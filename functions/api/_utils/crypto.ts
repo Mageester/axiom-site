@@ -1,5 +1,5 @@
 // Secure PBKDF2 helper for Cloudflare Workers
-const ITERATIONS = 250000;
+const ITERATIONS = 100000;
 const KEY_LENGTH = 32;
 
 // Derives a PBKDF2 keyed hash given a password and salt
