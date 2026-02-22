@@ -116,7 +116,8 @@ const LeadDetail: React.FC = () => {
                                     <option value="new">Uncontacted (New)</option>
                                     <option value="contacted">Outreach Sent</option>
                                     <option value="qualified">Qualified Meeting</option>
-                                    <option value="rejected">Rejected / Invalid</option>
+                                    <option value="closed">Closed / Won</option>
+                                    <option value="disqualified">Disqualified</option>
                                 </select>
                             </div>
 
