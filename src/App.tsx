@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation, Link } from 'react-router-dom';
+import { Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
 import { BackgroundAtmosphere } from './components/BackgroundAtmosphere';
 import { BrandLockup } from './components/BrandLockup';
 
@@ -128,6 +128,7 @@ const App: React.FC = () => {
 
                     {/* Secure Admin Routes */}
                     <Route path="/login" element={<Login />} />
+                    <Route path="/admin/login" element={<Navigate to="/login" replace />} />
                     <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
                     <Route path="/campaigns" element={<ProtectedRoute><Campaigns /></ProtectedRoute>} />
                     <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />

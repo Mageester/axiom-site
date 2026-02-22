@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { apiJson, errorMessage } from '../../lib/api';
+import { ApiRequestError, apiJson, errorMessage } from '../../lib/api';
 
 const LoginSchema = z.object({
-    username: z.string().min(1, "Username is required"),
+    email: z.string().min(1, "Email is required"),
     password: z.string().min(1, "Password is required")
 });
 
+const DEFAULT_ADMIN_ROUTE = '/campaigns';
+
+function getSafeNext(nextValue: string | null) {
+    if (!nextValue) return DEFAULT_ADMIN_ROUTE;
+    if (!nextValue.startsWith('/')) return DEFAULT_ADMIN_ROUTE;
+    if (nextValue.startsWith('//')) return DEFAULT_ADMIN_ROUTE;
+    if (nextValue.startsWith('/login')) return DEFAULT_ADMIN_ROUTE;
+    if (nextValue === '/admin') return DEFAULT_ADMIN_ROUTE;
+    if (nextValue.startsWith('/admin/')) return nextValue.slice('/admin'.length) || DEFAULT_ADMIN_ROUTE;
+    return nextValue;
+}
+
 const Login: React.FC = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const nextTarget = getSafeNext(new URLSearchParams(location.search).get('next'));
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
 
-        const result = LoginSchema.safeParse({ username, password });
+        const result = LoginSchema.safeParse({ email, password });
         if (!result.success) {
             setError(result.error.issues[0].message);
             return;
@@ -27,20 +42,36 @@ const Login: React.FC = () => {
 
         setLoading(true);
         try {
-            const data = await apiJson<{ user?: { must_change_password?: boolean } }>('/api/auth/login', {
+            await apiJson<{ user?: { must_change_password?: boolean } }>('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(result.data),
+                credentials: 'include',
+                body: JSON.stringify({
+                    username: result.data.email,
+                    password: result.data.password
+                }),
                 timeoutMs: 15000
             });
 
-            if (data.user?.must_change_password) {
+            const me = await apiJson<{ user?: { must_change_password?: boolean } }>('/api/auth/me', {
+                credentials: 'include',
+                timeoutMs: 10000
+            });
+
+            if (me.user?.must_change_password) {
                 navigate('/account', { replace: true });
             } else {
-                navigate('/campaigns', { replace: true });
+                navigate(nextTarget || DEFAULT_ADMIN_ROUTE, { replace: true });
             }
         } catch (err) {
-            setError(errorMessage(err, 'System error establishing connection.'));
+            if (err instanceof ApiRequestError) {
+                if (err.status === 401) setError('Invalid credentials. Check your email/username and password.');
+                else if (err.status === 429) setError('Too many login attempts. Wait 15 minutes and retry.');
+                else if (err.status >= 500) setError('Login service error. Please retry in a moment.');
+                else setError(err.message || 'Authentication request failed.');
+            } else {
+                setError(errorMessage(err, 'System error establishing connection.'));
+            }
             setLoading(false);
         }
     };
@@ -63,20 +94,25 @@ const Login: React.FC = () => {
                     )}
 
                     <div className="flex flex-col gap-2">
-                        <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Username</label>
+                        <label htmlFor="login-email" className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Email</label>
                         <input
+                            id="login-email"
                             type="text"
+                            autoComplete="username"
                             required
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            placeholder="operator email (or username)"
                             className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none font-mono"
                         />
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Passphrase</label>
+                        <label htmlFor="login-password" className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Password</label>
                         <input
+                            id="login-password"
                             type="password"
+                            autoComplete="current-password"
                             required
                             value={password}
                             onChange={e => setPassword(e.target.value)}
@@ -87,6 +123,11 @@ const Login: React.FC = () => {
                     <button disabled={loading} type="submit" className="w-full py-4 mt-2 bg-white text-black hover:bg-[#e2e2e2] active:scale-[0.99] text-[12px] font-bold uppercase tracking-[0.05em] transition-all duration-300 rounded-[2px] disabled:opacity-50">
                         {loading ? 'Authenticating...' : 'Establish Session'}
                     </button>
+                    {nextTarget !== DEFAULT_ADMIN_ROUTE ? (
+                        <p className="text-[10px] font-mono text-secondary/70 text-center uppercase tracking-widest">
+                            Redirecting to requested admin page after login
+                        </p>
+                    ) : null}
                 </form>
             </div>
         </div>
