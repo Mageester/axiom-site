@@ -1,4 +1,13 @@
-export async function onRequestGet(context) {
+import { z } from 'zod';
+
+const ALLOWED_STATUSES = ['new', 'contacted', 'qualified', 'closed', 'disqualified'] as const;
+
+const PatchLeadInput = z.object({
+    status: z.enum(ALLOWED_STATUSES).optional(),
+    notes: z.string().max(5000).optional()
+});
+
+export async function onRequestGet(context: any) {
     const { env, params } = context;
     try {
         const { results: leads } = await env.DB.prepare(`
@@ -23,20 +32,26 @@ export async function onRequestGet(context) {
         return new Response(JSON.stringify({ lead: leads[0] }), {
             status: 200, headers: { 'Content-Type': 'application/json' }
         });
-    } catch (e) {
+    } catch (e: any) {
         return new Response('Error: ' + e.message, { status: 500 });
     }
 }
 
-export async function onRequestPatch(context) {
+export async function onRequestPatch(context: any) {
     const { env, params, request } = context;
     try {
-        const payload = await request.json();
+        let payload;
+        try {
+            payload = PatchLeadInput.parse(await request.json());
+        } catch (e: any) {
+            return new Response(JSON.stringify({ error: "Invalid input", details: e.issues?.[0]?.message }), { status: 400 });
+        }
+
         const { status, notes } = payload;
 
-        const updates = [];
-        const binds = [];
-        if (status) { updates.push('status = ?'); binds.push(status); }
+        const updates: string[] = [];
+        const binds: any[] = [];
+        if (status !== undefined) { updates.push('status = ?'); binds.push(status); }
         if (notes !== undefined) { updates.push('notes = ?'); binds.push(notes); }
 
         if (updates.length > 0) {
@@ -46,7 +61,7 @@ export async function onRequestPatch(context) {
         return new Response(JSON.stringify({ message: "Updated" }), {
             status: 200, headers: { 'Content-Type': 'application/json' }
         });
-    } catch (e) {
+    } catch (e: any) {
         return new Response('Error: ' + e.message, { status: 500 });
     }
 }

@@ -6,7 +6,9 @@ const KEY_LENGTH = 32;
 // Returns in format: <salt_hex>:<hash_hex>
 export async function hashPassword(password: string, saltHex?: string): Promise<string> {
     const encoder = new TextEncoder();
-    const salt = saltHex ? new Uint8Array(saltHex.match(/.{1,2}/g)!.map(byte => parseInt(byte, 16))) : crypto.getRandomValues(new Uint8Array(16));
+    const salt = saltHex
+        ? new Uint8Array(saltHex.match(/.{1,2}/g)!.map(byte => parseInt(byte, 16)))
+        : crypto.getRandomValues(new Uint8Array(16));
 
     const keyMaterial = await crypto.subtle.importKey(
         'raw',
@@ -33,13 +35,41 @@ export async function hashPassword(password: string, saltHex?: string): Promise<
     return `${newSaltHex}:${hashHex}`;
 }
 
+// Constant-time comparison to prevent timing attacks
+async function timingSafeEqual(a: string, b: string): Promise<boolean> {
+    const encoder = new TextEncoder();
+
+    // Pad both to the same length to prevent length-based timing leaks
+    const maxLen = Math.max(a.length, b.length);
+    const aPadded = a.padEnd(maxLen, '\0');
+    const bPadded = b.padEnd(maxLen, '\0');
+
+    const keyA = await crypto.subtle.importKey('raw', encoder.encode(aPadded), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const keyB = await crypto.subtle.importKey('raw', encoder.encode(bPadded), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+
+    const sigA = await crypto.subtle.sign('HMAC', keyA, encoder.encode('compare'));
+    const sigB = await crypto.subtle.sign('HMAC', keyB, encoder.encode('compare'));
+
+    const aBytes = new Uint8Array(sigA);
+    const bBytes = new Uint8Array(sigB);
+
+    // XOR all bytes and check if any differ — constant-time
+    let diff = 0;
+    for (let i = 0; i < aBytes.length; i++) {
+        diff |= aBytes[i] ^ bBytes[i];
+    }
+    return diff === 0;
+}
+
 export async function verifyPassword(password: string, storedHash: string): Promise<boolean> {
     const [saltHex, originalHashHex] = storedHash.split(':');
     if (!saltHex || !originalHashHex) return false;
 
-    // Use a constant-time comparison if possible, or just strict equality
     const compareHash = await hashPassword(password, saltHex);
-    return compareHash === storedHash;
+    const [, compareHashHex] = compareHash.split(':');
+
+    // Use timing-safe comparison to prevent timing attacks
+    return timingSafeEqual(compareHashHex, originalHashHex);
 }
 
 // Token operations for session validation

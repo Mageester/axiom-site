@@ -3,13 +3,12 @@ import { hashPassword, verifyPassword, hashToken } from '../_utils/crypto';
 
 // Basic Zod schema for input validation
 const LoginInput = z.object({
-    username: z.string().min(1),
-    password: z.string().min(1)
+    username: z.string().min(1).max(64),
+    password: z.string().min(1).max(256)
 });
 
 async function checkRateLimit(env: any, ip: string, username: string): Promise<boolean> {
-    const key = `${ip}:${username}`;
-    // very basic in-memory limit using DB (better than nothing for MVP)
+    const key = `${ip}:${username.toLowerCase()}`;
     const { results } = await env.DB.prepare(`
         SELECT count, last_at 
         FROM login_attempts 
@@ -17,14 +16,14 @@ async function checkRateLimit(env: any, ip: string, username: string): Promise<b
     `).bind(key).all();
 
     if (results.length > 0) {
-        let attempt = results[0];
-        // 5 attempts per 10 minutes
+        const attempt = results[0];
+        // 5 attempts per 15 minutes
         if (attempt.count >= 5) {
-            const tenMinsAgo = new Date(Date.now() - 10 * 60000).toISOString();
-            if (attempt.last_at > tenMinsAgo) {
+            const windowAgo = new Date(Date.now() - 15 * 60000).toISOString();
+            if (attempt.last_at > windowAgo) {
                 return false; // Rate limited
             } else {
-                // Reset limit if older than 10 mins
+                // Reset limit if window has passed
                 await env.DB.prepare(`
                     UPDATE login_attempts 
                     SET count = 1, last_at = CURRENT_TIMESTAMP 
@@ -33,7 +32,6 @@ async function checkRateLimit(env: any, ip: string, username: string): Promise<b
                 return true;
             }
         } else {
-            // Increment
             await env.DB.prepare(`
                 UPDATE login_attempts 
                 SET count = count + 1, last_at = CURRENT_TIMESTAMP 
@@ -42,7 +40,6 @@ async function checkRateLimit(env: any, ip: string, username: string): Promise<b
             return true;
         }
     } else {
-        // Insert new limit
         await env.DB.prepare(`
             INSERT INTO login_attempts (key, count) 
             VALUES (?, 1)
@@ -51,21 +48,28 @@ async function checkRateLimit(env: any, ip: string, username: string): Promise<b
     }
 }
 
+// bootstrapAdmin - safely creates schema and admin user if needed
+// Runs CREATE TABLE IF NOT EXISTS to be idempotent.
+// Only does the full work once per cold-start via module-level flag.
+let _bootstrapped = false;
+
 async function bootstrapAdmin(env: any) {
-    // Automatically wipe legacy table structures
+    if (_bootstrapped) return;
+
+    // Detect legacy broken schema (missing username column) and drop
     try {
         await env.DB.prepare('SELECT username FROM users LIMIT 1').all();
     } catch (e) {
+        // Old schema — drop and rebuild
         await env.DB.prepare('DROP TABLE IF EXISTS sessions').run();
         await env.DB.prepare('DROP TABLE IF EXISTS users').run();
     }
 
-    // 1) Fully execute missing schema tables if they don't exist
     await env.DB.prepare(`
         CREATE TABLE IF NOT EXISTS users (
             id TEXT PRIMARY KEY,
             email TEXT,
-            username TEXT UNIQUE NOT NULL,
+            username TEXT UNIQUE NOT NULL COLLATE NOCASE,
             password_hash TEXT NOT NULL,
             role TEXT NOT NULL DEFAULT 'admin',
             must_change_password BOOLEAN NOT NULL DEFAULT 1,
@@ -99,7 +103,6 @@ async function bootstrapAdmin(env: any) {
 
     const { results } = await env.DB.prepare(`SELECT id FROM users WHERE username = 'admin'`).all();
     if (results.length === 0) {
-        // Safe creation of admin
         const initialPassHash = await hashPassword('admin');
         const id = crypto.randomUUID();
         await env.DB.prepare(`
@@ -107,6 +110,8 @@ async function bootstrapAdmin(env: any) {
             VALUES (?, 'admin', ?, 'admin', 1)
         `).bind(id, initialPassHash).run();
     }
+
+    _bootstrapped = true;
 }
 
 export async function onRequestPost(context: any) {
@@ -125,22 +130,31 @@ export async function onRequestPost(context: any) {
         const allowed = await checkRateLimit(env, ip, data.username);
 
         if (!allowed) {
-            return new Response(JSON.stringify({ error: "Too many login attempts. Please try again later." }), { status: 429 });
+            return new Response(JSON.stringify({ error: "Too many login attempts. Please try again in 15 minutes." }), {
+                status: 429,
+                headers: { 'Retry-After': '900' }
+            });
         }
 
+        // Use COLLATE NOCASE for case-insensitive username lookup
         const { results } = await env.DB.prepare('SELECT * FROM users WHERE username = ? COLLATE NOCASE').bind(data.username).all();
-        if (results.length === 0) return new Response(JSON.stringify({ error: "Invalid credentials" }), { status: 401 });
+
+        // Always run the hash even if user doesn't exist (prevents user enumeration via timing)
+        const dummyHash = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
+        const userHash = results.length > 0 ? results[0].password_hash : dummyHash;
+        const valid = await verifyPassword(data.password, userHash);
+
+        if (results.length === 0 || !valid) {
+            return new Response(JSON.stringify({ error: "Invalid credentials" }), { status: 401 });
+        }
 
         const user = results[0];
-        const valid = await verifyPassword(data.password, user.password_hash);
 
-        if (!valid) return new Response(JSON.stringify({ error: "Invalid credentials" }), { status: 401 });
-
-        // reset rate limit on success
-        await env.DB.prepare(`DELETE FROM login_attempts WHERE key = ?`).bind(`${ip}:${data.username}`).run();
+        // Reset rate limit on success
+        await env.DB.prepare(`DELETE FROM login_attempts WHERE key = ?`).bind(`${ip}:${data.username.toLowerCase()}`).run();
 
         // Create secure session
-        const sessionToken = crypto.randomUUID() + crypto.randomUUID(); // Double UUID for entropy
+        const sessionToken = crypto.randomUUID() + crypto.randomUUID();
         const sessionHash = await hashToken(sessionToken);
         const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 7 days
         const sessionId = crypto.randomUUID();
@@ -153,7 +167,6 @@ export async function onRequestPost(context: any) {
             ip, request.headers.get('User-Agent') || 'unknown'
         ).run();
 
-        // Clear password in response
         return new Response(JSON.stringify({
             user: { username: user.username, role: user.role, must_change_password: !!user.must_change_password }
         }), {
