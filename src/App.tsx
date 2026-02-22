@@ -5,6 +5,11 @@ import { BrandLockup } from './components/BrandLockup';
 
 import Home from './pages/Home';
 import Mission from './pages/Mission';
+import Login from './pages/admin/Login';
+import Campaigns from './pages/admin/Campaigns';
+import Leads from './pages/admin/Leads';
+import LeadDetail from './pages/admin/LeadDetail';
+import Jobs from './pages/admin/Jobs';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -117,6 +122,13 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/mission" element={<Mission />} />
+
+                    {/* Secure Admin Routes */}
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/campaigns" element={<Campaigns />} />
+                    <Route path="/leads" element={<Leads />} />
+                    <Route path="/leads/:id" element={<LeadDetail />} />
+                    <Route path="/jobs" element={<Jobs />} />
                 </Routes>
             </main>
 
