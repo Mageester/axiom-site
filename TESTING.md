@@ -79,6 +79,21 @@ Use Chrome DevTools -> Network (Preserve log ON, Disable cache ON).
 - `401/403` responses include JSON `{ "error": "..." }`.
 - `/api/jobs/run` response contains `log[]` and useful error text if a job fails.
 
+### Campaigns UI -> Discovery Trigger Check
+
+From `/campaigns`, clicking the `Run Discovery Job` button should now trigger:
+
+1. `POST /api/campaigns` (201)
+2. `POST /api/jobs/run` (200) immediately after campaign creation
+
+Verify in DevTools Network:
+
+- `POST /api/jobs/run` is visible exactly once per click
+- request method is `POST`
+- response is JSON and includes `msg`, `processed`, and `log`
+- button shows `Running...` while the requests are in flight
+- UI shows inline success or error text (no silent failure)
+
 ## Failure Drills (recommended)
 
 1. Overpass timeout/network issue:
