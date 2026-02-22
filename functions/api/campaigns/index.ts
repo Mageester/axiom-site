@@ -43,3 +43,19 @@ export async function onRequestPost(context) {
         return apiError(500, d1ErrorMessage(e, 'Failed to create campaign'));
     }
 }
+
+export async function onRequestDelete(context) {
+    const { env } = context;
+    try {
+        await env.DB.prepare(`DELETE FROM jobs WHERE type IN ('DISCOVERY', 'AUDIT')`).run().catch(() => null);
+        await env.DB.prepare(`DELETE FROM scores`).run();
+        await env.DB.prepare(`DELETE FROM summaries`).run();
+        await env.DB.prepare(`DELETE FROM audits`).run();
+        await env.DB.prepare(`DELETE FROM leads`).run();
+        await env.DB.prepare(`DELETE FROM campaigns`).run();
+
+        return json({ message: 'All campaigns deleted' });
+    } catch (e: any) {
+        return apiError(500, d1ErrorMessage(e, 'Failed to delete all campaigns'));
+    }
+}

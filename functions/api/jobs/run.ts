@@ -4,11 +4,47 @@ import { apiError, d1ErrorMessage, json } from '../_utils/http';
 import { logEvent } from '../_utils/log';
 
 export async function onRequestPost(context: any) {
-    const { env } = context;
+    const { env, request } = context;
     let jobsProcessed = 0;
     const log: string[] = [];
+    let prioritizedJobId: string | null = null;
 
     try {
+        const contentType = request.headers.get('Content-Type') || '';
+        if (contentType.includes('application/json')) {
+            let body: any = null;
+            try {
+                body = await request.json();
+            } catch {
+                return apiError(400, 'Invalid JSON body');
+            }
+
+            const campaignId = typeof body?.campaign_id === 'string' ? body.campaign_id.trim() : '';
+            if (campaignId) {
+                const { results: campaignRows } = await env.DB.prepare(
+                    'SELECT id, niche, city, radius_km FROM campaigns WHERE id = ? LIMIT 1'
+                ).bind(campaignId).all();
+
+                if (campaignRows.length === 0) {
+                    return apiError(404, 'Campaign not found');
+                }
+
+                const campaign = campaignRows[0];
+                prioritizedJobId = crypto.randomUUID();
+                const payload = JSON.stringify({
+                    campaignId: campaign.id,
+                    niche: campaign.niche,
+                    city: campaign.city,
+                    radius_km: campaign.radius_km
+                });
+
+                await env.DB.prepare(
+                    `INSERT INTO jobs (id, type, payload_json) VALUES (?, 'DISCOVERY', ?)`
+                ).bind(prioritizedJobId, payload).run();
+                log.push(`Queued DISCOVERY rerun for campaign ${campaign.id}`);
+            }
+        }
+
         // Only pick up queued jobs. 'running' jobs are in-flight or orphaned.
         // Orphaned jobs (locked > 5 min ago) get reset to queued automatically.
         await env.DB.prepare(`
@@ -18,14 +54,27 @@ export async function onRequestPost(context: any) {
             AND locked_at < datetime('now', '-5 minutes')
         `).run().catch(() => null); // ignore if locked_at column missing
 
-        const { results: pendingJobs } = await env.DB.prepare(`
-            SELECT id, type, payload_json, attempts 
-            FROM jobs 
-            WHERE status = 'queued'
-            AND run_after <= CURRENT_TIMESTAMP
-            ORDER BY created_at ASC
-            LIMIT 3
-        `).all();
+        const pendingQuery = prioritizedJobId
+            ? `
+                SELECT id, type, payload_json, attempts
+                FROM jobs
+                WHERE status = 'queued'
+                  AND run_after <= CURRENT_TIMESTAMP
+                ORDER BY CASE WHEN id = ? THEN 0 ELSE 1 END, created_at ASC
+                LIMIT 3
+            `
+            : `
+                SELECT id, type, payload_json, attempts
+                FROM jobs
+                WHERE status = 'queued'
+                  AND run_after <= CURRENT_TIMESTAMP
+                ORDER BY created_at ASC
+                LIMIT 3
+            `;
+        const pendingStmt = env.DB.prepare(pendingQuery);
+        const { results: pendingJobs } = prioritizedJobId
+            ? await pendingStmt.bind(prioritizedJobId).all()
+            : await pendingStmt.all();
 
         if (pendingJobs.length === 0) {
             return json({ msg: "No jobs pending", log });
