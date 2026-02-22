@@ -318,7 +318,7 @@ const Campaigns: React.FC = () => {
                         </div>
                         <div className="flex flex-col gap-2">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Target City</label>
-                            <input type="text" placeholder="e.g. Toronto, CA" required value={form.city} onChange={e => setForm({ ...form, city: e.target.value })} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-3 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none" />
+                            <input type="text" placeholder="e.g. Toronto, ON" required value={form.city} onChange={e => setForm({ ...form, city: e.target.value })} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-3 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none" />
                             <p className="text-[10px] font-mono text-secondary/60">Use `City, Province/State` (examples: `Toronto, ON`, `Dallas, TX`).</p>
                             {cityError ? <p className="text-[10px] font-mono text-red-400">{cityError}</p> : null}
                         </div>

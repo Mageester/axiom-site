@@ -101,7 +101,7 @@ export async function onRequestPost(context: any) {
 
                     if (!campaignId || !niche || !city) throw new Error('Invalid DISCOVERY payload');
 
-                    const businesses = await fetchOsmBusinesses(niche, city, Number(radius_km) || 10);
+                    const businesses = await fetchOsmBusinesses(niche, city, Number(radius_km) || 10, env);
                     log.push(`Found ${businesses.length} businesses`);
 
                     for (const b of businesses) {

@@ -103,6 +103,25 @@ Verify in DevTools Network:
 3. Schema missing:
    - Test against a fresh DB without migrations and confirm API errors clearly mention missing/outdated schema.
 
+## Geocode Sanity Test
+
+Use this when discovery returns `0` leads with geocoding failures for valid cities.
+
+1. Test city inputs in `/campaigns` using:
+   - `Kitchener, ON`
+   - `Toronto, ON`
+   - `Dallas, TX`
+2. Create a campaign and run discovery (or use `Run Again` on an existing campaign).
+3. Inspect `/api/jobs/run` response `log[]`:
+   - Expect geocoding to succeed (no `City not found` for valid inputs)
+   - If no match exists, expect explicit text like:
+     - `Geocode returned no results for q=..., country=...`
+   - If Nominatim rate-limits/blocks, expect explicit text like:
+     - `Geocode blocked/rate-limited: status=..., retry_after=...`
+4. For Toronto plumbing (radius 10–25 km), confirm:
+   - `/api/jobs/run` returns `processed > 0`
+   - leads appear in `/leads?campaign_id=...`
+
 ## Login 500 Triage (Cloudflare Pages)
 
 Use this when `POST /api/auth/login` returns `500` in production.
