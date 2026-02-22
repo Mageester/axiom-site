@@ -52,6 +52,43 @@ async function checkRateLimit(env: any, ip: string, username: string): Promise<b
 }
 
 async function bootstrapAdmin(env: any) {
+    // 1) Fully execute missing schema tables if they don't exist
+    await env.DB.prepare(`
+        CREATE TABLE IF NOT EXISTS users (
+            id TEXT PRIMARY KEY,
+            email TEXT,
+            username TEXT UNIQUE NOT NULL,
+            password_hash TEXT NOT NULL,
+            role TEXT NOT NULL DEFAULT 'admin',
+            must_change_password BOOLEAN NOT NULL DEFAULT 1,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    `).run();
+
+    await env.DB.prepare(`
+        CREATE TABLE IF NOT EXISTS sessions (
+            id TEXT PRIMARY KEY,
+            user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            session_token_hash TEXT NOT NULL UNIQUE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            expires_at TIMESTAMP NOT NULL,
+            revoked_at TIMESTAMP,
+            last_seen_at TIMESTAMP,
+            ip TEXT,
+            user_agent TEXT
+        );
+    `).run();
+
+    await env.DB.prepare(`
+        CREATE TABLE IF NOT EXISTS login_attempts (
+            key TEXT PRIMARY KEY,
+            count INTEGER NOT NULL DEFAULT 1,
+            first_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            last_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    `).run();
+
     const { results } = await env.DB.prepare(`SELECT id FROM users WHERE username = 'admin'`).all();
     if (results.length === 0) {
         // Safe creation of admin
