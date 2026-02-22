@@ -6,10 +6,13 @@ import { BrandLockup } from './components/BrandLockup';
 import Home from './pages/Home';
 import Mission from './pages/Mission';
 import Login from './pages/admin/Login';
+import Account from './pages/admin/Account';
 import Campaigns from './pages/admin/Campaigns';
 import Leads from './pages/admin/Leads';
 import LeadDetail from './pages/admin/LeadDetail';
 import Jobs from './pages/admin/Jobs';
+
+import ProtectedRoute from './components/ProtectedRoute';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -125,10 +128,11 @@ const App: React.FC = () => {
 
                     {/* Secure Admin Routes */}
                     <Route path="/login" element={<Login />} />
-                    <Route path="/campaigns" element={<Campaigns />} />
-                    <Route path="/leads" element={<Leads />} />
-                    <Route path="/leads/:id" element={<LeadDetail />} />
-                    <Route path="/jobs" element={<Jobs />} />
+                    <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+                    <Route path="/campaigns" element={<ProtectedRoute><Campaigns /></ProtectedRoute>} />
+                    <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
+                    <Route path="/leads/:id" element={<ProtectedRoute><LeadDetail /></ProtectedRoute>} />
+                    <Route path="/jobs" element={<ProtectedRoute><Jobs /></ProtectedRoute>} />
                 </Routes>
             </main>
 
