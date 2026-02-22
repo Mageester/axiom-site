@@ -52,6 +52,14 @@ async function checkRateLimit(env: any, ip: string, username: string): Promise<b
 }
 
 async function bootstrapAdmin(env: any) {
+    // Automatically wipe legacy table structures
+    try {
+        await env.DB.prepare('SELECT username FROM users LIMIT 1').all();
+    } catch (e) {
+        await env.DB.prepare('DROP TABLE IF EXISTS sessions').run();
+        await env.DB.prepare('DROP TABLE IF EXISTS users').run();
+    }
+
     // 1) Fully execute missing schema tables if they don't exist
     await env.DB.prepare(`
         CREATE TABLE IF NOT EXISTS users (
