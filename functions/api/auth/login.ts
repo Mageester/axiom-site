@@ -64,7 +64,8 @@ async function bootstrapAdmin(env: any) {
     }
 }
 
-export async function onRequestPost({ request, env }: { request: any, env: any }) {
+export async function onRequestPost(context: any) {
+    const { request, env } = context;
     try {
         await bootstrapAdmin(env);
 

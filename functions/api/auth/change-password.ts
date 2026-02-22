@@ -6,7 +6,8 @@ const ChangePassInput = z.object({
     new_password: z.string().min(10, "Password must be at least 10 characters long")
 });
 
-export async function onRequestPost({ request, env, data }: { request: any, env: any, data?: any }) {
+export async function onRequestPost(context: any) {
+    const { request, env, data } = context;
     if (!data || !data.user) return new Response('Unauthorized', { status: 401 });
 
     let input;

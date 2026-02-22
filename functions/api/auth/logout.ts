@@ -1,6 +1,7 @@
 import { hashToken } from '../_utils/crypto';
 
-export async function onRequestPost({ request, env }: { request: any, env: any }) {
+export async function onRequestPost(context: any) {
+    const { request, env } = context;
     const cookieHeader = request.headers.get('Cookie') || '';
     const match = cookieHeader.match(/axiom_session=([^;]+)/);
     const sessionToken = match ? match[1] : null;

@@ -1,6 +1,6 @@
 import { hashToken } from './_utils/crypto';
 
-export async function onRequest(context: { request: any, env: any, next: any, data?: any }) {
+export async function onRequest(context: any) {
     const { request, env, next } = context;
     const url = new URL(request.url);
 

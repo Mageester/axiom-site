@@ -1,4 +1,4 @@
-export async function onRequestGet(context: { data?: any }) {
+export async function onRequestGet(context: any) {
     if (!context.data || !context.data.user) {
         return new Response('Unauthorized', { status: 401 });
     }
