@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { apiError, d1ErrorMessage, json } from '../../_utils/http';
 
 const ALLOWED_STATUSES = ['new', 'contacted', 'qualified', 'closed', 'disqualified'] as const;
 
@@ -27,13 +28,11 @@ export async function onRequestGet(context: any) {
             LIMIT 1
         `).bind(params.id).all();
 
-        if (leads.length === 0) return new Response('Not found', { status: 404 });
+        if (leads.length === 0) return apiError(404, 'Lead not found');
 
-        return new Response(JSON.stringify({ lead: leads[0] }), {
-            status: 200, headers: { 'Content-Type': 'application/json' }
-        });
+        return json({ lead: leads[0] });
     } catch (e: any) {
-        return new Response('Error: ' + e.message, { status: 500 });
+        return apiError(500, d1ErrorMessage(e, 'Failed to fetch lead'));
     }
 }
 
@@ -44,7 +43,7 @@ export async function onRequestPatch(context: any) {
         try {
             payload = PatchLeadInput.parse(await request.json());
         } catch (e: any) {
-            return new Response(JSON.stringify({ error: "Invalid input", details: e.issues?.[0]?.message }), { status: 400 });
+            return apiError(400, 'Invalid input', { details: e.issues?.[0]?.message });
         }
 
         const { status, notes } = payload;
@@ -58,10 +57,8 @@ export async function onRequestPatch(context: any) {
             await env.DB.prepare(`UPDATE leads SET ${updates.join(', ')} WHERE id = ?`).bind(...binds, params.id).run();
         }
 
-        return new Response(JSON.stringify({ message: "Updated" }), {
-            status: 200, headers: { 'Content-Type': 'application/json' }
-        });
+        return json({ message: "Updated" });
     } catch (e: any) {
-        return new Response('Error: ' + e.message, { status: 500 });
+        return apiError(500, d1ErrorMessage(e, 'Failed to update lead'));
     }
 }

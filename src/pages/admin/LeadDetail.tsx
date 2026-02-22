@@ -1,45 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { apiJson, errorMessage } from '../../lib/api';
 
 const LeadDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [lead, setLead] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [loadError, setLoadError] = useState('');
+    const [saveError, setSaveError] = useState('');
+    const [saveSuccess, setSaveSuccess] = useState('');
 
     // Form state
     const [status, setStatus] = useState('new');
     const [notes, setNotes] = useState('');
 
     useEffect(() => {
-        fetch(`/api/leads/${id}`)
-            .then(res => res.json())
+        setLoading(true);
+        setLoadError('');
+        apiJson<{ lead: any }>(`/api/leads/${id}`, { timeoutMs: 15000 })
             .then(data => {
                 setLead(data.lead);
                 setStatus(data.lead?.status || 'new');
                 setNotes(data.lead?.notes || '');
                 setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch(err => {
+                setLoadError(errorMessage(err, 'Failed to load lead.'));
+                setLoading(false);
+            });
     }, [id]);
 
     const handleSave = async () => {
         setSaving(true);
+        setSaveError('');
+        setSaveSuccess('');
         try {
-            await fetch(`/api/leads/${id}`, {
+            await apiJson(`/api/leads/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ status, notes })
+                body: JSON.stringify({ status, notes }),
+                timeoutMs: 15000
             });
+            setSaveSuccess('Saved.');
+        } catch (err) {
+            setSaveError(errorMessage(err, 'Failed to save lead.'));
         } finally {
             setSaving(false);
         }
     };
 
     if (loading) return <div className="pt-32 pb-24 px-6 text-center text-secondary font-mono text-[12px]">Decrypting intelligence...</div>;
+    if (loadError) return <div className="pt-32 pb-24 px-6 text-center text-red-500 font-mono text-[12px]">{loadError}</div>;
     if (!lead) return <div className="pt-32 pb-24 px-6 text-center text-red-500 font-mono text-[12px]">Lead not found</div>;
 
-    const bullets = lead.bullets_json ? JSON.parse(lead.bullets_json) : [];
+    let bullets: string[] = [];
+    try {
+        bullets = lead.bullets_json ? JSON.parse(lead.bullets_json) : [];
+    } catch {
+        bullets = [];
+    }
 
     return (
         <div className="pt-32 pb-24 px-6 max-w-[1100px] mx-auto w-full">
@@ -106,6 +126,8 @@ const LeadDetail: React.FC = () => {
                         </div>
 
                         <div className="flex flex-col gap-4">
+                            {saveError ? <p className="text-[11px] font-mono text-red-400">{saveError}</p> : null}
+                            {saveSuccess ? <p className="text-[11px] font-mono text-emerald-400">{saveSuccess}</p> : null}
                             <div className="flex flex-col gap-2">
                                 <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Pipeline Status</label>
                                 <select

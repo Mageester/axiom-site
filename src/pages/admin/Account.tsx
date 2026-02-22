@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
+import { apiJson, errorMessage } from '../../lib/api';
 
 const ChangePassSchema = z.object({
     oldPassword: z.string().min(1, "Current passphrase is required"),
@@ -25,8 +26,7 @@ const Account: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('/api/auth/me')
-            .then(res => res.json())
+        apiJson<{ user?: { username?: string; must_change_password?: boolean } }>('/api/auth/me', { timeoutMs: 10000 })
             .then(data => {
                 setUsername(data.user?.username || '');
                 setMustChange(data.user?.must_change_password || false);
@@ -47,22 +47,15 @@ const Account: React.FC = () => {
 
         setLoading(true);
         try {
-            const res = await fetch('/api/auth/change-password', {
+            await apiJson('/api/auth/change-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     old_password: oldPassword,
                     new_password: newPassword
-                })
+                }),
+                timeoutMs: 20000
             });
-
-            const data = await res.json().catch(() => ({}));
-
-            if (!res.ok) {
-                setError(data.error || 'Update rejected. Verify current passphrase.');
-                setLoading(false);
-                return;
-            }
 
             setSuccess('Cryptographic protocol updated successfully. Session rotated.');
             setMustChange(false);
@@ -77,13 +70,13 @@ const Account: React.FC = () => {
             }
 
         } catch (err) {
-            setError('System error establishing connection.');
+            setError(errorMessage(err, 'System error establishing connection.'));
             setLoading(false);
         }
     };
 
     const handleLogout = async () => {
-        await fetch('/api/auth/logout', { method: 'POST' });
+        await apiJson('/api/auth/logout', { method: 'POST', timeoutMs: 10000 }).catch(() => null);
         navigate('/login', { replace: true });
     };
 

@@ -1,3 +1,5 @@
+import { apiError, d1ErrorMessage, json } from '../_utils/http';
+
 export async function onRequestGet(context) {
     const { env, request } = context;
     const url = new URL(request.url);
@@ -31,10 +33,8 @@ export async function onRequestGet(context) {
 
         const { results } = await env.DB.prepare(query).bind(...binds).all();
 
-        return new Response(JSON.stringify({ leads: results }), {
-            status: 200, headers: { 'Content-Type': 'application/json' }
-        });
-    } catch (e) {
-        return new Response('Error fetch leads: ' + e.message, { status: 500 });
+        return json({ leads: results });
+    } catch (e: any) {
+        return apiError(500, d1ErrorMessage(e, 'Failed to fetch leads'));
     }
 }

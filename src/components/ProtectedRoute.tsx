@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { apiJson } from '../lib/api';
 
 interface User {
     username: string;
@@ -13,11 +14,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const location = useLocation();
 
     useEffect(() => {
-        fetch('/api/auth/me')
-            .then(res => {
-                if (!res.ok) throw new Error('Unauthorized');
-                return res.json();
-            })
+        apiJson<{ user: User }>('/api/auth/me', { timeoutMs: 10000 })
             .then(data => {
                 setUser(data.user);
                 setLoading(false);

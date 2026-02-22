@@ -1,4 +1,6 @@
 import { hashToken } from './_utils/crypto';
+import { apiError } from './_utils/http';
+import { logEvent } from './_utils/log';
 
 // Track bootstrap state for the process lifetime to avoid running on every request
 let bootstrapped = false;
@@ -31,12 +33,12 @@ export async function onRequest(context: any) {
                 });
             }
             // For /me, no session = unauthorized
-            return new Response('Unauthorized', { status: 401 });
+            return apiError(401, 'Unauthorized');
         }
 
         // Has a token, let it through to the actual handler (which validates it)
         const hashedToken = await hashToken(sessionToken).catch(() => null);
-        if (!hashedToken) return new Response('Unauthorized', { status: 401 });
+        if (!hashedToken) return apiError(401, 'Unauthorized');
 
         try {
             const { results } = await env.DB.prepare(
@@ -52,7 +54,12 @@ export async function onRequest(context: any) {
                 context.data = context.data || {};
                 context.data.user = results[0];
             }
-        } catch (e) { /* ignore - handlers will deal with missing data */ }
+        } catch (e) {
+            logEvent('error', 'auth.middleware.lookup_failed', {
+                path: url.pathname,
+                message: e instanceof Error ? e.message : String(e)
+            });
+        }
 
         return next();
     }
@@ -63,7 +70,7 @@ export async function onRequest(context: any) {
     const sessionToken = match ? match[1] : null;
 
     if (!sessionToken) {
-        return new Response('Unauthorized', { status: 401 });
+        return apiError(401, 'Unauthorized');
     }
 
     try {
@@ -79,7 +86,8 @@ export async function onRequest(context: any) {
         ).bind(hashedToken).all();
 
         if (results.length === 0) {
-            return new Response('Unauthorized / Session Expired', { status: 401 });
+            logEvent('warn', 'auth.session.invalid', { path: url.pathname });
+            return apiError(401, 'Unauthorized / Session Expired');
         }
 
         const user = results[0];
@@ -87,7 +95,7 @@ export async function onRequest(context: any) {
         // Block all non-account requests if must_change_password is true
         if (user.must_change_password &&
             !url.pathname.startsWith('/api/auth/change-password')) {
-            return new Response('Forbidden: Must change password', { status: 403 });
+            return apiError(403, 'Forbidden: Must change password');
         }
 
         // Attach context
@@ -96,6 +104,10 @@ export async function onRequest(context: any) {
 
         return next();
     } catch (e) {
-        return new Response('Internal error checking session', { status: 500 });
+        logEvent('error', 'auth.middleware.internal_error', {
+            path: url.pathname,
+            message: e instanceof Error ? e.message : String(e)
+        });
+        return apiError(500, 'Internal error checking session');
     }
 }

@@ -35,10 +35,6 @@ export async function fetchOsmBusinesses(niche: string, city: string, radiusKm: 
         throw new Error('Geocoding failed: ' + e.message);
     }
 
-    // Query Overpass with timeout
-    const ovController = new AbortController();
-    const ovTimer = setTimeout(() => ovController.abort(), 25000);
-
     const query = `
         [out:json][timeout:20];
         (
@@ -52,20 +48,34 @@ export async function fetchOsmBusinesses(niche: string, city: string, radiusKm: 
     `;
 
     let data: any;
-    try {
-        const url = 'https://overpass-api.de/api/interpreter';
-        const res = await fetch(url, {
-            method: 'POST',
-            body: 'data=' + encodeURIComponent(query),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            signal: ovController.signal
-        });
-        clearTimeout(ovTimer);
-        if (!res.ok) throw new Error(`Overpass error: ${res.status}`);
-        data = await res.json();
-    } catch (e: any) {
-        clearTimeout(ovTimer);
-        throw new Error('Overpass query failed: ' + e.message);
+    const overpassEndpoints = [
+        'https://overpass-api.de/api/interpreter',
+        'https://overpass.kumi.systems/api/interpreter'
+    ];
+    let lastError = 'Unknown error';
+
+    for (const url of overpassEndpoints) {
+        const ovController = new AbortController();
+        const ovTimer = setTimeout(() => ovController.abort(), 25000);
+        try {
+            const res = await fetch(url, {
+                method: 'POST',
+                body: 'data=' + encodeURIComponent(query),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                signal: ovController.signal
+            });
+            if (!res.ok) throw new Error(`Overpass error ${res.status}`);
+            data = await res.json();
+            clearTimeout(ovTimer);
+            break;
+        } catch (e: any) {
+            clearTimeout(ovTimer);
+            lastError = e?.name === 'AbortError' ? 'Overpass timeout' : (e?.message || 'Overpass network error');
+        }
+    }
+
+    if (!data) {
+        throw new Error('Overpass query failed: ' + lastError);
     }
 
     const seen = new Set<string>();

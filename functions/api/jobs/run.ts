@@ -1,5 +1,7 @@
 import { fetchOsmBusinesses } from '../_utils/osm';
 import { performAudit } from '../_utils/audit';
+import { apiError, d1ErrorMessage, json } from '../_utils/http';
+import { logEvent } from '../_utils/log';
 
 export async function onRequestPost(context: any) {
     const { env } = context;
@@ -20,14 +22,13 @@ export async function onRequestPost(context: any) {
             SELECT id, type, payload_json, attempts 
             FROM jobs 
             WHERE status = 'queued'
+            AND run_after <= CURRENT_TIMESTAMP
             ORDER BY created_at ASC
             LIMIT 3
         `).all();
 
         if (pendingJobs.length === 0) {
-            return new Response(JSON.stringify({ msg: "No jobs pending", log }), {
-                status: 200, headers: { 'Content-Type': 'application/json' }
-            });
+            return json({ msg: "No jobs pending", log });
         }
 
         for (const job of pendingJobs) {
@@ -37,7 +38,7 @@ export async function onRequestPost(context: any) {
             ).bind(job.id).run();
 
             // If no rows changed, another worker grabbed this job — skip
-            if (!lockResult.meta?.changes && lockResult.meta?.changes !== undefined) {
+            if (typeof lockResult.meta?.changes === 'number' && lockResult.meta.changes !== 1) {
                 log.push(`Job ${job.id} already locked, skipping`);
                 continue;
             }
@@ -61,20 +62,38 @@ export async function onRequestPost(context: any) {
                                 VALUES (?, ?, ?, ?, ?, ?, ?)
                             `).bind(b.osm_id, b.name, b.lat, b.lon, b.address, b.phone, b.website).run();
 
-                            const leadId = crypto.randomUUID();
+                            const candidateLeadId = crypto.randomUUID();
+                            let leadId = candidateLeadId;
                             await env.DB.prepare(`
                                 INSERT OR IGNORE INTO leads (id, campaign_id, business_id, canonical_url)
                                 VALUES (?, ?, ?, ?)
-                            `).bind(leadId, campaignId, b.osm_id, b.website).run();
+                            `).bind(candidateLeadId, campaignId, b.osm_id, b.website).run();
+
+                            const { results: leadRows } = await env.DB.prepare(`
+                                SELECT id FROM leads WHERE campaign_id = ? AND business_id = ? LIMIT 1
+                            `).bind(campaignId, b.osm_id).all();
+
+                            if (leadRows.length === 0) {
+                                throw new Error(`Lead insert missing for business ${b.osm_id}`);
+                            }
+                            leadId = String(leadRows[0].id);
 
                             if (b.website && b.website.length > 5) {
+                                const { results: existingAudits } = await env.DB.prepare(
+                                    `SELECT id FROM audits WHERE lead_id = ? LIMIT 1`
+                                ).bind(leadId).all();
+                                if (existingAudits.length > 0) continue;
+
                                 const auditJobId = crypto.randomUUID();
                                 const auditPayload = JSON.stringify({ leadId, website: b.website });
                                 await env.DB.prepare(`
                                     INSERT INTO jobs (id, type, payload_json) VALUES (?, 'AUDIT', ?)
                                 `).bind(auditJobId, auditPayload).run();
                             }
-                        } catch (_) { /* ignore individual insert collisions */ }
+                        } catch (insertE: any) {
+                            const insertMsg = (insertE?.message || 'discovery insert error').substring(0, 300);
+                            log.push(`Discovery item skipped (${b.osm_id}): ${insertMsg}`);
+                        }
                     }
 
                 } else if (job.type === 'AUDIT') {
@@ -134,16 +153,24 @@ export async function onRequestPost(context: any) {
                 const nextStatus = (job.attempts + 1) >= maxAttempts ? 'failed' : 'queued';
                 const errMsg = (jobE.message || 'unknown error').substring(0, 500); // Cap error log length
                 log.push(`Job ${job.id} failed (attempt ${job.attempts + 1}/${maxAttempts}): ${errMsg}`);
+                logEvent('error', 'jobs.run.job_failed', {
+                    jobId: job.id,
+                    type: job.type,
+                    attempt: (job.attempts || 0) + 1,
+                    nextStatus,
+                    error: errMsg
+                });
                 await env.DB.prepare("UPDATE jobs SET status=?, attempts=attempts+1, last_error=?, locked_at=NULL, updated_at=CURRENT_TIMESTAMP WHERE id=?")
                     .bind(nextStatus, errMsg, job.id).run();
             }
         }
 
-        return new Response(JSON.stringify({ msg: "Jobs run complete", processed: jobsProcessed, log }), {
-            status: 200, headers: { 'Content-Type': 'application/json' }
-        });
+        return json({ msg: "Jobs run complete", processed: jobsProcessed, log });
 
     } catch (e: any) {
-        return new Response(JSON.stringify({ error: 'Fatal runner error', msg: e.message }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+        logEvent('error', 'jobs.run.fatal_error', {
+            message: e?.message || 'unknown'
+        });
+        return apiError(500, d1ErrorMessage(e, 'Fatal runner error'));
     }
 }

@@ -1,3 +1,5 @@
+import { apiError, d1ErrorMessage, json } from '../_utils/http';
+
 export async function onRequestGet(context) {
     const { env } = context;
     try {
@@ -14,10 +16,8 @@ export async function onRequestGet(context) {
             GROUP BY status
         `).all();
 
-        return new Response(JSON.stringify({ jobs: results, stats: stats.results }), {
-            status: 200, headers: { 'Content-Type': 'application/json' }
-        });
-    } catch (e) {
-        return new Response('Error ' + e.message, { status: 500 });
+        return json({ jobs: results, stats: stats.results });
+    } catch (e: any) {
+        return apiError(500, d1ErrorMessage(e, 'Failed to fetch jobs'));
     }
 }

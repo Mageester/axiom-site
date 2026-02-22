@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import { apiJson, errorMessage } from '../../lib/api';
 
 const Leads: React.FC = () => {
     const [searchParams] = useSearchParams();
     const [leads, setLeads] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     const campaignId = searchParams.get('campaign_id');
     const statusFilter = searchParams.get('status');
@@ -16,10 +18,14 @@ const Leads: React.FC = () => {
         if (statusFilter) params.append('status', statusFilter);
         if (params.toString()) url += '?' + params.toString();
 
-        fetch(url)
-            .then(res => res.json())
+        setLoading(true);
+        setError('');
+        apiJson<{ leads?: any[] }>(url, { timeoutMs: 15000 })
             .then(data => { setLeads(data.leads || []); setLoading(false); })
-            .catch(() => setLoading(false));
+            .catch(err => {
+                setError(errorMessage(err, 'Failed to load leads.'));
+                setLoading(false);
+            });
     }, [campaignId, statusFilter]);
 
     return (
@@ -34,6 +40,7 @@ const Leads: React.FC = () => {
                 </div>
             </div>
 
+            {error ? <p className="text-red-400 font-mono text-[12px] mb-4">{error}</p> : null}
             {loading ? <p className="text-secondary font-mono text-[12px]">Fetching intelligence...</p> : (
                 <div className="surface-panel overflow-x-auto rounded-sm border border-subtle">
                     <table className="w-full text-left text-[13px]">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
+import { apiJson, errorMessage } from '../../lib/api';
 
 const LoginSchema = z.object({
     username: z.string().min(1, "Username is required"),
@@ -26,19 +27,12 @@ const Login: React.FC = () => {
 
         setLoading(true);
         try {
-            const res = await fetch('/api/auth/login', {
+            const data = await apiJson<{ user?: { must_change_password?: boolean } }>('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(result.data)
+                body: JSON.stringify(result.data),
+                timeoutMs: 15000
             });
-
-            const data = await res.json().catch(() => ({}));
-
-            if (!res.ok) {
-                setError(data.error || 'Authentication rejected. Status: ' + res.status);
-                setLoading(false);
-                return;
-            }
 
             if (data.user?.must_change_password) {
                 navigate('/account', { replace: true });
@@ -46,7 +40,7 @@ const Login: React.FC = () => {
                 navigate('/campaigns', { replace: true });
             }
         } catch (err) {
-            setError('System error establishing connection.');
+            setError(errorMessage(err, 'System error establishing connection.'));
             setLoading(false);
         }
     };

@@ -1,39 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ApiRequestError, apiJson, errorMessage } from '../../lib/api';
 
 const Campaigns: React.FC = () => {
     const [campaigns, setCampaigns] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     const [form, setForm] = useState({ niche: '', city: '', radius: 10 });
     const [creating, setCreating] = useState(false);
+    const [createError, setCreateError] = useState('');
+
+    const loadCampaigns = async () => {
+        try {
+            setError('');
+            const data = await apiJson<{ campaigns?: any[] }>('/api/campaigns', { timeoutMs: 15000 });
+            setCampaigns(data.campaigns || []);
+        } catch (err) {
+            if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
+                window.location.href = '/login';
+                return;
+            }
+            setError(errorMessage(err, 'Failed to load campaigns.'));
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        fetch('/api/campaigns')
-            .then(res => {
-                if (res.status === 401 || res.status === 403) window.location.href = '/login';
-                return res.json();
-            })
-            .then(data => { setCampaigns(data.campaigns || []); setLoading(false); })
-            .catch(() => setLoading(false));
+        loadCampaigns();
     }, []);
 
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
         setCreating(true);
+        setCreateError('');
         try {
-            const res = await fetch('/api/campaigns', {
+            await apiJson('/api/campaigns', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ niche: form.niche, city: form.city, radius_km: form.radius })
+                body: JSON.stringify({ niche: form.niche, city: form.city, radius_km: form.radius }),
+                timeoutMs: 20000
             });
-            if (res.ok) {
-                setForm({ niche: '', city: '', radius: 10 });
-                // reload
-                const newRes = await fetch('/api/campaigns');
-                const newData = await newRes.json();
-                setCampaigns(newData.campaigns || []);
-            }
+            setForm({ niche: '', city: '', radius: 10 });
+            await loadCampaigns();
+        } catch (err) {
+            setCreateError(errorMessage(err, 'Failed to create campaign.'));
         } finally {
             setCreating(false);
         }
@@ -54,6 +66,7 @@ const Campaigns: React.FC = () => {
                     <form onSubmit={handleCreate} className="surface-panel p-6 sm:p-8 flex flex-col gap-6 rounded-sm relative">
                         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
                         <h2 className="text-[15px] font-semibold text-primary/90 mb-2">Deploy New Campaign</h2>
+                        {createError ? <p className="text-[11px] font-mono text-red-400">{createError}</p> : null}
 
                         <div className="flex flex-col gap-2">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Target Niche</label>
@@ -76,6 +89,7 @@ const Campaigns: React.FC = () => {
 
                 {/* List */}
                 <div className="lg:col-span-8 flex flex-col gap-4">
+                    {error ? <p className="text-red-400 font-mono text-[12px]">{error}</p> : null}
                     {loading ? <p className="text-secondary font-mono text-[12px]">Fetching telemetry...</p> :
                         campaigns.map(c => (
                             <div key={c.id} className="surface-panel p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between group hover:border-white/20 transition-all">

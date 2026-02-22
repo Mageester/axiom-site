@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { apiJson, errorMessage } from '../../lib/api';
 
 const Jobs: React.FC = () => {
     const [jobs, setJobs] = useState<any[]>([]);
     const [stats, setStats] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [running, setRunning] = useState(false);
+    const [error, setError] = useState('');
+    const [runError, setRunError] = useState('');
 
     const loadData = () => {
-        fetch('/api/jobs')
-            .then(res => res.json())
+        setError('');
+        apiJson<{ jobs?: any[]; stats?: any[] }>('/api/jobs', { timeoutMs: 15000 })
             .then(data => {
                 setJobs(data.jobs || []);
                 setStats(data.stats || []);
                 setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch(err => {
+                setError(errorMessage(err, 'Failed to load jobs.'));
+                setLoading(false);
+            });
     };
 
     useEffect(() => {
@@ -25,9 +31,12 @@ const Jobs: React.FC = () => {
 
     const handleRun = async () => {
         setRunning(true);
+        setRunError('');
         try {
-            await fetch('/api/jobs/run', { method: 'POST' });
+            await apiJson('/api/jobs/run', { method: 'POST', timeoutMs: 30000 });
             loadData();
+        } catch (err) {
+            setRunError(errorMessage(err, 'Failed to run jobs.'));
         } finally {
             setRunning(false);
         }
@@ -48,6 +57,8 @@ const Jobs: React.FC = () => {
                     {running ? 'Execution Commencing...' : 'Force Queue Execution'}
                 </button>
             </div>
+            {runError ? <p className="text-red-400 font-mono text-[12px] mb-4">{runError}</p> : null}
+            {error ? <p className="text-red-400 font-mono text-[12px] mb-4">{error}</p> : null}
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-10">
                 {stats.length > 0 ? stats.map((s, i) => (

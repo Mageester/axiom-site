@@ -1,5 +1,7 @@
 import { z } from 'zod';
 import { hashPassword, verifyPassword, hashToken } from '../_utils/crypto';
+import { apiError, d1ErrorMessage, json } from '../_utils/http';
+import { logEvent } from '../_utils/log';
 
 const LoginInput = z.object({
     username: z.string().min(1).max(64),
@@ -106,17 +108,15 @@ export async function onRequestPost(context: any) {
         try {
             data = LoginInput.parse(await request.json());
         } catch {
-            return new Response(JSON.stringify({ error: 'Invalid input format' }), {
-                status: 400, headers: { 'Content-Type': 'application/json' }
-            });
+            return apiError(400, 'Invalid input format');
         }
 
         const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
         const allowed = await checkRateLimit(env, ip, data.username);
         if (!allowed) {
-            return new Response(JSON.stringify({ error: 'Too many login attempts. Please try again in 15 minutes.' }), {
-                status: 429,
-                headers: { 'Content-Type': 'application/json', 'Retry-After': '900' }
+            logEvent('warn', 'auth.login.rate_limited', { username: data.username, ip });
+            return json({ error: 'Too many login attempts. Please try again in 15 minutes.' }, 429, {
+                'Retry-After': '900'
             });
         }
 
@@ -131,9 +131,8 @@ export async function onRequestPost(context: any) {
         const valid = await verifyPassword(data.password, hashToVerify, env);
 
         if (results.length === 0 || !valid) {
-            return new Response(JSON.stringify({ error: 'Invalid credentials' }), {
-                status: 401, headers: { 'Content-Type': 'application/json' }
-            });
+            logEvent('warn', 'auth.login.invalid_credentials', { username: data.username, ip });
+            return apiError(401, 'Invalid credentials');
         }
 
         const user = results[0];
@@ -156,24 +155,20 @@ export async function onRequestPost(context: any) {
             ip, request.headers.get('User-Agent') || 'unknown'
         ).run();
 
-        return new Response(JSON.stringify({
+        return json({
             user: {
                 username: user.username,
                 role: user.role,
                 must_change_password: !!user.must_change_password
             }
-        }), {
-            status: 200,
-            headers: {
-                'Content-Type': 'application/json',
-                'Set-Cookie': `axiom_session=${sessionToken}; HttpOnly; Secure; SameSite=Strict; Path=/; Expires=${expiresAt.toUTCString()}`
-            }
+        }, 200, {
+            'Set-Cookie': `axiom_session=${sessionToken}; HttpOnly; Secure; SameSite=Strict; Path=/; Expires=${expiresAt.toUTCString()}`
         });
 
     } catch (e: any) {
-        // Expose error detail in response temporarily for diagnosis, remove after fix confirmed
-        return new Response(JSON.stringify({ error: 'Login system error', _diag: e?.message }), {
-            status: 500, headers: { 'Content-Type': 'application/json' }
+        logEvent('error', 'auth.login.internal_error', {
+            message: e?.message || 'unknown'
         });
+        return apiError(500, d1ErrorMessage(e, 'Login system error'));
     }
 }

@@ -2,40 +2,44 @@ export async function performAudit(rawUrl: string) {
     let url = rawUrl.trim();
     if (!url.startsWith('http')) url = 'https://' + url;
 
-    const controller = new AbortController();
-    const tId = setTimeout(() => controller.abort(), 10000);
-
-    let start = Date.now();
-    let res;
-
-    try {
-        res = await fetch(url, {
-            redirect: 'follow',
-            signal: controller.signal,
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0) Chrome/120.0.0.0 Safari/537.36 Axiom-Intel-Audit/1.0'
-            }
-        });
-    } catch (e) {
-        clearTimeout(tId);
-        if (url.startsWith('https://') && e.name !== 'AbortError') {
-            const fallbackUrl = url.replace('https://', 'http://');
-            start = Date.now();
-            try {
-                res = await fetch(fallbackUrl, {
-                    signal: controller.signal,
-                    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0) Chrome/120.0.0.0 Safari/537.36 Axiom-Intel-Audit/1.0' }
-                });
-            } catch (fallbackE) {
-                return { error: 'Failed to connect (fallback): ' + fallbackE.message };
-            }
-        } else {
-            return { error: e.message };
+    async function fetchWithTimeout(targetUrl: string, timeoutMs: number) {
+        const controller = new AbortController();
+        const tId = setTimeout(() => controller.abort(), timeoutMs);
+        try {
+            const res = await fetch(targetUrl, {
+                redirect: 'follow',
+                signal: controller.signal,
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0) Chrome/120.0.0.0 Safari/537.36 Axiom-Intel-Audit/1.0'
+                }
+            });
+            return res;
+        } finally {
+            clearTimeout(tId);
         }
     }
 
-    clearTimeout(tId);
+    let start = Date.now();
+    let res: Response | undefined;
+
+    try {
+        res = await fetchWithTimeout(url, 10000);
+    } catch (e: any) {
+        if (url.startsWith('https://') && e?.name !== 'AbortError') {
+            const fallbackUrl = url.replace('https://', 'http://');
+            start = Date.now();
+            try {
+                res = await fetchWithTimeout(fallbackUrl, 10000);
+            } catch (fallbackE: any) {
+                const msg = fallbackE?.name === 'AbortError' ? 'Request timed out' : (fallbackE?.message || 'Unknown network error');
+                return { error: 'Failed to connect (fallback): ' + msg };
+            }
+        } else {
+            return { error: e?.name === 'AbortError' ? 'Request timed out' : (e?.message || 'Network error') };
+        }
+    }
     if (!res) return { error: 'No response' };
+    if (!res.ok) return { error: `HTTP ${res.status}` };
 
     const timeMs = Date.now() - start;
     const finalUrl = res.url;

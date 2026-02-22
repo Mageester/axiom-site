@@ -1,3 +1,5 @@
+import { apiError, d1ErrorMessage, json } from '../_utils/http';
+
 export async function onRequestGet(context) {
     const { env } = context;
     try {
@@ -9,12 +11,9 @@ export async function onRequestGet(context) {
             ORDER BY c.created_at DESC
         `).all();
 
-        return new Response(JSON.stringify({ campaigns: results }), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' }
-        });
-    } catch (e) {
-        return new Response('Error: ' + e.message, { status: 500 });
+        return json({ campaigns: results });
+    } catch (e: any) {
+        return apiError(500, d1ErrorMessage(e, 'Failed to fetch campaigns'));
     }
 }
 
@@ -24,7 +23,7 @@ export async function onRequestPost(context) {
         const { niche, city, radius_km } = await request.json();
 
         if (!niche || !city || radius_km == null) {
-            return new Response('Missing fields', { status: 400 });
+            return apiError(400, 'Missing fields');
         }
 
         const campaignId = crypto.randomUUID();
@@ -39,11 +38,8 @@ export async function onRequestPost(context) {
             'INSERT INTO jobs (id, type, payload_json) VALUES (?, ?, ?)'
         ).bind(jobId, 'DISCOVERY', payload).run();
 
-        return new Response(JSON.stringify({ message: "Campaign created", campaign_id: campaignId, job_id: jobId }), {
-            status: 201,
-            headers: { 'Content-Type': 'application/json' }
-        });
-    } catch (e) {
-        return new Response('Error: ' + e.message, { status: 500 });
+        return json({ message: "Campaign created", campaign_id: campaignId, job_id: jobId }, 201);
+    } catch (e: any) {
+        return apiError(500, d1ErrorMessage(e, 'Failed to create campaign'));
     }
 }
