@@ -8,46 +8,40 @@ const LoginInput = z.object({
 
 async function checkRateLimit(env: any, ip: string, username: string): Promise<boolean> {
     const key = `${ip}:${username.toLowerCase()}`;
-    const { results } = await env.DB.prepare(`
-        SELECT count, last_at FROM login_attempts WHERE key = ?
-    `).bind(key).all();
+    try {
+        const { results } = await env.DB.prepare(`
+            SELECT count, last_at FROM login_attempts WHERE key = ?
+        `).bind(key).all();
 
-    if (results.length > 0) {
-        const attempt = results[0];
-        if (attempt.count >= 5) {
-            const windowAgo = new Date(Date.now() - 15 * 60000).toISOString();
-            if (attempt.last_at > windowAgo) {
-                return false; // Rate limited
+        if (results.length > 0) {
+            const attempt = results[0];
+            if (attempt.count >= 5) {
+                const windowAgo = new Date(Date.now() - 15 * 60000).toISOString();
+                if (attempt.last_at > windowAgo) return false;
+                await env.DB.prepare(`UPDATE login_attempts SET count = 1, last_at = CURRENT_TIMESTAMP WHERE key = ?`).bind(key).run();
+                return true;
             }
-            // Window expired — reset
-            await env.DB.prepare(`
-                UPDATE login_attempts SET count = 1, last_at = CURRENT_TIMESTAMP WHERE key = ?
-            `).bind(key).run();
+            await env.DB.prepare(`UPDATE login_attempts SET count = count + 1, last_at = CURRENT_TIMESTAMP WHERE key = ?`).bind(key).run();
             return true;
         }
-        await env.DB.prepare(`
-            UPDATE login_attempts SET count = count + 1, last_at = CURRENT_TIMESTAMP WHERE key = ?
-        `).bind(key).run();
+        await env.DB.prepare(`INSERT INTO login_attempts (key, count) VALUES (?, 1)`).bind(key).run();
         return true;
+    } catch {
+        return true; // On rate limit DB error, allow — don't block legitimate logins
     }
-    await env.DB.prepare(`
-        INSERT INTO login_attempts (key, count) VALUES (?, 1)
-    `).bind(key).run();
-    return true;
 }
 
-// Module-level flag — runs once per cold start
 let _bootstrapped = false;
 
-async function bootstrapIfEnabled(env: any) {
+async function ensureSchema(env: any) {
     if (_bootstrapped) return;
-    _bootstrapped = true; // Set immediately to prevent concurrent re-entry
 
-    // Ensure schema tables exist (safe for any cold start)
-    try { await env.DB.prepare('SELECT username FROM users LIMIT 1').all(); }
-    catch {
-        await env.DB.prepare('DROP TABLE IF EXISTS sessions').run();
-        await env.DB.prepare('DROP TABLE IF EXISTS users').run();
+    // Detect legacy broken schema (missing username column) and rebuild
+    try {
+        await env.DB.prepare('SELECT username FROM users LIMIT 1').all();
+    } catch {
+        await env.DB.prepare('DROP TABLE IF EXISTS sessions').run().catch(() => null);
+        await env.DB.prepare('DROP TABLE IF EXISTS users').run().catch(() => null);
     }
 
     await env.DB.prepare(`
@@ -86,7 +80,9 @@ async function bootstrapIfEnabled(env: any) {
         )
     `).run();
 
-    // Bootstrap admin ONLY if explicitly enabled AND no admin exists yet
+    _bootstrapped = true;
+
+    // Bootstrap admin ONLY if explicitly enabled AND no admin exists
     const bootstrapEnabled = env.BOOTSTRAP_ENABLED === 'true' || env.BOOTSTRAP_ENABLED === '1';
     if (!bootstrapEnabled) return;
 
@@ -104,7 +100,7 @@ async function bootstrapIfEnabled(env: any) {
 export async function onRequestPost(context: any) {
     const { request, env } = context;
     try {
-        await bootstrapIfEnabled(env);
+        await ensureSchema(env);
 
         let data: z.infer<typeof LoginInput>;
         try {
@@ -128,7 +124,8 @@ export async function onRequestPost(context: any) {
             'SELECT * FROM users WHERE username = ? COLLATE NOCASE'
         ).bind(data.username).all();
 
-        // Always verify a hash (even dummy) to prevent user-enumeration via timing
+        // Always run verifyPassword to prevent user-enumeration via timing.
+        // Dummy hash uses current format so timing is identical.
         const dummyHash = `100000:${'aa'.repeat(16)}:${'bb'.repeat(32)}`;
         const hashToVerify = results.length > 0 ? results[0].password_hash : dummyHash;
         const valid = await verifyPassword(data.password, hashToVerify, env);
@@ -143,12 +140,12 @@ export async function onRequestPost(context: any) {
 
         // Reset rate limit on success
         await env.DB.prepare('DELETE FROM login_attempts WHERE key = ?')
-            .bind(`${ip}:${data.username.toLowerCase()}`).run();
+            .bind(`${ip}:${data.username.toLowerCase()}`).run().catch(() => null);
 
-        // Create secure session — double UUID for entropy (72 chars)
+        // Session: double UUID = 72 chars of entropy
         const sessionToken = crypto.randomUUID() + crypto.randomUUID();
         const sessionHash = await hashToken(sessionToken);
-        const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 7 days
+        const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
         const sessionId = crypto.randomUUID();
 
         await env.DB.prepare(`
@@ -174,8 +171,8 @@ export async function onRequestPost(context: any) {
         });
 
     } catch (e: any) {
-        // Never expose internal error details in production
-        return new Response(JSON.stringify({ error: 'Login system error' }), {
+        // Expose error detail in response temporarily for diagnosis, remove after fix confirmed
+        return new Response(JSON.stringify({ error: 'Login system error', _diag: e?.message }), {
             status: 500, headers: { 'Content-Type': 'application/json' }
         });
     }
