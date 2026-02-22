@@ -88,6 +88,29 @@ Use Chrome DevTools -> Network (Preserve log ON, Disable cache ON).
 3. Schema missing:
    - Test against a fresh DB without migrations and confirm API errors clearly mention missing/outdated schema.
 
+## Login 500 Triage (Cloudflare Pages)
+
+Use this when `POST /api/auth/login` returns `500` in production.
+
+1. Check Cloudflare Pages deployment + Functions logs:
+   - Cloudflare Dashboard -> Workers & Pages -> your Pages project -> Deployments (latest commit is deployed)
+   - Then open Functions/Realtime logs for the deployment/environment and filter for `auth.login`
+2. Check the response body in browser DevTools Network:
+   - Expected safe JSON (never raw HTML/plain text)
+   - `{"error":"DB binding missing"}`
+   - `{"error":"DB schema missing/outdated. Run migrations / ensure correct D1 bound in Pages."}`
+   - `{"error":"Login system error"}`
+3. If `DB binding missing`:
+   - Pages project configuration is missing D1 binding named `DB`
+   - Add D1 binding `DB` in Pages project settings for the active environment (production/preview)
+4. If schema missing/outdated:
+   - The bound D1 database is wrong, empty, or missing migrations
+   - Apply repo migrations to the correct D1 and confirm Pages is bound to that same database
+5. Bootstrap checks (first-time admin only):
+   - If `BOOTSTRAP_ENABLED=true`, also set `BOOTSTRAP_ADMIN_PASSWORD`
+   - Optional: set `BOOTSTRAP_ADMIN_USERNAME` (defaults to `admin`)
+   - First login should still force password change (`must_change_password=true`)
+
 ## Commands To Run Before Shipping
 
 - `npm run build`

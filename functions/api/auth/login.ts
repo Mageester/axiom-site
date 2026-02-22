@@ -8,6 +8,22 @@ const LoginInput = z.object({
     password: z.string().min(1).max(256)
 });
 
+function isSchemaErrorMessage(message: string) {
+    const m = message.toLowerCase();
+    return m.includes('no such table') || m.includes('no such column') || m.includes('has no column named');
+}
+
+function loginServerError(e: any) {
+    const message = e?.message || 'unknown';
+    if (isSchemaErrorMessage(String(message))) {
+        return apiError(500, 'DB schema missing/outdated. Run migrations / ensure correct D1 bound in Pages.');
+    }
+    if (String(message).includes('BOOTSTRAP_ADMIN_PASSWORD')) {
+        return apiError(500, 'Bootstrap enabled but BOOTSTRAP_ADMIN_PASSWORD is missing');
+    }
+    return apiError(500, d1ErrorMessage(e, 'Login system error'));
+}
+
 async function checkRateLimit(env: any, ip: string, username: string): Promise<boolean> {
     const key = `${ip}:${username.toLowerCase()}`;
     try {
@@ -88,20 +104,33 @@ async function ensureSchema(env: any) {
     const bootstrapEnabled = env.BOOTSTRAP_ENABLED === 'true' || env.BOOTSTRAP_ENABLED === '1';
     if (!bootstrapEnabled) return;
 
-    const { results } = await env.DB.prepare(`SELECT id FROM users WHERE username = 'admin' COLLATE NOCASE`).all();
+    const bootstrapUsername = String(env.BOOTSTRAP_ADMIN_USERNAME || 'admin').trim().slice(0, 64) || 'admin';
+    const bootstrapPassword = env.BOOTSTRAP_ADMIN_PASSWORD;
+    if (!bootstrapPassword) {
+        throw new Error('Bootstrap enabled but BOOTSTRAP_ADMIN_PASSWORD is missing');
+    }
+
+    const { results } = await env.DB.prepare(`SELECT id FROM users WHERE username = ? COLLATE NOCASE`).bind(bootstrapUsername).all();
     if (results.length === 0) {
-        const initialPassHash = await hashPassword('admin', undefined, env);
+        const initialPassHash = await hashPassword(String(bootstrapPassword), undefined, env);
         const id = crypto.randomUUID();
         await env.DB.prepare(`
             INSERT INTO users (id, username, password_hash, role, must_change_password)
-            VALUES (?, 'admin', ?, 'admin', 1)
-        `).bind(id, initialPassHash).run();
+            VALUES (?, ?, ?, 'admin', 1)
+        `).bind(id, bootstrapUsername, initialPassHash).run();
     }
 }
 
 export async function onRequestPost(context: any) {
     const { request, env } = context;
     try {
+        if (!env?.DB || typeof env.DB.prepare !== 'function') {
+            logEvent('error', 'auth.login.db_binding_missing', {
+                path: '/api/auth/login'
+            });
+            return apiError(500, 'DB binding missing');
+        }
+
         await ensureSchema(env);
 
         let data: z.infer<typeof LoginInput>;
@@ -169,6 +198,6 @@ export async function onRequestPost(context: any) {
         logEvent('error', 'auth.login.internal_error', {
             message: e?.message || 'unknown'
         });
-        return apiError(500, d1ErrorMessage(e, 'Login system error'));
+        return loginServerError(e);
     }
 }
