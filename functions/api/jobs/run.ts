@@ -2,6 +2,8 @@ import { fetchOsmBusinesses } from '../_utils/osm';
 import { performAudit } from '../_utils/audit';
 import { apiError, d1ErrorMessage, json } from '../_utils/http';
 import { logEvent } from '../_utils/log';
+import { ensureDiscoverySchema } from '../_utils/schema';
+import { auditLiteWebsite, expandNicheKeywords, normalizeDomain, normalizePhone, scoreOpportunity } from '../_utils/discovery';
 
 export async function onRequestPost(context: any) {
     const { env, request } = context;
@@ -10,6 +12,8 @@ export async function onRequestPost(context: any) {
     let prioritizedJobId: string | null = null;
 
     try {
+        await ensureDiscoverySchema(env);
+
         const contentType = request.headers.get('Content-Type') || '';
         if (contentType.includes('application/json')) {
             let body: any = null;
@@ -22,7 +26,7 @@ export async function onRequestPost(context: any) {
             const campaignId = typeof body?.campaign_id === 'string' ? body.campaign_id.trim() : '';
             if (campaignId) {
                 const { results: campaignRows } = await env.DB.prepare(
-                    'SELECT id, niche, city, radius_km FROM campaigns WHERE id = ? LIMIT 1'
+                    'SELECT id, niche, city, radius_km, COALESCE(mode, \'opportunity\') as mode FROM campaigns WHERE id = ? LIMIT 1'
                 ).bind(campaignId).all();
 
                 if (campaignRows.length === 0) {
@@ -35,7 +39,8 @@ export async function onRequestPost(context: any) {
                     campaignId: campaign.id,
                     niche: campaign.niche,
                     city: campaign.city,
-                    radius_km: campaign.radius_km
+                    radius_km: campaign.radius_km,
+                    mode: campaign.mode === 'strict' ? 'strict' : 'opportunity'
                 });
 
                 await env.DB.prepare(
@@ -98,12 +103,25 @@ export async function onRequestPost(context: any) {
                 if (job.type === 'DISCOVERY') {
                     const payload = JSON.parse(job.payload_json);
                     const { campaignId, niche, city, radius_km } = payload;
+                    const mode = payload.mode === 'strict' ? 'strict' : 'opportunity';
+                    const nicheKeywords = expandNicheKeywords(String(niche || ''));
 
                     if (!campaignId || !niche || !city) throw new Error('Invalid DISCOVERY payload');
 
-                    const businesses = await fetchOsmBusinesses(niche, city, Number(radius_km) || 10, env);
+                    const discoveryRes = await fetchOsmBusinesses(niche, city, Number(radius_km) || 10, env, mode);
+                    const businesses = discoveryRes.businesses || [];
+                    if (discoveryRes.meta?.broad_query_used) {
+                        log.push(`broad_query_used city=${city} mode=${mode}`);
+                        logEvent('info', 'discovery.broad_query_used', { campaignId, city, mode });
+                    }
+                    if (discoveryRes.meta?.strict_fallback_triggered) {
+                        log.push(`strict_fallback_triggered city=${city}`);
+                        logEvent('info', 'discovery.strict_fallback_triggered', { campaignId, city });
+                    }
                     log.push(`Found ${businesses.length} businesses`);
 
+                    let scoredCount = 0;
+                    let emailsFoundCount = 0;
                     for (const b of businesses) {
                         try {
                             await env.DB.prepare(`
@@ -111,21 +129,111 @@ export async function onRequestPost(context: any) {
                                 VALUES (?, ?, ?, ?, ?, ?, ?)
                             `).bind(b.osm_id, b.name, b.lat, b.lon, b.address, b.phone, b.website).run();
 
+                            const domain = normalizeDomain(b.website);
+                            const phoneDigits = normalizePhone(b.phone);
+                            const dedupeKey = domain ? `domain:${domain}` : (phoneDigits ? `phone:${phoneDigits}` : null);
+
+                            let existingLead: any = null;
+                            if (dedupeKey) {
+                                const { results: dedupeRows } = await env.DB.prepare(
+                                    `SELECT id, campaign_id, canonical_url FROM leads WHERE dedupe_key = ? LIMIT 1`
+                                ).bind(dedupeKey).all();
+                                if (dedupeRows.length > 0) existingLead = dedupeRows[0];
+                            }
+                            if (!existingLead) {
+                                const { results: businessRows } = await env.DB.prepare(
+                                    `SELECT id, campaign_id, canonical_url FROM leads WHERE business_id = ? LIMIT 1`
+                                ).bind(b.osm_id).all();
+                                if (businessRows.length > 0) existingLead = businessRows[0];
+                            }
+
                             const candidateLeadId = crypto.randomUUID();
                             let leadId = candidateLeadId;
-                            await env.DB.prepare(`
-                                INSERT OR IGNORE INTO leads (id, campaign_id, business_id, canonical_url)
-                                VALUES (?, ?, ?, ?)
-                            `).bind(candidateLeadId, campaignId, b.osm_id, b.website).run();
 
-                            const { results: leadRows } = await env.DB.prepare(`
-                                SELECT id FROM leads WHERE campaign_id = ? AND business_id = ? LIMIT 1
-                            `).bind(campaignId, b.osm_id).all();
+                            let intakePresent = 0;
+                            let bookingPresent = 0;
+                            let detectedEmail: string | null = null;
+                            let finalUrl = b.website || null;
+                            let httpsSupported = b.website && String(b.website).startsWith('https://') ? 1 : 0;
 
-                            if (leadRows.length === 0) {
-                                throw new Error(`Lead insert missing for business ${b.osm_id}`);
+                            if (b.website) {
+                                const lite = await auditLiteWebsite(String(b.website));
+                                if (lite) {
+                                    intakePresent = lite.intakePresent;
+                                    bookingPresent = lite.bookingPresent;
+                                    detectedEmail = lite.detectedEmail;
+                                    finalUrl = lite.finalUrl || finalUrl;
+                                    httpsSupported = lite.httpsSupported;
+                                    if (detectedEmail) emailsFoundCount++;
+                                }
                             }
-                            leadId = String(leadRows[0].id);
+
+                            const scored = scoreOpportunity({
+                                website: b.website,
+                                finalUrl,
+                                phone: b.phone,
+                                address: b.address,
+                                name: b.name,
+                                tags: b.tags || {},
+                                intakePresent,
+                                bookingPresent,
+                                nicheKeywords
+                            });
+                            scoredCount++;
+
+                            const shouldKeepByStrict =
+                                mode !== 'strict' ||
+                                scored.keywordHits > 0 ||
+                                businesses.length < 20 ||
+                                scored.score >= 8;
+                            if (!shouldKeepByStrict) {
+                                continue;
+                            }
+
+                            if (existingLead) {
+                                leadId = String(existingLead.id);
+                                await env.DB.prepare(`
+                                    INSERT OR IGNORE INTO lead_campaigns (lead_id, campaign_id) VALUES (?, ?)
+                                `).bind(leadId, campaignId).run();
+                                await env.DB.prepare(`
+                                    UPDATE leads
+                                    SET canonical_url = COALESCE(canonical_url, ?),
+                                        opportunity_score = CASE WHEN opportunity_score IS NULL OR opportunity_score < ? THEN ? ELSE opportunity_score END,
+                                        opportunity_reasons = CASE WHEN opportunity_score IS NULL OR opportunity_score < ? THEN ? ELSE opportunity_reasons END,
+                                        intake_present = CASE WHEN intake_present = 1 THEN 1 ELSE ? END,
+                                        booking_present = CASE WHEN booking_present = 1 THEN 1 ELSE ? END,
+                                        detected_email = COALESCE(detected_email, ?),
+                                        dedupe_key = COALESCE(dedupe_key, ?)
+                                    WHERE id = ?
+                                `).bind(
+                                    finalUrl,
+                                    scored.score, scored.score,
+                                    scored.score, JSON.stringify(scored.reasons),
+                                    intakePresent, bookingPresent, detectedEmail, dedupeKey, leadId
+                                ).run().catch(() => null);
+                            } else {
+                                await env.DB.prepare(`
+                                    INSERT OR IGNORE INTO leads (
+                                        id, campaign_id, business_id, canonical_url,
+                                        opportunity_score, opportunity_reasons, intake_present, booking_present, detected_email, dedupe_key
+                                    )
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                `).bind(
+                                    candidateLeadId, campaignId, b.osm_id, finalUrl,
+                                    scored.score, JSON.stringify(scored.reasons), intakePresent, bookingPresent, detectedEmail, dedupeKey
+                                ).run();
+                                await env.DB.prepare(`
+                                    INSERT OR IGNORE INTO lead_campaigns (lead_id, campaign_id) VALUES (?, ?)
+                                `).bind(candidateLeadId, campaignId).run().catch(() => null);
+
+                                const { results: leadRows } = await env.DB.prepare(`
+                                    SELECT id FROM leads WHERE id = ? LIMIT 1
+                                `).bind(candidateLeadId).all();
+                                if (leadRows.length === 0) {
+                                    throw new Error(`Lead insert missing for business ${b.osm_id}`);
+                                }
+                                leadId = String(leadRows[0].id);
+                            }
 
                             if (b.website && b.website.length > 5) {
                                 const { results: existingAudits } = await env.DB.prepare(
@@ -144,6 +252,10 @@ export async function onRequestPost(context: any) {
                             log.push(`Discovery item skipped (${b.osm_id}): ${insertMsg}`);
                         }
                     }
+                    log.push(`leads_scored=${scoredCount}`);
+                    log.push(`emails_found_count=${emailsFoundCount}`);
+                    logEvent('info', 'discovery.leads_scored', { campaignId, count: scoredCount });
+                    logEvent('info', 'discovery.emails_found_count', { campaignId, count: emailsFoundCount });
 
                 } else if (job.type === 'AUDIT') {
                     const payload = JSON.parse(job.payload_json);

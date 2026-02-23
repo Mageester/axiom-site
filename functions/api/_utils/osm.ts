@@ -140,12 +140,9 @@ async function geocodeCity(cityInput: string, env?: any) {
     throw new Error(lastErr);
 }
 
-export async function fetchOsmBusinesses(niche: string, city: string, radiusKm: number, env?: any) {
-    const r = Math.min(radiusKm, 100) * 1000; // Cap radius at 100km to prevent runaway queries
-
-    // Map niches to OSM craft tags
-    const n = niche.toLowerCase().replace(/[^a-z_]/g, '').slice(0, 64);
-    let craftType = n;
+function craftTypeForNiche(niche: string) {
+    const n = niche.toLowerCase().replace(/[^a-z_ ]/g, '').slice(0, 64);
+    let craftType = n.replace(/\s+/g, '_');
     if (n.includes('hvac')) craftType = 'hvac';
     else if (n.includes('plumb')) craftType = 'plumber';
     else if (n.includes('electric')) craftType = 'electrician';
@@ -153,28 +150,10 @@ export async function fetchOsmBusinesses(niche: string, city: string, radiusKm: 
     else if (n.includes('paint')) craftType = 'painter';
     else if (n.includes('landscap')) craftType = 'gardener';
     else if (n.includes('clean')) craftType = 'cleaning';
+    return craftType;
+}
 
-    let lat: number, lon: number;
-    try {
-        const geo = await geocodeCity(city, env);
-        lat = geo.lat;
-        lon = geo.lon;
-    } catch (e: any) {
-        throw new Error(e?.message || 'Geocoding failed');
-    }
-
-    const query = `
-        [out:json][timeout:20];
-        (
-            node["craft"="${craftType}"](around:${r},${lat},${lon});
-            way["craft"="${craftType}"](around:${r},${lat},${lon});
-            node["shop"="${craftType}"](around:${r},${lat},${lon});
-        );
-        out body;
-        >;
-        out skel qt;
-    `;
-
+async function runOverpassQuery(query: string) {
     let data: any;
     const overpassEndpoints = [
         'https://overpass-api.de/api/interpreter',
@@ -205,29 +184,117 @@ export async function fetchOsmBusinesses(niche: string, city: string, radiusKm: 
     if (!data) {
         throw new Error('Overpass query failed: ' + lastError);
     }
+    return data;
+}
 
-    const seen = new Set<string>();
+function mapBusinessesFromOverpass(data: any, fallbackLat: number, fallbackLon: number, hardCap: number) {
     const businesses: any[] = [];
-
-    for (const el of (data.elements || []).slice(0, 200)) { // Hard cap at 200 businesses
+    const byName = new Set<string>();
+    for (const el of (data.elements || [])) {
         if (!el.tags?.name) continue;
-
-        const key = el.tags.name.toLowerCase().trim();
-        if (seen.has(key)) continue; // Deduplicate by name
-        seen.add(key);
-
+        const nameKey = String(el.tags.name).toLowerCase().trim();
+        if (byName.has(nameKey)) continue;
+        byName.add(nameKey);
         businesses.push({
             osm_id: String(el.id),
             name: el.tags.name,
-            lat: el.lat ?? el.center?.lat ?? lat,
-            lon: el.lon ?? el.center?.lon ?? lon,
+            lat: el.lat ?? el.center?.lat ?? fallbackLat,
+            lon: el.lon ?? el.center?.lon ?? fallbackLon,
             phone: el.tags.phone || el.tags['contact:phone'] || null,
             website: el.tags.website || el.tags['contact:website'] || null,
             address: el.tags['addr:street']
                 ? `${el.tags['addr:housenumber'] || ''} ${el.tags['addr:street']}`.trim()
-                : null
+                : null,
+            tags: el.tags || {}
         });
     }
 
-    return businesses;
+    businesses.sort((a, b) => {
+        const as = (a.website ? 2 : 0) + (a.phone ? 1 : 0);
+        const bs = (b.website ? 2 : 0) + (b.phone ? 1 : 0);
+        return bs - as;
+    });
+
+    return businesses.slice(0, hardCap);
+}
+
+export async function fetchOsmBusinesses(
+    niche: string,
+    city: string,
+    radiusKm: number,
+    env?: any,
+    mode: 'strict' | 'opportunity' = 'opportunity'
+) {
+    const r = Math.min(radiusKm, 100) * 1000; // Cap radius at 100km to prevent runaway queries
+
+    const craftType = craftTypeForNiche(niche);
+
+    let lat: number, lon: number;
+    try {
+        const geo = await geocodeCity(city, env);
+        lat = geo.lat;
+        lon = geo.lon;
+    } catch (e: any) {
+        throw new Error(e?.message || 'Geocoding failed');
+    }
+
+    const nicheQuery = `
+        [out:json][timeout:20];
+        (
+            node["craft"="${craftType}"](around:${r},${lat},${lon});
+            way["craft"="${craftType}"](around:${r},${lat},${lon});
+            node["shop"="${craftType}"](around:${r},${lat},${lon});
+            way["shop"="${craftType}"](around:${r},${lat},${lon});
+        );
+        out body;
+        >;
+        out skel qt;
+    `;
+
+    const nicheData = await runOverpassQuery(nicheQuery);
+    let businesses = mapBusinessesFromOverpass(nicheData, lat, lon, 300);
+
+    const lowThreshold = mode === 'strict' ? 12 : 40;
+    let broadFallbackUsed = false;
+    let strictFallbackTriggered = false;
+
+    if (businesses.length < lowThreshold) {
+        if (mode === 'strict') strictFallbackTriggered = true;
+        const broadQuery = `
+            [out:json][timeout:20];
+            (
+                node["craft"](around:${r},${lat},${lon});
+                way["craft"](around:${r},${lat},${lon});
+                node["office"](around:${r},${lat},${lon});
+                way["office"](around:${r},${lat},${lon});
+                node["shop"](around:${r},${lat},${lon});
+                way["shop"](around:${r},${lat},${lon});
+                node["amenity"](around:${r},${lat},${lon});
+                way["amenity"](around:${r},${lat},${lon});
+            );
+            out body;
+            >;
+            out skel qt;
+        `;
+        const broadData = await runOverpassQuery(broadQuery);
+        const broad = mapBusinessesFromOverpass(broadData, lat, lon, 300);
+        const seen = new Set(businesses.map(b => b.osm_id));
+        for (const b of broad) {
+            if (seen.has(b.osm_id)) continue;
+            businesses.push(b);
+            seen.add(b.osm_id);
+            if (businesses.length >= 300) break;
+        }
+        broadFallbackUsed = true;
+    }
+
+    return {
+        businesses: businesses.slice(0, 300),
+        meta: {
+            geocode_query: normalizeCityInput(city),
+            broad_query_used: broadFallbackUsed,
+            strict_fallback_triggered: strictFallbackTriggered,
+            geocode_country: inferCountryFromRegion(city).countryCode || null
+        }
+    };
 }
