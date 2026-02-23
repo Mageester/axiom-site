@@ -24,6 +24,8 @@ export async function onRequestGet(context) {
             SELECT l.id, l.campaign_id, l.status, l.notes, l.canonical_url, l.last_audit_at,
                    COALESCE(l.opportunity_score, 0) as opportunity_score,
                    l.opportunity_reasons,
+                   COALESCE(l.website_status, 'unknown') as website_status,
+                   l.website_source,
                    COALESCE(l.intake_present, 0) as intake_present,
                    COALESCE(l.booking_present, 0) as booking_present,
                    l.detected_email,

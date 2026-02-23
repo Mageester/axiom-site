@@ -1,4 +1,4 @@
-import { fetchOsmBusinesses } from '../_utils/osm';
+import { enrichWebsiteForBusiness, fetchOsmBusinesses } from '../_utils/osm';
 import { performAudit } from '../_utils/audit';
 import { apiError, d1ErrorMessage, json } from '../_utils/http';
 import { logEvent } from '../_utils/log';
@@ -129,7 +129,15 @@ export async function onRequestPost(context: any) {
                                 VALUES (?, ?, ?, ?, ?, ?, ?)
                             `).bind(b.osm_id, b.name, b.lat, b.lon, b.address, b.phone, b.website).run();
 
-                            const domain = normalizeDomain(b.website);
+                            const websiteEnriched = await enrichWebsiteForBusiness(b, env);
+                            if (websiteEnriched.error) {
+                                log.push(`Website enrichment skipped (${b.osm_type || 'node'}:${b.osm_id}): ${websiteEnriched.error}`);
+                            }
+                            const resolvedWebsite = websiteEnriched.website || null;
+                            const websiteStatus = websiteEnriched.website_status || 'unknown';
+                            const websiteSource = websiteEnriched.website_source || null;
+
+                            const domain = normalizeDomain(resolvedWebsite || b.website);
                             const phoneDigits = normalizePhone(b.phone);
                             const dedupeKey = domain ? `domain:${domain}` : (phoneDigits ? `phone:${phoneDigits}` : null);
 
@@ -153,11 +161,11 @@ export async function onRequestPost(context: any) {
                             let intakePresent = 0;
                             let bookingPresent = 0;
                             let detectedEmail: string | null = null;
-                            let finalUrl = b.website || null;
-                            let httpsSupported = b.website && String(b.website).startsWith('https://') ? 1 : 0;
+                            let finalUrl = resolvedWebsite;
+                            let httpsSupported = resolvedWebsite && String(resolvedWebsite).startsWith('https://') ? 1 : 0;
 
-                            if (b.website) {
-                                const lite = await auditLiteWebsite(String(b.website));
+                            if (resolvedWebsite) {
+                                const lite = await auditLiteWebsite(String(resolvedWebsite));
                                 if (lite) {
                                     intakePresent = lite.intakePresent;
                                     bookingPresent = lite.bookingPresent;
@@ -169,7 +177,7 @@ export async function onRequestPost(context: any) {
                             }
 
                             const scored = scoreOpportunity({
-                                website: b.website,
+                                website: resolvedWebsite,
                                 finalUrl,
                                 phone: b.phone,
                                 address: b.address,
@@ -198,6 +206,8 @@ export async function onRequestPost(context: any) {
                                 await env.DB.prepare(`
                                     UPDATE leads
                                     SET canonical_url = COALESCE(canonical_url, ?),
+                                        website_status = CASE WHEN ? = 'known' THEN 'known' ELSE COALESCE(website_status, ?) END,
+                                        website_source = COALESCE(website_source, ?),
                                         opportunity_score = CASE WHEN opportunity_score IS NULL OR opportunity_score < ? THEN ? ELSE opportunity_score END,
                                         opportunity_reasons = CASE WHEN opportunity_score IS NULL OR opportunity_score < ? THEN ? ELSE opportunity_reasons END,
                                         intake_present = CASE WHEN intake_present = 1 THEN 1 ELSE ? END,
@@ -207,6 +217,7 @@ export async function onRequestPost(context: any) {
                                     WHERE id = ?
                                 `).bind(
                                     finalUrl,
+                                    websiteStatus, websiteStatus, websiteSource,
                                     scored.score, scored.score,
                                     scored.score, JSON.stringify(scored.reasons),
                                     intakePresent, bookingPresent, detectedEmail, dedupeKey, leadId
@@ -215,11 +226,13 @@ export async function onRequestPost(context: any) {
                                 await env.DB.prepare(`
                                     INSERT OR IGNORE INTO leads (
                                         id, campaign_id, business_id, canonical_url,
+                                        website_status, website_source,
                                         opportunity_score, opportunity_reasons, intake_present, booking_present, detected_email, dedupe_key
                                     )
-                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                                 `).bind(
                                     candidateLeadId, campaignId, b.osm_id, finalUrl,
+                                    websiteStatus, websiteSource,
                                     scored.score, JSON.stringify(scored.reasons), intakePresent, bookingPresent, detectedEmail, dedupeKey
                                 ).run();
                                 await env.DB.prepare(`
@@ -235,14 +248,14 @@ export async function onRequestPost(context: any) {
                                 leadId = String(leadRows[0].id);
                             }
 
-                            if (b.website && b.website.length > 5) {
+                            if (resolvedWebsite && resolvedWebsite.length > 5) {
                                 const { results: existingAudits } = await env.DB.prepare(
                                     `SELECT id FROM audits WHERE lead_id = ? LIMIT 1`
                                 ).bind(leadId).all();
                                 if (existingAudits.length > 0) continue;
 
                                 const auditJobId = crypto.randomUUID();
-                                const auditPayload = JSON.stringify({ leadId, website: b.website });
+                                const auditPayload = JSON.stringify({ leadId, website: resolvedWebsite });
                                 await env.DB.prepare(`
                                     INSERT INTO jobs (id, type, payload_json) VALUES (?, 'AUDIT', ?)
                                 `).bind(auditJobId, auditPayload).run();

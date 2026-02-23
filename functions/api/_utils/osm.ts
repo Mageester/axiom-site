@@ -5,6 +5,10 @@ const US_STATES = new Set([
     'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'DC'
 ]);
 const GEOCODE_CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+const WEBSITE_ENRICH_CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+let websiteEnrichRequestsThisRun = 0;
+let websiteEnrichWindowStartedAt = 0;
+const WEBSITE_ENRICH_MAX_PER_RUN = 20;
 
 function normalizeCityInput(input: string) {
     return input.replace(/\s+/g, ' ').trim();
@@ -33,6 +37,17 @@ async function ensureGeocodeCacheTable(env?: any) {
             lon REAL NOT NULL,
             bbox TEXT,
             updated_at INTEGER NOT NULL
+        )
+    `).run().catch(() => null);
+}
+
+async function ensureWebsiteEnrichCacheTable(env?: any) {
+    if (!env?.DB?.prepare) return;
+    await env.DB.prepare(`
+        CREATE TABLE IF NOT EXISTS website_enrich_cache (
+            key TEXT PRIMARY KEY,
+            website TEXT,
+            checked_at INTEGER NOT NULL
         )
     `).run().catch(() => null);
 }
@@ -153,6 +168,130 @@ function craftTypeForNiche(niche: string) {
     return craftType;
 }
 
+function websiteFromTags(tags: any): string | null {
+    if (!tags) return null;
+    return tags.website || tags['contact:website'] || tags.url || tags['contact:url'] || null;
+}
+
+function normalizeWebsiteUrl(input?: string | null): string | null {
+    if (!input) return null;
+    let raw = String(input).trim();
+    if (!raw) return null;
+    raw = raw.replace(/\s+/g, '');
+    if (!/^https?:\/\//i.test(raw)) raw = `https://${raw}`;
+    try {
+        const u = new URL(raw);
+        u.protocol = 'https:';
+        u.hash = '';
+        if (u.pathname.endsWith('/') && u.pathname !== '/') {
+            u.pathname = u.pathname.replace(/\/+$/, '');
+        }
+        return u.toString().replace(/\/$/, (u.pathname === '/' ? '/' : ''));
+    } catch {
+        return null;
+    }
+}
+
+async function getWebsiteEnrichCache(env: any, key: string) {
+    if (!env?.DB?.prepare) return null;
+    await ensureWebsiteEnrichCacheTable(env);
+    const { results } = await env.DB.prepare(
+        `SELECT website, checked_at FROM website_enrich_cache WHERE key = ? LIMIT 1`
+    ).bind(key).all();
+    if (!results.length) return null;
+    const row = results[0];
+    const checkedAt = Number(row.checked_at || 0);
+    if (!checkedAt || (Date.now() - checkedAt) > WEBSITE_ENRICH_CACHE_TTL_MS) return null;
+    return { website: row.website ? String(row.website) : null, checkedAt };
+}
+
+async function setWebsiteEnrichCache(env: any, key: string, website: string | null) {
+    if (!env?.DB?.prepare) return;
+    await ensureWebsiteEnrichCacheTable(env);
+    await env.DB.prepare(`
+        INSERT INTO website_enrich_cache (key, website, checked_at)
+        VALUES (?, ?, ?)
+        ON CONFLICT(key) DO UPDATE SET website=excluded.website, checked_at=excluded.checked_at
+    `).bind(key, website, Date.now()).run().catch(() => null);
+}
+
+function resetWebsiteEnrichBudgetWindowIfNeeded() {
+    const now = Date.now();
+    if (!websiteEnrichWindowStartedAt || (now - websiteEnrichWindowStartedAt) > 60000) {
+        websiteEnrichWindowStartedAt = now;
+        websiteEnrichRequestsThisRun = 0;
+    }
+}
+
+async function enrichWebsiteFromNominatim(osmType: string, osmId: string, env?: any) {
+    const typeLetter = osmType === 'way' ? 'W' : osmType === 'relation' ? 'R' : 'N';
+    const cacheKey = `${typeLetter}:${osmId}`;
+    const cached = await getWebsiteEnrichCache(env, cacheKey);
+    if (cached) {
+        return { website: normalizeWebsiteUrl(cached.website), source: cached.website ? 'nominatim' : null, cacheHit: true, attempted: true };
+    }
+
+    resetWebsiteEnrichBudgetWindowIfNeeded();
+    if (websiteEnrichRequestsThisRun >= WEBSITE_ENRICH_MAX_PER_RUN) {
+        return { website: null, source: null, cacheHit: false, attempted: false, error: 'website enrichment skipped: per-run cap reached' };
+    }
+    websiteEnrichRequestsThisRun++;
+
+    const url = new URL('https://nominatim.openstreetmap.org/lookup');
+    url.searchParams.set('format', 'jsonv2');
+    url.searchParams.set('osm_ids', `${typeLetter}${osmId}`);
+    url.searchParams.set('extratags', '1');
+
+    let lastError = '';
+    for (let attempt = 0; attempt < 2; attempt++) {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 7000 + attempt * 1000);
+        try {
+            const res = await fetch(url.toString(), {
+                headers: {
+                    'Accept': 'application/json',
+                    'User-Agent': 'Axiom-Intel/1.0 (website enrichment)'
+                },
+                signal: controller.signal
+            });
+            clearTimeout(timeout);
+
+            if (res.status === 429 || res.status === 403) {
+                const retryAfter = res.headers.get('Retry-After');
+                lastError = `Geocode blocked/rate-limited: status=${res.status}, retry_after=${retryAfter || 'n/a'}`;
+                if (res.status === 429 && attempt < 1) {
+                    await new Promise(r => setTimeout(r, 500));
+                    continue;
+                }
+                await setWebsiteEnrichCache(env, cacheKey, null);
+                return { website: null, source: null, cacheHit: false, attempted: true, error: lastError };
+            }
+            if (res.status >= 500) {
+                lastError = `Nominatim lookup failed: status=${res.status}`;
+                if (attempt < 1) {
+                    await new Promise(r => setTimeout(r, 400));
+                    continue;
+                }
+                break;
+            }
+            if (!res.ok) {
+                lastError = `Nominatim lookup failed: status=${res.status}`;
+                break;
+            }
+            const data: any[] = await res.json();
+            const extratags = data?.[0]?.extratags || data?.[0]?.tags || {};
+            const found = normalizeWebsiteUrl(websiteFromTags(extratags));
+            await setWebsiteEnrichCache(env, cacheKey, found);
+            return { website: found, source: found ? 'nominatim' : null, cacheHit: false, attempted: true };
+        } catch (e: any) {
+            clearTimeout(timeout);
+            lastError = e?.name === 'AbortError' ? 'Nominatim lookup timed out' : (e?.message || 'Nominatim lookup failed');
+        }
+    }
+
+    return { website: null, source: null, cacheHit: false, attempted: true, error: lastError || 'Nominatim lookup failed' };
+}
+
 async function runOverpassQuery(query: string) {
     let data: any;
     const overpassEndpoints = [
@@ -197,11 +336,12 @@ function mapBusinessesFromOverpass(data: any, fallbackLat: number, fallbackLon: 
         byName.add(nameKey);
         businesses.push({
             osm_id: String(el.id),
+            osm_type: String(el.type || 'node'),
             name: el.tags.name,
             lat: el.lat ?? el.center?.lat ?? fallbackLat,
             lon: el.lon ?? el.center?.lon ?? fallbackLon,
             phone: el.tags.phone || el.tags['contact:phone'] || null,
-            website: el.tags.website || el.tags['contact:website'] || null,
+            website: normalizeWebsiteUrl(websiteFromTags(el.tags)),
             address: el.tags['addr:street']
                 ? `${el.tags['addr:housenumber'] || ''} ${el.tags['addr:street']}`.trim()
                 : null,
@@ -216,6 +356,32 @@ function mapBusinessesFromOverpass(data: any, fallbackLat: number, fallbackLon: 
     });
 
     return businesses.slice(0, hardCap);
+}
+
+export async function enrichWebsiteForBusiness(business: any, env?: any) {
+    const overpassWebsite = normalizeWebsiteUrl(business?.website || null);
+    if (overpassWebsite) {
+        return { website: overpassWebsite, website_status: 'known', website_source: 'overpass', attempted: false };
+    }
+
+    const osmType = String(business?.osm_type || 'node');
+    const osmId = String(business?.osm_id || '');
+    if (!osmId) {
+        return { website: null, website_status: 'unknown', website_source: null, attempted: false };
+    }
+    const enriched = await enrichWebsiteFromNominatim(osmType, osmId, env);
+    if (enriched.error) {
+        return { website: null, website_status: 'unknown', website_source: null, attempted: enriched.attempted, error: enriched.error };
+    }
+    if (enriched.website) {
+        return { website: enriched.website, website_status: 'known', website_source: 'nominatim', attempted: true };
+    }
+    return {
+        website: null,
+        website_status: enriched.attempted ? 'confirmed_missing' : 'unknown',
+        website_source: null,
+        attempted: !!enriched.attempted
+    };
 }
 
 export async function fetchOsmBusinesses(

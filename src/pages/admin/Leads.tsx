@@ -44,6 +44,22 @@ const Leads: React.FC = () => {
         return Number(b.opportunity_score || 0) - Number(a.opportunity_score || 0);
     });
 
+    const websiteLabel = (lead: any) => {
+        if (lead.canonical_url) return null;
+        if (lead.website_status === 'confirmed_missing') return 'No website found';
+        return 'Website unknown (OSM)';
+    };
+
+    const websiteSourceBadge = (lead: any) => {
+        if (!lead.website_source) return null;
+        const label = lead.website_source === 'nominatim' ? 'Nominatim' : 'OSM';
+        return (
+            <span className="inline-flex items-center px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-white/10 text-secondary rounded-sm ml-2">
+                {label}
+            </span>
+        );
+    };
+
     return (
         <div className="pt-32 pb-24 px-6 max-w-[1200px] mx-auto w-full">
             <div className="flex justify-between items-end mb-10 border-b border-subtle pb-6">
@@ -107,8 +123,15 @@ const Leads: React.FC = () => {
                                     </td>
                                     <td className="p-4 text-secondary">
                                         {lead.canonical_url ? (
-                                            <a href={lead.canonical_url} target="_blank" rel="noopener noreferrer" className="hover:text-accent font-mono truncate max-w-[200px] inline-block">{lead.canonical_url.replace(/^https?:\/\//, '')}</a>
-                                        ) : <span className="text-secondary/30 italic">No web presence</span>}
+                                            <div className="flex items-center flex-wrap gap-y-1">
+                                                <a href={lead.canonical_url} target="_blank" rel="noopener noreferrer" className="hover:text-accent font-mono truncate max-w-[220px] inline-block">{lead.canonical_url.replace(/^https?:\/\//, '')}</a>
+                                                {websiteSourceBadge(lead)}
+                                            </div>
+                                        ) : (
+                                            <span className="text-secondary/50 italic">
+                                                {websiteLabel(lead)}
+                                            </span>
+                                        )}
                                     </td>
                                     <td className="p-4">
                                         {lead.score !== null ? (

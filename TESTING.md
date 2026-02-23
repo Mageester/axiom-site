@@ -122,6 +122,20 @@ Use this when discovery returns `0` leads with geocoding failures for valid citi
    - `/api/jobs/run` returns `processed > 0`
    - leads appear in `/leads?campaign_id=...`
 
+## Website Enrichment / "No web presence" Sanity Test
+
+Use this when leads are incorrectly shown as having no website because OSM omitted the website tag.
+
+1. Run discovery for a campaign in a dense city (for example `plumbing`, `Toronto, ON`, radius `10-25`).
+2. Open `/leads?campaign_id=...` and inspect rows that do not have a clickable website.
+3. Verify labels:
+   - `Website unknown (OSM)` means OSM did not provide a website and no enrichment confirmation exists yet.
+   - `No website found` means enrichment was attempted and no website was found.
+   - Clickable website rows may show a small `OSM` or `Nominatim` badge (source of website).
+4. Run discovery again for the same area/campaign and check `/api/jobs/run` logs / timing:
+   - Nominatim lookup volume should drop due to D1 `website_enrich_cache` hits (30-day TTL).
+   - The app should still return leads and should not regress to `0` results.
+
 ## Login 500 Triage (Cloudflare Pages)
 
 Use this when `POST /api/auth/login` returns `500` in production.
