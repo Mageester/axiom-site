@@ -1,3 +1,4 @@
+import { ensureDiscoverySchema } from '../_utils/schema';
 import { apiError, d1ErrorMessage, json } from '../_utils/http';
 
 export async function onRequestGet(context) {
@@ -7,11 +8,12 @@ export async function onRequestGet(context) {
     const status = url.searchParams.get('status');
 
     try {
+        await ensureDiscoverySchema(env);
         let qs = '';
         let binds = [];
         if (campaign_id) {
-            qs += ' WHERE l.campaign_id = ?';
-            binds.push(campaign_id);
+            qs += ' WHERE (l.campaign_id = ? OR EXISTS (SELECT 1 FROM lead_campaigns lc WHERE lc.lead_id = l.id AND lc.campaign_id = ?))';
+            binds.push(campaign_id, campaign_id);
         }
         if (status) {
             qs += (qs ? ' AND' : ' WHERE') + ' l.status = ?';
@@ -19,7 +21,12 @@ export async function onRequestGet(context) {
         }
 
         const query = `
-            SELECT l.id, l.campaign_id, l.status, l.notes, l.canonical_url,
+            SELECT l.id, l.campaign_id, l.status, l.notes, l.canonical_url, l.last_audit_at,
+                   COALESCE(l.opportunity_score, 0) as opportunity_score,
+                   l.opportunity_reasons,
+                   COALESCE(l.intake_present, 0) as intake_present,
+                   COALESCE(l.booking_present, 0) as booking_present,
+                   l.detected_email,
                    b.name, b.address, b.phone, b.website_raw, b.lat, b.lon,
                    a.id as audit_id, s.total as score, s.breakdown_json 
             FROM leads l
@@ -27,7 +34,7 @@ export async function onRequestGet(context) {
             LEFT JOIN audits a ON a.lead_id = l.id
             LEFT JOIN scores s ON s.audit_id = a.id
             ${qs}
-            ORDER BY s.total DESC NULLS LAST, l.last_audit_at DESC NULLS LAST
+            ORDER BY COALESCE(l.opportunity_score, 0) DESC, s.total DESC NULLS LAST, l.last_audit_at DESC NULLS LAST
             LIMIT 500
         `;
 
