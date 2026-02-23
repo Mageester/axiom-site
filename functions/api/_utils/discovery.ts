@@ -32,6 +32,34 @@ export function normalizeDomain(url?: string | null) {
     }
 }
 
+export function normalizeNameForDedupe(name?: string | null) {
+    return String(name || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, ' ')
+        .replace(/\b(ltd|inc|corp|corporation|company|co|llc|limited)\b/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+export function normalizeAddressForDedupe(address?: string | null) {
+    return String(address || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, ' ')
+        .replace(/\b(street|st)\b/g, 'st')
+        .replace(/\b(avenue|ave)\b/g, 'ave')
+        .replace(/\b(road|rd)\b/g, 'rd')
+        .replace(/\b(boulevard|blvd)\b/g, 'blvd')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+export function fuzzyBusinessKey(name?: string | null, address?: string | null) {
+    const n = normalizeNameForDedupe(name);
+    const a = normalizeAddressForDedupe(address);
+    if (!n || !a) return '';
+    return `${n}|${a}`;
+}
+
 function detectEmailInHtml(lower: string, original: string) {
     const mailtoMatch = original.match(/mailto:([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/i);
     if (mailtoMatch?.[1]) return mailtoMatch[1].toLowerCase();
@@ -200,4 +228,25 @@ export function scoreOpportunity(input: {
         reasons,
         keywordHits
     };
+}
+
+export function scoreLeadQuality(input: {
+    phone?: string | null;
+    email?: string | null;
+    website?: string | null;
+    websiteVerified?: string | null;
+    address?: string | null;
+    keywordHits?: number;
+}) {
+    let score = 0;
+    const reasons: string[] = [];
+    if (input.phone) { score += 20; reasons.push('Has phone'); }
+    if (input.email) { score += 25; reasons.push('Has email'); }
+    if (input.website) { score += 20; reasons.push('Has website'); }
+    if (input.websiteVerified === 'confirmed_live') { score += 15; reasons.push('Website verified live'); }
+    if (input.address) { score += 10; reasons.push('Has address'); }
+    if ((input.keywordHits || 0) >= 2) { score += 10; reasons.push('Strong niche/category confidence'); }
+    else if ((input.keywordHits || 0) === 1) { score += 5; reasons.push('Some category confidence'); }
+    if (!input.phone && !input.email) { score = Math.max(0, score - 10); reasons.push('No direct contact'); }
+    return { score: Math.max(0, Math.min(100, score)), reasons };
 }

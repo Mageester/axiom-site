@@ -3,7 +3,7 @@ import { performAudit } from '../_utils/audit';
 import { apiError, d1ErrorMessage, json } from '../_utils/http';
 import { logEvent } from '../_utils/log';
 import { ensureDiscoverySchema } from '../_utils/schema';
-import { auditLiteWebsite, expandNicheKeywords, normalizeDomain, normalizePhone, scoreOpportunity } from '../_utils/discovery';
+import { auditLiteWebsite, expandNicheKeywords, fuzzyBusinessKey, normalizeDomain, normalizePhone, scoreLeadQuality, scoreOpportunity } from '../_utils/discovery';
 
 export async function onRequestPost(context: any) {
     const { env, request } = context;
@@ -160,6 +160,21 @@ export async function onRequestPost(context: any) {
                                 if (dedupeRows.length > 0) existingLead = dedupeRows[0];
                             }
                             if (!existingLead) {
+                                const fuzzyKey = fuzzyBusinessKey(b.name, b.address);
+                                if (fuzzyKey) {
+                                    const { results: fuzzyRows } = await env.DB.prepare(
+                                        `SELECT l.id, l.campaign_id, l.canonical_url
+                                         FROM leads l
+                                         JOIN businesses b2 ON b2.osm_id = l.business_id
+                                         WHERE lower(trim(b2.name)) = lower(trim(?))
+                                           AND COALESCE(lower(trim(b2.address)), '') = COALESCE(lower(trim(?)), '')
+                                         LIMIT 1`
+                                    ).bind(b.name, b.address || '').all();
+                                    if (fuzzyRows.length > 0) existingLead = fuzzyRows[0];
+                                }
+                            }
+
+                            if (!existingLead) {
                                 const { results: businessRows } = await env.DB.prepare(
                                     `SELECT id, campaign_id, canonical_url FROM leads WHERE business_id = ? LIMIT 1`
                                 ).bind(b.osm_id).all();
@@ -199,6 +214,14 @@ export async function onRequestPost(context: any) {
                                 nicheKeywords
                             });
                             scoredCount++;
+                            const quality = scoreLeadQuality({
+                                phone: b.phone,
+                                email: detectedEmail,
+                                website: resolvedWebsite,
+                                websiteVerified,
+                                address: b.address,
+                                keywordHits: scored.keywordHits
+                            });
 
                             const shouldKeepByStrict =
                                 mode !== 'strict' ||
@@ -221,6 +244,8 @@ export async function onRequestPost(context: any) {
                                         website_source = COALESCE(website_source, ?),
                                         website_verified = CASE WHEN ? = 'confirmed_live' THEN 'confirmed_live' ELSE COALESCE(website_verified, ?) END,
                                         website_last_checked_at = COALESCE(website_last_checked_at, ?),
+                                        lead_quality_score = CASE WHEN lead_quality_score IS NULL OR lead_quality_score < ? THEN ? ELSE lead_quality_score END,
+                                        lead_quality_reasons = CASE WHEN lead_quality_score IS NULL OR lead_quality_score < ? THEN ? ELSE lead_quality_reasons END,
                                         opportunity_score = CASE WHEN opportunity_score IS NULL OR opportunity_score < ? THEN ? ELSE opportunity_score END,
                                         opportunity_reasons = CASE WHEN opportunity_score IS NULL OR opportunity_score < ? THEN ? ELSE opportunity_reasons END,
                                         intake_present = CASE WHEN intake_present = 1 THEN 1 ELSE ? END,
@@ -232,6 +257,8 @@ export async function onRequestPost(context: any) {
                                     finalUrl,
                                     websiteStatus, websiteStatus, websiteSource,
                                     websiteVerified, websiteVerified, websiteLastCheckedAt,
+                                    quality.score, quality.score,
+                                    quality.score, JSON.stringify(quality.reasons),
                                     scored.score, scored.score,
                                     scored.score, JSON.stringify(scored.reasons),
                                     intakePresent, bookingPresent, detectedEmail, dedupeKey, leadId
@@ -242,13 +269,15 @@ export async function onRequestPost(context: any) {
                                         id, campaign_id, business_id, canonical_url,
                                         website_status, website_source,
                                         website_verified, website_last_checked_at,
+                                        lead_quality_score, lead_quality_reasons,
                                         opportunity_score, opportunity_reasons, intake_present, booking_present, detected_email, dedupe_key
                                     )
-                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                                 `).bind(
                                     candidateLeadId, campaignId, b.osm_id, finalUrl,
                                     websiteStatus, websiteSource,
                                     websiteVerified, websiteLastCheckedAt,
+                                    quality.score, JSON.stringify(quality.reasons),
                                     scored.score, JSON.stringify(scored.reasons), intakePresent, bookingPresent, detectedEmail, dedupeKey
                                 ).run();
                                 await env.DB.prepare(`
