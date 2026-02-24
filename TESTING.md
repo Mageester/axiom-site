@@ -226,6 +226,44 @@ Use this when `POST /api/auth/login` returns `500` in production.
    - Optional: set `BOOTSTRAP_ADMIN_USERNAME` (defaults to `admin`)
    - First login should still force password change (`must_change_password=true`)
 
+## Admin Access Hardening (Cloudflare Access + Optional Header Guard)
+
+### App-level route hardening
+
+1. Public `/login` should no longer render the admin login UI.
+2. Visiting `/login` should redirect to `/`.
+3. Admin login UI should be available at `/admin/login`.
+4. Protected pages should redirect unauthenticated users to `/admin/login?next=...`.
+
+### Cloudflare Access (recommended edge lock)
+
+1. In Cloudflare Dashboard, open your Pages project and add an Access application for the production hostname.
+2. Protect the admin paths at minimum:
+   - `/admin/*`
+   - `/api/*`
+3. Require an identity policy (email allowlist / IdP group) for operators.
+4. Verify behavior in browser:
+   - Unauthenticated request to `/admin/login` is blocked by Cloudflare Access challenge
+   - Authenticated operator can reach `/admin/login` and complete login flow
+5. Verify API protection:
+   - `/api/auth/login` and `/api/jobs/run` should be blocked by Access when not authenticated at the edge
+
+### Optional second layer: `ADMIN_ACCESS_TOKEN`
+
+If you want a simple header-based guard behind Cloudflare Access or an upstream proxy:
+
+1. Set Pages environment variable:
+   - `ADMIN_ACCESS_TOKEN=<long-random-secret>`
+2. Ensure your edge/proxy sends header on admin traffic:
+   - `X-Admin-Token: <same value>`
+3. Verify blocking:
+   - Request `/api/auth/me` without header -> `403` JSON `{ "error": "Forbidden: Admin edge token required" }`
+   - Request `/admin/login` without header -> `403` JSON
+4. Verify success:
+   - Same requests with correct header pass through to normal auth/session handling
+
+Note: The app never logs the token value; only path/method are logged on denial.
+
 ## Commands To Run Before Shipping
 
 - `npm run build`
