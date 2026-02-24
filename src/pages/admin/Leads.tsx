@@ -67,7 +67,7 @@ const Leads: React.FC = () => {
             setSelected({});
         } catch (err) {
             if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/login';
+                window.location.href = '/admin/login';
                 return;
             }
             setError(errorMessage(err, 'Failed to load leads.'));

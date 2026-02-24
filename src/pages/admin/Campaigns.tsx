@@ -84,7 +84,7 @@ const Campaigns: React.FC = () => {
             setCampaigns(data.campaigns || []);
         } catch (err) {
             if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/login';
+                window.location.href = '/admin/login';
                 return;
             }
             setError(errorMessage(err, 'Failed to load campaigns.'));
@@ -180,7 +180,7 @@ const Campaigns: React.FC = () => {
                 });
             } catch (runErr) {
                 if (runErr instanceof ApiRequestError && (runErr.status === 401 || runErr.status === 403)) {
-                    window.location.href = '/login';
+                    window.location.href = '/admin/login';
                     return;
                 }
                 setCreateError(
@@ -200,7 +200,7 @@ const Campaigns: React.FC = () => {
             await loadCampaigns();
         } catch (err) {
             if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/login';
+                window.location.href = '/admin/login';
                 return;
             }
             setCreateError(errorMessage(err, 'Failed to create campaign.'));
@@ -226,7 +226,7 @@ const Campaigns: React.FC = () => {
             await loadCampaigns();
         } catch (err) {
             if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/login';
+                window.location.href = '/admin/login';
                 return;
             }
             setActionError(`Failed to run discovery for ${campaign.city}: ${errorMessage(err, 'Unable to run jobs.')}`);
@@ -252,7 +252,7 @@ const Campaigns: React.FC = () => {
             await loadCampaigns();
         } catch (err) {
             if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/login';
+                window.location.href = '/admin/login';
                 return;
             }
             setActionError(`Delete failed: ${errorMessage(err, 'Unable to delete campaign.')}`);
@@ -279,7 +279,7 @@ const Campaigns: React.FC = () => {
             await loadCampaigns();
         } catch (err) {
             if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/login';
+                window.location.href = '/admin/login';
                 return;
             }
             setActionError(`Delete all failed: ${errorMessage(err, 'Unable to delete all campaigns.')}`);

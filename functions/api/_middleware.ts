@@ -5,9 +5,30 @@ import { logEvent } from './_utils/log';
 // Track bootstrap state for the process lifetime to avoid running on every request
 let bootstrapped = false;
 
+function constantTimeEqualString(a: string, b: string) {
+    if (a.length !== b.length) return false;
+    let diff = 0;
+    for (let i = 0; i < a.length; i++) {
+        diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+    }
+    return diff === 0;
+}
+
 export async function onRequest(context: any) {
     const { request, env, next } = context;
     const url = new URL(request.url);
+    const adminAccessToken = String(env?.ADMIN_ACCESS_TOKEN || '').trim();
+
+    if (adminAccessToken) {
+        const provided = request.headers.get('X-Admin-Token') || '';
+        if (!provided || !constantTimeEqualString(provided, adminAccessToken)) {
+            logEvent('warn', 'admin.edge_token.denied', {
+                path: url.pathname,
+                method: request.method
+            });
+            return apiError(403, 'Forbidden: Admin edge token required');
+        }
+    }
 
     // Always allow login (handles its own bootstrap inline)
     if (url.pathname === '/api/auth/login') {

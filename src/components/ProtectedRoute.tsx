@@ -34,7 +34,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const routeKey = `${location.pathname}${location.search}`;
     const loginNext = useMemo(() => {
         const target = `${location.pathname}${location.search}`;
-        return `/login?next=${encodeURIComponent(target)}`;
+        return `/admin/login?next=${encodeURIComponent(target)}`;
     }, [location.pathname, location.search]);
 
     useEffect(() => {

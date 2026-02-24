@@ -15,8 +15,8 @@ function getSafeNext(nextValue: string | null) {
     if (!nextValue.startsWith('/')) return DEFAULT_ADMIN_ROUTE;
     if (nextValue.startsWith('//')) return DEFAULT_ADMIN_ROUTE;
     if (nextValue.startsWith('/login')) return DEFAULT_ADMIN_ROUTE;
+    if (nextValue.startsWith('/admin/login')) return DEFAULT_ADMIN_ROUTE;
     if (nextValue === '/admin') return DEFAULT_ADMIN_ROUTE;
-    if (nextValue.startsWith('/admin/')) return nextValue.slice('/admin'.length) || DEFAULT_ADMIN_ROUTE;
     return nextValue;
 }
 

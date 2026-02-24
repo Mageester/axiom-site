@@ -122,12 +122,11 @@ const App: React.FC = () => {
                     <Route path="/pricing" element={<PricingPage />} />
                     <Route path="/contact" element={<ContactPage />} />
 
+                    {/* Secure Admin Routes */}
+                    <Route path="/login" element={<Navigate to="/" replace />} />
+                    <Route path="/admin/login" element={<Login />} />
                     {/* Old mission route redirects to services */}
                     <Route path="/mission" element={<Navigate to="/services" replace />} />
-
-                    {/* Secure Admin Routes (hidden from public ui) */}
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/admin/login" element={<Navigate to="/login" replace />} />
                     <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
                     <Route path="/campaigns" element={<ProtectedRoute><Campaigns /></ProtectedRoute>} />
                     <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
