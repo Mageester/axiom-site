@@ -83,19 +83,29 @@ const ContactPage: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Current Website (if any)</label>
                             <input type="url" name="website" placeholder="https://" className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                         </div>
+                        <div className="flex flex-col gap-3">
+                            <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Primary Goal</label>
+                            <select name="goal" required className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none appearance-none">
+                                <option value="">Select an option...</option>
+                                <option value="New Website">I need a brand new website</option>
+                                <option value="Rebuild">I need to rebuild my current website</option>
+                                <option value="Landing Page">I need a landing page for ads</option>
+                                <option value="Other">Other request</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div className="flex flex-col gap-3 mb-2">
-                        <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Project Details & Needs</label>
-                        <textarea name="notes" rows={5} required placeholder="Tell us about your business, what you need the website to do, and any specific requirements..." className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors resize-none rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none"></textarea>
+                        <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Project Details & Friction Notes</label>
+                        <textarea name="notes" rows={5} required placeholder="Tell us about your business, what you need the website to do, your main frustrations with your current setup..." className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors resize-none rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none"></textarea>
                     </div>
 
-                    <button disabled={status === 'loading'} type="submit" className="w-full py-4 mt-2 bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-[0.05em] transition-all duration-300 rounded-sm disabled:opacity-50">
+                    <button disabled={status === 'loading'} type="submit" className="w-full py-4 mt-2 bg-white text-black hover:bg-[#e2e2e2] hover:scale-[1.01] active:scale-[0.99] text-[12px] font-bold uppercase tracking-[0.05em] transition-all duration-300 rounded-[2px] disabled:opacity-50">
                         {status === 'loading' ? 'Sending Request...' : 'Submit Request'}
                     </button>
 

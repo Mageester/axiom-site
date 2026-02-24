@@ -29,66 +29,53 @@ const Home: React.FC = () => {
                     }}
                 />
 
-                <div className="max-w-[1100px] w-full mx-auto relative z-10 flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8">
-                    {/* Text Content */}
-                    <div className="flex-1 text-center lg:text-left max-w-[700px] flex flex-col items-center lg:items-start mx-auto lg:mx-0">
-                        <h1 className="text-[40px] sm:text-[56px] lg:text-[72px] font-semibold tracking-[-0.02em] mb-8 leading-[1.02] text-primary reveal">
-                            Professional<br />Website Building.
-                        </h1>
-                        <p className="text-[17px] text-secondary max-w-[500px] mb-12 leading-relaxed font-light reveal reveal-delay-1">
-                            We design, build, and maintain high-performance websites for service-based businesses in Ontario and beyond.
-                        </p>
-                        <div className="flex flex-col sm:flex-row items-center gap-4 mb-14 reveal reveal-delay-2 w-full sm:w-auto">
-                            <Link to="/contact" className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-white/90 hover:scale-[1.01] active:scale-[0.99] text-black text-[12px] font-bold tracking-[0.05em] uppercase transition-all duration-300 border border-transparent shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                                Request a Website Build
-                            </Link>
-                            <Link to="/work" className="w-full sm:w-auto px-8 py-4 bg-[#121417]/50 border border-white/10 hover:border-white/30 hover:bg-white/5 text-primary text-[12px] font-semibold tracking-[0.05em] uppercase transition-all duration-300">
-                                View Our Work
-                            </Link>
-                        </div>
-                        <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 text-[10px] sm:text-[11px] tracking-widest text-secondary/60 uppercase font-mono reveal reveal-delay-3">
-                            <span>Ontario-Based</span>
-                            <span className="w-1 h-1 bg-subtle rounded-full hidden sm:block opacity-40"></span>
-                            <span>Custom Design</span>
-                            <span className="w-1 h-1 bg-subtle rounded-full hidden sm:block opacity-40"></span>
-                            <span>Lightning Fast</span>
-                        </div>
+                <div className="max-w-[1100px] w-full mx-auto relative z-10 flex flex-col items-center text-center">
+                    <h1 className="text-[40px] sm:text-[56px] lg:text-[72px] font-semibold tracking-[-0.02em] mb-8 leading-[1.02] text-primary reveal max-w-[900px]">
+                        Stop Losing Customers<br />to a Slow Website.
+                    </h1>
+                    <p className="text-[17px] text-secondary max-w-[650px] mb-12 leading-relaxed font-light reveal reveal-delay-1">
+                        We build high-performance, custom-coded websites for professional service businesses. No cheap templates. No sluggish loading times. Just premium digital infrastructure designed to convert.
+                    </p>
+                    <div className="flex flex-col sm:flex-row items-center gap-4 mb-14 reveal reveal-delay-2 w-full sm:w-auto justify-center">
+                        <Link to="/contact" className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-white/90 hover:scale-[1.01] active:scale-[0.99] text-black text-[12px] font-bold tracking-[0.05em] uppercase transition-all duration-300 border border-transparent shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            Request a Consultation
+                        </Link>
+                        <Link to="/work" className="w-full sm:w-auto px-8 py-4 bg-[#121417]/50 border border-white/10 hover:border-white/30 hover:bg-white/5 text-primary text-[12px] font-semibold tracking-[0.05em] uppercase transition-all duration-300">
+                            View Our Work
+                        </Link>
                     </div>
                 </div>
             </section>
 
-            {/* VALUE PROPS */}
+            {/* PROBLEM / SOLUTION & APPROACH */}
             <section className="py-28 px-6 max-w-[1100px] mx-auto w-full overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 w-full">
+
+                    {/* Problem */}
                     <div className="lg:col-span-4 reveal">
-                        <h2 className="text-2xl font-semibold mb-6 text-primary tracking-tight">Why Choose Us?</h2>
+                        <h2 className="text-2xl font-semibold mb-6 text-primary tracking-tight">The Cost of Bad Architecture</h2>
                         <div className="w-8 h-[2px] bg-accent mb-8 opacity-60"></div>
-                        <ul className="flex flex-col gap-5 text-[14px] text-secondary">
-                            {[
-                                "No cheap templates",
-                                "Lightning fast loading speeds",
-                                "Mobile-first, responsive layouts",
-                                "Built-in local SEO fundamentals",
-                                "Fully managed infrastructure"
-                            ].map((prop, i) => (
-                                <li key={i} className="flex items-start gap-3">
-                                    <span className="mt-[6px] block w-[4px] h-[4px] bg-accent/60 shrink-0"></span>
-                                    {prop}
-                                </li>
-                            ))}
-                        </ul>
+                        <p className="text-[15px] text-secondary leading-relaxed mb-6">
+                            A slow website doesn't just annoy visitors—it kills trust. If your site takes longer than 3 seconds to load, or looks broken on a smartphone, your ideal clients are already calling your competitor.
+                        </p>
+
+                        <h3 className="text-[18px] font-semibold text-primary/90 mt-10 mb-4">Engineered for Performance</h3>
+                        <p className="text-[15px] text-secondary leading-relaxed">
+                            We don't use bloated website builders. We write clean, semantic code deployed on global edge networks. The result? Instant load times, uncompromising security, and a digital presence that signals absolute competence.
+                        </p>
                     </div>
 
+                    {/* Approach Grid */}
                     <div className="lg:col-span-8">
                         <h2 className="text-2xl font-semibold mb-6 text-primary tracking-tight reveal">Our Approach</h2>
                         <div className="w-8 h-[2px] bg-accent mb-8 opacity-60 reveal"></div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {[
-                                { title: "1. Discovery", desc: "We learn about your business, target audience, and primary goals for the website." },
-                                { title: "2. Design", desc: "We create a custom, high-fidelity design tailored strictly to your brand identity." },
-                                { title: "3. Development", desc: "We write clean, semantic code optimized for maximum performance and search engines." },
-                                { title: "4. Launch", desc: "We deploy your site to premium global edge networks so it loads instantly everywhere." },
-                                { title: "5. Maintenance", desc: "We handle security, server updates, and minor content adjustments month after month." }
+                                { title: "1. Discovery", desc: "We map your business goals, target audience, and primary conversion metrics." },
+                                { title: "2. Architecture & Design", desc: "We draft the blueprints—structural layout, typography, and visual assets tailored to your brand invariant." },
+                                { title: "3. Development", desc: "We write the code. No templates, no bloat. Pure performance and semantic SEO." },
+                                { title: "4. Deployment", desc: "We launch your site on enterprise-grade global edge networks for sub-second loading." },
+                                { title: "5. Governance", desc: "Ongoing monitoring, strict security patching, and structural maintenance." }
                             ].map((mod, i) => (
                                 <div
                                     key={i}
@@ -104,10 +91,53 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
+            {/* TESTIMONIAL PREVIEW */}
+            <section className="py-24 px-6 border-y border-subtle bg-[#0a0c0e] reveal">
+                <div className="max-w-[800px] mx-auto text-center">
+                    <div className="text-accent/60 text-4xl font-serif leading-none mb-6">"</div>
+                    <p className="text-xl md:text-2xl text-primary font-light leading-relaxed mb-8">
+                        Axiom tore down our outdated site and built something that actually reflects the quality of our work. Our mobile conversion rate doubled in the first month.
+                    </p>
+                    <div className="text-[12px] uppercase tracking-widest font-mono text-secondary">
+                        — Client Placeholder <span className="text-secondary/50 mx-2">|</span> Service Industry
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ */}
+            <section className="py-28 px-6 max-w-[800px] mx-auto w-full reveal">
+                <div className="text-center mb-16">
+                    <h2 className="text-2xl font-semibold mb-6 text-primary tracking-tight">Frequently Asked Questions</h2>
+                    <div className="w-8 h-[2px] bg-accent mx-auto opacity-60"></div>
+                </div>
+
+                <div className="flex flex-col gap-8">
+                    {[
+                        {
+                            q: "Do you use WordPress or Squarespace?",
+                            a: "No. We build custom coded websites (React/Static architecture) because it guarantees better security, infinitely faster load times, and customizability that builders can't legitimately match."
+                        },
+                        {
+                            q: "Do you provide hosting?",
+                            a: "Yes. We deploy your site on premium edge networks (Cloudflare) with 99.99% uptime guarantees, included entirely within our monthly infrastructure retainer."
+                        },
+                        {
+                            q: "What about SEO?",
+                            a: "Every site we build includes foundational technical SEO automatically: proper semantic HTML, screaming-fast load times, mobile-optimization, and correct meta structures."
+                        }
+                    ].map((faq, i) => (
+                        <div key={i} className="border-b border-subtle pb-8 last:border-0">
+                            <h3 className="text-lg font-semibold text-primary mb-3">{faq.q}</h3>
+                            <p className="text-[15px] text-secondary leading-relaxed">{faq.a}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
             {/* CTA */}
             <section className="py-24 px-6 border-t border-subtle relative overflow-hidden text-center reveal">
                 <div className="max-w-[600px] mx-auto w-full relative z-10">
-                    <h2 className="text-[32px] font-semibold mb-4 text-primary tracking-tight">Need a professional website?</h2>
+                    <h2 className="text-[32px] font-semibold mb-4 text-primary tracking-tight">Ready to rebuild?</h2>
                     <p className="text-[15px] text-secondary mx-auto leading-relaxed mb-10">Stop losing customers to outdated design and slow loading speeds.</p>
 
                     <Link to="/contact" className="inline-block px-8 py-4 bg-white hover:bg-white/90 hover:scale-[1.01] active:scale-[0.99] text-black text-[12px] font-bold tracking-[0.05em] uppercase transition-all duration-300 border border-transparent shadow-[0_0_20px_rgba(255,255,255,0.1)]">
