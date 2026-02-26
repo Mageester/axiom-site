@@ -87,6 +87,15 @@ const App: React.FC = () => {
                         <Link to="/pricing" className="hover:text-primary transition-colors focus-visible:text-primary">Pricing</Link>
                         <Link to="/contact" className="hover:text-primary transition-colors focus-visible:text-primary">Contact</Link>
                     </div>
+                    <div className="hidden md:flex items-center ml-6">
+                        <Link
+                            to="/contact"
+                            aria-label="Request a consultation"
+                            className="px-4 py-2 bg-white text-black hover:bg-[#e2e2e2] text-[10px] font-bold uppercase tracking-[0.08em] border border-transparent transition-all duration-300 rounded-[2px]"
+                        >
+                            Request a Consultation
+                        </Link>
+                    </div>
 
                     <button
                         className="md:hidden text-secondary hover:text-primary p-2 -mr-2 transition-colors"
@@ -112,6 +121,14 @@ const App: React.FC = () => {
                         <Link to="/work" onClick={() => setMobileMenuOpen(false)}>Work</Link>
                         <Link to="/pricing" onClick={() => setMobileMenuOpen(false)}>Pricing</Link>
                         <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+                        <Link
+                            to="/contact"
+                            onClick={() => setMobileMenuOpen(false)}
+                            aria-label="Request a consultation"
+                            className="mt-2 inline-flex items-center justify-center px-4 py-3 bg-white text-black text-[11px] font-bold uppercase tracking-[0.08em] rounded-[2px]"
+                        >
+                            Request a Consultation
+                        </Link>
                     </div>
                 )}
             </nav>
