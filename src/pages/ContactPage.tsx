@@ -1,34 +1,81 @@
 import React, { useState } from 'react';
 
+type SubmitState = '' | 'loading' | 'success' | 'error';
+
+type IntakeFormState = {
+    name: string;
+    email: string;
+    business_name: string;
+    phone: string;
+    current_website: string;
+    primary_goal: string;
+    details: string;
+    company_fax: string;
+};
+
+const INITIAL_FORM: IntakeFormState = {
+    name: '',
+    email: '',
+    business_name: '',
+    phone: '',
+    current_website: '',
+    primary_goal: '',
+    details: '',
+    company_fax: ''
+};
+
 const ContactPage: React.FC = () => {
-    const [status, setStatus] = useState<'' | 'loading' | 'success' | 'error'>('');
+    const [form, setForm] = useState<IntakeFormState>(INITIAL_FORM);
+    const [status, setStatus] = useState<SubmitState>('');
     const [msg, setMsg] = useState('');
+
+    const setField = (key: keyof IntakeFormState, value: string) => {
+        setForm(prev => ({ ...prev, [key]: value }));
+    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setStatus('loading');
         setMsg('');
 
-        const form = e.currentTarget;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-
         try {
-            const res = await fetch('/api/public/website-request', {
+            const res = await fetch('/api/intake', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify({
+                    ...form,
+                    source_path: window.location.pathname
+                })
             });
-            const resData = await res.json();
+
+            let resData: any = {};
+            try {
+                resData = await res.json();
+            } catch {
+                resData = {};
+            }
 
             if (res.ok) {
                 setStatus('success');
-                form.reset();
-            } else {
-                setStatus('error');
-                setMsg(resData.error || 'Failed to submit. Please email us directly.');
+                setMsg('Request received — we’ll email you within 24–48 hours.');
+                setForm(INITIAL_FORM);
+                return;
             }
-        } catch (err) {
+
+            if (res.status === 400) {
+                setStatus('error');
+                setMsg(resData?.details || resData?.error || 'Please review your form fields and try again.');
+                return;
+            }
+            if (res.status === 429) {
+                setStatus('error');
+                setMsg(resData?.error || 'Too many requests. Please wait and try again.');
+                return;
+            }
+
+            setStatus('error');
+            setMsg(resData?.error || 'Failed to submit. Please email us directly.');
+        } catch {
             setStatus('error');
             setMsg('Network error. Please try again or email us.');
         }
@@ -49,7 +96,7 @@ const ContactPage: React.FC = () => {
 
                     {status === 'success' && (
                         <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 p-4 rounded-sm text-sm font-mono text-center mb-4">
-                            Request received. We will contact you within 24 hours.
+                            {msg || 'Request received — we’ll email you within 24–48 hours.'}
                         </div>
                     )}
                     {status === 'error' && (
@@ -58,51 +105,63 @@ const ContactPage: React.FC = () => {
                         </div>
                     )}
 
-                    {/* Honeypot field (hidden) */}
-                    <input type="text" name="honeypot" className="hidden" tabIndex={-1} autoComplete="off" />
+                    <div className="absolute left-[-10000px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
+                        <label htmlFor="company-fax">Company Fax</label>
+                        <input
+                            id="company-fax"
+                            type="text"
+                            name="company_fax"
+                            tabIndex={-1}
+                            autoComplete="off"
+                            value={form.company_fax}
+                            onChange={(e) => setField('company_fax', e.target.value)}
+                        />
+                    </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Your Name</label>
-                            <input type="text" name="name" required className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            <input type="text" name="name" required minLength={2} maxLength={80} value={form.name} onChange={(e) => setField('name', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                         </div>
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Email Address</label>
-                            <input type="email" name="email" required className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            <input type="email" name="email" required value={form.email} onChange={(e) => setField('email', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Business Name</label>
-                            <input type="text" name="company" required className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            <input type="text" name="business_name" required minLength={2} maxLength={120} value={form.business_name} onChange={(e) => setField('business_name', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                         </div>
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Phone Number (Optional)</label>
-                            <input type="tel" name="phone" className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            <input type="tel" name="phone" value={form.phone} onChange={(e) => setField('phone', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Current Website (if any)</label>
-                            <input type="url" name="website" placeholder="https://" className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            <input type="url" name="current_website" placeholder="https://example.com" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                         </div>
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Primary Goal</label>
-                            <select name="goal" required className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none appearance-none">
+                            <select name="primary_goal" required value={form.primary_goal} onChange={(e) => setField('primary_goal', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none appearance-none">
                                 <option value="">Select an option...</option>
-                                <option value="New Website">I need a brand new website</option>
-                                <option value="Rebuild">I need to rebuild my current website</option>
-                                <option value="Landing Page">I need a landing page for ads</option>
-                                <option value="Other">Other request</option>
+                                <option value="new_site">I need a brand new website</option>
+                                <option value="rebuild">I need to rebuild my current website</option>
+                                <option value="landing_page">I need a landing page for ads</option>
+                                <option value="maintenance">I need ongoing site maintenance</option>
+                                <option value="seo_performance">I need better speed / SEO performance</option>
+                                <option value="not_sure">Not sure yet (need guidance)</option>
                             </select>
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-3 mb-2">
                         <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Project Details & Friction Notes</label>
-                        <textarea name="notes" rows={5} required placeholder="Tell us about your business, what you need the website to do, your main frustrations with your current setup..." className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors resize-none rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none"></textarea>
+                        <textarea name="details" rows={5} required minLength={20} maxLength={2000} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Tell us about your business, what you need the website to do, and your biggest pain points..." className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors resize-none rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none"></textarea>
                     </div>
 
                     <button disabled={status === 'loading'} type="submit" className="w-full py-4 mt-2 bg-white text-black hover:bg-[#e2e2e2] hover:scale-[1.01] active:scale-[0.99] text-[12px] font-bold uppercase tracking-[0.05em] transition-all duration-300 rounded-[2px] disabled:opacity-50">

@@ -18,8 +18,9 @@ export async function onRequest(context: any) {
     const { request, env, next } = context;
     const url = new URL(request.url);
     const adminAccessToken = String(env?.ADMIN_ACCESS_TOKEN || '').trim();
+    const isPublicIntake = url.pathname === '/api/intake';
 
-    if (adminAccessToken) {
+    if (adminAccessToken && !isPublicIntake) {
         const provided = request.headers.get('X-Admin-Token') || '';
         if (!provided || !constantTimeEqualString(provided, adminAccessToken)) {
             logEvent('warn', 'admin.edge_token.denied', {
@@ -28,6 +29,10 @@ export async function onRequest(context: any) {
             });
             return apiError(403, 'Forbidden: Admin edge token required');
         }
+    }
+
+    if (isPublicIntake) {
+        return next();
     }
 
     // Always allow login (handles its own bootstrap inline)
