@@ -32,6 +32,9 @@ const PricingPage: React.FC = () => {
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Basic On-Page SEO & Fast Loading</li>
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Contact Form Integration</li>
                         </ul>
+                        <Link to="/contact?package=foundation&goal=new_site" className="mt-8 inline-flex items-center justify-center px-5 py-3 bg-white/10 border border-white/20 hover:bg-white hover:text-black text-primary text-[11px] font-semibold uppercase tracking-widest rounded-sm transition-all duration-300">
+                            Request a Consultation
+                        </Link>
                     </div>
 
                     {/* TIER 2 - ACCENTED */}
@@ -48,6 +51,9 @@ const PricingPage: React.FC = () => {
                             <li className="flex items-start gap-3"><span className="text-accent/60 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Google Analytics & Tag Manager</li>
                             <li className="flex items-start gap-3"><span className="text-accent/60 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Speed Guarantees (90+ Lighthouse)</li>
                         </ul>
+                        <Link to="/contact?package=engine&goal=rebuild" className="mt-8 inline-flex items-center justify-center px-5 py-3 bg-white text-black hover:bg-[#e2e2e2] text-[11px] font-bold uppercase tracking-widest rounded-sm transition-all duration-300">
+                            Request a Consultation
+                        </Link>
                     </div>
 
                     {/* TIER 3 */}
@@ -63,8 +69,17 @@ const PricingPage: React.FC = () => {
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Custom CRM/Booking API Integrations</li>
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Advanced Technical SEO</li>
                         </ul>
+                        <Link to="/contact?package=authority&goal=rebuild" className="mt-8 inline-flex items-center justify-center px-5 py-3 bg-white/10 border border-white/20 hover:bg-white hover:text-black text-primary text-[11px] font-semibold uppercase tracking-widest rounded-sm transition-all duration-300">
+                            Request a Consultation
+                        </Link>
                     </div>
 
+                </div>
+                <div className="mt-8 surface-panel p-5 sm:p-6 rounded-sm border border-accent/20 bg-accent/5">
+                    <div className="text-[10px] font-mono text-accent/90 uppercase tracking-widest mb-3">Risk Reversal</div>
+                    <p className="text-[14px] text-secondary leading-relaxed">
+                        Performance and mobile improvement commitments can be included in written scopes for eligible rebuild projects. We define benchmarks up front so expectations are clear before development starts.
+                    </p>
                 </div>
             </section>
 
@@ -86,12 +101,12 @@ const PricingPage: React.FC = () => {
                     </div>
 
                     <div className="flex flex-col justify-center p-8">
-                        <h3 className="text-[24px] font-semibold text-primary mb-4">The Rebuild Guarantee</h3>
+                        <h3 className="text-[24px] font-semibold text-primary mb-4">Performance Commitments</h3>
                         <p className="text-[15px] text-secondary leading-relaxed mb-6">
-                            If your new custom site doesn't load faster and perform better on mobile than your old one, <strong>you don't pay the final invoice.</strong> We build infrastructure that mathematically out-competes generic site builders, and we stake our revenue on it.
+                            For qualifying rebuilds, we can define written performance and mobile improvement benchmarks in scope before work begins. The goal is a clear technical standard, not vague promises.
                         </p>
                         <Link to="/contact" className="self-start px-8 py-4 bg-[#121417] border border-white/10 hover:border-white/30 hover:bg-white/5 text-primary text-[12px] font-semibold tracking-[0.05em] uppercase transition-all duration-300">
-                            Discuss Your Project
+                            Request a Consultation
                         </Link>
                     </div>
                 </div>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 type SubmitState = '' | 'loading' | 'success' | 'error';
 
@@ -13,6 +14,8 @@ type IntakeFormState = {
     company_fax: string;
 };
 
+type FormErrors = Partial<Record<keyof IntakeFormState, string>>;
+
 const INITIAL_FORM: IntakeFormState = {
     name: '',
     email: '',
@@ -24,19 +27,113 @@ const INITIAL_FORM: IntakeFormState = {
     company_fax: ''
 };
 
+const GOAL_OPTIONS = new Set([
+    'new_site',
+    'rebuild',
+    'landing_page',
+    'maintenance',
+    'seo_performance',
+    'not_sure'
+]);
+
+const PACKAGE_LABELS: Record<string, string> = {
+    foundation: 'Foundation',
+    engine: 'Engine',
+    authority: 'Authority'
+};
+
 const ContactPage: React.FC = () => {
+    const [searchParams] = useSearchParams();
     const [form, setForm] = useState<IntakeFormState>(INITIAL_FORM);
     const [status, setStatus] = useState<SubmitState>('');
     const [msg, setMsg] = useState('');
+    const [errors, setErrors] = useState<FormErrors>({});
+    const [prefillApplied, setPrefillApplied] = useState(false);
+
+    const packageParam = (searchParams.get('package') || '').toLowerCase();
+    const goalParam = (searchParams.get('goal') || '').trim();
+    const packageLabel = PACKAGE_LABELS[packageParam] || '';
+
+    useEffect(() => {
+        if (prefillApplied) return;
+
+        setForm(prev => {
+            const next = { ...prev };
+            let changed = false;
+
+            if (GOAL_OPTIONS.has(goalParam) && !next.primary_goal) {
+                next.primary_goal = goalParam;
+                changed = true;
+            }
+
+            if (packageLabel && !next.details) {
+                next.details = `Package interest: ${packageLabel}\n\nProject details: `;
+                changed = true;
+            }
+
+            return changed ? next : prev;
+        });
+
+        setPrefillApplied(true);
+    }, [goalParam, packageLabel, prefillApplied]);
+
+    const goalOptionsList = useMemo(() => ([
+        { value: 'new_site', label: 'I need a brand new website' },
+        { value: 'rebuild', label: 'I need to rebuild my current website' },
+        { value: 'landing_page', label: 'I need a landing page for ads' },
+        { value: 'maintenance', label: 'I need ongoing site maintenance' },
+        { value: 'seo_performance', label: 'I need better speed / SEO performance' },
+        { value: 'not_sure', label: 'Not sure yet (need guidance)' }
+    ]), []);
 
     const setField = (key: keyof IntakeFormState, value: string) => {
+        if (errors[key]) {
+            setErrors(prev => {
+                const next = { ...prev };
+                delete next[key];
+                return next;
+            });
+        }
         setForm(prev => ({ ...prev, [key]: value }));
+    };
+
+    const validateForm = (): FormErrors => {
+        const nextErrors: FormErrors = {};
+        const email = form.email.trim();
+        const website = form.current_website.trim();
+        const details = form.details.trim();
+
+        if (form.name.trim().length < 2) nextErrors.name = 'Enter your name (at least 2 characters).';
+        if (!email) nextErrors.email = 'Enter a valid email address.';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = 'Enter a valid email address.';
+        if (form.business_name.trim().length < 2) nextErrors.business_name = 'Enter your business name.';
+        if (!GOAL_OPTIONS.has(form.primary_goal)) nextErrors.primary_goal = 'Select your primary goal.';
+        if (details.length < 20) nextErrors.details = 'Please share at least 20 characters about your project.';
+        if (form.phone.trim() && form.phone.trim().length < 7) nextErrors.phone = 'Phone number looks too short.';
+        if (website) {
+            try {
+                new URL(website.startsWith('http') ? website : `https://${website}`);
+            } catch {
+                nextErrors.current_website = 'Enter a valid website URL (example.com or https://example.com).';
+            }
+        }
+
+        return nextErrors;
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const nextErrors = validateForm();
+        if (Object.keys(nextErrors).length > 0) {
+            setErrors(nextErrors);
+            setStatus('error');
+            setMsg('Please review the highlighted fields and try again.');
+            return;
+        }
+
         setStatus('loading');
         setMsg('');
+        setErrors({});
 
         try {
             const res = await fetch('/api/intake', {
@@ -58,7 +155,11 @@ const ContactPage: React.FC = () => {
             if (res.ok) {
                 setStatus('success');
                 setMsg('Request received — we’ll email you within 24–48 hours.');
-                setForm(INITIAL_FORM);
+                setForm({
+                    ...INITIAL_FORM,
+                    primary_goal: GOAL_OPTIONS.has(goalParam) ? goalParam : '',
+                    details: packageLabel ? `Package interest: ${packageLabel}\n\nProject details: ` : ''
+                });
                 return;
             }
 
@@ -89,6 +190,11 @@ const ContactPage: React.FC = () => {
                 <div className="text-center mb-16">
                     <h1 className="text-[40px] font-semibold mb-4 text-primary tracking-tight">Let's Build Your Website</h1>
                     <p className="text-[15px] text-secondary max-w-md mx-auto leading-relaxed">Fill out the form below. We'll review your details and reach out to discuss your project.</p>
+                    {packageLabel && (
+                        <p className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mt-4">
+                            Package interest: {packageLabel}
+                        </p>
+                    )}
                 </div>
 
                 <form onSubmit={handleSubmit} className="bg-[#0f1113] border border-white/5 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.6)] p-8 md:p-12 flex flex-col gap-8 rounded-sm relative overflow-hidden">
@@ -122,10 +228,12 @@ const ContactPage: React.FC = () => {
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Your Name</label>
                             <input type="text" name="name" required minLength={2} maxLength={80} value={form.name} onChange={(e) => setField('name', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            {errors.name && <p className="text-[11px] text-red-400">{errors.name}</p>}
                         </div>
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Email Address</label>
                             <input type="email" name="email" required value={form.email} onChange={(e) => setField('email', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            {errors.email && <p className="text-[11px] text-red-400">{errors.email}</p>}
                         </div>
                     </div>
 
@@ -133,10 +241,12 @@ const ContactPage: React.FC = () => {
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Business Name</label>
                             <input type="text" name="business_name" required minLength={2} maxLength={120} value={form.business_name} onChange={(e) => setField('business_name', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            {errors.business_name && <p className="text-[11px] text-red-400">{errors.business_name}</p>}
                         </div>
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Phone Number (Optional)</label>
                             <input type="tel" name="phone" value={form.phone} onChange={(e) => setField('phone', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            {errors.phone && <p className="text-[11px] text-red-400">{errors.phone}</p>}
                         </div>
                     </div>
 
@@ -144,24 +254,33 @@ const ContactPage: React.FC = () => {
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Current Website (if any)</label>
                             <input type="url" name="current_website" placeholder="https://example.com" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                            {errors.current_website && <p className="text-[11px] text-red-400">{errors.current_website}</p>}
                         </div>
                         <div className="flex flex-col gap-3">
                             <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Primary Goal</label>
                             <select name="primary_goal" required value={form.primary_goal} onChange={(e) => setField('primary_goal', e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none appearance-none">
                                 <option value="">Select an option...</option>
-                                <option value="new_site">I need a brand new website</option>
-                                <option value="rebuild">I need to rebuild my current website</option>
-                                <option value="landing_page">I need a landing page for ads</option>
-                                <option value="maintenance">I need ongoing site maintenance</option>
-                                <option value="seo_performance">I need better speed / SEO performance</option>
-                                <option value="not_sure">Not sure yet (need guidance)</option>
+                                {goalOptionsList.map((goal) => (
+                                    <option key={goal.value} value={goal.value}>{goal.label}</option>
+                                ))}
                             </select>
+                            {errors.primary_goal && <p className="text-[11px] text-red-400">{errors.primary_goal}</p>}
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-3 mb-2">
                         <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Project Details & Friction Notes</label>
                         <textarea name="details" rows={5} required minLength={20} maxLength={2000} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Tell us about your business, what you need the website to do, and your biggest pain points..." className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors resize-none rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none"></textarea>
+                        {errors.details && <p className="text-[11px] text-red-400">{errors.details}</p>}
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start">
+                        <p className="text-[11px] text-secondary/70 leading-relaxed">
+                            We’ll reply within 1 business day. No spam, no mailing list, no pressure.
+                        </p>
+                        <p className="text-[11px] text-secondary/60 leading-relaxed sm:text-right">
+                            Best results: include service area, services, and what your current site is not doing well.
+                        </p>
                     </div>
 
                     <button disabled={status === 'loading'} type="submit" className="w-full py-4 mt-2 bg-white text-black hover:bg-[#e2e2e2] hover:scale-[1.01] active:scale-[0.99] text-[12px] font-bold uppercase tracking-[0.05em] transition-all duration-300 rounded-[2px] disabled:opacity-50">

@@ -177,6 +177,29 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
+            <section className="py-20 px-6 border-y border-subtle bg-[#0a0c0e] reveal">
+                <div className="max-w-[820px] mx-auto text-center">
+                    <div className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-6">Proof in Progress</div>
+                    <h2 className="text-2xl sm:text-3xl font-semibold text-primary tracking-tight mb-4">
+                        Results will be published here as projects launch.
+                    </h2>
+                    <p className="text-[15px] text-secondary leading-relaxed mb-8">
+                        We do not publish placeholder testimonials or fabricated client outcomes. If you want to evaluate fit before launch case studies are available, ask for a sample or concept build walkthrough.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
+                        {[
+                            'What operators usually ask first: speed, mobile usability, and conversion structure',
+                            'Early access builds are available for review during planning',
+                            'Performance targets and deliverables are scoped before build begins'
+                        ].map((item) => (
+                            <div key={item} className="surface-panel p-4 rounded-sm">
+                                <p className="text-[12px] text-secondary leading-relaxed">{item}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             <section className="py-20 px-6 border-t border-subtle bg-[#0a0c0e] reveal">
                 <div className="max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                     <div className="lg:col-span-7">
