@@ -295,13 +295,18 @@ const Campaigns: React.FC = () => {
                     <h1 className="text-3xl font-semibold text-primary tracking-tight">Intelligence Campaigns</h1>
                     <p className="text-[13px] text-secondary font-mono uppercase tracking-widest mt-2">{campaigns.length} Active Deployments</p>
                 </div>
-                <button
-                    type="button"
-                    onClick={() => setDeleteAllOpen(v => !v)}
-                    className="px-4 py-2 border border-red-500/30 text-red-300 hover:bg-red-500/10 text-[10px] font-semibold tracking-widest uppercase rounded-sm"
-                >
-                    Delete All Campaigns
-                </button>
+                <div className="flex items-center gap-3">
+                    <Link to="/admin/inquiries" className="px-4 py-2 border border-white/10 text-secondary hover:text-white hover:border-white/30 text-[10px] font-semibold tracking-widest uppercase rounded-sm">
+                        Inquiries
+                    </Link>
+                    <button
+                        type="button"
+                        onClick={() => setDeleteAllOpen(v => !v)}
+                        className="px-4 py-2 border border-red-500/30 text-red-300 hover:bg-red-500/10 text-[10px] font-semibold tracking-widest uppercase rounded-sm"
+                    >
+                        Delete All Campaigns
+                    </button>
+                </div>
             </div>
 
             {deleteAllOpen ? (

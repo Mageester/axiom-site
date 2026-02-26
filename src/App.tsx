@@ -16,6 +16,8 @@ import Campaigns from './pages/admin/Campaigns';
 import Leads from './pages/admin/Leads';
 import LeadDetail from './pages/admin/LeadDetail';
 import Jobs from './pages/admin/Jobs';
+import Inquiries from './pages/admin/Inquiries';
+import InquiryDetail from './pages/admin/InquiryDetail';
 
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -132,6 +134,8 @@ const App: React.FC = () => {
                     <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
                     <Route path="/leads/:id" element={<ProtectedRoute><LeadDetail /></ProtectedRoute>} />
                     <Route path="/jobs" element={<ProtectedRoute><Jobs /></ProtectedRoute>} />
+                    <Route path="/admin/inquiries" element={<ProtectedRoute><Inquiries /></ProtectedRoute>} />
+                    <Route path="/admin/inquiries/:id" element={<ProtectedRoute><InquiryDetail /></ProtectedRoute>} />
                 </Routes>
             </main>
 

@@ -241,12 +241,16 @@ Use this when `POST /api/auth/login` returns `500` in production.
 2. Protect the admin paths at minimum:
    - `/admin/*`
    - `/api/*`
-3. Require an identity policy (email allowlist / IdP group) for operators.
-4. Verify behavior in browser:
+3. Carve-out for public intake:
+   - If Access protects `/api/*`, create a bypass/public policy for `/api/intake` (POST) OR narrow Access protection to admin APIs only.
+   - `/api/intake` must remain publicly reachable for the website request form.
+4. Require an identity policy (email allowlist / IdP group) for operators.
+5. Verify behavior in browser:
    - Unauthenticated request to `/admin/login` is blocked by Cloudflare Access challenge
    - Authenticated operator can reach `/admin/login` and complete login flow
-5. Verify API protection:
+6. Verify API protection:
    - `/api/auth/login` and `/api/jobs/run` should be blocked by Access when not authenticated at the edge
+   - `/api/intake` should still be reachable publicly (after carve-out)
 
 ### Optional second layer: `ADMIN_ACCESS_TOKEN`
 
@@ -263,6 +267,42 @@ If you want a simple header-based guard behind Cloudflare Access or an upstream 
    - Same requests with correct header pass through to normal auth/session handling
 
 Note: The app never logs the token value; only path/method are logged on denial.
+
+## Website Intake Pipeline (Public)
+
+1. Apply latest migration including `0004_website_inquiries.sql`.
+2. Open `/contact`.
+3. Fill the website request form and submit.
+4. Verify browser Network:
+   - `POST /api/intake` -> `200`
+   - response body `{ "ok": true }`
+5. Verify D1 row inserted in `website_inquiries` with:
+   - `status = 'new'`
+   - `ip_hash` present (no raw IP stored)
+   - `source_path = /contact`
+6. Honeypot check:
+   - Submit with hidden `company_fax` populated (manual/devtools test)
+   - API still returns `200 { ok: true }`
+   - No operator-facing spam hint is revealed
+   - Be consistent with implementation (row inserted as spam OR no row inserted)
+7. Rate limit check:
+   - Send >5 requests within 10 minutes from same IP
+   - Expect `429` with safe error message
+
+## Admin Inquiries Panel
+
+1. Log in at `/admin/login`.
+2. Open `/admin/inquiries`.
+3. Verify list loads newest-first and shows columns:
+   - created_at, business_name, name, email, primary_goal, status
+4. Open a record (`/admin/inquiries/:id`) and verify full details render:
+   - phone
+   - current website
+   - details
+5. Update status and save:
+   - `PATCH /api/inquiries/:id` -> `200`
+   - refresh and confirm persisted
+6. Click `Mark Spam` and confirm status becomes `spam`.
 
 ## Commands To Run Before Shipping
 
