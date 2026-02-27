@@ -1,7 +1,7 @@
 export type CaseStudyEntry = {
     slug: string;
     title: string;
-    label: 'Sample Case Study' | 'Concept Build';
+    label: 'Sample Case Study' | 'Concept Build' | 'Active Deployment';
     niche: string;
     location: string;
     summary: string;
@@ -47,29 +47,31 @@ export const caseStudies: CaseStudyEntry[] = [
     },
     {
         slug: 'concept-landscaping-authority-site',
-        title: 'Concept: Landscaping Authority Site',
-        label: 'Concept Build',
+        title: 'Demo: Landscaping Authority Site',
+        label: 'Active Deployment',
         niche: 'Local Business',
-        location: 'Ontario-focused',
-        summary: 'A concept layout for a premium landscaping company focused on higher-ticket projects and image-led credibility.',
+        location: 'Edge Isolated',
+        summary: 'A sub-second edge-deployed dispatch architecture designed for premium landscaping and hardscaping contractors.',
         context: 'Concept demonstration for a landscaping and design firm that needs stronger trust signals and clearer service qualification.',
         problems: ['Portfolio-heavy site with weak CTA prompts', 'No lead qualification messaging', 'Unstructured service pages'],
         built: ['Premium portfolio presentation flow', 'Consultation-first CTA system', 'Service area and service category structure'],
         targets: ['Target: strong visual credibility on mobile', 'Target: better consultation intent capture'],
-        deliverables: ['Concept homepage', 'Service architecture', 'Inquiry flow blueprint']
+        deliverables: ['Concept homepage', 'Service architecture', 'Inquiry flow blueprint'],
+        ctaLabel: 'Initialize Demo'
     },
     {
         slug: 'concept-roofing-conversion-site',
-        title: 'Concept: Roofing Conversion Site',
-        label: 'Concept Build',
+        title: 'Demo: Roofing Conversion Site',
+        label: 'Active Deployment',
         niche: 'Contractors',
-        location: 'Southwestern Ontario',
-        summary: 'A concept build focused on emergency-call clarity, financing CTA placement, and service trust positioning.',
+        location: 'Edge Isolated',
+        summary: 'A sub-second edge-deployed dispatch architecture designed for emergency roofing calls and exterior protection services.',
         context: 'Concept demonstration for a roofing company balancing emergency calls with planned replacement projects.',
         problems: ['Competing CTAs with no hierarchy', 'Slow load from builder bloat', 'Weak trust structure'],
         built: ['Emergency vs estimate CTA split', 'Trust section layout', 'Performance-first page shell'],
         targets: ['Target: clearer first-click conversion path', 'Target: improved mobile readability'],
-        deliverables: ['Concept homepage', 'Roofing service page framework', 'CTA and copy hierarchy blueprint']
+        deliverables: ['Concept homepage', 'Roofing service page framework', 'CTA and copy hierarchy blueprint'],
+        ctaLabel: 'Initialize Demo'
     }
 ];
 

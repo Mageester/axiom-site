@@ -55,45 +55,57 @@ const WorkPage: React.FC = () => {
                             <span className="text-accent/80 text-lg leading-none">↗</span>
                         </div>
                     </a>
-                    {caseStudies.map((project, i) => (
-                        <Link
-                            key={project.slug}
-                            to={`/work/${project.slug}`}
-                            className="surface-panel p-8 md:p-10 relative overflow-hidden group hover:-translate-y-1 hover:border-white/20 transition-all duration-500 flex flex-col"
-                            style={{ transitionDelay: `${i * 50}ms` }}
-                        >
-                            <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            <div className="h-48 md:h-56 w-full bg-white/5 border-b border-white/5 mb-6 flex items-center justify-center rounded-sm relative overflow-hidden group-hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-all duration-500">
-                                <img
-                                    src={
-                                        project.niche.includes('HVAC')
-                                            ? "/hvac-case-study.webp"
-                                            : project.niche.includes('Landscaping')
-                                                ? "/landscaping-concept.webp"
-                                                : project.niche.includes('Roofing')
-                                                    ? "/roofing-concept.webp"
-                                                    : "https://images.unsplash.com/photo-1581094288338-2314dddb7ec3?auto=format&fit=crop&q=80&w=800"
-                                    }
-                                    alt={project.title}
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                />
-                                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300 pointer-events-none z-10"></div>
-                            </div>
-                            <div className="flex items-center justify-between gap-3 mb-3">
-                                <span className={`text-[10px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm ${project.label === 'Sample Case Study' ? 'border-accent/20 text-accent/90 bg-accent/5' : 'border-white/10 text-secondary'}`}>
-                                    {project.label}
-                                </span>
-                                <span className="text-[10px] font-mono uppercase tracking-widest text-secondary/70">{project.location}</span>
-                            </div>
-                            <h3 className="text-[20px] font-semibold text-primary/90 mb-2 transition-colors group-hover:text-primary">{project.title}</h3>
-                            <div className="text-[12px] text-secondary/60 uppercase font-mono tracking-widest mb-4">{project.niche}</div>
-                            <p className="text-[14px] text-secondary leading-relaxed mb-6">{project.summary}</p>
-                            <div className="mt-auto flex items-center justify-between">
-                                <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">Open Blueprint</span>
-                                <span className="text-accent/80 text-lg leading-none">→</span>
-                            </div>
-                        </Link>
-                    ))}
+                    {caseStudies.map((project, i) => {
+                        const isActiveDemo = project.label === 'Active Deployment';
+                        const Wrapper: any = isActiveDemo ? 'a' : Link;
+                        const wrapperProps = isActiveDemo ? {
+                            href: project.niche.includes('Landscaping') ? 'https://landscaping.getaxiom.ca' : 'https://roofing.getaxiom.ca',
+                            target: '_blank',
+                            rel: 'noopener noreferrer'
+                        } : {
+                            to: `/work/${project.slug}`
+                        };
+
+                        return (
+                            <Wrapper
+                                key={project.slug}
+                                {...wrapperProps}
+                                className="surface-panel p-8 md:p-10 relative overflow-hidden group hover:-translate-y-1 hover:border-white/20 transition-all duration-500 flex flex-col"
+                                style={{ transitionDelay: `${i * 50}ms` }}
+                            >
+                                <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="h-48 md:h-56 w-full bg-white/5 border-b border-white/5 mb-6 flex items-center justify-center rounded-sm relative overflow-hidden group-hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-all duration-500">
+                                    <img
+                                        src={
+                                            project.niche.includes('HVAC')
+                                                ? "/hvac-case-study.webp"
+                                                : project.niche.includes('Landscaping')
+                                                    ? "/landscaping-concept.webp"
+                                                    : project.niche.includes('Roofing')
+                                                        ? "/roofing-concept.webp"
+                                                        : "https://images.unsplash.com/photo-1581094288338-2314dddb7ec3?auto=format&fit=crop&q=80&w=800"
+                                        }
+                                        alt={project.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300 pointer-events-none z-10"></div>
+                                </div>
+                                <div className="flex items-center justify-between gap-3 mb-3">
+                                    <span className={`text-[10px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm ${isActiveDemo ? 'border-accent/20 text-accent/90 bg-accent/5' : project.label === 'Sample Case Study' ? 'border-accent/20 text-accent/90 bg-accent/5' : 'border-white/10 text-secondary'}`}>
+                                        {project.label}
+                                    </span>
+                                    <span className="text-[10px] font-mono uppercase tracking-widest text-secondary/70">{project.location}</span>
+                                </div>
+                                <h3 className="text-[20px] font-semibold text-primary/90 mb-2 transition-colors group-hover:text-primary">{project.title}</h3>
+                                <div className="text-[12px] text-secondary/60 uppercase font-mono tracking-widest mb-4">{project.niche}</div>
+                                <p className="text-[14px] text-secondary leading-relaxed mb-6">{project.summary}</p>
+                                <div className="mt-auto flex items-center justify-between">
+                                    <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">{project.ctaLabel || 'Open Blueprint'}</span>
+                                    <span className="text-accent/80 text-lg leading-none">{isActiveDemo ? '↗' : '→'}</span>
+                                </div>
+                            </Wrapper>
+                        );
+                    })}
                 </div>
             </section>
         </div>
