@@ -113,7 +113,8 @@ export default function Campaigns() {
         setLogs(prev => [...prev, `[🚀] Starting ENGINE V2 Scrape: ${normalizedNiche} in ${normalizedCity} (Radius: ${radius}km, Depth: ${maxDepth})`]);
 
         try {
-            const res = await fetch(`/api/scrape?niche=${encodeURIComponent(normalizedNiche)}&city=${encodeURIComponent(normalizedCity)}&radius=${radius}&maxDepth=${maxDepth}`);
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:10000';
+            const res = await fetch(`${backendUrl}/api/scrape?niche=${encodeURIComponent(normalizedNiche)}&city=${encodeURIComponent(normalizedCity)}&radius=${radius}&maxDepth=${maxDepth}`);
 
             if (!res.body) throw new Error("No response body");
 
