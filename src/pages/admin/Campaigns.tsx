@@ -34,8 +34,7 @@ export default function Campaigns() {
     const [csvPath, setCsvPath] = useState("")
     const scrollRef = useRef<HTMLDivElement>(null)
 
-    const [pollJobsActive, setPollJobsActive] = useState(false);
-    const [activeCampaignId, setActiveCampaignId] = useState<string | null>(null);
+
 
     // Auto-scroll terminal
     useEffect(() => {
@@ -62,43 +61,7 @@ export default function Campaigns() {
         loadCampaigns();
     }, []);
 
-    // Polling logic from native Axiom site
-    useEffect(() => {
-        if (!pollJobsActive) return;
-        let cancelled = false;
-        const tick = async () => {
-            try {
-                const data = await apiJson<{ jobs?: Array<{ status: string }>; stats?: Array<{ status: string; c: number }> }>('/api/jobs', {
-                    timeoutMs: 15000,
-                    credentials: 'include'
-                });
-                if (cancelled) return;
-                const jobs = data.jobs || [];
-                const hasRunning = jobs.some(j => j.status === 'running');
 
-                if (!hasRunning) {
-                    setCompleted(true);
-                    setLoading(false);
-                    setPollJobsActive(false);
-                    setLogs(prev => [...prev, `[✅] EXTRACTION COMPLETE. Targets strictly processed.`]);
-                    if (activeCampaignId) {
-                        setCsvPath(`/api/campaigns/${activeCampaignId}/export.csv`);
-                        setLogs(prev => [...prev, `[💾] CSV Appended: /api/campaigns/${activeCampaignId}/export.csv`]);
-                    }
-                    loadCampaigns();
-                }
-            } catch {
-                if (!cancelled) setPollJobsActive(false);
-            }
-        };
-
-        tick();
-        const id = window.setInterval(tick, 2000);
-        return () => {
-            cancelled = true;
-            window.clearInterval(id);
-        };
-    }, [pollJobsActive, activeCampaignId]);
 
     const handleExtraction = async (e: React.FormEvent) => {
         e.preventDefault()
