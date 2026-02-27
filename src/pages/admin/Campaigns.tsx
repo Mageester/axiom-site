@@ -107,54 +107,54 @@ export default function Campaigns() {
         setLogs([])
         setCsvPath("")
 
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-        if (!apiKey) {
-            setLogs([`[!!!] System Error: API Key missing. Please configure your environment variables.`]);
-            setLoading(false);
-            return;
-        }
-
         const normalizedNiche = normalizeText(niche);
         const normalizedCity = normalizeText(city);
 
         setLogs(prev => [...prev, `[🚀] Starting ENGINE V2 Scrape: ${normalizedNiche} in ${normalizedCity} (Radius: ${radius}km, Depth: ${maxDepth})`]);
 
         try {
-            // 1. Create native Axiom campaign
-            const created = await apiJson<{ campaign_id?: string }>('/api/campaigns', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    niche: normalizedNiche,
-                    city: normalizedCity,
-                    radius_km: parseInt(radius) || 10,
-                    mode: 'opportunity'
-                }),
-                credentials: 'include',
-                timeoutMs: 20000
-            });
+            const res = await fetch(`/api/scrape?niche=${encodeURIComponent(normalizedNiche)}&city=${encodeURIComponent(normalizedCity)}&radius=${radius}&maxDepth=${maxDepth}`);
 
-            if (created.campaign_id) setActiveCampaignId(created.campaign_id);
+            if (!res.body) throw new Error("No response body");
 
-            setLogs(prev => [...prev, `[🌐] Injecting infinite scroll bypass parameters...`]);
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder();
+            let done = false;
 
-            // 2. Trigger native job runner
-            const runRes = await apiJson<{ msg?: string; processed?: number; log?: string[] }>('/api/jobs/run', {
-                method: 'POST',
-                credentials: 'include',
-                timeoutMs: 30000
-            });
-
-            setLogs(prev => [...prev, `[⬇️] Diving deeper... Engine dispatched.`]);
-
-            if (runRes.log && runRes.log.length > 0) {
-                setLogs(prev => [...prev, ...runRes.log!.map(l => `[✔] ${l}`)]);
+            while (!done) {
+                const { value, done: readerDone } = await reader.read();
+                done = readerDone;
+                if (value) {
+                    const chunk = decoder.decode(value, { stream: true });
+                    const lines = chunk.split('\n');
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const dataStr = line.substring(6);
+                            if (dataStr) {
+                                try {
+                                    const data = JSON.parse(dataStr);
+                                    if (data.message) {
+                                        setLogs(prev => [...prev, data.message]);
+                                    }
+                                    if (data.error) {
+                                        setLogs(prev => [...prev, `[!!!] ERROR: ${data.error}`]);
+                                        setLoading(false);
+                                    }
+                                    if (data._done) {
+                                        setCompleted(true);
+                                        setLoading(false);
+                                        setCsvPath('C:\\Users\\riley\\.gemini\\antigravity\\scratch\\Lead_Database_No_Site.csv');
+                                    }
+                                } catch (e) {
+                                    // Error parsing JSON string, likely incomplete stream chunk
+                                }
+                            }
+                        }
+                    }
+                }
             }
-
-            setPollJobsActive(true);
-
         } catch (err: any) {
-            setLogs(prev => [...prev, `[!!!] ERROR: ${err.message || 'Job initialization failed.'}`]);
+            setLogs(prev => [...prev, `[!!!] ERROR: ${err.message || 'Server request failed.'}`]);
             setLoading(false);
         }
     }
