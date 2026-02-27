@@ -79,45 +79,57 @@ const App: React.FC = () => {
             <BackgroundAtmosphere />
 
             {/* NAV */}
-            <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ease-out ${isScrolled ? 'bg-[#060708] border-b border-subtle shadow-sm shadow-black/20' : 'bg-transparent border-b border-transparent'}`}>
-                <div className="max-w-[1100px] mx-auto px-6 h-20 flex items-center justify-between">
-                    <Link to="/" className="flex items-center gap-3 group focus-visible:ring-offset-background">
-                        <BrandLockup
-                            logoSize="h-[18px] w-auto opacity-90 group-hover:opacity-100 transition-opacity"
-                            textSize="text-[13px] group-hover:text-white transition-colors duration-300"
-                        />
-                    </Link>
-                    <div className="hidden md:flex items-center gap-10 text-[13px] font-medium text-secondary">
+            <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ease-out ${isScrolled ? 'bg-[#060708] border-b border-white/5 shadow-sm shadow-black/20' : 'bg-transparent border-b border-white/5'}`}>
+                <div className="max-w-[1400px] mx-auto px-6 h-20 grid grid-cols-3 items-center">
+
+                    {/* Left: Nav Links (Desktop) */}
+                    <div className="hidden lg:flex items-center gap-8 text-[13px] font-medium text-secondary justify-self-start">
                         <Link to="/" className="hover:text-primary transition-colors focus-visible:text-primary">Home</Link>
                         <Link to="/services" className="hover:text-primary transition-colors focus-visible:text-primary">Services</Link>
                         <Link to="/work" className="hover:text-primary transition-colors focus-visible:text-primary">Concepts</Link>
                         <Link to="/pricing" className="hover:text-primary transition-colors focus-visible:text-primary">Pricing</Link>
                         <Link to="/contact" className="hover:text-primary transition-colors focus-visible:text-primary">Contact</Link>
                     </div>
-                    <div className="hidden md:flex items-center ml-6">
+
+                    {/* Left Placeholder (Mobile) */}
+                    <div className="lg:hidden justify-self-start"></div>
+
+                    {/* Center: Branding */}
+                    <Link to="/" className="flex items-center gap-3 group focus-visible:ring-offset-background justify-self-center">
+                        <BrandLockup
+                            logoSize="h-[22px] lg:h-[24px] w-auto opacity-90 group-hover:opacity-100 transition-all duration-500 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+                            textSize="text-[17px] lg:text-[19px] font-bold tracking-[0.1em] group-hover:text-white transition-all duration-500 drop-shadow-sm group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+                        />
+                    </Link>
+
+                    {/* Right: CTA (Desktop) */}
+                    <div className="hidden lg:flex items-center justify-self-end">
                         <Link
                             to="/contact"
                             aria-label="Request a consultation"
-                            className="px-4 py-2 bg-white text-black hover:bg-[#e2e2e2] text-[10px] font-bold uppercase tracking-[0.08em] border border-transparent transition-all duration-300 rounded-[2px]"
+                            className="px-6 py-2.5 bg-white text-black hover:bg-[#e2e2e2] text-[10px] font-bold uppercase tracking-[0.08em] border border-transparent transition-all duration-300 rounded-[2px]"
                         >
                             Request a Consultation
                         </Link>
                     </div>
 
-                    <button
-                        className="md:hidden text-secondary hover:text-primary p-2 -mr-2 transition-colors"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        aria-label="Toggle Menu"
-                        aria-expanded={mobileMenuOpen}
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            {mobileMenuOpen ? (
-                                <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-                            ) : (
-                                <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-                            )}
-                        </svg>
-                    </button>
+                    {/* Right: Hamburger Nav (Mobile) */}
+                    <div className="lg:hidden justify-self-end">
+                        <button
+                            className="text-secondary hover:text-primary p-2 -mr-2 transition-colors"
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            aria-label="Toggle Menu"
+                            aria-expanded={mobileMenuOpen}
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                {mobileMenuOpen ? (
+                                    <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                                ) : (
+                                    <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+                                )}
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 {/* Mobile Menu */}
