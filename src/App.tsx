@@ -9,6 +9,8 @@ import WorkPage from './pages/WorkPage';
 import WorkCaseStudyPage from './pages/WorkCaseStudyPage';
 import PricingPage from './pages/PricingPage';
 import ContactPage from './pages/ContactPage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
 
 // Admin System Imports - Lazy Loaded
 const Login = lazy(() => import('./pages/admin/Login'));
@@ -161,6 +163,8 @@ const App: React.FC = () => {
                         <Route path="/work/:slug" element={<WorkCaseStudyPage />} />
                         <Route path="/pricing" element={<PricingPage />} />
                         <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/terms" element={<TermsPage />} />
+                        <Route path="/privacy" element={<PrivacyPage />} />
 
                         {/* Secure Admin Routes */}
                         <Route path="/login" element={<Navigate to="/" replace />} />
@@ -187,6 +191,11 @@ const App: React.FC = () => {
                             logoSize="h-[18px] w-auto grayscale group-hover:grayscale-0 transition-all drop-shadow-sm"
                             textSize="text-[12px] uppercase text-primary"
                         />
+                    </div>
+
+                    <div className="flex items-center gap-6 text-[11px] font-mono uppercase tracking-widest text-secondary/60">
+                        <Link to="/privacy" className="hover:text-primary transition-colors duration-300">Privacy Policy</Link>
+                        <Link to="/terms" className="hover:text-primary transition-colors duration-300">Terms of Service</Link>
                     </div>
 
                     <div className="flex flex-col items-center md:items-end gap-2 text-[12px] text-secondary font-mono">

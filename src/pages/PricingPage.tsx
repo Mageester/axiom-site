@@ -30,12 +30,22 @@ const PricingPage: React.FC = () => {
                         <div className="absolute top-0 left-0 w-[3px] h-full bg-secondary/30"></div>
                         <h3 className="text-[24px] font-semibold text-primary mb-2">The Foundation</h3>
                         <p className="text-[13px] text-secondary mb-4 min-h-[40px]">Perfect for new businesses needing a professional digital presence fast.</p>
-                        <div className="text-[11px] font-mono text-secondary uppercase tracking-widest mb-6 border-b border-subtle pb-6">$1,500 – $2,500 CAD <br /><span className="lowercase text-secondary/60">(2-3 weeks)</span></div>
+                        <div className="text-[11px] font-mono text-secondary uppercase tracking-widest mb-6 border-b border-subtle pb-6">
+                            $1,500 – $2,500 CAD <br />
+                            <span className="text-[10px] text-secondary/70 normal-case mt-2 block leading-relaxed">50% Deposit to commence engineering,<br />50% Due upon final deployment.</span>
+                        </div>
                         <ul className="flex flex-col gap-4 text-[13px] text-secondary flex-1">
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>3-5 Page Custom Design</li>
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Mobile-First Responsiveness</li>
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Basic On-Page SEO & Fast Loading</li>
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Contact Form Integration</li>
+                            <li className="flex items-start gap-3 group/tooltip relative">
+                                <span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>
+                                <span className="border-b border-dashed border-secondary/40 cursor-help">$150/mo Edge Infrastructure Retainer</span>
+                                <div className="absolute left-0 bottom-full mb-2 w-[240px] p-3 bg-[#1a1d21] border border-white/10 text-[11px] text-secondary/90 rounded-sm opacity-0 group-hover/tooltip:opacity-100 transition-opacity pointer-events-none z-20 shadow-xl">
+                                    Covers Cloudflare Enterprise-grade routing, Render engine hosting, and monthly SEO schema maintenance.
+                                </div>
+                            </li>
                         </ul>
                         <Link to="/contact?package=foundation&goal=new_site" className="mt-8 inline-flex items-center justify-center px-5 py-3 bg-white/10 border border-white/20 hover:bg-white hover:text-black text-primary text-[11px] font-semibold uppercase tracking-widest rounded-sm transition-all duration-300">
                             Request a Consultation
@@ -48,13 +58,23 @@ const PricingPage: React.FC = () => {
                         <div className="absolute top-0 right-0 py-1 px-3 bg-accent/10 border-b border-l border-accent/20 text-[10px] font-mono text-accent uppercase tracking-widest rounded-bl-sm">Recommended</div>
                         <h3 className="text-[24px] font-semibold text-primary mb-2">The Engine</h3>
                         <p className="text-[13px] text-secondary mb-4 min-h-[40px]">For established businesses driving traffic who need higher conversions.</p>
-                        <div className="text-[11px] font-mono text-primary uppercase tracking-widest mb-6 border-b border-subtle pb-6">$3,500 – $5,500 CAD <br /><span className="lowercase text-secondary/60">(4-6 weeks)</span></div>
+                        <div className="text-[11px] font-mono text-primary uppercase tracking-widest mb-6 border-b border-subtle pb-6">
+                            $3,500 – $5,500 CAD <br />
+                            <span className="text-[10px] text-secondary/70 normal-case mt-2 block leading-relaxed">50% Deposit to commence engineering,<br />50% Due upon final deployment.</span>
+                        </div>
                         <ul className="flex flex-col gap-4 text-[13px] text-secondary flex-1">
                             <li className="flex items-start gap-3"><span className="text-accent/60 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>5-10 Page Custom Design</li>
                             <li className="flex items-start gap-3"><span className="text-accent/60 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Focused Service Pages</li>
                             <li className="flex items-start gap-3"><span className="text-accent/60 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Advanced Local SEO Structure (Schema)</li>
                             <li className="flex items-start gap-3"><span className="text-accent/60 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Google Analytics & Tag Manager</li>
                             <li className="flex items-start gap-3"><span className="text-accent/60 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Speed Guarantees (90+ Lighthouse)</li>
+                            <li className="flex items-start gap-3 group/tooltip relative">
+                                <span className="text-accent/60 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>
+                                <span className="border-b border-dashed border-secondary/40 cursor-help text-primary/90 font-medium">$150/mo Edge Infrastructure Retainer</span>
+                                <div className="absolute left-0 bottom-full mb-2 w-[240px] p-3 bg-[#1a1d21] border border-white/10 text-[11px] text-secondary/90 rounded-sm opacity-0 group-hover/tooltip:opacity-100 transition-opacity pointer-events-none z-20 shadow-xl font-normal">
+                                    Covers Cloudflare Enterprise-grade routing, Render engine hosting, and monthly SEO schema maintenance.
+                                </div>
+                            </li>
                         </ul>
                         <Link to="/contact?package=engine&goal=rebuild" className="mt-8 inline-flex items-center justify-center px-5 py-3 bg-white text-black hover:bg-[#e2e2e2] text-[11px] font-bold uppercase tracking-widest rounded-sm transition-all duration-300">
                             Request a Consultation
@@ -66,13 +86,23 @@ const PricingPage: React.FC = () => {
                         <div className="absolute top-0 left-0 w-[3px] h-full bg-secondary/30"></div>
                         <h3 className="text-[24px] font-semibold text-primary mb-2">The Authority</h3>
                         <p className="text-[13px] text-secondary mb-4 min-h-[40px]">For high-ticket providers needing absolute market dominance.</p>
-                        <div className="text-[11px] font-mono text-secondary uppercase tracking-widest mb-6 border-b border-subtle pb-6">$7,500+ CAD <br /><span className="lowercase text-secondary/60">(6-8+ weeks)</span></div>
+                        <div className="text-[11px] font-mono text-secondary uppercase tracking-widest mb-6 border-b border-subtle pb-6">
+                            $7,500+ CAD <br />
+                            <span className="text-[10px] text-secondary/70 normal-case mt-2 block leading-relaxed">50% Deposit to commence engineering,<br />50% Due upon final deployment.</span>
+                        </div>
                         <ul className="flex flex-col gap-4 text-[13px] text-secondary flex-1">
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Unlimited Core Pages</li>
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Bespoke Premium Animations</li>
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Strict Performance Invariants</li>
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Custom CRM/Booking API Integrations</li>
                             <li className="flex items-start gap-3"><span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>Advanced Technical SEO</li>
+                            <li className="flex items-start gap-3 group/tooltip relative">
+                                <span className="text-secondary/40 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"></span>
+                                <span className="border-b border-dashed border-secondary/40 cursor-help">$150/mo Edge Infrastructure Retainer</span>
+                                <div className="absolute left-0 bottom-full mb-2 w-[240px] p-3 bg-[#1a1d21] border border-white/10 text-[11px] text-secondary/90 rounded-sm opacity-0 group-hover/tooltip:opacity-100 transition-opacity pointer-events-none z-20 shadow-xl">
+                                    Covers Cloudflare Enterprise-grade routing, Render engine hosting, and monthly SEO schema maintenance.
+                                </div>
+                            </li>
                         </ul>
                         <Link to="/contact?package=authority&goal=rebuild" className="mt-8 inline-flex items-center justify-center px-5 py-3 bg-white/10 border border-white/20 hover:bg-white hover:text-black text-primary text-[11px] font-semibold uppercase tracking-widest rounded-sm transition-all duration-300">
                             Request a Consultation

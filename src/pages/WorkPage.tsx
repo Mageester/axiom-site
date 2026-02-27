@@ -69,9 +69,9 @@ const WorkPage: React.FC = () => {
                                         project.niche.includes('HVAC')
                                             ? "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800"
                                             : project.niche.includes('Landscaping')
-                                                ? "https://images.unsplash.com/photo-1558905619-159c4740e21a?auto=format&fit=crop&q=80&w=800"
+                                                ? "/landscape-concept.jpg"
                                                 : project.niche.includes('Roofing')
-                                                    ? "https://images.unsplash.com/photo-1632759162353-194941ee24fd?auto=format&fit=crop&q=80&w=800"
+                                                    ? "/roofing-concept.jpg"
                                                     : "https://images.unsplash.com/photo-1581094288338-2314dddb7ec3?auto=format&fit=crop&q=80&w=800"
                                     }
                                     alt={project.title}
