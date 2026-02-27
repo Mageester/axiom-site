@@ -59,7 +59,7 @@ const WorkPage: React.FC = () => {
                         const isActiveDemo = project.label === 'Active Deployment';
                         const Wrapper: any = isActiveDemo ? 'a' : Link;
                         const wrapperProps = isActiveDemo ? {
-                            href: project.niche.includes('Landscaping') ? 'https://landscaping.getaxiom.ca' : 'https://roofing.getaxiom.ca',
+                            href: project.slug.includes('landscaping') ? 'https://landscaping.getaxiom.ca' : 'https://roofing.getaxiom.ca',
                             target: '_blank',
                             rel: 'noopener noreferrer'
                         } : {
@@ -77,11 +77,11 @@ const WorkPage: React.FC = () => {
                                 <div className="h-48 md:h-56 w-full bg-white/5 border-b border-white/5 mb-6 flex items-center justify-center rounded-sm relative overflow-hidden group-hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-all duration-500">
                                     <img
                                         src={
-                                            project.niche.includes('HVAC')
+                                            project.slug.includes('hvac')
                                                 ? "/hvac-case-study.webp"
-                                                : project.niche.includes('Landscaping')
+                                                : project.slug.includes('landscaping')
                                                     ? "/landscaping-concept.webp"
-                                                    : project.niche.includes('Roofing')
+                                                    : project.slug.includes('roofing')
                                                         ? "/roofing-concept.webp"
                                                         : "https://images.unsplash.com/photo-1581094288338-2314dddb7ec3?auto=format&fit=crop&q=80&w=800"
                                         }
