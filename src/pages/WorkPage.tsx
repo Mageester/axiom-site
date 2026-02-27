@@ -27,10 +27,11 @@ const WorkPage: React.FC = () => {
                     >
                         <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <div className="h-[180px] w-full bg-white/5 border border-white/10 mb-6 flex items-center justify-center rounded-sm relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent"></div>
-                            <span className="text-[11px] font-mono text-secondary/50 uppercase tracking-widest">
-                                [Live Demonstration]
-                            </span>
+                            <img
+                                src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80"
+                                alt="Demonstration"
+                                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                            />
                         </div>
                         <div className="flex items-center justify-between gap-3 mb-3">
                             <span className="text-[10px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm border-accent/20 text-accent/90 bg-accent/5">
