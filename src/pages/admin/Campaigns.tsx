@@ -1,7 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ApiRequestError, apiJson, errorMessage } from '../../lib/api';
-import { previewNicheKeywords } from '../../lib/nicheKeywords';
+import { ApiRequestError, apiJson } from '../../lib/api';
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "../../components/ui/card"
+import { Label } from "../../components/ui/label"
+import { Input } from "../../components/ui/input"
+import { Button } from "../../components/ui/button"
+
+function normalizeText(value: string) {
+    return value.replace(/\s+/g, ' ').trim();
+}
 
 type Campaign = {
     id: string;
@@ -13,70 +21,31 @@ type Campaign = {
     lead_count: number;
 };
 
-type RunResponse = {
-    msg?: string;
-    processed?: number;
-    log?: string[];
-};
+export default function Campaigns() {
+    const [niche, setNiche] = useState("")
+    const [city, setCity] = useState("")
+    const [radius, setRadius] = useState("10")
+    const [maxDepth, setMaxDepth] = useState("5")
 
-function normalizeText(value: string) {
-    return value.replace(/\s+/g, ' ').trim();
-}
-
-function validateNiche(value: string) {
-    const normalized = normalizeText(value);
-    if (!normalized) return 'Target niche is required';
-    if (normalized.length < 2) return 'Target niche must be at least 2 characters';
-    if (normalized.length > 60) return 'Target niche must be 60 characters or less';
-    return '';
-}
-
-function validateCity(value: string) {
-    const normalized = normalizeText(value);
-    if (!normalized) return 'Target city is required';
-    if (!/^[^,]{2,60},\s*[A-Za-z .'-]{2,30}$/.test(normalized)) {
-        return 'Use format: City, Province/State (example: Toronto, ON)';
-    }
-    return '';
-}
-
-const Campaigns: React.FC = () => {
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false)
+    const [completed, setCompleted] = useState(false)
+    const [logs, setLogs] = useState<string[]>([])
+    const [csvPath, setCsvPath] = useState("")
+    const scrollRef = useRef<HTMLDivElement>(null)
 
-    const [form, setForm] = useState({ niche: '', city: '', radius: 10, mode: 'opportunity' as 'strict' | 'opportunity' });
-    const [creating, setCreating] = useState(false);
-    const [createError, setCreateError] = useState('');
-    const [createSuccess, setCreateSuccess] = useState('');
-    const [actionBusyId, setActionBusyId] = useState<string | null>(null);
-    const [actionError, setActionError] = useState('');
-    const [deleteAllOpen, setDeleteAllOpen] = useState(false);
-    const [deleteAllConfirm, setDeleteAllConfirm] = useState('');
-    const [deleteAllBusy, setDeleteAllBusy] = useState(false);
-
-    const [runStatus, setRunStatus] = useState('');
-    const [runProcessed, setRunProcessed] = useState<number | null>(null);
-    const [recentRunLog, setRecentRunLog] = useState<string[]>([]);
     const [pollJobsActive, setPollJobsActive] = useState(false);
     const [activeCampaignId, setActiveCampaignId] = useState<string | null>(null);
-    const [campaignSummary, setCampaignSummary] = useState<any | null>(null);
 
-    const normalizedForm = useMemo(() => ({
-        niche: normalizeText(form.niche),
-        city: normalizeText(form.city),
-        radius: Number.isFinite(form.radius) ? form.radius : 10,
-        mode: form.mode === 'strict' ? 'strict' : 'opportunity'
-    }), [form]);
-    const keywordPreview = useMemo(() => previewNicheKeywords(form.niche), [form.niche]);
-    const nicheError = validateNiche(form.niche);
-    const cityError = validateCity(form.city);
-    const radiusError = Number.isFinite(form.radius) && form.radius >= 1 && form.radius <= 100 ? '' : 'Radius must be between 1 and 100 km';
-    const formValid = !nicheError && !cityError && !radiusError;
+    // Auto-scroll terminal
+    useEffect(() => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+        }
+    }, [logs])
 
     const loadCampaigns = async () => {
         try {
-            setError('');
             const data = await apiJson<{ campaigns?: Campaign[] }>('/api/campaigns', {
                 timeoutMs: 15000,
                 credentials: 'include'
@@ -85,11 +54,7 @@ const Campaigns: React.FC = () => {
         } catch (err) {
             if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
                 window.location.href = '/admin/login';
-                return;
             }
-            setError(errorMessage(err, 'Failed to load campaigns.'));
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -97,6 +62,7 @@ const Campaigns: React.FC = () => {
         loadCampaigns();
     }, []);
 
+    // Polling logic from native Axiom site
     useEffect(() => {
         if (!pollJobsActive) return;
         let cancelled = false;
@@ -109,9 +75,18 @@ const Campaigns: React.FC = () => {
                 if (cancelled) return;
                 const jobs = data.jobs || [];
                 const hasRunning = jobs.some(j => j.status === 'running');
-                const queued = jobs.filter(j => j.status === 'queued').length;
-                setRunStatus(hasRunning ? 'Job runner active…' : (queued > 0 ? `Queued jobs remaining: ${queued}` : 'Queue idle.'));
-                if (!hasRunning) setPollJobsActive(false);
+
+                if (!hasRunning) {
+                    setCompleted(true);
+                    setLoading(false);
+                    setPollJobsActive(false);
+                    setLogs(prev => [...prev, `[✅] EXTRACTION COMPLETE. Targets strictly processed.`]);
+                    if (activeCampaignId) {
+                        setCsvPath(`/api/campaigns/${activeCampaignId}/export.csv`);
+                        setLogs(prev => [...prev, `[💾] CSV Appended: /api/campaigns/${activeCampaignId}/export.csv`]);
+                    }
+                    loadCampaigns();
+                }
             } catch {
                 if (!cancelled) setPollJobsActive(false);
             }
@@ -123,170 +98,59 @@ const Campaigns: React.FC = () => {
             cancelled = true;
             window.clearInterval(id);
         };
-    }, [pollJobsActive]);
+    }, [pollJobsActive, activeCampaignId]);
 
-    const applyRunResult = (runRes: RunResponse, prefix?: string) => {
-        const log = Array.isArray(runRes.log) ? runRes.log : [];
-        setRunStatus(`${prefix ? `${prefix}. ` : ''}${runRes.msg || 'Queue executed.'}`);
-        setRunProcessed(typeof runRes.processed === 'number' ? runRes.processed : null);
-        setRecentRunLog(log);
-        setPollJobsActive(true);
-    };
+    const handleExtraction = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setLoading(true)
+        setCompleted(false)
+        setLogs([])
+        setCsvPath("")
 
-    const loadCampaignSummary = async (campaignId: string) => {
+        const normalizedNiche = normalizeText(niche);
+        const normalizedCity = normalizeText(city);
+
+        setLogs(prev => [...prev, `[🚀] Starting ENGINE V2 Scrape: ${normalizedNiche} in ${normalizedCity} (Radius: ${radius}km, Depth: ${maxDepth})`]);
+
         try {
-            const data = await apiJson<{ summary?: any }>(`/api/campaigns/${campaignId}/summary`, {
-                timeoutMs: 15000,
-                credentials: 'include'
-            });
-            setCampaignSummary(data.summary || null);
-            setActiveCampaignId(campaignId);
-        } catch {
-            setActiveCampaignId(campaignId);
-            setCampaignSummary(null);
-        }
-    };
-
-    const handleCreate = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!formValid) {
-            setCreateError(nicheError || cityError || radiusError || 'Invalid input');
-            return;
-        }
-        setCreating(true);
-        setCreateError('');
-        setCreateSuccess('');
-        setActionError('');
-        try {
+            // 1. Create native Axiom campaign
             const created = await apiJson<{ campaign_id?: string }>('/api/campaigns', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    niche: normalizedForm.niche,
-                    city: normalizedForm.city,
-                    radius_km: normalizedForm.radius,
-                    mode: normalizedForm.mode
+                    niche: normalizedNiche,
+                    city: normalizedCity,
+                    radius_km: parseInt(radius) || 10,
+                    mode: 'opportunity'
                 }),
                 credentials: 'include',
                 timeoutMs: 20000
             });
 
-            let runRes: { msg?: string; processed?: number; log?: string[] } | null = null;
-            try {
-                runRes = await apiJson<{ msg?: string; processed?: number; log?: string[] }>('/api/jobs/run', {
-                    method: 'POST',
-                    credentials: 'include',
-                    timeoutMs: 30000
-                });
-            } catch (runErr) {
-                if (runErr instanceof ApiRequestError && (runErr.status === 401 || runErr.status === 403)) {
-                    window.location.href = '/admin/login';
-                    return;
-                }
-                setCreateError(
-                    `Campaign created${created.campaign_id ? ` (${created.campaign_id})` : ''}, but running discovery failed: ${errorMessage(runErr, 'Unable to run jobs.')}`
-                );
-                setForm({ niche: '', city: '', radius: 10, mode: 'opportunity' });
-                await loadCampaigns();
-                return;
-            }
+            if (created.campaign_id) setActiveCampaignId(created.campaign_id);
 
-            applyRunResult(runRes, 'Discovery trigger sent');
-            if (created.campaign_id) await loadCampaignSummary(created.campaign_id);
-            setCreateSuccess(
-                `Campaign created${created.campaign_id ? ` (${created.campaign_id})` : ''}. ${runRes?.msg || 'Queue executed.'} ${typeof runRes?.processed === 'number' ? `Processed: ${runRes.processed}.` : ''}`.trim()
-            );
-            setForm({ niche: '', city: '', radius: 10, mode: 'opportunity' });
-            await loadCampaigns();
-        } catch (err) {
-            if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/admin/login';
-                return;
-            }
-            setCreateError(errorMessage(err, 'Failed to create campaign.'));
-        } finally {
-            setCreating(false);
-        }
-    };
+            setLogs(prev => [...prev, `[🌐] Injecting infinite scroll bypass parameters...`]);
 
-    const handleRunAgain = async (campaign: Campaign) => {
-        setActionBusyId(`run:${campaign.id}`);
-        setActionError('');
-        setCreateSuccess('');
-        try {
-            const runRes = await apiJson<RunResponse>('/api/jobs/run', {
+            // 2. Trigger native job runner
+            const runRes = await apiJson<{ msg?: string; processed?: number; log?: string[] }>('/api/jobs/run', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ campaign_id: campaign.id }),
                 credentials: 'include',
                 timeoutMs: 30000
             });
-            applyRunResult(runRes, `Rerun requested for ${campaign.city}`);
-            await loadCampaignSummary(campaign.id);
-            await loadCampaigns();
-        } catch (err) {
-            if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/admin/login';
-                return;
-            }
-            setActionError(`Failed to run discovery for ${campaign.city}: ${errorMessage(err, 'Unable to run jobs.')}`);
-        } finally {
-            setActionBusyId(null);
-        }
-    };
 
-    const handleDeleteCampaign = async (campaign: Campaign) => {
-        const confirmed = window.confirm(`Delete campaign "${campaign.city} • ${campaign.niche}" and related leads/jobs?`);
-        if (!confirmed) return;
-        setActionBusyId(`delete:${campaign.id}`);
-        setActionError('');
-        try {
-            await apiJson(`/api/campaigns/${campaign.id}`, {
-                method: 'DELETE',
-                credentials: 'include',
-                timeoutMs: 30000
-            });
-            setRunStatus(`Deleted campaign ${campaign.city} • ${campaign.niche}`);
-            setRunProcessed(null);
-            setRecentRunLog([]);
-            await loadCampaigns();
-        } catch (err) {
-            if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/admin/login';
-                return;
-            }
-            setActionError(`Delete failed: ${errorMessage(err, 'Unable to delete campaign.')}`);
-        } finally {
-            setActionBusyId(null);
-        }
-    };
+            setLogs(prev => [...prev, `[⬇️] Diving deeper... Engine dispatched.`]);
 
-    const handleDeleteAll = async () => {
-        if (deleteAllConfirm !== 'DELETE') return;
-        setDeleteAllBusy(true);
-        setActionError('');
-        try {
-            await apiJson('/api/campaigns', {
-                method: 'DELETE',
-                credentials: 'include',
-                timeoutMs: 30000
-            });
-            setDeleteAllOpen(false);
-            setDeleteAllConfirm('');
-            setRunStatus('All campaigns deleted');
-            setRunProcessed(null);
-            setRecentRunLog([]);
-            await loadCampaigns();
-        } catch (err) {
-            if (err instanceof ApiRequestError && (err.status === 401 || err.status === 403)) {
-                window.location.href = '/admin/login';
-                return;
+            if (runRes.log && runRes.log.length > 0) {
+                setLogs(prev => [...prev, ...runRes.log!.map(l => `[✔] ${l}`)]);
             }
-            setActionError(`Delete all failed: ${errorMessage(err, 'Unable to delete all campaigns.')}`);
-        } finally {
-            setDeleteAllBusy(false);
+
+            setPollJobsActive(true);
+
+        } catch (err: any) {
+            setLogs(prev => [...prev, `[!!!] ERROR: ${err.message || 'Job initialization failed.'}`]);
+            setLoading(false);
         }
-    };
+    }
 
     return (
         <div className="pt-32 pb-24 px-6 max-w-[1100px] mx-auto w-full">
@@ -299,175 +163,140 @@ const Campaigns: React.FC = () => {
                     <Link to="/admin/inquiries" className="px-4 py-2 border border-white/10 text-secondary hover:text-white hover:border-white/30 text-[10px] font-semibold tracking-widest uppercase rounded-sm">
                         Inquiries
                     </Link>
-                    <button
-                        type="button"
-                        onClick={() => setDeleteAllOpen(v => !v)}
-                        className="px-4 py-2 border border-red-500/30 text-red-300 hover:bg-red-500/10 text-[10px] font-semibold tracking-widest uppercase rounded-sm"
-                    >
-                        Delete All Campaigns
-                    </button>
                 </div>
             </div>
 
-            {deleteAllOpen ? (
-                <div className="surface-panel p-4 mb-6 border border-red-500/30">
-                    <p className="text-[11px] font-mono text-red-300 mb-3">Type `DELETE` to remove all campaigns, leads, audits, and pipeline jobs.</p>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                        <input
-                            type="text"
-                            value={deleteAllConfirm}
-                            onChange={e => setDeleteAllConfirm(e.target.value)}
-                            placeholder="Type DELETE"
-                            className="bg-[#070708] border border-white/10 text-primary text-[13px] p-3 rounded-[2px] outline-none font-mono flex-1"
-                        />
-                        <button
-                            type="button"
-                            disabled={deleteAllBusy || deleteAllConfirm !== 'DELETE'}
-                            onClick={handleDeleteAll}
-                            className="px-4 py-3 bg-red-500/20 border border-red-500/40 text-red-200 text-[11px] font-semibold uppercase tracking-widest rounded-sm disabled:opacity-50"
-                        >
-                            {deleteAllBusy ? 'Deleting…' : 'Confirm Delete All'}
-                        </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-in fade-in zoom-in-95 duration-500">
+
+                {/* Controls - The Omniscient Transplant */}
+                <Card className="border-subtle bg-[#0a0c0e]">
+                    <CardHeader>
+                        <CardTitle className="text-2xl font-extrabold tracking-tight text-primary">The Omniscient</CardTitle>
+                        <CardDescription className="text-secondary">
+                            Deep-mine qualified prospects missing websites, analyze their digital footprint, and auto-export to CSV.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <form onSubmit={handleExtraction} className="space-y-6">
+                            <div className="space-y-2">
+                                <Label htmlFor="niche" className="font-semibold text-primary">Niche / Profession</Label>
+                                <Input
+                                    id="niche" placeholder="e.g. Roofers, Concrete, Med-Spas"
+                                    value={niche} onChange={(e) => setNiche(e.target.value)}
+                                    required className="bg-transparent text-primary border-subtle focus-visible:border-accent"
+                                    disabled={loading}
+                                />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="city" className="font-semibold text-primary">Target City</Label>
+                                    <Input
+                                        id="city" placeholder="e.g. Cambridge, ON"
+                                        value={city} onChange={(e) => setCity(e.target.value)}
+                                        required className="bg-transparent text-primary border-subtle focus-visible:border-accent"
+                                        disabled={loading}
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="radius" className="font-semibold text-primary">Radius (km)</Label>
+                                    <Input
+                                        id="radius" type="number"
+                                        value={radius} onChange={(e) => setRadius(e.target.value)}
+                                        required className="bg-transparent text-primary border-subtle focus-visible:border-accent"
+                                        disabled={loading}
+                                    />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="maxDepth" className="font-semibold text-primary">Max Scroll Depth</Label>
+                                    <Input
+                                        id="maxDepth" type="number" min="1" max="50"
+                                        title="How deep to scroll in Maps (1 = fast, 15 = deep)"
+                                        value={maxDepth} onChange={(e) => setMaxDepth(e.target.value)}
+                                        required className="bg-transparent text-primary border-subtle focus-visible:border-accent"
+                                        disabled={loading}
+                                    />
+                                </div>
+                            </div>
+
+                            <Button type="submit" size="lg" className="w-full font-bold text-md cursor-pointer hover:bg-[#e2e2e2]" disabled={loading}>
+                                {loading ? "Streaming Extraction..." : "Commence Engine"}
+                            </Button>
+                        </form>
+                    </CardContent>
+                </Card>
+
+                {/* Live Terminal - The Omniscient Transplant */}
+                <Card className="bg-[#050607] border-subtle shadow-xl overflow-hidden flex flex-col h-[500px]">
+                    <CardHeader className="bg-[#080a0c] border-b border-subtle py-3">
+                        <div className="flex items-center space-x-2">
+                            <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                            <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                            <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                            <span className="ml-2 text-xs font-mono text-secondary tracking-wider">OMNISCIENT_TERMINAL</span>
+                        </div>
+                    </CardHeader>
+                    <CardContent
+                        ref={scrollRef}
+                        className="flex-1 p-4 overflow-y-auto font-mono text-xs sm:text-sm text-green-400 space-y-1"
+                    >
+                        {logs.length === 0 && !loading && (
+                            <p className="text-secondary/60">Waiting for commands...</p>
+                        )}
+                        {logs.map((log, i) => (
+                            <div key={i} className="break-words">
+                                {log.startsWith("[!!!]") ? <span className="text-red-500 font-bold">{log}</span> :
+                                    log.startsWith("[✅]") ? <span className="text-emerald-400 font-bold">{log}</span> :
+                                        log.startsWith("[✔]") ? <span className="text-zinc-300">{log}</span> :
+                                            log.startsWith("[💾]") ? <span className="text-cyan-400">{log}</span> :
+                                                log}
+                            </div>
+                        ))}
+                        {loading && (
+                            <div className="animate-pulse text-secondary/60 mt-2">_</div>
+                        )}
+                    </CardContent>
+                    {completed && csvPath && (
+                        <CardFooter className="bg-emerald-950/30 border-t border-emerald-900/30 py-3 block">
+                            <h4 className="text-emerald-400 font-bold text-sm mb-1">Export Completed Safely</h4>
+                            <p className="text-emerald-500/80 text-xs font-mono break-all">{csvPath}</p>
+                            <a href={csvPath} className="inline-block text-center w-full mt-3 border border-emerald-800 text-emerald-400 hover:bg-emerald-900/50 hover:text-emerald-300 py-2 rounded-md text-sm transition-colors">
+                                Download CSV Payload
+                            </a>
+                        </CardFooter>
+                    )}
+                </Card>
+            </div>
+
+            {/* Legacy Dashboard Listing preserved */}
+            <div className="mt-12 surface-panel rounded-sm border border-subtle">
+                {campaigns.map(c => (
+                    <div key={c.id} className="p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between group border-b border-subtle last:border-0 hover:bg-white/[0.02] transition-colors">
+                        <div className="flex flex-col gap-1">
+                            <div className="flex items-center gap-3">
+                                <h3 className="text-[16px] font-semibold text-primary">{c.city} • <span className="opacity-80 font-normal capitalize">{c.niche}</span></h3>
+                                <span className="text-[9px] font-mono bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm">{c.radius_km}km</span>
+                            </div>
+                            <p className="text-[12px] text-secondary/60 font-mono tracking-wider">{new Date(c.created_at).toLocaleString()}</p>
+                        </div>
+                        <div className="mt-4 sm:mt-0 flex items-center gap-6">
+                            <div className="flex flex-col items-end">
+                                <span className="text-[18px] font-mono font-semibold text-primary leading-none">{c.lead_count}</span>
+                                <span className="text-[9px] font-mono text-secondary uppercase tracking-widest">Leads Gathered</span>
+                            </div>
+                            <div className="flex gap-2">
+                                <Link to={`/leads?campaign_id=${c.id}`} className="px-4 py-2 border border-white/10 hover:border-white/30 text-primary text-[10px] font-semibold tracking-[0.05em] uppercase transition-all duration-300 rounded-sm bg-white/5">
+                                    View Pipeline
+                                </Link>
+                                <a href={`/api/campaigns/${c.id}/export.outreach.csv`} className="px-4 py-2 border border-white/10 hover:border-white/30 text-secondary text-[10px] font-semibold tracking-[0.05em] uppercase transition-all duration-300 rounded-sm bg-transparent">
+                                    Outreach CSV
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            ) : null}
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                {/* Form */}
-                <div className="lg:col-span-4">
-                    <form onSubmit={handleCreate} className="surface-panel p-6 sm:p-8 flex flex-col gap-6 rounded-sm relative">
-                        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
-                        <h2 className="text-[15px] font-semibold text-primary/90 mb-2">Deploy New Campaign</h2>
-                        {createError ? <p className="text-[11px] font-mono text-red-400">{createError}</p> : null}
-                        {createSuccess ? <p className="text-[11px] font-mono text-emerald-400">{createSuccess}</p> : null}
-                        {actionError ? <p className="text-[11px] font-mono text-red-400">{actionError}</p> : null}
-
-                        <div className="flex flex-col gap-2">
-                            <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Target Niche</label>
-                            <input type="text" placeholder="e.g. hvac, plumbing, roofing" required value={form.niche} onChange={e => setForm({ ...form, niche: e.target.value })} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-3 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none" />
-                            <p className="text-[10px] font-mono text-secondary/60">2–60 chars. Spaces are normalized automatically.</p>
-                            {nicheError ? <p className="text-[10px] font-mono text-red-400">{nicheError}</p> : null}
-                            {keywordPreview.length > 0 ? <p className="text-[10px] font-mono text-secondary/70 break-words">Keyword preview: {keywordPreview.join(', ')}</p> : null}
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Target City</label>
-                            <input type="text" placeholder="e.g. Toronto, ON" required value={form.city} onChange={e => setForm({ ...form, city: e.target.value })} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-3 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none" />
-                            <p className="text-[10px] font-mono text-secondary/60">Use `City, Province/State` (examples: `Toronto, ON`, `Dallas, TX`).</p>
-                            {cityError ? <p className="text-[10px] font-mono text-red-400">{cityError}</p> : null}
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Radius (km)</label>
-                            <input type="number" min="1" max="100" required value={form.radius} onChange={e => setForm({ ...form, radius: Number.parseInt(e.target.value || '0', 10) })} className="bg-[#070708] border border-white/10 text-primary text-[14px] p-3 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none" />
-                            {radiusError ? <p className="text-[10px] font-mono text-red-400">{radiusError}</p> : null}
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Mode</label>
-                            <div className="grid grid-cols-2 gap-2">
-                                <button type="button" onClick={() => setForm({ ...form, mode: 'opportunity' })} className={`px-3 py-2 border rounded-sm text-[10px] font-mono uppercase tracking-widest ${form.mode === 'opportunity' ? 'border-accent/40 text-accent bg-accent/10' : 'border-white/10 text-secondary'}`}>Opportunity</button>
-                                <button type="button" onClick={() => setForm({ ...form, mode: 'strict' })} className={`px-3 py-2 border rounded-sm text-[10px] font-mono uppercase tracking-widest ${form.mode === 'strict' ? 'border-accent/40 text-accent bg-accent/10' : 'border-white/10 text-secondary'}`}>Strict</button>
-                            </div>
-                            <p className="text-[10px] font-mono text-secondary/60">{form.mode === 'strict' ? 'Prefer niche matches; fallback engages if results are low.' : 'Broad capture + opportunity scoring (recommended).'}</p>
-                        </div>
-
-                        <button disabled={creating || !formValid} type="submit" className="w-full py-4 mt-2 bg-white text-black hover:bg-[#e2e2e2] active:scale-[0.99] text-[12px] font-bold uppercase tracking-[0.05em] transition-all duration-300 rounded-[2px] disabled:opacity-50">
-                            {creating ? 'Running...' : 'Run Discovery Job'}
-                        </button>
-                    </form>
-
-                    <div className="surface-panel p-5 mt-6 rounded-sm border border-subtle">
-                        <h3 className="text-[11px] font-mono uppercase tracking-widest text-secondary mb-3">Recent Run Status</h3>
-                        <p className="text-[12px] text-primary">{runStatus || 'No recent run yet.'}</p>
-                        {runProcessed !== null ? <p className="text-[11px] font-mono text-secondary mt-2">Processed: {runProcessed}</p> : null}
-                        {recentRunLog.length > 0 ? (
-                            <div className="mt-4 bg-black/30 border border-white/5 rounded-sm p-3">
-                                <p className="text-[10px] font-mono uppercase tracking-widest text-secondary/70 mb-2">Recent Run Log</p>
-                                <div className="max-h-48 overflow-auto space-y-1">
-                                    {[...recentRunLog.slice(0, 6), ...(recentRunLog.length > 12 ? ['...'] : []), ...recentRunLog.slice(-6)].map((line, idx) => (
-                                        <p key={`${idx}-${line}`} className="text-[10px] font-mono text-secondary break-words">{line}</p>
-                                    ))}
-                                </div>
-                            </div>
-                        ) : null}
-                        {activeCampaignId ? (
-                            <div className="mt-4 border-t border-subtle pt-4">
-                                <div className="flex items-center justify-between mb-2">
-                                    <p className="text-[10px] font-mono uppercase tracking-widest text-secondary/70">Campaign Insights</p>
-                                    <a href={`/api/campaigns/${activeCampaignId}/export.csv`} className="text-[10px] font-mono uppercase tracking-widest text-accent hover:underline">Export CSV</a>
-                                    <a href={`/api/campaigns/${activeCampaignId}/export.outreach.csv`} className="text-[10px] font-mono uppercase tracking-widest text-secondary hover:text-accent hover:underline ml-3">Outreach CSV</a>
-                                </div>
-                                {campaignSummary ? (
-                                    <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-secondary">
-                                        <div>Total: <span className="text-primary">{campaignSummary.total_leads ?? 0}</span></div>
-                                        <div>High: <span className="text-primary">{campaignSummary.high_opportunity_count ?? 0}</span></div>
-                                        <div>High quality: <span className="text-primary">{campaignSummary.high_quality_count ?? 0}</span></div>
-                                        <div>No website: <span className="text-primary">{campaignSummary.no_website_count ?? 0}</span></div>
-                                        <div>Verified live: <span className="text-primary">{campaignSummary.website_verified_live_count ?? 0}</span></div>
-                                        <div>Unreachable: <span className="text-primary">{campaignSummary.website_unreachable_count ?? 0}</span></div>
-                                        <div>Missing intake: <span className="text-primary">{campaignSummary.missing_intake_count ?? 0}</span></div>
-                                        <div>Missing booking: <span className="text-primary">{campaignSummary.missing_booking_count ?? 0}</span></div>
-                                        <div>Emails: <span className="text-primary">{campaignSummary.emails_found_count ?? 0}</span></div>
-                                        <div>DNC: <span className="text-primary">{campaignSummary.dnc_count ?? 0}</span></div>
-                                    </div>
-                                ) : <p className="text-[10px] font-mono text-secondary/60">Summary unavailable.</p>}
-                            </div>
-                        ) : null}
-                    </div>
-                </div>
-
-                {/* List */}
-                <div className="lg:col-span-8 flex flex-col gap-4">
-                    {error ? <p className="text-red-400 font-mono text-[12px]">{error}</p> : null}
-                    {loading ? <p className="text-secondary font-mono text-[12px]">Fetching telemetry...</p> :
-                        campaigns.map(c => (
-                            <div key={c.id} className="surface-panel p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between group hover:border-white/20 transition-all">
-                                <div className="flex flex-col gap-1">
-                                    <div className="flex items-center gap-3">
-                                        <h3 className="text-[16px] font-semibold text-primary">{c.city} • <span className="opacity-80 font-normal capitalize">{c.niche}</span></h3>
-                                        <span className="text-[9px] font-mono bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm">{c.radius_km}km</span>
-                                    </div>
-                                    <p className="text-[12px] text-secondary/60 font-mono tracking-wider">{new Date(c.created_at).toLocaleString()}</p>
-                                </div>
-                                <div className="mt-4 sm:mt-0 flex items-center gap-6">
-                                    <div className="flex flex-col items-end">
-                                        <span className="text-[18px] font-mono font-semibold text-primary leading-none">{c.lead_count}</span>
-                                        <span className="text-[9px] font-mono text-secondary uppercase tracking-widest">Leads Gathered</span>
-                                        <span className="text-[9px] font-mono text-secondary/70 uppercase tracking-widest mt-1">{(c.mode || 'opportunity')}</span>
-                                    </div>
-                                    <div className="flex flex-col sm:flex-row gap-2">
-                                        <Link to={`/leads?campaign_id=${c.id}`} className="px-4 py-2.5 bg-[#121417]/50 border border-white/10 hover:border-white/30 hover:bg-white/5 text-primary text-[10px] font-semibold tracking-[0.05em] uppercase transition-all duration-300 rounded-sm text-center">
-                                            View Pipeline
-                                        </Link>
-                                        <a href={`/api/campaigns/${c.id}/export.csv`} className="px-4 py-2.5 border border-white/10 text-secondary hover:text-white hover:border-white/30 text-[10px] font-semibold tracking-[0.05em] uppercase rounded-sm text-center">
-                                            Export CSV
-                                        </a>
-                                        <a href={`/api/campaigns/${c.id}/export.outreach.csv`} className="px-4 py-2.5 border border-white/10 text-secondary hover:text-white hover:border-white/30 text-[10px] font-semibold tracking-[0.05em] uppercase rounded-sm text-center">
-                                            Outreach CSV
-                                        </a>
-                                        <button
-                                            type="button"
-                                            disabled={actionBusyId !== null}
-                                            onClick={() => handleRunAgain(c)}
-                                            className="px-4 py-2.5 border border-accent/30 text-accent hover:bg-accent/10 text-[10px] font-semibold tracking-[0.05em] uppercase rounded-sm disabled:opacity-50"
-                                        >
-                                            {actionBusyId === `run:${c.id}` ? 'Running…' : 'Run Again'}
-                                        </button>
-                                        <button
-                                            type="button"
-                                            disabled={actionBusyId !== null}
-                                            onClick={() => handleDeleteCampaign(c)}
-                                            className="px-4 py-2.5 border border-red-500/30 text-red-300 hover:bg-red-500/10 text-[10px] font-semibold tracking-[0.05em] uppercase rounded-sm disabled:opacity-50"
-                                        >
-                                            {actionBusyId === `delete:${c.id}` ? 'Deleting…' : 'Delete'}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    }
-                </div>
+                ))}
             </div>
         </div>
     );
-};
-
-export default Campaigns;
+}

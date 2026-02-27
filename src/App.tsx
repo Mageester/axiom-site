@@ -171,7 +171,7 @@ const App: React.FC = () => {
 
                     <div className="flex flex-col items-center md:items-end gap-2 text-[12px] text-secondary font-mono">
                         <span className="tracking-widest uppercase text-[10px] opacity-60">Professional Website Building</span>
-                        <a href="mailto:contact@axiominfrastructure.com" className="hover:text-primary transition-colors duration-300 tracking-tight">contact@axiominfrastructure.com</a>
+                        <a href="mailto:contact@getaxiom.ca" className="hover:text-primary transition-colors duration-300 tracking-tight">contact@getaxiom.ca</a>
                     </div>
                 </div>
             </footer>
