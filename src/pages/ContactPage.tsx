@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 type SubmitState = '' | 'loading' | 'success' | 'error';
 
@@ -184,6 +185,10 @@ const ContactPage: React.FC = () => {
 
     return (
         <div className="pt-32 pb-24 relative overflow-hidden">
+            <SEO
+                title="Contact & Project Intake | Axiom Infrastructure"
+                description="Start your web infrastructure project today. Fill out our intake form to discuss custom builds or rebuilds for your service business."
+            />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none z-0" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.015) 0%, transparent 60%)' }}></div>
 
             <div className="max-w-[700px] mx-auto w-full relative z-10 px-6 reveal">

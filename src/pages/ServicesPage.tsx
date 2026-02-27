@@ -1,8 +1,13 @@
 import React from 'react';
+import { SEO } from '../components/SEO';
 
 const ServicesPage: React.FC = () => {
     return (
         <div className="pt-32 pb-24">
+            <SEO
+                title="Web Infrastructure Services | Axiom"
+                description="We design, build, and maintain high-performance websites for service-based businesses in Kitchener. Custom builds, rebuilds, and landing pages."
+            />
             <section className="px-6 pb-24 border-b border-subtle">
                 <div className="max-w-[800px] w-full mx-auto text-center reveal">
                     <div className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-6">Capabilities</div>

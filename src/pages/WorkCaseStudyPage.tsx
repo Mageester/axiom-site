@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import { getCaseStudyBySlug } from '../data/caseStudies';
 
 const WorkCaseStudyPage: React.FC = () => {
@@ -10,6 +11,10 @@ const WorkCaseStudyPage: React.FC = () => {
 
     return (
         <div className="pt-32 pb-24">
+            <SEO
+                title={`${entry.title} | Axiom Work`}
+                description={entry.summary}
+            />
             <section className="px-6 pb-16 border-b border-subtle">
                 <div className="max-w-[900px] mx-auto w-full reveal">
                     <div className="flex flex-wrap items-center gap-3 mb-6">

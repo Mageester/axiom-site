@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import { caseStudies } from '../data/caseStudies';
 
 const WorkPage: React.FC = () => {
     return (
         <div className="pt-32 pb-24">
+            <SEO
+                title="Our Work & Architectures | Axiom"
+                description="Explore our high-performance website architectures and industry demonstrations custom-built for contractors."
+            />
             <section className="px-6 pb-24 border-b border-subtle">
                 <div className="max-w-[800px] w-full mx-auto text-center reveal">
                     <div className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-6">Concept Architectures</div>

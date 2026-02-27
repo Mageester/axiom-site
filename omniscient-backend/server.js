@@ -28,6 +28,20 @@ app.get('/api/scrape', async (req, res) => {
     };
 
     let browser = null;
+    let isStreamActive = true;
+
+    req.on('close', async () => {
+        console.log(`[🛑] Client disconnected. Aborting scrape for ${city}...`);
+        isStreamActive = false;
+        if (browser) {
+            try {
+                await browser.close();
+                browser = null;
+            } catch (e) {
+                console.error("Error closing browser on disconnect:", e);
+            }
+        }
+    });
 
     try {
         if (!niche || !city) {
@@ -83,6 +97,7 @@ app.get('/api/scrape', async (req, res) => {
         let lastHeight = 0;
         let scrollAttempts = 0;
         while (scrollAttempts < maxDepth) {
+            if (!isStreamActive) return;
             const newHeight = await page.evaluate(() => {
                 const feed = document.querySelector('div[role="feed"]');
                 if (feed) {
@@ -160,6 +175,7 @@ app.get('/api/scrape', async (req, res) => {
         let savedCount = 0;
 
         for (const target of targets) {
+            if (!isStreamActive) return;
             sendEvent({ message: `[⚙️] Deep Enriching: ${target.businessName}...` });
             const searchPage = await browserContext.newPage();
             let rawFootprint = "";
@@ -237,7 +253,11 @@ app.get('/api/scrape', async (req, res) => {
         console.error("[!] Scrape Stream Error:", error);
         sendEvent({ error: error.message });
     } finally {
-        if (browser) await browser.close();
+        if (browser) {
+            try {
+                await browser.close();
+            } catch (e) { }
+        }
         res.end(); // close stream
     }
 });

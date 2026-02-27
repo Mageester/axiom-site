@@ -33,8 +33,15 @@ export default function Campaigns() {
     const [logs, setLogs] = useState<string[]>([])
     const [csvPath, setCsvPath] = useState("")
     const scrollRef = useRef<HTMLDivElement>(null)
+    const abortControllerRef = useRef<AbortController | null>(null);
+    const streamTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-
+    useEffect(() => {
+        return () => {
+            if (abortControllerRef.current) abortControllerRef.current.abort();
+            if (streamTimeoutRef.current) clearTimeout(streamTimeoutRef.current);
+        };
+    }, []);
 
     // Auto-scroll terminal
     useEffect(() => {
@@ -70,24 +77,42 @@ export default function Campaigns() {
         setLogs([])
         setCsvPath("")
 
+        if (abortControllerRef.current) abortControllerRef.current.abort();
+        const controller = new AbortController();
+        abortControllerRef.current = controller;
+
         const normalizedNiche = normalizeText(niche);
         const normalizedCity = normalizeText(city);
 
         setLogs(prev => [...prev, `[🚀] Starting ENGINE V2 Scrape: ${normalizedNiche} in ${normalizedCity} (Radius: ${radius}km, Depth: ${maxDepth})`]);
 
+        if (streamTimeoutRef.current) clearTimeout(streamTimeoutRef.current);
+        streamTimeoutRef.current = setTimeout(() => {
+            setLogs(prev => [...prev, '[⏳] System Warming Up... (Backend engine is booting, this can take up to 60s)']);
+        }, 50000);
+
         try {
             const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:10000';
-            const res = await fetch(`${backendUrl}/api/scrape?niche=${encodeURIComponent(normalizedNiche)}&city=${encodeURIComponent(normalizedCity)}&radius=${radius}&maxDepth=${maxDepth}`);
+            const res = await fetch(`${backendUrl}/api/scrape?niche=${encodeURIComponent(normalizedNiche)}&city=${encodeURIComponent(normalizedCity)}&radius=${radius}&maxDepth=${maxDepth}`, {
+                signal: controller.signal
+            });
 
             if (!res.body) throw new Error("No response body");
 
             const reader = res.body.getReader();
             const decoder = new TextDecoder();
             let done = false;
+            let firstChunkReceived = false;
 
             while (!done) {
                 const { value, done: readerDone } = await reader.read();
                 done = readerDone;
+
+                if (!firstChunkReceived && streamTimeoutRef.current) {
+                    clearTimeout(streamTimeoutRef.current);
+                    firstChunkReceived = true;
+                }
+
                 if (value) {
                     const chunk = decoder.decode(value, { stream: true });
                     const lines = chunk.split('\n');
@@ -118,8 +143,14 @@ export default function Campaigns() {
                 }
             }
         } catch (err: any) {
-            setLogs(prev => [...prev, `[!!!] ERROR: ${err.message || 'Server request failed.'}`]);
+            if (err.name === 'AbortError') {
+                setLogs(prev => [...prev, '[🛑] Stream terminated by user navigation.']);
+            } else {
+                setLogs(prev => [...prev, `[!!!] ERROR: ${err.message || 'Server request failed.'}`]);
+            }
             setLoading(false);
+        } finally {
+            if (streamTimeoutRef.current) clearTimeout(streamTimeoutRef.current);
         }
     }
 

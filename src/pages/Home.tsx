@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 const authorityPillars = [
     {
@@ -73,6 +74,25 @@ const Home: React.FC = () => {
 
     return (
         <>
+            <SEO
+                title="High-performance web design | Axiom Infrastructure"
+                description="Contractor lead generation and high-performance web design in Kitchener. We build custom infrastructure that drives Better results than templates."
+                schema={{
+                    "@context": "https://schema.org",
+                    "@type": "ProfessionalService",
+                    "name": "Axiom Infrastructure",
+                    "description": "Web Infrastructure & Lead Generation for Contractors",
+                    "url": "https://axiom-site.onrender.com",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Kitchener",
+                        "addressRegion": "Ontario",
+                        "addressCountry": "CA"
+                    },
+                    "areaServed": "Kitchener"
+                }}
+            />
+
             <section
                 ref={heroRef}
                 onMouseMove={handleMouseMove}

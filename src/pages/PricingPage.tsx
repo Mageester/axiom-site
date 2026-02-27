@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 const PricingPage: React.FC = () => {
     return (
         <div className="pt-32 pb-24">
+            <SEO
+                title="Website Pricing & Packages | Axiom Infrastructure"
+                description="Honest, transparent pricing for high-performance contractor web design. View our website packages from $1,500 CAD."
+            />
             <section className="px-6 pb-24 border-b border-subtle">
                 <div className="max-w-[800px] w-full mx-auto text-center reveal">
                     <div className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-6">Investment Structure</div>
