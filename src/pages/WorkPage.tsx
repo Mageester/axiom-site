@@ -19,6 +19,35 @@ const WorkPage: React.FC = () => {
 
             <section className="py-24 px-6 max-w-[1100px] mx-auto w-full reveal">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <a
+                        href="https://hvac.getaxiom.ca"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="surface-panel p-8 md:p-10 relative overflow-hidden group hover:-translate-y-1 hover:border-white/20 transition-all duration-500 flex flex-col"
+                    >
+                        <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="h-[180px] w-full bg-white/5 border border-white/10 mb-6 flex items-center justify-center rounded-sm relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent"></div>
+                            <span className="text-[11px] font-mono text-secondary/50 uppercase tracking-widest">
+                                [Live Demonstration]
+                            </span>
+                        </div>
+                        <div className="flex items-center justify-between gap-3 mb-3">
+                            <span className="text-[10px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm border-accent/20 text-accent/90 bg-accent/5">
+                                Active Deployment
+                            </span>
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-secondary/70">Edge Isolated</span>
+                        </div>
+                        <h3 className="text-[20px] font-semibold text-primary/90 mb-2 transition-colors group-hover:text-primary">HVAC & Climate Dispatch</h3>
+                        <div className="text-[12px] text-secondary/60 uppercase font-mono tracking-widest mb-4">Industrial Control Demo</div>
+                        <p className="text-[14px] text-secondary leading-relaxed mb-6">
+                            Sub-second, edge-deployed dispatch architecture designed for industrial climate control and emergency HVAC services.
+                        </p>
+                        <div className="mt-auto flex items-center justify-between">
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">Initialize Demo</span>
+                            <span className="text-accent/80 text-lg leading-none">↗</span>
+                        </div>
+                    </a>
                     {caseStudies.map((project, i) => (
                         <Link
                             key={project.slug}
