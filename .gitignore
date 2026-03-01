@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 .wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
 
 # Editor directories and files
 .vscode/*
@@ -26,3 +30,6 @@ dist-ssr
 
 # Nested Demo Repositories
 /axiom-hvac-demo
+/axiom-roofing-demo
+/axiom-landscaping-demo
+/__temp_*
