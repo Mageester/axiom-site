@@ -158,8 +158,12 @@ const App: React.FC = () => {
 
             <footer className="bg-background py-16 px-6 border-t border-subtle">
                 <div className="max-w-[1100px] mx-auto">
-                    <div className="surface-panel p-8 sm:p-10 rounded-sm text-center">
-                        <p className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-4">Risk Reversal</p>
+                    <div className="bg-[#111214] border border-[#1e2028] p-8 sm:p-10 rounded-lg text-center">
+                        <div className="flex items-center justify-center gap-3 mb-4">
+                            <div className="h-[1px] w-8 bg-[var(--accent)]/40"></div>
+                            <p className="text-[11px] font-mono text-[var(--accent)] uppercase tracking-[0.2em]">Risk Reversal</p>
+                            <div className="h-[1px] w-8 bg-[var(--accent)]/40"></div>
+                        </div>
                         <h2 className="text-[26px] sm:text-[34px] font-semibold text-primary tracking-tight mb-4">
                             Your site stays online when demand spikes.
                         </h2>
