@@ -188,9 +188,9 @@ const App: React.FC = () => {
                             textSize="text-[12px] uppercase text-primary"
                         />
                         <div className="flex items-center gap-6 text-[11px] font-mono uppercase tracking-widest text-secondary/60">
-                            <Link to="/privacy" className="py-2 hover:text-primary transition-colors duration-300">Privacy</Link>
-                            <Link to="/terms" className="py-2 hover:text-primary transition-colors duration-300">Terms</Link>
-                            <Link to="/admin/login" className="py-2 hover:text-primary transition-colors duration-300">Client Portal</Link>
+                            <Link to="/privacy" className="min-h-[48px] inline-flex items-center hover:text-primary transition-colors duration-300">Privacy</Link>
+                            <Link to="/terms" className="min-h-[48px] inline-flex items-center hover:text-primary transition-colors duration-300">Terms</Link>
+                            <Link to="/admin/login" className="min-h-[48px] inline-flex items-center hover:text-primary transition-colors duration-300">Client Portal</Link>
                         </div>
                     </div>
 
