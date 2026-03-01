@@ -9,6 +9,7 @@ import WorkPage from './pages/WorkPage';
 import WorkCaseStudyPage from './pages/WorkCaseStudyPage';
 import PricingPage from './pages/PricingPage';
 import ContactPage from './pages/ContactPage';
+import AuditPage from './pages/AuditPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 
@@ -163,6 +164,7 @@ const App: React.FC = () => {
                         <Route path="/work/:slug" element={<WorkCaseStudyPage />} />
                         <Route path="/pricing" element={<PricingPage />} />
                         <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/audit" element={<AuditPage />} />
                         <Route path="/terms" element={<TermsPage />} />
                         <Route path="/privacy" element={<PrivacyPage />} />
 
