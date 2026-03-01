@@ -128,6 +128,28 @@ const App: React.FC = () => {
                 </div>
             </nav>
 
+            {/* Trust Badge Strip */}
+            <div className="fixed top-0 w-full z-40 pointer-events-none" style={{ marginTop: 'calc(5rem + 1px)' }}>
+                <div className="bg-[#0a0b0d]/95 backdrop-blur-sm border-b border-[#1e2028]">
+                    <div className="max-w-[1400px] mx-auto px-6 py-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 pointer-events-auto">
+                        {[
+                            { badge: 'Cloudflare Enterprise Network', tip: 'Deployed across 300+ edge cities worldwide' },
+                            { badge: 'HSTS Preload Active', tip: 'Browser-enforced encrypted connections' },
+                            { badge: 'WCAG 2.1 Compliant', tip: 'Universal accessibility standard' },
+                            { badge: 'SSL A+ Rated', tip: 'Bank-level encryption on every request' },
+                        ].map((item) => (
+                            <span key={item.badge} className="group relative text-[9px] font-mono uppercase tracking-[0.15em] text-[var(--text-secondary)]/50 hover:text-[var(--text-secondary)] transition-colors cursor-default flex items-center gap-1.5">
+                                <span className="w-1 h-1 rounded-full bg-emerald-500/40 group-hover:bg-emerald-400 transition-colors"></span>
+                                {item.badge}
+                                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-[#1a1d25] text-[var(--text-secondary)] text-[10px] font-mono px-3 py-1.5 rounded-md border border-[#2a2d35] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                                    {item.tip}
+                                </span>
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
             <main className="flex-1 flex flex-col">
                 <Suspense fallback={<AdminLoader />}>
                     <Routes>
@@ -158,6 +180,7 @@ const App: React.FC = () => {
 
             <footer className="bg-[#0B0B0C] py-12 px-6 border-t border-[#1e2028]">
                 <div className="max-w-[1100px] mx-auto">
+                    {/* Brand + Navigation */}
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
                         <BrandLockup
                             opacity="opacity-40 hover:opacity-100 transition-opacity duration-500"
@@ -167,8 +190,18 @@ const App: React.FC = () => {
                         <div className="flex items-center gap-6 text-[11px] font-mono uppercase tracking-widest text-secondary/60">
                             <Link to="/privacy" className="py-2 hover:text-primary transition-colors duration-300">Privacy</Link>
                             <Link to="/terms" className="py-2 hover:text-primary transition-colors duration-300">Terms</Link>
+                            <Link to="/admin/login" className="py-2 hover:text-primary transition-colors duration-300">Client Portal</Link>
                         </div>
                     </div>
+
+                    {/* Brand Statement */}
+                    <div className="mt-6 pt-6 border-t border-[#1e2028]">
+                        <p className="text-[12px] text-[var(--text-secondary)]/40 leading-relaxed text-center max-w-2xl mx-auto">
+                            Axiom Infrastructure is a performance-first engineering firm. We do not use templates, DIY builders, or shared hosting.
+                        </p>
+                    </div>
+
+                    {/* Copyright + Status */}
                     <div className="mt-6 pt-6 border-t border-[#1e2028] flex flex-col sm:flex-row items-center justify-between gap-4">
                         <p className="text-[11px] font-mono text-[var(--text-secondary)]/50 uppercase tracking-widest">
                             © {new Date().getFullYear()} Axiom Infrastructure
