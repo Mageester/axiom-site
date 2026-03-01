@@ -44,7 +44,17 @@ const transporter = nodemailer.createTransport({
 app.post('/api/intake', async (req, res) => {
     try {
         // --- DEBUG: Log raw incoming payload ---
+        console.log('[INTAKE] Content-Type:', req.headers['content-type']);
         console.log('[INTAKE] Raw req.body:', JSON.stringify(req.body, null, 2));
+
+        // Guard: If body parser failed or Content-Type is wrong, req.body will be undefined
+        if (!req.body || typeof req.body !== 'object') {
+            console.error('[INTAKE] CRITICAL: req.body is undefined or not an object. Check Content-Type header.');
+            return res.status(400).json({
+                error: 'Malformed request',
+                details: 'Request body is empty or not valid JSON. Ensure Content-Type: application/json is set.'
+            });
+        }
 
         const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'unknown';
         const now = Date.now();
