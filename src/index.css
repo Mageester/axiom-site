@@ -10,7 +10,7 @@
     --border-subtle: rgba(255, 255, 255, 0.05);
     /* Softened from 0.06 */
     --text-primary: rgba(255, 255, 255, 0.90);
-    --text-secondary: rgba(255, 255, 255, 0.60);
+    --text-secondary: rgba(255, 255, 255, 0.65);
     /* Deepened for stronger hierarchy */
     --accent: #5a729b;
     /* Desaturated from #4B6EAF for premium restraint */

@@ -85,12 +85,12 @@ const App: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-6 h-20 grid grid-cols-3 items-center">
 
                     {/* Left: Nav Links (Desktop) */}
-                    <div className="hidden lg:flex items-center gap-8 text-[13px] font-medium text-secondary justify-self-start">
-                        <Link to="/" className="hover:text-primary transition-colors focus-visible:text-primary">Home</Link>
-                        <Link to="/services" className="hover:text-primary transition-colors focus-visible:text-primary">Services</Link>
-                        <Link to="/work" className="hover:text-primary transition-colors focus-visible:text-primary">Concepts</Link>
-                        <Link to="/pricing" className="hover:text-primary transition-colors focus-visible:text-primary">Pricing</Link>
-                        <Link to="/contact" className="hover:text-primary transition-colors focus-visible:text-primary">Contact</Link>
+                    <div className="hidden lg:flex items-center gap-8 text-[14px] font-medium text-secondary justify-self-start">
+                        <Link to="/" className="py-3 hover:text-primary transition-colors focus-visible:text-primary">Home</Link>
+                        <Link to="/services" className="py-3 hover:text-primary transition-colors focus-visible:text-primary">Services</Link>
+                        <Link to="/work" className="py-3 hover:text-primary transition-colors focus-visible:text-primary">Concepts</Link>
+                        <Link to="/pricing" className="py-3 hover:text-primary transition-colors focus-visible:text-primary">Pricing</Link>
+                        <Link to="/contact" className="py-3 hover:text-primary transition-colors focus-visible:text-primary">Contact</Link>
                     </div>
 
                     {/* Left Placeholder (Mobile) */}
@@ -136,12 +136,12 @@ const App: React.FC = () => {
 
                 {/* Mobile Menu */}
                 {mobileMenuOpen && (
-                    <div className="md:hidden bg-[#0a0c0e] border-b border-subtle absolute top-20 left-0 w-full px-6 py-4 flex flex-col gap-4 text-sm font-medium text-secondary shadow-xl z-50">
-                        <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-                        <Link to="/services" onClick={() => setMobileMenuOpen(false)}>Services</Link>
-                        <Link to="/work" onClick={() => setMobileMenuOpen(false)}>Concepts</Link>
-                        <Link to="/pricing" onClick={() => setMobileMenuOpen(false)}>Pricing</Link>
-                        <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+                    <div className="md:hidden bg-[#0a0c0e] border-b border-subtle absolute top-20 left-0 w-full px-6 py-4 flex flex-col gap-2 text-[16px] font-medium text-secondary shadow-xl z-50">
+                        <Link to="/" className="py-3 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+                        <Link to="/services" className="py-3 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>Services</Link>
+                        <Link to="/work" className="py-3 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>Concepts</Link>
+                        <Link to="/pricing" className="py-3 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>Pricing</Link>
+                        <Link to="/contact" className="py-3 mb-2" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
                         <Link
                             to="/contact"
                             onClick={() => setMobileMenuOpen(false)}
@@ -193,14 +193,14 @@ const App: React.FC = () => {
                         />
                     </div>
 
-                    <div className="flex items-center gap-6 text-[11px] font-mono uppercase tracking-widest text-secondary/60">
-                        <Link to="/privacy" className="hover:text-primary transition-colors duration-300">Privacy Policy</Link>
-                        <Link to="/terms" className="hover:text-primary transition-colors duration-300">Terms of Service</Link>
+                    <div className="flex items-center gap-6 text-[14px] font-mono uppercase tracking-widest text-secondary/60">
+                        <Link to="/privacy" className="py-3 hover:text-primary transition-colors duration-300">Privacy Policy</Link>
+                        <Link to="/terms" className="py-3 hover:text-primary transition-colors duration-300">Terms of Service</Link>
                     </div>
 
-                    <div className="flex flex-col items-center md:items-end gap-2 text-[12px] text-secondary font-mono">
-                        <span className="tracking-widest uppercase text-[10px] opacity-60">Professional Website Building</span>
-                        <a href="mailto:contact@getaxiom.ca" className="hover:text-primary transition-colors duration-300 tracking-tight">contact@getaxiom.ca</a>
+                    <div className="flex flex-col items-center md:items-end gap-2 text-[16px] text-secondary font-mono">
+                        <span className="tracking-widest uppercase text-[14px] opacity-60">Professional Website Building</span>
+                        <a href="mailto:contact@getaxiom.ca" className="py-3 hover:text-primary transition-colors duration-300 tracking-tight">contact@getaxiom.ca</a>
                     </div>
                 </div>
             </footer>

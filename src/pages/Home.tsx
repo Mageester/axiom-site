@@ -20,42 +20,34 @@ const authorityPillars = [
 const processSteps = [
     {
         title: 'Discovery',
-        desc: 'We map your services, target geography, offer positioning, and what a qualified lead looks like.'
+        desc: 'Map services, target geography, and offer positioning.'
     },
     {
         title: 'Blueprint',
-        desc: 'We define the page structure, conversion path, messaging hierarchy, and performance requirements before build starts.'
+        desc: 'Define page structure, messaging, and conversion architecture.'
     },
     {
         title: 'Build',
-        desc: 'Custom-coded implementation with mobile-first QA, speed optimization, and clean deployment workflows.'
+        desc: 'Custom-coded implementation with mobile-first speed optimization.'
     },
     {
-        title: 'Launch & Optimize',
-        desc: 'Production launch, analytics setup, and post-launch refinements focused on speed, clarity, and conversion readiness.'
+        title: 'Deployment',
+        desc: 'Production launch, analytics setup, and edge network configuration.'
     }
 ];
 
-const comparisons = [
+const differentiationCards = [
     {
-        label: 'Performance control',
-        builders: 'Template theme + app/plugin weight can limit speed optimization.',
-        axiom: 'Custom code and tighter payload control designed for performance benchmarks.'
+        title: 'Speed',
+        desc: '90+ Lighthouse scores.'
     },
     {
-        label: 'Technical SEO control',
-        builders: 'Usable for basics, but harder to enforce clean structure at scale.',
-        axiom: 'Semantic structure and service-area architecture planned from the blueprint stage.'
+        title: 'Security',
+        desc: 'Cloudflare Edge protection.'
     },
     {
-        label: 'Maintainability',
-        builders: 'Builder changes/apps can introduce regressions.',
-        axiom: 'Lean codebase with controlled updates and infrastructure management options.'
-    },
-    {
-        label: 'Ownership & scalability',
-        builders: 'Good for fast starts, but can become restrictive as needs grow.',
-        axiom: 'Built for long-term control, custom integrations, and future expansion.'
+        title: 'SEO',
+        desc: 'Local Market Dominance Schema.'
     }
 ];
 
@@ -98,8 +90,20 @@ const Home: React.FC = () => {
                 onMouseMove={handleMouseMove}
                 className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 px-6 overflow-hidden flex flex-col items-center border-b border-subtle"
             >
+                {/* SORA VIDEO BACKGROUND */}
+                <video
+                    src="/sora.mp4"
+                    playsInline
+                    autoPlay
+                    loop
+                    muted
+                    className="absolute inset-0 w-full h-full object-cover z-0"
+                ></video>
+                {/* DARK OVERLAY FOR CONTRAST */}
+                <div className="absolute inset-0 bg-black/40 z-0"></div>
+
                 <div
-                    className="absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-80 mix-blend-screen"
+                    className="absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-80 mix-blend-screen z-10"
                     style={{
                         background: `radial-gradient(800px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255,255,255,0.035), transparent 40%)`
                     }}
@@ -161,17 +165,11 @@ const Home: React.FC = () => {
                         </p>
                     </div>
 
-                    <div className="surface-panel overflow-hidden rounded-sm border border-subtle">
-                        <div className="grid grid-cols-12 border-b border-subtle bg-black/40 text-[10px] font-mono uppercase tracking-wider text-secondary">
-                            <div className="col-span-4 p-4">Decision Area</div>
-                            <div className="col-span-4 p-4">Template Builders</div>
-                            <div className="col-span-4 p-4">Axiom</div>
-                        </div>
-                        {comparisons.map((row) => (
-                            <div key={row.label} className="grid grid-cols-12 border-b last:border-b-0 border-subtle text-[13px]">
-                                <div className="col-span-12 md:col-span-4 p-4 text-primary font-medium">{row.label}</div>
-                                <div className="col-span-12 md:col-span-4 p-4 text-secondary leading-relaxed">{row.builders}</div>
-                                <div className="col-span-12 md:col-span-4 p-4 text-secondary leading-relaxed">{row.axiom}</div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {differentiationCards.map((card, i) => (
+                            <div key={card.title} className="surface-panel p-8 rounded-sm text-center">
+                                <div className="text-[12px] font-mono text-accent/80 uppercase tracking-widest mb-3">0{i + 1} {card.title}</div>
+                                <h3 className="text-[18px] font-semibold text-primary">{card.desc}</h3>
                             </div>
                         ))}
                     </div>

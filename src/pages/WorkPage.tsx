@@ -35,19 +35,20 @@ const WorkPage: React.FC = () => {
                             <img
                                 src="/hvac-demo.png"
                                 alt="Demonstration"
+                                loading="lazy"
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300 pointer-events-none z-10"></div>
                         </div>
                         <div className="flex items-center justify-between gap-3 mb-3">
-                            <span className="text-[10px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm border-accent/20 text-accent/90 bg-accent/5">
+                            <span className="text-[12px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm border-accent/20 text-accent/90 bg-accent/5">
                                 Active Deployment
                             </span>
-                            <span className="text-[10px] font-mono uppercase tracking-widest text-secondary/70">Edge Isolated</span>
+                            <span className="text-[12px] font-mono uppercase tracking-widest text-secondary/70">Edge Isolated</span>
                         </div>
                         <h3 className="text-[20px] font-semibold text-primary/90 mb-2 transition-colors group-hover:text-primary">HVAC & Climate Dispatch</h3>
                         <div className="text-[12px] text-secondary/60 uppercase font-mono tracking-widest mb-4">Industrial Control Demo</div>
-                        <p className="text-[14px] text-secondary leading-relaxed mb-6">
+                        <p className="text-[16px] text-secondary leading-relaxed mb-6">
                             Sub-second, edge-deployed dispatch architecture designed for industrial climate control and emergency HVAC services.
                         </p>
                         <div className="mt-auto flex items-center justify-between">
@@ -86,19 +87,22 @@ const WorkPage: React.FC = () => {
                                                         : "https://images.unsplash.com/photo-1581094288338-2314dddb7ec3?auto=format&fit=crop&q=80&w=800"
                                         }
                                         alt={project.title}
+                                        loading="lazy"
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
                                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300 pointer-events-none z-10"></div>
                                 </div>
                                 <div className="flex items-center justify-between gap-3 mb-3">
-                                    <span className={`text-[10px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm ${isActiveDemo ? 'border-accent/20 text-accent/90 bg-accent/5' : project.label === 'Sample Case Study' ? 'border-accent/20 text-accent/90 bg-accent/5' : 'border-white/10 text-secondary'}`}>
+                                    <span className={`text-[12px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm ${isActiveDemo ? 'border-accent/20 text-accent/90 bg-accent/5' : project.label === 'Sample Case Study' ? 'border-accent/20 text-accent/90 bg-accent/5' : 'border-white/10 text-secondary'}`}>
                                         {project.label}
                                     </span>
-                                    <span className="text-[10px] font-mono uppercase tracking-widest text-secondary/70">{project.location}</span>
+                                    <span className="text-[12px] font-mono uppercase tracking-widest text-secondary/70">{project.location}</span>
                                 </div>
                                 <h3 className="text-[20px] font-semibold text-primary/90 mb-2 transition-colors group-hover:text-primary">{project.title}</h3>
                                 <div className="text-[12px] text-secondary/60 uppercase font-mono tracking-widest mb-4">{project.niche}</div>
-                                <p className="text-[14px] text-secondary leading-relaxed mb-6">{project.summary}</p>
+                                <p className="text-[16px] text-secondary leading-relaxed mb-6">
+                                    {project.summary}
+                                </p>
                                 <div className="mt-auto flex items-center justify-between">
                                     <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">{project.ctaLabel || 'Open Blueprint'}</span>
                                     <span className="text-accent/80 text-lg leading-none">{isActiveDemo ? '↗' : '→'}</span>
