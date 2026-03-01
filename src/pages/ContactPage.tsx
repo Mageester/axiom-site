@@ -202,8 +202,8 @@ const ContactPage: React.FC = () => {
                                 <label className="text-[12px] font-mono text-secondary uppercase tracking-widest">Current Website</label>
                                 <input type="url" placeholder="https://" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className="bg-[#0b0b0c] border border-zinc-700 text-primary text-[15px] p-4 min-h-[48px] rounded-sm outline-none focus-visible:border-white/30" />
                             </div>
-                            <button type="button" onClick={handleNextStep} className="min-h-[52px] w-full bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-widest">
-                                Continue to Audit Questions
+                            <button type="button" onClick={handleNextStep} className="min-h-[52px] w-full bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-widest rounded-[4px]">
+                                See If You Qualify (2‑Minute Survey)
                             </button>
                         </div>
                     ) : (

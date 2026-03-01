@@ -194,6 +194,16 @@ const App: React.FC = () => {
                     </div>
                 </div>
             </footer>
+
+            {/* Mobile-only sticky CTA */}
+            <div className="sm:hidden fixed bottom-0 left-0 w-full z-50 bg-[#0B0B0C]/95 backdrop-blur-sm border-t border-[#1e2028] px-4 py-3 safe-area-bottom">
+                <Link
+                    to="/contact"
+                    className="flex items-center justify-center w-full min-h-[52px] bg-white text-[#0B0B0C] text-[12px] font-bold uppercase tracking-widest rounded-[4px] shadow-[0_0_20px_rgba(255,255,255,0.1)] active:bg-[#e2e2e2] transition-colors"
+                >
+                    Apply for Authority Build
+                </Link>
+            </div>
         </div>
     );
 };

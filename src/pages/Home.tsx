@@ -54,26 +54,31 @@ const Home: React.FC = () => {
                             </div>
 
                             <h1 className="text-[38px] sm:text-[50px] font-semibold text-white tracking-tight leading-[1.06]">
-                                The website system serious contractors use to win higher‑paying jobs.
+                                Command your market with a revenue‑generating website.
                             </h1>
 
                             <p className="text-[16px] text-[var(--text-secondary)] leading-relaxed max-w-xl">
-                                We build premium, conversion-focused infrastructure for local service businesses that need stronger trust, better lead quality, and reliable uptime.
+                                We engineer blazing‑fast, conversion‑focused web infrastructure for service businesses that want to outclass competitors and stay online during storms.
                             </p>
 
-                            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                                <Link
-                                    to="/concepts"
-                                    className="inline-flex items-center justify-center min-h-[52px] px-8 border border-[#2a2d35] bg-[#161820] text-white hover:bg-[#1c1f28] hover:border-[#3a3d45] text-[12px] font-semibold uppercase tracking-widest transition-all rounded-[4px]"
-                                >
-                                    View Concepts
-                                </Link>
-                                <Link
-                                    to="/contact"
-                                    className="inline-flex items-center justify-center min-h-[52px] px-8 bg-white text-[#0B0B0C] hover:bg-[#f0f0f0] text-[12px] font-bold uppercase tracking-widest transition-all rounded-[4px] shadow-[0_0_20px_rgba(255,255,255,0.08)]"
-                                >
-                                    Book Strategy Call
-                                </Link>
+                            <div className="flex flex-col gap-4 pt-2">
+                                <div className="flex flex-col sm:flex-row gap-3">
+                                    <Link
+                                        to="/concepts"
+                                        className="inline-flex items-center justify-center min-h-[52px] px-8 border border-[#2a2d35] bg-[#161820] text-white hover:bg-[#1c1f28] hover:border-[#3a3d45] text-[12px] font-semibold uppercase tracking-widest transition-all rounded-[4px]"
+                                    >
+                                        View Concepts
+                                    </Link>
+                                    <Link
+                                        to="/contact"
+                                        className="inline-flex items-center justify-center min-h-[52px] px-8 bg-white text-[#0B0B0C] hover:bg-[#f0f0f0] text-[12px] font-bold uppercase tracking-widest transition-all rounded-[4px] shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+                                    >
+                                        Book Strategy Call
+                                    </Link>
+                                </div>
+                                <p className="text-[12px] text-[var(--text-secondary)]/70 font-mono">
+                                    Custom engagements starting at <span className="text-white font-semibold">$7,500</span>. Only <span className="text-[var(--accent)]">4 partner slots</span> available per month.
+                                </p>
                             </div>
                         </div>
                     </div>
