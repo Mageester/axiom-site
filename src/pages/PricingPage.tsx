@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
 const PricingPage: React.FC = () => {
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const pricingRef = useRef<HTMLElement>(null);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!pricingRef.current) return;
+        const rect = pricingRef.current.getBoundingClientRect();
+        setMousePos({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        });
+    };
+
     return (
         <div className="pt-32 pb-24">
             <SEO
@@ -22,8 +34,19 @@ const PricingPage: React.FC = () => {
             </section>
 
             {/* THREE TIERS */}
-            <section className="py-24 px-6 max-w-[1200px] mx-auto w-full reveal">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <section
+                ref={pricingRef}
+                onMouseMove={handleMouseMove}
+                className="py-24 px-6 max-w-[1200px] mx-auto w-full reveal relative overflow-hidden"
+            >
+                <div
+                    className="absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-80 mix-blend-screen z-0"
+                    style={{
+                        background: `radial-gradient(1000px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255,255,255,0.02), transparent 40%)`
+                    }}
+                />
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
 
                     {/* TIER 1 */}
                     <div className="surface-panel p-8 sm:p-10 relative overflow-hidden group border-white/5 hover:border-white/10 transition-all rounded-sm flex flex-col">
@@ -53,9 +76,10 @@ const PricingPage: React.FC = () => {
                     </div>
 
                     {/* TIER 2 - ACCENTED */}
-                    <div className="surface-panel p-8 sm:p-10 relative overflow-hidden group border-white/10 hover:border-white/20 transition-all rounded-sm flex flex-col scale-[1.02] shadow-2xl z-10 bg-[#121417]">
-                        <div className="absolute top-0 left-0 w-[4px] h-full bg-accent/80"></div>
-                        <div className="absolute top-0 right-0 py-1 px-3 bg-accent/10 border-b border-l border-accent/20 text-[10px] font-mono text-accent uppercase tracking-widest rounded-bl-sm">Recommended</div>
+                    <div className="surface-panel p-8 sm:p-10 relative overflow-hidden group border-white/20 hover:border-accent/40 transition-all rounded-sm flex flex-col scale-[1.02] shadow-2xl z-20 bg-[#121417]">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:16px_16px] opacity-30 pointer-events-none"></div>
+                        <div className="absolute top-0 left-0 w-[4px] h-full bg-accent"></div>
+                        <div className="absolute top-0 right-0 py-1 px-3 bg-accent/15 border-b border-l border-accent/30 text-[10px] font-mono text-accent uppercase tracking-widest rounded-bl-sm z-10">Recommended</div>
                         <h3 className="text-[24px] font-semibold text-primary mb-2">The Engine</h3>
                         <p className="text-[13px] text-secondary mb-4 min-h-[40px]">For established businesses driving traffic who need higher conversions.</p>
                         <div className="text-[11px] font-mono text-primary uppercase tracking-widest mb-6 border-b border-subtle pb-6">
