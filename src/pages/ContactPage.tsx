@@ -219,6 +219,21 @@ const ContactPage: React.FC = () => {
                             <button type="button" onClick={handleNextStep} className="min-h-[52px] w-full bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-widest rounded-[4px]">
                                 See If You Qualify (2‑Minute Survey)
                             </button>
+
+                            {/* What Happens Next */}
+                            <div className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-5 flex flex-col gap-4">
+                                <p className="text-[11px] font-mono text-[var(--accent)] uppercase tracking-widest">What Happens Next</p>
+                                {[
+                                    { phase: '01', text: 'Aidan personally reviews your current site and local market competition.' },
+                                    { phase: '02', text: 'We schedule a 15-minute Strategy Call to see if our infrastructure fits your sales flow.' },
+                                    { phase: '03', text: "We either move to a formal Audit, or point you to someone else if we aren't a fit. No pressure." },
+                                ].map((step) => (
+                                    <div key={step.phase} className="flex gap-3 items-start">
+                                        <span className="text-[14px] font-bold text-[var(--accent)]/20 font-mono shrink-0 mt-0.5">{step.phase}</span>
+                                        <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{step.text}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     ) : (
                         <div className="flex flex-col gap-6">

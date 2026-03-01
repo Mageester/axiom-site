@@ -177,6 +177,46 @@ const ServicesPage: React.FC = () => {
                 </div>
             </section>
 
+            {/* ROI Math Block */}
+            <section className="max-w-[1100px] mx-auto mt-10">
+                <div className="bg-[#111214] border border-[#1e2028] rounded-lg p-10 md:p-12">
+                    <div className="text-center mb-10">
+                        <div className="flex items-center justify-center gap-3 mb-4">
+                            <div className="h-[1px] w-8 bg-red-500/30"></div>
+                            <p className="text-[11px] font-mono text-red-400/70 uppercase tracking-[0.2em]">The Math</p>
+                            <div className="h-[1px] w-8 bg-red-500/30"></div>
+                        </div>
+                        <h2 className="text-[28px] sm:text-[34px] font-semibold text-white tracking-tight">
+                            The Cost of Doing Nothing.
+                        </h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                        <div className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-6 flex flex-col gap-2">
+                            <p className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">Avg. HVAC Lead Value</p>
+                            <p className="text-[28px] font-bold text-white tracking-tight">$1,500 – $15,000</p>
+                            <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">Emergency installs, full system replacements, and commercial maintenance contracts.</p>
+                        </div>
+                        <div className="bg-[#0e0f12] border border-red-500/15 rounded-md p-6 flex flex-col gap-2">
+                            <p className="text-[10px] font-mono uppercase tracking-widest text-red-400/60">Competitor Site</p>
+                            <p className="text-[28px] font-bold text-red-400/80 tracking-tight">3.5s Load Time</p>
+                            <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">40% bounce rate. Nearly half your potential customers leave before the page finishes loading.</p>
+                        </div>
+                        <div className="bg-[#0e0f12] border border-emerald-500/15 rounded-md p-6 flex flex-col gap-2">
+                            <p className="text-[10px] font-mono uppercase tracking-widest text-emerald-400/60">Axiom Site</p>
+                            <p className="text-[28px] font-bold text-emerald-400 tracking-tight">0.4s Load Time</p>
+                            <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">Captures the leads they lose. Every fraction of a second is revenue you're either earning or giving away.</p>
+                        </div>
+                    </div>
+
+                    <div className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-6 text-center">
+                        <p className="text-[16px] text-white leading-relaxed font-medium">
+                            A single captured emergency install during peak season pays for your <span className="text-emerald-400">entire year</span> of infrastructure.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             {/* FAQ Section */}
             <section className="max-w-[1100px] mx-auto mt-10">
                 <div className="bg-[#111214] border border-[#1e2028] rounded-lg p-10 md:p-12">

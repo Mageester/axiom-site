@@ -181,6 +181,52 @@ const Home: React.FC = () => {
                         </div>
                     </div>
                 </section>
+
+                {/* ──── THE AXIOM STORY ──── */}
+                <section className="max-w-[1100px] mx-auto mt-10">
+                    <div className="bg-[#111214] border border-[#1e2028] rounded-lg p-10 md:p-14">
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="h-[1px] w-8 bg-[var(--accent)]/50"></div>
+                            <p className="text-[11px] font-mono text-[var(--accent)] uppercase tracking-[0.2em]">The Axiom Story</p>
+                        </div>
+
+                        <div className="flex flex-col lg:flex-row gap-10">
+                            <div className="flex-1 flex flex-col gap-5">
+                                <h2 className="text-[28px] sm:text-[34px] font-semibold text-white tracking-tight leading-snug">
+                                    This wasn't built in a boardroom.
+                                </h2>
+                                <div className="flex flex-col gap-4 text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                                    <p>
+                                        Axiom was built because I saw $10M roofing and HVAC firms losing six figures every year to slow sites and "marketing" agencies that don't understand the pressure of a heatwave.
+                                    </p>
+                                    <p>
+                                        These agencies sell logos and colour palettes. They don't understand that when a storm rolls through at 2&nbsp;AM and every homeowner in the county is searching for emergency repair, your site needs to be the one that loads — not the one that crashes.
+                                    </p>
+                                    <p>
+                                        I'm an engineer, not a designer. I build systems that capture revenue under pressure. That's why Axiom exists — to give serious contractors the same calibre of web infrastructure that Fortune 500 companies take for granted.
+                                    </p>
+                                </div>
+                                <p className="text-[12px] font-mono text-[var(--text-secondary)]/60 uppercase tracking-widest mt-2">
+                                    — Aidan · Founder, Axiom Infrastructure
+                                </p>
+                            </div>
+
+                            <div className="lg:w-[320px] shrink-0 flex flex-col gap-4">
+                                {[
+                                    { label: 'Approach', value: 'Engineering-First' },
+                                    { label: 'Clients', value: 'Service Businesses' },
+                                    { label: 'Base', value: 'Kitchener, Ontario' },
+                                    { label: 'Partners / Month', value: '4 Maximum' },
+                                ].map((stat) => (
+                                    <div key={stat.label} className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-4 flex flex-col gap-1">
+                                        <p className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">{stat.label}</p>
+                                        <p className="text-[18px] font-semibold text-white tracking-tight">{stat.value}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </>
     );
