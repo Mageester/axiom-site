@@ -2,135 +2,74 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
-const investmentTiers = [
+const tiers = [
     {
-        title: 'The Foundation',
+        name: 'The Foundation',
         price: '$2,500',
-        fit: 'For operators who need a clean, fast digital front door now.',
-        outcome: 'Launch a conversion-ready single-page asset that immediately upgrades market perception.'
+        desc: 'Single-page authority asset for businesses that need a serious digital front door now.'
     },
     {
-        title: 'The Engine',
+        name: 'The Engine',
         price: '$5,000',
-        fit: 'For teams ready to scale lead flow and sales consistency.',
-        outcome: 'Deploy a multi-page system that qualifies traffic, builds trust, and improves close quality.'
+        desc: 'Multi-page infrastructure that improves lead quality and creates a repeatable conversion path.'
     },
     {
-        title: 'The Authority',
+        name: 'The Authority',
         price: '$7,500+',
-        fit: 'For companies focused on local category leadership.',
-        outcome: 'Capture market share with enterprise infrastructure, zero-friction onboarding, and premium positioning.'
-    }
-];
-
-const authorityRoi = [
-    {
-        title: 'Total Market Capture',
-        desc: 'Own the premium position in your service area with a brand experience built to outperform templates.'
-    },
-    {
-        title: 'Automated Lead Qualification',
-        desc: 'Filter low-intent traffic and route high-intent buyers into your pipeline with less manual triage.'
-    },
-    {
-        title: 'Zero-Friction Customer Onboarding',
-        desc: 'Make it easy for serious buyers to request service, submit details, and move to booked conversations.'
-    },
-    {
-        title: 'Storm-Ready Reliability',
-        desc: 'Enterprise edge architecture protects uptime during seasonal spikes when your best jobs typically appear.'
+        desc: 'Full bespoke infrastructure for market dominance, premium trust, and zero-friction onboarding.'
     }
 ];
 
 const ServicesPage: React.FC = () => {
     return (
-        <div className="pt-36 pb-24">
+        <div className="pt-36 pb-24 px-6">
             <SEO
                 title="Infrastructure Investments | Axiom"
-                description="Foundation, Engine, and Authority investment tiers for service businesses that need speed, trust, and higher-paying job flow."
+                description="Explore Foundation, Engine, and Authority infrastructure investments for local service businesses."
             />
 
-            <section className="px-6 pb-20 border-b border-subtle">
-                <div className="max-w-[900px] mx-auto text-center reveal">
-                    <p className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-5">Infrastructure Investments</p>
-                    <h1 className="text-[40px] sm:text-[56px] lg:text-[68px] font-semibold tracking-[-0.02em] mb-7 leading-[1.04] text-primary">
-                        This is a revenue asset, not a web design package.
-                    </h1>
-                    <p className="text-[17px] text-secondary max-w-[700px] mx-auto leading-relaxed font-light mb-8">
-                        Each tier is engineered to increase lead quality, strengthen trust, and help you win higher-value jobs in competitive local markets.
+            <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 mb-10">
+                <p className="text-[11px] font-mono text-accent/80 uppercase tracking-widest">Infrastructure Investments</p>
+                <h1 className="text-[40px] sm:text-[52px] font-semibold text-primary tracking-tight leading-[1.06]">
+                    Structured build tiers for serious local operators.
+                </h1>
+                <p className="text-[16px] text-secondary leading-relaxed">
+                    Choose the infrastructure level that matches your growth stage and revenue goals.
+                </p>
+            </section>
+
+            <section className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5">
+                {tiers.map((tier) => (
+                    <article key={tier.name} className="surface-panel bg-zinc-900/50 border-zinc-800 p-8 rounded-sm flex flex-col gap-4">
+                        <p className="text-[10px] font-mono uppercase tracking-widest text-secondary">{tier.price}</p>
+                        <h2 className="text-[24px] font-semibold text-primary tracking-tight">{tier.name}</h2>
+                        <p className="text-[14px] text-secondary leading-relaxed">{tier.desc}</p>
+                    </article>
+                ))}
+            </section>
+
+            <section className="max-w-6xl mx-auto mt-8 surface-panel bg-zinc-900/50 border-zinc-800 p-8 md:p-10 rounded-sm">
+                <div className="max-w-3xl mx-auto text-center flex flex-col gap-4">
+                    <h2 className="text-[30px] sm:text-[38px] font-semibold text-primary tracking-tight">
+                        Authority tier is built for total market capture.
+                    </h2>
+                    <p className="text-[15px] text-secondary leading-relaxed">
+                        Advanced funnel logic, premium UI systems, and edge reliability combine to increase qualified demand and protect revenue during peak season.
                     </p>
+                </div>
+            </section>
+
+            <section className="max-w-3xl mx-auto mt-10 text-center flex flex-col gap-4">
+                <h3 className="text-[30px] font-semibold text-primary tracking-tight">Ready to apply?</h3>
+                <p className="text-[15px] text-secondary leading-relaxed">
+                    Submit your application and we will recommend the right infrastructure tier for your growth targets.
+                </p>
+                <div className="flex justify-center">
                     <Link
                         to="/contact"
-                        className="inline-flex items-center justify-center min-h-[52px] px-9 py-4 bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-widest rounded-sm transition-all duration-300"
+                        className="inline-flex items-center justify-center min-h-[52px] px-8 py-4 bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-widest transition-colors"
                     >
-                        Apply for Strategy Call
-                    </Link>
-                    <p className="text-[11px] font-mono uppercase tracking-widest text-secondary/70 mt-4">
-                        We onboard 4 new partners per month
-                    </p>
-                </div>
-            </section>
-
-            <section className="py-20 px-6 max-w-[1100px] mx-auto w-full reveal">
-                <div className="text-center mb-14">
-                    <h2 className="text-[28px] sm:text-[36px] font-semibold text-primary tracking-tight mb-4">Choose your growth stage.</h2>
-                    <p className="text-[15px] text-secondary max-w-[760px] mx-auto leading-relaxed">
-                        Start where you are, then move up as demand and operating maturity increase.
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    {investmentTiers.map((tier) => (
-                        <article key={tier.title} className="surface-panel p-8 rounded-sm">
-                            <p className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-3">{tier.price}</p>
-                            <h3 className="text-[22px] font-semibold text-primary mb-4">{tier.title}</h3>
-                            <p className="text-[14px] text-secondary leading-relaxed mb-4">{tier.fit}</p>
-                            <p className="text-[14px] text-secondary leading-relaxed">{tier.outcome}</p>
-                        </article>
-                    ))}
-                </div>
-            </section>
-
-            <section className="py-20 px-6 border-y border-subtle bg-[#0a0c0e] reveal">
-                <div className="max-w-[1000px] mx-auto text-center">
-                    <p className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-5">Risk Reversal</p>
-                    <h2 className="text-[28px] sm:text-[36px] font-semibold text-primary tracking-tight mb-4">
-                        Built on enterprise edge networks so your site does not fail when calls surge.
-                    </h2>
-                    <p className="text-[15px] text-secondary max-w-[780px] mx-auto leading-relaxed">
-                        Weather-driven demand is when your website matters most. Authority infrastructure is engineered for that exact pressure.
-                    </p>
-                </div>
-            </section>
-
-            <section className="py-20 px-6 max-w-[1100px] mx-auto w-full reveal">
-                <div className="text-center mb-14">
-                    <p className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-4">Authority ROI</p>
-                    <h2 className="text-[28px] sm:text-[36px] font-semibold text-primary tracking-tight">
-                        What $7,500+ actually does for your bottom line.
-                    </h2>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {authorityRoi.map((item) => (
-                        <article key={item.title} className="surface-panel p-8 rounded-sm">
-                            <h3 className="text-[20px] font-semibold text-primary mb-3">{item.title}</h3>
-                            <p className="text-[14px] text-secondary leading-relaxed">{item.desc}</p>
-                        </article>
-                    ))}
-                </div>
-            </section>
-
-            <section className="py-20 px-6 border-t border-subtle reveal">
-                <div className="max-w-[820px] mx-auto text-center">
-                    <h2 className="text-[30px] font-semibold text-primary tracking-tight mb-4">Ready to apply for your infrastructure audit?</h2>
-                    <p className="text-[15px] text-secondary leading-relaxed mb-8">
-                        We will identify where your current site leaks revenue and recommend the best investment tier for your growth stage.
-                    </p>
-                    <Link
-                        to="/contact"
-                        className="inline-flex items-center justify-center min-h-[52px] px-9 py-4 bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-widest rounded-sm transition-all duration-300"
-                    >
-                        Start Project Application
+                        Book Strategy Call
                     </Link>
                 </div>
             </section>

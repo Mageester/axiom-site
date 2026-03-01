@@ -5,7 +5,7 @@ import { BrandLockup } from './components/BrandLockup';
 
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
-import WorkPage from './pages/WorkPage';
+import ConceptsPage from './pages/Concepts';
 import WorkCaseStudyPage from './pages/WorkCaseStudyPage';
 import PricingPage from './pages/PricingPage';
 import ContactPage from './pages/ContactPage';
@@ -95,6 +95,7 @@ const App: React.FC = () => {
                     <div className="hidden md:flex items-center justify-center gap-8 text-[13px] font-medium text-secondary">
                         <Link to="/" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Home</Link>
                         <Link to="/services" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Infrastructure</Link>
+                        <Link to="/concepts" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Concepts</Link>
                         <Link to="/contact" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Apply</Link>
                     </div>
 
@@ -111,6 +112,7 @@ const App: React.FC = () => {
                     <div className="max-w-[1400px] mx-auto px-6 py-2 flex items-center justify-center gap-6 text-[12px] font-medium text-secondary">
                         <Link to="/" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Home</Link>
                         <Link to="/services" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Infrastructure</Link>
+                        <Link to="/concepts" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Concepts</Link>
                         <Link to="/contact" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Apply</Link>
                     </div>
                 </div>
@@ -131,7 +133,8 @@ const App: React.FC = () => {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/services" element={<ServicesPage />} />
-                        <Route path="/work" element={<WorkPage />} />
+                        <Route path="/concepts" element={<ConceptsPage />} />
+                        <Route path="/work" element={<Navigate to="/concepts" replace />} />
                         <Route path="/work/:slug" element={<WorkCaseStudyPage />} />
                         <Route path="/pricing" element={<PricingPage />} />
                         <Route path="/contact" element={<ContactPage />} />
