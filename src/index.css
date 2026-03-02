@@ -30,11 +30,11 @@
   h4,
   h5,
   h6 {
-    @apply font-grotesk tracking-tight text-[var(--text-primary)] text-left;
+    @apply font-grotesk tracking-tight text-[#F5F5F5];
   }
 
   p {
-    @apply leading-relaxed max-w-3xl text-left;
+    @apply leading-[1.75];
   }
 
   *:focus-visible {
@@ -132,6 +132,28 @@
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Editorial prose for long-form reading */
+  .prose-editorial {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 42rem;
+  }
+
+  .prose-editorial p {
+    margin-bottom: 1.5em;
+  }
+
+  .prose-editorial p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Section divider for visual pacing */
+  .section-rule {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.06), transparent);
   }
 }
 

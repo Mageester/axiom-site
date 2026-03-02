@@ -39,13 +39,13 @@ const Manifesto: React.FC = () => {
 
             {/* The Problem */}
             <article className="max-w-3xl mx-auto flex flex-col gap-10">
-                <section className="bg-[#111214] border border-[#1e2028] rounded-lg p-8 md:p-12 flex flex-col gap-6">
+                <section className="flex flex-col gap-6">
                     <div className="flex items-center gap-3">
                         <div className="h-[1px] w-8 bg-[var(--accent)]/50"></div>
                         <p className="text-[11px] font-mono text-[var(--accent)] uppercase tracking-[0.2em]">The Problem</p>
                     </div>
 
-                    <div className="flex flex-col gap-5 text-[16px] text-[var(--text-secondary)] leading-[1.7]">
+                    <div className="prose-editorial">
                         <p>
                             Every contractor knows the feeling. It's July. The first real heatwave hits. Every phone in town is ringing. Homeowners are searching "AC repair near me" at 2 AM.
                         </p>
@@ -57,6 +57,8 @@ const Manifesto: React.FC = () => {
                         </p>
                     </div>
                 </section>
+
+                <div className="section-rule"></div>
 
                 {/* The Interactive Math */}
                 <section className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 md:p-12 flex flex-col gap-6">
@@ -115,14 +117,16 @@ const Manifesto: React.FC = () => {
                     </div>
                 </section>
 
+                <div className="section-rule"></div>
+
                 {/* The Fix */}
-                <section className="bg-[#111214] border border-[#1e2028] rounded-lg p-8 md:p-12 flex flex-col gap-6">
+                <section className="flex flex-col gap-6">
                     <div className="flex items-center gap-3">
                         <div className="h-[1px] w-8 bg-emerald-500/40"></div>
                         <p className="text-[11px] font-mono text-emerald-400/70 uppercase tracking-[0.2em]">The Axiom Fix</p>
                     </div>
 
-                    <div className="flex flex-col gap-5 text-[16px] text-[var(--text-secondary)] leading-[1.7]">
+                    <div className="prose-editorial">
                         <p>
                             Axiom deploys your site on the same global edge network used by Shopify, Discord, and Cloudflare itself. Your pages are served from 300+ data centres worldwide.
                         </p>
@@ -134,19 +138,21 @@ const Manifesto: React.FC = () => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-3 gap-3 sm:gap-4">
                         {[
                             { label: 'Edge Load Time', value: '0.4s', color: 'text-emerald-400' },
                             { label: 'Uptime SLA', value: '99.99%', color: 'text-emerald-400' },
                             { label: 'Global Edge Nodes', value: '300+', color: 'text-emerald-400' },
                         ].map((stat) => (
-                            <div key={stat.label} className="bg-[#0e0f12] border border-emerald-500/15 rounded-md p-5 flex flex-col gap-1 text-center">
-                                <p className={`text-[28px] font-bold tracking-tight ${stat.color}`}>{stat.value}</p>
-                                <p className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">{stat.label}</p>
+                            <div key={stat.label} className="bg-[#0e0f12] border border-emerald-500/15 rounded-md p-4 sm:p-5 flex flex-col gap-1 text-center">
+                                <p className={`text-[22px] sm:text-[28px] font-bold tracking-tight ${stat.color}`}>{stat.value}</p>
+                                <p className="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">{stat.label}</p>
                             </div>
                         ))}
                     </div>
                 </section>
+
+                <div className="section-rule"></div>
 
                 {/* CTA */}
                 <section className="bg-[#111214] border border-[var(--accent)]/20 rounded-lg p-10 md:p-14 text-center flex flex-col items-center gap-5">
