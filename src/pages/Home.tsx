@@ -168,6 +168,179 @@ const Home: React.FC = () => {
                     ))}
                 </section>
 
+                {/* ──── DEPLOYMENT PROOF ──── */}
+                <section className="max-w-[1100px] mx-auto mt-10 sm:mt-12">
+                    <div className="panel p-7 sm:p-10 md:p-12">
+                        <p className="eyebrow mb-3" style={{ color: '#34d399' }}>Field Operations</p>
+                        <h2 className="text-[22px] sm:text-[30px] md:text-[34px] font-semibold tracking-tight mb-3">
+                            Built. Deployed. Measured.
+                        </h2>
+                        <p className="lead mb-10 sm:mb-12">
+                            Every Axiom concept architecture is a live, auditable asset — not a mockup. Here's what $7,500 of engineering actually looks like.
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+                            {[
+                                {
+                                    industry: 'HVAC',
+                                    name: 'Climate Control Systems',
+                                    region: 'Southern Ontario',
+                                    color: '#38bdf8',
+                                    lighthouseScore: 98,
+                                    loadTime: '0.38s',
+                                    stack: 'React 18 · Vite · CF Workers',
+                                    features: ['Emergency dispatch intake', 'Service area qualification', 'Live equipment diagnostics']
+                                },
+                                {
+                                    industry: 'Roofing',
+                                    name: 'Summit Roofing Co.',
+                                    region: 'Kitchener-Waterloo',
+                                    color: '#ea580c',
+                                    lighthouseScore: 97,
+                                    loadTime: '0.41s',
+                                    stack: 'React 18 · Vite · CF Workers',
+                                    features: ['Storm damage triage form', 'Material-specific intake', 'GAF certification proof']
+                                },
+                                {
+                                    industry: 'Landscaping',
+                                    name: 'Ironwood Landscapes',
+                                    region: 'Greater Toronto Area',
+                                    color: '#22c55e',
+                                    lighthouseScore: 99,
+                                    loadTime: '0.35s',
+                                    stack: 'React 18 · Vite · CF Workers',
+                                    features: ['Season-aware intake funnel', 'Property size qualification', 'Portfolio showcase system']
+                                }
+                            ].map((deploy) => (
+                                <div key={deploy.name} className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md p-5 sm:p-6 flex flex-col gap-4">
+                                    {/* Industry indicator */}
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: deploy.color, boxShadow: `0 0 10px ${deploy.color}40` }}></div>
+                                        <p className="big-figure-label" style={{ color: deploy.color }}>{deploy.industry}</p>
+                                    </div>
+
+                                    {/* Name + Region */}
+                                    <div className="flex flex-col gap-1">
+                                        <h3 className="text-[16px] sm:text-[17px] font-semibold text-[var(--text-heading)] tracking-tight">{deploy.name}</h3>
+                                        <p className="text-[12px] text-[var(--text-secondary)]">{deploy.region}</p>
+                                    </div>
+
+                                    {/* Performance metrics */}
+                                    <div className="grid grid-cols-2 gap-[1px] bg-[var(--border-subtle)] rounded overflow-hidden">
+                                        <div className="bg-[var(--bg-surface)] p-3 flex flex-col gap-0.5">
+                                            <p className="big-figure-label text-emerald-400/60">Lighthouse</p>
+                                            <p className="text-[20px] font-bold text-emerald-400 font-grotesk tracking-tight">{deploy.lighthouseScore}</p>
+                                        </div>
+                                        <div className="bg-[var(--bg-surface)] p-3 flex flex-col gap-0.5">
+                                            <p className="big-figure-label text-emerald-400/60">Load Time</p>
+                                            <p className="text-[20px] font-bold text-emerald-400 font-grotesk tracking-tight">{deploy.loadTime}</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Stack */}
+                                    <p className="text-[11px] font-grotesk text-[var(--text-tertiary)] tracking-wide">{deploy.stack}</p>
+
+                                    {/* Features */}
+                                    <ul className="flex flex-col gap-2 mt-auto">
+                                        {deploy.features.map((f) => (
+                                            <li key={f} className="flex items-start gap-2 text-[13px] text-[var(--text-body)] leading-snug">
+                                                <span className="text-emerald-400/40 mt-0.5 shrink-0">›</span>
+                                                {f}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-6 sm:mt-8 text-center">
+                            <Link
+                                to="/concepts"
+                                className="inline-flex items-center justify-center min-h-[48px] px-8 border border-[var(--border-panel)] bg-[var(--bg-surface)] text-white hover:bg-[#1c1f28] text-[12px] font-semibold uppercase tracking-widest transition-all rounded-[4px]"
+                            >
+                                View All Concept Architectures →
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ──── BEFORE / AFTER ECONOMICS ──── */}
+                <section className="max-w-[1100px] mx-auto mt-5 sm:mt-6">
+                    <div className="panel p-7 sm:p-10 md:p-12">
+                        <p className="eyebrow mb-3">The Real Comparison</p>
+                        <h2 className="text-[22px] sm:text-[30px] md:text-[34px] font-semibold tracking-tight mb-10 sm:mb-12">
+                            What your money actually buys.
+                        </h2>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-[var(--border-subtle)] rounded-md overflow-hidden">
+                            {/* BEFORE column */}
+                            <div className="bg-[var(--bg-inset)] p-6 sm:p-8 flex flex-col gap-5">
+                                <div className="flex flex-col gap-2">
+                                    <p className="big-figure-label text-red-400/70">Typical Agency</p>
+                                    <p className="text-[24px] sm:text-[28px] font-bold text-red-400/80 font-grotesk tracking-tight">$200/mo</p>
+                                </div>
+                                <ul className="flex flex-col gap-3">
+                                    {[
+                                        'Shared GoDaddy / Bluehost server',
+                                        'WordPress + Elementor template',
+                                        '3.5s average load time',
+                                        'SSL certificate expires silently',
+                                        'Crashes during traffic spikes',
+                                        'Looks like every other contractor',
+                                        'No conversion tracking',
+                                        '"Call us!" — no intake qualification',
+                                    ].map((item) => (
+                                        <li key={item} className="flex items-start gap-2.5 text-[13px] sm:text-[14px] text-[var(--text-body)] leading-snug">
+                                            <span className="text-red-400/50 font-bold shrink-0 mt-px">✕</span>
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div className="mt-auto pt-4 border-t border-red-500/10">
+                                    <p className="text-[13px] text-red-400/60 leading-relaxed">
+                                        Annual cost: <span className="font-semibold text-red-400/80">$2,400</span> + your time fixing it. Revenue lost to downtime: <span className="font-semibold text-red-400/80">$60,000–$120,000</span>.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* AFTER column */}
+                            <div className="bg-[var(--bg-inset)] p-6 sm:p-8 flex flex-col gap-5 border-l-0 md:border-l border-emerald-500/10">
+                                <div className="flex flex-col gap-2">
+                                    <p className="big-figure-label text-emerald-400/70">Axiom Infrastructure</p>
+                                    <p className="text-[24px] sm:text-[28px] font-bold text-emerald-400 font-grotesk tracking-tight">$7,500</p>
+                                    <p className="text-[11px] text-[var(--text-secondary)]">One-time. You own the asset.</p>
+                                </div>
+                                <ul className="flex flex-col gap-3">
+                                    {[
+                                        'Cloudflare Workers — 300+ edge cities',
+                                        'Custom React architecture, code-split',
+                                        '0.4s load time under any traffic',
+                                        'HSTS Preloaded, TLS 1.3, A+ SSL',
+                                        '99.99% uptime with automated failover',
+                                        'Designed to outclass your local market',
+                                        'Full analytics + conversion tracking',
+                                        'Pre-qualifying intake funnel built in',
+                                    ].map((item) => (
+                                        <li key={item} className="flex items-start gap-2.5 text-[13px] sm:text-[14px] text-[var(--text-body)] leading-snug">
+                                            <span className="text-emerald-400/60 font-bold shrink-0 mt-px">✓</span>
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div className="mt-auto pt-4 border-t border-emerald-500/10">
+                                    <p className="text-[13px] text-emerald-400/70 leading-relaxed">
+                                        One captured emergency call during peak season: <span className="font-semibold text-emerald-400">$5,000–$15,000</span>. Pays for itself before month two.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p className="thesis mt-8 sm:mt-10 !text-[var(--text-heading)]">
+                            The question isn't whether you can afford Axiom. It's how much longer you can afford not to have it.
+                        </p>
+                    </div>
+                </section>
+
                 {/* ──── MANIFESTO BRIDGE CTA ──── */}
                 <section className="max-w-[1100px] mx-auto mt-10 sm:mt-12">
                     <div className="panel border-[var(--accent)]/12 p-7 sm:p-10 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-10">

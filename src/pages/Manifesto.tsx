@@ -166,6 +166,47 @@ const Manifesto: React.FC = () => {
 
                 <div className="section-rule"></div>
 
+                {/* ── SECTION 3.5: THE EVIDENCE ── */}
+                <section className="my-10 sm:my-14">
+                    <p className="eyebrow mb-5 sm:mb-6">The Evidence</p>
+
+                    <div className="prose-editorial">
+                        <p>
+                            We don't show mockups. Every Axiom concept architecture is a live, measurable deployment on Cloudflare's global edge. Here's what we've built for contractors in HVAC, roofing, and landscaping — purpose-engineered to capture revenue under pressure.
+                        </p>
+                    </div>
+
+                    {/* Deployment metrics */}
+                    <div className="stat-bar grid-cols-3 mt-8">
+                        {[
+                            { label: 'Avg. Lighthouse', value: '98', color: 'text-emerald-400' },
+                            { label: 'Avg. Load Time', value: '0.38s', color: 'text-emerald-400' },
+                            { label: 'Deployments Live', value: '3', color: 'text-[var(--accent)]' },
+                        ].map((stat) => (
+                            <div key={stat.label} className="stat-bar-cell">
+                                <p className={`stat-bar-value text-[22px] sm:text-[28px] ${stat.color}`}>{stat.value}</p>
+                                <p className="stat-bar-label">{stat.label}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Competitive risk — tighten the screw */}
+                    <div className="pull-quote" style={{ borderColor: 'var(--accent)' }}>
+                        <p>While you're reading this, the contractor down the road might be deploying with us. We take 4 partners per month. That's it.</p>
+                    </div>
+
+                    <div className="text-center mt-6">
+                        <Link
+                            to="/concepts"
+                            className="inline-flex items-center justify-center min-h-[44px] px-6 border border-[var(--border-panel)] bg-[var(--bg-surface)] text-white hover:bg-[#1c1f28] text-[11px] font-semibold uppercase tracking-widest transition-all rounded-[4px]"
+                        >
+                            View Live Deployments →
+                        </Link>
+                    </div>
+                </section>
+
+                <div className="section-rule"></div>
+
                 {/* ── SECTION 4: CTA ── */}
                 <section className="inline-cta mt-10 sm:mt-14">
                     <h2 className="text-[24px] sm:text-[32px] md:text-[36px] font-semibold tracking-tight">
