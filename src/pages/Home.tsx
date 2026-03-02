@@ -54,12 +54,12 @@ const Home: React.FC = () => {
                 <section className="max-w-[1100px] mx-auto">
                     <div className="panel p-8 sm:p-10 md:p-16 relative overflow-hidden">
                         {/* Subtle gradient glow */}
-                        <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(255,103,0,0.10)_0%,transparent_70%)] pointer-events-none"></div>
+                        <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(184,115,51,0.08)_0%,transparent_70%)] pointer-events-none"></div>
 
                         <div className="relative z-10 max-w-3xl flex flex-col gap-5 sm:gap-6">
                             <p className="eyebrow">Professional Tier Infrastructure</p>
 
-                            <h1 className="text-[28px] sm:text-[42px] md:text-[50px] font-semibold tracking-tight leading-[1.08]">
+                            <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
                                 Command your market with a revenue‑generating website.
                             </h1>
 
@@ -71,13 +71,13 @@ const Home: React.FC = () => {
                                 <div className="flex flex-col sm:flex-row gap-3">
                                     <Link
                                         to="/manifesto"
-                                        className="inline-flex items-center justify-center min-h-[52px] px-8 border border-[var(--border-panel)] bg-[var(--bg-surface)] text-white hover:bg-[#1c1f28] hover:border-[#3a3d45] text-[12px] font-semibold uppercase tracking-widest transition-all rounded-[4px]"
+                                        className="btn-secondary w-full sm:w-auto"
                                     >
                                         Read the $100K Leak Report
                                     </Link>
                                     <Link
                                         to="/contact"
-                                        className="inline-flex items-center justify-center min-h-[52px] px-8 bg-white text-[#0B0B0C] hover:bg-[#f0f0f0] text-[12px] font-bold uppercase tracking-widest transition-all rounded-[4px] shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+                                        className="btn-primary w-full sm:w-auto"
                                     >
                                         Book Strategy Call
                                     </Link>
@@ -147,7 +147,7 @@ const Home: React.FC = () => {
                     <div className="panel p-8 sm:p-10 md:p-12">
                         <div className="max-w-2xl mx-auto text-center flex flex-col gap-5">
                             <p className="eyebrow-center">Risk Reversal</p>
-                            <h2 className="text-[22px] sm:text-[32px] md:text-[36px] font-semibold tracking-tight">
+                            <h2 className="text-[22px] sm:text-[32px] md:text-[40px] font-semibold tracking-tight">
                                 When storms hit and demand spikes, your site stays up. Period.
                             </h2>
                             <p className="lead text-center mx-auto">
@@ -256,7 +256,7 @@ const Home: React.FC = () => {
                         <div className="mt-6 sm:mt-8 text-center">
                             <Link
                                 to="/concepts"
-                                className="inline-flex items-center justify-center min-h-[48px] px-8 border border-[var(--border-panel)] bg-[var(--bg-surface)] text-white hover:bg-[#1c1f28] text-[12px] font-semibold uppercase tracking-widest transition-all rounded-[4px]"
+                                className="btn-secondary"
                             >
                                 View All Concept Architectures →
                             </Link>
@@ -355,7 +355,7 @@ const Home: React.FC = () => {
                         </div>
                         <Link
                             to="/manifesto"
-                            className="shrink-0 inline-flex items-center justify-center min-h-[52px] px-8 border border-[var(--border-panel)] bg-[var(--bg-surface)] text-white hover:bg-[#1c1f28] hover:border-[#3a3d45] text-[12px] font-semibold uppercase tracking-widest transition-all rounded-[4px] w-full md:w-auto"
+                            className="btn-secondary shrink-0 w-full md:w-auto"
                         >
                             Read the Full Report →
                         </Link>
@@ -387,7 +387,7 @@ const Home: React.FC = () => {
                     <div className="panel p-7 sm:p-10 md:p-12">
                         <div className="text-center flex flex-col gap-4 sm:gap-5 mb-10">
                             <p className="eyebrow-center">Industries</p>
-                            <h2 className="text-[22px] sm:text-[32px] md:text-[36px] font-semibold tracking-tight">
+                            <h2 className="text-[22px] sm:text-[32px] md:text-[40px] font-semibold tracking-tight">
                                 Engineered for service-based industries.
                             </h2>
                         </div>
@@ -467,7 +467,7 @@ const Home: React.FC = () => {
                         </p>
                         <Link
                             to="/contact"
-                            className="inline-flex items-center justify-center min-h-[52px] px-10 bg-white text-[#0B0B0C] hover:bg-[#f0f0f0] text-[12px] font-bold uppercase tracking-widest transition-all rounded-[4px] shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+                            className="btn-primary"
                         >
                             Book Strategy Call
                         </Link>

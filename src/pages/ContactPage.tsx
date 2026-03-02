@@ -144,7 +144,7 @@ const ContactPage: React.FC = () => {
 
             <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 mb-8">
                 <p className="eyebrow-center">Project Application</p>
-                <h1 className="text-[28px] sm:text-[42px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
+                <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
                     Strategy Call + Infrastructure Audit
                 </h1>
                 <p className="lead text-center mx-auto">
@@ -207,29 +207,29 @@ const ContactPage: React.FC = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <div className="flex flex-col gap-2">
                                     <label className="text-[12px] font-mono text-secondary uppercase tracking-widest">Operator Name</label>
-                                    <input type="text" required minLength={2} value={form.name} onChange={(e) => setField('name', e.target.value)} className="bg-[#0b0b0c] border border-zinc-700 text-primary text-[15px] p-4 min-h-[48px] rounded-sm outline-none focus-visible:border-white/30" />
+                                    <input type="text" required minLength={2} value={form.name} onChange={(e) => setField('name', e.target.value)} className="input-field" />
                                     {errors.name && <p className="text-[12px] text-red-400">{errors.name}</p>}
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label className="text-[12px] font-mono text-secondary uppercase tracking-widest">Best Email</label>
-                                    <input type="email" required value={form.email} onChange={(e) => setField('email', e.target.value)} className="bg-[#0b0b0c] border border-zinc-700 text-primary text-[15px] p-4 min-h-[48px] rounded-sm outline-none focus-visible:border-white/30" />
+                                    <input type="email" required value={form.email} onChange={(e) => setField('email', e.target.value)} className="input-field" />
                                     {errors.email && <p className="text-[12px] text-red-400">{errors.email}</p>}
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label className="text-[12px] font-mono text-secondary uppercase tracking-widest">Business Name</label>
-                                    <input type="text" required minLength={2} value={form.business_name} onChange={(e) => setField('business_name', e.target.value)} className="bg-[#0b0b0c] border border-zinc-700 text-primary text-[15px] p-4 min-h-[48px] rounded-sm outline-none focus-visible:border-white/30" />
+                                    <input type="text" required minLength={2} value={form.business_name} onChange={(e) => setField('business_name', e.target.value)} className="input-field" />
                                     {errors.business_name && <p className="text-[12px] text-red-400">{errors.business_name}</p>}
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label className="text-[12px] font-mono text-secondary uppercase tracking-widest">Phone</label>
-                                    <input type="tel" value={form.phone} onChange={(e) => setField('phone', e.target.value)} className="bg-[#0b0b0c] border border-zinc-700 text-primary text-[15px] p-4 min-h-[48px] rounded-sm outline-none focus-visible:border-white/30" />
+                                    <input type="tel" value={form.phone} onChange={(e) => setField('phone', e.target.value)} className="input-field" />
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <label className="text-[12px] font-mono text-secondary uppercase tracking-widest">Current Website</label>
-                                <input type="url" placeholder="https://" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className="bg-[#0b0b0c] border border-zinc-700 text-primary text-[15px] p-4 min-h-[48px] rounded-sm outline-none focus-visible:border-white/30" />
+                                <input type="url" placeholder="https://" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className="input-field" />
                             </div>
-                            <button type="button" onClick={handleNextStep} className="min-h-[52px] w-full bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-widest rounded-[4px]">
+                            <button type="button" onClick={handleNextStep} className="btn-primary w-full">
                                 See If You Qualify (2‑Minute Survey)
                             </button>
                             <p className="text-[11px] font-mono text-center text-[var(--accent)] uppercase tracking-widest">Only 2 of 4 Partner Slots Remaining for This Month.</p>
@@ -253,7 +253,7 @@ const ContactPage: React.FC = () => {
                         <div className="flex flex-col gap-6">
                             <div className="flex flex-col gap-2">
                                 <label className="text-[12px] font-mono text-secondary uppercase tracking-widest">Preferred Investment Tier</label>
-                                <select value={form.project_scale} onChange={(e) => setField('project_scale', e.target.value)} className="bg-[#0b0b0c] border border-zinc-700 text-primary text-[15px] p-4 min-h-[48px] rounded-sm outline-none focus-visible:border-white/30">
+                                <select value={form.project_scale} onChange={(e) => setField('project_scale', e.target.value)} className="input-field">
                                     <option value="" disabled>Select your investment tier...</option>
                                     {SCALE_OPTIONS.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                                 </select>
@@ -266,7 +266,7 @@ const ContactPage: React.FC = () => {
                                     {PAIN_POINTS_OPTIONS.map(point => {
                                         const selected = form.pain_points.includes(point);
                                         return (
-                                            <button key={point} type="button" onClick={() => togglePainPoint(point)} className={`min-h-[48px] p-3 text-left text-[14px] border rounded-sm ${selected ? 'bg-white/10 border-white/30 text-primary' : 'bg-[#0b0b0c] border-zinc-700 text-secondary hover:border-zinc-500'}`}>
+                                            <button key={point} type="button" onClick={() => togglePainPoint(point)} className={`min-h-[48px] p-3 text-left text-[14px] rounded-sm transition-colors ${selected ? 'bg-[var(--accent)]/10 border border-[var(--accent)]/30 text-[var(--text-heading)]' : 'bg-[var(--bg-main)] border border-[var(--border-panel)] text-[var(--text-secondary)] hover:border-[var(--accent)]/30'}`}>
                                                 {point}
                                             </button>
                                         );
@@ -276,15 +276,15 @@ const ContactPage: React.FC = () => {
 
                             <div className="flex flex-col gap-2">
                                 <label className="text-[12px] font-mono text-secondary uppercase tracking-widest">Goals and Constraints</label>
-                                <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="What outcome are you targeting in the next 6-12 months?" className="bg-[#0b0b0c] border border-zinc-700 text-primary text-[15px] p-4 min-h-[48px] rounded-sm outline-none resize-none focus-visible:border-white/30"></textarea>
+                                <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="What outcome are you targeting in the next 6-12 months?" className="input-field resize-none"></textarea>
                                 {errors.details && <p className="text-[12px] text-red-400">{errors.details}</p>}
                             </div>
 
                             <div className="flex gap-4">
-                                <button type="button" onClick={() => setStep(1)} className="min-h-[52px] px-6 border border-zinc-700 hover:border-zinc-500 text-[12px] font-bold uppercase tracking-widest text-primary">
+                                <button type="button" onClick={() => setStep(1)} className="btn-secondary">
                                     Back
                                 </button>
-                                <button type="submit" disabled={status === 'loading'} className="min-h-[52px] flex-1 bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-widest disabled:opacity-50">
+                                <button type="submit" disabled={status === 'loading'} className="btn-primary flex-1">
                                     {status === 'loading' ? 'Submitting...' : 'Submit Application'}
                                 </button>
                             </div>

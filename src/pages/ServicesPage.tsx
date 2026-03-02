@@ -74,7 +74,7 @@ const ServicesPage: React.FC = () => {
             {/* Header */}
             <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-8">
                 <p className="eyebrow-center">Infrastructure Investments</p>
-                <h1 className="text-[28px] sm:text-[42px] md:text-[50px] font-semibold tracking-tight leading-[1.08]">
+                <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
                     Structured build tiers for serious local operators.
                 </h1>
                 <p className="lead text-center mx-auto">
@@ -151,7 +151,7 @@ const ServicesPage: React.FC = () => {
                 <div className="panel p-8 sm:p-10 md:p-12">
                     <div className="text-center mb-10">
                         <p className="eyebrow-center mb-4">Our Process</p>
-                        <h2 className="text-[24px] sm:text-[30px] md:text-[34px] font-semibold tracking-tight">
+                        <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
                             The Path to Professional: Our Engineering Process.
                         </h2>
                     </div>
@@ -193,7 +193,7 @@ const ServicesPage: React.FC = () => {
                 <div className="panel p-8 sm:p-10 md:p-12">
                     <div className="text-center mb-10">
                         <p className="eyebrow-center mb-4" style={{ color: '#ef4444' }}>The Math</p>
-                        <h2 className="text-[24px] sm:text-[30px] md:text-[34px] font-semibold tracking-tight">
+                        <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
                             The Cost of Doing Nothing.
                         </h2>
                     </div>
@@ -229,7 +229,7 @@ const ServicesPage: React.FC = () => {
                 <div className="panel p-8 sm:p-10 md:p-12">
                     <div className="text-center mb-8">
                         <p className="eyebrow-center mb-4">Common Questions</p>
-                        <h2 className="text-[24px] sm:text-[30px] md:text-[34px] font-semibold tracking-tight">
+                        <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
                             Before you apply.
                         </h2>
                     </div>
@@ -256,7 +256,7 @@ const ServicesPage: React.FC = () => {
                     <div className="text-center mt-8">
                         <Link
                             to="/contact"
-                            className="inline-flex items-center justify-center min-h-[52px] px-10 bg-white text-[#0B0B0C] hover:bg-[#f0f0f0] text-[12px] font-bold uppercase tracking-widest transition-all rounded-[4px] shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+                            className="btn-primary"
                         >
                             Book Strategy Call
                         </Link>

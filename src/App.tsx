@@ -84,7 +84,7 @@ const App: React.FC = () => {
             <ScrollToTop />
             <BackgroundAtmosphere />
 
-            <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ease-out ${isScrolled ? 'bg-[#060708] border-b border-white/5 shadow-sm shadow-black/20' : 'bg-[#060708]/90 border-b border-white/5'}`}>
+            <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ease-out ${isScrolled ? 'bg-[var(--bg-main)] border-b border-[var(--border-panel)] shadow-sm shadow-black/20' : 'bg-[var(--bg-main)]/90 border-b border-[var(--border-panel)]'}`}>
                 <div className="max-w-[1400px] mx-auto px-6 h-20 grid grid-cols-[1fr_auto] md:grid-cols-3 items-center gap-6">
                     <Link to="/" className="flex items-center gap-3 group focus-visible:ring-offset-background min-h-[48px]">
                         <BrandLockup
@@ -103,13 +103,13 @@ const App: React.FC = () => {
                     <Link
                         to="/contact"
                         aria-label="Apply for strategy call"
-                        className="justify-self-end inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-white text-black hover:bg-[#e2e2e2] text-[10px] font-bold uppercase tracking-[0.08em] border border-transparent transition-all duration-300 rounded-[2px]"
+                        className="justify-self-end btn-primary !min-h-[44px] !px-6 !text-[10px]"
                     >
                         Book a Strategy Call
                     </Link>
                 </div>
 
-                <div className="md:hidden border-t border-white/5">
+                <div className="md:hidden border-t border-[var(--border-panel)]">
                     <div className="max-w-[1400px] mx-auto px-6 py-2 flex items-center justify-center gap-6 text-[12px] font-medium text-secondary">
                         <Link to="/" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Home</Link>
                         <Link to="/services" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Infrastructure</Link>
@@ -118,7 +118,7 @@ const App: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="border-t border-white/5 bg-[#080a0c]/95">
+                <div className="border-t border-[var(--border-panel)] bg-[var(--bg-main)]/95">
                     <div className="max-w-[1400px] mx-auto px-6 py-2.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
                         {globalTrustSignals.map((signal) => (
                             <span key={signal} className="text-[10px] font-mono uppercase tracking-widest text-secondary/90">
@@ -131,7 +131,7 @@ const App: React.FC = () => {
 
             {/* Trust Badge Strip */}
             <div className="fixed top-0 w-full z-40 pointer-events-none" style={{ marginTop: 'calc(5rem + 1px)' }}>
-                <div className="bg-[#0a0b0d]/95 backdrop-blur-sm border-b border-[#1e2028]">
+                <div className="bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--border-panel)]">
                     <div className="max-w-[1400px] mx-auto px-6 py-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 pointer-events-auto">
                         {[
                             { badge: 'Cloudflare Enterprise Network', tip: 'Deployed across 300+ edge cities worldwide' },
@@ -180,7 +180,7 @@ const App: React.FC = () => {
                 </Suspense>
             </main>
 
-            <footer className="bg-[#0B0B0C] pt-12 pb-28 md:pb-12 px-6 border-t border-[#1e2028]">
+            <footer className="bg-[var(--bg-main)] pt-12 pb-28 md:pb-12 px-6 border-t border-[var(--border-panel)]">
                 <div className="max-w-[1100px] mx-auto">
                     {/* Brand + Navigation */}
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
@@ -197,7 +197,7 @@ const App: React.FC = () => {
                     </div>
 
                     {/* Brand Statement */}
-                    <div className="mt-6 pt-6 border-t border-[#1e2028] flex flex-col gap-3 items-center">
+                    <div className="mt-6 pt-6 border-t border-[var(--border-panel)] flex flex-col gap-3 items-center">
                         <p className="text-[12px] text-[var(--text-secondary)]/40 leading-relaxed text-center max-w-2xl mx-auto">
                             Axiom Infrastructure is a performance-first engineering firm. We do not use templates, DIY builders, or shared hosting.
                         </p>
@@ -209,7 +209,7 @@ const App: React.FC = () => {
                     </div>
 
                     {/* Copyright + Status */}
-                    <div className="mt-6 pt-6 border-t border-[#1e2028] flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="mt-6 pt-6 border-t border-[var(--border-panel)] flex flex-col sm:flex-row items-center justify-between gap-4">
                         <p className="text-[11px] font-mono text-[var(--text-secondary)]/50 uppercase tracking-widest">
                             © {new Date().getFullYear()} Axiom Infrastructure
                         </p>

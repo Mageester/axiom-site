@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
 const demos = [
@@ -44,62 +45,58 @@ const demos = [
 
 const ConceptsPage: React.FC = () => {
     return (
-        <div className="pt-36 pb-24 px-6">
+        <div className="pt-32 sm:pt-36 pb-24 px-5 sm:px-6">
             <SEO
                 title="Concepts | Axiom Infrastructure"
                 description="Explore Axiom Professional demo concepts for HVAC, roofing, and landscaping businesses."
             />
 
             {/* Header */}
-            <section className="max-w-3xl mx-auto text-center flex flex-col gap-5 mb-14">
-                <div className="flex items-center justify-center gap-3">
-                    <div className="h-[1px] w-8 bg-[var(--accent)]/40"></div>
-                    <p className="text-[11px] font-mono text-[var(--accent)] uppercase tracking-[0.2em]">Professional Concepts</p>
-                    <div className="h-[1px] w-8 bg-[var(--accent)]/40"></div>
-                </div>
-                <h1 className="text-[38px] sm:text-[50px] font-semibold text-white tracking-tight leading-[1.06]">
+            <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-14">
+                <p className="eyebrow-center">Professional Concepts</p>
+                <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
                     Real sites built for real contractors. Not templates.
                 </h1>
-                <p className="text-[16px] text-[var(--text-secondary)] leading-relaxed max-w-xl mx-auto">
-                    Each concept is engineered from scratch for a specific industry. Different layouts, different funnels, different conversion strategies. Because roofers and HVAC techs don't sell the same way.
+                <p className="lead text-center mx-auto">
+                    Each concept is engineered from scratch for a specific industry. Different layouts, different funnels, different conversion strategies.
                 </p>
             </section>
 
             {/* Demo Cards */}
-            <section className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <section className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4">
                 {demos.map((demo) => (
                     <article
                         key={demo.title}
-                        className="bg-[#111214] border border-[#1e2028] rounded-lg flex flex-col overflow-hidden group hover:border-[#2a2d38] transition-all"
+                        className="panel flex flex-col overflow-hidden group hover:border-[#2a2a2a] transition-colors"
                     >
                         {/* Accent top bar */}
-                        <div className="h-1 w-full" style={{ backgroundColor: demo.accent }}></div>
+                        <div className="h-[3px] w-full" style={{ backgroundColor: demo.accent }}></div>
 
-                        <div className="p-8 flex flex-col gap-5 flex-1">
+                        <div className="p-6 sm:p-8 flex flex-col gap-5 flex-1">
                             {/* Title block */}
                             <div className="flex flex-col gap-2">
-                                <p className="text-[10px] font-mono uppercase tracking-widest" style={{ color: demo.accent }}>
+                                <p className="big-figure-label" style={{ color: demo.accent }}>
                                     {demo.subtitle}
                                 </p>
-                                <h2 className="text-[24px] font-semibold text-white tracking-tight">{demo.title}</h2>
+                                <h2 className="text-[22px] sm:text-[24px] font-semibold tracking-tight">{demo.title}</h2>
                             </div>
 
-                            <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">{demo.desc}</p>
+                            <p className="text-[14px] text-[var(--text-body)] leading-[1.75]">{demo.desc}</p>
 
                             {/* Problem → Solution */}
-                            <div className="bg-[#0e0f12] border border-[#1a1d25] rounded-md overflow-hidden">
-                                <div className="p-4 flex gap-3 items-start border-b border-[#1a1d25]">
+                            <div className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md overflow-hidden">
+                                <div className="p-4 flex gap-3 items-start border-b border-[var(--border-panel)]">
                                     <div className="w-1 self-stretch rounded-full shrink-0 bg-red-500/30"></div>
                                     <div>
-                                        <p className="text-[10px] font-mono uppercase tracking-widest text-red-400/70 mb-1">Problem</p>
-                                        <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{demo.problem}</p>
+                                        <p className="big-figure-label text-red-400/70 mb-1">Problem</p>
+                                        <p className="text-[13px] text-[var(--text-body)] leading-[1.7]">{demo.problem}</p>
                                     </div>
                                 </div>
                                 <div className="p-4 flex gap-3 items-start">
                                     <div className="w-1 self-stretch rounded-full shrink-0 bg-emerald-500/40"></div>
                                     <div>
-                                        <p className="text-[10px] font-mono uppercase tracking-widest text-emerald-400/70 mb-1">Solution</p>
-                                        <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{demo.solution}</p>
+                                        <p className="big-figure-label text-emerald-400/70 mb-1">Solution</p>
+                                        <p className="text-[13px] text-[var(--text-body)] leading-[1.7]">{demo.solution}</p>
                                     </div>
                                 </div>
                             </div>
@@ -116,12 +113,12 @@ const ConceptsPage: React.FC = () => {
 
                             {/* Blueprint Deep-Dive (HVAC only) */}
                             {(demo as any).blueprint && (
-                                <div className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-5 flex flex-col gap-3">
-                                    <p className="text-[10px] font-mono uppercase tracking-widest" style={{ color: demo.accent }}>Project Deep-Dive</p>
+                                <div className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md p-5 flex flex-col gap-3">
+                                    <p className="big-figure-label" style={{ color: demo.accent }}>Project Deep-Dive</p>
                                     {(demo as any).blueprint.map((item: { label: string; text: string }) => (
                                         <div key={item.label} className="flex gap-3 items-start">
-                                            <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-secondary)] shrink-0 w-16 mt-0.5">{item.label}</span>
-                                            <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{item.text}</p>
+                                            <span className="big-figure-label text-[var(--text-secondary)] shrink-0 w-16 mt-0.5">{item.label}</span>
+                                            <p className="text-[13px] text-[var(--text-body)] leading-[1.7]">{item.text}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -132,7 +129,7 @@ const ConceptsPage: React.FC = () => {
                                 href={demo.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="mt-auto inline-flex items-center justify-center min-h-[48px] px-6 bg-white text-[#0B0B0C] hover:bg-[#f0f0f0] text-[11px] font-bold uppercase tracking-widest transition-all rounded-[4px]"
+                                className="btn-primary mt-auto"
                             >
                                 View Live Demo →
                             </a>
@@ -143,19 +140,16 @@ const ConceptsPage: React.FC = () => {
 
             {/* Bottom CTA */}
             <section className="max-w-[1100px] mx-auto mt-12">
-                <div className="bg-[#111214] border border-[#1e2028] rounded-lg p-10 md:p-12 text-center">
-                    <h2 className="text-[28px] sm:text-[34px] font-semibold text-white tracking-tight mb-4">
+                <div className="inline-cta !m-0">
+                    <h2 className="text-[24px] sm:text-[32px] md:text-[40px] font-semibold tracking-tight">
                         Want this built for your trade?
                     </h2>
-                    <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed max-w-xl mx-auto mb-6">
+                    <p className="lead text-center mx-auto">
                         Every build is engineered from scratch for your specific market. No templates. No shared layouts. No recycled designs from another contractor down the road.
                     </p>
-                    <a
-                        href="/contact"
-                        className="inline-flex items-center justify-center min-h-[52px] px-10 bg-white text-[#0B0B0C] hover:bg-[#f0f0f0] text-[12px] font-bold uppercase tracking-widest transition-all rounded-[4px] shadow-[0_0_20px_rgba(255,255,255,0.08)]"
-                    >
+                    <Link to="/contact" className="btn-primary">
                         Book Strategy Call
-                    </a>
+                    </Link>
                 </div>
             </section>
         </div>

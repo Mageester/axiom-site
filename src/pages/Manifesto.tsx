@@ -27,7 +27,7 @@ const Manifesto: React.FC = () => {
             <header className="max-w-2xl mx-auto text-center flex flex-col items-center gap-5 mb-16 sm:mb-20">
                 <p className="eyebrow-center">Infrastructure Whitepaper</p>
 
-                <h1 className="text-[28px] sm:text-[42px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
+                <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
                     The $100,000 Leak: Why Cheap Websites Fail During Peak Season.
                 </h1>
 
@@ -198,7 +198,7 @@ const Manifesto: React.FC = () => {
                     <div className="text-center mt-6">
                         <Link
                             to="/concepts"
-                            className="inline-flex items-center justify-center min-h-[44px] px-6 border border-[var(--border-panel)] bg-[var(--bg-surface)] text-white hover:bg-[#1c1f28] text-[11px] font-semibold uppercase tracking-widest transition-all rounded-[4px]"
+                            className="btn-secondary"
                         >
                             View Live Deployments →
                         </Link>
@@ -217,7 +217,7 @@ const Manifesto: React.FC = () => {
                     </p>
                     <Link
                         to="/contact"
-                        className="inline-flex items-center justify-center min-h-[52px] px-10 bg-white text-[#0B0B0C] hover:bg-[#f0f0f0] text-[12px] font-bold uppercase tracking-widest transition-all rounded-[4px] shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+                        className="btn-primary"
                     >
                         Plug the Leak with Axiom Infrastructure
                     </Link>
