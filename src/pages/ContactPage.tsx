@@ -136,50 +136,50 @@ const ContactPage: React.FC = () => {
     };
 
     return (
-        <div className="pt-36 pb-24 px-6">
+        <div className="pt-32 sm:pt-36 pb-24 px-5 sm:px-6">
             <SEO
                 title="Apply | Axiom Infrastructure"
                 description="Apply for a strategy call and infrastructure audit to identify revenue leaks and conversion gaps."
             />
 
             <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 mb-8">
-                <p className="text-[11px] font-mono text-accent/80 uppercase tracking-widest">Project Application</p>
-                <h1 className="text-[38px] sm:text-[48px] font-semibold text-primary tracking-tight leading-[1.06]">
+                <p className="eyebrow-center">Project Application</p>
+                <h1 className="text-[28px] sm:text-[42px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
                     Strategy Call + Infrastructure Audit
                 </h1>
-                <p className="text-[16px] text-secondary leading-relaxed">
+                <p className="lead text-center mx-auto">
                     Step {step} of 2. We use this to scope the right build tier and prepare a focused strategy conversation.
                 </p>
             </section>
 
             {/* Founder's Note */}
             <section className="max-w-4xl mx-auto mb-6">
-                <div className="bg-[#111214] border border-[#1e2028] rounded-lg p-6 md:p-8 flex gap-5 items-start">
+                <div className="panel p-5 sm:p-6 md:p-8 flex gap-5 items-start">
                     <div className="shrink-0 flex flex-col items-center gap-2">
-                        <div className="w-14 h-14 rounded-full bg-[#1a1d25] border border-[#2a2d35] flex items-center justify-center text-[18px] font-bold text-white/60 uppercase tracking-wide">A</div>
-                        <p className="text-[9px] font-mono text-[var(--text-secondary)]/40 uppercase tracking-widest text-center leading-tight max-w-[70px]">Aidan<br />Lead Engineer<br />Kitchener ON</p>
+                        <div className="w-14 h-14 rounded-full bg-[var(--bg-inset)] border border-[var(--border-panel)] flex items-center justify-center text-[18px] font-bold text-[var(--text-secondary)] uppercase tracking-wide">A</div>
+                        <p className="text-[9px] font-grotesk text-[var(--text-tertiary)] uppercase tracking-widest text-center leading-tight max-w-[70px]">Aidan<br />Lead Engineer<br />Kitchener ON</p>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <p className="text-[13px] font-mono text-[var(--accent)] uppercase tracking-widest">From the Operator</p>
-                        <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                        <p className="eyebrow !text-[12px] sm:!text-[13px]">From the Operator</p>
+                        <p className="text-[14px] sm:text-[15px] text-[var(--text-body)] leading-[1.75]">
                             I don't run a volume agency. I partner with a handful of serious contractors to build infrastructure that dominates local markets. Fill out the survey, and I will personally review your current setup.
                         </p>
-                        <p className="text-[12px] font-mono text-[var(--text-secondary)]/60 uppercase tracking-widest mt-1">— Aidan · Axiom Infrastructure</p>
+                        <p className="big-figure-label text-[var(--text-tertiary)] mt-1">— Aidan · Axiom Infrastructure</p>
                     </div>
                 </div>
             </section>
 
             {/* Performance Guarantee */}
             <section className="max-w-4xl mx-auto mb-6">
-                <div className="bg-[#111214] border border-[#1e2028] rounded-lg p-6 text-center">
-                    <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
-                        <span className="font-bold text-white uppercase tracking-widest text-[12px] mr-2">The Axiom Guarantee:</span>
+                <div className="panel p-5 sm:p-6 text-center">
+                    <p className="text-[13px] sm:text-[14px] text-[var(--text-body)] leading-[1.75]">
+                        <span className="font-bold text-[var(--text-heading)] uppercase tracking-widest text-[10.5px] sm:text-[11px] mr-2">The Axiom Guarantee:</span>
                         If our infrastructure doesn't measurably increase your qualified lead capture within 90 days, we work for free until it does.
                     </p>
                 </div>
             </section>
 
-            <section className="max-w-4xl mx-auto bg-[#111214] border border-[#1e2028] p-8 md:p-10 rounded-lg">
+            <section className="max-w-4xl mx-auto panel p-6 sm:p-8 md:p-10">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                     {status === 'success' && (
                         <div className="surface-panel bg-zinc-900/70 border-zinc-700 p-8 text-center rounded-sm">
@@ -235,16 +235,16 @@ const ContactPage: React.FC = () => {
                             <p className="text-[11px] font-mono text-center text-[var(--accent)] uppercase tracking-widest">Only 2 of 4 Partner Slots Remaining for This Month.</p>
 
                             {/* What Happens Next */}
-                            <div className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-5 flex flex-col gap-4">
-                                <p className="text-[11px] font-mono text-[var(--accent)] uppercase tracking-widest">What Happens Next</p>
+                            <div className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md p-4 sm:p-5 flex flex-col gap-4">
+                                <p className="eyebrow !text-[11px]">What Happens Next</p>
                                 {[
                                     { phase: '01', text: 'Aidan personally reviews your current site and local market competition.' },
                                     { phase: '02', text: 'We schedule a 15-minute Strategy Call to see if our infrastructure fits your sales flow.' },
                                     { phase: '03', text: "We either move to a formal Audit, or point you to someone else if we aren't a fit. No pressure." },
                                 ].map((step) => (
                                     <div key={step.phase} className="flex gap-3 items-start">
-                                        <span className="text-[14px] font-bold text-[var(--accent)]/20 font-mono shrink-0 mt-0.5">{step.phase}</span>
-                                        <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{step.text}</p>
+                                        <span className="text-[14px] font-bold text-[var(--accent)]/15 font-grotesk shrink-0 mt-0.5">{step.phase}</span>
+                                        <p className="text-[13px] text-[var(--text-body)] leading-[1.7]">{step.text}</p>
                                     </div>
                                 ))}
                             </div>
