@@ -77,10 +77,20 @@ const Home: React.FC = () => {
                                     </Link>
                                 </div>
                                 <p className="text-[12px] text-[var(--text-secondary)]/70 font-mono">
-                                    Custom engagements starting at <span className="text-white font-semibold">$7,500</span>. Only <span className="text-[var(--accent)]">4 partner slots</span> available per month.
+                                    Custom engagements starting at <span className="text-white font-semibold">$7,500</span>. <span className="text-[var(--accent)] font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
                                 </p>
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                {/* ──── PERFORMANCE GUARANTEE ──── */}
+                <section className="max-w-[1100px] mx-auto mt-6">
+                    <div className="bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-lg p-6 text-center">
+                        <p className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                            <span className="font-bold text-white uppercase tracking-widest text-[12px] mr-2">The Axiom Guarantee:</span>
+                            If our infrastructure doesn't measurably increase your qualified lead capture within 90 days, we work for free until it does.
+                        </p>
                     </div>
                 </section>
 

@@ -169,6 +169,16 @@ const ContactPage: React.FC = () => {
                 </div>
             </section>
 
+            {/* Performance Guarantee */}
+            <section className="max-w-4xl mx-auto mb-6">
+                <div className="bg-[#111214] border border-[#1e2028] rounded-lg p-6 text-center">
+                    <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
+                        <span className="font-bold text-white uppercase tracking-widest text-[12px] mr-2">The Axiom Guarantee:</span>
+                        If our infrastructure doesn't measurably increase your qualified lead capture within 90 days, we work for free until it does.
+                    </p>
+                </div>
+            </section>
+
             <section className="max-w-4xl mx-auto bg-[#111214] border border-[#1e2028] p-8 md:p-10 rounded-lg">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                     {status === 'success' && (
@@ -222,6 +232,7 @@ const ContactPage: React.FC = () => {
                             <button type="button" onClick={handleNextStep} className="min-h-[52px] w-full bg-white text-black hover:bg-[#e2e2e2] text-[12px] font-bold uppercase tracking-widest rounded-[4px]">
                                 See If You Qualify (2‑Minute Survey)
                             </button>
+                            <p className="text-[11px] font-mono text-center text-[var(--accent)] uppercase tracking-widest">Only 2 of 4 Partner Slots Remaining for This Month.</p>
 
                             {/* What Happens Next */}
                             <div className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-5 flex flex-col gap-4">
@@ -277,6 +288,7 @@ const ContactPage: React.FC = () => {
                                     {status === 'loading' ? 'Submitting...' : 'Submit Application'}
                                 </button>
                             </div>
+                            <p className="text-[11px] font-mono text-center text-[var(--accent)] uppercase tracking-widest mt-2">Only 2 of 4 Partner Slots Remaining for This Month.</p>
                         </div>
                     )}
                 </form>

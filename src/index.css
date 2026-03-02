@@ -4,16 +4,16 @@
 
 @layer base {
   :root {
-    --bg-main: #1F2933;
-    /* Deep Slate */
-    --bg-surface: #2B3A47;
-    /* Charcoal */
-    --border-subtle: rgba(247, 249, 251, 0.08);
-    --text-primary: #F7F9FB;
-    /* Off-White */
-    --text-secondary: rgba(247, 249, 251, 0.65);
-    --text-dark: #2B3A47;
-    /* Charcoal for light cards */
+    --bg-main: #0A0A0A;
+    /* Deep Charcoal */
+    --bg-surface: #171717;
+    /* Slightly lighter Charcoal */
+    --border-subtle: rgba(209, 213, 219, 0.08);
+    /* Adjusted for dark mode */
+    --text-primary: #F5F5F5;
+    /* Bright Off-White for Headings */
+    --text-secondary: #D1D5DB;
+    /* Light Gray for Body Text */
     --accent: #FF6700;
     /* Safety Orange */
     --accent-secondary: #00A6E6;
@@ -30,11 +30,11 @@
   h4,
   h5,
   h6 {
-    @apply font-grotesk tracking-tight text-[var(--text-primary)];
+    @apply font-grotesk tracking-tight text-[var(--text-primary)] text-left;
   }
 
   p {
-    @apply leading-relaxed;
+    @apply leading-relaxed max-w-3xl text-left;
   }
 
   *:focus-visible {
