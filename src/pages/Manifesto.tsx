@@ -12,11 +12,9 @@ const Manifesto: React.FC = () => {
 
             {/* Header */}
             <section className="max-w-3xl mx-auto text-center flex flex-col gap-5 mb-14">
-                <div className="flex items-center justify-center gap-3">
-                    <div className="h-[1px] w-8 bg-red-500/40"></div>
-                    <p className="text-[11px] font-mono text-red-400/70 uppercase tracking-[0.2em]">Infrastructure Whitepaper</p>
-                    <div className="h-[1px] w-8 bg-red-500/40"></div>
-                </div>
+                <div className="h-[1px] w-8 bg-[var(--accent)]/40"></div>
+                <p className="text-[11px] font-mono text-[var(--accent)]/70 uppercase tracking-[0.2em]">Infrastructure Whitepaper</p>
+                <div className="h-[1px] w-8 bg-[var(--accent)]/40"></div>
                 <h1 className="text-[34px] sm:text-[48px] font-semibold text-white tracking-tight leading-[1.06]">
                     The $100,000 Leak: Why Cheap Websites Fail During Peak Season.
                 </h1>
@@ -47,36 +45,52 @@ const Manifesto: React.FC = () => {
                 </section>
 
                 {/* The Math */}
-                <section className="bg-[#111214] border border-[#1e2028] rounded-lg p-8 md:p-12 flex flex-col gap-6">
+                <section className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-6 md:p-12 flex flex-col gap-6">
                     <div className="flex items-center gap-3">
-                        <div className="h-[1px] w-8 bg-red-500/40"></div>
-                        <p className="text-[11px] font-mono text-red-400/70 uppercase tracking-[0.2em]">The Math of Downtime</p>
+                        <div className="h-[1px] w-8 bg-[var(--accent)]/40"></div>
+                        <p className="text-[11px] font-mono text-[var(--accent)]/80 uppercase tracking-[0.2em]">The Math of Downtime</p>
                     </div>
 
-                    <p className="text-[16px] text-[var(--text-secondary)] leading-[1.7]">
+                    <p className="hidden md:block text-[16px] text-[var(--text-secondary)] leading-[1.7]">
                         Let's do the math that your web designer never showed you.
                     </p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {[
                             { label: 'Average HVAC Emergency Ticket', value: '$5,000', color: 'text-white' },
-                            { label: 'Competitor Avg. Load Time', value: '3.5 seconds', color: 'text-red-400/80' },
-                            { label: 'Bounce Rate at 3.5s', value: '40%', color: 'text-red-400/80' },
-                            { label: 'Emergency Calls Lost / Month', value: '2 minimum', color: 'text-red-400/80' },
+                            { label: 'Competitor Avg. Load Time', value: '3.5 seconds', color: 'text-[var(--accent)]/80' },
+                            { label: 'Bounce Rate at 3.5s', value: '40%', color: 'text-[var(--accent)]/80' },
+                            { label: 'Emergency Calls Lost / Month', value: '2 minimum', color: 'text-[var(--accent)]/80' },
                         ].map((stat) => (
-                            <div key={stat.label} className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-5 flex flex-col gap-1">
+                            <div key={stat.label} className="bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-md p-5 flex flex-col gap-1">
                                 <p className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">{stat.label}</p>
                                 <p className={`text-[24px] font-bold tracking-tight ${stat.color}`}>{stat.value}</p>
                             </div>
                         ))}
                     </div>
 
-                    <div className="bg-[#0e0f12] border border-red-500/15 rounded-md p-6 text-center">
-                        <p className="text-[10px] font-mono uppercase tracking-widest text-red-400/60 mb-2">Annual Revenue Leak</p>
-                        <p className="text-[36px] sm:text-[44px] font-bold text-red-400 tracking-tight">$120,000 / year</p>
+                    <div className="hidden md:block bg-[var(--bg-main)] border border-[var(--accent)]/20 rounded-md p-6 text-center">
+                        <p className="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)]/80 mb-2">Annual Revenue Leak</p>
+                        <p className="text-[36px] sm:text-[44px] font-bold text-[var(--accent)] tracking-tight">$120,000 / year</p>
                         <p className="text-[14px] text-[var(--text-secondary)] mt-2">
                             2 lost emergency calls × $5,000 avg. ticket × 12 months = revenue you're giving to competitors.
                         </p>
+                    </div>
+
+                    {/* Mobile-only condensed stats */}
+                    <div className="md:hidden flex items-center justify-between bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-md p-4 mt-2">
+                        <div className="flex flex-col gap-1 text-center flex-1 border-r border-[var(--border-subtle)]">
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-secondary)]">Ticket</span>
+                            <span className="text-[16px] font-bold text-white">$5K</span>
+                        </div>
+                        <div className="flex flex-col gap-1 text-center flex-1 border-r border-[var(--border-subtle)]">
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)]">Bounce</span>
+                            <span className="text-[16px] font-bold text-[var(--accent)]">40%</span>
+                        </div>
+                        <div className="flex flex-col gap-1 text-center flex-1">
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)]">Leak</span>
+                            <span className="text-[16px] font-bold text-[var(--accent)]">$120K</span>
+                        </div>
                     </div>
                 </section>
 

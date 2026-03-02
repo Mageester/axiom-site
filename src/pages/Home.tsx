@@ -45,7 +45,7 @@ const Home: React.FC = () => {
                 <section className="max-w-[1100px] mx-auto">
                     <div className="bg-[#111214] border border-[#1e2028] rounded-lg p-10 md:p-16 relative overflow-hidden">
                         {/* Subtle gradient glow behind hero */}
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(90,114,155,0.12)_0%,transparent_70%)] pointer-events-none"></div>
+                        <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(255,103,0,0.12)_0%,transparent_70%)] pointer-events-none"></div>
 
                         <div className="relative z-10 max-w-3xl flex flex-col gap-6">
                             <div className="flex items-center gap-3">
@@ -204,7 +204,30 @@ const Home: React.FC = () => {
                                 <h2 className="text-[28px] sm:text-[34px] font-semibold text-white tracking-tight leading-snug">
                                     This wasn't built in a boardroom.
                                 </h2>
-                                <div className="flex flex-col gap-4 text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                                {/* Mobile View: Truncated */}
+                                <div className="md:hidden flex flex-col gap-4 text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                                    <p>
+                                        Axiom was built because I saw $10M roofing and HVAC firms losing six figures every year to slow sites and "marketing" agencies that don't understand the pressure of a heatwave.
+                                    </p>
+                                    <details className="group mt-1">
+                                        <summary className="w-full min-h-[48px] border border-[var(--border-subtle)] bg-[var(--bg-main)] text-white hover:border-[var(--accent)]/50 rounded-[4px] text-[12px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 cursor-pointer transition-colors list-none outline-none [&::-webkit-details-marker]:hidden">
+                                            <span className="group-open:hidden">Read the Full Story</span>
+                                            <span className="hidden group-open:block">Hide Story</span>
+                                            <svg className="w-4 h-4 transition-transform group-open:-rotate-180 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                        </summary>
+                                        <div className="pt-5 flex flex-col gap-4 text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                                            <p>
+                                                These agencies sell logos and colour palettes. They don't understand that when a storm rolls through at 2&nbsp;AM and every homeowner in the county is searching for emergency repair, your site needs to be the one that loads — not the one that crashes.
+                                            </p>
+                                            <p>
+                                                I'm an engineer, not a designer. I build systems that capture revenue under pressure. That's why Axiom exists — to give serious contractors the same calibre of web infrastructure that Fortune 500 companies take for granted.
+                                            </p>
+                                        </div>
+                                    </details>
+                                </div>
+
+                                {/* Desktop View: Full Length */}
+                                <div className="hidden md:flex flex-col gap-4 text-[15px] text-[var(--text-secondary)] leading-relaxed">
                                     <p>
                                         Axiom was built because I saw $10M roofing and HVAC firms losing six figures every year to slow sites and "marketing" agencies that don't understand the pressure of a heatwave.
                                     </p>

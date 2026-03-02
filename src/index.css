@@ -4,16 +4,14 @@
 
 @layer base {
   :root {
-    --bg-main: #0B0B0C;
-    --bg-surface: #121417;
-    /* Darkened slightly to boost elevation contrast */
-    --border-subtle: rgba(255, 255, 255, 0.05);
-    /* Softened from 0.06 */
-    --text-primary: rgba(255, 255, 255, 0.90);
-    --text-secondary: rgba(255, 255, 255, 0.65);
-    /* Deepened for stronger hierarchy */
-    --accent: #5a729b;
-    /* Desaturated from #4B6EAF for premium restraint */
+    --bg-main: #1F2933; /* Deep Slate */
+    --bg-surface: #2B3A47; /* Charcoal */
+    --border-subtle: rgba(247, 249, 251, 0.08);
+    --text-primary: #F7F9FB; /* Off-White */
+    --text-secondary: rgba(247, 249, 251, 0.65);
+    --text-dark: #2B3A47; /* Charcoal for light cards */
+    --accent: #FF6700; /* Safety Orange */
+    --accent-secondary: #00A6E6; /* Electric Cyan */
   }
 
   body {

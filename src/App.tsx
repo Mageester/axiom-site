@@ -180,7 +180,7 @@ const App: React.FC = () => {
                 </Suspense>
             </main>
 
-            <footer className="bg-[#0B0B0C] py-12 px-6 border-t border-[#1e2028]">
+            <footer className="bg-[#0B0B0C] pt-12 pb-28 md:pb-12 px-6 border-t border-[#1e2028]">
                 <div className="max-w-[1100px] mx-auto">
                     {/* Brand + Navigation */}
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
@@ -221,15 +221,27 @@ const App: React.FC = () => {
                 </div>
             </footer>
 
-            {/* Mobile-only sticky CTA */}
-            <div className="sm:hidden fixed bottom-0 left-0 w-full z-50 bg-[#0B0B0C]/95 backdrop-blur-sm border-t border-[#1e2028] px-4 py-3 safe-area-bottom">
-                <Link
-                    to="/contact"
-                    className="flex items-center justify-center w-full min-h-[52px] bg-white text-[#0B0B0C] text-[12px] font-bold uppercase tracking-widest rounded-[4px] shadow-[0_0_20px_rgba(255,255,255,0.1)] active:bg-[#e2e2e2] transition-colors"
-                >
-                    Apply for Enterprise Build
-                </Link>
-            </div>
+            {/* Mobile-only sticky Bottom Nav */}
+            <nav className="md:hidden fixed bottom-0 left-0 w-full z-50 bg-[var(--bg-main)]/85 backdrop-blur-xl border-t border-[var(--border-subtle)] pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
+                <div className="grid grid-cols-4 px-2 py-1.5">
+                    <Link to="/" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-[var(--text-secondary)] hover:text-white transition-colors min-h-[48px]">
+                        <svg className="w-[20px] h-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                        <span className="text-[9px] font-semibold uppercase tracking-widest">Home</span>
+                    </Link>
+                    <Link to="/services" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-[var(--text-secondary)] hover:text-white transition-colors min-h-[48px]">
+                        <svg className="w-[20px] h-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                        <span className="text-[9px] font-semibold uppercase tracking-widest">Services</span>
+                    </Link>
+                    <Link to="/manifesto" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-[var(--text-secondary)] hover:text-white transition-colors min-h-[48px]">
+                        <svg className="w-[20px] h-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        <span className="text-[9px] font-semibold uppercase tracking-widest">Manifesto</span>
+                    </Link>
+                    <Link to="/contact" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-[var(--accent)] transition-colors min-h-[48px]">
+                        <svg className="w-[20px] h-[20px] drop-shadow-[0_0_8px_rgba(255,103,0,0.5)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        <span className="text-[9px] font-bold uppercase tracking-widest drop-shadow-[0_0_8px_rgba(255,103,0,0.3)]">Apply</span>
+                    </Link>
+                </div>
+            </nav>
         </div>
     );
 };
