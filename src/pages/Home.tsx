@@ -170,9 +170,9 @@ const Home: React.FC = () => {
                             </h2>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-3 md:overflow-visible scrollbar-hide">
                             {industries.map((ind) => (
-                                <div key={ind.name} className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-6 text-center">
+                                <div key={ind.name} className="min-w-[85%] snap-center md:min-w-0 bg-[#0e0f12] border border-[#1a1d25] rounded-md p-6 text-center">
                                     <div className="w-3 h-3 rounded-full mx-auto mb-4" style={{ backgroundColor: ind.accent, boxShadow: `0 0 12px ${ind.accent}40` }}></div>
                                     <p className="text-[16px] font-semibold text-white">{ind.name}</p>
                                     <p className="text-[12px] font-mono text-[var(--text-secondary)] mt-2 uppercase tracking-widest">Professional Tier</p>

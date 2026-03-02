@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
 const Manifesto: React.FC = () => {
+    const [showSticky, setShowSticky] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // Show after scrolling past the hero section (roughly 350px down)
+            setShowSticky(window.scrollY > 350);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <div className="pt-36 pb-24 px-6">
             <SEO
@@ -146,6 +157,18 @@ const Manifesto: React.FC = () => {
                     </p>
                 </section>
             </article>
+
+            {/* Mobile-only sticky CTA (Shows on scroll, sits above mobile nav) */}
+            <div className={`md:hidden fixed z-[45] bottom-[72px] left-0 w-full px-4 py-2 pointer-events-none transition-all duration-300 ease-in-out ${showSticky ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                <div className="pointer-events-auto">
+                    <Link
+                        to="/contact"
+                        className="flex items-center justify-center w-full min-h-[52px] bg-[var(--accent)] text-white text-[13px] font-bold uppercase tracking-widest rounded-md shadow-[0_8px_25px_rgba(255,103,0,0.35)] hover:bg-[#ff7a1f] active:scale-[0.98] transition-all"
+                    >
+                        Plug the Leak
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 };

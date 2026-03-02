@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
@@ -61,6 +61,9 @@ const faqs = [
 ];
 
 const ServicesPage: React.FC = () => {
+    const [openStep, setOpenStep] = useState<string | null>(null);
+    const [openFaq, setOpenFaq] = useState<string | null>(null);
+
     return (
         <div className="pt-36 pb-24 px-6">
             <SEO
@@ -99,12 +102,12 @@ const ServicesPage: React.FC = () => {
             </section>
 
             {/* Pricing Grid */}
-            <section className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 relative">
-                <div className="absolute inset-0 -m-4 rounded-xl pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(90,114,155,0.4) 39px, rgba(90,114,155,0.4) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(90,114,155,0.4) 39px, rgba(90,114,155,0.4) 40px)' }}></div>
+            <section className="max-w-[1100px] mx-auto flex overflow-x-auto snap-x snap-mandatory gap-5 pb-8 md:grid md:grid-cols-3 md:overflow-visible scrollbar-hide relative">
+                <div className="hidden md:block absolute inset-0 -m-4 rounded-xl pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(90,114,155,0.4) 39px, rgba(90,114,155,0.4) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(90,114,155,0.4) 39px, rgba(90,114,155,0.4) 40px)' }}></div>
                 {tiers.map((tier) => (
                     <article
                         key={tier.name}
-                        className={`relative bg-[#111214] border rounded-lg p-8 flex flex-col gap-5 transition-colors ${tier.featured
+                        className={`min-w-[85%] snap-center md:min-w-0 relative bg-[#111214] border rounded-lg p-8 flex flex-col gap-5 transition-colors ${tier.featured
                             ? 'border-[var(--accent)]/30 shadow-[0_0_24px_rgba(90,114,155,0.1)]'
                             : 'border-[#1e2028] hover:border-[#2a2d38]'
                             }`}
@@ -161,17 +164,32 @@ const ServicesPage: React.FC = () => {
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div className="flex flex-col gap-4 md:grid md:grid-cols-4 md:gap-5">
                         {[
                             { num: '01', title: 'Discovery & Audit', desc: 'We map your local market and identify lead-leakage in your current setup.' },
                             { num: '02', title: 'Infrastructure Engineering', desc: 'We build your bespoke V8 Edge environment and automated intake pipelines.' },
                             { num: '03', title: 'Performance Hardening', desc: 'We run 50+ point security and speed audits to ensure sub-second delivery.' },
                             { num: '04', title: 'Launch & Support', desc: 'Your asset goes live on the global edge with 24/7 uptime monitoring.' },
                         ].map((phase) => (
-                            <div key={phase.num} className="bg-[#0e0f12] border border-[#1a1d25] rounded-md p-6 flex flex-col gap-3">
-                                <span className="text-[26px] font-bold text-[var(--accent)]/20 font-mono">{phase.num}</span>
-                                <h3 className="text-[16px] font-semibold text-white tracking-tight">{phase.title}</h3>
-                                <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{phase.desc}</p>
+                            <div key={phase.num} className="bg-[#0e0f12] border border-[#1a1d25] rounded-md md:p-6 flex flex-col overflow-hidden">
+                                {/* Mobile Accordion Header */}
+                                <button
+                                    onClick={() => setOpenStep(openStep === phase.num ? null : phase.num)}
+                                    className="md:hidden w-full flex items-center justify-between p-5 text-left"
+                                >
+                                    <div className="flex items-center gap-4">
+                                        <span className="text-[20px] font-bold text-[var(--accent)] font-mono">{phase.num}</span>
+                                        <h3 className="text-[15px] font-semibold text-white tracking-tight">{phase.title}</h3>
+                                    </div>
+                                    <svg className={`w-4 h-4 text-[var(--text-secondary)] transition-transform duration-300 ${openStep === phase.num ? 'rotate-180 text-[var(--accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+
+                                {/* Mobile Accordion Content / Desktop Full View */}
+                                <div className={`px-5 pb-5 md:p-0 transition-all duration-300 md:!block ${openStep === phase.num ? 'block' : 'hidden md:block'}`}>
+                                    <span className="hidden md:block text-[26px] font-bold text-[var(--accent)]/20 font-mono mb-3">{phase.num}</span>
+                                    <h3 className="hidden md:block text-[16px] font-semibold text-white tracking-tight mb-3">{phase.title}</h3>
+                                    <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">{phase.desc}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -232,11 +250,21 @@ const ServicesPage: React.FC = () => {
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {faqs.map((faq) => (
-                            <div key={faq.q} className="flex flex-col gap-3">
-                                <h3 className="text-[16px] font-semibold text-white tracking-tight">{faq.q}</h3>
-                                <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">{faq.a}</p>
+                    <div className="flex flex-col gap-3 max-w-2xl mx-auto">
+                        {faqs.map((faq, i) => (
+                            <div key={i} className="bg-[#0e0f12] border border-[#1a1d25] rounded-md overflow-hidden">
+                                <button
+                                    onClick={() => setOpenFaq(openFaq === faq.q ? null : faq.q)}
+                                    className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors gap-4"
+                                >
+                                    <h3 className="text-[15px] font-semibold text-white tracking-tight">{faq.q}</h3>
+                                    <svg className={`w-4 h-4 shrink-0 text-[var(--text-secondary)] transition-transform duration-300 ${openFaq === faq.q ? 'rotate-180 text-[var(--accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                {openFaq === faq.q && (
+                                    <div className="px-5 pb-5 animate-in fade-in slide-in-from-top-2 duration-300">
+                                        <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed pt-2 border-t border-white/5">{faq.a}</p>
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
