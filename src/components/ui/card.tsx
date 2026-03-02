@@ -1,92 +1,91 @@
 import * as React from "react"
-
 import { cn } from "../../lib/utils"
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+/* ──────────────────────────────────────────────────────
+   AXIOM CARD SYSTEM
+   Three surface tiers for visual depth layering.
+
+   Variants:
+     default   → .panel         (#121212, inset glow)
+     inset     → .panel-inset   (#0e0f11, no glow)
+     elevated  → .panel-elevated (#171717, shadow)
+
+   Usage:
+     <Card>...</Card>
+     <Card variant="inset" padding="sm">...</Card>
+     <Card variant="elevated" padding="lg">...</Card>
+   ────────────────────────────────────────────────────── */
+
+type CardVariant = "default" | "inset" | "elevated"
+type CardPadding = "none" | "sm" | "md" | "lg"
+
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: CardVariant
+  padding?: CardPadding
+}
+
+const variantClasses: Record<CardVariant, string> = {
+  default: "panel",
+  inset: "panel-inset",
+  elevated: "panel-elevated",
+}
+
+const paddingClasses: Record<CardPadding, string> = {
+  none: "",
+  sm: "p-4 sm:p-5",
+  md: "p-6 sm:p-8",
+  lg: "p-8 sm:p-10 md:p-12",
+}
+
+function Card({ className, variant = "default", padding = "none", ...props }: CardProps) {
   return (
     <div
-      data-slot="card"
-      className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
-        className
-      )}
+      className={cn(variantClasses[variant], paddingClasses[padding], className)}
       {...props}
     />
   )
 }
 
-function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+/* ── Sub-components for structured content ────────── */
+
+function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div
-      data-slot="card-header"
-      className={cn(
-        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
-        className
-      )}
-      {...props}
-    />
+    <div className={cn("flex flex-col gap-2", className)} {...props} />
   )
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <div
-      data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
-      {...props}
-    />
+    <h3 className={cn("text-h3 font-grotesk font-semibold tracking-tight text-[var(--text-heading)]", className)} {...props} />
   )
 }
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <div
-      data-slot="card-description"
-      className={cn("text-muted-foreground text-sm", className)}
-      {...props}
-    />
+    <p className={cn("text-body-sm text-[var(--text-body)] leading-relaxed", className)} {...props} />
   )
 }
 
-function CardAction({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-action"
-      className={cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className
-      )}
-      {...props}
-    />
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col gap-4", className)} {...props} />
   )
-}
+)
+CardContent.displayName = "CardContent"
 
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div
-      data-slot="card-content"
-      className={cn("px-6", className)}
-      {...props}
-    />
-  )
-}
-
-function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-footer"
-      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
-      {...props}
-    />
+    <div className={cn("flex items-center gap-4 pt-4 border-t border-[var(--border-panel)]", className)} {...props} />
   )
 }
 
 export {
   Card,
   CardHeader,
-  CardFooter,
   CardTitle,
-  CardAction,
   CardDescription,
   CardContent,
+  CardFooter,
 }
+
+export type { CardVariant, CardPadding, CardProps }
