@@ -5,7 +5,7 @@ import { SEO } from '../components/SEO';
 const tiers = [
     {
         name: 'Foundation',
-        price: '$7,500+',
+        price: '$7,500',
         tag: 'Core Deployment',
         desc: 'Launch-grade contractor infrastructure for replacing fragile agency templates.',
         qualifier: 'Best for owner-led teams in one primary service territory.',
@@ -16,11 +16,11 @@ const tiers = [
             'Performance hardening with handoff baseline metrics',
         ],
         cta: 'Apply for Foundation',
-        packageParam: 'starter',
+        packageParam: 'foundation',
     },
     {
-        name: "Contractor's Choice",
-        price: '$7,500+',
+        name: 'Authority',
+        price: '$12,500+',
         tag: 'Growth System',
         desc: 'Most selected by scaling operators who need authority and throughput at the same time.',
         qualifier: 'Best for teams of 10+ targeting higher-ticket service work.',
@@ -30,13 +30,13 @@ const tiers = [
             'High-ticket service positioning across every key page',
             'Priority launch support through first campaign cycle',
         ],
-        cta: 'Apply for Contractor\'s Choice',
-        packageParam: 'professional',
+        cta: 'Apply for Authority',
+        packageParam: 'authority',
         featured: true,
     },
     {
-        name: 'Authority',
-        price: '$7,500+',
+        name: 'Multi-Location / Expansion',
+        price: 'Custom',
         tag: 'Bespoke Command',
         desc: 'Custom architecture for multi-crew and multi-market growth operators.',
         qualifier: 'Best for established teams expanding territories or acquisitions.',
@@ -46,15 +46,15 @@ const tiers = [
             'CRM and dispatch integration strategy at implementation',
             'Quarterly instrumentation review for growth accountability',
         ],
-        cta: 'Apply for Authority',
-        packageParam: 'enterprise',
+        cta: 'Request Expansion Scope',
+        packageParam: 'expansion',
     }
 ];
 
 const faqs = [
     {
         q: 'How long does a typical build take?',
-        a: 'Starter builds ship in 2 weeks. Professional builds take 3–4 weeks. Enterprise builds are 4–6 weeks depending on scope. We work in focused sprints with weekly check-ins — you\'re never left guessing.'
+        a: 'Foundation builds ship in 2 weeks. Authority builds take 3-4 weeks. Expansion programs are scoped in phased 4-8 week launches depending on integration depth. We work in focused sprints with weekly check-ins so timelines stay clear.'
     },
     {
         q: 'Do I need to handle my own hosting?',
@@ -62,7 +62,7 @@ const faqs = [
     },
     {
         q: 'What if I need changes after launch?',
-        a: 'Enterprise builds include 30 days of post-launch adjustments at no extra cost. After that, we offer retainer plans for ongoing optimization. You always own your code — no lock-in.'
+        a: 'Authority and Expansion engagements include 30 days of post-launch adjustments at no extra cost. After that, we offer optimization retainers. You always own your code with no lock-in.'
     }
 ];
 
@@ -74,7 +74,7 @@ const ServicesPage: React.FC = () => {
         <div className="page-shell">
             <SEO
                 title="Infrastructure Investments | Axiom"
-                description="Explore Starter, Professional, and Enterprise infrastructure investments for local service businesses."
+                description="Explore Foundation, Authority, and Expansion infrastructure investments for local service businesses."
             />
 
             {/* Header */}
@@ -177,7 +177,7 @@ const ServicesPage: React.FC = () => {
                     <div className="text-center mb-10">
                         <p className="eyebrow-center mb-4">Our Process</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
-                            The Path to Professional: Our Engineering Process.
+                            The Path to Authority: Our Engineering Process.
                         </h2>
                     </div>
 
