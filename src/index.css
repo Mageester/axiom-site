@@ -170,7 +170,7 @@
     --mx: 0px;
     --my: 0px;
     transform: translate(var(--mx), var(--my)) scale(1);
-    transition: transform 180ms ease, box-shadow 220ms ease, background-color 180ms ease;
+    transition: transform 0.3s ease-out, box-shadow 0.4s ease-out, background-color 0.3s ease-out;
     will-change: transform;
   }
 
@@ -272,7 +272,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     border-radius: 4px;
-    transition: all 180ms ease;
+    transition: all 0.3s ease-out;
     cursor: pointer;
     white-space: nowrap;
     gap: 8px;
@@ -319,7 +319,7 @@
     --mx: 0px;
     --my: 0px;
     transform: translate(var(--mx), var(--my)) scale(1);
-    transition: transform 180ms ease, box-shadow 220ms ease, background-color 180ms ease;
+    transition: transform 0.3s ease-out, box-shadow 0.4s ease-out, background-color 0.3s ease-out;
     will-change: transform;
   }
 
@@ -431,6 +431,30 @@
   select:focus {
     box-shadow: 0 0 0 2px rgba(228, 87, 46, 0.25), 0 0 18px rgba(228, 87, 46, 0.22);
     border-color: #E4572E;
+  }
+
+  input,
+  textarea,
+  select {
+    transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease-out;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+  }
+
+  input[type='range']::-moz-range-thumb {
+    transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+  }
+
+  input[type='range']:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 2px rgba(228, 87, 46, 0.28), 0 0 16px rgba(228, 87, 46, 0.24);
+    transform: scale(1.04);
+  }
+
+  input[type='range']:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 2px rgba(228, 87, 46, 0.28), 0 0 16px rgba(228, 87, 46, 0.24);
+    transform: scale(1.04);
   }
 
   /* ──────────────────────────────────────────────────
@@ -782,7 +806,7 @@
   .reveal {
     opacity: 0;
     transform: translateY(16px);
-    transition: opacity 650ms cubic-bezier(0.16, 0.84, 0.44, 1), transform 650ms cubic-bezier(0.16, 0.84, 0.44, 1);
+    transition: opacity 0.4s ease-out var(--reveal-delay, 0ms), transform 0.4s ease-out var(--reveal-delay, 0ms);
   }
 
   .reveal.active {
@@ -870,7 +894,7 @@ html {
 .axiom-bento {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transition: opacity 0.4s ease-out var(--reveal-delay, 0ms), transform 0.4s ease-out var(--reveal-delay, 0ms);
 }
 
 .axiom-bento.is-visible {
@@ -886,6 +910,53 @@ html {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes routeFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.route-fade {
+  animation: routeFade 0.3s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .magnetic-primary,
+  .btn-primary,
+  .hero-primary-cta {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero-fade-in,
+  .reveal,
+  .axiom-bento,
+  .route-fade,
+  .animate-grid-drift,
+  .animate-scan-sweep,
+  .animate-console-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  input,
+  textarea,
+  select,
+  input[type='range']::-webkit-slider-thumb,
+  input[type='range']::-moz-range-thumb {
+    transition: none !important;
   }
 }
 

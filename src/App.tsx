@@ -60,6 +60,23 @@ const App: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        document.querySelectorAll<HTMLElement>('section h2, section h3, section .axiom-reading-measure').forEach((el) => {
+            el.classList.add('reveal');
+        });
+
+        const targets = Array.from(document.querySelectorAll<HTMLElement>('.reveal, .axiom-bento'));
+        targets.forEach((el, index) => {
+            el.style.setProperty('--reveal-delay', `${(index % 6) * 100}ms`);
+        });
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            targets.forEach((el) => {
+                el.classList.add('active');
+                el.classList.add('is-visible');
+            });
+            return;
+        }
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -71,8 +88,7 @@ const App: React.FC = () => {
         }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
 
         const timer = setTimeout(() => {
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-            document.querySelectorAll('.axiom-bento').forEach(el => observer.observe(el));
+            targets.forEach((el) => observer.observe(el));
         }, 100);
 
         return () => {
@@ -83,6 +99,14 @@ const App: React.FC = () => {
 
     useEffect(() => {
         const nodes = Array.from(document.querySelectorAll<HTMLElement>('.btn-primary, .magnetic-primary'));
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            nodes.forEach((node) => {
+                node.style.setProperty('--mx', '0px');
+                node.style.setProperty('--my', '0px');
+            });
+            return;
+        }
+
         const radius = 50;
         const maxShift = 5;
         const onMove = (event: MouseEvent) => {
@@ -103,8 +127,19 @@ const App: React.FC = () => {
                 node.style.setProperty('--my', '0px');
             });
         };
+        const reset = () => {
+            nodes.forEach((node) => {
+                node.style.setProperty('--mx', '0px');
+                node.style.setProperty('--my', '0px');
+            });
+        };
+
         window.addEventListener('mousemove', onMove);
-        return () => window.removeEventListener('mousemove', onMove);
+        window.addEventListener('mouseleave', reset);
+        return () => {
+            window.removeEventListener('mousemove', onMove);
+            window.removeEventListener('mouseleave', reset);
+        };
     }, [location.pathname]);
 
     return (
@@ -181,30 +216,32 @@ const App: React.FC = () => {
 
             <main className="flex-1 flex flex-col axiom-grain">
                 <Suspense fallback={<AdminLoader />}>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/services" element={<ServicesPage />} />
-                        <Route path="/concepts" element={<ConceptsPage />} />
-                        <Route path="/work" element={<Navigate to="/concepts" replace />} />
-                        <Route path="/work/:slug" element={<WorkCaseStudyPage />} />
-                        <Route path="/pricing" element={<PricingPage />} />
-                        <Route path="/contact" element={<ContactPage />} />
-                        <Route path="/audit" element={<AuditPage />} />
-                        <Route path="/terms" element={<TermsPage />} />
-                        <Route path="/privacy" element={<PrivacyPage />} />
-                        <Route path="/manifesto" element={<Manifesto />} />
+                    <div key={`${location.pathname}${location.search}`} className="route-fade">
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/services" element={<ServicesPage />} />
+                            <Route path="/concepts" element={<ConceptsPage />} />
+                            <Route path="/work" element={<Navigate to="/concepts" replace />} />
+                            <Route path="/work/:slug" element={<WorkCaseStudyPage />} />
+                            <Route path="/pricing" element={<PricingPage />} />
+                            <Route path="/contact" element={<ContactPage />} />
+                            <Route path="/audit" element={<AuditPage />} />
+                            <Route path="/terms" element={<TermsPage />} />
+                            <Route path="/privacy" element={<PrivacyPage />} />
+                            <Route path="/manifesto" element={<Manifesto />} />
 
-                        <Route path="/login" element={<Navigate to="/" replace />} />
-                        <Route path="/admin/login" element={<Login />} />
-                        <Route path="/mission" element={<Navigate to="/services" replace />} />
-                        <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-                        <Route path="/campaigns" element={<ProtectedRoute><Campaigns /></ProtectedRoute>} />
-                        <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
-                        <Route path="/leads/:id" element={<ProtectedRoute><LeadDetail /></ProtectedRoute>} />
-                        <Route path="/jobs" element={<ProtectedRoute><Jobs /></ProtectedRoute>} />
-                        <Route path="/admin/inquiries" element={<ProtectedRoute><Inquiries /></ProtectedRoute>} />
-                        <Route path="/admin/inquiries/:id" element={<ProtectedRoute><InquiryDetail /></ProtectedRoute>} />
-                    </Routes>
+                            <Route path="/login" element={<Navigate to="/" replace />} />
+                            <Route path="/admin/login" element={<Login />} />
+                            <Route path="/mission" element={<Navigate to="/services" replace />} />
+                            <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+                            <Route path="/campaigns" element={<ProtectedRoute><Campaigns /></ProtectedRoute>} />
+                            <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
+                            <Route path="/leads/:id" element={<ProtectedRoute><LeadDetail /></ProtectedRoute>} />
+                            <Route path="/jobs" element={<ProtectedRoute><Jobs /></ProtectedRoute>} />
+                            <Route path="/admin/inquiries" element={<ProtectedRoute><Inquiries /></ProtectedRoute>} />
+                            <Route path="/admin/inquiries/:id" element={<ProtectedRoute><InquiryDetail /></ProtectedRoute>} />
+                        </Routes>
+                    </div>
                 </Suspense>
             </main>
             <footer className="axiom-shell-section pt-12 pb-28 md:pb-12 border-t border-axiom-border">
