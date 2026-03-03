@@ -88,14 +88,14 @@ const ConceptsPage: React.FC = () => {
                                 <div className="p-4 flex gap-3 items-start border-b border-axiom-border">
                                     <div className="w-1 self-stretch rounded-full shrink-0 bg-red-500/30"></div>
                                     <div>
-                                        <p className="big-figure-label text-red-400/70 mb-1">Problem</p>
+                                        <p className="big-figure-label text-axiom-text-mute/70 mb-1">Problem</p>
                                         <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.problem}</p>
                                     </div>
                                 </div>
                                 <div className="p-4 flex gap-3 items-start">
-                                    <div className="w-1 self-stretch rounded-full shrink-0 bg-emerald-500/40"></div>
+                                    <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-accent/40"></div>
                                     <div>
-                                        <p className="big-figure-label text-emerald-400/70 mb-1">Solution</p>
+                                        <p className="big-figure-label text-axiom-accent/80 mb-1">Solution</p>
                                         <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.solution}</p>
                                     </div>
                                 </div>

@@ -203,9 +203,9 @@ const App: React.FC = () => {
                             { badge: 'SSL A+ Rated', tip: 'Bank-level encryption on every request' },
                         ].map((item) => (
                             <span key={item.badge} className="group relative text-[9px] font-mono uppercase tracking-[0.15em] text-axiom-text-mute/50 hover:text-axiom-text-mute transition-colors cursor-default flex items-center gap-1.5">
-                                <span className="w-1 h-1 rounded-full bg-emerald-500/40 group-hover:bg-emerald-400 transition-colors"></span>
+                                <span className="w-1 h-1 rounded-full bg-axiom-accent/40 group-hover:bg-axiom-accent transition-colors"></span>
                                 {item.badge}
-                                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-[#1a1d25] text-axiom-text-mute text-[10px] font-mono px-3 py-1.5 rounded-md border border-[#2a2d35] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-axiom-surface text-axiom-text-mute text-[10px] font-mono px-3 py-1.5 rounded-md border border-axiom-border whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                                     {item.tip}
                                 </span>
                             </span>
@@ -275,7 +275,7 @@ const App: React.FC = () => {
                         <div className="axiom-bento">
                             <p className="text-[11px] font-mono text-axiom-text-mute uppercase tracking-widest">© {new Date().getFullYear()} Axiom Infrastructure</p>
                             <div className="flex items-center gap-2 mt-3">
-                                <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                                <div className="w-1.5 h-1.5 bg-axiom-accent rounded-full animate-pulse"></div>
                                 <span className="text-[10px] font-mono text-axiom-text-mute uppercase tracking-widest">All systems operational</span>
                             </div>
                         </div>

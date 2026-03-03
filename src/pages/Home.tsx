@@ -187,7 +187,7 @@ const Home: React.FC = () => {
  {/*  VALUE PROPOSITION CARDS  */}
                 <section className="max-w-[1100px] mx-auto mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                     {valueProps.map((card) => (
-                        <article key={card.title} className="axiom-bento p-6 sm:p-8 flex flex-col gap-4 group hover:border-[#2a2d38] transition-colors">
+                        <article key={card.title} className="axiom-bento p-6 sm:p-8 flex flex-col gap-4 group hover:border-axiom-border/80 transition-colors">
                             <span className="text-[24px] sm:text-[28px] font-bold text-[var(--accent)]/15 font-grotesk">{card.num}</span>
                             <h3 className="text-[17px] sm:text-[19px] font-semibold text-axiom-text-main tracking-tight leading-snug">{card.title}</h3>
                             <p className="text-[14px] sm:text-[15px] text-axiom-text-mute leading-[1.75]">{card.desc}</p>

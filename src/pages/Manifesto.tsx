@@ -199,7 +199,7 @@ const Manifesto: React.FC = () => {
                         </div>
                     </div>
                     {/* Thesis line — breaks rhythm */}
-                    <p className="thesis text-[#ef4444]/90">
+                    <p className="thesis text-axiom-text-main">
                         That's not a marketing budget. That's a leak in your business.
                     </p>
                     <div className="axiom-mono-callout">
@@ -218,7 +218,7 @@ const Manifesto: React.FC = () => {
                             Axiom deploys your site on the same global edge network used by Shopify, Discord, and Cloudflare itself. Your pages are served from 300+ data centres worldwide.
                         </p>
                         <p>
-                            When that heatwave hits and 500 people search for AC repair at the same time, your site loads in <strong className="text-emerald-400">0.4 seconds</strong>. Not 3.5. Not "kind of fast." Sub-second, every time, under any load.
+                            When that heatwave hits and 500 people search for AC repair at the same time, your site loads in <strong className="text-axiom-accent">0.4 seconds</strong>. Not 3.5. Not "kind of fast." Sub-second, every time, under any load.
                         </p>
                         <p>
                             You capture the calls your competitors' sites are too slow to handle. One emergency install pays for your entire year of infrastructure. Every call after that is pure margin.
@@ -228,9 +228,9 @@ const Manifesto: React.FC = () => {
                     {/* Stat bar — hard proof, breaks reading rhythm */}
                     <div className="stat-bar grid-cols-3 mt-10">
                         {[
-                            { label: 'Edge Load Time', value: '0.4s', color: 'text-emerald-400' },
-                            { label: 'Uptime SLA', value: '99.99%', color: 'text-emerald-400' },
-                            { label: 'Global Edge Nodes', value: '300+', color: 'text-emerald-400' },
+                            { label: 'Edge Load Time', value: '0.4s', color: 'text-axiom-accent' },
+                            { label: 'Uptime SLA', value: '99.99%', color: 'text-axiom-accent' },
+                            { label: 'Global Edge Nodes', value: '300+', color: 'text-axiom-accent' },
                         ].map((stat) => (
                             <div key={stat.label} className="stat-bar-cell">
                                 <p className={`stat-bar-value text-[22px] sm:text-[28px] ${stat.color}`}>{stat.value}</p>
@@ -240,7 +240,7 @@ const Manifesto: React.FC = () => {
                     </div>
 
                     {/* Pull quote — victory statement */}
-                    <div className="pull-quote" style={{ borderColor: '#34d399' }}>
+                    <div className="pull-quote" style={{ borderColor: 'var(--accent)' }}>
                         <p>One emergency install during peak season pays for your entire year of infrastructure.</p>
                     </div>
                     <div className="axiom-mono-callout">
@@ -263,9 +263,9 @@ const Manifesto: React.FC = () => {
                     {/* Deployment metrics */}
                     <div className="stat-bar grid-cols-3 mt-8">
                         {[
-                            { label: 'Avg. Lighthouse', value: '98', color: 'text-emerald-400' },
-                            { label: 'Avg. Load Time', value: '0.38s', color: 'text-emerald-400' },
-                            { label: 'Deployments Live', value: '3', color: 'text-[var(--accent)]' },
+                            { label: 'Avg. Lighthouse', value: '98', color: 'text-axiom-accent' },
+                            { label: 'Avg. Load Time', value: '0.38s', color: 'text-axiom-accent' },
+                            { label: 'Deployments Live', value: '3', color: 'text-axiom-accent' },
                         ].map((stat) => (
                             <div key={stat.label} className="stat-bar-cell">
                                 <p className={`stat-bar-value text-[22px] sm:text-[28px] ${stat.color}`}>{stat.value}</p>
@@ -307,7 +307,7 @@ const Manifesto: React.FC = () => {
                         Plug the Leak with Axiom Infrastructure
                     </Link>
                     <p className="text-[12px] text-axiom-text-mute font-grotesk">
-                        Custom engagements starting at <span className="text-axiom-text-main font-semibold">$7,500</span>. <span className="text-[var(--accent)] font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
+                        Custom engagements starting at <span className="text-axiom-text-main font-semibold">$7,500</span>. <span className="text-axiom-accent font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
                     </p>
                 </section>
             </article>
@@ -317,7 +317,7 @@ const Manifesto: React.FC = () => {
                 <div className="pointer-events-auto">
                     <Link
                         to="/contact"
-                        className="flex items-center justify-center w-full min-h-[52px] bg-[var(--accent)] text-axiom-text-main text-[13px] font-bold uppercase tracking-widest rounded-md shadow-[0_8px_25px_rgba(255,103,0,0.35)] hover:bg-[#ff7a1f] active:scale-[0.98] transition-all"
+                        className="flex items-center justify-center w-full min-h-[52px] bg-axiom-accent text-axiom-text-main text-[13px] font-bold uppercase tracking-widest rounded-md shadow-[0_8px_25px_rgba(228,87,46,0.35)] hover:bg-axiom-accent/90 active:scale-[0.98] transition-all"
                     >
                         Plug the Leak
                     </Link>

@@ -69,25 +69,25 @@ export const LiveConsole: React.FC = () => {
     }, [counter]);
 
     return (
-        <div className="w-full lg:w-[420px] xl:w-[460px] border border-axiom-border bg-[#15171A] rounded-sm overflow-hidden flex flex-col shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02),0_4px_20px_-8px_rgba(0,0,0,0.5)] text-left shrink-0">
+        <div className="w-full lg:w-[420px] xl:w-[460px] border border-axiom-border bg-axiom-elevated rounded-sm overflow-hidden flex flex-col shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02),0_4px_20px_-8px_rgba(0,0,0,0.5)] text-left shrink-0">
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-axiom-border bg-white/[0.01]">
                 <div className="flex items-center gap-2">
                     <span className="text-[10px] font-mono text-axiom-text-mute uppercase tracking-widest">System Console</span>
                 </div>
-                <div className="flex items-center gap-2 border border-[#34d399]/20 bg-[#34d399]/5 px-2 py-0.5 rounded-sm">
+                <div className="flex items-center gap-2 border border-axiom-accent/25 bg-axiom-accent/10 px-2 py-0.5 rounded-sm">
                     <span className="relative flex h-1.5 w-1.5 items-center justify-center">
-                        <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-[#34d399] opacity-40"></span>
-                        <span className="relative inline-flex rounded-full h-[3px] w-[3px] bg-[#34d399] opacity-90"></span>
+                        <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-axiom-accent opacity-40"></span>
+                        <span className="relative inline-flex rounded-full h-[3px] w-[3px] bg-axiom-accent opacity-90"></span>
                     </span>
-                    <span className="text-[9px] font-mono text-[#34d399]/90 tracking-widest uppercase">Active</span>
+                    <span className="text-[9px] font-mono text-axiom-accent/90 tracking-widest uppercase">Active</span>
                 </div>
             </div>
 
             {/* Event Feed */}
-            <div className="p-5 flex-1 h-[260px] overflow-hidden flex flex-col justify-end font-mono text-[11px] sm:text-[12px] leading-relaxed relative bg-[#0B0B0C]/30">
+            <div className="p-5 flex-1 h-[260px] overflow-hidden flex flex-col justify-end font-mono text-[11px] sm:text-[12px] leading-relaxed relative bg-axiom-base/60">
                 {/* Gradient mask to gracefully fade events as they scroll up */}
-                <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#131518]/90 to-transparent z-10 pointer-events-none"></div>
+                <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-axiom-elevated/90 to-transparent z-10 pointer-events-none"></div>
 
                 <div className="flex flex-col gap-3 relative z-0">
                     {events.map((ev) => (
