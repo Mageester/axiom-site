@@ -95,7 +95,7 @@ const Home: React.FC = () => {
                                 <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                                     <Link
                                         to="/contact"
-                                        className="btn-primary hero-primary-cta w-full sm:w-auto"
+                                        className="btn-primary btn-lg magnetic-primary hero-primary-cta w-full sm:w-auto"
                                     >
                                         Book Strategy Call
                                     </Link>
@@ -500,7 +500,7 @@ const Home: React.FC = () => {
                         </p>
                         <Link
                             to="/contact"
-                            className="btn-primary"
+                            className="btn-primary btn-lg"
                         >
                             Book Strategy Call
                         </Link>

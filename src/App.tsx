@@ -173,7 +173,7 @@ const App: React.FC = () => {
                     <Link
                         to="/contact"
                         aria-label="Apply for strategy call"
-                        className="hidden md:inline-flex justify-self-end btn-primary !min-h-[44px] !px-6 !text-[10px]"
+                        className="hidden md:inline-flex justify-self-end self-center btn-primary btn-md whitespace-nowrap shrink-0"
                     >
                         Book a Strategy Call
                     </Link>
@@ -201,7 +201,7 @@ const App: React.FC = () => {
                                     {item.label}
                                 </Link>
                             ))}
-                            <Link to="/contact" className="btn-primary w-full mt-2">
+                            <Link to="/contact" className="btn-primary btn-md w-full mt-2">
                                 Book Strategy Call
                             </Link>
                         </div>

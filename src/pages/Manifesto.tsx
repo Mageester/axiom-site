@@ -302,7 +302,7 @@ const Manifesto: React.FC = () => {
                     </p>
                     <Link
                         to="/contact"
-                        className="btn-primary"
+                        className="btn-primary btn-lg"
                     >
                         Plug the Leak with Axiom Infrastructure
                     </Link>
@@ -317,7 +317,7 @@ const Manifesto: React.FC = () => {
                 <div className="pointer-events-auto">
                     <Link
                         to="/contact"
-                        className="flex items-center justify-center w-full min-h-[52px] bg-axiom-accent text-axiom-text-main text-[13px] font-bold uppercase tracking-widest rounded-md shadow-[0_8px_25px_rgba(228,87,46,0.35)] hover:bg-axiom-accent/90 active:scale-[0.98] transition-all"
+                        className="btn-primary btn-lg magnetic-primary w-full"
                     >
                         Plug the Leak
                     </Link>

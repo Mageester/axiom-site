@@ -193,7 +193,7 @@ const ContactPage: React.FC = () => {
                         <div className="axiom-bento bg-axiom-elevated border-axiom-border p-8 text-center rounded-sm">
                             <h2 className="text-[28px] font-semibold text-axiom-text-main mb-3">{msg}</h2>
                             <p className="text-[14px] text-axiom-text-mute mb-6">Our strategy team will reply within 24 hours.</p>
-                            <button onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className="magnetic-primary min-h-[48px] px-6 py-3 border border-axiom-border hover:border-axiom-border text-[12px] font-bold uppercase tracking-widest text-axiom-text-main transition-colors">
+                            <button onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className="btn-secondary btn-md">
                                 Submit Another Application
                             </button>
                         </div>
@@ -237,7 +237,7 @@ const ContactPage: React.FC = () => {
                                 <label className="text-[12px] font-mono text-axiom-text-mute uppercase tracking-widest">Current Website</label>
                                 <input type="url" placeholder="https://" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className="input-field" />
                             </div>
-                            <button type="button" onClick={handleNextStep} className="btn-primary w-full">
+                            <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
                                 See If You Qualify (2‑Minute Survey)
                             </button>
                             <p className="text-[11px] font-mono text-center text-[var(--accent)] uppercase tracking-widest">Only 2 of 4 Partner Slots Remaining for This Month.</p>
@@ -292,7 +292,7 @@ const ContactPage: React.FC = () => {
                                 <button type="button" onClick={() => setStep(1)} className="btn-secondary">
                                     Back
                                 </button>
-                                <button type="submit" disabled={status === 'loading'} className="btn-primary flex-1">
+                                <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg flex-1">
                                     {status === 'loading' ? 'Submitting...' : 'Submit Application'}
                                 </button>
                             </div>

@@ -140,7 +140,7 @@ const PricingPage: React.FC = () => {
 
               <Link
                 to={`/contact?package=${tier.packageParam}`}
-                className="magnetic-primary inline-flex items-center justify-center min-h-[48px] px-6 bg-axiom-accent text-axiom-text-main text-[12px] font-bold uppercase tracking-widest"
+                className="btn-primary btn-md magnetic-primary w-full"
               >
                 {tier.cta}
               </Link>

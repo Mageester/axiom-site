@@ -110,7 +110,7 @@ const AuditPage: React.FC = () => {
                         <input type="url" name="website" required placeholder="https://" className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[16px] p-4 min-h-[48px] focus-visible:border-axiom-border focus-visible:bg-axiom-surface transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                     </div>
 
-                    <button disabled={status === 'loading' || status === 'success'} type="submit" className="btn-primary w-full py-4 mt-4 min-h-[50px] text-[14px] font-bold uppercase tracking-[0.05em] transition-all duration-300 rounded-[2px] disabled:opacity-50">
+                    <button disabled={status === 'loading' || status === 'success'} type="submit" className="btn-primary btn-lg w-full mt-4 disabled:opacity-50">
                         {status === 'loading' ? 'Analyzing...' : 'Analyze My Infrastructure'}
                     </button>
                 </form>
