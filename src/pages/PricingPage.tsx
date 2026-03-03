@@ -5,7 +5,7 @@ import { SEO } from '../components/SEO';
 const pricingTiers = [
   {
     name: 'Foundation',
-    price: '$7,500+',
+    price: '$7,500',
     currency: 'CAD',
     packageParam: 'starter',
     summary: 'Launch-grade infrastructure for contractors replacing slow, template-heavy agency builds.',
@@ -16,10 +16,11 @@ const pricingTiers = [
       'Mobile-first intake flow tuned for urgent calls',
       'Hardened performance baseline with handoff documentation',
     ],
+    boundary: 'Boundary: single territory scope, no multi-location rollout.',
   },
   {
     name: "Contractor's Choice",
-    price: '$7,500+',
+    price: '$12,500',
     currency: 'CAD',
     packageParam: 'professional',
     featured: true,
@@ -31,10 +32,11 @@ const pricingTiers = [
       'Authority messaging across core services and locations',
       'Priority launch support through initial campaign ramp',
     ],
+    boundary: 'Boundary: excludes custom back-office integrations.',
   },
   {
     name: 'Authority',
-    price: '$7,500+',
+    price: '$18,500+',
     currency: 'CAD',
     packageParam: 'enterprise',
     summary: 'Bespoke infrastructure for companies running multiple crews, territories, or acquisitions.',
@@ -45,6 +47,7 @@ const pricingTiers = [
       'Dispatch and CRM integration planning at launch',
       'Quarterly instrumentation reviews for sustained ROI control',
     ],
+    boundary: 'Boundary: custom statement of work required before production.',
   },
 ];
 
@@ -65,13 +68,13 @@ const trustSignals = [
 
 const PricingPage: React.FC = () => {
   return (
-    <div className="pt-32 pb-24 px-6 md:px-10 xl:px-20">
+    <div className="page-shell">
       <SEO
         title="Infrastructure Investment | Axiom Infrastructure"
         description="High-ticket web infrastructure packages built for contractors who need measurable conversion and performance authority."
       />
 
-      <section className="max-w-3xl mx-auto text-center flex flex-col gap-5 mb-14 sm:mb-16">
+      <section className="max-w-3xl mx-auto text-center flex flex-col gap-5 mb-12 sm:mb-14">
         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Infrastructure Investment</p>
         <h1 className="text-[32px] sm:text-[44px] md:text-[54px] font-axiomSans font-semibold tracking-[-0.02em] leading-[1.06] text-axiom-text-main">
           Pricing Built for Serious Operators.
@@ -120,6 +123,7 @@ const PricingPage: React.FC = () => {
               </ul>
 
               <p className="font-axiomSans text-[12px] text-axiom-text-mute">{tier.qualifier}</p>
+              <p className="font-axiomSans text-[12px] text-axiom-text-mute/90 border-t border-axiom-border pt-3">{tier.boundary}</p>
 
               <Link
                 to={`/contact?package=${tier.packageParam}`}
@@ -138,6 +142,21 @@ const PricingPage: React.FC = () => {
               <p className="font-axiomSans text-[14px] text-axiom-text-main/90 leading-relaxed mt-2">{signal.detail}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="max-w-[1200px] mx-auto mt-12">
+        <div className="axiom-bento bg-axiom-surface p-8 sm:p-10 text-center">
+          <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-axiom-text-mute mb-4">Execution Guarantee</p>
+          <h2 className="text-[24px] sm:text-[30px] font-axiomSans font-semibold tracking-tight text-axiom-text-main mb-3">
+            If it does not improve qualified lead flow, we keep working.
+          </h2>
+          <p className="text-[15px] text-axiom-text-mute max-w-[760px] mx-auto leading-relaxed">
+            We scope tightly, instrument everything, and optimize until the conversion system performs. This is infrastructure, not a brochure website.
+          </p>
+          <Link to="/contact" className="btn-primary mt-6">
+            Apply for Strategy Call
+          </Link>
         </div>
       </section>
     </div>

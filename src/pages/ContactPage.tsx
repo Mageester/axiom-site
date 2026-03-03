@@ -29,9 +29,9 @@ const INITIAL_FORM: IntakeFormState = {
 };
 
 const SCALE_OPTIONS = [
-    { value: 'starter', label: 'Starter Investment ($2,500)' },
-    { value: 'professional', label: 'Professional Investment ($5,000)' },
-    { value: 'enterprise', label: 'Enterprise Investment ($7,500+)' }
+    { value: 'starter', label: 'Foundation Investment ($7,500)' },
+    { value: 'professional', label: "Contractor's Choice ($12,500)" },
+    { value: 'enterprise', label: 'Authority Investment ($18,500+)' }
 ];
 
 const PAIN_POINTS_OPTIONS = [
@@ -136,13 +136,13 @@ const ContactPage: React.FC = () => {
     };
 
     return (
-        <div className="pt-32 sm:pt-36 pb-24 px-6 md:px-10 xl:px-20">
+        <div className="page-shell">
             <SEO
                 title="Apply | Axiom Infrastructure"
                 description="Apply for a strategy call and infrastructure audit to identify revenue leaks and conversion gaps."
             />
 
-            <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 mb-8">
+            <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 mb-6">
                 <p className="eyebrow-center">Project Application</p>
                 <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
                     Strategy Call + Infrastructure Audit
@@ -150,6 +150,9 @@ const ContactPage: React.FC = () => {
                 <p className="lead text-center mx-auto">
                     Step {step} of 2. We use this to scope the right build tier and prepare a focused strategy conversation.
                 </p>
+                <div className="w-full max-w-[420px] mx-auto h-[2px] bg-axiom-border rounded-full overflow-hidden">
+                    <div className={`h-full bg-axiom-accent transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`}></div>
+                </div>
             </section>
 
             {/* Founder's Note */}
@@ -192,7 +195,7 @@ const ContactPage: React.FC = () => {
                     )}
 
                     {status === 'error' && (
-                        <div className="bg-axiom-elevated border border-[#2a2218] text-[#a89070] p-5 rounded-[2px] text-[13px] font-mono leading-relaxed">
+                        <div className="bg-axiom-elevated border border-axiom-border text-axiom-text-mute p-5 rounded-[2px] text-[13px] font-mono leading-relaxed">
                             {msg}
                         </div>
                     )}

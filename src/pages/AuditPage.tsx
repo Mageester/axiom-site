@@ -55,7 +55,7 @@ const AuditPage: React.FC = () => {
     };
 
     return (
-        <div className="pt-32 pb-24 min-h-[90vh] flex flex-col items-center justify-center relative overflow-hidden px-6 md:px-10 xl:px-20">
+        <div className="page-shell min-h-[90vh] flex flex-col items-center justify-center relative overflow-hidden">
             <SEO
                 title="Complimentary Engineering Audit | Axiom Infrastructure"
                 description="Get a complimentary engineering audit of your website's performance, UX, and infrastructure."
@@ -75,7 +75,7 @@ const AuditPage: React.FC = () => {
                     <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
 
                     {status === 'success' && (
-                        <div className="absolute inset-0 bg-[#0f1113] z-50 flex flex-col items-center justify-center text-center p-8 animate-in fade-in zoom-in-95 duration-500">
+                        <div className="absolute inset-0 bg-axiom-elevated z-50 flex flex-col items-center justify-center text-center p-8 animate-in fade-in zoom-in-95 duration-500">
                             <div className="text-accent mb-6 w-12 h-12 flex items-center justify-center rounded-full border border-accent/30 bg-accent/10">
                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -89,8 +89,8 @@ const AuditPage: React.FC = () => {
                     )}
 
                     {status === 'error' && (
-                        <div className="bg-axiom-elevated border border-[#2a2218] text-[#a89070] p-5 rounded-[2px] text-[13px] font-mono leading-relaxed mb-2 flex items-start gap-4 animate-in fade-in duration-300">
-                            <div className="w-2 h-2 mt-1.5 bg-[#6b4c2a] rounded-sm shrink-0"></div>
+                        <div className="bg-axiom-elevated border border-axiom-border text-axiom-text-mute p-5 rounded-[2px] text-[13px] font-mono leading-relaxed mb-2 flex items-start gap-4 animate-in fade-in duration-300">
+                            <div className="w-2 h-2 mt-1.5 bg-axiom-accent/70 rounded-sm shrink-0"></div>
                             <p>{msg}</p>
                         </div>
                     )}
