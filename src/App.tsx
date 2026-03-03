@@ -79,13 +79,39 @@ const App: React.FC = () => {
         };
     }, [location.pathname]);
 
+    useEffect(() => {
+        const nodes = Array.from(document.querySelectorAll<HTMLElement>('.btn-primary, .magnetic-primary'));
+        const radius = 50;
+        const maxShift = 5;
+        const onMove = (event: MouseEvent) => {
+            nodes.forEach((node) => {
+                const rect = node.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                const dx = event.clientX - cx;
+                const dy = event.clientY - cy;
+                const distance = Math.hypot(dx, dy);
+                if (distance <= radius) {
+                    const power = 1 - distance / radius;
+                    node.style.setProperty('--mx', `${(dx / radius) * maxShift * power}px`);
+                    node.style.setProperty('--my', `${(dy / radius) * maxShift * power}px`);
+                    return;
+                }
+                node.style.setProperty('--mx', '0px');
+                node.style.setProperty('--my', '0px');
+            });
+        };
+        window.addEventListener('mousemove', onMove);
+        return () => window.removeEventListener('mousemove', onMove);
+    }, [location.pathname]);
+
     return (
         <div className="min-h-screen relative flex flex-col font-inter bg-background text-primary selection:bg-[var(--accent)] selection:text-white">
             <ScrollToTop />
             <BackgroundAtmosphere />
 
-            <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ease-out ${isScrolled ? 'bg-[var(--bg-main)] border-b border-[var(--border-panel)] shadow-sm shadow-black/20' : 'bg-[var(--bg-main)]/90 border-b border-[var(--border-panel)]'}`}>
-                <div className="max-w-[1400px] mx-auto px-6 h-20 grid grid-cols-[1fr_auto] md:grid-cols-3 items-center gap-6">
+            <nav className="fixed top-4 w-full z-50 px-6 md:px-10 xl:px-20">
+                <div className={`axiom-glass axiom-shell-inner border-b border-axiom-border h-20 grid grid-cols-[1fr_auto] md:grid-cols-3 items-center gap-6 px-6 transition-all duration-500 ease-out ${isScrolled ? 'shadow-[0_8px_30px_rgba(0,0,0,0.35)]' : ''}`}>
                     <Link to="/" className="flex items-center gap-3 group focus-visible:ring-offset-background min-h-[48px]">
                         <BrandLockup
                             logoSize="h-[22px] lg:h-[24px] w-auto opacity-90 group-hover:opacity-100 transition-all duration-500 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
@@ -109,8 +135,8 @@ const App: React.FC = () => {
                     </Link>
                 </div>
 
-                <div className="md:hidden border-t border-[var(--border-panel)]">
-                    <div className="max-w-[1400px] mx-auto px-6 py-2 flex items-center justify-center gap-6 text-[12px] font-medium text-secondary">
+                <div className="md:hidden border-t border-axiom-border">
+                    <div className="axiom-shell-inner px-6 py-2 flex items-center justify-center gap-6 text-[12px] font-medium text-secondary">
                         <Link to="/" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Home</Link>
                         <Link to="/services" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Infrastructure</Link>
                         <Link to="/concepts" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Concepts</Link>
@@ -118,8 +144,8 @@ const App: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="border-t border-[var(--border-panel)] bg-[var(--bg-main)]/95">
-                    <div className="max-w-[1400px] mx-auto px-6 py-2.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+                <div className="border-t border-axiom-border bg-axiom-surface/70">
+                    <div className="axiom-shell-inner px-6 py-2.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
                         {globalTrustSignals.map((signal) => (
                             <span key={signal} className="text-[10px] font-mono uppercase tracking-widest text-secondary/90">
                                 {signal}
@@ -151,7 +177,7 @@ const App: React.FC = () => {
                 </div>
             </div>
 
-            <main className="flex-1 flex flex-col">
+            <main className="flex-1 flex flex-col axiom-grain">
                 <Suspense fallback={<AdminLoader />}>
                     <Routes>
                         <Route path="/" element={<Home />} />
@@ -179,43 +205,40 @@ const App: React.FC = () => {
                     </Routes>
                 </Suspense>
             </main>
-
-            <footer className="bg-[var(--bg-main)] pt-12 pb-28 md:pb-12 px-6 border-t border-[var(--border-panel)]">
-                <div className="max-w-[1100px] mx-auto">
-                    {/* Brand + Navigation */}
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
-                        <BrandLockup
-                            opacity="opacity-40 hover:opacity-100 transition-opacity duration-500"
-                            logoSize="h-[18px] w-auto grayscale hover:grayscale-0 transition-all drop-shadow-sm"
-                            textSize="text-[12px] uppercase text-primary"
-                        />
-                        <div className="flex items-center gap-6 text-[11px] font-mono uppercase tracking-widest text-secondary/60">
-                            <Link to="/privacy" className="min-h-[48px] inline-flex items-center hover:text-primary transition-colors duration-300">Privacy</Link>
-                            <Link to="/terms" className="min-h-[48px] inline-flex items-center hover:text-primary transition-colors duration-300">Terms</Link>
-                            <Link to="/admin/login" className="min-h-[48px] inline-flex items-center hover:text-primary transition-colors duration-300">Client Portal</Link>
+            <footer className="axiom-shell-section pt-12 pb-28 md:pb-12 border-t border-axiom-border">
+                <div className="axiom-shell-inner">
+                    <div className="axiom-footer-grid">
+                        <div className="axiom-bento">
+                            <BrandLockup
+                                opacity="opacity-90"
+                                logoSize="h-[20px] w-auto grayscale-0 drop-shadow-sm"
+                                textSize="text-[13px] uppercase text-primary"
+                            />
+                            <p className="text-[12px] text-axiom-text-mute leading-relaxed mt-3">
+                                Axiom Infrastructure is a performance-first engineering firm. We do not use templates, DIY builders, or shared hosting.
+                            </p>
                         </div>
-                    </div>
-
-                    {/* Brand Statement */}
-                    <div className="mt-6 pt-6 border-t border-[var(--border-panel)] flex flex-col gap-3 items-center">
-                        <p className="text-[12px] text-[var(--text-secondary)]/40 leading-relaxed text-center max-w-2xl mx-auto">
-                            Axiom Infrastructure is a performance-first engineering firm. We do not use templates, DIY builders, or shared hosting.
-                        </p>
-                        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] font-mono text-[var(--text-secondary)]/40 uppercase tracking-widest">
-                            <span>Engineered in Kitchener, Ontario</span>
-                            <span className="hidden sm:inline">·</span>
-                            <a href="tel:+15195550198" className="hover:text-white transition-colors min-h-[48px] inline-flex items-center">(519) 555-0198</a>
+                        <div className="axiom-bento">
+                            <p className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-3">Operations</p>
+                            <div className="flex flex-col gap-2 text-[12px] text-axiom-text-main">
+                                <span>Engineered in Kitchener, Ontario</span>
+                                <a href="tel:+15195550198" className="hover:text-white transition-colors min-h-[48px] inline-flex items-center">(519) 555-0198</a>
+                            </div>
                         </div>
-                    </div>
-
-                    {/* Copyright + Status */}
-                    <div className="mt-6 pt-6 border-t border-[var(--border-panel)] flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <p className="text-[11px] font-mono text-[var(--text-secondary)]/50 uppercase tracking-widest">
-                            © {new Date().getFullYear()} Axiom Infrastructure
-                        </p>
-                        <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
-                            <span className="text-[10px] font-mono text-[var(--text-secondary)]/50 uppercase tracking-widest">All systems operational</span>
+                        <div className="axiom-bento">
+                            <p className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-3">Legal</p>
+                            <div className="flex flex-col gap-2 text-[11px] font-mono uppercase tracking-widest text-axiom-text-mute">
+                                <Link to="/privacy" className="min-h-[48px] inline-flex items-center hover:text-white transition-colors duration-300">Privacy</Link>
+                                <Link to="/terms" className="min-h-[48px] inline-flex items-center hover:text-white transition-colors duration-300">Terms</Link>
+                                <Link to="/admin/login" className="min-h-[48px] inline-flex items-center hover:text-white transition-colors duration-300">Client Portal</Link>
+                            </div>
+                        </div>
+                        <div className="axiom-bento">
+                            <p className="text-[11px] font-mono text-axiom-text-mute uppercase tracking-widest">© {new Date().getFullYear()} Axiom Infrastructure</p>
+                            <div className="flex items-center gap-2 mt-3">
+                                <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                                <span className="text-[10px] font-mono text-axiom-text-mute uppercase tracking-widest">All systems operational</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -247,3 +270,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+

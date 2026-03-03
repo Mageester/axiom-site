@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
 const trustMetrics = [
-    { label: 'Load Performance', value: 'Sub-Second', icon: '⚡' },
-    { label: 'Infrastructure', value: 'Edge Deployed', icon: '🌐' },
-    { label: 'Security Profile', value: 'Enterprise Grade', icon: '🔒' }
+    { label: 'Load Performance', value: 'Sub-Second', icon: 'âš¡' },
+    { label: 'Infrastructure', value: 'Edge Deployed', icon: 'ðŸŒ' },
+    { label: 'Security Profile', value: 'Enterprise Grade', icon: 'ðŸ”’' }
 ];
 
 const valueProps = [
     {
         num: '01',
-        title: 'Your Phones Ring During the Storm — Not After',
+        title: 'Your Phones Ring During the Storm â€” Not After',
         desc: 'When the first heatwave hits and every homeowner in town is searching for AC repair, your site stays online while your competitors\' sites crash. That\'s the difference between dispatching trucks and losing leads.'
     },
     {
@@ -49,10 +49,10 @@ const Home: React.FC = () => {
                 description="Edge-deployed web infrastructure for HVAC, roofing, and landscaping businesses that need premium design and stronger lead quality."
             />
 
-            <div className="pt-32 sm:pt-36 pb-24 px-5 sm:px-6">
-                {/* ──── HERO ──── */}
+            <div className="pt-32 sm:pt-36 pb-24 px-6 md:px-10 xl:px-20">
+                {/* â”€â”€â”€â”€ HERO â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto">
-                    <div className="panel p-8 sm:p-10 md:p-16 relative overflow-hidden">
+                    <div className="axiom-bento p-8 sm:p-10 md:p-16 relative overflow-hidden">
                         {/* Subtle gradient glow */}
                         <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(184,115,51,0.08)_0%,transparent_70%)] pointer-events-none"></div>
 
@@ -60,11 +60,11 @@ const Home: React.FC = () => {
                             <p className="eyebrow">Professional Tier Infrastructure</p>
 
                             <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
-                                Command your market with a revenue‑generating website.
+                                Command your market with a revenueâ€‘generating website.
                             </h1>
 
                             <p className="lead">
-                                We engineer blazing‑fast, conversion‑focused web infrastructure for service businesses that want to outclass competitors and stay online during storms.
+                                We engineer blazingâ€‘fast, conversionâ€‘focused web infrastructure for service businesses that want to outclass competitors and stay online during storms.
                             </p>
 
                             <div className="flex flex-col gap-4 pt-2">
@@ -90,9 +90,9 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
-                {/* ──── PERFORMANCE GUARANTEE ──── */}
+                {/* â”€â”€â”€â”€ PERFORMANCE GUARANTEE â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-4 sm:mt-5">
-                    <div className="bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-lg p-4 sm:p-6 text-center">
+                    <div className="axiom-bento p-4 sm:p-6 text-center">
                         <p className="text-[13px] sm:text-[14px] text-[var(--text-body)] leading-relaxed">
                             <span className="font-bold text-[var(--text-heading)] uppercase tracking-widest text-[10.5px] sm:text-[11px] mr-2">The Axiom Guarantee:</span>
                             If our infrastructure doesn't measurably increase your qualified lead capture within 90 days, we work for free until it does.
@@ -100,10 +100,10 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
-                {/* ──── TRUST METRICS ROW ──── */}
+                {/* â”€â”€â”€â”€ TRUST METRICS ROW â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-4 sm:mt-5 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
                     {trustMetrics.map((metric) => (
-                        <div key={metric.label} className="panel p-5 sm:p-6 flex items-center gap-5">
+                        <div key={metric.label} className="axiom-bento p-5 sm:p-6 flex items-center gap-5">
                             <div className="w-10 h-10 rounded-md bg-[var(--accent)]/10 border border-[var(--accent)]/15 flex items-center justify-center text-[18px] shrink-0">
                                 {metric.icon}
                             </div>
@@ -115,9 +115,9 @@ const Home: React.FC = () => {
                     ))}
                 </section>
 
-                {/* ──── SOCIAL PROOF ──── */}
+                {/* â”€â”€â”€â”€ SOCIAL PROOF â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-4 sm:mt-5">
-                    <div className="panel p-6 sm:p-8 md:p-10">
+                    <div className="axiom-bento p-6 sm:p-8 md:p-10">
                         <div className="flex flex-col md:flex-row gap-5 sm:gap-6 items-start">
                             <div className="text-[40px] leading-none text-[var(--accent)]/15 font-serif shrink-0 select-none">"</div>
                             <div className="flex flex-col gap-4 flex-1">
@@ -134,7 +134,7 @@ const Home: React.FC = () => {
                                                 <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.063 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z" /></svg>
                                             ))}
                                         </div>
-                                        <p className="big-figure-label text-[var(--text-secondary)]">Local HVAC Operator · Southern Ontario</p>
+                                        <p className="big-figure-label text-[var(--text-secondary)]">Local HVAC Operator Â· Southern Ontario</p>
                                     </div>
                                 </div>
                             </div>
@@ -142,25 +142,25 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
-                {/* ──── RISK REVERSAL BANNER ──── */}
+                {/* â”€â”€â”€â”€ RISK REVERSAL BANNER â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-16 sm:mt-24">
-                    <div className="panel p-8 sm:p-10 md:p-12">
+                    <div className="axiom-bento p-8 sm:p-10 md:p-12">
                         <div className="max-w-2xl mx-auto text-center flex flex-col gap-5">
                             <p className="eyebrow-center">Risk Reversal</p>
                             <h2 className="text-[22px] sm:text-[32px] md:text-[40px] font-semibold tracking-tight">
                                 When storms hit and demand spikes, your site stays up. Period.
                             </h2>
                             <p className="lead text-center mx-auto">
-                                Every contractor dreads the moment their site goes down during peak season. We deploy on the same infrastructure used by Fortune 500 companies — not some shared GoDaddy server that buckles under pressure.
+                                Every contractor dreads the moment their site goes down during peak season. We deploy on the same infrastructure used by Fortune 500 companies â€” not some shared GoDaddy server that buckles under pressure.
                             </p>
                         </div>
                     </div>
                 </section>
 
-                {/* ──── VALUE PROPOSITION CARDS ──── */}
+                {/* â”€â”€â”€â”€ VALUE PROPOSITION CARDS â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                     {valueProps.map((card) => (
-                        <article key={card.title} className="panel p-6 sm:p-8 flex flex-col gap-4 group hover:border-[#2a2d38] transition-colors">
+                        <article key={card.title} className="axiom-bento p-6 sm:p-8 flex flex-col gap-4 group hover:border-[#2a2d38] transition-colors">
                             <span className="text-[24px] sm:text-[28px] font-bold text-[var(--accent)]/15 font-grotesk">{card.num}</span>
                             <h3 className="text-[17px] sm:text-[19px] font-semibold text-[var(--text-heading)] tracking-tight leading-snug">{card.title}</h3>
                             <p className="text-[14px] sm:text-[15px] text-[var(--text-body)] leading-[1.75]">{card.desc}</p>
@@ -168,18 +168,18 @@ const Home: React.FC = () => {
                     ))}
                 </section>
 
-                {/* ── Section Break ── */}
+                {/* â”€â”€ Section Break â”€â”€ */}
                 <div className="max-w-[1100px] mx-auto mt-16 sm:mt-24"><div className="section-rule"></div></div>
 
-                {/* ──── DEPLOYMENT PROOF ──── */}
+                {/* â”€â”€â”€â”€ DEPLOYMENT PROOF â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
-                    <div className="panel p-7 sm:p-10 md:p-12">
+                    <div className="axiom-bento p-7 sm:p-10 md:p-12">
                         <p className="eyebrow mb-3" style={{ color: '#34d399' }}>Field Operations</p>
                         <h2 className="text-[22px] sm:text-[30px] md:text-[34px] font-semibold tracking-tight mb-3">
                             Built. Deployed. Measured.
                         </h2>
                         <p className="lead mb-10 sm:mb-12">
-                            Every Axiom concept architecture is a live, auditable asset — not a mockup. Here's what $7,500 of engineering actually looks like.
+                            Every Axiom concept architecture is a live, auditable asset â€” not a mockup. Here's what $7,500 of engineering actually looks like.
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
@@ -191,7 +191,7 @@ const Home: React.FC = () => {
                                     color: '#38bdf8',
                                     lighthouseScore: 98,
                                     loadTime: '0.38s',
-                                    stack: 'React 18 · Vite · CF Workers',
+                                    stack: 'React 18 Â· Vite Â· CF Workers',
                                     features: ['Emergency dispatch intake', 'Service area qualification', 'Live equipment diagnostics']
                                 },
                                 {
@@ -201,7 +201,7 @@ const Home: React.FC = () => {
                                     color: '#ea580c',
                                     lighthouseScore: 97,
                                     loadTime: '0.41s',
-                                    stack: 'React 18 · Vite · CF Workers',
+                                    stack: 'React 18 Â· Vite Â· CF Workers',
                                     features: ['Storm damage triage form', 'Material-specific intake', 'GAF certification proof']
                                 },
                                 {
@@ -211,7 +211,7 @@ const Home: React.FC = () => {
                                     color: '#22c55e',
                                     lighthouseScore: 99,
                                     loadTime: '0.35s',
-                                    stack: 'React 18 · Vite · CF Workers',
+                                    stack: 'React 18 Â· Vite Â· CF Workers',
                                     features: ['Season-aware intake funnel', 'Property size qualification', 'Portfolio showcase system']
                                 }
                             ].map((deploy) => (
@@ -247,7 +247,7 @@ const Home: React.FC = () => {
                                     <ul className="flex flex-col gap-2 mt-auto">
                                         {deploy.features.map((f) => (
                                             <li key={f} className="flex items-start gap-2 text-[13px] text-[var(--text-body)] leading-snug">
-                                                <span className="text-emerald-400/40 mt-0.5 shrink-0">›</span>
+                                                <span className="text-emerald-400/40 mt-0.5 shrink-0">â€º</span>
                                                 {f}
                                             </li>
                                         ))}
@@ -261,15 +261,15 @@ const Home: React.FC = () => {
                                 to="/concepts"
                                 className="btn-secondary"
                             >
-                                View All Concept Architectures →
+                                View All Concept Architectures â†’
                             </Link>
                         </div>
                     </div>
                 </section>
 
-                {/* ──── BEFORE / AFTER ECONOMICS ──── */}
+                {/* â”€â”€â”€â”€ BEFORE / AFTER ECONOMICS â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
-                    <div className="panel p-7 sm:p-10 md:p-12">
+                    <div className="axiom-bento p-7 sm:p-10 md:p-12">
                         <p className="eyebrow mb-3">The Real Comparison</p>
                         <h2 className="text-[22px] sm:text-[30px] md:text-[34px] font-semibold tracking-tight mb-10 sm:mb-12">
                             What your money actually buys.
@@ -291,17 +291,17 @@ const Home: React.FC = () => {
                                         'Crashes during traffic spikes',
                                         'Looks like every other contractor',
                                         'No conversion tracking',
-                                        '"Call us!" — no intake qualification',
+                                        '"Call us!" â€” no intake qualification',
                                     ].map((item) => (
                                         <li key={item} className="flex items-start gap-2.5 text-[13px] sm:text-[14px] text-[var(--text-body)] leading-snug">
-                                            <span className="text-red-400/50 font-bold shrink-0 mt-px">✕</span>
+                                            <span className="text-red-400/50 font-bold shrink-0 mt-px">âœ•</span>
                                             {item}
                                         </li>
                                     ))}
                                 </ul>
                                 <div className="mt-auto pt-4 border-t border-red-500/10">
                                     <p className="text-[13px] text-red-400/60 leading-relaxed">
-                                        Annual cost: <span className="font-semibold text-red-400/80">$2,400</span> + your time fixing it. Revenue lost to downtime: <span className="font-semibold text-red-400/80">$60,000–$120,000</span>.
+                                        Annual cost: <span className="font-semibold text-red-400/80">$2,400</span> + your time fixing it. Revenue lost to downtime: <span className="font-semibold text-red-400/80">$60,000â€“$120,000</span>.
                                     </p>
                                 </div>
                             </div>
@@ -315,7 +315,7 @@ const Home: React.FC = () => {
                                 </div>
                                 <ul className="flex flex-col gap-3">
                                     {[
-                                        'Cloudflare Workers — 300+ edge cities',
+                                        'Cloudflare Workers â€” 300+ edge cities',
                                         'Custom React architecture, code-split',
                                         '0.4s load time under any traffic',
                                         'HSTS Preloaded, TLS 1.3, A+ SSL',
@@ -325,14 +325,14 @@ const Home: React.FC = () => {
                                         'Pre-qualifying intake funnel built in',
                                     ].map((item) => (
                                         <li key={item} className="flex items-start gap-2.5 text-[13px] sm:text-[14px] text-[var(--text-body)] leading-snug">
-                                            <span className="text-emerald-400/60 font-bold shrink-0 mt-px">✓</span>
+                                            <span className="text-emerald-400/60 font-bold shrink-0 mt-px">âœ“</span>
                                             {item}
                                         </li>
                                     ))}
                                 </ul>
                                 <div className="mt-auto pt-4 border-t border-emerald-500/10">
                                     <p className="text-[13px] text-emerald-400/70 leading-relaxed">
-                                        One captured emergency call during peak season: <span className="font-semibold text-emerald-400">$5,000–$15,000</span>. Pays for itself before month two.
+                                        One captured emergency call during peak season: <span className="font-semibold text-emerald-400">$5,000â€“$15,000</span>. Pays for itself before month two.
                                     </p>
                                 </div>
                             </div>
@@ -344,12 +344,12 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
-                {/* ── Section Break ── */}
+                {/* â”€â”€ Section Break â”€â”€ */}
                 <div className="max-w-[1100px] mx-auto mt-16 sm:mt-24"><div className="section-rule"></div></div>
 
-                {/* ──── MANIFESTO BRIDGE CTA ──── */}
+                {/* â”€â”€â”€â”€ MANIFESTO BRIDGE CTA â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
-                    <div className="panel border-[var(--accent)]/12 p-7 sm:p-10 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                    <div className="axiom-bento border-[var(--accent)]/12 p-7 sm:p-10 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-10">
                         <div className="flex-1 flex flex-col gap-3">
                             <p className="eyebrow">The Whitepaper</p>
                             <h2 className="text-[20px] sm:text-[26px] md:text-[28px] font-semibold tracking-tight leading-snug">
@@ -363,14 +363,14 @@ const Home: React.FC = () => {
                             to="/manifesto"
                             className="btn-secondary shrink-0 w-full md:w-auto"
                         >
-                            Read the Full Report →
+                            Read the Full Report â†’
                         </Link>
                     </div>
                 </section>
 
-                {/* ──── INFRASTRUCTURE SPECIFICATION ──── */}
+                {/* â”€â”€â”€â”€ INFRASTRUCTURE SPECIFICATION â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
-                    <div className="panel p-7 sm:p-10 md:p-12">
+                    <div className="axiom-bento p-7 sm:p-10 md:p-12">
                         <p className="eyebrow mb-8" style={{ color: '#34d399' }}>Infrastructure Specification</p>
 
                         <div className="stat-bar grid-cols-1 sm:grid-cols-2">
@@ -388,9 +388,9 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
-                {/* ──── INDUSTRIES SERVED ──── */}
+                {/* â”€â”€â”€â”€ INDUSTRIES SERVED â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
-                    <div className="panel p-7 sm:p-10 md:p-12">
+                    <div className="axiom-bento p-7 sm:p-10 md:p-12">
                         <div className="text-center flex flex-col gap-4 sm:gap-5 mb-10">
                             <p className="eyebrow-center">Industries</p>
                             <h2 className="text-[22px] sm:text-[32px] md:text-[40px] font-semibold tracking-tight">
@@ -413,18 +413,18 @@ const Home: React.FC = () => {
                                 to="/concepts"
                                 className="btn-secondary"
                             >
-                                View Industry Concepts →
+                                View Industry Concepts â†’
                             </Link>
                         </div>
                     </div>
                 </section>
 
-                {/* ── Section Break ── */}
+                {/* â”€â”€ Section Break â”€â”€ */}
                 <div className="max-w-[1100px] mx-auto mt-16 sm:mt-24"><div className="section-rule"></div></div>
 
-                {/* ──── THE AXIOM STORY ──── */}
+                {/* â”€â”€â”€â”€ THE AXIOM STORY â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
-                    <div className="panel p-7 sm:p-10 md:p-14">
+                    <div className="axiom-bento p-7 sm:p-10 md:p-14">
                         <p className="eyebrow mb-6 sm:mb-8">The Axiom Story</p>
 
                         <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
@@ -437,14 +437,14 @@ const Home: React.FC = () => {
                                         Axiom was built because I saw $10M roofing and HVAC firms losing six figures every year to slow sites and "marketing" agencies that don't understand the pressure of a heatwave.
                                     </p>
                                     <p>
-                                        These agencies sell logos and colour palettes. They don't understand that when a storm rolls through at 2&nbsp;AM and every homeowner in the county is searching for emergency repair, your site needs to be the one that loads — not the one that crashes.
+                                        These agencies sell logos and colour palettes. They don't understand that when a storm rolls through at 2&nbsp;AM and every homeowner in the county is searching for emergency repair, your site needs to be the one that loads â€” not the one that crashes.
                                     </p>
                                     <p>
-                                        I'm an engineer, not a designer. I build systems that capture revenue under pressure. That's why Axiom exists — to give serious contractors the same calibre of web infrastructure that Fortune 500 companies take for granted.
+                                        I'm an engineer, not a designer. I build systems that capture revenue under pressure. That's why Axiom exists â€” to give serious contractors the same calibre of web infrastructure that Fortune 500 companies take for granted.
                                     </p>
                                 </div>
                                 <p className="big-figure-label text-[var(--text-tertiary)] mt-2">
-                                    — Aidan · Founder, Axiom Infrastructure
+                                    â€” Aidan Â· Founder, Axiom Infrastructure
                                 </p>
                             </div>
 
@@ -455,7 +455,7 @@ const Home: React.FC = () => {
                                     { label: 'Base', value: 'Kitchener, Ontario' },
                                     { label: 'Partners / Month', value: '4 Maximum' },
                                 ].map((stat) => (
-                                    <div key={stat.label} className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md p-4 flex flex-col gap-1">
+                                    <div key={stat.label} className="axiom-bento p-4 flex flex-col gap-1">
                                         <p className="big-figure-label text-[var(--text-secondary)]">{stat.label}</p>
                                         <p className="text-[16px] sm:text-[18px] font-semibold text-[var(--text-heading)] font-grotesk tracking-tight">{stat.value}</p>
                                     </div>
@@ -465,7 +465,7 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
-                {/* ──── FINAL CTA ──── */}
+                {/* â”€â”€â”€â”€ FINAL CTA â”€â”€â”€â”€ */}
                 <section className="max-w-[1100px] mx-auto mt-16 sm:mt-24">
                     <div className="inline-cta !m-0">
                         <h2 className="text-[24px] sm:text-[32px] md:text-[40px] font-semibold tracking-tight">
@@ -491,3 +491,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+

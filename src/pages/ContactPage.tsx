@@ -136,7 +136,7 @@ const ContactPage: React.FC = () => {
     };
 
     return (
-        <div className="pt-32 sm:pt-36 pb-24 px-5 sm:px-6">
+        <div className="pt-32 sm:pt-36 pb-24 px-6 md:px-10 xl:px-20">
             <SEO
                 title="Apply | Axiom Infrastructure"
                 description="Apply for a strategy call and infrastructure audit to identify revenue leaks and conversion gaps."
@@ -154,7 +154,7 @@ const ContactPage: React.FC = () => {
 
             {/* Founder's Note */}
             <section className="max-w-4xl mx-auto mb-6">
-                <div className="panel p-5 sm:p-6 md:p-8 flex gap-5 items-start">
+                <div className="axiom-bento p-6 md:p-8 flex gap-5 items-start">
                     <div className="shrink-0 flex flex-col items-center gap-2">
                         <div className="w-14 h-14 rounded-full bg-[var(--bg-inset)] border border-[var(--border-panel)] flex items-center justify-center text-[18px] font-bold text-[var(--text-secondary)] uppercase tracking-wide">A</div>
                         <p className="text-[9px] font-grotesk text-[var(--text-tertiary)] uppercase tracking-widest text-center leading-tight max-w-[70px]">Aidan<br />Lead Engineer<br />Kitchener ON</p>
@@ -171,7 +171,7 @@ const ContactPage: React.FC = () => {
 
             {/* Performance Guarantee */}
             <section className="max-w-4xl mx-auto mb-6">
-                <div className="panel p-5 sm:p-6 text-center">
+                <div className="axiom-bento p-6 text-center">
                     <p className="text-[13px] sm:text-[14px] text-[var(--text-body)] leading-[1.75]">
                         <span className="font-bold text-[var(--text-heading)] uppercase tracking-widest text-[10.5px] sm:text-[11px] mr-2">The Axiom Guarantee:</span>
                         If our infrastructure doesn't measurably increase your qualified lead capture within 90 days, we work for free until it does.
@@ -179,13 +179,13 @@ const ContactPage: React.FC = () => {
                 </div>
             </section>
 
-            <section className="max-w-4xl mx-auto panel p-6 sm:p-8 md:p-10">
+            <section className="max-w-4xl mx-auto axiom-glass p-6 sm:p-8 md:p-10">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                     {status === 'success' && (
-                        <div className="surface-panel bg-zinc-900/70 border-zinc-700 p-8 text-center rounded-sm">
+                        <div className="axiom-bento bg-zinc-900/70 border-zinc-700 p-8 text-center rounded-sm">
                             <h2 className="text-[28px] font-semibold text-primary mb-3">{msg}</h2>
                             <p className="text-[14px] text-secondary mb-6">Our strategy team will reply within 24 hours.</p>
-                            <button onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className="min-h-[48px] px-6 py-3 border border-zinc-700 hover:border-zinc-500 text-[12px] font-bold uppercase tracking-widest text-primary transition-colors">
+                            <button onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className="magnetic-primary min-h-[48px] px-6 py-3 border border-zinc-700 hover:border-zinc-500 text-[12px] font-bold uppercase tracking-widest text-primary transition-colors">
                                 Submit Another Application
                             </button>
                         </div>
@@ -235,7 +235,7 @@ const ContactPage: React.FC = () => {
                             <p className="text-[11px] font-mono text-center text-[var(--accent)] uppercase tracking-widest">Only 2 of 4 Partner Slots Remaining for This Month.</p>
 
                             {/* What Happens Next */}
-                            <div className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md p-4 sm:p-5 flex flex-col gap-4">
+                            <div className="axiom-bento p-5 flex flex-col gap-4">
                                 <p className="eyebrow !text-[11px]">What Happens Next</p>
                                 {[
                                     { phase: '01', text: 'Aidan personally reviews your current site and local market competition.' },

@@ -37,7 +37,7 @@ const tiers = [
         desc: 'A tailored digital experience designed around your exact sales process and market position.',
         features: [
             'Bespoke architecture built around how your best deals close',
-            'Instant page loads from servers in 200+ cities — no delays',
+            'Instant page loads from servers in 200+ cities â€” no delays',
             'A complete funnel: from first click to booked appointment',
             'Dedicated priority support with a named engineer'
         ],
@@ -48,15 +48,15 @@ const tiers = [
 const faqs = [
     {
         q: 'How long does a typical build take?',
-        a: 'Starter builds ship in 2 weeks. Professional builds take 3–4 weeks. Enterprise builds are 4–6 weeks depending on scope. We work in focused sprints with weekly check-ins — you\'re never left guessing.'
+        a: 'Starter builds ship in 2 weeks. Professional builds take 3â€“4 weeks. Enterprise builds are 4â€“6 weeks depending on scope. We work in focused sprints with weekly check-ins â€” you\'re never left guessing.'
     },
     {
         q: 'Do I need to handle my own hosting?',
-        a: 'No. Every Axiom build is deployed to Cloudflare\'s global edge network — the same infrastructure used by Fortune 500 companies. Hosting, SSL, and CDN are included and managed for you.'
+        a: 'No. Every Axiom build is deployed to Cloudflare\'s global edge network â€” the same infrastructure used by Fortune 500 companies. Hosting, SSL, and CDN are included and managed for you.'
     },
     {
         q: 'What if I need changes after launch?',
-        a: 'Enterprise builds include 30 days of post-launch adjustments at no extra cost. After that, we offer retainer plans for ongoing optimization. You always own your code — no lock-in.'
+        a: 'Enterprise builds include 30 days of post-launch adjustments at no extra cost. After that, we offer retainer plans for ongoing optimization. You always own your code â€” no lock-in.'
     }
 ];
 
@@ -65,7 +65,7 @@ const ServicesPage: React.FC = () => {
     const [openFaq, setOpenFaq] = useState<string | null>(null);
 
     return (
-        <div className="pt-32 sm:pt-36 pb-24 px-5 sm:px-6">
+        <div className="pt-32 sm:pt-36 pb-24 px-6 md:px-10 xl:px-20">
             <SEO
                 title="Infrastructure Investments | Axiom"
                 description="Explore Starter, Professional, and Enterprise infrastructure investments for local service businesses."
@@ -84,9 +84,9 @@ const ServicesPage: React.FC = () => {
 
             {/* SLA Guarantee Banner */}
             <section className="max-w-[1100px] mx-auto mb-10 sm:mb-12">
-                <div className="panel border-[var(--accent)]/15 p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 text-center sm:text-left">
+                <div className="axiom-bento border-[var(--accent)]/15 p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 text-center sm:text-left">
                     <div className="w-14 h-14 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-[24px] shrink-0">
-                        🛡️
+                        ðŸ›¡ï¸
                     </div>
                     <div className="flex flex-col gap-1">
                         <h3 className="text-[17px] sm:text-[18px] font-semibold tracking-tight">Performance Guarantee</h3>
@@ -148,7 +148,7 @@ const ServicesPage: React.FC = () => {
 
             {/* Engineering Roadmap */}
             <section className="max-w-[1100px] mx-auto mt-14 sm:mt-20">
-                <div className="panel p-8 sm:p-10 md:p-12">
+                <div className="axiom-bento p-8 sm:p-10 md:p-12">
                     <div className="text-center mb-10">
                         <p className="eyebrow-center mb-4">Our Process</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
@@ -163,7 +163,7 @@ const ServicesPage: React.FC = () => {
                             { num: '03', title: 'Performance Hardening', desc: 'We run 50+ point security and speed audits to ensure sub-second delivery.' },
                             { num: '04', title: 'Launch & Support', desc: 'Your asset goes live on the global edge with 24/7 uptime monitoring.' },
                         ].map((phase) => (
-                            <div key={phase.num} className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md md:p-6 flex flex-col overflow-hidden">
+                            <div key={phase.num} className="axiom-bento md:p-6 flex flex-col overflow-hidden">
                                 {/* Mobile Accordion Header */}
                                 <button
                                     onClick={() => setOpenStep(openStep === phase.num ? null : phase.num)}
@@ -193,7 +193,7 @@ const ServicesPage: React.FC = () => {
 
             {/* ROI Math Block */}
             <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
-                <div className="panel p-8 sm:p-10 md:p-12">
+                <div className="axiom-bento p-8 sm:p-10 md:p-12">
                     <div className="text-center mb-10">
                         <p className="eyebrow-center mb-4" style={{ color: '#ef4444' }}>The Math</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
@@ -202,9 +202,9 @@ const ServicesPage: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mb-8">
-                        <div className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md p-5 sm:p-6 flex flex-col gap-2">
+                        <div className="axiom-bento p-5 sm:p-6 flex flex-col gap-2">
                             <p className="big-figure-label text-[var(--text-secondary)]">Avg. HVAC Lead Value</p>
-                            <p className="text-[24px] sm:text-[28px] font-bold tracking-tight font-grotesk">$1,500 – $15,000</p>
+                            <p className="text-[24px] sm:text-[28px] font-bold tracking-tight font-grotesk">$1,500 â€“ $15,000</p>
                             <p className="text-[13px] text-[var(--text-body)] leading-[1.7]">Emergency installs, full system replacements, and commercial maintenance contracts.</p>
                         </div>
                         <div className="bg-[var(--bg-inset)] border border-red-500/15 rounded-md p-5 sm:p-6 flex flex-col gap-2">
@@ -219,7 +219,7 @@ const ServicesPage: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md p-5 sm:p-6 text-center">
+                    <div className="axiom-bento p-5 sm:p-6 text-center">
                         <p className="text-[15px] sm:text-[16px] text-[var(--text-heading)] leading-[1.7] font-medium">
                             A single captured emergency install during peak season pays for your <span className="text-emerald-400">entire year</span> of infrastructure.
                         </p>
@@ -229,7 +229,7 @@ const ServicesPage: React.FC = () => {
 
             {/* FAQ Section */}
             <section className="max-w-[1100px] mx-auto mt-14 sm:mt-20">
-                <div className="panel p-8 sm:p-10 md:p-12">
+                <div className="axiom-bento p-8 sm:p-10 md:p-12">
                     <div className="text-center mb-8">
                         <p className="eyebrow-center mb-4">Common Questions</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
@@ -239,7 +239,7 @@ const ServicesPage: React.FC = () => {
 
                     <div className="flex flex-col gap-3 max-w-2xl mx-auto">
                         {faqs.map((faq, i) => (
-                            <div key={i} className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md overflow-hidden">
+                            <div key={i} className="axiom-bento overflow-hidden">
                                 <button
                                     onClick={() => setOpenFaq(openFaq === faq.q ? null : faq.q)}
                                     className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors gap-4"
@@ -271,3 +271,4 @@ const ServicesPage: React.FC = () => {
 };
 
 export default ServicesPage;
+
