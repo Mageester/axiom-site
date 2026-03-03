@@ -7,6 +7,7 @@ const Manifesto: React.FC = () => {
     const [lostCalls, setLostCalls] = useState(2);
     const avgTicket = 5000;
     const annualLeak = lostCalls * avgTicket * 12;
+    const [displayAnnualLeak, setDisplayAnnualLeak] = useState(annualLeak);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -16,34 +17,48 @@ const Manifesto: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        const start = displayAnnualLeak;
+        const delta = annualLeak - start;
+        const startTime = performance.now();
+        let raf = 0;
+        const animate = (now: number) => {
+            const progress = Math.min((now - startTime) / 450, 1);
+            setDisplayAnnualLeak(Math.round(start + delta * progress));
+            if (progress < 1) raf = requestAnimationFrame(animate);
+        };
+        raf = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(raf);
+    }, [annualLeak]);
+
     return (
-        <div className="pt-32 sm:pt-36 pb-24 px-5 sm:px-6">
+        <div className="pt-32 sm:pt-36 pb-24 px-6 md:px-10 xl:px-20">
             <SEO
                 title="The $100,000 Leak | Axiom Infrastructure"
                 description="Why cheap websites fail during peak season and how the math of downtime costs HVAC, roofing, and landscaping firms six figures a year."
             />
 
             {/* ──── MANIFESTO HEADER ──── */}
-            <header className="max-w-2xl mx-auto text-center flex flex-col items-center gap-5 mb-16 sm:mb-20">
+            <header className="max-w-[720px] mx-auto text-center flex flex-col items-center gap-5 mb-16 sm:mb-20">
                 <p className="eyebrow-center">Infrastructure Whitepaper</p>
 
-                <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
+                <h1 className="hero-headline hero-fade-in">
                     The $100,000 Leak: Why Cheap Websites Fail During Peak Season.
                 </h1>
 
-                <p className="lead text-center mx-auto">
+                <p className="hero-subheading text-center mx-auto">
                     The math your web designer never showed you.
                 </p>
             </header>
 
             {/* ──── ARTICLE BODY ──── */}
-            <article className="max-w-2xl mx-auto flex flex-col gap-0">
+            <article className="max-w-[720px] mx-auto flex flex-col gap-0 leading-[1.6]">
 
                 {/* ── SECTION 1: THE PROBLEM ── */}
                 <section className="mb-6 sm:mb-8">
-                    <p className="eyebrow mb-5 sm:mb-6">The Problem</p>
+                    <p className="eyebrow mb-5 sm:mb-6">INFRASTRUCTURE COMMAND</p>
 
-                    <div className="prose-editorial">
+                    <div className="prose-editorial !leading-[1.6] max-w-[68ch]">
                         <p>
                             Every contractor knows the feeling. It's July. The first real heatwave hits. Every phone in town is ringing. Homeowners are searching "AC repair near me" at 2 AM.
                         </p>
@@ -65,21 +80,21 @@ const Manifesto: React.FC = () => {
 
                 {/* ── SECTION 2: THE MATH ── */}
                 <section className="my-10 sm:my-14">
-                    <p className="eyebrow mb-5 sm:mb-6" style={{ color: 'var(--accent)' }}>The Math of Downtime</p>
+                    <p className="eyebrow mb-5 sm:mb-6" style={{ color: 'var(--accent)' }}>MANDATORY PRECISION</p>
 
                     <p className="lead mb-8 sm:mb-10">
                         Adjust the slider below to see the math your web designer never showed you.
                     </p>
 
                     {/* Calculator Panel */}
-                    <div className="panel p-5 sm:p-8 md:p-10 flex flex-col gap-8">
+                    <div className="axiom-glass terminal-grid p-5 sm:p-8 md:p-10 flex flex-col gap-8">
                         {/* Slider */}
                         <div className="flex flex-col gap-4">
                             <div className="flex justify-between items-end">
-                                <label htmlFor="lost-calls-slider" className="text-[14px] sm:text-[15px] font-semibold text-[var(--text-heading)] tracking-tight">
+                                <label htmlFor="lost-calls-slider" className="font-axiomMono text-[14px] sm:text-[15px] font-semibold text-[var(--text-heading)] tracking-tight">
                                     Lost Emergency Calls per Month
                                 </label>
-                                <span className="text-[24px] sm:text-[28px] font-bold text-[var(--accent)] font-grotesk tabular-nums">{lostCalls}</span>
+                                <span className="font-axiomMono text-[24px] sm:text-[28px] font-bold text-[var(--accent)] tabular-nums">{lostCalls}</span>
                             </div>
                             <input
                                 id="lost-calls-slider"
@@ -88,7 +103,7 @@ const Manifesto: React.FC = () => {
                                 max="10"
                                 value={lostCalls}
                                 onChange={(e) => setLostCalls(Number(e.target.value))}
-                                className="w-full h-2 bg-[#1a1d25] rounded-full appearance-none cursor-pointer accent-[var(--accent)]"
+                                className="w-full h-2 bg-[#1a1d25] rounded-full appearance-none cursor-pointer accent-[#E4572E]"
                             />
                             <p className="text-[12px] text-[var(--text-secondary)]">Due to downtime or slow competitor load speeds.</p>
                         </div>
@@ -97,15 +112,15 @@ const Manifesto: React.FC = () => {
                         <div className="flex flex-col gap-3 py-6 border-y border-[var(--border-subtle)]">
                             <div className="flex justify-between items-center">
                                 <span className="text-[14px] text-[var(--text-secondary)]">Average HVAC Ticket</span>
-                                <span className="text-[15px] sm:text-[16px] font-grotesk font-medium text-[var(--text-heading)] tabular-nums">${avgTicket.toLocaleString()}</span>
+                                <span className="font-axiomMono text-[15px] sm:text-[16px] font-medium text-[var(--text-heading)] tabular-nums">${avgTicket.toLocaleString()}</span>
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="text-[14px] text-[var(--text-secondary)]">Months per Year</span>
-                                <span className="text-[15px] sm:text-[16px] font-grotesk font-medium text-[var(--text-heading)] tabular-nums">12</span>
+                                <span className="font-axiomMono text-[15px] sm:text-[16px] font-medium text-[var(--text-heading)] tabular-nums">12</span>
                             </div>
                             <div className="flex justify-between items-center pt-2">
                                 <span className="text-[14px] font-medium text-[var(--text-secondary)]">Calculation</span>
-                                <span className="text-[14px] font-grotesk font-medium text-[var(--text-secondary)] tabular-nums">
+                                <span className="font-axiomMono text-[14px] font-medium text-[var(--text-secondary)] tabular-nums">
                                     {lostCalls} × ${avgTicket.toLocaleString()} × 12
                                 </span>
                             </div>
@@ -114,8 +129,8 @@ const Manifesto: React.FC = () => {
                         {/* Big figure — dramatic emphasis */}
                         <div className="flex flex-col items-center text-center gap-3 pt-2">
                             <p className="big-figure-label text-[#ef4444]">Total Annual Revenue Leak</p>
-                            <p className="big-figure text-[36px] sm:text-[48px] md:text-[56px] text-[#ef4444] tabular-nums">
-                                ${annualLeak.toLocaleString()}
+                            <p className="font-axiomMono text-[32px] sm:text-[40px] md:text-[48px] font-bold text-[#ef4444] tabular-nums">
+                                ${displayAnnualLeak.toLocaleString()}
                             </p>
                         </div>
                     </div>
@@ -130,9 +145,9 @@ const Manifesto: React.FC = () => {
 
                 {/* ── SECTION 3: THE FIX ── */}
                 <section className="my-10 sm:my-14">
-                    <p className="eyebrow mb-5 sm:mb-6" style={{ color: '#34d399' }}>The Axiom Fix</p>
+                    <p className="eyebrow mb-5 sm:mb-6" style={{ color: '#34d399' }}>ELIMINATING ROI FRICTION</p>
 
-                    <div className="prose-editorial">
+                    <div className="prose-editorial !leading-[1.6] max-w-[68ch]">
                         <p>
                             Axiom deploys your site on the same global edge network used by Shopify, Discord, and Cloudflare itself. Your pages are served from 300+ data centres worldwide.
                         </p>
@@ -168,9 +183,9 @@ const Manifesto: React.FC = () => {
 
                 {/* ── SECTION 3.5: THE EVIDENCE ── */}
                 <section className="my-10 sm:my-14">
-                    <p className="eyebrow mb-5 sm:mb-6">The Evidence</p>
+                    <p className="eyebrow mb-5 sm:mb-6">THE ARCHITECTURE OF GROWTH</p>
 
-                    <div className="prose-editorial">
+                    <div className="prose-editorial !leading-[1.6] max-w-[68ch]">
                         <p>
                             We don't show mockups. Every Axiom concept architecture is a live, measurable deployment on Cloudflare's global edge. Here's what we've built for contractors in HVAC, roofing, and landscaping — purpose-engineered to capture revenue under pressure.
                         </p>
@@ -209,6 +224,7 @@ const Manifesto: React.FC = () => {
 
                 {/* ── SECTION 4: CTA ── */}
                 <section className="inline-cta mt-10 sm:mt-14">
+                    <p className="eyebrow-center mb-5">MACHINED SCALABILITY</p>
                     <h2 className="text-[24px] sm:text-[32px] md:text-[36px] font-semibold tracking-tight">
                         Plug the leak.
                     </h2>

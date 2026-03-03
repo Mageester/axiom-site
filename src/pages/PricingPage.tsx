@@ -51,16 +51,16 @@ const PricingPage: React.FC = () => {
                     {/* TIER 1 */}
                     <div className="surface-panel p-8 sm:p-10 relative overflow-hidden group border-white/5 hover:border-white/10 transition-all duration-300 rounded-sm flex flex-col bg-black/40">
                         <div className="absolute top-0 left-0 w-[3px] h-full bg-[#a1a1a1]/30"></div>
-                        <h3 className="text-[24px] font-semibold text-[#ffffff] mb-2 tracking-tight">The Foundation</h3>
-                        <p className="text-[13px] text-[#a1a1a1] mb-6 min-h-[40px] leading-relaxed">Essential digital infrastructure for local professionals.</p>
+                        <h3 className="text-[24px] font-semibold text-[#ffffff] mb-2 tracking-tight">Foundation</h3>
+                        <p className="text-[13px] text-axiom-text-mute mb-6 min-h-[40px] leading-relaxed">Essential digital infrastructure for local professionals.</p>
                         <div className="text-[32px] font-semibold text-[#ffffff] mb-8 border-b border-white/5 pb-6">
-                            $1,450 <span className="text-[12px] font-normal text-[#a1a1a1] uppercase tracking-widest ml-1">CAD</span>
+                            $7,500+ <span className="text-[12px] font-normal text-axiom-text-mute uppercase tracking-widest ml-1">CAD</span>
                         </div>
                         <ul className="flex flex-col gap-4 text-[13px] text-[#a1a1a1] flex-1">
-                            <li className="flex items-center gap-3"><span className="text-white/40 w-1 h-1 rounded-full shrink-0"></span>3-Page Core Architecture</li>
-                            <li className="flex items-center gap-3"><span className="text-white/40 w-1 h-1 rounded-full shrink-0"></span>Cloudflare Edge Deployment</li>
-                            <li className="flex items-center gap-3"><span className="text-white/40 w-1 h-1 rounded-full shrink-0"></span>Field-Optimized Mobile UX</li>
-                            <li className="flex items-center gap-3"><span className="text-white/40 w-1 h-1 rounded-full shrink-0"></span>SSL & Global CDN Security</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>3-Page Core Architecture</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>Cloudflare Edge Deployment</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>Field-Optimized Mobile UX</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>SSL & Global CDN Security</li>
                         </ul>
                         <Link to="/contact?package=foundation" className="mt-10 inline-flex items-center justify-center px-5 py-4 bg-transparent hover:bg-white text-white hover:text-black border border-white/20 hover:scale-[1.05] text-[11px] font-bold uppercase tracking-widest rounded-sm transition-all duration-300">
                             Select Foundation
@@ -68,20 +68,20 @@ const PricingPage: React.FC = () => {
                     </div>
 
                     {/* TIER 2 - FEATURED */}
-                    <div className="surface-panel p-8 sm:p-10 relative overflow-hidden group border-white/20 hover:border-white/40 transition-all duration-500 rounded-sm flex flex-col scale-[1.02] shadow-[0_0_30px_rgba(255,255,255,0.06)] z-20 bg-[#0c0c0c]">
+                    <div className="surface-panel p-8 sm:p-10 relative overflow-hidden group border-white/20 hover:border-white/40 transition-all duration-500 rounded-sm flex flex-col scale-[1.02] shadow-[0_0_30px_rgba(255,255,255,0.06)] z-20 bg-[#0c0c0c] border-t-2 border-t-axiom-accent">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:16px_16px] opacity-40 pointer-events-none"></div>
                         <div className="absolute top-0 left-0 w-[4px] h-full bg-[#ffffff]"></div>
-                        <div className="absolute top-0 right-0 py-1.5 px-4 bg-white text-black text-[10px] font-bold uppercase tracking-widest rounded-bl-sm z-10 shadow-lg">Recommended</div>
-                        <h3 className="text-[24px] font-semibold text-[#ffffff] mb-2 tracking-tight">The Engine</h3>
-                        <p className="text-[13px] text-[#a1a1a1] mb-6 min-h-[40px] leading-relaxed">A high-speed lead generation machine for growing businesses.</p>
+                        <div className="absolute top-0 right-0 py-1.5 px-4 bg-white text-black text-[10px] font-bold uppercase tracking-widest rounded-bl-sm z-10 shadow-lg">Contractor's Choice</div>
+                        <h3 className="text-[24px] font-semibold text-[#ffffff] mb-2 tracking-tight">Contractor's Choice</h3>
+                        <p className="text-[13px] text-axiom-text-mute mb-6 min-h-[40px] leading-relaxed">A high-speed lead generation machine for growth-stage teams.</p>
                         <div className="text-[32px] font-semibold text-[#ffffff] mb-8 border-b border-white/10 pb-6 relative z-10">
-                            $3,250 <span className="text-[12px] font-normal text-[#a1a1a1] uppercase tracking-widest ml-1">CAD</span>
+                            $7,500+ <span className="text-[12px] font-normal text-axiom-text-mute uppercase tracking-widest ml-1">CAD</span>
                         </div>
                         <ul className="flex flex-col gap-4 text-[13px] text-white/90 font-medium flex-1 relative z-10">
-                            <li className="flex items-center gap-3"><span className="bg-white/80 w-1 h-1 rounded-full shrink-0"></span>7-10 High-Conversion Pages</li>
-                            <li className="flex items-center gap-3"><span className="bg-white/80 w-1 h-1 rounded-full shrink-0"></span>90+ Lighthouse Speed Performance</li>
-                            <li className="flex items-center gap-3"><span className="bg-white/80 w-1 h-1 rounded-full shrink-0"></span>Local SEO Schema Architecture</li>
-                            <li className="flex items-center gap-3"><span className="bg-white/80 w-1 h-1 rounded-full shrink-0"></span>Advanced Lead Capture Systems</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>7-10 High-Conversion Pages</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>90+ Lighthouse Speed Performance</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>Local SEO Schema Architecture</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>Advanced Lead Capture Systems</li>
                         </ul>
                         <Link to="/contact?package=engine" className="mt-10 relative z-10 inline-flex items-center justify-center px-5 py-4 bg-white text-black border border-transparent hover:bg-[#e2e2e2] hover:scale-[1.05] text-[11px] font-bold uppercase tracking-widest rounded-sm transition-all duration-300">
                             Select Engine
@@ -91,16 +91,16 @@ const PricingPage: React.FC = () => {
                     {/* TIER 3 */}
                     <div className="surface-panel p-8 sm:p-10 relative overflow-hidden group border-white/5 hover:border-white/10 transition-all duration-300 rounded-sm flex flex-col bg-black/40">
                         <div className="absolute top-0 left-0 w-[3px] h-full bg-[#a1a1a1]/30"></div>
-                        <h3 className="text-[24px] font-semibold text-[#ffffff] mb-2 tracking-tight">Enterprise</h3>
-                        <p className="text-[13px] text-[#a1a1a1] mb-6 min-h-[40px] leading-relaxed">Custom-engineered systems for market leaders.</p>
+                        <h3 className="text-[24px] font-semibold text-[#ffffff] mb-2 tracking-tight">Authority</h3>
+                        <p className="text-[13px] text-axiom-text-mute mb-6 min-h-[40px] leading-relaxed">Custom-engineered systems for market leaders.</p>
                         <div className="text-[32px] font-semibold text-[#ffffff] mb-8 border-b border-white/5 pb-6">
-                            $7,500+ <span className="text-[12px] font-normal text-[#a1a1a1] uppercase tracking-widest ml-1">CAD</span>
+                            $7,500+ <span className="text-[12px] font-normal text-axiom-text-mute uppercase tracking-widest ml-1">CAD</span>
                         </div>
                         <ul className="flex flex-col gap-4 text-[13px] text-[#a1a1a1] flex-1">
-                            <li className="flex items-center gap-3"><span className="text-white/40 w-1 h-1 rounded-full shrink-0"></span>Bespoke Digital Ecosystems</li>
-                            <li className="flex items-center gap-3"><span className="text-white/40 w-1 h-1 rounded-full shrink-0"></span>Custom CRM & Booking Integration</li>
-                            <li className="flex items-center gap-3"><span className="text-white/40 w-1 h-1 rounded-full shrink-0"></span>Enterprise-Grade Security Protocols</li>
-                            <li className="flex items-center gap-3"><span className="text-white/40 w-1 h-1 rounded-full shrink-0"></span>Priority Engineering Support</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>Bespoke Digital Ecosystems</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>Custom CRM & Booking Integration</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>Enterprise-Grade Security Protocols</li>
+                            <li className="flex items-center gap-3"><span className="text-axiom-accent shrink-0">✓</span>Priority Engineering Support</li>
                         </ul>
                         <Link to="/contact?package=authority" className="mt-10 inline-flex items-center justify-center px-5 py-4 bg-transparent hover:bg-white text-white hover:text-black border border-white/20 hover:scale-[1.05] text-[11px] font-bold uppercase tracking-widest rounded-sm transition-all duration-300">
                             Select Enterprise

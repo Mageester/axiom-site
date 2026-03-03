@@ -64,6 +64,7 @@ const App: React.FC = () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                    entry.target.classList.add('is-visible');
                     observer.unobserve(entry.target);
                 }
             });
@@ -71,6 +72,7 @@ const App: React.FC = () => {
 
         const timer = setTimeout(() => {
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            document.querySelectorAll('.axiom-bento').forEach(el => observer.observe(el));
         }, 100);
 
         return () => {

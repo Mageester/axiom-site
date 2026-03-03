@@ -55,15 +55,16 @@ const Home: React.FC = () => {
                     <div className="axiom-bento p-8 sm:p-10 md:p-16 relative overflow-hidden">
                         {/* Subtle gradient glow */}
                         <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(184,115,51,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(9,10,11,0.2)_0%,rgba(9,10,11,0.78)_80%,rgba(9,10,11,0.92)_100%)] pointer-events-none"></div>
 
                         <div className="relative z-10 max-w-3xl flex flex-col gap-5 sm:gap-6">
                             <p className="eyebrow">Professional Tier Infrastructure</p>
 
-                            <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
+                            <h1 className="hero-headline hero-fade-in">
                                 Command your market with a revenueâ€‘generating website.
                             </h1>
 
-                            <p className="lead">
+                            <p className="hero-subheading hero-fade-in">
                                 We engineer blazingâ€‘fast, conversionâ€‘focused web infrastructure for service businesses that want to outclass competitors and stay online during storms.
                             </p>
 
@@ -80,6 +81,9 @@ const Home: React.FC = () => {
                                         className="btn-primary w-full sm:w-auto"
                                     >
                                         Book Strategy Call
+                                    </Link>
+                                    <Link to="/manifesto" className="text-axiom-text-main/80 text-[14px] inline-flex items-center gap-1 hover:text-white transition-colors">
+                                        See the numbers <span aria-hidden>→</span>
                                     </Link>
                                 </div>
                                 <p className="text-[12px] text-[var(--text-secondary)] font-grotesk">
