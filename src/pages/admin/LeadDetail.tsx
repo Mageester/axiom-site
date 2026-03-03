@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+﻿import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { apiJson, errorMessage } from '../../lib/api';
 
@@ -151,7 +151,7 @@ const LeadDetail: React.FC = () => {
         return `Hi ${lead.name}, quick note: we help service businesses improve leads from their web presence${!lead.canonical_url ? ' (including getting a site live)' : ''}. Want a short no-pressure audit summary? - {{your_name}}`;
     }, [lead]);
 
-    if (loading) return <div className="pt-32 pb-24 px-6 text-center text-secondary font-mono text-[12px]">Decrypting intelligence...</div>;
+    if (loading) return <div className="pt-32 pb-24 px-6 text-center text-axiom-text-mute font-mono text-[12px]">Decrypting intelligence...</div>;
     if (loadError) return <div className="pt-32 pb-24 px-6 text-center text-red-500 font-mono text-[12px]">{loadError}</div>;
     if (!lead) return <div className="pt-32 pb-24 px-6 text-center text-red-500 font-mono text-[12px]">Lead not found</div>;
 
@@ -164,75 +164,75 @@ const LeadDetail: React.FC = () => {
 
     return (
         <div className="pt-32 pb-24 px-6 max-w-[1200px] mx-auto w-full">
-            <div className="flex justify-between items-end mb-10 border-b border-subtle pb-6">
+            <div className="flex justify-between items-end mb-10 border-b border-axiom-border pb-6">
                 <div>
-                    <h1 className="text-3xl font-semibold text-primary tracking-tight">{lead.name}</h1>
-                    <p className="text-[13px] text-secondary font-mono tracking-widest mt-2">{lead.address}</p>
+                    <h1 className="text-3xl font-semibold text-axiom-text-main tracking-tight">{lead.name}</h1>
+                    <p className="text-[13px] text-axiom-text-mute font-mono tracking-widest mt-2">{lead.address}</p>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Link to="/leads" className="text-[11px] font-mono text-secondary hover:text-white uppercase tracking-widest transition-colors">← Back to Pipeline</Link>
+                    <Link to="/leads" className="text-[11px] font-mono text-axiom-text-mute hover:text-axiom-text-main uppercase tracking-widest transition-colors">â† Back to Pipeline</Link>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div className="lg:col-span-8 flex flex-col gap-6">
-                    <div className="surface-panel p-8 rounded-sm relative overflow-hidden">
+                    <div className="axiom-bento p-8 rounded-sm relative overflow-hidden">
                         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
-                        <h2 className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-6 border-b border-subtle pb-3">Audit Intelligence</h2>
+                        <h2 className="text-[11px] font-mono text-accent/80 uppercase tracking-widest mb-6 border-b border-axiom-border pb-3">Audit Intelligence</h2>
 
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-6">
-                            <div><div className="text-[10px] uppercase font-mono text-secondary">Aesthetic</div><div className="text-[24px] font-bold font-mono">{lead.score ?? 'N/A'}</div></div>
-                            <div><div className="text-[10px] uppercase font-mono text-secondary">Opportunity</div><div className="text-[24px] font-bold font-mono">{lead.opportunity_score ?? 0}</div></div>
-                            <div><div className="text-[10px] uppercase font-mono text-secondary">Lead Quality</div><div className="text-[24px] font-bold font-mono">{lead.lead_quality_score ?? 0}</div></div>
-                            <div><div className="text-[10px] uppercase font-mono text-secondary">Speed (ms)</div><div className="text-[24px] font-semibold font-mono">{lead.response_time_ms ?? '--'}</div></div>
+                            <div><div className="text-[10px] uppercase font-mono text-axiom-text-mute">Aesthetic</div><div className="text-[24px] font-bold font-mono">{lead.score ?? 'N/A'}</div></div>
+                            <div><div className="text-[10px] uppercase font-mono text-axiom-text-mute">Opportunity</div><div className="text-[24px] font-bold font-mono">{lead.opportunity_score ?? 0}</div></div>
+                            <div><div className="text-[10px] uppercase font-mono text-axiom-text-mute">Lead Quality</div><div className="text-[24px] font-bold font-mono">{lead.lead_quality_score ?? 0}</div></div>
+                            <div><div className="text-[10px] uppercase font-mono text-axiom-text-mute">Speed (ms)</div><div className="text-[24px] font-semibold font-mono">{lead.response_time_ms ?? '--'}</div></div>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 text-[12px]">
-                            <div className="border border-subtle rounded-sm p-4">
-                                <div className="text-[10px] font-mono uppercase tracking-widest text-secondary mb-2">Website Intelligence</div>
-                                {lead.canonical_url ? <a href={lead.canonical_url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-mono break-all">{lead.canonical_url}</a> : <p className="text-secondary/70 italic">{lead.website_status === 'confirmed_missing' ? 'None' : 'Unknown'}</p>}
+                            <div className="border border-axiom-border rounded-sm p-4">
+                                <div className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-2">Website Intelligence</div>
+                                {lead.canonical_url ? <a href={lead.canonical_url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-mono break-all">{lead.canonical_url}</a> : <p className="text-axiom-text-mute/70 italic">{lead.website_status === 'confirmed_missing' ? 'None' : 'Unknown'}</p>}
                                 <div className="mt-2 flex flex-wrap gap-2">
-                                    {websiteSourceLabel ? <span className="px-2 py-1 text-[9px] font-mono uppercase tracking-widest border border-white/10 rounded-sm text-secondary">{websiteSourceLabel}</span> : null}
-                                    <span className={`px-2 py-1 text-[9px] font-mono uppercase tracking-widest border rounded-sm ${lead.website_verified === 'confirmed_live' ? 'border-emerald-500/30 text-emerald-400' : lead.website_verified === 'unreachable' ? 'border-red-500/30 text-red-400' : 'border-white/10 text-secondary'}`}>{websiteVerifiedLabel}</span>
+                                    {websiteSourceLabel ? <span className="px-2 py-1 text-[9px] font-mono uppercase tracking-widest border border-axiom-border rounded-sm text-axiom-text-mute">{websiteSourceLabel}</span> : null}
+                                    <span className={`px-2 py-1 text-[9px] font-mono uppercase tracking-widest border rounded-sm ${lead.website_verified === 'confirmed_live' ? 'border-emerald-500/30 text-emerald-400' : lead.website_verified === 'unreachable' ? 'border-red-500/30 text-red-400' : 'border-axiom-border text-axiom-text-mute'}`}>{websiteVerifiedLabel}</span>
                                 </div>
-                                {lead.website_last_checked_at ? <p className="text-[10px] font-mono text-secondary/70 mt-2">Checked: {new Date(lead.website_last_checked_at).toLocaleString()}</p> : null}
+                                {lead.website_last_checked_at ? <p className="text-[10px] font-mono text-axiom-text-mute/70 mt-2">Checked: {new Date(lead.website_last_checked_at).toLocaleString()}</p> : null}
                             </div>
-                            <div className="border border-subtle rounded-sm p-4">
-                                <div className="text-[10px] font-mono uppercase tracking-widest text-secondary mb-2">Contactability</div>
-                                {lead.phone ? <a href={`tel:${lead.phone}`} className="block text-primary font-mono">{lead.phone}</a> : <p className="text-secondary/70">No phone</p>}
-                                {lead.detected_email ? <a href={`mailto:${lead.detected_email}`} className="block text-primary font-mono break-all mt-1">{lead.detected_email}</a> : <p className="text-secondary/70 mt-1">No email</p>}
+                            <div className="border border-axiom-border rounded-sm p-4">
+                                <div className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-2">Contactability</div>
+                                {lead.phone ? <a href={`tel:${lead.phone}`} className="block text-axiom-text-main font-mono">{lead.phone}</a> : <p className="text-axiom-text-mute/70">No phone</p>}
+                                {lead.detected_email ? <a href={`mailto:${lead.detected_email}`} className="block text-axiom-text-main font-mono break-all mt-1">{lead.detected_email}</a> : <p className="text-axiom-text-mute/70 mt-1">No email</p>}
                                 <div className="mt-2 flex flex-wrap gap-2">
                                     <span className={`px-2 py-1 text-[9px] font-mono uppercase tracking-widest border rounded-sm ${Number(lead.dnc || 0) ? 'border-red-500/30 text-red-300' : 'border-emerald-500/30 text-emerald-300'}`}>{Number(lead.dnc || 0) ? 'DNC' : 'Contactable'}</span>
-                                    <span className="px-2 py-1 text-[9px] font-mono uppercase tracking-widest border border-white/10 rounded-sm text-secondary">{(lead.phone || lead.detected_email) && !Number(lead.dnc || 0) ? 'Ready to Contact' : 'Needs Data'}</span>
+                                    <span className="px-2 py-1 text-[9px] font-mono uppercase tracking-widest border border-axiom-border rounded-sm text-axiom-text-mute">{(lead.phone || lead.detected_email) && !Number(lead.dnc || 0) ? 'Ready to Contact' : 'Needs Data'}</span>
                                 </div>
                             </div>
                         </div>
 
                         {bullets.length > 0 && (
-                            <div className="bg-black/20 p-5 border border-white/5 rounded-sm mb-5">
-                                <h3 className="text-[10px] font-mono text-white/50 uppercase tracking-widest mb-4">Outreach Ammunition</h3>
+                            <div className="bg-axiom-base/20 p-5 border border-axiom-border rounded-sm mb-5">
+                                <h3 className="text-[10px] font-mono text-axiom-text-main/50 uppercase tracking-widest mb-4">Outreach Ammunition</h3>
                                 <ul className="flex flex-col gap-3">
                                     {bullets.map((b: string, i: number) => (
-                                        <li key={i} className="text-[14px] text-secondary flex items-start gap-3"><span className="text-secondary/30 font-mono mt-0.5 text-[10px] shrink-0">→</span>{b}</li>
+                                        <li key={i} className="text-[14px] text-axiom-text-mute flex items-start gap-3"><span className="text-axiom-text-mute/30 font-mono mt-0.5 text-[10px] shrink-0">â†’</span>{b}</li>
                                     ))}
                                 </ul>
                             </div>
                         )}
 
-                        <div className="bg-black/20 p-5 border border-white/5 rounded-sm">
-                            <h3 className="text-[10px] font-mono text-white/50 uppercase tracking-widest mb-4">Outreach Assistant</h3>
+                        <div className="bg-axiom-base/20 p-5 border border-axiom-border rounded-sm">
+                            <h3 className="text-[10px] font-mono text-axiom-text-main/50 uppercase tracking-widest mb-4">Outreach Assistant</h3>
                             <div className="space-y-3">
                                 {outreachAngles.map((angle, i) => (
-                                    <p key={i} className="text-[13px] text-secondary"><span className="text-accent font-mono mr-2">{i + 1}.</span>{angle}</p>
+                                    <p key={i} className="text-[13px] text-axiom-text-mute"><span className="text-accent font-mono mr-2">{i + 1}.</span>{angle}</p>
                                 ))}
                                 <div className="grid grid-cols-1 gap-3 mt-3">
                                     <div>
-                                        <p className="text-[10px] font-mono uppercase tracking-widest text-secondary mb-2">Email Template</p>
-                                        <textarea readOnly rows={7} value={emailTemplate} className="w-full bg-[#070708] border border-white/10 text-primary text-[12px] p-3 rounded-[2px] font-mono" />
+                                        <p className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-2">Email Template</p>
+                                        <textarea readOnly rows={7} value={emailTemplate} className="w-full bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[12px] p-3 rounded-[2px] font-mono" />
                                     </div>
                                     <div>
-                                        <p className="text-[10px] font-mono uppercase tracking-widest text-secondary mb-2">SMS Template</p>
-                                        <textarea readOnly rows={3} value={smsTemplate} className="w-full bg-[#070708] border border-white/10 text-primary text-[12px] p-3 rounded-[2px] font-mono" />
+                                        <p className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-2">SMS Template</p>
+                                        <textarea readOnly rows={3} value={smsTemplate} className="w-full bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[12px] p-3 rounded-[2px] font-mono" />
                                     </div>
                                 </div>
                             </div>
@@ -241,14 +241,14 @@ const LeadDetail: React.FC = () => {
                 </div>
 
                 <div className="lg:col-span-4 flex flex-col gap-6">
-                    <div className="surface-panel p-6 rounded-sm relative">
-                        <h2 className="text-[11px] font-mono text-secondary uppercase tracking-widest mb-6 border-b border-subtle pb-3">Contact & Operations</h2>
+                    <div className="axiom-bento p-6 rounded-sm relative">
+                        <h2 className="text-[11px] font-mono text-axiom-text-mute uppercase tracking-widest mb-6 border-b border-axiom-border pb-3">Contact & Operations</h2>
                         <div className="flex flex-col gap-4">
                             {saveError ? <p className="text-[11px] font-mono text-red-400">{saveError}</p> : null}
                             {saveSuccess ? <p className="text-[11px] font-mono text-emerald-400">{saveSuccess}</p> : null}
                             <div className="flex flex-col gap-2">
-                                <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Pipeline Status</label>
-                                <select value={status} onChange={e => setStatus(e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[13px] p-3 rounded-[2px] outline-none font-mono">
+                                <label className="text-[10px] font-mono text-axiom-text-mute/80 uppercase tracking-widest">Pipeline Status</label>
+                                <select value={status} onChange={e => setStatus(e.target.value)} className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[13px] p-3 rounded-[2px] outline-none font-mono">
                                     <option value="new">Uncontacted (New)</option>
                                     <option value="contacted">Outreach Sent</option>
                                     <option value="qualified">Qualified Meeting</option>
@@ -258,8 +258,8 @@ const LeadDetail: React.FC = () => {
                             </div>
 
                             <div className="flex flex-col gap-2">
-                                <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Do Not Contact</label>
-                                <label className="flex items-center gap-2 text-[12px] text-primary">
+                                <label className="text-[10px] font-mono text-axiom-text-mute/80 uppercase tracking-widest">Do Not Contact</label>
+                                <label className="flex items-center gap-2 text-[12px] text-axiom-text-main">
                                     <input type="checkbox" checked={dnc} onChange={e => setDnc(e.target.checked)} />
                                     Mark lead as DNC
                                 </label>
@@ -268,54 +268,54 @@ const LeadDetail: React.FC = () => {
                                     value={dncReason}
                                     onChange={e => setDncReason(e.target.value)}
                                     placeholder="Reason (optional)"
-                                    className="bg-[#070708] border border-white/10 text-primary text-[12px] p-3 rounded-[2px] outline-none font-sans"
+                                    className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[12px] p-3 rounded-[2px] outline-none font-sans"
                                 />
                             </div>
 
                             <div className="flex flex-col gap-2">
-                                <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Operator Notes (Current)</label>
-                                <textarea rows={4} value={notes} onChange={e => setNotes(e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[13px] p-3 focus-visible:border-white/40 rounded-[2px] outline-none resize-none font-sans" />
+                                <label className="text-[10px] font-mono text-axiom-text-mute/80 uppercase tracking-widest">Operator Notes (Current)</label>
+                                <textarea rows={4} value={notes} onChange={e => setNotes(e.target.value)} className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[13px] p-3 focus-visible:border-axiom-border rounded-[2px] outline-none resize-none font-sans" />
                             </div>
 
-                            <button disabled={saving} onClick={handleSave} className="w-full py-3 mt-1 bg-white/10 border border-white/20 hover:bg-white text-primary hover:text-black font-semibold text-[11px] uppercase tracking-widest transition-all rounded-[2px] disabled:opacity-50">
+                            <button disabled={saving} onClick={handleSave} className="w-full py-3 mt-1 bg-white/10 border border-axiom-border hover:bg-white text-axiom-text-main hover:text-black font-semibold text-[11px] uppercase tracking-widest transition-all rounded-[2px] disabled:opacity-50">
                                 {saving ? 'Writing memory...' : 'Save Operations Data'}
                             </button>
                         </div>
                     </div>
 
-                    <div className="surface-panel p-6 rounded-sm">
-                        <h2 className="text-[11px] font-mono text-secondary uppercase tracking-widest mb-4 border-b border-subtle pb-3">Tags</h2>
+                    <div className="axiom-bento p-6 rounded-sm">
+                        <h2 className="text-[11px] font-mono text-axiom-text-mute uppercase tracking-widest mb-4 border-b border-axiom-border pb-3">Tags</h2>
                         <div className="flex gap-2 mb-3">
-                            <input value={tagInput} onChange={e => setTagInput(e.target.value)} placeholder="Add tag" className="bg-[#070708] border border-white/10 text-primary text-[12px] p-2 rounded-[2px] outline-none font-mono flex-1" />
-                            <button type="button" onClick={addTag} className="px-3 py-2 border border-white/10 text-secondary hover:text-white text-[10px] font-mono uppercase tracking-widest rounded-sm">Add</button>
+                            <input value={tagInput} onChange={e => setTagInput(e.target.value)} placeholder="Add tag" className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[12px] p-2 rounded-[2px] outline-none font-mono flex-1" />
+                            <button type="button" onClick={addTag} className="px-3 py-2 border border-axiom-border text-axiom-text-mute hover:text-axiom-text-main text-[10px] font-mono uppercase tracking-widest rounded-sm">Add</button>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             {tags.map((tag) => (
-                                <button key={tag.id} type="button" onClick={() => removeTag(tag)} className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-white/10 text-secondary hover:text-red-300 hover:border-red-500/30 rounded-sm">
-                                    {tag.name} ×
+                                <button key={tag.id} type="button" onClick={() => removeTag(tag)} className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-axiom-border text-axiom-text-mute hover:text-red-300 hover:border-red-500/30 rounded-sm">
+                                    {tag.name} Ã—
                                 </button>
                             ))}
                             {tags.length === 0 ? parseTagsCsv(lead.tags_csv).map((name) => (
-                                <span key={`read-${name}`} className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-white/10 text-secondary rounded-sm">{name}</span>
+                                <span key={`read-${name}`} className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-axiom-border text-axiom-text-mute rounded-sm">{name}</span>
                             )) : null}
-                            {tags.length === 0 && !lead.tags_csv ? <p className="text-[11px] text-secondary/70">No tags yet.</p> : null}
+                            {tags.length === 0 && !lead.tags_csv ? <p className="text-[11px] text-axiom-text-mute/70">No tags yet.</p> : null}
                         </div>
                     </div>
 
-                    <div className="surface-panel p-6 rounded-sm">
-                        <h2 className="text-[11px] font-mono text-secondary uppercase tracking-widest mb-4 border-b border-subtle pb-3">Notes History</h2>
+                    <div className="axiom-bento p-6 rounded-sm">
+                        <h2 className="text-[11px] font-mono text-axiom-text-mute uppercase tracking-widest mb-4 border-b border-axiom-border pb-3">Notes History</h2>
                         <div className="flex gap-2 mb-3">
-                            <textarea value={newNote} onChange={e => setNewNote(e.target.value)} rows={2} placeholder="Add timestamped note entry..." className="bg-[#070708] border border-white/10 text-primary text-[12px] p-2 rounded-[2px] outline-none font-sans flex-1 resize-none" />
-                            <button disabled={addingNote} type="button" onClick={addNote} className="px-3 py-2 border border-white/10 text-secondary hover:text-white text-[10px] font-mono uppercase tracking-widest rounded-sm disabled:opacity-50">{addingNote ? 'Adding…' : 'Add'}</button>
+                            <textarea value={newNote} onChange={e => setNewNote(e.target.value)} rows={2} placeholder="Add timestamped note entry..." className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[12px] p-2 rounded-[2px] outline-none font-sans flex-1 resize-none" />
+                            <button disabled={addingNote} type="button" onClick={addNote} className="px-3 py-2 border border-axiom-border text-axiom-text-mute hover:text-axiom-text-main text-[10px] font-mono uppercase tracking-widest rounded-sm disabled:opacity-50">{addingNote ? 'Addingâ€¦' : 'Add'}</button>
                         </div>
                         <div className="space-y-2 max-h-64 overflow-auto">
                             {notesHistory.map((n) => (
-                                <div key={n.id} className="border border-white/5 rounded-sm p-3">
-                                    <p className="text-[10px] font-mono text-secondary/70 mb-1">{n.created_at ? new Date(n.created_at).toLocaleString() : ''}</p>
-                                    <p className="text-[12px] text-secondary whitespace-pre-wrap">{n.note_text}</p>
+                                <div key={n.id} className="border border-axiom-border rounded-sm p-3">
+                                    <p className="text-[10px] font-mono text-axiom-text-mute/70 mb-1">{n.created_at ? new Date(n.created_at).toLocaleString() : ''}</p>
+                                    <p className="text-[12px] text-axiom-text-mute whitespace-pre-wrap">{n.note_text}</p>
                                 </div>
                             ))}
-                            {notesHistory.length === 0 ? <p className="text-[11px] text-secondary/70">No note history yet.</p> : null}
+                            {notesHistory.length === 0 ? <p className="text-[11px] text-axiom-text-mute/70">No note history yet.</p> : null}
                         </div>
                     </div>
                 </div>
@@ -325,3 +325,6 @@ const LeadDetail: React.FC = () => {
 };
 
 export default LeadDetail;
+
+
+

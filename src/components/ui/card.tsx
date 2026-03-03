@@ -1,20 +1,20 @@
-import * as React from "react"
+﻿import * as React from "react"
 import { cn } from "../../lib/utils"
 
-/* ──────────────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    AXIOM CARD SYSTEM
    Three surface tiers for visual depth layering.
 
    Variants:
-     default   → .panel         (#121212, inset glow)
-     inset     → .panel-inset   (#0e0f11, no glow)
-     elevated  → .panel-elevated (#171717, shadow)
+     default   â†’ .panel         (#121212, inset glow)
+     inset     â†’ .panel-inset   (#0e0f11, no glow)
+     elevated  â†’ .panel-elevated (#171717, shadow)
 
    Usage:
      <Card>...</Card>
      <Card variant="inset" padding="sm">...</Card>
      <Card variant="elevated" padding="lg">...</Card>
-   ────────────────────────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 type CardVariant = "default" | "inset" | "elevated"
 type CardPadding = "none" | "sm" | "md" | "lg"
@@ -46,7 +46,7 @@ function Card({ className, variant = "default", padding = "none", ...props }: Ca
   )
 }
 
-/* ── Sub-components for structured content ────────── */
+/* â”€â”€ Sub-components for structured content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
@@ -56,13 +56,13 @@ function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement
 
 function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h3 className={cn("text-h3 font-grotesk font-semibold tracking-tight text-[var(--text-heading)]", className)} {...props} />
+    <h3 className={cn("text-h3 font-grotesk font-semibold tracking-tight text-axiom-text-main", className)} {...props} />
   )
 }
 
 function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn("text-body-sm text-[var(--text-body)] leading-relaxed", className)} {...props} />
+    <p className={cn("text-body-sm text-axiom-text-mute leading-relaxed", className)} {...props} />
   )
 }
 
@@ -75,7 +75,7 @@ CardContent.displayName = "CardContent"
 
 function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("flex items-center gap-4 pt-4 border-t border-[var(--border-panel)]", className)} {...props} />
+    <div className={cn("flex items-center gap-4 pt-4 border-t border-axiom-border", className)} {...props} />
   )
 }
 
@@ -89,3 +89,4 @@ export {
 }
 
 export type { CardVariant, CardPadding, CardProps }
+

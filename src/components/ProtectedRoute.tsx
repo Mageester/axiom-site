@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { apiJson } from '../lib/api';
 
@@ -54,7 +54,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     }, [routeKey]);
 
     if (loading) {
-        return <div className="pt-32 pb-24 px-6 text-center text-secondary font-mono text-[12px]">Checking session...</div>;
+        return <div className="pt-32 pb-24 px-6 text-center text-axiom-text-mute font-mono text-[12px]">Checking session...</div>;
     }
 
     if (!user) {
@@ -69,3 +69,4 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default ProtectedRoute;
+

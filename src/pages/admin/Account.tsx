@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { apiJson, errorMessage } from '../../lib/api';
@@ -84,17 +84,17 @@ const Account: React.FC = () => {
         <div className="pt-32 pb-24 flex flex-col items-center justify-center relative min-h-[70vh]">
             <div className="max-w-[500px] w-full mx-auto relative z-10">
                 <div className="text-center mb-10">
-                    <h1 className="text-2xl font-semibold mb-2 text-primary tracking-tight">Operator Authorization Settings</h1>
+                    <h1 className="text-2xl font-semibold mb-2 text-axiom-text-main tracking-tight">Operator Authorization Settings</h1>
                     {mustChange ? (
                         <p className="text-[12px] text-red-400 font-mono uppercase tracking-widest mt-4 p-2 bg-red-500/10 border border-red-500/30">
                             Immediate Passphrase Rotation Required
                         </p>
                     ) : (
-                        <p className="text-[14px] text-secondary font-mono uppercase tracking-widest">Active Identity: {username}</p>
+                        <p className="text-[14px] text-axiom-text-mute font-mono uppercase tracking-widest">Active Identity: {username}</p>
                     )}
                 </div>
 
-                <form onSubmit={handleChangePassword} className="surface-panel p-8 flex flex-col gap-6 relative overflow-hidden">
+                <form onSubmit={handleChangePassword} className="axiom-bento p-8 flex flex-col gap-6 relative overflow-hidden">
                     <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
 
                     {error && (
@@ -110,35 +110,35 @@ const Account: React.FC = () => {
                     )}
 
                     <div className="flex flex-col gap-2">
-                        <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Current Passphrase</label>
+                        <label className="text-[10px] font-mono text-axiom-text-mute/80 uppercase tracking-widest">Current Passphrase</label>
                         <input
                             type="password"
                             required
                             value={oldPassword}
                             onChange={e => setOldPassword(e.target.value)}
-                            className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none font-mono"
+                            className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-axiom-surface transition-colors rounded-[2px] outline-none font-mono"
                         />
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">New Passphrase <span className="text-secondary/50 lowercase">(Min 10 chars)</span></label>
+                        <label className="text-[10px] font-mono text-axiom-text-mute/80 uppercase tracking-widest">New Passphrase <span className="text-axiom-text-mute/50 lowercase">(Min 10 chars)</span></label>
                         <input
                             type="password"
                             required
                             value={newPassword}
                             onChange={e => setNewPassword(e.target.value)}
-                            className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none font-mono"
+                            className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-axiom-surface transition-colors rounded-[2px] outline-none font-mono"
                         />
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Confirm New Passphrase</label>
+                        <label className="text-[10px] font-mono text-axiom-text-mute/80 uppercase tracking-widest">Confirm New Passphrase</label>
                         <input
                             type="password"
                             required
                             value={confirmPassword}
                             onChange={e => setConfirmPassword(e.target.value)}
-                            className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none font-mono"
+                            className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-axiom-surface transition-colors rounded-[2px] outline-none font-mono"
                         />
                     </div>
 
@@ -151,7 +151,7 @@ const Account: React.FC = () => {
 
                 {!mustChange && (
                     <div className="mt-8 flex justify-center">
-                        <button onClick={handleLogout} className="text-[10px] font-mono text-secondary hover:text-red-400 uppercase tracking-widest transition-colors py-2 px-4 border border-transparent hover:border-red-500/30 rounded-sm">
+                        <button onClick={handleLogout} className="text-[10px] font-mono text-axiom-text-mute hover:text-red-400 uppercase tracking-widest transition-colors py-2 px-4 border border-transparent hover:border-red-500/30 rounded-sm">
                             Terminate Session
                         </button>
                     </div>
@@ -162,3 +162,6 @@ const Account: React.FC = () => {
 };
 
 export default Account;
+
+
+

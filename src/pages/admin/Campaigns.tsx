@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+﻿import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ApiRequestError, apiJson } from '../../lib/api';
 
@@ -84,11 +84,11 @@ export default function Campaigns() {
         const normalizedNiche = normalizeText(niche);
         const normalizedCity = normalizeText(city);
 
-        setLogs(prev => [...prev, `[🚀] Starting ENGINE V2 Scrape: ${normalizedNiche} in ${normalizedCity} (Radius: ${radius}km, Depth: ${maxDepth})`]);
+        setLogs(prev => [...prev, `[ðŸš€] Starting ENGINE V2 Scrape: ${normalizedNiche} in ${normalizedCity} (Radius: ${radius}km, Depth: ${maxDepth})`]);
 
         if (streamTimeoutRef.current) clearTimeout(streamTimeoutRef.current);
         streamTimeoutRef.current = setTimeout(() => {
-            setLogs(prev => [...prev, '[⏳] System Warming Up... (Backend engine is booting, this can take up to 60s)']);
+            setLogs(prev => [...prev, '[â³] System Warming Up... (Backend engine is booting, this can take up to 60s)']);
         }, 50000);
 
         try {
@@ -147,7 +147,7 @@ export default function Campaigns() {
             }
         } catch (err: any) {
             if (err.name === 'AbortError') {
-                setLogs(prev => [...prev, '[🛑] Stream terminated by user navigation.']);
+                setLogs(prev => [...prev, '[ðŸ›‘] Stream terminated by user navigation.']);
             } else {
                 setLogs(prev => [...prev, `[!!!] ERROR: ${err.message || 'Server request failed.'}`]);
             }
@@ -159,13 +159,13 @@ export default function Campaigns() {
 
     return (
         <div className="pt-32 pb-24 px-6 max-w-[1100px] mx-auto w-full">
-            <div className="flex justify-between items-end mb-10 border-b border-subtle pb-6">
+            <div className="flex justify-between items-end mb-10 border-b border-axiom-border pb-6">
                 <div>
-                    <h1 className="text-3xl font-semibold text-primary tracking-tight">Intelligence Campaigns</h1>
-                    <p className="text-[13px] text-secondary font-mono uppercase tracking-widest mt-2">{campaigns.length} Active Deployments</p>
+                    <h1 className="text-3xl font-semibold text-axiom-text-main tracking-tight">Intelligence Campaigns</h1>
+                    <p className="text-[13px] text-axiom-text-mute font-mono uppercase tracking-widest mt-2">{campaigns.length} Active Deployments</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <Link to="/admin/inquiries" className="px-4 py-2 border border-white/10 text-secondary hover:text-white hover:border-white/30 text-[10px] font-semibold tracking-widest uppercase rounded-sm">
+                    <Link to="/admin/inquiries" className="px-4 py-2 border border-axiom-border text-axiom-text-mute hover:text-axiom-text-main hover:border-axiom-border text-[10px] font-semibold tracking-widest uppercase rounded-sm">
                         Inquiries
                     </Link>
                 </div>
@@ -174,52 +174,52 @@ export default function Campaigns() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-in fade-in zoom-in-95 duration-500">
 
                 {/* Controls - The Omniscient Transplant */}
-                <Card className="border-subtle bg-[#0a0c0e]">
+                <Card className="border-axiom-border bg-[#0a0c0e]">
                     <CardHeader>
-                        <CardTitle className="text-2xl font-extrabold tracking-tight text-primary">The Omniscient</CardTitle>
-                        <CardDescription className="text-secondary">
+                        <CardTitle className="text-2xl font-extrabold tracking-tight text-axiom-text-main">The Omniscient</CardTitle>
+                        <CardDescription className="text-axiom-text-mute">
                             Deep-mine qualified prospects missing websites, analyze their digital footprint, and auto-export to CSV.
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleExtraction} className="space-y-6">
                             <div className="space-y-2">
-                                <Label htmlFor="niche" className="font-semibold text-primary">Niche / Profession</Label>
+                                <Label htmlFor="niche" className="font-semibold text-axiom-text-main">Niche / Profession</Label>
                                 <Input
                                     id="niche" placeholder="e.g. Roofers, Concrete, Med-Spas"
                                     value={niche} onChange={(e) => setNiche(e.target.value)}
-                                    required className="bg-transparent text-primary border-subtle focus-visible:border-accent"
+                                    required className="bg-transparent text-axiom-text-main border-axiom-border focus-visible:border-accent"
                                     disabled={loading}
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="city" className="font-semibold text-primary">Target City</Label>
+                                    <Label htmlFor="city" className="font-semibold text-axiom-text-main">Target City</Label>
                                     <Input
                                         id="city" placeholder="e.g. Cambridge, ON"
                                         value={city} onChange={(e) => setCity(e.target.value)}
-                                        required className="bg-transparent text-primary border-subtle focus-visible:border-accent"
+                                        required className="bg-transparent text-axiom-text-main border-axiom-border focus-visible:border-accent"
                                         disabled={loading}
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="radius" className="font-semibold text-primary">Radius (km)</Label>
+                                    <Label htmlFor="radius" className="font-semibold text-axiom-text-main">Radius (km)</Label>
                                     <Input
                                         id="radius" type="number"
                                         value={radius} onChange={(e) => setRadius(e.target.value)}
-                                        required className="bg-transparent text-primary border-subtle focus-visible:border-accent"
+                                        required className="bg-transparent text-axiom-text-main border-axiom-border focus-visible:border-accent"
                                         disabled={loading}
                                     />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="maxDepth" className="font-semibold text-primary">Max Scroll Depth</Label>
+                                    <Label htmlFor="maxDepth" className="font-semibold text-axiom-text-main">Max Scroll Depth</Label>
                                     <Input
                                         id="maxDepth" type="number" min="1" max="50"
                                         title="How deep to scroll in Maps (1 = fast, 15 = deep)"
                                         value={maxDepth} onChange={(e) => setMaxDepth(e.target.value)}
-                                        required className="bg-transparent text-primary border-subtle focus-visible:border-accent"
+                                        required className="bg-transparent text-axiom-text-main border-axiom-border focus-visible:border-accent"
                                         disabled={loading}
                                     />
                                 </div>
@@ -233,13 +233,13 @@ export default function Campaigns() {
                 </Card>
 
                 {/* Live Terminal - The Omniscient Transplant */}
-                <Card className="bg-[#050607] border-subtle shadow-xl overflow-hidden flex flex-col h-[500px]">
-                    <CardHeader className="bg-[#080a0c] border-b border-subtle py-3">
+                <Card className="bg-[#050607] border-axiom-border shadow-xl overflow-hidden flex flex-col h-[500px]">
+                    <CardHeader className="bg-[#080a0c] border-b border-axiom-border py-3">
                         <div className="flex items-center space-x-2">
                             <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
                             <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
                             <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                            <span className="ml-2 text-xs font-mono text-secondary tracking-wider">OMNISCIENT_TERMINAL</span>
+                            <span className="ml-2 text-xs font-mono text-axiom-text-mute tracking-wider">OMNISCIENT_TERMINAL</span>
                         </div>
                     </CardHeader>
                     <CardContent
@@ -247,19 +247,19 @@ export default function Campaigns() {
                         className="flex-1 p-4 overflow-y-auto font-mono text-xs sm:text-sm text-green-400 space-y-1"
                     >
                         {logs.length === 0 && !loading && (
-                            <p className="text-secondary/60">Waiting for commands...</p>
+                            <p className="text-axiom-text-mute/60">Waiting for commands...</p>
                         )}
                         {logs.map((log, i) => (
                             <div key={i} className="break-words">
                                 {log.startsWith("[!!!]") ? <span className="text-red-500 font-bold">{log}</span> :
-                                    log.startsWith("[✅]") ? <span className="text-emerald-400 font-bold">{log}</span> :
-                                        log.startsWith("[✔]") ? <span className="text-zinc-300">{log}</span> :
-                                            log.startsWith("[💾]") ? <span className="text-cyan-400">{log}</span> :
+                                    log.startsWith("[âœ…]") ? <span className="text-emerald-400 font-bold">{log}</span> :
+                                        log.startsWith("[âœ”]") ? <span className="text-axiom-text-mute">{log}</span> :
+                                            log.startsWith("[ðŸ’¾]") ? <span className="text-cyan-400">{log}</span> :
                                                 log}
                             </div>
                         ))}
                         {loading && (
-                            <div className="animate-pulse text-secondary/60 mt-2">_</div>
+                            <div className="animate-pulse text-axiom-text-mute/60 mt-2">_</div>
                         )}
                     </CardContent>
                     {completed && csvPath && (
@@ -275,26 +275,26 @@ export default function Campaigns() {
             </div>
 
             {/* Legacy Dashboard Listing preserved */}
-            <div className="mt-12 surface-panel rounded-sm border border-subtle">
+            <div className="mt-12 axiom-bento rounded-sm border border-axiom-border">
                 {campaigns.map(c => (
-                    <div key={c.id} className="p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between group border-b border-subtle last:border-0 hover:bg-white/[0.02] transition-colors">
+                    <div key={c.id} className="p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between group border-b border-axiom-border last:border-0 hover:bg-white/[0.02] transition-colors">
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center gap-3">
-                                <h3 className="text-[16px] font-semibold text-primary">{c.city} • <span className="opacity-80 font-normal capitalize">{c.niche}</span></h3>
+                                <h3 className="text-[16px] font-semibold text-axiom-text-main">{c.city} â€¢ <span className="opacity-80 font-normal capitalize">{c.niche}</span></h3>
                                 <span className="text-[9px] font-mono bg-accent/10 text-accent px-1.5 py-0.5 rounded-sm">{c.radius_km}km</span>
                             </div>
-                            <p className="text-[12px] text-secondary/60 font-mono tracking-wider">{new Date(c.created_at).toLocaleString()}</p>
+                            <p className="text-[12px] text-axiom-text-mute/60 font-mono tracking-wider">{new Date(c.created_at).toLocaleString()}</p>
                         </div>
                         <div className="mt-4 sm:mt-0 flex items-center gap-6">
                             <div className="flex flex-col items-end">
-                                <span className="text-[18px] font-mono font-semibold text-primary leading-none">{c.lead_count}</span>
-                                <span className="text-[9px] font-mono text-secondary uppercase tracking-widest">Leads Gathered</span>
+                                <span className="text-[18px] font-mono font-semibold text-axiom-text-main leading-none">{c.lead_count}</span>
+                                <span className="text-[9px] font-mono text-axiom-text-mute uppercase tracking-widest">Leads Gathered</span>
                             </div>
                             <div className="flex gap-2">
-                                <Link to={`/leads?campaign_id=${c.id}`} className="px-4 py-2 border border-white/10 hover:border-white/30 text-primary text-[10px] font-semibold tracking-[0.05em] uppercase transition-all duration-300 rounded-sm bg-white/5">
+                                <Link to={`/leads?campaign_id=${c.id}`} className="px-4 py-2 border border-axiom-border hover:border-axiom-border text-axiom-text-main text-[10px] font-semibold tracking-[0.05em] uppercase transition-all duration-300 rounded-sm bg-white/5">
                                     View Pipeline
                                 </Link>
-                                <a href={`/api/campaigns/${c.id}/export.outreach.csv`} className="px-4 py-2 border border-white/10 hover:border-white/30 text-secondary text-[10px] font-semibold tracking-[0.05em] uppercase transition-all duration-300 rounded-sm bg-transparent">
+                                <a href={`/api/campaigns/${c.id}/export.outreach.csv`} className="px-4 py-2 border border-axiom-border hover:border-axiom-border text-axiom-text-mute text-[10px] font-semibold tracking-[0.05em] uppercase transition-all duration-300 rounded-sm bg-transparent">
                                     Outreach CSV
                                 </a>
                             </div>
@@ -305,3 +305,6 @@ export default function Campaigns() {
         </div>
     );
 }
+
+
+

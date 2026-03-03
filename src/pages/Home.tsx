@@ -1,17 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
 const trustMetrics = [
-    { label: 'Load Performance', value: 'Sub-Second', icon: '•' },
-    { label: 'Infrastructure', value: 'Edge Deployed', icon: '•' },
-    { label: 'Security Profile', value: 'Enterprise Grade', icon: '•' }
+    { label: 'Load Performance', value: 'Sub-Second', icon: 'â€¢' },
+    { label: 'Infrastructure', value: 'Edge Deployed', icon: 'â€¢' },
+    { label: 'Security Profile', value: 'Enterprise Grade', icon: 'â€¢' }
 ];
 
 const valueProps = [
     {
         num: '01',
-        title: 'Your Phones Ring During the Storm — Not After',
+        title: 'Your Phones Ring During the Storm â€” Not After',
         desc: 'When the first heatwave hits and every homeowner in town is searching for AC repair, your site stays online while your competitors\' sites crash. That\'s the difference between dispatching trucks and losing leads.'
     },
     {
@@ -77,13 +77,13 @@ const Home: React.FC = () => {
                         style={{ backgroundImage: "url('/roofing-concept.webp')", transform: 'translate3d(0,0,0) scale(1.08)' }}
                     ></div>
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(9,10,11,0.28)_0%,rgba(9,10,11,0.72)_56%,rgba(9,10,11,0.95)_100%)]"></div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/20 to-black/72"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-axiom-base/55 via-axiom-base/20 to-axiom-base/72"></div>
 
                     <div className="relative z-10 max-w-[1100px] mx-auto w-full">
                         <div className="max-w-3xl flex flex-col gap-5 sm:gap-6">
                             <p className="font-axiomMono text-[11px] uppercase tracking-[0.28em] text-axiom-text-mute">SYSTEM STATUS: INFRASTRUCTURE MACHINE ONLINE</p>
 
-                            <h1 className="hero-headline hero-fade-in text-axiom-text-main">
+                            <h1 className="hero-headline hero-fade-in font-bold text-axiom-text-main">
                                 Command your market with engineered web infrastructure.
                             </h1>
 
@@ -109,8 +109,8 @@ const Home: React.FC = () => {
                                         See the numbers <span aria-hidden>{'->'}</span>
                                     </Link>
                                 </div>
-                                <p className="text-[12px] text-[var(--text-secondary)] font-grotesk">
-                                    Custom engagements starting at <span className="text-[var(--text-heading)] font-semibold">$7,500</span>. <span className="text-[var(--accent)] font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
+                                <p className="text-[12px] text-axiom-text-mute font-grotesk">
+                                    Custom engagements starting at <span className="text-axiom-text-main font-semibold">$7,500</span>. <span className="text-axiom-text-main font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
                                 </p>
                             </div>
                         </div>
@@ -120,8 +120,8 @@ const Home: React.FC = () => {
  {/*  PERFORMANCE GUARANTEE  */}
                 <section className="max-w-[1100px] mx-auto mt-4 sm:mt-5">
                     <div className="axiom-bento p-4 sm:p-6 text-center">
-                        <p className="text-[13px] sm:text-[14px] text-[var(--text-body)] leading-relaxed">
-                            <span className="font-bold text-[var(--text-heading)] uppercase tracking-widest text-[10.5px] sm:text-[11px] mr-2">The Axiom Guarantee:</span>
+                        <p className="text-[13px] sm:text-[14px] text-axiom-text-mute leading-relaxed">
+                            <span className="font-bold text-axiom-text-main uppercase tracking-widest text-[10.5px] sm:text-[11px] mr-2">The Axiom Guarantee:</span>
                             If our infrastructure doesn't measurably increase your qualified lead capture within 90 days, we work for free until it does.
                         </p>
                     </div>
@@ -135,8 +135,8 @@ const Home: React.FC = () => {
                                 {metric.icon}
                             </div>
                             <div className="flex flex-col gap-1">
-                                <p className="big-figure-label text-[var(--text-secondary)]">{metric.label}</p>
-                                <p className="text-[17px] sm:text-[19px] font-semibold text-[var(--text-heading)] font-grotesk tracking-tight leading-none">{metric.value}</p>
+                                <p className="big-figure-label text-axiom-text-mute">{metric.label}</p>
+                                <p className="text-[17px] sm:text-[19px] font-semibold text-axiom-text-main font-grotesk tracking-tight leading-none">{metric.value}</p>
                             </div>
                         </div>
                     ))}
@@ -148,12 +148,12 @@ const Home: React.FC = () => {
                         <div className="flex flex-col md:flex-row gap-5 sm:gap-6 items-start">
                             <div className="text-[40px] leading-none text-[var(--accent)]/15 font-serif shrink-0 select-none">"</div>
                             <div className="flex flex-col gap-4 flex-1">
-                                <p className="text-[15px] sm:text-[16px] text-[var(--text-body)] leading-[1.75] italic">
+                                <p className="text-[15px] sm:text-[16px] text-axiom-text-mute leading-[1.75] italic">
                                     Since upgrading our infrastructure, our emergency dispatch rate doubled. No more wasted truck rolls. When the phones light up during a cold snap, every call is a real job.
                                 </p>
                                 <div className="flex items-center gap-4 pt-1">
-                                    <div className="w-10 h-10 rounded-full bg-[var(--bg-inset)] border border-[var(--border-panel)] flex items-center justify-center shrink-0">
-                                        <span className="text-[13px] font-bold text-[var(--text-secondary)]">JR</span>
+                                    <div className="w-10 h-10 rounded-full bg-axiom-elevated border border-axiom-border flex items-center justify-center shrink-0">
+                                        <span className="text-[13px] font-bold text-axiom-text-mute">JR</span>
                                     </div>
                                     <div className="flex flex-col gap-1">
                                         <div className="flex items-center gap-1">
@@ -161,7 +161,7 @@ const Home: React.FC = () => {
                                                 <svg key={i} className="w-3.5 h-3.5 text-axiom-text-mute" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.063 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z" /></svg>
                                             ))}
                                         </div>
-                                        <p className="big-figure-label text-[var(--text-secondary)]">Local HVAC Operator · Southern Ontario</p>
+                                        <p className="big-figure-label text-axiom-text-mute">Local HVAC Operator Â· Southern Ontario</p>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@ const Home: React.FC = () => {
                                 When storms hit and demand spikes, your site stays up. Period.
                             </h2>
                             <p className="lead text-center mx-auto">
-                                Every contractor dreads the moment their site goes down during peak season. We deploy on the same infrastructure used by Fortune 500 companies ” not some shared GoDaddy server that buckles under pressure.
+                                Every contractor dreads the moment their site goes down during peak season. We deploy on the same infrastructure used by Fortune 500 companies â€ not some shared GoDaddy server that buckles under pressure.
                             </p>
                         </div>
                     </div>
@@ -189,8 +189,8 @@ const Home: React.FC = () => {
                     {valueProps.map((card) => (
                         <article key={card.title} className="axiom-bento p-6 sm:p-8 flex flex-col gap-4 group hover:border-[#2a2d38] transition-colors">
                             <span className="text-[24px] sm:text-[28px] font-bold text-[var(--accent)]/15 font-grotesk">{card.num}</span>
-                            <h3 className="text-[17px] sm:text-[19px] font-semibold text-[var(--text-heading)] tracking-tight leading-snug">{card.title}</h3>
-                            <p className="text-[14px] sm:text-[15px] text-[var(--text-body)] leading-[1.75]">{card.desc}</p>
+                            <h3 className="text-[17px] sm:text-[19px] font-semibold text-axiom-text-main tracking-tight leading-snug">{card.title}</h3>
+                            <p className="text-[14px] sm:text-[15px] text-axiom-text-mute leading-[1.75]">{card.desc}</p>
                         </article>
                     ))}
                 </section>
@@ -201,12 +201,12 @@ const Home: React.FC = () => {
  {/*  DEPLOYMENT PROOF  */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
                     <div className="axiom-bento p-7 sm:p-10 md:p-12">
-                        <p className="eyebrow mb-3" style={{ color: '#34d399' }}>Field Operations</p>
+                        <p className="eyebrow mb-3">Field Operations</p>
                         <h2 className="text-[22px] sm:text-[30px] md:text-[34px] font-semibold tracking-tight mb-3">
                             Built. Deployed. Measured.
                         </h2>
                         <p className="lead mb-10 sm:mb-12">
-                            Every Axiom concept architecture is a live, auditable asset ” not a mockup. Here's what $7,500 of engineering actually looks like.
+                            Every Axiom concept architecture is a live, auditable asset â€ not a mockup. Here's what $7,500 of engineering actually looks like.
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
@@ -218,7 +218,7 @@ const Home: React.FC = () => {
                                     color: '#38bdf8',
                                     lighthouseScore: 98,
                                     loadTime: '0.38s',
-                                    stack: 'React 18 · Vite · CF Workers',
+                                    stack: 'React 18 Â· Vite Â· CF Workers',
                                     features: ['Emergency dispatch intake', 'Service area qualification', 'Live equipment diagnostics']
                                 },
                                 {
@@ -228,7 +228,7 @@ const Home: React.FC = () => {
                                     color: '#ea580c',
                                     lighthouseScore: 97,
                                     loadTime: '0.41s',
-                                    stack: 'React 18 · Vite · CF Workers',
+                                    stack: 'React 18 Â· Vite Â· CF Workers',
                                     features: ['Storm damage triage form', 'Material-specific intake', 'GAF certification proof']
                                 },
                                 {
@@ -238,11 +238,11 @@ const Home: React.FC = () => {
                                     color: '#22c55e',
                                     lighthouseScore: 99,
                                     loadTime: '0.35s',
-                                    stack: 'React 18 · Vite · CF Workers',
+                                    stack: 'React 18 Â· Vite Â· CF Workers',
                                     features: ['Season-aware intake funnel', 'Property size qualification', 'Portfolio showcase system']
                                 }
                             ].map((deploy) => (
-                                <div key={deploy.name} className="bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md p-5 sm:p-6 flex flex-col gap-4">
+                                <div key={deploy.name} className="axiom-bento-card p-5 sm:p-6 flex flex-col gap-4">
                                     {/* Industry indicator */}
                                     <div className="flex items-center gap-3">
                                         <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: deploy.color, boxShadow: `0 0 10px ${deploy.color}40` }}></div>
@@ -251,12 +251,12 @@ const Home: React.FC = () => {
 
                                     {/* Name + Region */}
                                     <div className="flex flex-col gap-1">
-                                        <h3 className="text-[16px] sm:text-[17px] font-semibold text-[var(--text-heading)] tracking-tight">{deploy.name}</h3>
-                                        <p className="text-[12px] text-[var(--text-secondary)]">{deploy.region}</p>
+                                        <h3 className="text-[16px] sm:text-[17px] font-semibold text-axiom-text-main tracking-tight">{deploy.name}</h3>
+                                        <p className="text-[12px] text-axiom-text-mute">{deploy.region}</p>
                                     </div>
 
                                     {/* Performance metrics */}
-                                    <div className="grid grid-cols-2 gap-[1px] bg-[var(--border-subtle)] rounded overflow-hidden">
+                                    <div className="grid grid-cols-2 gap-[1px] bg-axiom-border rounded overflow-hidden">
                                         <div className="bg-[var(--bg-surface)] p-3 flex flex-col gap-0.5">
                                             <p className="big-figure-label text-axiom-text-mute">Lighthouse</p>
                                             <p className="text-[20px] font-bold text-axiom-text-mute font-grotesk tracking-tight">{deploy.lighthouseScore}</p>
@@ -273,8 +273,8 @@ const Home: React.FC = () => {
                                     {/* Features */}
                                     <ul className="flex flex-col gap-2 mt-auto">
                                         {deploy.features.map((f) => (
-                                            <li key={f} className="flex items-start gap-2 text-[13px] text-[var(--text-body)] leading-snug">
- <span className="text-axiom-text-mute mt-0.5 shrink-0"></span>
+                                            <li key={f} className="flex items-start gap-2 text-[13px] text-axiom-text-mute leading-snug">
+                                                <span className="text-axiom-text-mute mt-0.5 shrink-0">•</span>
                                                 {f}
                                             </li>
                                         ))}
@@ -288,7 +288,7 @@ const Home: React.FC = () => {
                                 to="/concepts"
                                 className="btn-secondary"
                             >
-                                View All Concept Architectures ’
+                                View All Concept Architectures {'->'}
                             </Link>
                         </div>
                     </div>
@@ -302,9 +302,9 @@ const Home: React.FC = () => {
                             What your money actually buys.
                         </h2>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-[var(--border-subtle)] rounded-md overflow-hidden">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-axiom-border rounded-md overflow-hidden">
                             {/* BEFORE column */}
-                            <div className="bg-[var(--bg-inset)] p-6 sm:p-8 flex flex-col gap-5">
+                            <div className="bg-axiom-elevated p-6 sm:p-8 flex flex-col gap-5">
                                 <div className="flex flex-col gap-2">
                                     <p className="big-figure-label text-axiom-text-mute">Typical Agency</p>
                                     <p className="text-[24px] sm:text-[28px] font-bold text-axiom-text-mute font-grotesk tracking-tight">$200/mo</p>
@@ -318,31 +318,31 @@ const Home: React.FC = () => {
                                         'Crashes during traffic spikes',
                                         'Looks like every other contractor',
                                         'No conversion tracking',
-                                        '"Call us!" ” no intake qualification',
+                                        '"Call us!" â€ no intake qualification',
                                     ].map((item) => (
-                                        <li key={item} className="flex items-start gap-2.5 text-[13px] sm:text-[14px] text-[var(--text-body)] leading-snug">
-                                            <span className="text-axiom-text-mute font-bold shrink-0 mt-px"></span>
+                                        <li key={item} className="flex items-start gap-2.5 text-[13px] sm:text-[14px] text-axiom-text-mute leading-snug">
+                                            <span className="text-axiom-text-mute font-bold shrink-0 mt-px">•</span>
                                             {item}
                                         </li>
                                     ))}
                                 </ul>
                                 <div className="mt-auto pt-4 border-t border-axiom-border">
                                     <p className="text-[13px] text-axiom-text-mute leading-relaxed">
-                                        Annual cost: <span className="font-semibold text-axiom-text-mute">$2,400</span> + your time fixing it. Revenue lost to downtime: <span className="font-semibold text-axiom-text-mute">$60,000“$120,000</span>.
+                                        Annual cost: <span className="font-semibold text-axiom-text-mute">$2,400</span> + your time fixing it. Revenue lost to downtime: <span className="font-semibold text-axiom-text-mute">$60,000â€œ$120,000</span>.
                                     </p>
                                 </div>
                             </div>
 
                             {/* AFTER column */}
-                            <div className="bg-[var(--bg-inset)] p-6 sm:p-8 flex flex-col gap-5 border-l-0 md:border-l border-axiom-border">
+                            <div className="bg-axiom-elevated p-6 sm:p-8 flex flex-col gap-5 border-l-0 md:border-l border-axiom-border">
                                 <div className="flex flex-col gap-2">
                                     <p className="big-figure-label text-axiom-text-mute">Axiom Infrastructure</p>
                                     <p className="text-[24px] sm:text-[28px] font-bold text-axiom-text-mute font-grotesk tracking-tight">$7,500</p>
-                                    <p className="text-[11px] text-[var(--text-secondary)]">One-time. You own the asset.</p>
+                                    <p className="text-[11px] text-axiom-text-mute">One-time. You own the asset.</p>
                                 </div>
                                 <ul className="flex flex-col gap-3">
                                     {[
-                                        'Cloudflare Workers ” 300+ edge cities',
+                                        'Cloudflare Workers â€ 300+ edge cities',
                                         'Custom React architecture, code-split',
                                         '0.4s load time under any traffic',
                                         'HSTS Preloaded, TLS 1.3, A+ SSL',
@@ -351,21 +351,21 @@ const Home: React.FC = () => {
                                         'Full analytics + conversion tracking',
                                         'Pre-qualifying intake funnel built in',
                                     ].map((item) => (
-                                        <li key={item} className="flex items-start gap-2.5 text-[13px] sm:text-[14px] text-[var(--text-body)] leading-snug">
-                                            <span className="text-axiom-text-mute font-bold shrink-0 mt-px"></span>
+                                        <li key={item} className="flex items-start gap-2.5 text-[13px] sm:text-[14px] text-axiom-text-mute leading-snug">
+                                            <span className="text-axiom-text-mute font-bold shrink-0 mt-px">•</span>
                                             {item}
                                         </li>
                                     ))}
                                 </ul>
                                 <div className="mt-auto pt-4 border-t border-axiom-border">
                                     <p className="text-[13px] text-axiom-text-mute leading-relaxed">
-                                        One captured emergency call during peak season: <span className="font-semibold text-axiom-text-mute">$5,000“$15,000</span>. Pays for itself before month two.
+                                        One captured emergency call during peak season: <span className="font-semibold text-axiom-text-mute">$5,000â€œ$15,000</span>. Pays for itself before month two.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <p className="thesis mt-8 sm:mt-10 !text-[var(--text-heading)]">
+                        <p className="thesis mt-8 sm:mt-10 !text-axiom-text-main">
                             The question isn't whether you can afford Axiom. It's how much longer you can afford not to have it.
                         </p>
                     </div>
@@ -382,7 +382,7 @@ const Home: React.FC = () => {
                             <h2 className="text-[20px] sm:text-[26px] md:text-[28px] font-semibold tracking-tight leading-snug">
                                 The $100,000 Leak: Why cheap websites fail during peak season.
                             </h2>
-                            <p className="text-[14px] sm:text-[15px] text-[var(--text-body)] leading-[1.75]">
+                            <p className="text-[14px] sm:text-[15px] text-axiom-text-mute leading-[1.75]">
                                 The math your web designer never showed you. See exactly how downtime during your busiest week costs more than most contractors spend on marketing all year.
                             </p>
                         </div>
@@ -390,7 +390,7 @@ const Home: React.FC = () => {
                             to="/manifesto"
                             className="btn-secondary shrink-0 w-full md:w-auto"
                         >
-                            Read the Full Report ’
+                            Read the Full Report {'->'}
                         </Link>
                     </div>
                 </section>
@@ -398,13 +398,13 @@ const Home: React.FC = () => {
  {/*  INFRASTRUCTURE SPECIFICATION  */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
                     <div className="axiom-bento p-7 sm:p-10 md:p-12">
-                        <p className="eyebrow mb-8" style={{ color: '#34d399' }}>Infrastructure Specification</p>
+                        <p className="eyebrow mb-8">Infrastructure Specification</p>
 
                         <div className="stat-bar grid-cols-1 sm:grid-cols-2">
                             {infraSpec.map((spec) => (
                                 <div key={spec.label} className="stat-bar-cell !text-left !items-start">
                                     <p className="stat-bar-label !text-axiom-text-mute">{spec.label}</p>
-                                    <p className="text-[14px] sm:text-[15px] font-medium text-[var(--text-heading)]/90 tracking-tight">{spec.value}</p>
+                                    <p className="text-[14px] sm:text-[15px] font-medium text-axiom-text-main/90 tracking-tight">{spec.value}</p>
                                 </div>
                             ))}
                         </div>
@@ -427,10 +427,10 @@ const Home: React.FC = () => {
 
                         <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-3 md:overflow-visible scrollbar-hide">
                             {industries.map((ind) => (
-                                <div key={ind.name} className="min-w-[85%] snap-center md:min-w-0 bg-[var(--bg-inset)] border border-[var(--border-panel)] rounded-md p-6 text-center">
+                                <div key={ind.name} className="min-w-[85%] snap-center md:min-w-0 axiom-bento-card p-6 text-center">
                                     <div className="w-3 h-3 rounded-full mx-auto mb-4" style={{ backgroundColor: ind.accent, boxShadow: `0 0 12px ${ind.accent}40` }}></div>
-                                    <p className="text-[16px] font-semibold text-[var(--text-heading)] font-grotesk">{ind.name}</p>
-                                    <p className="big-figure-label text-[var(--text-secondary)] mt-2">Professional Tier</p>
+                                    <p className="text-[16px] font-semibold text-axiom-text-main font-grotesk">{ind.name}</p>
+                                    <p className="big-figure-label text-axiom-text-mute mt-2">Professional Tier</p>
                                 </div>
                             ))}
                         </div>
@@ -440,7 +440,7 @@ const Home: React.FC = () => {
                                 to="/concepts"
                                 className="btn-secondary"
                             >
-                                View Industry Concepts ’
+                                View Industry Concepts {'->'}
                             </Link>
                         </div>
                     </div>
@@ -464,14 +464,14 @@ const Home: React.FC = () => {
                                         Axiom was built because I saw $10M roofing and HVAC firms losing six figures every year to slow sites and "marketing" agencies that don't understand the pressure of a heatwave.
                                     </p>
                                     <p>
-                                        These agencies sell logos and colour palettes. They don't understand that when a storm rolls through at 2&nbsp;AM and every homeowner in the county is searching for emergency repair, your site needs to be the one that loads ” not the one that crashes.
+                                        These agencies sell logos and colour palettes. They don't understand that when a storm rolls through at 2&nbsp;AM and every homeowner in the county is searching for emergency repair, your site needs to be the one that loads â€ not the one that crashes.
                                     </p>
                                     <p>
-                                        I'm an engineer, not a designer. I build systems that capture revenue under pressure. That's why Axiom exists ” to give serious contractors the same calibre of web infrastructure that Fortune 500 companies take for granted.
+                                        I'm an engineer, not a designer. I build systems that capture revenue under pressure. That's why Axiom exists â€ to give serious contractors the same calibre of web infrastructure that Fortune 500 companies take for granted.
                                     </p>
                                 </div>
                                 <p className="big-figure-label text-[var(--text-tertiary)] mt-2">
-                                    ” Aidan · Founder, Axiom Infrastructure
+                                    â€ Aidan Â· Founder, Axiom Infrastructure
                                 </p>
                             </div>
 
@@ -483,8 +483,8 @@ const Home: React.FC = () => {
                                     { label: 'Partners / Month', value: '4 Maximum' },
                                 ].map((stat) => (
                                     <div key={stat.label} className="axiom-bento p-4 flex flex-col gap-1">
-                                        <p className="big-figure-label text-[var(--text-secondary)]">{stat.label}</p>
-                                        <p className="text-[16px] sm:text-[18px] font-semibold text-[var(--text-heading)] font-grotesk tracking-tight">{stat.value}</p>
+                                        <p className="big-figure-label text-axiom-text-mute">{stat.label}</p>
+                                        <p className="text-[16px] sm:text-[18px] font-semibold text-axiom-text-main font-grotesk tracking-tight">{stat.value}</p>
                                     </div>
                                 ))}
                             </div>
@@ -518,6 +518,9 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
+
 
 
 

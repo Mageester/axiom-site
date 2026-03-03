@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+﻿import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
 import { BackgroundAtmosphere } from './components/BackgroundAtmosphere';
 import { BrandLockup } from './components/BrandLockup';
@@ -33,7 +33,7 @@ const globalTrustSignals = [
 
 const AdminLoader = () => (
     <div className="min-h-[50vh] flex items-center justify-center w-full">
-        <div className="text-[11px] font-mono text-secondary uppercase tracking-widest animate-pulse border border-subtle px-4 py-2 bg-white/5">
+        <div className="text-[11px] font-mono text-axiom-text-mute uppercase tracking-widest animate-pulse border border-axiom-border px-4 py-2 bg-axiom-surface/60">
             Loading System Module...
         </div>
     </div>
@@ -143,7 +143,7 @@ const App: React.FC = () => {
     }, [location.pathname]);
 
     return (
-        <div className="min-h-screen relative flex flex-col font-inter bg-background text-primary selection:bg-[var(--accent)] selection:text-white">
+        <div className="min-h-screen relative flex flex-col font-inter bg-axiom-base text-axiom-text-main selection:bg-[var(--accent)] selection:text-axiom-text-main">
             <ScrollToTop />
             <BackgroundAtmosphere />
 
@@ -152,15 +152,15 @@ const App: React.FC = () => {
                     <Link to="/" className="flex items-center gap-3 group focus-visible:ring-offset-background min-h-[48px]">
                         <BrandLockup
                             logoSize="h-[22px] lg:h-[24px] w-auto opacity-90 group-hover:opacity-100 transition-all duration-500 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
-                            textSize="text-[17px] lg:text-[19px] font-bold tracking-[0.1em] group-hover:text-white transition-all duration-500 drop-shadow-sm group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+                            textSize="text-[17px] lg:text-[19px] font-bold tracking-[0.1em] group-hover:text-axiom-text-main transition-all duration-500 drop-shadow-sm group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
                         />
                     </Link>
 
-                    <div className="hidden md:flex items-center justify-center gap-8 text-[13px] font-medium text-secondary">
-                        <Link to="/" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Home</Link>
-                        <Link to="/services" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Infrastructure</Link>
-                        <Link to="/concepts" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Concepts</Link>
-                        <Link to="/contact" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Apply</Link>
+                    <div className="hidden md:flex items-center justify-center gap-8 text-[13px] font-medium text-axiom-text-mute">
+                        <Link to="/" className="min-h-[48px] inline-flex items-center py-2 hover:text-axiom-text-main transition-colors">Home</Link>
+                        <Link to="/services" className="min-h-[48px] inline-flex items-center py-2 hover:text-axiom-text-main transition-colors">Infrastructure</Link>
+                        <Link to="/concepts" className="min-h-[48px] inline-flex items-center py-2 hover:text-axiom-text-main transition-colors">Concepts</Link>
+                        <Link to="/contact" className="min-h-[48px] inline-flex items-center py-2 hover:text-axiom-text-main transition-colors">Apply</Link>
                     </div>
 
                     <Link
@@ -173,18 +173,18 @@ const App: React.FC = () => {
                 </div>
 
                 <div className="md:hidden border-t border-axiom-border">
-                    <div className="axiom-shell-inner px-6 py-2 flex items-center justify-center gap-6 text-[12px] font-medium text-secondary">
-                        <Link to="/" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Home</Link>
-                        <Link to="/services" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Infrastructure</Link>
-                        <Link to="/concepts" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Concepts</Link>
-                        <Link to="/contact" className="min-h-[48px] inline-flex items-center py-2 hover:text-primary transition-colors">Apply</Link>
+                    <div className="axiom-shell-inner px-6 py-2 flex items-center justify-center gap-6 text-[12px] font-medium text-axiom-text-mute">
+                        <Link to="/" className="min-h-[48px] inline-flex items-center py-2 hover:text-axiom-text-main transition-colors">Home</Link>
+                        <Link to="/services" className="min-h-[48px] inline-flex items-center py-2 hover:text-axiom-text-main transition-colors">Infrastructure</Link>
+                        <Link to="/concepts" className="min-h-[48px] inline-flex items-center py-2 hover:text-axiom-text-main transition-colors">Concepts</Link>
+                        <Link to="/contact" className="min-h-[48px] inline-flex items-center py-2 hover:text-axiom-text-main transition-colors">Apply</Link>
                     </div>
                 </div>
 
                 <div className="border-t border-axiom-border bg-axiom-surface/70">
                     <div className="axiom-shell-inner px-6 py-2.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
                         {globalTrustSignals.map((signal) => (
-                            <span key={signal} className="text-[10px] font-mono uppercase tracking-widest text-secondary/90">
+                            <span key={signal} className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute/90">
                                 {signal}
                             </span>
                         ))}
@@ -194,7 +194,7 @@ const App: React.FC = () => {
 
             {/* Trust Badge Strip */}
             <div className="fixed top-0 w-full z-40 pointer-events-none" style={{ marginTop: 'calc(5rem + 1px)' }}>
-                <div className="bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--border-panel)]">
+                <div className="bg-axiom-base/95 backdrop-blur-sm border-b border-axiom-border">
                     <div className="max-w-[1400px] mx-auto px-6 py-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 pointer-events-auto">
                         {[
                             { badge: 'Cloudflare Enterprise Network', tip: 'Deployed across 300+ edge cities worldwide' },
@@ -202,10 +202,10 @@ const App: React.FC = () => {
                             { badge: 'WCAG 2.1 Compliant', tip: 'Universal accessibility standard' },
                             { badge: 'SSL A+ Rated', tip: 'Bank-level encryption on every request' },
                         ].map((item) => (
-                            <span key={item.badge} className="group relative text-[9px] font-mono uppercase tracking-[0.15em] text-[var(--text-secondary)]/50 hover:text-[var(--text-secondary)] transition-colors cursor-default flex items-center gap-1.5">
+                            <span key={item.badge} className="group relative text-[9px] font-mono uppercase tracking-[0.15em] text-axiom-text-mute/50 hover:text-axiom-text-mute transition-colors cursor-default flex items-center gap-1.5">
                                 <span className="w-1 h-1 rounded-full bg-emerald-500/40 group-hover:bg-emerald-400 transition-colors"></span>
                                 {item.badge}
-                                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-[#1a1d25] text-[var(--text-secondary)] text-[10px] font-mono px-3 py-1.5 rounded-md border border-[#2a2d35] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-[#1a1d25] text-axiom-text-mute text-[10px] font-mono px-3 py-1.5 rounded-md border border-[#2a2d35] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                                     {item.tip}
                                 </span>
                             </span>
@@ -251,7 +251,7 @@ const App: React.FC = () => {
                             <BrandLockup
                                 opacity="opacity-90"
                                 logoSize="h-[20px] w-auto grayscale-0 drop-shadow-sm"
-                                textSize="text-[13px] uppercase text-primary"
+                                textSize="text-[13px] uppercase text-axiom-text-main"
                             />
                             <p className="text-[12px] text-axiom-text-mute leading-relaxed mt-3">
                                 Axiom Infrastructure is a performance-first engineering firm. We do not use templates, DIY builders, or shared hosting.
@@ -261,19 +261,19 @@ const App: React.FC = () => {
                             <p className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-3">Operations</p>
                             <div className="flex flex-col gap-2 text-[12px] text-axiom-text-main">
                                 <span>Engineered in Kitchener, Ontario</span>
-                                <a href="tel:+15195550198" className="hover:text-white transition-colors min-h-[48px] inline-flex items-center">(519) 555-0198</a>
+                                <a href="tel:+15195550198" className="hover:text-axiom-text-main transition-colors min-h-[48px] inline-flex items-center">(519) 555-0198</a>
                             </div>
                         </div>
                         <div className="axiom-bento">
                             <p className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-3">Legal</p>
                             <div className="flex flex-col gap-2 text-[11px] font-mono uppercase tracking-widest text-axiom-text-mute">
-                                <Link to="/privacy" className="min-h-[48px] inline-flex items-center hover:text-white transition-colors duration-300">Privacy</Link>
-                                <Link to="/terms" className="min-h-[48px] inline-flex items-center hover:text-white transition-colors duration-300">Terms</Link>
-                                <Link to="/admin/login" className="min-h-[48px] inline-flex items-center hover:text-white transition-colors duration-300">Client Portal</Link>
+                                <Link to="/privacy" className="min-h-[48px] inline-flex items-center hover:text-axiom-text-main transition-colors duration-300">Privacy</Link>
+                                <Link to="/terms" className="min-h-[48px] inline-flex items-center hover:text-axiom-text-main transition-colors duration-300">Terms</Link>
+                                <Link to="/admin/login" className="min-h-[48px] inline-flex items-center hover:text-axiom-text-main transition-colors duration-300">Client Portal</Link>
                             </div>
                         </div>
                         <div className="axiom-bento">
-                            <p className="text-[11px] font-mono text-axiom-text-mute uppercase tracking-widest">© {new Date().getFullYear()} Axiom Infrastructure</p>
+                            <p className="text-[11px] font-mono text-axiom-text-mute uppercase tracking-widest">Â© {new Date().getFullYear()} Axiom Infrastructure</p>
                             <div className="flex items-center gap-2 mt-3">
                                 <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
                                 <span className="text-[10px] font-mono text-axiom-text-mute uppercase tracking-widest">All systems operational</span>
@@ -284,17 +284,17 @@ const App: React.FC = () => {
             </footer>
 
             {/* Mobile-only sticky Bottom Nav */}
-            <nav className="md:hidden fixed bottom-0 left-0 w-full z-50 bg-[var(--bg-main)]/85 backdrop-blur-xl border-t border-[var(--border-subtle)] pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
+            <nav className="md:hidden fixed bottom-0 left-0 w-full z-50 bg-axiom-base/85 backdrop-blur-xl border-t border-axiom-border pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
                 <div className="grid grid-cols-4 px-2 py-1.5">
-                    <Link to="/" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-[var(--text-secondary)] hover:text-white transition-colors min-h-[48px]">
+                    <Link to="/" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-axiom-text-mute hover:text-axiom-text-main transition-colors min-h-[48px]">
                         <svg className="w-[20px] h-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                         <span className="text-[9px] font-semibold uppercase tracking-widest">Home</span>
                     </Link>
-                    <Link to="/services" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-[var(--text-secondary)] hover:text-white transition-colors min-h-[48px]">
+                    <Link to="/services" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-axiom-text-mute hover:text-axiom-text-main transition-colors min-h-[48px]">
                         <svg className="w-[20px] h-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                         <span className="text-[9px] font-semibold uppercase tracking-widest">Services</span>
                     </Link>
-                    <Link to="/manifesto" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-[var(--text-secondary)] hover:text-white transition-colors min-h-[48px]">
+                    <Link to="/manifesto" className="flex flex-col items-center justify-center gap-1.5 py-1.5 text-axiom-text-mute hover:text-axiom-text-main transition-colors min-h-[48px]">
                         <svg className="w-[20px] h-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                         <span className="text-[9px] font-semibold uppercase tracking-widest">Manifesto</span>
                     </Link>
@@ -309,4 +309,7 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+
+
 

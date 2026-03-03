@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { ApiRequestError, apiJson, errorMessage } from '../../lib/api';
@@ -80,11 +80,11 @@ const Login: React.FC = () => {
         <div className="pt-32 pb-24 flex items-center justify-center relative min-h-[70vh]">
             <div className="max-w-[400px] w-full mx-auto relative z-10">
                 <div className="text-center mb-10">
-                    <h1 className="text-2xl font-semibold mb-2 text-primary tracking-tight">System Access</h1>
-                    <p className="text-[14px] text-secondary font-mono uppercase tracking-widest">Operator Authorization Required</p>
+                    <h1 className="text-2xl font-semibold mb-2 text-axiom-text-main tracking-tight">System Access</h1>
+                    <p className="text-[14px] text-axiom-text-mute font-mono uppercase tracking-widest">Operator Authorization Required</p>
                 </div>
 
-                <form onSubmit={handleLogin} className="surface-panel p-8 flex flex-col gap-6 relative overflow-hidden">
+                <form onSubmit={handleLogin} className="axiom-bento p-8 flex flex-col gap-6 relative overflow-hidden">
                     <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
 
                     {error && (
@@ -94,7 +94,7 @@ const Login: React.FC = () => {
                     )}
 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="login-email" className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Email</label>
+                        <label htmlFor="login-email" className="text-[10px] font-mono text-axiom-text-mute/80 uppercase tracking-widest">Email</label>
                         <input
                             id="login-email"
                             type="text"
@@ -103,12 +103,12 @@ const Login: React.FC = () => {
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             placeholder="operator email (or username)"
-                            className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none font-mono"
+                            className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-axiom-surface transition-colors rounded-[2px] outline-none font-mono"
                         />
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="login-password" className="text-[10px] font-mono text-secondary/80 uppercase tracking-widest">Password</label>
+                        <label htmlFor="login-password" className="text-[10px] font-mono text-axiom-text-mute/80 uppercase tracking-widest">Password</label>
                         <input
                             id="login-password"
                             type="password"
@@ -116,7 +116,7 @@ const Login: React.FC = () => {
                             required
                             value={password}
                             onChange={e => setPassword(e.target.value)}
-                            className="bg-[#070708] border border-white/10 text-primary text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] outline-none"
+                            className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[14px] p-4 focus-visible:border-accent/40 focus-visible:bg-axiom-surface transition-colors rounded-[2px] outline-none"
                         />
                     </div>
 
@@ -124,7 +124,7 @@ const Login: React.FC = () => {
                         {loading ? 'Authenticating...' : 'Establish Session'}
                     </button>
                     {nextTarget !== DEFAULT_ADMIN_ROUTE ? (
-                        <p className="text-[10px] font-mono text-secondary/70 text-center uppercase tracking-widest">
+                        <p className="text-[10px] font-mono text-axiom-text-mute/70 text-center uppercase tracking-widest">
                             Redirecting to requested admin page after login
                         </p>
                     ) : null}
@@ -135,3 +135,6 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
+
+

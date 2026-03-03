@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
@@ -54,15 +54,15 @@ const tiers = [
 const faqs = [
     {
         q: 'How long does a typical build take?',
-        a: 'Starter builds ship in 2 weeks. Professional builds take 3–4 weeks. Enterprise builds are 4–6 weeks depending on scope. We work in focused sprints with weekly check-ins — you\'re never left guessing.'
+        a: 'Starter builds ship in 2 weeks. Professional builds take 3â€“4 weeks. Enterprise builds are 4â€“6 weeks depending on scope. We work in focused sprints with weekly check-ins â€” you\'re never left guessing.'
     },
     {
         q: 'Do I need to handle my own hosting?',
-        a: 'No. Every Axiom build is deployed to Cloudflare\'s global edge network — the same infrastructure used by Fortune 500 companies. Hosting, SSL, and CDN are included and managed for you.'
+        a: 'No. Every Axiom build is deployed to Cloudflare\'s global edge network â€” the same infrastructure used by Fortune 500 companies. Hosting, SSL, and CDN are included and managed for you.'
     },
     {
         q: 'What if I need changes after launch?',
-        a: 'Enterprise builds include 30 days of post-launch adjustments at no extra cost. After that, we offer retainer plans for ongoing optimization. You always own your code — no lock-in.'
+        a: 'Enterprise builds include 30 days of post-launch adjustments at no extra cost. After that, we offer retainer plans for ongoing optimization. You always own your code â€” no lock-in.'
     }
 ];
 
@@ -92,12 +92,12 @@ const ServicesPage: React.FC = () => {
             <section className="max-w-[1100px] mx-auto mb-10 sm:mb-12">
                 <div className="axiom-bento border-[var(--accent)]/15 p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 text-center sm:text-left">
                     <div className="w-14 h-14 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-[24px] shrink-0">
-                        •
+                        â€¢
                     </div>
                     <div className="flex flex-col gap-1">
                         <h3 className="text-[17px] sm:text-[18px] font-semibold tracking-tight">Performance Guarantee</h3>
-                        <p className="text-[14px] text-[var(--text-body)] leading-[1.75]">
-                            If your site isn't loading in under one second, we'll fix it free. <span className="text-[var(--text-heading)] font-medium">99.99% Edge Uptime guaranteed</span> or your month is on us.
+                        <p className="text-[14px] text-axiom-text-mute leading-[1.75]">
+                            If your site isn't loading in under one second, we'll fix it free. <span className="text-axiom-text-main font-medium">99.99% Edge Uptime guaranteed</span> or your month is on us.
                         </p>
                     </div>
                 </div>
@@ -198,14 +198,14 @@ const ServicesPage: React.FC = () => {
                                         <span className="text-[20px] font-bold text-[var(--accent)] font-axiomMono">{phase.num}</span>
                                         <h3 className="text-[15px] font-semibold text-axiom-text-main tracking-tight">{phase.title}</h3>
                                     </div>
-                                    <svg className={`w-4 h-4 text-[var(--text-secondary)] transition-transform duration-300 ${openStep === phase.num ? 'rotate-180 text-[var(--accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                    <svg className={`w-4 h-4 text-axiom-text-mute transition-transform duration-300 ${openStep === phase.num ? 'rotate-180 text-[var(--accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                                 </button>
 
                                 {/* Mobile Accordion Content / Desktop Full View */}
                                 <div className={`px-5 pb-5 md:p-0 transition-all duration-300 md:!block ${openStep === phase.num ? 'block' : 'hidden md:block'}`}>
                                     <span className="hidden md:block text-[26px] font-bold text-[var(--accent)]/15 font-grotesk mb-3">{phase.num}</span>
                                     <h3 className="hidden md:block text-[16px] font-semibold tracking-tight mb-3">{phase.title}</h3>
-                                    <p className="text-[13px] sm:text-[14px] text-[var(--text-body)] leading-[1.7]">{phase.desc}</p>
+                                    <p className="text-[13px] sm:text-[14px] text-axiom-text-mute leading-[1.7]">{phase.desc}</p>
                                 </div>
                             </div>
                         ))}
@@ -228,24 +228,24 @@ const ServicesPage: React.FC = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mb-8">
                         <div className="axiom-bento p-5 sm:p-6 flex flex-col gap-2">
-                            <p className="big-figure-label text-[var(--text-secondary)]">Avg. HVAC Lead Value</p>
-                            <p className="text-[24px] sm:text-[28px] font-bold tracking-tight font-grotesk">$1,500 – $15,000</p>
-                            <p className="text-[13px] text-[var(--text-body)] leading-[1.7]">Emergency installs, full system replacements, and commercial maintenance contracts.</p>
+                            <p className="big-figure-label text-axiom-text-mute">Avg. HVAC Lead Value</p>
+                            <p className="text-[24px] sm:text-[28px] font-bold tracking-tight font-grotesk">$1,500 â€“ $15,000</p>
+                            <p className="text-[13px] text-axiom-text-mute leading-[1.7]">Emergency installs, full system replacements, and commercial maintenance contracts.</p>
                         </div>
-                        <div className="bg-[var(--bg-inset)] border border-axiom-border rounded-md p-5 sm:p-6 flex flex-col gap-2">
+                        <div className="bg-axiom-elevated border border-axiom-border rounded-md p-5 sm:p-6 flex flex-col gap-2">
                             <p className="big-figure-label text-axiom-text-mute">Competitor Site</p>
                             <p className="text-[24px] sm:text-[28px] font-bold text-axiom-text-mute tracking-tight font-grotesk">3.5s Load Time</p>
-                            <p className="text-[13px] text-[var(--text-body)] leading-[1.7]">40% bounce rate. Nearly half your potential customers leave before the page finishes loading.</p>
+                            <p className="text-[13px] text-axiom-text-mute leading-[1.7]">40% bounce rate. Nearly half your potential customers leave before the page finishes loading.</p>
                         </div>
-                        <div className="bg-[var(--bg-inset)] border border-axiom-border rounded-md p-5 sm:p-6 flex flex-col gap-2">
+                        <div className="bg-axiom-elevated border border-axiom-border rounded-md p-5 sm:p-6 flex flex-col gap-2">
                             <p className="big-figure-label text-axiom-text-mute">Axiom Site</p>
                             <p className="text-[24px] sm:text-[28px] font-bold text-axiom-text-mute tracking-tight font-grotesk">0.4s Load Time</p>
-                            <p className="text-[13px] text-[var(--text-body)] leading-[1.7]">Captures the leads they lose. Every fraction of a second is revenue you're either earning or giving away.</p>
+                            <p className="text-[13px] text-axiom-text-mute leading-[1.7]">Captures the leads they lose. Every fraction of a second is revenue you're either earning or giving away.</p>
                         </div>
                     </div>
 
                     <div className="axiom-bento p-5 sm:p-6 text-center">
-                        <p className="text-[15px] sm:text-[16px] text-[var(--text-heading)] leading-[1.7] font-medium">
+                        <p className="text-[15px] sm:text-[16px] text-axiom-text-main leading-[1.7] font-medium">
                             A single captured emergency install during peak season pays for your <span className="text-axiom-text-mute">entire year</span> of infrastructure.
                         </p>
                     </div>
@@ -270,11 +270,11 @@ const ServicesPage: React.FC = () => {
                                     className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors gap-4"
                                 >
                                     <h3 className="text-[14px] sm:text-[15px] font-semibold tracking-tight">{faq.q}</h3>
-                                    <svg className={`w-4 h-4 shrink-0 text-[var(--text-secondary)] transition-transform duration-300 ${openFaq === faq.q ? 'rotate-180 text-[var(--accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                    <svg className={`w-4 h-4 shrink-0 text-axiom-text-mute transition-transform duration-300 ${openFaq === faq.q ? 'rotate-180 text-[var(--accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                                 </button>
                                 {openFaq === faq.q && (
                                     <div className="px-5 pb-5 animate-in fade-in slide-in-from-top-2 duration-300">
-                                        <p className="text-[14px] text-[var(--text-body)] leading-[1.75] pt-2 border-t border-white/5">{faq.a}</p>
+                                        <p className="text-[14px] text-axiom-text-mute leading-[1.75] pt-2 border-t border-axiom-border">{faq.a}</p>
                                     </div>
                                 )}
                             </div>
@@ -296,4 +296,6 @@ const ServicesPage: React.FC = () => {
 };
 
 export default ServicesPage;
+
+
 

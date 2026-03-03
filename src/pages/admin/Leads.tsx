@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+﻿import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ApiRequestError, apiJson, errorMessage } from '../../lib/api';
 
@@ -202,7 +202,7 @@ const Leads: React.FC = () => {
     const websiteSourceBadge = (lead: any) => {
         if (!lead.website_source) return null;
         const label = lead.website_source === 'nominatim' ? 'Nominatim' : lead.website_source === 'inferred_email' ? 'Email' : 'OSM';
-        return <span className="inline-flex items-center px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-white/10 text-secondary rounded-sm ml-2">{label}</span>;
+        return <span className="inline-flex items-center px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-axiom-border text-axiom-text-mute rounded-sm ml-2">{label}</span>;
     };
 
     const websiteVerifiedBadge = (lead: any) => {
@@ -213,32 +213,32 @@ const Leads: React.FC = () => {
             ? 'border-emerald-500/30 text-emerald-400 bg-emerald-500/10'
             : status === 'unreachable'
                 ? 'border-red-500/30 text-red-400 bg-red-500/10'
-                : 'border-white/10 text-secondary';
+                : 'border-axiom-border text-axiom-text-mute';
         return <span className={`inline-flex items-center px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border rounded-sm ml-2 ${cls}`}>{label}</span>;
     };
 
     return (
         <div className="pt-32 pb-24 px-6 max-w-[1280px] mx-auto w-full">
-            <div className="flex justify-between items-end mb-10 border-b border-subtle pb-6">
+            <div className="flex justify-between items-end mb-10 border-b border-axiom-border pb-6">
                 <div>
-                    <h1 className="text-3xl font-semibold text-primary tracking-tight">Lead Intelligence Pipeline</h1>
-                    <p className="text-[13px] text-secondary font-mono uppercase tracking-widest mt-2">{sortedLeads.length} Targets Visible</p>
+                    <h1 className="text-3xl font-semibold text-axiom-text-main tracking-tight">Lead Intelligence Pipeline</h1>
+                    <p className="text-[13px] text-axiom-text-mute font-mono uppercase tracking-widest mt-2">{sortedLeads.length} Targets Visible</p>
                 </div>
                 <div className="flex items-center gap-3 flex-wrap justify-end">
-                    <select value={sortBy} onChange={e => setSortBy(e.target.value as SortBy)} className="bg-[#070708] border border-white/10 text-primary text-[11px] p-2 rounded-[2px] font-mono">
+                    <select value={sortBy} onChange={e => setSortBy(e.target.value as SortBy)} className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[11px] p-2 rounded-[2px] font-mono">
                         <option value="opportunity">Sort: Opportunity</option>
                         <option value="quality">Sort: Quality</option>
                         <option value="newest">Sort: Newest</option>
                         <option value="status">Sort: Status</option>
                     </select>
-                    <select value={tagFilter} onChange={e => setTagFilter(e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[11px] p-2 rounded-[2px] font-mono">
+                    <select value={tagFilter} onChange={e => setTagFilter(e.target.value)} className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[11px] p-2 rounded-[2px] font-mono">
                         <option value="">All Tags</option>
                         {tags.map((t) => <option key={t.id} value={t.name}>{t.name}</option>)}
                     </select>
-                    <button type="button" onClick={() => setShowDuplicates(v => !v)} className={`px-3 py-2 text-[10px] font-mono uppercase tracking-widest border rounded-sm ${showDuplicates ? 'border-accent/40 text-accent bg-accent/10' : 'border-white/10 text-secondary'}`}>
+                    <button type="button" onClick={() => setShowDuplicates(v => !v)} className={`px-3 py-2 text-[10px] font-mono uppercase tracking-widest border rounded-sm ${showDuplicates ? 'border-accent/40 text-accent bg-accent/10' : 'border-axiom-border text-axiom-text-mute'}`}>
                         {showDuplicates ? 'Hiding Duplicates' : 'Show Duplicates'}
                     </button>
-                    <Link to="/campaigns" className="text-[11px] font-mono text-secondary hover:text-white uppercase tracking-widest transition-colors">← Back to Campaigns</Link>
+                    <Link to="/campaigns" className="text-[11px] font-mono text-axiom-text-mute hover:text-axiom-text-main uppercase tracking-widest transition-colors">â† Back to Campaigns</Link>
                 </div>
             </div>
 
@@ -258,33 +258,33 @@ const Leads: React.FC = () => {
                         key={value}
                         type="button"
                         onClick={() => setQuickFilter(value as QuickFilter)}
-                        className={`px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest border rounded-sm ${quickFilter === value ? 'border-accent/40 text-accent bg-accent/10' : 'border-white/10 text-secondary'}`}
+                        className={`px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest border rounded-sm ${quickFilter === value ? 'border-accent/40 text-accent bg-accent/10' : 'border-axiom-border text-axiom-text-mute'}`}
                     >
                         {label}
                     </button>
                 ))}
             </div>
 
-            <div className="surface-panel p-4 mb-6 border border-subtle">
+            <div className="axiom-bento p-4 mb-6 border border-axiom-border">
                 <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4">
                     <div className="flex items-center gap-2">
-                        <button type="button" onClick={toggleSelectAllVisible} className="px-3 py-2 text-[10px] font-mono uppercase tracking-widest border border-white/10 rounded-sm text-secondary hover:text-white">
+                        <button type="button" onClick={toggleSelectAllVisible} className="px-3 py-2 text-[10px] font-mono uppercase tracking-widest border border-axiom-border rounded-sm text-axiom-text-mute hover:text-axiom-text-main">
                             {sortedLeads.length > 0 && sortedLeads.every(l => selected[l.id]) ? 'Unselect Visible' : 'Select Visible'}
                         </button>
-                        <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">{selectedIds.length} Selected</span>
+                        <span className="text-[10px] font-mono text-axiom-text-mute uppercase tracking-widest">{selectedIds.length} Selected</span>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
-                        <select value={bulkStatus} onChange={e => setBulkStatus(e.target.value)} className="bg-[#070708] border border-white/10 text-primary text-[11px] p-2 rounded-[2px] font-mono">
+                        <select value={bulkStatus} onChange={e => setBulkStatus(e.target.value)} className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[11px] p-2 rounded-[2px] font-mono">
                             <option value="new">Mark New</option>
                             <option value="contacted">Mark Contacted</option>
                             <option value="qualified">Mark Qualified</option>
                             <option value="closed">Mark Closed</option>
                             <option value="disqualified">Mark Disqualified</option>
                         </select>
-                        <button disabled={bulkBusy} onClick={() => runBulkAction({ action: 'status', status: bulkStatus })} className="px-3 py-2 text-[10px] font-mono uppercase tracking-widest border border-white/10 rounded-sm text-secondary hover:text-white disabled:opacity-50">Bulk Status</button>
-                        <input value={bulkTagName} onChange={e => setBulkTagName(e.target.value)} placeholder="tag" className="bg-[#070708] border border-white/10 text-primary text-[11px] p-2 rounded-[2px] font-mono w-28" />
-                        <button disabled={bulkBusy} onClick={() => runBulkAction({ action: 'tag_add', tag_name: bulkTagName })} className="px-3 py-2 text-[10px] font-mono uppercase tracking-widest border border-white/10 rounded-sm text-secondary hover:text-white disabled:opacity-50">Bulk Add Tag</button>
+                        <button disabled={bulkBusy} onClick={() => runBulkAction({ action: 'status', status: bulkStatus })} className="px-3 py-2 text-[10px] font-mono uppercase tracking-widest border border-axiom-border rounded-sm text-axiom-text-mute hover:text-axiom-text-main disabled:opacity-50">Bulk Status</button>
+                        <input value={bulkTagName} onChange={e => setBulkTagName(e.target.value)} placeholder="tag" className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[11px] p-2 rounded-[2px] font-mono w-28" />
+                        <button disabled={bulkBusy} onClick={() => runBulkAction({ action: 'tag_add', tag_name: bulkTagName })} className="px-3 py-2 text-[10px] font-mono uppercase tracking-widest border border-axiom-border rounded-sm text-axiom-text-mute hover:text-axiom-text-main disabled:opacity-50">Bulk Add Tag</button>
                         <button disabled={bulkBusy} onClick={() => runBulkAction({ action: 'dnc', dnc: true, dnc_reason: 'Bulk operator action' })} className="px-3 py-2 text-[10px] font-mono uppercase tracking-widest border border-red-500/30 rounded-sm text-red-300 hover:bg-red-500/10 disabled:opacity-50">Bulk Mark DNC</button>
                         <button onClick={exportSelectedCsv} className="px-3 py-2 text-[10px] font-mono uppercase tracking-widest border border-accent/30 rounded-sm text-accent hover:bg-accent/10">Export Selection</button>
                     </div>
@@ -294,10 +294,10 @@ const Leads: React.FC = () => {
             </div>
 
             {error ? <p className="text-red-400 font-mono text-[12px] mb-4">{error}</p> : null}
-            {loading ? <p className="text-secondary font-mono text-[12px]">Fetching intelligence...</p> : (
-                <div className="surface-panel overflow-x-auto rounded-sm border border-subtle">
+            {loading ? <p className="text-axiom-text-mute font-mono text-[12px]">Fetching intelligence...</p> : (
+                <div className="axiom-bento overflow-x-auto rounded-sm border border-axiom-border">
                     <table className="w-full text-left text-[13px]">
-                        <thead className="border-b border-subtle bg-black/40 font-mono text-[10px] uppercase tracking-wider text-secondary">
+                        <thead className="border-b border-axiom-border bg-axiom-base/40 font-mono text-[10px] uppercase tracking-wider text-axiom-text-mute">
                             <tr>
                                 <th className="p-3 font-normal w-10">
                                     <input
@@ -325,29 +325,29 @@ const Leads: React.FC = () => {
                                                 onChange={() => setSelected(prev => ({ ...prev, [lead.id]: !prev[lead.id] }))}
                                             />
                                         </td>
-                                        <td className="p-4 font-medium text-primary">
+                                        <td className="p-4 font-medium text-axiom-text-main">
                                             <div className="flex items-center gap-2 flex-wrap">
                                                 <span>{lead.name}</span>
                                                 {Number(lead.dnc || 0) === 1 ? <span className="px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-red-500/30 text-red-300 rounded-sm">DNC</span> : null}
-                                                {lead.duplicate_of_lead_id ? <span className="px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-white/10 text-secondary rounded-sm">Duplicate of {String(lead.duplicate_of_lead_id).slice(0, 8)}</span> : null}
+                                                {lead.duplicate_of_lead_id ? <span className="px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-axiom-border text-axiom-text-mute rounded-sm">Duplicate of {String(lead.duplicate_of_lead_id).slice(0, 8)}</span> : null}
                                             </div>
-                                            <div className="text-[11px] text-secondary mt-1 font-normal break-words max-w-[360px] leading-tight">
-                                                {[lead.address, lead.phone].filter(Boolean).join(' • ')}
+                                            <div className="text-[11px] text-axiom-text-mute mt-1 font-normal break-words max-w-[360px] leading-tight">
+                                                {[lead.address, lead.phone].filter(Boolean).join(' â€¢ ')}
                                             </div>
-                                            <div className="text-[10px] text-secondary/70 font-mono mt-1 break-words">
+                                            <div className="text-[10px] text-axiom-text-mute/70 font-mono mt-1 break-words">
                                                 {lead.detected_email ? lead.detected_email : 'No email'}
-                                                {lead.last_note_preview ? ` • Note: ${String(lead.last_note_preview).slice(0, 40)}` : ''}
+                                                {lead.last_note_preview ? ` â€¢ Note: ${String(lead.last_note_preview).slice(0, 40)}` : ''}
                                             </div>
                                             {leadTags.length > 0 ? (
                                                 <div className="mt-2 flex flex-wrap gap-1">
                                                     {leadTags.slice(0, 4).map((tag) => (
-                                                        <span key={`${lead.id}-${tag}`} className="px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-white/10 text-secondary rounded-sm">{tag}</span>
+                                                        <span key={`${lead.id}-${tag}`} className="px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-axiom-border text-axiom-text-mute rounded-sm">{tag}</span>
                                                     ))}
-                                                    {leadTags.length > 4 ? <span className="px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-white/10 text-secondary rounded-sm">+{leadTags.length - 4}</span> : null}
+                                                    {leadTags.length > 4 ? <span className="px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-axiom-border text-axiom-text-mute rounded-sm">+{leadTags.length - 4}</span> : null}
                                                 </div>
                                             ) : null}
                                         </td>
-                                        <td className="p-4 text-secondary">
+                                        <td className="p-4 text-axiom-text-mute">
                                             {lead.canonical_url ? (
                                                 <div className="flex items-center flex-wrap gap-y-1">
                                                     <a href={lead.canonical_url} target="_blank" rel="noopener noreferrer" className="hover:text-accent font-mono truncate max-w-[220px] inline-block">{lead.canonical_url.replace(/^https?:\/\//, '')}</a>
@@ -356,7 +356,7 @@ const Leads: React.FC = () => {
                                                 </div>
                                             ) : (
                                                 <div className="flex items-center flex-wrap gap-y-1">
-                                                    <span className="text-secondary/50 italic">{websiteLabel(lead)}</span>
+                                                    <span className="text-axiom-text-mute/50 italic">{websiteLabel(lead)}</span>
                                                     {websiteSourceBadge(lead)}
                                                     {websiteVerifiedBadge(lead)}
                                                 </div>
@@ -368,8 +368,8 @@ const Leads: React.FC = () => {
                                                     <span className={`inline-flex items-center justify-center font-mono font-bold w-10 h-10 rounded-sm border ${lead.score >= 80 ? 'border-emerald-500/30 text-emerald-400 bg-emerald-500/10' : lead.score >= 50 ? 'border-yellow-500/30 text-yellow-400 bg-yellow-500/10' : 'border-red-500/30 text-red-400 bg-red-500/10'}`}>
                                                         {lead.score}
                                                     </span>
-                                                ) : <span className="text-secondary/40 font-mono text-[10px] uppercase">Pending</span>}
-                                                <div className="text-[10px] font-mono text-secondary">
+                                                ) : <span className="text-axiom-text-mute/40 font-mono text-[10px] uppercase">Pending</span>}
+                                                <div className="text-[10px] font-mono text-axiom-text-mute">
                                                     <div>Opp {lead.opportunity_score ?? 0}</div>
                                                     <div>Qual {lead.lead_quality_score ?? 0}</div>
                                                 </div>
@@ -377,20 +377,20 @@ const Leads: React.FC = () => {
                                         </td>
                                         <td className="p-4">
                                             <div className="flex flex-col items-start gap-2">
-                                                <span className={`text-[10px] font-mono px-2 py-1 rounded-sm uppercase tracking-wide border ${lead.status === 'qualified' ? 'border-accent/40 text-accent bg-accent/10' : lead.status === 'disqualified' ? 'border-red-500/30 text-red-500/80 bg-red-500/10' : 'border-subtle text-secondary'}`}>
+                                                <span className={`text-[10px] font-mono px-2 py-1 rounded-sm uppercase tracking-wide border ${lead.status === 'qualified' ? 'border-accent/40 text-accent bg-accent/10' : lead.status === 'disqualified' ? 'border-red-500/30 text-red-500/80 bg-red-500/10' : 'border-axiom-border text-axiom-text-mute'}`}>
                                                     {lead.status}
                                                 </span>
                                                 <button
                                                     type="button"
                                                     onClick={() => toggleLeadDnc(lead)}
-                                                    className={`text-[9px] font-mono uppercase tracking-widest px-2 py-1 border rounded-sm ${Number(lead.dnc || 0) ? 'border-red-500/30 text-red-300' : 'border-white/10 text-secondary hover:text-white'}`}
+                                                    className={`text-[9px] font-mono uppercase tracking-widest px-2 py-1 border rounded-sm ${Number(lead.dnc || 0) ? 'border-red-500/30 text-red-300' : 'border-axiom-border text-axiom-text-mute hover:text-axiom-text-main'}`}
                                                 >
                                                     {Number(lead.dnc || 0) ? 'Unset DNC' : 'Mark DNC'}
                                                 </button>
                                             </div>
                                         </td>
                                         <td className="p-4 text-right">
-                                            <Link to={`/leads/${lead.id}`} className="inline-block px-4 py-2 border border-white/10 hover:border-white/30 text-primary text-[10px] font-semibold tracking-widest uppercase transition-all duration-300 rounded-sm bg-white/5">
+                                            <Link to={`/leads/${lead.id}`} className="inline-block px-4 py-2 border border-axiom-border hover:border-axiom-border text-axiom-text-main text-[10px] font-semibold tracking-widest uppercase transition-all duration-300 rounded-sm bg-white/5">
                                                 Inspect
                                             </Link>
                                         </td>
@@ -406,3 +406,6 @@ const Leads: React.FC = () => {
 };
 
 export default Leads;
+
+
+

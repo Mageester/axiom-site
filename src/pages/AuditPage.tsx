@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { SEO } from '../components/SEO';
 
 type SubmitState = '' | 'loading' | 'success' | 'error';
@@ -65,8 +65,8 @@ const AuditPage: React.FC = () => {
 
             <div className="max-w-[600px] mx-auto w-full relative z-10 px-6 reveal">
                 <div className="text-center mb-12">
-                    <h1 className="text-[40px] md:text-[56px] font-semibold mb-6 text-primary tracking-tight leading-[1.05]">Is your website<br />a liability?</h1>
-                    <p className="text-[16px] text-secondary max-w-lg mx-auto leading-relaxed">
+                    <h1 className="text-[40px] md:text-[56px] font-semibold mb-6 text-axiom-text-main tracking-tight leading-[1.05]">Is your website<br />a liability?</h1>
+                    <p className="text-[16px] text-axiom-text-mute max-w-lg mx-auto leading-relaxed">
                         Most local business sites leak revenue due to outdated infrastructure. Get a complimentary engineering audit.
                     </p>
                 </div>
@@ -81,33 +81,33 @@ const AuditPage: React.FC = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <h2 className="text-[24px] font-semibold text-primary mb-3">Axiom Blueprint Requested.</h2>
-                            <p className="text-[14px] text-secondary leading-relaxed max-w-sm">
+                            <h2 className="text-[24px] font-semibold text-axiom-text-main mb-3">Axiom Blueprint Requested.</h2>
+                            <p className="text-[14px] text-axiom-text-mute leading-relaxed max-w-sm">
                                 Our engineering team will review your infrastructure and respond within 24 hours.
                             </p>
                         </div>
                     )}
 
                     {status === 'error' && (
-                        <div className="bg-[#0e0d0c] border border-[#2a2218] text-[#a89070] p-5 rounded-[2px] text-[13px] font-mono leading-relaxed mb-2 flex items-start gap-4 animate-in fade-in duration-300">
+                        <div className="bg-axiom-elevated border border-[#2a2218] text-[#a89070] p-5 rounded-[2px] text-[13px] font-mono leading-relaxed mb-2 flex items-start gap-4 animate-in fade-in duration-300">
                             <div className="w-2 h-2 mt-1.5 bg-[#6b4c2a] rounded-sm shrink-0"></div>
                             <p>{msg}</p>
                         </div>
                     )}
 
                     <div className="flex flex-col gap-3">
-                        <label className="text-[12px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Name</label>
-                        <input type="text" name="name" required minLength={2} className="bg-[#070708] border border-white/10 text-primary text-[16px] p-4 min-h-[48px] focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                        <label className="text-[12px] font-mono text-axiom-text-mute/80 uppercase tracking-widest pl-1">Name</label>
+                        <input type="text" name="name" required minLength={2} className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[16px] p-4 min-h-[48px] focus-visible:border-axiom-border focus-visible:bg-axiom-surface transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                     </div>
 
                     <div className="flex flex-col gap-3">
-                        <label className="text-[12px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Email</label>
-                        <input type="email" name="email" required className="bg-[#070708] border border-white/10 text-primary text-[16px] p-4 min-h-[48px] focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                        <label className="text-[12px] font-mono text-axiom-text-mute/80 uppercase tracking-widest pl-1">Email</label>
+                        <input type="email" name="email" required className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[16px] p-4 min-h-[48px] focus-visible:border-axiom-border focus-visible:bg-axiom-surface transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                     </div>
 
                     <div className="flex flex-col gap-3">
-                        <label className="text-[12px] font-mono text-secondary/80 uppercase tracking-widest pl-1">Website URL</label>
-                        <input type="url" name="website" required placeholder="https://" className="bg-[#070708] border border-white/10 text-primary text-[16px] p-4 min-h-[48px] focus-visible:border-white/40 focus-visible:bg-[#0a0a0b] transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
+                        <label className="text-[12px] font-mono text-axiom-text-mute/80 uppercase tracking-widest pl-1">Website URL</label>
+                        <input type="url" name="website" required placeholder="https://" className="bg-axiom-elevated border border-axiom-border text-axiom-text-main text-[16px] p-4 min-h-[48px] focus-visible:border-axiom-border focus-visible:bg-axiom-surface transition-colors rounded-[2px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] outline-none" />
                     </div>
 
                     <button disabled={status === 'loading' || status === 'success'} type="submit" className="btn-primary w-full py-4 mt-4 min-h-[50px] text-[14px] font-bold uppercase tracking-[0.05em] transition-all duration-300 rounded-[2px] disabled:opacity-50">
@@ -120,3 +120,5 @@ const AuditPage: React.FC = () => {
 };
 
 export default AuditPage;
+
+

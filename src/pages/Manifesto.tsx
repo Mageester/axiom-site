@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
@@ -42,7 +42,7 @@ const Manifesto: React.FC = () => {
                 description="Why cheap websites fail during peak season and how the math of downtime costs HVAC, roofing, and landscaping firms six figures a year."
             />
 
-            {/* ──── MANIFESTO HEADER ──── */}
+            {/* â”€â”€â”€â”€ MANIFESTO HEADER â”€â”€â”€â”€ */}
             <header className="max-w-[720px] mx-auto text-center flex flex-col items-center gap-5 mb-16 sm:mb-20">
                 <p className="eyebrow-center">Infrastructure Whitepaper</p>
 
@@ -55,10 +55,10 @@ const Manifesto: React.FC = () => {
                 </p>
             </header>
 
-            {/* ──── ARTICLE BODY ──── */}
+            {/* â”€â”€â”€â”€ ARTICLE BODY â”€â”€â”€â”€ */}
             <article className="max-w-[720px] mx-auto flex flex-col gap-0 leading-[1.6]">
 
-                {/* ── SECTION 1: THE PROBLEM ── */}
+                {/* â”€â”€ SECTION 1: THE PROBLEM â”€â”€ */}
                 <section className="mb-6 sm:mb-8">
                     <h2 className="axiom-command-heading mb-5 sm:mb-6">INFRASTRUCTURE COMMAND</h2>
 
@@ -70,11 +70,11 @@ const Manifesto: React.FC = () => {
                             Your $200/month marketing agency built your site on a shared hosting plan. It handles 50 visitors fine. But when 500 people hit it at once? It chokes. It slows. It crashes.
                         </p>
                         <p>
-                            Those emergency calls — each worth $3,000 to $15,000 — go to whoever loads first. That's not you. That's the guy down the road with the faster site.
+                            Those emergency calls â€” each worth $3,000 to $15,000 â€” go to whoever loads first. That's not you. That's the guy down the road with the faster site.
                         </p>
                     </div>
 
-                    {/* Pull quote — breaks reading rhythm */}
+                    {/* Pull quote â€” breaks reading rhythm */}
                     <div className="pull-quote">
                         <p>The calls don't wait. They go to whoever loads first.</p>
                     </div>
@@ -85,7 +85,7 @@ const Manifesto: React.FC = () => {
 
                 <div className="axiom-chapter-divider"></div>
 
-                {/* ── SECTION 2: THE MATH ── */}
+                {/* â”€â”€ SECTION 2: THE MATH â”€â”€ */}
                 <section className="my-10 sm:my-14">
                     <h2 className="axiom-command-heading mb-5 sm:mb-6">MANDATORY PRECISION</h2>
 
@@ -93,7 +93,7 @@ const Manifesto: React.FC = () => {
                         Adjust the slider below to see the math your web designer never showed you.
                     </p>
 
-                    {/* Calculator Panel */}
+                    {/* Calculator axiom-bento */}
                     <div className="axiom-bento relative overflow-hidden p-0 bg-axiom-surface border border-axiom-border">
                         <div
                             className="pointer-events-none absolute inset-0 opacity-30"
@@ -198,7 +198,7 @@ const Manifesto: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Thesis line — breaks rhythm */}
+                    {/* Thesis line â€” breaks rhythm */}
                     <p className="thesis text-[#ef4444]/90">
                         That's not a marketing budget. That's a leak in your business.
                     </p>
@@ -209,7 +209,7 @@ const Manifesto: React.FC = () => {
 
                 <div className="axiom-chapter-divider"></div>
 
-                {/* ── SECTION 3: THE FIX ── */}
+                {/* â”€â”€ SECTION 3: THE FIX â”€â”€ */}
                 <section className="my-10 sm:my-14">
                     <h2 className="axiom-command-heading mb-5 sm:mb-6">ELIMINATING ROI FRICTION</h2>
 
@@ -225,7 +225,7 @@ const Manifesto: React.FC = () => {
                         </p>
                     </div>
 
-                    {/* Stat bar — hard proof, breaks reading rhythm */}
+                    {/* Stat bar â€” hard proof, breaks reading rhythm */}
                     <div className="stat-bar grid-cols-3 mt-10">
                         {[
                             { label: 'Edge Load Time', value: '0.4s', color: 'text-emerald-400' },
@@ -239,7 +239,7 @@ const Manifesto: React.FC = () => {
                         ))}
                     </div>
 
-                    {/* Pull quote — victory statement */}
+                    {/* Pull quote â€” victory statement */}
                     <div className="pull-quote" style={{ borderColor: '#34d399' }}>
                         <p>One emergency install during peak season pays for your entire year of infrastructure.</p>
                     </div>
@@ -250,13 +250,13 @@ const Manifesto: React.FC = () => {
 
                 <div className="axiom-chapter-divider"></div>
 
-                {/* ── SECTION 3.5: THE EVIDENCE ── */}
+                {/* â”€â”€ SECTION 3.5: THE EVIDENCE â”€â”€ */}
                 <section className="my-10 sm:my-14">
                     <h2 className="axiom-command-heading mb-5 sm:mb-6">THE ARCHITECTURE OF GROWTH</h2>
 
                     <div className="prose-editorial !leading-[1.6] max-w-[720px]">
                         <p>
-                            We don't show mockups. Every Axiom concept architecture is a live, measurable deployment on Cloudflare's global edge. Here's what we've built for contractors in HVAC, roofing, and landscaping — purpose-engineered to capture revenue under pressure.
+                            We don't show mockups. Every Axiom concept architecture is a live, measurable deployment on Cloudflare's global edge. Here's what we've built for contractors in HVAC, roofing, and landscaping â€” purpose-engineered to capture revenue under pressure.
                         </p>
                     </div>
 
@@ -274,7 +274,7 @@ const Manifesto: React.FC = () => {
                         ))}
                     </div>
 
-                    {/* Competitive risk — tighten the screw */}
+                    {/* Competitive risk â€” tighten the screw */}
                     <div className="pull-quote" style={{ borderColor: 'var(--accent)' }}>
                         <p>While you're reading this, the contractor down the road might be deploying with us. We take 4 partners per month. That's it.</p>
                     </div>
@@ -284,14 +284,14 @@ const Manifesto: React.FC = () => {
                             to="/concepts"
                             className="btn-secondary"
                         >
-                            View Live Deployments →
+                            View Live Deployments â†’
                         </Link>
                     </div>
                 </section>
 
                 <div className="axiom-chapter-divider"></div>
 
-                {/* ── SECTION 4: CTA ── */}
+                {/* â”€â”€ SECTION 4: CTA â”€â”€ */}
                 <section className="inline-cta mt-10 sm:mt-14">
                     <h2 className="axiom-command-heading mb-5 text-center">MACHINED SCALABILITY</h2>
                     <h2 className="text-[24px] sm:text-[32px] md:text-[36px] font-semibold tracking-tight">
@@ -306,8 +306,8 @@ const Manifesto: React.FC = () => {
                     >
                         Plug the Leak with Axiom Infrastructure
                     </Link>
-                    <p className="text-[12px] text-[var(--text-secondary)] font-grotesk">
-                        Custom engagements starting at <span className="text-[var(--text-heading)] font-semibold">$7,500</span>. <span className="text-[var(--accent)] font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
+                    <p className="text-[12px] text-axiom-text-mute font-grotesk">
+                        Custom engagements starting at <span className="text-axiom-text-main font-semibold">$7,500</span>. <span className="text-[var(--accent)] font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
                     </p>
                 </section>
             </article>
@@ -317,7 +317,7 @@ const Manifesto: React.FC = () => {
                 <div className="pointer-events-auto">
                     <Link
                         to="/contact"
-                        className="flex items-center justify-center w-full min-h-[52px] bg-[var(--accent)] text-white text-[13px] font-bold uppercase tracking-widest rounded-md shadow-[0_8px_25px_rgba(255,103,0,0.35)] hover:bg-[#ff7a1f] active:scale-[0.98] transition-all"
+                        className="flex items-center justify-center w-full min-h-[52px] bg-[var(--accent)] text-axiom-text-main text-[13px] font-bold uppercase tracking-widest rounded-md shadow-[0_8px_25px_rgba(255,103,0,0.35)] hover:bg-[#ff7a1f] active:scale-[0.98] transition-all"
                     >
                         Plug the Leak
                     </Link>
@@ -328,4 +328,6 @@ const Manifesto: React.FC = () => {
 };
 
 export default Manifesto;
+
+
 

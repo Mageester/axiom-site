@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 
 const EVENT_TEMPLATES = [
     "Inbound captured: \"Emergency service\" (Kitchener, ON)",
@@ -69,11 +69,11 @@ export const LiveConsole: React.FC = () => {
     }, [counter]);
 
     return (
-        <div className="w-full lg:w-[420px] xl:w-[460px] border border-subtle bg-[#15171A] rounded-sm overflow-hidden flex flex-col shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02),0_4px_20px_-8px_rgba(0,0,0,0.5)] text-left shrink-0">
+        <div className="w-full lg:w-[420px] xl:w-[460px] border border-axiom-border bg-[#15171A] rounded-sm overflow-hidden flex flex-col shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02),0_4px_20px_-8px_rgba(0,0,0,0.5)] text-left shrink-0">
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-subtle bg-white/[0.01]">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-axiom-border bg-white/[0.01]">
                 <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">System Console</span>
+                    <span className="text-[10px] font-mono text-axiom-text-mute uppercase tracking-widest">System Console</span>
                 </div>
                 <div className="flex items-center gap-2 border border-[#34d399]/20 bg-[#34d399]/5 px-2 py-0.5 rounded-sm">
                     <span className="relative flex h-1.5 w-1.5 items-center justify-center">
@@ -96,27 +96,28 @@ export const LiveConsole: React.FC = () => {
                             className="flex items-start gap-4 animate-console-reveal"
                         >
                             <span className="text-accent/80 shrink-0">{ev.time}</span>
-                            <span className="text-primary/80">{ev.message}</span>
+                            <span className="text-axiom-text-main/80">{ev.message}</span>
                         </div>
                     ))}
                 </div>
             </div>
 
             {/* KPI Row */}
-            <div className="grid grid-cols-3 divide-x divide-subtle border-t border-subtle bg-white/[0.02]">
+            <div className="grid grid-cols-3 divide-x divide-subtle border-t border-axiom-border bg-white/[0.02]">
                 <div className="px-5 py-4 flex flex-col gap-1.5">
-                    <span className="text-[9px] uppercase tracking-wider text-secondary font-mono">Capture</span>
-                    <span className="text-[13px] tracking-tight font-semibold text-primary font-mono drop-shadow-sm">24/7</span>
+                    <span className="text-[9px] uppercase tracking-wider text-axiom-text-mute font-mono">Capture</span>
+                    <span className="text-[13px] tracking-tight font-semibold text-axiom-text-main font-mono drop-shadow-sm">24/7</span>
                 </div>
                 <div className="px-5 py-4 flex flex-col gap-1.5">
-                    <span className="text-[9px] uppercase tracking-wider text-secondary font-mono">Routing</span>
-                    <span className="text-[13px] tracking-tight font-semibold text-primary font-mono drop-shadow-sm">Structured</span>
+                    <span className="text-[9px] uppercase tracking-wider text-axiom-text-mute font-mono">Routing</span>
+                    <span className="text-[13px] tracking-tight font-semibold text-axiom-text-main font-mono drop-shadow-sm">Structured</span>
                 </div>
                 <div className="px-5 py-4 flex flex-col gap-1.5">
-                    <span className="text-[9px] uppercase tracking-wider text-secondary font-mono">Speed</span>
-                    <span className="text-[13px] tracking-tight font-semibold text-primary font-mono drop-shadow-sm">&lt;30s</span>
+                    <span className="text-[9px] uppercase tracking-wider text-axiom-text-mute font-mono">Speed</span>
+                    <span className="text-[13px] tracking-tight font-semibold text-axiom-text-main font-mono drop-shadow-sm">&lt;30s</span>
                 </div>
             </div>
         </div>
     );
 };
+
