@@ -1,915 +1,133 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ══════════════════════════════════════════════════════
-   AXIOM INFRASTRUCTURE — DESIGN SYSTEM
-   ══════════════════════════════════════════════════════
-   Surface:    #0A0A0A → #0e0f11 → #121212
-   Border:     #1F1F1F (panel) | rgba(255,255,255,0.06) (subtle)
-   Typography: #F5F5F5 (heading) → #D1D5DB (body) → #A3A3A3 (secondary)
-   Accent:     #B87333 (copper)
-   Spacing:    4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96
-   ══════════════════════════════════════════════════════ */
-
 @layer base {
   :root {
-    /* ── Surface System ─────────────────────────── */
-    --bg-main: #090A0B;
-    --bg-surface: #1F2326;
-    --bg-inset: #13171B;
-    --bg-elevated: #13171B;
-    --border-subtle: rgba(49, 54, 59, 0.65);
-    --border-panel: #31363B;
-
-    /* ── Typography Palette ──────────────────────── */
-    --text-heading: #F5F7FA;
-    --text-primary: #F5F7FA;
-    --text-body: #F5F7FA;
-    --text-secondary: #A7B3BC;
-    --text-tertiary: rgba(167, 179, 188, 0.55);
-
-    /* ── Accent System ───────────────────────────── */
-    --accent: #E4572E;
-    --accent-muted: rgba(228, 87, 46, 0.2);
-
-    /* ── Spacing Scale ───────────────────────────── */
-    --space-1: 4px;
-    --space-2: 8px;
-    --space-3: 12px;
-    --space-4: 16px;
-    --space-6: 24px;
-    --space-8: 32px;
-    --space-12: 48px;
-    --space-16: 64px;
-    --space-24: 96px;
-
-    /* ── Section Rhythm ──────────────────────────── */
-    --section-gap: 64px;
-    --section-gap-lg: 96px;
+    --section-py-mobile: 8rem;
+    --section-py-desktop: 12rem;
   }
 
-  /* ────────────────────────────────────────────────
-     BASE ELEMENT DEFAULTS
-     ──────────────────────────────────────────────── */
+  html {
+    scroll-behavior: smooth;
+  }
 
   body {
     @apply bg-axiom-base text-axiom-text-main font-axiomSans leading-[1.6];
-    font-size: 16px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-axiomSans tracking-tight;
-    color: var(--text-heading);
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(245, 247, 250, 0.35) 0.6px, transparent 0.6px),
+      radial-gradient(circle at 80% 75%, rgba(245, 247, 250, 0.3) 0.6px, transparent 0.6px);
+    background-size: 3px 3px, 4px 4px;
+    background-position: 0 0, 1px 1px;
+    mix-blend-mode: overlay;
+    opacity: 0.05;
+    z-index: 1;
   }
 
-  h1 {
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing: -0.02em;
+  section {
+    padding-top: var(--section-py-mobile);
+    padding-bottom: var(--section-py-mobile);
   }
 
-  h2 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -0.015em;
-  }
-
-  h3 {
-    font-size: 24px;
-    line-height: 32px;
-    letter-spacing: -0.01em;
-  }
-
-  p {
-    line-height: 1.6;
-    max-width: 42rem;
-  }
-
-  *:focus-visible {
-    @apply outline-none ring-1 ring-[var(--accent)] ring-offset-1 ring-offset-[var(--bg-main)];
+  @media (min-width: 1024px) {
+    section {
+      padding-top: var(--section-py-desktop);
+      padding-bottom: var(--section-py-desktop);
+    }
   }
 }
 
-/* ══════════════════════════════════════════════════════
-   COMPONENT SYSTEM
-   ══════════════════════════════════════════════════════ */
-
 @layer components {
-  .axiom-bento {
-    @apply bg-axiom-elevated border border-axiom-border rounded-2xl p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)];
+  .noise-overlay {
     position: relative;
-    overflow: hidden;
+    isolation: isolate;
   }
 
-  .axiom-bento-card {
-    @apply bg-axiom-elevated border border-axiom-border rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.05)];
-  }
-
-  .axiom-glass {
-    @apply bg-axiom-surface/60 backdrop-blur-md border border-axiom-border/50 rounded-xl;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .axiom-bento::before,
-  .axiom-glass::before {
-    content: '';
-    position: absolute;
-    inset: 0 auto auto 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    pointer-events: none;
-  }
-
-  .page-shell {
-    @apply pt-28 md:pt-32 pb-20 md:pb-24 px-6 md:px-10 xl:px-20;
-  }
-
-  .axiom-shell-section {
-    @apply relative py-[64px] md:py-[96px] xl:py-[120px] px-6 md:px-10 xl:px-20;
-  }
-
-  .axiom-shell-inner {
-    @apply max-w-[1200px] mx-auto;
-  }
-
-  .axiom-grain {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .axiom-grain::after {
+  .noise-overlay::after {
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-      radial-gradient(rgba(245, 247, 250, 0.35) 0.5px, transparent 0.5px),
-      radial-gradient(rgba(245, 247, 250, 0.25) 0.5px, transparent 0.5px);
-    background-size: 3px 3px, 5px 5px;
-    background-position: 0 0, 1px 1px;
-    opacity: 0.025;
     pointer-events: none;
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(245, 247, 250, 0.34) 0.6px, transparent 0.6px),
+      radial-gradient(circle at 75% 70%, rgba(245, 247, 250, 0.3) 0.6px, transparent 0.6px);
+    background-size: 4px 4px, 5px 5px;
+    background-position: 0 0, 1px 1px;
+    mix-blend-mode: overlay;
+    opacity: 0.05;
     z-index: 0;
   }
 
-  .axiom-grain>* {
+  .noise-overlay > * {
     position: relative;
     z-index: 1;
   }
 
-  .axiom-footer-grid {
-    @apply grid gap-4 md:grid-cols-4;
+  .axiom-bento {
+    @apply bg-[#13171B] border border-[#31363B] rounded-3xl relative overflow-hidden;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 
-  .magnetic-primary {
-    --mx: 0px;
-    --my: 0px;
-    will-change: transform;
-  }
-
-  .hero-primary-cta {
-    box-shadow: 0 10px 24px rgba(228, 87, 46, 0.16);
-  }
-
-  .hero-headline {
-    @apply font-axiomSans text-[48px] tracking-[-0.02em] leading-[1.05];
-  }
-
-  .hero-subheading {
-    @apply text-[20px] leading-[1.6] text-axiom-text-main/85;
-  }
-
-  .hero-fade-in {
-    opacity: 0;
-    animation: heroFadeIn 0.3s ease-out 0.3s forwards;
-  }
-
-  .terminal-grid {
-    background-image:
-      linear-gradient(to right, rgba(167, 179, 188, 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(167, 179, 188, 0.08) 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
-
-  /* ──────────────────────────────────────────────────
-     SECTION CONTAINER
-     Consistent max-width + horizontal padding.
-     Used as: <section class="section">
-     ────────────────────────────────────────────────── */
-  .axiom-container,
-  .section {
-    max-width: 1120px;
-    margin-inline: auto;
-    width: 100%;
-    padding-inline: 24px;
-  }
-
-  @media (min-width: 640px) {
-
-    .axiom-container,
-    .section {
-      padding-inline: 24px;
-    }
-  }
-
-  .axiom-section {
-    @apply py-14 md:py-24 xl:py-28;
-  }
-
-  .axiom-section-tight {
-    @apply py-12 md:py-16;
-  }
-
-  .axiom-section-hero {
-    @apply pt-20 md:pt-28 pb-16 md:pb-24;
-  }
-
-  /* ──────────────────────────────────────────────────
-     PANEL (surface card)
-     Primary card surface. Subtle tonal shift from
-     background with 1px border. Optional depth variant.
-     ────────────────────────────────────────────────── */
-  .panel {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-panel);
-    border-radius: 6px;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.02);
-  }
-
-  .panel-inset {
-    background: var(--bg-inset);
-    border: 1px solid var(--border-panel);
-    border-radius: 6px;
-  }
-
-  .panel-elevated {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border-panel);
-    border-radius: 6px;
-    box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.03),
-      0 4px 16px -8px rgba(0, 0, 0, 0.4);
-  }
-
-  /* ──────────────────────────────────────────────────
-     BUTTON SYSTEM
-     Three variants × Three sizes.
-     Typography uses Space Grotesk for authority.
-
-     Variants: primary | secondary | ghost
-     Sizes:    lg (52px) | md (44px) | sm (36px)
-     ────────────────────────────────────────────────── */
-
-  /* Shared button base */
-  .btn {
+  .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
     white-space: nowrap;
-    border-radius: 0.75rem;
-    font-family: Inter, Satoshi, sans-serif;
+    height: 3.5rem;
+    border-radius: 9999px;
+    padding-inline: 1.5rem;
+    color: #F5F7FA;
     font-weight: 600;
     letter-spacing: 0.01em;
-    line-height: 1.1;
-    text-align: center;
-    text-decoration: none;
-    transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-    cursor: pointer;
-    flex-shrink: 0;
+    background: radial-gradient(57.04% 86.47% at 50% 105%, #F37055 0%, #D13A1A 100%);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+      inset 0 -6px 4px 0 rgba(0, 0, 0, 0.2),
+      0 4px 6px 0 rgba(0, 0, 0, 0.4),
+      0 4px 80px 0 rgba(228, 87, 46, 0.3);
+    transition: transform 220ms ease, filter 220ms ease, box-shadow 220ms ease;
   }
 
-  .btn:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-    pointer-events: none;
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
   }
 
-  .btn-sm {
-    min-height: 36px;
-    padding-inline: 12px;
-    font-size: 0.875rem;
-    line-height: 1;
+  .btn-primary:active {
+    transform: translateY(1px);
   }
 
-  .btn-md,
-  .btn-primary,
-  .btn-secondary,
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    white-space: nowrap;
-    text-decoration: none;
-    cursor: pointer;
-    min-height: 44px;
-    padding-inline: 20px;
+  .btn-primary:focus-visible {
+    outline: none;
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+      inset 0 -6px 4px 0 rgba(0, 0, 0, 0.2),
+      0 4px 6px 0 rgba(0, 0, 0, 0.4),
+      0 4px 80px 0 rgba(228, 87, 46, 0.3),
+      0 0 0 2px rgba(228, 87, 46, 0.32);
+  }
+
+  .btn-md {
     font-size: 0.9375rem;
-    line-height: 1;
+    padding-inline: 1.25rem;
   }
 
   .btn-lg {
-    min-height: 48px;
-    padding-inline: 24px;
     font-size: 1rem;
-    line-height: 1;
+    padding-inline: 1.6rem;
   }
-
-  .btn-primary,
-  .magnetic-primary {
-    --mx: 0px;
-    --my: 0px;
-    background: #E4572E;
-    color: #F5F7FA;
-    border: 1px solid rgba(228, 87, 46, 0.7);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.16);
-    transform: translate(var(--mx), var(--my)) translateY(0);
-  }
-
-  .btn-primary:hover,
-  .magnetic-primary:hover {
-    background: #D65029;
-    box-shadow: 0 10px 22px rgba(228, 87, 46, 0.22);
-    transform: translate(var(--mx), var(--my)) translateY(-1px);
-  }
-
-  .btn-primary:active,
-  .magnetic-primary:active {
-    transform: translate(var(--mx), var(--my)) translateY(1px);
-  }
-
-  .btn-secondary {
-    background: rgba(31, 35, 38, 0.72);
-    color: #F5F7FA;
-    border: 1px solid #31363B;
-  }
-
-  .btn-secondary:hover {
-    background: #13171B;
-    border-color: rgba(167, 179, 188, 0.35);
-  }
-
-  .btn-secondary:active {
-    transform: translateY(1px);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    color: #F5F7FA;
-    border: 1px solid transparent;
-  }
-
-  .btn-ghost:hover {
-    background: rgba(31, 35, 38, 0.6);
-    border-color: rgba(49, 54, 59, 0.7);
-  }
-
-  .btn-ghost:active {
-    transform: translateY(1px);
-  }
-
-  .btn:focus-visible,
-  .btn-primary:focus-visible,
-  .btn-secondary:focus-visible,
-  .btn-ghost:focus-visible,
-  .magnetic-primary:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(228, 87, 46, 0.3);
-  }
-
-  /* FORM INPUT */
-  .input-field {
-    background: var(--bg-main);
-    border: 1px solid var(--border-panel);
-    color: var(--text-primary);
-    font-size: 15px;
-    padding: 12px 16px;
-    min-height: 48px;
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 200ms ease;
-    width: 100%;
-  }
-
-  .input-field:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(228, 87, 46, 0.25), 0 0 18px rgba(228, 87, 46, 0.22);
-  }
-
-  .input-field::placeholder {
-    color: var(--text-tertiary);
-  }
-
-  input:focus,
-  textarea:focus,
-  select:focus {
-    box-shadow: 0 0 0 2px rgba(228, 87, 46, 0.25), 0 0 18px rgba(228, 87, 46, 0.22);
-    border-color: #E4572E;
-  }
-
-  input,
-  textarea,
-  select {
-    transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease-out;
-  }
-
-  input[type='range']::-webkit-slider-thumb {
-    transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
-  }
-
-  input[type='range']::-moz-range-thumb {
-    transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
-  }
-
-  input[type='range']:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 2px rgba(228, 87, 46, 0.28), 0 0 16px rgba(228, 87, 46, 0.24);
-    transform: scale(1.04);
-  }
-
-  input[type='range']:focus::-moz-range-thumb {
-    box-shadow: 0 0 0 2px rgba(228, 87, 46, 0.28), 0 0 16px rgba(228, 87, 46, 0.24);
-    transform: scale(1.04);
-  }
-
-  /* ──────────────────────────────────────────────────
-     INLINE CTA
-     CTA block inside long-form prose, set apart with
-     panel treatment.
-     ────────────────────────────────────────────────── */
-  .inline-cta {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-panel);
-    border-radius: 6px;
-    padding: 48px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    margin: 48px 0;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.02);
-  }
-
-  @media (max-width: 639px) {
-    .inline-cta {
-      padding: 32px 24px;
-    }
-  }
-}
-
-/* ══════════════════════════════════════════════════════
-   EDITORIAL TYPOGRAPHY SYSTEM
-   ══════════════════════════════════════════════════════ */
-
-@layer utilities {
-
-  /* ──────────────────────────────────────────────────
-     EDITORIAL PROSE
-     Long-form reading wrapper. 17px body, 1.85 line-height,
-     42rem max-width (~67 chars/line), generous paragraph spacing.
-     ────────────────────────────────────────────────── */
-  .prose-editorial {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-body);
-    max-width: 720px;
-    letter-spacing: 0.005em;
-  }
-
-  @media (min-width: 640px) {
-    .prose-editorial {
-      font-size: 16.5px;
-    }
-  }
-
-  .prose-editorial p {
-    margin-bottom: 1.5em;
-  }
-
-  .prose-editorial p:last-child {
-    margin-bottom: 0;
-  }
-
-  .prose-editorial strong {
-    color: var(--text-heading);
-    font-weight: 600;
-  }
-
-  /* ──────────────────────────────────────────────────
-     SECTION EYEBROW
-     Restrained label above headings.
-     10.5px grotesk, ultra-tracked, accent at 75%.
-     ────────────────────────────────────────────────── */
-  .eyebrow {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    opacity: 0.75;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .eyebrow::before {
-    content: '';
-    display: block;
-    width: 32px;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.45;
-  }
-
-  /* Centered variant */
-  .eyebrow-center {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    opacity: 0.75;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .eyebrow-center::before,
-  .eyebrow-center::after {
-    content: '';
-    display: block;
-    width: 32px;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.45;
-  }
-
-  /* ──────────────────────────────────────────────────
-     LEAD-IN PARAGRAPH
-     First paragraph after a heading. Slightly larger,
-     bridging heading energy into body copy.
-     ────────────────────────────────────────────────── */
-  .lead {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-body);
-    max-width: 720px;
-    font-weight: 400;
-  }
-
-  @media (min-width: 640px) {
-    .lead {
-      font-size: 17px;
-    }
-  }
-
-  /* ──────────────────────────────────────────────────
-     PULL QUOTE
-     Emphasized editorial quote inside long-form prose.
-     Left-bordered with accent color.
-     ────────────────────────────────────────────────── */
-  .pull-quote {
-    border-left: 2px solid var(--accent);
-    padding: 4px 0 4px 24px;
-    margin: 40px 0;
-    max-width: 38rem;
-  }
-
-  .pull-quote p {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 19px;
-    line-height: 1.55;
-    font-weight: 500;
-    color: var(--text-heading);
-    letter-spacing: -0.01em;
-  }
-
-  @media (min-width: 640px) {
-    .pull-quote p {
-      font-size: 21px;
-    }
-  }
-
-  /* ──────────────────────────────────────────────────
-     THESIS LINE
-     Short, high-impact one-liner that breaks reading
-     rhythm and acts as a section thesis statement.
-     ────────────────────────────────────────────────── */
-  .thesis {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 20px;
-    line-height: 1.4;
-    font-weight: 600;
-    color: var(--text-heading);
-    letter-spacing: -0.015em;
-    max-width: 36rem;
-    margin: 32px 0;
-  }
-
-  @media (min-width: 640px) {
-    .thesis {
-      font-size: 23px;
-    }
-  }
-
-  /* ──────────────────────────────────────────────────
-     CAPTION / METADATA
-     Small technical labels, timestamps, attribution.
-     ────────────────────────────────────────────────── */
-  .caption {
-    font-size: 12px;
-    line-height: 16px;
-    color: var(--text-secondary);
-    font-weight: 500;
-  }
-
-  /* ──────────────────────────────────────────────────
-     BIG FIGURE
-     Oversized number/stat for dramatic emphasis.
-     ────────────────────────────────────────────────── */
-  .big-figure {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-
-  .big-figure-label {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    opacity: 0.65;
-  }
-
-  /* ──────────────────────────────────────────────────
-     SECTION DIVIDER
-     Subtle gradient rule for editorial pacing.
-     ────────────────────────────────────────────────── */
-  .section-rule {
-    height: 1px;
-    background: #31363B;
-    margin: 16px 0;
-  }
-
-  .axiom-command-heading {
-    @apply font-axiomSans font-bold uppercase text-axiom-text-main;
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    line-height: 1.4;
-  }
-
-  .axiom-mono-callout {
-    @apply font-axiomMono text-axiom-text-main/90 bg-axiom-elevated border border-axiom-border rounded-xl;
-    font-size: 13px;
-    line-height: 1.6;
-    padding: 14px 18px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  .axiom-chapter-divider {
-    height: 1px;
-    width: 100%;
-    background: #31363B;
-  }
-
-  /* ──────────────────────────────────────────────────
-     STAT BAR
-     Horizontal stat strip for breaking up prose.
-     ────────────────────────────────────────────────── */
-  .stat-bar {
-    display: grid;
-    gap: 1px;
-    background: var(--border-subtle);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .stat-bar-cell {
-    background: var(--bg-inset);
-    padding: 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    text-align: center;
-  }
-
-  .stat-bar-value {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-
-  .stat-bar-label {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-  }
-
-  /* ════════════════════════════════════════════════
-     EXISTING UTILITIES (preserved)
-     ════════════════════════════════════════════════ */
-
-  .border-subtle {
-    border-color: var(--border-subtle);
-  }
-
-  .surface-panel {
-    @apply bg-[var(--bg-surface)] border border-subtle;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.02), 0 4px 16px -8px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Atmosphere Depth System */
-  .bg-atmosphere-grid {
-    background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-position: 0 0;
-  }
-
-  .bg-atmosphere-scan {
-    background: linear-gradient(135deg, transparent 0%, transparent 40%, rgba(255, 255, 255, 0.06) 50%, transparent 60%, transparent 100%);
-    background-size: 200% 200%;
-  }
-
-  .bg-atmosphere-noise {
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-      radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-      radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
-    background-size: 24px 24px, 32px 32px, 16px 16px, 40px 40px, 20px 20px;
-  }
-
-  .hero-vignette {
-    background: radial-gradient(circle at top center, rgba(255, 255, 255, 0.015) 0%, var(--bg-main) 70%);
-  }
-
-  .mask-bottom-fade {
-    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-  }
-
-  .hw-accelerate {
-    will-change: transform, background-position;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .animate-grid-drift {
-      animation: gridDrift 60s linear infinite;
-    }
-
-    .animate-scan-sweep {
-      animation: scanSweep 24s ease-in-out infinite alternate;
-    }
-  }
-
-  /* Reveal animation system */
-  .reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.4s ease-out var(--reveal-delay, 0ms), transform 0.4s ease-out var(--reveal-delay, 0ms);
-  }
-
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .reveal-delay-1 {
-    transition-delay: 100ms;
-  }
-
-  .reveal-delay-2 {
-    transition-delay: 200ms;
-  }
-
-  .reveal-delay-3 {
-    transition-delay: 300ms;
-  }
-
-  /* Hide scrollbar for mobile carousels */
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-@keyframes sweep {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(200%);
-  }
-}
-
-.animate-sweep {
-  animation: sweep 3s infinite linear;
-}
-
-@keyframes gridDrift {
-  0% {
-    background-position: 0px 0px;
-  }
-
-  100% {
-    background-position: 80px 80px;
-  }
-}
-
-@keyframes scanSweep {
-  0% {
-    background-position: 0% 0%;
-  }
-
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-@keyframes consoleReveal {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-console-reveal {
-  animation: consoleReveal 550ms cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
-}
-
-.axiom-bento {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease-out var(--reveal-delay, 0ms), transform 0.4s ease-out var(--reveal-delay, 0ms);
-}
-
-.axiom-bento.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes heroFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes routeFade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.route-fade {
-  animation: routeFade 0.3s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -917,83 +135,8 @@ html {
     scroll-behavior: auto;
   }
 
-  .btn,
-  .btn-primary,
-  .btn-secondary,
-  .magnetic-primary,
-  .hero-primary-cta {
-    transform: none !important;
-    transition: none !important;
-  }
-
-  .hero-fade-in,
-  .reveal,
-  .axiom-bento,
-  .route-fade,
-  .animate-grid-drift,
-  .animate-scan-sweep,
-  .animate-console-reveal {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
-  }
-
-  input,
-  textarea,
-  select,
-  input[type='range']::-webkit-slider-thumb,
-  input[type='range']::-moz-range-thumb {
-    transition: none !important;
-  }
-}
-
-/* System Hardening Overrides */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(245, 247, 250, 0.3) 0.5px, transparent 0.5px);
-  background-size: 3px 3px;
-  opacity: 0.025;
-  z-index: 0;
-}
-
-.axiom-bento {
-  padding: clamp(24px, 2.4vw, 32px) !important;
-  background-color: #13171B !important;
-  border-color: #31363B !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05) !important;
-}
-
-.axiom-shell-section h1,
-.axiom-shell-section h2,
-.axiom-shell-section h3,
-.axiom-shell-section h4,
-.axiom-shell-section h5,
-.axiom-shell-section h6,
-.axiom-shell-section h1 *,
-.axiom-shell-section h2 *,
-.axiom-shell-section h3 *,
-.axiom-shell-section h4 *,
-.axiom-shell-section h5 *,
-.axiom-shell-section h6 * {
-  color: #F5F7FA !important;
-}
-
-.axiom-shell-section p,
-.axiom-shell-section li,
-.axiom-shell-section label,
-.axiom-shell-section small {
-  color: #A7B3BC;
-}
-
-@media (max-width: 767px) {
-
-  .axiom-shell-section,
-  .section {
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+  .btn-primary {
+    transition: none;
+    transform: none;
   }
 }
