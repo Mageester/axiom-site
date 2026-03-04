@@ -57,7 +57,8 @@ const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
   return (
     <div
       ref={wrapperRef}
-      className={`transform-gpu [transform:translate3d(var(--mx,0px),var(--my,0px),0)] transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.4,1)] ${className}`}
+      className={`transform-gpu [transform:translate3d(var(--mx,0px),var(--my,0px),0)] ${className}`}
+      style={{ transition: 'transform 0.3s cubic-bezier(0.2, 0.8, 0.4, 1)' }}
     >
       {children}
     </div>
