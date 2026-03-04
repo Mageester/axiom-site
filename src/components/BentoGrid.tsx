@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 
-const cardClass =
-  'relative overflow-hidden rounded-3xl border border-[#31363B] bg-[#13171B] transition-all duration-500 hover:-translate-y-2 hover:border-[#E4572E]/50 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)]';
+const cardBase =
+  'relative overflow-hidden rounded-3xl border border-[#31363B] bg-[#13171B] transform-gpu transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:-translate-y-1 hover:scale-[1.02] hover:border-[#E4572E]/50 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)]';
 
 const chamfer = {
   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
@@ -10,16 +10,16 @@ const chamfer = {
 const BentoGrid: React.FC = () => {
   return (
     <section className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-8 py-24">
-      <article className={`${cardClass} md:col-span-2 min-h-[440px] p-12 flex flex-col justify-between`} style={chamfer}>
+      <article className={`${cardBase} md:col-span-2 md:row-span-1 min-h-[440px] p-12 flex flex-col justify-between`} style={chamfer}>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
         <div className="space-y-6 max-w-3xl">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Performance Framework</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Performance Core</p>
           <h2 className="text-[#F5F7FA] text-4xl md:text-5xl font-black tracking-tighter leading-[1.04]">
-            Infrastructure Built For Performance, Scale, And Signal Control
+            A Command Surface For Scale, Speed, And Authority
           </h2>
           <p className="text-[#A7B3BC] text-[17px] leading-[1.7] max-w-2xl">
-            Each system layer is engineered to maintain speed under load, preserve authority, and route intent through measurable conversion architecture.
+            The anchor layer orchestrates performance architecture, preserving signal quality and conversion momentum under load.
           </p>
         </div>
 
@@ -29,7 +29,7 @@ const BentoGrid: React.FC = () => {
             {[
               { label: 'Signal', value: 'LIVE' },
               { label: 'Latency', value: '0.38s' },
-              { label: 'Coverage', value: '300+' },
+              { label: 'Scale', value: 'Elastic' },
               { label: 'Uptime', value: '99.99%' },
             ].map((item) => (
               <div key={item.label} className="rounded-xl border border-[#31363B] bg-[#13171B] p-3">
@@ -44,27 +44,36 @@ const BentoGrid: React.FC = () => {
         </div>
       </article>
 
-      <article className={`${cardClass} md:col-span-1 min-h-[440px] p-10 flex flex-col justify-between items-start`} style={chamfer}>
+      <article
+        className={`${cardBase} md:col-span-1 md:row-span-2 min-h-[736px] p-10 flex flex-col justify-between items-start md:translate-x-[8.333333%]`}
+        style={chamfer}
+      >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
-        <div className="space-y-3">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Operational Metric</p>
-          <p className="font-mono text-6xl tracking-tighter leading-none text-[#E4572E] drop-shadow-[0_0_22px_rgba(228,87,46,0.35)]">99.9%</p>
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#A7B3BC]">Efficiency</p>
+        <div className="space-y-4">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Deep-Dive Series</p>
+          <h3 className="text-[#F5F7FA] text-3xl font-black tracking-tight leading-tight">Infrastructure Case Studies</h3>
+          <p className="text-[#A7B3BC] text-[15px] leading-[1.7]">
+            Long-form architecture breakdowns showing how premium systems move from static presence to controlled growth engines.
+          </p>
         </div>
 
-        <p className="text-[#A7B3BC] text-[15px] leading-[1.7] max-w-[28ch]">
-          Precision intake logic compresses decision cycles and improves operational efficiency at every growth stage.
-        </p>
+        <div className="w-full space-y-3">
+          {['Performance Stack Audit', 'Conversion Flow Mapping', 'Authority Layer Deployment'].map((item) => (
+            <div key={item} className="w-full rounded-xl border border-[#31363B] bg-[#090A0B] p-4">
+              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">{item}</p>
+            </div>
+          ))}
+        </div>
       </article>
 
-      <article className={`${cardClass} md:col-span-1 min-h-[360px] p-10`} style={chamfer}>
+      <article className={`${cardBase} md:col-span-1 min-h-[360px] p-10 md:translate-x-[8.333333%]`} style={chamfer}>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
         <div className="h-full flex flex-col justify-between">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Status Graph</p>
-            <h3 className="mt-4 text-[#F5F7FA] text-2xl font-bold tracking-tight">Live Throughput</h3>
+            <h3 className="mt-4 text-[#F5F7FA] text-2xl font-bold tracking-tight">Runtime Throughput</h3>
           </div>
 
           <div className="mt-8 flex items-end gap-3 h-40">
@@ -77,22 +86,22 @@ const BentoGrid: React.FC = () => {
         </div>
       </article>
 
-      <article className={`${cardClass} md:col-span-2 min-h-[360px] p-12`} style={chamfer}>
+      <article className={`${cardBase} md:col-span-2 min-h-[360px] p-12`} style={chamfer}>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
         <div className="h-full flex flex-col justify-between max-w-3xl">
           <div className="space-y-5">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Conversion Geometry</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Conversion Architecture</p>
             <h3 className="text-[#F5F7FA] text-3xl md:text-4xl font-black tracking-tighter leading-[1.1]">
-              Precision Architecture That Turns Demand Into Qualified Capital
+              Geometry That Converts Intent Into Measurable Growth
             </h3>
             <p className="text-[#A7B3BC] text-[17px] leading-[1.75] max-w-2xl">
-              Conversion architecture removes friction between discovery and commitment with clear sequencing, strict qualification, and scalable intent capture.
+              Conversion layers remove friction between interest and commitment through precise sequencing, qualification control, and scalable signal routing.
             </p>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            {['Performance Layer', 'Scalable Control', 'Conversion System'].map((chip) => (
+            {['Performance Layer', 'Scalable Control', 'Signal Clarity'].map((chip) => (
               <span
                 key={chip}
                 className="inline-flex items-center rounded-full border border-[#31363B] bg-[#090A0B] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]"
