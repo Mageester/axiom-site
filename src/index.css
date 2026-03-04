@@ -104,19 +104,38 @@
 
 @layer components {
   .axiom-bento {
-    @apply bg-axiom-elevated border border-axiom-border rounded-2xl p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)];
+    @apply bg-axiom-elevated border border-axiom-border rounded-2xl p-6;
     position: relative;
     overflow: hidden;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+      0 2px 8px rgba(0, 0, 0, 0.18),
+      0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: border-color 0.3s cubic-bezier(0.2, 0, 0, 1),
+      box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1),
+      transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .axiom-bento:hover {
+    border-color: rgba(228, 87, 46, 0.15);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+      0 4px 12px rgba(0, 0, 0, 0.25),
+      0 20px 40px -15px rgba(0, 0, 0, 0.4);
   }
 
   .axiom-bento-card {
-    @apply bg-axiom-elevated border border-axiom-border rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.05)];
+    @apply bg-axiom-elevated border border-axiom-border rounded-2xl;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
   .axiom-glass {
-    @apply bg-axiom-surface/60 backdrop-blur-md border border-axiom-border/50 rounded-xl;
-    position: relative;
-    overflow: hidden;
+    background: rgba(9, 10, 11, 0.72);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-bottom: 1px solid rgba(49, 54, 59, 0.5);
   }
 
   .axiom-bento::before,
@@ -149,16 +168,12 @@
 
   .axiom-grain::after {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background-image:
-      radial-gradient(rgba(245, 247, 250, 0.35) 0.5px, transparent 0.5px),
-      radial-gradient(rgba(245, 247, 250, 0.25) 0.5px, transparent 0.5px);
-    background-size: 3px 3px, 5px 5px;
-    background-position: 0 0, 1px 1px;
-    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.028;
     pointer-events: none;
-    z-index: 0;
+    z-index: 50;
   }
 
   .axiom-grain>* {
@@ -329,17 +344,28 @@
   .magnetic-primary {
     --mx: 0px;
     --my: 0px;
-    background: #E4572E;
+    background: radial-gradient(57% 86% at 50% 105%, #E4572E 0%, #C14A27 100%);
     color: #F5F7FA;
-    border: 1px solid rgba(228, 87, 46, 0.7);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(228, 87, 46, 0.5);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+      0 2px 6px rgba(0, 0, 0, 0.3),
+      0 4px 24px rgba(228, 87, 46, 0.18);
     transform: translate(var(--mx), var(--my)) translateY(0);
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1),
+      box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1),
+      background 0.3s cubic-bezier(0.2, 0, 0, 1);
   }
 
   .btn-primary:hover,
   .magnetic-primary:hover {
-    background: #D65029;
-    box-shadow: 0 10px 22px rgba(228, 87, 46, 0.22);
+    background: radial-gradient(57% 86% at 50% 105%, #E4572E 0%, #B5431F 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+      0 4px 12px rgba(0, 0, 0, 0.35),
+      0 8px 40px rgba(228, 87, 46, 0.25);
     transform: translate(var(--mx), var(--my)) translateY(-1px);
   }
 
@@ -964,7 +990,7 @@ body::before {
   padding: clamp(24px, 2.4vw, 32px) !important;
   background-color: #13171B !important;
   border-color: #31363B !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
 }
 
 .axiom-shell-section h1,

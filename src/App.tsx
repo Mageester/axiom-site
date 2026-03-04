@@ -153,8 +153,8 @@ const App: React.FC = () => {
             <ScrollToTop />
             <BackgroundAtmosphere />
 
-            <nav className="fixed top-0 left-0 w-full z-50 border-b border-axiom-border bg-axiom-base/92 backdrop-blur-xl">
-                <div className={`axiom-shell-inner h-20 px-6 md:px-10 xl:px-20 grid grid-cols-[1fr_auto_auto] md:grid-cols-3 items-center gap-4 transition-all duration-300 ease-out ${isScrolled ? 'shadow-[0_10px_30px_rgba(0,0,0,0.35)]' : ''}`}>
+            <nav className="fixed top-0 left-0 w-full z-50 axiom-glass">
+                <div className={`axiom-shell-inner h-20 px-6 md:px-10 xl:px-20 grid grid-cols-[1fr_auto_auto] md:grid-cols-3 items-center gap-4 transition-all duration-300 ease-out ${isScrolled ? 'shadow-[0_8px_32px_rgba(0,0,0,0.4)]' : ''}`}>
                     <Link to="/" className="flex items-center gap-3 group focus-visible:ring-offset-background min-h-[48px]">
                         <BrandLockup
                             logoSize="h-[22px] lg:h-[24px] w-auto opacity-95 group-hover:opacity-100 transition-all duration-300"
