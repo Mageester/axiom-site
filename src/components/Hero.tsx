@@ -19,17 +19,17 @@ const Hero: React.FC = () => {
           </div>
 
           <h1 className="mb-10 text-6xl font-black leading-[1.05] tracking-tighter text-[#F2F4F7] opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[300ms] md:text-7xl">
-            The Standard for High-Performance Digital Identity.
+            Web Infrastructure That Elevates Every Industry.
           </h1>
 
           <p className="mb-8 max-w-lg text-lg leading-[1.65] text-[#A7B3BC] opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[500ms]">
-            We engineer elite digital infrastructure for brands that demand market dominance. No fluff. Just pure performance.
+            From luxury e-commerce to complex SaaS, we engineer bespoke websites that combine stunning aesthetics with rock-solid performance.
           </p>
 
           <div className="flex flex-wrap items-center gap-8 opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[700ms]">
             <MagneticWrapper className="inline-flex">
               <button type="button" onClick={scrollToIntake} className="btn-primary btn-lg whitespace-nowrap">
-                Secure Your Slot
+                Let's Start Your Project
               </button>
             </MagneticWrapper>
 

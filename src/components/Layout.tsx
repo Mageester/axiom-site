@@ -13,7 +13,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-[#090A0B] text-axiom-text-main">
+    <div className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
       <Preloader targetRef={logoTargetRef} />
 
       <div className="pointer-events-none absolute inset-0 z-0">
@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="engineering-grid animate-grid-drift" />
       </div>
 
-      <nav className="fixed left-0 right-0 top-0 z-50 border-b border-axiom-border bg-axiom-base/86 backdrop-blur-xl">
+      <nav className="fixed left-0 right-0 top-0 z-50 border-b border-axiom-border bg-[rgba(9,10,11,0.86)] backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-6">
           <button
             ref={logoTargetRef}
@@ -34,7 +34,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <img
               src="/logo.png"
               alt="Axiom Infrastructure"
-              className="h-16 w-auto object-contain drop-shadow-[0_0_20px_rgba(228,87,46,0.24)] md:h-20"
+              className="h-16 w-auto object-contain drop-shadow-[0_0_20px_rgba(176,93,65,0.24)] md:h-20"
             />
           </button>
 

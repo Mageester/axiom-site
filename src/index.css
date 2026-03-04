@@ -6,6 +6,9 @@
   :root {
     --section-py-mobile: 8rem;
     --section-py-desktop: 12rem;
+    --axiom-base: #090A0B;
+    --axiom-accent: #B05D41;
+    --axiom-text-primary: #ECEFF3;
     --axiom-amber: #B05D41;
     --axiom-gold: #D8B47A;
     --axiom-navy: #1C2E5A;
@@ -20,8 +23,8 @@
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    color: #ECEFF3;
-    background-color: #090A0B;
+    color: var(--axiom-text-primary);
+    background-color: var(--axiom-base);
     background-image:
       radial-gradient(circle at 14% 22%, rgba(28, 46, 90, 0.32), transparent 48%),
       radial-gradient(circle at 84% 38%, rgba(176, 93, 65, 0.28), transparent 52%);
@@ -161,7 +164,7 @@
     pointer-events: none;
     background-image: linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px);
     background-size: 80px 80px;
-    opacity: 0.15;
+    opacity: 0.1;
     -webkit-mask-image: radial-gradient(circle at top right, black, transparent 70%);
     mask-image: radial-gradient(circle at top right, black, transparent 70%);
   }
