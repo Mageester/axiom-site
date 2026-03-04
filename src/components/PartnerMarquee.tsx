@@ -7,10 +7,10 @@ type PartnerIcon = {
 
 const icons: PartnerIcon[] = [
   {
-    name: 'Cloudflare',
+    name: 'Vercel',
     svg: (
       <svg viewBox="0 0 48 48" className="h-6 w-6 fill-current" aria-hidden>
-        <path d="M11.6 33.2a6.8 6.8 0 0 1 1.5-13.4 9.9 9.9 0 0 1 19.1 3 6.1 6.1 0 0 1 1.6-.2 5.8 5.8 0 0 1 1.3 11.4H11.6Z" />
+        <path d="M24 10 7.6 37h32.8L24 10Z" />
       </svg>
     ),
   },
@@ -23,18 +23,10 @@ const icons: PartnerIcon[] = [
     ),
   },
   {
-    name: 'Vercel',
+    name: 'Cloudflare',
     svg: (
       <svg viewBox="0 0 48 48" className="h-6 w-6 fill-current" aria-hidden>
-        <path d="M24 10 7.6 37h32.8L24 10Z" />
-      </svg>
-    ),
-  },
-  {
-    name: 'GSAP',
-    svg: (
-      <svg viewBox="0 0 48 48" className="h-6 w-6 fill-current" aria-hidden>
-        <path d="M24 9a15 15 0 1 0 15 15h-6a9 9 0 1 1-9-9V9Z" />
+        <path d="M11.6 33.2a6.8 6.8 0 0 1 1.5-13.4 9.9 9.9 0 0 1 19.1 3 6.1 6.1 0 0 1 1.6-.2 5.8 5.8 0 0 1 1.3 11.4H11.6Z" />
       </svg>
     ),
   },
@@ -46,6 +38,14 @@ const icons: PartnerIcon[] = [
         <ellipse cx="24" cy="24" rx="17" ry="7" fill="none" stroke="currentColor" strokeWidth="2.2" />
         <ellipse cx="24" cy="24" rx="17" ry="7" fill="none" stroke="currentColor" strokeWidth="2.2" transform="rotate(60 24 24)" />
         <ellipse cx="24" cy="24" rx="17" ry="7" fill="none" stroke="currentColor" strokeWidth="2.2" transform="rotate(120 24 24)" />
+      </svg>
+    ),
+  },
+  {
+    name: 'GSAP',
+    svg: (
+      <svg viewBox="0 0 48 48" className="h-6 w-6 fill-current" aria-hidden>
+        <path d="M24 9a15 15 0 1 0 15 15h-6a9 9 0 1 1-9-9V9Z" />
       </svg>
     ),
   },
@@ -61,7 +61,7 @@ const PartnerMarquee: React.FC = () => {
           {track.map((icon, index) => (
             <div
               key={`${icon.name}-${index}`}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] text-[#A7B3BC] grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] text-[#A7B3BC] grayscale opacity-40 transition-all duration-700 hover:grayscale-0 hover:opacity-100"
               title={icon.name}
               aria-label={icon.name}
             >

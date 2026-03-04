@@ -27,7 +27,7 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
       setDeparting(true);
     }, 1500);
 
-    const finishTimer = window.setTimeout(() => setActive(false), 2550);
+    const finishTimer = window.setTimeout(() => setActive(false), 2800);
 
     return () => {
       window.clearTimeout(revealTimer);
@@ -40,7 +40,8 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
     const scale = departing ? 0.34 : revealed ? 1 : 1.1;
     const opacity = departing ? 0 : revealed ? 1 : 0;
     const blur = departing ? 2 : revealed ? 0 : 24;
-    const translate = departing ? `translate3d(${offset.x}px, ${offset.y}px, 0)` : 'translate3d(0, 0, 0)';
+    const yLift = departing ? -10 : revealed ? 0 : 18;
+    const translate = departing ? `translate3d(${offset.x}px, ${offset.y + yLift}px, 0)` : `translate3d(0, ${yLift}px, 0)`;
 
     return {
       opacity,

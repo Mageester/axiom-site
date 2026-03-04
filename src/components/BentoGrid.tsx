@@ -2,7 +2,7 @@ import React from 'react';
 import useReveal from '../hooks/useReveal';
 
 const cardBase =
-  'relative overflow-hidden rounded-[1.25rem] border border-[#31363B] bg-[#13171B] transform-gpu transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:-translate-y-1 hover:scale-[1.02] hover:border-[#E4572E]/50 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-1px_0_rgba(0,0,0,0.3),0_8px_20px_0_rgba(0,0,0,0.6)]';
+  'relative overflow-hidden rounded-[1.25rem] border border-[#31363B] bg-[#13171B] transform-gpu transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:-translate-y-1 hover:scale-[1.02] hover:border-[#B05D41]/60 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-1px_0_rgba(0,0,0,0.3),0_8px_20px_0_rgba(0,0,0,0.6)]';
 
 const revealClass = (isVisible: boolean, delayClass: string) =>
   `${isVisible ? `opacity-100 [animation-fill-mode:forwards] animate-[fade-in-up_0.6s_ease-out] ${delayClass}` : 'opacity-0 translate-y-5'} transform-gpu`;
@@ -25,7 +25,7 @@ const BentoGrid: React.FC = () => {
             Visual Engineering
           </h2>
             <p className="text-[#A7B3BC] text-[17px] leading-[1.7] max-w-2xl">
-              Building cinematic identities that position your brand at the top of your market.
+              Cinematic identities that position your brand at the absolute top of your market.
             </p>
           </div>
 
@@ -40,12 +40,12 @@ const BentoGrid: React.FC = () => {
               ].map((item) => (
                 <div key={item.label} className="rounded-xl border border-[#31363B] bg-[#13171B] p-3">
                   <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#A7B3BC]">{item.label}</p>
-                  <p className="mt-1 font-mono text-lg tracking-tight text-[#E4572E]">{item.value}</p>
+                  <p className="mt-1 font-mono text-lg tracking-tight text-[#D8B47A]">{item.value}</p>
                 </div>
               ))}
             </div>
             <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-[#31363B]">
-              <div className="h-full w-[84%] bg-[#E4572E] shadow-[0_0_16px_rgba(228,87,46,0.45)]" />
+              <div className="h-full w-[84%] bg-[#B05D41] shadow-[0_0_16px_rgba(176,93,65,0.45)]" />
             </div>
           </div>
         </article>
@@ -59,7 +59,7 @@ const BentoGrid: React.FC = () => {
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Deep-Dive Series</p>
             <h3 className="text-[#F5F7FA] text-3xl font-black tracking-tight leading-tight">Conversion Architecture</h3>
             <p className="text-[#A7B3BC] text-[15px] leading-[1.7]">
-              Turning digital traffic into measurable revenue through precision design.
+              Turning interest into revenue through precision design and high-stakes infrastructure.
             </p>
           </div>
 
@@ -89,7 +89,7 @@ const BentoGrid: React.FC = () => {
             <div className="mt-8 flex items-end gap-3 h-40">
               {[34, 58, 46, 79, 63, 91, 74].map((height, i) => (
                 <div key={i} className="flex-1 rounded-t-md border border-[#31363B] bg-[#090A0B] relative overflow-hidden" style={{ height: `${height}%` }}>
-                  <div className="absolute inset-x-0 bottom-0 bg-[#E4572E] opacity-80" style={{ height: `${Math.max(18, height - 24)}%` }} />
+                  <div className="absolute inset-x-0 bottom-0 bg-[#B05D41] opacity-80" style={{ height: `${Math.max(18, height - 24)}%` }} />
                 </div>
               ))}
             </div>

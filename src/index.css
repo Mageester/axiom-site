@@ -6,6 +6,9 @@
   :root {
     --section-py-mobile: 8rem;
     --section-py-desktop: 12rem;
+    --axiom-amber: #B05D41;
+    --axiom-gold: #D8B47A;
+    --axiom-navy: #1C2E5A;
   }
 
   html {
@@ -17,6 +20,11 @@
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    color: #ECEFF3;
+    background-color: #090A0B;
+    background-image:
+      radial-gradient(circle at 14% 22%, rgba(28, 46, 90, 0.32), transparent 48%),
+      radial-gradient(circle at 84% 38%, rgba(176, 93, 65, 0.28), transparent 52%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -94,8 +102,8 @@
     color: #F5F7FA;
     font-weight: 600;
     letter-spacing: 0.01em;
-    background: radial-gradient(57.04% 86.47% at 50% 105%, #F37055 0%, #D13A1A 100%);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 -6px 4px rgba(0, 0, 0, 0.3) inset, 0 4px 6px rgba(0, 0, 0, 0.5), 0 4px 80px rgba(228, 87, 46, 0.3);
+    background: radial-gradient(72% 110% at 50% 102%, #E0C18D 0%, #B05D41 58%, #7D4332 100%);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.34) inset, 0 -6px 4px rgba(0, 0, 0, 0.3) inset, 0 4px 6px rgba(0, 0, 0, 0.5), 0 4px 80px rgba(176, 93, 65, 0.34);
     transform: translateZ(0);
     backface-visibility: hidden;
     transition: transform 220ms cubic-bezier(0.2, 0.8, 0.4, 1), filter 220ms ease, box-shadow 220ms ease;
@@ -116,8 +124,8 @@
       inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
       inset 0 -6px 4px 0 rgba(0, 0, 0, 0.2),
       0 4px 6px 0 rgba(0, 0, 0, 0.4),
-      0 4px 80px 0 rgba(228, 87, 46, 0.3),
-      0 0 0 2px rgba(228, 87, 46, 0.32);
+      0 4px 80px 0 rgba(176, 93, 65, 0.34),
+      0 0 0 2px rgba(176, 93, 65, 0.32);
   }
 
   .btn-md {
