@@ -307,7 +307,7 @@ const Manifesto: React.FC = () => {
                         Plug the Leak with Axiom Infrastructure
                     </Link>
                     <p className="text-[12px] text-axiom-text-mute font-grotesk">
-                        Custom engagements starting at <span className="text-axiom-text-main font-semibold">$7,500</span>. <span className="text-axiom-accent font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
+                        Custom engagements starting at <span className="text-axiom-text-main font-semibold">$500 CAD</span>. <span className="text-axiom-accent font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
                     </p>
                 </section>
             </article>

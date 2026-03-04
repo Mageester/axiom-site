@@ -69,7 +69,7 @@ const Home: React.FC = () => {
             />
 
             <div className="page-shell">
- {/*  HERO  */}
+                {/*  HERO  */}
                 <section className="-mx-6 md:-mx-10 xl:-mx-20 min-h-[78vh] relative overflow-hidden flex items-center px-6 md:px-10 xl:px-20">
                     <div
                         ref={heroBgRef}
@@ -110,14 +110,14 @@ const Home: React.FC = () => {
                                     </Link>
                                 </div>
                                 <p className="text-[12px] text-axiom-text-mute font-grotesk">
-                                    Custom engagements starting at <span className="text-axiom-text-main font-semibold">$7,500</span>. <span className="text-axiom-text-main font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
+                                    Custom engagements starting at <span className="text-axiom-text-main font-semibold">$500 CAD</span>. <span className="text-axiom-text-main font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </section>
 
- {/*  PERFORMANCE GUARANTEE  */}
+                {/*  PERFORMANCE GUARANTEE  */}
                 <section className="max-w-[1100px] mx-auto mt-4 sm:mt-5">
                     <div className="axiom-bento p-4 sm:p-6 text-center">
                         <p className="text-[13px] sm:text-[14px] text-axiom-text-mute leading-relaxed">
@@ -127,7 +127,7 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
- {/*  TRUST METRICS ROW  */}
+                {/*  TRUST METRICS ROW  */}
                 <section className="max-w-[1100px] mx-auto mt-4 sm:mt-5 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
                     {trustMetrics.map((metric) => (
                         <div key={metric.label} className="axiom-bento p-5 sm:p-6 flex items-center gap-5">
@@ -142,7 +142,7 @@ const Home: React.FC = () => {
                     ))}
                 </section>
 
- {/*  SOCIAL PROOF  */}
+                {/*  SOCIAL PROOF  */}
                 <section className="max-w-[1100px] mx-auto mt-4 sm:mt-5">
                     <div className="axiom-bento p-6 sm:p-8 md:p-10">
                         <div className="flex flex-col md:flex-row gap-5 sm:gap-6 items-start">
@@ -169,7 +169,7 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
- {/*  RISK REVERSAL BANNER  */}
+                {/*  RISK REVERSAL BANNER  */}
                 <section className="max-w-[1100px] mx-auto mt-16 sm:mt-24">
                     <div className="axiom-bento p-8 sm:p-10 md:p-12">
                         <div className="max-w-2xl mx-auto text-center flex flex-col gap-5">
@@ -184,7 +184,7 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
- {/*  VALUE PROPOSITION CARDS  */}
+                {/*  VALUE PROPOSITION CARDS  */}
                 <section className="max-w-[1100px] mx-auto mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                     {valueProps.map((card) => (
                         <article key={card.title} className="axiom-bento p-6 sm:p-8 flex flex-col gap-4 group hover:border-axiom-border/80 transition-colors">
@@ -195,10 +195,10 @@ const Home: React.FC = () => {
                     ))}
                 </section>
 
- {/*  Section Break  */}
+                {/*  Section Break  */}
                 <div className="max-w-[1100px] mx-auto mt-16 sm:mt-24"><div className="section-rule"></div></div>
 
- {/*  DEPLOYMENT PROOF  */}
+                {/*  DEPLOYMENT PROOF  */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
                     <div className="axiom-bento p-7 sm:p-10 md:p-12">
                         <p className="eyebrow mb-3">Field Operations</p>
@@ -206,7 +206,7 @@ const Home: React.FC = () => {
                             Built. Deployed. Measured.
                         </h2>
                         <p className="lead mb-10 sm:mb-12">
-                            Every Axiom concept architecture is a live, auditable asset — not a mockup. Here's what $7,500 of engineering actually looks like.
+                            Every Axiom concept architecture is a live, auditable asset — not a mockup. Here's what our engineering actually looks like.
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
@@ -291,7 +291,7 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
- {/*  BEFORE / AFTER ECONOMICS  */}
+                {/*  BEFORE / AFTER ECONOMICS  */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
                     <div className="axiom-bento p-7 sm:p-10 md:p-12">
                         <p className="eyebrow mb-3">The Real Comparison</p>
@@ -334,7 +334,7 @@ const Home: React.FC = () => {
                             <div className="bg-axiom-elevated p-6 sm:p-8 flex flex-col gap-5 border-l-0 md:border-l border-axiom-border">
                                 <div className="flex flex-col gap-2">
                                     <p className="big-figure-label text-axiom-text-mute">Axiom Infrastructure</p>
-                                    <p className="text-[24px] sm:text-[28px] font-bold text-axiom-text-mute font-grotesk tracking-tight">$7,500</p>
+                                    <p className="text-[24px] sm:text-[28px] font-bold text-axiom-text-mute font-grotesk tracking-tight">$500 CAD</p>
                                     <p className="text-[11px] text-axiom-text-mute">One-time. You own the asset.</p>
                                 </div>
                                 <ul className="flex flex-col gap-3">
@@ -368,10 +368,10 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
- {/*  Section Break  */}
+                {/*  Section Break  */}
                 <div className="max-w-[1100px] mx-auto mt-16 sm:mt-24"><div className="section-rule"></div></div>
 
- {/*  MANIFESTO BRIDGE CTA  */}
+                {/*  MANIFESTO BRIDGE CTA  */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
                     <div className="axiom-bento border-[var(--accent)]/12 p-7 sm:p-10 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-10">
                         <div className="flex-1 flex flex-col gap-3">
@@ -392,7 +392,7 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
- {/*  INFRASTRUCTURE SPECIFICATION  */}
+                {/*  INFRASTRUCTURE SPECIFICATION  */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
                     <div className="axiom-bento p-7 sm:p-10 md:p-12">
                         <p className="eyebrow mb-8">Infrastructure Specification</p>
@@ -412,7 +412,7 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
- {/*  INDUSTRIES SERVED  */}
+                {/*  INDUSTRIES SERVED  */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
                     <div className="axiom-bento p-7 sm:p-10 md:p-12">
                         <div className="text-center flex flex-col gap-4 sm:gap-5 mb-10">
@@ -443,10 +443,10 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
- {/*  Section Break  */}
+                {/*  Section Break  */}
                 <div className="max-w-[1100px] mx-auto mt-16 sm:mt-24"><div className="section-rule"></div></div>
 
- {/*  THE AXIOM STORY  */}
+                {/*  THE AXIOM STORY  */}
                 <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
                     <div className="axiom-bento p-7 sm:p-10 md:p-14">
                         <p className="eyebrow mb-6 sm:mb-8">The Axiom Story</p>
@@ -489,7 +489,7 @@ const Home: React.FC = () => {
                     </div>
                 </section>
 
- {/*  FINAL CTA  */}
+                {/*  FINAL CTA  */}
                 <section className="max-w-[1100px] mx-auto mt-16 sm:mt-24">
                     <div className="inline-cta !m-0">
                         <h2 className="text-[24px] sm:text-[32px] md:text-[40px] font-semibold tracking-tight">

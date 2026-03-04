@@ -18,7 +18,7 @@ type PricingTier = {
 const pricingTiers: PricingTier[] = [
   {
     name: 'Foundation',
-    price: '$7,500',
+    price: '$500 CAD',
     packageParam: 'foundation',
     bestFor: 'Best for owner-led teams operating in one core service territory.',
     outcome: 'Ship a high-authority web asset that replaces fragile agency templates and captures urgent calls faster.',
@@ -33,7 +33,7 @@ const pricingTiers: PricingTier[] = [
   },
   {
     name: 'Authority',
-    price: '$12,500+',
+    price: '$1,500 CAD',
     packageParam: 'authority',
     featured: true,
     bestFor: 'Best for growth-stage operators scaling volume while protecting ticket quality.',
@@ -50,7 +50,7 @@ const pricingTiers: PricingTier[] = [
   },
   {
     name: 'Multi-Location / Expansion',
-    price: 'Custom',
+    price: '$3,000 CAD',
     packageParam: 'expansion',
     bestFor: 'Best for multi-crew operators expanding territories or integrating acquisitions.',
     outcome: 'Engineer a scalable infrastructure platform that standardizes performance across regions and crews.',

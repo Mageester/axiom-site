@@ -5,7 +5,7 @@ import { SEO } from '../components/SEO';
 const tiers = [
     {
         name: 'Foundation',
-        price: '$7,500',
+        price: '$500 CAD',
         tag: 'Core Deployment',
         desc: 'Launch-grade contractor infrastructure for replacing fragile agency templates.',
         qualifier: 'Best for owner-led teams in one primary service territory.',
@@ -20,7 +20,7 @@ const tiers = [
     },
     {
         name: 'Authority',
-        price: '$12,500+',
+        price: '$1,500 CAD',
         tag: 'Growth System',
         desc: 'Most selected by scaling operators who need authority and throughput at the same time.',
         qualifier: 'Best for teams of 10+ targeting higher-ticket service work.',
@@ -36,7 +36,7 @@ const tiers = [
     },
     {
         name: 'Multi-Location / Expansion',
-        price: 'Custom',
+        price: '$3,000 CAD',
         tag: 'Bespoke Command',
         desc: 'Custom architecture for multi-crew and multi-market growth operators.',
         qualifier: 'Best for established teams expanding territories or acquisitions.',

@@ -29,9 +29,9 @@ const INITIAL_FORM: IntakeFormState = {
 };
 
 const SCALE_OPTIONS = [
-    { value: 'foundation', label: 'Foundation Investment ($7,500)' },
-    { value: 'authority', label: 'Authority Investment ($12,500+)' },
-    { value: 'expansion', label: 'Multi-Location / Expansion (Custom)' }
+    { value: 'foundation', label: 'Foundation Investment ($500 CAD)' },
+    { value: 'authority', label: 'Authority Investment ($1,500 CAD)' },
+    { value: 'expansion', label: 'Multi-Location / Expansion ($3,000 CAD)' }
 ];
 
 const PAIN_POINTS_OPTIONS = [
@@ -48,9 +48,9 @@ const ContactPage: React.FC = () => {
         const packageParam = (searchParams.get('package') || '').toLowerCase();
         const normalizedPackage =
             packageParam === 'starter' ? 'foundation' :
-            packageParam === 'professional' ? 'authority' :
-            packageParam === 'enterprise' ? 'expansion' :
-            packageParam;
+                packageParam === 'professional' ? 'authority' :
+                    packageParam === 'enterprise' ? 'expansion' :
+                        packageParam;
         return {
             ...INITIAL_FORM,
             project_scale: SCALE_OPTIONS.some(o => o.value === normalizedPackage) ? normalizedPackage : ''
