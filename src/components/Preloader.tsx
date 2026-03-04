@@ -37,9 +37,9 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
   }, [active, targetRef]);
 
   const logoStyle = useMemo(() => {
-    const scale = departing ? 0.34 : revealed ? 1 : 8;
-    const opacity = departing ? 0.96 : revealed ? 1 : 0;
-    const blur = departing ? 0 : revealed ? 0 : 64;
+    const scale = departing ? 0.34 : revealed ? 1 : 12;
+    const opacity = departing ? 1 : revealed ? 1 : 0;
+    const blur = departing ? 0 : revealed ? 0 : 96;
     const yLift = departing ? -12 : revealed ? 0 : 22;
     const translate = departing ? `translate3d(${offset.x}px, ${offset.y + yLift}px, 0)` : `translate3d(0, ${yLift}px, 0)`;
 

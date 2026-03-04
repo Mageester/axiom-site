@@ -28,13 +28,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             ref={logoTargetRef}
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center rounded-md transition-transform duration-700 ease-in-out hover:scale-110"
+            className="inline-flex items-center transition-transform duration-700 ease-in-out hover:scale-110"
             aria-label="Axiom Infrastructure home"
           >
             <img
               src="/logo.png"
               alt="Axiom Infrastructure"
-              className="h-16 w-auto object-contain drop-shadow-[0_0_20px_rgba(176,93,65,0.24)] md:h-20"
+              className="h-14 w-auto object-contain md:h-20"
             />
           </button>
 
@@ -52,6 +52,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </button>
         </div>
       </nav>
+
+      <div className="pointer-events-none fixed right-4 top-1/2 z-40 -rotate-90">
+        <p className="font-axiomMono text-xs uppercase tracking-widest text-[#d2b49c]">
+          TRUSTED BY HIGH-STAKES ENGINEERING TEAMS
+        </p>
+      </div>
 
       <div className="relative z-10 pt-28 md:pt-32 noise-overlay">{children}</div>
     </div>
