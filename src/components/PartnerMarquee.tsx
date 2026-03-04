@@ -55,13 +55,13 @@ const PartnerMarquee: React.FC = () => {
   const track = [...icons, ...icons];
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-8 py-6" aria-label="Platform ecosystem">
-      <div className="relative overflow-hidden rounded-full border border-white/10 bg-[#111]/40 backdrop-blur-md">
-        <div className="animate-logo-cloud flex w-max items-center gap-4 px-5 py-3">
+    <section className="w-full overflow-hidden py-6" aria-label="Platform ecosystem">
+      <div className="flex w-full items-center overflow-hidden">
+        <div className="animate-logo-cloud flex w-max items-center gap-10 px-8">
           {track.map((icon, index) => (
             <div
               key={`${icon.name}-${index}`}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] text-[#A7B3BC] grayscale opacity-40 transition-all duration-700 hover:grayscale-0 hover:opacity-100"
+              className="inline-flex h-11 w-11 items-center justify-center text-white brightness-200 invert opacity-70 transition-opacity duration-300 hover:opacity-100"
               title={icon.name}
               aria-label={icon.name}
             >
