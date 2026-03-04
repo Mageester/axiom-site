@@ -26,7 +26,7 @@ const IntakeTerminal: React.FC = () => {
         }`}
       >
         <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#22c55e] animate-pulse" aria-hidden />
-        <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#A7B3BC]">System Status : Online</p>
+        <p className="text-[11px] font-medium tracking-[0.16em] uppercase text-[#A7B3BC]">Studio Availability : Open</p>
       </div>
 
       <div className="mb-8 space-y-3">
@@ -71,14 +71,29 @@ const IntakeTerminal: React.FC = () => {
           style={{ transitionDelay: '200ms' }}
         >
           <a
-            href="mailto:hello@getaxiom.ca"
+            href="mailto:aidan@getaxiom.ca"
             onClick={() => setActiveAction('email')}
             className={`${baseCardClass} block ${activeAction === 'email' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
             <p className="font-semibold text-[#F2F4F7] text-lg">Email Directly</p>
-            <p className="mt-2 text-sm text-[#A7B3BC]">Reach us instantly at hello@getaxiom.ca for direct communication.</p>
+            <p className="mt-2 text-sm text-[#A7B3BC]">Reach us instantly at aidan@getaxiom.ca for direct communication.</p>
           </a>
         </div>
+      </div>
+
+      <div className="mt-8 flex flex-col gap-2 text-sm md:flex-row md:items-center md:gap-6">
+        <a
+          href="mailto:aidan@getaxiom.ca"
+          className="w-fit text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]"
+        >
+          aidan@getaxiom.ca
+        </a>
+        <a
+          href="tel:+12267531833"
+          className="w-fit text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]"
+        >
+          226-753-1833
+        </a>
       </div>
 
       {activeAction === 'details' && (

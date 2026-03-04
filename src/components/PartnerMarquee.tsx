@@ -52,12 +52,12 @@ const icons: PartnerIcon[] = [
 ];
 
 const PartnerMarquee: React.FC = () => {
-  const track = [...icons, ...icons];
+  const track = [...icons, ...icons, ...icons];
 
   return (
     <section className="w-full overflow-hidden py-6" aria-label="Platform ecosystem">
       <div className="flex w-full items-center overflow-hidden">
-        <div className="animate-logo-cloud flex w-max items-center gap-10 px-8">
+        <div className="animate-logo-cloud flex w-max items-center gap-6 px-6">
           {track.map((icon, index) => (
             <div
               key={`${icon.name}-${index}`}

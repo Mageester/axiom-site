@@ -105,7 +105,7 @@ const Manifesto: React.FC = () => {
                         />
                         <div className="h-px w-full bg-axiom-accent" />
                         <div className="relative axiom-glass border-0 rounded-none p-5 sm:p-8 md:p-10">
-                            <p className="font-axiomMono text-axiom-text-mute text-[11px] uppercase tracking-[0.2em] mb-4">ROI TERMINAL</p>
+                            <p className="font-axiomMono text-axiom-text-mute text-[11px] uppercase tracking-[0.2em] mb-4">ROI DASHBOARD</p>
                             <h3 className="hero-headline text-[30px] sm:text-[36px] mb-6">The $120k Dashboard</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                                 <div className="space-y-5">
@@ -328,6 +328,7 @@ const Manifesto: React.FC = () => {
 };
 
 export default Manifesto;
+
 
 
 

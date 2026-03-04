@@ -22,9 +22,9 @@ const tiers = [
         name: 'Authority',
         price: '$1,500 CAD',
         tag: 'Growth System',
-        desc: 'Most selected by scaling operators who need authority and throughput at the same time.',
+        desc: 'Most selected by scaling teams who need authority and throughput at the same time.',
         qualifier: 'Best for teams of 10+ targeting higher-ticket service work.',
-        technical: '7-10 pages // ROI terminal // trust proof stack',
+        technical: '7-10 pages // ROI dashboard // trust proof stack',
         features: [
             'Qualification-first funnels that reduce low-margin leads',
             'High-ticket service positioning across every key page',
@@ -38,7 +38,7 @@ const tiers = [
         name: 'Multi-Location / Expansion',
         price: '$3,000 CAD',
         tag: 'Bespoke Command',
-        desc: 'Custom architecture for multi-crew and multi-market growth operators.',
+        desc: 'Custom architecture for multi-crew and multi-market growth teams.',
         qualifier: 'Best for established teams expanding territories or acquisitions.',
         technical: 'custom architecture // workflow integrations // executive reporting',
         features: [
@@ -81,7 +81,7 @@ const ServicesPage: React.FC = () => {
             <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-12 sm:mb-16">
                 <p className="eyebrow-center">Infrastructure Investments</p>
                 <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
-                    Structured build tiers for serious local operators.
+                    Structured build tiers for serious local businesses.
                 </h1>
                 <p className="lead text-center mx-auto">
                     Choose the infrastructure level that matches your growth stage and revenue goals.
@@ -296,6 +296,10 @@ const ServicesPage: React.FC = () => {
 };
 
 export default ServicesPage;
+
+
+
+
 
 
 

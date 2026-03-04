@@ -10,8 +10,8 @@ type MagneticWrapperProps = {
 const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
   children,
   className = '',
-  radius = 140,
-  strength = 8,
+  radius = 20,
+  strength = 6,
 }) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
@@ -36,14 +36,14 @@ const pricingTiers: PricingTier[] = [
     price: '$1,500 CAD',
     packageParam: 'authority',
     featured: true,
-    bestFor: 'Best for growth-stage operators scaling volume while protecting ticket quality.',
+    bestFor: 'Best for growth-stage teams scaling volume while protecting ticket quality.',
     outcome: 'Deploy a conversion system that filters weak inquiries and increases close-ready opportunities.',
-    technical: '7-10 pages // ROI terminal // trust proof architecture',
+    technical: '7-10 pages // ROI dashboard // trust proof architecture',
     includes: [
       'Qualification-first funnels tuned to reduce low-margin jobs',
       'Expanded service and market positioning across key revenue pages',
       'Priority implementation support through first campaign cycle',
-      'ROI dashboard layer for operator-level decision visibility',
+      'ROI dashboard layer for leadership-level decision visibility',
     ],
     boundary: 'Not included: enterprise back-office custom integrations.',
     cta: 'Apply for Authority',
@@ -52,7 +52,7 @@ const pricingTiers: PricingTier[] = [
     name: 'Multi-Location / Expansion',
     price: '$3,000 CAD',
     packageParam: 'expansion',
-    bestFor: 'Best for multi-crew operators expanding territories or integrating acquisitions.',
+    bestFor: 'Best for multi-crew teams expanding territories or integrating acquisitions.',
     outcome: 'Engineer a scalable infrastructure platform that standardizes performance across regions and crews.',
     technical: 'custom architecture // workflow mapping // executive reporting',
     includes: [
@@ -92,7 +92,7 @@ const PricingPage: React.FC = () => {
       <section className="max-w-3xl mx-auto text-center flex flex-col gap-5 mb-12 sm:mb-14">
         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Infrastructure Investment</p>
         <h1 className="text-[32px] sm:text-[44px] md:text-[54px] font-axiomSans font-semibold tracking-[-0.02em] leading-[1.06] text-axiom-text-main">
-          Pricing Built for Serious Operators.
+          Pricing Built for Serious Growth Teams.
         </h1>
         <p className="text-[16px] sm:text-[18px] text-axiom-text-main/85 leading-relaxed max-w-[760px] mx-auto">
           Clear value ladder, explicit outcomes, and engineered delivery standards. No hidden fees. No commodity agency fluff.
@@ -177,3 +177,8 @@ const PricingPage: React.FC = () => {
 };
 
 export default PricingPage;
+
+
+
+
+

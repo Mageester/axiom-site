@@ -1,74 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-type Testimonial = {
-  quote: string;
+type FounderProfile = {
   name: string;
-  title: string;
+  role: string;
   avatar: string;
 };
 
-const testimonials: Testimonial[] = [
+const founders: FounderProfile[] = [
   {
-    quote: 'They bridge the gap between ambitious visual concepts and operational reality.',
-    name: 'Jake Young',
-    title: 'Co-Founder and CEO',
+    name: 'Aidan Magee',
+    role: 'Co-Founder & Architect',
     avatar: '/images/avatar-jake.jpg',
   },
   {
-    quote: 'The new infrastructure elevated our brand while making the entire sales journey effortless.',
-    name: 'Sarah Mitchell',
-    title: 'Managing Partner',
+    name: 'Riley Hinsperger',
+    role: 'Co-Founder & Architect',
     avatar: '/images/avatar-sarah.jpg',
-  },
-  {
-    quote: 'Every touchpoint now communicates authority. We finally look as premium as we perform.',
-    name: 'Daniel Porter',
-    title: 'Founder',
-    avatar: '/images/avatar-daniel.jpg',
   },
 ];
 
 const Testimonials: React.FC = () => {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
   return (
-    <section className="w-full max-w-5xl mx-auto px-8 py-24">
-      <div className="relative min-h-[220px]">
-        {testimonials.map((item, itemIndex) => {
-          const active = itemIndex === index;
+    <section className="mx-auto w-full max-w-6xl px-6 md:px-8">
+      <div className="mb-8">
+        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Founder Authority</p>
+        <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Built by Co-Founders and Architects</h2>
+      </div>
 
-          return (
-            <article
-              key={item.name}
-              className={`absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-700 ease-out ${active ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-            >
-              <blockquote className="max-w-4xl text-2xl md:text-4xl italic leading-[1.35] tracking-tight text-[#F2F4F7]">
-                {item.quote}
-              </blockquote>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {founders.map((founder) => (
+          <article
+            key={founder.name}
+            className="rounded-2xl border border-[#2e344f] border-t border-t-white/10 bg-[#0d1323]/90 p-7 shadow-[0_20px_40px_rgba(0,0,0,0.6)] md:p-8"
+          >
+            <div className="flex items-center gap-4">
+              <img
+                src={founder.avatar}
+                alt={founder.name}
+                className="h-16 w-16 rounded-full object-cover ring-1 ring-[#34406c]"
+                loading="lazy"
+              />
+              <p className="text-left">
+                <span className="block text-lg font-semibold text-[#F5F7FA]">{founder.name}</span>
+                <span className="text-sm text-[#A7B3BC]">{founder.role}</span>
+              </p>
+            </div>
 
-              <div className="mt-8 flex items-center gap-4">
-                <img
-                  src={item.avatar}
-                  alt={item.name}
-                  className="h-14 w-14 rounded-full object-cover ring-1 ring-[#34406c]"
-                  loading="lazy"
-                />
-                <p className="text-left text-sm md:text-base text-[#A7B3BC]">
-                  <span className="block text-[#F2F4F7] font-semibold">{item.name}</span>
-                  <span>{item.title}</span>
-                </p>
-              </div>
-            </article>
-          );
-        })}
+            <blockquote className="mt-6 text-lg italic leading-[1.6] text-[#F5F7FA]">
+              "We bridge the gap between ambitious visual concepts and operational reality."
+            </blockquote>
+          </article>
+        ))}
       </div>
     </section>
   );

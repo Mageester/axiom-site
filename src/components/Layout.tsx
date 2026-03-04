@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <MagneticWrapper className="inline-flex">
             <button type="button" onClick={scrollToIntake} className="btn-primary btn-md whitespace-nowrap">
-              Initialize Setup
+              Start Your Project
             </button>
           </MagneticWrapper>
         </div>

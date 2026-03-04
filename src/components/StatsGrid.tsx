@@ -17,8 +17,8 @@ const StatsGrid: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div ref={oneReveal.ref} className={revealClass(oneReveal.isVisible)} style={{ transitionDelay: '0ms' }}>
           <article className={cardClass}>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC]">Revenue Supported</p>
-            <h3 className="mt-3 text-4xl font-black tracking-tight text-[#F2F4F7]">$50M+</h3>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC]">Authority Metric</p>
+            <h3 className="mt-3 text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Revenue Supported: $50M+</h3>
             <p className="mt-3 text-sm leading-[1.7] text-[#A7B3BC]">Systems backing eight-figure revenue.</p>
             <svg viewBox="0 0 260 70" className="mt-6 w-full" role="img" aria-label="Decorative amber bar chart">
               <rect x="8" y="34" width="24" height="28" rx="4" fill="#B05D41" opacity="0.45" />
@@ -34,17 +34,26 @@ const StatsGrid: React.FC = () => {
 
         <div ref={twoReveal.ref} className={revealClass(twoReveal.isVisible)} style={{ transitionDelay: '100ms' }}>
           <article className={cardClass}>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC]">Assets Deployed</p>
-            <h3 className="mt-3 text-4xl font-black tracking-tight text-[#F2F4F7]">150+</h3>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC]">Authority Metric</p>
+            <h3 className="mt-3 text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Assets Deployed: 150+</h3>
             <p className="mt-3 text-sm leading-[1.7] text-[#A7B3BC]">Production-ready web infrastructure.</p>
-            <div className="mt-6 h-[70px] rounded-xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
+            <svg viewBox="0 0 320 70" className="mt-6 w-full" role="img" aria-label="Decorative amber sparkline">
+              <path
+                d="M4 54 C30 42, 58 46, 84 34 C110 22, 138 24, 166 18 C194 12, 220 20, 248 14 C274 8, 296 10, 316 6"
+                fill="none"
+                stroke="#B05D41"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </article>
         </div>
 
         <div ref={threeReveal.ref} className={revealClass(threeReveal.isVisible)} style={{ transitionDelay: '200ms' }}>
           <article className={cardClass}>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC]">Enterprise DNA</p>
-            <h3 className="mt-3 text-4xl font-black tracking-tight text-[#F2F4F7]">&lt;30ms</h3>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC]">Authority Metric</p>
+            <h3 className="mt-3 text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Enterprise DNA: &lt;30ms</h3>
             <p className="mt-3 text-sm leading-[1.7] text-[#A7B3BC]">Applying high-frequency architectural standards to your brand.</p>
             <svg viewBox="0 0 320 70" className="mt-6 w-full" role="img" aria-label="Decorative amber wave line">
               <path

@@ -4,8 +4,6 @@
 
 @layer base {
   :root {
-    --section-py-mobile: 10rem;
-    --section-py-desktop: 15rem;
     --axiom-base: #090A0B;
     --axiom-accent: #B05D41;
     --axiom-text-primary: #ECEFF3;
@@ -44,7 +42,7 @@
     background-size: 3px 3px, 4px 4px, 5px 5px;
     background-position: 0 0, 1px 1px, 2px 2px;
     mix-blend-mode: soft-light;
-    opacity: 0.04;
+    opacity: 0.05;
     z-index: 2;
   }
 
@@ -52,8 +50,8 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding-top: var(--section-py-mobile) !important;
-    padding-bottom: var(--section-py-mobile) !important;
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
   }
 
   section::before,
@@ -89,8 +87,8 @@
 
   @media (min-width: 1024px) {
     section {
-      padding-top: var(--section-py-desktop) !important;
-      padding-bottom: var(--section-py-desktop) !important;
+      padding-top: 15rem !important;
+      padding-bottom: 15rem !important;
     }
   }
 }
@@ -122,12 +120,25 @@
   }
 
   .axiom-bento {
-    @apply bg-[#13171B] rounded-3xl relative overflow-hidden;
-    border: 0.6px solid rgba(255, 255, 255, 0.1);
+    @apply relative overflow-hidden rounded-2xl;
+    background: rgba(13, 19, 35, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid #2e344f;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     transform: translateZ(0);
     backface-visibility: hidden;
+  }
+
+  .axiom-bento::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    border-radius: 1rem 1rem 0 0;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
   }
 
   .machined-card {
@@ -181,6 +192,16 @@
     font-size: 1rem;
     padding-inline: 1.6rem;
   }
+
+  .magnetic-btn {
+    transform: translateX(var(--mx, 0px)) translateY(var(--my, 0px)) scale(var(--ms, 1));
+    transition: transform 200ms cubic-bezier(0.2, 0.8, 0.4, 1), filter 200ms ease;
+    will-change: transform;
+  }
+
+  .magnetic-btn.is-magnetic-active {
+    filter: brightness(1.04);
+  }
 }
 
 @layer utilities {
@@ -233,6 +254,36 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     will-change: transform;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 650ms ease-out, transform 650ms ease-out;
+    transition-delay: calc(var(--reveal-order, 0) * 100ms);
+  }
+
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .bento-hover {
+    transition: transform 500ms ease-out, box-shadow 500ms ease-out, border-color 500ms ease-out;
+  }
+
+  .bento-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -298,13 +349,20 @@
   .btn-primary,
   .hero-fade-in,
   .animate-grid-drift,
-  .animate-logo-cloud {
+  .animate-logo-cloud,
+  .reveal-on-scroll,
+  .magnetic-btn,
+  .bento-hover {
     animation: none;
     transition: none;
     transform: none;
   }
 
   .hero-fade-in {
+    opacity: 1;
+  }
+
+  .reveal-on-scroll {
     opacity: 1;
   }
 }

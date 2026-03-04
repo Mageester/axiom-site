@@ -168,7 +168,7 @@ const ContactPage: React.FC = () => {
                         <p className="text-[9px] font-grotesk text-[var(--text-tertiary)] uppercase tracking-widest text-center leading-tight max-w-[70px]">Aidan<br />Lead Engineer<br />Kitchener ON</p>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <p className="eyebrow !text-[12px] sm:!text-[13px]">From the Operator</p>
+                        <p className="eyebrow !text-[12px] sm:!text-[13px]">From the Founders</p>
                         <p className="text-[14px] sm:text-[15px] text-axiom-text-mute leading-[1.75]">
                             I don't run a volume agency. I partner with a handful of serious contractors to build infrastructure that dominates local markets. Fill out the survey, and I will personally review your current setup.
                         </p>
@@ -214,7 +214,7 @@ const ContactPage: React.FC = () => {
                         <div className="flex flex-col gap-6">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <div className="flex flex-col gap-2">
-                                    <label className="text-[12px] font-mono text-axiom-text-mute uppercase tracking-widest">Operator Name</label>
+                                    <label className="text-[12px] font-mono text-axiom-text-mute uppercase tracking-widest">Your Name</label>
                                     <input type="text" required minLength={2} value={form.name} onChange={(e) => setField('name', e.target.value)} className="input-field" />
                                     {errors.name && <p className="text-[12px] text-red-400">{errors.name}</p>}
                                 </div>
@@ -306,6 +306,8 @@ const ContactPage: React.FC = () => {
 };
 
 export default ContactPage;
+
+
 
 
 
