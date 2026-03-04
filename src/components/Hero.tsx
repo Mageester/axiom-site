@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import MagneticWrapper from './MagneticWrapper';
 
 const Hero: React.FC = () => {
@@ -94,3 +94,4 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+
