@@ -2,6 +2,7 @@
 import { Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
 import { BackgroundAtmosphere } from './components/BackgroundAtmosphere';
 import { BrandLockup } from './components/BrandLockup';
+import Footer from './components/Footer';
 
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
@@ -239,44 +240,7 @@ const App: React.FC = () => {
                     </div>
                 </Suspense>
             </main>
-            <footer className="axiom-shell-section pt-12 pb-12 border-t border-axiom-border">
-                <div className="axiom-shell-inner">
-                    <div className="axiom-footer-grid">
-                        <div className="axiom-bento">
-                            <BrandLockup
-                                opacity="opacity-90"
-                                logoSize="h-[20px] w-auto grayscale-0 drop-shadow-sm"
-                                textSize="text-[13px] uppercase text-axiom-text-main"
-                            />
-                            <p className="text-[12px] text-axiom-text-mute leading-relaxed mt-3">
-                                Axiom Infrastructure is a performance-first engineering firm. We do not use templates, DIY builders, or shared hosting.
-                            </p>
-                        </div>
-                        <div className="axiom-bento">
-                            <p className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-3">Operations</p>
-                            <div className="flex flex-col gap-2 text-[12px] text-axiom-text-main">
-                                <span>Engineered in Kitchener, Ontario</span>
-                                <a href="tel:+15195550198" className="hover:text-axiom-text-main transition-colors min-h-[48px] inline-flex items-center">(519) 555-0198</a>
-                            </div>
-                        </div>
-                        <div className="axiom-bento">
-                            <p className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute mb-3">Legal</p>
-                            <div className="flex flex-col gap-2 text-[11px] font-mono uppercase tracking-widest text-axiom-text-mute">
-                                <Link to="/privacy" className="min-h-[48px] inline-flex items-center hover:text-axiom-text-main transition-colors duration-300">Privacy</Link>
-                                <Link to="/terms" className="min-h-[48px] inline-flex items-center hover:text-axiom-text-main transition-colors duration-300">Terms</Link>
-                                <Link to="/admin/login" className="min-h-[48px] inline-flex items-center hover:text-axiom-text-main transition-colors duration-300">Client Portal</Link>
-                            </div>
-                        </div>
-                        <div className="axiom-bento">
-                            <p className="text-[11px] font-mono text-axiom-text-mute uppercase tracking-widest">© {new Date().getFullYear()} Axiom Infrastructure</p>
-                            <div className="flex items-center gap-2 mt-3">
-                                <div className="w-1.5 h-1.5 bg-axiom-accent rounded-full animate-pulse"></div>
-                                <span className="text-[10px] font-mono text-axiom-text-mute uppercase tracking-widest">All systems operational</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
 
         </div>
     );
