@@ -154,8 +154,8 @@
     background-image: linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px);
     background-size: 80px 80px;
     opacity: 0.15;
-    -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
-    mask-image: radial-gradient(circle at center, black, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at top right, black, transparent 70%);
+    mask-image: radial-gradient(circle at top right, black, transparent 70%);
   }
 
   .animate-logo-cloud {

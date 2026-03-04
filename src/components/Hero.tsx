@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
           </h1>
 
           <p className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[500ms] text-[#A7B3BC] text-lg max-w-lg leading-[1.65] mb-8">
-            We build the digital foundations for firms that demand market dominance. Zero fluff. Zero downtime. Just pure performance.
+            Dominating the local market with precision architecture. No fluff. Just performance.
           </p>
 
           <div className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[700ms] flex flex-wrap items-center gap-8">
