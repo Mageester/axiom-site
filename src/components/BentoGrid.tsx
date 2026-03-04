@@ -2,10 +2,10 @@ import React from 'react';
 import useReveal from '../hooks/useReveal';
 
 const cardBase =
-  'relative overflow-hidden rounded-[1.25rem] border border-[#31363B] border-t border-t-white/10 bg-[#13171B] machined-card transform-gpu transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:-translate-y-2 hover:scale-105 hover:border-[#B05D41]/60 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)]';
+  'relative overflow-hidden rounded-[1.25rem] border border-[#31363B] border-t border-t-white/10 bg-[#13171B] machined-card transform-gpu transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:border-[#B05D41]/60 hover:shadow-[0_25px_45px_rgba(0,0,0,0.7)]';
 
 const revealClass = (isVisible: boolean, delayClass: string) =>
-  `${isVisible ? `opacity-100 [animation-fill-mode:forwards] animate-[fade-in-up_0.6s_ease-out] ${delayClass}` : 'opacity-0 translate-y-5'} transform-gpu`;
+  `${isVisible ? `opacity-100 translate-y-0 ${delayClass}` : 'opacity-0 translate-y-8'} transform-gpu transition-all duration-700 ease-out`;
 
 const BentoGrid: React.FC = () => {
   const visualReveal = useReveal<HTMLDivElement>();
@@ -14,7 +14,7 @@ const BentoGrid: React.FC = () => {
 
   return (
     <section className="grid grid-cols-1 gap-6 max-w-7xl mx-auto px-8 py-24 md:grid-cols-3">
-      <div ref={visualReveal.ref} className={revealClass(visualReveal.isVisible, 'delay-0')}>
+      <div ref={visualReveal.ref} className={revealClass(visualReveal.isVisible, 'delay-0')} style={{ transitionDelay: '0ms' }}>
         <article className={`${cardBase} min-h-[420px]`}>
           <img
             src="/images/work-aether.jpg"
@@ -30,7 +30,7 @@ const BentoGrid: React.FC = () => {
         </article>
       </div>
 
-      <div ref={strategyReveal.ref} className={revealClass(strategyReveal.isVisible, 'delay-100')}>
+      <div ref={strategyReveal.ref} className={revealClass(strategyReveal.isVisible, 'delay-100')} style={{ transitionDelay: '100ms' }}>
         <article className={`${cardBase} md:col-span-2 min-h-[420px]`}>
           <img
             src="/images/case-study-1.jpg"
@@ -46,7 +46,7 @@ const BentoGrid: React.FC = () => {
         </article>
       </div>
 
-      <div ref={growthReveal.ref} className={revealClass(growthReveal.isVisible, 'delay-200')}>
+      <div ref={growthReveal.ref} className={revealClass(growthReveal.isVisible, 'delay-200')} style={{ transitionDelay: '200ms' }}>
         <article className={`${cardBase} md:col-span-3 min-h-[380px]`}>
           <img
             src="/images/case-study-4.jpg"

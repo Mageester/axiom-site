@@ -5,6 +5,8 @@ import Hero from '../components/Hero';
 import IntakeTerminal from '../components/IntakeTerminal';
 import Layout from '../components/Layout';
 import PartnerMarquee from '../components/PartnerMarquee';
+import StatsGrid from '../components/StatsGrid';
+import Testimonials from '../components/Testimonials';
 import { SEO } from '../components/SEO';
 
 const Home: React.FC = () => {
@@ -20,6 +22,8 @@ const Home: React.FC = () => {
           <Hero />
           <PartnerMarquee />
           <BentoGrid />
+          <StatsGrid />
+          <Testimonials />
           <IntakeTerminal />
           <Footer />
         </div>

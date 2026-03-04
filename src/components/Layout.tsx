@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import MagneticWrapper from './MagneticWrapper';
 import Preloader from './Preloader';
 
 type LayoutProps = {
@@ -47,9 +48,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </button>
           </div>
 
-          <button type="button" onClick={scrollToIntake} className="btn-primary btn-md whitespace-nowrap">
-            Initialize Setup
-          </button>
+          <MagneticWrapper className="inline-flex">
+            <button type="button" onClick={scrollToIntake} className="btn-primary btn-md whitespace-nowrap">
+              Initialize Setup
+            </button>
+          </MagneticWrapper>
         </div>
       </nav>
 

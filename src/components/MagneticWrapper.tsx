@@ -10,8 +10,8 @@ type MagneticWrapperProps = {
 const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
   children,
   className = '',
-  radius = 120,
-  strength = 6,
+  radius = 140,
+  strength = 8,
 }) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
@@ -30,6 +30,7 @@ const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
       if (distance > radius) {
         node.style.setProperty('--mx', '0px');
         node.style.setProperty('--my', '0px');
+        node.style.setProperty('--ms', '1');
         return;
       }
 
@@ -39,17 +40,19 @@ const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
 
       node.style.setProperty('--mx', `${mx.toFixed(2)}px`);
       node.style.setProperty('--my', `${my.toFixed(2)}px`);
+      node.style.setProperty('--ms', '1.05');
     };
 
     const reset = () => {
       node.style.setProperty('--mx', '0px');
       node.style.setProperty('--my', '0px');
+      node.style.setProperty('--ms', '1');
     };
 
-    node.addEventListener('mousemove', handleMove);
+    window.addEventListener('mousemove', handleMove);
     node.addEventListener('mouseleave', reset);
     return () => {
-      node.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('mousemove', handleMove);
       node.removeEventListener('mouseleave', reset);
     };
   }, [radius, strength]);
@@ -57,8 +60,8 @@ const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
   return (
     <div
       ref={wrapperRef}
-      className={`transform-gpu [transform:translate3d(var(--mx,0px),var(--my,0px),0)] ${className}`}
-      style={{ transition: 'transform 0.3s cubic-bezier(0.2, 0.8, 0.4, 1)' }}
+      className={`transform-gpu [transform:translateX(var(--mx,0px))_translateY(var(--my,0px))_scale(var(--ms,1))] ${className}`}
+      style={{ transition: 'transform 0.2s cubic-bezier(0.2, 0.8, 0.4, 1)' }}
     >
       {children}
     </div>

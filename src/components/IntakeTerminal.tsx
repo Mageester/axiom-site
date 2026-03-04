@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import MagneticWrapper from './MagneticWrapper';
+import useReveal from '../hooks/useReveal';
 
 type IntakeAction = 'consultation' | 'details' | 'email' | null;
 
@@ -10,10 +12,19 @@ const inputClass =
 
 const IntakeTerminal: React.FC = () => {
   const [activeAction, setActiveAction] = useState<IntakeAction>(null);
+  const statusReveal = useReveal<HTMLDivElement>();
+  const consultationReveal = useReveal<HTMLDivElement>();
+  const detailsReveal = useReveal<HTMLDivElement>();
+  const emailReveal = useReveal<HTMLDivElement>();
 
   return (
     <section id="intake" className="w-full max-w-6xl mx-auto px-6 py-28">
-      <div className="mb-10 flex items-center gap-3 rounded-full border border-white/10 border-t border-t-white/10 bg-[#111827]/70 px-4 py-2 w-fit machined-card">
+      <div
+        ref={statusReveal.ref}
+        className={`mb-10 flex w-fit items-center gap-3 rounded-full border border-white/10 border-t border-t-white/10 bg-[#111827]/70 px-4 py-2 machined-card transition-all duration-700 ease-out ${
+          statusReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#22c55e] animate-pulse" aria-hidden />
         <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#A7B3BC]">System Status : Online</p>
       </div>
@@ -24,32 +35,50 @@ const IntakeTerminal: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <button
-          type="button"
-          onClick={() => setActiveAction('consultation')}
-          className={`${baseCardClass} ${activeAction === 'consultation' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
+        <div
+          ref={consultationReveal.ref}
+          className={`transition-all duration-700 ease-out ${consultationReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ transitionDelay: '0ms' }}
         >
-          <p className="font-semibold text-[#F2F4F7] text-lg">Book a Consultation</p>
-          <p className="mt-2 text-sm text-[#A7B3BC]">Schedule a strategic session and map your goals with our team.</p>
-        </button>
+          <button
+            type="button"
+            onClick={() => setActiveAction('consultation')}
+            className={`${baseCardClass} w-full ${activeAction === 'consultation' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
+          >
+            <p className="font-semibold text-[#F2F4F7] text-lg">Book a Consultation</p>
+            <p className="mt-2 text-sm text-[#A7B3BC]">Schedule a strategic session and map your goals with our team.</p>
+          </button>
+        </div>
 
-        <button
-          type="button"
-          onClick={() => setActiveAction('details')}
-          className={`${baseCardClass} ${activeAction === 'details' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
+        <div
+          ref={detailsReveal.ref}
+          className={`transition-all duration-700 ease-out ${detailsReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ transitionDelay: '100ms' }}
         >
-          <p className="font-semibold text-[#F2F4F7] text-lg">Send Project Details</p>
-          <p className="mt-2 text-sm text-[#A7B3BC]">Open the guided form and submit project scope, timing, and budget.</p>
-        </button>
+          <button
+            type="button"
+            onClick={() => setActiveAction('details')}
+            className={`${baseCardClass} w-full ${activeAction === 'details' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
+          >
+            <p className="font-semibold text-[#F2F4F7] text-lg">Send Project Details</p>
+            <p className="mt-2 text-sm text-[#A7B3BC]">Open the guided form and submit project scope, timing, and budget.</p>
+          </button>
+        </div>
 
-        <a
-          href="mailto:hello@getaxiom.ca"
-          onClick={() => setActiveAction('email')}
-          className={`${baseCardClass} ${activeAction === 'email' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
+        <div
+          ref={emailReveal.ref}
+          className={`transition-all duration-700 ease-out ${emailReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ transitionDelay: '200ms' }}
         >
-          <p className="font-semibold text-[#F2F4F7] text-lg">Email Directly</p>
-          <p className="mt-2 text-sm text-[#A7B3BC]">Reach us instantly at hello@getaxiom.ca for direct communication.</p>
-        </a>
+          <a
+            href="mailto:hello@getaxiom.ca"
+            onClick={() => setActiveAction('email')}
+            className={`${baseCardClass} block ${activeAction === 'email' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
+          >
+            <p className="font-semibold text-[#F2F4F7] text-lg">Email Directly</p>
+            <p className="mt-2 text-sm text-[#A7B3BC]">Reach us instantly at hello@getaxiom.ca for direct communication.</p>
+          </a>
+        </div>
       </div>
 
       {activeAction === 'details' && (
@@ -70,7 +99,9 @@ const IntakeTerminal: React.FC = () => {
           </label>
 
           <div className="md:col-span-2">
-            <button type="submit" className="btn-primary btn-lg w-full">Send Project Details</button>
+            <MagneticWrapper className="block">
+              <button type="submit" className="btn-primary btn-lg w-full">Send Project Details</button>
+            </MagneticWrapper>
           </div>
         </form>
       )}

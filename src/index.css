@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --section-py-mobile: 8rem;
-    --section-py-desktop: 12rem;
+    --section-py-mobile: 10rem;
+    --section-py-desktop: 15rem;
     --axiom-base: #090A0B;
     --axiom-accent: #B05D41;
     --axiom-text-primary: #ECEFF3;
@@ -38,21 +38,22 @@
     inset: 0;
     pointer-events: none;
     background-image:
-      radial-gradient(circle at 15% 20%, rgba(245, 247, 250, 0.35) 0.6px, transparent 0.6px),
-      radial-gradient(circle at 80% 75%, rgba(245, 247, 250, 0.3) 0.6px, transparent 0.6px);
-    background-size: 3px 3px, 4px 4px;
-    background-position: 0 0, 1px 1px;
-    mix-blend-mode: overlay;
-    opacity: 0.05;
-    z-index: 1;
+      radial-gradient(circle at 10% 15%, rgba(255, 255, 255, 0.24) 0.6px, transparent 0.6px),
+      radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.2) 0.55px, transparent 0.55px),
+      radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.16) 0.5px, transparent 0.5px);
+    background-size: 3px 3px, 4px 4px, 5px 5px;
+    background-position: 0 0, 1px 1px, 2px 2px;
+    mix-blend-mode: soft-light;
+    opacity: 0.04;
+    z-index: 2;
   }
 
   section {
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding-top: var(--section-py-mobile);
-    padding-bottom: var(--section-py-mobile);
+    padding-top: var(--section-py-mobile) !important;
+    padding-bottom: var(--section-py-mobile) !important;
   }
 
   section::before,
@@ -88,8 +89,8 @@
 
   @media (min-width: 1024px) {
     section {
-      padding-top: var(--section-py-desktop);
-      padding-bottom: var(--section-py-desktop);
+      padding-top: var(--section-py-desktop) !important;
+      padding-bottom: var(--section-py-desktop) !important;
     }
   }
 }
