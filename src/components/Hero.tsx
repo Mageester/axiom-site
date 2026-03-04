@@ -19,11 +19,11 @@ const Hero: React.FC = () => {
           </div>
 
           <h1 className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[300ms] text-6xl md:text-7xl font-black text-[#F5F7FA] leading-[1.05] tracking-tighter mb-10">
-            The Standard for High-Performance Infrastructure.
+            The Standard for High-Performance Digital Identity.
           </h1>
 
           <p className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[500ms] text-[#A7B3BC] text-lg max-w-lg leading-[1.65] mb-8">
-            Dominating the local market with precision architecture. No fluff. Just performance.
+            We build elite web infrastructure for businesses that demand market dominance. Zero fluff. Zero downtime. Just pure performance.
           </p>
 
           <div className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[700ms] flex flex-wrap items-center gap-8">
@@ -94,4 +94,5 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+
 

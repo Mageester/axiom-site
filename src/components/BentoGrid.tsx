@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import useReveal from '../hooks/useReveal';
 
 const cardBase =
@@ -22,10 +22,10 @@ const BentoGrid: React.FC = () => {
           <div className="space-y-6 max-w-3xl">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Performance Core</p>
           <h2 className="text-[#F5F7FA] text-4xl md:text-5xl font-black tracking-tighter leading-[1.04]">
-            Built for the Long Game.
+            Visual Engineering
           </h2>
             <p className="text-[#A7B3BC] text-[17px] leading-[1.7] max-w-2xl">
-              The anchor layer orchestrates performance architecture, preserving signal quality and conversion momentum under load.
+              Building cinematic identities that position your brand at the top of your market.
             </p>
           </div>
 
@@ -57,9 +57,9 @@ const BentoGrid: React.FC = () => {
 
           <div className="space-y-4">
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Deep-Dive Series</p>
-            <h3 className="text-[#F5F7FA] text-3xl font-black tracking-tight leading-tight">Infrastructure Case Studies</h3>
+            <h3 className="text-[#F5F7FA] text-3xl font-black tracking-tight leading-tight">Conversion Architecture</h3>
             <p className="text-[#A7B3BC] text-[15px] leading-[1.7]">
-              Long-form architecture breakdowns showing how premium systems move from static presence to controlled growth engines.
+              Turning digital traffic into measurable revenue through precision design.
             </p>
           </div>
 
@@ -80,7 +80,10 @@ const BentoGrid: React.FC = () => {
           <div className="h-full flex flex-col justify-between">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Status Graph</p>
-              <h3 className="mt-4 text-[#F5F7FA] text-2xl font-bold tracking-tight">Runtime Throughput</h3>
+              <h3 className="mt-4 text-[#F5F7FA] text-2xl font-bold tracking-tight">Infrastructure for Growth</h3>
+              <p className="mt-3 text-[#A7B3BC] text-[15px] leading-[1.65]">
+                Sub-second load times and unbreakable reliability for high-stakes firms.
+              </p>
             </div>
 
             <div className="mt-8 flex items-end gap-3 h-40">
@@ -127,3 +130,4 @@ const BentoGrid: React.FC = () => {
 };
 
 export default BentoGrid;
+

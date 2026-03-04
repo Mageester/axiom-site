@@ -27,7 +27,7 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
       setDeparting(true);
     }, 1500);
 
-    const finishTimer = window.setTimeout(() => setActive(false), 2350);
+    const finishTimer = window.setTimeout(() => setActive(false), 2550);
 
     return () => {
       window.clearTimeout(revealTimer);
@@ -39,14 +39,14 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
   const logoStyle = useMemo(() => {
     const scale = departing ? 0.34 : revealed ? 1 : 1.1;
     const opacity = departing ? 0 : revealed ? 1 : 0;
-    const blur = departing ? 1 : revealed ? 0 : 20;
+    const blur = departing ? 2 : revealed ? 0 : 24;
     const translate = departing ? `translate3d(${offset.x}px, ${offset.y}px, 0)` : 'translate3d(0, 0, 0)';
 
     return {
       opacity,
       filter: `blur(${blur}px)`,
       transform: `translate(-50%, -50%) ${translate} scale(${scale})`,
-      transition: 'transform 800ms cubic-bezier(0.2, 0.8, 0.4, 1), opacity 800ms ease, filter 800ms ease',
+      transition: 'transform 1200ms cubic-bezier(0.2, 0.8, 0.4, 1), opacity 1200ms ease, filter 1200ms ease',
     } as React.CSSProperties;
   }, [departing, offset.x, offset.y, revealed]);
 
@@ -56,13 +56,13 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-[120] bg-[#090A0B] transition-opacity duration-700 ${departing ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}
+      className={`fixed inset-0 z-[120] bg-black transition-opacity duration-700 ${departing ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100'}`}
       aria-hidden
     >
       <img
         src="/logo.png"
         alt=""
-        className="absolute left-1/2 top-1/2 h-28 w-auto md:h-36 object-contain drop-shadow-[0_0_48px_rgba(245,247,250,0.2)]"
+        className="absolute left-1/2 top-1/2 h-28 w-auto object-contain drop-shadow-[0_0_48px_rgba(245,247,250,0.2)] md:h-36"
         style={logoStyle}
       />
     </div>

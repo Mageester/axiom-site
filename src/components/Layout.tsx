@@ -22,13 +22,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="engineering-grid animate-grid-drift" />
       </div>
 
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-axiom-border bg-axiom-base/86 backdrop-blur-xl">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-3 md:px-8">
+      <nav className="fixed left-0 right-0 top-0 z-50 border-b border-axiom-border bg-axiom-base/86 backdrop-blur-xl">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-6">
           <button
             ref={logoTargetRef}
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center rounded-md transition-all duration-700 ease-in-out hover:scale-110"
+            className="inline-flex items-center rounded-md transition-transform duration-700 ease-in-out hover:scale-110"
             aria-label="Axiom Infrastructure home"
           >
             <img
@@ -53,7 +53,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </nav>
 
-      <div className="relative z-10 pt-24 md:pt-28 noise-overlay">{children}</div>
+      <div className="relative z-10 pt-28 md:pt-32 noise-overlay">{children}</div>
     </div>
   );
 };
