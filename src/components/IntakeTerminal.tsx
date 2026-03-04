@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 
 const inputClass =
-  'w-full rounded-xl px-6 py-5 text-[#F5F7FA] placeholder-[#A7B3BC] bg-white/[0.03] backdrop-blur-md border border-white/10 transition-all duration-300 outline-none focus:border-[#E4572E] focus:ring-2 focus:ring-[#E4572E]/50 focus:shadow-[0_0_30px_rgba(228,87,46,0.2)]';
+  'w-full rounded-xl px-6 py-5 text-[#F5F7FA] placeholder-[#A7B3BC] bg-white/[0.03] backdrop-blur-xl border border-white/10 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.4)] transition-all duration-300 outline-none focus:border-[#E4572E] focus:ring-1 focus:ring-[#E4572E]/40 focus:shadow-[0_0_30px_rgba(228,87,46,0.15)]';
 
 const IntakeTerminal: React.FC = () => {
   return (
@@ -43,7 +43,10 @@ const IntakeTerminal: React.FC = () => {
         </label>
 
         <div className="md:col-span-2">
-          <button type="submit" className="btn-primary btn-lg w-full mt-8">
+          <button
+            type="submit"
+            className="btn-primary btn-lg w-full mt-8 rounded-full shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4),inset_0_-6px_4px_0_rgba(0,0,0,0.2),0_4px_6px_0_rgba(0,0,0,0.4),0_4px_80px_0_rgba(228,87,46,0.3)]"
+          >
             Request Authorization
           </button>
         </div>
