@@ -1,5 +1,6 @@
 import React from 'react';
 import BentoGrid from '../components/BentoGrid';
+import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import IntakeTerminal from '../components/IntakeTerminal';
 import Layout from '../components/Layout';
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
           <BentoGrid />
           <RoiTerminal />
           <IntakeTerminal />
+          <Footer />
         </div>
       </Layout>
     </>
