@@ -53,7 +53,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </nav>
 
-      <div className="pointer-events-none fixed right-4 top-1/2 z-40 rotate-90">
+      <div className="pointer-events-none fixed right-4 top-1/2 z-40 hidden rotate-90 lg:block">
         <p className="font-axiomMono text-xs uppercase tracking-widest text-[#d2b49c]">
           TRUSTED BY HIGH-STAKES TEAMS
         </p>

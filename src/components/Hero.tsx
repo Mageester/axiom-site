@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
 
   return (
     <section className="min-h-[90vh] flex items-center">
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-8 lg:grid-cols-12">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 lg:gap-0 px-8 lg:grid-cols-12">
         <div className="mt-auto flex h-full flex-col items-start pb-12 text-left lg:col-span-5">
           <div className="relative mb-8 opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[100ms]">
             <div className="pointer-events-none absolute -inset-8 rounded-full bg-[#253a7a]/30 blur-[200px]" />
