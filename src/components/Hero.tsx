@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import MagneticWrapper from './MagneticWrapper';
 
 const Hero: React.FC = () => {
   const scrollToIntake = () => {
@@ -26,9 +27,11 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-wrap items-center gap-8">
-            <button type="button" onClick={scrollToIntake} className="btn-primary btn-lg whitespace-nowrap">
-              Book a Strategy Call
-            </button>
+            <MagneticWrapper className="inline-flex">
+              <button type="button" onClick={scrollToIntake} className="btn-primary btn-lg whitespace-nowrap">
+                Book a Strategy Call
+              </button>
+            </MagneticWrapper>
 
             <button
               type="button"
@@ -46,7 +49,7 @@ const Hero: React.FC = () => {
             <div className="h-[70%] w-[70%] rounded-full bg-[#E4572E]/15 blur-[120px]" />
           </div>
 
-          <div className="relative w-full max-w-[600px] rounded-3xl border border-[#31363B] bg-[#13171B]/90 p-10 md:p-12 backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_80px_0_rgba(228,87,46,0.3)] [transform:rotateY(12deg)_rotateX(5deg)] transform-gpu">
+          <div className="relative w-full max-w-[600px] rounded-3xl border border-[#31363B] bg-[#13171B]/90 p-10 md:p-12 backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_80px_0_rgba(228,87,46,0.3)] [transform:rotateY(12deg)_rotateX(5deg)] hover:[transform:rotateY(-10deg)_rotateX(5deg)] transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.4,1)] transform-gpu">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" aria-hidden />
             <div className="relative flex h-full min-h-[320px] flex-col justify-between">
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Processor Core</p>

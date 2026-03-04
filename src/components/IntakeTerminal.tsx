@@ -1,7 +1,7 @@
-import React from 'react';
+﻿import React from 'react';
 
 const inputClass =
-  'w-full bg-[#13171B] border border-[#31363B] rounded-xl px-6 py-5 text-[#F5F7FA] placeholder-[#A7B3BC] transition-all duration-300 outline-none focus:border-[#E4572E] focus:ring-1 focus:ring-[#E4572E]/50 focus:shadow-[0_0_15px_rgba(228,87,46,0.15)]';
+  'w-full rounded-xl px-6 py-5 text-[#F5F7FA] placeholder-[#A7B3BC] bg-white/[0.03] backdrop-blur-md border border-white/10 transition-all duration-300 outline-none focus:border-[#E4572E] focus:ring-2 focus:ring-[#E4572E]/50 focus:shadow-[0_0_30px_rgba(228,87,46,0.2)]';
 
 const IntakeTerminal: React.FC = () => {
   return (
