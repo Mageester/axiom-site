@@ -11,43 +11,45 @@ const Hero: React.FC = () => {
 
   return (
     <section className="min-h-[90vh] flex items-center">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto px-8 w-full relative z-10 items-center">
-        <div className="flex flex-col items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto px-8 w-full relative z-10 items-center">
+        <div className="lg:col-span-5 h-full flex flex-col items-start mt-auto pb-12">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#E4572E]/40 bg-[#E4572E]/10 px-3 py-1 text-[10px] font-mono tracking-[0.2em] text-[#E4572E] mb-8 uppercase">
             Operator Status: Online
           </div>
 
-          <h1 className="text-6xl md:text-7xl font-black text-[#F5F7FA] leading-[1.05] tracking-tighter mb-6 text-left">
+          <h1 className="text-6xl md:text-7xl font-black text-[#F5F7FA] leading-[1.05] tracking-tighter text-left mb-10">
             Engineering Digital Authority.
           </h1>
 
-          <p className="text-[#A7B3BC] text-lg max-w-lg mb-10 text-left leading-[1.65]">
+          <p className="text-[#A7B3BC] text-lg max-w-lg text-left leading-[1.65] mb-8">
             Build a high-performance infrastructure layer designed to scale demand, protect trust, and convert intent with precision.
           </p>
 
-          <div className="flex flex-wrap items-center gap-6">
+          <div className="flex flex-wrap items-center gap-8">
             <button type="button" onClick={scrollToIntake} className="btn-primary btn-lg whitespace-nowrap">
               Book a Strategy Call
             </button>
+
             <button
               type="button"
               onClick={scrollToInfrastructure}
-              className="text-[#A7B3BC] text-[14px] font-medium tracking-wide hover:text-[#F5F7FA] transition-colors"
+              className="group inline-flex items-center text-[#A7B3BC] text-[14px] font-medium tracking-wide hover:text-[#F5F7FA] transition-colors"
             >
-              Explore Infrastructure -&gt;
+              Explore Infrastructure
+              <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">-&gt;</span>
             </button>
           </div>
         </div>
 
-        <div className="relative w-full aspect-square flex items-center justify-center">
+        <div className="lg:col-span-7 relative w-full aspect-square flex items-center justify-center perspective-[1000px] scale-110">
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <div className="h-[70%] w-[70%] rounded-full bg-[#E4572E]/15 blur-[120px]" />
           </div>
 
-          <div className="axiom-bento w-full max-w-[560px] p-10 md:p-12 rounded-3xl shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_40px_80px_-20px_rgba(0,0,0,0.85)] border border-[#31363B] bg-[#13171B]/90 backdrop-blur-xl">
+          <div className="relative w-full max-w-[600px] rounded-3xl border border-[#31363B] bg-[#13171B]/90 p-10 md:p-12 backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_80px_0_rgba(228,87,46,0.3)] [transform:rotateY(12deg)_rotateX(5deg)] transform-gpu">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" aria-hidden />
             <div className="relative flex h-full min-h-[320px] flex-col justify-between">
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Infrastructure Core</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Processor Core</p>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-2xl border border-[#31363B] bg-[#090A0B] p-4">
