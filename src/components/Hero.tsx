@@ -14,8 +14,8 @@ const Hero: React.FC = () => {
     <section className="min-h-[90vh] flex items-center">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto px-8 w-full relative z-10 items-center">
         <div className="lg:col-span-5 h-full flex flex-col items-start mt-auto pb-12">
-          <div className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.6s_ease-out] delay-0 inline-flex items-center gap-2 rounded-full border border-[#E4572E]/40 bg-[#E4572E]/10 px-3 py-1 text-[10px] font-mono tracking-[0.2em] text-[#E4572E] mb-8 uppercase">
-            Operator Status: Online
+          <div className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.6s_ease-out] delay-0 ticker-shimmer inline-flex items-center rounded-full px-3 py-1 text-xs bg-[#111]/80 border border-white/20 text-[#E4572E] mb-8 uppercase tracking-[0.12em] font-mono">
+            RESERVED: 2 MORE Q1 SLOTS AVAILABLE
           </div>
 
           <h1 className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.6s_ease-out] delay-150 text-6xl md:text-7xl font-black text-[#F5F7FA] leading-[1.05] tracking-tighter text-left mb-10">

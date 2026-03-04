@@ -14,6 +14,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute top-[10%] -left-[20%] h-[600px] w-[600px] rounded-full bg-[#253a7a] opacity-40 blur-[200px]" />
         <div className="absolute top-[35%] -right-[20%] h-[600px] w-[600px] rounded-full bg-[#B05D41] opacity-60 blur-[240px]" />
+        <div
+          className="absolute inset-0 opacity-[0.08] animate-grid-drift"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, rgba(167,179,188,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(167,179,188,0.12) 1px, transparent 1px)',
+            backgroundSize: '80px 80px',
+          }}
+        />
       </div>
 
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-axiom-border bg-axiom-base/86 backdrop-blur-xl">
