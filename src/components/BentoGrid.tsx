@@ -25,7 +25,16 @@ const BentoGrid: React.FC = () => {
           </div>
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-[#0A0D11]/80 p-3">
-            <div className="h-56 rounded-xl border border-white/10 bg-[radial-gradient(circle_at_70%_15%,rgba(176,93,65,0.3),transparent_50%),linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
+            <div className="relative overflow-hidden rounded-xl border border-white/10">
+              <img
+                src="/images/work-aether.jpg"
+                alt="Project Aether website showcase"
+                className="h-56 w-full object-cover object-center"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#090A0B]/75 to-transparent" />
+              <p className="absolute bottom-3 left-3 font-axiomMono text-[10px] uppercase tracking-[0.22em] text-[#D8B47A]">Project Aether</p>
+            </div>
           </div>
         </article>
       </div>
@@ -41,12 +50,28 @@ const BentoGrid: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <article className="rounded-2xl border border-white/10 bg-[#0A0D11]/80 p-4 md:col-span-2">
+              <div className="relative overflow-hidden rounded-xl border border-white/10">
+                <img
+                  src="/images/case-study-1.jpg"
+                  alt="Strategic architecture client website screenshot"
+                  className="h-52 w-full object-cover object-center"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090A0B]/70 to-transparent" />
+                <p className="absolute bottom-3 left-3 text-[#F2F4F7] text-sm font-semibold tracking-wide">Flagship Client Interface</p>
+              </div>
+            </article>
             <article className="rounded-2xl border border-white/10 bg-[#0A0D11]/80 p-4">
-              <div className="h-40 rounded-xl border border-white/10 bg-[radial-gradient(circle_at_65%_20%,rgba(176,93,65,0.25),transparent_52%),linear-gradient(160deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
+              <div className="relative overflow-hidden rounded-xl border border-white/10">
+                <img src="/images/case-study-2.jpg" alt="Luxury commerce case study" className="h-40 w-full object-cover object-center" loading="lazy" />
+              </div>
               <p className="mt-3 text-[#F2F4F7] text-sm font-semibold tracking-wide">Luxury Commerce Rebuild</p>
             </article>
             <article className="rounded-2xl border border-white/10 bg-[#0A0D11]/80 p-4">
-              <div className="h-40 rounded-xl border border-white/10 bg-[radial-gradient(circle_at_30%_20%,rgba(216,180,122,0.22),transparent_48%),linear-gradient(160deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
+              <div className="relative overflow-hidden rounded-xl border border-white/10">
+                <img src="/images/case-study-3.jpg" alt="Enterprise SaaS positioning case study" className="h-40 w-full object-cover object-center" loading="lazy" />
+              </div>
               <p className="mt-3 text-[#F2F4F7] text-sm font-semibold tracking-wide">Enterprise SaaS Positioning</p>
             </article>
           </div>
@@ -58,10 +83,16 @@ const BentoGrid: React.FC = () => {
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {['Luxury Retail Identity', 'B2B Platform Reframe', 'Premium Service Presence'].map((label) => (
-              <article key={label} className="rounded-2xl border border-white/10 bg-[#0A0D11]/80 p-4">
-                <div className="h-28 rounded-xl border border-white/10 bg-[linear-gradient(140deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
-                <p className="mt-3 text-[#A7B3BC] text-[13px] leading-[1.6]">{label}</p>
+            {[
+              { label: 'Luxury Retail Identity', src: '/images/work-aether.jpg' },
+              { label: 'B2B Platform Reframe', src: '/images/case-study-1.jpg' },
+              { label: 'Premium Service Presence', src: '/images/case-study-2.jpg' },
+            ].map((item) => (
+              <article key={item.label} className="rounded-2xl border border-white/10 bg-[#0A0D11]/80 p-4">
+                <div className="relative overflow-hidden rounded-xl border border-white/10">
+                  <img src={item.src} alt={item.label} className="h-28 w-full object-cover object-center" loading="lazy" />
+                </div>
+                <p className="mt-3 text-[#A7B3BC] text-[13px] leading-[1.6]">{item.label}</p>
               </article>
             ))}
           </div>

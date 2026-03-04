@@ -54,38 +54,18 @@ const Hero: React.FC = () => {
 
           <div className="relative w-full max-w-[640px] rounded-[32px] border border-white/12 bg-white/[0.04] p-6 backdrop-blur-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_42px_90px_-30px_rgba(0,0,0,0.88),0_0_90px_rgba(176,93,65,0.22)] transform-gpu [transform:rotateY(-11deg)_rotateX(6deg)_scale(1.06)] transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:[transform:rotateY(-7deg)_rotateX(3deg)_scale(1.09)] opacity-0 [animation-fill-mode:forwards] animate-[splash-reveal_0.9s_ease-out] delay-[250ms]">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" aria-hidden />
-            <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#0A0D11]/80 px-4 py-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#D8B47A]">Axiom Monolith</p>
-              <span className="rounded-full border border-[#B05D41]/40 bg-[#B05D41]/12 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-[#D8B47A]">
-                Live
-              </span>
-            </div>
-
-            <div className="mt-5 grid grid-cols-5 gap-3">
-              <article className="col-span-3 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-4">
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#A7B3BC]">Signature Work</p>
-                <h3 className="mt-2 text-lg font-semibold tracking-tight text-[#F2F4F7]">Luxury Funnel Blueprint</h3>
-                <div className="mt-4 h-24 rounded-xl border border-white/10 bg-[radial-gradient(circle_at_70%_20%,rgba(176,93,65,0.25),transparent_55%),linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
-              </article>
-
-              <article className="col-span-2 rounded-2xl border border-white/10 bg-[#0A0D11]/85 p-4">
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#A7B3BC]">Engagement</p>
-                <p className="mt-3 font-mono text-3xl tracking-tight text-[#D8B47A]">+38%</p>
-                <p className="mt-2 text-[12px] leading-relaxed text-[#A7B3BC]">Qualified demand routed from premium search channels.</p>
-              </article>
-            </div>
-
-            <div className="mt-4 grid grid-cols-3 gap-3">
-              {[
-                { label: 'Velocity', value: 'Sub-second' },
-                { label: 'Signal', value: 'High Intent' },
-                { label: 'Reliability', value: '99.99%' },
-              ].map((metric) => (
-                <div key={metric.label} className="rounded-xl border border-white/10 bg-[#0A0D11]/80 p-3">
-                  <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#A7B3BC]">{metric.label}</p>
-                  <p className="mt-1 text-sm font-semibold tracking-tight text-[#F2F4F7]">{metric.value}</p>
-                </div>
-              ))}
+            <div className="relative overflow-hidden rounded-2xl border border-white/10">
+              <img
+                src="/images/hero-metallic.jpg"
+                alt="Cinematic metallic architectural showcase"
+                className="h-[420px] w-full object-cover object-center"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#090A0B]/88 via-[#090A0B]/30 to-transparent" />
+              <div className="absolute inset-x-4 bottom-4 rounded-xl border border-white/10 bg-[#0A0D11]/72 px-4 py-3 backdrop-blur-sm">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D8B47A]">Axiom Signature Build</p>
+                <p className="mt-1 text-sm text-[#ECEFF3]">Premium architecture and cinematic presentation designed for high-trust conversion.</p>
+              </div>
             </div>
           </div>
         </div>
