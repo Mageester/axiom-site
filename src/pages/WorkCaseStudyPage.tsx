@@ -34,10 +34,10 @@ const WorkCaseStudyPage: React.FC = () => {
                     <h1 className="text-[34px] sm:text-[48px] font-semibold tracking-tight text-axiom-text-main mb-6">{entry.title}</h1>
                     <p className="text-[16px] text-axiom-text-mute leading-relaxed max-w-[760px]">{entry.summary}</p>
                     <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                        <Link to="/contact" className="btn-primary inline-flex items-center justify-center">
+                        <Link to="/contact" className="btn-primary">
                             {entry.ctaLabel || 'Request a Consultation'}
                         </Link>
-                        <Link to="/work" className="btn-secondary inline-flex items-center justify-center">
+                        <Link to="/work" className="btn-secondary">
                             Back to Work
                         </Link>
                     </div>
@@ -126,7 +126,7 @@ const WorkCaseStudyPage: React.FC = () => {
                     <p className="text-[15px] text-axiom-text-mute leading-relaxed mb-8">
                         We can scope a similar architecture for your market, services, and conversion goals without template constraints.
                     </p>
-                    <Link to="/contact" className="btn-primary inline-flex items-center justify-center">
+                    <Link to="/contact" className="btn-primary">
                         Request a Consultation
                     </Link>
                 </div>

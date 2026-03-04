@@ -73,7 +73,7 @@ export default {
             },
             borderRadius: {
                 'panel': '6px',    /* standard card/panel radius */
-                'button': '4px',   /* CTA button radius */
+                'button': '8px',   /* CTA button radius */
                 'input': '4px',    /* form input radius */
             },
             boxShadow: {

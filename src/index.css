@@ -176,9 +176,6 @@
     will-change: transform;
   }
 
-  .hero-primary-cta {
-    box-shadow: 0 10px 24px rgba(228, 87, 46, 0.16);
-  }
 
   .hero-headline {
     @apply font-axiomSans text-[48px] tracking-[-0.02em] leading-[1.05];
@@ -262,46 +259,19 @@
 
   /* ──────────────────────────────────────────────────
      BUTTON SYSTEM
-     Three variants × Three sizes.
-     Typography uses Space Grotesk for authority.
+     Variant + Size composition.
 
-     Variants: primary | secondary | ghost
-     Sizes:    lg (52px) | md (44px) | sm (36px)
+     Every button needs one variant class:
+       btn-primary | btn-secondary | btn-ghost
+     Optionally override size (default = md):
+       btn-sm (36 px) | btn-md (44 px) | btn-lg (48 px)
+
+     Radius: 8 px everywhere.
      ────────────────────────────────────────────────── */
 
-  /* Shared button base */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    white-space: nowrap;
-    border-radius: 0.75rem;
-    font-family: Inter, Satoshi, sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    line-height: 1.1;
-    text-align: center;
-    text-decoration: none;
-    transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-
-  .btn:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
-  .btn-sm {
-    min-height: 36px;
-    padding-inline: 12px;
-    font-size: 0.875rem;
-    line-height: 1;
-  }
-
-  .btn-md,
+  /* Shared base — layout, typography, transitions.
+     Inherited by every variant class automatically. */
+  .btn,
   .btn-primary,
   .btn-secondary,
   .btn-ghost {
@@ -310,44 +280,60 @@
     justify-content: center;
     gap: 8px;
     white-space: nowrap;
+    border-radius: 8px;
+    font-family: Inter, Satoshi, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-align: center;
     text-decoration: none;
     cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.18s ease, background-color 0.18s ease,
+                border-color 0.18s ease, box-shadow 0.18s ease;
+    /* Default = md sizing */
     min-height: 44px;
     padding-inline: 20px;
-    font-size: 0.9375rem;
-    line-height: 1;
+    font-size: 15px;
   }
 
-  .btn-lg {
-    min-height: 48px;
-    padding-inline: 24px;
-    font-size: 1rem;
-    line-height: 1;
+  .btn:disabled,
+  .btn-primary:disabled,
+  .btn-secondary:disabled,
+  .btn-ghost:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
-  .btn-primary,
-  .magnetic-primary {
+  /* ── Size overrides ── */
+  .btn-sm  { min-height: 36px; padding-inline: 14px; font-size: 13px; }
+  .btn-md  { min-height: 44px; padding-inline: 20px; font-size: 15px; }
+  .btn-lg  { min-height: 48px; padding-inline: 24px; font-size: 15px; }
+
+  /* ── Primary ── */
+  .btn-primary {
     --mx: 0px;
     --my: 0px;
     background: #E4572E;
     color: #F5F7FA;
     border: 1px solid rgba(228, 87, 46, 0.7);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22),
+                inset 0 1px 0 rgba(255, 255, 255, 0.16);
     transform: translate(var(--mx), var(--my)) translateY(0);
   }
 
-  .btn-primary:hover,
-  .magnetic-primary:hover {
+  .btn-primary:hover {
     background: #D65029;
     box-shadow: 0 10px 22px rgba(228, 87, 46, 0.22);
     transform: translate(var(--mx), var(--my)) translateY(-1px);
   }
 
-  .btn-primary:active,
-  .magnetic-primary:active {
+  .btn-primary:active {
     transform: translate(var(--mx), var(--my)) translateY(1px);
   }
 
+  /* ── Secondary ── */
   .btn-secondary {
     background: rgba(31, 35, 38, 0.72);
     color: #F5F7FA;
@@ -363,6 +349,7 @@
     transform: translateY(1px);
   }
 
+  /* ── Ghost ── */
   .btn-ghost {
     background: transparent;
     color: #F5F7FA;
@@ -378,13 +365,13 @@
     transform: translateY(1px);
   }
 
+  /* ── Focus ring (all variants) ── */
   .btn:focus-visible,
   .btn-primary:focus-visible,
   .btn-secondary:focus-visible,
-  .btn-ghost:focus-visible,
-  .magnetic-primary:focus-visible {
+  .btn-ghost:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(228, 87, 46, 0.3);
+    box-shadow: 0 0 0 2px var(--bg-main), 0 0 0 4px rgba(228, 87, 46, 0.5);
   }
 
   /* FORM INPUT */
@@ -920,8 +907,8 @@ html {
   .btn,
   .btn-primary,
   .btn-secondary,
-  .magnetic-primary,
-  .hero-primary-cta {
+  .btn-ghost,
+  .magnetic-primary {
     transform: none !important;
     transition: none !important;
   }

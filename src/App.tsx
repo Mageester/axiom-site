@@ -173,7 +173,7 @@ const App: React.FC = () => {
                     <Link
                         to="/contact"
                         aria-label="Apply for strategy call"
-                        className="hidden md:inline-flex justify-self-end self-center btn-primary btn-md whitespace-nowrap justify-center min-w-[180px] shrink-0"
+                        className="hidden md:inline-flex justify-self-end self-center btn-primary btn-md min-w-[180px]"
                     >
                         Book a Strategy Call
                     </Link>
