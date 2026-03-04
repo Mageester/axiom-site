@@ -3,7 +3,6 @@ import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import IntakeTerminal from '../components/IntakeTerminal';
 import Layout from '../components/Layout';
-import PartnerMarquee from '../components/PartnerMarquee';
 import StatsGrid from '../components/StatsGrid';
 import Testimonials from '../components/Testimonials';
 import WorksCarousel from '../components/WorksCarousel';
@@ -20,7 +19,6 @@ const Home: React.FC = () => {
       <Layout>
         <div className="flex flex-col gap-y-48 md:gap-y-64 pb-24 md:pb-32">
           <Hero />
-          <PartnerMarquee />
           <WorksCarousel />
           <StatsGrid />
           <Testimonials />

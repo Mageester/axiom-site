@@ -9,6 +9,10 @@ type LayoutProps = {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const logoTargetRef = useRef<HTMLButtonElement>(null);
 
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const scrollToIntake = () => {
     document.getElementById('intake')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -40,23 +44,38 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </button>
 
           <div className="hidden items-center gap-8 text-[11px] font-axiomMono uppercase tracking-[0.16em] text-axiom-text-mute md:flex">
-            <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="transition-colors hover:text-axiom-text-main">
-              Front Gate
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="transition-colors hover:text-axiom-text-main"
+            >
+              Home
             </button>
-            <button type="button" onClick={scrollToIntake} className="transition-colors hover:text-axiom-text-main">
-              Intake
+            <button
+              type="button"
+              onClick={() => scrollToSection('services')}
+              className="transition-colors hover:text-axiom-text-main"
+            >
+              Services
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToSection('works')}
+              className="transition-colors hover:text-axiom-text-main"
+            >
+              Works
             </button>
           </div>
 
           <MagneticWrapper className="inline-flex">
             <button type="button" onClick={scrollToIntake} className="btn-primary btn-md whitespace-nowrap">
-              Let's Start Your Project
+              Start Your Project
             </button>
           </MagneticWrapper>
         </div>
       </nav>
 
-      <div className="pointer-events-none fixed right-4 top-1/2 z-40 hidden rotate-90 lg:block">
+      <div className="pointer-events-none fixed right-4 top-1/2 z-40 hidden rotate-90 lg:flex">
         <p className="font-axiomMono text-xs uppercase tracking-widest text-[#d2b49c]">
           TRUSTED BY HIGH-STAKES TEAMS
         </p>

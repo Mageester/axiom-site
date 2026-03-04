@@ -61,7 +61,7 @@ const PartnerMarquee: React.FC = () => {
           {track.map((icon, index) => (
             <div
               key={`${icon.name}-${index}`}
-              className="inline-flex h-11 w-11 items-center justify-center text-white brightness-200 invert opacity-70 transition-opacity duration-300 hover:opacity-100"
+              className="inline-flex h-11 w-11 items-center justify-center text-white brightness-200 invert opacity-60 transition-opacity duration-300 hover:opacity-100"
               title={icon.name}
               aria-label={icon.name}
             >

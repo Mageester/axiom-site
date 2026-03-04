@@ -13,7 +13,7 @@ const StatsGrid: React.FC = () => {
   const threeReveal = useReveal<HTMLDivElement>();
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-8 py-16">
+    <section id="services" className="w-full max-w-7xl mx-auto px-8 py-16">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div ref={oneReveal.ref} className={revealClass(oneReveal.isVisible)} style={{ transitionDelay: '0ms' }}>
           <article className={cardClass}>

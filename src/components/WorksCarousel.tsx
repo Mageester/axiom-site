@@ -1,15 +1,35 @@
 import React from 'react';
 
 const projects = [
-  { src: '/images/work-aether.jpg', alt: 'Project Aether premium interface' },
-  { src: '/images/case-study-1.jpg', alt: 'Dark mode product experience mockup' },
-  { src: '/images/case-study-2.jpg', alt: 'High-end dashboard website concept' },
-  { src: '/images/case-study-3.jpg', alt: 'Premium landing page visual system' },
+  {
+    src: '/images/work-aether.jpg',
+    alt: 'Project Aether premium interface',
+    title: 'PROJECT AETHER',
+    subtitle: 'Visual Engineering',
+  },
+  {
+    src: '/images/case-study-1.jpg',
+    alt: 'Project Sentinel premium interface',
+    title: 'PROJECT SENTINEL',
+    subtitle: 'Strategic Architecture',
+  },
+  {
+    src: '/images/case-study-2.jpg',
+    alt: 'Project Forge premium interface',
+    title: 'PROJECT FORGE',
+    subtitle: 'Conversion Design',
+  },
+  {
+    src: '/images/case-study-3.jpg',
+    alt: 'Project Orbit premium interface',
+    title: 'PROJECT ORBIT',
+    subtitle: 'Growth Infrastructure',
+  },
 ];
 
 const WorksCarousel: React.FC = () => {
   return (
-    <section className="mx-auto w-full max-w-7xl px-6 md:px-8">
+    <section id="works" className="mx-auto w-full max-w-7xl px-6 md:px-8">
       <div className="mb-8">
         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected Works</p>
         <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Visual Authority in Motion</h2>
@@ -27,11 +47,10 @@ const WorksCarousel: React.FC = () => {
               className="h-[320px] w-full object-cover object-center md:h-[420px]"
               loading={index === 0 ? 'eager' : 'lazy'}
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050609]/90 via-black/20 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-              <p className="text-sm font-semibold tracking-wide text-[#F5F7FA] md:text-base">
-                Visual Engineering - PROJECT AETHER
-              </p>
+              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">{project.subtitle}</p>
+              <p className="mt-2 text-sm font-semibold tracking-wide text-[#F5F7FA] md:text-base">{project.title}</p>
             </div>
           </article>
         ))}
