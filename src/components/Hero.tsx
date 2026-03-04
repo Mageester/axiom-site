@@ -14,22 +14,22 @@ const Hero: React.FC = () => {
     <section className="min-h-[90vh] flex items-center">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto px-8 w-full relative z-10 items-center">
         <div className="lg:col-span-5 h-full flex flex-col items-start text-left mt-auto pb-12">
-          <div className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.6s_ease-out] delay-0 inline-flex items-center rounded-full px-3 py-1 text-[10px] bg-[#111]/80 border border-white/20 text-[#E4572E] mb-8 uppercase tracking-widest font-mono animate-pulse">
-            2 MORE Q1 SLOTS AVAILABLE
+          <div className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[100ms] ticker-shimmer inline-flex items-center rounded-full px-3 py-1 text-[10px] bg-[#111]/80 border border-white/20 text-[#E4572E] mb-8 uppercase tracking-widest font-mono">
+            LIMITED: 2 DEPLOYMENT SLOTS REMAINING FOR Q1
           </div>
 
-          <h1 className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.6s_ease-out] delay-150 text-6xl md:text-7xl font-black text-[#F5F7FA] leading-[1.05] tracking-tighter mb-10">
-            Orchestrating Digital Authority
+          <h1 className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[300ms] text-6xl md:text-7xl font-black text-[#F5F7FA] leading-[1.05] tracking-tighter mb-10">
+            The Standard for High-Performance Infrastructure.
           </h1>
 
-          <p className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.6s_ease-out] delay-300 text-[#A7B3BC] text-lg max-w-lg leading-[1.65] mb-8">
-            Engineering high-performance conversion geometry that turns demand into qualified deployment slots.
+          <p className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[500ms] text-[#A7B3BC] text-lg max-w-lg leading-[1.65] mb-8">
+            We build the digital foundations for firms that demand market dominance. Zero fluff. Zero downtime. Just pure performance.
           </p>
 
-          <div className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.6s_ease-out] delay-500 flex flex-wrap items-center gap-8">
+          <div className="opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[700ms] flex flex-wrap items-center gap-8">
             <MagneticWrapper className="inline-flex">
               <button type="button" onClick={scrollToIntake} className="btn-primary btn-lg whitespace-nowrap">
-                Book a Strategy Call
+                Secure Your Slot
               </button>
             </MagneticWrapper>
 
@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
             <div className="h-[72%] w-[72%] rounded-full bg-[#E4572E]/15 blur-[120px]" />
           </div>
 
-          <div className="relative w-full max-w-[620px] transform-gpu [transform:rotateY(-12deg)_rotateX(8deg)_scale(1.1)] rounded-3xl border border-[#31363B] bg-[#13171B]/92 p-10 md:p-12 backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_80px_rgba(228,87,46,0.3)] transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:[transform:rotateY(-8deg)_rotateX(4deg)_scale(1.12)]">
+          <div className="opacity-0 [animation-fill-mode:forwards] animate-[splash-reveal_0.9s_ease-out] delay-[250ms] relative w-full max-w-[620px] transform-gpu [transform:rotateY(-12deg)_rotateX(8deg)_scale(1.1)] rounded-3xl border border-[#31363B] bg-[#13171B]/92 p-10 md:p-12 backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_4px_80px_rgba(228,87,46,0.3)] transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:[transform:rotateY(-8deg)_rotateX(4deg)_scale(1.12)]">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" aria-hidden />
 
             <div className="relative flex h-full min-h-[340px] flex-col justify-between">
