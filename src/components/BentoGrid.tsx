@@ -1,16 +1,12 @@
 ﻿import React from 'react';
 
 const cardBase =
-  'relative overflow-hidden rounded-3xl border border-[#31363B] bg-[#13171B] transform-gpu transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:-translate-y-1 hover:scale-[1.02] hover:border-[#E4572E]/50 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)]';
-
-const chamfer = {
-  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
-};
+  'relative overflow-hidden rounded-[1.25rem] border border-[#31363B] bg-[#13171B] transform-gpu transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:-translate-y-1 hover:scale-[1.02] hover:border-[#E4572E]/50 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-1px_0_rgba(0,0,0,0.3),0_8px_20px_0_rgba(0,0,0,0.6)]';
 
 const BentoGrid: React.FC = () => {
   return (
     <section className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-8 py-24">
-      <article className={`${cardBase} md:col-span-2 md:row-span-1 min-h-[440px] p-12 flex flex-col justify-between`} style={chamfer}>
+      <article className={`${cardBase} md:col-span-2 min-h-[440px] p-12 flex flex-col justify-between animate-[fade-in-up_0.6s_ease-out]`}>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
         <div className="space-y-6 max-w-3xl">
@@ -45,8 +41,8 @@ const BentoGrid: React.FC = () => {
       </article>
 
       <article
-        className={`${cardBase} md:col-span-1 md:row-span-2 min-h-[736px] p-10 flex flex-col justify-between items-start md:translate-x-[8.333333%]`}
-        style={chamfer}
+        className={`${cardBase} md:row-span-2 min-h-[736px] p-10 flex flex-col justify-between items-start md:translate-x-[8.333333%] animate-[fade-in-up_0.6s_ease-out]`}
+        style={{ animationDelay: '80ms' }}
       >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
@@ -67,7 +63,10 @@ const BentoGrid: React.FC = () => {
         </div>
       </article>
 
-      <article className={`${cardBase} md:col-span-1 min-h-[360px] p-10 md:translate-x-[8.333333%]`} style={chamfer}>
+      <article
+        className={`${cardBase} min-h-[360px] p-10 md:translate-x-[8.333333%] animate-[fade-in-up_0.6s_ease-out]`}
+        style={{ animationDelay: '120ms' }}
+      >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
         <div className="h-full flex flex-col justify-between">
@@ -86,7 +85,7 @@ const BentoGrid: React.FC = () => {
         </div>
       </article>
 
-      <article className={`${cardBase} md:col-span-2 min-h-[360px] p-12`} style={chamfer}>
+      <article className={`${cardBase} md:col-span-2 min-h-[360px] p-12 animate-[fade-in-up_0.6s_ease-out]`} style={{ animationDelay: '160ms' }}>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
         <div className="h-full flex flex-col justify-between max-w-3xl">

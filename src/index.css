@@ -140,6 +140,12 @@
     animation: fade-in-up 0.6s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
   }
 
+  .card-snappy {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition: transform 300ms cubic-bezier(0.2, 0.8, 0.4, 1), box-shadow 300ms cubic-bezier(0.2, 0.8, 0.4, 1), border-color 300ms cubic-bezier(0.2, 0.8, 0.4, 1);
+  }
+
   .animate-grid-drift {
     animation: grid-drift 32s linear infinite;
   }
