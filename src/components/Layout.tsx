@@ -29,13 +29,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center rounded-md transition-transform duration-700 hover:scale-110"
+            className="inline-flex items-center rounded-md transition-all duration-700 ease-in-out hover:scale-110 hover:brightness-110"
             aria-label="Axiom Infrastructure home"
           >
             <img
               src="/logo.png"
               alt="Axiom Infrastructure"
-              className="h-9 w-auto object-contain drop-shadow-[0_0_20px_rgba(228,87,46,0.24)]"
+              className="h-10 w-auto object-contain drop-shadow-[0_0_20px_rgba(228,87,46,0.24)]"
             />
           </button>
 
