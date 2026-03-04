@@ -96,16 +96,19 @@ const ConceptsPage: React.FC = () => {
           return (
             <article
               key={demo.title}
-              className={`axiom-bento flex flex-col gap-5 overflow-hidden ${isExpanded ? 'max-h-none' : 'max-h-[82vh] lg:max-h-none'}`}
+              className="axiom-bento flex flex-col gap-5 overflow-hidden"
             >
+              {/* Accent bar */}
               <div className="h-[3px] -mx-6 -mt-6 mb-1 bg-axiom-accent" />
 
+              {/* Header: subtitle + title + positioning */}
               <div className="flex flex-col gap-2">
                 <p className="big-figure-label text-axiom-text-mute">{demo.subtitle}</p>
                 <h2 className="text-[22px] sm:text-[24px] font-semibold tracking-tight text-axiom-text-main">{demo.title}</h2>
                 <p className="text-[14px] text-axiom-text-main/90 leading-[1.65]">{demo.positioning}</p>
               </div>
 
+              {/* Core Capabilities (always visible, max 3) */}
               <div className="axiom-bento-card p-4">
                 <p className="big-figure-label text-axiom-text-mute mb-3">Core Capabilities</p>
                 <ul className="space-y-2">
@@ -118,59 +121,54 @@ const ConceptsPage: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="hidden lg:block axiom-bento-card overflow-hidden">
-                <div className="p-4 flex gap-3 items-start border-b border-axiom-border">
-                  <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-border"></div>
-                  <div>
-                    <p className="big-figure-label text-axiom-text-mute/70 mb-1">Problem</p>
-                    <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.problem}</p>
-                  </div>
-                </div>
-                <div className="p-4 flex gap-3 items-start">
-                  <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-accent/45"></div>
-                  <div>
-                    <p className="big-figure-label text-axiom-accent/85 mb-1">Solution</p>
-                    <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.solution}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className={`${isExpanded ? 'block' : 'hidden'} lg:hidden space-y-4`}> 
-                <div className="axiom-bento-card overflow-hidden">
-                  <div className="p-4 flex gap-3 items-start border-b border-axiom-border">
-                    <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-border"></div>
-                    <div>
-                      <p className="big-figure-label text-axiom-text-mute/70 mb-1">Problem</p>
-                      <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.problem}</p>
-                    </div>
-                  </div>
-                  <div className="p-4 flex gap-3 items-start">
-                    <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-accent/45"></div>
-                    <div>
-                      <p className="big-figure-label text-axiom-accent/85 mb-1">Solution</p>
-                      <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.solution}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="axiom-bento-card p-4">
-                  <p className="big-figure-label text-axiom-text-mute mb-2">Outcome Signal</p>
-                  <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.roi}</p>
-                </div>
-
-                {demo.blueprint && (
-                  <div className="axiom-bento-card p-4 flex flex-col gap-3">
-                    <p className="big-figure-label text-axiom-accent">Project Deep-Dive</p>
-                    {demo.blueprint.map((item) => (
-                      <div key={item.label} className="flex gap-3 items-start">
-                        <span className="big-figure-label text-axiom-text-mute shrink-0 w-16 mt-0.5">{item.label}</span>
-                        <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{item.text}</p>
+              {/* Expandable detail section — visible on desktop, toggled on mobile */}
+              <div
+                className={`grid transition-[grid-template-rows] duration-300 ease-out ${isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr] lg:grid-rows-[1fr]'
+                  }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="flex flex-col gap-4">
+                    {/* Problem / Solution */}
+                    <div className="axiom-bento-card overflow-hidden">
+                      <div className="p-4 flex gap-3 items-start border-b border-axiom-border">
+                        <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-border"></div>
+                        <div>
+                          <p className="big-figure-label text-axiom-text-mute/70 mb-1">Problem</p>
+                          <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.problem}</p>
+                        </div>
                       </div>
-                    ))}
+                      <div className="p-4 flex gap-3 items-start">
+                        <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-accent/45"></div>
+                        <div>
+                          <p className="big-figure-label text-axiom-accent/85 mb-1">Solution</p>
+                          <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.solution}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Outcome Signal */}
+                    <div className="axiom-bento-card p-4">
+                      <p className="big-figure-label text-axiom-text-mute mb-2">Outcome Signal</p>
+                      <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.roi}</p>
+                    </div>
+
+                    {/* Blueprint (HVAC only) */}
+                    {demo.blueprint && (
+                      <div className="axiom-bento-card p-4 flex flex-col gap-3">
+                        <p className="big-figure-label text-axiom-accent">Project Deep-Dive</p>
+                        {demo.blueprint.map((item) => (
+                          <div key={item.label} className="flex gap-3 items-start">
+                            <span className="big-figure-label text-axiom-text-mute shrink-0 w-16 mt-0.5">{item.label}</span>
+                            <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{item.text}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
 
+              {/* Actions */}
               <div className="flex flex-col gap-3 mt-auto">
                 <a
                   href={demo.url}
