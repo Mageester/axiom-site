@@ -35,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <img
               src="/logo.png"
               alt="Axiom Infrastructure"
-              className="h-14 w-auto object-contain md:h-20"
+              className="h-8 w-auto object-contain mix-blend-screen md:h-10"
             />
           </button>
 
@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <MagneticWrapper className="inline-flex">
             <button type="button" onClick={scrollToIntake} className="btn-primary btn-md whitespace-nowrap">
-              Start Your Project
+              Let's Start Your Project
             </button>
           </MagneticWrapper>
         </div>
