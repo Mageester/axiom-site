@@ -1,6 +1,7 @@
-﻿import React, { useEffect, useRef } from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
+import Hero from '../components/Hero';
 
 const trustMetrics = [
     { label: 'Load Performance', value: 'Sub-Second', icon: '•' },
@@ -42,25 +43,6 @@ const infraSpec = [
 ];
 
 const Home: React.FC = () => {
-    const heroBgRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        let ticking = false;
-        const onScroll = () => {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(() => {
-                if (heroBgRef.current) {
-                    const y = Math.min(window.scrollY * 0.12, 88);
-                    heroBgRef.current.style.transform = `translate3d(0, ${y}px, 0) scale(1.08)`;
-                }
-                ticking = false;
-            });
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
-    }, []);
-
     return (
         <>
             <SEO
@@ -70,52 +52,7 @@ const Home: React.FC = () => {
 
             <div className="page-shell">
                 {/*  HERO  */}
-                <section className="-mx-6 md:-mx-10 xl:-mx-20 min-h-[78vh] relative overflow-hidden flex items-center px-6 md:px-10 xl:px-20">
-                    <div
-                        ref={heroBgRef}
-                        className="absolute inset-0 bg-cover bg-center will-change-transform"
-                        style={{ backgroundImage: "url('/roofing-concept.webp')", transform: 'translate3d(0,0,0) scale(1.08)' }}
-                    ></div>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(9,10,11,0.28)_0%,rgba(9,10,11,0.72)_56%,rgba(9,10,11,0.95)_100%)]"></div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-axiom-base/55 via-axiom-base/20 to-axiom-base/72"></div>
-
-                    <div className="relative z-10 max-w-[1100px] mx-auto w-full">
-                        <div className="max-w-3xl flex flex-col gap-5 sm:gap-6">
-                            <p className="font-axiomMono text-[11px] uppercase tracking-[0.28em] text-axiom-text-mute">SYSTEM STATUS: INFRASTRUCTURE MACHINE ONLINE</p>
-
-                            <h1 className="hero-headline hero-fade-in font-bold text-axiom-text-main">
-                                Command your market with engineered web infrastructure.
-                            </h1>
-
-                            <p className="hero-subheading hero-fade-in max-w-2xl text-axiom-text-main/90">
-                                Capture higher-value calls during demand spikes with a fast, conversion-tuned platform designed for contractors closing $7,500+ jobs.
-                            </p>
-
-                            <div className="flex flex-col gap-4 pt-2">
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                                    <Link
-                                        to="/contact"
-                                        className="btn-primary btn-lg magnetic-primary hero-primary-cta w-full sm:w-auto"
-                                    >
-                                        Book Strategy Call
-                                    </Link>
-                                    <Link
-                                        to="/manifesto"
-                                        className="btn-secondary w-full sm:w-auto"
-                                    >
-                                        Read the $100K Leak Report
-                                    </Link>
-                                    <Link to="/manifesto" className="text-axiom-text-main/85 text-[15px] inline-flex items-center gap-1 hover:text-axiom-text-main transition-colors">
-                                        See the numbers <span aria-hidden>{'->'}</span>
-                                    </Link>
-                                </div>
-                                <p className="text-[12px] text-axiom-text-mute font-grotesk">
-                                    Custom engagements starting at <span className="text-axiom-text-main font-semibold">$500 CAD</span>. <span className="text-axiom-text-main font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <Hero />
 
                 {/*  PERFORMANCE GUARANTEE  */}
                 <section className="max-w-[1100px] mx-auto mt-4 sm:mt-5">
@@ -515,6 +452,8 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
 
 
 
