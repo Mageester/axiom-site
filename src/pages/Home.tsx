@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import IntakeTerminal from '../components/IntakeTerminal';
 import Layout from '../components/Layout';
-import RoiTerminal from '../components/RoiTerminal';
 import { SEO } from '../components/SEO';
 
 const Home: React.FC = () => {
@@ -16,10 +15,9 @@ const Home: React.FC = () => {
       />
 
       <Layout>
-        <div className="flex flex-col gap-y-40 md:gap-y-64 pb-24 md:pb-32">
+        <div className="flex flex-col gap-y-48 md:gap-y-64 pb-24 md:pb-32">
           <Hero />
           <BentoGrid />
-          <RoiTerminal />
           <IntakeTerminal />
           <Footer />
         </div>

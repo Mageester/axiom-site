@@ -18,11 +18,11 @@ const Hero: React.FC = () => {
           </div>
 
           <h1 className="text-6xl md:text-7xl font-black text-[#F5F7FA] leading-[1.05] tracking-tighter mb-6 text-left">
-            Defining Digital Authority
+            Engineering Digital Authority.
           </h1>
 
           <p className="text-[#A7B3BC] text-lg max-w-lg mb-10 text-left leading-[1.65]">
-            Command attention with engineered infrastructure that converts demand surges into qualified, high-ticket opportunities.
+            Build a high-performance infrastructure layer designed to scale demand, protect trust, and convert intent with precision.
           </p>
 
           <div className="flex flex-wrap items-center gap-6">

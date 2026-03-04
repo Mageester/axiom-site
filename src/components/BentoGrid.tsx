@@ -14,12 +14,12 @@ const BentoGrid: React.FC = () => {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
         <div className="space-y-6 max-w-3xl">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Authority Layer</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Performance Framework</p>
           <h2 className="text-[#F5F7FA] text-4xl md:text-5xl font-black tracking-tighter leading-[1.04]">
-            Uncompromising Architecture For High-Stakes Acquisition
+            Infrastructure Built For Performance, Scale, And Signal Control
           </h2>
           <p className="text-[#A7B3BC] text-[17px] leading-[1.7] max-w-2xl">
-            Every panel is engineered for conversion pressure, channeling intent signals into precision-qualified opportunities.
+            Each system layer is engineered to maintain speed under load, preserve authority, and route intent through measurable conversion architecture.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ const BentoGrid: React.FC = () => {
         </div>
 
         <p className="text-[#A7B3BC] text-[15px] leading-[1.7] max-w-[28ch]">
-          Engineered intake logic reduces wasted operator hours and compresses time-to-close across premium jobs.
+          Precision intake logic compresses decision cycles and improves operational efficiency at every growth stage.
         </p>
       </article>
 
@@ -87,12 +87,12 @@ const BentoGrid: React.FC = () => {
               Precision Architecture That Turns Demand Into Qualified Capital
             </h3>
             <p className="text-[#A7B3BC] text-[17px] leading-[1.75] max-w-2xl">
-              We remove the friction between discovery and commitment with high-clarity UX sequencing, strict qualification logic, and intent-weighted capture paths built for premium contractors.
+              Conversion architecture removes friction between discovery and commitment with clear sequencing, strict qualification, and scalable intent capture.
             </p>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            {['Qualified Calls', 'Asset Ownership', 'Operator Control'].map((chip) => (
+            {['Performance Layer', 'Scalable Control', 'Conversion System'].map((chip) => (
               <span
                 key={chip}
                 className="inline-flex items-center rounded-full border border-[#31363B] bg-[#090A0B] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]"
