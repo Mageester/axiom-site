@@ -20,10 +20,10 @@ const BentoGrid: React.FC = () => {
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
 
           <div className="space-y-6 max-w-3xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Performance Core</p>
-            <h2 className="text-[#F5F7FA] text-4xl md:text-5xl font-black tracking-tighter leading-[1.04]">
-              A Command Surface For Scale, Speed, And Authority
-            </h2>
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Performance Core</p>
+          <h2 className="text-[#F5F7FA] text-4xl md:text-5xl font-black tracking-tighter leading-[1.04]">
+            Built for the Long Game.
+          </h2>
             <p className="text-[#A7B3BC] text-[17px] leading-[1.7] max-w-2xl">
               The anchor layer orchestrates performance architecture, preserving signal quality and conversion momentum under load.
             </p>
@@ -102,7 +102,7 @@ const BentoGrid: React.FC = () => {
             <div className="space-y-5">
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Conversion Architecture</p>
               <h3 className="text-[#F5F7FA] text-3xl md:text-4xl font-black tracking-tighter leading-[1.1]">
-                Geometry That Converts Intent Into Measurable Growth
+                Turning Traffic into Contracts.
               </h3>
               <p className="text-[#A7B3BC] text-[17px] leading-[1.75] max-w-2xl">
                 Conversion layers remove friction between interest and commitment through precise sequencing, qualification control, and scalable signal routing.
