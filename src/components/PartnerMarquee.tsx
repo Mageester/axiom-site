@@ -14,20 +14,25 @@ const logos: PartnerLogo[] = [
 ];
 
 const PartnerMarquee: React.FC = () => {
-  const track = [...logos, ...logos, ...logos];
+  const duplicatedSets = [0, 1];
 
   return (
     <section className="w-full overflow-hidden py-6" aria-label="Platform ecosystem">
       <div className="flex w-full items-center overflow-hidden">
-        <div className="animate-logo-cloud flex w-max items-center gap-6 px-6">
-          {track.map((logo, index) => (
-            <img
-              key={`${logo.name}-${index}`}
-              src={logo.src}
-              alt={logo.name}
-              className="h-7 w-7 brightness-0 invert opacity-50 transition-opacity duration-300 hover:opacity-100 md:h-8 md:w-8"
-              loading="lazy"
-            />
+        <div className="animate-marquee flex w-max items-center">
+          {duplicatedSets.map((setIndex) => (
+            <div key={setIndex} className="flex w-max items-center">
+              {logos.map((logo) => (
+                <div key={`${setIndex}-${logo.name}`} className="mx-8 md:mx-16 flex-shrink-0">
+                  <img
+                    src={logo.src}
+                    alt={logo.name}
+                    className="h-12 md:h-16 w-auto object-contain brightness-0 invert opacity-50 transition-opacity duration-300 hover:opacity-100"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           ))}
         </div>
       </div>
