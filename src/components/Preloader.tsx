@@ -25,9 +25,9 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
         setOffset({ x: targetX - centerX, y: targetY - centerY });
       }
       setDeparting(true);
-    }, 1500);
+    }, 1600);
 
-    const finishTimer = window.setTimeout(() => setActive(false), 2800);
+    const finishTimer = window.setTimeout(() => setActive(false), 3200);
 
     return () => {
       window.clearTimeout(revealTimer);
@@ -37,17 +37,18 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
   }, [active, targetRef]);
 
   const logoStyle = useMemo(() => {
-    const scale = departing ? 0.42 : revealed ? 1 : 12;
-    const opacity = departing ? 1 : revealed ? 1 : 0;
+    const scale = departing ? 0.5 : revealed ? 1 : 12;
+    const opacity = departing ? 0.98 : revealed ? 1 : 0;
     const blur = departing ? 0 : revealed ? 0 : 96;
-    const yLift = departing ? -12 : revealed ? 0 : 22;
+    const yLift = departing ? -8 : revealed ? 0 : 22;
     const translate = departing ? `translate3d(${offset.x}px, ${offset.y + yLift}px, 0)` : `translate3d(0, ${yLift}px, 0)`;
 
     return {
       opacity,
       filter: `blur(${blur}px)`,
+      willChange: 'transform, opacity, filter',
       transform: `translate(-50%, -50%) ${translate} scale(${scale})`,
-      transition: 'transform 1200ms cubic-bezier(0.2, 0.8, 0.4, 1), opacity 1200ms ease, filter 1200ms ease',
+      transition: 'transform 1350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 900ms ease-out, filter 900ms ease-out',
     } as React.CSSProperties;
   }, [departing, offset.x, offset.y, revealed]);
 
@@ -57,7 +58,7 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-[120] bg-black transition-opacity duration-700 ${departing ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100'}`}
+      className={`fixed inset-0 z-[120] bg-black transition-opacity duration-[1100ms] ease-out ${departing ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100'}`}
       aria-hidden
     >
       <img

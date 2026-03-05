@@ -90,41 +90,43 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             : 'border-b border-transparent bg-[rgba(9,10,11,0.45)]'
           }`}
       >
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-5 md:py-6">
-          <div className="flex items-center gap-6">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-4 px-6 py-5 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:px-8 md:py-6">
+          <div className="flex items-center justify-start">
             <button
               ref={logoTargetRef}
               type="button"
               onClick={() => navigate('/')}
-              className="inline-flex items-center transition-transform duration-700 ease-in-out hover:scale-110"
+              className="inline-flex items-center transition-transform duration-700 ease-in-out hover:scale-[1.04]"
               aria-label="Axiom Infrastructure home"
             >
               <img
                 src="/photos/logoclear.png"
                 alt="Axiom Infrastructure"
-                className="h-16 md:h-20 w-auto object-contain cursor-pointer transition-all duration-500 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(176,93,65,0.4)]"
+                className="h-20 w-auto max-w-[280px] object-contain object-left cursor-pointer transition-all duration-500 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(176,93,65,0.4)] md:h-24 md:max-w-[340px]"
               />
             </button>
-
-            <div className="hidden items-center gap-8 text-[11px] font-axiomMono uppercase tracking-[0.16em] text-axiom-text-mute md:flex">
-              <NavLink to="/" className={navLinkClass}>
-                Home
-              </NavLink>
-              <NavLink to="/infrastructure" className={navLinkClass}>
-                Infrastructure
-              </NavLink>
-              <NavLink to="/works" className={navLinkClass}>
-                Works
-              </NavLink>
-              <NavLink to="/architects" className={navLinkClass}>
-                Architects
-              </NavLink>
-            </div>
           </div>
 
-          <a href="/#intake" className="hidden md:flex btn-primary btn-sm px-4 py-2 text-sm">
-            Start Your Project
-          </a>
+          <div className="hidden items-center justify-center gap-8 text-[11px] font-axiomMono uppercase tracking-[0.16em] text-axiom-text-mute md:flex">
+            <NavLink to="/" className={navLinkClass}>
+              Home
+            </NavLink>
+            <NavLink to="/infrastructure" className={navLinkClass}>
+              Infrastructure
+            </NavLink>
+            <NavLink to="/works" className={navLinkClass}>
+              Works
+            </NavLink>
+            <NavLink to="/architects" className={navLinkClass}>
+              Architects
+            </NavLink>
+          </div>
+
+          <div className="hidden items-center justify-end md:flex">
+            <a href="/#intake" className="btn-primary btn-sm px-4 py-2 text-sm">
+              Start Your Project
+            </a>
+          </div>
         </div>
       </nav>
 
