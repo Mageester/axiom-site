@@ -8,6 +8,10 @@ const LoginInput = z.object({
     password: z.string().min(1).max(256)
 });
 
+const LOGIN_RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const LOGIN_RATE_LIMIT_MAX = 5;
+const loginFallbackLimiter = new Map<string, { count: number; windowStart: number }>();
+
 function isSchemaErrorMessage(message: string) {
     const m = message.toLowerCase();
     return m.includes('no such table') || m.includes('no such column') || m.includes('has no column named');
@@ -24,6 +28,24 @@ function loginServerError(e: any) {
     return apiError(500, d1ErrorMessage(e, 'Login system error'));
 }
 
+function checkFallbackRateLimit(key: string): boolean {
+    const now = Date.now();
+    const current = loginFallbackLimiter.get(key);
+
+    if (!current || now - current.windowStart > LOGIN_RATE_LIMIT_WINDOW_MS) {
+        loginFallbackLimiter.set(key, { count: 1, windowStart: now });
+        return true;
+    }
+
+    if (current.count >= LOGIN_RATE_LIMIT_MAX) {
+        return false;
+    }
+
+    current.count += 1;
+    loginFallbackLimiter.set(key, current);
+    return true;
+}
+
 async function checkRateLimit(env: any, ip: string, username: string): Promise<boolean> {
     const key = `${ip}:${username.toLowerCase()}`;
     try {
@@ -33,8 +55,8 @@ async function checkRateLimit(env: any, ip: string, username: string): Promise<b
 
         if (results.length > 0) {
             const attempt = results[0];
-            if (attempt.count >= 5) {
-                const windowAgo = new Date(Date.now() - 15 * 60000).toISOString();
+            if (attempt.count >= LOGIN_RATE_LIMIT_MAX) {
+                const windowAgo = new Date(Date.now() - LOGIN_RATE_LIMIT_WINDOW_MS).toISOString();
                 if (attempt.last_at > windowAgo) return false;
                 await env.DB.prepare(`UPDATE login_attempts SET count = 1, last_at = CURRENT_TIMESTAMP WHERE key = ?`).bind(key).run();
                 return true;
@@ -42,10 +64,14 @@ async function checkRateLimit(env: any, ip: string, username: string): Promise<b
             await env.DB.prepare(`UPDATE login_attempts SET count = count + 1, last_at = CURRENT_TIMESTAMP WHERE key = ?`).bind(key).run();
             return true;
         }
+
         await env.DB.prepare(`INSERT INTO login_attempts (key, count) VALUES (?, 1)`).bind(key).run();
         return true;
-    } catch {
-        return true; // On rate limit DB error, allow — don't block legitimate logins
+    } catch (e: any) {
+        logEvent('warn', 'auth.login.rate_limiter_fallback', {
+            reason: e?.message || 'db_error'
+        });
+        return checkFallbackRateLimit(key);
     }
 }
 
@@ -54,12 +80,13 @@ let _bootstrapped = false;
 async function ensureSchema(env: any) {
     if (_bootstrapped) return;
 
-    // Detect legacy broken schema (missing username column) and rebuild
     try {
         await env.DB.prepare('SELECT username FROM users LIMIT 1').all();
-    } catch {
-        await env.DB.prepare('DROP TABLE IF EXISTS sessions').run().catch(() => null);
-        await env.DB.prepare('DROP TABLE IF EXISTS users').run().catch(() => null);
+    } catch (e: any) {
+        if (isSchemaErrorMessage(String(e?.message || ''))) {
+            throw new Error('MIGRATION_REQUIRED: auth schema is missing/outdated. Run D1 migrations before login.');
+        }
+        throw e;
     }
 
     await env.DB.prepare(`
@@ -100,7 +127,6 @@ async function ensureSchema(env: any) {
 
     _bootstrapped = true;
 
-    // Bootstrap admin ONLY if explicitly enabled AND no admin exists
     const bootstrapEnabled = env.BOOTSTRAP_ENABLED === 'true' || env.BOOTSTRAP_ENABLED === '1';
     if (!bootstrapEnabled) return;
 
@@ -153,8 +179,6 @@ export async function onRequestPost(context: any) {
             'SELECT * FROM users WHERE username = ? COLLATE NOCASE'
         ).bind(data.username).all();
 
-        // Always run verifyPassword to prevent user-enumeration via timing.
-        // Dummy hash uses current format so timing is identical.
         const dummyHash = `100000:${'aa'.repeat(16)}:${'bb'.repeat(32)}`;
         const hashToVerify = results.length > 0 ? results[0].password_hash : dummyHash;
         const valid = await verifyPassword(data.password, hashToVerify, env);
@@ -166,11 +190,9 @@ export async function onRequestPost(context: any) {
 
         const user = results[0];
 
-        // Reset rate limit on success
         await env.DB.prepare('DELETE FROM login_attempts WHERE key = ?')
             .bind(`${ip}:${data.username.toLowerCase()}`).run().catch(() => null);
 
-        // Session: double UUID = 72 chars of entropy
         const sessionToken = crypto.randomUUID() + crypto.randomUUID();
         const sessionHash = await hashToken(sessionToken);
         const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
