@@ -37,7 +37,7 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
   }, [active, targetRef]);
 
   const logoStyle = useMemo(() => {
-    const scale = departing ? 0.34 : revealed ? 1 : 12;
+    const scale = departing ? 0.42 : revealed ? 1 : 12;
     const opacity = departing ? 1 : revealed ? 1 : 0;
     const blur = departing ? 0 : revealed ? 0 : 96;
     const yLift = departing ? -12 : revealed ? 0 : 22;
@@ -61,9 +61,9 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
       aria-hidden
     >
       <img
-        src="/logo.png"
+        src="/photos/logoclear.png"
         alt=""
-        className="absolute left-1/2 top-1/2 h-28 w-auto object-contain drop-shadow-[0_0_48px_rgba(245,247,250,0.2)] md:h-36"
+        className="absolute left-1/2 top-1/2 h-40 w-auto object-contain drop-shadow-[0_0_48px_rgba(245,247,250,0.2)] md:h-48"
         style={logoStyle}
       />
     </div>

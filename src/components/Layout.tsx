@@ -90,34 +90,36 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             : 'border-b border-transparent bg-[rgba(9,10,11,0.45)]'
           }`}
       >
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-6">
-          <button
-            ref={logoTargetRef}
-            type="button"
-            onClick={() => navigate('/')}
-            className="inline-flex items-center transition-transform duration-700 ease-in-out hover:scale-110"
-            aria-label="Axiom Infrastructure home"
-          >
-            <img
-              src="/photos/logoclear.png"
-              alt="Axiom Infrastructure"
-              className="h-14 md:h-16 w-auto object-contain cursor-pointer transition-all duration-500 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(176,93,65,0.4)]"
-            />
-          </button>
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-5 md:py-6">
+          <div className="flex items-center gap-6">
+            <button
+              ref={logoTargetRef}
+              type="button"
+              onClick={() => navigate('/')}
+              className="inline-flex items-center transition-transform duration-700 ease-in-out hover:scale-110"
+              aria-label="Axiom Infrastructure home"
+            >
+              <img
+                src="/photos/logoclear.png"
+                alt="Axiom Infrastructure"
+                className="h-16 md:h-20 w-auto object-contain cursor-pointer transition-all duration-500 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(176,93,65,0.4)]"
+              />
+            </button>
 
-          <div className="hidden items-center gap-8 text-[11px] font-axiomMono uppercase tracking-[0.16em] text-axiom-text-mute md:flex">
-            <NavLink to="/" className={navLinkClass}>
-              Home
-            </NavLink>
-            <NavLink to="/infrastructure" className={navLinkClass}>
-              Infrastructure
-            </NavLink>
-            <NavLink to="/works" className={navLinkClass}>
-              Works
-            </NavLink>
-            <NavLink to="/architects" className={navLinkClass}>
-              Architects
-            </NavLink>
+            <div className="hidden items-center gap-8 text-[11px] font-axiomMono uppercase tracking-[0.16em] text-axiom-text-mute md:flex">
+              <NavLink to="/" className={navLinkClass}>
+                Home
+              </NavLink>
+              <NavLink to="/infrastructure" className={navLinkClass}>
+                Infrastructure
+              </NavLink>
+              <NavLink to="/works" className={navLinkClass}>
+                Works
+              </NavLink>
+              <NavLink to="/architects" className={navLinkClass}>
+                Architects
+              </NavLink>
+            </div>
           </div>
 
           <a href="/#intake" className="hidden md:flex btn-primary btn-sm px-4 py-2 text-sm">
