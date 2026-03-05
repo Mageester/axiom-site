@@ -31,7 +31,7 @@ const Testimonials: React.FC = () => {
         {founders.map((founder) => (
           <article
             key={founder.name}
-            className="rounded-2xl border border-white/10 bg-[#0d1323]/60 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-7 md:p-8"
+            className="rounded-2xl border border-white/10 bg-[#0d1323]/60 backdrop-blur-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),0_8px_30px_rgb(0,0,0,0.5)] p-7 md:p-8"
           >
             <div className="flex items-center gap-4">
               <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#1c253b] ring-2 ring-[#F59768]/50 text-[#F59768] font-bold text-xl">

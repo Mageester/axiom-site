@@ -28,8 +28,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Preloader targetRef={logoTargetRef} />
 
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute top-[10%] -left-[20%] h-[600px] w-[600px] rounded-full bg-[#253a7a] opacity-40 blur-[200px]" />
-        <div className="absolute top-[35%] -right-[20%] h-[600px] w-[600px] rounded-full bg-[#F59768] opacity-60 blur-[240px]" />
+        <div className="fixed top-[-20%] left-[-10%] h-[50vw] w-[50vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
+        <div className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
         <div className="engineering-grid animate-grid-drift" />
       </div>
 
