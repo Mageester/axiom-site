@@ -10,7 +10,7 @@ type LayoutProps = {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const layoutRef = useRef<HTMLDivElement>(null);
-  const logoTargetRef = useRef<HTMLImageElement>(null);
+  const logoTargetRef = useRef<HTMLButtonElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       });
 
       gsap.set(nav, { autoAlpha: 0, y: -50 });
-      gsap.set(logo, { autoAlpha: 0, x: -150, scale: 0.5, transformOrigin: 'left center' });
+      gsap.set(logo, { autoAlpha: 0, x: -150, scale: 0.72, transformOrigin: 'left center' });
       gsap.set(navLinks, { autoAlpha: 0, x: 28 });
       gsap.set(hero, { autoAlpha: 0 });
       gsap.set(backgrounds, { autoAlpha: 0 });
@@ -75,7 +75,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `font-bold uppercase tracking-[0.3em] text-[10px] text-white/80 hover:text-amber-500 transition-colors ${isActive ? 'text-amber-500' : ''}`;
+    `relative pb-1 font-semibold uppercase tracking-[0.24em] text-[11px] text-white/80 transition-colors duration-300 after:absolute after:bottom-[-7px] after:left-0 after:h-[1px] after:bg-amber-600 after:content-[''] after:transition-all after:duration-300 ${isActive ? 'text-white after:w-full' : 'after:w-0 hover:text-white hover:after:w-full'}`;
 
   return (
     <div ref={layoutRef} className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
@@ -96,24 +96,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             : 'border-b border-transparent bg-[rgba(9,10,11,0.45)]'
           }`}
       >
-        <div className="h-20 flex items-center justify-between px-12 bg-transparent backdrop-blur-md">
-          <div className="flex grow basis-[420px] items-center justify-start">
+        <div className="relative h-20 flex items-center px-6 md:px-12">
+          <div className="flex flex-1 basis-[44%] items-center justify-start">
             <button
+              ref={logoTargetRef}
               type="button"
               onClick={() => navigate('/')}
-              className="inline-flex items-center transition-transform duration-700 ease-in-out hover:scale-[1.04]"
+              className="inline-flex items-center origin-left transition-transform duration-700 ease-in-out hover:scale-[1.04]"
               aria-label="Axiom Infrastructure home"
             >
               <img
-                ref={logoTargetRef}
                 src="/photos/logoclear.png"
                 alt="Axiom Infrastructure"
-                className="fixed left-6 top-4 h-[85px] w-auto z-50 object-contain cursor-pointer transition-transform hover:scale-105"
+                className="h-24 w-auto max-w-none object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125 md:h-28 lg:h-32"
               />
             </button>
           </div>
 
-          <div className="hidden grow basis-[380px] items-center justify-center gap-9 font-axiomMono md:flex">
+          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-12 font-axiomMono md:flex">
             <NavLink to="/" className={navLinkClass} data-startup-link>
               Home
             </NavLink>
@@ -128,7 +128,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </NavLink>
           </div>
 
-          <div className="hidden grow basis-[220px] items-center justify-end md:flex">
+          <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
             <a href="/#intake" className="btn-primary btn-sm px-4 py-2 text-sm">
               Start Your Project
             </a>
