@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
@@ -113,16 +113,16 @@ const ServicesPage: React.FC = () => {
                         <div className="flex items-center justify-between gap-3">
                             <h2 className="font-axiomSans text-[24px] font-semibold tracking-tight text-axiom-text-main">{tier.name}</h2>
                             {tier.featured && (
-                                <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-axiom-accent border border-axiom-accent/40 px-2 py-1 rounded">
+                                <span className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-accent border border-axiom-accent/40 px-2 py-1 rounded">
                                     Contractor's Choice
                                 </span>
                             )}
                         </div>
 
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-axiom-text-mute">{tier.tag}</p>
+                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-text-mute">{tier.tag}</p>
                         <p className="font-axiomSans text-[32px] font-bold leading-none text-axiom-text-main">{tier.price}</p>
                         <p className="font-axiomSans text-[14px] text-axiom-text-main/90 leading-relaxed">{tier.desc}</p>
-                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.14em] text-axiom-text-mute">{tier.technical}</p>
+                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-axiom-text-mute">{tier.technical}</p>
 
                         <ul className="space-y-3 flex-1">
                             {tier.features.map((f) => (
@@ -165,7 +165,7 @@ const ServicesPage: React.FC = () => {
                     },
                 ].map((item) => (
                     <div key={item.label} className="axiom-bento bg-axiom-surface border border-axiom-border p-4 sm:p-5">
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-axiom-text-mute">{item.label}</p>
+                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-text-mute">{item.label}</p>
                         <p className="font-axiomSans text-[14px] text-axiom-text-main/90 leading-relaxed mt-2">{item.text}</p>
                     </div>
                 ))}

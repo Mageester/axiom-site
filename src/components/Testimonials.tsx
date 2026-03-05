@@ -34,12 +34,12 @@ const Testimonials: React.FC = () => {
             className="rounded-2xl border border-white/10 bg-[#0d1323]/60 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-7 md:p-8"
           >
             <div className="flex items-center gap-4">
-              <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#1c253b] ring-2 ring-[#B05D41]/50 text-[#B05D41] font-bold text-xl">
+              <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#1c253b] ring-2 ring-[#F59768]/50 text-[#F59768] font-bold text-xl">
                 {founder.initials}
               </div>
               <p className="text-left">
                 <span className="block text-lg font-semibold text-[#F5F7FA]">{founder.name}</span>
-                <span className="text-sm text-[#A7B3BC]">{founder.role}</span>
+                <span className="text-sm text-slate-300">{founder.role}</span>
               </p>
             </div>
 

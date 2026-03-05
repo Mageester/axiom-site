@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 const contactLinkClass =
   'block text-sm text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]';
@@ -9,26 +9,26 @@ const Footer: React.FC = () => {
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-8 py-20 md:grid-cols-[1.8fr_1fr_1fr_1fr_1fr] md:items-start">
         <div>
           <p className="text-3xl font-black leading-[1.05] tracking-tight text-[#F2F4F7] md:text-5xl">AXIOM INFRASTRUCTURE</p>
-          <p className="mt-4 max-w-md text-sm leading-[1.8] text-[#A7B3BC]">
+          <p className="mt-4 max-w-md text-sm leading-[1.8] text-slate-300">
             Premium digital infrastructure crafted for ambitious brands that need elite aesthetics and enterprise-grade performance.
           </p>
-          <p className="mt-8 text-xs uppercase tracking-[0.14em] text-[#A7B3BC]">© 2026 Axiom Infrastructure. All rights reserved.</p>
+          <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">© 2026 Axiom Infrastructure. All rights reserved.</p>
         </div>
 
         <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Navigate</p>
+          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Navigate</p>
           <a href="#" className="block text-sm text-[#F2F4F7] transition-colors hover:text-[#B05D41]">Home</a>
           <a href="#intake" className="block text-sm text-[#F2F4F7] transition-colors hover:text-[#B05D41]">Work With Us</a>
         </nav>
 
         <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Services</p>
+          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Services</p>
           <a href="#" className="block text-sm text-[#F2F4F7] transition-colors hover:text-[#B05D41]">Web Infrastructure</a>
           <a href="#" className="block text-sm text-[#F2F4F7] transition-colors hover:text-[#B05D41]">Conversion Systems</a>
         </nav>
 
         <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Contact</p>
+          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Contact</p>
           <a href="mailto:aidan@getaxiom.ca" className={contactLinkClass}>
             aidan@getaxiom.ca
           </a>
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
         </nav>
 
         <div className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Social</p>
+          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Social</p>
           <div className="flex items-center gap-4 text-[#F2F4F7]">
             <a aria-label="X" href="https://x.com" target="_blank" rel="noreferrer" className="transition-colors hover:text-[#B05D41]">
               <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden>

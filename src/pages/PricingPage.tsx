@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
@@ -109,7 +109,7 @@ const PricingPage: React.FC = () => {
               <div className="flex items-center justify-between gap-3">
                 <h2 className="font-axiomSans text-[22px] md:text-[24px] font-semibold tracking-tight text-axiom-text-main">{tier.name}</h2>
                 {tier.featured && (
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-axiom-accent border border-axiom-accent/50 px-2 py-1 rounded">
+                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-accent border border-axiom-accent/50 px-2 py-1 rounded">
                     Contractor&apos;s Choice
                   </span>
                 )}
@@ -119,7 +119,7 @@ const PricingPage: React.FC = () => {
               <p className="font-axiomSans text-[14px] leading-relaxed text-axiom-text-main/90">{tier.outcome}</p>
 
               <div className="space-y-2">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.14em] text-axiom-text-mute">{tier.technical}</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-axiom-text-mute">{tier.technical}</p>
                 <p className="font-axiomSans text-[12px] text-axiom-text-mute">{tier.bestFor}</p>
               </div>
 
@@ -151,7 +151,7 @@ const PricingPage: React.FC = () => {
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3">
           {trustSignals.map((signal) => (
             <div key={signal.label} className="axiom-bento bg-axiom-surface border border-axiom-border p-4 sm:p-5">
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-axiom-text-mute">{signal.label}</p>
+              <p className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-text-mute">{signal.label}</p>
               <p className="font-axiomSans text-[14px] text-axiom-text-main/90 leading-relaxed mt-2">{signal.detail}</p>
             </div>
           ))}

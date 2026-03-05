@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import MagneticWrapper from './MagneticWrapper';
+import React, { useEffect, useRef, useState } from 'react';
 import Preloader from './Preloader';
 
 type LayoutProps = {
@@ -8,13 +7,20 @@ type LayoutProps = {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const logoTargetRef = useRef<HTMLButtonElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 8);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollToIntake = () => {
-    document.getElementById('intake')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -23,11 +29,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute top-[10%] -left-[20%] h-[600px] w-[600px] rounded-full bg-[#253a7a] opacity-40 blur-[200px]" />
-        <div className="absolute top-[35%] -right-[20%] h-[600px] w-[600px] rounded-full bg-[#B05D41] opacity-60 blur-[240px]" />
+        <div className="absolute top-[35%] -right-[20%] h-[600px] w-[600px] rounded-full bg-[#F59768] opacity-60 blur-[240px]" />
         <div className="engineering-grid animate-grid-drift" />
       </div>
 
-      <nav className="fixed left-0 right-0 top-0 z-50 border-b border-axiom-border bg-[rgba(9,10,11,0.86)] backdrop-blur-xl">
+      <nav
+        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'border-b border-white/5 bg-[rgba(9,10,11,0.82)] backdrop-blur-md'
+            : 'border-b border-transparent bg-[rgba(9,10,11,0.45)]'
+        }`}
+      >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-6">
           <button
             ref={logoTargetRef}
@@ -67,11 +79,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </button>
           </div>
 
-          <MagneticWrapper className="inline-flex">
-            <button type="button" onClick={scrollToIntake} className="btn-primary btn-md whitespace-nowrap">
-              Start Your Project
-            </button>
-          </MagneticWrapper>
+          <a href="#intake" className="hidden md:flex btn-primary btn-sm px-4 py-2 text-sm">
+            Start Your Project
+          </a>
         </div>
       </nav>
 

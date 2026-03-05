@@ -30,7 +30,7 @@ const PartnerMarquee: React.FC = () => {
   return (
     <section aria-label="Platform ecosystem">
       <div className="w-full max-w-[100vw] overflow-hidden relative border-y border-white/5 py-10 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="flex w-max animate-marquee-infinite items-center space-x-16 md:space-x-32 pr-16 md:pr-32">
+        <div className="flex w-max animate-marquee-infinite hover:[animation-play-state:paused] items-center space-x-16 md:space-x-32 pr-16 md:pr-32">
           {track.map(({ name, Icon }, index) => (
             <div
               key={`${name}-${index}`}

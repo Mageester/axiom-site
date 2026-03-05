@@ -62,7 +62,7 @@ function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElem
 
 function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn("text-body-sm text-axiom-text-mute leading-relaxed", className)} {...props} />
+    <p className={cn("text-body-sm text-slate-300 leading-relaxed", className)} {...props} />
   )
 }
 

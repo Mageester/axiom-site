@@ -31,7 +31,7 @@ const IntakeTerminal: React.FC = () => {
 
       <div className="mb-8 space-y-3">
         <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Start Your Project</h2>
-        <p className="text-[#A7B3BC] max-w-2xl">Choose your preferred path. If you send details, the intake form unlocks below.</p>
+        <p className="text-slate-300 max-w-2xl">Choose your preferred path. If you send details, the intake form unlocks below.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -46,7 +46,7 @@ const IntakeTerminal: React.FC = () => {
             className={`${baseCardClass} w-full ${activeAction === 'consultation' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
             <p className="font-semibold text-[#F2F4F7] text-lg">Book a Consultation</p>
-            <p className="mt-2 text-sm text-[#A7B3BC]">Schedule a strategic session and map your goals with our team.</p>
+            <p className="mt-2 text-sm text-slate-300">Schedule a strategic session and map your goals with our team.</p>
           </button>
         </div>
 
@@ -61,7 +61,7 @@ const IntakeTerminal: React.FC = () => {
             className={`${baseCardClass} w-full ${activeAction === 'details' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
             <p className="font-semibold text-[#F2F4F7] text-lg">Send Project Details</p>
-            <p className="mt-2 text-sm text-[#A7B3BC]">Open the guided form and submit project scope, timing, and budget.</p>
+            <p className="mt-2 text-sm text-slate-300">Open the guided form and submit project scope, timing, and budget.</p>
           </button>
         </div>
 
@@ -76,7 +76,7 @@ const IntakeTerminal: React.FC = () => {
             className={`${baseCardClass} block ${activeAction === 'email' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
             <p className="font-semibold text-[#F2F4F7] text-lg">Email Directly</p>
-            <p className="mt-2 text-sm text-[#A7B3BC]">Reach us instantly at aidan@getaxiom.ca for direct communication.</p>
+            <p className="mt-2 text-sm text-slate-300">Reach us instantly at aidan@getaxiom.ca for direct communication.</p>
           </a>
         </div>
       </div>
