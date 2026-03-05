@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import Preloader from './Preloader';
 
 type LayoutProps = {
@@ -6,7 +7,7 @@ type LayoutProps = {
 };
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const logoTargetRef = useRef<HTMLButtonElement>(null);
+  const logoTargetRef = useRef<HTMLAnchorElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -19,9 +20,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+    `transition-colors ${isActive ? 'text-axiom-text-main' : 'text-axiom-text-mute hover:text-axiom-text-main'}`;
 
   return (
     <div className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
@@ -41,10 +41,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         }`}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-6">
-          <button
+          <NavLink
             ref={logoTargetRef}
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            to="/"
             className="inline-flex items-center transition-transform duration-700 ease-in-out hover:scale-110"
             aria-label="Axiom Infrastructure home"
           >
@@ -53,33 +52,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               alt="Axiom Infrastructure"
               className="h-8 w-auto object-contain mix-blend-screen md:h-10"
             />
-          </button>
+          </NavLink>
 
           <div className="hidden items-center gap-8 text-[11px] font-axiomMono uppercase tracking-[0.16em] text-axiom-text-mute md:flex">
-            <button
-              type="button"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="transition-colors hover:text-axiom-text-main"
-            >
+            <NavLink to="/" className={navLinkClass}>
               Home
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollToSection('services')}
-              className="transition-colors hover:text-axiom-text-main"
-            >
-              Services
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollToSection('works')}
-              className="transition-colors hover:text-axiom-text-main"
-            >
-              Works
-            </button>
+            </NavLink>
+            <NavLink to="/infrastructure" className={navLinkClass}>
+              Infrastructure
+            </NavLink>
+            <NavLink to="/deployments" className={navLinkClass}>
+              Deployments
+            </NavLink>
+            <NavLink to="/architects" className={navLinkClass}>
+              Architects
+            </NavLink>
           </div>
 
-          <a href="#intake" className="hidden md:flex btn-primary btn-sm px-4 py-2 text-sm">
+          <a href="/#intake" className="hidden md:flex btn-primary btn-sm px-4 py-2 text-sm">
             Start Your Project
           </a>
         </div>

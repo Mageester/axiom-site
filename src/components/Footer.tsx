@@ -1,7 +1,11 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const contactLinkClass =
   'block text-sm text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]';
+
+const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
+  `block text-sm transition-colors ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
 
 const Footer: React.FC = () => {
   return (
@@ -17,14 +21,16 @@ const Footer: React.FC = () => {
 
         <nav className="space-y-3">
           <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Navigate</p>
-          <a href="#" className="block text-sm text-[#F2F4F7] transition-colors hover:text-[#B05D41]">Home</a>
-          <a href="#intake" className="block text-sm text-[#F2F4F7] transition-colors hover:text-[#B05D41]">Work With Us</a>
+          <NavLink to="/" className={routeLinkClass}>Home</NavLink>
+          <NavLink to="/infrastructure" className={routeLinkClass}>Infrastructure</NavLink>
+          <NavLink to="/deployments" className={routeLinkClass}>Deployments</NavLink>
+          <NavLink to="/architects" className={routeLinkClass}>Architects</NavLink>
         </nav>
 
         <nav className="space-y-3">
           <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Services</p>
-          <a href="#" className="block text-sm text-[#F2F4F7] transition-colors hover:text-[#B05D41]">Web Infrastructure</a>
-          <a href="#" className="block text-sm text-[#F2F4F7] transition-colors hover:text-[#B05D41]">Conversion Systems</a>
+          <NavLink to="/infrastructure" className={routeLinkClass}>Web Infrastructure</NavLink>
+          <NavLink to="/deployments" className={routeLinkClass}>Deployments</NavLink>
         </nav>
 
         <nav className="space-y-3">
