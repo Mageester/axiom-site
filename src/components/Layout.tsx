@@ -102,13 +102,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               ref={logoTargetRef}
               type="button"
               onClick={() => navigate('/')}
-              className="inline-flex items-center origin-left transition-transform duration-700 ease-in-out hover:scale-[1.04]"
+              className="inline-flex h-full items-center origin-left leading-none transition-transform duration-700 ease-in-out hover:scale-[1.04]"
               aria-label="Axiom Infrastructure home"
             >
               <img
                 src="/photos/logoclear.png"
                 alt="Axiom Infrastructure"
-                className="h-24 w-auto max-w-none object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125 md:h-28 lg:h-32"
+                className="block h-24 w-auto max-w-none translate-y-[3px] object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125 md:h-28 md:translate-y-[4px] lg:h-32"
               />
             </button>
           </div>
