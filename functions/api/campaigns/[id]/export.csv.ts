@@ -3,8 +3,9 @@ import { ensureDiscoverySchema } from '../../_utils/schema';
 
 function esc(value: unknown) {
     const s = String(value ?? '');
-    if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
-    return s;
+    const neutralized = /^[=+\-@]/.test(s) ? `'${s}` : s;
+    if (/[",\n]/.test(neutralized)) return `"${neutralized.replace(/"/g, '""')}"`;
+    return neutralized;
 }
 
 export async function onRequestGet(context: any) {
