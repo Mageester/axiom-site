@@ -34,6 +34,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const ctx = gsap.context(() => {
       const nav = navRef.current;
       const logo = logoTargetRef.current;
+      const navLinks = gsap.utils.toArray<HTMLElement>('[data-startup-link]');
       const hero = layoutRef.current?.querySelector<HTMLElement>('[data-hero-root]');
       const heading = layoutRef.current?.querySelector<HTMLElement>('[data-startup-heading]');
       const backgrounds = gsap.utils.toArray<HTMLElement>('[data-startup-bg]');
@@ -48,7 +49,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       });
 
       gsap.set(nav, { autoAlpha: 0, y: -50 });
-      gsap.set(logo, { autoAlpha: 0, scale: 0.8, transformOrigin: 'left center' });
+      gsap.set(logo, { autoAlpha: 0, x: -100, scale: 0.5, transformOrigin: 'left center' });
+      gsap.set(navLinks, { autoAlpha: 0, x: 28 });
       gsap.set(hero, { autoAlpha: 0 });
       gsap.set(backgrounds, { autoAlpha: 0 });
       gsap.set(split.chars, { autoAlpha: 0, yPercent: 110 });
@@ -58,7 +60,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       timeline
         .to(nav, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power4.out' }, 0)
-        .to(logo, { autoAlpha: 1, scale: 1, duration: 0.6, ease: 'power4.out' }, 0.08)
+        .to(logo, { autoAlpha: 1, x: 0, scale: 1, duration: 0.72, ease: 'power4.out' }, 0.08)
+        .to(navLinks, { autoAlpha: 1, x: 0, duration: 0.45, stagger: 0.05, ease: 'power3.out' }, 0.3)
         .to(hero, { autoAlpha: 1, duration: 0.2 }, 0.2)
         .to(split.chars, { autoAlpha: 1, yPercent: 0, stagger: 0.02, duration: 0.5, ease: 'power3.out' }, 0.3)
         .to(backgrounds, { autoAlpha: 0.04, duration: 0.6, stagger: 0.08, ease: 'power1.out' }, 0.6)
@@ -72,7 +75,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative pb-1 text-xs uppercase font-medium tracking-[0.2em] transition-colors after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:bg-amber-600 after:transition-all after:duration-300 ${isActive ? 'text-axiom-text-main after:w-full' : 'text-axiom-text-mute hover:text-axiom-text-main after:w-0 hover:after:w-full'}`;
+    `relative pb-1 text-[10px] md:text-xs uppercase font-semibold tracking-[0.25em] text-white/90 transition-colors after:content-[''] after:absolute after:bottom-[-8px] after:left-0 after:w-0 after:h-[1px] after:bg-amber-600 after:transition-all after:duration-300 hover:after:w-full ${isActive ? 'text-white after:w-full' : 'text-white/80 hover:text-white/95'}`;
 
   return (
     <div ref={layoutRef} className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
@@ -93,8 +96,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             : 'border-b border-transparent bg-[rgba(9,10,11,0.45)]'
           }`}
       >
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-4 px-6 py-5 md:grid-cols-[minmax(360px,1.35fr)_auto_minmax(220px,1fr)] md:px-8 md:py-6">
-          <div className="flex items-center justify-start md:min-w-[360px] md:flex-grow">
+        <div className="grid w-full grid-cols-1 items-center gap-4 py-5 pl-2 pr-6 md:grid-cols-[minmax(460px,1.8fr)_auto_minmax(220px,1fr)] md:py-6 md:pl-0 md:pr-8">
+          <div className="flex flex-grow items-center justify-start md:min-w-[460px]">
             <button
               ref={logoTargetRef}
               type="button"
@@ -105,22 +108,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <img
                 src="/photos/logoclear.png"
                 alt="Axiom Infrastructure"
-                className="h-16 md:h-20 w-auto object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125"
+                className="h-20 md:h-24 w-auto object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125"
               />
             </button>
           </div>
 
           <div className="hidden items-center justify-center gap-8 font-axiomMono md:flex">
-            <NavLink to="/" className={navLinkClass}>
+            <NavLink to="/" className={navLinkClass} data-startup-link>
               Home
             </NavLink>
-            <NavLink to="/infrastructure" className={navLinkClass}>
+            <NavLink to="/infrastructure" className={navLinkClass} data-startup-link>
               Infrastructure
             </NavLink>
-            <NavLink to="/works" className={navLinkClass}>
+            <NavLink to="/works" className={navLinkClass} data-startup-link>
               Works
             </NavLink>
-            <NavLink to="/architects" className={navLinkClass}>
+            <NavLink to="/architects" className={navLinkClass} data-startup-link>
               Architects
             </NavLink>
           </div>
