@@ -231,6 +231,38 @@ function parsePainPoints(raw: unknown) {
     return [] as string[];
 }
 
+function escapeHtml(value: unknown) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function sanitizeHeaderValue(value: unknown, max = 160) {
+    return String(value ?? '')
+        .replace(/[\r\n]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, max);
+}
+
+function normalizeHttpUrl(value: string) {
+    if (!value) return '';
+    const trimmed = value.trim();
+    if (!trimmed) return '';
+
+    const withScheme = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+    try {
+        const parsed = new URL(withScheme);
+        if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return '';
+        return parsed.toString();
+    } catch {
+        return '';
+    }
+}
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
     const { request, env } = context;
 
@@ -314,10 +346,21 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
         const scaleText = projectScale ? projectScale.toUpperCase() : 'AUDIT REQUEST';
         const titleLine = businessName || currentWebsite || name;
-        const subjectLine = `[NEW LEAD] - ${scaleText} - ${titleLine}`;
+        const subjectLine = `[NEW LEAD] - ${sanitizeHeaderValue(scaleText, 80) || 'AUDIT REQUEST'} - ${sanitizeHeaderValue(titleLine, 120) || 'INTAKE'}`;
+
+        const safeName = escapeHtml(name);
+        const safeEmail = escapeHtml(email);
+        const safePhone = escapeHtml(phone || 'N/A');
+        const safeBusinessName = escapeHtml(businessName || 'N/A');
+        const safeProjectScale = escapeHtml(projectScale || primaryGoal || 'N/A');
+        const safeSourcePath = escapeHtml(sourcePath || 'N/A');
+        const safeDetails = escapeHtml(details || 'No details provided.');
+        const normalizedWebsite = normalizeHttpUrl(currentWebsite);
+        const safeWebsiteHref = escapeHtml(normalizedWebsite);
+        const safeWebsiteLabel = escapeHtml(currentWebsite || normalizedWebsite || 'N/A');
 
         const painPointsHtml = painPointsList.length > 0
-            ? `<ul>${painPointsList.map((item) => `<li>${item}</li>`).join('')}</ul>`
+            ? `<ul>${painPointsList.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`
             : '<em>None selected</em>';
 
         const htmlBody = `
@@ -326,22 +369,22 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
                 <h3 style="margin-top: 24px;">Lead Information</h3>
                 <table style="width: 100%; border-collapse: collapse;">
-                    <tr><td style="padding: 4px 0; width: 150px;"><strong>Name:</strong></td><td>${name}</td></tr>
-                    <tr><td style="padding: 4px 0;"><strong>Email:</strong></td><td><a href="mailto:${email}">${email}</a></td></tr>
-                    <tr><td style="padding: 4px 0;"><strong>Phone:</strong></td><td>${phone || 'N/A'}</td></tr>
-                    <tr><td style="padding: 4px 0;"><strong>Business:</strong></td><td>${businessName || 'N/A'}</td></tr>
-                    <tr><td style="padding: 4px 0;"><strong>Website:</strong></td><td>${currentWebsite ? `<a href="${currentWebsite}">${currentWebsite}</a>` : 'N/A'}</td></tr>
+                    <tr><td style="padding: 4px 0; width: 150px;"><strong>Name:</strong></td><td>${safeName}</td></tr>
+                    <tr><td style="padding: 4px 0;"><strong>Email:</strong></td><td><a href="mailto:${safeEmail}">${safeEmail}</a></td></tr>
+                    <tr><td style="padding: 4px 0;"><strong>Phone:</strong></td><td>${safePhone}</td></tr>
+                    <tr><td style="padding: 4px 0;"><strong>Business:</strong></td><td>${safeBusinessName}</td></tr>
+                    <tr><td style="padding: 4px 0;"><strong>Website:</strong></td><td>${normalizedWebsite ? `<a href="${safeWebsiteHref}">${safeWebsiteLabel}</a>` : safeWebsiteLabel}</td></tr>
                 </table>
 
                 <h3 style="margin-top: 24px;">Project Scope</h3>
-                <p><strong>Scale/Goal:</strong> ${projectScale || primaryGoal || 'N/A'}</p>
-                <p><strong>Source:</strong> ${sourcePath || 'N/A'}</p>
+                <p><strong>Scale/Goal:</strong> ${safeProjectScale}</p>
+                <p><strong>Source:</strong> ${safeSourcePath}</p>
 
                 <p style="margin-top: 16px;"><strong>Identified Pain Points:</strong></p>
                 ${painPointsHtml}
 
                 <h3 style="margin-top: 24px;">Technical Details / Notes</h3>
-                <div style="background-color: #f4f4f4; padding: 16px; border-radius: 4px; white-space: pre-wrap;">${details || 'No details provided.'}</div>
+                <div style="background-color: #f4f4f4; padding: 16px; border-radius: 4px; white-space: pre-wrap;">${safeDetails}</div>
 
                 <p style="margin-top: 32px; font-size: 12px; color: #666;">Routed via Axiom Edge Infrastructure.</p>
             </div>
@@ -390,6 +433,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             const painPointsText = painPointsList.length > 0
                 ? painPointsList.join(', ')
                 : 'general infrastructure review';
+            const safeScaleLabel = escapeHtml(scaleLabel);
+            const safePainPointsText = escapeHtml(painPointsText);
+            const safeReceiptName = escapeHtml(name);
 
             const receiptHtml = `
                 <div style="font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; max-width: 560px; margin: 0 auto;">
@@ -398,15 +444,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
                     </div>
 
                     <p style="font-size: 15px; line-height: 1.7; color: #333; margin: 0 0 20px 0;">
-                        Hello ${name},
+                        Hello ${safeReceiptName},
                     </p>
 
                     <p style="font-size: 15px; line-height: 1.7; color: #333; margin: 0 0 20px 0;">
-                        Thank you for your interest in Axiom. We have received your infrastructure qualification for a <strong>${scaleLabel}</strong> build.
+                        Thank you for your interest in Axiom. We have received your infrastructure qualification for a <strong>${safeScaleLabel}</strong> build.
                     </p>
 
                     <p style="font-size: 15px; line-height: 1.7; color: #333; margin: 0 0 20px 0;">
-                        Our lead engineer is currently auditing your selected pain points: <strong>${painPointsText}</strong>.
+                        Our lead engineer is currently auditing your selected pain points: <strong>${safePainPointsText}</strong>.
                     </p>
 
                     <p style="font-size: 15px; line-height: 1.7; color: #333; margin: 0 0 32px 0;">
