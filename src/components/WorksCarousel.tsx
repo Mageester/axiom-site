@@ -26,6 +26,7 @@ const projects = [
     subtitle: 'Growth Infrastructure',
   },
 ];
+const scrollProjects = [...projects, ...projects.slice(0, 2)];
 
 const WorksCarousel: React.FC = () => {
   return (
@@ -35,11 +36,11 @@ const WorksCarousel: React.FC = () => {
         <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Visual Authority in Motion</h2>
       </div>
 
-      <div className="hide-scrollbar flex snap-x snap-mandatory space-x-8 overflow-x-scroll pb-4">
-        {projects.map((project, index) => (
+      <div className="hide-scrollbar flex overflow-x-auto snap-x snap-mandatory space-x-6 pb-8">
+        {scrollProjects.map((project, index) => (
           <article
-            key={project.src}
-            className="group relative w-[85vw] min-w-[85vw] h-[450px] md:w-[65vw] md:min-w-[65vw] md:h-[650px] flex-shrink-0 snap-center rounded-3xl border border-white/10 bg-[#0d1323] shadow-2xl overflow-hidden"
+            key={`${project.src}-${index}`}
+            className="group relative flex-shrink-0 w-[85vw] md:w-[60vw] h-[450px] md:h-[650px] snap-center rounded-3xl border border-white/10 bg-[#0d1323] shadow-2xl overflow-hidden"
           >
             <img
               src={project.src}

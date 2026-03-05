@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
           <div className="mt-auto flex h-full flex-col items-start pb-12 text-left lg:col-span-5">
             <div className="relative mb-8 opacity-0 [animation-fill-mode:forwards] animate-[fade-in-up_0.8s_ease-out] delay-[100ms]">
               <div className="pointer-events-none absolute -inset-8 rounded-full bg-[#253a7a]/30 blur-[200px]" />
-              <div className="relative inline-flex items-center rounded-full bg-[#1c253b] px-4 py-1 text-sm text-[#f08d5f]">
+              <div className="relative inline-block px-4 py-1.5 rounded-full bg-[#1c253b] text-[#f08d5f] text-sm font-semibold tracking-wide border border-[#f08d5f]/20">
                 LIMITED: 2 DEPLOYMENT SLOTS REMAINING FOR Q1
               </div>
             </div>
@@ -54,7 +54,7 @@ const Hero: React.FC = () => {
               <div className="h-[74%] w-[74%] rounded-full bg-[#B05D41]/24 blur-[130px]" />
             </div>
 
-            <div className="relative w-full max-w-[760px] overflow-hidden rounded-[32px] border border-white/10 machined-card transform-gpu [transform:rotateY(-9deg)_rotateX(4deg)_scale(1.04)] transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.4,1)] hover:[transform:rotateY(-5deg)_rotateX(2deg)_scale(1.07)] opacity-0 [animation-fill-mode:forwards] animate-[splash-reveal_0.9s_ease-out] delay-[250ms] shadow-[0_20px_60px_rgba(0,0,0,0.65)]">
+            <div className="relative w-full max-w-[760px] overflow-hidden rounded-[32px] border border-white/10 machined-card transform-gpu [transform:rotateY(-12deg)_rotateX(5deg)] hover:[transform:rotateY(0deg)_rotateX(0deg)] transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.4,1)] opacity-0 [animation-fill-mode:forwards] animate-[splash-reveal_0.9s_ease-out] delay-[250ms] shadow-[0_20px_60px_rgba(0,0,0,0.65)]">
               <img
                 src="/images/hero-chip.jpg"
                 alt="Cinematic 3D processor hardware"
