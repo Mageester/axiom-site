@@ -239,6 +239,10 @@
     animation: marquee 24s linear infinite;
   }
 
+  .animate-infinite-scroll {
+    animation: scroll-x 20s linear infinite;
+  }
+
   .ticker-shimmer {
     position: relative;
     overflow: hidden;
@@ -345,6 +349,16 @@
   }
 }
 
+@keyframes scroll-x {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes shimmer-sweep {
   0% {
     transform: translateX(-120%);
@@ -365,6 +379,7 @@
   .animate-grid-drift,
   .animate-logo-cloud,
   .animate-marquee,
+  .animate-infinite-scroll,
   .reveal-on-scroll,
   .magnetic-btn,
   .bento-hover {
