@@ -1,31 +1,37 @@
 import React from 'react';
 
-const brands = ['AWS', 'REACT', 'VERCEL', 'GSAP', 'FIGMA', 'CLOUDFLARE'];
+type PartnerLogo = {
+  name: string;
+  src: string;
+};
+
+const logos: PartnerLogo[] = [
+  { name: 'AWS', src: 'https://cdn.simpleicons.org/amazonaws/white' },
+  { name: 'Vercel', src: 'https://cdn.simpleicons.org/vercel/white' },
+  { name: 'React', src: 'https://cdn.simpleicons.org/react/white' },
+  { name: 'Figma', src: 'https://cdn.simpleicons.org/figma/white' },
+  { name: 'Cloudflare', src: 'https://cdn.simpleicons.org/cloudflare/white' },
+  { name: 'GSAP', src: 'https://cdn.simpleicons.org/greensock/white' },
+];
 
 const PartnerMarquee: React.FC = () => {
+  const seamless = [...logos, ...logos];
+
   return (
-    <section aria-label="Platform ecosystem">
-      <div className="w-full overflow-hidden flex bg-[#090A0B] border-y border-white/5 py-8">
-        <div className="flex w-max animate-marquee-infinite space-x-16 md:space-x-32 pr-16 md:pr-32">
-          {brands.map((brand, index) => (
-            <span
-              key={`set-a-${brand}-${index}`}
-              className="text-4xl md:text-5xl font-black tracking-tighter text-white/40 px-12 hover:opacity-100 transition-opacity whitespace-nowrap flex-shrink-0"
-            >
-              {brand}
-            </span>
-          ))}
-          {brands.map((brand, index) => (
-            <span
-              key={`set-b-${brand}-${index}`}
-              className="text-4xl md:text-5xl font-black tracking-tighter text-white/40 px-12 hover:opacity-100 transition-opacity whitespace-nowrap flex-shrink-0"
-            >
-              {brand}
-            </span>
-          ))}
-        </div>
+    <div className="w-full max-w-[100vw] overflow-hidden relative border-y border-white/5 py-10 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+      <div className="flex w-max animate-marquee-infinite items-center space-x-16 md:space-x-32 pr-16 md:pr-32">
+        {seamless.map((logo, index) => (
+          <div key={`${logo.name}-${index}`} className="flex-shrink-0">
+            <img
+              src={logo.src}
+              alt={logo.name}
+              className="h-10 md:h-12 w-auto object-contain opacity-40 hover:opacity-100 transition-opacity duration-300"
+              loading="lazy"
+            />
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 
