@@ -1,0 +1,31 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Axiom Infrastructure" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - img "Axiom Infrastructure" [ref=e6]
+        - generic [ref=e7]:
+          - link "Infrastructure" [ref=e8] [cursor=pointer]:
+            - /url: "#"
+          - link "Deployments" [ref=e9] [cursor=pointer]:
+            - /url: "#"
+          - link "Architects" [ref=e10] [cursor=pointer]:
+            - /url: "#"
+  - main [ref=e11]:
+    - generic [ref=e14]:
+      - paragraph [ref=e15]: Axiom Infrastructure
+      - heading "Cinematic digital infrastructure for high-velocity brands." [level=1] [ref=e16]
+      - paragraph [ref=e17]: Kinetic interfaces. Hardened pipelines. Conversion-engineered execution.
+    - generic [ref=e20]:
+      - heading "Initiate Contact" [level=2] [ref=e21]
+      - paragraph [ref=e22]: Secure intake for elite project deployments.
+      - generic [ref=e23]:
+        - textbox "Name" [ref=e24]
+        - textbox "Email" [ref=e25]
+        - textbox "Company" [ref=e26]
+        - textbox "Mission brief" [ref=e27]
+        - button "Transmit" [ref=e28] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=e34] [cursor=pointer]:
+    - img [ref=e35]
+  - alert [ref=e38]
