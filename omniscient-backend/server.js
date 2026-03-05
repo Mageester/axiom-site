@@ -1,18 +1,70 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const { chromium } = require("playwright");
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require("@google/generative-ai");
 const { createObjectCsvWriter } = require("csv-writer");
 const fs = require("fs");
 const path = require("path");
 const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-app.use(cors());
 app.use(express.json());
+
+const DEFAULT_ALLOWED_ORIGINS = [
+    'https://getaxiom.ca',
+    'https://www.getaxiom.ca',
+    'https://hvac.getaxiom.ca',
+    'https://roofing.getaxiom.ca',
+    'https://landscaping.getaxiom.ca',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173'
+];
+
+const allowedOrigins = new Set(
+    (process.env.ALLOWED_ORIGINS || DEFAULT_ALLOWED_ORIGINS.join(','))
+        .split(',')
+        .map((origin) => origin.trim())
+        .filter(Boolean)
+);
+
+function extractClientIp(req) {
+    const forwarded = req.headers['x-forwarded-for'];
+    if (typeof forwarded === 'string' && forwarded.length > 0) {
+        return forwarded.split(',')[0].trim();
+    }
+    return req.connection.remoteAddress || req.socket?.remoteAddress || 'unknown';
+}
+
+function isAllowedOrigin(origin) {
+    if (!origin) return false;
+    return allowedOrigins.has(origin);
+}
+
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin && isAllowedOrigin(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Vary', 'Origin');
+        res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    }
+
+    if (req.method === 'OPTIONS') {
+        if (!origin || !isAllowedOrigin(origin)) {
+            return res.status(403).json({ error: 'Origin not allowed' });
+        }
+        return res.status(204).end();
+    }
+
+    if (origin && !isAllowedOrigin(origin)) {
+        return res.status(403).json({ error: 'Origin not allowed' });
+    }
+
+    next();
+});
 
 // --- Rate Limiter for Intake ---
 const intakeRateLimiter = new Map();
@@ -29,6 +81,97 @@ const cleanRateLimiter = () => {
 };
 
 setInterval(cleanRateLimiter, RATE_LIMIT_WINDOW);
+
+// --- Scrape auth tokens (server-issued) ---
+const scrapeAuthTokens = new Map();
+const SCRAPE_TOKEN_TTL_MS = 2 * 60 * 1000;
+const MAX_ACTIVE_SCRAPE_TOKENS = 500;
+
+function hashToken(token) {
+    return crypto.createHash('sha256').update(token).digest('hex');
+}
+
+function cleanExpiredScrapeTokens() {
+    const now = Date.now();
+    for (const [tokenHash, data] of scrapeAuthTokens.entries()) {
+        if (!data || data.expiresAt <= now) {
+            scrapeAuthTokens.delete(tokenHash);
+        }
+    }
+}
+
+setInterval(cleanExpiredScrapeTokens, 60 * 1000);
+
+function issueScrapeToken({ ip, origin, userAgent }) {
+    cleanExpiredScrapeTokens();
+    if (scrapeAuthTokens.size >= MAX_ACTIVE_SCRAPE_TOKENS) {
+        throw new Error('Scrape auth token store is full');
+    }
+
+    const token = crypto.randomBytes(32).toString('hex');
+    const tokenHash = hashToken(token);
+    scrapeAuthTokens.set(tokenHash, {
+        ip,
+        origin: origin || '',
+        userAgent: userAgent || '',
+        expiresAt: Date.now() + SCRAPE_TOKEN_TTL_MS
+    });
+    return token;
+}
+
+function consumeScrapeToken(rawToken, { ip, origin, userAgent }) {
+    if (!rawToken) return false;
+    cleanExpiredScrapeTokens();
+    const tokenHash = hashToken(rawToken);
+    const tokenRecord = scrapeAuthTokens.get(tokenHash);
+    if (!tokenRecord) return false;
+    scrapeAuthTokens.delete(tokenHash);
+
+    if (tokenRecord.ip !== ip) return false;
+    if ((tokenRecord.origin || '') !== (origin || '')) return false;
+    if ((tokenRecord.userAgent || '') !== (userAgent || '')) return false;
+    return true;
+}
+
+// --- Scrape endpoint rate limiting / quotas ---
+const scrapeRateLimiter = new Map();
+const SCRAPE_RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const SCRAPE_MAX_REQUESTS_PER_WINDOW = 3;
+const SCRAPE_MAX_CONCURRENT_GLOBAL = 2;
+const SCRAPE_MAX_CONCURRENT_PER_IP = 1;
+const scrapeInFlightByIp = new Map();
+let scrapeInFlightGlobal = 0;
+
+function checkScrapeRateLimit(ip) {
+    const now = Date.now();
+    const existing = scrapeRateLimiter.get(ip);
+    if (!existing || now - existing.windowStart > SCRAPE_RATE_WINDOW_MS) {
+        scrapeRateLimiter.set(ip, { count: 1, windowStart: now });
+        return true;
+    }
+    if (existing.count >= SCRAPE_MAX_REQUESTS_PER_WINDOW) {
+        return false;
+    }
+    existing.count += 1;
+    scrapeRateLimiter.set(ip, existing);
+    return true;
+}
+
+function claimScrapeConcurrency(ip) {
+    if (scrapeInFlightGlobal >= SCRAPE_MAX_CONCURRENT_GLOBAL) return false;
+    const currentIpCount = scrapeInFlightByIp.get(ip) || 0;
+    if (currentIpCount >= SCRAPE_MAX_CONCURRENT_PER_IP) return false;
+    scrapeInFlightGlobal += 1;
+    scrapeInFlightByIp.set(ip, currentIpCount + 1);
+    return true;
+}
+
+function releaseScrapeConcurrency(ip) {
+    scrapeInFlightGlobal = Math.max(0, scrapeInFlightGlobal - 1);
+    const currentIpCount = scrapeInFlightByIp.get(ip) || 0;
+    if (currentIpCount <= 1) scrapeInFlightByIp.delete(ip);
+    else scrapeInFlightByIp.set(ip, currentIpCount - 1);
+}
 
 // --- Nodemailer Setup ---
 const transporter = nodemailer.createTransport({
@@ -165,15 +308,46 @@ app.post('/api/intake', async (req, res) => {
     }
 });
 
+app.post('/api/scrape/token', (req, res) => {
+    try {
+        const origin = req.headers.origin || '';
+        if (!origin || !isAllowedOrigin(origin)) {
+            return res.status(403).json({ error: "Forbidden: Origin not allowed for scrape token issuance" });
+        }
+
+        const ip = extractClientIp(req);
+        const userAgent = req.headers['user-agent'] || 'unknown';
+        const token = issueScrapeToken({ ip, origin, userAgent });
+        return res.status(200).json({ token, expires_in_ms: SCRAPE_TOKEN_TTL_MS });
+    } catch (error) {
+        return res.status(503).json({ error: "Unable to issue scrape token. Please retry." });
+    }
+});
+
 app.get('/api/scrape', async (req, res) => {
     const { niche, city } = req.query;
     const radius = req.query.radius || "10";
-    const maxDepth = parseInt(req.query.maxDepth || "5", 10);
+    const maxDepth = Math.min(20, Math.max(1, parseInt(req.query.maxDepth || "5", 10)));
     const apiKey = process.env.GEMINI_API_KEY;
+    const ip = extractClientIp(req);
+    const origin = req.headers.origin || '';
+    const userAgent = req.headers['user-agent'] || 'unknown';
 
-    const providedSecret = req.headers['x-engine-secret'];
-    if (!process.env.ENGINE_SECRET || providedSecret !== process.env.ENGINE_SECRET) {
-        return res.status(401).json({ error: "Unauthorized: Invalid Engine Secret" });
+    const authHeader = req.headers.authorization || '';
+    const bearerToken = typeof authHeader === 'string' && authHeader.startsWith('Bearer ')
+        ? authHeader.slice(7).trim()
+        : '';
+    const tokenOk = consumeScrapeToken(bearerToken, { ip, origin, userAgent });
+    if (!tokenOk) {
+        return res.status(401).json({ error: "Unauthorized: Invalid or expired scrape auth token" });
+    }
+
+    if (!checkScrapeRateLimit(ip)) {
+        return res.status(429).json({ error: "Rate limit exceeded for scrape operations." });
+    }
+
+    if (!claimScrapeConcurrency(ip)) {
+        return res.status(429).json({ error: "Scrape quota exceeded. Please wait for active jobs to finish." });
     }
 
     res.setHeader('Content-Type', 'text/event-stream');
@@ -186,10 +360,18 @@ app.get('/api/scrape', async (req, res) => {
 
     let browser = null;
     let isStreamActive = true;
+    let concurrencyReleased = false;
+
+    const releaseConcurrencyOnce = () => {
+        if (concurrencyReleased) return;
+        concurrencyReleased = true;
+        releaseScrapeConcurrency(ip);
+    };
 
     req.on('close', async () => {
         console.log(`[🛑] Client disconnected. Aborting scrape for ${city}...`);
         isStreamActive = false;
+        releaseConcurrencyOnce();
         if (browser) {
             try {
                 await browser.close();
@@ -410,6 +592,7 @@ app.get('/api/scrape', async (req, res) => {
         console.error("[!] Scrape Stream Error:", error);
         sendEvent({ error: error.message });
     } finally {
+        releaseConcurrencyOnce();
         if (browser) {
             try {
                 await browser.close();

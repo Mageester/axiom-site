@@ -68,7 +68,24 @@ export default function Campaigns() {
         loadCampaigns();
     }, []);
 
+    const requestScrapeToken = async (backendUrl: string, signal: AbortSignal) => {
+        const tokenResponse = await fetch(`${backendUrl}/api/scrape/token`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal
+        });
 
+        if (!tokenResponse.ok) {
+            throw new Error(`Auth token request failed (${tokenResponse.status})`);
+        }
+
+        const tokenBody = await tokenResponse.json().catch(() => ({}));
+        if (!tokenBody?.token || typeof tokenBody.token !== 'string') {
+            throw new Error('Scrape auth token missing from server response.');
+        }
+
+        return tokenBody.token as string;
+    };
 
     const handleExtraction = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -93,10 +110,11 @@ export default function Campaigns() {
 
         try {
             const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:10000';
+            const scrapeToken = await requestScrapeToken(backendUrl, controller.signal);
             const res = await fetch(`${backendUrl}/api/scrape?niche=${encodeURIComponent(normalizedNiche)}&city=${encodeURIComponent(normalizedCity)}&radius=${radius}&maxDepth=${maxDepth}`, {
                 signal: controller.signal,
                 headers: {
-                    'x-engine-secret': import.meta.env.VITE_ENGINE_SECRET || ''
+                    'Authorization': `Bearer ${scrapeToken}`
                 }
             });
 
