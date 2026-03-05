@@ -12,6 +12,14 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 
 app.use(express.json());
+app.use((req, res, next) => {
+    const inboundRequestId = req.headers['x-request-id'];
+    req.requestId = (typeof inboundRequestId === 'string' && inboundRequestId.trim())
+        ? inboundRequestId.trim().slice(0, 128)
+        : crypto.randomUUID();
+    res.setHeader('X-Request-Id', req.requestId);
+    next();
+});
 
 const DEFAULT_ALLOWED_ORIGINS = [
     'https://getaxiom.ca',
@@ -185,14 +193,11 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post('/api/intake', async (req, res) => {
+    const requestId = req.requestId || crypto.randomUUID();
     try {
-        // --- DEBUG: Log raw incoming payload ---
-        console.log('[INTAKE] Content-Type:', req.headers['content-type']);
-        console.log('[INTAKE] Raw req.body:', JSON.stringify(req.body, null, 2));
-
         // Guard: If body parser failed or Content-Type is wrong, req.body will be undefined
         if (!req.body || typeof req.body !== 'object') {
-            console.error('[INTAKE] CRITICAL: req.body is undefined or not an object. Check Content-Type header.');
+            console.warn(`[INTAKE] request_id=${requestId} status=400 reason=malformed_body`);
             return res.status(400).json({
                 error: 'Malformed request',
                 details: 'Request body is empty or not valid JSON. Ensure Content-Type: application/json is set.'
@@ -239,11 +244,12 @@ app.post('/api/intake', async (req, res) => {
 
         if (company_fax) {
             // Honeypot tripped, return fake success
+            console.info(`[INTAKE] request_id=${requestId} status=200 result=honeypot`);
             return res.status(200).json({ success: true });
         }
 
         if (!name || !email) {
-            console.warn('[INTAKE] Validation failed. name:', name, 'email:', email);
+            console.warn(`[INTAKE] request_id=${requestId} status=400 reason=validation_failed fields=name,email`);
             return res.status(400).json({ error: "Name and email are required.", details: `Received name='${name}', email='${email}'` });
         }
 
@@ -285,9 +291,7 @@ app.post('/api/intake', async (req, res) => {
         `;
 
         if (!process.env.SMTP_HOST || !process.env.SMTP_USER) {
-            console.warn("[WARNING] SMTP credentials not fully configured. Logging email instead.");
-            console.log("SUBJECT:", subjectLine);
-            console.log("BODY:", htmlBody);
+            console.warn(`[INTAKE] request_id=${requestId} status=202 mocked=true reason=smtp_not_configured`);
             // Return success to the client regardless so the UI workflow functions normally.
             return res.status(200).json({ success: true, mocked: true });
         }
@@ -300,10 +304,11 @@ app.post('/api/intake', async (req, res) => {
             html: htmlBody
         });
 
+        console.info(`[INTAKE] request_id=${requestId} status=200 delivered=true origin=${req.headers.origin || 'none'}`);
         res.status(200).json({ success: true });
 
     } catch (error) {
-        console.error("[!] Intake Processing Error:", error);
+        console.error(`[INTAKE] request_id=${requestId} status=500 error=${error?.message || 'unknown'}`);
         res.status(500).json({ error: "Internal server error connecting to mailing engine." });
     }
 });
