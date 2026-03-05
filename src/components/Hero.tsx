@@ -49,19 +49,12 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative flex aspect-square w-full items-center justify-center perspective-[1000px] lg:col-span-7">
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="h-[74%] w-[74%] rounded-full bg-[#B05D41]/24 blur-[130px]" />
-            </div>
-
-            <div className="relative w-full max-w-[760px] overflow-hidden rounded-[32px] border border-white/10 machined-card transform-gpu [transform:rotateY(-12deg)_rotateX(5deg)] hover:[transform:rotateY(0deg)_rotateX(0deg)] transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.4,1)] opacity-0 [animation-fill-mode:forwards] animate-[splash-reveal_0.9s_ease-out] delay-[250ms] shadow-[0_20px_60px_rgba(0,0,0,0.65)]">
-              <img
-                src="/images/hero-chip.jpg"
-                alt="Cinematic 3D processor hardware"
-                className="h-[520px] w-full object-cover object-center"
-                loading="eager"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#090A0B]/65 via-transparent to-transparent" />
+          <div className="relative flex w-full items-center justify-center lg:col-span-7 opacity-0 [animation-fill-mode:forwards] animate-[splash-reveal_0.9s_ease-out] delay-[250ms]">
+            <div className="relative w-full aspect-square md:aspect-[4/3] rounded-3xl border border-white/20 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-2xl shadow-[0_0_80px_rgba(176,93,65,0.2)] flex items-center justify-center overflow-hidden perspective-[1000px]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(176,93,65,0.4)_0%,transparent_70%)] opacity-50"></div>
+              <div className="w-3/4 h-3/4 rounded-2xl border border-white/10 bg-[#0d1323]/80 shadow-2xl transform rotate-y-[-15deg] rotate-x-[10deg] [transform:rotateY(-15deg)_rotateX(10deg)] hover:rotate-y-0 hover:[transform:rotateY(0deg)_rotateX(0deg)] transition-transform duration-700 ease-out flex items-center justify-center">
+                <span className="text-white/20 font-bold tracking-widest">AXIOM CORE</span>
+              </div>
             </div>
           </div>
         </div>
