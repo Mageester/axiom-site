@@ -1,8 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
 
-const LENIS_LERP = 0.08;
-
 export default function SmoothScrollProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -11,9 +9,11 @@ export default function SmoothScrollProvider({ children }: PropsWithChildren) {
     if (reduceMotionQuery.matches) return;
 
     const lenis = new Lenis({
-      lerp: LENIS_LERP,
-      duration: 1.2,
+      lerp: 0.12,
+      duration: 0.8,
       smoothWheel: true,
+      wheelMultiplier: 0.8,
+      touchMultiplier: 1.5,
     });
 
     let rafId = 0;
