@@ -1,8 +1,44 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import SplitType from 'split-type';
 import MagneticWrapper from './MagneticWrapper';
 import PartnerMarquee from './PartnerMarquee';
 
 const Hero: React.FC = () => {
+  const heroRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useGSAP(
+    () => {
+      if (!headingRef.current) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const split = new SplitType(headingRef.current, {
+        types: 'lines,chars',
+        lineClass: 'split-line',
+        charClass: 'split-char',
+      });
+
+      gsap.fromTo(
+        split.chars,
+        { yPercent: 100, autoAlpha: 0 },
+        {
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: 0.72,
+          stagger: 0.015,
+          ease: 'expo.out',
+        },
+      );
+
+      return () => {
+        split.revert();
+      };
+    },
+    { scope: heroRef },
+  );
+
   const scrollToIntake = () => {
     document.getElementById('intake')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -12,9 +48,9 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="min-h-[90vh]">
+    <section ref={heroRef} className="min-h-[90vh]">
       <div className="flex min-h-[90vh] flex-col justify-center">
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-8 opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards] lg:grid-cols-12 lg:gap-0">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-8 lg:grid-cols-12 lg:gap-0">
           <div className="mt-auto flex h-full flex-col items-start pb-12 text-left lg:col-span-5">
             <div className="relative mb-8">
               <div className="pointer-events-none absolute inset-0 rounded-full bg-[#253a7a]/30 blur-[200px]" />
@@ -23,9 +59,11 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            <h1 className="mb-10 text-[clamp(2.5rem,5vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#F2F4F7] md:leading-[1.15]">
-              Defining Digital Identity.
-            </h1>
+            <div className="mb-10 overflow-hidden min-h-[2.3em] md:min-h-[1.2em]">
+              <h1 ref={headingRef} className="text-[clamp(2.5rem,5vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#F2F4F7] md:leading-[1.15]">
+                Defining Digital Identity.
+              </h1>
+            </div>
 
             <p className="mb-8 max-w-lg text-lg leading-[1.65] text-slate-300">
               We build sub-second web infrastructure with cinematic visuals and bullet-proof conversions for ambitious brands that demand elite performance.

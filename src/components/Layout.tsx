@@ -32,6 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="fixed top-[-20%] left-[-10%] h-[50vw] w-[50vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
         <div className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
         <div className="engineering-grid animate-grid-drift" />
+        <div className="global-noise-floor" />
       </div>
 
       <nav
@@ -50,7 +51,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             aria-label="Axiom Infrastructure home"
           >
             <img
-              src="/logo.png"
+              src="/photos/logotrans.png"
               alt="Axiom Infrastructure"
               className="h-10 md:h-12 w-auto object-contain cursor-pointer transition-transform duration-300 hover:scale-105"
             />

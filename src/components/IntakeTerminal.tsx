@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
-import MagneticWrapper from './MagneticWrapper';
 import useReveal from '../hooks/useReveal';
 
 type IntakeAction = 'consultation' | 'details' | 'email' | null;
@@ -239,11 +238,9 @@ const IntakeTerminal: React.FC = () => {
               )}
 
               <div className="md:col-span-2">
-                <MagneticWrapper className="block">
-                  <button type="submit" disabled={isSubmitting} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                    {isSubmitting ? 'Transmitting...' : 'Send Project Details'}
-                  </button>
-                </MagneticWrapper>
+                <button type="submit" disabled={isSubmitting} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
+                  {isSubmitting ? 'Transmitting...' : 'Send Project Details'}
+                </button>
               </div>
             </form>
           )}

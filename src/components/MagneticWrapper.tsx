@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 
 type MagneticWrapperProps = {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
   useEffect(() => {
     const node = wrapperRef.current;
     if (!node) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
     const handleMove = (event: MouseEvent) => {
       const rect = node.getBoundingClientRect();
@@ -28,9 +30,14 @@ const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
       const distance = Math.hypot(dx, dy);
 
       if (distance > radius) {
-        node.style.setProperty('--mx', '0px');
-        node.style.setProperty('--my', '0px');
-        node.style.setProperty('--ms', '1');
+        gsap.to(node, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.38,
+          ease: 'elastic.out(1,0.5)',
+          overwrite: true,
+        });
         return;
       }
 
@@ -38,15 +45,25 @@ const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
       const mx = distance > 0 ? (dx / distance) * force : 0;
       const my = distance > 0 ? (dy / distance) * force : 0;
 
-      node.style.setProperty('--mx', `${mx.toFixed(2)}px`);
-      node.style.setProperty('--my', `${my.toFixed(2)}px`);
-      node.style.setProperty('--ms', '1.05');
+      gsap.to(node, {
+        x: Number(mx.toFixed(2)),
+        y: Number(my.toFixed(2)),
+        scale: 1.05,
+        duration: 0.26,
+        ease: 'power3.out',
+        overwrite: true,
+      });
     };
 
     const reset = () => {
-      node.style.setProperty('--mx', '0px');
-      node.style.setProperty('--my', '0px');
-      node.style.setProperty('--ms', '1');
+      gsap.to(node, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.38,
+        ease: 'elastic.out(1,0.5)',
+        overwrite: true,
+      });
     };
 
     window.addEventListener('mousemove', handleMove);
@@ -57,11 +74,10 @@ const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
     };
   }, [radius, strength]);
 
-  return (
+    return (
     <div
       ref={wrapperRef}
-      className={`transform-gpu [transform:translateX(var(--mx,0px))_translateY(var(--my,0px))_scale(var(--ms,1))] ${className}`}
-      style={{ transition: 'transform 0.2s cubic-bezier(0.2, 0.8, 0.4, 1)' }}
+      className={`transform-gpu ${className}`}
     >
       {children}
     </div>

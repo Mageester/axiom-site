@@ -30,7 +30,7 @@ const WorksCarousel: React.FC = () => {
         {projects.map((project, index) => (
           <div
             key={`${project.title}-${index}`}
-            className="flex-shrink-0 w-[85vw] md:w-[60vw] h-[400px] md:h-[600px] snap-center relative rounded-3xl overflow-hidden border border-white/10 group"
+            className="flex-shrink-0 w-[85vw] md:w-[60vw] h-[400px] md:h-[600px] snap-center relative rounded-3xl overflow-hidden bg-[#0d1323]/60 backdrop-blur-xl border border-white/10 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] group"
           >
             <img
               src={project.src}

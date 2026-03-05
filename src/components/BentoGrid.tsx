@@ -2,7 +2,7 @@ import React from 'react';
 import useReveal from '../hooks/useReveal';
 
 const cardShell =
-  'group bento-hover relative overflow-hidden rounded-2xl bg-[#0d1323]/80 border border-[#2e344f] shadow-[0_20px_40px_rgba(0,0,0,0.6)] after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-px after:rounded-t-2xl after:bg-white/10';
+  'group bento-hover relative overflow-hidden rounded-2xl bg-[#0d1323]/60 backdrop-blur-xl border border-white/10 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)]';
 
 const thumbnails = [
   { src: '/images/case-study-1.jpg', alt: 'Cinematic project thumbnail one' },
@@ -49,7 +49,7 @@ const BentoGrid: React.FC = () => {
         className={`reveal-on-scroll ${depthReveal.isVisible ? 'is-visible' : ''} lg:col-span-3 lg:row-span-1`}
         style={{ ['--reveal-order' as string]: 1 } as React.CSSProperties}
       >
-        <article className={`${cardShell} bg-[#0d1323]/65 backdrop-blur-md`}>
+        <article className={cardShell}>
           <div className="flex h-full min-h-[300px] flex-col justify-between p-8">
             <div>
             <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Strategic Depth</p>

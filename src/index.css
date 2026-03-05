@@ -58,22 +58,6 @@
     @apply text-slate-300 leading-relaxed;
   }
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-      radial-gradient(circle at 10% 15%, rgba(255, 255, 255, 0.24) 0.6px, transparent 0.6px),
-      radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.2) 0.55px, transparent 0.55px),
-      radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.16) 0.5px, transparent 0.5px);
-    background-size: 3px 3px, 4px 4px, 5px 5px;
-    background-position: 0 0, 1px 1px, 2px 2px;
-    mix-blend-mode: soft-light;
-    opacity: 0.05;
-    z-index: 2;
-  }
-
   body::after {
     content: '';
     position: fixed;
@@ -157,6 +141,18 @@
   .noise-overlay > * {
     position: relative;
     z-index: 1;
+  }
+
+  .global-noise-floor {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.03;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    background-repeat: repeat;
   }
 
   .axiom-bento,
@@ -340,6 +336,16 @@
   .bento-hover:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.7);
+  }
+
+  .split-line {
+    display: block;
+    overflow: hidden;
+  }
+
+  .split-char {
+    display: inline-block;
+    will-change: transform, opacity;
   }
 }
 
