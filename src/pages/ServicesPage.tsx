@@ -19,10 +19,10 @@ const tiers = [
         packageParam: 'foundation',
     },
     {
-        name: 'Authority',
+        name: 'Growth',
         price: '$1,500 CAD',
         tag: 'Growth System',
-        desc: 'Most selected by scaling teams who need authority and throughput at the same time.',
+        desc: 'Most selected by scaling teams who need stronger positioning and throughput at the same time.',
         qualifier: 'Best for teams of 10+ targeting higher-ticket service work.',
         technical: '7-10 pages // ROI dashboard // trust proof stack',
         features: [
@@ -30,7 +30,7 @@ const tiers = [
             'High-ticket service positioning across every key page',
             'Priority launch support through first campaign cycle',
         ],
-        cta: 'Apply for Authority',
+        cta: 'Apply for Growth',
         packageParam: 'authority',
         featured: true,
     },
@@ -54,7 +54,7 @@ const tiers = [
 const faqs = [
     {
         q: 'How long does a typical build take?',
-        a: 'Foundation builds ship in 2 weeks. Authority builds take 3-4 weeks. Expansion programs are scoped in phased 4-8 week launches depending on integration depth. We work in focused sprints with weekly check-ins so timelines stay clear.'
+        a: 'Foundation builds ship in 2 weeks. Growth builds take 3-4 weeks. Expansion programs are scoped in phased 4-8 week launches depending on integration depth. We work in focused sprints with weekly check-ins so timelines stay clear.'
     },
     {
         q: 'Do I need to handle my own hosting?',
@@ -62,7 +62,7 @@ const faqs = [
     },
     {
         q: 'What if I need changes after launch?',
-        a: 'Authority and Expansion engagements include 30 days of post-launch adjustments at no extra cost. After that, we offer optimization retainers. You always own your code with no lock-in.'
+        a: 'Growth and Expansion engagements include 30 days of post-launch adjustments at no extra cost. After that, we offer optimization retainers. You always own your code with no lock-in.'
     }
 ];
 
@@ -74,7 +74,7 @@ const ServicesPage: React.FC = () => {
         <div className="page-shell">
             <SEO
                 title="Infrastructure Investments | Axiom"
-                description="Explore Foundation, Authority, and Expansion infrastructure investments for local service businesses."
+                description="Explore Foundation, Growth, and Expansion infrastructure investments for local service businesses."
             />
 
             {/* Header */}
@@ -177,7 +177,7 @@ const ServicesPage: React.FC = () => {
                     <div className="text-center mb-10">
                         <p className="eyebrow-center mb-4">Our Process</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
-                            The Path to Authority: Our Engineering Process.
+                            The Path to Scale: Our Engineering Process.
                         </h2>
                     </div>
 

@@ -17,7 +17,7 @@ const StatsGrid: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div ref={oneReveal.ref} className={revealClass(oneReveal.isVisible)} style={{ transitionDelay: '0ms' }}>
           <article className={`${cardClass} flex flex-col space-y-4`}>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Authority Metric</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Performance Metric</p>
             <h3 className="text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Revenue Supported: $50M+</h3>
             <p className="text-sm leading-[1.7] text-slate-300">Systems backing eight-figure revenue.</p>
             <svg viewBox="0 0 260 70" className="w-full" role="img" aria-label="Decorative amber bar chart">
@@ -34,7 +34,7 @@ const StatsGrid: React.FC = () => {
 
         <div ref={twoReveal.ref} className={revealClass(twoReveal.isVisible)} style={{ transitionDelay: '100ms' }}>
           <article className={`${cardClass} flex flex-col space-y-4`}>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Authority Metric</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Performance Metric</p>
             <h3 className="text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Assets Deployed: 150+</h3>
             <p className="text-sm leading-[1.7] text-slate-300">Production-ready web infrastructure.</p>
             <svg viewBox="0 0 320 70" className="w-full" role="img" aria-label="Decorative amber sparkline">
@@ -52,7 +52,7 @@ const StatsGrid: React.FC = () => {
 
         <div ref={threeReveal.ref} className={revealClass(threeReveal.isVisible)} style={{ transitionDelay: '200ms' }}>
           <article className={`${cardClass} flex flex-col space-y-4`}>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Authority Metric</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Performance Metric</p>
             <h3 className="text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Enterprise DNA: &lt;30ms</h3>
             <p className="text-sm leading-[1.7] text-slate-300">Applying high-frequency architectural standards to your brand.</p>
             <svg viewBox="0 0 320 70" className="w-full" role="img" aria-label="Decorative amber wave line">

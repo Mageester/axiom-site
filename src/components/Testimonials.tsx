@@ -23,7 +23,7 @@ const Testimonials: React.FC = () => {
   return (
     <section className="mx-auto w-full max-w-6xl px-6 md:px-8">
       <div className="mb-8">
-        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Founder Authority</p>
+        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Founder Perspective</p>
         <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Built by Co-Founders and Architects</h2>
       </div>
 

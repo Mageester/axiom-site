@@ -30,7 +30,7 @@ const INITIAL_FORM: IntakeFormState = {
 
 const SCALE_OPTIONS = [
     { value: 'foundation', label: 'Foundation Investment ($500 CAD)' },
-    { value: 'authority', label: 'Authority Investment ($1,500 CAD)' },
+    { value: 'authority', label: 'Growth Investment ($1,500 CAD)' },
     { value: 'expansion', label: 'Multi-Location / Expansion ($3,000 CAD)' }
 ];
 

@@ -21,7 +21,7 @@ const pricingTiers: PricingTier[] = [
     price: '$500 CAD',
     packageParam: 'foundation',
     bestFor: 'Best for owner-led teams operating in one core service territory.',
-    outcome: 'Ship a high-authority web asset that replaces fragile agency templates and captures urgent calls faster.',
+    outcome: 'Ship a high-performance web asset that replaces fragile agency templates and captures urgent calls faster.',
     technical: '3-5 pages // edge deployment // conversion instrumentation',
     includes: [
       'Offer architecture and service hierarchy built for premium positioning',
@@ -32,7 +32,7 @@ const pricingTiers: PricingTier[] = [
     cta: 'Apply for Foundation',
   },
   {
-    name: 'Authority',
+    name: 'Growth',
     price: '$1,500 CAD',
     packageParam: 'authority',
     featured: true,
@@ -46,7 +46,7 @@ const pricingTiers: PricingTier[] = [
       'ROI dashboard layer for leadership-level decision visibility',
     ],
     boundary: 'Not included: enterprise back-office custom integrations.',
-    cta: 'Apply for Authority',
+    cta: 'Apply for Growth',
   },
   {
     name: 'Multi-Location / Expansion',
@@ -86,7 +86,7 @@ const PricingPage: React.FC = () => {
     <div className="page-shell">
       <SEO
         title="Infrastructure Investment | Axiom Infrastructure"
-        description="High-ticket web infrastructure packages built for contractors who need measurable conversion and performance authority."
+        description="High-ticket web infrastructure packages built for contractors who need measurable conversion and performance results."
       />
 
       <section className="max-w-3xl mx-auto text-center flex flex-col gap-5 mb-12 sm:mb-14">

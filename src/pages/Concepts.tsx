@@ -23,7 +23,7 @@ type Demo = {
 
 const demos: Demo[] = [
   {
-    title: 'HVAC Authority',
+    title: 'HVAC Performance',
     subtitle: 'Apex Climate Systems',
     positioning: 'Dispatch-first infrastructure for emergency HVAC demand windows.',
     desc: 'When the first heatwave hits and your phones blow up, this system filters the tire-kickers so your techs only roll trucks for high-ticket emergency installs.',
@@ -40,7 +40,7 @@ const demos: Demo[] = [
     ],
   },
   {
-    title: 'Roofing Authority',
+    title: 'Roofing Performance',
     subtitle: 'Summit Roofing Co.',
     positioning: 'Storm protocol conversion system for high-volume inspection demand.',
     desc: "When hail storms hit and every roof in town leaks, your site loads instantly while your competitors' sites crash. You get the calls. They get voicemail.",
@@ -52,7 +52,7 @@ const demos: Demo[] = [
     features: ['Material Comparison Tool', 'Storm Damage Checklist', 'Insurance Claim Helper', 'Before/After Gallery'],
   },
   {
-    title: 'Landscaping Authority',
+    title: 'Landscaping Performance',
     subtitle: 'Verdant Landscapes',
     positioning: 'Portfolio-grade consultation system for premium outdoor projects.',
     desc: "You're bidding on $50K hardscape projects against companies with $200 websites. This fixes the gap between the quality of your work and the quality of your online presence.",
