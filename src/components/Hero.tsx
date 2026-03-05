@@ -54,11 +54,12 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative flex w-full items-center justify-center lg:col-span-7">
-            <div className="relative w-full lg:w-7/12 perspective-[1000px] [transform:rotateY(-5deg)_rotateX(2deg)] hover:[transform:rotateY(0deg)_rotateX(0deg)] transition-all duration-700 ease-out">
-              <video autoPlay muted loop playsInline className="w-full aspect-square md:aspect-[4/3] object-cover rounded-3xl drop-shadow-2xl brightness-110 saturate-110 border border-white/10">
+          <div className="relative flex w-full items-center justify-center lg:col-span-7 perspective-[1000px]">
+            <div className="relative w-full aspect-square md:aspect-[4/3] rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(176,93,65,0.15)] transform md:-rotate-y-12 md:rotate-x-6 hover:rotate-0 transition-transform duration-700">
+              <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover scale-105">
                 <source src="https://cdn.coverr.co/videos/coverr-abstract-glowing-lines-4552/1080p.mp4" type="video/mp4" />
               </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80"></div>
             </div>
           </div>
         </div>
