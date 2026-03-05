@@ -1,44 +1,8 @@
-import React, { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import SplitType from 'split-type';
+import React from 'react';
 import MagneticWrapper from './MagneticWrapper';
 import PartnerMarquee from './PartnerMarquee';
 
 const Hero: React.FC = () => {
-  const heroRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-
-  useGSAP(
-    () => {
-      if (!headingRef.current) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      const split = new SplitType(headingRef.current, {
-        types: 'lines,chars',
-        lineClass: 'split-line',
-        charClass: 'split-char',
-      });
-
-      gsap.fromTo(
-        split.chars,
-        { yPercent: 100, autoAlpha: 0 },
-        {
-          yPercent: 0,
-          autoAlpha: 1,
-          duration: 0.72,
-          stagger: 0.015,
-          ease: 'expo.out',
-        },
-      );
-
-      return () => {
-        split.revert();
-      };
-    },
-    { scope: heroRef },
-  );
-
   const scrollToIntake = () => {
     document.getElementById('intake')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -48,7 +12,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section ref={heroRef} className="min-h-[90vh]">
+    <section data-hero-root className="min-h-[90vh]">
       <div className="flex min-h-[90vh] flex-col justify-center">
         <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-8 lg:grid-cols-12 lg:gap-0">
           <div className="mt-auto flex h-full flex-col items-start pb-12 text-left lg:col-span-5">
@@ -60,7 +24,7 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="mb-10 overflow-hidden min-h-[2.3em] md:min-h-[1.2em]">
-              <h1 ref={headingRef} className="text-[clamp(2.5rem,5vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#F2F4F7] md:leading-[1.15]">
+              <h1 data-startup-heading className="text-[clamp(2.5rem,5vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#F2F4F7] md:leading-[1.15]">
                 Defining Digital Identity.
               </h1>
             </div>
@@ -93,7 +57,7 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="relative flex w-full items-center justify-center lg:col-span-7 perspective-[1000px]">
-            <div className="relative w-full aspect-square md:aspect-[4/3] rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(176,93,65,0.15)] transform md:-rotate-y-12 md:rotate-x-6 hover:rotate-0 transition-transform duration-700">
+            <div data-glass-card className="relative w-full aspect-square md:aspect-[4/3] rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(176,93,65,0.15)] transform md:-rotate-y-12 md:rotate-x-6 hover:rotate-0 transition-transform duration-700">
               <div className="absolute inset-0 bg-[#0d1323]"></div>
               <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] animate-[spin_20s_linear_infinite] opacity-50">
                 <div className="absolute inset-0 bg-[conic-gradient(from_90deg_at_50%_50%,#0d1323_0%,#B05D41_50%,#0d1323_100%)] blur-[80px]"></div>

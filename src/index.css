@@ -355,6 +355,17 @@
     display: inline-block;
     will-change: transform, opacity;
   }
+
+  .startup-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+
+  .startup-char {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
 }
 
 @keyframes fade-in-up {
