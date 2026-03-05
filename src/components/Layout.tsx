@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <img
               src="/logo.png"
               alt="Axiom Infrastructure"
-              className="h-8 w-auto object-contain mix-blend-screen md:h-10"
+              className="h-10 md:h-12 w-auto object-contain cursor-pointer transition-transform duration-300 hover:scale-105"
             />
           </NavLink>
 
