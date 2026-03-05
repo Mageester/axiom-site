@@ -36,11 +36,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </div>
 
       <nav
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-          isScrolled
+        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${isScrolled
             ? 'border-b border-white/5 bg-[rgba(9,10,11,0.82)] backdrop-blur-md'
             : 'border-b border-transparent bg-[rgba(9,10,11,0.45)]'
-        }`}
+          }`}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-6">
           <button
@@ -65,7 +64,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               Infrastructure
             </NavLink>
             <NavLink to="/deployments" className={navLinkClass}>
-              Deployments
+              Works
             </NavLink>
             <NavLink to="/architects" className={navLinkClass}>
               Architects

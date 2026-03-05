@@ -23,14 +23,14 @@ const Footer: React.FC = () => {
           <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Navigate</p>
           <NavLink to="/" className={routeLinkClass}>Home</NavLink>
           <NavLink to="/infrastructure" className={routeLinkClass}>Infrastructure</NavLink>
-          <NavLink to="/deployments" className={routeLinkClass}>Deployments</NavLink>
+          <NavLink to="/deployments" className={routeLinkClass}>Works</NavLink>
           <NavLink to="/architects" className={routeLinkClass}>Architects</NavLink>
         </nav>
 
         <nav className="space-y-3">
           <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Services</p>
           <NavLink to="/infrastructure" className={routeLinkClass}>Web Infrastructure</NavLink>
-          <NavLink to="/deployments" className={routeLinkClass}>Deployments</NavLink>
+          <NavLink to="/deployments" className={routeLinkClass}>Works</NavLink>
         </nav>
 
         <nav className="space-y-3">
