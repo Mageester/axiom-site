@@ -34,7 +34,7 @@ const Testimonials: React.FC = () => {
             className="rounded-2xl border border-[#2e344f] border-t border-t-white/10 bg-[#0d1323]/90 p-7 shadow-[0_20px_40px_rgba(0,0,0,0.6)] md:p-8"
           >
             <div className="flex items-center gap-4">
-              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#1c253b] ring-1 ring-[#B05D41]/50 text-[#B05D41] font-bold text-lg">
+              <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#1c253b] ring-2 ring-[#B05D41]/50 text-[#B05D41] font-bold text-xl">
                 {founder.initials}
               </div>
               <p className="text-left">

@@ -6,11 +6,11 @@ const PartnerMarquee: React.FC = () => {
   return (
     <section aria-label="Platform ecosystem">
       <div className="w-full overflow-hidden flex bg-[#090A0B] border-y border-white/5 py-8">
-        <div className="flex w-max animate-infinite-scroll space-x-16 md:space-x-32 pr-16 md:pr-32">
+        <div className="flex w-max animate-marquee-infinite space-x-16 md:space-x-32 pr-16 md:pr-32">
           {brands.map((brand, index) => (
             <span
               key={`set-a-${brand}-${index}`}
-              className="text-3xl md:text-5xl font-black tracking-tighter text-white opacity-40 hover:opacity-100 transition-opacity whitespace-nowrap flex-shrink-0"
+              className="text-4xl md:text-5xl font-black tracking-tighter text-white/40 px-12 hover:opacity-100 transition-opacity whitespace-nowrap flex-shrink-0"
             >
               {brand}
             </span>
@@ -18,7 +18,7 @@ const PartnerMarquee: React.FC = () => {
           {brands.map((brand, index) => (
             <span
               key={`set-b-${brand}-${index}`}
-              className="text-3xl md:text-5xl font-black tracking-tighter text-white opacity-40 hover:opacity-100 transition-opacity whitespace-nowrap flex-shrink-0"
+              className="text-4xl md:text-5xl font-black tracking-tighter text-white/40 px-12 hover:opacity-100 transition-opacity whitespace-nowrap flex-shrink-0"
             >
               {brand}
             </span>
