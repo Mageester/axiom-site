@@ -10,7 +10,7 @@ type LayoutProps = {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const layoutRef = useRef<HTMLDivElement>(null);
-  const logoTargetRef = useRef<HTMLButtonElement>(null);
+  const logoTargetRef = useRef<HTMLImageElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       });
 
       gsap.set(nav, { autoAlpha: 0, y: -50 });
-      gsap.set(logo, { autoAlpha: 0, x: -100, scale: 0.5, transformOrigin: 'left center' });
+      gsap.set(logo, { autoAlpha: 0, x: -150, scale: 0.5, transformOrigin: 'left center' });
       gsap.set(navLinks, { autoAlpha: 0, x: 28 });
       gsap.set(hero, { autoAlpha: 0 });
       gsap.set(backgrounds, { autoAlpha: 0 });
@@ -60,7 +60,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       timeline
         .to(nav, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power4.out' }, 0)
-        .to(logo, { autoAlpha: 1, x: 0, scale: 1, duration: 0.72, ease: 'power4.out' }, 0.08)
+        .to(logo, { autoAlpha: 1, x: 0, scale: 1, duration: 0.72, ease: 'expo.out' }, 0.08)
         .to(navLinks, { autoAlpha: 1, x: 0, duration: 0.45, stagger: 0.05, ease: 'power3.out' }, 0.3)
         .to(hero, { autoAlpha: 1, duration: 0.2 }, 0.2)
         .to(split.chars, { autoAlpha: 1, yPercent: 0, stagger: 0.02, duration: 0.5, ease: 'power3.out' }, 0.3)
@@ -75,7 +75,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative pb-1 text-[10px] md:text-xs uppercase font-semibold tracking-[0.25em] text-white/90 transition-colors after:content-[''] after:absolute after:bottom-[-8px] after:left-0 after:w-0 after:h-[1px] after:bg-amber-600 after:transition-all after:duration-300 hover:after:w-full ${isActive ? 'text-white after:w-full' : 'text-white/80 hover:text-white/95'}`;
+    `font-bold uppercase tracking-[0.3em] text-[10px] text-white/80 hover:text-amber-500 transition-colors ${isActive ? 'text-amber-500' : ''}`;
 
   return (
     <div ref={layoutRef} className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
@@ -96,24 +96,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             : 'border-b border-transparent bg-[rgba(9,10,11,0.45)]'
           }`}
       >
-        <div className="grid w-full grid-cols-1 items-center gap-4 py-5 pl-2 pr-6 md:grid-cols-[minmax(460px,1.8fr)_auto_minmax(220px,1fr)] md:py-6 md:pl-0 md:pr-8">
-          <div className="flex flex-grow items-center justify-start md:min-w-[460px]">
+        <div className="h-20 flex items-center justify-between px-12 bg-transparent backdrop-blur-md">
+          <div className="flex grow basis-[420px] items-center justify-start">
             <button
-              ref={logoTargetRef}
               type="button"
               onClick={() => navigate('/')}
               className="inline-flex items-center transition-transform duration-700 ease-in-out hover:scale-[1.04]"
               aria-label="Axiom Infrastructure home"
             >
               <img
+                ref={logoTargetRef}
                 src="/photos/logoclear.png"
                 alt="Axiom Infrastructure"
-                className="h-20 md:h-24 w-auto object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125"
+                className="fixed left-6 top-4 h-[85px] w-auto z-50 object-contain cursor-pointer transition-transform hover:scale-105"
               />
             </button>
           </div>
 
-          <div className="hidden items-center justify-center gap-8 font-axiomMono md:flex">
+          <div className="hidden grow basis-[380px] items-center justify-center gap-9 font-axiomMono md:flex">
             <NavLink to="/" className={navLinkClass} data-startup-link>
               Home
             </NavLink>
@@ -128,7 +128,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </NavLink>
           </div>
 
-          <div className="hidden items-center justify-end md:flex">
+          <div className="hidden grow basis-[220px] items-center justify-end md:flex">
             <a href="/#intake" className="btn-primary btn-sm px-4 py-2 text-sm">
               Start Your Project
             </a>
