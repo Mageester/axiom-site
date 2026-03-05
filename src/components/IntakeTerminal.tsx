@@ -3,6 +3,13 @@ import MagneticWrapper from './MagneticWrapper';
 import useReveal from '../hooks/useReveal';
 
 type IntakeAction = 'consultation' | 'details' | 'email' | null;
+type SubmitState = 'idle' | 'loading' | 'success' | 'error';
+
+type IntakeFormState = {
+  name: string;
+  email: string;
+  details: string;
+};
 
 const baseCardClass =
   'rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-6 machined-card transition-all duration-300 text-left';
@@ -10,12 +17,54 @@ const baseCardClass =
 const inputClass =
   'w-full rounded-xl px-5 py-4 text-[#F5F7FA] placeholder-[#A7B3BC] bg-white/[0.03] border border-white/10 border-t border-t-white/10 outline-none transition-all duration-300 focus:ring-2 focus:ring-[#B05D41]/40';
 
+const INITIAL_FORM: IntakeFormState = {
+  name: '',
+  email: '',
+  details: '',
+};
+
 const IntakeTerminal: React.FC = () => {
   const [activeAction, setActiveAction] = useState<IntakeAction>(null);
+  const [form, setForm] = useState<IntakeFormState>(INITIAL_FORM);
+  const [submitState, setSubmitState] = useState<SubmitState>('idle');
+
   const statusReveal = useReveal<HTMLDivElement>();
   const consultationReveal = useReveal<HTMLDivElement>();
   const detailsReveal = useReveal<HTMLDivElement>();
   const emailReveal = useReveal<HTMLDivElement>();
+
+  const setField = (key: keyof IntakeFormState, value: string) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (submitState === 'loading') return;
+
+    setSubmitState('loading');
+
+    try {
+      const response = await fetch('/api/intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          details: form.details,
+          source_path: window.location.pathname,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to transmit intake payload.');
+      }
+
+      setSubmitState('success');
+      setForm(INITIAL_FORM);
+    } catch {
+      setSubmitState('error');
+    }
+  };
 
   return (
     <section id="intake" className="w-full max-w-6xl mx-auto px-6 py-28">
@@ -97,28 +146,70 @@ const IntakeTerminal: React.FC = () => {
       </div>
 
       {activeAction === 'details' && (
-        <form className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5 rounded-2xl border border-white/10 border-t border-t-white/10 bg-[#10141c]/70 p-6 md:p-8 machined-card" onSubmit={(event) => event.preventDefault()}>
-          <label className="space-y-2">
-            <span className="text-sm text-[#A7B3BC]">Name</span>
-            <input type="text" name="name" placeholder="Full name" className={inputClass} />
-          </label>
+        <div className="mt-8 rounded-2xl border border-white/10 border-t border-t-white/10 bg-[#10141c]/70 p-6 md:p-8 machined-card">
+          {submitState === 'success' ? (
+            <div className="rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-8 text-center">
+              <p className="text-xl md:text-2xl font-semibold tracking-tight text-[#F2F4F7]">
+                Transmission Received. The Architects will review your parameters and establish contact.
+              </p>
+            </div>
+          ) : (
+            <form className="grid grid-cols-1 md:grid-cols-2 gap-5" onSubmit={handleSubmit}>
+              <label className="space-y-2">
+                <span className="text-sm text-[#A7B3BC]">Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  value={form.name}
+                  onChange={(event) => setField('name', event.target.value)}
+                  placeholder="Full name"
+                  className={inputClass}
+                />
+              </label>
 
-          <label className="space-y-2">
-            <span className="text-sm text-[#A7B3BC]">Email</span>
-            <input type="email" name="email" placeholder="you@company.com" className={inputClass} />
-          </label>
+              <label className="space-y-2">
+                <span className="text-sm text-[#A7B3BC]">Email</span>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={form.email}
+                  onChange={(event) => setField('email', event.target.value)}
+                  placeholder="you@company.com"
+                  className={inputClass}
+                />
+              </label>
 
-          <label className="space-y-2 md:col-span-2">
-            <span className="text-sm text-[#A7B3BC]">Project Details</span>
-            <textarea name="details" rows={6} placeholder="Share scope, goals, and timeline." className={inputClass} />
-          </label>
+              <label className="space-y-2 md:col-span-2">
+                <span className="text-sm text-[#A7B3BC]">Project Details</span>
+                <textarea
+                  name="details"
+                  rows={6}
+                  required
+                  value={form.details}
+                  onChange={(event) => setField('details', event.target.value)}
+                  placeholder="Share scope, goals, and timeline."
+                  className={inputClass}
+                />
+              </label>
 
-          <div className="md:col-span-2">
-            <MagneticWrapper className="block">
-              <button type="submit" className="btn-primary btn-lg w-full">Send Project Details</button>
-            </MagneticWrapper>
-          </div>
-        </form>
+              {submitState === 'error' && (
+                <p className="md:col-span-2 text-sm text-red-300">
+                  Transmission failed. Please retry or email aidan@getaxiom.ca directly.
+                </p>
+              )}
+
+              <div className="md:col-span-2">
+                <MagneticWrapper className="block">
+                  <button type="submit" disabled={submitState === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
+                    {submitState === 'loading' ? 'Transmitting...' : 'Send Project Details'}
+                  </button>
+                </MagneticWrapper>
+              </div>
+            </form>
+          )}
+        </div>
       )}
     </section>
   );

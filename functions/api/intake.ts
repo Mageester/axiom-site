@@ -6,7 +6,7 @@
  * 
  * Required Cloudflare Environment Variables:
  *   RESEND_API_KEY  - Your Resend API key (re_xxxxxxxxx)
- *   INTAKE_EMAIL    - Destination email (aidan@getaxiom.ca)
+ *   INTAKE_EMAIL    - Destination emails CSV (aidan@getaxiom.ca,riley@getaxiom.ca)
  */
 
 interface Env {
@@ -145,7 +145,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         `;
 
         // --- Send Email via Resend API ---
-        const destinationEmail = env.INTAKE_EMAIL || 'aidan@getaxiom.ca';
+        const destinationEmails = (env.INTAKE_EMAIL || 'aidan@getaxiom.ca,riley@getaxiom.ca')
+            .split(',')
+            .map((email) => email.trim())
+            .filter((email) => email.length > 0);
         const resendApiKey = env.RESEND_API_KEY;
 
         if (!resendApiKey) {
@@ -163,7 +166,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             },
             body: JSON.stringify({
                 from: 'Axiom Systems <engine@getaxiom.ca>',
-                to: [destinationEmail],
+                to: destinationEmails,
                 reply_to: email,
                 subject: subjectLine,
                 html: htmlBody,
@@ -179,7 +182,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             }), { status: 500, headers });
         }
 
-        console.log('[INTAKE] Lead notification dispatched to', destinationEmail);
+        console.log('[INTAKE] Lead notification dispatched to', destinationEmails.join(', '));
 
         // --- Axiom Receipt: Confirmation email to the client ---
         try {
