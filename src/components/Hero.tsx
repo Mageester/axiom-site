@@ -24,11 +24,11 @@ const Hero: React.FC = () => {
             </div>
 
             <h1 className="mb-10 text-[clamp(2.5rem,5vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#F2F4F7] md:leading-[1.15]">
-              Premium Web Infrastructure for Contractors Ready to Dominate.
+              Defining Digital Identity.
             </h1>
 
             <p className="mb-8 max-w-lg text-lg leading-[1.65] text-slate-300">
-              We build sub-second websites with cinematic visuals and bullet-proof conversions for HVAC, Roofing, and Landscaping leaders.
+              We build sub-second web infrastructure with cinematic visuals and bullet-proof conversions for ambitious brands that demand elite performance.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
