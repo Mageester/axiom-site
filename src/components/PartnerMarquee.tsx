@@ -1,37 +1,48 @@
-import React from 'react';
+﻿import React from 'react';
+import {
+  SiReact,
+  SiHotjar,
+  SiFigma,
+  SiGreensock,
+  SiNotion,
+  SiVercel,
+  SiSimpleicons,
+} from 'react-icons/si';
 
-type PartnerLogo = {
+type Brand = {
   name: string;
-  src: string;
+  Icon: React.ComponentType<{ size?: number; className?: string }>;
 };
 
-const logos: PartnerLogo[] = [
-  { name: 'AWS', src: 'https://cdn.simpleicons.org/amazonaws/white' },
-  { name: 'Vercel', src: 'https://cdn.simpleicons.org/vercel/white' },
-  { name: 'React', src: 'https://cdn.simpleicons.org/react/white' },
-  { name: 'Figma', src: 'https://cdn.simpleicons.org/figma/white' },
-  { name: 'Cloudflare', src: 'https://cdn.simpleicons.org/cloudflare/white' },
-  { name: 'GSAP', src: 'https://cdn.simpleicons.org/greensock/white' },
+const brands: Brand[] = [
+  { name: 'React', Icon: SiReact },
+  { name: 'Hotjar', Icon: SiHotjar },
+  { name: 'Figma', Icon: SiFigma },
+  { name: 'GSAP', Icon: SiGreensock },
+  { name: 'Notion', Icon: SiNotion },
+  { name: 'Vercel', Icon: SiVercel },
+  { name: 'AWS', Icon: SiSimpleicons },
 ];
 
 const PartnerMarquee: React.FC = () => {
-  const seamless = [...logos, ...logos];
+  const track = [...brands, ...brands];
 
   return (
-    <div className="w-full max-w-[100vw] overflow-hidden relative border-y border-white/5 py-10 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-      <div className="flex w-max animate-marquee-infinite items-center space-x-16 md:space-x-32 pr-16 md:pr-32">
-        {seamless.map((logo, index) => (
-          <div key={`${logo.name}-${index}`} className="flex-shrink-0">
-            <img
-              src={logo.src}
-              alt={logo.name}
-              className="h-10 md:h-12 w-auto object-contain opacity-40 hover:opacity-100 transition-opacity duration-300"
-              loading="lazy"
-            />
-          </div>
-        ))}
+    <section aria-label="Platform ecosystem">
+      <div className="w-full max-w-[100vw] overflow-hidden relative border-y border-white/5 py-10 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div className="flex w-max animate-marquee-infinite items-center space-x-16 md:space-x-32 pr-16 md:pr-32">
+          {track.map(({ name, Icon }, index) => (
+            <div
+              key={`${name}-${index}`}
+              className="flex items-center space-x-3 opacity-50 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 cursor-pointer flex-shrink-0"
+            >
+              <Icon size={32} className="text-white md:[&]:size-9" />
+              <span className="text-2xl md:text-3xl font-semibold tracking-tight text-white">{name}</span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
