@@ -21,6 +21,14 @@
     overflow-x: hidden;
   }
 
+  html.lenis {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
   body {
     @apply bg-axiom-base text-axiom-text-main font-axiomSans leading-[1.6];
     min-height: 100vh;

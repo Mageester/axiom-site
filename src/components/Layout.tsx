@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             aria-label="Axiom Infrastructure home"
           >
             <img
-              src="/photos/logotrans.png"
+              src="/photos/logoclear.png"
               alt="Axiom Infrastructure"
               className="h-10 md:h-12 w-auto object-contain cursor-pointer transition-transform duration-300 hover:scale-105"
             />
@@ -76,12 +76,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </a>
         </div>
       </nav>
-
-      <div className="pointer-events-none fixed right-4 top-1/2 z-40 hidden rotate-90 lg:block">
-        <p className="font-axiomMono text-xs uppercase tracking-widest text-[#d2b49c]">
-          TRUSTED BY HIGH-STAKES TEAMS
-        </p>
-      </div>
 
       <div className="relative z-10 pt-28 md:pt-32 noise-overlay">{children}</div>
     </div>

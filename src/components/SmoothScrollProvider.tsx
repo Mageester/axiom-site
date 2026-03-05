@@ -1,5 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
+import gsap from 'gsap';
 
 export default function SmoothScrollProvider({ children }: PropsWithChildren) {
   useEffect(() => {
@@ -9,25 +10,21 @@ export default function SmoothScrollProvider({ children }: PropsWithChildren) {
     if (reduceMotionQuery.matches) return;
 
     const lenis = new Lenis({
-      lerp: 0.12,
-      duration: 0.8,
+      lerp: 0.08,
       smoothWheel: true,
-      wheelMultiplier: 0.8,
+      wheelMultiplier: 1,
       touchMultiplier: 1.5,
     });
 
-    let rafId = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafId = window.requestAnimationFrame(raf);
+    const ticker = (time: number) => {
+      lenis.raf(time * 1000);
     };
 
-    rafId = window.requestAnimationFrame(raf);
+    gsap.ticker.add(ticker);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      if (rafId) {
-        window.cancelAnimationFrame(rafId);
-      }
+      gsap.ticker.remove(ticker);
       lenis.destroy();
     };
   }, []);
