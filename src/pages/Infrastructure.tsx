@@ -11,11 +11,22 @@ const Infrastructure: React.FC = () => {
         description="Infrastructure architecture and deployment standards from Axiom Infrastructure."
       />
       <Layout>
-        <main className="mx-auto flex min-h-[60vh] w-full max-w-7xl items-center px-8 py-24 md:py-32">
-          <section className="axiom-bento w-full p-10 md:p-14">
-            <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-text-mute">Infrastructure</p>
-            <h1 className="mt-4 text-[clamp(2.25rem,4vw,3.5rem)] font-extrabold tracking-tight text-axiom-text-main">Infrastructure</h1>
-            <p className="mt-4 max-w-2xl text-slate-300">Page scaffold is live. Content architecture can be added next.</p>
+        <main className="mx-auto w-full max-w-7xl px-6 py-20 md:px-8 md:py-28">
+          <section className="grid gap-6 md:grid-cols-12">
+            <article className="md:col-span-8 rounded-2xl border border-white/10 bg-[#0d1323]/60 p-8 backdrop-blur-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] md:p-12">
+              <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-text-mute">Infrastructure</p>
+              <h1 className="mt-4 text-[clamp(2.25rem,4vw,3.5rem)] font-extrabold tracking-tight text-axiom-text-main">
+                Command Layer
+              </h1>
+              <p className="mt-4 max-w-2xl text-slate-300">
+                Architecture standards, performance targets, and production checklists will render here.
+              </p>
+            </article>
+            <article className="md:col-span-4 rounded-2xl border border-white/10 bg-[#0d1323]/60 p-8 backdrop-blur-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)]">
+              <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-text-mute">Status</p>
+              <p className="mt-4 text-xl font-semibold text-axiom-text-main">Scaffold Active</p>
+              <p className="mt-3 text-sm text-slate-300">This territory is now route-live and ready for Phase 5 content modules.</p>
+            </article>
           </section>
         </main>
         <Footer />
