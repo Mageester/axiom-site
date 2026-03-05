@@ -39,12 +39,12 @@ const WorksCarousel: React.FC = () => {
         {projects.map((project, index) => (
           <article
             key={project.src}
-            className="group relative w-[85vw] min-w-[85vw] flex-shrink-0 snap-center overflow-hidden rounded-2xl border border-[#2e344f] border-t border-t-white/10 bg-[#0d1323]/80 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.6)] md:w-[60vw] md:min-w-[60vw]"
+            className="group relative w-[85vw] min-w-[85vw] h-[450px] md:w-[65vw] md:min-w-[65vw] md:h-[650px] flex-shrink-0 snap-center rounded-3xl border border-white/10 bg-[#0d1323] shadow-2xl overflow-hidden"
           >
             <img
               src={project.src}
               alt={project.alt}
-              className="h-[320px] w-full object-cover object-center md:h-[420px]"
+              className="w-full h-full object-cover object-center"
               loading={index === 0 ? 'eager' : 'lazy'}
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050609]/90 via-black/20 to-transparent" />
