@@ -33,12 +33,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
     const ctx = gsap.context(() => {
       const nav = navRef.current;
+      const logo = logoTargetRef.current;
       const hero = layoutRef.current?.querySelector<HTMLElement>('[data-hero-root]');
       const heading = layoutRef.current?.querySelector<HTMLElement>('[data-startup-heading]');
       const backgrounds = gsap.utils.toArray<HTMLElement>('[data-startup-bg]');
       const cards = gsap.utils.toArray<HTMLElement>('[data-glass-card], .axiom-bento, .axiom-bento-card, .machined-card');
 
-      if (!nav || !hero || !heading) return;
+      if (!nav || !hero || !heading || !logo) return;
 
       split = new SplitType(heading, {
         types: 'words,chars',
@@ -47,6 +48,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       });
 
       gsap.set(nav, { autoAlpha: 0, y: -50 });
+      gsap.set(logo, { autoAlpha: 0, scale: 0.8, transformOrigin: 'left center' });
       gsap.set(hero, { autoAlpha: 0 });
       gsap.set(backgrounds, { autoAlpha: 0 });
       gsap.set(split.chars, { autoAlpha: 0, yPercent: 110 });
@@ -56,6 +58,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       timeline
         .to(nav, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power4.out' }, 0)
+        .to(logo, { autoAlpha: 1, scale: 1, duration: 0.6, ease: 'power4.out' }, 0.08)
         .to(hero, { autoAlpha: 1, duration: 0.2 }, 0.2)
         .to(split.chars, { autoAlpha: 1, yPercent: 0, stagger: 0.02, duration: 0.5, ease: 'power3.out' }, 0.3)
         .to(backgrounds, { autoAlpha: 0.04, duration: 0.6, stagger: 0.08, ease: 'power1.out' }, 0.6)
@@ -69,7 +72,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `transition-colors ${isActive ? 'text-axiom-text-main' : 'text-axiom-text-mute hover:text-axiom-text-main'}`;
+    `relative pb-1 text-xs uppercase font-medium tracking-[0.2em] transition-colors after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:bg-amber-600 after:transition-all after:duration-300 ${isActive ? 'text-axiom-text-main after:w-full' : 'text-axiom-text-mute hover:text-axiom-text-main after:w-0 hover:after:w-full'}`;
 
   return (
     <div ref={layoutRef} className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
@@ -90,8 +93,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             : 'border-b border-transparent bg-[rgba(9,10,11,0.45)]'
           }`}
       >
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-4 px-6 py-5 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:px-8 md:py-6">
-          <div className="flex items-center justify-start">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-4 px-6 py-5 md:grid-cols-[minmax(360px,1.35fr)_auto_minmax(220px,1fr)] md:px-8 md:py-6">
+          <div className="flex items-center justify-start md:min-w-[360px] md:flex-grow">
             <button
               ref={logoTargetRef}
               type="button"
@@ -102,12 +105,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <img
                 src="/photos/logoclear.png"
                 alt="Axiom Infrastructure"
-                className="h-20 w-auto max-w-[280px] object-contain object-left cursor-pointer transition-all duration-500 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(176,93,65,0.4)] md:h-24 md:max-w-[340px]"
+                className="h-16 md:h-20 w-auto object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125"
               />
             </button>
           </div>
 
-          <div className="hidden items-center justify-center gap-8 text-[11px] font-axiomMono uppercase tracking-[0.16em] text-axiom-text-mute md:flex">
+          <div className="hidden items-center justify-center gap-8 font-axiomMono md:flex">
             <NavLink to="/" className={navLinkClass}>
               Home
             </NavLink>
