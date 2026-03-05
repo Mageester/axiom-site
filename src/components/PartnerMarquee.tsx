@@ -6,7 +6,7 @@ import {
   SiGreensock,
   SiNotion,
   SiVercel,
-  SiSimpleicons,
+  SiSimpleicons as SiAmazonwebservices,
 } from 'react-icons/si';
 
 type Brand = {
@@ -21,7 +21,7 @@ const brands: Brand[] = [
   { name: 'GSAP', Icon: SiGreensock },
   { name: 'Notion', Icon: SiNotion },
   { name: 'Vercel', Icon: SiVercel },
-  { name: 'AWS', Icon: SiSimpleicons },
+  { name: 'AWS', Icon: SiAmazonwebservices },
 ];
 
 const PartnerMarquee: React.FC = () => {

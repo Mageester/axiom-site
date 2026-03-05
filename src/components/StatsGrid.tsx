@@ -2,7 +2,7 @@ import React from 'react';
 import useReveal from '../hooks/useReveal';
 
 const cardClass =
-  'rounded-2xl bg-[#0d1323]/90 backdrop-blur-lg border border-white/10 border-t border-white/10 shadow-2xl p-7 md:p-8 transition-all duration-300 ease-out';
+  'rounded-2xl border border-white/10 bg-[#0d1323]/60 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-7 md:p-8 transition-all duration-300 ease-out';
 
 const revealClass = (isVisible: boolean) =>
   `transform-gpu transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;

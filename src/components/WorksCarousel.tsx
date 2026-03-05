@@ -40,7 +40,7 @@ const WorksCarousel: React.FC = () => {
         {scrollProjects.map((project, index) => (
           <article
             key={`${project.src}-${index}`}
-            className="group relative flex-shrink-0 min-w-[85vw] md:min-w-[65vw] h-[500px] md:h-[650px] snap-center rounded-3xl border border-white/10 bg-[#0d1323] shadow-2xl overflow-hidden"
+            className="group relative flex-shrink-0 min-w-[85vw] md:min-w-[65vw] h-[500px] md:h-[650px] snap-center rounded-2xl border border-white/10 bg-[#0d1323]/60 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] overflow-hidden"
           >
             <img
               src={project.src}
