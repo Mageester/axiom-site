@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Preloader from './Preloader';
 
 type LayoutProps = {
@@ -7,8 +7,9 @@ type LayoutProps = {
 };
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const logoTargetRef = useRef<HTMLAnchorElement>(null);
+  const logoTargetRef = useRef<HTMLButtonElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,9 +42,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         }`}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-6">
-          <NavLink
+          <button
             ref={logoTargetRef}
-            to="/"
+            type="button"
+            onClick={() => navigate('/')}
             className="inline-flex items-center transition-transform duration-700 ease-in-out hover:scale-110"
             aria-label="Axiom Infrastructure home"
           >
@@ -52,7 +54,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               alt="Axiom Infrastructure"
               className="h-10 md:h-12 w-auto object-contain cursor-pointer transition-transform duration-300 hover:scale-105"
             />
-          </NavLink>
+          </button>
 
           <div className="hidden items-center gap-8 text-[11px] font-axiomMono uppercase tracking-[0.16em] text-axiom-text-mute md:flex">
             <NavLink to="/" className={navLinkClass}>
