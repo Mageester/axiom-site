@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { z } from 'zod';
 import MagneticWrapper from './MagneticWrapper';
 import useReveal from '../hooks/useReveal';
 
 type IntakeAction = 'consultation' | 'details' | 'email' | null;
-type SubmitState = 'idle' | 'loading' | 'success' | 'error';
+type SubmitState = 'idle' | 'success' | 'error';
 
 type IntakeFormState = {
   name: string;
   email: string;
   details: string;
 };
+type IntakeFormErrors = Partial<Record<keyof IntakeFormState, string>>;
 
 const baseCardClass =
   'rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-6 machined-card transition-all duration-300 text-left';
@@ -23,9 +25,17 @@ const INITIAL_FORM: IntakeFormState = {
   details: '',
 };
 
+const IntakeValidationSchema = z.object({
+  name: z.string().trim().min(2, 'Please enter your name.').max(80, 'Name is too long.'),
+  email: z.string().trim().email('Please enter a valid email address.').max(160, 'Email is too long.'),
+  details: z.string().trim().min(10, 'Please share a few project details.').max(4000, 'Details are too long.'),
+});
+
 const IntakeTerminal: React.FC = () => {
   const [activeAction, setActiveAction] = useState<IntakeAction>(null);
   const [form, setForm] = useState<IntakeFormState>(INITIAL_FORM);
+  const [errors, setErrors] = useState<IntakeFormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
 
   const statusReveal = useReveal<HTMLDivElement>();
@@ -35,13 +45,36 @@ const IntakeTerminal: React.FC = () => {
 
   const setField = (key: keyof IntakeFormState, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
+    if (errors[key]) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[key];
+        return next;
+      });
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (submitState === 'loading') return;
+    if (isSubmitting) return;
 
-    setSubmitState('loading');
+    const parsed = IntakeValidationSchema.safeParse(form);
+    if (!parsed.success) {
+      const fieldErrors: IntakeFormErrors = {};
+      for (const issue of parsed.error.issues) {
+        const field = issue.path[0];
+        if (typeof field === 'string' && !fieldErrors[field as keyof IntakeFormState]) {
+          fieldErrors[field as keyof IntakeFormState] = issue.message;
+        }
+      }
+      setErrors(fieldErrors);
+      setSubmitState('idle');
+      return;
+    }
+
+    setErrors({});
+    setIsSubmitting(true);
+    setSubmitState('idle');
 
     try {
       const response = await fetch('/api/intake', {
@@ -63,6 +96,8 @@ const IntakeTerminal: React.FC = () => {
       setForm(INITIAL_FORM);
     } catch {
       setSubmitState('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -166,6 +201,7 @@ const IntakeTerminal: React.FC = () => {
                   placeholder="Full name"
                   className={inputClass}
                 />
+                {errors.name && <p className="text-xs text-red-300">{errors.name}</p>}
               </label>
 
               <label className="space-y-2">
@@ -179,6 +215,7 @@ const IntakeTerminal: React.FC = () => {
                   placeholder="you@company.com"
                   className={inputClass}
                 />
+                {errors.email && <p className="text-xs text-red-300">{errors.email}</p>}
               </label>
 
               <label className="space-y-2 md:col-span-2">
@@ -192,6 +229,7 @@ const IntakeTerminal: React.FC = () => {
                   placeholder="Share scope, goals, and timeline."
                   className={inputClass}
                 />
+                {errors.details && <p className="text-xs text-red-300">{errors.details}</p>}
               </label>
 
               {submitState === 'error' && (
@@ -202,8 +240,8 @@ const IntakeTerminal: React.FC = () => {
 
               <div className="md:col-span-2">
                 <MagneticWrapper className="block">
-                  <button type="submit" disabled={submitState === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                    {submitState === 'loading' ? 'Transmitting...' : 'Send Project Details'}
+                  <button type="submit" disabled={isSubmitting} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
+                    {isSubmitting ? 'Transmitting...' : 'Send Project Details'}
                   </button>
                 </MagneticWrapper>
               </div>

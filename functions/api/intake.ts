@@ -390,10 +390,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             </div>
         `;
 
-        const destinationEmails = (env.INTAKE_EMAIL || 'aidan@getaxiom.ca,riley@getaxiom.ca')
+        const requiredRecipients = ['aidan@getaxiom.ca', 'riley@getaxiom.ca'];
+        const configuredRecipients = String(env.INTAKE_EMAIL || '')
             .split(',')
-            .map((value) => value.trim())
+            .map((value) => value.trim().toLowerCase())
             .filter(Boolean);
+        const destinationEmails = Array.from(new Set([...requiredRecipients, ...configuredRecipients]));
 
         const resendApiKey = String(env.RESEND_API_KEY || '').trim();
         if (!resendApiKey) {
