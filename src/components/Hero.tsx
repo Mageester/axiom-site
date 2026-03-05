@@ -56,10 +56,16 @@ const Hero: React.FC = () => {
 
           <div className="relative flex w-full items-center justify-center lg:col-span-7 perspective-[1000px]">
             <div className="relative w-full aspect-square md:aspect-[4/3] rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(176,93,65,0.15)] transform md:-rotate-y-12 md:rotate-x-6 hover:rotate-0 transition-transform duration-700">
-              <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover scale-105">
-                <source src="https://cdn.coverr.co/videos/coverr-abstract-glowing-lines-4552/1080p.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80"></div>
+              <div className="absolute inset-0 bg-[#0d1323]"></div>
+              <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] animate-[spin_20s_linear_infinite] opacity-50">
+                <div className="absolute inset-0 bg-[conic-gradient(from_90deg_at_50%_50%,#0d1323_0%,#B05D41_50%,#0d1323_100%)] blur-[80px]"></div>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-90"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-32 h-32 rounded-full border border-white/5 bg-white/5 backdrop-blur-xl flex items-center justify-center shadow-[inset_0_0_20px_rgba(255,255,255,0.1)]">
+                  <span className="text-white/40 font-bold tracking-widest text-sm">AXIOM</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

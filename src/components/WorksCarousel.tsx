@@ -28,9 +28,9 @@ const WorksCarousel: React.FC = () => {
 
       <div className="hide-scrollbar flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 w-full max-w-[100vw]">
         {projects.map((project, index) => (
-          <article
+          <div
             key={`${project.title}-${index}`}
-            className="flex-shrink-0 w-[85vw] md:w-[60vw] h-[400px] md:h-[600px] snap-center relative rounded-3xl overflow-hidden border border-white/10"
+            className="flex-shrink-0 w-[85vw] md:w-[60vw] h-[400px] md:h-[600px] snap-center relative rounded-3xl overflow-hidden border border-white/10 group"
           >
             <img
               src={project.src}
@@ -38,11 +38,10 @@ const WorksCarousel: React.FC = () => {
               className="w-full h-full object-cover"
               loading={index === 0 ? 'eager' : 'lazy'}
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050609]/90 via-black/20 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-              <p className="text-sm font-semibold tracking-wide text-[#F5F7FA] md:text-base">{project.title}</p>
+            <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+              <h3 className="text-2xl font-bold text-white">{project.title}</h3>
             </div>
-          </article>
+          </div>
         ))}
       </div>
     </section>
