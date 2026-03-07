@@ -7,21 +7,21 @@ import { SEO } from '../components/SEO';
 
 const selectedWork = [
   {
-    title: 'Project Ember',
+    title: 'Home Services Repositioning',
     sector: 'Home Services',
-    focus: 'Positioning architecture and lead routing.',
+    focus: 'Message reset and lead qualification flow.',
     image: '/images/work-aether.jpg',
   },
   {
-    title: 'Project Ironclad',
+    title: 'Contracting Conversion System',
     sector: 'Contracting',
-    focus: 'Conversion flow refinement.',
+    focus: 'Offer hierarchy and inquiry path control.',
     image: '/images/case-study-2.jpg',
   },
   {
-    title: 'Project Clarity',
+    title: 'Professional Services Refresh',
     sector: 'Professional Services',
-    focus: 'Editorial presentation standards.',
+    focus: 'Editorial structure and trust presentation.',
     image: '/images/case-study-1.jpg',
   },
 ];
@@ -53,8 +53,8 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom Infrastructure | Premium Web Infrastructure for Service Firms"
-        description="Axiom builds premium web infrastructure for service firms focused on stronger trust signals, cleaner conversion paths, and reliable execution."
+        title="Axiom Infrastructure | Premium Web Systems for Service Firms"
+        description="Axiom builds premium web systems for service firms focused on trust, conversion clarity, and reliable delivery."
       />
 
       <Layout>
@@ -65,14 +65,14 @@ const Home: React.FC = () => {
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#d4a48e]">Axiom Infrastructure</p>
                 <div className="mt-5 max-w-5xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Premium web infrastructure for service firms where trust decides deal value.
+                    Premium web systems for service firms where trust decides deal value.
                   </h1>
                 </div>
                 <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-300 md:text-lg">
-                  Positioning, conversion, and release systems for firms that need to look and perform at a higher level.
+                  Positioning, conversion, and delivery systems for teams that need stronger deal confidence.
                 </p>
                 <div className="mt-9 flex flex-wrap items-center gap-4">
-                  <a href="#intake" className="btn-primary btn-lg whitespace-nowrap">
+                  <a href="/apply" className="btn-primary btn-lg whitespace-nowrap">
                     Apply for Fit Review
                   </a>
                   <Link
@@ -108,7 +108,7 @@ const Home: React.FC = () => {
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected Work</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Proof in delivery.</h2>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Selected Work Snapshots.</h2>
               </div>
               <Link to="/works" className="hidden text-sm font-medium text-white/70 transition-colors hover:text-white md:inline-flex">
                 Open Work Index
@@ -143,7 +143,7 @@ const Home: React.FC = () => {
             <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
               <div className="lg:col-span-4">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Capabilities</p>
-                <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Three systems that move commercial outcomes.</h2>
+                <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Three systems for trust and lead quality.</h2>
               </div>
               <div className="grid gap-6 lg:col-span-8 md:grid-cols-3">
                 {capabilities.map((item) => (
@@ -198,9 +198,9 @@ const Home: React.FC = () => {
           <section id="intake" className="pt-24 md:pt-28">
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Qualified Next Step</p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Apply for an engagement review.</h2>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Apply for a fit review.</h2>
               <div className="mt-8 flex items-center justify-center">
-                <a href="mailto:aidan@getaxiom.ca" className="btn-primary btn-lg whitespace-nowrap">
+                <a href="/apply" className="btn-primary btn-lg whitespace-nowrap">
                   Apply for Fit Review
                 </a>
               </div>

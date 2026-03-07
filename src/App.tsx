@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Architects from './pages/Architects';
+import ContactPage from './pages/ContactPage';
 import Deployments from './pages/Deployments';
 import Home from './pages/Home';
 import Infrastructure from './pages/Infrastructure';
@@ -25,6 +26,8 @@ const App: React.FC = () => {
           <Route path="/infrastructure" element={<Infrastructure />} />
           <Route path="/works" element={<Deployments />} />
           <Route path="/deployments" element={<Navigate to="/works" replace />} />
+          <Route path="/apply" element={<ContactPage />} />
+          <Route path="/contact" element={<Navigate to="/apply" replace />} />
           <Route path="/architects" element={<Architects />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

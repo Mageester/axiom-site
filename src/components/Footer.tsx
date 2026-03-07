@@ -14,8 +14,11 @@ const Footer: React.FC = () => {
         <div>
           <p className="text-3xl font-black leading-[1.05] tracking-tight text-[#F2F4F7] md:text-5xl">AXIOM INFRASTRUCTURE</p>
           <p className="mt-4 max-w-md text-sm leading-[1.8] text-slate-300">
-            Digital infrastructure for service businesses that need stronger positioning, cleaner conversion paths, and reliable execution.
+            Web systems for service firms that need stronger trust signals, cleaner conversion paths, and reliable execution.
           </p>
+          <a href="/apply" className={contactLinkClass + ' mt-6'}>
+            Apply for Fit Review
+          </a>
           <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">Copyright 2026 Axiom Infrastructure. All rights reserved.</p>
         </div>
 

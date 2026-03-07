@@ -9,6 +9,7 @@ type IntakeFormState = {
   name: string;
   email: string;
   details: string;
+  company_fax: string;
 };
 type IntakeFormErrors = Partial<Record<keyof IntakeFormState, string>>;
 
@@ -22,12 +23,14 @@ const INITIAL_FORM: IntakeFormState = {
   name: '',
   email: '',
   details: '',
+  company_fax: '',
 };
 
 const IntakeValidationSchema = z.object({
   name: z.string().trim().min(2, 'Please enter your name.').max(80, 'Name is too long.'),
   email: z.string().trim().email('Please enter a valid email address.').max(160, 'Email is too long.'),
   details: z.string().trim().min(10, 'Please share a few project details.').max(4000, 'Details are too long.'),
+  company_fax: z.string().trim().max(120).optional(),
 });
 
 const IntakeTerminal: React.FC = () => {
@@ -74,20 +77,29 @@ const IntakeTerminal: React.FC = () => {
     setErrors({});
     setIsSubmitting(true);
     setSubmitState('idle');
+    let timeoutId: number | null = null;
 
     try {
+      const controller = new AbortController();
+      timeoutId = window.setTimeout(() => controller.abort(), 15000);
       const response = await fetch('/api/intake', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
         body: JSON.stringify({
           name: form.name,
           email: form.email,
           details: form.details,
+          company_fax: form.company_fax,
           source_path: window.location.pathname,
         }),
+        signal: controller.signal,
       });
+      const result = await response.json().catch(() => null) as { ok?: boolean } | null;
 
-      if (!response.ok) {
+      if (!response.ok || result?.ok === false) {
         throw new Error('Failed to transmit intake payload.');
       }
 
@@ -96,6 +108,9 @@ const IntakeTerminal: React.FC = () => {
     } catch {
       setSubmitState('error');
     } finally {
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
       setIsSubmitting(false);
     }
   };
@@ -231,9 +246,22 @@ const IntakeTerminal: React.FC = () => {
                 {errors.details && <p className="text-xs text-red-300">{errors.details}</p>}
               </label>
 
+              <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                <label htmlFor="terminal-company-fax">Company Fax</label>
+                <input
+                  id="terminal-company-fax"
+                  type="text"
+                  name="company_fax"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.company_fax}
+                  onChange={(event) => setField('company_fax', event.target.value)}
+                />
+              </div>
+
               {submitState === 'error' && (
                 <p className="md:col-span-2 text-sm text-red-300">
-                  Transmission failed. Please retry or email aidan@getaxiom.ca directly.
+                  Transmission failed. Please retry or email aidan@getaxiom.ca and riley@getaxiom.ca.
                 </p>
               )}
 

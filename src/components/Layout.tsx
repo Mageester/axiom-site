@@ -129,8 +129,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
-            <a href="/#intake" className="btn-primary btn-sm px-4 py-2 text-sm">
-              Apply
+            <a href="/apply" className="btn-primary btn-sm px-4 py-2 text-sm">
+              Apply for Fit Review
             </a>
           </div>
         </div>

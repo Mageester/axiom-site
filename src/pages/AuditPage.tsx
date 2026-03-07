@@ -2,6 +2,7 @@
 import { SEO } from '../components/SEO';
 
 type SubmitState = '' | 'loading' | 'success' | 'error';
+type ApiResult = { ok?: boolean; error?: string; message?: string; details?: string };
 
 const AuditPage: React.FC = () => {
     const [status, setStatus] = useState<SubmitState>('');
@@ -9,10 +10,18 @@ const AuditPage: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (status === 'loading') return;
         const formData = new FormData(e.currentTarget);
         const name = formData.get('name') as string;
         const email = formData.get('email') as string;
         const website = formData.get('website') as string;
+        const companyFax = (formData.get('company_fax') as string) || '';
+
+        if (companyFax.trim()) {
+            setStatus('success');
+            setMsg('Axiom Blueprint Requested.');
+            return;
+        }
 
         if (!name || !email || !website) {
             setStatus('error');
@@ -22,35 +31,45 @@ const AuditPage: React.FC = () => {
 
         setStatus('loading');
         setMsg('');
+        let timeoutId: number | null = null;
 
         try {
+            const controller = new AbortController();
+            timeoutId = window.setTimeout(() => controller.abort(), 15000);
             const payload = {
                 name,
                 email,
                 current_website: website,
                 primary_goal: 'audit_request',
                 details: 'Automated request for a complimentary engineering audit.',
-                source_path: window.location.pathname
+                source_path: window.location.pathname,
+                company_fax: companyFax
             };
-            console.log('[AXIOM] Sending Payload:', payload);
 
             const res = await fetch('/api/intake', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify(payload),
+                signal: controller.signal
             });
+            const result = await res.json().catch(() => null) as ApiResult | null;
 
-            if (res.ok) {
+            if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg('Axiom Blueprint Requested.');
+                setMsg(result?.message || 'Axiom Blueprint Requested.');
                 return;
             }
 
             setStatus('error');
-            setMsg('Engineering Link Failed. Please reach out to aidan@getaxiom.ca directly while we recalibrate.');
+            setMsg(result?.error || 'Submission failed. Please reach out to aidan@getaxiom.ca and riley@getaxiom.ca directly.');
         } catch {
             setStatus('error');
-            setMsg('Engineering Link Failed. Please reach out to aidan@getaxiom.ca directly while we recalibrate.');
+            setMsg('Submission failed. Please reach out to aidan@getaxiom.ca and riley@getaxiom.ca directly.');
+        } finally {
+            if (timeoutId !== null) window.clearTimeout(timeoutId);
         }
     };
 
@@ -73,6 +92,11 @@ const AuditPage: React.FC = () => {
 
                 <form onSubmit={handleSubmit} className="axiom-glass p-8 md:p-10 flex flex-col gap-6 rounded-sm relative overflow-hidden">
                     <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
+
+                    <div className="absolute left-[-10000px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
+                        <label htmlFor="audit-company-fax">Company Fax</label>
+                        <input id="audit-company-fax" type="text" name="company_fax" tabIndex={-1} autoComplete="off" />
+                    </div>
 
                     {status === 'success' && (
                         <div className="absolute inset-0 bg-axiom-elevated z-50 flex flex-col items-center justify-center text-center p-8 animate-in fade-in zoom-in-95 duration-500">

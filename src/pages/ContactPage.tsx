@@ -3,6 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
 type SubmitState = '' | 'loading' | 'success' | 'error';
+type ApiResult = {
+    ok?: boolean;
+    error?: string;
+    message?: string;
+    details?: string;
+};
 
 type IntakeFormState = {
     name: string;
@@ -41,6 +47,16 @@ const PAIN_POINTS_OPTIONS = [
     'Hard for customers to request service quickly',
     'Hard to update and manage'
 ];
+
+const FALLBACK_SUBMIT_ERROR = 'Submission failed. Please retry or email aidan@getaxiom.ca and riley@getaxiom.ca.';
+
+function getApiErrorMessage(payload: ApiResult | null) {
+    if (!payload) return FALLBACK_SUBMIT_ERROR;
+    if (payload.error && payload.details) return `${payload.error} ${payload.details}`;
+    if (payload.error) return payload.error;
+    if (payload.message && !payload.ok) return payload.message;
+    return FALLBACK_SUBMIT_ERROR;
+}
 
 const ContactPage: React.FC = () => {
     const [searchParams] = useSearchParams();
@@ -101,6 +117,7 @@ const ContactPage: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (status === 'loading') return;
         if (form.company_fax) return;
 
         const nextErrors: typeof errors = {};
@@ -113,8 +130,11 @@ const ContactPage: React.FC = () => {
 
         setStatus('loading');
         setMsg('');
+        let timeoutId: number | null = null;
 
         try {
+            const controller = new AbortController();
+            timeoutId = window.setTimeout(() => controller.abort(), 15000);
             const payload = {
                 ...form,
                 pain_points: form.pain_points.join(', '),
@@ -122,21 +142,30 @@ const ContactPage: React.FC = () => {
             };
             const res = await fetch('/api/intake', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify(payload),
+                signal: controller.signal
             });
+            const result = await res.json().catch(() => null) as ApiResult | null;
 
-            if (res.ok) {
+            if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg('Application Received.');
+                setMsg(result?.message || 'Application received. Confirmation email sent.');
                 return;
             }
 
             setStatus('error');
-            setMsg('Application link failed. Please email aidan@getaxiom.ca directly while we recalibrate.');
+            setMsg(getApiErrorMessage(result));
         } catch {
             setStatus('error');
-            setMsg('Application link failed. Please email aidan@getaxiom.ca directly while we recalibrate.');
+            setMsg(FALLBACK_SUBMIT_ERROR);
+        } finally {
+            if (timeoutId !== null) {
+                window.clearTimeout(timeoutId);
+            }
         }
     };
 
@@ -189,11 +218,12 @@ const ContactPage: React.FC = () => {
 
             <section className="max-w-4xl mx-auto axiom-glass p-6 sm:p-8 md:p-10">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+                    <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
                     {status === 'success' && (
                         <div className="axiom-bento bg-axiom-elevated border-axiom-border p-8 text-center rounded-sm">
                             <h2 className="text-[28px] font-semibold text-axiom-text-main mb-3">{msg}</h2>
-                            <p className="text-[14px] text-axiom-text-mute mb-6">Our strategy team will reply within 24 hours.</p>
-                            <button onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className="btn-secondary btn-md">
+                            <p className="text-[14px] text-axiom-text-mute mb-6">A partner will review your submission and reply within one business day.</p>
+                            <button type="button" onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className="btn-secondary btn-md">
                                 Submit Another Application
                             </button>
                         </div>
@@ -292,13 +322,14 @@ const ContactPage: React.FC = () => {
                                 <button type="button" onClick={() => setStep(1)} className="btn-secondary">
                                     Back
                                 </button>
-                                <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg flex-1">
+                                <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg flex-1 disabled:cursor-not-allowed disabled:opacity-70">
                                     {status === 'loading' ? 'Submitting...' : 'Submit Application'}
                                 </button>
                             </div>
                             <p className="text-[11px] font-mono text-center text-[var(--accent)] uppercase tracking-widest mt-2">Only 2 of 4 Partner Slots Remaining for This Month.</p>
                         </div>
                     )}
+                    </fieldset>
                 </form>
             </section>
         </div>
