@@ -2,23 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
+import PartnerMarquee from '../components/PartnerMarquee';
 import { SEO } from '../components/SEO';
 
 const proofItems = [
   {
     title: 'Positioning Architecture',
     detail:
-      'Message structure, hierarchy, and page flow designed to signal market leadership in the first scroll.',
+      'Message structure and hierarchy designed to establish market leadership in the first scroll.',
   },
   {
     title: 'Experience QA',
     detail:
-      'Responsive QA, interaction reviews, and form-path testing before release so quality holds under real traffic.',
+      'Responsive QA, interaction reviews, and form-path testing before release.',
   },
   {
     title: 'Release Discipline',
     detail:
       'Every release is versioned, reviewed, and shipped against defined acceptance criteria.',
+  },
+  {
+    title: 'Conversion Path Integrity',
+    detail:
+      'Primary conversion flows are validated so qualified buyers are not lost to avoidable friction.',
   },
 ];
 
@@ -73,8 +79,8 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom Infrastructure | Digital Infrastructure for Premium Service Brands"
-        description="Axiom builds high-trust digital infrastructure for service businesses that need stronger positioning, cleaner conversion paths, and reliable execution."
+        title="Axiom Infrastructure | Premium Web Infrastructure for Service Firms"
+        description="Axiom builds premium web infrastructure for service firms focused on stronger trust signals, cleaner conversion paths, and reliable execution."
       />
 
       <Layout>
@@ -85,11 +91,11 @@ const Home: React.FC = () => {
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#d4a48e]">Axiom Infrastructure</p>
                 <div className="mt-5 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.6rem,6vw,5.1rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    The digital standard for service firms that intend to lead their category.
+                    Premium web infrastructure for service firms where trust decides deal value.
                   </h1>
                 </div>
                 <p className="mt-7 max-w-2xl text-lg leading-relaxed text-slate-300">
-                  We build web systems that strengthen trust, improve lead quality, and support higher-value sales conversations.
+                  We design and deliver digital systems that improve perceived authority, lead quality, and conversion confidence.
                 </p>
                 <div className="mt-10 flex flex-wrap items-center gap-4">
                   <a href="#intake" className="btn-primary btn-lg whitespace-nowrap">
@@ -127,27 +133,21 @@ const Home: React.FC = () => {
           </section>
 
           <section className="pt-6 md:pt-10">
-            <div className="machined-card rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-4 md:px-8 md:py-5">
-              <div className="grid gap-3 text-xs uppercase tracking-[0.16em] text-[#A7B3BC] md:grid-cols-3 md:gap-6">
-                <p>Selective Intake</p>
-                <p>Quality Gates Before Launch</p>
-                <p>Senior-Led Delivery</p>
-              </div>
-            </div>
+            <PartnerMarquee />
           </section>
 
           <section className="pt-20 md:pt-28">
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Selected Work</h2>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Proof in Delivery</h2>
               </div>
               <Link to="/works" className="hidden text-sm font-medium text-white/70 transition-colors hover:text-white md:inline-flex">
                 Open Work Index
               </Link>
             </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-3">
+            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {proofItems.map((item) => (
                 <article key={item.title} className="machined-card rounded-2xl border border-white/10 bg-[#0d1323]/62 p-6">
                   <h3 className="text-xl font-semibold text-[#F2F4F7]">{item.title}</h3>
@@ -156,9 +156,12 @@ const Home: React.FC = () => {
               ))}
             </div>
 
-            <p className="mt-6 max-w-3xl text-sm text-slate-400">
-              Proof is presented through execution quality, delivery standards, and visible work output.
-            </p>
+            <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5">
+              <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Current Proof Layer</p>
+              <p className="mt-2 text-sm text-slate-300">
+                Reviewable today: production-grade composition standards, release methodology, and publicly visible implementation quality.
+              </p>
+            </div>
           </section>
 
           <section className="pt-20 md:pt-28">
@@ -196,7 +199,7 @@ const Home: React.FC = () => {
           <section className="pt-20 md:pt-28">
             <div className="machined-card rounded-3xl border border-white/10 bg-white/[0.03] p-7 md:p-10">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Investment</p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Structured engagements, not one-off design tasks.</h2>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Structured engagements for operators with real growth intent.</h2>
               <p className="mt-5 max-w-3xl text-sm leading-relaxed text-slate-300">
                 Engagements are scoped around commercial objectives, timeline constraints, and operating capacity. Investment is defined after qualification.
               </p>
@@ -210,6 +213,9 @@ const Home: React.FC = () => {
                   <p className="mt-2 text-sm text-slate-400">For teams requiring broader page architecture, governance, and continuity.</p>
                 </div>
               </div>
+              <p className="mt-6 text-xs uppercase tracking-[0.14em] text-slate-400">
+                Best fit: established service firms with sales volume, internal follow-through, and a clear growth mandate.
+              </p>
             </div>
           </section>
 
@@ -228,13 +234,13 @@ const Home: React.FC = () => {
           <section id="intake" className="pt-20 md:pt-28">
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center shadow-[0_24px_80px_rgba(0,0,0,0.45)] md:p-12">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Qualified Next Step</p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">If fit is strong, we map the engagement within one call.</h2>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Apply for an engagement review.</h2>
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-slate-300">
                 Send a concise brief with business context. We will confirm fit, define scope, and recommend the appropriate engagement path.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <a href="mailto:aidan@getaxiom.ca" className="btn-primary btn-lg whitespace-nowrap">
-                  Request a Fit Call
+                  Apply for Fit Review
                 </a>
                 <a
                   href="mailto:aidan@getaxiom.ca?subject=Axiom%20Project%20Brief"

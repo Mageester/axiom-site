@@ -209,6 +209,30 @@
   .magnetic-btn.is-magnetic-active {
     filter: brightness(1.04);
   }
+
+  .marquee-shell {
+    position: relative;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: marquee-loop var(--marquee-duration, 36s) linear infinite;
+  }
+
+  .marquee-segment {
+    display: flex;
+    align-items: center;
+    gap: var(--marquee-gap, 2rem);
+    padding-right: var(--marquee-gap, 2rem);
+    flex-shrink: 0;
+    min-width: max-content;
+  }
+
+  .marquee-shell:hover .marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 @layer utilities {
@@ -423,6 +447,16 @@
   }
 }
 
+@keyframes marquee-loop {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -454,5 +488,19 @@
 
   .reveal-on-scroll {
     opacity: 1;
+  }
+
+  .marquee-shell {
+    overflow-x: auto;
+  }
+
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+    width: max-content;
+  }
+
+  .marquee-track .marquee-segment:last-child {
+    display: none;
   }
 }

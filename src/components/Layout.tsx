@@ -118,19 +118,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               Home
             </NavLink>
             <NavLink to="/infrastructure" className={navLinkClass} data-startup-link>
-              Standards
+              Method
             </NavLink>
             <NavLink to="/works" className={navLinkClass} data-startup-link>
               Work
             </NavLink>
             <NavLink to="/architects" className={navLinkClass} data-startup-link>
-              Team
+              About
             </NavLink>
           </div>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
             <a href="/#intake" className="btn-primary btn-sm px-4 py-2 text-sm">
-              Request a Fit Call
+              Apply
             </a>
           </div>
         </div>

@@ -1,43 +1,41 @@
-﻿import React from 'react';
-import {
-  SiReact,
-  SiHotjar,
-  SiFigma,
-  SiGreensock,
-  SiNotion,
-  SiVercel,
-  SiSimpleicons as SiAmazonwebservices,
-} from 'react-icons/si';
+import React from 'react';
 
-type Brand = {
-  name: string;
-  Icon: React.ComponentType<{ size?: number; className?: string }>;
+type Signal = {
+  label: string;
 };
 
-const brands: Brand[] = [
-  { name: 'React', Icon: SiReact },
-  { name: 'Hotjar', Icon: SiHotjar },
-  { name: 'Figma', Icon: SiFigma },
-  { name: 'GSAP', Icon: SiGreensock },
-  { name: 'Notion', Icon: SiNotion },
-  { name: 'Vercel', Icon: SiVercel },
-  { name: 'AWS', Icon: SiAmazonwebservices },
+const signals: Signal[] = [
+  { label: 'Selective Intake' },
+  { label: 'Senior-Led Delivery' },
+  { label: 'Conversion QA Gates' },
+  { label: 'Release Checklist Enforced' },
+  { label: 'Clear Qualification Path' },
+  { label: 'Structured Investment' },
+  { label: 'Operational Continuity' },
+  { label: 'Performance Baseline Review' },
 ];
 
 const PartnerMarquee: React.FC = () => {
-  const track = [...brands, ...brands];
+  const segment = [...signals, ...signals];
 
   return (
-    <section aria-label="Platform ecosystem">
-      <div className="w-full max-w-[100vw] overflow-hidden relative border-y border-white/5 py-10 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="flex w-max animate-marquee-infinite hover:[animation-play-state:paused] items-center space-x-16 md:space-x-32 pr-16 md:pr-32">
-          {track.map(({ name, Icon }, index) => (
-            <div
-              key={`${name}-${index}`}
-              className="flex items-center space-x-3 opacity-50 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 cursor-pointer flex-shrink-0"
-            >
-              <Icon size={32} className="text-white md:[&]:size-9" />
-              <span className="text-2xl md:text-3xl font-semibold tracking-tight text-white">{name}</span>
+    <section aria-label="Operational signals" className="w-full">
+      <div className="marquee-shell hide-scrollbar relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] py-3 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <div
+          className="marquee-track"
+          style={{ '--marquee-duration': '38s', '--marquee-gap': '2.5rem' } as React.CSSProperties}
+        >
+          {[0, 1].map((segmentIndex) => (
+            <div key={segmentIndex} aria-hidden={segmentIndex === 1} className="marquee-segment">
+              {segment.map(({ label }, index) => (
+                <div
+                  key={`${segmentIndex}-${label}-${index}`}
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-[#10182a]/70 px-4 py-2"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#B05D41]" aria-hidden />
+                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">{label}</span>
+                </div>
+              ))}
             </div>
           ))}
         </div>
