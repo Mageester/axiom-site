@@ -70,7 +70,7 @@ const WorkCaseStudyPage: React.FC = () => {
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
-                    {entry.ctaLabel || 'Apply for Fit Review'}
+                    Apply for Fit Review
                   </Link>
                   <Link
                     to="/works"
