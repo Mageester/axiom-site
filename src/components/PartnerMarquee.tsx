@@ -5,9 +5,9 @@ type Signal = {
 };
 
 const signals: Signal[] = [
-  { label: 'Two-Step Intake Flow' },
-  { label: 'Pages Functions API Intake' },
-  { label: 'D1 Inquiry Logging' },
+  { label: 'Two-Step Qualification Flow' },
+  { label: 'Founder-Led Intake Review' },
+  { label: 'Inquiry Path QA Checked' },
   { label: 'Scope Lock Before Build' },
   { label: 'Release Checklist Gates' },
   { label: 'Senior-Led QA Review' },

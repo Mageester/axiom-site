@@ -12,10 +12,16 @@ const proofImageBySlug: Record<string, string> = {
   'concept-roofing-conversion-site': '/images/case-study-2.jpg',
 };
 
+const proofTypeLabel: Record<string, string> = {
+  'Sample Case Study': 'Sample Build',
+  'Concept Build': 'Concept Build',
+  'Active Deployment': 'Active Deployment',
+};
+
 const selectedWork = caseStudies.map((entry) => ({
   id: entry.slug,
   title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-  projectType: entry.label,
+  projectType: proofTypeLabel[entry.label] ?? entry.label,
   businessContext: `${entry.niche} · ${entry.location}`,
   scope: entry.deliverables.slice(0, 2).join(' + '),
   role: entry.built.slice(0, 2).join(' + '),
@@ -44,6 +50,12 @@ const method = [
   'Production, QA, and controlled release.',
 ];
 
+const fitSignals = [
+  { label: 'Engagement', value: 'Founder-led and selective' },
+  { label: 'Typical Scope', value: 'Positioning + conversion rebuild' },
+  { label: 'Response Window', value: 'Within one business day' },
+];
+
 const Home: React.FC = () => {
   const [feature, ...stacked] = selectedWork;
 
@@ -57,16 +69,16 @@ const Home: React.FC = () => {
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-20 md:pt-28">
-            <div className="grid items-end gap-10 lg:grid-cols-12">
+            <div className="grid items-end gap-10 lg:grid-cols-12 lg:gap-12">
               <div className="lg:col-span-8">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#d4a48e]">Axiom Infrastructure</p>
                 <div className="mt-5 max-w-5xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Premium web systems for service firms where trust decides deal value.
+                    Premium websites for service firms where trust drives conversions.
                   </h1>
                 </div>
                 <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-300 md:text-lg">
-                  Positioning, conversion, and delivery systems for teams that need stronger deal confidence.
+                  Positioning, conversion architecture, and senior-led delivery for established operators.
                 </p>
                 <div className="mt-9 flex flex-wrap items-center gap-4">
                   <a href="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -83,11 +95,14 @@ const Home: React.FC = () => {
 
               <div className="lg:col-span-4">
                 <div data-glass-card className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Fit Profile</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="rounded-full border border-white/15 px-2.5 py-1 text-[11px] text-slate-300">Established Teams</span>
-                    <span className="rounded-full border border-white/15 px-2.5 py-1 text-[11px] text-slate-300">Active Sales Volume</span>
-                    <span className="rounded-full border border-white/15 px-2.5 py-1 text-[11px] text-slate-300">Growth Intent</span>
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Best-Fit Profile</p>
+                  <div className="mt-3 divide-y divide-white/10 rounded-xl border border-white/10 bg-[#0f1524]/45">
+                    {fitSignals.map((item) => (
+                      <div key={item.label} className="px-3 py-3">
+                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">{item.label}</p>
+                        <p className="mt-1 text-sm text-slate-200">{item.value}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -105,9 +120,12 @@ const Home: React.FC = () => {
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof Objects</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Current Work, Clearly Framed.</h2>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Selected Work, Clearly Framed.</h2>
               </div>
-              <Link to="/works" className="hidden text-sm font-medium text-white/70 transition-colors hover:text-white md:inline-flex">
+              <Link
+                to="/works"
+                className="hidden items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white md:inline-flex"
+              >
                 View Full Proof Library
               </Link>
             </div>
@@ -144,11 +162,28 @@ const Home: React.FC = () => {
                       <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{item.projectType}</p>
                       <h3 className="mt-1 text-xl font-semibold text-white">{item.title}</h3>
                       <p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-200/85">{item.businessContext}</p>
-                      <p className="mt-1 text-xs text-slate-200/90">{item.scope}</p>
+                      <dl className="mt-2 grid gap-1 text-[11px] text-slate-200/90">
+                        <div>
+                          <dt className="inline text-slate-300/65">Scope: </dt>
+                          <dd className="inline">{item.scope}</dd>
+                        </div>
+                        <div>
+                          <dt className="inline text-slate-300/65">Role: </dt>
+                          <dd className="inline">{item.role}</dd>
+                        </div>
+                      </dl>
                     </div>
                   </article>
                 ))}
               </div>
+            </div>
+            <div className="mt-6 flex md:hidden">
+              <Link
+                to="/works"
+                className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
+              >
+                View Full Proof Library
+              </Link>
             </div>
           </section>
 
