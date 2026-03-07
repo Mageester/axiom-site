@@ -75,7 +75,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative pb-1 font-semibold uppercase tracking-[0.24em] text-[11px] text-white/80 transition-colors duration-300 after:absolute after:bottom-[-7px] after:left-0 after:h-[1px] after:bg-amber-600 after:content-[''] after:transition-all after:duration-300 ${isActive ? 'text-white after:w-full' : 'after:w-0 hover:text-white hover:after:w-full'}`;
+    `relative pb-1 font-medium uppercase tracking-[0.2em] text-[11px] text-white/78 transition-colors duration-300 after:absolute after:bottom-[-7px] after:left-0 after:h-[1px] after:bg-amber-600 after:content-[''] after:transition-all after:duration-300 ${isActive ? 'text-white after:w-full' : 'after:w-0 hover:text-white hover:after:w-full'}`;
 
   return (
     <div ref={layoutRef} className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
@@ -108,7 +108,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <img
                 src="/photos/logoclear.png"
                 alt="Axiom Infrastructure"
-                className="block h-24 w-auto max-w-none translate-y-[3px] object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125 md:h-28 md:translate-y-[4px] lg:h-32"
+                className="block h-16 w-auto max-w-none object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125 md:h-20 lg:h-24"
               />
             </button>
           </div>
@@ -130,7 +130,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
             <a href="/#intake" className="btn-primary btn-sm px-4 py-2 text-sm">
-              Start Your Project
+              Request a Fit Call
             </a>
           </div>
         </div>

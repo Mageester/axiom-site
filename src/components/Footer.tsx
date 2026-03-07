@@ -14,9 +14,9 @@ const Footer: React.FC = () => {
         <div>
           <p className="text-3xl font-black leading-[1.05] tracking-tight text-[#F2F4F7] md:text-5xl">AXIOM INFRASTRUCTURE</p>
           <p className="mt-4 max-w-md text-sm leading-[1.8] text-slate-300">
-            Premium digital infrastructure crafted for ambitious brands that need elite aesthetics and enterprise-grade performance.
+            Digital infrastructure for service businesses that need stronger positioning, cleaner conversion paths, and reliable execution.
           </p>
-          <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">Â© 2026 Axiom Infrastructure. All rights reserved.</p>
+          <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">© 2026 Axiom Infrastructure. All rights reserved.</p>
         </div>
 
         <nav className="space-y-3">
@@ -28,9 +28,9 @@ const Footer: React.FC = () => {
         </nav>
 
         <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Services</p>
-          <NavLink to="/infrastructure" className={routeLinkClass}>Web Infrastructure</NavLink>
-          <NavLink to="/deployments" className={routeLinkClass}>Works</NavLink>
+          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Capabilities</p>
+          <NavLink to="/infrastructure" className={routeLinkClass}>Infrastructure Systems</NavLink>
+          <NavLink to="/deployments" className={routeLinkClass}>Selected Work</NavLink>
         </nav>
 
         <nav className="space-y-3">
