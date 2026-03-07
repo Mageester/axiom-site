@@ -14,7 +14,10 @@ const Footer: React.FC = () => {
         <div>
           <p className="text-3xl font-black leading-[1.05] tracking-tight text-[#F2F4F7] md:text-5xl">AXIOM INFRASTRUCTURE</p>
           <p className="mt-4 max-w-md text-sm leading-[1.8] text-slate-300">
-            Web systems for service firms that need stronger trust signals, cleaner conversion paths, and reliable execution.
+            Premium websites for businesses that need stronger trust signals, clearer conversion paths, and reliable execution.
+          </p>
+          <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-400">
+            Sample and demonstration work is labeled transparently. No fabricated results, testimonials, or client claims.
           </p>
           <a href="/apply" className={contactLinkClass + ' mt-6'}>
             Apply for Fit Review
@@ -32,6 +35,7 @@ const Footer: React.FC = () => {
 
         <nav className="space-y-3">
           <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Engagement</p>
+          <NavLink to="/apply" className={routeLinkClass}>Fit Review</NavLink>
           <NavLink to="/infrastructure" className={routeLinkClass}>Delivery Method</NavLink>
           <NavLink to="/works" className={routeLinkClass}>Selected Work</NavLink>
         </nav>

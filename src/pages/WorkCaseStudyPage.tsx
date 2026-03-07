@@ -45,6 +45,9 @@ const WorkCaseStudyPage: React.FC = () => {
                   {entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '')}
                 </h1>
                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">{entry.summary}</p>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">
+                  This page documents build intent, structure decisions, and scope for a {entry.label.toLowerCase()}.
+                </p>
 
                 <dl className="mt-6 grid gap-3 sm:grid-cols-3">
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
@@ -132,6 +135,12 @@ const WorkCaseStudyPage: React.FC = () => {
                   </ul>
                   <p className="mt-4 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-500">
                     Planning targets are directional unless validated in a live deployment.
+                  </p>
+                </article>
+                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Trust Note</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                    Axiom labels each proof object clearly as sample, demonstration, or active deployment so buyers can evaluate trust signals without inflated claims.
                   </p>
                 </article>
               </div>

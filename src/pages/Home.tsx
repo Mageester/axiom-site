@@ -35,16 +35,16 @@ const selectedWork = caseStudies.map((entry) => ({
 
 const capabilities = [
   {
-    title: 'Positioning Systems',
-    detail: 'Message hierarchy built for stronger authority.',
+    title: 'Clarity',
+    detail: 'Offer and message hierarchy designed for fast buyer understanding.',
   },
   {
-    title: 'Conversion Systems',
-    detail: 'Clear decision paths for higher-quality inquiries.',
+    title: 'Trust',
+    detail: 'Confident visual systems and structure for stronger decision confidence.',
   },
   {
-    title: 'Delivery Systems',
-    detail: 'Senior-led QA and release discipline.',
+    title: 'Conversion Quality',
+    detail: 'Clear action paths for higher-intent inquiries and fewer dead clicks.',
   },
 ];
 
@@ -54,10 +54,28 @@ const method = [
   'Production, QA, and controlled release.',
 ];
 
-const fitSignals = [
-  { label: 'Engagement', value: 'Founder-led and selective' },
-  { label: 'Typical Scope', value: 'Positioning + conversion rebuild' },
-  { label: 'Response Window', value: 'Within one business day' },
+const fitSignals = {
+  bestFit: [
+    'Established business with active offers and real buying traffic.',
+    'Team ready to decide on scope and move quickly.',
+    'Need stronger trust, positioning, and conversion structure.',
+  ],
+  notFit: [
+    'Template refresh requests with no clear business objective.',
+    'Projects seeking volume over quality or no-fit offers.',
+  ],
+};
+
+const buildStandards = [
+  'Clear primary action path on every key page.',
+  'Cross-device QA before launch and on intake flow.',
+  'Structure built for maintainability, speed, and consistency.',
+];
+
+const buildOutcomes = [
+  'Buyer clarity in first-screen messaging',
+  'Stronger trust during evaluation',
+  'Higher-quality inquiry pathways',
 ];
 
 const Home: React.FC = () => {
@@ -99,14 +117,28 @@ const Home: React.FC = () => {
 
               <div className="lg:col-span-4">
                 <div data-glass-card className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Best-Fit Profile</p>
-                  <div className="mt-3 divide-y divide-white/10 rounded-xl border border-white/10 bg-[#0f1524]/45">
-                    {fitSignals.map((item) => (
-                      <div key={item.label} className="px-3 py-3">
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">{item.label}</p>
-                        <p className="mt-1 text-sm text-slate-200">{item.value}</p>
-                      </div>
-                    ))}
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Fit Guidance</p>
+                  <div className="mt-3 space-y-4 rounded-xl border border-white/10 bg-[#0f1524]/45 p-3">
+                    <div>
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Best Fit For</p>
+                      <ul className="mt-2 space-y-2">
+                        {fitSignals.bestFit.map((item) => (
+                          <li key={item} className="text-sm leading-relaxed text-slate-200">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="border-t border-white/10 pt-3">
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Not For</p>
+                      <ul className="mt-2 space-y-2">
+                        {fitSignals.notFit.map((item) => (
+                          <li key={item} className="text-sm leading-relaxed text-slate-300">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -163,6 +195,12 @@ const Home: React.FC = () => {
                       <dd className="mt-0.5 normal-case tracking-normal text-slate-100">{feature.scope}</dd>
                     </div>
                   </dl>
+                  <Link
+                    to={`/works/${feature.id}`}
+                    className="mt-4 inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
+                  >
+                    View Build Notes
+                  </Link>
                 </div>
               </article>
 
@@ -192,6 +230,12 @@ const Home: React.FC = () => {
                           <dd className="mt-0.5">{item.demonstrates}</dd>
                         </div>
                       </dl>
+                      <Link
+                        to={`/works/${item.id}`}
+                        className="mt-2 inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
+                      >
+                        Build Notes
+                      </Link>
                     </div>
                   </article>
                 ))}
@@ -211,7 +255,7 @@ const Home: React.FC = () => {
             <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
               <div className="lg:col-span-4">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Capabilities</p>
-                <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Three systems for trust and lead quality.</h2>
+                <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Every Axiom build is designed to improve three buyer outcomes.</h2>
               </div>
               <div className="grid gap-6 lg:col-span-8 md:grid-cols-3">
                 {capabilities.map((item) => (
@@ -222,6 +266,13 @@ const Home: React.FC = () => {
                 ))}
               </div>
             </div>
+            <div className="mt-7 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <ul className="grid gap-3 md:grid-cols-3">
+                {buildOutcomes.map((item) => (
+                  <li key={item} className="text-sm text-slate-300">{item}</li>
+                ))}
+              </ul>
+            </div>
           </section>
 
           <section className="pt-16 md:pt-20">
@@ -230,14 +281,24 @@ const Home: React.FC = () => {
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Method</p>
                 <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Engagement clarity in three steps.</h2>
               </div>
-              <ol className="space-y-3 md:col-span-8">
-                {method.map((step, index) => (
-                  <li key={step} className="flex items-start gap-3">
-                    <span className="mt-0.5 font-axiomMono text-xs text-[#d4a48e]">0{index + 1}</span>
-                    <p className="text-sm text-slate-300">{step}</p>
-                  </li>
-                ))}
-              </ol>
+              <div className="grid gap-5 md:col-span-8 lg:grid-cols-2">
+                <ol className="space-y-3">
+                  {method.map((step, index) => (
+                    <li key={step} className="flex items-start gap-3">
+                      <span className="mt-0.5 font-axiomMono text-xs text-[#d4a48e]">0{index + 1}</span>
+                      <p className="text-sm text-slate-300">{step}</p>
+                    </li>
+                  ))}
+                </ol>
+                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Build Standards</p>
+                  <ul className="mt-3 space-y-2">
+                    {buildStandards.map((item) => (
+                      <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              </div>
             </div>
           </section>
 

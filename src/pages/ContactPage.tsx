@@ -50,6 +50,24 @@ const PAIN_POINTS_OPTIONS = [
     'Hard to update and manage'
 ];
 
+const BEST_FIT_SIGNALS = [
+    'Established business with active offers and clear service demand',
+    'Need stronger trust, positioning, and conversion clarity',
+    'Ready to make decisions and execute within a defined scope'
+];
+
+const NOT_FIT_SIGNALS = [
+    'Looking for the cheapest possible template refresh',
+    'No clear offer, buyer type, or decision owner on the project',
+    'Need guaranteed outcomes without implementation commitment'
+];
+
+const BUILD_STANDARDS = [
+    'Clear primary action path across key pages',
+    'Cross-device QA before launch',
+    'Inquiry form path reviewed and tested end-to-end'
+];
+
 const FALLBACK_SUBMIT_ERROR = 'Submission failed. Please retry or email aidan@getaxiom.ca and riley@getaxiom.ca.';
 const FIELD_LABEL_CLASS = 'text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
 const FIELD_INPUT_CLASS =
@@ -180,7 +198,7 @@ const ContactPage: React.FC = () => {
         <>
             <SEO
                 title="Apply | Axiom Infrastructure"
-                description="Apply for a strategy call and infrastructure audit to identify revenue leaks and conversion gaps."
+                description="Apply for a fit review to assess scope, standards, and whether Axiom is the right partner for your website rebuild."
             />
             <Layout>
                 <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
@@ -201,18 +219,28 @@ const ContactPage: React.FC = () => {
 
                     <section className="mx-auto mt-6 grid max-w-5xl gap-4 md:grid-cols-2">
                         <article className="axiom-bento p-6">
-                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">From the Founder</p>
-                            <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                                I don't run a volume agency. I partner with a limited number of serious contractors to build infrastructure that dominates local markets.
-                            </p>
-                            <p className="mt-4 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Aidan - Lead Engineer - Kitchener ON</p>
+                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Best Fit / Not Fit</p>
+                            <div className="mt-3 space-y-3">
+                                <div>
+                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Best Fit For</p>
+                                    <ul className="mt-1 space-y-1.5">
+                                        {BEST_FIT_SIGNALS.map(item => <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>)}
+                                    </ul>
+                                </div>
+                                <div className="border-t border-white/10 pt-3">
+                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Not For</p>
+                                    <ul className="mt-1 space-y-1.5">
+                                        {NOT_FIT_SIGNALS.map(item => <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>)}
+                                    </ul>
+                                </div>
+                            </div>
                         </article>
                         <article className="axiom-bento p-6">
-                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Guarantee</p>
-                            <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                                If our infrastructure doesn't measurably increase qualified lead capture within 90 days, we work for free until it does.
-                            </p>
-                            <p className="mt-4 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#d4a48e]">Selective engagements only</p>
+                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Build Standards</p>
+                            <ul className="mt-3 space-y-2">
+                                {BUILD_STANDARDS.map(item => <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>)}
+                            </ul>
+                            <p className="mt-4 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#d4a48e]">Founder-led and selective engagements</p>
                         </article>
                     </section>
 
@@ -274,7 +302,7 @@ const ContactPage: React.FC = () => {
                                                 See If You Qualify (2-Minute Survey)
                                             </button>
                                             <p className="text-center font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">
-                                                Only 2 of 4 partner slots remaining for this month.
+                                                Selective monthly intake
                                             </p>
 
                                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
@@ -340,7 +368,7 @@ const ContactPage: React.FC = () => {
                                                 </button>
                                             </div>
                                             <p className="text-center font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">
-                                                Only 2 of 4 partner slots remaining for this month.
+                                                Selective monthly intake
                                             </p>
                                         </div>
                                     )}

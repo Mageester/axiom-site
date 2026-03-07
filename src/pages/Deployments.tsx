@@ -104,6 +104,12 @@ function WorkCard({ work }: { work: WorkEntry }) {
                 <dd className="mt-1 leading-relaxed text-white/88">{work.scope}</dd>
               </div>
             </dl>
+            <Link
+              to={`/works/${work.id}`}
+              className="mt-4 inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
+            >
+              View Build Notes
+            </Link>
           </div>
         </>
       ) : (
@@ -144,6 +150,12 @@ function WorkCard({ work }: { work: WorkEntry }) {
               )}
             </dl>
             <p className="mt-auto pt-3 text-[10px] uppercase tracking-[0.12em] text-slate-500">{work.businessContext}</p>
+            <Link
+              to={`/works/${work.id}`}
+              className="mt-2 inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
+            >
+              View Build Notes
+            </Link>
           </div>
         </div>
       )}
@@ -187,6 +199,9 @@ const Deployments: React.FC = () => {
                   <li>Core problem being solved</li>
                   <li>What the build demonstrates</li>
                 </ul>
+                <p className="mt-4 text-xs leading-relaxed text-slate-400">
+                  Unless labeled <span className="text-slate-200">Active Deployment</span>, these are sample or demonstration builds and do not claim client outcomes.
+                </p>
               </div>
             </div>
           </div>

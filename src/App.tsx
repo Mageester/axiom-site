@@ -7,6 +7,7 @@ import ContactPage from './pages/ContactPage';
 import Deployments from './pages/Deployments';
 import Home from './pages/Home';
 import Infrastructure from './pages/Infrastructure';
+import WorkCaseStudyPage from './pages/WorkCaseStudyPage';
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -25,6 +26,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/infrastructure" element={<Infrastructure />} />
           <Route path="/works" element={<Deployments />} />
+          <Route path="/works/:slug" element={<WorkCaseStudyPage />} />
           <Route path="/deployments" element={<Navigate to="/works" replace />} />
           <Route path="/apply" element={<ContactPage />} />
           <Route path="/contact" element={<Navigate to="/apply" replace />} />
