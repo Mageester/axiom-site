@@ -39,9 +39,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (!isMobileMenuOpen) return;
     setIsMobileMenuOpen(false);
-  }, [location.pathname, location.search, isMobileMenuOpen]);
+  }, [location.pathname, location.search]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
