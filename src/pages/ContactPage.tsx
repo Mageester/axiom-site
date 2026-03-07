@@ -184,7 +184,7 @@ const ContactPage: React.FC = () => {
             />
             <Layout>
                 <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
-                    <section data-hero-root className="mx-auto max-w-3xl pt-16 text-center md:pt-22">
+                    <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
                         <p className="font-axiomMono text-[10px] uppercase tracking-[0.2em] text-[#d4a48e]">Project Application</p>
                         <div className="mt-4 overflow-hidden">
                             <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
@@ -199,7 +199,7 @@ const ContactPage: React.FC = () => {
                         </div>
                     </section>
 
-                    <section className="mx-auto mt-8 grid max-w-5xl gap-5 md:grid-cols-2">
+                    <section className="mx-auto mt-6 grid max-w-5xl gap-4 md:grid-cols-2">
                         <article className="axiom-bento p-6">
                             <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">From the Founder</p>
                             <p className="mt-3 text-sm leading-relaxed text-slate-300">
@@ -216,7 +216,7 @@ const ContactPage: React.FC = () => {
                         </article>
                     </section>
 
-                    <section className="mx-auto mt-6 max-w-5xl">
+                    <section className="mx-auto mt-5 max-w-5xl">
                         <div className="axiom-bento p-6 md:p-8">
                             <form onSubmit={handleSubmit} className="flex flex-col gap-7">
                                 <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">

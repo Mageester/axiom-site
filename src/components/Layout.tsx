@@ -21,7 +21,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
-  const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -64,7 +63,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
 
     lastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const focusTarget = mobileMenuCloseRef.current || mobileMenuRef.current;
+    const focusTarget = mobileMenuRef.current?.querySelector<HTMLElement>('a[href], button:not([disabled])') || mobileMenuRef.current;
     window.requestAnimationFrame(() => focusTarget?.focus());
   }, [isMobileMenuOpen]);
 
@@ -212,7 +211,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               ref={mobileMenuButtonRef}
               type="button"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] text-[#F2F4F7] transition-colors hover:border-white/35 hover:bg-white/[0.08]"
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-[#F2F4F7] transition-all hover:border-white/35 hover:bg-white/[0.08] ${
+                isMobileMenuOpen ? 'border-white/25 bg-white/[0.08]' : 'border-white/15 bg-white/[0.03]'
+              }`}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-site-menu"
@@ -233,7 +234,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </nav>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/55 transition-opacity duration-200 md:hidden ${isMobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+        className={`fixed inset-0 z-40 bg-black/70 transition-opacity duration-200 md:hidden ${isMobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
         onClick={() => setIsMobileMenuOpen(false)}
         aria-hidden={!isMobileMenuOpen}
       />
@@ -241,28 +242,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div
         id="mobile-site-menu"
         ref={mobileMenuRef}
-        role="dialog"
-        aria-modal="true"
+        role={isMobileMenuOpen ? 'dialog' : undefined}
+        aria-modal={isMobileMenuOpen ? 'true' : undefined}
+        aria-hidden={!isMobileMenuOpen}
         aria-labelledby="mobile-menu-title"
         className={`fixed inset-x-4 top-[5.5rem] z-50 rounded-2xl border border-white/15 bg-[rgba(10,11,13,0.96)] p-5 shadow-[0_28px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl transition-all duration-200 md:hidden ${
           isMobileMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >
-        <div className="mb-5 flex items-center justify-between">
+        <div className="mb-5 flex items-center">
           <p id="mobile-menu-title" className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
             Navigation
           </p>
-          <button
-            ref={mobileMenuCloseRef}
-            type="button"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] text-[#F2F4F7] transition-colors hover:border-white/35 hover:bg-white/[0.08]"
-          >
-            <span className="sr-only">Close menu</span>
-            <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" aria-hidden>
-              <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-            </svg>
-          </button>
         </div>
 
         <nav className="flex flex-col gap-1" aria-label="Mobile">
@@ -287,7 +278,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </a>
       </div>
 
-      <div className="relative z-10 pt-28 md:pt-32 noise-overlay">{children}</div>
+      <div className="relative z-10 pt-24 md:pt-28 noise-overlay">{children}</div>
     </div>
   );
 };

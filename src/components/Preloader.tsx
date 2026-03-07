@@ -5,7 +5,10 @@ type PreloaderProps = {
 };
 
 const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return window.sessionStorage.getItem('axiom-preloader-seen') !== '1';
+  });
   const [revealed, setRevealed] = useState(false);
   const [departing, setDeparting] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -27,7 +30,10 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
       setDeparting(true);
     }, 1600);
 
-    const finishTimer = window.setTimeout(() => setActive(false), 3200);
+    const finishTimer = window.setTimeout(() => {
+      window.sessionStorage.setItem('axiom-preloader-seen', '1');
+      setActive(false);
+    }, 3200);
 
     return () => {
       window.clearTimeout(revealTimer);

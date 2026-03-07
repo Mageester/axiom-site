@@ -22,7 +22,7 @@ const selectedWork = caseStudies.map((entry) => ({
   id: entry.slug,
   title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
   projectType: proofTypeLabel[entry.label] ?? entry.label,
-  businessContext: `${entry.niche} · ${entry.location}`,
+  businessContext: `${entry.niche} - ${entry.location}`,
   scope: entry.deliverables.slice(0, 2).join(' + '),
   role: entry.built.slice(0, 2).join(' + '),
   summary: entry.summary,
@@ -68,7 +68,7 @@ const Home: React.FC = () => {
 
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="pt-20 md:pt-28">
+          <section data-hero-root className="pt-12 md:pt-20">
             <div className="grid items-end gap-10 lg:grid-cols-12 lg:gap-12">
               <div className="lg:col-span-8">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#d4a48e]">Axiom Infrastructure</p>
@@ -116,7 +116,7 @@ const Home: React.FC = () => {
             <PartnerMarquee />
           </section>
 
-          <section className="pt-24 md:pt-32">
+          <section className="pt-20 md:pt-28">
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof Objects</p>

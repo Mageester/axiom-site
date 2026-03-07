@@ -55,8 +55,8 @@ const works: WorkEntry[] = caseStudies.map((entry) => ({
 
 function WorkCard({ work }: { work: WorkEntry }) {
   const heightMap = {
-    sm: 'h-[420px] sm:h-[460px]',
-    md: 'h-[460px] sm:h-[500px]',
+    sm: 'h-[360px] sm:h-[410px]',
+    md: 'h-[440px] sm:h-[490px]',
     lg: 'h-[500px] sm:h-[560px]',
   };
 
@@ -65,6 +65,8 @@ function WorkCard({ work }: { work: WorkEntry }) {
     md: 'md:col-span-1',
     lg: 'md:col-span-2',
   };
+
+  const isCompact = work.span === 'sm';
 
   return (
     <div
@@ -89,16 +91,18 @@ function WorkCard({ work }: { work: WorkEntry }) {
         <div className="translate-y-2 transition-transform duration-500 ease-out group-hover:translate-y-0">
           <h3 className="text-lg font-bold tracking-tight text-white sm:text-xl">{work.title}</h3>
           <p className="mt-1 text-xs uppercase tracking-[0.12em] text-white/75">{work.businessContext}</p>
-          <p className="mt-2 text-sm text-white/90">{work.summary}</p>
-          <dl className="mt-3 grid gap-2 text-[11px] text-white/85 sm:grid-cols-2">
+          {!isCompact && <p className="mt-2 text-sm text-white/90">{work.summary}</p>}
+          <dl className={`mt-3 grid gap-2 text-[11px] text-white/85 ${isCompact ? 'grid-cols-1' : 'sm:grid-cols-2'}`}>
             <div>
               <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Scope</dt>
               <dd className="mt-0.5 leading-relaxed">{work.scope}</dd>
             </div>
-            <div>
-              <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Role</dt>
-              <dd className="mt-0.5 leading-relaxed">{work.role}</dd>
-            </div>
+            {!isCompact && (
+              <div>
+                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Role</dt>
+                <dd className="mt-0.5 leading-relaxed">{work.role}</dd>
+              </div>
+            )}
           </dl>
         </div>
       </div>
@@ -114,7 +118,7 @@ const Deployments: React.FC = () => {
         description="Proof objects from current sample and concept builds, with explicit scope, context, and Axiom role."
       />
       <Layout>
-        <section className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-10 pb-2 md:px-8 md:pt-16">
+        <section className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-4 pb-2 md:px-8 md:pt-10">
           <div className="grid items-end gap-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof Library</p>
