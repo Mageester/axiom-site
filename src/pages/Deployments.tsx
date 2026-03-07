@@ -16,7 +16,7 @@ interface WorkEntry {
   scope: string;
   summary: string;
   image: string;
-  span: 'sm' | 'md' | 'lg';
+  layout: 'featured' | 'editorial' | 'compact';
 }
 
 const proofImageBySlug: Record<string, string> = {
@@ -32,10 +32,10 @@ const proofTypeLabel: Record<string, string> = {
   'Active Deployment': 'Active Deployment',
 };
 
-const spanBySlug: Record<string, WorkEntry['span']> = {
-  'sample-hvac-kitchener': 'lg',
-  'concept-landscaping-authority-site': 'md',
-  'concept-roofing-conversion-site': 'sm',
+const layoutBySlug: Record<string, WorkEntry['layout']> = {
+  'sample-hvac-kitchener': 'featured',
+  'concept-landscaping-authority-site': 'editorial',
+  'concept-roofing-conversion-site': 'compact',
 };
 
 const oneSentence = (value: string) => {
@@ -48,78 +48,106 @@ const works: WorkEntry[] = caseStudies.map((entry) => ({
   id: entry.slug,
   title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
   projectType: proofTypeLabel[entry.label] ?? entry.label,
-  audience: entry.niche,
+  audience: entry.businessType,
   businessContext: `${entry.niche} - ${entry.location}`,
-  coreProblem: entry.problems[0] || 'Unclear trust and conversion structure',
-  demonstrates: entry.built[0] || 'Clearer page hierarchy and conversion pathways',
+  coreProblem: entry.primaryProblem || entry.problems[0] || 'Unclear trust and conversion structure',
+  demonstrates: entry.demonstrates || entry.built[0] || 'Clearer page hierarchy and conversion pathways',
   scope: entry.deliverables.slice(0, 2).join(' + '),
   summary: oneSentence(entry.summary),
   image: proofImageBySlug[entry.slug] || '/images/work-aether.jpg',
-  span: spanBySlug[entry.slug] || 'md',
+  layout: layoutBySlug[entry.slug] || 'compact',
 }));
 
 function WorkCard({ work }: { work: WorkEntry }) {
-  const heightMap = {
-    sm: 'h-[360px] sm:h-[410px]',
-    md: 'h-[440px] sm:h-[490px]',
-    lg: 'h-[500px] sm:h-[560px]',
-  };
-
-  const colSpanMap = {
-    sm: 'md:col-span-1',
-    md: 'md:col-span-1',
-    lg: 'md:col-span-2',
-  };
-
-  const isCompact = work.span === 'sm';
+  const isFeatured = work.layout === 'featured';
+  const isEditorial = work.layout === 'editorial';
 
   return (
-    <div
-      className={`group relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] border border-white/[0.08] bg-[#0d1323]/80 ${heightMap[work.span]} ${colSpanMap[work.span]} transition-all duration-500 hover:border-white/20 hover:shadow-[0_0_60px_rgba(176,93,65,0.1)]`}
+    <article
+      className={`group overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] border border-white/[0.08] bg-[#0d1323]/80 transition-all duration-500 hover:border-white/20 hover:shadow-[0_0_60px_rgba(176,93,65,0.1)] ${
+        isFeatured ? 'relative h-[520px] sm:h-[580px] md:col-span-2' : 'relative h-[430px] sm:h-[480px] md:col-span-1'
+      }`}
     >
-      <img
-        src={work.image}
-        alt={work.title}
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        loading="lazy"
-      />
+      {isFeatured ? (
+        <>
+          <img
+            src={work.image}
+            alt={work.title}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/45 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-95" />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/86 via-black/30 to-transparent opacity-75 transition-opacity duration-500 group-hover:opacity-95" />
+          <div className="absolute left-5 top-5 z-10 flex flex-wrap items-center gap-2">
+            <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+              {work.projectType}
+            </span>
+            <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
+              {work.audience}
+            </span>
+          </div>
 
-      <div className="absolute left-4 top-4 z-10">
-        <span className="inline-block rounded-full border border-white/10 bg-black/40 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/70 backdrop-blur-md">
-          {work.projectType}
-        </span>
-      </div>
-
-      <div className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-6">
-        <div className="translate-y-2 transition-transform duration-500 ease-out group-hover:translate-y-0">
-          <h3 className="text-lg font-bold tracking-tight text-white sm:text-xl">{work.title}</h3>
-          <p className="mt-1 text-xs uppercase tracking-[0.12em] text-white/75">{work.businessContext}</p>
-          {!isCompact && <p className="mt-2 text-sm text-white/90">{work.summary}</p>}
-          <dl className={`mt-3 grid gap-2 text-[11px] text-white/85 ${isCompact ? 'grid-cols-1' : 'sm:grid-cols-2'}`}>
-            <div className={isCompact ? '' : 'sm:col-span-2'}>
-              <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Business Type</dt>
-              <dd className="mt-0.5 leading-relaxed">{work.audience}</dd>
-            </div>
-            <div className={isCompact ? '' : 'sm:col-span-2'}>
-              <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Core Problem</dt>
-              <dd className="mt-0.5 leading-relaxed">{work.coreProblem}</dd>
-            </div>
-            <div>
-              <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Demonstrates</dt>
-              <dd className="mt-0.5 leading-relaxed">{work.demonstrates}</dd>
-            </div>
-            {!isCompact && (
+          <div className="absolute inset-x-5 bottom-5 z-10 rounded-2xl border border-white/15 bg-black/35 p-5 backdrop-blur-md sm:p-6">
+            <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-[1.9rem]">{work.title}</h3>
+            <p className="mt-2 max-w-3xl text-sm text-slate-200">{work.summary}</p>
+            <dl className="mt-4 grid gap-3 text-[11px] sm:grid-cols-3">
               <div>
-                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Scope</dt>
-                <dd className="mt-0.5 leading-relaxed">{work.scope}</dd>
+                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Core Problem</dt>
+                <dd className="mt-1 leading-relaxed text-white/88">{work.coreProblem}</dd>
               </div>
-            )}
-          </dl>
+              <div>
+                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Demonstrates</dt>
+                <dd className="mt-1 leading-relaxed text-white/88">{work.demonstrates}</dd>
+              </div>
+              <div>
+                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Scope Snapshot</dt>
+                <dd className="mt-1 leading-relaxed text-white/88">{work.scope}</dd>
+              </div>
+            </dl>
+          </div>
+        </>
+      ) : (
+        <div className="flex h-full flex-col">
+          <div className={`relative ${isEditorial ? 'h-[56%]' : 'h-[52%]'} overflow-hidden`}>
+            <img
+              src={work.image}
+              alt={work.title}
+              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
+            <div className="absolute left-4 top-4 z-10">
+              <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+                {work.projectType}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex flex-1 flex-col bg-[#0d1323]/90 p-5">
+            <h3 className="text-xl font-semibold tracking-tight text-white">{work.title}</h3>
+            <p className="mt-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">{work.audience}</p>
+            {isEditorial && <p className="mt-2 text-sm text-slate-300/95">{work.summary}</p>}
+            <dl className="mt-3 grid gap-2 text-[11px]">
+              <div>
+                <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Core Problem</dt>
+                <dd className="mt-0.5 leading-relaxed text-slate-200">{work.coreProblem}</dd>
+              </div>
+              <div>
+                <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Demonstrates</dt>
+                <dd className="mt-0.5 leading-relaxed text-slate-200">{work.demonstrates}</dd>
+              </div>
+              {isEditorial && (
+                <div>
+                  <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Scope Snapshot</dt>
+                  <dd className="mt-0.5 leading-relaxed text-slate-200">{work.scope}</dd>
+                </div>
+              )}
+            </dl>
+            <p className="mt-auto pt-3 text-[10px] uppercase tracking-[0.12em] text-slate-500">{work.businessContext}</p>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </article>
   );
 }
 
@@ -128,14 +156,14 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom Infrastructure"
-        description="Truth-first proof objects from sample and demonstration builds, each framed with business type, problem, and what the work demonstrates."
+        description="Truth-first proof objects from sample and demonstration builds, presented with clear business context, problem framing, and design intent."
       />
       <Layout>
         <section className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-4 pb-2 md:px-8 md:pt-10">
           <div className="grid items-end gap-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof Library</p>
-              <h1 className="mt-4 max-w-4xl text-left">Current work with context, scope, and role clarity.</h1>
+              <h1 className="mt-4 max-w-4xl text-left">Curated sample and demonstration builds for business-facing websites.</h1>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <a href="/apply" className="btn-primary btn-lg whitespace-nowrap">
                   Apply for Fit Review

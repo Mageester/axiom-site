@@ -23,10 +23,10 @@ const selectedWork = caseStudies.map((entry) => ({
   id: entry.slug,
   title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
   projectType: proofTypeLabel[entry.label] ?? entry.label,
-  audience: entry.niche,
+  audience: entry.businessType,
   businessContext: `${entry.niche} - ${entry.location}`,
-  coreProblem: entry.problems[0] || 'Unclear trust and conversion structure',
-  demonstrates: entry.built[0] || 'Clearer hierarchy and conversion pathways',
+  coreProblem: entry.primaryProblem || entry.problems[0] || 'Unclear trust and conversion structure',
+  demonstrates: entry.demonstrates || entry.built[0] || 'Clearer hierarchy and conversion pathways',
   scope: entry.deliverables.slice(0, 2).join(' + '),
   role: entry.built.slice(0, 2).join(' + '),
   summary: entry.summary,
@@ -124,7 +124,7 @@ const Home: React.FC = () => {
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof Objects</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Sample and Demonstration Work, Clearly Framed.</h2>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Curated Sample and Demonstration Work.</h2>
               </div>
               <Link
                 to="/works"
@@ -137,55 +137,59 @@ const Home: React.FC = () => {
             <div className="grid gap-5 lg:grid-cols-12">
               <article className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/70 lg:col-span-7">
                 <img src={feature.image} alt={feature.title} className="h-[500px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent p-7">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{feature.projectType}</p>
-                  <h3 className="mt-2 text-[clamp(1.6rem,2vw,2.1rem)] font-semibold text-white">{feature.title}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/45 to-transparent" />
+                <div className="absolute left-6 top-6 z-10 flex flex-wrap items-center gap-2">
+                  <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+                    {feature.projectType}
+                  </span>
+                  <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
+                    {feature.audience}
+                  </span>
+                </div>
+                <div className="absolute inset-x-6 bottom-6 z-10 rounded-2xl border border-white/15 bg-black/35 p-6 backdrop-blur-md">
+                  <h3 className="text-[clamp(1.6rem,2vw,2.1rem)] font-semibold text-white">{feature.title}</h3>
                   <p className="mt-2 max-w-2xl text-sm text-slate-200">{feature.summary}</p>
-                  <dl className="mt-4 grid gap-2 text-[11px] uppercase tracking-[0.12em] text-slate-200/90 md:grid-cols-2">
-                    <div>
-                      <dt className="text-slate-300/65">Business Type</dt>
-                      <dd className="mt-0.5">{feature.audience}</dd>
-                    </div>
+                  <dl className="mt-4 grid gap-3 text-[11px] uppercase tracking-[0.12em] text-slate-200/90 md:grid-cols-3">
                     <div>
                       <dt className="text-slate-300/65">Core Problem</dt>
-                      <dd className="mt-0.5">{feature.coreProblem}</dd>
+                      <dd className="mt-0.5 normal-case tracking-normal text-slate-100">{feature.coreProblem}</dd>
                     </div>
                     <div>
                       <dt className="text-slate-300/65">Demonstrates</dt>
-                      <dd className="mt-0.5">{feature.demonstrates}</dd>
+                      <dd className="mt-0.5 normal-case tracking-normal text-slate-100">{feature.demonstrates}</dd>
                     </div>
                     <div>
-                      <dt className="text-slate-300/65">Market Context</dt>
-                      <dd className="mt-0.5">{feature.businessContext}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-300/65">Scope</dt>
-                      <dd className="mt-0.5">{feature.scope}</dd>
-                    </div>
-                    <div className="md:col-span-2">
-                      <dt className="text-slate-300/65">Axiom Role</dt>
-                      <dd className="mt-0.5">{feature.role}</dd>
+                      <dt className="text-slate-300/65">Scope Snapshot</dt>
+                      <dd className="mt-0.5 normal-case tracking-normal text-slate-100">{feature.scope}</dd>
                     </div>
                   </dl>
                 </div>
               </article>
 
               <div className="grid gap-5 lg:col-span-5">
-                {stacked.map((item) => (
-                  <article key={item.id} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/70">
-                    <img src={item.image} alt={item.title} className="h-[240px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent p-5">
-                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{item.projectType}</p>
-                      <h3 className="mt-1 text-xl font-semibold text-white">{item.title}</h3>
-                      <p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-200/85">{item.audience}</p>
-                      <dl className="mt-2 grid gap-1 text-[11px] text-slate-200/90">
+                {stacked.map((item, index) => (
+                  <article key={item.id} className="group overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85">
+                    <div className={`relative ${index === 0 ? 'h-[56%]' : 'h-[52%]'} overflow-hidden`}>
+                      <img src={item.image} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
+                      <div className="absolute left-4 top-4">
+                        <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+                          {item.projectType}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2 p-5">
+                      <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">{item.audience}</p>
+                      {index === 0 && <p className="text-sm text-slate-300/95">{item.summary}</p>}
+                      <dl className="grid gap-2 text-[11px] text-slate-200/90">
                         <div>
-                          <dt className="inline text-slate-300/65">Problem: </dt>
-                          <dd className="inline">{item.coreProblem}</dd>
+                          <dt className="text-slate-300/65">Core Problem</dt>
+                          <dd className="mt-0.5">{item.coreProblem}</dd>
                         </div>
                         <div>
-                          <dt className="inline text-slate-300/65">Demonstrates: </dt>
-                          <dd className="inline">{item.demonstrates}</dd>
+                          <dt className="text-slate-300/65">Demonstrates</dt>
+                          <dd className="mt-0.5">{item.demonstrates}</dd>
                         </div>
                       </dl>
                     </div>

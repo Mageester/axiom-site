@@ -4,6 +4,9 @@ export type CaseStudyEntry = {
     label: 'Sample Build' | 'Concept Build' | 'Demonstration Site' | 'Active Deployment';
     niche: string;
     location: string;
+    businessType: string;
+    primaryProblem: string;
+    demonstrates: string;
     summary: string;
     context: string;
     problems: string[];
@@ -20,6 +23,9 @@ export const caseStudies: CaseStudyEntry[] = [
         label: 'Sample Build',
         niche: 'Service-Based Business',
         location: 'Kitchener, ON (Sample Market)',
+        businessType: 'Service-Based Business',
+        primaryProblem: 'Outdated website with weak trust cues and no clear inquiry path.',
+        demonstrates: 'Service-page architecture with stronger trust and cleaner quote pathways.',
         summary: 'Sample build for a local service business with an outdated website and inconsistent inquiry flow.',
         context: 'Sample project showing how a service business can move from generic pages to a clearer trust and conversion structure.',
         problems: [
@@ -51,6 +57,9 @@ export const caseStudies: CaseStudyEntry[] = [
         label: 'Demonstration Site',
         niche: 'Local Business',
         location: 'Demonstration Environment',
+        businessType: 'Local Business',
+        primaryProblem: 'Portfolio-heavy pages with unclear next action for new inquiries.',
+        demonstrates: 'Premium portfolio framing with stronger consultation intent.',
         summary: 'Demonstration site for a local business that needs stronger visual trust and clearer consultation intent.',
         context: 'Demonstration project for a portfolio-heavy business with weak conversion framing and unclear next steps.',
         problems: ['Portfolio-heavy pages with unclear next action', 'No lead qualification messaging', 'Unstructured service pages'],
@@ -65,6 +74,9 @@ export const caseStudies: CaseStudyEntry[] = [
         label: 'Demonstration Site',
         niche: 'Professional Service Business',
         location: 'Demonstration Environment',
+        businessType: 'Professional Service Business',
+        primaryProblem: 'Competing CTAs with weak hierarchy during high-intent visits.',
+        demonstrates: 'Clear CTA priority for urgent versus planned project inquiries.',
         summary: 'Demonstration site for a business balancing urgent inquiries with planned higher-ticket projects.',
         context: 'Demonstration project for a business with competing CTAs and weak trust structure during high-intent visits.',
         problems: ['Competing CTAs with no hierarchy', 'Slow load from builder bloat', 'Weak trust structure'],
