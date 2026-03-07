@@ -121,7 +121,7 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Works | Axiom Infrastructure"
-        description="Recent works and case studies from Axiom Infrastructure. Premium web infrastructure for ambitious Ontario businesses."
+        description="Selected work from Axiom Infrastructure, focused on positioning quality, conversion clarity, and execution standards."
       />
       <Layout>
         {/* ═══════════════════════════════════════════════════════
@@ -129,20 +129,20 @@ const Deployments: React.FC = () => {
         ═══════════════════════════════════════════════════════ */}
         <section className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 pt-8 pb-0 text-center md:px-8 md:pt-16 overflow-visible">
           <h1 className="mb-4">
-            Recent Works
+            Selected Work
           </h1>
           <p className="mb-8 max-w-md text-lg text-slate-400">
-            Let's discuss scope, timing, and fit.
+            A review of structure, presentation quality, and conversion intent.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a href="/#intake" className="btn-primary btn-lg whitespace-nowrap">
-              Work With Us
+              Request a Fit Call
             </a>
             <Link
               to="/infrastructure"
               className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-axiom-text-main hover:underline"
             >
-              Explore our services
+              Review Standards
               <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -171,13 +171,13 @@ const Deployments: React.FC = () => {
           <div className="relative z-10">
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a href="/#intake" className="btn-primary btn-lg whitespace-nowrap">
-                Work With Us
+                Request a Fit Call
               </a>
               <Link
                 to="/infrastructure"
                 className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-axiom-text-main hover:underline"
               >
-                Explore our services
+                Review Standards
                 <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

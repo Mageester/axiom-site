@@ -1,4 +1,4 @@
-import React from 'react';
+ï»¿import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const contactLinkClass =
@@ -16,21 +16,21 @@ const Footer: React.FC = () => {
           <p className="mt-4 max-w-md text-sm leading-[1.8] text-slate-300">
             Digital infrastructure for service businesses that need stronger positioning, cleaner conversion paths, and reliable execution.
           </p>
-          <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">© 2026 Axiom Infrastructure. All rights reserved.</p>
+          <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">Copyright 2026 Axiom Infrastructure. All rights reserved.</p>
         </div>
 
         <nav className="space-y-3">
           <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Navigate</p>
           <NavLink to="/" className={routeLinkClass}>Home</NavLink>
-          <NavLink to="/infrastructure" className={routeLinkClass}>Infrastructure</NavLink>
-          <NavLink to="/deployments" className={routeLinkClass}>Works</NavLink>
-          <NavLink to="/architects" className={routeLinkClass}>Architects</NavLink>
+          <NavLink to="/infrastructure" className={routeLinkClass}>Standards</NavLink>
+          <NavLink to="/works" className={routeLinkClass}>Work</NavLink>
+          <NavLink to="/architects" className={routeLinkClass}>Team</NavLink>
         </nav>
 
         <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Capabilities</p>
-          <NavLink to="/infrastructure" className={routeLinkClass}>Infrastructure Systems</NavLink>
-          <NavLink to="/deployments" className={routeLinkClass}>Selected Work</NavLink>
+          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Offerings</p>
+          <NavLink to="/infrastructure" className={routeLinkClass}>Engagement Standards</NavLink>
+          <NavLink to="/works" className={routeLinkClass}>Selected Work</NavLink>
         </nav>
 
         <nav className="space-y-3">

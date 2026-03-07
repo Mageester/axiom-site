@@ -7,25 +7,25 @@ const Infrastructure: React.FC = () => {
   return (
     <>
       <SEO
-        title="Infrastructure | Axiom Infrastructure"
-        description="Infrastructure architecture and deployment standards from Axiom Infrastructure."
+        title="Standards | Axiom Infrastructure"
+        description="Engagement standards, delivery criteria, and operating principles used across Axiom infrastructure projects."
       />
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-6 py-20 md:px-8 md:py-28">
           <section className="grid gap-6 md:grid-cols-12">
             <article className="md:col-span-8 rounded-2xl border border-white/10 bg-[#0d1323]/60 p-8 backdrop-blur-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] md:p-12">
-              <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-text-mute">Infrastructure</p>
+              <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-text-mute">Standards</p>
               <h1 className="mt-4 text-[clamp(2.25rem,4vw,3.5rem)] font-extrabold tracking-tight text-axiom-text-main">
-                Command Layer
+                Engagement Standards
               </h1>
               <p className="mt-4 max-w-2xl text-slate-300">
-                Architecture standards, performance targets, and production checklists will render here.
+                How scope is qualified, how quality is protected, and how releases are governed from kickoff through launch.
               </p>
             </article>
             <article className="md:col-span-4 rounded-2xl border border-white/10 bg-[#0d1323]/60 p-8 backdrop-blur-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)]">
-              <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-text-mute">Status</p>
-              <p className="mt-4 text-xl font-semibold text-axiom-text-main">Scaffold Active</p>
-              <p className="mt-3 text-sm text-slate-300">This territory is now route-live and ready for Phase 5 content modules.</p>
+              <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-text-mute">Current State</p>
+              <p className="mt-4 text-xl font-semibold text-axiom-text-main">Publishing in Progress</p>
+              <p className="mt-3 text-sm text-slate-300">This section is being expanded with detailed qualification criteria and release standards.</p>
             </article>
           </section>
         </main>

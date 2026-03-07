@@ -118,13 +118,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               Home
             </NavLink>
             <NavLink to="/infrastructure" className={navLinkClass} data-startup-link>
-              Infrastructure
+              Standards
             </NavLink>
             <NavLink to="/works" className={navLinkClass} data-startup-link>
-              Works
+              Work
             </NavLink>
             <NavLink to="/architects" className={navLinkClass} data-startup-link>
-              Architects
+              Team
             </NavLink>
           </div>
 

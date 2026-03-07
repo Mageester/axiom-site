@@ -6,19 +6,19 @@ import { SEO } from '../components/SEO';
 
 const proofItems = [
   {
-    title: 'Positioning Systems',
+    title: 'Positioning Architecture',
     detail:
-      'Message architecture, visual hierarchy, and conversion paths designed for high-trust service buyers.',
+      'Message structure, hierarchy, and page flow designed to signal market leadership in the first scroll.',
   },
   {
-    title: 'UX QA Standards',
+    title: 'Experience QA',
     detail:
-      'Responsive QA, interaction audits, and form-path testing before release so the experience holds under real traffic.',
+      'Responsive QA, interaction reviews, and form-path testing before release so quality holds under real traffic.',
   },
   {
-    title: 'Launch Discipline',
+    title: 'Release Discipline',
     detail:
-      'Every release is versioned, reviewed, and checked against defined acceptance criteria before it goes live.',
+      'Every release is versioned, reviewed, and shipped against defined acceptance criteria.',
   },
 ];
 
@@ -26,7 +26,7 @@ const capabilities = [
   {
     title: 'Positioning-First Homepage Systems',
     detail:
-      'We shape the first 20 seconds of perception so your business reads as the premium option before a call is booked.',
+      'We shape first impressions so your firm reads as the premium option before a conversation starts.',
   },
   {
     title: 'Conversion Paths for Qualified Demand',
@@ -34,33 +34,33 @@ const capabilities = [
       'Every page guides serious buyers toward the next decision with less friction and clearer intent.',
   },
   {
-    title: 'Editorial-Level Brand Presentation',
+    title: 'Editorial Brand Presentation',
     detail:
-      'Typography, rhythm, and composition engineered to elevate trust across desktop and mobile.',
+      'Typography, rhythm, and composition tuned to increase trust across desktop and mobile.',
   },
   {
-    title: 'Operationally Stable Delivery',
+    title: 'Operational Delivery',
     detail:
-      'Build quality and release discipline designed for teams that need reliability, not redesign churn.',
+      'Release quality designed for teams that need reliability, not redesign churn.',
   },
 ];
 
 const standards = [
-  'Commercial framing before design production.',
-  'Conversion-path and content hierarchy locked before build.',
-  'Pre-launch QA and release checklist before handoff.',
+  'Commercial framing is locked before production begins.',
+  'Content hierarchy and conversion path are finalized before build.',
+  'QA and release checklist are completed before handoff.',
 ];
 
 const faqs = [
   {
     question: 'Who is Axiom best suited for?',
     answer:
-      'Service businesses with established revenue, a real sales process, and the intent to improve positioning rather than patch visuals.',
+      'Service businesses with established revenue, a real sales process, and the intent to strengthen market positioning.',
   },
   {
     question: 'Who is not a fit?',
     answer:
-      'Teams looking for the lowest-cost site or immediate same-week turnaround. We prioritize quality and long-term commercial performance.',
+      'Teams prioritizing the lowest-cost option or immediate same-week turnaround.',
   },
   {
     question: 'What happens first?',
@@ -85,11 +85,11 @@ const Home: React.FC = () => {
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#d4a48e]">Axiom Infrastructure</p>
                 <div className="mt-5 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.6rem,6vw,5.1rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Digital infrastructure for service brands that need to look like the obvious choice.
+                    The digital standard for service firms that intend to lead their category.
                   </h1>
                 </div>
                 <p className="mt-7 max-w-2xl text-lg leading-relaxed text-slate-300">
-                  We design and deliver commercially sharp web systems that increase trust, improve lead quality, and support premium pricing.
+                  We build web systems that strengthen trust, improve lead quality, and support higher-value sales conversations.
                 </p>
                 <div className="mt-10 flex flex-wrap items-center gap-4">
                   <a href="#intake" className="btn-primary btn-lg whitespace-nowrap">
@@ -99,7 +99,7 @@ const Home: React.FC = () => {
                     to="/works"
                     className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.16em] text-white/70 transition-colors hover:text-white"
                   >
-                    View Selected Work
+                    Review Work
                   </Link>
                 </div>
               </div>
@@ -110,15 +110,15 @@ const Home: React.FC = () => {
                   <ul className="mt-5 space-y-4 text-sm text-slate-300">
                     <li className="flex items-start gap-3">
                       <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#B05D41]" />
-                      <span>Selective intake with limited active engagements at one time.</span>
+                      <span>Selective intake with limited active engagements.</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#B05D41]" />
-                      <span>Built for firms where presentation quality directly influences deal value.</span>
+                      <span>Built for firms where brand presentation directly influences deal value.</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#B05D41]" />
-                      <span>Structured around measurable business outcomes, not visual novelty.</span>
+                      <span>Scoped around commercial outcomes, not visual novelty.</span>
                     </li>
                   </ul>
                 </div>
@@ -140,10 +140,10 @@ const Home: React.FC = () => {
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Selected Work Standards</h2>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Selected Work</h2>
               </div>
               <Link to="/works" className="hidden text-sm font-medium text-white/70 transition-colors hover:text-white md:inline-flex">
-                Open Works
+                Open Work Index
               </Link>
             </div>
 
@@ -157,7 +157,7 @@ const Home: React.FC = () => {
             </div>
 
             <p className="mt-6 max-w-3xl text-sm text-slate-400">
-              We do not publish fabricated testimonials, inflated metrics, or placeholder badges. Public proof is based on delivery standards and visible execution quality.
+              Proof is presented through execution quality, delivery standards, and visible work output.
             </p>
           </section>
 
@@ -179,8 +179,8 @@ const Home: React.FC = () => {
           <section className="pt-20 md:pt-28">
             <div className="grid gap-8 lg:grid-cols-12">
               <div className="lg:col-span-5">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Process</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Short, disciplined, and standards-led.</h2>
+              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Standards</p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Lean process. Strict standards.</h2>
               </div>
               <ol className="lg:col-span-7 space-y-4">
                 {standards.map((item, index) => (
@@ -198,16 +198,16 @@ const Home: React.FC = () => {
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Investment</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Structured engagements, not one-off design tasks.</h2>
               <p className="mt-5 max-w-3xl text-sm leading-relaxed text-slate-300">
-                Engagements are scoped around commercial objectives, timeline constraints, and operating capacity. We define the right level of investment after qualification.
+                Engagements are scoped around commercial objectives, timeline constraints, and operating capacity. Investment is defined after qualification.
               </p>
               <div className="mt-8 grid gap-4 md:grid-cols-2">
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                  <p className="text-sm font-semibold text-[#F2F4F7]">Positioning + Homepage Infrastructure</p>
-                  <p className="mt-2 text-sm text-slate-400">For firms needing a stronger market signal and a cleaner conversion foundation.</p>
+                  <p className="text-sm font-semibold text-[#F2F4F7]">Positioning + Conversion Core</p>
+                  <p className="mt-2 text-sm text-slate-400">For firms requiring a stronger market signal and a cleaner conversion foundation.</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                  <p className="text-sm font-semibold text-[#F2F4F7]">Multi-Page Infrastructure System</p>
-                  <p className="mt-2 text-sm text-slate-400">For teams requiring broader page architecture, standards, and long-term governance.</p>
+                  <p className="text-sm font-semibold text-[#F2F4F7]">Multi-Page Growth System</p>
+                  <p className="mt-2 text-sm text-slate-400">For teams requiring broader page architecture, governance, and continuity.</p>
                 </div>
               </div>
             </div>
@@ -230,7 +230,7 @@ const Home: React.FC = () => {
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Qualified Next Step</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">If fit is strong, we map the engagement within one call.</h2>
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-slate-300">
-                Send a concise brief and business context. We will confirm fit, define scope, and recommend the right engagement path.
+                Send a concise brief with business context. We will confirm fit, define scope, and recommend the appropriate engagement path.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <a href="mailto:aidan@getaxiom.ca" className="btn-primary btn-lg whitespace-nowrap">
