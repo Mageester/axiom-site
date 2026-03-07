@@ -13,8 +13,9 @@ const proofImageBySlug: Record<string, string> = {
 };
 
 const proofTypeLabel: Record<string, string> = {
-  'Sample Case Study': 'Sample Build',
+  'Sample Build': 'Sample Build',
   'Concept Build': 'Concept Build',
+  'Demonstration Site': 'Demonstration Site',
   'Active Deployment': 'Active Deployment',
 };
 
@@ -22,7 +23,10 @@ const selectedWork = caseStudies.map((entry) => ({
   id: entry.slug,
   title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
   projectType: proofTypeLabel[entry.label] ?? entry.label,
+  audience: entry.niche,
   businessContext: `${entry.niche} - ${entry.location}`,
+  coreProblem: entry.problems[0] || 'Unclear trust and conversion structure',
+  demonstrates: entry.built[0] || 'Clearer hierarchy and conversion pathways',
   scope: entry.deliverables.slice(0, 2).join(' + '),
   role: entry.built.slice(0, 2).join(' + '),
   summary: entry.summary,
@@ -62,8 +66,8 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom Infrastructure | Premium Web Systems for Service Firms"
-        description="Axiom builds premium web systems for service firms focused on trust, conversion clarity, and reliable delivery."
+        title="Axiom Infrastructure | Premium Websites for Growth-Focused Businesses"
+        description="Axiom designs and builds premium websites for businesses that need stronger trust, clearer positioning, and better conversion structure."
       />
 
       <Layout>
@@ -74,11 +78,11 @@ const Home: React.FC = () => {
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#d4a48e]">Axiom Infrastructure</p>
                 <div className="mt-5 max-w-5xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Premium websites for service firms where trust drives conversions.
+                    Premium websites for businesses where trust drives conversions.
                   </h1>
                 </div>
                 <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-300 md:text-lg">
-                  Positioning, conversion architecture, and senior-led delivery for established operators.
+                  Positioning, conversion architecture, and senior-led delivery for established businesses.
                 </p>
                 <div className="mt-9 flex flex-wrap items-center gap-4">
                   <a href="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -120,7 +124,7 @@ const Home: React.FC = () => {
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof Objects</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Selected Work, Clearly Framed.</h2>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Sample and Demonstration Work, Clearly Framed.</h2>
               </div>
               <Link
                 to="/works"
@@ -139,7 +143,19 @@ const Home: React.FC = () => {
                   <p className="mt-2 max-w-2xl text-sm text-slate-200">{feature.summary}</p>
                   <dl className="mt-4 grid gap-2 text-[11px] uppercase tracking-[0.12em] text-slate-200/90 md:grid-cols-2">
                     <div>
-                      <dt className="text-slate-300/65">Business Context</dt>
+                      <dt className="text-slate-300/65">Business Type</dt>
+                      <dd className="mt-0.5">{feature.audience}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-slate-300/65">Core Problem</dt>
+                      <dd className="mt-0.5">{feature.coreProblem}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-slate-300/65">Demonstrates</dt>
+                      <dd className="mt-0.5">{feature.demonstrates}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-slate-300/65">Market Context</dt>
                       <dd className="mt-0.5">{feature.businessContext}</dd>
                     </div>
                     <div>
@@ -161,15 +177,15 @@ const Home: React.FC = () => {
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent p-5">
                       <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{item.projectType}</p>
                       <h3 className="mt-1 text-xl font-semibold text-white">{item.title}</h3>
-                      <p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-200/85">{item.businessContext}</p>
+                      <p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-200/85">{item.audience}</p>
                       <dl className="mt-2 grid gap-1 text-[11px] text-slate-200/90">
                         <div>
-                          <dt className="inline text-slate-300/65">Scope: </dt>
-                          <dd className="inline">{item.scope}</dd>
+                          <dt className="inline text-slate-300/65">Problem: </dt>
+                          <dd className="inline">{item.coreProblem}</dd>
                         </div>
                         <div>
-                          <dt className="inline text-slate-300/65">Role: </dt>
-                          <dd className="inline">{item.role}</dd>
+                          <dt className="inline text-slate-300/65">Demonstrates: </dt>
+                          <dd className="inline">{item.demonstrates}</dd>
                         </div>
                       </dl>
                     </div>
@@ -238,7 +254,7 @@ const Home: React.FC = () => {
                 </div>
               </div>
               <p className="mt-5 text-xs uppercase tracking-[0.14em] text-slate-400">
-                Best fit: established service firms with sales volume and clear growth mandate.
+                Best fit: established businesses with sales volume and clear growth mandate.
               </p>
             </div>
           </section>

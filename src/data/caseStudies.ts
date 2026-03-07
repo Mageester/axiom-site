@@ -1,7 +1,7 @@
 export type CaseStudyEntry = {
     slug: string;
     title: string;
-    label: 'Sample Case Study' | 'Concept Build' | 'Active Deployment';
+    label: 'Sample Build' | 'Concept Build' | 'Demonstration Site' | 'Active Deployment';
     niche: string;
     location: string;
     summary: string;
@@ -16,19 +16,19 @@ export type CaseStudyEntry = {
 export const caseStudies: CaseStudyEntry[] = [
     {
         slug: 'sample-hvac-kitchener',
-        title: 'Sample: HVAC Contractor (Kitchener)',
-        label: 'Sample Case Study',
-        niche: 'Trade Services',
-        location: 'Kitchener, ON',
-        summary: 'A demonstration build showing how a performance-first HVAC site can improve trust, speed, and quote conversion readiness.',
-        context: 'This sample case study represents a typical local HVAC contractor that relies on calls and quote requests but has an outdated site experience.',
+        title: 'Sample: HVAC Service Business Site',
+        label: 'Sample Build',
+        niche: 'Service-Based Business',
+        location: 'Kitchener, ON (Sample Market)',
+        summary: 'Sample build for a local service business with an outdated website and inconsistent inquiry flow.',
+        context: 'Sample project showing how a service business can move from generic pages to a clearer trust and conversion structure.',
         problems: [
+            'Outdated website with weak trust cues and no clear inquiry path',
             'Slow mobile loading and inconsistent page layout across devices',
-            'Unclear quote CTA hierarchy on service pages',
-            'Weak local service area structure and thin technical SEO foundation'
+            'Weak service-page structure and thin technical SEO foundation'
         ],
         built: [
-            'Service-focused page architecture for HVAC, furnace, and AC repair/installation',
+            'Demonstrates a service-page architecture with clearer trust and quote pathways',
             'Clear contact and quote request funnel above the fold and repeated by section',
             'Performance-first front-end structure with edge delivery deployment model'
         ],
@@ -47,28 +47,28 @@ export const caseStudies: CaseStudyEntry[] = [
     },
     {
         slug: 'concept-landscaping-authority-site',
-        title: 'Demo: Landscaping Professional Site',
-        label: 'Concept Build',
+        title: 'Demo: Landscaping and Outdoor Services Site',
+        label: 'Demonstration Site',
         niche: 'Local Business',
-        location: 'Demo Environment',
-        summary: 'A sub-second edge-deployed dispatch architecture designed for premium landscaping and hardscaping contractors.',
-        context: 'Concept demonstration for a landscaping and design firm that needs stronger trust signals and clearer service qualification.',
-        problems: ['Portfolio-heavy site with weak CTA prompts', 'No lead qualification messaging', 'Unstructured service pages'],
-        built: ['Premium portfolio presentation flow', 'Consultation-first CTA system', 'Service area and service category structure'],
+        location: 'Demonstration Environment',
+        summary: 'Demonstration site for a local business that needs stronger visual trust and clearer consultation intent.',
+        context: 'Demonstration project for a portfolio-heavy business with weak conversion framing and unclear next steps.',
+        problems: ['Portfolio-heavy pages with unclear next action', 'No lead qualification messaging', 'Unstructured service pages'],
+        built: ['Demonstrates premium portfolio framing with stronger consultation intent', 'Consultation-first CTA system', 'Service area and service category structure'],
         targets: ['Target: strong visual credibility on mobile', 'Target: better consultation intent capture'],
         deliverables: ['Concept homepage', 'Service architecture', 'Inquiry flow blueprint'],
         ctaLabel: 'Initialize Demo'
     },
     {
         slug: 'concept-roofing-conversion-site',
-        title: 'Demo: Roofing Conversion Site',
-        label: 'Concept Build',
-        niche: 'Contractors',
-        location: 'Demo Environment',
-        summary: 'A sub-second edge-deployed dispatch architecture designed for emergency roofing calls and exterior protection services.',
-        context: 'Concept demonstration for a roofing company balancing emergency calls with planned replacement projects.',
+        title: 'Demo: Roofing and Exterior Services Site',
+        label: 'Demonstration Site',
+        niche: 'Professional Service Business',
+        location: 'Demonstration Environment',
+        summary: 'Demonstration site for a business balancing urgent inquiries with planned higher-ticket projects.',
+        context: 'Demonstration project for a business with competing CTAs and weak trust structure during high-intent visits.',
         problems: ['Competing CTAs with no hierarchy', 'Slow load from builder bloat', 'Weak trust structure'],
-        built: ['Emergency vs estimate CTA split', 'Trust section layout', 'Performance-first page shell'],
+        built: ['Demonstrates CTA hierarchy for urgent versus planned inquiries', 'Trust section layout', 'Performance-first page shell'],
         targets: ['Target: clearer first-click conversion path', 'Target: improved mobile readability'],
         deliverables: ['Concept homepage', 'Roofing service page framework', 'CTA and copy hierarchy blueprint'],
         ctaLabel: 'Initialize Demo'

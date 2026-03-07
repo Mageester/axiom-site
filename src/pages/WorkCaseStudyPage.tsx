@@ -25,7 +25,7 @@ const WorkCaseStudyPage: React.FC = () => {
             <section className="px-6 pb-16 border-b border-axiom-border">
                 <div className="max-w-[900px] mx-auto w-full reveal">
                     <div className="flex flex-wrap items-center gap-3 mb-6">
-                        <span className={`text-[10px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm ${entry.label === 'Sample Case Study' ? 'border-accent/20 text-accent/90 bg-accent/5' : 'border-axiom-border text-axiom-text-mute'}`}>
+                        <span className={`text-[10px] font-mono uppercase tracking-widest border px-2 py-1 rounded-sm ${entry.label === 'Sample Build' ? 'border-accent/20 text-accent/90 bg-accent/5' : 'border-axiom-border text-axiom-text-mute'}`}>
                             {entry.label}
                         </span>
                         <span className="text-[10px] font-mono uppercase tracking-widest text-axiom-text-mute">{entry.niche}</span>

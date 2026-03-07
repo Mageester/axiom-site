@@ -9,9 +9,11 @@ interface WorkEntry {
   id: string;
   title: string;
   projectType: string;
+  audience: string;
   businessContext: string;
+  coreProblem: string;
+  demonstrates: string;
   scope: string;
-  role: string;
   summary: string;
   image: string;
   span: 'sm' | 'md' | 'lg';
@@ -24,8 +26,9 @@ const proofImageBySlug: Record<string, string> = {
 };
 
 const proofTypeLabel: Record<string, string> = {
-  'Sample Case Study': 'Sample Build',
+  'Sample Build': 'Sample Build',
   'Concept Build': 'Concept Build',
+  'Demonstration Site': 'Demonstration Site',
   'Active Deployment': 'Active Deployment',
 };
 
@@ -45,9 +48,11 @@ const works: WorkEntry[] = caseStudies.map((entry) => ({
   id: entry.slug,
   title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
   projectType: proofTypeLabel[entry.label] ?? entry.label,
+  audience: entry.niche,
   businessContext: `${entry.niche} - ${entry.location}`,
+  coreProblem: entry.problems[0] || 'Unclear trust and conversion structure',
+  demonstrates: entry.built[0] || 'Clearer page hierarchy and conversion pathways',
   scope: entry.deliverables.slice(0, 2).join(' + '),
-  role: entry.built.slice(0, 2).join(' + '),
   summary: oneSentence(entry.summary),
   image: proofImageBySlug[entry.slug] || '/images/work-aether.jpg',
   span: spanBySlug[entry.slug] || 'md',
@@ -93,14 +98,22 @@ function WorkCard({ work }: { work: WorkEntry }) {
           <p className="mt-1 text-xs uppercase tracking-[0.12em] text-white/75">{work.businessContext}</p>
           {!isCompact && <p className="mt-2 text-sm text-white/90">{work.summary}</p>}
           <dl className={`mt-3 grid gap-2 text-[11px] text-white/85 ${isCompact ? 'grid-cols-1' : 'sm:grid-cols-2'}`}>
+            <div className={isCompact ? '' : 'sm:col-span-2'}>
+              <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Business Type</dt>
+              <dd className="mt-0.5 leading-relaxed">{work.audience}</dd>
+            </div>
+            <div className={isCompact ? '' : 'sm:col-span-2'}>
+              <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Core Problem</dt>
+              <dd className="mt-0.5 leading-relaxed">{work.coreProblem}</dd>
+            </div>
             <div>
-              <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Scope</dt>
-              <dd className="mt-0.5 leading-relaxed">{work.scope}</dd>
+              <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Demonstrates</dt>
+              <dd className="mt-0.5 leading-relaxed">{work.demonstrates}</dd>
             </div>
             {!isCompact && (
               <div>
-                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Role</dt>
-                <dd className="mt-0.5 leading-relaxed">{work.role}</dd>
+                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Scope</dt>
+                <dd className="mt-0.5 leading-relaxed">{work.scope}</dd>
               </div>
             )}
           </dl>
@@ -115,7 +128,7 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom Infrastructure"
-        description="Proof objects from current sample and concept builds, with explicit scope, context, and Axiom role."
+        description="Truth-first proof objects from sample and demonstration builds, each framed with business type, problem, and what the work demonstrates."
       />
       <Layout>
         <section className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-4 pb-2 md:px-8 md:pt-10">
@@ -142,9 +155,9 @@ const Deployments: React.FC = () => {
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Each proof object includes</p>
                 <ul className="mt-3 space-y-2 text-sm text-slate-300">
-                  <li>Business context and market frame</li>
-                  <li>Concrete scope snapshot</li>
-                  <li>Explicit Axiom execution role</li>
+                  <li>Business type and audience context</li>
+                  <li>Core problem being solved</li>
+                  <li>What the build demonstrates</li>
                 </ul>
               </div>
             </div>
