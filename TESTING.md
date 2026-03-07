@@ -32,6 +32,73 @@ This checklist verifies the production-critical flow:
 
 Note: This repo currently has no committed `wrangler.toml`, so local D1 binding config must be provided via CLI/dashboard config.
 
+## Intake Reliability: Deterministic Local Workflow
+
+Use this flow when verifying `/api/intake` on a fresh machine.
+
+### Required local files
+
+1. Copy `.env.example` to `.dev.vars`.
+2. Set values in `.dev.vars`:
+   - always required for intake verification: `RESEND_API_KEY`
+   - required for recipient routing:
+     - `INTAKE_EMAIL` (defaults already include `aidan@getaxiom.ca,riley@getaxiom.ca`)
+     - `INTAKE_FROM_EMAIL`
+     - `INTAKE_CONFIRMATION_FROM_EMAIL`
+   - optional:
+     - `TURNSTILE_SECRET_KEY` (if set, every submit must include a valid Turnstile token)
+     - `INTAKE_ALLOWED_ORIGINS` (must include your frontend origin)
+
+### 3-terminal local run (recommended)
+
+1. Terminal A (keep `dist/` fresh):
+   - `npm run build:watch`
+2. Terminal B (Pages Functions + static build, local):
+   - `npm run dev:intake:api`
+   - This runs Wrangler Pages dev on `http://127.0.0.1:10000`
+3. Terminal C (frontend with `/api` proxy):
+   - `npm run dev:intake:web`
+   - Vite runs on `http://127.0.0.1:5173` and proxies `/api/*` to `:10000`
+
+### Automated smoke test
+
+Run from a fourth terminal while A/B/C are running:
+
+- `npm run intake:smoke`
+
+Default behavior expects `503` for valid submission if `RESEND_API_KEY` is missing (`--expect service_unavailable`).
+
+Expectations:
+- `OPTIONS /api/intake` returns `204`
+- invalid payload returns `400`
+- honeypot payload (`company_fax`) returns `200 { ok: true }`
+- valid payload returns:
+  - `503` when `RESEND_API_KEY` is missing
+  - `200 { ok: true }` when email delivery is configured and working
+  - `502` when provider call fails after validation
+
+Override expectation when secrets are configured:
+
+- `npm run intake:smoke -- --expect success`
+
+### Live delivery verification checklist (requires real secrets)
+
+After `--expect success`:
+1. Submit via `/apply` in browser.
+2. Confirm internal notification delivered to:
+   - `aidan@getaxiom.ca`
+   - `riley@getaxiom.ca`
+3. Confirm confirmation email delivered to submitter email.
+4. Confirm response body includes:
+   - `{ "ok": true, "message": "Transmission received. Confirmation email sent." }`
+5. If using D1 binding, confirm a row exists in `website_inquiries`.
+
+### What cannot be fully verified without live secrets/bindings
+
+- Without `RESEND_API_KEY`: true email delivery path (internal + confirmation) cannot be verified.
+- Without a D1 `DB` binding: durable intake persistence to `website_inquiries` cannot be verified.
+- With `TURNSTILE_SECRET_KEY` set but no valid token in payload: success path is intentionally blocked.
+
 ## Browser Verification Checklist (Local)
 
 1. Open `/login`.
@@ -271,7 +338,7 @@ Note: The app never logs the token value; only path/method are logged on denial.
 ## Website Intake Pipeline (Public)
 
 1. Apply latest migration including `0004_website_inquiries.sql`.
-2. Open `/contact`.
+2. Open `/apply` (or `/contact`, which redirects to `/apply`).
 3. Fill the website request form and submit.
 4. Verify browser Network:
    - `POST /api/intake` -> `200`

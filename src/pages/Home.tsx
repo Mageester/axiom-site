@@ -4,27 +4,24 @@ import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import PartnerMarquee from '../components/PartnerMarquee';
 import { SEO } from '../components/SEO';
+import { caseStudies } from '../data/caseStudies';
 
-const selectedWork = [
-  {
-    title: 'Home Services Repositioning',
-    sector: 'Home Services',
-    focus: 'Message reset and lead qualification flow.',
-    image: '/images/work-aether.jpg',
-  },
-  {
-    title: 'Contracting Conversion System',
-    sector: 'Contracting',
-    focus: 'Offer hierarchy and inquiry path control.',
-    image: '/images/case-study-2.jpg',
-  },
-  {
-    title: 'Professional Services Refresh',
-    sector: 'Professional Services',
-    focus: 'Editorial structure and trust presentation.',
-    image: '/images/case-study-1.jpg',
-  },
-];
+const proofImageBySlug: Record<string, string> = {
+  'sample-hvac-kitchener': '/images/work-aether.jpg',
+  'concept-landscaping-authority-site': '/images/case-study-1.jpg',
+  'concept-roofing-conversion-site': '/images/case-study-2.jpg',
+};
+
+const selectedWork = caseStudies.map((entry) => ({
+  id: entry.slug,
+  title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
+  projectType: entry.label,
+  businessContext: `${entry.niche} · ${entry.location}`,
+  scope: entry.deliverables.slice(0, 2).join(' + '),
+  role: entry.built.slice(0, 2).join(' + '),
+  summary: entry.summary,
+  image: proofImageBySlug[entry.slug] || '/images/work-aether.jpg',
+}));
 
 const capabilities = [
   {
@@ -107,11 +104,11 @@ const Home: React.FC = () => {
           <section className="pt-24 md:pt-32">
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected Work</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Selected Work Snapshots.</h2>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof Objects</p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Current Work, Clearly Framed.</h2>
               </div>
               <Link to="/works" className="hidden text-sm font-medium text-white/70 transition-colors hover:text-white md:inline-flex">
-                Open Work Index
+                View Full Proof Library
               </Link>
             </div>
 
@@ -119,19 +116,35 @@ const Home: React.FC = () => {
               <article className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/70 lg:col-span-7">
                 <img src={feature.image} alt={feature.title} className="h-[500px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent p-7">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{feature.sector}</p>
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{feature.projectType}</p>
                   <h3 className="mt-2 text-[clamp(1.6rem,2vw,2.1rem)] font-semibold text-white">{feature.title}</h3>
-                  <p className="mt-1 max-w-lg text-xs uppercase tracking-[0.12em] text-slate-200">{feature.focus}</p>
+                  <p className="mt-2 max-w-2xl text-sm text-slate-200">{feature.summary}</p>
+                  <dl className="mt-4 grid gap-2 text-[11px] uppercase tracking-[0.12em] text-slate-200/90 md:grid-cols-2">
+                    <div>
+                      <dt className="text-slate-300/65">Business Context</dt>
+                      <dd className="mt-0.5">{feature.businessContext}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-slate-300/65">Scope</dt>
+                      <dd className="mt-0.5">{feature.scope}</dd>
+                    </div>
+                    <div className="md:col-span-2">
+                      <dt className="text-slate-300/65">Axiom Role</dt>
+                      <dd className="mt-0.5">{feature.role}</dd>
+                    </div>
+                  </dl>
                 </div>
               </article>
 
               <div className="grid gap-5 lg:col-span-5">
                 {stacked.map((item) => (
-                  <article key={item.title} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/70">
+                  <article key={item.id} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/70">
                     <img src={item.image} alt={item.title} className="h-[240px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent p-5">
-                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{item.sector}</p>
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{item.projectType}</p>
                       <h3 className="mt-1 text-xl font-semibold text-white">{item.title}</h3>
+                      <p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-200/85">{item.businessContext}</p>
+                      <p className="mt-1 text-xs text-slate-200/90">{item.scope}</p>
                     </div>
                   </article>
                 ))}

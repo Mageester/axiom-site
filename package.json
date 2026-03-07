@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:watch": "vite build --watch",
+    "dev:intake:web": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "dev:intake:api": "wrangler pages dev dist --local --port 10000 --compatibility-date=2026-03-07",
+    "intake:smoke": "node scripts/intake-smoke.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

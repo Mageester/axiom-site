@@ -1,18 +1,31 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import SplitType from 'split-type';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Preloader from './Preloader';
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
+const NAV_ITEMS = [
+  { label: 'Home', to: '/' },
+  { label: 'Method', to: '/infrastructure' },
+  { label: 'Work', to: '/works' },
+  { label: 'About', to: '/architects' },
+];
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const layoutRef = useRef<HTMLDivElement>(null);
   const logoTargetRef = useRef<HTMLButtonElement>(null);
   const navRef = useRef<HTMLElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +37,74 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    setIsMobileMenuOpen(false);
+  }, [location.pathname, location.search, isMobileMenuOpen]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const body = document.body;
+    const previousOverflow = body.style.overflow;
+    if (isMobileMenuOpen) {
+      body.style.overflow = 'hidden';
+      return () => {
+        body.style.overflow = previousOverflow;
+      };
+    }
+
+    body.style.overflow = previousOverflow;
+    return;
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      lastFocusedRef.current?.focus();
+      return;
+    }
+
+    lastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const focusTarget = mobileMenuCloseRef.current || mobileMenuRef.current;
+    window.requestAnimationFrame(() => focusTarget?.focus());
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setIsMobileMenuOpen(false);
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+      const container = mobileMenuRef.current;
+      if (!container) return;
+      const focusable = Array.from(
+        container.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((element) => !element.hasAttribute('aria-hidden'));
+
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [isMobileMenuOpen]);
 
   useLayoutEffect(() => {
     if (typeof window === 'undefined') return;
@@ -114,18 +195,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-12 font-axiomMono md:flex">
-            <NavLink to="/" className={navLinkClass} data-startup-link>
-              Home
-            </NavLink>
-            <NavLink to="/infrastructure" className={navLinkClass} data-startup-link>
-              Method
-            </NavLink>
-            <NavLink to="/works" className={navLinkClass} data-startup-link>
-              Work
-            </NavLink>
-            <NavLink to="/architects" className={navLinkClass} data-startup-link>
-              About
-            </NavLink>
+            {NAV_ITEMS.map((item) => (
+              <NavLink key={item.to} to={item.to} className={navLinkClass} data-startup-link>
+                {item.label}
+              </NavLink>
+            ))}
           </div>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
@@ -133,8 +207,86 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               Apply for Fit Review
             </a>
           </div>
+
+          <div className="flex flex-1 basis-[44%] items-center justify-end md:hidden">
+            <button
+              ref={mobileMenuButtonRef}
+              type="button"
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] text-[#F2F4F7] transition-colors hover:border-white/35 hover:bg-white/[0.08]"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-site-menu"
+            >
+              <span className="sr-only">{isMobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
+              {isMobileMenuOpen ? (
+                <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
+                  <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
+                  <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
       </nav>
+
+      <div
+        className={`fixed inset-0 z-40 bg-black/55 transition-opacity duration-200 md:hidden ${isMobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+        onClick={() => setIsMobileMenuOpen(false)}
+        aria-hidden={!isMobileMenuOpen}
+      />
+
+      <div
+        id="mobile-site-menu"
+        ref={mobileMenuRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-menu-title"
+        className={`fixed inset-x-4 top-[5.5rem] z-50 rounded-2xl border border-white/15 bg-[rgba(10,11,13,0.96)] p-5 shadow-[0_28px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl transition-all duration-200 md:hidden ${
+          isMobileMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
+        }`}
+      >
+        <div className="mb-5 flex items-center justify-between">
+          <p id="mobile-menu-title" className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
+            Navigation
+          </p>
+          <button
+            ref={mobileMenuCloseRef}
+            type="button"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] text-[#F2F4F7] transition-colors hover:border-white/35 hover:bg-white/[0.08]"
+          >
+            <span className="sr-only">Close menu</span>
+            <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" aria-hidden>
+              <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+
+        <nav className="flex flex-col gap-1" aria-label="Mobile">
+          {NAV_ITEMS.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={({ isActive }) =>
+                `rounded-xl px-3 py-2.5 text-sm uppercase tracking-[0.14em] transition-colors ${
+                  isActive ? 'bg-white/[0.08] text-[#F2F4F7]' : 'text-slate-300 hover:bg-white/[0.05] hover:text-[#F2F4F7]'
+                }`
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        <a href="/apply" onClick={() => setIsMobileMenuOpen(false)} className="btn-primary btn-lg mt-5 w-full">
+          Apply for Fit Review
+        </a>
+      </div>
 
       <div className="relative z-10 pt-28 md:pt-32 noise-overlay">{children}</div>
     </div>

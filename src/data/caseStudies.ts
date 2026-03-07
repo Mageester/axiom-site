@@ -48,9 +48,9 @@ export const caseStudies: CaseStudyEntry[] = [
     {
         slug: 'concept-landscaping-authority-site',
         title: 'Demo: Landscaping Professional Site',
-        label: 'Active Deployment',
+        label: 'Concept Build',
         niche: 'Local Business',
-        location: 'Edge Isolated',
+        location: 'Demo Environment',
         summary: 'A sub-second edge-deployed dispatch architecture designed for premium landscaping and hardscaping contractors.',
         context: 'Concept demonstration for a landscaping and design firm that needs stronger trust signals and clearer service qualification.',
         problems: ['Portfolio-heavy site with weak CTA prompts', 'No lead qualification messaging', 'Unstructured service pages'],
@@ -62,9 +62,9 @@ export const caseStudies: CaseStudyEntry[] = [
     {
         slug: 'concept-roofing-conversion-site',
         title: 'Demo: Roofing Conversion Site',
-        label: 'Active Deployment',
+        label: 'Concept Build',
         niche: 'Contractors',
-        location: 'Edge Isolated',
+        location: 'Demo Environment',
         summary: 'A sub-second edge-deployed dispatch architecture designed for emergency roofing calls and exterior protection services.',
         context: 'Concept demonstration for a roofing company balancing emergency calls with planned replacement projects.',
         problems: ['Competing CTAs with no hierarchy', 'Slow load from builder bloat', 'Weak trust structure'],

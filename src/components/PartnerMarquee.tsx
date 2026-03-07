@@ -5,12 +5,12 @@ type Signal = {
 };
 
 const signals: Signal[] = [
-  { label: 'Selective Intake' },
-  { label: 'Senior-Led Delivery' },
-  { label: 'Conversion QA Gates' },
-  { label: 'Release Checklist Enforced' },
-  { label: 'Structured Investment' },
-  { label: 'Operational Continuity' },
+  { label: 'Two-Step Intake Flow' },
+  { label: 'Pages Functions API Intake' },
+  { label: 'D1 Inquiry Logging' },
+  { label: 'Scope Lock Before Build' },
+  { label: 'Release Checklist Gates' },
+  { label: 'Senior-Led QA Review' },
 ];
 
 const PartnerMarquee: React.FC = () => {
