@@ -361,12 +361,14 @@ const Infrastructure: React.FC = () => {
                 </div>
               </article>
 
-              <article className="axiom-bento card-snappy p-7 md:col-span-4 md:self-start md:p-8" data-reveal>
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">First Call Focus</p>
+              <article className="axiom-bento card-snappy h-fit p-7 md:col-span-4 md:self-start md:p-8" data-reveal>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Consultation Agenda</p>
                 <ul className="mt-4 space-y-3">
                   <li className="text-sm leading-relaxed text-slate-300">30-minute online Zoom consultation</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Required pages, forms, maps, and key functionality</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Scope alignment and package recommendation</li>
+                  <li className="text-sm leading-relaxed text-slate-300">Business goals, services, and priority outcomes</li>
+                  <li className="text-sm leading-relaxed text-slate-300">Required pages and functionality (booking, forms, maps)</li>
+                  <li className="text-sm leading-relaxed text-slate-300">Current website/domain setup or Axiom-managed infrastructure</li>
+                  <li className="text-sm leading-relaxed text-slate-300">Scope clarity and package recommendation</li>
                 </ul>
               </article>
             </div>
