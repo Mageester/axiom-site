@@ -5,12 +5,14 @@ type Signal = {
 };
 
 const signals: Signal[] = [
-  { label: 'Two-Step Qualification Flow' },
-  { label: 'Founder-Led Intake Review' },
-  { label: 'Inquiry Path QA Checked' },
-  { label: 'Scope Lock Before Build' },
-  { label: 'Release Checklist Gates' },
-  { label: 'Senior-Led QA Review' },
+  { label: 'Senior QA' },
+  { label: 'Scope Locked' },
+  { label: 'Founder Reviewed' },
+  { label: 'Edge Powered' },
+  { label: 'Speed Verified' },
+  { label: 'Code Audited' },
+  { label: 'Live Monitoring' },
+  { label: 'Launch Ready' },
 ];
 
 const PartnerMarquee: React.FC = () => {
@@ -30,7 +32,7 @@ const PartnerMarquee: React.FC = () => {
                   key={`${segmentIndex}-${label}-${index}`}
                   className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-[#10182a]/70 px-3.5 py-1.5"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#B05D41]" aria-hidden />
+                  <span className="status-dot h-1.5 w-1.5 rounded-full" aria-hidden />
                   <span className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">{label}</span>
                 </div>
               ))}

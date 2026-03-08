@@ -316,6 +316,12 @@
   .marquee-shell:hover .marquee-track {
     animation-play-state: paused;
   }
+
+  .status-dot {
+    background-color: #22c55e;
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.22), 0 0 7px rgba(34, 197, 94, 0.36);
+    animation: status-pulse 3.2s ease-in-out infinite;
+  }
 }
 
 @layer utilities {
@@ -574,6 +580,21 @@
   }
 }
 
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 0.86;
+    transform: scale(1);
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2), 0 0 6px rgba(34, 197, 94, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.28), 0 0 10px rgba(34, 197, 94, 0.45);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -598,7 +619,8 @@
   .animate-marquee-infinite,
   .reveal-on-scroll,
   .magnetic-btn,
-  .bento-hover {
+  .bento-hover,
+  .status-dot {
     animation: none;
     transition: none;
     transform: none;
