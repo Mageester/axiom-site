@@ -153,7 +153,6 @@ const ContactPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (status === 'loading') return;
-        if (form.company_fax) return;
 
         const nextErrors: typeof errors = {};
         if (!form.project_scale) nextErrors.project_scale = 'Please select an investment tier.';
@@ -193,7 +192,7 @@ const ContactPage: React.FC = () => {
 
             if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg(result?.message || 'Application received. Confirmation email sent.');
+                setMsg('Thanks for applying. One of our partners will review your submission within one business day.');
                 return;
             }
 
@@ -287,7 +286,7 @@ const ContactPage: React.FC = () => {
                                             </div>
 
                                             <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
-                                                Submit
+                                                Next
                                             </button>
 
                                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
@@ -374,7 +373,7 @@ const ContactPage: React.FC = () => {
                                                     Back
                                                 </button>
                                                 <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg flex-1 disabled:cursor-not-allowed disabled:opacity-70">
-                                                    {status === 'loading' ? 'Submitting...' : 'Submit Application'}
+                                                    {status === 'loading' ? 'Submitting...' : 'Request Consultation'}
                                                 </button>
                                             </div>
                                         </div>
