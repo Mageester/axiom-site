@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
@@ -299,7 +299,7 @@ const ContactPage: React.FC = () => {
                                             </div>
 
                                             <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
-                                                See If You Qualify (2-Minute Survey)
+                                                Submit
                                             </button>
                                             <p className="text-center font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">
                                                 Selective monthly intake
@@ -307,18 +307,12 @@ const ContactPage: React.FC = () => {
 
                                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                                                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What Happens Next</p>
-                                                <div className="mt-4 flex flex-col gap-3">
-                                                    {[
-                                                        { phase: '01', text: 'Aidan personally reviews your current site and local market competition.' },
-                                                        { phase: '02', text: 'We schedule a 15-minute strategy call to assess fit.' },
-                                                        { phase: '03', text: "If it's not a fit, we say so directly and point you elsewhere." },
-                                                    ].map((entry) => (
-                                                        <div key={entry.phase} className="flex items-start gap-3">
-                                                            <span className="mt-0.5 font-axiomMono text-xs text-[#d4a48e]">{entry.phase}</span>
-                                                            <p className="text-sm text-slate-300">{entry.text}</p>
-                                                        </div>
-                                                    ))}
-                                                </div>
+                                                <p className="mt-3 text-sm text-slate-300">
+                                                    Review the full process before submitting. The Method page explains each step from consultation to launch.
+                                                </p>
+                                                <Link to="/infrastructure" className={`${SECONDARY_BUTTON_CLASS} mt-4 w-full sm:w-auto`}>
+                                                    View Method
+                                                </Link>
                                             </div>
                                         </div>
                                     ) : (

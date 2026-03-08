@@ -17,10 +17,10 @@ const App: React.FC = () => {
       <motion.div
         key={location.pathname}
         className="min-h-screen overflow-x-hidden"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -16 }}
-        transition={{ duration: 0.46, ease: [0.22, 1, 0.36, 1] }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
       >
         <Routes location={location}>
           <Route path="/" element={<Home />} />

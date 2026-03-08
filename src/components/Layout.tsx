@@ -38,6 +38,41 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    const root = layoutRef.current;
+    if (!root) return;
+
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('main > section, main > article'))
+      .filter((element, index) => index > 0 && !element.hasAttribute('data-hero-root') && element.dataset.reveal !== 'off');
+
+    if (targets.length === 0) return;
+
+    targets.forEach((element, index) => {
+      element.classList.add('reveal-on-scroll');
+      element.style.setProperty('--reveal-order', String(index % 4));
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      targets.forEach((element) => element.classList.add('is-visible'));
+      return () => undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    targets.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname, location.search]);
 
