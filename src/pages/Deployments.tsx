@@ -164,6 +164,13 @@ function WorkCard({ work }: { work: WorkEntry }) {
 }
 
 const Deployments: React.FC = () => {
+  const handleViewSamplesClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = document.getElementById('sample-builds');
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <>
       <SEO
@@ -171,43 +178,31 @@ const Deployments: React.FC = () => {
         description="Truth-first proof objects from sample and demonstration builds, presented with clear business context, problem framing, and design intent."
       />
       <Layout>
-        <section className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-4 pb-2 md:px-8 md:pt-10">
-          <div className="grid items-end gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof Library</p>
-              <h1 className="mt-4 max-w-4xl text-left">Curated sample and demonstration builds for business-facing websites.</h1>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <a href="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Apply for Fit Review
-                </a>
-                <Link
-                  to="/infrastructure"
-                  className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-axiom-text-main hover:underline"
-                >
-                  Review Method
-                  <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
+        <section className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0">
+          <div className="max-w-4xl">
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">WORK</p>
+            <h1 className="mt-2.5 max-w-4xl text-left">Sample builds for real business use cases.</h1>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+              Demonstration sites showing how we structure fast, high-trust, conversion-focused web systems for service businesses.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3.5">
+              <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
+                View sample builds
+              </a>
+              <Link
+                to="/infrastructure"
+                className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-white/25 hover:bg-white/[0.06] hover:text-axiom-text-main"
+              >
+                Review method
+              </Link>
             </div>
-            <div className="lg:col-span-4">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Each proof object includes</p>
-                <ul className="mt-3 space-y-2 text-sm text-slate-300">
-                  <li>Business type and audience context</li>
-                  <li>Core problem being solved</li>
-                  <li>What the build demonstrates</li>
-                </ul>
-                <p className="mt-4 text-xs leading-relaxed text-slate-400">
-                  Unless labeled <span className="text-slate-200">Active Deployment</span>, these are sample or demonstration builds and do not claim client outcomes.
-                </p>
-              </div>
-            </div>
+            <p className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-400">
+              Unless marked Active Deployment, these examples are internal sample builds created to demonstrate structure, UX, and technical standards.
+            </p>
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-7xl overflow-visible px-4 pt-6 pb-8 sm:px-6 md:px-8">
+        <section id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-2 pb-8 sm:px-6 md:px-8 md:pt-4">
           <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
             {works.map((work) => (
               <WorkCard key={work.id} work={work} />
