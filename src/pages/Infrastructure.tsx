@@ -187,21 +187,6 @@ const FAQ_ITEMS: readonly ExpandableItem[] = [
   },
 ];
 
-const PROOF_POINTS: readonly ExpandableItem[] = [
-  {
-    title: 'Founder-led qualification',
-    body: 'Strategy and scope decisions are handled directly by Axiom leadership, not delegated to a generic intake team.',
-  },
-  {
-    title: 'Controlled launch standards',
-    body: 'Release is handled with explicit checks for forms, routing, and production behavior across core devices.',
-  },
-  {
-    title: 'Transparent work positioning',
-    body: 'Sample and demonstration work is labeled clearly, with no fabricated claims, testimonials, or inflated outcomes.',
-  },
-];
-
 const StepIcon: React.FC<{ id: string }> = ({ id }) => {
   const common = 'h-5 w-5 text-[#d4a48e]';
 
@@ -596,40 +581,6 @@ const Infrastructure: React.FC = () => {
                 );
               })}
             </div>
-          </section>
-
-          <section className="pt-16 md:pt-22">
-            <div className="mb-7" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Operational Proof</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Signals serious operators expect.</h2>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-3">
-              {PROOF_POINTS.map((item) => (
-                <article key={item.title} className="axiom-bento rounded-2xl p-5 md:p-6" data-reveal>
-                  <h3 className="text-lg font-semibold text-[#F2F4F7]">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.body}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="pt-12 md:pt-16">
-            <article className="axiom-bento rounded-2xl p-6 md:p-8" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Save For Later</p>
-              <h2 className="mt-2 text-2xl font-semibold text-[#F2F4F7] md:text-3xl">Need a one-page process overview for internal review?</h2>
-              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Request the infrastructure method summary and we will send a concise shareable overview your team can review asynchronously.
-              </p>
-              <div className="mt-6">
-                <a
-                  href="mailto:aidan@getaxiom.ca?subject=Axiom%20Method%20Overview%20Request"
-                  className="inline-flex rounded-full border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-slate-100 transition-colors hover:border-white/35 hover:bg-white/[0.08]"
-                >
-                  Request Process Summary
-                </a>
-              </div>
-            </article>
           </section>
 
           <section className="pt-16 md:pt-22">
