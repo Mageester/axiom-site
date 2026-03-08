@@ -6,14 +6,29 @@
 
 @layer base {
   :root {
-    --axiom-base: #090A0B;
-    --axiom-accent: #B05D41;
-    --accent: #B05D41;
-    --accent2: #F59768;
-    --axiom-text-primary: #CBD5E1;
-    --axiom-amber: #B05D41;
-    --axiom-gold: #D8B47A;
-    --axiom-navy: #1C2E5A;
+    --axiom-base: #090B10;
+    --axiom-elevated: #11161D;
+    --axiom-surface: #182131;
+    --axiom-border: #2A3444;
+    --axiom-accent: #C26E4E;
+    --accent: #C26E4E;
+    --accent2: #D88361;
+    --accent-muted: rgba(194, 110, 78, 0.2);
+    --axiom-text-main: #F3F6FA;
+    --axiom-text-primary: #C2CCD8;
+    --axiom-text-mute: #8F9BAB;
+    --axiom-amber: #C26E4E;
+    --axiom-gold: #D6B07A;
+    --axiom-navy: #21324A;
+    --bg-main: var(--axiom-base);
+    --bg-surface: var(--axiom-elevated);
+    --bg-inset: #0D1118;
+    --border-panel: var(--axiom-border);
+    --border-subtle: rgba(143, 155, 171, 0.24);
+    --text-primary: var(--axiom-text-main);
+    --text-secondary: var(--axiom-text-primary);
+    --text-heading: var(--axiom-text-main);
+    --text-body: var(--axiom-text-primary);
   }
 
   html {
@@ -37,10 +52,28 @@
     color: var(--axiom-text-primary);
     background-color: var(--axiom-base);
     background-image:
-      radial-gradient(circle at 14% 22%, rgba(28, 46, 90, 0.24), transparent 48%),
-      radial-gradient(circle at 84% 38%, rgba(176, 93, 65, 0.2), transparent 52%);
+      radial-gradient(1200px 620px at -6% -24%, rgba(33, 50, 74, 0.34), transparent 60%),
+      radial-gradient(980px 560px at 112% 18%, rgba(194, 110, 78, 0.18), transparent 58%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 32%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -90px;
+    left: 0;
+    right: 0;
+    height: 230px;
+    pointer-events: none;
+    background:
+      radial-gradient(72% 100% at 50% 0%, rgba(194, 110, 78, 0.2) 0%, transparent 72%),
+      radial-gradient(56% 80% at 68% 8%, rgba(33, 50, 74, 0.2) 0%, transparent 74%);
+    filter: blur(30px);
+    opacity: 0.62;
+    z-index: 1;
+    animation: ambient-pan 24s ease-in-out infinite;
   }
 
   #root {
@@ -72,10 +105,15 @@
     inset: 0;
     pointer-events: none;
     background-image:
-      radial-gradient(circle at top left, rgba(176, 93, 65, 0.07) 0%, transparent 56%),
-      radial-gradient(circle at bottom right, rgba(176, 93, 65, 0.05) 0%, transparent 56%);
-    filter: blur(90px);
+      radial-gradient(circle at top left, rgba(194, 110, 78, 0.06) 0%, transparent 58%),
+      radial-gradient(circle at bottom right, rgba(194, 110, 78, 0.04) 0%, transparent 58%);
+    filter: blur(86px);
     z-index: 1;
+  }
+
+  ::selection {
+    color: #f9fbff;
+    background: rgba(194, 110, 78, 0.38);
   }
 
   section {
@@ -115,7 +153,7 @@
     inset: 0;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.03;
+    opacity: 0.02;
     mix-blend-mode: soft-light;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 220px 220px;
@@ -126,8 +164,9 @@
   .axiom-bento-card,
   .machined-card {
     @apply relative overflow-hidden rounded-2xl border border-white/10;
-    background: rgba(14, 20, 34, 0.74);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.07), 0 4px 14px rgba(0, 0, 0, 0.44), 0 16px 32px rgba(0, 0, 0, 0.32);
+    background: linear-gradient(180deg, rgba(24, 33, 49, 0.82) 0%, rgba(17, 22, 29, 0.82) 100%);
+    border-color: rgba(143, 155, 171, 0.24);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06), 0 4px 14px rgba(0, 0, 0, 0.42), 0 14px 28px rgba(0, 0, 0, 0.3);
     transform: translateZ(0);
     backface-visibility: hidden;
   }
@@ -139,7 +178,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
     pointer-events: none;
   }
@@ -152,24 +191,27 @@
     height: 3.5rem;
     border-radius: 9999px;
     padding-inline: 1.5rem;
-    color: #F5F7FA;
+    color: var(--axiom-text-main);
     font-weight: 600;
     letter-spacing: 0.01em;
-    background: radial-gradient(57% 86% at 50% 105%, #f59768 0%, #b05d41 100%);
-    border: 0.5px solid rgba(255, 255, 255, 0.58);
+    background: linear-gradient(138deg, var(--accent2) -10%, var(--accent) 58%, #a15e42 110%);
+    background-size: 125% 125%;
+    background-position: 18% 28%;
+    border: 0.5px solid rgba(255, 255, 255, 0.52);
     box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.34),
       inset 0 -6px 4px 0 rgba(0, 0, 0, 0.2),
       0 4px 6px 0 rgba(0, 0, 0, 0.4),
-      0 4px 52px 0 rgba(176, 93, 65, 0.18);
+      0 4px 46px 0 rgba(194, 110, 78, 0.18);
     transform: translateZ(0);
     backface-visibility: hidden;
-    transition: transform 300ms cubic-bezier(0.2, 0.8, 0.4, 1), filter 300ms ease, box-shadow 300ms ease;
+    transition: transform 300ms cubic-bezier(0.2, 0.8, 0.4, 1), filter 300ms ease, box-shadow 300ms ease, background-position 300ms ease;
   }
 
   .btn-primary:hover {
     transform: translate3d(0, -0.2rem, 0) scale(1.015);
     filter: brightness(1.05);
+    background-position: 86% 34%;
   }
 
   .btn-primary:active {
@@ -181,7 +223,7 @@
     box-shadow:
       0 4px 20px rgba(0, 0, 0, 0.6),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
-      0 0 0 2px rgba(176, 93, 65, 0.32);
+      0 0 0 2px rgba(194, 110, 78, 0.36);
   }
 
   .btn-md {
@@ -363,6 +405,23 @@
   }
 }
 
+@keyframes ambient-pan {
+  0% {
+    transform: translateX(-1.8%) scale(1);
+    opacity: 0.56;
+  }
+
+  50% {
+    transform: translateX(1.4%) scale(1.02);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateX(-1.8%) scale(1);
+    opacity: 0.56;
+  }
+}
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -468,6 +527,7 @@
   }
 
   .btn-primary,
+  body::before,
   .hero-fade-in,
   .animate-grid-drift,
   .animate-logo-cloud,
