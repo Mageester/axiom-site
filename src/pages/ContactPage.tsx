@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
@@ -110,6 +110,22 @@ const ContactPage: React.FC = () => {
     const [status, setStatus] = useState<SubmitState>('');
     const [msg, setMsg] = useState('');
     const [errors, setErrors] = useState<Partial<Record<keyof IntakeFormState, string>>>({});
+    const successBoxRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (status !== 'success') return;
+
+        const scrollToSuccess = () => {
+            const target = successBoxRef.current;
+            if (!target) return;
+            const topOffset = 112;
+            const targetTop = target.getBoundingClientRect().top + window.scrollY - topOffset;
+            window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+        };
+
+        const rafId = window.requestAnimationFrame(scrollToSuccess);
+        return () => window.cancelAnimationFrame(rafId);
+    }, [status]);
 
     const setField = (key: keyof IntakeFormState, value: string | string[]) => {
         if (errors[key]) {
@@ -234,7 +250,7 @@ const ContactPage: React.FC = () => {
                             <form onSubmit={handleSubmit} className="flex flex-col gap-7">
                                 <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
                                     {status === 'success' && (
-                                        <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
+                                        <div ref={successBoxRef} className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
                                             <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
                                             <p className="mt-2 text-sm text-slate-300">A partner will review your submission and reply within one business day.</p>
                                             <button type="button" onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
