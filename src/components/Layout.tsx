@@ -206,8 +206,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         ref={navRef}
         data-startup-nav
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${isScrolled
-            ? 'border-b border-white/5 bg-[rgba(9,10,11,0.82)] backdrop-blur-md'
-            : 'border-b border-transparent bg-[rgba(9,10,11,0.45)]'
+            ? 'border-b border-white/[0.08] bg-[rgba(9,12,18,0.58)] backdrop-blur-sm'
+            : 'border-b border-transparent bg-transparent backdrop-blur-0'
           }`}
       >
         <div className="relative h-20 flex items-center px-6 md:px-12">
