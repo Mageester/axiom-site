@@ -343,7 +343,7 @@ const Infrastructure: React.FC = () => {
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-8 md:pt-16">
-            <div className="grid gap-6 md:grid-cols-12 md:gap-8">
+            <div className="grid gap-6 md:grid-cols-12 md:items-start md:gap-8">
               <article className="axiom-bento card-snappy p-7 md:col-span-8 md:p-10" data-reveal>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Method</p>
                 <div className="mt-4 max-w-4xl overflow-hidden">
@@ -361,7 +361,7 @@ const Infrastructure: React.FC = () => {
                 </div>
               </article>
 
-              <article className="axiom-bento card-snappy p-7 md:col-span-4 md:p-8" data-reveal>
+              <article className="axiom-bento card-snappy p-7 md:col-span-4 md:self-start md:p-8" data-reveal>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">First Call Focus</p>
                 <ul className="mt-4 space-y-3">
                   <li className="text-sm leading-relaxed text-slate-300">30-minute online Zoom consultation</li>
