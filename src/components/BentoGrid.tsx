@@ -1,14 +1,16 @@
 import React from 'react';
 import useReveal from '../hooks/useReveal';
+import ResponsiveImage from './ResponsiveImage';
+import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
 
 const cardShell =
   'group bento-hover relative overflow-hidden rounded-2xl bg-[#0d1323]/60 backdrop-blur-xl border border-white/10 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)]';
 
-const thumbnails = [
-  { src: '/images/case-study-1.jpg', alt: 'Cinematic project thumbnail one' },
-  { src: '/images/case-study-2.jpg', alt: 'Cinematic project thumbnail two' },
-  { src: '/images/case-study-3.jpg', alt: 'Cinematic project thumbnail three' },
-  { src: '/images/case-study-4.jpg', alt: 'Cinematic project thumbnail four' },
+const thumbnails: { src: ResponsiveSource; alt: string }[] = [
+  { src: responsiveImages.caseStudy1, alt: 'Cinematic project thumbnail one' },
+  { src: responsiveImages.caseStudy2, alt: 'Cinematic project thumbnail two' },
+  { src: responsiveImages.caseStudy3, alt: 'Cinematic project thumbnail three' },
+  { src: responsiveImages.caseStudy4, alt: 'Cinematic project thumbnail four' },
 ];
 
 const BentoGrid: React.FC = () => {
@@ -24,11 +26,13 @@ const BentoGrid: React.FC = () => {
         style={{ ['--reveal-order' as string]: 0 } as React.CSSProperties}
       >
         <article className={cardShell}>
-          <img
-            src="/images/work-aether.jpg"
+          <ResponsiveImage
+            source={responsiveImages.workAether}
+            sizes="(min-width: 1024px) 50vw, 100vw"
             alt="Premium website showcase"
             className="h-full min-h-[520px] w-full object-cover object-center"
             loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-8">
@@ -91,12 +95,14 @@ const BentoGrid: React.FC = () => {
             </div>
             <div className="mt-8 flex gap-6 overflow-x-auto pb-2">
               {thumbnails.map((item) => (
-                <img
-                  key={item.src}
-                  src={item.src}
+                <ResponsiveImage
+                  key={item.src.fallbackSrc}
+                  source={item.src}
+                  sizes="(min-width: 768px) 360px, 300px"
                   alt={item.alt}
                   className="h-40 min-w-[300px] rounded-xl border border-white/10 object-cover object-center md:h-48 md:min-w-[360px]"
                   loading="lazy"
+                  decoding="async"
                 />
               ))}
             </div>

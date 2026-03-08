@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import PartnerMarquee from '../components/PartnerMarquee';
+import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { caseStudies } from '../data/caseStudies';
+import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
 
-const proofImageBySlug: Record<string, string> = {
-  'sample-hvac-kitchener': '/images/work-aether.jpg',
-  'concept-landscaping-authority-site': '/images/case-study-1.jpg',
-  'concept-roofing-conversion-site': '/images/case-study-2.jpg',
+const proofImageBySlug: Record<string, ResponsiveSource> = {
+  'sample-hvac-kitchener': responsiveImages.workAether,
+  'concept-landscaping-authority-site': responsiveImages.caseStudy1,
+  'concept-roofing-conversion-site': responsiveImages.caseStudy2,
 };
 
 const proofTypeLabel: Record<string, string> = {
@@ -28,7 +30,7 @@ const selectedWork = caseStudies.map((entry) => ({
   demonstrates: entry.demonstrates || entry.built[0] || 'Clearer hierarchy and conversion pathways',
   scope: entry.deliverables.slice(0, 2).join(' + '),
   summary: entry.summary,
-  image: proofImageBySlug[entry.slug] || '/images/work-aether.jpg',
+  image: proofImageBySlug[entry.slug] || responsiveImages.workAether,
 }));
 
 const capabilities = [
@@ -127,7 +129,14 @@ const Home: React.FC = () => {
             <div className="grid gap-5 lg:grid-cols-12 lg:items-start">
               <article className="group h-fit overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/80 lg:col-span-7 lg:self-start">
                 <div className="relative h-[260px] sm:h-[320px] md:h-[360px] overflow-hidden">
-                  <img src={feature.image} alt={feature.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                  <ResponsiveImage
+                    source={feature.image}
+                    sizes="(min-width: 1280px) 760px, (min-width: 1024px) 62vw, 100vw"
+                    alt={feature.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/28 to-transparent" />
                   <div className="absolute left-6 top-6 z-10 flex flex-wrap items-center gap-2">
                     <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
@@ -169,7 +178,14 @@ const Home: React.FC = () => {
                 {stacked.map((item, index) => (
                   <article key={item.id} className="group overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85">
                     <div className={`relative ${index === 0 ? 'h-[56%]' : 'h-[52%]'} overflow-hidden`}>
-                      <img src={item.image} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                      <ResponsiveImage
+                        source={item.image}
+                        sizes="(min-width: 1024px) 38vw, 100vw"
+                        alt={item.title}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        loading="lazy"
+                        decoding="async"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
                       <div className="absolute left-4 top-4">
                         <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">

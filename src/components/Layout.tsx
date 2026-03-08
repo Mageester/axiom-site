@@ -1,8 +1,9 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import SplitType from 'split-type';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Preloader from './Preloader';
+import ResponsiveImage from './ResponsiveImage';
+import { responsiveImages } from '../lib/responsiveImages';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -143,48 +144,58 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     if (typeof window === 'undefined') return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    let split: SplitType | null = null;
+    let splitInstance: { chars: Element[]; revert: () => void } | null = null;
+    let ctx: gsap.Context | null = null;
+    let cancelled = false;
 
-    const ctx = gsap.context(() => {
-      const nav = navRef.current;
-      const logo = logoTargetRef.current;
-      const navLinks = gsap.utils.toArray<HTMLElement>('[data-startup-link]');
-      const hero = layoutRef.current?.querySelector<HTMLElement>('[data-hero-root]');
-      const heading = layoutRef.current?.querySelector<HTMLElement>('[data-startup-heading]');
-      const backgrounds = gsap.utils.toArray<HTMLElement>('[data-startup-bg]');
-      const cards = gsap.utils.toArray<HTMLElement>('[data-glass-card], .axiom-bento, .axiom-bento-card, .machined-card');
+    const initAnimations = async () => {
+      const { default: SplitType } = await import('split-type');
+      if (cancelled) return;
 
-      if (!nav || !hero || !heading || !logo) return;
+      ctx = gsap.context(() => {
+        const nav = navRef.current;
+        const logo = logoTargetRef.current;
+        const navLinks = gsap.utils.toArray<HTMLElement>('[data-startup-link]');
+        const hero = layoutRef.current?.querySelector<HTMLElement>('[data-hero-root]');
+        const heading = layoutRef.current?.querySelector<HTMLElement>('[data-startup-heading]');
+        const backgrounds = gsap.utils.toArray<HTMLElement>('[data-startup-bg]');
+        const cards = gsap.utils.toArray<HTMLElement>('[data-glass-card], .axiom-bento, .axiom-bento-card, .machined-card');
 
-      split = new SplitType(heading, {
-        types: 'words,chars',
-        wordClass: 'startup-word',
-        charClass: 'startup-char',
-      });
+        if (!nav || !hero || !heading || !logo) return;
 
-      gsap.set(nav, { autoAlpha: 0, y: -50 });
-      gsap.set(logo, { autoAlpha: 0, x: -150, scale: 0.72, transformOrigin: 'left center' });
-      gsap.set(navLinks, { autoAlpha: 0, x: 28 });
-      gsap.set(hero, { autoAlpha: 0 });
-      gsap.set(backgrounds, { autoAlpha: 0 });
-      gsap.set(split.chars, { autoAlpha: 0, yPercent: 110 });
-      gsap.set(cards, { autoAlpha: 0, y: 40 });
+        splitInstance = new SplitType(heading, {
+          types: 'words,chars',
+          wordClass: 'startup-word',
+          charClass: 'startup-char',
+        }) as { chars: Element[]; revert: () => void };
 
-      const timeline = gsap.timeline();
+        gsap.set(nav, { autoAlpha: 0, y: -50 });
+        gsap.set(logo, { autoAlpha: 0, x: -150, scale: 0.72, transformOrigin: 'left center' });
+        gsap.set(navLinks, { autoAlpha: 0, x: 28 });
+        gsap.set(hero, { autoAlpha: 0 });
+        gsap.set(backgrounds, { autoAlpha: 0 });
+        gsap.set(splitInstance.chars, { autoAlpha: 0, yPercent: 110 });
+        gsap.set(cards, { autoAlpha: 0, y: 40 });
 
-      timeline
-        .to(nav, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power4.out' }, 0)
-        .to(logo, { autoAlpha: 1, x: 0, scale: 1, duration: 0.72, ease: 'expo.out' }, 0.08)
-        .to(navLinks, { autoAlpha: 1, x: 0, duration: 0.45, stagger: 0.05, ease: 'power3.out' }, 0.3)
-        .to(hero, { autoAlpha: 1, duration: 0.2 }, 0.2)
-        .to(split.chars, { autoAlpha: 1, yPercent: 0, stagger: 0.02, duration: 0.5, ease: 'power3.out' }, 0.3)
-        .to(backgrounds, { autoAlpha: 0.04, duration: 0.6, stagger: 0.08, ease: 'power1.out' }, 0.6)
-        .to(cards, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }, 0.6);
-    }, layoutRef);
+        const timeline = gsap.timeline();
+
+        timeline
+          .to(nav, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power4.out' }, 0)
+          .to(logo, { autoAlpha: 1, x: 0, scale: 1, duration: 0.72, ease: 'expo.out' }, 0.08)
+          .to(navLinks, { autoAlpha: 1, x: 0, duration: 0.45, stagger: 0.05, ease: 'power3.out' }, 0.3)
+          .to(hero, { autoAlpha: 1, duration: 0.2 }, 0.2)
+          .to(splitInstance.chars, { autoAlpha: 1, yPercent: 0, stagger: 0.02, duration: 0.5, ease: 'power3.out' }, 0.3)
+          .to(backgrounds, { autoAlpha: 0.04, duration: 0.6, stagger: 0.08, ease: 'power1.out' }, 0.6)
+          .to(cards, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }, 0.6);
+      }, layoutRef);
+    };
+
+    void initAnimations();
 
     return () => {
-      ctx.revert();
-      split?.revert();
+      cancelled = true;
+      ctx?.revert();
+      splitInstance?.revert();
     };
   }, []);
 
@@ -219,10 +230,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               className="inline-flex h-full items-center origin-left leading-none transition-transform duration-700 ease-in-out hover:scale-[1.04]"
               aria-label="Axiom Infrastructure home"
             >
-              <img
-                src="/photos/logoclear.png"
+              <ResponsiveImage
+                source={responsiveImages.logoClear}
+                sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
                 alt="Axiom Infrastructure"
                 className="block h-16 w-auto max-w-none object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125 md:h-20 lg:h-24"
+                decoding="async"
+                fetchPriority="high"
               />
             </button>
           </div>

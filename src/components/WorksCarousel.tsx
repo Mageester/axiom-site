@@ -1,20 +1,22 @@
 import React from 'react';
+import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
+import ResponsiveImage from './ResponsiveImage';
 
-const projects = [
+const projects: { src: ResponsiveSource; alt: string; title: string; sector: string }[] = [
   {
-    src: '/images/work-aether.jpg',
+    src: responsiveImages.workAether,
     alt: 'Project Aether interface showcase',
     title: 'Project Aether',
     sector: 'Home Services',
   },
   {
-    src: '/images/case-study-2.jpg',
+    src: responsiveImages.caseStudy2,
     alt: 'Project Nexus interface showcase',
     title: 'Project Nexus',
     sector: 'Contracting',
   },
   {
-    src: '/images/case-study-1.jpg',
+    src: responsiveImages.caseStudy1,
     alt: 'Project Sentinel interface showcase',
     title: 'Project Sentinel',
     sector: 'Professional Services',
@@ -43,7 +45,14 @@ const WorksCarousel: React.FC = () => {
                   key={`${segmentIndex}-${project.title}-${index}`}
                   className="relative h-[360px] w-[78vw] max-w-[520px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/65 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] md:h-[460px] md:w-[40vw]"
                 >
-                  <img src={project.src} alt={project.alt} className="h-full w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} />
+                  <ResponsiveImage
+                    source={project.src}
+                    sizes="(min-width: 1024px) 40vw, 78vw"
+                    alt={project.alt}
+                    className="h-full w-full object-cover"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6">
                     <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{project.sector}</p>
                     <h3 className="mt-2 text-xl font-semibold text-white">{project.title}</h3>

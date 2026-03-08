@@ -1,4 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import ResponsiveImage from './ResponsiveImage';
+import { responsiveImages } from '../lib/responsiveImages';
 
 type PreloaderProps = {
   targetRef: React.RefObject<HTMLElement>;
@@ -67,11 +69,14 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
       className={`fixed inset-0 z-[120] bg-black transition-opacity duration-[1100ms] ease-out ${departing ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100'}`}
       aria-hidden
     >
-      <img
-        src="/photos/logoclear.png"
+      <ResponsiveImage
+        source={responsiveImages.logoClear}
+        sizes="(min-width: 768px) 320px, 256px"
         alt=""
         className="absolute left-1/2 top-1/2 h-40 w-auto object-contain drop-shadow-[0_0_48px_rgba(245,247,250,0.2)] md:h-48"
         style={logoStyle}
+        decoding="async"
+        fetchPriority="high"
       />
     </div>
   );

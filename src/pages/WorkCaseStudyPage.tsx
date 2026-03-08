@@ -2,13 +2,15 @@ import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
+import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { getCaseStudyBySlug } from '../data/caseStudies';
+import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
 
-const proofImageBySlug: Record<string, string> = {
-  'sample-hvac-kitchener': '/images/work-aether.jpg',
-  'concept-landscaping-authority-site': '/images/case-study-1.jpg',
-  'concept-roofing-conversion-site': '/images/case-study-2.jpg',
+const proofImageBySlug: Record<string, ResponsiveSource> = {
+  'sample-hvac-kitchener': responsiveImages.workAether,
+  'concept-landscaping-authority-site': responsiveImages.caseStudy1,
+  'concept-roofing-conversion-site': responsiveImages.caseStudy2,
 };
 
 const proofToneByLabel: Record<string, string> = {
@@ -24,7 +26,7 @@ const WorkCaseStudyPage: React.FC = () => {
 
   if (!entry) return <Navigate to="/works" replace />;
 
-  const image = proofImageBySlug[entry.slug] || '/images/work-aether.jpg';
+  const image = proofImageBySlug[entry.slug] || responsiveImages.workAether;
   const labelTone = proofToneByLabel[entry.label] || 'border-white/20 text-slate-200 bg-white/[0.04]';
 
   return (
@@ -83,7 +85,15 @@ const WorkCaseStudyPage: React.FC = () => {
 
               <div className="lg:col-span-5">
                 <div className="group relative h-[360px] overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/80 md:h-[460px]">
-                  <img src={image} alt={entry.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                  <ResponsiveImage
+                    source={image}
+                    sizes="(min-width: 1280px) 520px, (min-width: 1024px) 44vw, 100vw"
+                    alt={entry.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
                 </div>
               </div>

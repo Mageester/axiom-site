@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
+import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { caseStudies } from '../data/caseStudies';
+import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
 
 interface WorkEntry {
   id: string;
@@ -15,14 +17,14 @@ interface WorkEntry {
   demonstrates: string;
   scope: string;
   summary: string;
-  image: string;
+  image: ResponsiveSource;
   layout: 'featured' | 'editorial' | 'compact';
 }
 
-const proofImageBySlug: Record<string, string> = {
-  'sample-hvac-kitchener': '/images/work-aether.jpg',
-  'concept-landscaping-authority-site': '/images/case-study-1.jpg',
-  'concept-roofing-conversion-site': '/images/case-study-2.jpg',
+const proofImageBySlug: Record<string, ResponsiveSource> = {
+  'sample-hvac-kitchener': responsiveImages.workAether,
+  'concept-landscaping-authority-site': responsiveImages.caseStudy1,
+  'concept-roofing-conversion-site': responsiveImages.caseStudy2,
 };
 
 const proofTypeLabel: Record<string, string> = {
@@ -54,7 +56,7 @@ const works: WorkEntry[] = caseStudies.map((entry) => ({
   demonstrates: entry.demonstrates || entry.built[0] || 'Clearer page hierarchy and conversion pathways',
   scope: entry.deliverables.slice(0, 2).join(' + '),
   summary: oneSentence(entry.summary),
-  image: proofImageBySlug[entry.slug] || '/images/work-aether.jpg',
+  image: proofImageBySlug[entry.slug] || responsiveImages.workAether,
   layout: layoutBySlug[entry.slug] || 'compact',
 }));
 
@@ -70,11 +72,14 @@ function WorkCard({ work }: { work: WorkEntry }) {
     >
       {isFeatured ? (
         <>
-          <img
-            src={work.image}
+          <ResponsiveImage
+            source={work.image}
+            sizes="(min-width: 1280px) 920px, (min-width: 768px) 92vw, 100vw"
             alt={work.title}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            loading="lazy"
+            loading={isFeatured ? 'eager' : 'lazy'}
+            fetchPriority={isFeatured ? 'high' : 'auto'}
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/45 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-95" />
 
@@ -115,11 +120,13 @@ function WorkCard({ work }: { work: WorkEntry }) {
       ) : (
         <div className="flex h-full flex-col">
           <div className={`relative ${isEditorial ? 'h-[56%]' : 'h-[52%]'} overflow-hidden`}>
-            <img
-              src={work.image}
+            <ResponsiveImage
+              source={work.image}
+              sizes="(min-width: 768px) 48vw, 100vw"
               alt={work.title}
               className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
             <div className="absolute left-4 top-4 z-10">
