@@ -124,8 +124,8 @@ const Home: React.FC = () => {
               </Link>
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-12">
-              <article className="group overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/80 lg:col-span-7">
+            <div className="grid gap-5 lg:grid-cols-12 lg:items-start">
+              <article className="group h-fit overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/80 lg:col-span-7 lg:self-start">
                 <div className="relative h-[260px] sm:h-[320px] md:h-[360px] overflow-hidden">
                   <img src={feature.image} alt={feature.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/28 to-transparent" />
