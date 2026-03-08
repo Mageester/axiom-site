@@ -40,7 +40,7 @@ export default {
             fontFamily: {
                 axiomSans: ['Inter', 'Satoshi', 'sans-serif'],
                 axiomDisplay: ['"Space Grotesk"', 'Inter', 'sans-serif'],
-                axiomMono: ['"IBM Plex Mono"', 'monospace'],
+                axiomMono: ['Sora', 'Inter', 'sans-serif'],
                 grotesk: ['"Space Grotesk"', 'Inter', 'sans-serif'],
                 inter: ['Inter', 'sans-serif'],
             },
