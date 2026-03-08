@@ -377,31 +377,30 @@ const Infrastructure: React.FC = () => {
           </div>
 
           <section id="process" data-method-section className="pt-14 md:pt-20">
-            <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
-              <div className="lg:col-span-4" data-reveal>
+            <div className="grid gap-5 lg:grid-cols-12 lg:gap-7">
+              <div className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start" data-reveal>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Process</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Clear steps from first call to launch.</h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
                   The sequence is structured to reduce ambiguity and keep project decisions aligned.
                 </p>
+              </div>
 
-                <article className="axiom-bento mt-6 p-5" data-reveal>
+              <ol className="grid gap-4 lg:col-span-8">
+                <li className="axiom-bento rounded-2xl px-4 py-3 md:px-5 md:py-3.5" data-reveal aria-label="Step progress">
                   <div className="flex items-center justify-between">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Step Progress</p>
+                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Progress</p>
                     <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#d4a48e]">
                       {activeProcessStep + 1} / {PROCESS_STEPS.length}
                     </p>
                   </div>
-                  <div className="mt-3 h-1.5 rounded-full bg-white/10">
+                  <div className="mt-2 h-1 rounded-full bg-white/10">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-[#B05D41] to-[#F59768] transition-all duration-300 motion-reduce:transition-none"
                       style={{ width: `${processProgress}%` }}
                     />
                   </div>
-                </article>
-              </div>
-
-              <ol className="grid gap-4 lg:col-span-8">
+                </li>
                 {PROCESS_STEPS.map((step, index) => (
                   <li
                     key={step.id}
