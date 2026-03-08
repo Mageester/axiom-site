@@ -343,9 +343,8 @@ const Infrastructure: React.FC = () => {
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-8 md:pt-16">
-            <div className="grid gap-6 md:grid-cols-12 md:items-start md:gap-8">
-              <article className="md:col-span-8 md:pr-6" data-reveal>
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Method</p>
+            <div className="max-w-5xl">
+              <article className="md:pr-6" data-reveal>
                 <div className="mt-4 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2rem,8.2vw,4rem)] font-extrabold leading-[1.05] text-[#F2F4F7]">
                     How the Axiom process works.
@@ -359,17 +358,6 @@ const Infrastructure: React.FC = () => {
                     Book Consultation
                   </Link>
                 </div>
-              </article>
-
-              <article className="axiom-bento card-snappy h-fit p-7 md:col-span-4 md:self-start md:p-8" data-reveal>
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Consultation Agenda</p>
-                <ul className="mt-4 space-y-3">
-                  <li className="text-sm leading-relaxed text-slate-300">30-minute online Zoom consultation</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Business goals, services, and priority outcomes</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Required pages and functionality (booking, forms, maps)</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Current website/domain setup or Axiom-managed infrastructure</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Scope clarity and package recommendation</li>
-                </ul>
               </article>
             </div>
           </section>
