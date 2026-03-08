@@ -38,11 +38,8 @@ const Footer: React.FC = () => {
 
         <nav className="space-y-3">
           <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Contact</p>
-          <a href="mailto:aidan@getaxiom.ca" className={contactLinkClass}>
-            aidan@getaxiom.ca
-          </a>
-          <a href="tel:+12267531833" className={contactLinkClass}>
-            226-753-1833
+          <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
+            contact@getaxiom.ca
           </a>
         </nav>
       </div>
