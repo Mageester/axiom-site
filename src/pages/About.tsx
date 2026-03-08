@@ -95,7 +95,7 @@ const About: React.FC = () => {
         <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-12 md:pt-18">
             <div className="max-w-5xl">
-              <article className="axiom-bento card-snappy p-7 md:p-10">
+              <article className="p-7 md:p-10">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">About Axiom</p>
                 <div className="mt-4 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.15rem,5.8vw,4.3rem)] font-extrabold leading-[1.06] text-[#F2F4F7]">
