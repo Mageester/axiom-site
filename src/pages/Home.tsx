@@ -268,18 +268,35 @@ const Home: React.FC = () => {
           </section>
 
           <section id="intake" className="pt-22 md:pt-26">
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Qualified Next Step</p>
-              <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Apply for a fit review.
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We review scope, technical requirements, and delivery fit before recommending the best package for your business.
-              </p>
-              <div className="mt-8 flex items-center justify-center">
-                <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Apply for Fit Review
-                </Link>
+            <div className="relative overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br from-[#0f1628]/88 via-[#101726]/82 to-[#0b1120]/88 p-8 text-center shadow-[0_22px_60px_rgba(0,0,0,0.35)] md:p-12">
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute -top-24 left-[16%] h-52 w-52 rounded-full bg-[#B05D41]/14 blur-3xl" />
+                <div className="absolute -bottom-28 right-[10%] h-64 w-64 rounded-full bg-[#4B6EAF]/14 blur-3xl" />
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/28 to-transparent" />
+              </div>
+
+              <div className="relative z-10">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">NEXT STEPS</p>
+                <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                  Book Free Consultation now
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+                  We review your scope, required functionality, and technical setup first, then guide you to the package that fits your business.
+                </p>
+
+                <div className="mt-8 flex items-center justify-center">
+                  <Link to="/apply" className="btn-primary btn-attention btn-lg whitespace-nowrap">
+                    BOOK CONSULTATION
+                  </Link>
+                </div>
+
+                <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-5 gap-y-2">
+                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">30-minute Zoom consultation</span>
+                  <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
+                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Online only</span>
+                  <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
+                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Founder-led review</span>
+                </div>
               </div>
             </div>
           </section>
