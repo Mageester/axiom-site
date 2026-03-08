@@ -178,9 +178,11 @@ const Deployments: React.FC = () => {
         description="Truth-first proof objects from sample and demonstration builds, presented with clear business context, problem framing, and design intent."
       />
       <Layout>
-        <section className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0">
+        <section data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0">
           <div className="max-w-4xl">
-            <h1 className="mt-2.5 max-w-4xl text-left">Sample builds for real business use cases.</h1>
+            <div className="mt-2.5 max-w-4xl overflow-hidden">
+              <h1 data-startup-heading className="text-left">Sample builds for real business use cases.</h1>
+            </div>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
               Demonstration sites showing how we structure fast, high-trust, conversion-focused web systems for service businesses.
             </p>
