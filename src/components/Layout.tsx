@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { label: 'Home', to: '/' },
   { label: 'Method', to: '/infrastructure' },
   { label: 'Work', to: '/works' },
-  { label: 'About', to: '/architects' },
+  { label: 'About', to: '/about' },
 ];
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
