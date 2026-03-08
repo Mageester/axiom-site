@@ -77,8 +77,8 @@ const Home: React.FC = () => {
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-12 md:pt-20">
-            <div className="grid gap-7 lg:grid-cols-12 lg:gap-10">
-              <div className="lg:col-span-8">
+            <div className="max-w-5xl">
+              <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#d4a48e]">Axiom Infrastructure</p>
                 <div className="mt-5 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
@@ -100,26 +100,6 @@ const Home: React.FC = () => {
                   </Link>
                 </div>
               </div>
-
-              <aside className="lg:col-span-4">
-                <article data-glass-card className="axiom-bento p-5 md:p-6">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Engagement Snapshot</p>
-                  <div className="mt-4 space-y-3">
-                    <div className="rounded-xl border border-white/10 bg-[#0f1524]/40 p-3">
-                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Call Format</p>
-                      <p className="mt-1 text-sm text-slate-200">30-minute online Zoom consultation</p>
-                    </div>
-                    <div className="rounded-xl border border-white/10 bg-[#0f1524]/40 p-3">
-                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Decision Model</p>
-                      <p className="mt-1 text-sm text-slate-200">Scope clarity before production starts</p>
-                    </div>
-                    <div className="rounded-xl border border-white/10 bg-[#0f1524]/40 p-3">
-                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Delivery Style</p>
-                      <p className="mt-1 text-sm text-slate-200">Founder-led and selectively scoped</p>
-                    </div>
-                  </div>
-                </article>
-              </aside>
             </div>
           </section>
 
