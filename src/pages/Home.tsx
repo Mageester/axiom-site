@@ -67,8 +67,6 @@ const operationalSignals = [
 ];
 
 const Home: React.FC = () => {
-  const [feature, ...stacked] = selectedWork;
-
   return (
     <>
       <SEO
@@ -125,97 +123,48 @@ const Home: React.FC = () => {
               </Link>
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-12">
-              <article className="group overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/80 lg:col-span-7 lg:flex lg:h-full lg:flex-col">
-                <div className="relative h-[260px] overflow-hidden sm:h-[320px] md:h-[360px] lg:h-auto lg:min-h-[360px] lg:flex-1">
-                  <ResponsiveImage
-                    source={feature.image}
-                    sizes="(min-width: 1280px) 760px, (min-width: 1024px) 62vw, 100vw"
-                    alt={feature.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/28 to-transparent" />
-                  <div className="absolute left-6 top-6 z-10 flex flex-wrap items-center gap-2">
-                    <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
-                      {feature.projectType}
-                    </span>
-                    <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
-                      {feature.audience}
-                    </span>
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {selectedWork.map((item) => (
+                <article key={item.id} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85">
+                  <div className="relative h-[230px] overflow-hidden sm:h-[260px]">
+                    <ResponsiveImage
+                      source={item.image}
+                      sizes="(min-width: 1280px) 360px, (min-width: 1024px) 33vw, (min-width: 768px) 48vw, 100vw"
+                      alt={item.title}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/62 via-black/20 to-transparent" />
+                    <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">
+                      <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+                        {item.projectType}
+                      </span>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex flex-col gap-2 bg-[#0d1323]/90 p-6">
-                  <h3 className="text-[clamp(1.55rem,2vw,2rem)] font-semibold text-white">{feature.title}</h3>
-                  <p className="mt-1 max-w-2xl text-sm text-slate-200">{feature.summary}</p>
-                  <dl className="mt-4 grid gap-3 text-[11px] uppercase tracking-[0.12em] text-slate-200/90 md:grid-cols-3">
-                    <div>
-                      <dt className="text-slate-300/65">Core Problem</dt>
-                      <dd className="mt-0.5 normal-case tracking-normal text-slate-100">{feature.coreProblem}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-300/65">Demonstrates</dt>
-                      <dd className="mt-0.5 normal-case tracking-normal text-slate-100">{feature.demonstrates}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-slate-300/65">Scope Snapshot</dt>
-                      <dd className="mt-0.5 normal-case tracking-normal text-slate-100">{feature.scope}</dd>
-                    </div>
-                  </dl>
-                  <Link
-                    to={`/works/${feature.id}`}
-                    className="mt-3 inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
-                  >
-                    View Build Notes
-                  </Link>
-                </div>
-              </article>
-
-              <div className="grid gap-5 lg:col-span-5">
-                {stacked.map((item, index) => (
-                  <article key={item.id} className="group overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85">
-                    <div className={`relative ${index === 0 ? 'h-[56%]' : 'h-[52%]'} overflow-hidden`}>
-                      <ResponsiveImage
-                        source={item.image}
-                        sizes="(min-width: 1024px) 38vw, 100vw"
-                        alt={item.title}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
-                      <div className="absolute left-4 top-4">
-                        <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
-                          {item.projectType}
-                        </span>
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                    <p className="mt-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">{item.audience}</p>
+                    <p className="mt-3 text-sm text-slate-300/95">{item.summary}</p>
+                    <dl className="mt-3 grid gap-2 text-[11px] text-slate-200/90">
+                      <div>
+                        <dt className="text-slate-300/65">Core Problem</dt>
+                        <dd className="mt-0.5">{item.coreProblem}</dd>
                       </div>
-                    </div>
-                    <div className="flex flex-col gap-2 p-5">
-                      <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">{item.audience}</p>
-                      {index === 0 && <p className="text-sm text-slate-300/95">{item.summary}</p>}
-                      <dl className="grid gap-2 text-[11px] text-slate-200/90">
-                        <div>
-                          <dt className="text-slate-300/65">Core Problem</dt>
-                          <dd className="mt-0.5">{item.coreProblem}</dd>
-                        </div>
-                        <div>
-                          <dt className="text-slate-300/65">Demonstrates</dt>
-                          <dd className="mt-0.5">{item.demonstrates}</dd>
-                        </div>
-                      </dl>
-                      <Link
-                        to={`/works/${item.id}`}
-                        className="mt-2 inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
-                      >
-                        Build Notes
-                      </Link>
-                    </div>
-                  </article>
-                ))}
-              </div>
+                      <div>
+                        <dt className="text-slate-300/65">Demonstrates</dt>
+                        <dd className="mt-0.5">{item.demonstrates}</dd>
+                      </div>
+                    </dl>
+                    <Link
+                      to={`/works/${item.id}`}
+                      className="mt-auto pt-3 inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
+                    >
+                      Build Notes
+                    </Link>
+                  </div>
+                </article>
+              ))}
             </div>
           </section>
 
