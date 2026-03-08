@@ -11,6 +11,7 @@ type ApiResult = {
     message?: string;
     details?: string;
 };
+type YesNoAnswer = '' | 'yes' | 'no';
 
 type IntakeFormState = {
     name: string;
@@ -21,6 +22,10 @@ type IntakeFormState = {
     project_scale: string;
     pain_points: string[];
     details: string;
+    fit_active_demand: YesNoAnswer;
+    fit_trust_conversion_need: YesNoAnswer;
+    fit_decision_owner_ready: YesNoAnswer;
+    fit_defined_scope_ready: YesNoAnswer;
     company_fax: string;
 };
 
@@ -33,6 +38,10 @@ const INITIAL_FORM: IntakeFormState = {
     project_scale: '',
     pain_points: [],
     details: '',
+    fit_active_demand: '',
+    fit_trust_conversion_need: '',
+    fit_decision_owner_ready: '',
+    fit_defined_scope_ready: '',
     company_fax: ''
 };
 
@@ -50,22 +59,23 @@ const PAIN_POINTS_OPTIONS = [
     'Hard to update and manage'
 ];
 
-const BEST_FIT_SIGNALS = [
-    'Established business with active offers and clear service demand',
-    'Need stronger trust, positioning, and conversion clarity',
-    'Ready to make decisions and execute within a defined scope'
-];
-
-const NOT_FIT_SIGNALS = [
-    'Looking for the cheapest possible template refresh',
-    'No clear offer, buyer type, or decision owner on the project',
-    'Need guaranteed outcomes without implementation commitment'
-];
-
-const BUILD_STANDARDS = [
-    'Clear primary action path across key pages',
-    'Cross-device QA before launch',
-    'Inquiry form path reviewed and tested end-to-end'
+const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_active_demand' | 'fit_trust_conversion_need' | 'fit_decision_owner_ready' | 'fit_defined_scope_ready'>; label: string }> = [
+    {
+        key: 'fit_active_demand',
+        label: 'Do you have active service demand and a clear offer in market today?'
+    },
+    {
+        key: 'fit_trust_conversion_need',
+        label: 'Are you looking for stronger trust, positioning, and conversion clarity (not just a quick template refresh)?'
+    },
+    {
+        key: 'fit_decision_owner_ready',
+        label: 'Is there a clear decision owner available to review and approve project decisions?'
+    },
+    {
+        key: 'fit_defined_scope_ready',
+        label: 'Are you ready to execute within a defined scope once the plan is aligned?'
+    }
 ];
 
 const FALLBACK_SUBMIT_ERROR = 'Submission failed. Please retry or email aidan@getaxiom.ca and riley@getaxiom.ca.';
@@ -148,6 +158,11 @@ const ContactPage: React.FC = () => {
         const nextErrors: typeof errors = {};
         if (!form.project_scale) nextErrors.project_scale = 'Please select an investment tier.';
         if (form.details.trim().length < 10) nextErrors.details = 'Please share details (min 10 chars).';
+        FIT_QUESTIONS.forEach((question) => {
+            if (!form[question.key]) {
+                nextErrors[question.key] = 'Please choose yes or no.';
+            }
+        });
         if (Object.keys(nextErrors).length > 0) {
             setErrors(nextErrors);
             return;
@@ -217,33 +232,6 @@ const ContactPage: React.FC = () => {
                         </div>
                     </section>
 
-                    <section className="mx-auto mt-6 grid max-w-5xl gap-4 md:grid-cols-2">
-                        <article className="axiom-bento p-6">
-                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Best Fit / Not Fit</p>
-                            <div className="mt-3 space-y-3">
-                                <div>
-                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Best Fit For</p>
-                                    <ul className="mt-1 space-y-1.5">
-                                        {BEST_FIT_SIGNALS.map(item => <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>)}
-                                    </ul>
-                                </div>
-                                <div className="border-t border-white/10 pt-3">
-                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Not For</p>
-                                    <ul className="mt-1 space-y-1.5">
-                                        {NOT_FIT_SIGNALS.map(item => <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>)}
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-                        <article className="axiom-bento p-6">
-                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Build Standards</p>
-                            <ul className="mt-3 space-y-2">
-                                {BUILD_STANDARDS.map(item => <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>)}
-                            </ul>
-                            <p className="mt-4 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#d4a48e]">Founder-led and selective engagements</p>
-                        </article>
-                    </section>
-
                     <section className="mx-auto mt-5 max-w-5xl">
                         <div className="axiom-bento p-6 md:p-8">
                             <form onSubmit={handleSubmit} className="flex flex-col gap-7">
@@ -301,9 +289,6 @@ const ContactPage: React.FC = () => {
                                             <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
                                                 Submit
                                             </button>
-                                            <p className="text-center font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">
-                                                Selective monthly intake
-                                            </p>
 
                                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                                                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What Happens Next</p>
@@ -347,6 +332,37 @@ const ContactPage: React.FC = () => {
                                                 </div>
                                             </div>
 
+                                            <div className="flex flex-col gap-3">
+                                                <label className={FIELD_LABEL_CLASS}>Best-Fit Questions (Yes / No)</label>
+                                                <div className="grid grid-cols-1 gap-3">
+                                                    {FIT_QUESTIONS.map((question) => (
+                                                        <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">
+                                                            <p className="text-sm leading-relaxed text-slate-200">{question.label}</p>
+                                                            <div className="mt-3 grid grid-cols-2 gap-2 sm:max-w-[220px]">
+                                                                {(['yes', 'no'] as const).map((option) => {
+                                                                    const isSelected = form[question.key] === option;
+                                                                    return (
+                                                                        <button
+                                                                            key={option}
+                                                                            type="button"
+                                                                            onClick={() => setField(question.key, option)}
+                                                                            className={`rounded-lg border px-3 py-2 text-sm font-medium capitalize transition-colors ${isSelected
+                                                                                ? 'border-[#B05D41]/45 bg-[#B05D41]/12 text-[#F2F4F7]'
+                                                                                : 'border-white/10 bg-[#0f1524]/70 text-slate-300 hover:border-white/25'
+                                                                                }`}
+                                                                            aria-pressed={isSelected}
+                                                                        >
+                                                                            {option}
+                                                                        </button>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                            {errors[question.key] && <p className="mt-2 text-xs text-red-300">{errors[question.key]}</p>}
+                                                        </article>
+                                                    ))}
+                                                </div>
+                                            </div>
+
                                             <div className="flex flex-col gap-2">
                                                 <label className={FIELD_LABEL_CLASS}>Goals and Constraints</label>
                                                 <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="What outcome are you targeting in the next 6-12 months?" className={`${FIELD_INPUT_CLASS} resize-none`} />
@@ -361,9 +377,6 @@ const ContactPage: React.FC = () => {
                                                     {status === 'loading' ? 'Submitting...' : 'Submit Application'}
                                                 </button>
                                             </div>
-                                            <p className="text-center font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">
-                                                Selective monthly intake
-                                            </p>
                                         </div>
                                     )}
                                 </fieldset>
