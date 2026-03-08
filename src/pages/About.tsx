@@ -75,6 +75,15 @@ const VALUES: readonly string[] = [
 ];
 
 const About: React.FC = () => {
+  const handleLearnMoreClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = document.getElementById('why-axiom-exists');
+    if (!target) return;
+    event.preventDefault();
+    const topOffset = 110;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - topOffset;
+    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+  };
+
   return (
     <>
       <SEO
@@ -85,12 +94,12 @@ const About: React.FC = () => {
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-12 md:pt-18">
-            <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
-              <article className="axiom-bento card-snappy p-7 md:p-10 lg:col-span-8">
+            <div className="max-w-5xl">
+              <article className="axiom-bento card-snappy p-7 md:p-10">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">About Axiom</p>
                 <div className="mt-4 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.15rem,5.8vw,4.3rem)] font-extrabold leading-[1.06] text-[#F2F4F7]">
-                    Custom websites built properly for local businesses.
+                    About Axiom
                   </h1>
                 </div>
                 <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
@@ -98,9 +107,9 @@ const About: React.FC = () => {
                   We build something better with modern technology and an engineering-first delivery standard.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book a Discovery Call
-                  </Link>
+                  <a href="#why-axiom-exists" onClick={handleLearnMoreClick} className="btn-primary btn-lg whitespace-nowrap">
+                    Learn more
+                  </a>
                   <Link
                     to="/infrastructure"
                     className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-white/30 hover:bg-white/[0.07]"
@@ -109,20 +118,10 @@ const About: React.FC = () => {
                   </Link>
                 </div>
               </article>
-
-              <aside className="axiom-bento card-snappy h-fit p-7 lg:col-span-4 md:p-8">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Current Focus</p>
-                <ul className="mt-4 space-y-3">
-                  <li className="text-sm leading-relaxed text-slate-300">Local service businesses</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Businesses that rely on local search</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Small to medium business teams</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Owners serious about a modern website</li>
-                </ul>
-              </aside>
             </div>
           </section>
 
-          <section className="pt-16 md:pt-22">
+          <section id="why-axiom-exists" className="scroll-mt-28 pt-16 md:pt-22">
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why Axiom Exists</h2>
               <p className="mt-5 text-sm leading-relaxed text-slate-300 md:text-base">
