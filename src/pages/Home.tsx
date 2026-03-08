@@ -81,8 +81,7 @@ const Home: React.FC = () => {
           <section data-hero-root className="pt-12 md:pt-20">
             <div className="max-w-5xl">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#d4a48e]">Axiom Infrastructure</p>
-                <div className="mt-5 max-w-4xl overflow-hidden">
+                <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
                     Premium websites for businesses where trust drives conversions.
                   </h1>
