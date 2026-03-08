@@ -125,20 +125,23 @@ const Home: React.FC = () => {
             </div>
 
             <div className="grid gap-5 lg:grid-cols-12">
-              <article className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/65 lg:col-span-7">
-                <img src={feature.image} alt={feature.title} className="h-[500px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/45 to-transparent" />
-                <div className="absolute left-6 top-6 z-10 flex flex-wrap items-center gap-2">
-                  <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
-                    {feature.projectType}
-                  </span>
-                  <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
-                    {feature.audience}
-                  </span>
+              <article className="group overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/80 lg:col-span-7">
+                <div className="relative h-[260px] sm:h-[320px] md:h-[360px] overflow-hidden">
+                  <img src={feature.image} alt={feature.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/28 to-transparent" />
+                  <div className="absolute left-6 top-6 z-10 flex flex-wrap items-center gap-2">
+                    <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+                      {feature.projectType}
+                    </span>
+                    <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
+                      {feature.audience}
+                    </span>
+                  </div>
                 </div>
-                <div className="absolute inset-x-6 bottom-6 z-10 rounded-2xl border border-white/15 bg-black/35 p-6 backdrop-blur-md">
+
+                <div className="flex flex-col gap-2 bg-[#0d1323]/90 p-6">
                   <h3 className="text-[clamp(1.55rem,2vw,2rem)] font-semibold text-white">{feature.title}</h3>
-                  <p className="mt-2 max-w-2xl text-sm text-slate-200">{feature.summary}</p>
+                  <p className="mt-1 max-w-2xl text-sm text-slate-200">{feature.summary}</p>
                   <dl className="mt-4 grid gap-3 text-[11px] uppercase tracking-[0.12em] text-slate-200/90 md:grid-cols-3">
                     <div>
                       <dt className="text-slate-300/65">Core Problem</dt>
@@ -155,7 +158,7 @@ const Home: React.FC = () => {
                   </dl>
                   <Link
                     to={`/works/${feature.id}`}
-                    className="mt-4 inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
+                    className="mt-3 inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
                   >
                     View Build Notes
                   </Link>
