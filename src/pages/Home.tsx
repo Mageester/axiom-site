@@ -226,7 +226,7 @@ const Home: React.FC = () => {
               <div className="lg:col-span-4">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Delivery Method</p>
                 <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                  A cleaner engagement model for high-intent operators.
+                A cleaner engagement model for high-intent business owners.
                 </h2>
                 <ol className="mt-5 space-y-3">
                   {method.map((step, index) => (
