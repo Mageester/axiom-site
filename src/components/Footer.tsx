@@ -19,9 +19,6 @@ const Footer: React.FC = () => {
           <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-400">
             Sample and demonstration work is labeled transparently. No fabricated results, testimonials, or client claims.
           </p>
-          <a href="/apply" className={contactLinkClass + ' mt-6'}>
-            Apply for Fit Review
-          </a>
           <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">Copyright 2026 Axiom Infrastructure. All rights reserved.</p>
         </div>
 
@@ -35,7 +32,6 @@ const Footer: React.FC = () => {
 
         <nav className="space-y-3">
           <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Engagement</p>
-          <NavLink to="/apply" className={routeLinkClass}>Fit Review</NavLink>
           <NavLink to="/infrastructure" className={routeLinkClass}>Delivery Method</NavLink>
           <NavLink to="/works" className={routeLinkClass}>Selected Work</NavLink>
         </nav>
