@@ -344,7 +344,7 @@ const Infrastructure: React.FC = () => {
         <main className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-8 md:pt-16">
             <div className="grid gap-6 md:grid-cols-12 md:items-start md:gap-8">
-              <article className="axiom-bento card-snappy p-7 md:col-span-8 md:p-10" data-reveal>
+              <article className="md:col-span-8 md:pr-6" data-reveal>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Method</p>
                 <div className="mt-4 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2rem,8.2vw,4rem)] font-extrabold leading-[1.05] text-[#F2F4F7]">
