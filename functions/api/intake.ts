@@ -431,7 +431,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         const body = parsed.data;
         const honeypot = (body.company_fax || body.companyFax || '').trim();
         if (honeypot) {
-            return jsonResponse(request, env, { ok: true }, 200);
+            const requestOrigin = request.headers.get('Origin');
+            if (!requestOrigin) {
+                return jsonResponse(request, env, { ok: false, error: 'Spam check failed' }, 400);
+            }
+            console.warn('[INTAKE] honeypot_ignored_for_trusted_origin', {
+                origin: requestOrigin,
+                length: honeypot.length
+            });
         }
 
         const clientIp = getClientIp(request);

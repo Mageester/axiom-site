@@ -26,7 +26,6 @@ type IntakeFormState = {
     fit_trust_conversion_need: YesNoAnswer;
     fit_decision_owner_ready: YesNoAnswer;
     fit_defined_scope_ready: YesNoAnswer;
-    company_fax: string;
 };
 
 const INITIAL_FORM: IntakeFormState = {
@@ -41,8 +40,7 @@ const INITIAL_FORM: IntakeFormState = {
     fit_active_demand: '',
     fit_trust_conversion_need: '',
     fit_decision_owner_ready: '',
-    fit_defined_scope_ready: '',
-    company_fax: ''
+    fit_defined_scope_ready: ''
 };
 
 const SCALE_OPTIONS = [
@@ -250,11 +248,6 @@ const ContactPage: React.FC = () => {
                                             {msg}
                                         </div>
                                     )}
-
-                                    <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
-                                        <label htmlFor="company-fax">Company Fax</label>
-                                        <input id="company-fax" type="text" name="company_fax" tabIndex={-1} autoComplete="off" value={form.company_fax} onChange={(e) => setField('company_fax', e.target.value)} />
-                                    </div>
 
                                     {step === 1 ? (
                                         <div className="flex flex-col gap-6">
