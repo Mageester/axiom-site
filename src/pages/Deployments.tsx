@@ -180,7 +180,6 @@ const Deployments: React.FC = () => {
       <Layout>
         <section className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0">
           <div className="max-w-4xl">
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">WORK</p>
             <h1 className="mt-2.5 max-w-4xl text-left">Sample builds for real business use cases.</h1>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
               Demonstration sites showing how we structure fast, high-trust, conversion-focused web systems for service businesses.
