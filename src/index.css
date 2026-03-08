@@ -226,6 +226,22 @@
       0 0 0 2px rgba(194, 110, 78, 0.36);
   }
 
+  .btn-attention {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-attention::after {
+    content: '';
+    position: absolute;
+    inset: -10% -24%;
+    border-radius: inherit;
+    background: linear-gradient(112deg, transparent 38%, rgba(255, 255, 255, 0.28) 50%, transparent 62%);
+    transform: translateX(-140%) skewX(-14deg);
+    animation: btn-sheen 4.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
   .btn-md {
     font-size: 0.9375rem;
     padding-inline: 1.25rem;
@@ -422,6 +438,23 @@
   }
 }
 
+@keyframes btn-sheen {
+  0%,
+  70% {
+    transform: translateX(-140%) skewX(-14deg);
+    opacity: 0;
+  }
+
+  78% {
+    opacity: 0.42;
+  }
+
+  100% {
+    transform: translateX(170%) skewX(-14deg);
+    opacity: 0;
+  }
+}
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -527,6 +560,7 @@
   }
 
   .btn-primary,
+  .btn-attention,
   body::before,
   .hero-fade-in,
   .animate-grid-drift,

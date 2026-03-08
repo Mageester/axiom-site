@@ -7,6 +7,7 @@ import { SEO } from '../components/SEO';
 type SectionLink = {
   id: string;
   label: string;
+  shortLabel?: string;
 };
 
 type ProcessStep = {
@@ -32,8 +33,8 @@ type ExpandableItem = {
 
 const SECTION_LINKS: readonly SectionLink[] = [
   { id: 'process', label: 'Process' },
-  { id: 'your-stack', label: 'Your Stack' },
-  { id: 'clarify', label: 'What We Clarify' },
+  { id: 'your-stack', label: 'Your Stack', shortLabel: 'Stack' },
+  { id: 'clarify', label: 'What We Clarify', shortLabel: 'Clarify' },
   { id: 'faq', label: 'FAQ' },
 ];
 
@@ -340,41 +341,41 @@ const Infrastructure: React.FC = () => {
       />
 
       <Layout>
-        <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="pt-10 md:pt-16">
+        <main className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
+          <section data-hero-root className="pt-8 md:pt-16">
             <div className="grid gap-6 md:grid-cols-12 md:gap-8">
               <article className="axiom-bento card-snappy p-7 md:col-span-8 md:p-10" data-reveal>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Method</p>
                 <div className="mt-4 max-w-4xl overflow-hidden">
-                  <h1 data-startup-heading className="text-[clamp(2.1rem,5vw,4.2rem)] font-extrabold leading-[1.05] text-[#F2F4F7]">
-                    Premium web systems for high-trust service firms.
+                  <h1 data-startup-heading className="text-[clamp(2rem,8.2vw,4rem)] font-extrabold leading-[1.05] text-[#F2F4F7]">
+                    How the Axiom process works.
                   </h1>
                 </div>
-                <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
-                  Custom-built websites and digital infrastructure for businesses that need speed, trust, and a stronger online presence.
+                <p className="mt-5 max-w-prose text-base leading-relaxed text-slate-300 md:text-lg">
+                  A clear, structured path from your first Zoom consultation to launch. No guesswork, no bloated process, and no unclear handoff.
                 </p>
                 <div className="mt-8">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book 30-Minute Zoom Consultation
+                    Book Consultation
                   </Link>
                 </div>
               </article>
 
               <article className="axiom-bento card-snappy p-7 md:col-span-4 md:p-8" data-reveal>
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Best Fit</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">First Call Focus</p>
                 <ul className="mt-4 space-y-3">
-                  <li className="text-sm leading-relaxed text-slate-300">Established service businesses with active demand</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Teams that need clear structure before build</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Operators prioritizing trust and conversion quality</li>
+                  <li className="text-sm leading-relaxed text-slate-300">30-minute online Zoom consultation</li>
+                  <li className="text-sm leading-relaxed text-slate-300">Required pages, forms, maps, and key functionality</li>
+                  <li className="text-sm leading-relaxed text-slate-300">Scope alignment and package recommendation</li>
                 </ul>
               </article>
             </div>
           </section>
 
-          <div className="sticky top-20 z-30 mt-10 md:top-24" data-reveal>
+          <div className="z-30 mt-8 md:sticky md:top-24" data-reveal>
             <nav
               aria-label="Infrastructure page sections"
-              className="hide-scrollbar overflow-x-auto rounded-full border border-white/10 bg-[rgba(12,16,25,0.88)] p-2 backdrop-blur-xl"
+              className="hide-scrollbar overflow-x-auto rounded-2xl border border-white/10 bg-[rgba(12,16,25,0.88)] p-1.5 backdrop-blur-xl md:rounded-full md:p-2"
             >
               <ul className="flex min-w-max items-center gap-1">
                 {SECTION_LINKS.map((link) => {
@@ -390,7 +391,8 @@ const Infrastructure: React.FC = () => {
                         }`}
                         aria-current={isActive ? 'location' : undefined}
                       >
-                        {link.label}
+                        <span className="hidden md:inline">{link.label}</span>
+                        <span className="md:hidden">{link.shortLabel || link.label}</span>
                       </a>
                     </li>
                   );
