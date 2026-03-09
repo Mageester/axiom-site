@@ -225,7 +225,7 @@ const Deployments: React.FC = () => {
             <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of execution?</h2>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <a href="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                Apply for Fit Review
+                Book Consultation
               </a>
               <Link
                 to="/infrastructure"
