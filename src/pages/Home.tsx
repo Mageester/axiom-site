@@ -35,35 +35,38 @@ const selectedWork = caseStudies.map((entry) => ({
 
 const capabilities = [
   {
-    title: 'Clear Scope',
-    detail: 'We define pages, features, and project requirements before production begins.',
+    title: 'Built Around Your Business',
+    detail:
+      'We start by understanding what you do, what needs to be included, and what the site needs to help you achieve.',
   },
   {
-    title: 'Structured Build',
-    detail: 'The site is built with strong hierarchy, cleaner UX, and performance in mind.',
+    title: 'Made to Build Trust',
+    detail:
+      'Clear structure, stronger presentation, and cleaner messaging help the business look more established online.',
   },
   {
-    title: 'Controlled Launch',
-    detail: 'Before release, we test key flows, review across devices, and ship with more control.',
+    title: 'Designed to Generate Inquiries',
+    detail:
+      'Calls, forms, and booking actions are placed with intent so more of the right visitors take the next step.',
   },
 ];
 
 const method = [
-  '01 — Discovery and scope alignment',
-  '02 — Structure and conversion planning',
-  '03 — Build, QA, and controlled launch',
+  '01 — We learn the business and what the site needs to do',
+  '02 — We plan the pages, structure, and conversion flow',
+  '03 — We build, test, and launch to a higher standard',
 ];
 
 const buildStandards = [
-  'Single primary action on every key page',
-  'Cross-device QA and intake testing before launch',
-  'Built for speed, maintainability, and long-term use',
+  'Make the offer easy to understand',
+  'Guide visitors to a clear next step',
+  'Work cleanly across desktop and mobile',
 ];
 
 const operationalSignals = [
-  'Founder-led intake review',
-  'Scope locked before production',
-  'Controlled launch checklist',
+  'Founder-led planning and review',
+  'Requirements agreed before build begins',
+  'Every key page checked before launch',
 ];
 
 const Home: React.FC = () => {
@@ -171,9 +174,9 @@ const Home: React.FC = () => {
           <section className="pt-20 md:pt-24">
             <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
               <div className="lg:col-span-4">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Delivery Method</p>
-                <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                  Web infrastructure delivered with clarity and control.
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">How We Work</p>
+                <h2 className="mt-3 max-w-[20ch] text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
+                  A better way to build a serious business website.
                 </h2>
                 <ol className="mt-5 space-y-3">
                   {method.map((step) => (
@@ -186,7 +189,7 @@ const Home: React.FC = () => {
 
               <div className="grid gap-6 lg:col-span-8 md:grid-cols-3">
                 {capabilities.map((item) => (
-                  <article key={item.title} className="axiom-bento p-5">
+                  <article key={item.title} className="axiom-bento h-full p-4 md:p-5">
                     <h3 className="text-base font-semibold text-[#F2F4F7]">{item.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.detail}</p>
                   </article>
@@ -195,7 +198,7 @@ const Home: React.FC = () => {
             </div>
             <div className="mt-7 grid gap-4 md:grid-cols-2">
               <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Build Standards</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">What The Site Needs To Do</p>
                 <ul className="mt-3 space-y-2">
                   {buildStandards.map((item) => (
                     <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>
@@ -203,7 +206,7 @@ const Home: React.FC = () => {
                 </ul>
               </article>
               <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Project Controls</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">How The Project Is Run</p>
                 <ul className="mt-3 space-y-2">
                   {operationalSignals.map((item) => (
                     <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>
