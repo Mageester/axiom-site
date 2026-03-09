@@ -300,11 +300,22 @@ const ContactPage: React.FC = () => {
                                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                                                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What Happens Next</p>
                                                 <p className="mt-3 text-sm text-slate-300">
-                                                    Review the full process before submitting. The Method page explains each step from consultation to launch.
+                                                    Once your request is submitted, we&apos;ll reach out within 1 business day to schedule your consultation.
                                                 </p>
-                                                <Link to="/infrastructure" className={`${SECONDARY_BUTTON_CLASS} mt-4 w-full sm:w-auto`}>
-                                                    View Method
-                                                </Link>
+                                                <p className="mt-3 text-sm text-slate-300">
+                                                    If you have any questions about the process, refer to our{' '}
+                                                    <Link to="/infrastructure" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                                        Method
+                                                    </Link>{' '}
+                                                    page. You can also email{' '}
+                                                    <a
+                                                        href="mailto:contact@getaxiom.ca"
+                                                        className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+                                                    >
+                                                        contact@getaxiom.ca
+                                                    </a>
+                                                    , and we&apos;ll respond the same day, including weekends.
+                                                </p>
                                             </div>
                                         </div>
                                     ) : (
