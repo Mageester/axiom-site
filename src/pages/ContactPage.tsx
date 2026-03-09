@@ -233,7 +233,7 @@ const ContactPage: React.FC = () => {
                     <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
                         <div className="mt-4 overflow-hidden">
                             <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                                Strategy Call + Infrastructure Audit
+                                Start With a Strategy Call
                             </h1>
                         </div>
                         <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
