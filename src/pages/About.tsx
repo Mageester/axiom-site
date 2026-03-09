@@ -181,6 +181,15 @@ const About: React.FC = () => {
                 <p className="mt-4 text-sm leading-relaxed text-slate-300">
                   Riley works directly on architecture, frontend delivery, and performance standards to ensure each build is technically strong and client-ready.
                 </p>
+                <div className="mt-5">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
+                  <a
+                    href="mailto:riley@getaxiom.ca"
+                    className="mt-2 inline-flex text-sm text-[#F2F4F7] underline decoration-white/35 underline-offset-3 transition-colors hover:text-white"
+                  >
+                    riley@getaxiom.ca
+                  </a>
+                </div>
               </article>
 
               <article className="axiom-bento card-snappy p-6 md:p-7">
@@ -196,6 +205,15 @@ const About: React.FC = () => {
                 <p className="mt-4 text-sm leading-relaxed text-slate-300">
                   Aidan works directly on structure, user flow, and implementation quality so websites remain clear, reliable, and practical for real business use.
                 </p>
+                <div className="mt-5">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
+                  <a
+                    href="mailto:aidan@getaxiom.ca"
+                    className="mt-2 inline-flex text-sm text-[#F2F4F7] underline decoration-white/35 underline-offset-3 transition-colors hover:text-white"
+                  >
+                    aidan@getaxiom.ca
+                  </a>
+                </div>
               </article>
             </div>
           </section>
