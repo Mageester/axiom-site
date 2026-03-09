@@ -20,7 +20,7 @@ const Architects: React.FC = () => {
               </h1>
               <p className="mt-4 max-w-2xl text-slate-300">Axiom is a senior-led team focused on positioning precision, conversion clarity, and controlled delivery.</p>
               <a href="/apply" className="mt-8 inline-flex text-sm font-medium text-[#B05D41] transition-colors hover:text-[#d7a189]">
-                Apply for Fit Review
+                Book Consultation
               </a>
             </article>
             <article className="md:col-span-4 rounded-2xl border border-white/10 bg-[#0d1323]/60 p-8 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] backdrop-blur-xl">

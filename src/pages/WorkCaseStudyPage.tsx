@@ -72,7 +72,7 @@ const WorkCaseStudyPage: React.FC = () => {
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
-                    Apply for Fit Review
+                    Book Consultation
                   </Link>
                   <Link
                     to="/works"
@@ -165,7 +165,7 @@ const WorkCaseStudyPage: React.FC = () => {
               </p>
               <div className="mt-7 flex items-center justify-center">
                 <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
-                  Apply for Fit Review
+                  Book Consultation
                 </Link>
               </div>
             </div>
