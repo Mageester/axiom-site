@@ -35,35 +35,35 @@ const selectedWork = caseStudies.map((entry) => ({
 
 const capabilities = [
   {
-    title: 'Clarity',
-    detail: 'Offer and message hierarchy designed for faster buyer understanding.',
+    title: 'Clear Scope',
+    detail: 'We define pages, features, and project requirements before production begins.',
   },
   {
-    title: 'Trust',
-    detail: 'Confident visual systems and structure for stronger decision confidence.',
+    title: 'Structured Build',
+    detail: 'The site is built with strong hierarchy, cleaner UX, and performance in mind.',
   },
   {
-    title: 'Conversion Quality',
-    detail: 'Clear action paths for higher-intent inquiries and fewer dead clicks.',
+    title: 'Controlled Launch',
+    detail: 'Before release, we test key flows, review across devices, and ship with more control.',
   },
 ];
 
 const method = [
-  'Fit alignment and scope lock',
-  'Structure and conversion architecture',
-  'Production, QA, and controlled release',
+  '01 — Discovery and scope alignment',
+  '02 — Structure and conversion planning',
+  '03 — Build, QA, and controlled launch',
 ];
 
 const buildStandards = [
-  'Clear primary action path on every key page',
-  'Cross-device QA before launch and intake flow checks',
-  'Structure built for maintainability and speed',
+  'Single primary action on every key page',
+  'Cross-device QA and intake testing before launch',
+  'Built for speed, maintainability, and long-term use',
 ];
 
 const operationalSignals = [
   'Founder-led intake review',
-  'Scope lock before production',
-  'Controlled release checklist',
+  'Scope locked before production',
+  'Controlled launch checklist',
 ];
 
 const Home: React.FC = () => {
@@ -173,13 +173,12 @@ const Home: React.FC = () => {
               <div className="lg:col-span-4">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Delivery Method</p>
                 <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                A cleaner engagement model for high-intent business owners.
+                  Web infrastructure delivered with clarity and control.
                 </h2>
                 <ol className="mt-5 space-y-3">
-                  {method.map((step, index) => (
-                    <li key={step} className="flex items-start gap-3">
-                      <span className="mt-0.5 font-axiomMono text-xs text-[#d4a48e]">0{index + 1}</span>
-                      <p className="text-sm text-slate-300">{step}</p>
+                  {method.map((step) => (
+                    <li key={step} className="text-sm text-slate-300">
+                      <p>{step}</p>
                     </li>
                   ))}
                 </ol>
@@ -204,7 +203,7 @@ const Home: React.FC = () => {
                 </ul>
               </article>
               <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Operational Signals</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Project Controls</p>
                 <ul className="mt-3 space-y-2">
                   {operationalSignals.map((item) => (
                     <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>
