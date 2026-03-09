@@ -148,7 +148,7 @@ const About: React.FC = () => {
 
           <section className="pt-16 md:pt-22">
             <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What Makes Axiom Different</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">The Axiom Guarantee</h2>
             </div>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
               {DIFFERENTIATORS.map((item) => (
