@@ -12,57 +12,57 @@ type InfoCard = {
 const WEBSITE_PROBLEMS: readonly InfoCard[] = [
   {
     title: 'Slow Template Builds',
-    body: 'Many local sites are built from generic templates that load slowly and lose attention before visitors even read the offer.',
+    body: 'Generic template sites often load slowly and lose attention before visitors reach the offer.',
   },
   {
     title: 'Outdated First Impression',
-    body: 'Old layouts and visual clutter can make good businesses look less credible than they really are.',
+    body: 'Dated layouts and visual clutter can make a strong business look less credible online.',
   },
   {
     title: 'Limited Customization',
-    body: 'Cheap setups often force businesses into fixed layouts that do not match how they actually sell and operate.',
+    body: 'Low-cost setups often lock businesses into layouts that do not match how they sell.',
   },
   {
     title: 'Weak User Flow',
-    body: 'When calls, quote forms, and service pages are not structured clearly, visitors leave without taking action.',
+    body: 'If pages and contact actions are unclear, visitors leave without taking the next step.',
   },
 ];
 
 const DIFFERENTIATORS: readonly InfoCard[] = [
   {
     title: 'Performance Engineering',
-    body: 'We build with speed as a core requirement so pages load quickly and stay responsive on real devices.',
+    body: 'Speed is engineered in from day one, not added later.',
   },
   {
     title: 'Cloudflare Edge Delivery',
-    body: 'Your site is delivered through Cloudflare edge infrastructure for stable global routing and strong uptime.',
+    body: 'Sites run through Cloudflare edge infrastructure for dependable routing and uptime.',
   },
   {
     title: 'Faster Load Times',
-    body: 'We focus on lean frontend architecture so visitors reach your content and contact actions without delay.',
+    body: 'Lean frontend code gets visitors to content and contact actions faster.',
   },
   {
     title: 'Reliability First',
-    body: 'We treat production behavior seriously, with clean deployment and post-launch checks for forms and routing.',
+    body: 'We ship with clean deployment standards and post-launch checks for forms and routing.',
   },
   {
     title: 'Scalable Foundation',
-    body: 'The site is built so you can add services, pages, and features later without rebuilding from scratch.',
+    body: 'Your site can grow with new pages and services without a rebuild.',
   },
 ];
 
 const STANDARDS: readonly InfoCard[] = [
   {
     title: 'Extremely Fast Load Times',
-    body: 'Speed is not optional. Every build is engineered to minimize friction from first click to first action.',
+    body: 'Pages should load quickly on real devices, not just in demos.',
   },
   {
     title: 'Ease Of Use',
-    body: 'Visitors should find what they need quickly. Structure, navigation, and page flow are designed for clarity.',
+    body: 'Navigation and page flow stay simple so visitors find what they need fast.',
   },
   {
     title: 'Hyper-Custom Design',
-    body: 'Each website is custom-built around the business, not forced into a one-size-fits-all template.',
+    body: 'Every build is custom to the business, never forced into a template.',
   },
 ];
 
@@ -102,8 +102,7 @@ const About: React.FC = () => {
                   </h1>
                 </div>
                 <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
-                  Axiom started after seeing local businesses stuck with slow, outdated websites that did not reflect the quality of their work.
-                  We build something better with modern technology and an engineering-first delivery standard.
+                  Axiom started after seeing local businesses stuck with slow, outdated websites. We build modern websites with an engineering-first delivery standard.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <a href="#why-axiom-exists" onClick={handleLearnMoreClick} className="btn-primary btn-lg whitespace-nowrap">
@@ -124,10 +123,10 @@ const About: React.FC = () => {
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why Axiom Exists</h2>
               <p className="mt-5 text-sm leading-relaxed text-slate-300 md:text-base">
-                We started Axiom after repeatedly seeing local businesses with websites that were slow, dated, and hard to use. The business itself was often excellent, but the website sent the wrong signal.
+                Too many local businesses have excellent service but websites that are slow, dated, or hard to use.
               </p>
               <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
-                Most owners do not have time to build their own site, so they settle for cheap templates. Our role is to remove that compromise with custom, high-performance websites built the right way.
+                Most owners do not have time to build their own site, so they settle for cheap templates. We remove that compromise with custom, high-performance websites.
               </p>
             </div>
           </section>
@@ -164,7 +163,7 @@ const About: React.FC = () => {
             <div className="mb-7">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Founders</h2>
               <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Riley Hinsperger and Aidan Magee are equal partners. Both founders build the websites and both are equally responsible for deliverables and service quality.
+                Riley Hinsperger and Aidan Magee are equal partners. Both build the websites and stand behind delivery quality.
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
@@ -175,11 +174,11 @@ const About: React.FC = () => {
                   </span>
                   <div>
                     <h3 className="text-xl font-semibold text-[#F2F4F7]">Riley Hinsperger</h3>
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Co-Founder • Equal Partner</p>
+                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Co-Founder | Equal Partner</p>
                   </div>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                  Riley works directly on architecture, frontend delivery, and performance standards to ensure each build is technically strong and client-ready.
+                  Riley leads architecture, frontend delivery, and performance standards on every build.
                 </p>
                 <div className="mt-5">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
@@ -199,11 +198,11 @@ const About: React.FC = () => {
                   </span>
                   <div>
                     <h3 className="text-xl font-semibold text-[#F2F4F7]">Aidan Magee</h3>
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Co-Founder • Equal Partner</p>
+                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Co-Founder | Equal Partner</p>
                   </div>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                  Aidan works directly on structure, user flow, and implementation quality so websites remain clear, reliable, and practical for real business use.
+                  Aidan leads structure, user flow, and implementation quality on every build.
                 </p>
                 <div className="mt-5">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
@@ -262,7 +261,7 @@ const About: React.FC = () => {
               <article className="axiom-bento card-snappy p-6 md:p-7">
                 <h3 className="text-lg font-semibold text-[#F2F4F7]">Not The Right Fit</h3>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                  We are not a fit for owners who do not see a modern website as important to business credibility, customer trust, and local visibility.
+                  We are not a fit for owners who do not see a modern website as core to credibility and local visibility.
                 </p>
               </article>
             </div>
@@ -274,7 +273,7 @@ const About: React.FC = () => {
                 If your business is serious, your website should be too.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Book a discovery call and we will map the right website scope for your business.
+                Book a discovery call and we will define the right scope for your business.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
