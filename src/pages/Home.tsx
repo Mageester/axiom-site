@@ -152,8 +152,8 @@ const Home: React.FC = () => {
             <PartnerMarquee />
           </section>
 
-          <section className="pt-20 md:pt-28">
-            <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <section className="pt-16 md:pt-28">
+            <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected Work</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Proof of work for credible, higher-performing websites.</h2>
@@ -177,7 +177,7 @@ const Home: React.FC = () => {
                   tabIndex={0}
                   onClick={() => openWorkDetails(item)}
                   onKeyDown={(event) => handleCardKeyDown(event, item)}
-                  className="group mx-auto flex h-[610px] w-full max-w-[940px] cursor-pointer flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_50px_rgba(0,0,0,0.35)]"
+                  className="group mx-auto flex h-[540px] w-full max-w-[940px] cursor-pointer flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_50px_rgba(0,0,0,0.35)] sm:h-[590px] lg:h-[610px]"
                 >
                   {item.demoUrl ? (
                     <a
@@ -185,7 +185,7 @@ const Home: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(event) => event.stopPropagation()}
-                      className="relative block h-[52%] overflow-hidden"
+                      className="relative block h-[46%] overflow-hidden sm:h-[50%] lg:h-[52%]"
                       aria-label={`View live demo for ${item.title}`}
                     >
                       <ResponsiveImage
@@ -208,7 +208,7 @@ const Home: React.FC = () => {
                       </div>
                     </a>
                   ) : (
-                    <div className="relative h-[52%] overflow-hidden">
+                    <div className="relative h-[46%] overflow-hidden sm:h-[50%] lg:h-[52%]">
                       <ResponsiveImage
                         source={item.image}
                         sizes="(min-width: 1280px) 940px, (min-width: 768px) 90vw, 100vw"
@@ -229,10 +229,10 @@ const Home: React.FC = () => {
                       </div>
                     </div>
                   )}
-                  <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-5 sm:p-6">
-                    <h3 className="text-2xl font-semibold tracking-tight text-white">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300/95">{item.summary}</p>
-                    <dl className="mt-4 grid gap-3 text-[11px] text-slate-200/90 sm:grid-cols-2">
+                  <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-4 sm:p-6">
+                    <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-2xl">{item.title}</h3>
+                    <p className="mt-2 text-[0.84rem] leading-relaxed text-slate-300/95 sm:text-sm">{item.summary}</p>
+                    <dl className="mt-3 grid gap-2.5 text-[10.5px] text-slate-200/90 sm:mt-4 sm:gap-3 sm:text-[11px] sm:grid-cols-2">
                       <div>
                         <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Core Problem</dt>
                         <dd className="mt-1 leading-relaxed">{item.coreProblem}</dd>
@@ -242,7 +242,7 @@ const Home: React.FC = () => {
                         <dd className="mt-1 leading-relaxed">{item.demonstrates}</dd>
                       </div>
                     </dl>
-                    <div className="mt-auto flex flex-wrap items-center gap-4 pt-4">
+                    <div className="mt-auto flex flex-wrap items-center gap-3 pt-3.5 sm:gap-4 sm:pt-4">
                       {item.demoUrl ? (
                         <a
                           href={item.demoUrl}

@@ -90,7 +90,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
         event.preventDefault();
         onOpen(work);
       }}
-      className="group mx-auto flex h-[650px] w-full max-w-[960px] cursor-pointer flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_54px_rgba(0,0,0,0.36)]"
+      className="group mx-auto flex h-[560px] w-full max-w-[960px] cursor-pointer flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_54px_rgba(0,0,0,0.36)] sm:h-[620px] lg:h-[650px]"
     >
       {work.demoUrl ? (
         <a
@@ -98,7 +98,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
           target="_blank"
           rel="noopener noreferrer"
           onClick={(event) => event.stopPropagation()}
-          className="relative block h-[52%] overflow-hidden"
+          className="relative block h-[44%] overflow-hidden sm:h-[50%] lg:h-[52%]"
           aria-label={`View live demo for ${work.title}`}
         >
           <ResponsiveImage
@@ -121,7 +121,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
           </div>
         </a>
       ) : (
-        <div className="relative h-[52%] overflow-hidden">
+        <div className="relative h-[44%] overflow-hidden sm:h-[50%] lg:h-[52%]">
           <ResponsiveImage
             source={work.image}
             sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
@@ -143,10 +143,10 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
         </div>
       )}
 
-      <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-5 sm:p-6">
-        <h3 className="text-2xl font-semibold tracking-tight text-white">{work.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-slate-300/95">{work.summary}</p>
-        <dl className="mt-4 grid gap-3 text-[11px] text-slate-200/90 sm:grid-cols-3">
+      <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-4 sm:p-6">
+        <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-2xl">{work.title}</h3>
+        <p className="mt-2 text-[0.84rem] leading-relaxed text-slate-300/95 sm:text-sm">{work.summary}</p>
+        <dl className="mt-3 grid gap-2.5 text-[10.5px] text-slate-200/90 sm:mt-4 sm:gap-3 sm:text-[11px] sm:grid-cols-3">
           <div>
             <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Core Problem</dt>
             <dd className="mt-1 leading-relaxed">{work.coreProblem}</dd>
@@ -160,8 +160,8 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
             <dd className="mt-1 leading-relaxed">{work.scope}</dd>
           </div>
         </dl>
-        <p className="mt-4 font-axiomMono text-[10px] uppercase tracking-[0.12em] text-slate-500">{work.businessContext}</p>
-        <div className="mt-auto flex flex-wrap items-center gap-4 pt-4">
+        <p className="mt-3 font-axiomMono text-[10px] uppercase tracking-[0.12em] text-slate-500 sm:mt-4">{work.businessContext}</p>
+        <div className="mt-auto flex flex-wrap items-center gap-3 pt-3.5 sm:gap-4 sm:pt-4">
           {work.demoUrl ? (
             <a
               href={work.demoUrl}
@@ -221,7 +221,7 @@ const Deployments: React.FC = () => {
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
               Demonstration sites showing how we structure fast, high-trust, conversion-focused web systems for businesses where first impressions drive inquiries.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3.5">
+            <div className="mt-5 flex flex-wrap items-center gap-3 md:mt-6 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
                 View sample builds
               </a>
@@ -238,7 +238,7 @@ const Deployments: React.FC = () => {
           </div>
         </section>
 
-        <section id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-2 pb-8 sm:px-6 md:px-8 md:pt-4">
+        <section id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-1 pb-8 sm:px-6 md:px-8 md:pt-4">
           <SingleItemCarousel
             items={works}
             getItemKey={(work) => work.id}

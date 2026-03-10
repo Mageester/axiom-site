@@ -38,14 +38,14 @@ function SingleItemCarousel<T>({
   const viewportRef = useRef<HTMLDivElement | null>(null);
 
   const slideRatio = useMemo(() => {
-    if (viewportWidth >= 1280) return 0.68;
-    if (viewportWidth >= 1024) return 0.72;
-    if (viewportWidth >= 768) return 0.8;
-    return 0.9;
+    if (viewportWidth >= 1280) return 0.66;
+    if (viewportWidth >= 1024) return 0.7;
+    if (viewportWidth >= 768) return 0.78;
+    return 0.84;
   }, [viewportWidth]);
 
-  const slideGap = viewportWidth >= 1024 ? 18 : 10;
-  const slideWidth = Math.max((viewportWidth || 0) * slideRatio, 280);
+  const slideGap = viewportWidth >= 1024 ? 18 : 12;
+  const slideWidth = Math.max((viewportWidth || 0) * slideRatio, 300);
   const stepWidth = slideWidth + slideGap;
   const centerOffset = Math.max((viewportWidth - slideWidth) / 2, 0);
   const translateX = centerOffset - trackIndex * stepWidth;
@@ -81,7 +81,9 @@ function SingleItemCarousel<T>({
   const goNext = useCallback((manual = false) => step(1, manual), [step]);
   const goPrev = useCallback((manual = false) => step(-1, manual), [step]);
 
-  const handleTransitionEnd = useCallback(() => {
+  const handleTransitionEnd = useCallback((event: React.TransitionEvent<HTMLDivElement>) => {
+    if (event.target !== event.currentTarget || event.propertyName !== 'transform') return;
+
     if (!canLoop) {
       setIsAnimating(false);
       return;
@@ -158,11 +160,11 @@ function SingleItemCarousel<T>({
         }
       }}
     >
-      <div ref={viewportRef} className={`hide-scrollbar overflow-hidden ${viewportClassName ?? ''}`}>
+      <div ref={viewportRef} className={`hide-scrollbar overflow-hidden px-1 md:px-2 ${viewportClassName ?? ''}`}>
         <div
-          className={`flex touch-pan-y ${
+          className={`flex touch-pan-y will-change-transform [transform:translateZ(0)] ${
             isTransitionEnabled
-              ? 'transition-transform duration-[560ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
+              ? 'transition-transform duration-[760ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none'
               : ''
           }`}
           style={{
@@ -193,10 +195,10 @@ function SingleItemCarousel<T>({
                     goNext(true);
                   }
                 }}
-                className={`h-full transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
+                className={`h-full transition-[transform,opacity] duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
                   isActive
                     ? 'scale-100 opacity-100'
-                    : 'cursor-pointer scale-[0.98] opacity-80 hover:scale-[0.992] hover:opacity-95'
+                    : 'cursor-pointer scale-[0.985] opacity-84 hover:scale-[0.992] hover:opacity-96'
                 }`}
               >
                 {renderItem(item, resolveItemIndex(index))}
