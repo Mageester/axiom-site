@@ -70,7 +70,7 @@ const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
 
 function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry) => void }) {
   return (
-    <article
+    <div
       role="link"
       tabIndex={0}
       onClick={() => onOpen(work)}
@@ -79,8 +79,9 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
         event.preventDefault();
         onOpen(work);
       }}
-      className="group mx-auto flex h-[560px] w-full max-w-[960px] cursor-pointer flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_54px_rgba(0,0,0,0.36)] sm:h-[620px] lg:h-[650px]"
+      className="group/proof relative z-0 mx-auto h-[560px] w-full max-w-[960px] cursor-pointer rounded-[1.5rem] hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:h-[620px] lg:h-[650px]"
     >
+      <article className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:border-white/20 group-hover/proof:shadow-[0_24px_54px_rgba(0,0,0,0.36)]">
       {work.demoUrl ? (
         <a
           href={work.demoUrl}
@@ -94,7 +95,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
             source={work.image}
             sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
             alt={work.imageAlt ?? work.title}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/proof:scale-[1.03]"
             loading="lazy"
             decoding="async"
             style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
@@ -115,7 +116,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
             source={work.image}
             sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
             alt={work.imageAlt ?? work.title}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/proof:scale-[1.03]"
             loading="lazy"
             decoding="async"
             style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
@@ -173,7 +174,8 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
           ) : null}
         </div>
       </div>
-    </article>
+      </article>
+    </div>
   );
 }
 

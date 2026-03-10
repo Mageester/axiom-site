@@ -160,13 +160,14 @@ const Home: React.FC = () => {
               ariaLabel="Selected work projects"
               className="mx-auto max-w-5xl"
               renderItem={(item) => (
-                <article
+                <div
                   role="link"
                   tabIndex={0}
                   onClick={() => openWorkDetails(item)}
                   onKeyDown={(event) => handleCardKeyDown(event, item)}
-                  className="group mx-auto flex h-[540px] w-full max-w-[940px] cursor-pointer flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_50px_rgba(0,0,0,0.35)] sm:h-[590px] lg:h-[610px]"
+                  className="group/proof relative z-0 mx-auto h-[540px] w-full max-w-[940px] cursor-pointer rounded-3xl hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:h-[590px] lg:h-[610px]"
                 >
+                  <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:border-white/20 group-hover/proof:shadow-[0_24px_50px_rgba(0,0,0,0.35)]">
                   {item.demoUrl ? (
                     <a
                       href={item.demoUrl}
@@ -180,7 +181,7 @@ const Home: React.FC = () => {
                         source={item.image}
                         sizes="(min-width: 1280px) 940px, (min-width: 768px) 90vw, 100vw"
                         alt={item.imageAlt ?? item.title}
-                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/proof:scale-[1.03]"
                         loading="lazy"
                         decoding="async"
                         style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
@@ -201,7 +202,7 @@ const Home: React.FC = () => {
                         source={item.image}
                         sizes="(min-width: 1280px) 940px, (min-width: 768px) 90vw, 100vw"
                         alt={item.imageAlt ?? item.title}
-                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/proof:scale-[1.03]"
                         loading="lazy"
                         decoding="async"
                         style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
@@ -253,7 +254,8 @@ const Home: React.FC = () => {
                       ) : null}
                     </div>
                   </div>
-                </article>
+                  </article>
+                </div>
               )}
             />
           </section>
