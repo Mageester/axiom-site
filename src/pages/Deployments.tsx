@@ -29,6 +29,7 @@ const worksDisplayOrder = [
   'concept-landscaping-authority-site',
   'concept-roofing-conversion-site',
 ] as const;
+const RESTAURANT_WORK_SLUG = 'demonstration-restaurant-reservation-site';
 
 const proofImageBySlug: Record<string, ResponsiveSource> = {
   'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
@@ -78,16 +79,16 @@ const works: WorkEntry[] = orderedCaseStudies.map((entry) => ({
   imagePosition: imagePositionBySlug[entry.slug],
 }));
 
-function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (slug: string) => void }) {
+function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry) => void }) {
   return (
     <article
       role="link"
       tabIndex={0}
-      onClick={() => onOpen(work.id)}
+      onClick={() => onOpen(work)}
       onKeyDown={(event) => {
         if (event.key !== 'Enter' && event.key !== ' ') return;
         event.preventDefault();
-        onOpen(work.id);
+        onOpen(work);
       }}
       className="group mx-auto flex h-[650px] w-full max-w-[960px] cursor-pointer flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_54px_rgba(0,0,0,0.36)]"
     >
@@ -172,13 +173,15 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (slug: string) =>
               View Live Demo
             </a>
           ) : null}
-          <Link
-            to={`/works/${work.id}`}
-            onClick={(event) => event.stopPropagation()}
-            className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
-          >
-            Review Build Notes
-          </Link>
+          {!(work.id === RESTAURANT_WORK_SLUG && work.demoUrl) ? (
+            <Link
+              to={`/works/${work.id}`}
+              onClick={(event) => event.stopPropagation()}
+              className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
+            >
+              Review Build Notes
+            </Link>
+          ) : null}
         </div>
       </div>
     </article>
@@ -188,8 +191,12 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (slug: string) =>
 const Deployments: React.FC = () => {
   const navigate = useNavigate();
 
-  const openWorkDetails = (slug: string) => {
-    navigate(`/works/${slug}`);
+  const openWorkDetails = (work: WorkEntry) => {
+    if (work.id === RESTAURANT_WORK_SLUG && work.demoUrl) {
+      window.location.assign(work.demoUrl);
+      return;
+    }
+    navigate(`/works/${work.id}`);
   };
 
   const handleViewSamplesClick = (event: React.MouseEvent<HTMLAnchorElement>) => {

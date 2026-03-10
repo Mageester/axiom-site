@@ -36,6 +36,7 @@ const homeSelectedWorkSlugs = [
   'concept-landscaping-authority-site',
   'concept-roofing-conversion-site',
 ] as const;
+const RESTAURANT_WORK_SLUG = 'demonstration-restaurant-reservation-site';
 
 const selectedWorkEntries = homeSelectedWorkSlugs
   .map((slug) => caseStudies.find((entry) => entry.slug === slug))
@@ -95,14 +96,18 @@ const operationalSignals = [
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
-  const openWorkDetails = (slug: string) => {
-    navigate(`/works/${slug}`);
+  const openWorkDetails = (work: (typeof selectedWork)[number]) => {
+    if (work.id === RESTAURANT_WORK_SLUG && work.demoUrl) {
+      window.location.assign(work.demoUrl);
+      return;
+    }
+    navigate(`/works/${work.id}`);
   };
 
-  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLElement>, slug: string) => {
+  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLElement>, work: (typeof selectedWork)[number]) => {
     if (event.key !== 'Enter' && event.key !== ' ') return;
     event.preventDefault();
-    openWorkDetails(slug);
+    openWorkDetails(work);
   };
 
   return (
@@ -170,8 +175,8 @@ const Home: React.FC = () => {
                 <article
                   role="link"
                   tabIndex={0}
-                  onClick={() => openWorkDetails(item.id)}
-                  onKeyDown={(event) => handleCardKeyDown(event, item.id)}
+                  onClick={() => openWorkDetails(item)}
+                  onKeyDown={(event) => handleCardKeyDown(event, item)}
                   className="group mx-auto flex h-[610px] w-full max-w-[940px] cursor-pointer flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_50px_rgba(0,0,0,0.35)]"
                 >
                   {item.demoUrl ? (
@@ -249,13 +254,15 @@ const Home: React.FC = () => {
                           View Live Demo
                         </a>
                       ) : null}
-                      <Link
-                        to={`/works/${item.id}`}
-                        onClick={(event) => event.stopPropagation()}
-                        className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
-                      >
-                        Build Notes
-                      </Link>
+                      {!(item.id === RESTAURANT_WORK_SLUG && item.demoUrl) ? (
+                        <Link
+                          to={`/works/${item.id}`}
+                          onClick={(event) => event.stopPropagation()}
+                          className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
+                        >
+                          Build Notes
+                        </Link>
+                      ) : null}
                     </div>
                   </div>
                 </article>
