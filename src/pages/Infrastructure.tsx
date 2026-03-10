@@ -99,38 +99,38 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
 const STACK_OPTIONS: readonly StackOption[] = [
   {
     id: 'current',
-    label: 'Use Current Setup',
-    title: 'Work inside your current website and domain setup',
+    label: 'Work Within Current Setup',
+    title: 'Work within your current setup and improve what matters',
     summary:
-      'If your current provider setup is stable, we can work within it and improve what matters without forcing a full migration.',
+      'If your current domain and hosting are already in a good place, we can build within that environment and upgrade the site without forcing a full move.',
     bullets: [
-      'Use your existing domain provider',
-      'Keep useful infrastructure already in place',
-      'Upgrade execution quality with less transition risk',
+      'Keep your current domain and provider',
+      'Avoid unnecessary migration work',
+      'Improve performance, structure, and user experience',
     ],
   },
   {
     id: 'domain-kept',
-    label: 'Keep Domain',
-    title: 'Keep your domain, replace the website experience',
+    label: 'Keep Domain, Rebuild Site',
+    title: 'Keep the domain. Replace the site experience.',
     summary:
-      'When the domain should stay but the site needs a full rebuild, we handle transition planning and release without unnecessary disruption.',
+      'If the domain should stay but the website needs a full reset, we handle the rebuild and launch planning so the transition stays clean and low-friction.',
     bullets: [
-      'Domain continuity preserved',
-      'New build shipped with clean handoff planning',
-      'Lower friction for existing customers and search presence',
+      'Keep your existing domain in place',
+      'Launch a new site with a clean transition',
+      'Protect continuity for customers and search visibility',
     ],
   },
   {
     id: 'managed',
-    label: 'Axiom-Managed',
-    title: 'Let Axiom manage hosting and infrastructure directly',
+    label: 'Fully Managed by Axiom',
+    title: 'Let Axiom handle hosting, deployment, and upkeep',
     summary:
-      'If you want a fully managed model, we can run infrastructure for you and keep technical operations centralized.',
+      'If you want a more hands-off model, we can manage the technical side directly so updates, releases, and ongoing site operations stay centralized.',
     bullets: [
-      'Single accountable technical owner',
-      'Streamlined updates and release controls',
-      'Less internal overhead for your team',
+      'One team handling the technical side',
+      'Cleaner updates and release control',
+      'Less internal overhead for your business',
     ],
   },
 ];
@@ -490,17 +490,22 @@ const Infrastructure: React.FC = () => {
             </div>
           </section>
 
-          <section id="your-stack" data-method-section className="pt-16 md:pt-22">
-            <div className="mb-7" data-reveal>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Use your existing setup or shift to managed infrastructure.</h2>
+          <section id="your-stack" data-method-section className="pt-14 md:pt-18">
+            <div className="mb-6 max-w-4xl" data-reveal>
+              <h2 className="mt-1 text-[clamp(1.95rem,4.6vw,3.35rem)] font-bold leading-[1.08] tracking-tight text-[#F2F4F7]">
+                Keep what works. Replace what doesn&apos;t.
+              </h2>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+                We can work within your current setup, rebuild around your existing domain, or manage the technical side for you directly.
+              </p>
             </div>
 
-            <div className="grid gap-4 lg:grid-cols-12">
+            <div className="grid gap-3 lg:grid-cols-12 lg:gap-4">
               <div className="lg:col-span-5" data-reveal>
                 <div
                   role="group"
-                  aria-label="Infrastructure setup options"
-                  className="axiom-bento flex flex-col gap-2 p-3"
+                  aria-label="Website setup options"
+                  className="axiom-bento flex flex-col gap-1.5 rounded-2xl p-2.5 md:p-3"
                 >
                   {STACK_OPTIONS.map((option) => {
                     const selected = option.id === activeStack;
@@ -510,10 +515,10 @@ const Infrastructure: React.FC = () => {
                         type="button"
                         aria-pressed={selected}
                         onClick={() => setActiveStack(option.id)}
-                        className={`rounded-xl px-4 py-3 text-left text-sm transition-colors ${
+                        className={`rounded-xl border px-4 py-3.5 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B05D41]/45 ${
                           selected
-                            ? 'bg-[#B05D41]/14 text-[#F2F4F7] ring-1 ring-[#B05D41]/45'
-                            : 'text-slate-300 hover:bg-white/[0.06] hover:text-[#F2F4F7]'
+                            ? 'border-[#B05D41]/40 bg-[#B05D41]/14 text-[#F2F4F7] shadow-[inset_0_0_0_1px_rgba(176,93,65,0.16)]'
+                            : 'border-transparent text-slate-300 hover:border-white/10 hover:bg-white/[0.05] hover:text-[#F2F4F7]'
                         }`}
                       >
                         {option.label}
@@ -525,17 +530,17 @@ const Infrastructure: React.FC = () => {
 
               <div className="lg:col-span-7" data-reveal>
                 <article
-                  className="axiom-bento rounded-2xl p-6 md:p-8"
+                  className="axiom-bento rounded-2xl p-6 md:p-7"
                 >
                   <div
                     key={activeStackData.id}
                     className="animate-[fade-in-up_0.28s_ease-out] motion-reduce:animate-none"
                   >
-                    <h3 className="text-2xl font-semibold text-[#F2F4F7]">{activeStackData.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-300 md:text-base">{activeStackData.summary}</p>
-                    <ul className="mt-4 space-y-2">
+                    <h3 className="text-[clamp(1.35rem,2.3vw,2rem)] font-semibold leading-tight text-[#F2F4F7]">{activeStackData.title}</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">{activeStackData.summary}</p>
+                    <ul className="mt-5 list-disc space-y-2.5 pl-5">
                       {activeStackData.bullets.map((bullet) => (
-                        <li key={bullet} className="text-sm leading-relaxed text-slate-300">
+                        <li key={bullet} className="text-sm leading-relaxed text-slate-300 md:text-[0.97rem]">
                           {bullet}
                         </li>
                       ))}
