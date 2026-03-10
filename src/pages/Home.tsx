@@ -12,18 +12,14 @@ const proofImageBySlug: Record<string, ResponsiveSource> = {
   'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
   'concept-landscaping-authority-site': responsiveImages.caseStudy1,
   'concept-roofing-conversion-site': responsiveImages.caseStudy2,
-  'concept-restaurant-reservation-site': responsiveImages.workRestaurant,
 };
 
 const proofImagePositionBySlug: Record<string, string> = {
   'demonstration-restaurant-reservation-site': 'center 24%',
-  'concept-restaurant-reservation-site': 'center 30%',
 };
 
 const proofImageAltBySlug: Record<string, string> = {
   'demonstration-restaurant-reservation-site':
-    'Server presenting plated dishes in a warmly lit dining room',
-  'concept-restaurant-reservation-site':
     'Server presenting plated dishes in a warmly lit dining room',
 };
 
@@ -34,7 +30,17 @@ const proofTypeLabel: Record<string, string> = {
   'Active Deployment': 'Active Deployment',
 };
 
-const selectedWork = caseStudies.map((entry) => ({
+const homeSelectedWorkSlugs = [
+  'demonstration-restaurant-reservation-site',
+  'concept-landscaping-authority-site',
+  'concept-roofing-conversion-site',
+] as const;
+
+const selectedWorkEntries = homeSelectedWorkSlugs
+  .map((slug) => caseStudies.find((entry) => entry.slug === slug))
+  .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
+
+const selectedWork = selectedWorkEntries.map((entry) => ({
   id: entry.slug,
   title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
   projectType: proofTypeLabel[entry.label] ?? entry.label,

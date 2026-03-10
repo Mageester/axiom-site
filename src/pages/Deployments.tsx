@@ -25,11 +25,16 @@ interface WorkEntry {
   layout: 'featured' | 'editorial' | 'compact';
 }
 
+const worksDisplayOrder = [
+  'demonstration-restaurant-reservation-site',
+  'concept-landscaping-authority-site',
+  'concept-roofing-conversion-site',
+] as const;
+
 const proofImageBySlug: Record<string, ResponsiveSource> = {
   'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
   'concept-landscaping-authority-site': responsiveImages.caseStudy1,
   'concept-roofing-conversion-site': responsiveImages.caseStudy2,
-  'concept-restaurant-reservation-site': responsiveImages.workRestaurant,
 };
 
 const proofTypeLabel: Record<string, string> = {
@@ -41,26 +46,21 @@ const proofTypeLabel: Record<string, string> = {
 
 const layoutBySlug: Record<string, WorkEntry['layout']> = {
   'demonstration-restaurant-reservation-site': 'featured',
-  'concept-landscaping-authority-site': 'editorial',
+  'concept-landscaping-authority-site': 'compact',
   'concept-roofing-conversion-site': 'compact',
-  'concept-restaurant-reservation-site': 'editorial',
 };
 
 const imagePositionBySlug: Record<string, string> = {
   'demonstration-restaurant-reservation-site': 'center 24%',
-  'concept-restaurant-reservation-site': 'center 30%',
 };
 
 const imageAltBySlug: Record<string, string> = {
   'demonstration-restaurant-reservation-site':
     'Server presenting plated dishes in a warmly lit dining room',
-  'concept-restaurant-reservation-site':
-    'Server presenting plated dishes in a warmly lit dining room',
 };
 
 const toneBySlug: Record<string, WorkEntry['tone']> = {
   'demonstration-restaurant-reservation-site': 'hospitality',
-  'concept-restaurant-reservation-site': 'hospitality',
 };
 
 const oneSentence = (value: string) => {
@@ -69,7 +69,11 @@ const oneSentence = (value: string) => {
   return `${parts[0].replace(/\.$/, '')}.`;
 };
 
-const works: WorkEntry[] = caseStudies.map((entry) => ({
+const orderedCaseStudies = worksDisplayOrder
+  .map((slug) => caseStudies.find((entry) => entry.slug === slug))
+  .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
+
+const works: WorkEntry[] = orderedCaseStudies.map((entry) => ({
   id: entry.slug,
   title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
   projectType: proofTypeLabel[entry.label] ?? entry.label,

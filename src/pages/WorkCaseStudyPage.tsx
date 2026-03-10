@@ -11,18 +11,14 @@ const proofImageBySlug: Record<string, ResponsiveSource> = {
   'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
   'concept-landscaping-authority-site': responsiveImages.caseStudy1,
   'concept-roofing-conversion-site': responsiveImages.caseStudy2,
-  'concept-restaurant-reservation-site': responsiveImages.workRestaurant,
 };
 
 const proofImagePositionBySlug: Record<string, string> = {
   'demonstration-restaurant-reservation-site': 'center 24%',
-  'concept-restaurant-reservation-site': 'center 30%',
 };
 
 const proofImageAltBySlug: Record<string, string> = {
   'demonstration-restaurant-reservation-site':
-    'Server presenting plated dishes in a warmly lit dining room',
-  'concept-restaurant-reservation-site':
     'Server presenting plated dishes in a warmly lit dining room',
 };
 
