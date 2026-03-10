@@ -38,13 +38,13 @@ function SingleItemCarousel<T>({
   const viewportRef = useRef<HTMLDivElement | null>(null);
 
   const slideRatio = useMemo(() => {
-    if (viewportWidth >= 1280) return 0.76;
-    if (viewportWidth >= 1024) return 0.8;
-    if (viewportWidth >= 768) return 0.86;
-    return 0.92;
+    if (viewportWidth >= 1280) return 0.68;
+    if (viewportWidth >= 1024) return 0.72;
+    if (viewportWidth >= 768) return 0.8;
+    return 0.9;
   }, [viewportWidth]);
 
-  const slideGap = viewportWidth >= 1024 ? 20 : 12;
+  const slideGap = viewportWidth >= 1024 ? 18 : 10;
   const slideWidth = Math.max((viewportWidth || 0) * slideRatio, 280);
   const stepWidth = slideWidth + slideGap;
   const centerOffset = Math.max((viewportWidth - slideWidth) / 2, 0);
@@ -158,19 +158,6 @@ function SingleItemCarousel<T>({
         }
       }}
     >
-      {canLoop ? (
-        <button
-          type="button"
-          aria-label="Previous slide"
-          onClick={() => goPrev(true)}
-          className="absolute left-2 top-1/2 z-20 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#0d1323]/85 text-white/90 shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-colors hover:bg-[#1a253d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 md:left-3"
-        >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-hidden>
-            <path d="m14.5 5.5-6 6 6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-      ) : null}
-
       <div ref={viewportRef} className={`hide-scrollbar overflow-hidden ${viewportClassName ?? ''}`}>
         <div
           className={`flex touch-pan-y ${
@@ -192,33 +179,34 @@ function SingleItemCarousel<T>({
               className={`shrink-0 ${slideClassName ?? ''}`}
               style={{ width: `${slideWidth}px` }}
             >
+              {(() => {
+                const isActive = index === trackIndex;
+                return (
               <div
-                className={`h-full transition-[transform,opacity,filter] duration-500 ease-out motion-reduce:transition-none ${
-                  index === trackIndex
-                    ? 'pointer-events-auto scale-100 opacity-100 blur-0'
-                    : 'pointer-events-none scale-[0.968] opacity-55 blur-[1.8px]'
+                onClickCapture={(event) => {
+                  if (isActive || !canLoop || isAnimating) return;
+                  event.preventDefault();
+                  event.stopPropagation();
+                  if (index < trackIndex) {
+                    goPrev(true);
+                  } else {
+                    goNext(true);
+                  }
+                }}
+                className={`h-full transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none ${
+                  isActive
+                    ? 'scale-100 opacity-100'
+                    : 'cursor-pointer scale-[0.98] opacity-80 hover:scale-[0.992] hover:opacity-95'
                 }`}
-                aria-hidden={index !== trackIndex}
               >
                 {renderItem(item, resolveItemIndex(index))}
               </div>
+                );
+              })()}
             </div>
           ))}
         </div>
       </div>
-
-      {canLoop ? (
-        <button
-          type="button"
-          aria-label="Next slide"
-          onClick={() => goNext(true)}
-          className="absolute right-2 top-1/2 z-20 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#0d1323]/85 text-white/90 shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-colors hover:bg-[#1a253d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 md:right-3"
-        >
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" aria-hidden>
-            <path d="m9.5 5.5 6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-      ) : null}
     </section>
   );
 }
