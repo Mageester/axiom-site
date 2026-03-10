@@ -6,7 +6,8 @@ import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import SingleItemCarousel from '../components/SingleItemCarousel';
 import { caseStudies } from '../data/caseStudies';
-import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
+import type { ResponsiveSource } from '../lib/responsiveImages';
+import { getWorkProofImage } from '../lib/workProofImages';
 
 interface WorkEntry {
   id: string;
@@ -31,26 +32,11 @@ const worksDisplayOrder = [
 ] as const;
 const RESTAURANT_WORK_SLUG = 'demonstration-restaurant-reservation-site';
 
-const proofImageBySlug: Record<string, ResponsiveSource> = {
-  'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
-  'concept-landscaping-authority-site': responsiveImages.caseStudy1,
-  'concept-roofing-conversion-site': responsiveImages.caseStudy2,
-};
-
 const proofTypeLabel: Record<string, string> = {
   'Sample Build': 'Sample Build',
   'Concept Build': 'Concept Build',
   'Demonstration Site': 'Demonstration Site',
   'Active Deployment': 'Active Deployment',
-};
-
-const imagePositionBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'center 24%',
-};
-
-const imageAltBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site':
-    'Server presenting plated dishes in a warmly lit dining room',
 };
 
 const oneSentence = (value: string) => {
@@ -63,21 +49,24 @@ const orderedCaseStudies = worksDisplayOrder
   .map((slug) => caseStudies.find((entry) => entry.slug === slug))
   .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
 
-const works: WorkEntry[] = orderedCaseStudies.map((entry) => ({
-  id: entry.slug,
-  title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-  projectType: proofTypeLabel[entry.label] ?? entry.label,
-  audience: entry.businessType,
-  businessContext: `${entry.niche} - ${entry.location}`,
-  coreProblem: entry.primaryProblem || entry.problems[0] || 'Unclear trust and conversion structure',
-  demonstrates: entry.demonstrates || entry.built[0] || 'Clearer page hierarchy and conversion pathways',
-  scope: entry.deliverables.slice(0, 2).join(' + '),
-  summary: oneSentence(entry.summary),
-  image: proofImageBySlug[entry.slug] || responsiveImages.workAether,
-  demoUrl: entry.demoUrl,
-  imageAlt: imageAltBySlug[entry.slug],
-  imagePosition: imagePositionBySlug[entry.slug],
-}));
+const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
+  const proofImage = getWorkProofImage(entry.slug);
+  return {
+    id: entry.slug,
+    title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
+    projectType: proofTypeLabel[entry.label] ?? entry.label,
+    audience: entry.businessType,
+    businessContext: `${entry.niche} - ${entry.location}`,
+    coreProblem: entry.primaryProblem || entry.problems[0] || 'Unclear trust and conversion structure',
+    demonstrates: entry.demonstrates || entry.built[0] || 'Clearer page hierarchy and conversion pathways',
+    scope: entry.deliverables.slice(0, 2).join(' + '),
+    summary: oneSentence(entry.summary),
+    image: proofImage.source,
+    demoUrl: entry.demoUrl,
+    imageAlt: proofImage.alt,
+    imagePosition: proofImage.position,
+  };
+});
 
 function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry) => void }) {
   return (

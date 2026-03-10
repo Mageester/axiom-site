@@ -5,22 +5,7 @@ import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { getCaseStudyBySlug } from '../data/caseStudies';
-import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
-
-const proofImageBySlug: Record<string, ResponsiveSource> = {
-  'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
-  'concept-landscaping-authority-site': responsiveImages.caseStudy1,
-  'concept-roofing-conversion-site': responsiveImages.caseStudy2,
-};
-
-const proofImagePositionBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'center 24%',
-};
-
-const proofImageAltBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site':
-    'Server presenting plated dishes in a warmly lit dining room',
-};
+import { getWorkProofImage } from '../lib/workProofImages';
 
 const proofToneByLabel: Record<string, string> = {
   'Sample Build': 'border-[#B05D41]/30 text-[#d4a48e] bg-[#B05D41]/10',
@@ -35,9 +20,10 @@ const WorkCaseStudyPage: React.FC = () => {
 
   if (!entry) return <Navigate to="/works" replace />;
 
-  const image = proofImageBySlug[entry.slug] || responsiveImages.workAether;
-  const imagePosition = proofImagePositionBySlug[entry.slug];
-  const imageAlt = proofImageAltBySlug[entry.slug] || entry.title;
+  const proofImage = getWorkProofImage(entry.slug);
+  const image = proofImage.source;
+  const imagePosition = proofImage.position;
+  const imageAlt = proofImage.alt || entry.title;
   const labelTone = proofToneByLabel[entry.label] || 'border-white/20 text-slate-200 bg-white/[0.04]';
 
   return (

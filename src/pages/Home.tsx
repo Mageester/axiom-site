@@ -7,22 +7,7 @@ import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import SingleItemCarousel from '../components/SingleItemCarousel';
 import { caseStudies } from '../data/caseStudies';
-import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
-
-const proofImageBySlug: Record<string, ResponsiveSource> = {
-  'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
-  'concept-landscaping-authority-site': responsiveImages.caseStudy1,
-  'concept-roofing-conversion-site': responsiveImages.caseStudy2,
-};
-
-const proofImagePositionBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'center 24%',
-};
-
-const proofImageAltBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site':
-    'Server presenting plated dishes in a warmly lit dining room',
-};
+import { getWorkProofImage } from '../lib/workProofImages';
 
 const proofTypeLabel: Record<string, string> = {
   'Sample Build': 'Sample Build',
@@ -42,20 +27,23 @@ const selectedWorkEntries = homeSelectedWorkSlugs
   .map((slug) => caseStudies.find((entry) => entry.slug === slug))
   .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
 
-const selectedWork = selectedWorkEntries.map((entry) => ({
-  id: entry.slug,
-  title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-  projectType: proofTypeLabel[entry.label] ?? entry.label,
-  audience: entry.businessType,
-  coreProblem: entry.primaryProblem || entry.problems[0] || 'Unclear trust and conversion structure',
-  demonstrates: entry.demonstrates || entry.built[0] || 'Clearer hierarchy and conversion pathways',
-  scope: entry.deliverables.slice(0, 2).join(' + '),
-  summary: entry.summary,
-  image: proofImageBySlug[entry.slug] || responsiveImages.workAether,
-  demoUrl: entry.demoUrl,
-  imageAlt: proofImageAltBySlug[entry.slug],
-  imagePosition: proofImagePositionBySlug[entry.slug],
-}));
+const selectedWork = selectedWorkEntries.map((entry) => {
+  const proofImage = getWorkProofImage(entry.slug);
+  return {
+    id: entry.slug,
+    title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
+    projectType: proofTypeLabel[entry.label] ?? entry.label,
+    audience: entry.businessType,
+    coreProblem: entry.primaryProblem || entry.problems[0] || 'Unclear trust and conversion structure',
+    demonstrates: entry.demonstrates || entry.built[0] || 'Clearer hierarchy and conversion pathways',
+    scope: entry.deliverables.slice(0, 2).join(' + '),
+    summary: entry.summary,
+    image: proofImage.source,
+    demoUrl: entry.demoUrl,
+    imageAlt: proofImage.alt,
+    imagePosition: proofImage.position,
+  };
+});
 
 const capabilities = [
   {

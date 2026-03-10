@@ -19,6 +19,27 @@ export const responsiveImages = {
     webpSrcSet:
       '/images/work-restaurant-640.webp 640w, /images/work-restaurant-960.webp 960w, /images/work-restaurant-1280.webp 1280w',
   },
+  workLandscaping: {
+    fallbackSrc: '/images/work-landscaping.jpg',
+    avifSrcSet:
+      '/images/work-landscaping-640.avif 640w, /images/work-landscaping-960.avif 960w, /images/work-landscaping-1200.avif 1200w',
+    webpSrcSet:
+      '/images/work-landscaping-640.webp 640w, /images/work-landscaping-960.webp 960w, /images/work-landscaping-1200.webp 1200w',
+  },
+  workRoofing: {
+    fallbackSrc: '/images/work-roofing.jpg',
+    avifSrcSet:
+      '/images/work-roofing-640.avif 640w, /images/work-roofing-960.avif 960w, /images/work-roofing-1200.avif 1200w',
+    webpSrcSet:
+      '/images/work-roofing-640.webp 640w, /images/work-roofing-960.webp 960w, /images/work-roofing-1200.webp 1200w',
+  },
+  workHvac: {
+    fallbackSrc: '/images/work-hvac.jpg',
+    avifSrcSet:
+      '/images/work-hvac-640.avif 640w, /images/work-hvac-960.avif 960w, /images/work-hvac-1200.avif 1200w',
+    webpSrcSet:
+      '/images/work-hvac-640.webp 640w, /images/work-hvac-960.webp 960w, /images/work-hvac-1200.webp 1200w',
+  },
   caseStudy1: {
     fallbackSrc: '/images/case-study-1.jpg',
     avifSrcSet:

@@ -23,6 +23,24 @@ const photoJobs = [
     fallback: { path: fromRoot('public', 'images', 'work-restaurant.jpg'), width: 1280, quality: 76 },
   },
   {
+    input: fromRoot('public', 'landscaping-concept.webp'),
+    baseName: fromRoot('public', 'images', 'work-landscaping'),
+    widths: [640, 960, 1200],
+    fallback: { path: fromRoot('public', 'images', 'work-landscaping.jpg'), width: 1200, quality: 76 },
+  },
+  {
+    input: fromRoot('public', 'roofing-concept.webp'),
+    baseName: fromRoot('public', 'images', 'work-roofing'),
+    widths: [640, 960, 1200],
+    fallback: { path: fromRoot('public', 'images', 'work-roofing.jpg'), width: 1200, quality: 76 },
+  },
+  {
+    input: fromRoot('public', 'hvac-case-study.webp'),
+    baseName: fromRoot('public', 'images', 'work-hvac'),
+    widths: [640, 960, 1200],
+    fallback: { path: fromRoot('public', 'images', 'work-hvac.jpg'), width: 1200, quality: 76 },
+  },
+  {
     input: fromRoot('public', 'images', 'case-study-1.jpg'),
     baseName: fromRoot('public', 'images', 'case-study-1'),
     widths: [640, 960, 1280],
