@@ -437,7 +437,6 @@ const Infrastructure: React.FC = () => {
 
           <section id="your-stack" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Your Stack</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Use your existing setup or shift to managed infrastructure.</h2>
             </div>
 
