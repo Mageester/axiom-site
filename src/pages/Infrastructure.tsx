@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
@@ -239,6 +239,7 @@ const Infrastructure: React.FC = () => {
   const [openClarify, setOpenClarify] = useState<number>(0);
   const [openFaq, setOpenFaq] = useState<number>(0);
   const [activeProcessStep, setActiveProcessStep] = useState<number>(0);
+  const sectionScrollFrame = useRef<number | null>(null);
 
   const activeStackData = useMemo(
     () => STACK_OPTIONS.find((option) => option.id === activeStack) ?? STACK_OPTIONS[0],
@@ -316,6 +317,59 @@ const Infrastructure: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(
+    () => () => {
+      if (sectionScrollFrame.current !== null) {
+        window.cancelAnimationFrame(sectionScrollFrame.current);
+      }
+    },
+    []
+  );
+
+  const scrollToSection = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    const isPlainLeftClick =
+      event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+    if (!isPlainLeftClick) return;
+
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+    event.preventDefault();
+
+    const topOffset = window.innerWidth >= 768 ? 132 : 118;
+    const targetTop = Math.max(target.getBoundingClientRect().top + window.scrollY - topOffset, 0);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      window.scrollTo({ top: targetTop, left: 0, behavior: 'auto' });
+      return;
+    }
+
+    const startTop = window.scrollY;
+    const distance = targetTop - startTop;
+    const duration = 560;
+    const startedAt = performance.now();
+    const easeInOut = (time: number) =>
+      time < 0.5 ? 4 * time * time * time : 1 - Math.pow(-2 * time + 2, 3) / 2;
+
+    if (sectionScrollFrame.current !== null) {
+      window.cancelAnimationFrame(sectionScrollFrame.current);
+    }
+
+    const animate = (now: number) => {
+      const elapsed = Math.min((now - startedAt) / duration, 1);
+      const eased = easeInOut(elapsed);
+      window.scrollTo({ top: startTop + distance * eased, left: 0, behavior: 'auto' });
+
+      if (elapsed < 1) {
+        sectionScrollFrame.current = window.requestAnimationFrame(animate);
+      } else {
+        sectionScrollFrame.current = null;
+      }
+    };
+
+    sectionScrollFrame.current = window.requestAnimationFrame(animate);
+  };
+
   const processProgress = ((activeProcessStep + 1) / PROCESS_STEPS.length) * 100;
 
   return (
@@ -350,16 +404,17 @@ const Infrastructure: React.FC = () => {
           <div className="z-30 mt-8 md:sticky md:top-24" data-reveal>
             <nav
               aria-label="Infrastructure page sections"
-              className="hide-scrollbar overflow-x-auto rounded-2xl border border-white/10 bg-[rgba(12,16,25,0.88)] p-1.5 backdrop-blur-xl md:rounded-full md:p-2"
+              className="hide-scrollbar mx-auto w-full overflow-x-auto rounded-2xl border border-white/10 bg-[rgba(12,16,25,0.82)] p-1.5 backdrop-blur-lg md:w-fit md:rounded-full md:p-1.5"
             >
-              <ul className="flex min-w-max items-center gap-1">
+              <ul className="flex min-w-max items-center gap-0.5 md:gap-1">
                 {SECTION_LINKS.map((link) => {
                   const isActive = activeSection === link.id;
                   return (
                     <li key={link.id}>
                       <a
                         href={`#${link.id}`}
-                        className={`inline-flex rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors ${
+                        onClick={(event) => scrollToSection(event, link.id)}
+                        className={`inline-flex rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors ${
                           isActive
                             ? 'bg-[#B05D41]/20 text-[#F2F4F7] ring-1 ring-[#B05D41]/40'
                             : 'text-slate-300 hover:bg-white/[0.07] hover:text-[#F2F4F7]'
