@@ -19,14 +19,17 @@ interface WorkEntry {
   summary: string;
   image: ResponsiveSource;
   demoUrl?: string;
+  imageAlt?: string;
+  imagePosition?: string;
+  tone: 'default' | 'hospitality';
   layout: 'featured' | 'editorial' | 'compact';
 }
 
 const proofImageBySlug: Record<string, ResponsiveSource> = {
-  'sample-hvac-kitchener': responsiveImages.workAether,
+  'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
   'concept-landscaping-authority-site': responsiveImages.caseStudy1,
   'concept-roofing-conversion-site': responsiveImages.caseStudy2,
-  'concept-restaurant-reservation-site': responsiveImages.caseStudy3,
+  'concept-restaurant-reservation-site': responsiveImages.workRestaurant,
 };
 
 const proofTypeLabel: Record<string, string> = {
@@ -37,10 +40,27 @@ const proofTypeLabel: Record<string, string> = {
 };
 
 const layoutBySlug: Record<string, WorkEntry['layout']> = {
-  'sample-hvac-kitchener': 'featured',
+  'demonstration-restaurant-reservation-site': 'featured',
   'concept-landscaping-authority-site': 'editorial',
   'concept-roofing-conversion-site': 'compact',
   'concept-restaurant-reservation-site': 'editorial',
+};
+
+const imagePositionBySlug: Record<string, string> = {
+  'demonstration-restaurant-reservation-site': 'center 24%',
+  'concept-restaurant-reservation-site': 'center 30%',
+};
+
+const imageAltBySlug: Record<string, string> = {
+  'demonstration-restaurant-reservation-site':
+    'Server presenting plated dishes in a warmly lit dining room',
+  'concept-restaurant-reservation-site':
+    'Server presenting plated dishes in a warmly lit dining room',
+};
+
+const toneBySlug: Record<string, WorkEntry['tone']> = {
+  'demonstration-restaurant-reservation-site': 'hospitality',
+  'concept-restaurant-reservation-site': 'hospitality',
 };
 
 const oneSentence = (value: string) => {
@@ -61,16 +81,33 @@ const works: WorkEntry[] = caseStudies.map((entry) => ({
   summary: oneSentence(entry.summary),
   image: proofImageBySlug[entry.slug] || responsiveImages.workAether,
   demoUrl: entry.demoUrl,
+  imageAlt: imageAltBySlug[entry.slug],
+  imagePosition: imagePositionBySlug[entry.slug],
+  tone: toneBySlug[entry.slug] || 'default',
   layout: layoutBySlug[entry.slug] || 'compact',
 }));
 
 function WorkCard({ work }: { work: WorkEntry }) {
   const isFeatured = work.layout === 'featured';
   const isEditorial = work.layout === 'editorial';
+  const isHospitality = work.tone === 'hospitality';
+  const frameToneClass = isHospitality
+    ? 'border-[#c79379]/35 hover:border-[#e4b89d]/60 hover:shadow-[0_0_74px_rgba(176,93,65,0.26)]'
+    : 'border-white/[0.08] hover:border-white/20 hover:shadow-[0_0_60px_rgba(176,93,65,0.1)]';
+  const typeChipClass = isHospitality
+    ? 'border-[#efdac6]/22 bg-[#1f140f]/60 text-[#f1dec9]'
+    : 'border-white/10 bg-black/45 text-white/75';
+  const audienceChipClass = isHospitality
+    ? 'border-[#efdac6]/20 bg-[#1a110d]/55 text-[#e8d3be]'
+    : 'border-white/10 bg-black/35 text-white/70';
+  const featuredPanelClass = isHospitality
+    ? 'border-[#efdac6]/24 bg-[#130d0a]/52'
+    : 'border-white/15 bg-black/35';
+  const cardCtaLabel = isHospitality ? 'Review Build Notes' : 'View Build Notes';
 
   return (
     <article
-      className={`group overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] border border-white/[0.08] bg-[#0d1323]/80 transition-all duration-500 hover:border-white/20 hover:shadow-[0_0_60px_rgba(176,93,65,0.1)] ${
+      className={`group overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] border bg-[#0d1323]/80 transition-all duration-500 ${frameToneClass} ${
         isFeatured ? 'relative h-[520px] sm:h-[580px] md:col-span-2' : 'relative h-[430px] sm:h-[480px] md:col-span-1'
       }`}
     >
@@ -79,24 +116,34 @@ function WorkCard({ work }: { work: WorkEntry }) {
           <ResponsiveImage
             source={work.image}
             sizes="(min-width: 1280px) 920px, (min-width: 768px) 92vw, 100vw"
-            alt={work.title}
+            alt={work.imageAlt ?? work.title}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             loading={isFeatured ? 'eager' : 'lazy'}
             fetchPriority={isFeatured ? 'high' : 'auto'}
             decoding="async"
+            style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/45 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-95" />
+          <div
+            className={`absolute inset-0 transition-opacity duration-500 group-hover:opacity-95 ${
+              isHospitality
+                ? 'bg-gradient-to-t from-[#080503]/96 via-[#2b190f]/58 to-transparent opacity-92'
+                : 'bg-gradient-to-t from-black/92 via-black/45 to-transparent opacity-85'
+            }`}
+          />
+          {isHospitality ? (
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_20%,rgba(176,93,65,0.36),transparent_46%)] opacity-50 transition-opacity duration-500 group-hover:opacity-70" />
+          ) : null}
 
           <div className="absolute left-5 top-5 z-10 flex flex-wrap items-center gap-2">
-            <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+            <span className={`inline-block rounded-full border px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] backdrop-blur-md ${typeChipClass}`}>
               {work.projectType}
             </span>
-            <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
+            <span className={`inline-block rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.14em] backdrop-blur-md ${audienceChipClass}`}>
               {work.audience}
             </span>
           </div>
 
-          <div className="absolute inset-x-5 bottom-5 z-10 rounded-2xl border border-white/15 bg-black/35 p-5 backdrop-blur-md sm:p-6">
+          <div className={`absolute inset-x-5 bottom-5 z-10 rounded-2xl border p-5 backdrop-blur-md sm:p-6 ${featuredPanelClass}`}>
             <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-[1.9rem]">{work.title}</h3>
             <p className="mt-2 max-w-3xl text-sm text-slate-200">{work.summary}</p>
             <dl className="mt-4 grid gap-3 text-[11px] sm:grid-cols-3">
@@ -128,7 +175,7 @@ function WorkCard({ work }: { work: WorkEntry }) {
                 to={`/works/${work.id}`}
                 className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
               >
-                View Build Notes
+                {cardCtaLabel}
               </Link>
             </div>
           </div>
@@ -139,10 +186,11 @@ function WorkCard({ work }: { work: WorkEntry }) {
             <ResponsiveImage
               source={work.image}
               sizes="(min-width: 768px) 48vw, 100vw"
-              alt={work.title}
+              alt={work.imageAlt ?? work.title}
               className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               loading="lazy"
               decoding="async"
+              style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
             <div className="absolute left-4 top-4 z-10">
@@ -188,7 +236,7 @@ function WorkCard({ work }: { work: WorkEntry }) {
                 to={`/works/${work.id}`}
                 className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
               >
-                View Build Notes
+                {cardCtaLabel}
               </Link>
             </div>
           </div>
@@ -219,7 +267,7 @@ const Deployments: React.FC = () => {
               <h1 data-startup-heading className="text-left">Sample sites for real business use cases.</h1>
             </div>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-              Demonstration sites showing how we structure fast, high-trust, conversion-focused web systems for service businesses.
+              Demonstration sites showing how we structure fast, high-trust, conversion-focused web systems for businesses where first impressions drive inquiries.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">

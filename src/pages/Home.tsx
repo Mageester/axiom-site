@@ -9,10 +9,22 @@ import { caseStudies } from '../data/caseStudies';
 import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
 
 const proofImageBySlug: Record<string, ResponsiveSource> = {
-  'sample-hvac-kitchener': responsiveImages.workAether,
+  'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
   'concept-landscaping-authority-site': responsiveImages.caseStudy1,
   'concept-roofing-conversion-site': responsiveImages.caseStudy2,
-  'concept-restaurant-reservation-site': responsiveImages.caseStudy3,
+  'concept-restaurant-reservation-site': responsiveImages.workRestaurant,
+};
+
+const proofImagePositionBySlug: Record<string, string> = {
+  'demonstration-restaurant-reservation-site': 'center 24%',
+  'concept-restaurant-reservation-site': 'center 30%',
+};
+
+const proofImageAltBySlug: Record<string, string> = {
+  'demonstration-restaurant-reservation-site':
+    'Server presenting plated dishes in a warmly lit dining room',
+  'concept-restaurant-reservation-site':
+    'Server presenting plated dishes in a warmly lit dining room',
 };
 
 const proofTypeLabel: Record<string, string> = {
@@ -33,6 +45,8 @@ const selectedWork = caseStudies.map((entry) => ({
   summary: entry.summary,
   image: proofImageBySlug[entry.slug] || responsiveImages.workAether,
   demoUrl: entry.demoUrl,
+  imageAlt: proofImageAltBySlug[entry.slug],
+  imagePosition: proofImagePositionBySlug[entry.slug],
 }));
 
 const capabilities = [
@@ -135,10 +149,11 @@ const Home: React.FC = () => {
                     <ResponsiveImage
                       source={item.image}
                       sizes="(min-width: 1280px) 360px, (min-width: 1024px) 33vw, (min-width: 768px) 48vw, 100vw"
-                      alt={item.title}
+                      alt={item.imageAlt ?? item.title}
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                       loading="lazy"
                       decoding="async"
+                      style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/62 via-black/20 to-transparent" />
                     <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">

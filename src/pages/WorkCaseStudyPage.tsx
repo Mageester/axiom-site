@@ -8,10 +8,22 @@ import { getCaseStudyBySlug } from '../data/caseStudies';
 import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
 
 const proofImageBySlug: Record<string, ResponsiveSource> = {
-  'sample-hvac-kitchener': responsiveImages.workAether,
+  'demonstration-restaurant-reservation-site': responsiveImages.workRestaurant,
   'concept-landscaping-authority-site': responsiveImages.caseStudy1,
   'concept-roofing-conversion-site': responsiveImages.caseStudy2,
-  'concept-restaurant-reservation-site': responsiveImages.caseStudy3,
+  'concept-restaurant-reservation-site': responsiveImages.workRestaurant,
+};
+
+const proofImagePositionBySlug: Record<string, string> = {
+  'demonstration-restaurant-reservation-site': 'center 24%',
+  'concept-restaurant-reservation-site': 'center 30%',
+};
+
+const proofImageAltBySlug: Record<string, string> = {
+  'demonstration-restaurant-reservation-site':
+    'Server presenting plated dishes in a warmly lit dining room',
+  'concept-restaurant-reservation-site':
+    'Server presenting plated dishes in a warmly lit dining room',
 };
 
 const proofToneByLabel: Record<string, string> = {
@@ -28,6 +40,8 @@ const WorkCaseStudyPage: React.FC = () => {
   if (!entry) return <Navigate to="/works" replace />;
 
   const image = proofImageBySlug[entry.slug] || responsiveImages.workAether;
+  const imagePosition = proofImagePositionBySlug[entry.slug];
+  const imageAlt = proofImageAltBySlug[entry.slug] || entry.title;
   const labelTone = proofToneByLabel[entry.label] || 'border-white/20 text-slate-200 bg-white/[0.04]';
 
   return (
@@ -99,11 +113,12 @@ const WorkCaseStudyPage: React.FC = () => {
                   <ResponsiveImage
                     source={image}
                     sizes="(min-width: 1280px) 520px, (min-width: 1024px) 44vw, 100vw"
-                    alt={entry.title}
+                    alt={imageAlt}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
+                    style={imagePosition ? { objectPosition: imagePosition } : undefined}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
                 </div>

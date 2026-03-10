@@ -12,6 +12,13 @@ export const responsiveImages = {
     webpSrcSet:
       '/images/work-aether-640.webp 640w, /images/work-aether-960.webp 960w, /images/work-aether-1280.webp 1280w',
   },
+  workRestaurant: {
+    fallbackSrc: '/images/work-restaurant.jpg',
+    avifSrcSet:
+      '/images/work-restaurant-640.avif 640w, /images/work-restaurant-960.avif 960w, /images/work-restaurant-1280.avif 1280w',
+    webpSrcSet:
+      '/images/work-restaurant-640.webp 640w, /images/work-restaurant-960.webp 960w, /images/work-restaurant-1280.webp 1280w',
+  },
   caseStudy1: {
     fallbackSrc: '/images/case-study-1.jpg',
     avifSrcSet:

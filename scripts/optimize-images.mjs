@@ -17,6 +17,12 @@ const photoJobs = [
     fallback: { path: fromRoot('public', 'images', 'work-aether.jpg'), width: 1280, quality: 76 },
   },
   {
+    input: fromRoot('public', 'images', 'work-restaurant.jpg'),
+    baseName: fromRoot('public', 'images', 'work-restaurant'),
+    widths: [640, 960, 1280],
+    fallback: { path: fromRoot('public', 'images', 'work-restaurant.jpg'), width: 1280, quality: 76 },
+  },
+  {
     input: fromRoot('public', 'images', 'case-study-1.jpg'),
     baseName: fromRoot('public', 'images', 'case-study-1'),
     widths: [640, 960, 1280],

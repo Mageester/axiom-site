@@ -19,36 +19,36 @@ export type CaseStudyEntry = {
 
 export const caseStudies: CaseStudyEntry[] = [
     {
-        slug: 'sample-hvac-kitchener',
-        title: 'Sample: HVAC Service Business Site',
-        label: 'Sample Build',
-        niche: 'Service-Based Business',
-        location: 'Kitchener, ON (Sample Market)',
-        businessType: 'Service-Based Business',
-        primaryProblem: 'Outdated website with weak trust cues and no clear inquiry path.',
-        demonstrates: 'Service-page architecture with stronger trust and cleaner quote pathways.',
-        summary: 'Sample build for a local service business with an outdated website and inconsistent inquiry flow.',
-        context: 'Sample project showing how a service business can move from generic pages to a clearer trust and conversion structure.',
+        slug: 'demonstration-restaurant-reservation-site',
+        title: 'Demo: Restaurant Reservation Site',
+        label: 'Demonstration Site',
+        niche: 'Restaurant and Hospitality',
+        location: 'Toronto, ON (Demonstration Environment)',
+        businessType: 'Restaurant Business',
+        primaryProblem: 'Weak atmosphere presentation and unclear reservation path for high-intent visitors.',
+        demonstrates: 'Photo-led hospitality framing with cleaner reservation-first conversion flow.',
+        summary: 'Demonstration site for a reservation-led restaurant brand that needs stronger atmosphere, sharper menu clarity, and higher booking confidence.',
+        context: 'Demonstration project showing how a restaurant brand can move from generic web presence to a premium, hospitality-driven booking experience.',
         problems: [
-            'Outdated website with weak trust cues and no clear inquiry path',
-            'Slow mobile loading and inconsistent page layout across devices',
-            'Weak service-page structure and thin technical SEO foundation'
+            'Generic visuals that do not communicate dining atmosphere or food quality',
+            'Reservation actions are buried, creating drop-off during high-intent traffic',
+            'Menu information is hard to scan on mobile and lacks clear hierarchy'
         ],
         built: [
-            'Demonstrates a service-page architecture with clearer trust and quote pathways',
-            'Clear contact and quote request funnel above the fold and repeated by section',
-            'Performance-first front-end structure with edge delivery deployment model'
+            'Demonstrates photo-led hero and section composition aligned to hospitality buying behavior',
+            'Clear reservation path above the fold and reinforced through menu and proof sections',
+            'Structured menu and trust blocks designed for fast mobile scanning'
         ],
         targets: [
-            'Target: 90+ Lighthouse performance score on key pages',
-            'Target: sub-2s load on optimized production pages',
-            'Target: clearer mobile CTA visibility for quote requests'
+            'Target: stronger reservation intent from homepage traffic',
+            'Target: clearer menu discovery and scan speed on mobile',
+            'Target: improved trust perception through atmosphere and presentation quality'
         ],
         deliverables: [
-            'Homepage + service pages + contact funnel',
-            'Mobile-first UI system and CTA hierarchy',
-            'Technical SEO foundation and metadata setup',
-            'Analytics-ready deployment structure'
+            'Homepage + menu preview + reservation-first CTA system',
+            'Hospitality-focused visual hierarchy and card composition',
+            'Mobile-first layout and interaction polish',
+            'Technical SEO and metadata-ready page structure'
         ],
         ctaLabel: 'Request a Similar Build'
     },
