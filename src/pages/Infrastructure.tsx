@@ -162,12 +162,6 @@ const CLARIFY_ITEMS: readonly ExpandableItem[] = [
   },
 ];
 
-const FLEXIBILITY_ITEMS: readonly string[] = [
-  'Existing site and domain provider',
-  'Existing domain with a full rebuild',
-  'Fully Axiom-managed hosting and infrastructure',
-];
-
 const FAQ_ITEMS: readonly ExpandableItem[] = [
   {
     title: 'How are consultations conducted?',
@@ -585,21 +579,6 @@ const Infrastructure: React.FC = () => {
                   </article>
                 );
               })}
-            </div>
-          </section>
-
-          <section className="pt-16 md:pt-22">
-            <div className="mb-7" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Setup Flexibility</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Three ways to run delivery.</h2>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-3">
-              {FLEXIBILITY_ITEMS.map((item) => (
-                <article key={item} className="axiom-bento rounded-2xl p-5 md:p-6" data-reveal>
-                  <p className="text-sm leading-relaxed text-slate-200">{item}</p>
-                </article>
-              ))}
             </div>
           </section>
 
