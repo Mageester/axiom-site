@@ -18,6 +18,7 @@ interface WorkEntry {
   scope: string;
   summary: string;
   image: ResponsiveSource;
+  demoUrl?: string;
   layout: 'featured' | 'editorial' | 'compact';
 }
 
@@ -25,6 +26,7 @@ const proofImageBySlug: Record<string, ResponsiveSource> = {
   'sample-hvac-kitchener': responsiveImages.workAether,
   'concept-landscaping-authority-site': responsiveImages.caseStudy1,
   'concept-roofing-conversion-site': responsiveImages.caseStudy2,
+  'concept-restaurant-reservation-site': responsiveImages.caseStudy3,
 };
 
 const proofTypeLabel: Record<string, string> = {
@@ -38,6 +40,7 @@ const layoutBySlug: Record<string, WorkEntry['layout']> = {
   'sample-hvac-kitchener': 'featured',
   'concept-landscaping-authority-site': 'editorial',
   'concept-roofing-conversion-site': 'compact',
+  'concept-restaurant-reservation-site': 'editorial',
 };
 
 const oneSentence = (value: string) => {
@@ -57,6 +60,7 @@ const works: WorkEntry[] = caseStudies.map((entry) => ({
   scope: entry.deliverables.slice(0, 2).join(' + '),
   summary: oneSentence(entry.summary),
   image: proofImageBySlug[entry.slug] || responsiveImages.workAether,
+  demoUrl: entry.demoUrl,
   layout: layoutBySlug[entry.slug] || 'compact',
 }));
 
@@ -109,12 +113,24 @@ function WorkCard({ work }: { work: WorkEntry }) {
                 <dd className="mt-1 leading-relaxed text-white/88">{work.scope}</dd>
               </div>
             </dl>
-            <Link
-              to={`/works/${work.id}`}
-              className="mt-4 inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
-            >
-              View Build Notes
-            </Link>
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              {work.demoUrl ? (
+                <a
+                  href={work.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
+                >
+                  View Live Demo
+                </a>
+              ) : null}
+              <Link
+                to={`/works/${work.id}`}
+                className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
+              >
+                View Build Notes
+              </Link>
+            </div>
           </div>
         </>
       ) : (
@@ -157,12 +173,24 @@ function WorkCard({ work }: { work: WorkEntry }) {
               )}
             </dl>
             <p className="mt-auto pt-3 text-[10px] uppercase tracking-[0.12em] text-slate-500">{work.businessContext}</p>
-            <Link
-              to={`/works/${work.id}`}
-              className="mt-2 inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
-            >
-              View Build Notes
-            </Link>
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              {work.demoUrl ? (
+                <a
+                  href={work.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
+                >
+                  View Live Demo
+                </a>
+              ) : null}
+              <Link
+                to={`/works/${work.id}`}
+                className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
+              >
+                View Build Notes
+              </Link>
+            </div>
           </div>
         </div>
       )}
