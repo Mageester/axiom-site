@@ -12,6 +12,7 @@ const proofImageBySlug: Record<string, ResponsiveSource> = {
   'sample-hvac-kitchener': responsiveImages.workAether,
   'concept-landscaping-authority-site': responsiveImages.caseStudy1,
   'concept-roofing-conversion-site': responsiveImages.caseStudy2,
+  'concept-restaurant-reservation-site': responsiveImages.caseStudy3,
 };
 
 const proofTypeLabel: Record<string, string> = {
@@ -31,6 +32,7 @@ const selectedWork = caseStudies.map((entry) => ({
   scope: entry.deliverables.slice(0, 2).join(' + '),
   summary: entry.summary,
   image: proofImageBySlug[entry.slug] || responsiveImages.workAether,
+  demoUrl: entry.demoUrl,
 }));
 
 const capabilities = [
@@ -159,12 +161,24 @@ const Home: React.FC = () => {
                         <dd className="mt-0.5">{item.demonstrates}</dd>
                       </div>
                     </dl>
-                    <Link
-                      to={`/works/${item.id}`}
-                      className="mt-auto pt-3 inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
-                    >
-                      Build Notes
-                    </Link>
+                    <div className="mt-auto flex flex-wrap items-center gap-3 pt-3">
+                      {item.demoUrl ? (
+                        <a
+                          href={item.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
+                        >
+                          View Live Demo
+                        </a>
+                      ) : null}
+                      <Link
+                        to={`/works/${item.id}`}
+                        className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
+                      >
+                        Build Notes
+                      </Link>
+                    </div>
                   </div>
                 </article>
               ))}

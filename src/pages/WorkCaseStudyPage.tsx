@@ -11,6 +11,7 @@ const proofImageBySlug: Record<string, ResponsiveSource> = {
   'sample-hvac-kitchener': responsiveImages.workAether,
   'concept-landscaping-authority-site': responsiveImages.caseStudy1,
   'concept-roofing-conversion-site': responsiveImages.caseStudy2,
+  'concept-restaurant-reservation-site': responsiveImages.caseStudy3,
 };
 
 const proofToneByLabel: Record<string, string> = {
@@ -71,6 +72,16 @@ const WorkCaseStudyPage: React.FC = () => {
                 </dl>
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                  {entry.demoUrl ? (
+                    <a
+                      href={entry.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-full border border-[#d4a48e]/35 bg-[#d4a48e]/12 px-5 py-3 text-sm font-medium text-[#e8bea8] transition-colors hover:border-[#e8bea8]/60 hover:bg-[#d4a48e]/18"
+                    >
+                      View Live Demo
+                    </a>
+                  ) : null}
                   <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
                     Book Consultation
                   </Link>

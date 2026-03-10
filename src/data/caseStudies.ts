@@ -2,6 +2,7 @@ export type CaseStudyEntry = {
     slug: string;
     title: string;
     label: 'Sample Build' | 'Concept Build' | 'Demonstration Site' | 'Active Deployment';
+    demoUrl?: string;
     niche: string;
     location: string;
     businessType: string;
@@ -83,6 +84,40 @@ export const caseStudies: CaseStudyEntry[] = [
         built: ['Demonstrates CTA hierarchy for urgent versus planned inquiries', 'Trust section layout', 'Performance-first page shell'],
         targets: ['Target: clearer first-click conversion path', 'Target: improved mobile readability'],
         deliverables: ['Concept homepage', 'Roofing service page framework', 'CTA and copy hierarchy blueprint'],
+        ctaLabel: 'Initialize Demo'
+    },
+    {
+        slug: 'concept-restaurant-reservation-site',
+        title: 'Demo: Restaurant Reservation Experience',
+        label: 'Demonstration Site',
+        demoUrl: 'https://restaurant.getaxiom.ca',
+        niche: 'Restaurants',
+        location: 'Demonstration Environment',
+        businessType: 'Chef-Driven Restaurant',
+        primaryProblem: 'Attractive brand presence without a clear, mobile-first reservation pathway.',
+        demonstrates: 'Reservation-first UX with premium visual hierarchy and strong mobile booking intent.',
+        summary: 'Demonstration build for restaurants that need stronger atmosphere and clearer reservation conversion.',
+        context: 'Demonstration project for hospitality brands that need better menu readability, trust signals, and direct reservation flow.',
+        problems: [
+            'Heavy visual pages with weak call-to-reserve clarity',
+            'Menu content difficult to scan on mobile',
+            'Inconsistent contact and reservation paths'
+        ],
+        built: [
+            'Demonstrates reservation-first UX across every key page',
+            'Hospitality-focused visual system with consistent premium styling',
+            'Structured content model for menu, story, and contact details'
+        ],
+        targets: [
+            'Target: clearer reservation intent from first screen',
+            'Target: stronger menu readability on small screens',
+            'Target: consistent trust and contact signals site-wide'
+        ],
+        deliverables: [
+            'Homepage, menu, about, and reservations pages',
+            'Shared design system primitives and content schema',
+            'Mobile sticky reserve CTA and clean contact pathways'
+        ],
         ctaLabel: 'Initialize Demo'
     }
 ];
