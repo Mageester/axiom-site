@@ -379,7 +379,6 @@ const Infrastructure: React.FC = () => {
           <section id="process" data-method-section className="pt-14 md:pt-20">
             <div className="mx-auto w-full max-w-[1220px]">
               <div className="mx-auto w-full max-w-[740px]" data-reveal>
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Process</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Clear steps from first call to launch.</h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
                   The sequence is structured to reduce ambiguity and keep project decisions aligned.
