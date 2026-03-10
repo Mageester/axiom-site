@@ -198,7 +198,7 @@ const Deployments: React.FC = () => {
                 View sample builds
               </a>
               <Link
-                to="/infrastructure"
+                to="/method"
                 className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-white/25 hover:bg-white/[0.06] hover:text-axiom-text-main"
               >
                 Review method
@@ -228,7 +228,7 @@ const Deployments: React.FC = () => {
                 Book Consultation
               </a>
               <Link
-                to="/infrastructure"
+                to="/method"
                 className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-axiom-text-main hover:underline"
               >
                 Review Method

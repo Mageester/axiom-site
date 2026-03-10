@@ -11,7 +11,7 @@ type LayoutProps = {
 
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
-  { label: 'Method', to: '/infrastructure' },
+  { label: 'Method', to: '/method' },
   { label: 'Work', to: '/works' },
   { label: 'About', to: '/about' },
 ];

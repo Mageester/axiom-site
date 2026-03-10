@@ -30,7 +30,8 @@ const App: React.FC = () => {
         <Suspense fallback={<RouteFallback />}>
           <Routes location={location}>
             <Route path="/" element={<Home />} />
-            <Route path="/infrastructure" element={<Infrastructure />} />
+            <Route path="/method" element={<Infrastructure />} />
+            <Route path="/infrastructure" element={<Navigate to="/method" replace />} />
             <Route path="/works" element={<Deployments />} />
             <Route path="/works/:slug" element={<WorkCaseStudyPage />} />
             <Route path="/deployments" element={<Navigate to="/works" replace />} />

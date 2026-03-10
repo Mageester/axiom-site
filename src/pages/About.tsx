@@ -109,7 +109,7 @@ const About: React.FC = () => {
                     Learn more
                   </a>
                   <Link
-                    to="/infrastructure"
+                    to="/method"
                     className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-white/30 hover:bg-white/[0.07]"
                   >
                     View Method
@@ -280,7 +280,7 @@ const About: React.FC = () => {
                   Book a Discovery Call
                 </Link>
                 <Link
-                  to="/infrastructure"
+                  to="/method"
                   className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-white/30 hover:bg-white/[0.07]"
                 >
                   See Infrastructure

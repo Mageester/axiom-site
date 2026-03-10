@@ -304,7 +304,7 @@ const ContactPage: React.FC = () => {
                                                 </p>
                                                 <p className="mt-3 text-sm text-slate-300">
                                                     If you have any questions about the process, refer to our{' '}
-                                                    <Link to="/infrastructure" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                                    <Link to="/method" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                                         Method
                                                     </Link>{' '}
                                                     page. You can also email{' '}

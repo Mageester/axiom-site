@@ -95,7 +95,7 @@ const Home: React.FC = () => {
                     BOOK CONSULTATION NOW
                   </Link>
                   <Link
-                    to="/infrastructure"
+                    to="/method"
                     className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
                   >
                     See Method
