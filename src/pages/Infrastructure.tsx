@@ -377,8 +377,8 @@ const Infrastructure: React.FC = () => {
           </div>
 
           <section id="process" data-method-section className="pt-14 md:pt-20">
-            <div className="grid gap-5 lg:grid-cols-12 lg:gap-7">
-              <div className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start" data-reveal>
+            <div className="mx-auto w-full max-w-[1220px]">
+              <div className="mx-auto w-full max-w-[740px]" data-reveal>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Process</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Clear steps from first call to launch.</h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
@@ -386,7 +386,7 @@ const Infrastructure: React.FC = () => {
                 </p>
               </div>
 
-              <ol className="grid gap-4 lg:col-span-8">
+              <ol className="mx-auto mt-10 grid w-full max-w-[960px] gap-5 md:mt-12 md:gap-6">
                 <li className="axiom-bento rounded-2xl px-4 py-3 md:px-5 md:py-3.5" data-reveal aria-label="Step progress">
                   <div className="flex items-center justify-between">
                     <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Progress</p>
