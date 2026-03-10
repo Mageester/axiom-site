@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
+import SingleItemCarousel from '../components/SingleItemCarousel';
 import { caseStudies } from '../data/caseStudies';
 import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
 
@@ -21,8 +22,6 @@ interface WorkEntry {
   demoUrl?: string;
   imageAlt?: string;
   imagePosition?: string;
-  tone: 'default' | 'hospitality';
-  layout: 'featured' | 'editorial' | 'compact';
 }
 
 const worksDisplayOrder = [
@@ -44,12 +43,6 @@ const proofTypeLabel: Record<string, string> = {
   'Active Deployment': 'Active Deployment',
 };
 
-const layoutBySlug: Record<string, WorkEntry['layout']> = {
-  'demonstration-restaurant-reservation-site': 'featured',
-  'concept-landscaping-authority-site': 'compact',
-  'concept-roofing-conversion-site': 'compact',
-};
-
 const imagePositionBySlug: Record<string, string> = {
   'demonstration-restaurant-reservation-site': 'center 24%',
 };
@@ -57,10 +50,6 @@ const imagePositionBySlug: Record<string, string> = {
 const imageAltBySlug: Record<string, string> = {
   'demonstration-restaurant-reservation-site':
     'Server presenting plated dishes in a warmly lit dining room',
-};
-
-const toneBySlug: Record<string, WorkEntry['tone']> = {
-  'demonstration-restaurant-reservation-site': 'hospitality',
 };
 
 const oneSentence = (value: string) => {
@@ -87,170 +76,92 @@ const works: WorkEntry[] = orderedCaseStudies.map((entry) => ({
   demoUrl: entry.demoUrl,
   imageAlt: imageAltBySlug[entry.slug],
   imagePosition: imagePositionBySlug[entry.slug],
-  tone: toneBySlug[entry.slug] || 'default',
-  layout: layoutBySlug[entry.slug] || 'compact',
 }));
 
-function WorkCard({ work }: { work: WorkEntry }) {
-  const isFeatured = work.layout === 'featured';
-  const isEditorial = work.layout === 'editorial';
-  const isHospitality = work.tone === 'hospitality';
-  const frameToneClass = isHospitality
-    ? 'border-[#c79379]/35 hover:border-[#e4b89d]/60 hover:shadow-[0_0_74px_rgba(176,93,65,0.26)]'
-    : 'border-white/[0.08] hover:border-white/20 hover:shadow-[0_0_60px_rgba(176,93,65,0.1)]';
-  const typeChipClass = isHospitality
-    ? 'border-[#efdac6]/22 bg-[#1f140f]/60 text-[#f1dec9]'
-    : 'border-white/10 bg-black/45 text-white/75';
-  const audienceChipClass = isHospitality
-    ? 'border-[#efdac6]/20 bg-[#1a110d]/55 text-[#e8d3be]'
-    : 'border-white/10 bg-black/35 text-white/70';
-  const featuredPanelClass = isHospitality
-    ? 'border-[#efdac6]/24 bg-[#130d0a]/52'
-    : 'border-white/15 bg-black/35';
-  const cardCtaLabel = isHospitality ? 'Review Build Notes' : 'View Build Notes';
-
+function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (slug: string) => void }) {
   return (
     <article
-      className={`group overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] border bg-[#0d1323]/80 transition-all duration-500 ${frameToneClass} ${
-        isFeatured ? 'relative h-[520px] sm:h-[580px] md:col-span-2' : 'relative h-[430px] sm:h-[480px] md:col-span-1'
-      }`}
+      role="link"
+      tabIndex={0}
+      onClick={() => onOpen(work.id)}
+      onKeyDown={(event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        onOpen(work.id);
+      }}
+      className="group mx-auto flex h-[650px] w-full max-w-[960px] cursor-pointer flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_54px_rgba(0,0,0,0.36)]"
     >
-      {isFeatured ? (
-        <>
-          <ResponsiveImage
-            source={work.image}
-            sizes="(min-width: 1280px) 920px, (min-width: 768px) 92vw, 100vw"
-            alt={work.imageAlt ?? work.title}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            loading={isFeatured ? 'eager' : 'lazy'}
-            fetchPriority={isFeatured ? 'high' : 'auto'}
-            decoding="async"
-            style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
-          />
-          <div
-            className={`absolute inset-0 transition-opacity duration-500 group-hover:opacity-95 ${
-              isHospitality
-                ? 'bg-gradient-to-t from-[#080503]/96 via-[#2b190f]/58 to-transparent opacity-92'
-                : 'bg-gradient-to-t from-black/92 via-black/45 to-transparent opacity-85'
-            }`}
-          />
-          {isHospitality ? (
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_20%,rgba(176,93,65,0.36),transparent_46%)] opacity-50 transition-opacity duration-500 group-hover:opacity-70" />
-          ) : null}
-
-          <div className="absolute left-5 top-5 z-10 flex flex-wrap items-center gap-2">
-            <span className={`inline-block rounded-full border px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] backdrop-blur-md ${typeChipClass}`}>
-              {work.projectType}
-            </span>
-            <span className={`inline-block rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.14em] backdrop-blur-md ${audienceChipClass}`}>
-              {work.audience}
-            </span>
-          </div>
-
-          <div className={`absolute inset-x-5 bottom-5 z-10 rounded-2xl border p-5 backdrop-blur-md sm:p-6 ${featuredPanelClass}`}>
-            <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-[1.9rem]">{work.title}</h3>
-            <p className="mt-2 max-w-3xl text-sm text-slate-200">{work.summary}</p>
-            <dl className="mt-4 grid gap-3 text-[11px] sm:grid-cols-3">
-              <div>
-                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Core Problem</dt>
-                <dd className="mt-1 leading-relaxed text-white/88">{work.coreProblem}</dd>
-              </div>
-              <div>
-                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Demonstrates</dt>
-                <dd className="mt-1 leading-relaxed text-white/88">{work.demonstrates}</dd>
-              </div>
-              <div>
-                <dt className="font-axiomMono uppercase tracking-[0.12em] text-white/60">Scope Snapshot</dt>
-                <dd className="mt-1 leading-relaxed text-white/88">{work.scope}</dd>
-              </div>
-            </dl>
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              {work.demoUrl ? (
-                <a
-                  href={work.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
-                >
-                  View Live Demo
-                </a>
-              ) : null}
-              <Link
-                to={`/works/${work.id}`}
-                className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
-              >
-                {cardCtaLabel}
-              </Link>
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="flex h-full flex-col">
-          <div className={`relative ${isEditorial ? 'h-[56%]' : 'h-[52%]'} overflow-hidden`}>
-            <ResponsiveImage
-              source={work.image}
-              sizes="(min-width: 768px) 48vw, 100vw"
-              alt={work.imageAlt ?? work.title}
-              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              loading="lazy"
-              decoding="async"
-              style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
-            <div className="absolute left-4 top-4 z-10">
-              <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
-                {work.projectType}
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-1 flex-col bg-[#0d1323]/90 p-5">
-            <h3 className="text-xl font-semibold tracking-tight text-white">{work.title}</h3>
-            <p className="mt-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">{work.audience}</p>
-            {isEditorial && <p className="mt-2 text-sm text-slate-300/95">{work.summary}</p>}
-            <dl className="mt-3 grid gap-2 text-[11px]">
-              <div>
-                <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Core Problem</dt>
-                <dd className="mt-0.5 leading-relaxed text-slate-200">{work.coreProblem}</dd>
-              </div>
-              <div>
-                <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Demonstrates</dt>
-                <dd className="mt-0.5 leading-relaxed text-slate-200">{work.demonstrates}</dd>
-              </div>
-              {isEditorial && (
-                <div>
-                  <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Scope Snapshot</dt>
-                  <dd className="mt-0.5 leading-relaxed text-slate-200">{work.scope}</dd>
-                </div>
-              )}
-            </dl>
-            <p className="mt-auto pt-3 text-[10px] uppercase tracking-[0.12em] text-slate-500">{work.businessContext}</p>
-            <div className="mt-2 flex flex-wrap items-center gap-3">
-              {work.demoUrl ? (
-                <a
-                  href={work.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
-                >
-                  View Live Demo
-                </a>
-              ) : null}
-              <Link
-                to={`/works/${work.id}`}
-                className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
-              >
-                {cardCtaLabel}
-              </Link>
-            </div>
-          </div>
+      <div className="relative h-[52%] overflow-hidden">
+        <ResponsiveImage
+          source={work.image}
+          sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
+          alt={work.imageAlt ?? work.title}
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          loading="lazy"
+          decoding="async"
+          style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
+        <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
+          <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+            {work.projectType}
+          </span>
+          <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
+            {work.audience}
+          </span>
         </div>
-      )}
+      </div>
+
+      <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-5 sm:p-6">
+        <h3 className="text-2xl font-semibold tracking-tight text-white">{work.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-slate-300/95">{work.summary}</p>
+        <dl className="mt-4 grid gap-3 text-[11px] text-slate-200/90 sm:grid-cols-3">
+          <div>
+            <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Core Problem</dt>
+            <dd className="mt-1 leading-relaxed">{work.coreProblem}</dd>
+          </div>
+          <div>
+            <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Demonstrates</dt>
+            <dd className="mt-1 leading-relaxed">{work.demonstrates}</dd>
+          </div>
+          <div>
+            <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Scope Snapshot</dt>
+            <dd className="mt-1 leading-relaxed">{work.scope}</dd>
+          </div>
+        </dl>
+        <p className="mt-4 font-axiomMono text-[10px] uppercase tracking-[0.12em] text-slate-500">{work.businessContext}</p>
+        <div className="mt-auto flex flex-wrap items-center gap-4 pt-4">
+          {work.demoUrl ? (
+            <a
+              href={work.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(event) => event.stopPropagation()}
+              className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
+            >
+              View Live Demo
+            </a>
+          ) : null}
+          <Link
+            to={`/works/${work.id}`}
+            onClick={(event) => event.stopPropagation()}
+            className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
+          >
+            Review Build Notes
+          </Link>
+        </div>
+      </div>
     </article>
   );
 }
 
 const Deployments: React.FC = () => {
+  const navigate = useNavigate();
+
+  const openWorkDetails = (slug: string) => {
+    navigate(`/works/${slug}`);
+  };
+
   const handleViewSamplesClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     const target = document.getElementById('sample-builds');
     if (!target) return;
@@ -291,11 +202,13 @@ const Deployments: React.FC = () => {
         </section>
 
         <section id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-2 pb-8 sm:px-6 md:px-8 md:pt-4">
-          <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
-            {works.map((work) => (
-              <WorkCard key={work.id} work={work} />
-            ))}
-          </div>
+          <SingleItemCarousel
+            items={works}
+            getItemKey={(work) => work.id}
+            ariaLabel="Sample builds carousel"
+            className="mx-auto max-w-5xl"
+            renderItem={(work) => <WorkCard work={work} onOpen={openWorkDetails} />}
+          />
         </section>
 
         <section className="relative mx-auto flex w-full max-w-5xl flex-col items-center overflow-visible px-6 pb-12 text-center md:px-8">

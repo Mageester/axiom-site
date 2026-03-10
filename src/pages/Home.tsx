@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import PartnerMarquee from '../components/PartnerMarquee';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
+import SingleItemCarousel from '../components/SingleItemCarousel';
 import { caseStudies } from '../data/caseStudies';
 import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
 
@@ -92,6 +93,18 @@ const operationalSignals = [
 ];
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  const openWorkDetails = (slug: string) => {
+    navigate(`/works/${slug}`);
+  };
+
+  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLElement>, slug: string) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    openWorkDetails(slug);
+  };
+
   return (
     <>
       <SEO
@@ -110,7 +123,7 @@ const Home: React.FC = () => {
                   </h1>
                 </div>
                 <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-300 md:text-lg">
-                  Senior-led web infrastructure for established service businesses that need stronger positioning, cleaner conversion flow, and reliable execution.
+                  You do premium work. Your website should reflect that. We upgrade your online presence so you instantly build trust with the clients you actually want.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -148,62 +161,76 @@ const Home: React.FC = () => {
               </Link>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {selectedWork.map((item) => (
-                <article key={item.id} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85">
-                  <div className="relative h-[230px] overflow-hidden sm:h-[260px]">
+            <SingleItemCarousel
+              items={selectedWork}
+              getItemKey={(item) => item.id}
+              ariaLabel="Selected work projects"
+              className="mx-auto max-w-5xl"
+              renderItem={(item) => (
+                <article
+                  role="link"
+                  tabIndex={0}
+                  onClick={() => openWorkDetails(item.id)}
+                  onKeyDown={(event) => handleCardKeyDown(event, item.id)}
+                  className="group mx-auto flex h-[610px] w-full max-w-[940px] cursor-pointer flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_50px_rgba(0,0,0,0.35)]"
+                >
+                  <div className="relative h-[52%] overflow-hidden">
                     <ResponsiveImage
                       source={item.image}
-                      sizes="(min-width: 1280px) 360px, (min-width: 1024px) 33vw, (min-width: 768px) 48vw, 100vw"
+                      sizes="(min-width: 1280px) 940px, (min-width: 768px) 90vw, 100vw"
                       alt={item.imageAlt ?? item.title}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                       loading="lazy"
                       decoding="async"
                       style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/62 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
                     <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">
                       <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
                         {item.projectType}
                       </span>
+                      <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
+                        {item.audience}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                    <p className="mt-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">{item.audience}</p>
-                    <p className="mt-3 text-sm text-slate-300/95">{item.summary}</p>
-                    <dl className="mt-3 grid gap-2 text-[11px] text-slate-200/90">
+                  <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-5 sm:p-6">
+                    <h3 className="text-2xl font-semibold tracking-tight text-white">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-300/95">{item.summary}</p>
+                    <dl className="mt-4 grid gap-3 text-[11px] text-slate-200/90 sm:grid-cols-2">
                       <div>
-                        <dt className="text-slate-300/65">Core Problem</dt>
-                        <dd className="mt-0.5">{item.coreProblem}</dd>
+                        <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Core Problem</dt>
+                        <dd className="mt-1 leading-relaxed">{item.coreProblem}</dd>
                       </div>
                       <div>
-                        <dt className="text-slate-300/65">Demonstrates</dt>
-                        <dd className="mt-0.5">{item.demonstrates}</dd>
+                        <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Demonstrates</dt>
+                        <dd className="mt-1 leading-relaxed">{item.demonstrates}</dd>
                       </div>
                     </dl>
-                    <div className="mt-auto flex flex-wrap items-center gap-3 pt-3">
+                    <div className="mt-auto flex flex-wrap items-center gap-4 pt-4">
                       {item.demoUrl ? (
                         <a
                           href={item.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
+                          onClick={(event) => event.stopPropagation()}
+                          className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
                         >
                           View Live Demo
                         </a>
                       ) : null}
                       <Link
                         to={`/works/${item.id}`}
-                        className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-white"
+                        onClick={(event) => event.stopPropagation()}
+                        className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
                       >
                         Build Notes
                       </Link>
                     </div>
                   </div>
                 </article>
-              ))}
-            </div>
+              )}
+            />
           </section>
 
           <section className="pt-20 md:pt-24">
