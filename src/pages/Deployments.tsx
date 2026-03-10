@@ -91,26 +91,56 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (slug: string) =>
       }}
       className="group mx-auto flex h-[650px] w-full max-w-[960px] cursor-pointer flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_24px_54px_rgba(0,0,0,0.36)]"
     >
-      <div className="relative h-[52%] overflow-hidden">
-        <ResponsiveImage
-          source={work.image}
-          sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
-          alt={work.imageAlt ?? work.title}
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-          loading="lazy"
-          decoding="async"
-          style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
-        <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
-          <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
-            {work.projectType}
-          </span>
-          <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
-            {work.audience}
-          </span>
+      {work.demoUrl ? (
+        <a
+          href={work.demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(event) => event.stopPropagation()}
+          className="relative block h-[52%] overflow-hidden"
+          aria-label={`View live demo for ${work.title}`}
+        >
+          <ResponsiveImage
+            source={work.image}
+            sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
+            alt={work.imageAlt ?? work.title}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            loading="lazy"
+            decoding="async"
+            style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
+          <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
+            <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+              {work.projectType}
+            </span>
+            <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
+              {work.audience}
+            </span>
+          </div>
+        </a>
+      ) : (
+        <div className="relative h-[52%] overflow-hidden">
+          <ResponsiveImage
+            source={work.image}
+            sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
+            alt={work.imageAlt ?? work.title}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            loading="lazy"
+            decoding="async"
+            style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
+          <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
+            <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+              {work.projectType}
+            </span>
+            <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
+              {work.audience}
+            </span>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-5 sm:p-6">
         <h3 className="text-2xl font-semibold tracking-tight text-white">{work.title}</h3>

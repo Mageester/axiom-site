@@ -32,14 +32,41 @@ function SingleItemCarousel<T>({
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [autoplayResetSeed, setAutoplayResetSeed] = useState<number>(0);
+  const [viewportWidth, setViewportWidth] = useState<number>(0);
 
   const touchStartX = useRef<number | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+
+  const slideRatio = useMemo(() => {
+    if (viewportWidth >= 1280) return 0.76;
+    if (viewportWidth >= 1024) return 0.8;
+    if (viewportWidth >= 768) return 0.86;
+    return 0.92;
+  }, [viewportWidth]);
+
+  const slideGap = viewportWidth >= 1024 ? 20 : 12;
+  const slideWidth = Math.max((viewportWidth || 0) * slideRatio, 280);
+  const stepWidth = slideWidth + slideGap;
+  const centerOffset = Math.max((viewportWidth - slideWidth) / 2, 0);
+  const translateX = centerOffset - trackIndex * stepWidth;
 
   useEffect(() => {
     setTrackIndex(canLoop ? 1 : 0);
     setIsTransitionEnabled(true);
     setIsAnimating(false);
   }, [canLoop, items.length]);
+
+  useEffect(() => {
+    if (!viewportRef.current) return;
+
+    const node = viewportRef.current;
+    const updateWidth = () => setViewportWidth(node.clientWidth);
+    updateWidth();
+
+    const observer = new ResizeObserver(() => updateWidth());
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   const step = useCallback(
     (direction: 1 | -1, manual: boolean) => {
@@ -144,21 +171,37 @@ function SingleItemCarousel<T>({
         </button>
       ) : null}
 
-      <div className={`hide-scrollbar overflow-hidden ${viewportClassName ?? ''}`}>
+      <div ref={viewportRef} className={`hide-scrollbar overflow-hidden ${viewportClassName ?? ''}`}>
         <div
           className={`flex touch-pan-y ${
             isTransitionEnabled
-              ? 'transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
+              ? 'transition-transform duration-[560ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
               : ''
           }`}
-          style={{ transform: `translate3d(-${trackIndex * 100}%, 0, 0)` }}
+          style={{
+            columnGap: `${slideGap}px`,
+            transform: `translate3d(${translateX}px, 0, 0)`,
+          }}
           onTransitionEnd={handleTransitionEnd}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
           {trackItems.map((item, index) => (
-            <div key={resolveSlideKey(item, index)} className={`w-full shrink-0 ${slideClassName ?? ''}`}>
-              {renderItem(item, resolveItemIndex(index))}
+            <div
+              key={resolveSlideKey(item, index)}
+              className={`shrink-0 ${slideClassName ?? ''}`}
+              style={{ width: `${slideWidth}px` }}
+            >
+              <div
+                className={`h-full transition-[transform,opacity,filter] duration-500 ease-out motion-reduce:transition-none ${
+                  index === trackIndex
+                    ? 'pointer-events-auto scale-100 opacity-100 blur-0'
+                    : 'pointer-events-none scale-[0.968] opacity-55 blur-[1.8px]'
+                }`}
+                aria-hidden={index !== trackIndex}
+              >
+                {renderItem(item, resolveItemIndex(index))}
+              </div>
             </div>
           ))}
         </div>
