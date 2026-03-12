@@ -13,15 +13,14 @@ const proofTypeLabel: Record<string, string> = {
   'Sample Build': 'Sample Build',
   'Concept Build': 'Concept Build',
   'Demonstration Site': 'Demonstration Site',
-  'Active Deployment': 'Active Deployment',
+  'Live Demo': 'Live Demo',
+  'In Progress': 'In Progress',
 };
 
 const homeSelectedWorkSlugs = [
   'demonstration-restaurant-reservation-site',
   'concept-landscaping-authority-site',
-  'concept-roofing-conversion-site',
 ] as const;
-const RESTAURANT_WORK_SLUG = 'demonstration-restaurant-reservation-site';
 
 const selectedWorkEntries = homeSelectedWorkSlugs
   .map((slug) => caseStudies.find((entry) => entry.slug === slug))
@@ -29,10 +28,13 @@ const selectedWorkEntries = homeSelectedWorkSlugs
 
 const selectedWork = selectedWorkEntries.map((entry) => {
   const proofImage = getWorkProofImage(entry.slug);
+  const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
   return {
     id: entry.slug,
     title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
     projectType: proofTypeLabel[entry.label] ?? entry.label,
+    statusLabel: entry.label,
+    isLiveDemo,
     audience: entry.businessType,
     coreProblem: entry.primaryProblem || entry.problems[0] || 'Unclear trust and conversion structure',
     demonstrates: entry.demonstrates || entry.built[0] || 'Clearer hierarchy and conversion pathways',
@@ -85,7 +87,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const openWorkDetails = (work: (typeof selectedWork)[number]) => {
-    if (work.id === RESTAURANT_WORK_SLUG && work.demoUrl) {
+    if (work.isLiveDemo && work.demoUrl) {
       window.location.assign(work.demoUrl);
       return;
     }
@@ -168,7 +170,7 @@ const Home: React.FC = () => {
                   className="group/proof relative z-0 mx-auto h-[540px] w-full max-w-[940px] cursor-pointer rounded-3xl hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:h-[590px] lg:h-[610px]"
                 >
                   <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0d1323]/85 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:border-white/20 group-hover/proof:shadow-[0_24px_50px_rgba(0,0,0,0.35)]">
-                  {item.demoUrl ? (
+                  {item.isLiveDemo && item.demoUrl ? (
                     <a
                       href={item.demoUrl}
                       target="_blank"
@@ -232,7 +234,7 @@ const Home: React.FC = () => {
                       </div>
                     </dl>
                     <div className="mt-auto flex flex-wrap items-center gap-3 pt-3.5 sm:gap-4 sm:pt-4">
-                      {item.demoUrl ? (
+                      {item.isLiveDemo && item.demoUrl ? (
                         <a
                           href={item.demoUrl}
                           target="_blank"
@@ -242,8 +244,12 @@ const Home: React.FC = () => {
                         >
                           View Live Demo
                         </a>
+                      ) : item.statusLabel === 'In Progress' ? (
+                        <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+                          Preview Soon
+                        </span>
                       ) : null}
-                      {!(item.id === RESTAURANT_WORK_SLUG && item.demoUrl) ? (
+                      {!item.isLiveDemo ? (
                         <Link
                           to={`/works/${item.id}`}
                           onClick={(event) => event.stopPropagation()}

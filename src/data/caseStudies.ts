@@ -1,7 +1,7 @@
 export type CaseStudyEntry = {
     slug: string;
     title: string;
-    label: 'Sample Build' | 'Concept Build' | 'Demonstration Site' | 'Active Deployment';
+    label: 'Sample Build' | 'Concept Build' | 'Demonstration Site' | 'Live Demo' | 'In Progress';
     demoUrl?: string;
     niche: string;
     location: string;
@@ -21,10 +21,10 @@ export const caseStudies: CaseStudyEntry[] = [
     {
         slug: 'demonstration-restaurant-reservation-site',
         title: 'Demo: Restaurant Reservation Site',
-        label: 'Active Deployment',
+        label: 'Live Demo',
         demoUrl: 'https://restaurant.getaxiom.ca',
         niche: 'Restaurant and Hospitality',
-        location: 'Toronto, ON (Live Demonstration Deployment)',
+        location: 'Toronto, ON (Live demonstration deployment)',
         businessType: 'Restaurant Business',
         primaryProblem: 'Weak atmosphere presentation and unclear reservation path for high-intent visitors.',
         demonstrates: 'Photo-led hospitality framing with cleaner reservation-first conversion flow.',
@@ -56,36 +56,38 @@ export const caseStudies: CaseStudyEntry[] = [
     {
         slug: 'concept-landscaping-authority-site',
         title: 'Demo: Landscaping and Outdoor Services Site',
-        label: 'Demonstration Site',
-        niche: 'Local Business',
-        location: 'Demonstration Environment',
-        businessType: 'Local Business',
+        label: 'Live Demo',
+        demoUrl: 'https://landscaping.getaxiom.ca',
+        niche: 'Landscaping and Outdoor Services',
+        location: 'Toronto, ON (Live demonstration deployment)',
+        businessType: 'Landscaping and Outdoor Services Business',
         primaryProblem: 'Portfolio-heavy pages with unclear next action for new inquiries.',
         demonstrates: 'Premium portfolio framing with stronger consultation intent.',
-        summary: 'Demonstration site for a local business that needs stronger visual trust and clearer consultation intent.',
-        context: 'Demonstration project for a portfolio-heavy business with weak conversion framing and unclear next steps.',
+        summary: 'Live demonstration site for a landscaping business that needs stronger project presentation, clearer local trust, and a better quote path.',
+        context: 'Live demonstration project showing how a landscaping company can move from generic service pages to a stronger portfolio-led website with clearer quote intent.',
         problems: ['Portfolio-heavy pages with unclear next action', 'No lead qualification messaging', 'Unstructured service pages'],
         built: ['Demonstrates premium portfolio framing with stronger consultation intent', 'Consultation-first CTA system', 'Service area and service category structure'],
         targets: ['Target: strong visual credibility on mobile', 'Target: better consultation intent capture'],
-        deliverables: ['Concept homepage', 'Service architecture', 'Inquiry flow blueprint'],
-        ctaLabel: 'Initialize Demo'
+        deliverables: ['Homepage + services + projects architecture', 'Service-area and consultation flow', 'Premium residential proof presentation'],
+        ctaLabel: 'Request a Similar Build'
     },
     {
         slug: 'concept-roofing-conversion-site',
         title: 'Demo: Roofing and Exterior Services Site',
-        label: 'Demonstration Site',
-        niche: 'Professional Service Business',
-        location: 'Demonstration Environment',
-        businessType: 'Professional Service Business',
+        label: 'In Progress',
+        demoUrl: 'https://roofing.getaxiom.ca',
+        niche: 'Roofing and Exterior Services',
+        location: 'Shared demo platform (launch pending)',
+        businessType: 'Roofing and Exterior Services Business',
         primaryProblem: 'Competing CTAs with weak hierarchy during high-intent visits.',
         demonstrates: 'Clear CTA priority for urgent versus planned project inquiries.',
-        summary: 'Demonstration site for a business balancing urgent inquiries with planned higher-ticket projects.',
-        context: 'Demonstration project for a business with competing CTAs and weak trust structure during high-intent visits.',
+        summary: 'Roofing demonstration build in progress for a business balancing urgent inspections with planned higher-ticket exterior work.',
+        context: 'Roofing and exterior-services demonstration build in progress inside the shared demo platform, focused on inspection-led trust, urgent-versus-planned CTA clarity, and stronger operational credibility.',
         problems: ['Competing CTAs with no hierarchy', 'Slow load from builder bloat', 'Weak trust structure'],
         built: ['Demonstrates CTA hierarchy for urgent versus planned inquiries', 'Trust section layout', 'Performance-first page shell'],
         targets: ['Target: clearer first-click conversion path', 'Target: improved mobile readability'],
-        deliverables: ['Concept homepage', 'Roofing service page framework', 'CTA and copy hierarchy blueprint'],
-        ctaLabel: 'Initialize Demo'
+        deliverables: ['Homepage + services + inspection flow', 'Roofing service architecture', 'Operational trust and CTA hierarchy system'],
+        ctaLabel: 'Preview Soon'
     }
 ];
 

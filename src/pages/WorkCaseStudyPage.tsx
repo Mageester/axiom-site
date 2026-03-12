@@ -11,7 +11,8 @@ const proofToneByLabel: Record<string, string> = {
   'Sample Build': 'border-[#B05D41]/30 text-[#d4a48e] bg-[#B05D41]/10',
   'Demonstration Site': 'border-white/20 text-slate-200 bg-white/[0.04]',
   'Concept Build': 'border-white/20 text-slate-200 bg-white/[0.04]',
-  'Active Deployment': 'border-emerald-300/25 text-emerald-200 bg-emerald-500/10',
+  'Live Demo': 'border-emerald-300/25 text-emerald-200 bg-emerald-500/10',
+  'In Progress': 'border-amber-300/25 text-amber-200 bg-amber-500/10',
 };
 
 const WorkCaseStudyPage: React.FC = () => {
@@ -25,6 +26,13 @@ const WorkCaseStudyPage: React.FC = () => {
   const imagePosition = proofImage.position;
   const imageAlt = proofImage.alt || entry.title;
   const labelTone = proofToneByLabel[entry.label] || 'border-white/20 text-slate-200 bg-white/[0.04]';
+  const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
+  const detailNote =
+    isLiveDemo
+      ? 'This page documents the live deployment and the build decisions behind it.'
+      : entry.label === 'In Progress'
+        ? 'This proof object is still in progress. Build notes are public now, while the live preview stays hidden until deployment is stable.'
+        : `This page documents build intent, structure decisions, and scope for a ${entry.label.toLowerCase()}.`;
 
   return (
     <>
@@ -45,7 +53,7 @@ const WorkCaseStudyPage: React.FC = () => {
                 </h1>
                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">{entry.summary}</p>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">
-                  This page documents build intent, structure decisions, and scope for a {entry.label.toLowerCase()}.
+                  {detailNote}
                 </p>
 
                 <dl className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -68,7 +76,7 @@ const WorkCaseStudyPage: React.FC = () => {
                 </dl>
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  {entry.demoUrl ? (
+                  {isLiveDemo && entry.demoUrl ? (
                     <a
                       href={entry.demoUrl}
                       target="_blank"
@@ -77,6 +85,10 @@ const WorkCaseStudyPage: React.FC = () => {
                     >
                       View Live Demo
                     </a>
+                  ) : entry.label === 'In Progress' ? (
+                    <span className="inline-flex items-center justify-center rounded-full border border-amber-300/25 bg-amber-500/10 px-5 py-3 text-sm font-medium text-amber-100">
+                      Preview Soon
+                    </span>
                   ) : null}
                   <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
                     Book Consultation
@@ -158,7 +170,7 @@ const WorkCaseStudyPage: React.FC = () => {
                 <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
                   <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Trust Note</h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                    Axiom labels each proof object clearly as sample, demonstration, or active deployment so buyers can evaluate trust signals without inflated claims.
+                    Axiom labels each proof object clearly as live, demonstration, concept, or in progress so buyers can evaluate trust signals without inflated claims.
                   </p>
                 </article>
               </div>

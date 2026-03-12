@@ -13,6 +13,8 @@ interface WorkEntry {
   id: string;
   title: string;
   projectType: string;
+  statusLabel: string;
+  isLiveDemo: boolean;
   audience: string;
   businessContext: string;
   coreProblem: string;
@@ -30,13 +32,13 @@ const worksDisplayOrder = [
   'concept-landscaping-authority-site',
   'concept-roofing-conversion-site',
 ] as const;
-const RESTAURANT_WORK_SLUG = 'demonstration-restaurant-reservation-site';
 
 const proofTypeLabel: Record<string, string> = {
   'Sample Build': 'Sample Build',
   'Concept Build': 'Concept Build',
   'Demonstration Site': 'Demonstration Site',
-  'Active Deployment': 'Active Deployment',
+  'Live Demo': 'Live Demo',
+  'In Progress': 'In Progress',
 };
 
 const oneSentence = (value: string) => {
@@ -51,10 +53,13 @@ const orderedCaseStudies = worksDisplayOrder
 
 const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
   const proofImage = getWorkProofImage(entry.slug);
+  const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
   return {
     id: entry.slug,
     title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
     projectType: proofTypeLabel[entry.label] ?? entry.label,
+    statusLabel: entry.label,
+    isLiveDemo,
     audience: entry.businessType,
     businessContext: `${entry.niche} - ${entry.location}`,
     coreProblem: entry.primaryProblem || entry.problems[0] || 'Unclear trust and conversion structure',
@@ -82,7 +87,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
       className="group/proof relative z-0 mx-auto h-[560px] w-full max-w-[960px] cursor-pointer rounded-[1.5rem] hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:h-[620px] lg:h-[650px]"
     >
       <article className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:border-white/20 group-hover/proof:shadow-[0_24px_54px_rgba(0,0,0,0.36)]">
-      {work.demoUrl ? (
+      {work.isLiveDemo && work.demoUrl ? (
         <a
           href={work.demoUrl}
           target="_blank"
@@ -152,7 +157,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
         </dl>
         <p className="mt-3 font-axiomMono text-[10px] uppercase tracking-[0.12em] text-slate-500 sm:mt-4">{work.businessContext}</p>
         <div className="mt-auto flex flex-wrap items-center gap-3 pt-3.5 sm:gap-4 sm:pt-4">
-          {work.demoUrl ? (
+          {work.isLiveDemo && work.demoUrl ? (
             <a
               href={work.demoUrl}
               target="_blank"
@@ -162,8 +167,12 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
             >
               View Live Demo
             </a>
+          ) : work.statusLabel === 'In Progress' ? (
+            <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+              Preview Soon
+            </span>
           ) : null}
-          {!(work.id === RESTAURANT_WORK_SLUG && work.demoUrl) ? (
+          {!work.isLiveDemo ? (
             <Link
               to={`/works/${work.id}`}
               onClick={(event) => event.stopPropagation()}
@@ -183,7 +192,7 @@ const Deployments: React.FC = () => {
   const navigate = useNavigate();
 
   const openWorkDetails = (work: WorkEntry) => {
-    if (work.id === RESTAURANT_WORK_SLUG && work.demoUrl) {
+    if (work.isLiveDemo && work.demoUrl) {
       window.location.assign(work.demoUrl);
       return;
     }
@@ -224,7 +233,7 @@ const Deployments: React.FC = () => {
               </Link>
             </div>
             <p className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-400">
-              Unless marked Active Deployment, these examples are internal sample builds created to demonstrate structure, UX, and technical standards.
+              Items marked Live Demo are currently reachable deployments. Items marked In Progress stay on build notes until their preview environment is stable enough to show publicly.
             </p>
           </div>
         </section>
