@@ -74,20 +74,20 @@ export const caseStudies: CaseStudyEntry[] = [
     {
         slug: 'concept-roofing-conversion-site',
         title: 'Demo: Roofing and Exterior Services Site',
-        label: 'In Progress',
+        label: 'Live Demo',
         demoUrl: 'https://roofing.getaxiom.ca',
         niche: 'Roofing and Exterior Services',
-        location: 'Shared demo platform (launch pending)',
+        location: 'Toronto, ON (Live demonstration deployment)',
         businessType: 'Roofing and Exterior Services Business',
         primaryProblem: 'Competing CTAs with weak hierarchy during high-intent visits.',
         demonstrates: 'Clear CTA priority for urgent versus planned project inquiries.',
-        summary: 'Roofing demonstration build in progress for a business balancing urgent inspections with planned higher-ticket exterior work.',
-        context: 'Roofing and exterior-services demonstration build in progress inside the shared demo platform, focused on inspection-led trust, urgent-versus-planned CTA clarity, and stronger operational credibility.',
+        summary: 'Live demonstration site for a roofing and exterior-services business balancing urgent inspections with planned higher-ticket exterior work.',
+        context: 'Live demonstration project showing how a roofing and exterior-services company can structure inspection-led trust, urgent-versus-planned CTA clarity, and stronger operational credibility.',
         problems: ['Competing CTAs with no hierarchy', 'Slow load from builder bloat', 'Weak trust structure'],
         built: ['Demonstrates CTA hierarchy for urgent versus planned inquiries', 'Trust section layout', 'Performance-first page shell'],
         targets: ['Target: clearer first-click conversion path', 'Target: improved mobile readability'],
         deliverables: ['Homepage + services + inspection flow', 'Roofing service architecture', 'Operational trust and CTA hierarchy system'],
-        ctaLabel: 'Preview Soon'
+        ctaLabel: 'Request a Similar Build'
     }
 ];
 

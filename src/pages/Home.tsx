@@ -20,6 +20,7 @@ const proofTypeLabel: Record<string, string> = {
 const homeSelectedWorkSlugs = [
   'demonstration-restaurant-reservation-site',
   'concept-landscaping-authority-site',
+  'concept-roofing-conversion-site',
 ] as const;
 
 const selectedWorkEntries = homeSelectedWorkSlugs

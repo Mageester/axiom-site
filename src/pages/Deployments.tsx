@@ -233,7 +233,7 @@ const Deployments: React.FC = () => {
               </Link>
             </div>
             <p className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-400">
-              Items marked Live Demo are currently reachable deployments. Items marked In Progress stay on build notes until their preview environment is stable enough to show publicly.
+              Items marked Live Demo are currently reachable deployments. Build notes remain available where buyers want to review the underlying proof object as well.
             </p>
           </div>
         </section>
