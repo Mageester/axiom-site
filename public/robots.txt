@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://axiom-site.onrender.com/sitemap.xml
+Sitemap: https://getaxiom.ca/sitemap.xml
