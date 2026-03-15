@@ -161,6 +161,7 @@ const Home: React.FC = () => {
               items={selectedWork}
               getItemKey={(item) => item.id}
               ariaLabel="Selected work projects"
+              loop={false}
               className="mx-auto max-w-5xl"
               renderItem={(item) => (
                 <div

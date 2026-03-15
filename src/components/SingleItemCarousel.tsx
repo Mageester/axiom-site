@@ -6,6 +6,7 @@ type SingleItemCarouselProps<T> = {
   renderItem: (item: T, index: number) => React.ReactNode;
   ariaLabel: string;
   intervalMs?: number;
+  loop?: boolean;
   className?: string;
   viewportClassName?: string;
   slideClassName?: string;
@@ -17,11 +18,13 @@ function SingleItemCarousel<T>({
   renderItem,
   ariaLabel,
   intervalMs = 5000,
+  loop = true,
   className,
   viewportClassName,
   slideClassName,
 }: SingleItemCarouselProps<T>) {
-  const canLoop = items.length > 1;
+  const hasMultipleItems = items.length > 1;
+  const canLoop = loop && hasMultipleItems;
   const trackItems = useMemo(() => {
     if (!canLoop) return [...items];
     return [items[items.length - 1], ...items, items[0]];
@@ -70,12 +73,23 @@ function SingleItemCarousel<T>({
 
   const step = useCallback(
     (direction: 1 | -1, manual: boolean) => {
-      if (!canLoop || isAnimating) return;
+      if (!hasMultipleItems || isAnimating) return;
+
+      if (!canLoop) {
+        const nextIndex = trackIndex + direction;
+        if (nextIndex < 0 || nextIndex > items.length - 1) return;
+
+        setIsAnimating(true);
+        setTrackIndex(nextIndex);
+        if (manual) setAutoplayResetSeed((seed) => seed + 1);
+        return;
+      }
+
       setIsAnimating(true);
       setTrackIndex((prev) => prev + direction);
       if (manual) setAutoplayResetSeed((seed) => seed + 1);
     },
-    [canLoop, isAnimating]
+    [canLoop, hasMultipleItems, isAnimating, items.length, trackIndex]
   );
 
   const goNext = useCallback((manual = false) => step(1, manual), [step]);
@@ -115,12 +129,12 @@ function SingleItemCarousel<T>({
   }, [autoplayResetSeed, canLoop, goNext, intervalMs, isPaused]);
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (!canLoop) return;
+    if (!hasMultipleItems) return;
     touchStartX.current = event.changedTouches[0]?.clientX ?? null;
   };
 
   const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (!canLoop || touchStartX.current === null) return;
+    if (!hasMultipleItems || touchStartX.current === null) return;
     const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
     const delta = endX - touchStartX.current;
     touchStartX.current = null;
@@ -186,10 +200,10 @@ function SingleItemCarousel<T>({
                 return (
               <div
                 onClickCapture={(event) => {
-                  if (isActive || !canLoop || isAnimating) return;
-                  event.preventDefault();
-                  event.stopPropagation();
-                  if (index < trackIndex) {
+                if (isActive || !hasMultipleItems || isAnimating) return;
+                event.preventDefault();
+                event.stopPropagation();
+                if (index < trackIndex) {
                     goPrev(true);
                   } else {
                     goNext(true);

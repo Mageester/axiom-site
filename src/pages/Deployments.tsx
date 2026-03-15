@@ -243,6 +243,7 @@ const Deployments: React.FC = () => {
             items={works}
             getItemKey={(work) => work.id}
             ariaLabel="Sample builds carousel"
+            loop={false}
             className="mx-auto max-w-5xl"
             renderItem={(work) => <WorkCard work={work} onOpen={openWorkDetails} />}
           />
