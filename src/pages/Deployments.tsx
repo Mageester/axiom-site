@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import SingleItemCarousel from '../components/SingleItemCarousel';
+import { RevealBlock } from '../components/ui/RevealBlock';
 import { caseStudies } from '../data/caseStudies';
 import type { ResponsiveSource } from '../lib/responsiveImages';
 import { getWorkProofImage } from '../lib/workProofImages';
@@ -213,7 +214,7 @@ const Deployments: React.FC = () => {
         description="Truth-first proof objects from sample and demonstration builds, presented with clear business context, problem framing, and design intent."
       />
       <Layout>
-        <section data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0">
+        <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0" variant="feature">
           <div className="max-w-4xl">
             <div className="mt-2.5 max-w-4xl overflow-hidden">
               <h1 data-startup-heading className="text-left">Sample sites for real business use cases.</h1>
@@ -236,9 +237,9 @@ const Deployments: React.FC = () => {
               Items marked Live Demo are currently reachable deployments. Build notes remain available where buyers want to review the underlying proof object as well.
             </p>
           </div>
-        </section>
+        </RevealBlock>
 
-        <section id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-1 pb-8 sm:px-6 md:px-8 md:pt-4">
+        <RevealBlock as="section" id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-1 pb-8 sm:px-6 md:px-8 md:pt-4">
           <SingleItemCarousel
             items={works}
             getItemKey={(work) => work.id}
@@ -247,9 +248,9 @@ const Deployments: React.FC = () => {
             className="mx-auto max-w-5xl"
             renderItem={(work) => <WorkCard work={work} onOpen={openWorkDetails} />}
           />
-        </section>
+        </RevealBlock>
 
-        <section className="relative mx-auto flex w-full max-w-5xl flex-col items-center overflow-visible px-6 pb-12 text-center md:px-8">
+        <RevealBlock as="section" className="relative mx-auto flex w-full max-w-5xl flex-col items-center overflow-visible px-6 pb-12 text-center md:px-8">
           <div className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[600px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[160px]" />
 
           <div className="relative z-10">
@@ -269,7 +270,7 @@ const Deployments: React.FC = () => {
               </Link>
             </div>
           </div>
-        </section>
+        </RevealBlock>
 
         <Footer />
       </Layout>

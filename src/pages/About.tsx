@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
+import { RevealBlock } from '../components/ui/RevealBlock';
 
 type InfoCard = {
   title: string;
@@ -93,7 +94,7 @@ const About: React.FC = () => {
 
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="pt-12 md:pt-18">
+          <RevealBlock as="section" data-hero-root className="pt-12 md:pt-18" variant="feature">
             <div className="max-w-5xl">
               <article className="p-7 md:p-10">
                 <div className="max-w-4xl overflow-hidden">
@@ -117,9 +118,9 @@ const About: React.FC = () => {
                 </div>
               </article>
             </div>
-          </section>
+          </RevealBlock>
 
-          <section id="why-axiom-exists" className="scroll-mt-28 pt-16 md:pt-22">
+          <RevealBlock as="section" id="why-axiom-exists" className="scroll-mt-28 pt-16 md:pt-22">
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why Axiom Exists</h2>
               <p className="mt-5 text-sm leading-relaxed text-slate-300 md:text-base">
@@ -129,9 +130,9 @@ const About: React.FC = () => {
                 Most owners do not have time to build their own site, so they settle for cheap templates. We remove that compromise with custom, high-performance websites.
               </p>
             </div>
-          </section>
+          </RevealBlock>
 
-          <section className="pt-16 md:pt-22">
+          <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">The Problem With Most Websites</h2>
             </div>
@@ -143,9 +144,9 @@ const About: React.FC = () => {
                 </article>
               ))}
             </div>
-          </section>
+          </RevealBlock>
 
-          <section className="pt-16 md:pt-22">
+          <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">The Axiom Guarantee</h2>
             </div>
@@ -157,9 +158,9 @@ const About: React.FC = () => {
                 </article>
               ))}
             </div>
-          </section>
+          </RevealBlock>
 
-          <section className="pt-16 md:pt-22">
+          <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Founders</h2>
               <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
@@ -215,9 +216,9 @@ const About: React.FC = () => {
                 </div>
               </article>
             </div>
-          </section>
+          </RevealBlock>
 
-          <section className="pt-16 md:pt-22">
+          <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Our Standards</h2>
             </div>
@@ -229,9 +230,9 @@ const About: React.FC = () => {
                 </article>
               ))}
             </div>
-          </section>
+          </RevealBlock>
 
-          <section className="pt-16 md:pt-22">
+          <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">How We Work</h2>
             </div>
@@ -242,9 +243,9 @@ const About: React.FC = () => {
                 </article>
               ))}
             </div>
-          </section>
+          </RevealBlock>
 
-          <section className="pt-16 md:pt-22">
+          <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Who We&apos;re Built For</h2>
             </div>
@@ -265,9 +266,9 @@ const About: React.FC = () => {
                 </p>
               </article>
             </div>
-          </section>
+          </RevealBlock>
 
-          <section className="pt-16 md:pt-22">
+          <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                 If your business is serious, your website should be too.
@@ -287,7 +288,7 @@ const About: React.FC = () => {
                 </Link>
               </div>
             </div>
-          </section>
+          </RevealBlock>
         </main>
 
         <Footer />

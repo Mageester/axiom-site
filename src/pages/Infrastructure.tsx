@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
+import { RevealBlock } from '../components/ui/RevealBlock';
 
 type SectionLink = {
   id: string;
@@ -375,7 +376,7 @@ const Infrastructure: React.FC = () => {
 
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="pt-8 md:pt-16">
+          <RevealBlock as="section" data-hero-root className="pt-8 md:pt-16" variant="feature">
             <div className="max-w-5xl">
               <article className="md:pr-6" data-reveal>
                 <div className="mt-4 max-w-4xl overflow-hidden">
@@ -393,7 +394,7 @@ const Infrastructure: React.FC = () => {
                 </div>
               </article>
             </div>
-          </section>
+          </RevealBlock>
 
           <div className="z-30 mt-8 md:sticky md:top-24" data-reveal>
             <nav
@@ -425,7 +426,7 @@ const Infrastructure: React.FC = () => {
             </nav>
           </div>
 
-          <section id="process" data-method-section className="pt-14 md:pt-20">
+          <RevealBlock as="section" id="process" data-method-section className="pt-14 md:pt-20">
             <div className="mx-auto w-full max-w-[1220px]">
               <div className="mx-auto w-full max-w-[740px]" data-reveal>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Clear steps from first call to launch.</h2>
@@ -482,9 +483,9 @@ const Infrastructure: React.FC = () => {
                 ))}
               </ol>
             </div>
-          </section>
+          </RevealBlock>
 
-          <section id="your-stack" data-method-section className="pt-14 md:pt-18">
+          <RevealBlock as="section" id="your-stack" data-method-section className="pt-14 md:pt-18">
             <div className="mb-6 max-w-4xl" data-reveal>
               <h2 className="mt-1 text-[clamp(1.95rem,4.6vw,3.35rem)] font-bold leading-[1.08] tracking-tight text-[#F2F4F7]">
                 Keep what works. Replace what doesn&apos;t.
@@ -543,9 +544,9 @@ const Infrastructure: React.FC = () => {
                 </article>
               </div>
             </div>
-          </section>
+          </RevealBlock>
 
-          <section id="clarify" data-method-section className="pt-16 md:pt-22">
+          <RevealBlock as="section" id="clarify" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What We Clarify</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">No build starts with unresolved assumptions.</h2>
@@ -580,9 +581,9 @@ const Infrastructure: React.FC = () => {
                 );
               })}
             </div>
-          </section>
+          </RevealBlock>
 
-          <section id="faq" data-method-section className="pt-16 md:pt-22">
+          <RevealBlock as="section" id="faq" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">FAQ</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Common process questions.</h2>
@@ -617,9 +618,9 @@ const Infrastructure: React.FC = () => {
                 );
               })}
             </div>
-          </section>
+          </RevealBlock>
 
-          <section className="pt-16 md:pt-22">
+          <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
             <div
               className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12"
               data-reveal
@@ -637,7 +638,7 @@ const Infrastructure: React.FC = () => {
                 </Link>
               </div>
             </div>
-          </section>
+          </RevealBlock>
         </main>
 
         <Footer />
