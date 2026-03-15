@@ -65,7 +65,8 @@ const standardsCards = [
   {
     title: 'Cloudflare Edge Hosting',
     detail:
-      'Production deployments run through Cloudflare’s edge network for global delivery, caching control, and cleaner launch operations.',
+      'Delivered through Cloudflare\'s global edge network for faster caching, reliable delivery, and cleaner launch operations.',
+    desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
         <path d="M7.5 15.5a3.5 3.5 0 0 1 .9-6.88 5 5 0 0 1 9.36 1.26A3 3 0 1 1 18 15.5H7.5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
@@ -75,7 +76,8 @@ const standardsCards = [
   {
     title: 'Performance-Optimized Architecture',
     detail:
-      'Layouts, media, and interaction layers are structured for fast loading and stable rendering instead of being patched after design is approved.',
+      'Layouts, media, and interaction layers are structured for speed from the start instead of being patched after design is approved.',
+    desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
         <path d="M12 5v7l4 2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
@@ -86,7 +88,8 @@ const standardsCards = [
   {
     title: 'Mobile-First Development',
     detail:
-      'Every build is planned from the smaller viewport up so the mobile experience is deliberate, usable, and commercially credible.',
+      'Each build is planned from the smallest viewport up so the mobile experience feels deliberate, usable, and commercially credible.',
+    desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
         <rect height="16" rx="2.5" stroke="currentColor" strokeWidth="1.7" width="10" x="7" y="4" />
@@ -98,7 +101,8 @@ const standardsCards = [
   {
     title: 'Accessibility Standards',
     detail:
-      'Hierarchy, contrast, focus treatment, and interaction states are reviewed so the site feels cleaner to use and more dependable to buyers.',
+      'Hierarchy, contrast, focus states, and interaction behavior are reviewed so the site feels clearer and easier to use.',
+    desktopSpan: 'lg:col-span-6',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
         <circle cx="12" cy="5" r="2" fill="currentColor" />
@@ -109,7 +113,8 @@ const standardsCards = [
   {
     title: 'Launch QA Checklist',
     detail:
-      'Every key page, CTA path, responsive state, and content handoff is checked before launch so the finished site ships in a release-ready state.',
+      'Key pages, CTA paths, responsive states, and content handoff are checked before launch so the build ships in a release-ready state.',
+    desktopSpan: 'lg:col-span-6',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
         <path d="M8 7h8M8 12h4M8 17h6" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7" />
@@ -293,39 +298,50 @@ const Home: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-20 md:pt-24">
-            <div className="max-w-3xl">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Build Standards</p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Technical standards that protect the quality of the final build.
-              </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Design quality matters, but premium sites also need dependable infrastructure, disciplined implementation, and clean launch procedures. We build for that from the start.
-              </p>
-            </div>
+          <RevealBlock as="section" className="pt-20 md:pt-24" variant="feature">
+            <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(12,18,33,0.94)_0%,rgba(10,15,26,0.97)_100%)] px-6 py-12 shadow-[0_22px_70px_rgba(0,0,0,0.24)] md:px-8 md:py-14 lg:px-10 lg:py-16">
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute left-[10%] top-[-14%] h-40 w-40 rounded-full bg-[#4B6EAF]/10 blur-3xl md:h-52 md:w-52" />
+                <div className="absolute bottom-[-16%] right-[8%] h-44 w-44 rounded-full bg-[#B05D41]/10 blur-3xl md:h-56 md:w-56" />
+                <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+              </div>
 
-            <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-              {standardsCards.map((item, index) => (
-                <RevealBlock
-                  as="article"
-                  key={item.title}
-                  delay={index * 0.07}
-                  variant="card"
-                  className="group rounded-[24px] border border-white/10 bg-white/[0.035] p-5 shadow-[0_12px_34px_rgba(0,0,0,0.16)] transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out hover:-translate-y-1 hover:border-[#d4a48e]/28 hover:bg-white/[0.05] hover:shadow-[0_22px_54px_rgba(0,0,0,0.28)]"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-[#111a2c] text-[#d4a48e] transition-colors duration-300 group-hover:border-[#d4a48e]/30 group-hover:text-[#e4b59f]">
-                    {item.icon}
-                  </div>
-                  <h3 className="mt-5 text-lg font-semibold tracking-tight text-[#F2F4F7]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                    {item.detail}
+              <div className="relative z-10">
+                <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">BUILD STANDARDS</p>
+                  <h2 className="mt-4 max-w-[12ch] text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
+                    Standards built into every launch.
+                  </h2>
+                  <p className="mt-5 max-w-[38rem] text-sm leading-7 text-slate-300 md:text-base">
+                    Serious websites need more than good design. Every Axiom build is engineered for speed, accessibility, mobile usability, and clean deployment from day one.
                   </p>
-                </RevealBlock>
-              ))}
+                </div>
+
+                <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-12">
+                  {standardsCards.map((item, index) => (
+                    <RevealBlock
+                      as="article"
+                      key={item.title}
+                      delay={index * 0.06}
+                      variant="card"
+                      className={`group relative flex h-full min-h-[15.5rem] flex-col rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,25,41,0.82)_0%,rgba(12,18,31,0.94)_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_14px_34px_rgba(0,0,0,0.18)] transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:border-white/18 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_20px_42px_rgba(0,0,0,0.24)] md:p-7 ${item.desktopSpan}`}
+                      whileHover={{ y: -2 }}
+                      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent opacity-70" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(19,29,48,0.96)_0%,rgba(14,21,35,0.96)_100%)] text-[#d4a48e] transition-colors duration-300 group-hover:border-white/16 group-hover:text-[#e1b29b]">
+                        {item.icon}
+                      </div>
+                      <h3 className="mt-6 text-[1.15rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.2rem]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 max-w-[36ch] text-sm leading-7 text-slate-300">
+                        {item.detail}
+                      </p>
+                    </RevealBlock>
+                  ))}
+                </div>
+              </div>
             </div>
           </RevealBlock>
 
