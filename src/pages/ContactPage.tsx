@@ -309,10 +309,10 @@ const ContactPage: React.FC = () => {
                                                     </Link>{' '}
                                                     page. You can also email{' '}
                                                     <a
-                                                        href="mailto:contact@getaxiom.ca"
+                                                        href="mailto:aidan@getaxiom.ca,riley@getaxiom.ca"
                                                         className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
                                                     >
-                                                        contact@getaxiom.ca
+                                                        aidan@getaxiom.ca and riley@getaxiom.ca
                                                     </a>
                                                     , and we&apos;ll respond the same day, including weekends.
                                                 </p>

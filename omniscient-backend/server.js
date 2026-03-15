@@ -31,12 +31,28 @@ const DEFAULT_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173'
 ];
 
+const DEFAULT_INTERNAL_RECIPIENTS = ['aidan@getaxiom.ca', 'riley@getaxiom.ca'];
+
 const allowedOrigins = new Set(
     (process.env.ALLOWED_ORIGINS || DEFAULT_ALLOWED_ORIGINS.join(','))
         .split(',')
         .map((origin) => origin.trim())
         .filter(Boolean)
 );
+
+function splitCsv(value = '') {
+    return String(value)
+        .split(',')
+        .map((entry) => entry.trim().toLowerCase())
+        .filter(Boolean);
+}
+
+function getInternalRecipients() {
+    return Array.from(new Set([
+        ...DEFAULT_INTERNAL_RECIPIENTS,
+        ...splitCsv(process.env.INTAKE_EMAIL)
+    ]));
+}
 
 function extractClientIp(req) {
     const forwarded = req.headers['x-forwarded-for'];
@@ -298,7 +314,7 @@ app.post('/api/intake', async (req, res) => {
 
         await transporter.sendMail({
             from: `"Axiom Engine" <${process.env.SMTP_USER}>`,
-            to: 'aidan@getaxiom.ca', // Target Destination
+            to: getInternalRecipients(),
             replyTo: email,
             subject: subjectLine,
             html: htmlBody
