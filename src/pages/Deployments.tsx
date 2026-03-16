@@ -178,7 +178,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
               onClick={(event) => event.stopPropagation()}
               className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
             >
-              Review Build Notes
+              View Details
             </Link>
           ) : null}
         </div>
@@ -216,24 +216,24 @@ const Deployments: React.FC = () => {
         <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0" variant="feature">
           <div className="max-w-4xl">
             <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">Featured Work</h1>
+              <h1 data-startup-heading className="text-left">Work & Examples</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-              Demonstration sites and live work showing how we structure fast, high-trust, conversion-focused websites for businesses where first impressions drive inquiries.
+              A mix of live client websites and demonstration examples. We build concept sites to show the exact standards, layouts, and speed we deliver for specific local industries.
             </p>
             <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3 md:mt-6 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
-                View sample builds
+                View examples
               </a>
               <Link
                 to="/method"
                 className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-white/25 hover:bg-white/[0.06] hover:text-axiom-text-main"
               >
-                Review method
+                View our process
               </Link>
             </div>
             <p data-startup-meta className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-400">
-              Items marked Live Demo are current live projects. Build notes remain available if you want to understand the strategy and design decisions behind the build.
+              We label each item clearly. 'Live Demo' means a real deployed business. 'Demonstration Site' or 'Concept Build' are model layouts used to show our baseline standards for that industry.
             </p>
           </div>
         </RevealBlock>
@@ -255,13 +255,13 @@ const Deployments: React.FC = () => {
             <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of execution?</h2>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <a href="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                Book Consultation
+                Book a Discovery Call
               </a>
               <Link
                 to="/method"
                 className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-axiom-text-main hover:underline"
               >
-                Review Method
+                View Our Process
                 <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

@@ -52,7 +52,7 @@ const capabilities = [
   {
     title: 'Made to Build Trust',
     detail:
-      'Clear structure, stronger presentation, and cleaner messaging help the business look more established online.',
+      'A clear layout and modern design ensure your business looks established, capable, and trustworthy from the first click.',
   },
   {
     title: 'Designed to Generate Inquiries',
@@ -152,21 +152,21 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Websites built to make your business look credible instantly.
+                    Custom websites built for serious local businesses.
                   </h1>
                 </div>
                 <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-300 md:text-lg">
-                  Visitors decide whether to trust a company in seconds. We design and build websites that present the business clearly, look established immediately, and make the next step feel worth taking.
+                  We build fast, professional websites that help established businesses look credible, rank higher, and generate more inquiries. No templates, no bloat.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    BOOK CONSULTATION NOW
+                    Book a Discovery Call
                   </Link>
                   <Link
                     to="/method"
                     className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
                   >
-                    See Method
+                    View Our Process
                   </Link>
                 </div>
               </div>
@@ -184,14 +184,14 @@ const Home: React.FC = () => {
             <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Featured Work</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Demonstration builds and live work presented as a clear portfolio.</h2>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">A selection of our custom builds, live projects, and category examples.</h2>
               </div>
-              <Link
-                to="/works"
-                className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
-              >
-                View Full Proof Library
-              </Link>
+                <Link
+                  to="/works"
+                  className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
+                >
+                  View Our Work
+                </Link>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -273,7 +273,7 @@ const Home: React.FC = () => {
               <div className="lg:col-span-4">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">How We Work</p>
                 <h2 className="mt-3 max-w-[20ch] text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                  A better way to build a serious business website.
+                  A clear, professional process for building your website.
                 </h2>
                 <ol className="mt-5 space-y-3">
                   {method.map((step) => (
@@ -371,15 +371,15 @@ const Home: React.FC = () => {
               <div className="relative z-10">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">NEXT STEPS</p>
                 <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Book Free Consultation now
+                  Start Your Project
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  We review your scope, required functionality, and technical setup first, then guide you to the package that fits your business.
+                  Book a brief discovery call to discuss your business and current website goals. We will review your context and recommend a structured path forward.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">
                   <Link to="/apply" className="btn-primary btn-attention btn-lg whitespace-nowrap">
-                    BOOK CONSULTATION
+                    Book a Discovery Call
                   </Link>
                 </div>
 

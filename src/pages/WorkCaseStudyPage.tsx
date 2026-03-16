@@ -29,10 +29,10 @@ const WorkCaseStudyPage: React.FC = () => {
   const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
   const detailNote =
     isLiveDemo
-      ? 'This page documents the live deployment and the build decisions behind it.'
+      ? 'This page outlines a live project and the strategy behind it.'
       : entry.label === 'In Progress'
-        ? 'This proof object is still in progress. Build notes are public now, while the live preview stays hidden until deployment is stable.'
-        : `This page documents build intent, structure decisions, and scope for a ${entry.label.toLowerCase()}.`;
+        ? 'This project is currently in development. Build notes are public, but the live preview is restricted until launch.'
+        : `This page documents the layout intent, scope, and technical decisions for a ${entry.label.toLowerCase()}.`;
 
   return (
     <>
@@ -168,9 +168,9 @@ const WorkCaseStudyPage: React.FC = () => {
                   </p>
                 </article>
                 <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Trust Note</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Our Transparency Standard</h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                    Axiom labels each proof object clearly as live, demonstration, concept, or in progress so buyers can evaluate trust signals without inflated claims.
+                    We label our portfolio clearly so you always know what is a live client website, a demonstration build, or an active concept. No fabricated results.
                   </p>
                 </article>
               </div>
