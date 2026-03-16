@@ -194,7 +194,7 @@ const Deployments: React.FC = () => {
 
   const openWorkDetails = (work: WorkEntry) => {
     if (work.isLiveDemo && work.demoUrl) {
-      window.location.assign(work.demoUrl);
+      window.open(work.demoUrl, '_blank', 'noopener,noreferrer');
       return;
     }
     navigate(`/works/${work.id}`);

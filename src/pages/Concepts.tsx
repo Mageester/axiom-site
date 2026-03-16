@@ -72,6 +72,10 @@ const ConceptsPage: React.FC = () => {
     setExpanded((prev) => ({ ...prev, [title]: !prev[title] }));
   };
 
+  const openDemo = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="page-shell">
       <SEO
@@ -96,7 +100,15 @@ const ConceptsPage: React.FC = () => {
           return (
             <article
               key={demo.title}
-              className={`axiom-bento flex flex-col gap-5 overflow-hidden ${isExpanded ? 'max-h-none' : 'max-h-[82vh] lg:max-h-none'}`}
+              role="link"
+              tabIndex={0}
+              onClick={() => openDemo(demo.url)}
+              onKeyDown={(event) => {
+                if (event.key !== 'Enter' && event.key !== ' ') return;
+                event.preventDefault();
+                openDemo(demo.url);
+              }}
+              className={`axiom-bento flex cursor-pointer flex-col gap-5 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-axiom-accent/45 ${isExpanded ? 'max-h-none' : 'max-h-[82vh] lg:max-h-none'}`}
             >
               <div className="h-[3px] -mx-6 -mt-6 mb-1 bg-axiom-accent" />
 
@@ -176,6 +188,7 @@ const ConceptsPage: React.FC = () => {
                   href={demo.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(event) => event.stopPropagation()}
                   className="btn-primary w-full"
                 >
                   View Demo {'->'}
@@ -183,7 +196,10 @@ const ConceptsPage: React.FC = () => {
 
                 <button
                   type="button"
-                  onClick={() => toggleDetails(demo.title)}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    toggleDetails(demo.title);
+                  }}
                   className="lg:hidden btn-secondary w-full"
                 >
                   {isExpanded ? 'Hide details' : 'Show details'}
