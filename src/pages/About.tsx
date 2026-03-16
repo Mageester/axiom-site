@@ -88,7 +88,7 @@ const About: React.FC = () => {
   return (
     <>
       <SEO
-        title="About | Axiom Infrastructure"
+        title="About | Axiom"
         description="Axiom builds high-performance custom websites for local businesses. Meet Riley Hinsperger and Aidan Magee and see how we work."
       />
 

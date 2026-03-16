@@ -87,11 +87,11 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     id: 'launch',
     number: '05',
-    title: 'Launch and Infrastructure',
+    title: 'Launch and Handover',
     summary:
-      'We launch through a controlled release process and validate infrastructure, routing, and production readiness.',
+      'We launch through a controlled release process and ensure everything runs flawlessly before handing over the keys.',
     points: [
-      'DNS, hosting, and domain routing validated',
+      'DNS, hosting, and domain routing handled cleanly',
       'Post-launch checks for reliability and speed',
     ],
   },
@@ -370,8 +370,8 @@ const Infrastructure: React.FC = () => {
   return (
     <>
       <SEO
-        title="Method | Axiom Infrastructure"
-        description="Premium web systems for high-trust service firms. A clear process from 30-minute Zoom consultation to launch and infrastructure."
+        title="Method | Axiom"
+        description="Premium web systems for high-trust service firms. A clear process from a discovery call to a finalized, high-performing website."
       />
 
       <Layout>
@@ -398,7 +398,7 @@ const Infrastructure: React.FC = () => {
 
           <div className="z-30 mt-8 md:sticky md:top-24" data-reveal>
             <nav
-              aria-label="Infrastructure page sections"
+              aria-label="Method page sections"
               className="hide-scrollbar mx-auto w-full overflow-x-auto rounded-2xl border border-white/10 bg-[rgba(12,16,25,0.82)] p-1.5 backdrop-blur-lg md:w-fit md:rounded-full md:p-1.5"
             >
               <ul className="flex min-w-max items-center gap-0.5 md:gap-1">
@@ -549,7 +549,7 @@ const Infrastructure: React.FC = () => {
           <RevealBlock as="section" id="clarify" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What We Clarify</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">No build starts with unresolved assumptions.</h2>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Every project starts with a clear plan.</h2>
             </div>
 
             <div className="grid gap-3">
@@ -627,7 +627,7 @@ const Infrastructure: React.FC = () => {
             >
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Final Step</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Book your 30-minute Zoom consultation.
+                Book your discovery consultation.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
                 We will review your requirements and recommend the package that best fits your business.

@@ -5,13 +5,13 @@ type Signal = {
 };
 
 const signals: Signal[] = [
-  { label: 'Senior QA' },
+  { label: 'Thorough QA' },
   { label: 'Scope Locked' },
   { label: 'Founder Reviewed' },
-  { label: 'Edge Powered' },
+  { label: 'Global Delivery' },
   { label: 'Speed Verified' },
-  { label: 'Code Audited' },
-  { label: 'Live Monitoring' },
+  { label: 'Stricter Standards' },
+  { label: 'Reliable Uptime' },
   { label: 'Launch Ready' },
 ];
 
@@ -27,7 +27,7 @@ const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
     );
   }
 
-  if (label === 'Edge Powered') {
+  if (label === 'Global Delivery') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <path d="M13 3 6.5 13h4L9.5 21 17.5 10h-4.5L13 3Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
@@ -44,7 +44,7 @@ const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
     );
   }
 
-  if (label === 'Code Audited') {
+  if (label === 'Stricter Standards') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <path d="M12 3 5.5 6v5.4c0 4.1 2.4 7.4 6.5 9.6 4.1-2.2 6.5-5.5 6.5-9.6V6L12 3Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
@@ -53,7 +53,7 @@ const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
     );
   }
 
-  if (label === 'Live Monitoring') {
+  if (label === 'Reliable Uptime') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <path
@@ -96,7 +96,7 @@ const PartnerMarquee: React.FC = () => {
   const segment = [...signals, ...signals];
 
   return (
-    <section aria-label="Operational signals" className="w-full">
+    <section aria-label="Our standards" className="w-full">
       <div className="marquee-shell hide-scrollbar relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] py-2 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div
           className="marquee-track"

@@ -44,9 +44,9 @@ const INITIAL_FORM: IntakeFormState = {
 };
 
 const SCALE_OPTIONS = [
-    { value: 'foundation', label: 'Foundation Investment ($500 CAD)' },
-    { value: 'authority', label: 'Growth Investment ($1,500 CAD)' },
-    { value: 'expansion', label: 'Multi-Location / Expansion ($3,000 CAD)' }
+    { value: 'foundation', label: 'Foundation Build ($500 CAD)' },
+    { value: 'authority', label: 'Growth Build ($1,500 CAD)' },
+    { value: 'expansion', label: 'Custom or Multi-location Build ($3,000 CAD)' }
 ];
 
 const PAIN_POINTS_OPTIONS = [
@@ -60,19 +60,19 @@ const PAIN_POINTS_OPTIONS = [
 const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_active_demand' | 'fit_trust_conversion_need' | 'fit_decision_owner_ready' | 'fit_defined_scope_ready'>; label: string }> = [
     {
         key: 'fit_active_demand',
-        label: 'Do you have active service demand and a clear offer in market today?'
+        label: 'Are you currently taking on new clients or customers?'
     },
     {
         key: 'fit_trust_conversion_need',
-        label: 'Are you looking for stronger trust, positioning, and conversion clarity (not just a quick template refresh)?'
+        label: 'Are you looking for a professional, custom website rather than a cheap template?'
     },
     {
         key: 'fit_decision_owner_ready',
-        label: 'Is there a clear decision owner available to review and approve project decisions?'
+        label: 'Will you (or a single decision-maker) be available to review the project during the build?'
     },
     {
         key: 'fit_defined_scope_ready',
-        label: 'Are you ready to execute within a defined scope once the plan is aligned?'
+        label: 'Are you ready to start this project within the next few weeks?'
     }
 ];
 
@@ -225,19 +225,19 @@ const ContactPage: React.FC = () => {
     return (
         <>
             <SEO
-                title="Apply | Axiom Infrastructure"
-                description="Apply for a fit review to assess scope, standards, and whether Axiom is the right partner for your website rebuild."
+                title="Book Consultation | Axiom"
+                description="Book a discovery consultation to assess your project priorities, needed scope, and how Axiom can help your business."
             />
             <Layout>
                 <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
                     <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
                         <div className="mt-4 overflow-hidden">
                             <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                                Start With a Strategy Call
+                                Book a Discovery Consultation
                             </h1>
                         </div>
                         <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Step {step} of 2. We use this to scope the right build tier and prepare a focused strategy conversation.
+                            Step {step} of 2. We use this to understand your goals and have a focused, useful conversation.
                         </p>
                         <div className="mx-auto mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
                             <div className={`h-full bg-[#B05D41] transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`} />
@@ -321,7 +321,7 @@ const ContactPage: React.FC = () => {
                                     ) : (
                                         <div className="flex flex-col gap-6">
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>Preferred Investment Tier</label>
+                                                <label className={FIELD_LABEL_CLASS}>Preferred Build Package</label>
                                                 <select value={form.project_scale} onChange={(e) => setField('project_scale', e.target.value)} className={FIELD_INPUT_CLASS}>
                                                     <option value="" disabled>Select your investment tier...</option>
                                                     {SCALE_OPTIONS.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
@@ -351,7 +351,7 @@ const ContactPage: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>Best-Fit Questions (Yes / No)</label>
+                                                <label className={FIELD_LABEL_CLASS}>Quick Best-Fit Questions (Yes/No)</label>
                                                 <div className="grid grid-cols-1 gap-3">
                                                     {FIT_QUESTIONS.map((question) => (
                                                         <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">

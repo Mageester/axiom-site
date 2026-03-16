@@ -209,17 +209,17 @@ const Deployments: React.FC = () => {
   return (
     <>
       <SEO
-        title="Work | Axiom Infrastructure"
-        description="Truth-first proof objects from sample and demonstration builds, presented with clear business context, problem framing, and design intent."
+        title="Work | Axiom"
+        description="View our featured work, sample builds, and demonstration sites, complete with business context and design strategy."
       />
       <Layout>
         <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0" variant="feature">
           <div className="max-w-4xl">
             <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">Sample sites for real business use cases.</h1>
+              <h1 data-startup-heading className="text-left">Featured Work</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-              Demonstration sites showing how we structure fast, high-trust, conversion-focused web systems for businesses where first impressions drive inquiries.
+              Demonstration sites and live work showing how we structure fast, high-trust, conversion-focused websites for businesses where first impressions drive inquiries.
             </p>
             <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3 md:mt-6 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
@@ -233,7 +233,7 @@ const Deployments: React.FC = () => {
               </Link>
             </div>
             <p data-startup-meta className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-400">
-              Items marked Live Demo are currently reachable deployments. Build notes remain available where buyers want to review the underlying proof object as well.
+              Items marked Live Demo are current live projects. Build notes remain available if you want to understand the strategy and design decisions behind the build.
             </p>
           </div>
         </RevealBlock>

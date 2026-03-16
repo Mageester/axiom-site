@@ -63,9 +63,9 @@ const capabilities = [
 
 const standardsCards = [
   {
-    title: 'Cloudflare Edge Hosting',
+    title: 'Fast, Reliable Hosting',
     detail:
-      'Delivered through Cloudflare\'s global edge network for faster caching, reliable delivery, and cleaner launch operations.',
+      'Sites are delivered globally for fast loading, reliable uptime, and a smooth experience for every visitor.',
     desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -74,9 +74,9 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Performance-Optimized Architecture',
+    title: 'Built for Speed',
     detail:
-      'Layouts, media, and interaction layers are structured for speed from the start instead of being patched after design is approved.',
+      'We structure layouts, media, and interactions to load instantly, so you never lose a visitor to slow wait times.',
     desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -86,9 +86,9 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Mobile-First Development',
+    title: 'Flawless on Mobile',
     detail:
-      'Each build is planned from the smallest viewport up so the mobile experience feels deliberate, usable, and commercially credible.',
+      'We design from the phone up, ensuring your website feels completely natural, credible, and easy to use on any device.',
     desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -99,9 +99,9 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Accessibility Standards',
+    title: 'Clear and Accessible',
     detail:
-      'Hierarchy, contrast, focus states, and interaction behavior are reviewed so the site feels clearer and easier to use.',
+      'Colors, contrast, structure, and text sizing are carefully reviewed to ensure a highly readable experience for everyone.',
     desktopSpan: 'lg:col-span-6',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -111,9 +111,9 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Launch QA Checklist',
+    title: 'Rigorous Pre-Launch Checks',
     detail:
-      'Key pages, CTA paths, responsive states, and content handoff are checked before launch so the build ships in a release-ready state.',
+      'Core pages, contact forms, mobile layouts, and critical actions are fully tested before your website goes live.',
     desktopSpan: 'lg:col-span-6',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -141,7 +141,7 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom Infrastructure | Premium Websites for Growth-Focused Businesses"
+        title="Axiom | Premium Websites for Growth-Focused Businesses"
         description="Axiom designs and builds premium websites for businesses that need stronger trust, clearer positioning, and better conversion structure."
       />
 
@@ -175,7 +175,7 @@ const Home: React.FC = () => {
 
           <section className="pt-10 md:pt-14">
             <p className="mb-3 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-              Operational signals
+              Our Standards
             </p>
             <PartnerMarquee />
           </section>
@@ -183,8 +183,8 @@ const Home: React.FC = () => {
           <RevealBlock as="section" className="pt-16 md:pt-28" variant="feature">
             <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected Deployments</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Live demo deployments presented as a clean studio portfolio.</h2>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Featured Work</p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Demonstration builds and live work presented as a clear portfolio.</h2>
               </div>
               <Link
                 to="/works"
@@ -323,12 +323,12 @@ const Home: React.FC = () => {
 
               <div className="relative z-10">
                 <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">BUILD STANDARDS</p>
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">OUR STANDARDS</p>
                   <h2 className="mt-4 max-w-[12ch] text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
                     Standards built into every launch.
                   </h2>
                   <p className="mt-5 max-w-[38rem] text-sm leading-7 text-slate-300 md:text-base">
-                    Serious websites need more than good design. Every Axiom build is engineered for speed, accessibility, mobile usability, and clean deployment from day one.
+                    A professional website needs more than good design. Every Axiom build is structured to load fast, work flawlessly on mobile, and guide visitors toward booking or buying.
                   </p>
                 </div>
 
