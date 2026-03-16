@@ -144,58 +144,55 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     if (typeof window === 'undefined') return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    let splitInstance: { chars: Element[]; revert: () => void } | null = null;
-    let ctx: gsap.Context | null = null;
-    let cancelled = false;
+    const ctx = gsap.context(() => {
+      const nav = navRef.current;
+      const logo = logoTargetRef.current;
+      const navLinks = gsap.utils.toArray<HTMLElement>('[data-startup-link]');
+      const heroContent = gsap.utils
+        .toArray<HTMLElement>(
+          '[data-startup-heading], [data-startup-copy], [data-startup-actions], [data-startup-meta]'
+        )
+        .filter((element) => !element.closest('[aria-hidden="true"]'));
+      const backgrounds = gsap.utils.toArray<HTMLElement>('[data-startup-bg]');
+      const cards = gsap.utils
+        .toArray<HTMLElement>('[data-glass-card], .axiom-bento, .axiom-bento-card, .machined-card')
+        .filter((element) => !element.closest('[aria-hidden="true"]'));
 
-    const initAnimations = async () => {
-      const { default: SplitType } = await import('split-type');
-      if (cancelled) return;
+      const timeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      ctx = gsap.context(() => {
-        const nav = navRef.current;
-        const logo = logoTargetRef.current;
-        const navLinks = gsap.utils.toArray<HTMLElement>('[data-startup-link]');
-        const hero = layoutRef.current?.querySelector<HTMLElement>('[data-hero-root]');
-        const heading = layoutRef.current?.querySelector<HTMLElement>('[data-startup-heading]');
-        const backgrounds = gsap.utils.toArray<HTMLElement>('[data-startup-bg]');
-        const cards = gsap.utils.toArray<HTMLElement>('[data-glass-card], .axiom-bento, .axiom-bento-card, .machined-card');
+      if (nav) {
+        gsap.set(nav, { autoAlpha: 0, y: -18 });
+        timeline.to(nav, { autoAlpha: 1, y: 0, duration: 0.5 }, 0);
+      }
 
-        if (!nav || !hero || !heading || !logo) return;
+      if (logo) {
+        gsap.set(logo, { autoAlpha: 0, x: -28, transformOrigin: 'left center' });
+        timeline.to(logo, { autoAlpha: 1, x: 0, duration: 0.72, ease: 'expo.out' }, 0.08);
+      }
 
-        splitInstance = new SplitType(heading, {
-          types: 'words,chars',
-          wordClass: 'startup-word',
-          charClass: 'startup-char',
-        }) as { chars: Element[]; revert: () => void };
+      if (navLinks.length) {
+        gsap.set(navLinks, { autoAlpha: 0, y: -10 });
+        timeline.to(navLinks, { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.04 }, 0.18);
+      }
 
-        gsap.set(nav, { autoAlpha: 0, y: -50 });
-        gsap.set(logo, { autoAlpha: 0, x: -150, scale: 0.72, transformOrigin: 'left center' });
-        gsap.set(navLinks, { autoAlpha: 0, x: 28 });
-        gsap.set(hero, { autoAlpha: 0 });
+      if (heroContent.length) {
+        gsap.set(heroContent, { autoAlpha: 0, y: 18 });
+        timeline.to(heroContent, { autoAlpha: 1, y: 0, duration: 0.62, stagger: 0.08 }, 0.22);
+      }
+
+      if (backgrounds.length) {
         gsap.set(backgrounds, { autoAlpha: 0 });
-        gsap.set(splitInstance.chars, { autoAlpha: 0, yPercent: 110 });
-        gsap.set(cards, { autoAlpha: 0, y: 40 });
+        timeline.to(backgrounds, { autoAlpha: 0.07, duration: 0.8, stagger: 0.08, ease: 'power1.out' }, 0.16);
+      }
 
-        const timeline = gsap.timeline();
-
-        timeline
-          .to(nav, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power4.out' }, 0)
-          .to(logo, { autoAlpha: 1, x: 0, scale: 1, duration: 0.72, ease: 'expo.out' }, 0.08)
-          .to(navLinks, { autoAlpha: 1, x: 0, duration: 0.45, stagger: 0.05, ease: 'power3.out' }, 0.3)
-          .to(hero, { autoAlpha: 1, duration: 0.2 }, 0.2)
-          .to(splitInstance.chars, { autoAlpha: 1, yPercent: 0, stagger: 0.02, duration: 0.5, ease: 'power3.out' }, 0.3)
-          .to(backgrounds, { autoAlpha: 0.04, duration: 0.6, stagger: 0.08, ease: 'power1.out' }, 0.6)
-          .to(cards, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' }, 0.6);
-      }, layoutRef);
-    };
-
-    void initAnimations();
+      if (cards.length) {
+        gsap.set(cards, { autoAlpha: 0, y: 22 });
+        timeline.to(cards, { autoAlpha: 1, y: 0, duration: 0.56, stagger: 0.05 }, 0.36);
+      }
+    }, layoutRef);
 
     return () => {
-      cancelled = true;
       ctx?.revert();
-      splitInstance?.revert();
     };
   }, []);
 

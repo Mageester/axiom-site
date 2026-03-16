@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
-import SingleItemCarousel from '../components/SingleItemCarousel';
 import { RevealBlock } from '../components/ui/RevealBlock';
 import { caseStudies } from '../data/caseStudies';
 import type { ResponsiveSource } from '../lib/responsiveImages';
@@ -85,16 +84,16 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
         event.preventDefault();
         onOpen(work);
       }}
-      className="group/proof relative z-0 mx-auto h-[560px] w-full max-w-[960px] cursor-pointer rounded-[1.5rem] hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:h-[620px] lg:h-[650px]"
+      className="group/proof relative z-0 mx-auto flex h-full min-h-[34rem] w-full cursor-pointer rounded-[1.5rem] hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:min-h-[36rem]"
     >
-      <article className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:border-white/20 group-hover/proof:shadow-[0_24px_54px_rgba(0,0,0,0.36)]">
+      <article className="flex h-full flex-1 flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:border-white/20 group-hover/proof:shadow-[0_24px_54px_rgba(0,0,0,0.36)]">
       {work.isLiveDemo && work.demoUrl ? (
         <a
           href={work.demoUrl}
           target="_blank"
           rel="noopener noreferrer"
           onClick={(event) => event.stopPropagation()}
-          className="relative block h-[44%] overflow-hidden sm:h-[50%] lg:h-[52%]"
+          className="relative block h-[42%] overflow-hidden sm:h-[45%]"
           aria-label={`View live demo for ${work.title}`}
         >
           <ResponsiveImage
@@ -117,7 +116,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
           </div>
         </a>
       ) : (
-        <div className="relative h-[44%] overflow-hidden sm:h-[50%] lg:h-[52%]">
+        <div className="relative h-[42%] overflow-hidden sm:h-[45%]">
           <ResponsiveImage
             source={work.image}
             sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
@@ -219,10 +218,10 @@ const Deployments: React.FC = () => {
             <div className="mt-2.5 max-w-4xl overflow-hidden">
               <h1 data-startup-heading className="text-left">Sample sites for real business use cases.</h1>
             </div>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+            <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
               Demonstration sites showing how we structure fast, high-trust, conversion-focused web systems for businesses where first impressions drive inquiries.
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-3 md:mt-6 md:gap-3.5">
+            <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3 md:mt-6 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
                 View sample builds
               </a>
@@ -233,21 +232,20 @@ const Deployments: React.FC = () => {
                 Review method
               </Link>
             </div>
-            <p className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-400">
+            <p data-startup-meta className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-400">
               Items marked Live Demo are currently reachable deployments. Build notes remain available where buyers want to review the underlying proof object as well.
             </p>
           </div>
         </RevealBlock>
 
-        <RevealBlock as="section" id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-1 pb-8 sm:px-6 md:px-8 md:pt-4">
-          <SingleItemCarousel
-            items={works}
-            getItemKey={(work) => work.id}
-            ariaLabel="Sample builds carousel"
-            loop={false}
-            className="mx-auto max-w-5xl"
-            renderItem={(work) => <WorkCard work={work} onOpen={openWorkDetails} />}
-          />
+        <RevealBlock as="section" id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-3 pb-8 sm:px-6 md:px-8 md:pt-6">
+          <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {works.map((work, index) => (
+              <RevealBlock as="article" key={work.id} delay={index * 0.08} variant="card">
+                <WorkCard work={work} onOpen={openWorkDetails} />
+              </RevealBlock>
+            ))}
+          </div>
         </RevealBlock>
 
         <RevealBlock as="section" className="relative mx-auto flex w-full max-w-5xl flex-col items-center overflow-visible px-6 pb-12 text-center md:px-8">
