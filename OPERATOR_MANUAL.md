@@ -2,126 +2,166 @@
 
 ## Overview
 
-This repository contains:
+This repo now contains both:
 
-- Public website building agency site (React/Vite in `src/`)
-- Public intake form handler (`functions/api/public/website-request.ts`)
-- Hidden Admin lead finder UI (same React app, behind `/login`)
-- Cloudflare Pages Functions API (`functions/api/*`)
-- D1-backed auth, website requests, campaigns, leads, jobs, audits
+- The public Axiom website
+- The protected Omniscient internal lead-finding system used through `ops.getaxiom.ca`
 
-## Platform Constraints (current repo reality)
+The internal app is mounted inside the same React build and backed by Cloudflare Pages Functions + D1.
 
-- Cloudflare Pages + Pages Functions + D1
-- Auth uses server-side sessions with hashed session tokens in D1
-- Admin auth cookie: `axiom_session` (`HttpOnly; Secure; SameSite=Strict`)
-- Middleware route protection in `functions/api/_middleware.ts`
+## Runtime Reality
 
-## Required D1 Binding
+- Frontend: Vite + React Router
+- API/runtime: Cloudflare Pages Functions
+- DB binding: `DB`
+- Internal session cookie: `axiom_session`
+- Protected ops routes:
+  - `/dashboard`
+  - `/hunt`
+  - `/vault`
+  - `/triage`
+  - `/settings`
+  - `/lead/:id`
+  - `/account`
 
-- Binding name must be exactly: `DB`
+## Security Model
 
-If `DB` is missing or points to the wrong database, all admin API routes will fail.
+There are now three layers of protection:
+
+1. Cloudflare Access on `ops.getaxiom.ca`
+2. Session-protected Pages Functions APIs
+3. Session-checked protected internal page routes
+
+Sensitive actions are admin-only:
+
+- scrape
+- export
+- delete
+- backfill
+- runtime/settings access
+
+Audit events are recorded for:
+
+- scrape start / finish / failure
+- exports
+- lead edits
+- lead deletes
+- backfill runs
+
+## Required Bindings
+
+- `DB`
+
+## Important Env Vars
+
+- `APP_BASE_URL`
+- `GEMINI_API_KEY`
+- `RATE_LIMIT_MAX_EXPORT`
+- `RATE_LIMIT_MAX_SCRAPE`
+- `RATE_LIMIT_WINDOW_SECONDS`
+- `SCRAPE_CONCURRENCY_LIMIT`
+- `SCRAPE_TIMEOUT_MS`
+
+Optional:
+
+- `BROWSER`
+- `BOOTSTRAP_ENABLED`
+- `BOOTSTRAP_ADMIN_USERNAME`
+- `BOOTSTRAP_ADMIN_PASSWORD`
+- `ADMIN_ACCESS_TOKEN`
+- `PBKDF2_ITERS`
 
 ## Migrations
 
-Migrations are stored in:
+Apply all migrations through `0005_omniscient.sql`.
 
-- `migrations/0000_schema.sql`
-- `migrations/0001_secure_auth.sql`
-- `migrations/0002_add_jobs_locked_by.sql`
+New Omniscient tables:
 
-Apply migrations before first use and whenever schema changes.
+- `omniscient_leads`
+- `omniscient_audit_events`
+- `omniscient_rate_limit_windows`
+- `omniscient_scrape_runs`
 
-## Auth / First Login
+## First Login / Bootstrap
 
 Login endpoint:
 
 - `POST /api/auth/login`
 
-Bootstrap behavior:
+If bootstrap is enabled:
 
-- `BOOTSTRAP_ENABLED=true` (or `1`) allows auto-creation of `admin` user only when no admin exists.
-- Default bootstrap password is `admin` and `must_change_password=1`.
-- Operator must rotate password on first login (`/account`).
+- a bootstrap admin can be auto-created
+- first password rotation still happens through `/account`
 
-Disable bootstrap in production after setup.
+Disable bootstrap after initial production setup.
 
-## Operator Workflow (Normal Use)
+## Normal Omniscient Workflow
 
-1. Log in at `/login`
+1. Sign in at `/admin/login`
 2. If prompted, rotate password at `/account`
-3. Go to `/campaigns`
-4. Create a campaign (niche/city/radius)
-5. Open `/jobs`
-6. Run queue (`Force Queue Execution`) until discovery/audits complete
-7. Open lead list (`/leads?campaign_id=...`)
-8. Open a lead detail page (`/leads/:id`)
-9. Review audit score + outreach bullets
-10. Update pipeline status and notes (CRM-style status tracking)
+3. Open `/dashboard` for status
+4. Run extraction at `/hunt`
+5. Review/search/export records in `/vault`
+6. Speed-work the best leads in `/triage`
+7. Open `/lead/:id` for dossier details and operator notes
+8. Check `/settings` for runtime status if scrape/export issues appear
 
-## Job Types
-
-- `DISCOVERY`
-  - Uses Nominatim + Overpass (server-side) to find businesses
-  - Writes `businesses`, `leads`, and enqueues `AUDIT` jobs when a website exists
-- `AUDIT`
-  - Audits website reachability/basic conversion signals
-  - Writes `audits`, `scores`, `summaries`
-  - Updates `leads.last_audit_at`
-
-## Job Runner Operations
+## Scrape Behavior
 
 Endpoint:
 
-- `POST /api/jobs/run`
+- `GET /api/omniscient/scrape`
 
 Behavior:
 
-- Resets orphaned `running` jobs older than 5 minutes back to `queued`
-- Processes up to 3 queued jobs per run
-- Retries failed jobs up to 3 attempts
-- Writes truncated `last_error` on failure
+- admin-only
+- SSE stream response
+- Cloudflare Browser Rendering when `BROWSER` is bound
+- local Playwright fallback for development
+- server-side Gemini enrichment when `GEMINI_API_KEY` exists
+- D1 persistence only, no local filesystem dependency
+- rate-limited and concurrency-limited
 
-Use `/jobs` to monitor queue status and failures.
+## Export Behavior
 
-## Observability (current)
+Endpoint:
 
-- API returns JSON error bodies for admin-facing endpoints
-- Structured server logs added for:
-  - auth login failures / rate limits / internal errors
-  - job runner fatal errors
-  - per-job pipeline failures
+- `GET /api/omniscient/leads/export`
 
-No secrets are logged. Session tokens and passwords are not logged.
+Supports:
 
-## Security Notes (unchanged)
+- CSV
+- XLSX
 
-- Password hashing: PBKDF2 SHA-256 with format `iterations:salt:hash`
-- Constant-time comparison retained
-- Session tokens are hashed in DB (SHA-256)
-- Cookie remains `HttpOnly + Secure + SameSite=Strict`
-- Middleware protection remains in place for `/api/*`
-- SQL remains parameterized
+Protected:
 
-## Common Failures and What They Mean
+- admin-only
+- rate-limited
+- audited
 
-- `401 Unauthorized` on admin APIs:
-  - Session expired/revoked or no cookie
-- `403 Forbidden: Must change password`:
-  - Operator must complete `/account` password change first
-- `...schema is missing or migrations were not applied`:
-  - D1 migrations not applied to the active DB
-- `Overpass query failed: Overpass timeout`:
-  - External OSM infra issue; retry job later
-- `Failed to connect (fallback): Request timed out` (AUDIT):
-  - Target site unreachable/slow; job will retry up to max attempts
+## Failure Modes
+
+- `401 Unauthorized`
+  - no session or expired session
+- `403 Forbidden`
+  - user is authenticated but not allowed for an admin-only action
+- `409 Another scrape is already running`
+  - current concurrency cap reached
+- `429 ... rate limit exceeded`
+  - scrape/export limit reached for the current window
+- empty or partial scrape results
+  - Maps/browser discovery returned weak public signals
+- no AI enrichment
+  - `GEMINI_API_KEY` missing or Gemini call failed; heuristic enrichment still runs
 
 ## Deployment Notes
 
-- This repo currently has no committed `wrangler.toml`
-- Ensure the Cloudflare Pages project has:
+- This repo is structured for Cloudflare Pages, not a separate Node server
+- Push to the Git-connected branch to trigger deployment
+- `wrangler.jsonc` now captures the Pages asset directory and SPA fallback behavior for direct route hits
+- Keep `ops.getaxiom.ca` attached to the Pages project and behind Cloudflare Access
+- Ensure the Pages project has:
   - Functions enabled
   - D1 binding `DB`
-  - required env vars (`PBKDF2_ITERS`, `BOOTSTRAP_ENABLED` as needed)
-- `public/_headers` contains static header rules (including CSP/security headers)
+  - Browser Rendering binding `BROWSER` if scrape should run in-cloud
+  - the Omniscient env vars above

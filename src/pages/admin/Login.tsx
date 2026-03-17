@@ -8,7 +8,7 @@ const LoginSchema = z.object({
     password: z.string().min(1, "Password is required")
 });
 
-const DEFAULT_ADMIN_ROUTE = '/campaigns';
+const DEFAULT_ADMIN_ROUTE = '/dashboard';
 
 function getSafeNext(nextValue: string | null) {
     if (!nextValue) return DEFAULT_ADMIN_ROUTE;

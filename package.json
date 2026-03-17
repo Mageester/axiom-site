@@ -14,6 +14,8 @@
     "intake:smoke": "node scripts/intake-smoke.mjs"
   },
   "dependencies": {
+    "@cloudflare/playwright": "^1.1.2",
+    "@google/generative-ai": "^0.24.1",
     "@gsap/react": "^2.1.2",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",
@@ -22,13 +24,16 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.35.0",
     "gsap": "^3.14.2",
+    "lucide-react": "^0.577.0",
+    "playwright": "^1.58.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.6.0",
     "react-router-dom": "^7.13.0",
     "split-type": "^0.3.4",
     "tailwind-merge": "^3.5.0",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260301.1",

@@ -1,61 +1,139 @@
-# Axiom Web Infrastructure - Professional Website Agency
+# Axiom Site + Omniscient Ops
 
-A production-ready static agency site built with Vite, React, and Tailwind CSS.
-Configured for selling high-performance, professional website builds and maintenance to local and service businesses.
+This repository now serves two jobs from one Cloudflare deployment:
 
-## Infrastructure Stack
-* **Framework:** React 18 + Vite (Fully Static for Public, API Functions for Intake)
-* **Styling:** Tailwind CSS
-* **Typography:** Space Grotesk (Headings), Inter (Body)
-* **Colors:** Dark Background (`#0B0B0C`), Surface (`#15171A`), Accent (`#4B6EAF`)
+- Public Axiom marketing site (`src/`)
+- Protected internal Omniscient ops app for `ops.getaxiom.ca`
 
-## Assets
-We have provided a fallback SVG logo (`public/favicon.svg`).
-**Action Required:** Please place your provided agency logo image if necessary. 
+The internal app is not a static mock. It runs through Cloudflare Pages Functions with D1-backed auth/session state and protected Omniscient APIs for scraping, analytics, triage, vault access, exports, and runtime status.
 
-## Local Development & Build Commands
+## Platform
 
-Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended).
+- Frontend: React 18 + Vite + React Router
+- Edge runtime: Cloudflare Pages + Pages Functions
+- Database: Cloudflare D1 binding `DB`
+- Internal auth: D1-backed sessions via `axiom_session`
+- Scraping: Cloudflare Browser Rendering when bound, local Playwright fallback for dev
+- AI enrichment: Gemini server-side only
 
-1. **Install Dependencies:**
-   ```bash
-   npm install
-   ```
-2. **Start Local Development Server:**
-   ```bash
-   npm run dev
-   ```
-3. **Build Static Application (for Production):**
-   ```bash
-   npm run build
-   ```
-4. **Preview Production Build Locally:**
-   ```bash
-   npm run preview
-   ```
+## Internal Routes
 
-## Cloudflare Pages Deployment Instructions
+- `/dashboard`
+- `/hunt`
+- `/vault`
+- `/triage`
+- `/settings`
+- `/lead/:id`
+- `/admin/login`
+- `/account`
 
-This application is configured as a fully static, client-side application without a Node.js server requirement, making it perfect for edge deployment via Cloudflare Pages.
+Legacy internal routes are redirected:
 
-1. **Push to Repository:**
-   Commit this entire directory to a Git repository (GitHub/GitLab).
+- `/campaigns` -> `/hunt`
+- `/leads` -> `/vault`
+- `/leads/:id` -> `/lead/:id`
 
-2. **Connect to Cloudflare Pages:**
-   - Log into your Cloudflare Dashboard and navigate to **Workers & Pages** -> **Create Application** -> **Pages** -> **Connect to Git**.
-   - Select your repository.
+## Omniscient API Surface
 
-3. **Configure Build Settings:**
-   - **Framework Preset:** Vite
-   - **Build Command:** `npm run build`
-   - **Build Output Directory:** `dist`
+- `GET /api/omniscient/leads`
+- `GET /api/omniscient/leads/:id`
+- `PATCH /api/omniscient/leads/:id`
+- `DELETE /api/omniscient/leads/:id`
+- `POST /api/omniscient/leads/delete`
+- `POST /api/omniscient/leads/backfill`
+- `GET /api/omniscient/leads/analytics`
+- `GET /api/omniscient/leads/stats`
+- `GET /api/omniscient/leads/triage`
+- `GET /api/omniscient/leads/export`
+- `GET /api/omniscient/runtime`
+- `GET /api/omniscient/scrape`
 
-4. **Deploy:**
-   Click **Save and Deploy**. Cloudflare will automatically provision your global CDN infrastructure, build the static assets, and deploy to the edge nodes.
-   
-5. **(Optional) Custom Domain:**
-   After deployment, go to the "Custom Domains" tab in your Cloudflare Pages project to map your production domain.
+All Omniscient API routes are session-protected. Scrape, export, settings/runtime, delete, and backfill are admin-only.
 
-## Lighthouse & Performance Optimization
-- **Accessibility:** Uses semantic HTML, proper contrast ratios, and accessible form labels.
-- **Performance:** Implements highly localized asset bundling and defers JS initialization where appropriate. No heavy external frameworks were used outside of React & Tailwind.
+## Required Bindings / Env
+
+Required:
+
+- `DB`
+
+Recommended / required for full Omniscient functionality:
+
+- `GEMINI_API_KEY`
+- `APP_BASE_URL`
+- `RATE_LIMIT_MAX_EXPORT`
+- `RATE_LIMIT_MAX_SCRAPE`
+- `RATE_LIMIT_WINDOW_SECONDS`
+- `SCRAPE_CONCURRENCY_LIMIT`
+- `SCRAPE_TIMEOUT_MS`
+
+Optional:
+
+- `BROWSER`
+- `ADMIN_ACCESS_TOKEN`
+- `BOOTSTRAP_ENABLED`
+- `BOOTSTRAP_ADMIN_USERNAME`
+- `BOOTSTRAP_ADMIN_PASSWORD`
+- `PBKDF2_ITERS`
+
+## Migrations
+
+Apply all migrations in order, including the Omniscient schema:
+
+- `migrations/0000_schema.sql`
+- `migrations/0001_secure_auth.sql`
+- `migrations/0002_add_jobs_locked_by.sql`
+- `migrations/0003_website_requests.sql`
+- `migrations/0004_website_inquiries.sql`
+- `migrations/0005_omniscient.sql`
+
+## Local Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the Vite app:
+
+```bash
+npm run dev
+```
+
+Build production assets:
+
+```bash
+npm run build
+```
+
+Pages Functions local dev remains Cloudflare-based. Typical flow:
+
+```bash
+npm run build
+npx wrangler pages dev --local --d1 DB=axiom-site-local
+```
+
+The committed [wrangler.jsonc](/Users/riley/Documents/GitHub/axiom-site/wrangler.jsonc) defines the Pages build output and SPA asset fallback for direct route hits. Add bindings/env values with `.dev.vars` or CLI flags as needed for local testing.
+
+## Deployment
+
+This repo is intended to deploy through the existing Cloudflare Pages Git integration already attached to the site. The operational model is:
+
+1. Push to the connected GitHub branch
+2. Cloudflare Pages rebuilds `dist`
+3. Pages Functions deploy alongside the static bundle
+4. `ops.getaxiom.ca` stays behind Cloudflare Access
+
+Build settings:
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- Wrangler/Pages config: [wrangler.jsonc](/Users/riley/Documents/GitHub/axiom-site/wrangler.jsonc)
+
+## Security Notes
+
+- Gemini is server-side only; it is never exposed to the client bundle
+- Omniscient exports are protected and rate-limited
+- Scrape execution is protected, rate-limited, audited, and concurrency-limited
+- Protected internal pages are gated at the Pages route layer and by session-aware client routing
+- The ops subdomain should remain behind Cloudflare Access
