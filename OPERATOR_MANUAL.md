@@ -158,7 +158,8 @@ Protected:
 
 - This repo is structured for Cloudflare Pages, not a separate Node server
 - Push to the Git-connected branch to trigger deployment
-- `wrangler.jsonc` now captures the Pages asset directory and SPA fallback behavior for direct route hits
+- Do not add a repo-level `wrangler.jsonc` unless you intentionally want the repo to override the existing Pages project config
+- Direct hits are handled in-repo through `public/_redirects` plus protected Pages Functions, so `/dashboard`, `/vault`, `/lead/:id`, and `/admin/login` do not depend on a hidden dashboard SPA fallback toggle
 - Keep `ops.getaxiom.ca` attached to the Pages project and behind Cloudflare Access
 - Ensure the Pages project has:
   - Functions enabled

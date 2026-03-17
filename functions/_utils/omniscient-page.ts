@@ -28,3 +28,40 @@ export async function requireProtectedPage(context: any, options: PageGuardOptio
 
     return null;
 }
+
+async function fetchAppShell(context: any) {
+    const assets = context?.env?.ASSETS;
+    if (!assets?.fetch) {
+        return null;
+    }
+
+    const indexUrl = new URL('/index.html', context.request.url);
+    const response = await assets.fetch(new Request(indexUrl.toString(), context.request));
+    if (!response.ok) {
+        return null;
+    }
+
+    const headers = new Headers(response.headers);
+    headers.set('Cache-Control', 'no-store');
+
+    return new Response(response.body, {
+        headers,
+        status: response.status,
+        statusText: response.statusText,
+    });
+}
+
+export async function serveProtectedAppShell(context: any, options: PageGuardOptions = {}) {
+    const guarded = await requireProtectedPage(context, options);
+    if (guarded) {
+        return guarded;
+    }
+
+    const shell = await fetchAppShell(context);
+    return shell || context.next();
+}
+
+export async function servePublicAppShell(context: any) {
+    const shell = await fetchAppShell(context);
+    return shell || context.next();
+}

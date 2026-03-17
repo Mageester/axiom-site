@@ -110,10 +110,10 @@ Pages Functions local dev remains Cloudflare-based. Typical flow:
 
 ```bash
 npm run build
-npx wrangler pages dev --local --d1 DB=axiom-site-local
+npx wrangler pages dev dist --local --d1 DB=axiom-site-local
 ```
 
-The committed [wrangler.jsonc](/Users/riley/Documents/GitHub/axiom-site/wrangler.jsonc) defines the Pages build output and SPA asset fallback for direct route hits. Add bindings/env values with `.dev.vars` or CLI flags as needed for local testing.
+This repo intentionally does not commit a `wrangler.jsonc` or `wrangler.toml` for production, so the existing Cloudflare Pages project remains the source of truth for bindings, domains, and deploy settings. Direct route hits are handled in-repo via committed `public/_redirects` rewrites plus protected Pages Functions handlers, which keeps `/dashboard`, `/vault`, `/lead/:id`, and `/admin/login` working without a dashboard-only SPA fallback toggle.
 
 ## Deployment
 
@@ -128,7 +128,7 @@ Build settings:
 
 - Build command: `npm run build`
 - Output directory: `dist`
-- Wrangler/Pages config: [wrangler.jsonc](/Users/riley/Documents/GitHub/axiom-site/wrangler.jsonc)
+- Pages project settings stay in the existing Cloudflare dashboard project (`axiom-ops`)
 
 ## Security Notes
 
