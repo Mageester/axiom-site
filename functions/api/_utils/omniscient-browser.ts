@@ -35,14 +35,18 @@ export async function launchOmniscientBrowser(env: any): Promise<AutomationBrows
         try {
             const noopMkdtemp = async () => '/tmp/artifacts';
             
+            // Use dynamic strings to bypass TypeScript static analysis (error TS2307)
+            const nodeFs = 'node:fs';
+            const nodeFsPromises = 'node:fs/promises';
+            
             // 1. Try ESM imports
-            const fs = await import('node:fs').catch(() => null);
-            const fsPromises = await import('node:fs/promises').catch(() => null);
+            const fs = await import(/* @vite-ignore */ nodeFs).catch(() => null);
+            const fsPromises = await import(/* @vite-ignore */ nodeFsPromises).catch(() => null);
             
             // 2. Try to find require (wrangler often polyfills this for internal use)
             // @ts-ignore
             const req = typeof require !== 'undefined' ? require : null;
-            const fsReq = req ? req('node:fs') : null;
+            const fsReq = req ? req(nodeFs) : null;
 
             const targets = [fs, fsPromises, fsReq].filter(Boolean);
             for (const t of targets) {
