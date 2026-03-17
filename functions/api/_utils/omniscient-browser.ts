@@ -33,23 +33,39 @@ export async function launchOmniscientBrowser(env: any): Promise<AutomationBrows
     if (env?.BROWSER) {
         // Stub fs.promises.mkdtemp to bypass unenv "not implemented yet" error during _connectOverCDPInternal
         try {
-            // @ts-ignore - Shim global fs for unenv environments
-            const fs = await import('node:fs');
-            // @ts-ignore
-            const fsPromises = await import('node:fs/promises');
             const noopMkdtemp = async () => '/tmp/artifacts';
             
-            // Apply to the objects themselves
-            if (fs) {
-                (fs as any).mkdtemp = noopMkdtemp;
-                if ((fs as any).promises) (fs as any).promises.mkdtemp = noopMkdtemp;
-            }
-            if (fsPromises) {
-                (fsPromises as any).mkdtemp = noopMkdtemp;
+            // 1. Try ESM imports
+            const fs = await import('node:fs').catch(() => null);
+            const fsPromises = await import('node:fs/promises').catch(() => null);
+            
+            // 2. Try to find require (wrangler often polyfills this for internal use)
+            // @ts-ignore
+            const req = typeof require !== 'undefined' ? require : null;
+            const fsReq = req ? req('node:fs') : null;
+
+            const targets = [fs, fsPromises, fsReq].filter(Boolean);
+            for (const t of targets) {
+                try {
+                    // Try direct assignment
+                    (t as any).mkdtemp = noopMkdtemp;
+                    if ((t as any).promises) (t as any).promises.mkdtemp = noopMkdtemp;
+                    if ((t as any).default?.promises) (t as any).default.promises.mkdtemp = noopMkdtemp;
+                } catch (e) {
+                    // Try property definition if read-only
+                    try {
+                        Object.defineProperty(t, 'mkdtemp', { value: noopMkdtemp, configurable: true });
+                    } catch (e2) {
+                        // ignore
+                    }
+                }
             }
 
-            // Also check the default exports just in case
-            if ((fs as any).default?.promises) (fs as any).default.promises.mkdtemp = noopMkdtemp;
+            // 3. Shim globalThis in case Playwright is looking there
+            // @ts-ignore
+            globalThis.mkdtemp = noopMkdtemp;
+            // @ts-ignore
+            if (!globalThis.fs) globalThis.fs = { promises: { mkdtemp: noopMkdtemp } };
         } catch (e) {
             // ignore
         }
