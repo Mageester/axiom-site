@@ -33,18 +33,23 @@ export async function launchOmniscientBrowser(env: any): Promise<AutomationBrows
     if (env?.BROWSER) {
         // Stub fs.promises.mkdtemp to bypass unenv "not implemented yet" error during _connectOverCDPInternal
         try {
-            // @ts-ignore
+            // @ts-ignore - Shim global fs for unenv environments
             const fs = await import('node:fs');
             // @ts-ignore
             const fsPromises = await import('node:fs/promises');
             const noopMkdtemp = async () => '/tmp/artifacts';
             
-            if (fs.promises) {
-                (fs.promises as any).mkdtemp = noopMkdtemp;
+            // Apply to the objects themselves
+            if (fs) {
+                (fs as any).mkdtemp = noopMkdtemp;
+                if ((fs as any).promises) (fs as any).promises.mkdtemp = noopMkdtemp;
             }
             if (fsPromises) {
                 (fsPromises as any).mkdtemp = noopMkdtemp;
             }
+
+            // Also check the default exports just in case
+            if ((fs as any).default?.promises) (fs as any).default.promises.mkdtemp = noopMkdtemp;
         } catch (e) {
             // ignore
         }
