@@ -31,6 +31,24 @@ async function dynamicImport(specifier: string): Promise<any> {
 
 export async function launchOmniscientBrowser(env: any): Promise<AutomationBrowser> {
     if (env?.BROWSER) {
+        // Stub fs.promises.mkdtemp to bypass unenv "not implemented yet" error during _connectOverCDPInternal
+        try {
+            // @ts-ignore
+            const fs = await import('node:fs');
+            // @ts-ignore
+            const fsPromises = await import('node:fs/promises');
+            const noopMkdtemp = async () => '/tmp/artifacts';
+            
+            if (fs.promises) {
+                (fs.promises as any).mkdtemp = noopMkdtemp;
+            }
+            if (fsPromises) {
+                (fsPromises as any).mkdtemp = noopMkdtemp;
+            }
+        } catch (e) {
+            // ignore
+        }
+
         const { launch } = await dynamicImport(CLOUDFLARE_PLAYWRIGHT_MODULE);
         return launch(env.BROWSER);
     }
