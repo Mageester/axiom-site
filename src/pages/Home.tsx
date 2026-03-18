@@ -160,7 +160,7 @@ const Home: React.FC = () => {
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book a Discovery Call
+                    Book Consultation
                   </Link>
                   <Link
                     to="/method"
@@ -374,12 +374,12 @@ const Home: React.FC = () => {
                   Start Your Project
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Book a brief discovery call to discuss your business and current website goals. We will review your context and recommend a structured path forward.
+                  Book a brief consultation to discuss your business and current website goals. We will review your context and recommend a structured path forward.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">
                   <Link to="/apply" className="btn-primary btn-attention btn-lg whitespace-nowrap">
-                    Book a Discovery Call
+                    Book Consultation
                   </Link>
                 </div>
 

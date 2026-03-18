@@ -248,7 +248,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
             <a href="/apply" className="btn-primary btn-attention btn-sm px-4 py-2 text-sm">
-              BOOK A DISCOVERY CALL
+              BOOK CONSULTATION
             </a>
           </div>
 
@@ -320,7 +320,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </nav>
 
         <a href="/apply" onClick={() => setIsMobileMenuOpen(false)} className="btn-primary btn-attention btn-lg mt-5 w-full">
-          BOOK A DISCOVERY CALL
+          BOOK CONSULTATION
         </a>
       </div>
 

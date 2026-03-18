@@ -226,14 +226,14 @@ const ContactPage: React.FC = () => {
         <>
             <SEO
                 title="Book Consultation | Axiom"
-                description="Book a discovery consultation to assess your project priorities, needed scope, and how Axiom can help your business."
+                description="Book a consultation to assess your project priorities, needed scope, and how Axiom can help your business."
             />
             <Layout>
                 <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
                     <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
                         <div className="mt-4 overflow-hidden">
                             <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                                Book a Discovery Consultation
+                                Book Consultation
                             </h1>
                         </div>
                         <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">

@@ -371,7 +371,7 @@ const Infrastructure: React.FC = () => {
     <>
       <SEO
         title="Method | Axiom"
-        description="Premium web systems for high-trust service firms. A clear process from a discovery call to a finalized, high-performing website."
+        description="Premium web systems for high-trust service firms. A clear process from consultation to a finalized, high-performing website."
       />
 
       <Layout>
@@ -627,7 +627,7 @@ const Infrastructure: React.FC = () => {
             >
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Final Step</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Book your discovery consultation.
+                Book your consultation.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
                 We will review your requirements and recommend the package that best fits your business.

@@ -274,11 +274,11 @@ const About: React.FC = () => {
                 If your business is serious, your website should be too.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Book a discovery call and we will define the right scope for your business.
+                Book a consultation and we will define the right scope for your business.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Book a Discovery Call
+                  Book Consultation
                 </Link>
                 <Link
                   to="/method"
