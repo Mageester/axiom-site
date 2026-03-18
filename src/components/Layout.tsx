@@ -247,9 +247,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
-            <a href="/apply" className="btn-primary btn-attention btn-sm px-4 py-2 text-sm">
+            <NavLink to="/apply" className="btn-primary btn-attention btn-sm px-4 py-2 text-sm">
               BOOK FREE CONSULTATION
-            </a>
+            </NavLink>
           </div>
 
           <div className="flex flex-1 basis-[44%] items-center justify-end md:hidden">
@@ -319,9 +319,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           ))}
         </nav>
 
-        <a href="/apply" onClick={() => setIsMobileMenuOpen(false)} className="btn-primary btn-attention btn-lg mt-5 w-full">
+        <NavLink to="/apply" onClick={() => setIsMobileMenuOpen(false)} className="btn-primary btn-attention btn-lg mt-5 w-full">
           BOOK FREE CONSULTATION
-        </a>
+        </NavLink>
       </div>
 
       <div className="relative z-10 pt-24 md:pt-28 noise-overlay">{children}</div>

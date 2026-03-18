@@ -301,7 +301,7 @@ const Manifesto: React.FC = () => {
                         Stop losing six figures a year to a website that wasn't built for peak season. See if Axiom is the right fit for your operation.
                     </p>
                     <Link
-                        to="/contact"
+                        to="/apply"
                         className="btn-primary btn-lg"
                     >
                         Plug the Leak with Axiom Infrastructure
@@ -316,7 +316,7 @@ const Manifesto: React.FC = () => {
             <div className={`md:hidden fixed z-[45] bottom-4 left-0 w-full px-4 py-2 pointer-events-none transition-all duration-300 ease-in-out ${showSticky ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 <div className="pointer-events-auto">
                     <Link
-                        to="/contact"
+                        to="/apply"
                         className="btn-primary btn-lg magnetic-primary w-full"
                     >
                         Plug the Leak

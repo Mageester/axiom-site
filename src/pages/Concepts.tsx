@@ -218,7 +218,7 @@ const ConceptsPage: React.FC = () => {
           <p className="lead text-center mx-auto">
             Every build is engineered from scratch for your specific market. No templates. No shared layouts. No recycled designs from another contractor down the road.
           </p>
-          <Link to="/contact" className="btn-primary">
+          <Link to="/apply" className="btn-primary">
             Book Strategy Call
           </Link>
         </div>

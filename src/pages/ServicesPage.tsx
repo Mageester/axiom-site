@@ -140,7 +140,7 @@ const ServicesPage: React.FC = () => {
                         <p className="font-axiomSans text-[12px] text-axiom-text-mute">{tier.qualifier}</p>
 
                         <Link
-                            to={`/contact?package=${tier.packageParam}`}
+                            to={`/apply?package=${tier.packageParam}`}
                             className="btn-primary btn-md magnetic-primary w-full"
                         >
                             {tier.cta}
@@ -283,7 +283,7 @@ const ServicesPage: React.FC = () => {
 
                     <div className="text-center mt-8">
                         <Link
-                            to="/contact"
+                            to="/apply"
                             className="btn-primary"
                         >
                             Book Strategy Call

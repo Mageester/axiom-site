@@ -139,7 +139,7 @@ const PricingPage: React.FC = () => {
               <p className="font-axiomSans text-[12px] text-axiom-text-mute/90 border-t border-axiom-border pt-3">{tier.boundary}</p>
 
               <Link
-                to={`/contact?package=${tier.packageParam}`}
+                to={`/apply?package=${tier.packageParam}`}
                 className="btn-primary btn-md magnetic-primary w-full"
               >
                 {tier.cta}
@@ -167,7 +167,7 @@ const PricingPage: React.FC = () => {
           <p className="text-[15px] text-axiom-text-mute max-w-[760px] mx-auto leading-relaxed">
             We scope tightly, instrument everything, and optimize until the conversion system performs. This is infrastructure, not a brochure website.
           </p>
-          <Link to="/contact" className="btn-primary mt-6">
+          <Link to="/apply" className="btn-primary mt-6">
             Apply for Strategy Call
           </Link>
         </div>
