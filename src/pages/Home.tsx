@@ -32,13 +32,11 @@ const selectedWork = selectedWorkEntries.map((entry) => {
   return {
     id: entry.slug,
     title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-    scope: entry.deliverables.slice(0, 2).join(' + '),
-    summary: entry.summary,
+    summary: entry.summary.split('. ')[0].replace(/\.$/, '') + '.',
     image: proofImage.source,
     demoUrl: entry.demoUrl,
     imageAlt: proofImage.alt,
     imagePosition: proofImage.position,
-    industry: entry.niche,
     projectType: proofTypeLabel[entry.label] ?? entry.label,
   };
 });
@@ -224,17 +222,11 @@ const Home: React.FC = () => {
                     </div>
 
                     <div className="flex flex-1 flex-col p-5 sm:p-6">
-                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">
-                        {item.industry}
-                      </p>
-                      <h3 className="mt-3 text-[1.35rem] font-semibold tracking-tight text-white sm:text-[1.55rem]">
+                      <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-[1.55rem]">
                         {item.title}
                       </h3>
                       <p className="mt-3 text-sm leading-relaxed text-slate-300/95">
                         {item.summary}
-                      </p>
-                      <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-slate-400">
-                        {item.scope}
                       </p>
 
                       {item.demoUrl ? (

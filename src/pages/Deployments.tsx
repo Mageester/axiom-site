@@ -15,11 +15,6 @@ interface WorkEntry {
   projectType: string;
   statusLabel: string;
   isLiveDemo: boolean;
-  audience: string;
-  businessContext: string;
-  coreProblem: string;
-  demonstrates: string;
-  scope: string;
   summary: string;
   image: ResponsiveSource;
   demoUrl?: string;
@@ -60,11 +55,6 @@ const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
     projectType: proofTypeLabel[entry.label] ?? entry.label,
     statusLabel: entry.label,
     isLiveDemo,
-    audience: entry.businessType,
-    businessContext: `${entry.niche} - ${entry.location}`,
-    coreProblem: entry.primaryProblem || entry.problems[0] || 'Unclear trust and conversion structure',
-    demonstrates: entry.demonstrates || entry.built[0] || 'Clearer page hierarchy and conversion pathways',
-    scope: entry.deliverables.slice(0, 2).join(' + '),
     summary: oneSentence(entry.summary),
     image: proofImage.source,
     demoUrl: entry.demoUrl,
@@ -110,9 +100,6 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
             <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
               {work.projectType}
             </span>
-            <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
-              {work.audience}
-            </span>
           </div>
         </a>
       ) : (
@@ -131,32 +118,14 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
             <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
               {work.projectType}
             </span>
-            <span className="inline-block rounded-full border border-white/10 bg-black/35 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-white/70 backdrop-blur-md">
-              {work.audience}
-            </span>
           </div>
         </div>
       )}
 
       <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-4 sm:p-6">
         <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-2xl">{work.title}</h3>
-        <p className="mt-2 text-[0.84rem] leading-relaxed text-slate-300/95 sm:text-sm">{work.summary}</p>
-        <dl className="mt-3 grid gap-2.5 text-[10.5px] text-slate-200/90 sm:mt-4 sm:gap-3 sm:text-[11px] sm:grid-cols-3">
-          <div>
-            <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Core Problem</dt>
-            <dd className="mt-1 leading-relaxed">{work.coreProblem}</dd>
-          </div>
-          <div>
-            <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Demonstrates</dt>
-            <dd className="mt-1 leading-relaxed">{work.demonstrates}</dd>
-          </div>
-          <div>
-            <dt className="font-axiomMono uppercase tracking-[0.12em] text-slate-400">Scope Snapshot</dt>
-            <dd className="mt-1 leading-relaxed">{work.scope}</dd>
-          </div>
-        </dl>
-        <p className="mt-3 font-axiomMono text-[10px] uppercase tracking-[0.12em] text-slate-500 sm:mt-4">{work.businessContext}</p>
-        <div className="mt-auto flex flex-wrap items-center gap-3 pt-3.5 sm:gap-4 sm:pt-4">
+        <p className="mt-3 max-w-[34ch] text-[0.92rem] leading-relaxed text-slate-300/95 sm:text-[0.98rem]">{work.summary}</p>
+        <div className="mt-auto flex flex-wrap items-center gap-3 pt-5 sm:gap-4 sm:pt-6">
           {work.isLiveDemo && work.demoUrl ? (
             <a
               href={work.demoUrl}
