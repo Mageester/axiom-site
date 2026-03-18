@@ -8,5 +8,5 @@ binding = "BROWSER"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "axiom-db"
-database_id = "834c7403-1628-4015-8a2b-8a8b136868af"
+database_name = "axiom_intel"
+database_id = "c1918427-9f66-41ef-87cf-436e36f2400b"
