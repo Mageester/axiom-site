@@ -91,7 +91,7 @@ const WorkCaseStudyPage: React.FC = () => {
                     </span>
                   ) : null}
                   <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
-                    Book Consultation
+                            Book Free Consultation
                   </Link>
                   <Link
                     to="/works"
@@ -185,7 +185,7 @@ const WorkCaseStudyPage: React.FC = () => {
               </p>
               <div className="mt-7 flex items-center justify-center">
                 <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
-                  Book Consultation
+                                            Book Free Consultation
                 </Link>
               </div>
             </div>

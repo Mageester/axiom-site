@@ -389,7 +389,7 @@ const Infrastructure: React.FC = () => {
                 </p>
                 <div className="mt-8">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book Consultation
+                            Book Free Consultation
                   </Link>
                 </div>
               </article>
@@ -634,7 +634,7 @@ const Infrastructure: React.FC = () => {
               </p>
               <div className="mt-8 flex justify-center">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Book Consultation
+                                Book Free Consultation
                 </Link>
               </div>
             </div>

@@ -278,7 +278,7 @@ const About: React.FC = () => {
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Book Consultation
+                                Book Free Consultation
                 </Link>
                 <Link
                   to="/method"

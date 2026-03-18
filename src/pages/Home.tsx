@@ -160,7 +160,7 @@ const Home: React.FC = () => {
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book Consultation
+                            Book Free Consultation
                   </Link>
                   <Link
                     to="/method"
@@ -379,7 +379,7 @@ const Home: React.FC = () => {
 
                 <div className="mt-8 flex items-center justify-center">
                   <Link to="/apply" className="btn-primary btn-attention btn-lg whitespace-nowrap">
-                    Book Consultation
+                                Book Free Consultation
                   </Link>
                 </div>
 
