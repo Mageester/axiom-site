@@ -12,10 +12,10 @@ import { getWorkProofImage } from '../lib/workProofImages';
 interface WorkEntry {
   id: string;
   title: string;
-  projectType: string;
+  businessType: string;
   statusLabel: string;
   isLiveDemo: boolean;
-  summary: string;
+  improvement: string;
   image: ResponsiveSource;
   demoUrl?: string;
   imageAlt?: string;
@@ -28,18 +28,18 @@ const worksDisplayOrder = [
   'concept-roofing-conversion-site',
 ] as const;
 
-const proofTypeLabel: Record<string, string> = {
+const statusDisplayLabel: Record<string, string> = {
   'Sample Build': 'Sample Build',
-  'Concept Build': 'Concept Build',
-  'Demonstration Site': 'Demonstration Site',
-  'Live Demo': 'Live Demo',
+  'Concept Build': 'Demo',
+  'Demonstration Site': 'Demo',
+  'Live Demo': 'Live Deployment',
   'In Progress': 'In Progress',
 };
 
-const oneSentence = (value: string) => {
-  const parts = value.split('. ');
-  if (parts.length <= 1) return value;
-  return `${parts[0].replace(/\.$/, '')}.`;
+const improvementCopyBySlug: Record<string, string> = {
+  'demonstration-restaurant-reservation-site': 'Built to create a clearer, more modern, and more trustworthy first impression for diners.',
+  'concept-landscaping-authority-site': 'Built to create a clearer, more modern, and more trustworthy first impression for homeowners.',
+  'concept-roofing-conversion-site': 'Built to create a clearer, more modern, and more trustworthy first impression for roofing inquiries.',
 };
 
 const orderedCaseStudies = worksDisplayOrder
@@ -52,10 +52,10 @@ const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
   return {
     id: entry.slug,
     title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-    projectType: proofTypeLabel[entry.label] ?? entry.label,
-    statusLabel: entry.label,
+    businessType: entry.businessType.replace(/\s+Business$/, ''),
+    statusLabel: statusDisplayLabel[entry.label] ?? entry.label,
     isLiveDemo,
-    summary: oneSentence(entry.summary),
+    improvement: improvementCopyBySlug[entry.slug] ?? 'Built to create a clearer, more modern, and more trustworthy first impression.',
     image: proofImage.source,
     demoUrl: entry.demoUrl,
     imageAlt: proofImage.alt,
@@ -84,7 +84,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
           rel="noopener noreferrer"
           onClick={(event) => event.stopPropagation()}
           className="relative block h-[42%] overflow-hidden sm:h-[45%]"
-          aria-label={`View live demo for ${work.title}`}
+          aria-label={`Open live site for ${work.title}`}
         >
           <ResponsiveImage
             source={work.image}
@@ -98,7 +98,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
           <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
           <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
             <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
-              {work.projectType}
+              Status: {work.statusLabel}
             </span>
           </div>
         </a>
@@ -116,15 +116,17 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
           <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
           <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
             <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
-              {work.projectType}
+              Status: {work.statusLabel}
             </span>
           </div>
         </div>
       )}
 
       <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-4 sm:p-6">
-        <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-2xl">{work.title}</h3>
-        <p className="mt-3 max-w-[34ch] text-[0.92rem] leading-relaxed text-slate-300/95 sm:text-[0.98rem]">{work.summary}</p>
+        <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">Business Type</p>
+        <p className="mt-1 text-sm font-medium text-slate-200">{work.businessType}</p>
+        <h3 className="mt-4 text-[1.35rem] font-semibold tracking-tight text-white sm:text-2xl">{work.title}</h3>
+        <p className="mt-3 max-w-[34ch] text-[0.92rem] leading-relaxed text-slate-300/95 sm:text-[0.98rem]">{work.improvement}</p>
         <div className="mt-auto flex flex-wrap items-center gap-3 pt-5 sm:gap-4 sm:pt-6">
           {work.isLiveDemo && work.demoUrl ? (
             <a
@@ -134,7 +136,7 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
               onClick={(event) => event.stopPropagation()}
               className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
             >
-              View Live Demo
+              Open Live Site
             </a>
           ) : work.statusLabel === 'In Progress' ? (
             <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
@@ -179,7 +181,7 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom"
-        description="View our featured work, sample builds, and demonstration sites, complete with business context and design strategy."
+        description="View our featured work, sample builds, demos, and live deployments with clear labeling and business context."
       />
       <Layout>
         <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0" variant="feature">
@@ -188,7 +190,7 @@ const Deployments: React.FC = () => {
               <h1 data-startup-heading className="text-left">Work & Examples</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-              A mix of live client websites and demonstration examples. We build concept sites to show the exact standards, layouts, and speed we deliver for specific local industries.
+              Sample builds, demos, and live deployments from the kinds of websites Axiom builds for businesses that need a stronger online presence.
             </p>
             <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3 md:mt-6 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
@@ -202,7 +204,7 @@ const Deployments: React.FC = () => {
               </Link>
             </div>
             <p data-startup-meta className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-400">
-              We label each item clearly. 'Live Demo' means a real deployed business. 'Demonstration Site' or 'Concept Build' are model layouts used to show our baseline standards for that industry.
+              Labels are explicit so you always know what is a Sample Build, a Demo, or a Live Deployment.
             </p>
           </div>
         </RevealBlock>
@@ -223,9 +225,9 @@ const Deployments: React.FC = () => {
           <div className="relative z-10">
             <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of execution?</h2>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-              <a href="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                            Book Free Consultation
-              </a>
+              <Link to="/apply#project-application-form" className="btn-primary btn-lg whitespace-nowrap">
+                Book Free Consultation
+              </Link>
               <Link
                 to="/method"
                 className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-axiom-text-main hover:underline"
