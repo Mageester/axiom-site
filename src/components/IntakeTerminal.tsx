@@ -169,22 +169,22 @@ const IntakeTerminal: React.FC = () => {
           style={{ transitionDelay: '200ms' }}
         >
           <a
-            href="mailto:aidan@getaxiom.ca"
+            href="mailto:contact@getaxiom.ca"
             onClick={() => setActiveAction('email')}
             className={`${baseCardClass} block ${activeAction === 'email' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
             <p className="font-semibold text-[#F2F4F7] text-lg">Email Directly</p>
-            <p className="mt-2 text-sm text-slate-300">Reach us instantly at aidan@getaxiom.ca for direct communication.</p>
+            <p className="mt-2 text-sm text-slate-300">Reach us instantly at contact@getaxiom.ca for direct communication.</p>
           </a>
         </div>
       </div>
 
       <div className="mt-8 flex flex-col gap-2 text-sm md:flex-row md:items-center md:gap-6">
         <a
-          href="mailto:aidan@getaxiom.ca"
+          href="mailto:contact@getaxiom.ca"
           className="w-fit text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]"
         >
-          aidan@getaxiom.ca
+          contact@getaxiom.ca
         </a>
         <a
           href="tel:+12267531833"
@@ -261,7 +261,7 @@ const IntakeTerminal: React.FC = () => {
 
               {submitState === 'error' && (
                 <p className="md:col-span-2 text-sm text-red-300">
-                  Transmission failed. Please retry or email aidan@getaxiom.ca and riley@getaxiom.ca.
+                  Transmission failed. Please retry or email contact@getaxiom.ca.
                 </p>
               )}
 

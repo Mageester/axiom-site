@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const contactLinkClass =
@@ -38,9 +38,8 @@ const Footer: React.FC = () => {
 
         <nav className="space-y-3">
           <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Contact</p>
-          <a href="mailto:aidan@getaxiom.ca,riley@getaxiom.ca" className={contactLinkClass}>
-            <span className="block">aidan@getaxiom.ca</span>
-            <span className="block">riley@getaxiom.ca</span>
+          <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
+            <span className="block">contact@getaxiom.ca</span>
           </a>
         </nav>
       </div>
