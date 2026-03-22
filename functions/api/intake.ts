@@ -23,7 +23,7 @@ const DEFAULT_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173'
 ];
 
-const DEFAULT_INTERNAL_RECIPIENTS = ['aidan@getaxiom.ca', 'riley@getaxiom.ca'];
+const DEFAULT_INTERNAL_RECIPIENTS = ['contact@getaxiom.ca'];
 const DEFAULT_FROM_EMAIL = 'Axiom Intake <engine@getaxiom.ca>';
 const DEFAULT_CONFIRMATION_FROM_EMAIL = 'Axiom Infrastructure <engine@getaxiom.ca>';
 
@@ -382,7 +382,7 @@ function buildConfirmationEmail(params: { name: string }) {
             <h1 style="font-size:22px;line-height:1.3;margin:0 0 16px 0;color:#0d1323;">Transmission received</h1>
             <p style="margin:0 0 14px 0;line-height:1.6;">Hi ${escapeHtml(params.name)},</p>
             <p style="margin:0 0 14px 0;line-height:1.6;">Your request has been received by Axiom Infrastructure.</p>
-            <p style="margin:0 0 20px 0;line-height:1.6;">A partner will review your submission and reply from <strong>aidan@getaxiom.ca</strong> within one business day.</p>
+            <p style="margin:0 0 20px 0;line-height:1.6;">A partner will review your submission and reply from <strong>contact@getaxiom.ca</strong> within one business day.</p>
             <p style="margin:0;color:#6b7280;font-size:12px;">Axiom Infrastructure</p>
         </div>
     `;
@@ -392,7 +392,7 @@ function buildConfirmationEmail(params: { name: string }) {
         '',
         `Hi ${params.name},`,
         'Your request has been received by Axiom Infrastructure.',
-        'A partner will review your submission and reply from aidan@getaxiom.ca within one business day.',
+        'A partner will review your submission and reply from contact@getaxiom.ca within one business day.',
         '',
         'Axiom Infrastructure'
     ].join('\n');
@@ -471,7 +471,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         if (!resendApiKey) {
             return jsonResponse(request, env, {
                 ok: false,
-                error: 'Intake is temporarily unavailable. Please email aidan@getaxiom.ca.'
+                error: 'Intake is temporarily unavailable. Please email contact@getaxiom.ca.'
             }, 503);
         }
 
@@ -577,7 +577,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             sendResendEmail(resendApiKey, {
                 from: confirmationFrom,
                 to: [email],
-                reply_to: 'aidan@getaxiom.ca',
+                reply_to: 'contact@getaxiom.ca',
                 subject: 'Axiom received your request',
                 html: confirmationEmail.html,
                 text: confirmationEmail.text
@@ -598,7 +598,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             }
             return jsonResponse(request, env, {
                 ok: false,
-                error: 'Submission could not be delivered. Please try again or email aidan@getaxiom.ca.'
+                error: 'Submission could not be delivered. Please try again or email contact@getaxiom.ca.'
             }, 502);
         }
 

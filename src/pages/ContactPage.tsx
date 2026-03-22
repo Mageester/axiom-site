@@ -76,7 +76,7 @@ const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_activ
     }
 ];
 
-const FALLBACK_SUBMIT_ERROR = 'Submission failed. Please retry or email aidan@getaxiom.ca and riley@getaxiom.ca.';
+const FALLBACK_SUBMIT_ERROR = 'Submission failed. Please retry or email contact@getaxiom.ca.';
 const FIELD_LABEL_CLASS = 'text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
 const FIELD_INPUT_CLASS =
     'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-sm text-[#F2F4F7] outline-none transition-all placeholder:text-slate-500 focus:border-[#B05D41]/60 focus:ring-2 focus:ring-[#B05D41]/20';
@@ -284,11 +284,8 @@ const GeneralContactForm: React.FC = () => {
                     <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                         <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Direct Contact</p>
                         <div className="mt-3 space-y-2 text-sm text-slate-300">
-                            <a href="mailto:aidan@getaxiom.ca" className="block text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                aidan@getaxiom.ca
-                            </a>
-                            <a href="mailto:riley@getaxiom.ca" className="block text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                riley@getaxiom.ca
+                            <a href="mailto:contact@getaxiom.ca" className="block text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                contact@getaxiom.ca
                             </a>
                             <a href="tel:+12267531833" className="block text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                 226-753-1833
