@@ -6,7 +6,8 @@ type PageGuardOptions = {
 
 export function isOpsHost(request: Request) {
     const host = request.headers.get('Host') || '';
-    return /^ops\./i.test(host) || host.toLowerCase() === 'ops.getaxiom.ca';
+    const normalizedHost = host.toLowerCase();
+    return /^ops\./i.test(host) || /^operations\./i.test(host) || normalizedHost === 'ops.getaxiom.ca' || normalizedHost === 'operations.getaxiom.ca';
 }
 
 export async function requireProtectedPage(context: any, options: PageGuardOptions = {}) {

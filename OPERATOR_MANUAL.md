@@ -5,7 +5,7 @@
 This repo now contains both:
 
 - The public Axiom website
-- The protected Omniscient internal lead-finding system used through `ops.getaxiom.ca`
+- The protected Omniscient internal lead-finding system used through `operations.getaxiom.ca`
 
 The internal app is mounted inside the same React build and backed by Cloudflare Pages Functions + D1.
 
@@ -28,7 +28,7 @@ The internal app is mounted inside the same React build and backed by Cloudflare
 
 There are now three layers of protection:
 
-1. Cloudflare Access on `ops.getaxiom.ca`
+1. Cloudflare Access on `operations.getaxiom.ca`
 2. Session-protected Pages Functions APIs
 3. Session-checked protected internal page routes
 
@@ -160,7 +160,7 @@ Protected:
 - Push to the Git-connected branch to trigger deployment
 - Do not add a repo-level `wrangler.jsonc` unless you intentionally want the repo to override the existing Pages project config
 - Direct hits are handled in-repo through `public/_redirects` plus protected Pages Functions, so `/dashboard`, `/vault`, `/lead/:id`, and `/admin/login` do not depend on a hidden dashboard SPA fallback toggle
-- Keep `ops.getaxiom.ca` attached to the Pages project and behind Cloudflare Access
+- Keep `operations.getaxiom.ca` attached to the Pages project and behind Cloudflare Access
 - Ensure the Pages project has:
   - Functions enabled
   - D1 binding `DB`
