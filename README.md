@@ -3,7 +3,7 @@
 This repository now serves two jobs from one Cloudflare deployment:
 
 - Public Axiom marketing site (`src/`)
-- Protected internal Omniscient ops app for `operations.getaxiom.ca`
+- Protected internal Omniscient ops app for `ops.getaxiom.ca`
 
 The internal app is not a static mock. It runs through Cloudflare Pages Functions with D1-backed auth/session state and protected Omniscient APIs for scraping, analytics, triage, vault access, exports, and runtime status.
 
@@ -122,7 +122,7 @@ This repo is intended to deploy through the existing Cloudflare Pages Git integr
 1. Push to the connected GitHub branch
 2. Cloudflare Pages rebuilds `dist`
 3. Pages Functions deploy alongside the static bundle
-4. `operations.getaxiom.ca` stays behind Cloudflare Access
+4. `ops.getaxiom.ca` stays behind Cloudflare Access
 
 Build settings:
 
