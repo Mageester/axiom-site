@@ -184,10 +184,10 @@ const About: React.FC = () => {
                 <div className="mt-5">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
                   <a
-                    href="mailto:contact@getaxiom.ca"
+                    href="mailto:riley@getaxiom.ca"
                     className="mt-2 inline-flex text-sm text-[#F2F4F7] underline decoration-white/35 underline-offset-3 transition-colors hover:text-white"
                   >
-                    contact@getaxiom.ca
+                    riley@getaxiom.ca
                   </a>
                 </div>
               </article>
@@ -208,10 +208,10 @@ const About: React.FC = () => {
                 <div className="mt-5">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
                   <a
-                    href="mailto:contact@getaxiom.ca"
+                    href="mailto:aidan@getaxiom.ca"
                     className="mt-2 inline-flex text-sm text-[#F2F4F7] underline decoration-white/35 underline-offset-3 transition-colors hover:text-white"
                   >
-                    contact@getaxiom.ca
+                    aidan@getaxiom.ca
                   </a>
                 </div>
               </article>

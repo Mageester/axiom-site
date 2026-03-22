@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { SEO } from '../components/SEO';
 
 type SubmitState = '' | 'loading' | 'success' | 'error';
@@ -64,10 +64,10 @@ const AuditPage: React.FC = () => {
             }
 
             setStatus('error');
-            setMsg(result?.error || 'Submission failed. Please reach out to contact@getaxiom.ca directly.');
+            setMsg(result?.error || 'Submission failed. Please reach out to aidan@getaxiom.ca and riley@getaxiom.ca directly.');
         } catch {
             setStatus('error');
-            setMsg('Submission failed. Please reach out to contact@getaxiom.ca directly.');
+            setMsg('Submission failed. Please reach out to aidan@getaxiom.ca and riley@getaxiom.ca directly.');
         } finally {
             if (timeoutId !== null) window.clearTimeout(timeoutId);
         }
@@ -144,3 +144,5 @@ const AuditPage: React.FC = () => {
 };
 
 export default AuditPage;
+
+
