@@ -42,44 +42,44 @@ const supportingProofs = selectedWork.slice(1);
 
 const proofSignals = [
   {
-    title: 'One proof story up front',
+    title: 'Lead with real proof',
     detail:
-      'The homepage now leads with a flagship example so visitors understand the quality bar before reading the rest of the page.',
+      'Visitors see one complete example first, so they can quickly understand the standard of work before anything else.',
   },
   {
-    title: 'Clarity before ornament',
+    title: 'Clarity over noise',
     detail:
-      'Copy and layout focus on what the business does, what changed, and why the structure helps the right buyer decide faster.',
+      'Every section focuses on what changed, why it matters, and what a serious buyer needs to know to move forward.',
   },
   {
-    title: 'Designed for mobile first',
+    title: 'Built for mobile behavior',
     detail:
-      'The first screen, proof blocks, and calls to action are organized so a phone visitor can scan and act without detours.',
+      'The page is structured for fast scanning on a phone, with clean paths to trust, proof, and the next action.',
   },
 ];
 
 const processSteps = [
   {
-    title: 'Learn the business',
+    title: 'Strategy alignment',
     detail:
-      'We define the real goal, the right buyer, and the one page path that should do the heaviest lifting.',
+      'We align on goals, audience, and the exact journey the site needs to support.',
   },
   {
-    title: 'Shape the proof',
+    title: 'Proof architecture',
     detail:
-      'We decide what to show, what to cut, and how the story should move from credibility to action.',
+      'We select the right evidence, remove distractions, and structure the narrative to earn confidence quickly.',
   },
   {
-    title: 'Build, test, launch',
+    title: 'Production delivery',
     detail:
-      'We ship a lean site, verify the mobile flow, and leave the handoff clear enough for the client to trust the result.',
+      'We ship a focused site, validate performance and mobile flow, and deliver a clean launch handoff.',
   },
 ];
 
 const fitSignals = [
-  'Local service businesses that need the site to create trust quickly',
-  'Teams that want one clear next step instead of a page full of competing actions',
-  'Owners who care about mobile scanning, load speed, and high-intent conversion',
+  'Service businesses that need trust to be established in the first few seconds',
+  'Teams that want one clear next step, not five competing calls to action',
+  'Owners who value mobile performance, clear positioning, and qualified inquiries',
 ];
 
 const Home: React.FC = () => {
@@ -87,7 +87,7 @@ const Home: React.FC = () => {
     <>
       <SEO
         title="Axiom | Premium Websites for Growth-Focused Businesses"
-        description="Axiom designs and builds premium websites for businesses that need stronger trust, clearer positioning, and better conversion structure."
+        description="Axiom creates premium websites for service businesses that need stronger positioning, faster trust, and higher-quality inbound demand."
         canonicalPath="/"
       />
 
@@ -100,11 +100,11 @@ const Home: React.FC = () => {
                   data-startup-heading
                   className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]"
                 >
-                  Premium websites that help serious service businesses earn trust fast.
+                  Premium websites that help serious service businesses win trust early.
                 </h1>
               </div>
               <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
-                We design lean, custom sites around proof, clarity, and mobile performance so the right visitors understand what you do, why you are credible, and what to do next.
+                We create focused, custom websites built around proof, clarity, and mobile performance, so the right buyers understand your value and take the next step with confidence.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link to="/apply#project-application-form" className="btn-primary btn-lg whitespace-nowrap">
@@ -136,7 +136,7 @@ const Home: React.FC = () => {
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Flagship proof</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  One immersive example that shows the level of thinking behind the work.
+                  A flagship case study that shows how strategy translates into results.
                 </h2>
               </div>
                 <Link
@@ -216,7 +216,7 @@ const Home: React.FC = () => {
                     >
                       <div>
                         <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Live demo</p>
-                        <p className="mt-2 text-sm leading-relaxed text-slate-300">Open the strongest live example and inspect the experience directly.</p>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-300">Open a live example to review the execution in detail.</p>
                       </div>
                       <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e]">Open</span>
                     </a>
@@ -231,7 +231,7 @@ const Home: React.FC = () => {
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">More proof</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Supporting examples that show the range of the work.
+                  Additional case studies across different service categories.
                 </h2>
               </div>
               <Link
@@ -311,7 +311,7 @@ const Home: React.FC = () => {
               <div className="lg:col-span-5">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">How we work</p>
                 <h2 className="mt-3 max-w-[18ch] text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                  A simple process that keeps the project moving.
+                  A tight process built for speed and control.
                 </h2>
               </div>
 
@@ -328,9 +328,9 @@ const Home: React.FC = () => {
               <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">How the project is run</p>
                 <ul className="mt-3 space-y-2">
-                  <li className="text-sm leading-relaxed text-slate-300">Founder-led planning and review</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Requirements agreed before build begins</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Every key page checked before launch</li>
+                  <li className="text-sm leading-relaxed text-slate-300">Founder-led strategy, direction, and review</li>
+                  <li className="text-sm leading-relaxed text-slate-300">Scope and requirements locked before production</li>
+                  <li className="text-sm leading-relaxed text-slate-300">Critical pages QA&apos;d before launch</li>
                 </ul>
               </article>
               <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
@@ -349,10 +349,10 @@ const Home: React.FC = () => {
           <RevealBlock as="section" className="pt-20 md:pt-24" variant="feature">
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                If the website has to do the heavy lifting, let&apos;s build it that way.
+                If your website is expected to carry growth, it should be engineered for it.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Start a project application and we&apos;ll review the scope, the right page path, and the best proof structure for your business.
+                Submit an application and we&apos;ll review your scope, conversion path, and proof strategy to determine fit.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link to="/apply#project-application-form" className="btn-primary btn-lg whitespace-nowrap">
