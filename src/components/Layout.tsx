@@ -39,41 +39,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const root = layoutRef.current;
-    if (!root) return;
-
-    const targets = Array.from(root.querySelectorAll<HTMLElement>('main > section, main > article'))
-      .filter((element, index) => index > 0 && !element.hasAttribute('data-hero-root') && element.dataset.reveal !== 'off');
-
-    if (targets.length === 0) return;
-
-    targets.forEach((element, index) => {
-      element.classList.add('reveal-on-scroll');
-      element.style.setProperty('--reveal-order', String(index % 4));
-    });
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      targets.forEach((element) => element.classList.add('is-visible'));
-      return () => undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
-    );
-
-    targets.forEach((element) => observer.observe(element));
-
-    return () => observer.disconnect();
-  }, [location.pathname]);
-
-  useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname, location.search]);
 
@@ -148,46 +113,33 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       const nav = navRef.current;
       const logo = logoTargetRef.current;
       const navLinks = gsap.utils.toArray<HTMLElement>('[data-startup-link]');
-      const heroContent = gsap.utils
+      const heroContent = gsap
+        .utils
         .toArray<HTMLElement>(
           '[data-startup-heading], [data-startup-copy], [data-startup-actions], [data-startup-meta]'
         )
-        .filter((element) => !element.closest('[aria-hidden="true"]'));
-      const backgrounds = gsap.utils.toArray<HTMLElement>('[data-startup-bg]');
-      const cards = gsap.utils
-        .toArray<HTMLElement>('[data-glass-card], .axiom-bento, .axiom-bento-card, .machined-card')
         .filter((element) => !element.closest('[aria-hidden="true"]'));
 
       const timeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       if (nav) {
         gsap.set(nav, { autoAlpha: 0, y: -18 });
-        timeline.to(nav, { autoAlpha: 1, y: 0, duration: 0.5 }, 0);
+        timeline.to(nav, { autoAlpha: 1, y: 0, duration: 0.38 }, 0);
       }
 
       if (logo) {
         gsap.set(logo, { autoAlpha: 0, x: -28, transformOrigin: 'left center' });
-        timeline.to(logo, { autoAlpha: 1, x: 0, duration: 0.72, ease: 'expo.out' }, 0.08);
+        timeline.to(logo, { autoAlpha: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0.04);
       }
 
       if (navLinks.length) {
         gsap.set(navLinks, { autoAlpha: 0, y: -10 });
-        timeline.to(navLinks, { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.04 }, 0.18);
+        timeline.to(navLinks, { autoAlpha: 1, y: 0, duration: 0.28, stagger: 0.03 }, 0.12);
       }
 
       if (heroContent.length) {
         gsap.set(heroContent, { autoAlpha: 0, y: 18 });
-        timeline.to(heroContent, { autoAlpha: 1, y: 0, duration: 0.62, stagger: 0.08 }, 0.22);
-      }
-
-      if (backgrounds.length) {
-        gsap.set(backgrounds, { autoAlpha: 0 });
-        timeline.to(backgrounds, { autoAlpha: 0.07, duration: 0.8, stagger: 0.08, ease: 'power1.out' }, 0.16);
-      }
-
-      if (cards.length) {
-        gsap.set(cards, { autoAlpha: 0, y: 22 });
-        timeline.to(cards, { autoAlpha: 1, y: 0, duration: 0.56, stagger: 0.05 }, 0.36);
+        timeline.to(heroContent, { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.03 }, 0.18);
       }
     }, layoutRef);
 
@@ -201,12 +153,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div ref={layoutRef} className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
-      <Preloader targetRef={logoTargetRef} />
+      <Preloader />
 
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div data-startup-bg className="fixed top-[-20%] left-[-10%] h-[50vw] w-[50vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
-        <div data-startup-bg className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
-        <div data-startup-bg className="engineering-grid animate-grid-drift" />
+        <div data-startup-bg className="fixed top-[-20%] left-[-10%] h-[50vw] w-[50vw] rounded-full bg-[#B05D41] opacity-[0.1] blur-[110px]" />
+        <div data-startup-bg className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B05D41] opacity-[0.1] blur-[110px]" />
+        <div data-startup-bg className="engineering-grid" />
         <div data-startup-bg className="global-noise-floor" />
       </div>
 
@@ -224,14 +176,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               ref={logoTargetRef}
               type="button"
               onClick={() => navigate('/')}
-              className="inline-flex h-full items-center origin-left leading-none transition-transform duration-700 ease-in-out hover:scale-[1.04]"
+              className="inline-flex h-full items-center origin-left leading-none transition-transform duration-500 ease-in-out hover:scale-[1.01]"
               aria-label="Axiom Infrastructure home"
             >
               <ResponsiveImage
                 source={responsiveImages.logoClear}
                 sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
                 alt="Axiom Infrastructure"
-                className="block h-16 w-auto max-w-none object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125 md:h-20 lg:h-24"
+                className="block h-16 w-auto max-w-none cursor-pointer object-left object-contain transition-all duration-[400ms] hover:brightness-110 md:h-20 lg:h-24"
                 decoding="async"
                 fetchPriority="high"
               />

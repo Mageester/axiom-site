@@ -15,6 +15,14 @@ const proofToneByLabel: Record<string, string> = {
   'In Progress': 'border-amber-300/25 text-amber-200 bg-amber-500/10',
 };
 
+const statusDisplayLabel: Record<string, string> = {
+  'Sample Build': 'Sample Build',
+  'Demonstration Site': 'Demo',
+  'Concept Build': 'Concept',
+  'Live Demo': 'Live Deployment',
+  'In Progress': 'In Progress',
+};
+
 const WorkCaseStudyPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const entry = getCaseStudyBySlug(String(slug || ''));
@@ -26,7 +34,15 @@ const WorkCaseStudyPage: React.FC = () => {
   const imagePosition = proofImage.position;
   const imageAlt = proofImage.alt || entry.title;
   const labelTone = proofToneByLabel[entry.label] || 'border-white/20 text-slate-200 bg-white/[0.04]';
+  const statusLabel = statusDisplayLabel[entry.label] || entry.label;
   const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
+  const hasPreviewUrl = Boolean(entry.demoUrl);
+  const previewLabel =
+    entry.label === 'Live Demo'
+      ? 'Open Live Site'
+      : entry.label === 'Demonstration Site'
+        ? 'Open Demo'
+        : 'Open Concept Demo';
   const detailNote =
     isLiveDemo
       ? 'This page outlines a live project and the strategy behind it.'
@@ -43,47 +59,51 @@ const WorkCaseStudyPage: React.FC = () => {
             <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
               <div className="lg:col-span-7">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className={`rounded-full border px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] ${labelTone}`}>{entry.label}</span>
+                  <span className={`rounded-full border px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] ${labelTone}`}>Status: {statusLabel}</span>
                   <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">
                     {entry.businessType}
                   </span>
                 </div>
                 <h1 className="mt-5 max-w-3xl text-[clamp(2rem,4.4vw,3.8rem)] font-semibold tracking-tight text-[#F2F4F7]">
-                  {entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '')}
+                  {entry.title.replace(/^(Sample|Demo|Concept):\s*/, '')}
                 </h1>
                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">{entry.summary}</p>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">
                   {detailNote}
                 </p>
 
-                <dl className="mt-6 grid gap-3 sm:grid-cols-3">
+                <dl className="mt-6 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
                     <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Business Type</dt>
                     <dd className="mt-1 text-sm text-slate-200">{entry.businessType}</dd>
                   </div>
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:col-span-2">
-                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Core Problem</dt>
-                    <dd className="mt-1 text-sm text-slate-200">{entry.primaryProblem}</dd>
-                  </div>
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:col-span-2">
-                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Demonstrates</dt>
-                    <dd className="mt-1 text-sm text-slate-200">{entry.demonstrates}</dd>
-                  </div>
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Context</dt>
-                    <dd className="mt-1 text-sm text-slate-200">{entry.location}</dd>
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Status</dt>
+                    <dd className="mt-1 text-sm text-slate-200">{statusLabel}</dd>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:col-span-2">
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Overview</dt>
+                    <dd className="mt-1 text-sm text-slate-200">{entry.summary}</dd>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:col-span-2">
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Problem</dt>
+                    <dd className="mt-1 text-sm text-slate-200">The previous online presence did not reflect the quality of the business.</dd>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:col-span-2">
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">What Changed</dt>
+                    <dd className="mt-1 text-sm text-slate-200">The site was redesigned to feel clearer, more modern, easier to navigate, and more credible on first impression.</dd>
                   </div>
                 </dl>
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  {isLiveDemo && entry.demoUrl ? (
+                  {hasPreviewUrl ? (
                     <a
                       href={entry.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center rounded-full border border-[#d4a48e]/35 bg-[#d4a48e]/12 px-5 py-3 text-sm font-medium text-[#e8bea8] transition-colors hover:border-[#e8bea8]/60 hover:bg-[#d4a48e]/18"
                     >
-                      View Live Demo
+                      {previewLabel}
                     </a>
                   ) : entry.label === 'In Progress' ? (
                     <span className="inline-flex items-center justify-center rounded-full border border-amber-300/25 bg-amber-500/10 px-5 py-3 text-sm font-medium text-amber-100">
@@ -181,7 +201,7 @@ const WorkCaseStudyPage: React.FC = () => {
             <div className="rounded-3xl border border-white/10 bg-black/20 p-7 text-center md:p-10">
               <h2 className="text-3xl font-semibold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of website quality?</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We can scope a similar architecture for your business context and conversion goals without template constraints.
+                We can scope a similar website for your business and goals without forcing a template.
               </p>
               <div className="mt-7 flex items-center justify-center">
                 <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">

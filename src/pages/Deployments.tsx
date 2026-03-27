@@ -30,16 +30,16 @@ const worksDisplayOrder = [
 
 const statusDisplayLabel: Record<string, string> = {
   'Sample Build': 'Sample Build',
-  'Concept Build': 'Demo',
+  'Concept Build': 'Concept',
   'Demonstration Site': 'Demo',
   'Live Demo': 'Live Deployment',
   'In Progress': 'In Progress',
 };
 
 const improvementCopyBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'Built to create a clearer, more modern, and more trustworthy first impression for diners.',
-  'concept-landscaping-authority-site': 'Built to create a clearer, more modern, and more trustworthy first impression for homeowners.',
-  'concept-roofing-conversion-site': 'Built to create a clearer, more modern, and more trustworthy first impression for roofing inquiries.',
+  'demonstration-restaurant-reservation-site': 'Live demo showing a clearer reservation flow and a more trustworthy first impression for diners.',
+  'concept-landscaping-authority-site': 'Concept build showing a clearer quote path and a more trustworthy first impression for homeowners.',
+  'concept-roofing-conversion-site': 'Concept build showing clearer priority for urgent and planned roofing inquiries.',
 };
 
 const orderedCaseStudies = worksDisplayOrder
@@ -51,7 +51,7 @@ const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
   const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
   return {
     id: entry.slug,
-    title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
+    title: entry.title.replace(/^(Sample|Demo|Concept):\s*/, ''),
     businessType: entry.businessType.replace(/\s+Business$/, ''),
     statusLabel: statusDisplayLabel[entry.label] ?? entry.label,
     isLiveDemo,
@@ -208,7 +208,7 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom"
-        description="View our featured work, sample builds, demos, and live deployments with clear labeling and business context."
+        description="View our featured work, sample builds, concept builds, demos, and live deployments with clear labeling and business context."
       />
       <Layout>
         <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-8 pb-4 md:px-8 md:pt-12 md:pb-2" variant="feature">
@@ -218,7 +218,7 @@ const Deployments: React.FC = () => {
               <h1 data-startup-heading className="text-left">Selected Work</h1>
             </div>
             <p data-startup-copy className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-              A small set of live deployments, demos, and sample builds. Each one is labeled clearly and shown with the business context behind it.
+              A small set of live deployments, concept builds, demos, and sample builds. Each one is labeled clearly and shown with the business context behind it.
             </p>
             <div data-startup-actions className="mt-6 flex flex-wrap items-center gap-3 md:mt-7 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">

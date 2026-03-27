@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+// Legacy public intake endpoint.
+// The public site now uses /api/intake as the canonical submission path.
 const WebsiteRequestSchema = z.object({
     name: z.string().min(1, "Name is required").max(100),
     company: z.string().min(1, "Company is required").max(100),

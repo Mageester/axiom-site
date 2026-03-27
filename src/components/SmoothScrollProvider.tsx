@@ -18,10 +18,10 @@ export default function SmoothScrollProvider({ children }: PropsWithChildren) {
     if (reduceMotionQuery.matches) return;
 
     const lenis = new Lenis({
-      lerp: 0.08,
+      lerp: 0.12,
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 1.5,
+      touchMultiplier: 1.2,
     });
     lenisRef.current = lenis;
 

@@ -56,12 +56,12 @@ const BentoGrid: React.FC = () => {
         <article className={cardShell}>
           <div className="flex h-full min-h-[300px] flex-col justify-between p-8">
             <div>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Strategic Depth</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Clear Messaging</p>
             <h3 className="mt-3 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">
-              Conversion Architecture for Premium Brands
+              Professional websites that build trust
             </h3>
               <p className="mt-4 max-w-xl text-[15px] leading-[1.7] text-[#A7B3BC]">
-                Positioning, narrative sequencing, and offer framing engineered to move high-intent buyers from curiosity to action.
+                Clear page structure, message order, and action flow so visitors understand the business and know what to do next.
               </p>
             </div>
             <button

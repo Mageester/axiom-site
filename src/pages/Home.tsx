@@ -9,11 +9,11 @@ import { RevealBlock } from '../components/ui/RevealBlock';
 import { caseStudies } from '../data/caseStudies';
 import { getWorkProofImage } from '../lib/workProofImages';
 
-const proofTypeLabel: Record<string, string> = {
+const selectedWorkLabel: Record<string, string> = {
   'Sample Build': 'Sample Build',
-  'Concept Build': 'Concept Build',
-  'Demonstration Site': 'Demonstration Site',
-  'Live Demo': 'Live Demo',
+  'Concept Build': 'Concept',
+  'Demonstration Site': 'Demo',
+  'Live Demo': 'Live Deployment',
   'In Progress': 'In Progress',
 };
 
@@ -29,15 +29,30 @@ const selectedWorkEntries = homeSelectedWorkSlugs
 
 const selectedWork = selectedWorkEntries.map((entry) => {
   const proofImage = getWorkProofImage(entry.slug);
+  const trustLabel = selectedWorkLabel[entry.label] ?? entry.label;
+  const supportLines: Record<string, string> = {
+    'demonstration-restaurant-reservation-site': 'Live demo showing a clearer reservation flow and stronger booking confidence.',
+    'concept-landscaping-authority-site': 'Concept build showing a clearer quote path and better project presentation.',
+    'concept-roofing-conversion-site': 'Concept build showing clearer priority for urgent and planned inquiries.',
+  };
+  const previewLabel =
+    trustLabel === 'Live Deployment'
+      ? 'Open Live Site'
+      : trustLabel === 'Concept'
+        ? 'Open Concept Demo'
+        : 'Open Demo';
+
   return {
     id: entry.slug,
-    title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-    summary: entry.summary.split('. ')[0].replace(/\.$/, '') + '.',
+    projectName: entry.title.replace(/^(Sample|Demo|Concept):\s*/, ''),
+    businessType: entry.businessType.replace(/\s+Business$/, ''),
+    supportingLine: supportLines[entry.slug] ?? 'Built to improve clarity, trust, and first impression.',
     image: proofImage.source,
     demoUrl: entry.demoUrl,
     imageAlt: proofImage.alt,
     imagePosition: proofImage.position,
-    projectType: proofTypeLabel[entry.label] ?? entry.label,
+    trustLabel,
+    previewLabel,
   };
 });
 
@@ -61,9 +76,9 @@ const capabilities = [
 
 const standardsCards = [
   {
-    title: 'Fast, Reliable Hosting',
+    title: 'Reliable Delivery',
     detail:
-      'Sites are delivered globally for fast loading, reliable uptime, and a smooth experience for every visitor.',
+      'Sites are deployed with the basics handled cleanly before launch.',
     desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -72,9 +87,9 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Built for Speed',
+    title: 'Efficient Page Structure',
     detail:
-      'We structure layouts, media, and interactions to load instantly, so you never lose a visitor to slow wait times.',
+      'Layouts, media, and interactions are kept light so the site stays responsive.',
     desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -84,9 +99,9 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Flawless on Mobile',
+    title: 'Designed for Mobile',
     detail:
-      'We design from the phone up, ensuring your website feels completely natural, credible, and easy to use on any device.',
+      'The layout is checked on smaller screens so the site remains easy to use.',
     desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -99,7 +114,7 @@ const standardsCards = [
   {
     title: 'Clear and Accessible',
     detail:
-      'Colors, contrast, structure, and text sizing are carefully reviewed to ensure a highly readable experience for everyone.',
+      'Colors, contrast, structure, and text sizing are reviewed for readability.',
     desktopSpan: 'lg:col-span-6',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -109,9 +124,9 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Rigorous Pre-Launch Checks',
+    title: 'Pre-Launch Checks',
     detail:
-      'Core pages, contact forms, mobile layouts, and critical actions are fully tested before your website goes live.',
+      'Core pages, contact forms, and critical actions are reviewed before the site goes live.',
     desktopSpan: 'lg:col-span-6',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -125,7 +140,7 @@ const standardsCards = [
 
 const method = [
   '01 — We learn the business and what the site needs to do',
-  '02 — We plan the pages, structure, and conversion flow',
+  '02 — We plan the pages, structure, and inquiry flow',
   '03 — We build, test, and launch to a higher standard',
 ];
 
@@ -139,8 +154,8 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom | Premium Websites for Growth-Focused Businesses"
-        description="Axiom designs and builds premium websites for businesses that need stronger trust, clearer positioning, and better conversion structure."
+        title="Axiom | Professional Websites for Businesses"
+        description="Axiom designs and builds clean, modern websites that help businesses look more credible online."
       />
 
       <Layout>
@@ -150,21 +165,24 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Custom websites built for serious local businesses.
+                    Professional websites for businesses
                   </h1>
                 </div>
                 <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-300 md:text-lg">
-                  We build fast, professional websites that help established businesses look credible, rank higher, and generate more inquiries. No templates, no bloat.
+                  Axiom designs and builds clean, modern websites that help businesses look more credible online.
+                </p>
+                <p className="mt-4 max-w-prose text-sm leading-relaxed text-slate-400 md:text-base">
+                  Best fit for businesses that need a stronger online presence, clearer positioning, and a more trustworthy first impression.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                            Book Free Consultation
+                  <Link to="/works" className="btn-primary btn-lg whitespace-nowrap">
+                            View Work
                   </Link>
                   <Link
-                    to="/method"
+                    to="/apply"
                     className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
                   >
-                    View Our Process
+                    Start a Project
                   </Link>
                 </div>
               </div>
@@ -172,23 +190,44 @@ const Home: React.FC = () => {
           </section>
 
           <section className="pt-10 md:pt-14">
-            <p className="mb-3 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-              Our Standards
-            </p>
-            <PartnerMarquee />
+            <div className="max-w-4xl">
+              <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
+                Why it matters
+              </p>
+              <h2 className="mt-3 text-[clamp(1.5rem,3vw,2.25rem)] font-bold tracking-tight text-[#F2F4F7]">
+                A strong business should not be held back by a weak website.
+              </h2>
+              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+                Many businesses have grown, but their website still looks outdated, unclear, or less professional than the business actually is. Axiom builds websites that feel clear, credible, and modern.
+              </p>
+              <ul className="mt-6 grid gap-3 md:grid-cols-3">
+                <li className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm leading-relaxed text-slate-200">
+                  Businesses with outdated or weak websites
+                </li>
+                <li className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm leading-relaxed text-slate-200">
+                  Businesses that need to look more credible online
+                </li>
+                <li className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm leading-relaxed text-slate-200">
+                  Businesses that want a clearer, more professional first impression
+                </li>
+              </ul>
+            </div>
+            <div className="mt-6">
+              <PartnerMarquee />
+            </div>
           </section>
 
           <RevealBlock as="section" className="pt-16 md:pt-28" variant="feature">
             <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Featured Work</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">A selection of our custom builds, live projects, and category examples.</h2>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected Work</p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Examples of the kinds of websites Axiom builds for businesses that need a stronger online presence.</h2>
               </div>
                 <Link
                   to="/works"
                   className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
                 >
-                  View Our Work
+                  View All Work
                 </Link>
             </div>
 
@@ -207,7 +246,7 @@ const Home: React.FC = () => {
                       <ResponsiveImage
                         source={item.image}
                         sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
-                        alt={item.imageAlt ?? item.title}
+                        alt={item.imageAlt ?? item.projectName}
                         className="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover/deployment:scale-[1.03] group-focus-visible/deployment:scale-[1.03]"
                         loading="lazy"
                         decoding="async"
@@ -216,23 +255,26 @@ const Home: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/12 to-transparent" />
                       <div className="absolute left-4 top-4">
                         <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
-                          {item.projectType}
+                          {item.trustLabel}
                         </span>
                       </div>
                     </div>
 
                     <div className="flex flex-1 flex-col p-5 sm:p-6">
-                      <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-[1.55rem]">
-                        {item.title}
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
+                        {item.businessType}
+                      </p>
+                      <h3 className="mt-2 text-[1.35rem] font-semibold tracking-tight text-white sm:text-[1.55rem]">
+                        {item.projectName}
                       </h3>
                       <p className="mt-3 text-sm leading-relaxed text-slate-300/95">
-                        {item.summary}
+                        {item.supportingLine}
                       </p>
 
                       {item.demoUrl ? (
                         <div className="mt-auto pt-6">
                           <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/deployment:text-[#e8bea8] group-focus-visible/deployment:text-[#e8bea8]">
-                            View Demo
+                            {item.previewLabel}
                           </span>
                         </div>
                       ) : null}
@@ -250,7 +292,7 @@ const Home: React.FC = () => {
                     href={item.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`View live demo for ${item.title}`}
+                    aria-label={`${item.previewLabel} for ${item.projectName}`}
                     className="group/deployment block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090d18]"
                   >
                     {card}
@@ -320,7 +362,7 @@ const Home: React.FC = () => {
                     Standards built into every launch.
                   </h2>
                   <p className="mt-5 max-w-[38rem] text-sm leading-7 text-slate-300 md:text-base">
-                    A professional website needs more than good design. Every Axiom build is structured to load fast, work flawlessly on mobile, and guide visitors toward booking or buying.
+                    A professional website needs more than good design. Every Axiom build is structured to stay responsive, readable, and easy to use across the devices most visitors rely on.
                   </p>
                 </div>
 
@@ -366,7 +408,7 @@ const Home: React.FC = () => {
                   Start Your Project
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Book a brief consultation to discuss your business and current website goals. We will review your context and recommend a structured path forward.
+                  Talk through your business and current website goals. We will review your context and recommend next steps.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">
@@ -376,7 +418,7 @@ const Home: React.FC = () => {
                 </div>
 
                 <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-5 gap-y-2">
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">30-minute Zoom consultation</span>
+                    <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">30-minute Zoom call</span>
                   <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
                   <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Online only</span>
                   <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />

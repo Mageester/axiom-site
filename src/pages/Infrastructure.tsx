@@ -35,7 +35,6 @@ type ExpandableItem = {
 const SECTION_LINKS: readonly SectionLink[] = [
   { id: 'process', label: 'Process' },
   { id: 'your-stack', label: 'Your Stack', shortLabel: 'Stack' },
-  { id: 'clarify', label: 'What We Clarify', shortLabel: 'Clarify' },
   { id: 'faq', label: 'FAQ' },
 ];
 
@@ -43,9 +42,9 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     id: 'call',
     number: '01',
-    title: 'Online Strategy Call',
+    title: 'Project Intro Call',
     summary:
-      'Every project starts with a focused 30-minute Zoom meeting to understand your business, priorities, and required website capabilities.',
+      'Every project starts with a 30-minute Zoom call to understand your business, priorities, and website needs.',
     points: [
       'Online only, clear agenda, no wasted time',
       'Pages, menus, forms, maps, booking, gallery, quote flow',
@@ -54,9 +53,9 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     id: 'scope',
     number: '02',
-    title: 'Scope and Package Recommendation',
+    title: 'Scope and Package Match',
     summary:
-      'We translate requirements into a clear scope and recommend the package that best fits your goals, timeline, and technical needs.',
+      'We turn the requirements into a clear scope and recommend the package that best fits your goals, timeline, and technical needs.',
     points: [
       'What is included now vs. phased later',
       'Delivery model aligned to your business reality',
@@ -67,7 +66,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     number: '03',
     title: 'Website Planning and Structure',
     summary:
-      'Before build starts, we define structure, navigation, and conversion pathways so each page has a clear purpose.',
+      'Before build starts, we define structure, navigation, and page flow so each page has a clear purpose.',
     points: [
       'Page hierarchy and menu logic',
       'Content and CTA structure for faster buyer decisions',
@@ -78,7 +77,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     number: '04',
     title: 'Build and Review',
     summary:
-      'Axiom implements the approved plan with performance-focused standards, then runs guided reviews to keep decisions efficient.',
+      'Axiom implements the approved plan with clear quality checks, then reviews the details before launch.',
     points: [
       'Desktop and mobile behavior verified',
       'Refinement checkpoints without scope drift',
@@ -136,41 +135,14 @@ const STACK_OPTIONS: readonly StackOption[] = [
   },
 ];
 
-const CLARIFY_ITEMS: readonly ExpandableItem[] = [
-  {
-    title: 'Required pages and navigation flow',
-    body: 'We define exactly what pages are needed, how navigation should be organized, and where key actions should appear so users move through the site with minimal friction.',
-  },
-  {
-    title: 'Feature requirements by business model',
-    body: 'We scope feature requirements early, including booking, menu structures, maps, galleries, quote forms, and contact pathways aligned to your service model.',
-  },
-  {
-    title: 'Lead capture and form routing',
-    body: 'We clarify form inputs, destination routing, and response expectations so inbound leads are captured cleanly and handled without manual confusion.',
-  },
-  {
-    title: 'Content structure and message hierarchy',
-    body: 'We organize content blocks and messaging priorities around buyer intent so each page supports trust and conversion outcomes.',
-  },
-  {
-    title: 'Domain, hosting, and release path',
-    body: 'We confirm domain ownership, hosting responsibilities, and launch sequencing before production so rollout is smooth and predictable.',
-  },
-  {
-    title: 'Near-term and future expansion needs',
-    body: 'We identify what must ship now and what can expand later, so the initial build is stable without boxing your business into short-term decisions.',
-  },
-];
-
 const FAQ_ITEMS: readonly ExpandableItem[] = [
   {
     title: 'How are consultations conducted?',
-    body: 'Consultations are conducted online only through Zoom. This keeps scheduling fast and keeps the process focused.',
+    body: 'The first call is online through Zoom. This keeps scheduling fast and keeps the process focused.',
   },
   {
     title: 'How long is the first meeting?',
-    body: 'The initial consultation is 30 minutes. We use that time to understand your business and define what the website must include.',
+    body: 'The first call is 30 minutes. We use that time to understand your business and define what the website must include.',
   },
   {
     title: 'Can Axiom work with my existing domain and provider?',
@@ -178,7 +150,7 @@ const FAQ_ITEMS: readonly ExpandableItem[] = [
   },
   {
     title: 'When do you recommend a package?',
-    body: 'After the strategy call and scope definition. Recommendations are based on the project requirements and delivery needs.',
+    body: 'After the first call and scope definition. Recommendations are based on the project requirements and delivery needs.',
   },
 ];
 
@@ -231,7 +203,6 @@ const StepIcon: React.FC<{ id: string }> = ({ id }) => {
 const Infrastructure: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>(SECTION_LINKS[0].id);
   const [activeStack, setActiveStack] = useState<string>(STACK_OPTIONS[0].id);
-  const [openClarify, setOpenClarify] = useState<number>(0);
   const [openFaq, setOpenFaq] = useState<number>(0);
   const [activeProcessStep, setActiveProcessStep] = useState<number>(0);
   const sectionScrollFrame = useRef<number | null>(null);
@@ -543,43 +514,6 @@ const Infrastructure: React.FC = () => {
                   </div>
                 </article>
               </div>
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" id="clarify" data-method-section className="pt-16 md:pt-22">
-            <div className="mb-7" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What We Clarify</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Every project starts with a clear plan.</h2>
-            </div>
-
-            <div className="grid gap-3">
-              {CLARIFY_ITEMS.map((item, index) => {
-                const expanded = openClarify === index;
-                return (
-                  <article key={item.title} className="axiom-bento rounded-2xl p-5 md:p-6" data-reveal>
-                    <button
-                      type="button"
-                      className="flex w-full items-center justify-between gap-4 text-left"
-                      aria-expanded={expanded}
-                      aria-controls={`clarify-panel-${index}`}
-                      onClick={() => setOpenClarify(expanded ? -1 : index)}
-                    >
-                      <span className="text-base font-semibold text-[#F2F4F7] md:text-lg">{item.title}</span>
-                      <span className="font-axiomMono text-xs uppercase tracking-[0.12em] text-[#d4a48e]">
-                        {expanded ? 'Hide' : 'Show'}
-                      </span>
-                    </button>
-                    <div
-                      id={`clarify-panel-${index}`}
-                      className={`overflow-hidden transition-all duration-300 motion-reduce:transition-none ${
-                        expanded ? 'mt-3 max-h-64 opacity-100' : 'max-h-0 opacity-0'
-                      }`}
-                    >
-                      <p className="text-sm leading-relaxed text-slate-300 md:text-base">{item.body}</p>
-                    </div>
-                  </article>
-                );
-              })}
             </div>
           </RevealBlock>
 

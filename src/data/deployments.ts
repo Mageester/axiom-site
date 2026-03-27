@@ -56,7 +56,8 @@ export interface DeploymentRecord {
     stackTags: string[];    // e.g., ["React", "Cloudflare", "GSAP"]
 }
 
-// Mock Data representing the engineering-first approach
+// Mock Data representing the clear delivery approach
+// Legacy fictional dataset. Not used by the current public work pages.
 export const deployments: DeploymentRecord[] = [
     {
         id: "dep-001",
@@ -85,9 +86,9 @@ export const deployments: DeploymentRecord[] = [
             "Cumbersome CMS slowing down marketing iterations."
         ],
         architectureSummary: [
-            "Headless Next.js architected for edge caching.",
-            "Aggressive static generation (SSG) for all core marketing pages.",
-            "Decoupled Sanity CMS for rapid content deployment."
+            "Headless Next.js with edge caching.",
+            "Static generation for core marketing pages.",
+            "Sanity CMS separated from the frontend for easier content updates."
         ],
         fullResults: [
             "Global Time-to-Interactive reduced to 0.8s.",
@@ -126,9 +127,9 @@ export const deployments: DeploymentRecord[] = [
             "Zero mobile optimization resulting in lost local search traffic."
         ],
         architectureSummary: [
-            "Custom React frontend with streamlined API integration to booking backend.",
-            "Stripped down DOM and removed all heavy tracking scripts.",
-            "Implemented strict Content Security Policies (CSP) for compliance."
+            "Custom React frontend connected to the booking backend.",
+            "Simplified the DOM and removed heavy tracking scripts.",
+            "Added strict Content Security Policy rules for compliance."
         ],
         fullResults: [
             "New patient patient acquisition cost (CAC) lowered by 22%.",
@@ -164,9 +165,9 @@ export const deployments: DeploymentRecord[] = [
             "Contact forms frequently failing to deliver to sales team."
         ],
         architectureSummary: [
-            "Emergency code audit and surgical removal of blocking resources.",
-            "Re-engineered critical rendering path.",
-            "Replaced fragile PHP mailers with robust Edge API routes."
+            "Emergency audit that removed blocking resources.",
+            "Rebuilt the critical rendering path.",
+            "Replaced fragile PHP mailers with Edge API routes."
         ],
         fullResults: [
             "Site restored to Page 1 for top 5 local keywords.",

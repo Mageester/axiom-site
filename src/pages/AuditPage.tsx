@@ -76,7 +76,7 @@ const AuditPage: React.FC = () => {
     return (
         <div className="page-shell min-h-[90vh] flex flex-col items-center justify-center relative overflow-hidden">
             <SEO
-                title="Complimentary Engineering Audit | Axiom Infrastructure"
+                title="Complimentary Engineering Audit | Axiom"
                 description="Get a complimentary engineering audit of your website's performance, UX, and infrastructure."
             />
             {/* Background glowing orb */}

@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
-// deployments.data.ts — Single source of truth for all portfolio entries.
+// deployments.data.ts is a legacy portfolio dataset and not part of the current public work pages.
 //
-// HOW TO ADD A NEW DEPLOYMENT:
+// Retained only for historical reference.
 //   1. Copy any existing object in the `deployments` array.
 //   2. Give it a unique `id` (format: "dep-XXX").
 //   3. Fill every required field. `proof` is optional.
@@ -121,7 +121,7 @@ export const deployments: Deployment[] = [
             "Trust section with license numbers, insurance badges, and review aggregation.",
             "Before/after project gallery with lazy-loaded image comparison slider.",
             "Service-area pages for surrounding municipalities.",
-            "Performance-first CSS — zero render-blocking resources.",
+            "Lean CSS with no render-blocking resources.",
             "Structured data for contractor, reviews, and service areas.",
             "One-tap emergency call button fixed to mobile viewport.",
         ],
@@ -237,7 +237,7 @@ export const deployments: Deployment[] = [
             "Uncompressed 5MB hero images causing 4s+ load times.",
         ],
         build: [
-            "Consultation-first CTA architecture — every section drives to quote request.",
+            "Clear CTA structure — every section drives to a quote request.",
             "Before/after image gallery with swipe comparison on mobile.",
             "Service category pages for each core offering.",
             "Service-area pages for surrounding municipalities.",
@@ -280,7 +280,7 @@ export const deployments: Deployment[] = [
             "Site not mobile-responsive — auto-zoomed on every phone.",
         ],
         build: [
-            "Practice area architecture with dedicated pages per specialization.",
+            "Dedicated pages for each practice area.",
             "Intake form with conditional logic routing inquiries to the correct team member.",
             "Professional profile pages with credentials and direct booking.",
             "Trust-building section: case results, settlements, professional associations.",
@@ -364,7 +364,7 @@ export const deployments: Deployment[] = [
             "Agent profile pages with active listings, sold history, and direct scheduling.",
             "Neighborhood guide pages for local SEO.",
             "Market report section for seller-focused content marketing.",
-            "Performance-first image handling for high-resolution photography.",
+            "Fast image handling for high-resolution photography.",
             "CRM webhook integration for instant lead routing.",
             "Social proof section: recent closings, client testimonials, awards.",
         ],

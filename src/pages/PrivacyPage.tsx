@@ -5,7 +5,7 @@ const PrivacyPage: React.FC = () => {
     return (
         <div className="pt-32 pb-24 px-6">
             <SEO
-                title="Privacy Policy | Axiom Infrastructure"
+                title="Privacy Policy | Axiom"
                 description="Privacy guidelines regarding the collection and use of information."
             />
             <div className="max-w-[800px] mx-auto text-axiom-text-mute leading-relaxed">
@@ -16,7 +16,7 @@ const PrivacyPage: React.FC = () => {
                 <p className="mb-6">We collect several different types of information for various purposes to provide and improve our Service to you. This includes personal data provided exclusively via direct contact or scheduled consultation requests.</p>
 
                 <h2 className="text-[20px] font-semibold text-axiom-text-main mb-4 mt-8">2. Use of Data</h2>
-                <p className="mb-4">Axiom Infrastructure uses the collected data for various purposes:</p>
+                <p className="mb-4">Axiom uses the collected data for various purposes:</p>
                 <ul className="list-disc pl-6 mb-6">
                     <li>To provide and maintain the Service</li>
                     <li>To notify you about changes to our Service</li>

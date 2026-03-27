@@ -6,9 +6,14 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 const About = lazy(() => import('./pages/About'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const PricingPage = lazy(() => import('./pages/PricingPage'));
 const Deployments = lazy(() => import('./pages/Deployments'));
 const Infrastructure = lazy(() => import('./pages/Infrastructure'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const WorkCaseStudyPage = lazy(() => import('./pages/WorkCaseStudyPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const AuditPage = lazy(() => import('./pages/AuditPage'));
 const Login = lazy(() => import('./pages/admin/Login'));
 const Account = lazy(() => import('./pages/admin/Account'));
 const Jobs = lazy(() => import('./pages/admin/Jobs'));
@@ -57,11 +62,18 @@ const App: React.FC = () => {
             <Route path="/infrastructure" element={<Navigate to="/method" replace />} />
             <Route path="/works" element={<Deployments />} />
             <Route path="/works/:slug" element={<WorkCaseStudyPage />} />
+            <Route path="/work" element={<Navigate to="/works" replace />} />
+            <Route path="/work/:slug" element={<WorkCaseStudyPage />} />
             <Route path="/deployments" element={<Navigate to="/works" replace />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/pricing" element={<PricingPage />} />
             <Route path="/apply" element={<ContactPage />} />
-            <Route path="/contact" element={<Navigate to="/apply" replace />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/architects" element={<Navigate to="/about" replace />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/audit" element={<AuditPage />} />
             <Route path="/admin/login" element={<Login />} />
             <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />

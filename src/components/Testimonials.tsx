@@ -23,8 +23,8 @@ const Testimonials: React.FC = () => {
   return (
     <section className="mx-auto w-full max-w-6xl px-6 md:px-8">
       <div className="mb-8">
-        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Founder Perspective</p>
-        <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Built by Co-Founders and Architects</h2>
+        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">The Team</p>
+        <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Direct involvement from planning through launch</h2>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -43,9 +43,9 @@ const Testimonials: React.FC = () => {
               </p>
             </div>
 
-            <blockquote className="mt-6 text-lg italic leading-[1.6] text-[#F5F7FA]">
-              "We bridge the gap between ambitious visual concepts and operational reality."
-            </blockquote>
+            <p className="mt-6 text-base leading-[1.7] text-slate-300">
+              Direct involvement across planning, build, and launch. No handoff gap between the idea and the execution.
+            </p>
           </article>
         ))}
       </div>

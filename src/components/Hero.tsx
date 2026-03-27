@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
             <div className="relative mb-8">
               <div className="pointer-events-none absolute inset-0 rounded-full bg-[#253a7a]/30 blur-[200px]" />
               <div className="relative inline-block px-4 py-1.5 rounded-full bg-[#1c253b] text-[#F59768] text-sm font-semibold tracking-wide border border-[#F59768]/20">
-                LIMITED: 2 DEPLOYMENT SLOTS REMAINING FOR Q1
+                Focused project window
               </div>
             </div>
 
@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
             </div>
 
             <p className="mb-8 max-w-lg text-lg leading-[1.65] text-slate-300">
-              We build sub-second web infrastructure with cinematic visuals and bullet-proof conversions for ambitious brands that demand elite performance.
+              We build fast, credible websites with clear structure and practical conversion paths for service businesses that need a better first impression.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
                 </MagneticWrapper>
                 <div className="inline-flex items-center gap-2 rounded-full bg-[#1c2e5a]/40 px-3 py-1">
                   <span className="size-2 rounded-full bg-[#F59768] animate-pulse"></span>
-                  <span className="text-xs font-medium text-[#F59768] tracking-wider">2 spots left for Q2</span>
+                  <span className="text-xs font-medium text-[#F59768] tracking-wider">Clear scope before kickoff</span>
                 </div>
               </div>
 

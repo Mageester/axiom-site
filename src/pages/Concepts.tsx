@@ -219,7 +219,7 @@ const ConceptsPage: React.FC = () => {
             Every build is engineered from scratch for your specific market. No templates. No shared layouts. No recycled designs from another contractor down the road.
           </p>
           <Link to="/apply" className="btn-primary">
-            Book Strategy Call
+            Start Application
           </Link>
         </div>
       </section>

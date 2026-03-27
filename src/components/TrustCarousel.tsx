@@ -7,20 +7,20 @@ type TrustCard = {
 
 const cards: TrustCard[] = [
   {
-    heading: 'Positioning Clarity',
-    detail: 'Commercial narrative and page hierarchy aligned before production starts.',
+    heading: 'Clear Scope',
+    detail: 'Pages, deliverables, and next steps are defined before production starts.',
   },
   {
-    heading: 'Interaction Reliability',
-    detail: 'Critical interaction paths are validated across viewport sizes before launch.',
+    heading: 'Responsive Layouts',
+    detail: 'Critical interaction paths are checked across viewport sizes before launch.',
   },
   {
-    heading: 'Form Path Integrity',
-    detail: 'Intake and contact paths are tested to reduce drop-off at key decision points.',
+    heading: 'Stable Handoffs',
+    detail: 'Intake and contact paths are reviewed so the next step stays obvious.',
   },
   {
     heading: 'Release Discipline',
-    detail: 'Every release follows a checklist with defined acceptance criteria.',
+    detail: 'Every release follows a simple checklist with defined acceptance criteria.',
   },
 ];
 
@@ -28,7 +28,7 @@ const TrustCarousel: React.FC = () => {
   const segment = [...cards, ...cards];
 
   return (
-    <section aria-label="Delivery proof" className="w-full max-w-7xl px-6 md:px-8">
+    <section aria-label="Delivery standards" className="w-full max-w-7xl px-6 md:px-8">
       <div className="marquee-shell hide-scrollbar overflow-hidden">
         <div
           className="marquee-track"

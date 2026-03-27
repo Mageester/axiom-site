@@ -11,7 +11,6 @@ type ApiResult = {
     message?: string;
     details?: string;
 };
-type YesNoAnswer = '' | 'yes' | 'no';
 
 type IntakeFormState = {
     name: string;
@@ -22,10 +21,6 @@ type IntakeFormState = {
     project_scale: string;
     pain_points: string[];
     details: string;
-    fit_active_demand: YesNoAnswer;
-    fit_trust_conversion_need: YesNoAnswer;
-    fit_decision_owner_ready: YesNoAnswer;
-    fit_defined_scope_ready: YesNoAnswer;
 };
 
 const INITIAL_FORM: IntakeFormState = {
@@ -37,10 +32,6 @@ const INITIAL_FORM: IntakeFormState = {
     project_scale: '',
     pain_points: [],
     details: '',
-    fit_active_demand: '',
-    fit_trust_conversion_need: '',
-    fit_decision_owner_ready: '',
-    fit_defined_scope_ready: ''
 };
 
 const SCALE_OPTIONS = [
@@ -55,25 +46,6 @@ const PAIN_POINTS_OPTIONS = [
     'Losing high-paying jobs to stronger brands',
     'Hard for customers to request service quickly',
     'Hard to update and manage'
-];
-
-const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_active_demand' | 'fit_trust_conversion_need' | 'fit_decision_owner_ready' | 'fit_defined_scope_ready'>; label: string }> = [
-    {
-        key: 'fit_active_demand',
-        label: 'Are you currently taking on new clients or customers?'
-    },
-    {
-        key: 'fit_trust_conversion_need',
-        label: 'Are you looking for a professional, custom website rather than a cheap template?'
-    },
-    {
-        key: 'fit_decision_owner_ready',
-        label: 'Will you (or a single decision-maker) be available to review the project during the build?'
-    },
-    {
-        key: 'fit_defined_scope_ready',
-        label: 'Are you ready to start this project within the next few weeks?'
-    }
 ];
 
 const FALLBACK_SUBMIT_ERROR = 'Submission failed. Please retry or email aidan@getaxiom.ca and riley@getaxiom.ca.';
@@ -214,7 +186,7 @@ const GeneralContactForm: React.FC = () => {
                 <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
                     For serious website projects, use{' '}
                     <Link to="/apply" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                        Apply
+                        Project Inquiry
                     </Link>
                     .
                 </p>
@@ -301,7 +273,7 @@ const GeneralContactForm: React.FC = () => {
                         <p className="mt-3 text-sm leading-relaxed text-slate-300">
                             Use{' '}
                             <Link to="/apply" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                Apply
+                                Project Inquiry
                             </Link>{' '}
                             for serious website work.
                         </p>
@@ -425,11 +397,6 @@ const ProjectApplicationForm: React.FC = () => {
         const nextErrors: typeof errors = {};
         if (!form.project_scale) nextErrors.project_scale = 'Please select an investment tier.';
         if (form.details.trim().length < 10) nextErrors.details = 'Please share details (min 10 chars).';
-        FIT_QUESTIONS.forEach((question) => {
-            if (!form[question.key]) {
-                nextErrors[question.key] = 'Please choose yes or no.';
-            }
-        });
         if (Object.keys(nextErrors).length > 0) {
             setErrors(nextErrors);
             return;
@@ -460,7 +427,7 @@ const ProjectApplicationForm: React.FC = () => {
 
             if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg('Thanks for applying. One of our partners will review your submission within one business day.');
+                setMsg('Thanks. We will review your request within one business day.');
                 return;
             }
 
@@ -479,32 +446,32 @@ const ProjectApplicationForm: React.FC = () => {
     return (
         <>
             <SEO
-                title="Apply | Axiom"
-                description="Tell us about your business and what you need. This is the best route for serious website projects."
+                title="Project Inquiry | Axiom"
+                description="Share the basics of your project and we will scope the next step."
             />
             <Layout>
                 <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
                     <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
                         <div className="mt-4 overflow-hidden">
                             <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
-                                Apply
+                                Project Inquiry
                             </p>
                             <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                                Tell us about your business and what you need.
+                                Tell us about your project.
                             </h1>
                         </div>
                         <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Tell us about your business and what you need. This is the best route for serious website projects.
+                            Share the basics and we will review scope within one business day.
                         </p>
                         <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
-                            For general questions or an initial inquiry, use{' '}
+                            For general questions or a quick initial inquiry, use{' '}
                             <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                 Contact
                             </Link>
                             .
                         </p>
                         <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Step {step} of 2. This helps us understand scope and fit.
+                            Step {step} of 2. Add the details that help us scope faster.
                         </p>
                         <div className="mx-auto mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
                             <div className={`h-full bg-[#B05D41] transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`} />
@@ -520,7 +487,7 @@ const ProjectApplicationForm: React.FC = () => {
                                             <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
                                             <p className="mt-2 text-sm text-slate-300">A partner will review your submission and reply within one business day.</p>
                                             <button type="button" onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
-                                                Submit Another Application
+                                                Send Another Request
                                             </button>
                                         </div>
                                     )}
@@ -561,13 +528,13 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
-                                                Next
+                                                Continue
                                             </button>
 
                                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">After You Apply</p>
+                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Next Steps</p>
                                                 <p className="mt-3 text-sm text-slate-300">
-                                                    Once your request is submitted, we&apos;ll review the scope and next steps within 1 business day.
+                                                    Once your request is submitted, we&apos;ll review the scope and next steps within one business day.
                                                 </p>
                                                 <p className="mt-3 text-sm text-slate-300">
                                                     If you only have a general question, use{' '}
@@ -610,37 +577,6 @@ const ProjectApplicationForm: React.FC = () => {
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>Fit Questions (Yes/No)</label>
-                                                <div className="grid grid-cols-1 gap-3">
-                                                    {FIT_QUESTIONS.map((question) => (
-                                                        <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">
-                                                            <p className="text-sm leading-relaxed text-slate-200">{question.label}</p>
-                                                            <div className="mt-3 grid grid-cols-2 gap-2 sm:max-w-[220px]">
-                                                                {(['yes', 'no'] as const).map((option) => {
-                                                                    const isSelected = form[question.key] === option;
-                                                                    return (
-                                                                        <button
-                                                                            key={option}
-                                                                            type="button"
-                                                                            onClick={() => setField(question.key, option)}
-                                                                            className={`rounded-lg border px-3 py-2 text-sm font-medium capitalize transition-colors ${isSelected
-                                                                                ? 'border-[#B05D41]/45 bg-[#B05D41]/12 text-[#F2F4F7]'
-                                                                                : 'border-white/10 bg-[#0f1524]/70 text-slate-300 hover:border-white/25'
-                                                                                }`}
-                                                                            aria-pressed={isSelected}
-                                                                        >
-                                                                            {option}
-                                                                        </button>
-                                                                    );
-                                                                })}
-                                                            </div>
-                                                            {errors[question.key] && <p className="mt-2 text-xs text-red-300">{errors[question.key]}</p>}
-                                                        </article>
-                                                    ))}
-                                                </div>
-                                            </div>
-
                                             <div className="flex flex-col gap-2">
                                                 <label className={FIELD_LABEL_CLASS}>Project Details</label>
                                                 <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="What do you need the site to do?" className={`${FIELD_INPUT_CLASS} resize-none`} />
@@ -652,7 +588,7 @@ const ProjectApplicationForm: React.FC = () => {
                                                     Back
                                                 </button>
                                                 <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg flex-1 disabled:cursor-not-allowed disabled:opacity-70">
-                                                    {status === 'loading' ? 'Submitting...' : 'Submit Application'}
+                                                    {status === 'loading' ? 'Submitting...' : 'Send Request'}
                                                 </button>
                                             </div>
                                         </div>

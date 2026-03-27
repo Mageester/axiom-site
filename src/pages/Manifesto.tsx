@@ -252,11 +252,11 @@ const Manifesto: React.FC = () => {
 
                 {/* ---- SECTION 3.5: THE EVIDENCE ---- */}
                 <section className="my-10 sm:my-14">
-                    <h2 className="axiom-command-heading mb-5 sm:mb-6">THE ARCHITECTURE OF GROWTH</h2>
+                    <h2 className="axiom-command-heading mb-5 sm:mb-6">REAL DEPLOYMENTS</h2>
 
                     <div className="prose-editorial !leading-[1.6] max-w-[720px]">
                         <p>
-                            We don't show mockups. Every Axiom concept architecture is a live, measurable deployment on Cloudflare's global edge. Here's what we've built for contractors in HVAC, roofing, and landscaping — purpose-engineered to capture revenue under pressure.
+                            We don't show mockups. Every Axiom concept is a live, measurable deployment on Cloudflare's global edge. Here's what we've built for contractors in HVAC, roofing, and landscaping — focused on clear presentation and fast response under pressure.
                         </p>
                     </div>
 
