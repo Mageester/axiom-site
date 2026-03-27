@@ -88,6 +88,17 @@
   gap: var(--space-4);
   margin-bottom: var(--space-7);
   padding: var(--space-7);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::after {
+  background: linear-gradient(120deg, transparent, rgb(231 200 137 / 8%), transparent);
+  border-radius: inherit;
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
 }
 
 .page-hero__eyebrow {
@@ -113,6 +124,33 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
+}
+
+.hero-signals {
+  background: color-mix(in srgb, var(--color-surface) 86%, black);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: calc(var(--space-7) * -0.55) auto var(--space-8);
+  max-width: calc(var(--container-max) - (var(--space-5) * 2));
+  padding: var(--space-4) var(--space-5);
+  position: relative;
+  z-index: 2;
+}
+
+.hero-signals__label {
+  color: var(--color-text-muted);
+  font-size: var(--size-2xs);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-1);
+  text-transform: uppercase;
+}
+
+.hero-signals__value {
+  color: var(--color-text-primary);
+  font-size: var(--size-sm);
 }
 
 .section {
@@ -174,7 +212,7 @@
 .card__meta {
   color: var(--color-brand-strong);
   font-size: var(--size-xs);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -269,6 +307,34 @@ textarea:focus-visible {
   display: grid;
   gap: var(--space-5);
   padding: var(--space-6);
+}
+
+.chef-note {
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--color-surface) 90%, black),
+    color-mix(in srgb, var(--color-surface-strong) 86%, black)
+  );
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-secondary);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  line-height: 1.35;
+  margin: 0;
+  max-width: 48ch;
+  padding: var(--space-6);
+}
+
+.chef-note cite {
+  color: var(--color-brand-strong);
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--size-xs);
+  font-style: normal;
+  letter-spacing: 0.08em;
+  margin-top: var(--space-5);
+  text-transform: uppercase;
 }
 
 .experience-panel__actions {
@@ -497,6 +563,11 @@ textarea:focus-visible {
   .team-grid,
   .site-footer__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-signals {
+    grid-template-columns: 1fr;
+    margin-top: calc(var(--space-7) * -0.45);
   }
 
   .reservation-layout {
