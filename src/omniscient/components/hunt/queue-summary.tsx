@@ -33,7 +33,7 @@ export function QueueSummary({ queue, avgJobDuration }: QueueSummaryProps) {
 
     return (
         <div className="flex items-center gap-3 px-3 py-2 glass rounded-lg text-[10px] font-mono">
-            <span className="text-zinc-500">{total} jobs</span>
+            <span className="text-zinc-500">{total} queued</span>
             <div className="h-3 w-px bg-white/[0.06]" />
 
             {completed > 0 && (
@@ -64,7 +64,7 @@ export function QueueSummary({ queue, avgJobDuration }: QueueSummaryProps) {
             {eta && (
                 <>
                     <div className="h-3 w-px bg-white/[0.06]" />
-                    <span className="text-zinc-600">~{eta}m remaining</span>
+                    <span className="text-zinc-500">~{eta}m remaining</span>
                 </>
             )}
         </div>

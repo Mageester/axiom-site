@@ -1,7 +1,5 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import Preloader from './Preloader';
 import ResponsiveImage from './ResponsiveImage';
 import { responsiveImages } from '../lib/responsiveImages';
 
@@ -10,18 +8,17 @@ type LayoutProps = {
 };
 
 const NAV_ITEMS = [
-  { label: 'Home', to: '/' },
-  { label: 'Method', to: '/method' },
-  { label: 'Work', to: '/works' },
+  { label: 'Process', to: '/process' },
+  { label: 'Work', to: '/work' },
   { label: 'About', to: '/about' },
 ];
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const layoutRef = useRef<HTMLDivElement>(null);
-  const logoTargetRef = useRef<HTMLButtonElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -37,41 +34,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    const root = layoutRef.current;
-    if (!root) return;
-
-    const targets = Array.from(root.querySelectorAll<HTMLElement>('main > section, main > article'))
-      .filter((element, index) => index > 0 && !element.hasAttribute('data-hero-root') && element.dataset.reveal !== 'off');
-
-    if (targets.length === 0) return;
-
-    targets.forEach((element, index) => {
-      element.classList.add('reveal-on-scroll');
-      element.style.setProperty('--reveal-order', String(index % 4));
-    });
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      targets.forEach((element) => element.classList.add('is-visible'));
-      return () => undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
-    );
-
-    targets.forEach((element) => observer.observe(element));
-
-    return () => observer.disconnect();
-  }, [location.pathname]);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -93,8 +55,25 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
+    const content = contentRef.current;
+    if (!content) return;
+
+    if (isMobileMenuOpen) {
+      content.setAttribute('inert', '');
+      content.setAttribute('aria-hidden', 'true');
+      return;
+    }
+
+    content.removeAttribute('inert');
+    content.removeAttribute('aria-hidden');
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
     if (!isMobileMenuOpen) {
-      lastFocusedRef.current?.focus();
+      window.requestAnimationFrame(() => {
+        const target = lastFocusedRef.current || mobileMenuButtonRef.current;
+        target?.focus();
+      });
       return;
     }
 
@@ -140,79 +119,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [isMobileMenuOpen]);
 
-  useLayoutEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const ctx = gsap.context(() => {
-      const nav = navRef.current;
-      const logo = logoTargetRef.current;
-      const navLinks = gsap.utils.toArray<HTMLElement>('[data-startup-link]');
-      const heroContent = gsap.utils
-        .toArray<HTMLElement>(
-          '[data-startup-heading], [data-startup-copy], [data-startup-actions], [data-startup-meta]'
-        )
-        .filter((element) => !element.closest('[aria-hidden="true"]'));
-      const backgrounds = gsap.utils.toArray<HTMLElement>('[data-startup-bg]');
-      const cards = gsap.utils
-        .toArray<HTMLElement>('[data-glass-card], .axiom-bento, .axiom-bento-card, .machined-card')
-        .filter((element) => !element.closest('[aria-hidden="true"]'));
-
-      const timeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      if (nav) {
-        gsap.set(nav, { autoAlpha: 0, y: -18 });
-        timeline.to(nav, { autoAlpha: 1, y: 0, duration: 0.5 }, 0);
-      }
-
-      if (logo) {
-        gsap.set(logo, { autoAlpha: 0, x: -28, transformOrigin: 'left center' });
-        timeline.to(logo, { autoAlpha: 1, x: 0, duration: 0.72, ease: 'expo.out' }, 0.08);
-      }
-
-      if (navLinks.length) {
-        gsap.set(navLinks, { autoAlpha: 0, y: -10 });
-        timeline.to(navLinks, { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.04 }, 0.18);
-      }
-
-      if (heroContent.length) {
-        gsap.set(heroContent, { autoAlpha: 0, y: 18 });
-        timeline.to(heroContent, { autoAlpha: 1, y: 0, duration: 0.62, stagger: 0.08 }, 0.22);
-      }
-
-      if (backgrounds.length) {
-        gsap.set(backgrounds, { autoAlpha: 0 });
-        timeline.to(backgrounds, { autoAlpha: 0.07, duration: 0.8, stagger: 0.08, ease: 'power1.out' }, 0.16);
-      }
-
-      if (cards.length) {
-        gsap.set(cards, { autoAlpha: 0, y: 22 });
-        timeline.to(cards, { autoAlpha: 1, y: 0, duration: 0.56, stagger: 0.05 }, 0.36);
-      }
-    }, layoutRef);
-
-    return () => {
-      ctx?.revert();
-    };
-  }, []);
-
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative pb-1 font-medium uppercase tracking-[0.2em] text-[11px] text-white/78 transition-colors duration-300 after:absolute after:bottom-[-7px] after:left-0 after:h-[1px] after:bg-amber-600 after:content-[''] after:transition-all after:duration-300 ${isActive ? 'text-white after:w-full' : 'after:w-0 hover:text-white hover:after:w-full'}`;
+    `relative pb-1 font-medium uppercase tracking-[0.16em] text-[11px] text-white/78 transition-colors duration-300 after:absolute after:bottom-[-7px] after:left-0 after:h-[1px] after:bg-amber-600 after:content-[''] after:transition-all after:duration-300 ${isActive ? 'text-white after:w-full' : 'after:w-0 hover:text-white hover:after:w-full'}`;
 
   return (
     <div ref={layoutRef} className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
-      <Preloader targetRef={logoTargetRef} />
-
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div data-startup-bg className="fixed top-[-20%] left-[-10%] h-[50vw] w-[50vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
-        <div data-startup-bg className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
-        <div data-startup-bg className="engineering-grid animate-grid-drift" />
-        <div data-startup-bg className="global-noise-floor" />
+        <div className="fixed top-[-20%] left-[-10%] h-[50vw] w-[50vw] rounded-full bg-[#B05D41] opacity-[0.14] blur-[120px]" />
+        <div className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B05D41] opacity-[0.12] blur-[120px]" />
+        <div className="engineering-grid" />
+        <div className="global-noise-floor" />
       </div>
 
       <nav
         ref={navRef}
-        data-startup-nav
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${isScrolled
             ? 'border-b border-white/[0.08] bg-[rgba(9,12,18,0.58)] backdrop-blur-sm'
             : 'border-b border-transparent bg-transparent backdrop-blur-0'
@@ -221,16 +141,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="relative h-20 flex items-center px-6 md:px-12">
           <div className="flex flex-1 basis-[44%] items-center justify-start">
             <button
-              ref={logoTargetRef}
               type="button"
               onClick={() => navigate('/')}
               className="inline-flex h-full items-center origin-left leading-none transition-transform duration-700 ease-in-out hover:scale-[1.04]"
-              aria-label="Axiom Infrastructure home"
+              aria-label="Axiom home"
             >
               <ResponsiveImage
                 source={responsiveImages.logoClear}
                 sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
-                alt="Axiom Infrastructure"
+                alt="Axiom"
                 className="block h-16 w-auto max-w-none object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125 md:h-20 lg:h-24"
                 decoding="async"
                 fetchPriority="high"
@@ -240,15 +159,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-12 font-axiomMono md:flex">
             {NAV_ITEMS.map((item) => (
-              <NavLink key={item.to} to={item.to} className={navLinkClass} data-startup-link>
+              <NavLink key={item.to} to={item.to} className={navLinkClass}>
                 {item.label}
               </NavLink>
             ))}
           </div>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
-            <NavLink to="/apply" className="btn-primary btn-attention btn-sm px-4 py-2 text-sm">
-              BOOK FREE CONSULTATION
+            <NavLink to="/apply" className="btn-primary btn-sm px-4 py-2 text-sm">
+              Apply Now
             </NavLink>
           </div>
 
@@ -256,7 +175,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <button
               ref={mobileMenuButtonRef}
               type="button"
-              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              onClick={() => {
+                lastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+                setIsMobileMenuOpen((prev) => !prev);
+              }}
               className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-[#F2F4F7] transition-all hover:border-white/35 hover:bg-white/[0.08] ${
                 isMobileMenuOpen ? 'border-white/25 bg-white/[0.08]' : 'border-white/15 bg-white/[0.03]'
               }`}
@@ -319,12 +241,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           ))}
         </nav>
 
-        <NavLink to="/apply" onClick={() => setIsMobileMenuOpen(false)} className="btn-primary btn-attention btn-lg mt-5 w-full">
-          BOOK FREE CONSULTATION
+        <NavLink to="/apply" onClick={() => setIsMobileMenuOpen(false)} className="btn-primary btn-lg mt-5 w-full">
+          Start Application
         </NavLink>
       </div>
 
-      <div className="relative z-10 pt-24 md:pt-28 noise-overlay">{children}</div>
+      <div ref={contentRef} className="relative z-10 pt-24 md:pt-28 noise-overlay">
+        {children}
+      </div>
     </div>
   );
 };

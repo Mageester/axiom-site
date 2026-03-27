@@ -117,20 +117,44 @@ function HuntInner() {
     }
 
     return (
-        <div className="max-w-7xl mx-auto space-y-4">
+        <div className="omniscient-operator max-w-7xl mx-auto space-y-4">
             {/* Hero Banner */}
             <div className="animate-slide-up">
-                <div className="flex items-center justify-between">
-                    <div>
-                        <h1 className="text-4xl font-extrabold tracking-tight">
-                            <span className="gradient-text">The Hunt</span>
-                        </h1>
-                        <p className="text-muted-foreground mt-2 text-sm max-w-xl">
-                            Build multi-target extraction queues, deep-mine prospects with AI intelligence, and auto-score every lead.
-                        </p>
-                    </div>
+                <div className="flex flex-col gap-2">
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Operator scan lane</p>
+                    <h1 className="text-4xl font-extrabold tracking-tight">
+                        <span className="gradient-text">The Hunt</span>
+                    </h1>
+                    <p className="text-muted-foreground mt-1 text-sm max-w-2xl">
+                        Define the target, launch the queue, and keep the live feed and issues panel in view while the scan runs.
+                    </p>
                 </div>
             </div>
+
+            <Card className="glass-strong rounded-2xl overflow-hidden animate-slide-up">
+                <CardHeader className="pb-3">
+                    <CardTitle className="text-sm font-bold flex items-center gap-2">
+                        <Radar className="w-4 h-4 text-emerald-400" />
+                        Scan path
+                    </CardTitle>
+                    <CardDescription className="text-[11px]">
+                        Keep the plan short: choose a target, run the queue, then resolve exceptions in the feed.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-3 md:grid-cols-3">
+                    {[
+                        { step: "01", title: "Define target", body: "Pick a niche and city pair that is worth scanning.", toneClass: "text-emerald-400/70" },
+                        { step: "02", title: "Run queue", body: "Launch the batch and watch the Ops HUD for stage changes.", toneClass: "text-cyan-400/70" },
+                        { step: "03", title: "Resolve issues", body: "Use the terminal and issues panel to handle failures fast.", toneClass: "text-amber-400/70" },
+                    ].map(item => (
+                        <div key={item.step} className="glass rounded-xl p-4 border border-white/[0.05]">
+                            <div className={`text-[10px] uppercase tracking-widest ${item.toneClass}`}>{item.step}</div>
+                            <div className="mt-2 text-sm font-bold text-white">{item.title}</div>
+                            <p className="mt-1 text-[11px] text-muted-foreground">{item.body}</p>
+                        </div>
+                    ))}
+                </CardContent>
+            </Card>
 
             {/* OPS HUD (always visible when queue exists) */}
             {(store.loading || store.session.status === "completed" || store.session.status === "canceled" || store.queue.length > 0) && (
@@ -156,10 +180,10 @@ function HuntInner() {
                         <CardHeader className="pb-3">
                             <CardTitle className="text-base font-bold flex items-center gap-2">
                                 <Target className="w-4.5 h-4.5 text-emerald-400" />
-                                Queue Builder
+                                Build Queue
                             </CardTitle>
                             <CardDescription className="text-[11px]">
-                                Add niche + city combos to process sequentially.
+                                Choose a niche and city, then stage the next scan.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -167,7 +191,7 @@ function HuntInner() {
                             <div className="space-y-1.5">
                                 <Label htmlFor="niche" className="text-[11px] font-semibold flex items-center gap-1.5">
                                     <Layers className="w-3.5 h-3.5 text-emerald-400" />
-                                    Niche / Profession
+                                    Target niche
                                 </Label>
                                 <Input
                                     id="niche" placeholder="e.g. Roofers, Med-Spas"
@@ -195,7 +219,7 @@ function HuntInner() {
                             <div className="space-y-1.5">
                                 <Label htmlFor="city" className="text-[11px] font-semibold flex items-center gap-1.5">
                                     <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-                                    Target City
+                                    Target city
                                 </Label>
                                 <Input
                                     id="city" placeholder="e.g. Kitchener"
@@ -224,14 +248,14 @@ function HuntInner() {
                                 <div className="space-y-1.5">
                                     <Label htmlFor="radius" className="text-[11px] font-semibold flex items-center gap-1.5">
                                         <Radar className="w-3.5 h-3.5 text-amber-400" />
-                                        Radius (km)
+                                        Radius
                                     </Label>
                                     <Input id="radius" type="number" value={radius} onChange={(e) => setRadius(e.target.value)} className="bg-black/30 border-white/10 text-sm" disabled={store.loading} />
                                 </div>
                                 <div className="space-y-1.5">
                                     <Label htmlFor="maxDepth" className="text-[11px] font-semibold flex items-center gap-1.5">
                                         <ArrowDown className="w-3.5 h-3.5 text-purple-400" />
-                                        Scroll Depth
+                                        Depth
                                     </Label>
                                     <Input id="maxDepth" type="number" min="1" max="50" value={maxDepth} onChange={(e) => setMaxDepth(e.target.value)} className="bg-black/30 border-white/10 text-sm" disabled={store.loading} />
                                 </div>
@@ -246,7 +270,7 @@ function HuntInner() {
                                 disabled={store.loading || !niche || !city}
                             >
                                 <Plus className="w-4 h-4 mr-2" />
-                                Add to Queue
+                                Add target
                             </Button>
                         </CardContent>
                     </Card>
@@ -258,7 +282,7 @@ function HuntInner() {
                                 <div className="flex items-center justify-between">
                                     <CardTitle className="text-sm font-bold flex items-center gap-2">
                                         <Zap className="w-4 h-4 text-amber-400" />
-                                        Extraction Queue
+                                        Active queue
                                     </CardTitle>
                                     <QueueSummary queue={store.queue} avgJobDuration={avgJobDuration} />
                                 </div>
@@ -327,12 +351,12 @@ function HuntInner() {
                                     {store.loading ? (
                                         <span className="flex items-center gap-2">
                                             <Radar className="w-4 h-4 animate-pulse" />
-                                            Processing Queue...
+                                            Running scan...
                                         </span>
                                     ) : (
                                         <span className="flex items-center gap-2">
                                             <Play className="w-4 h-4" />
-                                            Launch Queue ({pendingCount} {pendingCount === 1 ? "target" : "targets"})
+                                            Start scan ({pendingCount} {pendingCount === 1 ? "target" : "targets"})
                                         </span>
                                     )}
                                 </Button>
@@ -340,12 +364,6 @@ function HuntInner() {
                         </Card>
                     )}
 
-                    {/* Issues Panel */}
-                    <IssuesPanel
-                        errors={store.session.errors}
-                        onRetryJob={retryJob}
-                        onDismiss={dismissError}
-                    />
                 </div>
 
                 {/* Right Column — Terminal */}
@@ -355,6 +373,12 @@ function HuntInner() {
                         logs={store.logs}
                         onTogglePin={store.togglePin}
                         loading={store.loading}
+                    />
+
+                    <IssuesPanel
+                        errors={store.session.errors}
+                        onRetryJob={retryJob}
+                        onDismiss={dismissError}
                     />
 
                     {/* Completion Footer */}

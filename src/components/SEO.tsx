@@ -4,18 +4,31 @@ interface SEOProps {
   title: string;
   description: string;
   image?: string;
-  schema?: Record<string, any>;
+  canonicalPath?: string;
 }
 
 const DEFAULT_OG_IMAGE = '/og-image.png';
 const SITE_URL = 'https://getaxiom.ca';
 
-export const SEO: React.FC<SEOProps> = ({ title, description, image, schema }) => {
+function getCanonicalUrl(canonicalPath?: string) {
+  if (canonicalPath) {
+    return new URL(canonicalPath, SITE_URL).toString();
+  }
+
+  if (typeof window !== 'undefined') {
+    return `${window.location.origin}${window.location.pathname}`;
+  }
+
+  return SITE_URL;
+}
+
+export const SEO: React.FC<SEOProps> = ({ title, description, image, canonicalPath }) => {
   useEffect(() => {
     document.title = title;
 
     const ogImage = image || DEFAULT_OG_IMAGE;
     const fullImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
+    const canonicalUrl = getCanonicalUrl(canonicalPath);
 
     const metaTags: Record<string, string> = {
       'description': description,
@@ -23,8 +36,8 @@ export const SEO: React.FC<SEOProps> = ({ title, description, image, schema }) =
       'og:description': description,
       'og:image': fullImageUrl,
       'og:type': 'website',
-      'og:url': SITE_URL,
-      'og:site_name': 'Axiom Infrastructure',
+      'og:url': canonicalUrl,
+      'og:site_name': 'Axiom',
       'twitter:card': 'summary_large_image',
       'twitter:title': title,
       'twitter:description': description,
@@ -45,25 +58,15 @@ export const SEO: React.FC<SEOProps> = ({ title, description, image, schema }) =
       el.setAttribute('content', value);
     });
 
-    // JSON-LD Schema
-    let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
-    if (schema) {
-      if (!scriptTag) {
-        scriptTag = document.createElement('script');
-        scriptTag.setAttribute('type', 'application/ld+json');
-        document.head.appendChild(scriptTag);
-      }
-      scriptTag.textContent = JSON.stringify(schema);
-    } else if (scriptTag) {
-      scriptTag.remove();
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
     }
+    canonicalLink.setAttribute('href', canonicalUrl);
 
-    return () => {
-      if (scriptTag && document.head.contains(scriptTag)) {
-        scriptTag.remove();
-      }
-    };
-  }, [title, description, image, schema]);
+  }, [title, description, image, canonicalPath]);
 
   return null;
 };

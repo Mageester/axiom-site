@@ -246,7 +246,32 @@ function TriageInner() {
         [leads]);
 
     return (
-        <div className="max-w-[1200px] mx-auto flex flex-col gap-4 h-[calc(100vh-80px)]">
+        <div className="omniscient-operator max-w-[1200px] mx-auto flex flex-col gap-4 h-[calc(100vh-80px)]">
+            <div className="animate-slide-up">
+                <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
+                    <div className="max-w-2xl">
+                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Decision lane</p>
+                        <h1 className="text-4xl font-extrabold tracking-tight">
+                            <span className="gradient-text">Triage</span>
+                        </h1>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                            Keep the decision surface calm: review one lead, take one action, and move on.
+                        </p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                        <div className="glass rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-emerald-400">
+                            {Math.max(0, remaining)} remaining
+                        </div>
+                        <div className="glass rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-cyan-400">
+                            {stats.kept} kept
+                        </div>
+                        <div className="glass rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-amber-400">
+                            {stats.followUp} follow-up
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* Filter bar */}
             <TriageFilterBar
                 filters={filters}

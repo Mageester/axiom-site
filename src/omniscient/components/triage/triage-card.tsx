@@ -57,7 +57,7 @@ export function TriageCard({ lead, className }: { lead: TriageLead; className?: 
 
     return (
         <div className={cn(
-            "glass-ultra rounded-2xl p-6 relative overflow-hidden transition-all duration-300",
+            "glass-ultra rounded-2xl p-5 lg:p-6 relative overflow-hidden transition-all duration-300",
             tierConfig.glow,
             className
         )}>
@@ -65,11 +65,11 @@ export function TriageCard({ lead, className }: { lead: TriageLead; className?: 
             <div className={cn("absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r", tierConfig.gradient)} />
 
             {/* 1) Header */}
-            <div className="flex items-start justify-between mb-5">
+            <div className="flex items-start justify-between gap-4 mb-5">
                 <div className="min-w-0 flex-1">
                     <h2 className="text-xl font-bold text-white leading-tight truncate">{lead.businessName}</h2>
                     <div className="flex items-center gap-3 mt-1.5">
-                        <span className="text-[11px] text-purple-400/80 font-mono">{lead.niche}</span>
+                        <span className="text-[11px] uppercase tracking-widest text-purple-400/80 font-mono">{lead.niche}</span>
                         <span className="text-[11px] text-zinc-500 flex items-center gap-1">
                             <MapPin className="w-3 h-3" /> {lead.city}
                         </span>
@@ -102,59 +102,67 @@ export function TriageCard({ lead, className }: { lead: TriageLead; className?: 
             </div>
 
             {/* 2) Contact strip */}
-            <div className="flex items-center gap-6 mb-5 py-3 px-4 glass rounded-xl">
-                {lead.phone ? (
-                    <div className="flex items-center gap-2">
-                        <Phone className="w-3.5 h-3.5 text-zinc-400" />
-                        <span className="text-sm font-mono text-zinc-200">{lead.phone}</span>
-                        <CopyButton value={lead.phone} label="Copy phone" size="xs" />
-                        <a
-                            href={`tel:${lead.phone}`}
-                            className="text-emerald-400 hover:text-emerald-300 transition-colors"
-                            title="Call now"
-                        >
-                            <PhoneCall className="w-3.5 h-3.5" />
-                        </a>
-                        {lead.phoneConfidence != null && (
-                            <MiniBar value={lead.phoneConfidence} color="bg-cyan-400" />
-                        )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+                <div className="glass rounded-xl p-4">
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] uppercase tracking-widest text-emerald-400/60">Call first</span>
+                        {lead.phone && <CopyButton value={lead.phone} label="Copy phone" size="xs" />}
                     </div>
-                ) : (
-                    <div className="flex items-center gap-2 text-zinc-700">
-                        <Phone className="w-3.5 h-3.5" />
-                        <span className="text-xs italic">No phone</span>
-                    </div>
-                )}
+                    {lead.phone ? (
+                        <div className="flex items-center gap-2">
+                            <Phone className="w-3.5 h-3.5 text-zinc-400" />
+                            <span className="text-sm font-mono text-zinc-200">{lead.phone}</span>
+                            <a
+                                href={`tel:${lead.phone}`}
+                                className="text-emerald-400 hover:text-emerald-300 transition-colors"
+                                title="Call now"
+                            >
+                                <PhoneCall className="w-3.5 h-3.5" />
+                            </a>
+                            {lead.phoneConfidence != null && (
+                                <MiniBar value={lead.phoneConfidence} color="bg-cyan-400" />
+                            )}
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-2 text-zinc-700">
+                            <Phone className="w-3.5 h-3.5" />
+                            <span className="text-xs italic">No phone</span>
+                        </div>
+                    )}
+                </div>
 
-                <div className="h-4 w-px bg-white/[0.06]" />
-
-                {lead.email ? (
-                    <div className="flex items-center gap-2">
-                        <Mail className="w-3.5 h-3.5 text-cyan-400/60" />
-                        <span className="text-sm font-mono text-cyan-300/80 truncate max-w-[200px]">{lead.email}</span>
-                        <CopyButton value={lead.email} label="Copy email" size="xs" />
-                        {lead.emailType && (
-                            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/[0.04] text-zinc-500">
-                                {lead.emailType}
-                            </span>
-                        )}
-                        {lead.emailConfidence != null && (
-                            <MiniBar value={lead.emailConfidence} color="bg-emerald-400" />
-                        )}
+                <div className="glass rounded-xl p-4">
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] uppercase tracking-widest text-cyan-400/60">Email fallback</span>
+                        {lead.email && <CopyButton value={lead.email} label="Copy email" size="xs" />}
                     </div>
-                ) : (
-                    <div className="flex items-center gap-2 text-zinc-700">
-                        <Mail className="w-3.5 h-3.5" />
-                        <span className="text-xs italic">No email</span>
-                    </div>
-                )}
+                    {lead.email ? (
+                        <div className="flex items-center gap-2">
+                            <Mail className="w-3.5 h-3.5 text-cyan-400/60" />
+                            <span className="text-sm font-mono text-cyan-300/80 truncate max-w-[200px]">{lead.email}</span>
+                            {lead.emailType && (
+                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/[0.04] text-zinc-500">
+                                    {lead.emailType}
+                                </span>
+                            )}
+                            {lead.emailConfidence != null && (
+                                <MiniBar value={lead.emailConfidence} color="bg-emerald-400" />
+                            )}
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-2 text-zinc-700">
+                            <Mail className="w-3.5 h-3.5" />
+                            <span className="text-xs italic">No email</span>
+                        </div>
+                    )}
+                </div>
             </div>
 
             {/* 3) Evidence: Pain Signals + Website Assessment */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                 {/* Pain signals */}
                 <div className="glass rounded-xl p-4">
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground/40 mb-2">Pain Signals</div>
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-2">Why this lead</div>
                     {painSignals.length > 0 ? (
                         <div className="space-y-1.5">
                             {painSignals.slice(0, 3).map((sig, i) => (
@@ -171,7 +179,7 @@ export function TriageCard({ lead, className }: { lead: TriageLead; className?: 
 
                 {/* Website assessment */}
                 <div className="glass rounded-xl p-4">
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground/40 mb-2">Website Assessment</div>
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-2">Website read</div>
                     {assessment ? (
                         <div>
                             <div className="flex items-center gap-3 mb-3">
@@ -220,7 +228,7 @@ export function TriageCard({ lead, className }: { lead: TriageLead; className?: 
                 {lead.callOpener && (
                     <div className="glass rounded-xl p-4">
                         <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-[10px] uppercase tracking-widest text-emerald-400/50">Call Opener</span>
+                            <span className="text-[10px] uppercase tracking-widest text-emerald-400/50">Opening line</span>
                             <CopyButton value={lead.callOpener} label="Copy opener" size="xs" />
                         </div>
                         <p className="text-[11px] text-zinc-300 leading-relaxed line-clamp-2">{lead.callOpener}</p>
@@ -229,7 +237,7 @@ export function TriageCard({ lead, className }: { lead: TriageLead; className?: 
                 {lead.followUpQuestion && (
                     <div className="glass rounded-xl p-4">
                         <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-[10px] uppercase tracking-widest text-cyan-400/50">Follow-up</span>
+                            <span className="text-[10px] uppercase tracking-widest text-cyan-400/50">Second touch</span>
                             <CopyButton value={lead.followUpQuestion} label="Copy follow-up" size="xs" />
                         </div>
                         <p className="text-[11px] text-zinc-300 leading-relaxed line-clamp-1">{lead.followUpQuestion}</p>

@@ -9,6 +9,21 @@ export function isOpsHost(request: Request) {
     return /^ops\./i.test(host) || host.toLowerCase() === 'ops.getaxiom.ca';
 }
 
+const STATIC_FILE_PATTERN = /\.[a-z0-9]+$/i;
+const PUBLIC_ASSET_PREFIXES = ['/api/', '/assets/', '/images/', '/photos/', '/fonts/', '/cdn-cgi/'];
+
+export function shouldBypassPublicShell(pathname: string) {
+    if (!pathname || pathname === '/') {
+        return false;
+    }
+
+    if (PUBLIC_ASSET_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
+        return true;
+    }
+
+    return STATIC_FILE_PATTERN.test(pathname);
+}
+
 export async function requireProtectedPage(context: any, options: PageGuardOptions = {}) {
     const user = await resolveOmniscientUserFromRequest(context.request, context.env);
     const url = new URL(context.request.url);

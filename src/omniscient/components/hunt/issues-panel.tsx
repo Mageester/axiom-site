@@ -29,7 +29,7 @@ export function IssuesPanel({ errors, onRetryJob, onDismiss }: IssuesPanelProps)
             <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4 text-red-400" />
-                    <span className="text-xs font-bold text-red-400">
+                    <span className="text-xs font-bold text-red-400 uppercase tracking-widest">
                         Issues ({activeErrors.length})
                     </span>
                 </div>

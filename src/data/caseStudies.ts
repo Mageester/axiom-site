@@ -14,6 +14,12 @@ export type CaseStudyEntry = {
     built: string[];
     targets: string[];
     deliverables: string[];
+    experienceShift: string;
+    before: string;
+    after: string;
+    strategy: string;
+    mobileFocus: string;
+    proofPoints: string[];
     ctaLabel?: string;
 };
 
@@ -51,6 +57,16 @@ export const caseStudies: CaseStudyEntry[] = [
             'Mobile-first layout and interaction polish',
             'Technical SEO and metadata-ready page structure'
         ],
+        experienceShift: 'Moves the first impression from a generic restaurant page to a calm reservation-led hospitality experience.',
+        before: 'The original experience leaves the booking path too easy to miss and the atmosphere too flat to sell the room.',
+        after: 'The new structure puts the dining mood, reservation action, and menu confidence where diners expect them.',
+        strategy: 'Lead with a cinematic hero, make the booking action obvious, and keep the menu legible on mobile.',
+        mobileFocus: 'Shorter blocks and a tighter CTA stack keep the booking path fast on phones.',
+        proofPoints: [
+            'Reservation path stays visible above the fold',
+            'Menu information is easier to scan on mobile',
+            'Visual mood supports premium dining expectations',
+        ],
         ctaLabel: 'Request a Similar Build'
     },
     {
@@ -69,6 +85,16 @@ export const caseStudies: CaseStudyEntry[] = [
         built: ['Demonstrates premium portfolio framing with stronger consultation intent', 'Consultation-first CTA system', 'Service area and service category structure'],
         targets: ['Target: strong visual credibility on mobile', 'Target: better consultation intent capture'],
         deliverables: ['Homepage + services + projects architecture', 'Service-area and consultation flow', 'Premium residential proof presentation'],
+        experienceShift: 'Turns a portfolio-heavy site into a consultation-first presentation with clearer local trust.',
+        before: 'The old framing leaves new visitors scanning work samples without a crisp next step.',
+        after: 'The revised flow uses the project gallery as proof, then guides the right homeowner toward a consultation.',
+        strategy: 'Use project imagery to build credibility quickly, then surface consultation intent before the visitor drifts.',
+        mobileFocus: 'Large visual blocks stay readable while the next-step CTA remains easy to reach on smaller screens.',
+        proofPoints: [
+            'Portfolio evidence does more of the selling',
+            'Consultation intent is clear from the first screen',
+            'Service-area language helps the right local buyer self-select',
+        ],
         ctaLabel: 'Request a Similar Build'
     },
     {
@@ -87,6 +113,16 @@ export const caseStudies: CaseStudyEntry[] = [
         built: ['Demonstrates CTA hierarchy for urgent versus planned inquiries', 'Trust section layout', 'Performance-first page shell'],
         targets: ['Target: clearer first-click conversion path', 'Target: improved mobile readability'],
         deliverables: ['Homepage + services + inspection flow', 'Roofing service architecture', 'Operational trust and CTA hierarchy system'],
+        experienceShift: 'Replaces competing CTAs with a clearer split between urgent repairs and planned projects.',
+        before: 'The earlier structure asks visitors to choose between too many actions at the same time.',
+        after: 'The new flow distinguishes emergency intent from planned work and makes the inspection path obvious.',
+        strategy: 'Prioritize inspection-led trust, then route urgent and planned work into separate decision paths.',
+        mobileFocus: 'CTA order and trust blocks are tuned so a mobile visitor can decide without hunting.',
+        proofPoints: [
+            'Urgent versus planned intent is visually separated',
+            'The first action is easier to understand',
+            'Trust is established before the quote ask',
+        ],
         ctaLabel: 'Request a Similar Build'
     }
 ];

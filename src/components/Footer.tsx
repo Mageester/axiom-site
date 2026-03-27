@@ -23,17 +23,18 @@ const Footer: React.FC = () => {
         </div>
 
         <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Navigate</p>
+          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Explore</p>
           <NavLink to="/" className={routeLinkClass}>Home</NavLink>
-          <NavLink to="/method" className={routeLinkClass}>Method</NavLink>
-          <NavLink to="/works" className={routeLinkClass}>Work</NavLink>
+          <NavLink to="/work" className={routeLinkClass}>Work</NavLink>
+          <NavLink to="/process" className={routeLinkClass}>Process</NavLink>
+          <NavLink to="/apply" className={routeLinkClass}>Apply</NavLink>
           <NavLink to="/about" className={routeLinkClass}>About</NavLink>
         </nav>
 
         <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Engagement</p>
-          <NavLink to="/method" className={routeLinkClass}>Delivery Method</NavLink>
-          <NavLink to="/works" className={routeLinkClass}>Selected Work</NavLink>
+          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Next step</p>
+          <NavLink to="/apply#project-application-form" className={routeLinkClass}>Start Application</NavLink>
+          <NavLink to="/work" className={routeLinkClass}>Featured Proof</NavLink>
         </nav>
 
         <nav className="space-y-3">

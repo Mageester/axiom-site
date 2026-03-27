@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
@@ -34,43 +34,43 @@ type ExpandableItem = {
 
 const SECTION_LINKS: readonly SectionLink[] = [
   { id: 'process', label: 'Process' },
-  { id: 'your-stack', label: 'Your Stack', shortLabel: 'Stack' },
-  { id: 'clarify', label: 'What We Clarify', shortLabel: 'Clarify' },
-  { id: 'faq', label: 'FAQ' },
+  { id: 'setup', label: 'Setup', shortLabel: 'Setup' },
+  { id: 'clarify', label: 'Clarify', shortLabel: 'Clarify' },
+  { id: 'faq', label: 'Questions', shortLabel: 'FAQ' },
 ];
 
 const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     id: 'call',
     number: '01',
-    title: 'Online Strategy Call',
+    title: 'Discovery Call',
     summary:
-      'Every project starts with a focused 30-minute Zoom meeting to understand your business, priorities, and required website capabilities.',
+      'We start with a focused call to understand the business, the audience, and the outcomes the site needs to support.',
     points: [
-      'Online only, clear agenda, no wasted time',
-      'Pages, menus, forms, maps, booking, gallery, quote flow',
+      'Short call, clear agenda, no wasted time',
+      'Pages, menus, forms, maps, booking, galleries, quotes',
     ],
   },
   {
     id: 'scope',
     number: '02',
-    title: 'Scope and Package Recommendation',
+    title: 'Scope + Recommendation',
     summary:
-      'We translate requirements into a clear scope and recommend the package that best fits your goals, timeline, and technical needs.',
+      'We translate the request into a practical scope and recommend the package that matches the project size and timing.',
     points: [
-      'What is included now vs. phased later',
-      'Delivery model aligned to your business reality',
+      'What ships now vs. what can phase later',
+      'A delivery path aligned to the business reality',
     ],
   },
   {
     id: 'plan',
     number: '03',
-    title: 'Website Planning and Structure',
+    title: 'Structure and Content Plan',
     summary:
-      'Before build starts, we define structure, navigation, and conversion pathways so each page has a clear purpose.',
+      'Before build starts, we define structure, navigation, and conversion pathways so every page has a clear job.',
     points: [
       'Page hierarchy and menu logic',
-      'Content and CTA structure for faster buyer decisions',
+      'Content and CTA structure that supports faster decisions',
     ],
   },
   {
@@ -87,9 +87,9 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     id: 'launch',
     number: '05',
-    title: 'Launch and Handover',
+    title: 'Launch and Handoff',
     summary:
-      'We launch through a controlled release process and ensure everything runs flawlessly before handing over the keys.',
+      'We launch through a controlled release process and make sure everything is stable before handoff.',
     points: [
       'DNS, hosting, and domain routing handled cleanly',
       'Post-launch checks for reliability and speed',
@@ -101,9 +101,9 @@ const STACK_OPTIONS: readonly StackOption[] = [
   {
     id: 'current',
     label: 'Work Within Current Setup',
-    title: 'Work within your current setup and improve what matters',
+    title: 'Improve the current setup without forcing a move',
     summary:
-      'If your current domain and hosting are already in a good place, we can build within that environment and upgrade the site without forcing a full move.',
+      'If your current domain and hosting are already in good shape, we can build within that environment and upgrade the site without a full move.',
     bullets: [
       'Keep your current domain and provider',
       'Avoid unnecessary migration work',
@@ -165,20 +165,20 @@ const CLARIFY_ITEMS: readonly ExpandableItem[] = [
 
 const FAQ_ITEMS: readonly ExpandableItem[] = [
   {
-    title: 'How are consultations conducted?',
-    body: 'Consultations are conducted online only through Zoom. This keeps scheduling fast and keeps the process focused.',
+    title: 'How does the project start?',
+    body: 'Everything begins with a short intake call so we can understand the business, the audience, and the outcomes the site needs to support.',
   },
   {
     title: 'How long is the first meeting?',
-    body: 'The initial consultation is 30 minutes. We use that time to understand your business and define what the website must include.',
+    body: 'The first call is 30 minutes. We use that time to understand your goals and determine whether the project is a fit.',
   },
   {
     title: 'Can Axiom work with my existing domain and provider?',
-    body: 'Yes. If your current setup is workable, we can build around it. If needed, we can also handle infrastructure directly.',
+    body: 'Yes. If your current setup is workable, we can build around it. If needed, we can also manage the technical side directly.',
   },
   {
     title: 'When do you recommend a package?',
-    body: 'After the strategy call and scope definition. Recommendations are based on the project requirements and delivery needs.',
+    body: 'After the intake and scope definition. Recommendations are based on the project requirements and delivery needs.',
   },
 ];
 
@@ -234,7 +234,6 @@ const Infrastructure: React.FC = () => {
   const [openClarify, setOpenClarify] = useState<number>(0);
   const [openFaq, setOpenFaq] = useState<number>(0);
   const [activeProcessStep, setActiveProcessStep] = useState<number>(0);
-  const sectionScrollFrame = useRef<number | null>(null);
 
   const activeStackData = useMemo(
     () => STACK_OPTIONS.find((option) => option.id === activeStack) ?? STACK_OPTIONS[0],
@@ -282,45 +281,6 @@ const Infrastructure: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  useLayoutEffect(() => {
-    const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
-    if (nodes.length === 0) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      nodes.forEach((node) => node.classList.add('is-visible'));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries, currentObserver) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          currentObserver.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
-    );
-
-    nodes.forEach((node, index) => {
-      node.classList.add('reveal-on-scroll');
-      node.style.setProperty('--reveal-order', String(index % 6));
-      observer.observe(node);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(
-    () => () => {
-      if (sectionScrollFrame.current !== null) {
-        window.cancelAnimationFrame(sectionScrollFrame.current);
-      }
-    },
-    []
-  );
-
   const scrollToSection = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     const isPlainLeftClick =
       event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
@@ -329,40 +289,8 @@ const Infrastructure: React.FC = () => {
     const target = document.getElementById(sectionId);
     if (!target) return;
     event.preventDefault();
-
-    const topOffset = window.innerWidth >= 768 ? 132 : 118;
-    const targetTop = Math.max(target.getBoundingClientRect().top + window.scrollY - topOffset, 0);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (prefersReducedMotion) {
-      window.scrollTo({ top: targetTop, left: 0, behavior: 'auto' });
-      return;
-    }
-
-    const startTop = window.scrollY;
-    const distance = targetTop - startTop;
-    const duration = 560;
-    const startedAt = performance.now();
-    const easeInOut = (time: number) =>
-      time < 0.5 ? 4 * time * time * time : 1 - Math.pow(-2 * time + 2, 3) / 2;
-
-    if (sectionScrollFrame.current !== null) {
-      window.cancelAnimationFrame(sectionScrollFrame.current);
-    }
-
-    const animate = (now: number) => {
-      const elapsed = Math.min((now - startedAt) / duration, 1);
-      const eased = easeInOut(elapsed);
-      window.scrollTo({ top: startTop + distance * eased, left: 0, behavior: 'auto' });
-
-      if (elapsed < 1) {
-        sectionScrollFrame.current = window.requestAnimationFrame(animate);
-      } else {
-        sectionScrollFrame.current = null;
-      }
-    };
-
-    sectionScrollFrame.current = window.requestAnimationFrame(animate);
+    target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
   };
 
   const processProgress = ((activeProcessStep + 1) / PROCESS_STEPS.length) * 100;
@@ -370,13 +298,14 @@ const Infrastructure: React.FC = () => {
   return (
     <>
       <SEO
-        title="Method | Axiom"
-        description="Premium web systems for high-trust service firms. A clear process from consultation to a finalized, high-performing website."
+        title="Process | Axiom"
+        description="Premium web systems for high-trust service firms. A clear process from intake to a finalized, high-performing website."
+        canonicalPath="/process"
       />
 
       <Layout>
         <main className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
-          <RevealBlock as="section" data-hero-root className="pt-8 md:pt-16" variant="feature">
+          <RevealBlock as="section" data-hero-root className="pt-8 md:pt-16 scroll-mt-28 md:scroll-mt-32" variant="feature">
             <div className="max-w-5xl">
               <article className="md:pr-6" data-reveal>
                 <div className="mt-4 max-w-4xl overflow-hidden">
@@ -385,11 +314,11 @@ const Infrastructure: React.FC = () => {
                   </h1>
                 </div>
                 <p className="mt-5 max-w-prose text-base leading-relaxed text-slate-300 md:text-lg">
-                  A clear, structured path from your first Zoom consultation to launch. No guesswork, no bloated process, and no unclear handoff.
+                  A clear, structured path from intake to launch. No guesswork, no bloated process, and no unclear handoff.
                 </p>
                 <div className="mt-8">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                            Book Free Consultation
+                    Apply for a Project
                   </Link>
                 </div>
               </article>
@@ -398,7 +327,7 @@ const Infrastructure: React.FC = () => {
 
           <div className="z-30 mt-8 md:sticky md:top-24" data-reveal>
             <nav
-              aria-label="Method page sections"
+              aria-label="Process page sections"
               className="hide-scrollbar mx-auto w-full overflow-x-auto rounded-2xl border border-white/10 bg-[rgba(12,16,25,0.82)] p-1.5 backdrop-blur-lg md:w-fit md:rounded-full md:p-1.5"
             >
               <ul className="flex min-w-max items-center gap-0.5 md:gap-1">
@@ -426,7 +355,7 @@ const Infrastructure: React.FC = () => {
             </nav>
           </div>
 
-          <RevealBlock as="section" id="process" data-method-section className="pt-14 md:pt-20">
+          <RevealBlock as="section" id="process" data-method-section className="scroll-mt-28 pt-14 md:scroll-mt-32 md:pt-20">
             <div className="mx-auto w-full max-w-[1220px]">
               <div className="mx-auto w-full max-w-[740px]" data-reveal>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Clear steps from first call to launch.</h2>
@@ -485,7 +414,7 @@ const Infrastructure: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" id="your-stack" data-method-section className="pt-14 md:pt-18">
+          <RevealBlock as="section" id="setup" data-method-section className="pt-14 md:pt-18 scroll-mt-28 md:scroll-mt-32">
             <div className="mb-6 max-w-4xl" data-reveal>
               <h2 className="mt-1 text-[clamp(1.95rem,4.6vw,3.35rem)] font-bold leading-[1.08] tracking-tight text-[#F2F4F7]">
                 Keep what works. Replace what doesn&apos;t.
@@ -546,7 +475,7 @@ const Infrastructure: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" id="clarify" data-method-section className="pt-16 md:pt-22">
+          <RevealBlock as="section" id="clarify" data-method-section className="pt-16 md:pt-22 scroll-mt-28 md:scroll-mt-32">
             <div className="mb-7" data-reveal>
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What We Clarify</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Every project starts with a clear plan.</h2>
@@ -583,9 +512,9 @@ const Infrastructure: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" id="faq" data-method-section className="pt-16 md:pt-22">
+          <RevealBlock as="section" id="faq" data-method-section className="pt-16 md:pt-22 scroll-mt-28 md:scroll-mt-32">
             <div className="mb-7" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">FAQ</p>
+              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Questions</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Common process questions.</h2>
             </div>
 
@@ -620,21 +549,21 @@ const Infrastructure: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
+          <RevealBlock as="section" className="pt-16 md:pt-22 scroll-mt-28 md:scroll-mt-32" variant="feature">
             <div
               className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12"
               data-reveal
             >
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Final Step</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Book your consultation.
+                Apply when you&apos;re ready.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
                 We will review your requirements and recommend the package that best fits your business.
               </p>
               <div className="mt-8 flex justify-center">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                                Book Free Consultation
+                  Apply for a Project
                 </Link>
               </div>
             </div>

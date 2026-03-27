@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useLayoutEffect, type ReactNode } from "react";
 
 interface PerformancePrefs {
     reducedMotion: boolean;
@@ -17,29 +17,28 @@ const PerformanceContext = createContext<PerformanceCtx>({
 const STORAGE_KEY = "omniscient-perf-mode";
 
 export function PerformanceProvider({ children }: { children: ReactNode }) {
-    const [reducedMotion, setReducedMotion] = useState(false);
+    const [reducedMotion, setReducedMotion] = useState(true);
 
     useEffect(() => {
-        // Honour OS preference
         const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
         const stored = localStorage.getItem(STORAGE_KEY);
 
         if (stored !== null) {
             setReducedMotion(stored === "true");
-        } else if (mq.matches) {
+        } else {
             setReducedMotion(true);
         }
 
         const handler = (e: MediaQueryListEvent) => {
-            if (localStorage.getItem(STORAGE_KEY) === null) {
-                setReducedMotion(e.matches);
+            if (localStorage.getItem(STORAGE_KEY) === null && e.matches) {
+                setReducedMotion(true);
             }
         };
         mq.addEventListener("change", handler);
         return () => mq.removeEventListener("change", handler);
     }, []);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         document.documentElement.classList.toggle("perf-mode", reducedMotion);
     }, [reducedMotion]);
 
