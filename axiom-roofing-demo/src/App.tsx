@@ -20,7 +20,7 @@ const navItems: NavItem[] = [
 ];
 
 const heroSignals = [
-  { label: 'Priority intake', value: 'Call first for leak triage' },
+  { label: 'Priority intake', value: 'Call first for active leaks' },
   { label: 'Scope clarity', value: 'Photo-backed before crew day' },
   { label: 'Service area', value: 'Toronto + Durham' },
 ];
@@ -77,7 +77,7 @@ const trustSignals = [
 const contactExpectations = [
   'Initial response reviewed manually',
   'Issue-first inspection sequencing before quoting',
-  'Clear recommendation before any crew booking',
+  'Address and access details confirmed on follow-up',
 ];
 
 const imagery = {
@@ -173,10 +173,10 @@ const Hero: React.FC = () => (
     <div className="site-container hero-grid">
       <div>
         <p className="section-kicker">Roofing and exterior protection | Toronto and Durham</p>
-        <h1 className="hero-title">Photo-backed inspections, repairs, and replacements with a clean scope before work begins.</h1>
+        <h1 className="hero-title">Photo-backed roof inspections with a clear next step before work begins.</h1>
         <p className="hero-copy">
-          We identify the failure point, document the risk, and quote the smallest durable fix first. If
-          replacement is the right call, you’ll know why before crew day.
+          We identify the failure point, document the risk, and recommend the smallest durable fix first. If
+          replacement is the right call, you'll know why before crew day.
         </p>
 
         <div className="hero-actions">
@@ -371,7 +371,7 @@ const ContactSection: React.FC = () => {
           <SectionIntro
             eyebrow="Inspection request"
             title="Send the issue and we will return the clear next step."
-            copy="For active leaks, call first so temporary protection can be triaged. For standard inspections, send the address, condition notes, and timing."
+            copy="For active leaks, call first so temporary protection can be triaged. For standard inspections, send the condition notes and timing. Address can follow during review."
           />
 
           <a href="tel:16475550164" className="btn-primary mt-8 w-full sm:w-auto">
@@ -414,11 +414,6 @@ const ContactSection: React.FC = () => {
             </div>
 
             <label>
-              <span className="field-label">Property address</span>
-              <input type="text" className="field-input" />
-            </label>
-
-            <label>
               <span className="field-label">Issue details</span>
               <textarea
                 rows={5}
@@ -440,21 +435,43 @@ const ContactSection: React.FC = () => {
 
 const Footer: React.FC = () => (
   <footer className="site-footer">
-    <div className="site-container footer-grid">
-      <div>
-        <p className="footer-brand">Blackridge Roofing &amp; Exteriors</p>
-        <p className="footer-meta">Residential roofing and exterior support across Toronto and Durham.</p>
-      </div>
-      <div className="footer-links">
-        {navItems.map((item) => (
-          <a key={item.id} href={item.href}>
-            {item.label}
+    <div className="site-container">
+      <div className="footer-cta">
+        <div className="footer-cta-copy">
+          <p className="footer-cta-kicker">Need a clear next step?</p>
+          <h2 className="footer-cta-title">Call for triage or request an inspection.</h2>
+          <p className="footer-cta-body">
+            We review the issue, confirm the right scope, and make sure the recommendation is written before
+            crew day.
+          </p>
+        </div>
+
+        <div className="footer-cta-actions">
+          <a href="tel:16475550164" className="btn-secondary">
+            Call for triage
           </a>
-        ))}
+          <a href="#contact" className="btn-primary">
+            Request inspection
+          </a>
+        </div>
       </div>
-      <div>
-        <p className="footer-meta">Licensed and insured. Scope and warranty details provided in writing.</p>
-        <p className="footer-meta">Copyright {new Date().getFullYear()} Blackridge Roofing &amp; Exteriors.</p>
+
+      <div className="footer-grid">
+        <div>
+          <p className="footer-brand">Blackridge Roofing &amp; Exteriors</p>
+          <p className="footer-meta">Residential roofing and exterior support across Toronto and Durham.</p>
+        </div>
+        <div className="footer-links">
+          {navItems.map((item) => (
+            <a key={item.id} href={item.href}>
+              {item.label}
+            </a>
+          ))}
+        </div>
+        <div>
+          <p className="footer-meta">Licensed and insured. Warranty and scope details provided in writing.</p>
+          <p className="footer-meta">Copyright {new Date().getFullYear()} Blackridge Roofing &amp; Exteriors.</p>
+        </div>
       </div>
     </div>
   </footer>

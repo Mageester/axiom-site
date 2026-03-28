@@ -436,6 +436,167 @@ textarea:focus-visible {
   padding: var(--space-4) 0 0;
 }
 
+.about-values {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.value-row {
+  background: color-mix(in srgb, var(--color-surface) 86%, black);
+  border: 1px solid color-mix(in srgb, var(--color-border) 90%, transparent);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--space-3);
+  min-height: 100%;
+  padding: var(--space-5);
+}
+
+.value-row__eyebrow,
+.team-row__role,
+.reservation-brief__eyebrow,
+.site-footer__eyebrow {
+  color: var(--color-brand-strong);
+  font-size: var(--size-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.value-row h3,
+.team-row h3 {
+  font-family: var(--font-display);
+  font-size: var(--size-lg);
+}
+
+.value-row p,
+.team-row p {
+  color: var(--color-text-secondary);
+}
+
+.team-rows {
+  border-top: 1px solid var(--color-border);
+}
+
+.team-row {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: var(--space-4) 0;
+}
+
+.team-row + .team-row {
+  border-top: 1px solid var(--color-border);
+}
+
+.reservation-brief {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+}
+
+.reservation-brief__panel {
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--color-surface) 88%, black),
+    color-mix(in srgb, var(--color-surface-strong) 84%, black)
+  );
+  border: 1px solid color-mix(in srgb, var(--color-border) 92%, transparent);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-6);
+}
+
+.reservation-brief__panel h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  line-height: 1.08;
+}
+
+.reservation-brief__panel p {
+  color: var(--color-text-secondary);
+}
+
+.reservation-brief__links {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.reservation-link {
+  background: color-mix(in srgb, var(--color-surface) 84%, black);
+  border: 1px solid color-mix(in srgb, var(--color-border) 92%, transparent);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.reservation-link:hover,
+.reservation-link:focus-visible {
+  border-color: color-mix(in srgb, var(--color-brand-strong) 44%, var(--color-border));
+  background: color-mix(in srgb, var(--color-surface-strong) 88%, black);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.reservation-link span {
+  color: var(--color-text-muted);
+  font-size: var(--size-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reservation-link strong {
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: var(--size-lg);
+}
+
+.site-footer__closing {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  margin: 0 auto var(--space-6);
+  max-width: var(--container-max);
+  padding: var(--space-6);
+  border: 1px solid color-mix(in srgb, var(--color-border) 90%, transparent);
+  border-radius: 28px;
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--color-surface) 92%, black),
+    color-mix(in srgb, var(--color-surface-strong) 88%, black)
+  );
+}
+
+.site-footer__closing-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.55rem);
+  line-height: 1.06;
+  margin-top: var(--space-2);
+}
+
+.site-footer__closing-copy {
+  color: var(--color-text-secondary);
+  max-width: 46ch;
+  margin-top: var(--space-3);
+}
+
+.site-footer__closing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.site-footer__eyebrow {
+  color: var(--color-brand-strong);
+}
+
 .team-grid {
   display: grid;
   gap: var(--space-4);
@@ -570,6 +731,16 @@ textarea:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .about-values,
+  .reservation-brief {
+    grid-template-columns: 1fr;
+  }
+
+  .team-row,
+  .site-footer__closing {
+    grid-template-columns: 1fr;
+  }
+
   .hero-signals {
     grid-template-columns: 1fr;
     margin-top: calc(var(--space-7) * -0.45);
@@ -630,6 +801,10 @@ textarea:focus-visible {
   .team-grid,
   .site-footer__grid {
     grid-template-columns: 1fr;
+  }
+
+  .site-footer__closing-actions {
+    justify-content: flex-start;
   }
 
   .mobile-reserve-bar {

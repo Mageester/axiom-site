@@ -13,9 +13,9 @@
     color-scheme: dark;
     font-feature-settings: "rlig" 1, "calt" 1;
     background-image:
-      radial-gradient(circle at 16% 0%, rgba(143, 167, 63, 0.14), transparent 30%),
+      radial-gradient(circle at 16% 0%, rgba(186, 153, 86, 0.14), transparent 28%),
       radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.05), transparent 24%),
-      linear-gradient(180deg, #090b08 0%, #0d100b 44%, #090b08 100%);
+      linear-gradient(180deg, #080b08 0%, #0c100b 44%, #090b08 100%);
   }
 
   #root {
@@ -28,7 +28,7 @@
   }
 
   ::selection {
-    background: rgba(167, 184, 88, 0.25);
+    background: rgba(198, 165, 96, 0.26);
     color: #f6f5e9;
   }
 }
@@ -68,6 +68,6 @@
   }
 
   .glow-grove {
-    box-shadow: 0 0 20px rgba(143, 167, 63, 0.08), 0 0 60px rgba(143, 167, 63, 0.04);
+    box-shadow: 0 0 20px rgba(186, 153, 86, 0.08), 0 0 60px rgba(186, 153, 86, 0.04);
   }
 }

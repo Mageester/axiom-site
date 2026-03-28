@@ -1,6 +1,6 @@
 import { routes } from '../config/routes'
 import { restaurantContent } from '../content/restaurantContent'
-import { ButtonLink } from '../components/ui/Button'
+import { ButtonAnchor, ButtonLink } from '../components/ui/Button'
 import { Section } from '../components/ui/Section'
 
 const heroImage =
@@ -65,7 +65,7 @@ export function HomePage() {
       <Section
         description="A composed room with clear pacing, attentive service, and calm coastal tone."
         eyebrow="Signature evenings"
-        title="A dining room calibrated for long, deliberate dinners."
+        title={restaurantContent.home.experience.title}
       >
         <div className="experience-split">
           <div className="image-panel">
@@ -103,8 +103,7 @@ export function HomePage() {
         <div className="menu-split">
           <div className="menu-split__intro">
             <p className="menu-split__copy">
-              Dishes move through the season in short arcs. Each menu is edited for clarity,
-              pairing rhythm, and a clean finish.
+              The menu moves in short arcs, edited for clarity, pairing rhythm, and a clean finish.
             </p>
             <ButtonLink to={routes.menu} variant="secondary">
               View full menu
@@ -156,9 +155,9 @@ export function HomePage() {
             </ul>
             <div className="room-split__actions">
               <ButtonLink to={routes.reservations}>Reserve private dining</ButtonLink>
-              <ButtonLink to={routes.reservations} variant="secondary">
-                Call reservations
-              </ButtonLink>
+              <ButtonAnchor href="tel:+14165550182" variant="secondary">
+                Call concierge
+              </ButtonAnchor>
             </div>
           </div>
           <div className="image-panel image-panel--tall">
@@ -203,8 +202,8 @@ export function HomePage() {
         <div className="reserve-cta">
           <div className="reserve-cta__body">
             <p>
-              Dinner service is Tuesday through Sunday. A valid card is required to hold
-              reservations, and cancellation terms are confirmed at booking.
+              Reservations open 30 days in advance. For hosted tables and private dining, our concierge
+              can help coordinate the details.
             </p>
             <div className="reserve-cta__actions">
               <ButtonLink size="lg" to={routes.reservations}>

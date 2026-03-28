@@ -8,13 +8,13 @@ export function MenuPage() {
     <>
       <PageHero
         actions={
-          <ButtonLink to={routes.reservations} variant="secondary">
+          <ButtonLink size="lg" to={routes.reservations} variant="secondary">
             Reserve a table
           </ButtonLink>
         }
         description={restaurantContent.menu.intro}
         eyebrow="Menu"
-        title="Seasonal offerings"
+        title="Seasonal menu, edited nightly."
       />
 
       <div className="menu-sections">

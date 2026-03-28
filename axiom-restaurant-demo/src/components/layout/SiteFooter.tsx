@@ -1,8 +1,31 @@
+import { routes } from '../../config/routes'
 import { restaurantContent } from '../../content/restaurantContent'
+import { ButtonAnchor, ButtonLink } from '../ui/Button'
 
 export function SiteFooter() {
   return (
     <footer className="site-footer">
+      <div className="site-footer__closing">
+        <div>
+          <p className="site-footer__eyebrow">Reservations</p>
+          <h2 className="site-footer__closing-title">
+            Reserve a dinner, private table, or hosted evening.
+          </h2>
+          <p className="site-footer__closing-copy">
+            Concierge handles the details so the evening can start calmly.
+          </p>
+        </div>
+
+        <div className="site-footer__closing-actions">
+          <ButtonLink size="lg" to={routes.reservations}>
+            Reserve a table
+          </ButtonLink>
+          <ButtonAnchor href="tel:+14165550182" size="lg" variant="secondary">
+            Call concierge
+          </ButtonAnchor>
+        </div>
+      </div>
+
       <div className="site-footer__grid">
         <div>
           <h2 className="site-footer__brand">{restaurantContent.brand.name}</h2>

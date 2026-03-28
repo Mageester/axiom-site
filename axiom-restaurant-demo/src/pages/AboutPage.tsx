@@ -1,7 +1,6 @@
 import { routes } from '../config/routes'
 import { restaurantContent } from '../content/restaurantContent'
 import { ButtonLink } from '../components/ui/Button'
-import { Card } from '../components/ui/Card'
 import { PageHero } from '../components/ui/PageHero'
 import { Section } from '../components/ui/Section'
 
@@ -10,7 +9,9 @@ export function AboutPage() {
     <>
       <PageHero
         actions={
-          <ButtonLink to={routes.reservations}>Reserve your visit</ButtonLink>
+          <ButtonLink size="lg" to={routes.reservations}>
+            Reserve your visit
+          </ButtonLink>
         }
         description={restaurantContent.about.intro}
         eyebrow="About"
@@ -27,27 +28,34 @@ export function AboutPage() {
         </div>
       </Section>
 
-      <Section title="Operating values">
-        <div className="card-grid card-grid--3">
+      <Section
+        description="Three rules keep the room calm and the booking reliable."
+        title="Operating values"
+      >
+        <div className="about-values">
           {restaurantContent.about.values.map((value) => (
-            <Card
-              description={value.description}
-              key={value.title}
-              title={value.title}
-            />
+            <article className="value-row" key={value.title}>
+              <p className="value-row__eyebrow">Principle</p>
+              <h3>{value.title}</h3>
+              <p>{value.description}</p>
+            </article>
           ))}
         </div>
       </Section>
 
-      <Section title="Leadership">
-        <div className="team-grid">
+      <Section
+        description="A small team keeps the dining room consistent night after night."
+        title="Leadership"
+      >
+        <div className="team-rows">
           {restaurantContent.about.team.map((member) => (
-            <Card
-              description={member.bio}
-              key={member.name}
-              meta={member.role}
-              title={member.name}
-            />
+            <article className="team-row" key={member.name}>
+              <div>
+                <p className="team-row__role">{member.role}</p>
+                <h3>{member.name}</h3>
+              </div>
+              <p>{member.bio}</p>
+            </article>
           ))}
         </div>
       </Section>
