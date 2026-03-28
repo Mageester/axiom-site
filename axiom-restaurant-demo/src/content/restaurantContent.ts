@@ -20,7 +20,7 @@ export const restaurantContent: RestaurantContent = {
       eyebrow: 'Chef-led dining in Toronto',
       title: 'An evening by the water, reserved with intention.',
       description:
-        'Atelier Meridian offers a quiet dinner room shaped by seasonal cooking, attentive hosting, and a menu that moves with Ontario produce and Atlantic catch.',
+        'A quiet dining room shaped by seasonal cooking, attentive hosting, and a menu edited for a clean finish.',
       primaryCta: 'Reserve a table',
       secondaryCta: 'Explore the menu',
     },
@@ -160,7 +160,7 @@ export const restaurantContent: RestaurantContent = {
   },
   reservations: {
     intro:
-      'Reservations open 30 days in advance. For parties of nine or more, contact our concierge directly.',
+      'Reservations open 30 days in advance. For hosted tables and private dining, contact our concierge directly.',
     policies: [
       'A card is required to hold dinner reservations.',
       'Cancellations within 24 hours may incur a per-seat fee.',

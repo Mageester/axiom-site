@@ -196,7 +196,7 @@ export function HomePage() {
 
       <Section
         className="section--final"
-        description="Reservations open 30 days in advance. For parties above eight guests, contact our concierge directly."
+        description="Reservations open 30 days in advance. For hosted tables and private dining, contact our concierge directly."
         eyebrow="Reservations"
         title="Reserve your table for dinner."
       >

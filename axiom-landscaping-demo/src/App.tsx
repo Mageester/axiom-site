@@ -245,8 +245,7 @@ const Hero = () => (
           Outdoor spaces that read like a finished part of the home.
         </h1>
         <p className="animate-rise-in-delay-2 mt-6 max-w-xl text-[18px] leading-8 text-stone-300 sm:text-[19px]">
-          Northline plans patios, front approaches, planting, and lighting for Toronto homes where the yard
-          should feel settled, usable, and worth the investment.
+          Northline plans patios, planting, lighting, and front approaches so the exterior reads settled, usable, and finished.
         </p>
 
         <div className="animate-rise-in-delay-2 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -392,8 +391,7 @@ const ComparisonStudy = () => (
 
         <div className="mt-10 space-y-4 border-l border-white/10 pl-5">
           <p className="text-[15px] leading-7 text-stone-300 sm:text-[16px]">
-            Northline is selling the after, not the task list. A useful proof moment shows how the house,
-            the yard, and the lighting all work together once the build is complete.
+            A useful proof moment shows the whole read: how the approach, the yard, and the lighting work together after the build.
           </p>
           {processSteps.map((step) => (
             <div key={step.title} className="flex items-start gap-3 text-[15px] leading-7 text-stone-300 sm:text-[16px]">
@@ -640,7 +638,7 @@ const ContactForm = () => {
           <div className="max-w-xl">
             <SectionHeading
               label="Request a quote"
-              title="Tell us what needs to be rebuilt."
+              title="Tell us what feels unfinished, and what finished should look like."
               body="Share the address, current photos, and the area you want to improve. Northline confirms fit, finish expectations, and whether a site visit makes sense."
             />
 
