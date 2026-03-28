@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ResponsiveSource } from '../lib/responsiveImages';
 
 type ResponsiveImageProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'sizes'> & {
@@ -15,9 +15,19 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   ...imgProps
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const imageRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     setIsLoaded(false);
+  }, [source.avifSrcSet, source.webpSrcSet, source.fallbackSrc]);
+
+  useEffect(() => {
+    const image = imageRef.current;
+    if (!image) return;
+
+    if (image.complete && image.naturalWidth > 0) {
+      setIsLoaded(true);
+    }
   }, [source.avifSrcSet, source.webpSrcSet, source.fallbackSrc]);
 
   const handleLoad: React.ReactEventHandler<HTMLImageElement> = (event) => {
@@ -36,6 +46,7 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         <source type="image/avif" srcSet={source.avifSrcSet} sizes={sizes} />
         <source type="image/webp" srcSet={source.webpSrcSet} sizes={sizes} />
         <img
+          ref={imageRef}
           src={source.fallbackSrc}
           srcSet={source.webpSrcSet}
           sizes={sizes}
