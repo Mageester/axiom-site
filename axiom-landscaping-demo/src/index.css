@@ -3,8 +3,23 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    background: #0e0d0c;
+  }
+
   body {
-    @apply bg-surface-base text-stone-200 font-sans antialiased text-[15px] leading-relaxed;
+    @apply min-h-screen bg-surface-base text-stone-200 font-sans antialiased text-[15px] leading-relaxed;
+    color-scheme: dark;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  img {
+    display: block;
   }
 
   ::selection {

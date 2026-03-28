@@ -1,258 +1,681 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-/* ─── Header ─── */
-const Header: React.FC = () => (
-  <header className="sticky top-0 z-50 w-full bg-surface-base/80 backdrop-blur-xl border-b border-white/5">
-    <div className="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <div className="w-9 h-9 bg-grove-500 rounded-sm flex items-center justify-center">
-          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-          </svg>
-        </div>
-        <div>
-          <h1 className="text-white font-bold text-lg tracking-tight leading-none">Verdant</h1>
-          <span className="text-grove-300/60 text-[11px] font-mono uppercase tracking-widest">Outdoor Architecture</span>
-        </div>
+const primaryButton =
+  'inline-flex min-h-[52px] items-center justify-center rounded-full bg-grove-500 px-7 text-[13px] font-semibold uppercase tracking-[0.24em] text-white transition-colors duration-200 hover:bg-grove-400 active:scale-[0.98]';
+const secondaryButton =
+  'inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/12 bg-transparent px-7 text-[13px] font-semibold uppercase tracking-[0.24em] text-white transition-colors duration-200 hover:border-white/25 hover:bg-white/5 active:scale-[0.98]';
+const subtleButton =
+  'inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/10 px-5 text-[12px] font-semibold uppercase tracking-[0.22em] text-stone-200 transition-colors duration-200 hover:border-white/20 hover:bg-white/5';
+const fieldClass =
+  'w-full rounded-2xl border border-white/10 bg-surface-base/90 px-4 py-3 text-[16px] text-white outline-none transition-colors placeholder:text-stone-600 focus:border-grove-400/50';
+const labelClass = 'text-[13px] font-medium uppercase tracking-[0.22em] text-stone-400';
+
+const navLinks = [
+  { label: 'Services', href: '#services' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Coverage', href: '#coverage' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const heroPoints = [
+  'Patios and outdoor rooms',
+  'Front entry and curb appeal',
+  'Planting, lighting, finish work',
+];
+
+const services = [
+  {
+    number: '01',
+    title: 'Patios and outdoor rooms',
+    copy: 'Dining terraces, lounge zones, and hardscape layouts that feel built for daily use, not just photos.',
+    detail: 'Entertaining, family time, and better flow',
+  },
+  {
+    number: '02',
+    title: 'Front approaches and curb appeal',
+    copy: 'Walkways, steps, edging, and planting that make the home read better from the street.',
+    detail: 'Entry sequence and first impression',
+  },
+  {
+    number: '03',
+    title: 'Planting and softscape',
+    copy: 'Layered planting plans, privacy screening, and low-maintenance structure that ages well.',
+    detail: 'Seasonal color and softer boundaries',
+  },
+  {
+    number: '04',
+    title: 'Landscape lighting and finishing details',
+    copy: 'Low-voltage lighting, final edges, and the quiet finishing work that makes the whole property feel complete.',
+    detail: 'Evening use and long-term polish',
+  },
+];
+
+const processSteps = [
+  {
+    title: 'Walk the site',
+    copy: 'We look at access, drainage, sun exposure, traffic flow, and the spots where the property feels unfinished.',
+  },
+  {
+    title: 'Shape the scope',
+    copy: 'You get a clear plan for materials, sequencing, and what should happen now versus later.',
+  },
+  {
+    title: 'Build and finish',
+    copy: 'We install, refine, plant, and light the space so the final result feels intentional instead of patched together.',
+  },
+];
+
+const materials = [
+  {
+    title: 'Natural stone and paver systems',
+    copy: 'Durable surfaces that suit the style of the home and the way the space is used.',
+  },
+  {
+    title: 'Composite decking and outdoor structures',
+    copy: 'Clean lines and reliable performance where decking, seating, or overhead structure makes sense.',
+  },
+  {
+    title: 'Low-voltage lighting',
+    copy: 'A controlled evening read without harsh fixtures or overlighting.',
+  },
+  {
+    title: 'Native and low-maintenance planting',
+    copy: 'Structure, seasonality, and fewer maintenance headaches once the project is finished.',
+  },
+  {
+    title: 'Drainage and grading',
+    copy: 'The quiet work that protects the finish and keeps the space functional through the seasons.',
+  },
+];
+
+const coverage = [
+  'Toronto',
+  'Etobicoke',
+  'North York',
+  'Mississauga',
+  'Oakville',
+  'Burlington',
+  'Vaughan',
+  'West GTA suburbs',
+];
+
+const checklist = [
+  'How the front of the house reads from the street',
+  'Where people gather, move, and enter the yard',
+  'How water behaves after rain and snowmelt',
+  'What should be planted now versus phased later',
+  'Where lighting will matter after dark',
+  'How much maintenance you want the space to ask for',
+];
+
+const SectionHeading = ({
+  label,
+  title,
+  body,
+  align = 'left',
+}: {
+  label: string;
+  title: string;
+  body: string;
+  align?: 'left' | 'center';
+}) => (
+  <div className={align === 'center' ? 'mx-auto text-center' : ''}>
+    <p className="text-[12px] sm:text-[13px] font-medium uppercase tracking-[0.28em] text-grove-300/70">
+      {label}
+    </p>
+    <h2
+      className={`mt-4 font-serif text-[clamp(2.3rem,4vw,4.15rem)] leading-[0.98] tracking-tight text-white text-balance ${
+        align === 'center' ? 'mx-auto max-w-4xl' : 'max-w-3xl'
+      }`}
+    >
+      {title}
+    </h2>
+    <p
+      className={`mt-6 text-[17px] leading-8 text-stone-300 ${
+        align === 'center' ? 'mx-auto max-w-3xl' : 'max-w-2xl'
+      }`}
+    >
+      {body}
+    </p>
+  </div>
+);
+
+const BrandMark = () => (
+  <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-grove-500/10 text-grove-300 shadow-inner shadow-black/30">
+    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M7 17.2 12 5l5 12.2" />
+      <path d="M9.1 12.1h5.8" />
+    </svg>
+  </div>
+);
+
+const Header = () => (
+  <header className="sticky top-0 z-50 border-b border-white/8 bg-surface-base/80 backdrop-blur-xl">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-between gap-4 py-4 sm:py-5">
+        <a href="#top" className="flex items-center gap-3">
+          <BrandMark />
+          <div>
+            <div className="text-[15px] font-semibold tracking-tight text-white sm:text-[16px]">
+              Verdant Landscapes
+            </div>
+            <div className="text-[11px] uppercase tracking-[0.3em] text-stone-500">Outdoor living</div>
+          </div>
+        </a>
+
+        <nav className="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="rounded-full px-4 py-2 text-[13px] font-medium text-stone-300 transition-colors hover:bg-white/5 hover:text-white"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <a href="#contact" className={primaryButton}>
+          Request a quote
+        </a>
       </div>
 
-      <nav className="hidden md:flex items-center gap-1 text-[13px] font-medium text-stone-400">
-        <a href="#services" className="px-4 py-3 hover:text-white transition-colors">Services</a>
-        <a href="#portfolio" className="px-4 py-3 hover:text-white transition-colors">Portfolio</a>
-        <a href="#contact" className="px-4 py-3 hover:text-white transition-colors">Contact</a>
-      </nav>
-
-      <a href="tel:1-800-555-0300" className="flex items-center gap-2 bg-grove-600 hover:bg-grove-500 text-white px-5 min-h-[48px] text-[13px] font-bold uppercase tracking-wider transition-all active:scale-[0.97] rounded-sm">
-        Free Consultation
-      </a>
+      <div className="pb-4 lg:hidden">
+        <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} className={subtleButton}>
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </header>
 );
 
-/* ─── Hero ─── */
-const Hero: React.FC = () => (
-  <section className="relative pt-28 pb-36 px-4 overflow-hidden">
-    <div className="absolute inset-0 z-0">
-      <div className="absolute inset-0 bg-gradient-to-b from-grove-700/10 via-surface-base to-surface-base"></div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-grove-500/5 blur-[120px]"></div>
+const Hero = () => (
+  <section className="relative overflow-hidden px-4 pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-16">
+    <div className="absolute inset-x-0 top-0 h-[760px]">
+      <div className="absolute -left-24 top-0 h-80 w-80 rounded-full bg-grove-500/10 blur-3xl" />
+      <div className="absolute right-0 top-24 h-[30rem] w-[30rem] rounded-full bg-emerald-400/5 blur-[140px]" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
     </div>
 
-    <div className="max-w-6xl mx-auto relative z-10">
-      <div className="max-w-2xl">
-        <div className="inline-flex items-center gap-2 bg-grove-500/10 border border-grove-500/20 text-grove-300 px-4 py-2 rounded-sm text-[12px] font-mono uppercase tracking-widest mb-8">
-          <div className="w-1.5 h-1.5 bg-grove-400 rounded-full animate-pulse"></div>
-          Premium Landscape Design
-        </div>
-
-        <h2 className="text-[clamp(2.5rem,6vw,4rem)] font-bold text-white mb-6 leading-[1.05] tracking-tight">
-          Transform Your<br />Outdoor Space.
-        </h2>
-
-        <p className="text-[17px] text-stone-400 mb-10 max-w-lg leading-relaxed">
-          We design and engineer pristine outdoor environments — from living walls to hardscape architecture. Precision craftsmanship for residential and commercial properties.
+    <div className="mx-auto grid max-w-7xl items-end gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
+      <div className="relative z-10 max-w-2xl">
+        <p className={labelClass}>Premium residential landscaping</p>
+        <h1 className="mt-6 font-serif text-[clamp(3rem,6vw,5.9rem)] leading-[0.95] tracking-tight text-white text-balance">
+          Outdoor rooms, front entries, and planting that make a home feel finished.
+        </h1>
+        <p className="mt-6 max-w-xl text-[18px] leading-8 text-stone-300 sm:text-[19px]">
+          We shape patios, curb appeal, low-voltage lighting, and softscape details into spaces homeowners can
+          actually live in. The work stays premium, practical, and easy to maintain.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-          <a href="#contact" className="text-center bg-grove-600 hover:bg-grove-500 text-white px-8 min-h-[52px] flex items-center justify-center text-[14px] font-bold uppercase tracking-widest transition-all active:scale-[0.98] rounded-sm">
-            Design Consultation
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a href="#contact" className={primaryButton}>
+            Request a quote
           </a>
-          <a href="tel:1-800-555-0300" className="text-center border border-white/10 hover:border-white/30 text-white px-8 min-h-[52px] flex items-center justify-center text-[14px] font-bold uppercase tracking-widest transition-all rounded-sm">
-            1-800-555-0300
+          <a href="#projects" className={secondaryButton}>
+            See recent work
           </a>
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[15px] text-stone-300">
+          {heroPoints.map((point) => (
+            <span key={point} className="inline-flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-grove-400" />
+              {point}
+            </span>
+          ))}
+        </div>
+        <p className="mt-4 text-[14px] text-stone-500">Residential projects across the Greater Toronto Area.</p>
+      </div>
+
+      <div className="relative z-10">
+        <div className="relative overflow-hidden rounded-[34px] border border-white/8 bg-surface-card shadow-2xl shadow-black/35">
+          <picture>
+            <source
+              type="image/avif"
+              srcSet="/images/work-landscaping-640.avif 640w, /images/work-landscaping-960.avif 960w, /images/work-landscaping-1200.avif 1200w"
+            />
+            <source
+              type="image/webp"
+              srcSet="/images/work-landscaping-640.webp 640w, /images/work-landscaping-960.webp 960w, /images/work-landscaping-1200.webp 1200w"
+            />
+            <img
+              src="/images/work-landscaping-1200.webp"
+              alt="Premium residential landscaping with planting, patio work, and a finished outdoor living area"
+              className="h-[clamp(420px,58vw,760px)] w-full object-cover object-center"
+              loading="eager"
+            />
+          </picture>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/14 to-transparent" />
+          <div className="absolute inset-x-5 bottom-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-md rounded-[24px] border border-white/10 bg-surface-base/75 px-4 py-3 backdrop-blur-md">
+              <p className="text-[11px] uppercase tracking-[0.28em] text-stone-400">Selected work</p>
+              <p className="mt-2 text-[15px] leading-7 text-white">
+                A single yard becomes a usable sequence: approach, gathering area, planting, and light.
+              </p>
+            </div>
+            <div className="hidden rounded-[24px] border border-white/10 bg-surface-base/75 px-4 py-3 text-right backdrop-blur-md sm:block">
+              <p className="text-[11px] uppercase tracking-[0.28em] text-stone-400">What homeowners ask for</p>
+              <p className="mt-1 text-[15px] leading-6 text-stone-200">Clear scope · Strong curb appeal · Clean finish</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="mx-auto mt-10 max-w-7xl border-y border-white/8 py-5">
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px] text-stone-300">
+        <span className="font-medium text-white">Residential focus</span>
+        <span className="text-stone-600">•</span>
+        <span>Patios, outdoor rooms, and front-entry upgrades</span>
+        <span className="text-stone-600">•</span>
+        <span>Planting, low-voltage lighting, and finish work</span>
+        <span className="text-stone-600">•</span>
+        <span>Site visits by appointment</span>
+      </div>
+    </div>
+  </section>
+);
+
+const Services = () => (
+  <section id="services" className="scroll-mt-28 px-4 py-20 sm:py-28">
+    <div className="mx-auto max-w-7xl">
+      <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-16">
+        <div className="max-w-xl">
+          <SectionHeading
+            label="What we handle"
+            title="The work homeowners actually need."
+            body="We focus on the parts of the property that change how a home feels from the street and from the back door."
+          />
+
+          <a href="#contact" className={`${secondaryButton} mt-8`}>
+            Tell us your scope
+          </a>
+        </div>
+
+        <div className="overflow-hidden rounded-[32px] border border-white/8 bg-surface-card/65">
+          {services.map((service, index) => (
+            <article
+              key={service.number}
+              className={`grid gap-4 px-5 py-6 sm:grid-cols-[90px_1fr] sm:gap-6 sm:px-7 sm:py-7 ${
+                index < services.length - 1 ? 'border-b border-white/8' : ''
+              }`}
+            >
+              <div className="flex items-center gap-3 sm:block">
+                <span className="text-[12px] uppercase tracking-[0.32em] text-grove-300/70">{service.number}</span>
+              </div>
+
+              <div>
+                <h3 className="text-[21px] font-medium tracking-tight text-white sm:text-[23px]">{service.title}</h3>
+                <p className="mt-2 text-[15px] leading-7 text-stone-300 sm:text-[16px]">{service.copy}</p>
+                <p className="mt-3 text-[13px] uppercase tracking-[0.2em] text-stone-500">{service.detail}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </div>
   </section>
 );
 
-/* ─── Services ─── */
-const services = [
-  {
-    title: 'Landscape Design',
-    desc: 'Custom-engineered garden architecture with 3D rendering. Native plantings, irrigation systems, and seasonal bloom planning.',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-    ),
-  },
-  {
-    title: 'Hardscape Architecture',
-    desc: 'Precision-cut stonework, retaining walls, and outdoor living structures. Engineered for drainage and structural integrity.',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-    ),
-  },
-  {
-    title: 'Seasonal Maintenance',
-    desc: 'Year-round property care programs — spring preparation, summer mowing, fall cleanup, and winter protection protocols.',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-    ),
-  },
-];
+const Process = () => (
+  <section className="px-4 py-20 sm:py-28">
+    <div className="mx-auto max-w-7xl">
+      <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:gap-16">
+        <SectionHeading
+          label="How the work moves"
+          title="A clear process, not a vague promise."
+          body="We keep the early stage practical: site conditions, scope, materials, and the sequence of work are all discussed before the build starts."
+        />
 
-const Services: React.FC = () => (
-  <section id="services" className="py-28 px-4 relative">
-    <div className="max-w-6xl mx-auto">
-      <div className="mb-16">
-        <span className="text-[11px] font-mono text-grove-400/70 uppercase tracking-[0.2em] mb-4 block">Core Capabilities</span>
-        <h3 className="text-[32px] font-bold text-white tracking-tight">Outdoor Engineering Services</h3>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {services.map((s, i) => (
-          <div key={i} className="group bg-surface-card border border-white/5 p-8 rounded-sm hover:border-grove-500/20 transition-all duration-500 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-grove-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="text-grove-400 mb-6 w-12 h-12 flex items-center justify-center bg-grove-500/10 rounded-sm border border-grove-500/10">
-              {s.icon}
-            </div>
-            <h4 className="text-white font-semibold text-lg mb-3 tracking-tight">{s.title}</h4>
-            <p className="text-stone-500 text-[14px] leading-relaxed">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-/* ─── Stats ─── */
-const Stats: React.FC = () => (
-  <section className="py-20 px-4 border-y border-white/5">
-    <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      {[
-        { value: '650+', label: 'Properties Transformed' },
-        { value: '12+', label: 'Years of Craft' },
-        { value: '100%', label: 'Organic Materials' },
-        { value: '4 Season', label: 'Maintenance Plans' },
-      ].map((stat, i) => (
-        <div key={i}>
-          <div className="text-[28px] font-bold text-white tracking-tight mb-1">{stat.value}</div>
-          <div className="text-[12px] font-mono text-stone-500 uppercase tracking-widest">{stat.label}</div>
+        <div className="overflow-hidden rounded-[32px] border border-white/8 bg-surface-card/55">
+          {processSteps.map((step, index) => (
+            <article
+              key={step.title}
+              className={`grid gap-4 px-5 py-6 sm:grid-cols-[96px_1fr] sm:gap-6 sm:px-7 sm:py-7 ${
+                index < processSteps.length - 1 ? 'border-b border-white/8' : ''
+              }`}
+            >
+              <div className="font-serif text-[2.8rem] leading-none tracking-tight text-grove-300/70">
+                0{index + 1}
+              </div>
+              <div>
+                <h3 className="text-[21px] font-medium tracking-tight text-white sm:text-[22px]">{step.title}</h3>
+                <p className="mt-2 max-w-2xl text-[15px] leading-7 text-stone-300 sm:text-[16px]">{step.copy}</p>
+              </div>
+            </article>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   </section>
 );
 
-/* ─── Portfolio Showcase ─── */
-const Portfolio: React.FC = () => (
-  <section id="portfolio" className="py-28 px-4">
-    <div className="max-w-6xl mx-auto">
-      <div className="mb-16">
-        <span className="text-[11px] font-mono text-grove-400/70 uppercase tracking-[0.2em] mb-4 block">Recent Work</span>
-        <h3 className="text-[32px] font-bold text-white tracking-tight">Transformation Gallery</h3>
-      </div>
+const Projects = () => (
+  <section id="projects" className="scroll-mt-28 px-4 py-20 sm:py-28">
+    <div className="mx-auto max-w-7xl">
+      <SectionHeading
+        label="Recent work"
+        title="Project scope is easier to trust when the outcome is obvious."
+        body="We present projects the way homeowners experience them: how the approach reads, how the yard functions, and what changed after the work was finished."
+      />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[
-          { title: 'Modern Zen Courtyard', tag: 'Residential' },
-          { title: 'Commercial Atrium', tag: 'Commercial' },
-          { title: 'Heritage Stone Path', tag: 'Hardscape' },
-        ].map((p, i) => (
-          <div key={i} className="group bg-surface-card border border-white/5 rounded-sm overflow-hidden hover:border-grove-500/20 transition-all duration-500">
-            <div className="h-48 bg-gradient-to-br from-grove-700/20 to-surface-elevated flex items-center justify-center">
-              <svg className="w-12 h-12 text-grove-500/30 group-hover:text-grove-500/50 transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-            </div>
-            <div className="p-6">
-              <span className="text-[10px] font-mono text-grove-400/70 uppercase tracking-widest">{p.tag}</span>
-              <h4 className="text-white font-semibold text-base mt-1">{p.title}</h4>
+      <div className="mt-14 grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
+        <article className="group relative overflow-hidden rounded-[34px] border border-white/8 bg-surface-card shadow-2xl shadow-black/20">
+          <picture>
+            <source type="image/webp" srcSet="/images/work-landscaping-1200.webp" />
+            <img
+              src="/images/work-landscaping-1200.webp"
+              alt="Featured residential landscape project with patio work, planting, and lighting"
+              className="h-full min-h-[34rem] w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+          </picture>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/18 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+            <p className="text-[12px] uppercase tracking-[0.28em] text-grove-300/70">Featured project</p>
+            <h3 className="mt-3 max-w-2xl font-serif text-[clamp(1.9rem,3vw,3rem)] leading-[0.98] tracking-tight text-white text-balance">
+              Patio, planting, and lighting brought into one sequence.
+            </h3>
+            <p className="mt-4 max-w-xl text-[16px] leading-7 text-stone-200/90">
+              We reshaped the main outdoor area so the house, the entry, and the yard feel connected. The result is
+              quieter, clearer, and easier to use at night.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {['Patio plane', 'Curb appeal', 'Night use'].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-white/10 bg-surface-base/65 px-3 py-1.5 text-[12px] uppercase tracking-[0.22em] text-stone-200 backdrop-blur-md"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
-        ))}
+        </article>
+
+        <div className="grid gap-6">
+          <article className="overflow-hidden rounded-[30px] border border-white/8 bg-surface-card/70">
+            <img
+              src="/images/landscaping-concept.webp"
+              alt="Editorial landscape concept for a front approach and planting composition"
+              className="h-56 w-full object-cover object-center"
+              loading="lazy"
+            />
+            <div className="p-6 sm:p-7">
+              <p className="text-[12px] uppercase tracking-[0.28em] text-grove-300/70">Curb appeal</p>
+              <h4 className="mt-3 text-[22px] font-medium tracking-tight text-white">
+                A cleaner front approach from the street.
+              </h4>
+              <p className="mt-3 text-[15px] leading-7 text-stone-300">
+                Sharper planting structure, softer transitions, and an entry sequence that feels deliberate.
+              </p>
+              <p className="mt-4 text-[13px] uppercase tracking-[0.2em] text-stone-500">
+                More presence without looking overbuilt.
+              </p>
+            </div>
+          </article>
+
+          <article className="rounded-[30px] border border-white/8 bg-surface-card/55 p-6 sm:p-7">
+            <p className="text-[12px] uppercase tracking-[0.28em] text-grove-300/70">What this means</p>
+            <p className="mt-3 text-[18px] leading-8 text-white text-balance sm:text-[20px]">
+              The best landscape work solves a sequence problem, not just a surface problem.
+            </p>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              {[
+                'Better flow between the house and yard',
+                'Lighting that reads cleanly after dark',
+                'Planting that still makes sense in three years',
+                'Edges and joints that feel intentional',
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-3 text-[15px] leading-7 text-stone-300">
+                  <span className="mt-2 h-2 w-2 rounded-full bg-grove-400" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 );
 
-/* ─── Contact Form ─── */
-const ContactForm: React.FC = () => {
+const Materials = () => (
+  <section className="px-4 py-20 sm:py-28">
+    <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:gap-16">
+      <SectionHeading
+        label="Materials and systems"
+        title="The right systems make the finish feel effortless."
+        body="Good landscaping is usually won in the details: drainage, the paver system, planting structure, and lighting that belongs to the house."
+      />
+
+      <div className="rounded-[32px] border border-white/8 bg-surface-card/55 p-6 sm:p-8">
+        <div className="divide-y divide-white/8">
+          {materials.map((material) => (
+            <div key={material.title} className="grid gap-2 py-5 sm:grid-cols-[220px_1fr] sm:gap-6">
+              <h3 className="text-[18px] font-medium tracking-tight text-white">{material.title}</h3>
+              <p className="text-[15px] leading-7 text-stone-300">{material.copy}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 text-[14px] leading-7 text-stone-500">
+          Built for Ontario conditions and chosen for durability first.
+        </p>
+      </div>
+    </div>
+  </section>
+);
+
+const Coverage = () => (
+  <section id="coverage" className="scroll-mt-28 px-4 py-20 sm:py-28">
+    <div className="mx-auto max-w-7xl rounded-[36px] border border-white/8 bg-surface-card/55 px-6 py-8 sm:px-8 sm:py-10 lg:px-10">
+      <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
+        <SectionHeading
+          label="Service area"
+          title="Residential work across the Greater Toronto Area."
+          body="Site visits are scheduled by appointment. If you are a little outside the core area, ask anyway."
+        />
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {coverage.map((city) => (
+            <div key={city} className="flex items-center gap-3 text-[16px] text-stone-200">
+              <span className="h-2 w-2 rounded-full bg-grove-400" />
+              <span>{city}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const Checklist = () => (
+  <section className="px-4 py-20 sm:py-28">
+    <div className="mx-auto max-w-7xl rounded-[36px] border border-white/8 bg-gradient-to-br from-surface-card/85 via-surface-card/70 to-grove-950/15 px-6 py-8 sm:px-8 sm:py-10 lg:px-10">
+      <div className="grid gap-10 lg:grid-cols-[0.84fr_1.16fr] lg:gap-16">
+        <SectionHeading
+          label="Before we quote"
+          title="We check the things that make the estimate honest."
+          body="A useful quote starts with the part of the yard that feels off, not with a generic package."
+        />
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {checklist.map((item) => (
+            <div key={item} className="flex items-start gap-3 text-[15px] leading-7 text-stone-300 sm:text-[16px]">
+              <span className="mt-2 h-2 w-2 rounded-full bg-grove-400" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section id="contact" className="py-28 px-4 relative">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-grove-500/5 blur-[100px] pointer-events-none"></div>
+    <section id="contact" className="scroll-mt-28 px-4 py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl rounded-[36px] border border-grove-500/12 bg-gradient-to-br from-surface-card/95 via-surface-card/80 to-grove-950/20 px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+        <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+          <div className="max-w-xl">
+            <SectionHeading
+              label="Request a quote"
+              title="Tell us what feels unfinished."
+              body="Share the address, the area you want to improve, and the timing. We’ll reply with the next step and whether a site visit makes sense."
+            />
 
-      <div className="max-w-xl mx-auto relative z-10">
-        <div className="mb-12">
-          <span className="text-[11px] font-mono text-grove-400/70 uppercase tracking-[0.2em] mb-4 block">Get Started</span>
-          <h3 className="text-[32px] font-bold text-white tracking-tight mb-4">Begin Your Transformation</h3>
-          <p className="text-stone-500 text-[15px]">Our design team will assess your property and develop a custom landscape architecture plan.</p>
-        </div>
-
-        {submitted ? (
-          <div className="bg-surface-card border border-grove-500/20 p-12 text-center rounded-sm glow-grove">
-            <div className="text-grove-400 mb-4 w-12 h-12 mx-auto flex items-center justify-center rounded-full border border-grove-500/30 bg-grove-500/10">
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+            <div className="mt-8 space-y-4">
+              {[
+                'Patios and outdoor rooms',
+                'Front-yard and curb appeal upgrades',
+                'Planting and lighting details',
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-3 text-[15px] leading-7 text-stone-300 sm:text-[16px]">
+                  <span className="mt-2 h-2 w-2 rounded-full bg-grove-400" />
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
-            <h4 className="text-white font-semibold text-xl mb-2">Consultation Requested.</h4>
-            <p className="text-stone-500 text-[14px]">Our lead designer will reach out within 48 hours.</p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a href="tel:1-800-555-0300" className={secondaryButton}>
+                Call 1-800-555-0300
+              </a>
+              <p className="text-[14px] text-stone-500">No pressure. Short notes are fine.</p>
+            </div>
           </div>
-        ) : (
-          <form className="bg-surface-card border border-white/5 p-8 md:p-10 rounded-sm space-y-6 relative" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
-            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-grove-500/20 to-transparent"></div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-mono text-stone-500 uppercase tracking-widest">Full Name</label>
-                <input type="text" required className="bg-surface-base border border-white/10 p-4 min-h-[48px] text-white text-[15px] focus:border-grove-500/40 outline-none transition-colors rounded-sm" />
+          <div className="relative">
+            {submitted ? (
+              <div className="rounded-[28px] border border-grove-500/20 bg-surface-base/80 p-8 text-center shadow-2xl shadow-black/20">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-grove-500/30 bg-grove-500/10 text-grove-300">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="mt-5 text-[24px] font-semibold tracking-tight text-white">Request received.</h3>
+                <p className="mt-3 text-[15px] leading-7 text-stone-300">
+                  We’ll review your note and follow up with the next step.
+                </p>
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-mono text-stone-500 uppercase tracking-widest">Phone</label>
-                <input type="tel" required className="bg-surface-base border border-white/10 p-4 min-h-[48px] text-white text-[15px] focus:border-grove-500/40 outline-none transition-colors rounded-sm" />
-              </div>
-            </div>
+            ) : (
+              <form
+                className="rounded-[28px] border border-white/8 bg-surface-base/70 p-5 shadow-2xl shadow-black/20 backdrop-blur-sm sm:p-6 lg:p-7"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  setSubmitted(true);
+                }}
+              >
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <label className="flex flex-col gap-2">
+                    <span className={labelClass}>Full name</span>
+                    <input type="text" required className={fieldClass} />
+                  </label>
+                  <label className="flex flex-col gap-2">
+                    <span className={labelClass}>Phone or email</span>
+                    <input type="text" required className={fieldClass} />
+                  </label>
+                </div>
 
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-mono text-stone-500 uppercase tracking-widest">Property Address</label>
-              <input type="text" className="bg-surface-base border border-white/10 p-4 min-h-[48px] text-white text-[15px] placeholder:text-stone-600 focus:border-grove-500/40 outline-none transition-colors rounded-sm" />
-            </div>
+                <label className="mt-4 flex flex-col gap-2">
+                  <span className={labelClass}>Property address</span>
+                  <input type="text" className={fieldClass} placeholder="Street and city" />
+                </label>
 
-            <div className="flex flex-col gap-2">
-              <label className="text-[11px] font-mono text-stone-500 uppercase tracking-widest">Project Vision</label>
-              <textarea rows={4} required className="bg-surface-base border border-white/10 p-4 min-h-[48px] text-white text-[15px] focus:border-grove-500/40 outline-none transition-colors resize-none rounded-sm" placeholder="Describe your ideal outdoor space..."></textarea>
-            </div>
+                <label className="mt-4 flex flex-col gap-2">
+                  <span className={labelClass}>Project notes</span>
+                  <textarea
+                    rows={5}
+                    required
+                    className={`${fieldClass} resize-none`}
+                    placeholder="Tell us what you want to change, what the yard needs, and when you'd like to start."
+                  />
+                </label>
 
-            <button type="submit" className="w-full bg-grove-600 hover:bg-grove-500 text-white min-h-[52px] text-[14px] font-bold uppercase tracking-widest transition-all active:scale-[0.98] mt-2 rounded-sm">
-              Request Design Consultation
-            </button>
-          </form>
-        )}
+                <button type="submit" className={`${primaryButton} mt-6 w-full`}>
+                  Request quote
+                </button>
+                <p className="mt-4 text-center text-[14px] text-stone-500">
+                  If you know the rough size or timeline, include it.
+                </p>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
-/* ─── Footer ─── */
-const Footer: React.FC = () => (
-  <footer className="py-12 px-4 border-t border-white/5">
-    <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-      <div className="text-center md:text-left">
-        <h5 className="text-white font-bold text-sm uppercase tracking-widest mb-1">Verdant Landscapes</h5>
-        <p className="text-stone-600 text-[12px] font-mono">LIC# L-307215 · Certified Landscape Architects</p>
-      </div>
+const Footer = () => (
+  <footer className="border-t border-white/8 px-4 pb-8 pt-14 sm:pt-16">
+    <div className="mx-auto max-w-7xl">
+      <div className="grid gap-10 lg:grid-cols-[1.2fr_0.7fr_0.9fr] lg:gap-12">
+        <div>
+          <a href="#top" className="flex items-center gap-3">
+            <BrandMark />
+            <div>
+              <div className="text-[15px] font-semibold tracking-tight text-white sm:text-[16px]">
+                Verdant Landscapes
+              </div>
+              <div className="text-[11px] uppercase tracking-[0.3em] text-stone-500">Outdoor living</div>
+            </div>
+          </a>
+          <p className="mt-5 max-w-xl text-[16px] leading-7 text-stone-300">
+            Premium residential landscaping for patios, planting, lighting, and outdoor rooms that feel complete.
+          </p>
+          <a href="#contact" className={`${primaryButton} mt-6`}>
+            Request a quote
+          </a>
+        </div>
 
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 bg-surface-card border border-white/5 px-4 py-2 rounded-sm">
-          <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
-          <span className="text-[11px] font-mono text-stone-500 uppercase tracking-widest">Performance: Optimized</span>
+        <div>
+          <p className="text-[12px] uppercase tracking-[0.28em] text-grove-300/70">Navigation</p>
+          <div className="mt-5 grid gap-3 text-[15px] text-stone-300">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="transition-colors hover:text-white">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p className="text-[12px] uppercase tracking-[0.28em] text-grove-300/70">Contact</p>
+          <div className="mt-5 space-y-4 text-[15px] leading-7 text-stone-300">
+            <p>1-800-555-0300</p>
+            <p>Residential projects across the Greater Toronto Area.</p>
+            <p>Site visits by appointment.</p>
+          </div>
         </div>
       </div>
 
-      <div className="text-[11px] font-mono text-stone-600 tracking-wide">
-        © {new Date().getFullYear()} Verdant Landscapes. All rights reserved.
+      <div className="mt-10 flex flex-col gap-3 border-t border-white/8 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-[13px] text-stone-500">© {new Date().getFullYear()} Verdant Landscapes.</p>
+        <p className="text-[13px] text-stone-600">Residential landscaping and outdoor living across the GTA.</p>
       </div>
     </div>
   </footer>
 );
 
-/* ─── App ─── */
-const App: React.FC = () => (
-  <div className="min-h-screen bg-surface-base flex flex-col">
+const App = () => (
+  <div className="min-h-screen bg-surface-base text-stone-200">
     <Header />
-    <main className="flex-1">
+    <main id="top">
       <Hero />
       <Services />
-      <Stats />
-      <Portfolio />
+      <Process />
+      <Projects />
+      <Materials />
+      <Coverage />
+      <Checklist />
       <ContactForm />
     </main>
     <Footer />

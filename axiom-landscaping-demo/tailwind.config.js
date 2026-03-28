@@ -27,6 +27,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
         mono: ['SF Mono', 'Fira Code', 'monospace'],
       },
     },

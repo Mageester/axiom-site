@@ -7,16 +7,27 @@
 html,
 body,
 #root {
-  margin: 0;
   min-height: 100%;
+  margin: 0;
+}
+
+html {
+  background: var(--color-bg);
+  scroll-behavior: smooth;
 }
 
 body {
-  background: radial-gradient(circle at top right, #1f2c26, var(--color-bg) 45%);
+  background:
+    radial-gradient(circle at top left, rgb(212 176 106 / 0.14), transparent 24%),
+    radial-gradient(circle at 80% 16%, rgb(90 125 107 / 0.14), transparent 24%),
+    linear-gradient(180deg, #111815 0%, #0d1110 38%, #0a0d0c 100%);
   color: var(--color-text-primary);
   font-family: var(--font-body);
-  font-size: var(--size-sm);
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -29,11 +40,21 @@ img {
   max-width: 100%;
 }
 
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
 h1,
 h2,
 h3,
 h4,
-p {
+p,
+dl,
+dd {
   margin: 0;
 }
 
@@ -42,14 +63,15 @@ ul {
   padding: 0;
 }
 
-input,
-select,
-textarea,
-button {
-  color: inherit;
-  font: inherit;
+::selection {
+  background: rgb(212 176 106 / 0.28);
+  color: #fff6dc;
 }
 
 .plain-list {
   list-style: none;
+}
+
+.text-balance {
+  text-wrap: balance;
 }

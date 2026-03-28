@@ -1,0 +1,54 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 620) rotate(90) scale(650 650)">
+      <stop stop-color="#E6C889" stop-opacity="0.16" />
+      <stop offset="0.5" stop-color="#1A231E" stop-opacity="0.08" />
+      <stop offset="1" stop-color="#0B100E" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="linen" x1="120" y1="120" x2="1080" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#131A17" />
+      <stop offset="1" stop-color="#0C1110" />
+    </linearGradient>
+    <radialGradient id="plate" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 600) rotate(90) scale(250 250)">
+      <stop stop-color="#F6F0E4" />
+      <stop offset="0.6" stop-color="#E4D5BC" />
+      <stop offset="1" stop-color="#B99A6A" />
+    </radialGradient>
+    <radialGradient id="center" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 600) rotate(90) scale(130 130)">
+      <stop stop-color="#7E3E2B" />
+      <stop offset="0.7" stop-color="#43241C" />
+      <stop offset="1" stop-color="#241611" />
+    </radialGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="24" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="1200" rx="56" fill="url(#linen)" />
+  <circle cx="600" cy="620" r="430" fill="url(#bgGlow)" filter="url(#shadow)" />
+
+  <ellipse cx="600" cy="650" rx="360" ry="250" fill="#0A0D0C" fill-opacity="0.48" filter="url(#shadow)" />
+  <ellipse cx="600" cy="600" rx="286" ry="286" fill="url(#plate)" />
+  <ellipse cx="600" cy="600" rx="252" ry="252" fill="#F4ECE0" />
+  <ellipse cx="600" cy="600" rx="216" ry="216" fill="#F8F4EB" />
+  <ellipse cx="600" cy="600" rx="174" ry="174" fill="url(#center)" />
+
+  <path d="M470 606C516 548 580 518 664 520C710 522 748 538 788 560" stroke="#D4B06A" stroke-opacity="0.62" stroke-width="12" stroke-linecap="round" />
+  <path d="M448 632C516 670 600 686 676 676C726 670 768 650 810 616" stroke="#5A7D6B" stroke-opacity="0.7" stroke-width="10" stroke-linecap="round" />
+  <path d="M470 646C550 600 612 580 702 574" stroke="#B66A53" stroke-opacity="0.62" stroke-width="9" stroke-linecap="round" />
+  <circle cx="460" cy="620" r="34" fill="#8FBC8F" fill-opacity="0.74" />
+  <circle cx="500" cy="560" r="18" fill="#D4B06A" fill-opacity="0.88" />
+  <circle cx="816" cy="604" r="20" fill="#D4B06A" fill-opacity="0.88" />
+  <circle cx="760" cy="676" r="26" fill="#A65E4D" fill-opacity="0.72" />
+  <circle cx="680" cy="546" r="24" fill="#7E3E2B" fill-opacity="0.78" />
+  <circle cx="576" cy="744" r="28" fill="#E6C889" fill-opacity="0.72" />
+  <circle cx="640" cy="738" r="10" fill="#9ED4B5" />
+  <path d="M494 530C528 500 558 488 608 482" stroke="#E6C889" stroke-opacity="0.4" stroke-width="8" stroke-linecap="round" />
+  <path d="M718 548C754 534 776 530 808 534" stroke="#8FBC8F" stroke-opacity="0.44" stroke-width="8" stroke-linecap="round" />
+
+  <ellipse cx="600" cy="600" rx="88" ry="56" fill="#F9F2E9" fill-opacity="0.42" />
+  <ellipse cx="600" cy="600" rx="58" ry="36" fill="#D4B06A" fill-opacity="0.16" />
+
+  <circle cx="600" cy="600" r="454" stroke="#E6C889" stroke-opacity="0.08" stroke-width="2" />
+  <circle cx="600" cy="600" r="520" stroke="#7B8E7A" stroke-opacity="0.08" stroke-width="2" />
+</svg>

@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
 
 :root {
-  --color-bg: #0f1412;
-  --color-bg-soft: #151c19;
-  --color-surface: #1b2420;
-  --color-surface-strong: #243029;
-  --color-border: #35453d;
+  --color-bg: #0a0d0c;
+  --color-bg-soft: #121815;
+  --color-surface: #18211d;
+  --color-surface-strong: #223029;
+  --color-border: #314038;
   --color-text-primary: #edf2ee;
   --color-text-secondary: #c2cdc6;
   --color-text-muted: #8ea096;
@@ -13,7 +13,7 @@
   --color-brand-strong: #e7c889;
   --color-brand-ink: #271d0f;
   --color-success: #8fbc8f;
-  --shadow-soft: 0 8px 24px rgb(5 8 6 / 25%);
+  --shadow-soft: 0 16px 36px rgb(5 8 6 / 24%);
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Manrope', 'Segoe UI', sans-serif;
@@ -41,5 +41,5 @@
   --radius-lg: 20px;
   --radius-pill: 999px;
 
-  --container-max: 1120px;
+  --container-max: 1160px;
 }
