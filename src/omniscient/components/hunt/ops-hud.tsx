@@ -88,7 +88,7 @@ function LiveCounters({ counters }: { counters: HuntCounters }) {
                     <div className={cn("text-base font-bold font-mono leading-none", c.color)}>
                         {counters[c.key]}
                     </div>
-                    <div className="text-[9px] uppercase tracking-wider text-zinc-500 mt-0.5">{c.label}</div>
+                    <div className="text-[8px] uppercase tracking-wider text-zinc-600 mt-0.5">{c.label}</div>
                 </div>
             ))}
         </div>
@@ -136,13 +136,13 @@ export function OpsHud({
                     {isRunning && (
                         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <span className="text-[9px] font-mono text-emerald-400 uppercase tracking-wider">Live feed</span>
+                            <span className="text-[9px] font-mono text-emerald-400 uppercase tracking-wider">Live</span>
                         </div>
                     )}
                     {isPaused && (
                         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
                             <Pause className="w-2.5 h-2.5 text-amber-400" />
-                            <span className="text-[9px] font-mono text-amber-400 uppercase tracking-wider">Paused</span>
+                            <span className="text-[9px] font-mono text-amber-400 uppercase tracking-wider">Paused (buffering)</span>
                         </div>
                     )}
                     {isCompleted && (
@@ -205,7 +205,7 @@ export function OpsHud({
                 {currentJob && (isRunning || isPaused) && (
                     <div className="flex items-center gap-3 glass rounded-lg px-3 py-2">
                         <div>
-                            <div className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">
+                            <div className="text-[10px] text-zinc-500 font-mono">
                                 Job {currentJob.index}/{currentJob.total}
                             </div>
                             <div className="text-xs font-medium text-white">
@@ -216,7 +216,7 @@ export function OpsHud({
                         <div className="text-right">
                             <div className="text-xs font-mono text-amber-400">{formatTime(elapsed)}</div>
                             {lastEvent && (
-                                <div className="text-[10px] text-zinc-500 truncate max-w-[220px]">{lastEvent}</div>
+                                <div className="text-[9px] text-zinc-500 truncate max-w-[200px]">{lastEvent}</div>
                             )}
                         </div>
                     </div>

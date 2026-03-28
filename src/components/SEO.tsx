@@ -4,31 +4,18 @@ interface SEOProps {
   title: string;
   description: string;
   image?: string;
-  canonicalPath?: string;
+  schema?: Record<string, any>;
 }
 
 const DEFAULT_OG_IMAGE = '/og-image.png';
 const SITE_URL = 'https://getaxiom.ca';
 
-function getCanonicalUrl(canonicalPath?: string) {
-  if (canonicalPath) {
-    return new URL(canonicalPath, SITE_URL).toString();
-  }
-
-  if (typeof window !== 'undefined') {
-    return `${window.location.origin}${window.location.pathname}`;
-  }
-
-  return SITE_URL;
-}
-
-export const SEO: React.FC<SEOProps> = ({ title, description, image, canonicalPath }) => {
+export const SEO: React.FC<SEOProps> = ({ title, description, image, schema }) => {
   useEffect(() => {
     document.title = title;
 
     const ogImage = image || DEFAULT_OG_IMAGE;
     const fullImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
-    const canonicalUrl = getCanonicalUrl(canonicalPath);
 
     const metaTags: Record<string, string> = {
       'description': description,
@@ -36,8 +23,8 @@ export const SEO: React.FC<SEOProps> = ({ title, description, image, canonicalPa
       'og:description': description,
       'og:image': fullImageUrl,
       'og:type': 'website',
-      'og:url': canonicalUrl,
-      'og:site_name': 'Axiom',
+      'og:url': SITE_URL,
+      'og:site_name': 'Axiom Infrastructure',
       'twitter:card': 'summary_large_image',
       'twitter:title': title,
       'twitter:description': description,
@@ -58,15 +45,25 @@ export const SEO: React.FC<SEOProps> = ({ title, description, image, canonicalPa
       el.setAttribute('content', value);
     });
 
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link');
-      canonicalLink.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalLink);
+    // JSON-LD Schema
+    let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
+    if (schema) {
+      if (!scriptTag) {
+        scriptTag = document.createElement('script');
+        scriptTag.setAttribute('type', 'application/ld+json');
+        document.head.appendChild(scriptTag);
+      }
+      scriptTag.textContent = JSON.stringify(schema);
+    } else if (scriptTag) {
+      scriptTag.remove();
     }
-    canonicalLink.setAttribute('href', canonicalUrl);
 
-  }, [title, description, image, canonicalPath]);
+    return () => {
+      if (scriptTag && document.head.contains(scriptTag)) {
+        scriptTag.remove();
+      }
+    };
+  }, [title, description, image, schema]);
 
   return null;
 };

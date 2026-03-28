@@ -1,15 +1,7 @@
-import { isOpsHost, requireProtectedPage, servePublicAppShell, shouldBypassPublicShell } from './_utils/omniscient-page';
+import { isOpsHost, requireProtectedPage } from './_utils/omniscient-page';
 
 export async function onRequest(context: any) {
-    const url = new URL(context.request.url);
-
     if (!isOpsHost(context.request)) {
-        if (context.request.method === 'GET' || context.request.method === 'HEAD') {
-            if (!shouldBypassPublicShell(url.pathname)) {
-                return servePublicAppShell(context);
-            }
-        }
-
         return context.next();
     }
 
@@ -18,5 +10,6 @@ export async function onRequest(context: any) {
         return guarded;
     }
 
+    const url = new URL(context.request.url);
     return Response.redirect(`${url.origin}/dashboard`, 302);
 }

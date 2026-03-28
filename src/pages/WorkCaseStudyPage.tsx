@@ -19,7 +19,7 @@ const WorkCaseStudyPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const entry = getCaseStudyBySlug(String(slug || ''));
 
-  if (!entry) return <Navigate to="/work" replace />;
+  if (!entry) return <Navigate to="/works" replace />;
 
   const proofImage = getWorkProofImage(entry.slug);
   const image = proofImage.source;
@@ -27,7 +27,12 @@ const WorkCaseStudyPage: React.FC = () => {
   const imageAlt = proofImage.alt || entry.title;
   const labelTone = proofToneByLabel[entry.label] || 'border-white/20 text-slate-200 bg-white/[0.04]';
   const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
-  const title = entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '');
+  const detailNote =
+    isLiveDemo
+      ? 'This page outlines a live project and the strategy behind it.'
+      : entry.label === 'In Progress'
+        ? 'This project is currently in development. Build notes are public, but the live preview is restricted until launch.'
+        : `This page documents the layout intent, scope, and technical decisions for a ${entry.label.toLowerCase()}.`;
 
   return (
     <>
@@ -38,38 +43,37 @@ const WorkCaseStudyPage: React.FC = () => {
             <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
               <div className="lg:col-span-7">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className={`rounded-full border px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] ${labelTone}`}>
-                    {entry.label}
-                  </span>
+                  <span className={`rounded-full border px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] ${labelTone}`}>{entry.label}</span>
                   <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">
                     {entry.businessType}
                   </span>
                 </div>
-
                 <h1 className="mt-5 max-w-3xl text-[clamp(2rem,4.4vw,3.8rem)] font-semibold tracking-tight text-[#F2F4F7]">
-                  {title}
+                  {entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '')}
                 </h1>
                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">{entry.summary}</p>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">{entry.experienceShift}</p>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">
+                  {detailNote}
+                </p>
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                <dl className="mt-6 grid gap-3 sm:grid-cols-3">
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Problem</p>
-                    <p className="mt-1 text-sm text-slate-200">{entry.primaryProblem}</p>
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Business Type</dt>
+                    <dd className="mt-1 text-sm text-slate-200">{entry.businessType}</dd>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:col-span-2">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Demonstrates</p>
-                    <p className="mt-1 text-sm text-slate-200">{entry.demonstrates}</p>
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Core Problem</dt>
+                    <dd className="mt-1 text-sm text-slate-200">{entry.primaryProblem}</dd>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:col-span-2">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Strategy</p>
-                    <p className="mt-1 text-sm text-slate-200">{entry.strategy}</p>
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Demonstrates</dt>
+                    <dd className="mt-1 text-sm text-slate-200">{entry.demonstrates}</dd>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Mobile focus</p>
-                    <p className="mt-1 text-sm text-slate-200">{entry.mobileFocus}</p>
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Context</dt>
+                    <dd className="mt-1 text-sm text-slate-200">{entry.location}</dd>
                   </div>
-                </div>
+                </dl>
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   {isLiveDemo && entry.demoUrl ? (
@@ -86,11 +90,11 @@ const WorkCaseStudyPage: React.FC = () => {
                       Preview Soon
                     </span>
                   ) : null}
-                  <Link to="/apply#project-application-form" className="btn-primary btn-lg inline-flex items-center justify-center">
-                    Start Application
+                  <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
+                            Book Free Consultation
                   </Link>
                   <Link
-                    to="/work"
+                    to="/works"
                     className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-white/30 hover:bg-white/[0.07]"
                   >
                     Back to Work
@@ -118,44 +122,14 @@ const WorkCaseStudyPage: React.FC = () => {
 
           <section className="pt-12 md:pt-16">
             <div className="grid gap-6 lg:grid-cols-12">
-              <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6 lg:col-span-7">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Before and after</p>
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Before</p>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{entry.before}</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">After</p>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{entry.after}</p>
-                  </div>
-                </div>
-              </article>
-
-              <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6 lg:col-span-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What this build proves</p>
-                <ul className="mt-4 space-y-3">
-                  {entry.proofPoints.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#d4a48e]" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            </div>
-          </section>
-
-          <section className="pt-12 md:pt-16">
-            <div className="grid gap-6 lg:grid-cols-12">
               <div className="space-y-6 lg:col-span-7">
                 <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Build context</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Build Context</h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-300">{entry.context}</p>
                 </article>
 
                 <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Primary problems</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Primary Problems</h2>
                   <ul className="mt-3 space-y-3">
                     {entry.problems.slice(0, 3).map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
@@ -169,13 +143,19 @@ const WorkCaseStudyPage: React.FC = () => {
 
               <div className="space-y-6 lg:col-span-5">
                 <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">How it was shaped</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{entry.strategy}</p>
-                  <p className="mt-4 text-sm leading-relaxed text-slate-300">{entry.mobileFocus}</p>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What This Build Demonstrates</h2>
+                  <ul className="mt-3 space-y-3">
+                    {entry.built.slice(0, 3).map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#d4a48e]" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </article>
 
                 <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Scope snapshot</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Scope Snapshot</h2>
                   <ul className="mt-3 space-y-2">
                     {entry.deliverables.slice(0, 3).map((item) => (
                       <li key={item} className="text-sm leading-relaxed text-slate-300">
@@ -187,11 +167,10 @@ const WorkCaseStudyPage: React.FC = () => {
                     Planning targets are directional unless validated in a live deployment.
                   </p>
                 </article>
-
                 <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Our transparency standard</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Our Transparency Standard</h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                    We label the portfolio clearly so you always know what is a live client website, a demonstration build, or an active concept. No fabricated results.
+                    We label our portfolio clearly so you always know what is a live client website, a demonstration build, or an active concept. No fabricated results.
                   </p>
                 </article>
               </div>
@@ -205,8 +184,8 @@ const WorkCaseStudyPage: React.FC = () => {
                 We can scope a similar architecture for your business context and conversion goals without template constraints.
               </p>
               <div className="mt-7 flex items-center justify-center">
-                <Link to="/apply#project-application-form" className="btn-primary btn-lg inline-flex items-center justify-center">
-                  Start Application
+                <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
+                                            Book Free Consultation
                 </Link>
               </div>
             </div>

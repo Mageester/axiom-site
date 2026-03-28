@@ -13,15 +13,15 @@ interface RevealBlockProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
 
 const variants: Record<RevealVariant, { hidden: { opacity: number; y: number }; visible: { opacity: number; y: number } }> = {
   section: {
-    hidden: { opacity: 0, y: 16 },
+    hidden: { opacity: 0, y: 22 },
     visible: { opacity: 1, y: 0 },
   },
   card: {
-    hidden: { opacity: 0, y: 12 },
+    hidden: { opacity: 0, y: 16 },
     visible: { opacity: 1, y: 0 },
   },
   feature: {
-    hidden: { opacity: 0, y: 18 },
+    hidden: { opacity: 0, y: 26 },
     visible: { opacity: 1, y: 0 },
   },
 };
@@ -57,7 +57,7 @@ export function RevealBlock({
       whileInView={variants[variant].visible}
       viewport={{ once: true, amount: 0.16, margin: '0px 0px -10% 0px' }}
       transition={{
-        duration: variant === 'card' ? 0.42 : 0.54,
+        duration: variant === 'card' ? 0.5 : 0.62,
         delay,
         ease: [0.22, 1, 0.36, 1],
         ...transition,

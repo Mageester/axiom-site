@@ -1,9 +1,7 @@
 "use client"
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect, useRef } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@omni/components/ui/card"
 import { Badge } from "@omni/components/ui/badge"
-import { Button } from "@omni/components/ui/button"
 import {
     Database, Mail, Globe, Star, TrendingUp, Zap, Activity, BarChart3,
     MapPin, Target, ArrowUpRight, Users, Phone, Share2, Shield
@@ -32,6 +30,7 @@ interface Analytics {
 
 function AnimatedCounter({ value, suffix = "", prefix = "" }: { value: number; suffix?: string; prefix?: string }) {
     const [display, setDisplay] = useState(0)
+    const ref = useRef<HTMLSpanElement>(null)
 
     useEffect(() => {
         if (value === 0) { setDisplay(0); return }
@@ -51,7 +50,7 @@ function AnimatedCounter({ value, suffix = "", prefix = "" }: { value: number; s
         return () => clearInterval(timer)
     }, [value])
 
-    return <span className="animate-counter-up font-mono">{prefix}{display.toLocaleString()}{suffix}</span>
+    return <span ref={ref} className="animate-counter-up font-mono">{prefix}{display.toLocaleString()}{suffix}</span>
 }
 
 function ScoreTier({ score }: { score: number }) {
@@ -75,7 +74,6 @@ const NICHE_COLORS = [
 ]
 
 export default function DashboardClient() {
-    const navigate = useNavigate()
     const [data, setData] = useState<Analytics | null>(null)
     const [loading, setLoading] = useState(true)
 
@@ -110,69 +108,27 @@ export default function DashboardClient() {
     const maxCity = Math.max(...data.cityDistribution.map(c => c.count), 1)
     const maxTimeline = Math.max(...data.leadsOverTime.map(t => t.count), 1)
 
-    const strongLeads = data.scoreDistribution.elite + data.scoreDistribution.high
-
     return (
-        <div className="omniscient-operator max-w-7xl mx-auto space-y-6">
+        <div className="max-w-7xl mx-auto space-y-6">
             {/* Hero Header */}
             <div className="animate-slide-up">
-                <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-                    <div className="max-w-3xl">
-                        <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Operator overview</p>
+                <div className="flex items-center justify-between">
+                    <div>
                         <h1 className="text-4xl font-extrabold tracking-tight">
                             <span className="gradient-text">Command Center</span>
                         </h1>
-                        <p className="mt-2 text-sm text-muted-foreground max-w-2xl">
-                            Read the pipeline, decide the next move, and keep the queue moving without guessing.
+                        <p className="text-muted-foreground mt-2 text-sm max-w-xl">
+                            Real-time intelligence overview of your entire lead pipeline.
                         </p>
                     </div>
-                    <div className="flex flex-wrap items-center gap-2">
+                    <div className="hidden lg:flex items-center gap-3">
                         <div className="glass rounded-full px-3 py-1.5 flex items-center gap-2">
-                            <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                            <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider">Performance-first</span>
-                        </div>
-                        <div className="glass rounded-full px-3 py-1.5 flex items-center gap-2">
-                            <Database className="w-3.5 h-3.5 text-cyan-400" />
-                            <span className="text-[10px] font-mono text-cyan-300 uppercase tracking-wider">{data.total} leads tracked</span>
+                            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-glow" />
+                            <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider">Engine Idle</span>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <Card className="glass-strong rounded-2xl overflow-hidden animate-slide-up">
-                <CardHeader className="pb-3">
-                    <CardTitle className="text-sm font-bold flex items-center gap-2">
-                        <Zap className="w-4 h-4 text-emerald-400" />
-                        Today&apos;s focus
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className="grid gap-3 md:grid-cols-3">
-                    <button
-                        onClick={() => navigate("/hunt")}
-                        className="glass rounded-xl p-4 text-left border border-emerald-500/10 hover:border-emerald-500/25 hover:bg-emerald-500/[0.04] transition-all"
-                    >
-                        <div className="text-xs uppercase tracking-widest text-emerald-400/70">Run Hunt</div>
-                        <div className="mt-2 text-lg font-bold text-white">{data.funnel.contactable.toLocaleString()}</div>
-                        <div className="mt-1 text-[11px] text-muted-foreground">Contactable targets ready to queue.</div>
-                    </button>
-                    <button
-                        onClick={() => navigate("/triage")}
-                        className="glass rounded-xl p-4 text-left border border-cyan-500/10 hover:border-cyan-500/25 hover:bg-cyan-500/[0.04] transition-all"
-                    >
-                        <div className="text-xs uppercase tracking-widest text-cyan-400/70">Review Triage</div>
-                        <div className="mt-2 text-lg font-bold text-white">{strongLeads.toLocaleString()}</div>
-                        <div className="mt-1 text-[11px] text-muted-foreground">High-tier leads waiting for a decision.</div>
-                    </button>
-                    <button
-                        onClick={() => navigate("/vault")}
-                        className="glass rounded-xl p-4 text-left border border-amber-500/10 hover:border-amber-500/25 hover:bg-amber-500/[0.04] transition-all"
-                    >
-                        <div className="text-xs uppercase tracking-widest text-amber-400/70">Open Vault</div>
-                        <div className="mt-2 text-lg font-bold text-white">{data.total.toLocaleString()}</div>
-                        <div className="mt-1 text-[11px] text-muted-foreground">Stored leads ready to search or export.</div>
-                    </button>
-                </CardContent>
-            </Card>
 
             {/* KPI Hero Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 cascade">

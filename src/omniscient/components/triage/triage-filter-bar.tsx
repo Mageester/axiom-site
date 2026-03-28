@@ -46,11 +46,11 @@ export function TriageFilterBar({
             <div className="flex items-center gap-3 mr-2">
                 <div className="flex items-center gap-2">
                     <SlidersHorizontal className="w-4 h-4 text-emerald-400" />
-                    <span className="text-xs font-bold text-white uppercase tracking-wider">Decision filters</span>
+                    <span className="text-xs font-bold text-white uppercase tracking-wider">Triage</span>
                 </div>
                 <div className="h-4 w-px bg-white/[0.06]" />
                 <div className="flex items-center gap-3 text-[10px] font-mono">
-                    <span className="text-zinc-500">{stats.remaining} remaining</span>
+                    <span className="text-zinc-500">{stats.remaining} left</span>
                     <span className="text-emerald-400">{stats.kept} kept</span>
                     <span className="text-red-400/70">{stats.archived} archived</span>
                     <span className="text-cyan-400">{stats.followUp} follow-up</span>

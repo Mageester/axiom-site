@@ -51,6 +51,7 @@ export function ActionDock({
 }: ActionDockProps) {
     return (
         <div className="glass-ultra rounded-xl px-6 py-4 flex items-center gap-3 justify-center">
+            {/* Navigation */}
             <div className="flex items-center gap-1 mr-2">
                 <button
                     onClick={onPrev}
@@ -61,7 +62,7 @@ export function ActionDock({
                             ? "border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/[0.12]"
                             : "border-white/[0.02] text-zinc-800 cursor-not-allowed"
                     )}
-                    title="Previous lead (K / Left)"
+                    title="Previous (K / ←)"
                 >
                     <ChevronLeft className="w-4 h-4" />
                 </button>
@@ -74,7 +75,7 @@ export function ActionDock({
                             ? "border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/[0.12]"
                             : "border-white/[0.02] text-zinc-800 cursor-not-allowed"
                     )}
-                    title="Next lead (J / Right)"
+                    title="Next (J / →)"
                 >
                     <ChevronRight className="w-4 h-4" />
                 </button>
@@ -82,6 +83,7 @@ export function ActionDock({
 
             <div className="h-6 w-px bg-white/[0.06]" />
 
+            {/* Main actions */}
             {ACTIONS.map(a => {
                 const isCallDisabled = a.action === "call_now" && !hasPhone;
                 const Icon = a.icon;
@@ -109,6 +111,7 @@ export function ActionDock({
 
             <div className="h-6 w-px bg-white/[0.06]" />
 
+            {/* Secondary */}
             <button
                 onClick={onOpenDossier}
                 disabled={disabled}
@@ -118,11 +121,11 @@ export function ActionDock({
                         ? "border-purple-500/20 text-purple-400 bg-purple-500/5 hover:bg-purple-500/10"
                         : "border-white/[0.02] text-zinc-800 cursor-not-allowed"
                 )}
-                title="Open dossier (Enter)"
+                title="Open Dossier (Enter)"
             >
                 <CornerDownLeft className="w-3.5 h-3.5" />
-                Open dossier
-                <kbd className="ml-0.5 text-[9px] font-mono px-1 py-0.5 rounded bg-black/30 border border-white/[0.06] opacity-60">Enter</kbd>
+                Dossier
+                <kbd className="ml-0.5 text-[9px] font-mono px-1 py-0.5 rounded bg-black/30 border border-white/[0.06] opacity-60">↵</kbd>
             </button>
 
             <button
@@ -134,12 +137,14 @@ export function ActionDock({
                         ? "border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/[0.15]"
                         : "border-white/[0.02] text-zinc-800 cursor-not-allowed"
                 )}
-                title="Undo last action (Z)"
+                title="Undo (Z)"
             >
                 <Undo2 className="w-3.5 h-3.5" />
-                Undo last
+                Undo
                 <kbd className="ml-0.5 text-[9px] font-mono px-1 py-0.5 rounded bg-black/30 border border-white/[0.06] opacity-60">Z</kbd>
             </button>
         </div>
     );
 }
+
+

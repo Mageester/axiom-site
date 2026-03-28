@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useMemo, useCallback, useEffect } from "react"
+import React, { useState, useMemo, useCallback, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@omni/components/ui/table"
 import { Input } from "@omni/components/ui/input"
@@ -57,7 +57,7 @@ export default function VaultDataTable({ initialLeads }: { initialLeads: Lead[] 
     const navigate = useNavigate()
     const [leads, setLeads] = useState<Lead[]>(initialLeads)
 
-    useEffect(() => {
+    React.useEffect(() => {
         setLeads(initialLeads)
     }, [initialLeads])
 
@@ -221,9 +221,7 @@ export default function VaultDataTable({ initialLeads }: { initialLeads: Lead[] 
     const totalPages = Math.max(1, Math.ceil(processedLeads.length / perPage))
     const pagedLeads = processedLeads.slice(page * perPage, (page + 1) * perPage)
 
-    useEffect(() => {
-        setPage(0)
-    }, [search, statusFilter, hasEmailFilter, hasPhoneFilter, hasContactFilter, hasSocialFilter, nicheFilter, cityFilter, minRating, maxRating, minReviews, maxReviews, dateFrom, dateTo, perPage])
+    useMemo(() => { setPage(0) }, [search, statusFilter, hasEmailFilter, hasPhoneFilter, hasContactFilter, hasSocialFilter, nicheFilter, cityFilter, minRating, maxRating, minReviews, maxReviews, dateFrom, dateTo, perPage])
 
     const handleSort = (key: SortKey) => {
         if (sortKey === key) {
@@ -364,7 +362,7 @@ export default function VaultDataTable({ initialLeads }: { initialLeads: Lead[] 
     )
 
     return (
-        <div className="omniscient-operator space-y-4">
+        <div className="space-y-4">
             {/* Top Bar: Search + Actions */}
             <div className="flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1">
@@ -439,25 +437,16 @@ export default function VaultDataTable({ initialLeads }: { initialLeads: Lead[] 
                         {f.label}
                     </Button>
                 ))}
-            {activeFilterCount > 0 && (
-                <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={clearAllFilters}
+                {activeFilterCount > 0 && (
+                    <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={clearAllFilters}
                         className="text-[11px] h-7 text-zinc-500 hover:text-red-400 gap-1"
                     >
                         <X className="w-3 h-3" /> Clear all filters
                     </Button>
                 )}
-            </div>
-
-            <div className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
-                <div className="text-sm text-white">
-                    Showing <span className="font-semibold">{processedLeads.length}</span> of <span className="font-semibold">{leads.length}</span> leads
-                </div>
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground/60">
-                    {activeFilterCount > 0 ? `${activeFilterCount} filters active` : "No filters applied"}
-                </div>
             </div>
 
             {/* Advanced Filter Panel */}
@@ -466,7 +455,7 @@ export default function VaultDataTable({ initialLeads }: { initialLeads: Lead[] 
                     <div className="flex items-center justify-between mb-1">
                         <h3 className="text-xs font-bold text-white flex items-center gap-2">
                             <Filter className="w-4 h-4 text-emerald-400" />
-                            Filter stack
+                            Advanced Filters
                         </h3>
                         <Button
                             variant="ghost"
@@ -474,7 +463,7 @@ export default function VaultDataTable({ initialLeads }: { initialLeads: Lead[] 
                             onClick={clearAllFilters}
                             className="text-[10px] text-zinc-500 hover:text-red-400 h-6 gap-1"
                         >
-                            <X className="w-3 h-3" /> Reset filters
+                            <X className="w-3 h-3" /> Reset
                         </Button>
                     </div>
 
@@ -618,7 +607,7 @@ export default function VaultDataTable({ initialLeads }: { initialLeads: Lead[] 
                     <div className="flex items-center justify-between mb-1">
                         <h3 className="text-xs font-bold text-white flex items-center gap-2">
                             <FileSpreadsheet className="w-4 h-4 text-cyan-400" />
-                            Export options
+                            Export Settings
                         </h3>
                         <button onClick={() => setShowExport(false)} className="text-zinc-600 hover:text-white transition-colors">
                             <X className="w-4 h-4" />
