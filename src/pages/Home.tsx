@@ -144,7 +144,7 @@ const Home: React.FC = () => {
       />
 
       <Layout>
-        <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-12 md:pt-20">
             <div className="max-w-5xl">
               <div>
@@ -153,7 +153,7 @@ const Home: React.FC = () => {
                     Custom websites built for serious local businesses.
                   </h1>
                 </div>
-                <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-300 md:text-lg">
+                <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
                   We build fast, professional websites that help established businesses look credible, rank higher, and generate more inquiries. No templates, no bloat.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">

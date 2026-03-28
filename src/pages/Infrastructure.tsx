@@ -234,7 +234,11 @@ const Infrastructure: React.FC = () => {
   const [openClarify, setOpenClarify] = useState<number>(0);
   const [openFaq, setOpenFaq] = useState<number>(0);
   const [activeProcessStep, setActiveProcessStep] = useState<number>(0);
+  const [processScrollProgress, setProcessScrollProgress] = useState<number>(0);
+  const [isSectionNavPinned, setIsSectionNavPinned] = useState(false);
+  const [sectionNavHeight, setSectionNavHeight] = useState(0);
   const sectionScrollFrame = useRef<number | null>(null);
+  const sectionNavRef = useRef<HTMLElement | null>(null);
 
   const activeStackData = useMemo(
     () => STACK_OPTIONS.find((option) => option.id === activeStack) ?? STACK_OPTIONS[0],
@@ -282,6 +286,74 @@ const Infrastructure: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const sectionNav = sectionNavRef.current;
+    if (!sectionNav) return;
+
+    let rafId = 0;
+
+    const updatePinState = () => {
+      rafId = 0;
+      setSectionNavHeight(sectionNav.offsetHeight);
+      const pinThreshold = sectionNav.offsetTop - 92;
+      setIsSectionNavPinned(window.scrollY >= pinThreshold);
+    };
+
+    const handleScroll = () => {
+      if (rafId !== 0) return;
+      rafId = window.requestAnimationFrame(updatePinState);
+    };
+
+    updatePinState();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+
+    return () => {
+      if (rafId !== 0) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const processSection = document.getElementById('process');
+    if (!processSection) return;
+
+    let rafId = 0;
+
+    const updateProgress = () => {
+      rafId = 0;
+      const rect = processSection.getBoundingClientRect();
+      const sectionTop = rect.top + window.scrollY;
+      const sectionHeight = rect.height;
+      const start = sectionTop - window.innerHeight * 0.35;
+      const end = sectionTop + sectionHeight - window.innerHeight * 0.15;
+      const total = Math.max(end - start, 1);
+      const progress = Math.min(Math.max((window.scrollY - start) / total, 0), 1);
+
+      setProcessScrollProgress(progress * 100);
+    };
+
+    const handleScroll = () => {
+      if (rafId !== 0) return;
+      rafId = window.requestAnimationFrame(updateProgress);
+    };
+
+    updateProgress();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+
+    return () => {
+      if (rafId !== 0) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
   useLayoutEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
     if (nodes.length === 0) return;
@@ -321,16 +393,7 @@ const Infrastructure: React.FC = () => {
     []
   );
 
-  const scrollToSection = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
-    const isPlainLeftClick =
-      event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
-    if (!isPlainLeftClick) return;
-
-    const target = document.getElementById(sectionId);
-    if (!target) return;
-    event.preventDefault();
-
-    const topOffset = window.innerWidth >= 768 ? 132 : 118;
+  const scrollToTarget = (target: HTMLElement, topOffset: number) => {
     const targetTop = Math.max(target.getBoundingClientRect().top + window.scrollY - topOffset, 0);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -365,7 +428,18 @@ const Infrastructure: React.FC = () => {
     sectionScrollFrame.current = window.requestAnimationFrame(animate);
   };
 
-  const processProgress = ((activeProcessStep + 1) / PROCESS_STEPS.length) * 100;
+  const scrollToSection = (event: React.MouseEvent<HTMLElement>, sectionId: string) => {
+    const isPlainLeftClick =
+      event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+    if (!isPlainLeftClick) return;
+
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+    event.preventDefault();
+    scrollToTarget(target, window.innerWidth >= 768 ? 132 : 118);
+  };
+
+  const processProgress = processScrollProgress;
 
   return (
     <>
@@ -375,7 +449,7 @@ const Infrastructure: React.FC = () => {
       />
 
       <Layout>
-        <main className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
           <RevealBlock as="section" data-hero-root className="pt-8 md:pt-16" variant="feature">
             <div className="max-w-5xl">
               <article className="md:pr-6" data-reveal>
@@ -384,7 +458,7 @@ const Infrastructure: React.FC = () => {
                     How the Axiom process works.
                   </h1>
                 </div>
-                <p className="mt-5 max-w-prose text-base leading-relaxed text-slate-300 md:text-lg">
+                <p className="mt-5 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
                   A clear, structured path from your first Zoom consultation to launch. No guesswork, no bloated process, and no unclear handoff.
                 </p>
                 <div className="mt-8">
@@ -396,10 +470,15 @@ const Infrastructure: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <div className="z-30 mt-8 md:sticky md:top-24" data-reveal>
+          <div className="mt-8" data-reveal style={sectionNavHeight > 0 ? { minHeight: `${sectionNavHeight}px` } : undefined}>
             <nav
+              ref={sectionNavRef}
               aria-label="Method page sections"
-              className="hide-scrollbar mx-auto w-full overflow-x-auto rounded-2xl border border-white/10 bg-[rgba(12,16,25,0.82)] p-1.5 backdrop-blur-lg md:w-fit md:rounded-full md:p-1.5"
+              className={`hide-scrollbar overflow-x-auto rounded-2xl border border-white/10 bg-[rgba(12,16,25,0.82)] p-1.5 backdrop-blur-lg transition-all duration-300 md:rounded-full md:p-1.5 ${
+                isSectionNavPinned
+                  ? 'fixed left-1/2 top-[5.25rem] z-40 w-[calc(100vw-2rem)] -translate-x-1/2 shadow-[0_18px_42px_rgba(0,0,0,0.28)] md:w-fit'
+                  : 'relative mx-auto w-full md:w-fit'
+              }`}
             >
               <ul className="flex min-w-max items-center gap-0.5 md:gap-1">
                 {SECTION_LINKS.map((link) => {
@@ -435,6 +514,36 @@ const Infrastructure: React.FC = () => {
                 </p>
               </div>
 
+              <nav
+                aria-label="Process steps"
+                className="mt-6 flex gap-2 overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.03] p-2 backdrop-blur-md"
+                data-reveal
+              >
+                {PROCESS_STEPS.map((step, index) => {
+                  const isActive = activeProcessStep === index;
+                  return (
+                    <button
+                      key={step.id}
+                      type="button"
+                      onClick={(event) => scrollToSection(event, `process-step-${step.id}`)}
+                      aria-current={isActive ? 'step' : undefined}
+                      className={`inline-flex min-w-max flex-1 items-center gap-3 rounded-xl border px-3.5 py-3 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 md:flex-none md:px-4 ${
+                        isActive
+                          ? 'border-[#d4a48e]/35 bg-[#B05D41]/12 text-[#F2F4F7] shadow-[0_0_0_1px_rgba(212,164,142,0.14)]'
+                          : 'border-transparent bg-transparent text-slate-300 hover:border-white/10 hover:bg-white/[0.05] hover:text-[#F2F4F7]'
+                      }`}
+                    >
+                      <span className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">
+                        {step.number}
+                      </span>
+                      <span className="text-xs font-medium uppercase tracking-[0.12em]">
+                        {step.title}
+                      </span>
+                    </button>
+                  );
+                })}
+              </nav>
+
               <ol className="mx-auto mt-10 grid w-full max-w-[960px] gap-5 md:mt-12 md:gap-6">
                 <li className="axiom-bento rounded-2xl px-4 py-3 md:px-5 md:py-3.5" data-reveal aria-label="Step progress">
                   <div className="flex items-center justify-between">
@@ -453,14 +562,27 @@ const Infrastructure: React.FC = () => {
                 {PROCESS_STEPS.map((step, index) => (
                   <li
                     key={step.id}
+                    id={`process-step-${step.id}`}
                     data-process-step
                     data-step-index={index}
                     data-reveal
-                    className="axiom-bento card-snappy rounded-2xl p-6 transition-transform duration-300 hover:-translate-y-1 motion-reduce:transform-none md:p-7"
+                    aria-current={activeProcessStep === index ? 'step' : undefined}
+                    className={`axiom-bento card-snappy scroll-mt-32 rounded-2xl p-6 transition-all duration-300 motion-reduce:transform-none md:p-7 ${
+                      activeProcessStep === index
+                        ? 'border-[#d4a48e]/28 bg-[linear-gradient(180deg,rgba(24,33,49,0.92)_0%,rgba(16,23,38,0.96)_100%)] shadow-[0_18px_42px_rgba(0,0,0,0.26)]'
+                        : 'border-white/8 opacity-80'
+                    }`}
                   >
                     <div className="grid gap-4 md:grid-cols-12 md:items-start">
                       <div className="md:col-span-2">
-                        <p className="font-axiomMono text-lg tracking-[0.18em] text-[#d4a48e]">{step.number}</p>
+                        <button
+                          type="button"
+                          aria-label={`Jump to ${step.title}`}
+                          onClick={(event) => scrollToSection(event, `process-step-${step.id}`)}
+                          className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 font-axiomMono text-lg tracking-[0.18em] text-[#d4a48e] transition-all duration-300 hover:border-[#d4a48e]/28 hover:bg-[#B05D41]/12 hover:text-[#f0cfbf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+                        >
+                          {step.number}
+                        </button>
                       </div>
                       <div className="md:col-span-10">
                         <div className="flex items-center gap-3">

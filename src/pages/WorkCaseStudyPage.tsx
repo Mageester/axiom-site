@@ -38,7 +38,7 @@ const WorkCaseStudyPage: React.FC = () => {
     <>
       <SEO title={`${entry.title} | Axiom Work`} description={entry.summary} />
       <Layout>
-        <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
           <section className="pt-12 md:pt-16">
             <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
               <div className="lg:col-span-7">
@@ -51,8 +51,8 @@ const WorkCaseStudyPage: React.FC = () => {
                 <h1 className="mt-5 max-w-3xl text-[clamp(2rem,4.4vw,3.8rem)] font-semibold tracking-tight text-[#F2F4F7]">
                   {entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '')}
                 </h1>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">{entry.summary}</p>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400">
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">{entry.summary}</p>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">
                   {detailNote}
                 </p>
 
@@ -110,7 +110,6 @@ const WorkCaseStudyPage: React.FC = () => {
                     alt={imageAlt}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     loading="eager"
-                    fetchPriority="high"
                     decoding="async"
                     style={imagePosition ? { objectPosition: imagePosition } : undefined}
                   />

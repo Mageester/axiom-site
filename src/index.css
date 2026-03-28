@@ -13,8 +13,8 @@
     --accent2: #D88361;
     --accent-muted: rgba(194, 110, 78, 0.2);
     --axiom-text-main: #F3F6FA;
-    --axiom-text-primary: #C2CCD8;
-    --axiom-text-mute: #8F9BAB;
+    --axiom-text-primary: #CFD7E3;
+    --axiom-text-mute: #9AA8B6;
     --axiom-amber: #C26E4E;
     --axiom-gold: #D6B07A;
     --axiom-navy: #21324A;
@@ -31,6 +31,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
     overflow-x: hidden;
   }
 
@@ -94,7 +95,46 @@
   }
 
   p {
-    @apply text-slate-300 leading-relaxed;
+    @apply leading-relaxed;
+    color: #D1D9E4;
+  }
+
+  main[id],
+  section[id],
+  article[id] {
+    scroll-margin-top: 7rem;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px rgba(212, 164, 142, 0.46),
+      0 0 0 6px rgba(9, 11, 16, 0.9);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 80;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 9999px;
+    background: rgba(9, 11, 16, 0.96);
+    color: var(--axiom-text-main);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    padding: 0.85rem 1rem;
+    text-transform: uppercase;
+    transform: translateY(-160%);
+    transition: transform 220ms ease, opacity 220ms ease, border-color 220ms ease, background-color 220ms ease;
+    opacity: 0;
+  }
+
+  .skip-link:focus-visible,
+  .skip-link:focus {
+    transform: translateY(0);
+    opacity: 1;
   }
 
   a,

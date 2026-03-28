@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import FloatingAffordances from './FloatingAffordances';
 import Preloader from './Preloader';
 import ResponsiveImage from './ResponsiveImage';
 import { responsiveImages } from '../lib/responsiveImages';
@@ -15,6 +16,14 @@ const NAV_ITEMS = [
   { label: 'Work', to: '/works' },
   { label: 'About', to: '/about' },
 ];
+
+const isActiveRoute = (pathname: string, to: string) => {
+  if (to === '/') {
+    return pathname === '/';
+  }
+
+  return pathname === to || pathname.startsWith(`${to}/`);
+};
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const layoutRef = useRef<HTMLDivElement>(null);
@@ -196,15 +205,51 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     };
   }, []);
 
-  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative pb-1 font-medium uppercase tracking-[0.2em] text-[11px] text-white/78 transition-colors duration-300 after:absolute after:bottom-[-7px] after:left-0 after:h-[1px] after:bg-amber-600 after:content-[''] after:transition-all after:duration-300 ${isActive ? 'text-white after:w-full' : 'after:w-0 hover:text-white hover:after:w-full'}`;
+  const navLinkClass = (pathname: string, to: string) => {
+    const active = isActiveRoute(pathname, to);
+
+    return [
+      'relative inline-flex items-center rounded-full px-3.5 py-2 font-medium uppercase tracking-[0.2em] text-[11px] transition-all duration-300',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
+      active
+        ? 'scale-[1.04] bg-white/[0.06] text-[#F2F4F7] shadow-[0_0_0_1px_rgba(212,164,142,0.18),0_0_20px_rgba(212,164,142,0.08)] after:absolute after:inset-x-3 after:bottom-[6px] after:h-[2px] after:rounded-full after:bg-[#d4a48e] after:content-[""]'
+        : 'text-white/55 hover:bg-white/[0.04] hover:text-[#EAEFF5]'
+    ].join(' ');
+  };
+
+  const mobileNavLinkClass = (pathname: string, to: string) => {
+    const active = isActiveRoute(pathname, to);
+
+    return [
+      'rounded-xl px-3 py-2.5 text-sm uppercase tracking-[0.14em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
+      active
+        ? 'bg-white/[0.08] text-[#F2F4F7] shadow-[inset_0_0_0_1px_rgba(212,164,142,0.12)]'
+        : 'text-slate-300 hover:bg-white/[0.05] hover:text-[#F2F4F7]'
+    ].join(' ');
+  };
+
+  const handleSkipToMain = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = document.getElementById('main-content');
+    if (!target) return;
+
+    event.preventDefault();
+    target.focus();
+    target.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  };
 
   return (
     <div ref={layoutRef} className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
       <Preloader targetRef={logoTargetRef} />
 
+      <a href="#main-content" onClick={handleSkipToMain} className="skip-link">
+        Skip to main content
+      </a>
+
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div data-startup-bg className="fixed top-[-20%] left-[-10%] h-[50vw] w-[50vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
+        <div data-startup-bg className="fixed left-[-10%] top-[-20%] h-[50vw] w-[50vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
         <div data-startup-bg className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
         <div data-startup-bg className="engineering-grid animate-grid-drift" />
         <div data-startup-bg className="global-noise-floor" />
@@ -213,43 +258,49 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <nav
         ref={navRef}
         data-startup-nav
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${isScrolled
-            ? 'border-b border-white/[0.08] bg-[rgba(9,12,18,0.58)] backdrop-blur-sm'
+        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'border-b border-white/[0.08] bg-[rgba(9,12,18,0.68)] backdrop-blur-xl'
             : 'border-b border-transparent bg-transparent backdrop-blur-0'
-          }`}
+        }`}
       >
-        <div className="relative h-20 flex items-center px-6 md:px-12">
-          <div className="flex flex-1 basis-[44%] items-center justify-start">
+        <div className="relative flex h-20 items-center px-6 md:px-12">
+          <div className="flex basis-[44%] flex-1 items-center justify-start">
             <button
               ref={logoTargetRef}
               type="button"
               onClick={() => navigate('/')}
-              className="inline-flex h-full items-center origin-left leading-none transition-transform duration-700 ease-in-out hover:scale-[1.04]"
+              className="inline-flex h-full origin-left items-center leading-none transition-transform duration-500 ease-out hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
               aria-label="Axiom Infrastructure home"
             >
               <ResponsiveImage
                 source={responsiveImages.logoClear}
                 sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
-                alt="Axiom Infrastructure"
-                className="block h-16 w-auto max-w-none object-left object-contain cursor-pointer transition-all duration-500 hover:brightness-125 md:h-20 lg:h-24"
+                alt="Axiom Infrastructure logo"
+                className="block h-16 w-auto max-w-none cursor-pointer object-contain object-left transition-all duration-500 hover:brightness-125 md:h-20 lg:h-24"
                 decoding="async"
-                fetchPriority="high"
               />
             </button>
           </div>
 
-          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-12 font-axiomMono md:flex">
+          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-3 font-axiomMono md:flex">
             {NAV_ITEMS.map((item) => (
-              <NavLink key={item.to} to={item.to} className={navLinkClass} data-startup-link>
+              <Link
+                key={item.to}
+                to={item.to}
+                data-startup-link
+                aria-current={isActiveRoute(location.pathname, item.to) ? 'page' : undefined}
+                className={navLinkClass(location.pathname, item.to)}
+              >
                 {item.label}
-              </NavLink>
+              </Link>
             ))}
           </div>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
-            <NavLink to="/apply" className="btn-primary btn-attention btn-sm px-4 py-2 text-sm">
+            <Link to="/apply#project-application-form" className="btn-primary btn-attention btn-sm px-4 py-2 text-sm">
               BOOK FREE CONSULTATION
-            </NavLink>
+            </Link>
           </div>
 
           <div className="flex flex-1 basis-[44%] items-center justify-end md:hidden">
@@ -257,14 +308,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               ref={mobileMenuButtonRef}
               type="button"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-[#F2F4F7] transition-all hover:border-white/35 hover:bg-white/[0.08] ${
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-[#F2F4F7] transition-all hover:border-white/35 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${
                 isMobileMenuOpen ? 'border-white/25 bg-white/[0.08]' : 'border-white/15 bg-white/[0.03]'
               }`}
-              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={isMobileMenuOpen ? 'Close site navigation' : 'Open site navigation'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-site-menu"
             >
-              <span className="sr-only">{isMobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
+              <span className="sr-only">{isMobileMenuOpen ? 'Close site navigation' : 'Open site navigation'}</span>
               {isMobileMenuOpen ? (
                 <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
                   <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
@@ -280,7 +331,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </nav>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/70 transition-opacity duration-200 md:hidden ${isMobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+        className={`fixed inset-0 z-40 bg-black/70 transition-opacity duration-200 md:hidden ${
+          isMobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+        }`}
         onClick={() => setIsMobileMenuOpen(false)}
         aria-hidden={!isMobileMenuOpen}
       />
@@ -304,27 +357,30 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         <nav className="flex flex-col gap-1" aria-label="Mobile">
           {NAV_ITEMS.map((item) => (
-            <NavLink
+            <Link
               key={item.to}
               to={item.to}
               onClick={() => setIsMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `rounded-xl px-3 py-2.5 text-sm uppercase tracking-[0.14em] transition-colors ${
-                  isActive ? 'bg-white/[0.08] text-[#F2F4F7]' : 'text-slate-300 hover:bg-white/[0.05] hover:text-[#F2F4F7]'
-                }`
-              }
+              aria-current={isActiveRoute(location.pathname, item.to) ? 'page' : undefined}
+              className={mobileNavLinkClass(location.pathname, item.to)}
             >
               {item.label}
-            </NavLink>
+            </Link>
           ))}
         </nav>
 
-        <NavLink to="/apply" onClick={() => setIsMobileMenuOpen(false)} className="btn-primary btn-attention btn-lg mt-5 w-full">
+        <Link
+          to="/apply#project-application-form"
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="btn-primary btn-attention btn-lg mt-5 w-full"
+        >
           BOOK FREE CONSULTATION
-        </NavLink>
+        </Link>
       </div>
 
-      <div className="relative z-10 pt-24 md:pt-28 noise-overlay">{children}</div>
+      <div className="relative z-10 pt-24 noise-overlay md:pt-28">{children}</div>
+
+      <FloatingAffordances />
     </div>
   );
 };

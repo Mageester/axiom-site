@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
@@ -28,12 +28,19 @@ const worksDisplayOrder = [
   'concept-roofing-conversion-site',
 ] as const;
 
-const statusDisplayLabel: Record<string, string> = {
-  'Sample Build': 'Sample Build',
-  'Concept Build': 'Demo',
-  'Demonstration Site': 'Demo',
-  'Live Demo': 'Live Deployment',
-  'In Progress': 'In Progress',
+const workPresentationBySlug: Record<string, { statusLabel: string; isLiveDemo: boolean }> = {
+  'demonstration-restaurant-reservation-site': {
+    statusLabel: 'Live Deployment',
+    isLiveDemo: true,
+  },
+  'concept-landscaping-authority-site': {
+    statusLabel: 'Demo',
+    isLiveDemo: false,
+  },
+  'concept-roofing-conversion-site': {
+    statusLabel: 'Demo',
+    isLiveDemo: false,
+  },
 };
 
 const improvementCopyBySlug: Record<string, string> = {
@@ -48,13 +55,13 @@ const orderedCaseStudies = worksDisplayOrder
 
 const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
   const proofImage = getWorkProofImage(entry.slug);
-  const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
+  const presentation = workPresentationBySlug[entry.slug] ?? { statusLabel: 'Demo', isLiveDemo: Boolean(entry.demoUrl) };
   return {
     id: entry.slug,
     title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
     businessType: entry.businessType.replace(/\s+Business$/, ''),
-    statusLabel: statusDisplayLabel[entry.label] ?? entry.label,
-    isLiveDemo,
+    statusLabel: presentation.statusLabel,
+    isLiveDemo: presentation.isLiveDemo,
     improvement: improvementCopyBySlug[entry.slug] ?? 'Built to create a clearer, more modern, and more trustworthy first impression.',
     image: proofImage.source,
     demoUrl: entry.demoUrl,
@@ -62,6 +69,12 @@ const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
     imagePosition: proofImage.position,
   };
 });
+
+const STATUS_FILTERS = [
+  { id: 'all', label: 'All' },
+  { id: 'live', label: 'Live' },
+  { id: 'demo', label: 'Demo' },
+] as const;
 
 function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry) => void }) {
   return (
@@ -161,6 +174,22 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
 
 const Deployments: React.FC = () => {
   const navigate = useNavigate();
+  const [statusFilter, setStatusFilter] = useState<'all' | 'live' | 'demo'>('all');
+  const [industryFilter, setIndustryFilter] = useState('all');
+
+  const availableIndustries = useMemo(
+    () => ['all', ...new Set(works.map((work) => work.businessType).filter(Boolean))],
+    []
+  );
+
+  const filteredWorks = useMemo(() => {
+    return works.filter((work) => {
+      const statusMatch =
+        statusFilter === 'all' || (statusFilter === 'live' ? work.isLiveDemo : !work.isLiveDemo);
+      const industryMatch = industryFilter === 'all' || work.businessType === industryFilter;
+      return statusMatch && industryMatch;
+    });
+  }, [industryFilter, statusFilter]);
 
   const openWorkDetails = (work: WorkEntry) => {
     if (work.isLiveDemo && work.demoUrl) {
@@ -184,12 +213,13 @@ const Deployments: React.FC = () => {
         description="View our featured work, sample builds, demos, and live deployments with clear labeling and business context."
       />
       <Layout>
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-0 pb-24 md:pb-28">
         <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0" variant="feature">
           <div className="max-w-4xl">
             <div className="mt-2.5 max-w-4xl overflow-hidden">
               <h1 data-startup-heading className="text-left">Work & Examples</h1>
             </div>
-            <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+            <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
               Sample builds, demos, and live deployments from the kinds of websites Axiom builds for businesses that need a stronger online presence.
             </p>
             <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3 md:mt-6 md:gap-3.5">
@@ -203,20 +233,82 @@ const Deployments: React.FC = () => {
                 View our process
               </Link>
             </div>
-            <p data-startup-meta className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-400">
+            <p data-startup-meta className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-300">
               Labels are explicit so you always know what is a Sample Build, a Demo, or a Live Deployment.
             </p>
           </div>
         </RevealBlock>
 
-        <RevealBlock as="section" id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-3 pb-8 sm:px-6 md:px-8 md:pt-6">
-          <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {works.map((work, index) => (
-              <RevealBlock as="article" key={work.id} delay={index * 0.08} variant="card">
-                <WorkCard work={work} onOpen={openWorkDetails} />
-              </RevealBlock>
-            ))}
+        <section className="mx-auto w-full max-w-7xl px-4 pt-8 sm:px-6 md:px-8">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter work by status">
+              {STATUS_FILTERS.map((filter) => {
+                const selected = statusFilter === filter.id;
+                return (
+                  <button
+                    key={filter.id}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => setStatusFilter(filter.id)}
+                    className={`rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${
+                      selected
+                        ? 'border-[#d4a48e]/35 bg-[#B05D41]/12 text-[#F2F4F7] shadow-[0_0_0_1px_rgba(212,164,142,0.12)]'
+                        : 'border-white/12 bg-white/[0.03] text-slate-300 hover:border-white/25 hover:bg-white/[0.06] hover:text-[#F2F4F7]'
+                    }`}
+                  >
+                    {filter.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            <label className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+              <span>Industry</span>
+              <select
+                value={industryFilter}
+                onChange={(event) => setIndustryFilter(event.target.value)}
+                className="rounded-full border border-white/12 bg-[#0d1323]/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#F2F4F7] outline-none transition-all focus:border-[#d4a48e]/45 focus:ring-2 focus:ring-[#d4a48e]/20"
+              >
+                <option value="all">All industries</option>
+                {availableIndustries
+                  .filter((industry) => industry !== 'all')
+                  .map((industry) => (
+                    <option key={industry} value={industry}>
+                      {industry}
+                    </option>
+                  ))}
+              </select>
+            </label>
           </div>
+        </section>
+
+        <RevealBlock as="section" id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-3 pb-8 sm:px-6 md:px-8 md:pt-6">
+          {filteredWorks.length > 0 ? (
+            <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {filteredWorks.map((work, index) => (
+                <RevealBlock as="article" key={work.id} delay={index * 0.08} variant="card">
+                  <WorkCard work={work} onOpen={openWorkDetails} />
+                </RevealBlock>
+              ))}
+            </div>
+          ) : (
+            <div className="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-white/[0.03] p-8 text-center">
+              <h2 className="text-2xl font-semibold text-[#F2F4F7]">No matching examples right now.</h2>
+              <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300">
+                Try a different status or industry filter to narrow the examples.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setStatusFilter('all');
+                  setIndustryFilter('all');
+                }}
+                className="btn-primary btn-lg mt-6"
+              >
+                Reset filters
+              </button>
+            </div>
+          )}
         </RevealBlock>
 
         <RevealBlock as="section" className="relative mx-auto flex w-full max-w-5xl flex-col items-center overflow-visible px-6 pb-12 text-center md:px-8">
@@ -241,6 +333,7 @@ const Deployments: React.FC = () => {
           </div>
         </RevealBlock>
 
+        </main>
         <Footer />
       </Layout>
     </>

@@ -93,7 +93,7 @@ const About: React.FC = () => {
       />
 
       <Layout>
-        <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
           <RevealBlock as="section" data-hero-root className="pt-12 md:pt-18" variant="feature">
             <div className="max-w-5xl">
               <article className="p-7 md:p-10">
@@ -102,7 +102,7 @@ const About: React.FC = () => {
                     About Axiom
                   </h1>
                 </div>
-                <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
+                <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
                   Axiom started after seeing local businesses stuck with slow, outdated websites. We build modern websites with an engineering-first delivery standard.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">

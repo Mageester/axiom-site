@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useRef } from 'react';
+import { PropsWithChildren, useLayoutEffect, useRef } from 'react';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
 import { useLocation } from 'react-router-dom';
@@ -7,7 +7,7 @@ export default function SmoothScrollProvider({ children }: PropsWithChildren) {
   const lenisRef = useRef<Lenis | null>(null);
   const { pathname } = useLocation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window === 'undefined') return;
 
     if ('scrollRestoration' in window.history) {
@@ -39,7 +39,7 @@ export default function SmoothScrollProvider({ children }: PropsWithChildren) {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window === 'undefined') return;
 
     const resetScroll = () => {
@@ -50,8 +50,12 @@ export default function SmoothScrollProvider({ children }: PropsWithChildren) {
     };
 
     resetScroll();
-    const rafId = window.requestAnimationFrame(resetScroll);
-    return () => window.cancelAnimationFrame(rafId);
+    const firstRaf = window.requestAnimationFrame(resetScroll);
+    const secondRaf = window.requestAnimationFrame(resetScroll);
+    return () => {
+      window.cancelAnimationFrame(firstRaf);
+      window.cancelAnimationFrame(secondRaf);
+    };
   }, [pathname]);
 
   return <>{children}</>;

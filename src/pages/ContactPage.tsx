@@ -208,10 +208,10 @@ const GeneralContactForm: React.FC = () => {
                         Have a question or want to talk about your project? Get in touch.
                     </h1>
                 </div>
-                <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
+                <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-200/90 md:text-base">
                     For general questions or an initial inquiry, send a message below.
                 </p>
-                <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
+                <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-300">
                     For serious website projects, use{' '}
                     <Link to="/apply" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                         Apply
@@ -319,7 +319,7 @@ const ContactPage: React.FC = () => {
 
     return (
         <Layout>
-            <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
+            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
                 <GeneralContactForm />
             </main>
             <Footer />
@@ -480,10 +480,10 @@ const ProjectApplicationForm: React.FC = () => {
                 description="Tell us about your business and what you need. This is the best route for serious website projects."
             />
             <Layout>
-                <main className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
-                    <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
-                        <div className="mt-4 overflow-hidden">
-                            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
+            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
+                <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
+                    <div className="mt-4 overflow-hidden">
+                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
                                 Apply
                             </p>
                             <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">

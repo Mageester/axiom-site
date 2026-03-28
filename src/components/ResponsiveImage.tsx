@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ResponsiveSource } from '../lib/responsiveImages';
 
 type ResponsiveImageProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'sizes'> & {
@@ -6,21 +6,52 @@ type ResponsiveImageProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src
   sizes: string;
 };
 
-const ResponsiveImage: React.FC<ResponsiveImageProps> = ({ source, sizes, ...imgProps }) => {
-  const { fetchPriority, ...restImgProps } = imgProps;
+const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
+  source,
+  sizes,
+  onLoad,
+  onError,
+  className,
+  ...imgProps
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [source.avifSrcSet, source.webpSrcSet, source.fallbackSrc]);
+
+  const handleLoad: React.ReactEventHandler<HTMLImageElement> = (event) => {
+    setIsLoaded(true);
+    onLoad?.(event);
+  };
+
+  const handleError: React.ReactEventHandler<HTMLImageElement> = (event) => {
+    setIsLoaded(true);
+    onError?.(event);
+  };
 
   return (
-    <picture>
-      <source type="image/avif" srcSet={source.avifSrcSet} sizes={sizes} />
-      <source type="image/webp" srcSet={source.webpSrcSet} sizes={sizes} />
-      <img
-        src={source.fallbackSrc}
-        srcSet={source.webpSrcSet}
-        sizes={sizes}
-        {...restImgProps}
-        {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
+    <span className="relative block overflow-hidden">
+      <picture className="block">
+        <source type="image/avif" srcSet={source.avifSrcSet} sizes={sizes} />
+        <source type="image/webp" srcSet={source.webpSrcSet} sizes={sizes} />
+        <img
+          src={source.fallbackSrc}
+          srcSet={source.webpSrcSet}
+          sizes={sizes}
+          {...imgProps}
+          className={`${className ?? ''} block transition-opacity duration-500 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`.trim()}
+          onLoad={handleLoad}
+          onError={handleError}
+        />
+      </picture>
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.04] via-white/[0.08] to-white/[0.04] transition-opacity duration-500 ${
+          isLoaded ? 'opacity-0' : 'opacity-100 animate-pulse motion-reduce:animate-none'
+        }`}
       />
-    </picture>
+    </span>
   );
 };
 
