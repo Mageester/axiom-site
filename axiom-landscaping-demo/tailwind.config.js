@@ -8,25 +8,26 @@ export default {
     extend: {
       colors: {
         surface: {
-          base: '#0e0d0c',
-          card: '#161514',
-          elevated: '#1c1b19',
+          base: '#090b08',
+          card: '#11140f',
+          elevated: '#181d17',
         },
         grove: {
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
+          300: '#d6e49f',
+          400: '#b7cc6b',
+          500: '#95ad3d',
+          600: '#7f9230',
+          700: '#636e23',
         },
         lime: {
-          300: '#bef264',
-          400: '#a3e635',
-          500: '#84cc16',
+          300: '#d8e28e',
+          400: '#bdd65e',
+          500: '#98c933',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
         mono: ['SF Mono', 'Fira Code', 'monospace'],
       },
     },
