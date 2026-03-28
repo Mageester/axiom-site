@@ -4,7 +4,7 @@ export const restaurantContent: RestaurantContent = {
   brand: {
     name: 'Atelier Meridian',
     city: 'Toronto',
-    tagline: 'Seasonal tasting house with coastal influence',
+    tagline: 'Seasonal dining by Toronto harbour',
     phone: '+1 (416) 555-0182',
     email: 'reservations@ateliermeridian.ca',
     address: '112 Harbor Lane, Toronto, ON M5V 2L6',
@@ -18,43 +18,40 @@ export const restaurantContent: RestaurantContent = {
   home: {
     hero: {
       eyebrow: 'Chef-led dining in Toronto',
-      title: 'A reservation-first dining experience built for modern hospitality.',
+      title: 'An evening by the water, reserved with intention.',
       description:
-        'Atelier Meridian delivers a premium evening of precise plating, focused service, and ingredient-led menus designed around Ontario seasonality.',
+        'Atelier Meridian offers a quiet dinner room shaped by seasonal cooking, attentive hosting, and a menu that moves with Ontario produce and Atlantic catch.',
       primaryCta: 'Reserve a table',
-      secondaryCta: 'Explore menu',
+      secondaryCta: 'Explore the menu',
     },
     highlights: [
       {
-        title: 'Chef-led tasting cadence',
-        description:
-          'A rotating progression of small and full plates coordinated to your table pace.',
+        title: 'Seasonal tasting cadence',
+        description: 'A paced progression of plates built around the rhythm of the evening.',
       },
       {
-        title: 'Curated beverage pairing',
-        description:
-          'Low-intervention wines, signature zero-proof options, and guided pairings by course.',
+        title: 'Curated beverage pairings',
+        description: 'Low-intervention wines and zero-proof pairings selected to support the menu.',
       },
       {
         title: 'Private dining studio',
-        description:
-          'An intimate 12-seat room for celebrations, team dinners, and host-led experiences.',
+        description: 'An intimate room for celebrations, hosted dinners, and small business tables.',
       },
     ],
     experience: {
-      title: 'Designed for seamless booking and confident planning',
+      title: 'Designed for calm arrival and confident booking',
       description:
-        'The experience begins before arrival with clear reservation windows, party-size guidance, and direct contact channels.',
+        'Clear reservation windows, party-size guidance, and direct contact channels help the evening begin without friction.',
       points: [
-        'Real-time reservation intake for dinner service',
-        'Dedicated concierge response for dietary and accessibility needs',
-        'Transparent pricing and cancellation guidance before booking',
+        'Reservations open 30 days ahead',
+        'Private dining for up to 12 guests',
+        'Dietary and accessibility requests welcomed in advance',
       ],
     },
   },
   menu: {
     intro:
-      'Our menu is updated weekly based on regional harvests and fishery availability. Sample offerings below.',
+      'The menu changes with the season. The examples below reflect the room\'s tone rather than a fixed list.',
     sections: [
       {
         title: 'First Plates',
@@ -123,39 +120,36 @@ export const restaurantContent: RestaurantContent = {
   },
   about: {
     intro:
-      'Atelier Meridian was established to combine meticulous cuisine with calm, human hospitality.',
+      'Atelier Meridian was created to bring meticulous cuisine and calm hospitality into the same room.',
     story: [
       'Our kitchen works in short seasonal cycles. Menus are tested daily and adjusted to match the quality of incoming ingredients.',
-      'Service is paced to feel unhurried. We focus on host awareness, clear communication, and guest comfort over scripted formality.',
-      'The room was designed around natural textures and soft acoustics, creating an atmosphere that supports conversation and occasion.',
+      'Service is paced to feel unhurried, with clear communication and a calm front-of-house rhythm.',
+      'The room pairs natural textures with soft acoustics so conversation stays at the center of the evening.',
     ],
     values: [
       {
-        title: 'Ingredient transparency',
-        description:
-          'We source from partner farms and fisheries with direct visibility into origin and harvest timing.',
+        title: 'Ingredient restraint',
+        description: 'We source from farms and fisheries with direct visibility into origin and harvest timing.',
       },
       {
         title: 'Accessible premium dining',
-        description:
-          'Every guest receives clear options for dietary accommodations and table accessibility.',
+        description: 'Guests receive clear options for dietary accommodations and table accessibility.',
       },
       {
         title: 'Operational consistency',
-        description:
-          'From booking confirmations to final course delivery, we design each touchpoint for reliability.',
+        description: 'From booking confirmations to final course delivery, each touchpoint is designed for reliability.',
       },
     ],
     team: [
       {
         name: 'Camille Hart',
         role: 'Executive Chef',
-        bio: 'Camille leads menu development with a focus on coastal techniques and regional produce.',
+        bio: 'Camille leads menu development with a focus on restraint, balance, and coastal technique.',
       },
       {
         name: 'Noah Pereira',
         role: 'Restaurant Director',
-        bio: 'Noah oversees front-of-house operations and guest experience delivery.',
+        bio: 'Noah oversees front-of-house rhythm and guest experience delivery.',
       },
       {
         name: 'Sora Kim',
@@ -166,25 +160,25 @@ export const restaurantContent: RestaurantContent = {
   },
   reservations: {
     intro:
-      'Reservations open 30 days in advance. For parties above eight guests, contact our concierge directly.',
+      'Reservations open 30 days in advance. For parties of nine or more, contact our concierge directly.',
     policies: [
-      'A valid card is required to hold dinner reservations.',
-      'Cancellations made within 24 hours may be subject to a per-seat fee.',
-      'Please notify us of allergies or dietary requests at least 48 hours before arrival.',
+      'A card is required to hold dinner reservations.',
+      'Cancellations within 24 hours may incur a per-seat fee.',
+      'Please share allergies or dietary requests at least 48 hours before arrival.',
     ],
     channels: [
       {
-        label: 'Book online',
+        label: 'Reserve online',
         value: 'Open reservation portal',
         href: 'https://www.opentable.com/',
       },
       {
-        label: 'Call reservations',
+        label: 'Call concierge',
         value: '+1 (416) 555-0182',
         href: 'tel:+14165550182',
       },
       {
-        label: 'Email concierge',
+        label: 'Email reservations',
         value: 'reservations@ateliermeridian.ca',
         href: 'mailto:reservations@ateliermeridian.ca',
       },

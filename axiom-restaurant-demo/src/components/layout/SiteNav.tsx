@@ -44,7 +44,7 @@ export function SiteNav() {
             </NavLink>
           ))}
           <ButtonLink className="primary-nav__reserve" size="md" to={routes.reservations}>
-            Reserve
+            Reserve a table
           </ButtonLink>
         </nav>
       </div>

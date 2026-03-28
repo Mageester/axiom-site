@@ -9,12 +9,12 @@ export function MenuPage() {
       <PageHero
         actions={
           <ButtonLink to={routes.reservations} variant="secondary">
-            Reserve for dinner
+            Reserve a table
           </ButtonLink>
         }
         description={restaurantContent.menu.intro}
         eyebrow="Menu"
-        title="Current offerings"
+        title="Seasonal offerings"
       />
 
       <div className="menu-sections">
