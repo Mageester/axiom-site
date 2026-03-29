@@ -94,7 +94,7 @@ const About: React.FC = () => {
 
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-          <RevealBlock as="section" data-hero-root className="pt-12 md:pt-18" variant="feature">
+          <RevealBlock as="section" data-hero-root className="pt-8 md:pt-12" variant="feature">
             <div className="max-w-5xl">
               <article className="p-7 md:p-10">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Operator philosophy</p>
@@ -121,152 +121,164 @@ const About: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" id="why-axiom-exists" className="scroll-mt-28 pt-16 md:pt-22">
+          <RevealBlock as="section" id="why-axiom-exists" className="scroll-mt-28 pt-12 md:pt-16">
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why we work this way</h2>
-              <p className="mt-5 text-sm leading-relaxed text-slate-300 md:text-base">
+              <p className="mt-5 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
                 The point is not startup origin story. It is a clear operator philosophy for clients who want a site that matches the quality of the work behind it.
               </p>
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-16 md:pt-22">
-            <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why most sites underperform</h2>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {WEBSITE_PROBLEMS.map((item) => (
-                <article key={item.title} className="axiom-bento card-snappy p-5 md:p-6">
-                  <h3 className="text-lg font-semibold text-[#F2F4F7]">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.body}</p>
-                </article>
-              ))}
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" className="pt-16 md:pt-22">
-            <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What the work is held to</h2>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-              {DIFFERENTIATORS.map((item) => (
-                <article key={item.title} className="axiom-bento card-snappy p-5 md:p-6">
-                  <h3 className="text-base font-semibold text-[#F2F4F7]">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.body}</p>
-                </article>
-              ))}
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" className="pt-16 md:pt-22">
-            <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Founders</h2>
-              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Riley Hinsperger and Aidan Magee are equal partners. Both build the work and stand behind delivery quality.
-              </p>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <article className="axiom-bento card-snappy p-6 md:p-7">
-                <div className="flex items-center gap-4">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] font-axiomMono text-xs uppercase tracking-[0.14em] text-slate-200">
-                    RH
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#F2F4F7]">Riley Hinsperger</h3>
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Co-Founder | Equal Partner</p>
-                  </div>
+          <RevealBlock as="section" className="pt-12 md:pt-16">
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
+              <article className="space-y-7">
+                <div className="max-w-3xl">
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why most sites underperform</h2>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                  Riley leads architecture, frontend delivery, and performance standards on every build.
-                </p>
-                <div className="mt-5">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
-                  <a
-                    href="mailto:riley@getaxiom.ca"
-                    className="mt-2 inline-flex text-sm text-[#F2F4F7] underline decoration-white/35 underline-offset-3 transition-colors hover:text-white"
-                  >
-                    riley@getaxiom.ca
-                  </a>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {WEBSITE_PROBLEMS.map((item) => (
+                    <article key={item.title} className="axiom-bento card-snappy p-5 md:p-6">
+                      <h3 className="text-lg font-semibold text-[#F2F4F7]">{item.title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.body}</p>
+                    </article>
+                  ))}
                 </div>
               </article>
 
-              <article className="axiom-bento card-snappy p-6 md:p-7">
-                <div className="flex items-center gap-4">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] font-axiomMono text-xs uppercase tracking-[0.14em] text-slate-200">
-                    AM
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#F2F4F7]">Aidan Magee</h3>
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Co-Founder | Equal Partner</p>
-                  </div>
+              <article className="space-y-7">
+                <div className="max-w-3xl">
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What the work is held to</h2>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                  Aidan leads structure, user flow, and implementation quality on every build.
-                </p>
-                <div className="mt-5">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
-                  <a
-                    href="mailto:aidan@getaxiom.ca"
-                    className="mt-2 inline-flex text-sm text-[#F2F4F7] underline decoration-white/35 underline-offset-3 transition-colors hover:text-white"
-                  >
-                    aidan@getaxiom.ca
-                  </a>
+                <div className="grid gap-4">
+                  {DIFFERENTIATORS.map((item) => (
+                    <article key={item.title} className="axiom-bento card-snappy p-5 md:p-6">
+                      <h3 className="text-base font-semibold text-[#F2F4F7]">{item.title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.body}</p>
+                    </article>
+                  ))}
                 </div>
               </article>
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-16 md:pt-22">
-            <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Operating standards</h2>
-            </div>
-            <div className="grid gap-4 md:grid-cols-3">
-              {STANDARDS.map((item) => (
-                <article key={item.title} className="axiom-bento card-snappy p-6 md:p-7">
-                  <h3 className="text-xl font-semibold text-[#F2F4F7]">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.body}</p>
-                </article>
-              ))}
-            </div>
-          </RevealBlock>
+          <RevealBlock as="section" className="pt-12 md:pt-16">
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)]">
+              <article className="space-y-7">
+                <div className="max-w-3xl">
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Founders</h2>
+                  <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+                    Riley Hinsperger and Aidan Magee are equal partners. Both build the work and stand behind delivery quality.
+                  </p>
+                </div>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <article className="axiom-bento card-snappy p-6 md:p-7">
+                    <div className="flex items-center gap-4">
+                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] font-axiomMono text-xs uppercase tracking-[0.14em] text-slate-200">
+                        RH
+                      </span>
+                      <div>
+                        <h3 className="text-xl font-semibold text-[#F2F4F7]">Riley Hinsperger</h3>
+                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Co-Founder | Equal Partner</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-sm leading-relaxed text-slate-300">
+                      Riley leads architecture, frontend delivery, and performance standards on every build.
+                    </p>
+                    <div className="mt-5">
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
+                      <a
+                        href="mailto:riley@getaxiom.ca"
+                        className="mt-2 inline-flex text-sm text-[#F2F4F7] underline decoration-white/35 underline-offset-3 transition-colors hover:text-white"
+                      >
+                        riley@getaxiom.ca
+                      </a>
+                    </div>
+                  </article>
 
-          <RevealBlock as="section" className="pt-16 md:pt-22">
-            <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Working principles</h2>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-              {VALUES.map((value) => (
-                <article key={value} className="axiom-bento card-snappy p-5 md:p-6">
-                  <p className="text-sm font-medium leading-relaxed text-slate-200">{value}</p>
-                </article>
-              ))}
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" className="pt-16 md:pt-22">
-            <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Who We&apos;re Built For</h2>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <article className="axiom-bento card-snappy p-6 md:p-7">
-                <h3 className="text-lg font-semibold text-[#F2F4F7]">Best Fit Clients</h3>
-                <ul className="mt-4 space-y-3">
-                  <li className="text-sm leading-relaxed text-slate-300">Local service businesses and local-search driven companies</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Small to medium business teams that need a serious web presence</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Owners who understand the value of a modern, fast website</li>
-                </ul>
+                  <article className="axiom-bento card-snappy p-6 md:p-7">
+                    <div className="flex items-center gap-4">
+                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] font-axiomMono text-xs uppercase tracking-[0.14em] text-slate-200">
+                        AM
+                      </span>
+                      <div>
+                        <h3 className="text-xl font-semibold text-[#F2F4F7]">Aidan Magee</h3>
+                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Co-Founder | Equal Partner</p>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-sm leading-relaxed text-slate-300">
+                      Aidan leads structure, user flow, and implementation quality on every build.
+                    </p>
+                    <div className="mt-5">
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
+                      <a
+                        href="mailto:aidan@getaxiom.ca"
+                        className="mt-2 inline-flex text-sm text-[#F2F4F7] underline decoration-white/35 underline-offset-3 transition-colors hover:text-white"
+                      >
+                        aidan@getaxiom.ca
+                      </a>
+                    </div>
+                  </article>
+                </div>
               </article>
 
-              <article className="axiom-bento card-snappy p-6 md:p-7">
-                <h3 className="text-lg font-semibold text-[#F2F4F7]">Not The Right Fit</h3>
-                <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                  We are not a fit for owners who do not see a modern website as core to credibility and local visibility.
-                </p>
+              <article className="space-y-7">
+                <div className="max-w-3xl">
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Operating standards</h2>
+                </div>
+                <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-1">
+                  {STANDARDS.map((item) => (
+                    <article key={item.title} className="axiom-bento card-snappy p-6 md:p-7">
+                      <h3 className="text-xl font-semibold text-[#F2F4F7]">{item.title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.body}</p>
+                    </article>
+                  ))}
+                </div>
               </article>
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
+          <RevealBlock as="section" className="pt-12 md:pt-16">
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)]">
+              <article className="space-y-7">
+                <div className="max-w-3xl">
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Working principles</h2>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                  {VALUES.map((value) => (
+                    <article key={value} className="axiom-bento card-snappy p-5 md:p-6">
+                      <p className="text-sm font-medium leading-relaxed text-slate-200">{value}</p>
+                    </article>
+                  ))}
+                </div>
+              </article>
+
+              <article className="space-y-7">
+                <div className="max-w-3xl">
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Who We&apos;re Built For</h2>
+                </div>
+                <div className="grid gap-4">
+                  <article className="axiom-bento card-snappy p-6 md:p-7">
+                    <h3 className="text-lg font-semibold text-[#F2F4F7]">Best Fit Clients</h3>
+                    <ul className="mt-4 space-y-3">
+                      <li className="text-sm leading-relaxed text-slate-300">Local service businesses and local-search driven companies</li>
+                      <li className="text-sm leading-relaxed text-slate-300">Small to medium business teams that need a serious web presence</li>
+                      <li className="text-sm leading-relaxed text-slate-300">Owners who understand the value of a modern, fast website</li>
+                    </ul>
+                  </article>
+
+                  <article className="axiom-bento card-snappy p-6 md:p-7">
+                    <h3 className="text-lg font-semibold text-[#F2F4F7]">Not The Right Fit</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-slate-300">
+                      We are not a fit for owners who do not see a modern website as core to credibility and local visibility.
+                    </p>
+                  </article>
+                </div>
+              </article>
+            </div>
+          </RevealBlock>
+
+          <RevealBlock as="section" className="pt-12 md:pt-16" variant="feature">
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                 If your business is serious, your website should be too.

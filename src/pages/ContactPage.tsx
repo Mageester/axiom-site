@@ -481,34 +481,55 @@ const ProjectApplicationForm: React.FC = () => {
             />
             <Layout>
             <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
-                <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
-                    <div className="mt-4 overflow-hidden">
-                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
-                                Apply
+                <div className="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start">
+                    <section data-hero-root className="pt-8 md:pt-12 lg:sticky lg:top-28">
+                        <div className="max-w-2xl">
+                            <div className="overflow-hidden">
+                                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Apply</p>
+                                <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
+                                    Tell us about your business and what you need.
+                                </h1>
+                            </div>
+                            <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
+                                Tell us about your business and what you need. This is the best route for serious website projects.
                             </p>
-                            <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                                Tell us about your business and what you need.
-                            </h1>
+                            <p className="mt-3 max-w-2xl text-sm text-slate-400">
+                                For general questions or an initial inquiry, use{' '}
+                                <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                    Contact
+                                </Link>
+                                .
+                            </p>
+                            <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
+                                Step {step} of 2. This helps us understand scope and fit.
+                            </p>
+                            <div className="mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
+                                <div className={`h-full bg-[#B05D41] transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`} />
+                            </div>
                         </div>
-                        <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Tell us about your business and what you need. This is the best route for serious website projects.
-                        </p>
-                        <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
-                            For general questions or an initial inquiry, use{' '}
-                            <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                Contact
-                            </Link>
-                            .
-                        </p>
-                        <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Step {step} of 2. This helps us understand scope and fit.
-                        </p>
-                        <div className="mx-auto mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
-                            <div className={`h-full bg-[#B05D41] transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`} />
+
+                        <div className="mt-8 grid gap-4">
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">After You Apply</p>
+                                <p className="mt-3 text-sm text-slate-300">
+                                    Once your request is submitted, we&apos;ll review the scope and next steps within 1 business day.
+                                </p>
+                            </div>
+
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need a scoped project?</p>
+                                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                                    Use{' '}
+                                    <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                        Contact
+                                    </Link>{' '}
+                                    for general questions and lighter inquiries.
+                                </p>
+                            </div>
                         </div>
                     </section>
 
-                    <section ref={formSectionRef} id="project-application-form" className="mx-auto mt-5 max-w-5xl">
+                    <section ref={formSectionRef} id="project-application-form" className="pt-2 md:pt-6 lg:pt-12">
                         <div className="axiom-bento p-6 md:p-8">
                             <form onSubmit={handleSubmit} className="flex flex-col gap-7">
                                 <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
@@ -560,20 +581,6 @@ const ProjectApplicationForm: React.FC = () => {
                                             <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
                                                 Next
                                             </button>
-
-                                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">After You Apply</p>
-                                                <p className="mt-3 text-sm text-slate-300">
-                                                    Once your request is submitted, we&apos;ll review the scope and next steps within 1 business day.
-                                                </p>
-                                                <p className="mt-3 text-sm text-slate-300">
-                                                    If you only have a general question, use{' '}
-                                                    <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                                        Contact
-                                                    </Link>
-                                                    .
-                                                </p>
-                                            </div>
                                         </div>
                                     ) : (
                                         <div className="flex flex-col gap-6">
@@ -658,7 +665,8 @@ const ProjectApplicationForm: React.FC = () => {
                             </form>
                         </div>
                     </section>
-                </main>
+                </div>
+            </main>
                 <Footer />
             </Layout>
         </>
