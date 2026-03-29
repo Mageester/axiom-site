@@ -183,92 +183,10 @@ const Home: React.FC = () => {
 
           <section className="pt-10 md:pt-14">
             <p className="mb-3 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-              Our Standards
+              Operational standards
             </p>
             <PartnerMarquee />
           </section>
-
-          <RevealBlock as="section" className="pt-16 md:pt-28" variant="feature">
-            <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Featured Work</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">A selection of our custom builds, live projects, and category examples.</h2>
-              </div>
-                <Link
-                  to="/works"
-                  className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
-                >
-                  View Our Work
-                </Link>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {selectedWork.map((item, index) => {
-                const card = (
-                  <RevealBlock
-                    as="article"
-                    delay={index * 0.08}
-                    variant="card"
-                    className="flex min-h-[30rem] cursor-pointer flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1221]/92 shadow-[0_10px_34px_rgba(0,0,0,0.18)] transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/deployment:-translate-y-1 group-hover/deployment:border-[#d4a48e]/30 group-hover/deployment:shadow-[0_24px_60px_rgba(0,0,0,0.34)] group-focus-visible/deployment:-translate-y-1 group-focus-visible/deployment:border-[#d4a48e]/35 group-focus-visible/deployment:shadow-[0_24px_60px_rgba(0,0,0,0.34)]"
-                    whileHover={{ y: -6 }}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <div className="relative overflow-hidden">
-                      <ResponsiveImage
-                        source={item.image}
-                        sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
-                        alt={item.imageAlt ?? item.title}
-                        className="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover/deployment:scale-[1.03] group-focus-visible/deployment:scale-[1.03]"
-                        loading="lazy"
-                        decoding="async"
-                        style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/12 to-transparent" />
-                      <div className="absolute left-4 top-4">
-                        <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
-                          {item.projectType}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-1 flex-col p-5 sm:p-6">
-                      <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-[1.55rem]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-slate-300/95">
-                        {item.summary}
-                      </p>
-
-                      {item.demoUrl ? (
-                        <div className="mt-auto pt-6">
-                          <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/deployment:text-[#e8bea8] group-focus-visible/deployment:text-[#e8bea8]">
-                            View Demo
-                          </span>
-                        </div>
-                      ) : null}
-                    </div>
-                  </RevealBlock>
-                );
-
-                if (!item.demoUrl) {
-                  return React.cloneElement(card, { key: item.id });
-                }
-
-                return (
-                  <a
-                    key={item.id}
-                    href={item.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View live demo for ${item.title}`}
-                    className="group/deployment block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090d18]"
-                  >
-                    {card}
-                  </a>
-                );
-              })}
-            </div>
-          </RevealBlock>
 
           <RevealBlock as="section" className="pt-20 md:pt-24">
             <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
@@ -312,6 +230,88 @@ const Home: React.FC = () => {
                   <li className="text-sm leading-relaxed text-slate-300">Clean performance across desktop and mobile</li>
                 </ul>
               </article>
+            </div>
+          </RevealBlock>
+
+          <RevealBlock as="section" className="pt-16 md:pt-28" variant="feature">
+            <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                  Examples of the standard in practice.
+                </h2>
+              </div>
+              <Link
+                to="/works"
+                className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
+              >
+                See selected work
+              </Link>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {selectedWork.map((item, index) => {
+                const card = (
+                  <RevealBlock
+                    as="article"
+                    delay={index * 0.08}
+                    variant="card"
+                    className="flex min-h-[30rem] cursor-pointer flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1221]/92 shadow-[0_10px_34px_rgba(0,0,0,0.18)] transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/deployment:-translate-y-1 group-hover/deployment:border-[#d4a48e]/30 group-hover/deployment:shadow-[0_24px_60px_rgba(0,0,0,0.34)] group-focus-visible/deployment:-translate-y-1 group-focus-visible/deployment:border-[#d4a48e]/35 group-focus-visible/deployment:shadow-[0_24px_60px_rgba(0,0,0,0.34)]"
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="relative overflow-hidden">
+                      <ResponsiveImage
+                        source={item.image}
+                        sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
+                        alt={item.imageAlt ?? item.title}
+                        className="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover/deployment:scale-[1.03] group-focus-visible/deployment:scale-[1.03]"
+                        loading="lazy"
+                        decoding="async"
+                        style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/12 to-transparent" />
+                      <div className="absolute left-4 top-4">
+                        <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
+                          {item.projectType}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-1 flex-col p-5 sm:p-6">
+                      <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-[1.55rem]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-300/95">{item.summary}</p>
+
+                      {item.demoUrl ? (
+                        <div className="mt-auto pt-6">
+                          <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/deployment:text-[#e8bea8] group-focus-visible/deployment:text-[#e8bea8]">
+                            View demo
+                          </span>
+                        </div>
+                      ) : null}
+                    </div>
+                  </RevealBlock>
+                );
+
+                if (!item.demoUrl) {
+                  return React.cloneElement(card, { key: item.id });
+                }
+
+                return (
+                  <a
+                    key={item.id}
+                    href={item.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View live demo for ${item.title}`}
+                    className="group/deployment block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090d18]"
+                  >
+                    {card}
+                  </a>
+                );
+              })}
             </div>
           </RevealBlock>
 
