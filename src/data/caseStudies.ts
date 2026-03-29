@@ -79,14 +79,14 @@ export const caseStudies: CaseStudyEntry[] = [
         niche: 'Roofing and Exterior Services',
         location: 'Toronto, ON (Live demonstration deployment)',
         businessType: 'Roofing and Exterior Services Business',
-        primaryProblem: 'Competing CTAs with weak hierarchy during high-intent visits.',
-        demonstrates: 'Clear CTA priority for urgent versus planned project inquiries.',
-        summary: 'Live demonstration site for a roofing and exterior-services business balancing urgent inspections with planned higher-ticket exterior work.',
-        context: 'Live demonstration project showing how a roofing and exterior-services company can structure inspection-led trust, urgent-versus-planned CTA clarity, and stronger operational credibility.',
-        problems: ['Competing CTAs with no hierarchy', 'Slow load from builder bloat', 'Weak trust structure'],
-        built: ['Demonstrates CTA hierarchy for urgent versus planned inquiries', 'Trust section layout', 'Performance-first page shell'],
-        targets: ['Target: clearer first-click conversion path', 'Target: improved mobile readability'],
-        deliverables: ['Homepage + services + inspection flow', 'Roofing service architecture', 'Operational trust and CTA hierarchy system'],
+        primaryProblem: 'People need roof help fast, but the page gives too many equal choices.',
+        demonstrates: 'One clear path for urgent repairs and one for planned roof work.',
+        summary: 'Live demo for a roofing company that needs more booked inspections from storm calls and routine roof requests.',
+        context: 'Built to help a roofing team handle storm traffic, explain services clearly, and get more qualified inspection requests.',
+        problems: ['Too many buttons fighting for attention', 'Slow pages during storm traffic spikes', 'Not enough proof that the team is reliable'],
+        built: ['Simple urgent-vs-planned booking flow', 'Clear trust section with proof points', 'Fast page structure for mobile and peak traffic'],
+        targets: ['Target: more inspection form starts from first click', 'Target: easier reading on mobile for homeowners'],
+        deliverables: ['Homepage, service pages, and inspection booking flow', 'Roof repair and replacement service structure', 'Trust and call-to-action sections built for homeowners'],
         ctaLabel: 'Request a Similar Build'
     }
 ];

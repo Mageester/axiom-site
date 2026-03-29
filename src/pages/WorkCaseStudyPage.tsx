@@ -32,7 +32,7 @@ const WorkCaseStudyPage: React.FC = () => {
       ? 'This page outlines a live project and the strategy behind it.'
       : entry.label === 'In Progress'
         ? 'This project is currently in development. Build notes are public, but the live preview is restricted until launch.'
-        : `This page documents the layout intent, scope, and technical decisions for a ${entry.label.toLowerCase()}.`;
+        : `This page explains the layout, messaging, and technical decisions behind this ${entry.label.toLowerCase()}.`;
 
   return (
     <>
@@ -154,7 +154,7 @@ const WorkCaseStudyPage: React.FC = () => {
                 </article>
 
                 <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Scope Snapshot</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What's Included</h2>
                   <ul className="mt-3 space-y-2">
                     {entry.deliverables.slice(0, 3).map((item) => (
                       <li key={item} className="text-sm leading-relaxed text-slate-300">
@@ -180,7 +180,7 @@ const WorkCaseStudyPage: React.FC = () => {
             <div className="rounded-3xl border border-white/10 bg-black/20 p-7 text-center md:p-10">
               <h2 className="text-3xl font-semibold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of website quality?</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We can scope a similar architecture for your business context and conversion goals without template constraints.
+                We can build a similar system for your business goals without using templates.
               </p>
               <div className="mt-7 flex items-center justify-center">
                 <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
