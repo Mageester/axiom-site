@@ -14,10 +14,10 @@ const Footer: React.FC = () => {
         <div>
           <p className="text-3xl font-black leading-[1.05] tracking-tight text-[#F2F4F7] md:text-5xl">AXIOM INFRASTRUCTURE</p>
           <p className="mt-4 max-w-md text-sm leading-[1.8] text-slate-300">
-            Founder-led websites for established service businesses that need a sharper first impression and a cleaner path to inquiry.
+            Founder-led websites for service businesses that need a better first impression and a clearer next step.
           </p>
           <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-400">
-            Sample and demonstration work is labeled transparently. No fabricated results or client claims.
+            Sample and demo work is labeled clearly. No fake results or client claims.
           </p>
           <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">Copyright 2026 Axiom Infrastructure. All rights reserved.</p>
         </div>

@@ -10,11 +10,11 @@ import { caseStudies } from '../data/caseStudies';
 import { getWorkProofImage } from '../lib/workProofImages';
 
 const proofTypeLabel: Record<string, string> = {
-  'Sample Build': 'Sample Build',
-  'Concept Build': 'Concept Build',
-  'Demonstration Site': 'Demonstration Site',
-  'Live Demo': 'Live Demo',
-  'In Progress': 'In Progress',
+  'Sample Build': 'Sample',
+  'Concept Build': 'Demo site',
+  'Demonstration Site': 'Demo site',
+  'Live Demo': 'Live site',
+  'In Progress': 'In progress',
 };
 
 const homeSelectedWorkSlugs = [
@@ -43,27 +43,23 @@ const selectedWork = selectedWorkEntries.map((entry) => {
 
 const capabilities = [
   {
-    title: 'Built Around Your Business',
-    detail:
-      'We start by understanding what you do, what needs to be included, and what the site needs to help you achieve.',
+    title: 'Built for Your Business',
+    detail: 'We learn what you do, what needs to be on the site, and what the site needs to help you do.',
   },
   {
-    title: 'Made to Build Trust',
-    detail:
-      'A clear layout and modern design ensure your business looks established, capable, and trustworthy from the first click.',
+    title: 'Helps Build Trust',
+    detail: 'Clear structure and clean design help your business look established right away.',
   },
   {
-    title: 'Designed to Generate Inquiries',
-    detail:
-      'Calls, forms, and booking actions are placed with intent so more of the right visitors take the next step.',
+    title: 'Made to Bring In Inquiries',
+    detail: 'Calls, forms, and booking links are placed where people expect them.',
   },
 ];
 
 const standardsCards = [
   {
-    title: 'Fast, Reliable Hosting',
-    detail:
-      'Sites are delivered globally for fast loading, reliable uptime, and a smooth experience for every visitor.',
+    title: 'Fast Hosting',
+    detail: 'Hosting is set up for speed and steady uptime.',
     desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -72,9 +68,8 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Built for Speed',
-    detail:
-      'We structure layouts, media, and interactions to load instantly, so you never lose a visitor to slow wait times.',
+    title: 'Built to Load Fast',
+    detail: 'Layouts, images, and interactions stay light.',
     desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -84,9 +79,8 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Flawless on Mobile',
-    detail:
-      'We design from the phone up, ensuring your website feels completely natural, credible, and easy to use on any device.',
+    title: 'Works on Mobile',
+    detail: 'We plan for phones first so the site still feels easy to use on a small screen.',
     desktopSpan: 'lg:col-span-4',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -97,9 +91,8 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Clear and Accessible',
-    detail:
-      'Colors, contrast, structure, and text sizing are carefully reviewed to ensure a highly readable experience for everyone.',
+    title: 'Easy to Read',
+    detail: 'Colors, spacing, and text are checked so the page stays readable.',
     desktopSpan: 'lg:col-span-6',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -109,9 +102,8 @@ const standardsCards = [
     ),
   },
   {
-    title: 'Rigorous Pre-Launch Checks',
-    detail:
-      'Core pages, contact forms, mobile layouts, and critical actions are fully tested before your website goes live.',
+    title: 'Checked Before Launch',
+    detail: 'Pages, forms, and key actions are tested before launch.',
     desktopSpan: 'lg:col-span-6',
     icon: (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -124,15 +116,15 @@ const standardsCards = [
 ];
 
 const method = [
-  '01 — We learn the business and what the site needs to do',
-  '02 — We plan the pages, structure, and conversion flow',
-  '03 — We build, test, and launch to a higher standard',
+  '01 — We learn what the business needs',
+  '02 — We plan the pages and calls to action',
+  '03 — We build, test, and launch',
 ];
 
 const operationalSignals = [
-  'A brief founder-led fit call to confirm the business and goals',
-  'A clear recommendation on scope, timing, and next step',
-  'Requirements agreed before build begins',
+  'Short fit call',
+  'Clear next step',
+  'Built for local service businesses',
 ];
 
 const Home: React.FC = () => {
@@ -140,7 +132,7 @@ const Home: React.FC = () => {
     <>
       <SEO
         title="Axiom | Premium Websites for Service Businesses"
-        description="Axiom designs and builds founder-led websites for established local companies that need sharper positioning, stronger trust, and a clearer path from first visit to inquiry."
+        description="Axiom builds websites for local businesses that need a better first impression and a clearer next step."
       />
 
       <Layout>
@@ -150,11 +142,11 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Premium websites for service businesses that need trust fast.
+                    Websites for service businesses that need a better first impression.
                   </h1>
                 </div>
                 <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom designs and builds fast, founder-led websites for established local companies that need sharper positioning, stronger trust, and a clearer path from first visit to inquiry.
+                  Axiom builds fast, founder-led websites for local businesses that need a better site and a clearer next step.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -168,14 +160,14 @@ const Home: React.FC = () => {
                   </Link>
                 </div>
                 <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
-                  The consultation is a 30-minute founder-led fit call. We review your business, what the site needs to do, and whether Axiom is the right partner before any scope is discussed.
+                  The first call is 30 minutes. We review your business, the site, and fit before we talk scope.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[12px] uppercase tracking-[0.16em] text-slate-400">
-                  <span>Founder-led review</span>
+                  <span>Short fit call</span>
                   <span className="hidden sm:inline">/</span>
                   <span>Clear next step</span>
                   <span className="hidden sm:inline">/</span>
-                  <span>Built for established local service businesses</span>
+                  <span>Built for local businesses</span>
                 </div>
               </div>
             </div>
@@ -183,7 +175,7 @@ const Home: React.FC = () => {
 
           <section className="pt-10 md:pt-14">
             <p className="mb-3 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-              Built-in baseline
+              Included in every build
             </p>
             <PartnerMarquee />
           </section>
@@ -193,7 +185,7 @@ const Home: React.FC = () => {
               <div className="lg:col-span-4">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">How We Work</p>
                 <h2 className="mt-3 max-w-[20ch] text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                  A clear, professional process for building your website.
+                  A clear process for building your website.
                 </h2>
                 <ol className="mt-5 space-y-3">
                   {method.map((step) => (
@@ -236,16 +228,16 @@ const Home: React.FC = () => {
           <RevealBlock as="section" className="pt-16 md:pt-28" variant="feature">
             <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work samples</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Examples of the standard in practice.
+                  Live sites and demos from the kinds of businesses we build for.
                 </h2>
               </div>
               <Link
                 to="/works"
                 className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
               >
-                See selected work
+                See examples
               </Link>
             </div>
 
@@ -325,12 +317,12 @@ const Home: React.FC = () => {
 
               <div className="relative z-10">
                 <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">OUR STANDARDS</p>
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">What is included</p>
                   <h2 className="mt-4 max-w-[12ch] text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
-                    Standards built into every launch.
+                    What every launch includes.
                   </h2>
                   <p className="mt-5 max-w-[38rem] text-sm leading-7 text-slate-300 md:text-base">
-                    A professional website needs more than good design. Every Axiom build is structured to load fast, work flawlessly on mobile, and guide visitors toward booking or buying.
+                    A good website needs more than good design. Every Axiom build is made to load quickly, work on mobile, and help people take the next step.
                   </p>
                 </div>
 
@@ -379,10 +371,10 @@ const Home: React.FC = () => {
               <div className="relative z-10">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  If the fit is right, we&apos;ll define the build.
+                  If it is a fit, we&apos;ll define the project.
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Book a brief consultation and we&apos;ll review the business, the current site, and the next step before any scope is discussed.
+                  Book a short call. We&apos;ll review the business, the current site, and the next step before we talk scope.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">

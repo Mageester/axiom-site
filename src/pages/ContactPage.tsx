@@ -294,13 +294,13 @@ const GeneralContactForm: React.FC = () => {
                     </article>
 
                     <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need a scoped project?</p>
+                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need a smaller request?</p>
                         <p className="mt-3 text-sm leading-relaxed text-slate-300">
                             Use{' '}
                             <Link to="/apply" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                 Apply
                             </Link>{' '}
-                            for serious website work.
+                            for bigger projects.
                         </p>
                     </article>
                 </div>
@@ -477,7 +477,7 @@ const ProjectApplicationForm: React.FC = () => {
         <>
             <SEO
                 title="Apply | Axiom"
-                description="Tell us about your business and what you need. This is the best route for serious website projects."
+                description="Tell us about your business. We will review fit before we discuss scope."
             />
             <Layout>
             <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
@@ -491,17 +491,17 @@ const ProjectApplicationForm: React.FC = () => {
                                 </h1>
                             </div>
                             <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                                We keep the intake light, then review fit before any scope discussion begins.
+                                The form is short. We review fit before we talk scope.
                             </p>
                             <p className="mt-3 max-w-2xl text-sm text-slate-400">
-                                For general questions or an initial inquiry, use{' '}
+                                Use{' '}
                                 <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                     Contact
                                 </Link>
-                                .
+                                {' '}for general questions.
                             </p>
                             <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                                Step {step} of 2. This helps us understand scope and fit.
+                                Step {step} of 2. We use this to review fit.
                             </p>
                             <div className="mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
                                 <div className={`h-full bg-[#B05D41] transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`} />
@@ -510,20 +510,20 @@ const ProjectApplicationForm: React.FC = () => {
 
                         <div className="mt-8 grid gap-4">
                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">After You Apply</p>
+                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What happens next</p>
                                 <p className="mt-3 text-sm text-slate-300">
-                                    Once your request is submitted, we&apos;ll review the scope and next steps within 1 business day.
+                                    We review applications within 1 business day.
                                 </p>
                             </div>
 
                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need a scoped project?</p>
+                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need a smaller request?</p>
                                 <p className="mt-3 text-sm leading-relaxed text-slate-300">
                                     Use{' '}
                                     <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                         Contact
                                     </Link>{' '}
-                                    for general questions and lighter inquiries.
+                                    for general questions and smaller requests.
                                 </p>
                             </div>
                         </div>
@@ -536,7 +536,7 @@ const ProjectApplicationForm: React.FC = () => {
                                     {status === 'success' && (
                                         <div ref={successBoxRef} className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
                                             <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
-                                            <p className="mt-2 text-sm text-slate-300">A partner will review your submission and reply within one business day.</p>
+                                            <p className="mt-2 text-sm text-slate-300">We will review your application within one business day.</p>
                                             <button type="button" onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
                                                 Submit Another Application
                                             </button>

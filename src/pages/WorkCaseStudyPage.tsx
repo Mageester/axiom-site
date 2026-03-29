@@ -15,6 +15,14 @@ const proofToneByLabel: Record<string, string> = {
   'In Progress': 'border-amber-300/25 text-amber-200 bg-amber-500/10',
 };
 
+const proofLabelText: Record<string, string> = {
+  'Sample Build': 'Sample',
+  'Demonstration Site': 'Demo site',
+  'Concept Build': 'Demo site',
+  'Live Demo': 'Live site',
+  'In Progress': 'In progress',
+};
+
 const WorkCaseStudyPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const entry = getCaseStudyBySlug(String(slug || ''));
@@ -29,10 +37,10 @@ const WorkCaseStudyPage: React.FC = () => {
   const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
   const detailNote =
     isLiveDemo
-      ? 'This page shows the live build and the choices behind it.'
+      ? 'This page shows the live site and the choices behind it.'
       : entry.label === 'In Progress'
-        ? 'This project is currently in development. Build notes are public, but the live preview is restricted until launch.'
-        : `This page focuses on what was built, why it was built, and how it supports the category.`;
+        ? 'This project is still in development. Notes are public, but the live preview is private until launch.'
+        : 'This page shows what was built and why it was built.';
 
   return (
     <>
@@ -43,7 +51,7 @@ const WorkCaseStudyPage: React.FC = () => {
             <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
               <div className="lg:col-span-7">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className={`rounded-full border px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] ${labelTone}`}>{entry.label}</span>
+                  <span className={`rounded-full border px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] ${labelTone}`}>{proofLabelText[entry.label] || entry.label}</span>
                   <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">
                     {entry.businessType}
                   </span>
@@ -58,15 +66,15 @@ const WorkCaseStudyPage: React.FC = () => {
 
                 <dl className="mt-6 grid gap-3 sm:grid-cols-3">
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Business Type</dt>
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Business type</dt>
                     <dd className="mt-1 text-sm text-slate-200">{entry.businessType}</dd>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:col-span-2">
-                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Core Problem</dt>
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Main problem</dt>
                     <dd className="mt-1 text-sm text-slate-200">{entry.primaryProblem}</dd>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:col-span-2">
-                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Demonstrates</dt>
+                    <dt className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Shows</dt>
                     <dd className="mt-1 text-sm text-slate-200">{entry.demonstrates}</dd>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
@@ -83,7 +91,7 @@ const WorkCaseStudyPage: React.FC = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center rounded-full border border-[#d4a48e]/35 bg-[#d4a48e]/12 px-5 py-3 text-sm font-medium text-[#e8bea8] transition-colors hover:border-[#e8bea8]/60 hover:bg-[#d4a48e]/18"
                     >
-                      View Live Demo
+                      View live site
                     </a>
                   ) : entry.label === 'In Progress' ? (
                     <span className="inline-flex items-center justify-center rounded-full border border-amber-300/25 bg-amber-500/10 px-5 py-3 text-sm font-medium text-amber-100">
@@ -123,12 +131,12 @@ const WorkCaseStudyPage: React.FC = () => {
             <div className="grid gap-6 lg:grid-cols-12">
               <div className="space-y-6 lg:col-span-7">
                 <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Build Context</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Context</h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-300">{entry.context}</p>
                 </article>
 
                 <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Primary Problems</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Problems</h2>
                   <ul className="mt-3 space-y-3">
                     {entry.problems.slice(0, 3).map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
@@ -142,7 +150,7 @@ const WorkCaseStudyPage: React.FC = () => {
 
               <div className="space-y-6 lg:col-span-5">
                 <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What This Build Demonstrates</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What the build shows</h2>
                   <ul className="mt-3 space-y-3">
                     {entry.built.slice(0, 3).map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
@@ -154,7 +162,7 @@ const WorkCaseStudyPage: React.FC = () => {
                 </article>
 
                 <article className="rounded-2xl border border-white/10 bg-[#0d1323]/75 p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Scope Snapshot</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Scope</h2>
                   <ul className="mt-3 space-y-2">
                     {entry.deliverables.slice(0, 3).map((item) => (
                       <li key={item} className="text-sm leading-relaxed text-slate-300">
@@ -163,13 +171,13 @@ const WorkCaseStudyPage: React.FC = () => {
                     ))}
                   </ul>
                   <p className="mt-4 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-500">
-                    Planning targets are directional unless validated in a live deployment.
+                    Targets are directional unless validated in a live build.
                   </p>
                 </article>
                 <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Transparency</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Labeling</h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                    We label our portfolio clearly so you always know what is a live client website, a demonstration build, or an active concept. No fabricated results.
+                    We label our work clearly so you always know what is live, demo, or concept. No fake results.
                   </p>
                 </article>
               </div>
@@ -178,9 +186,9 @@ const WorkCaseStudyPage: React.FC = () => {
 
           <section className="pt-14 md:pt-16">
             <div className="rounded-3xl border border-white/10 bg-black/20 p-7 text-center md:p-10">
-              <h2 className="text-3xl font-semibold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of execution?</h2>
+              <h2 className="text-3xl font-semibold tracking-tight text-[#F2F4F7] md:text-4xl">Need this for your business?</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We can scope a similar architecture for your business context and conversion goals without template constraints.
+                We can scope a similar build for your business without using a template.
               </p>
               <div className="mt-7 flex items-center justify-center">
                 <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">

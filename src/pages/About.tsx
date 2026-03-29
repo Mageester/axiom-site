@@ -12,67 +12,67 @@ type InfoCard = {
 
 const WEBSITE_PROBLEMS: readonly InfoCard[] = [
   {
-    title: 'Slow Template Builds',
-    body: 'Generic template sites often load slowly and lose attention before visitors reach the offer.',
+    title: 'Slow builds',
+    body: 'Template sites are often slow and lose attention before people reach the offer.',
   },
   {
-    title: 'Outdated First Impression',
-    body: 'Dated layouts and visual clutter can make a strong business look less credible online.',
+    title: 'Old first impression',
+    body: 'Old layouts and clutter can make a strong business look less credible.',
   },
   {
-    title: 'Limited Customization',
-    body: 'Low-cost setups often lock businesses into layouts that do not match how they sell.',
+    title: 'Hard to customize',
+    body: 'Cheap setups often do not match how a business sells.',
   },
   {
-    title: 'Weak User Flow',
-    body: 'If pages and contact actions are unclear, visitors leave without taking the next step.',
+    title: 'Unclear next step',
+    body: 'If the next step is hard to find, people leave.',
   },
 ];
 
 const DIFFERENTIATORS: readonly InfoCard[] = [
   {
-    title: 'Performance Engineering',
-    body: 'Speed is engineered in from day one, not added later.',
+    title: 'Fast pages',
+    body: 'Speed is built in from day one.',
   },
   {
-    title: 'Cloudflare Edge Delivery',
-    body: 'Sites run through Cloudflare edge infrastructure for dependable routing and uptime.',
+    title: 'Reliable hosting',
+    body: 'Sites run through Cloudflare for speed and uptime.',
   },
   {
-    title: 'Faster Load Times',
-    body: 'Lean frontend code gets visitors to content and contact actions faster.',
+    title: 'Simple code',
+    body: 'Lean code gets people to the content faster.',
   },
   {
-    title: 'Reliability First',
-    body: 'We ship with clean deployment standards and post-launch checks for forms and routing.',
+    title: 'Works after launch',
+    body: 'We check forms and links before and after launch.',
   },
   {
-    title: 'Scalable Foundation',
-    body: 'Your site can grow with new pages and services without a rebuild.',
+    title: 'Built to grow',
+    body: 'The site can grow with new pages and services.',
   },
 ];
 
 const STANDARDS: readonly InfoCard[] = [
   {
-    title: 'Extremely Fast Load Times',
-    body: 'Pages should load quickly on real devices, not just in demos.',
+    title: 'Fast pages',
+    body: 'Pages should load quickly on real devices.',
   },
   {
-    title: 'Ease Of Use',
-    body: 'Navigation and page flow stay simple so visitors find what they need fast.',
+    title: 'Easy to use',
+    body: 'Navigation and page flow stay simple.',
   },
   {
-    title: 'Hyper-Custom Design',
-    body: 'Every build is custom to the business, never forced into a template.',
+    title: 'Custom design',
+    body: 'Every build is made for the business, not forced into a template.',
   },
 ];
 
 const VALUES: readonly string[] = [
-  'Pride in the work',
-  'Long-term local business relationships',
-  'Helping businesses grow',
-  'Honesty in every recommendation',
-  'Reliable delivery and support',
+  'Do the work well',
+  'Build long-term relationships',
+  'Help businesses grow',
+  'Give honest advice',
+  'Deliver and support well',
 ];
 
 const About: React.FC = () => {
@@ -89,7 +89,7 @@ const About: React.FC = () => {
     <>
       <SEO
         title="About | Axiom"
-        description="Axiom is a founder-led web partner for local businesses that want a serious operating standard, a better fit, and a cleaner delivery model."
+        description="Axiom is a founder-led website partner for local businesses that want a better site and a clear process."
       />
 
       <Layout>
@@ -97,18 +97,18 @@ const About: React.FC = () => {
           <RevealBlock as="section" data-hero-root className="pt-8 md:pt-12" variant="feature">
             <div className="max-w-5xl">
               <article className="p-7 md:p-10">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Operator philosophy</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">About Axiom</p>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.15rem,5.8vw,4.3rem)] font-extrabold leading-[1.06] text-[#F2F4F7]">
-                    Built by operators, not a layer of agency polish.
+                    Built by two founders who do the work.
                   </h1>
                 </div>
                 <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom is for local businesses that want a serious web partner who thinks in systems, delivery, and fit for the business.
+                  Axiom is for local businesses that want a website partner who keeps things clear and gets the work done.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <a href="#why-axiom-exists" onClick={handleLearnMoreClick} className="btn-primary btn-lg whitespace-nowrap">
-                    See the philosophy
+                    See how we work
                   </a>
                   <Link
                     to="/method"
@@ -123,9 +123,9 @@ const About: React.FC = () => {
 
           <RevealBlock as="section" id="why-axiom-exists" className="scroll-mt-28 pt-12 md:pt-16">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why we work this way</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why Axiom exists</h2>
               <p className="mt-5 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                The point is not startup origin story. It is a clear operator philosophy for clients who want a site that matches the quality of the work behind it.
+                We want websites that look good, load fast, and make it easy for the right people to get in touch.
               </p>
             </div>
           </RevealBlock>
@@ -134,7 +134,7 @@ const About: React.FC = () => {
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
               <article className="space-y-7">
                 <div className="max-w-3xl">
-                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why most sites underperform</h2>
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why many sites fall short</h2>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   {WEBSITE_PROBLEMS.map((item) => (
@@ -148,7 +148,7 @@ const About: React.FC = () => {
 
               <article className="space-y-7">
                 <div className="max-w-3xl">
-                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What the work is held to</h2>
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What every build needs</h2>
                 </div>
                 <div className="grid gap-4">
                   {DIFFERENTIATORS.map((item) => (
@@ -168,7 +168,7 @@ const About: React.FC = () => {
                 <div className="max-w-3xl">
                   <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Founders</h2>
                   <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                    Riley Hinsperger and Aidan Magee are equal partners. Both build the work and stand behind delivery quality.
+                    Riley Hinsperger and Aidan Magee are equal partners. They both build the work.
                   </p>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
@@ -183,7 +183,7 @@ const About: React.FC = () => {
                       </div>
                     </div>
                     <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                      Riley leads architecture, frontend delivery, and performance standards on every build.
+                      Riley leads design, frontend work, and performance on every build.
                     </p>
                     <div className="mt-5">
                       <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
@@ -207,7 +207,7 @@ const About: React.FC = () => {
                       </div>
                     </div>
                     <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                      Aidan leads structure, user flow, and implementation quality on every build.
+                      Aidan leads structure, user flow, and build quality on every build.
                     </p>
                     <div className="mt-5">
                       <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
@@ -224,7 +224,7 @@ const About: React.FC = () => {
 
               <article className="space-y-7">
                 <div className="max-w-3xl">
-                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Operating standards</h2>
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What every build includes</h2>
                 </div>
                 <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-1">
                   {STANDARDS.map((item) => (
@@ -242,7 +242,7 @@ const About: React.FC = () => {
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)]">
               <article className="space-y-7">
                 <div className="max-w-3xl">
-                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Working principles</h2>
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What matters to us</h2>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                   {VALUES.map((value) => (
@@ -255,11 +255,11 @@ const About: React.FC = () => {
 
               <article className="space-y-7">
                 <div className="max-w-3xl">
-                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Who We&apos;re Built For</h2>
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Who it&apos;s for</h2>
                 </div>
                 <div className="grid gap-4">
                   <article className="axiom-bento card-snappy p-6 md:p-7">
-                    <h3 className="text-lg font-semibold text-[#F2F4F7]">Best Fit Clients</h3>
+                    <h3 className="text-lg font-semibold text-[#F2F4F7]">Best fit</h3>
                     <ul className="mt-4 space-y-3">
                       <li className="text-sm leading-relaxed text-slate-300">Local service businesses and local-search driven companies</li>
                       <li className="text-sm leading-relaxed text-slate-300">Small to medium business teams that need a serious web presence</li>
@@ -268,9 +268,9 @@ const About: React.FC = () => {
                   </article>
 
                   <article className="axiom-bento card-snappy p-6 md:p-7">
-                    <h3 className="text-lg font-semibold text-[#F2F4F7]">Not The Right Fit</h3>
+                    <h3 className="text-lg font-semibold text-[#F2F4F7]">Not a fit</h3>
                     <p className="mt-4 text-sm leading-relaxed text-slate-300">
-                      We are not a fit for owners who do not see a modern website as core to credibility and local visibility.
+                      We are not a fit for owners who do not see a modern website as important.
                     </p>
                   </article>
                 </div>
@@ -281,10 +281,10 @@ const About: React.FC = () => {
           <RevealBlock as="section" className="pt-12 md:pt-16" variant="feature">
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                If your business is serious, your website should be too.
+                If your business needs a better site, let&apos;s talk.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Book a consultation and we will confirm the fit, then define the right scope for your business.
+                Book a consultation and we will confirm fit before we define the work.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -294,7 +294,7 @@ const About: React.FC = () => {
                   to="/method"
                   className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-white/30 hover:bg-white/[0.07]"
                 >
-                  See Infrastructure
+                  See Method
                 </Link>
               </div>
             </div>

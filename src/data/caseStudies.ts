@@ -26,30 +26,29 @@ export const caseStudies: CaseStudyEntry[] = [
         niche: 'Restaurant and Hospitality',
         location: 'Toronto, ON (Live demonstration deployment)',
         businessType: 'Restaurant Business',
-        primaryProblem: 'Weak atmosphere presentation and unclear reservation path for high-intent visitors.',
-        demonstrates: 'Photo-led hospitality framing with cleaner reservation-first conversion flow.',
-        summary: 'Demonstration site for a reservation-led restaurant brand that needs stronger atmosphere, sharper menu clarity, and higher booking confidence.',
-        context: 'Demonstration project showing how a restaurant brand can move from generic web presence to a premium, hospitality-driven booking experience.',
+        primaryProblem: 'The site did not make the restaurant feel inviting or make reservations easy to find.',
+        demonstrates: 'A clearer food-first layout with reservations up front.',
+        summary: 'A restaurant site that makes the food feel inviting and the reservation path easy.',
+        context: 'A demo that shows how a restaurant can move from a generic site to a booking-friendly one.',
         problems: [
-            'Generic visuals that do not communicate dining atmosphere or food quality',
-            'Reservation actions are buried, creating drop-off during high-intent traffic',
-            'Menu information is hard to scan on mobile and lacks clear hierarchy'
+            'Photos do not show the dining experience clearly',
+            'Reservations are too hard to find',
+            'Menu details are hard to scan on mobile'
         ],
         built: [
-            'Demonstrates photo-led hero and section composition aligned to hospitality buying behavior',
-            'Clear reservation path above the fold and reinforced through menu and proof sections',
-            'Structured menu and trust blocks designed for fast mobile scanning'
+            'Photo-led homepage',
+            'Reservation button up front',
+            'Simple menu and trust sections'
         ],
         targets: [
-            'Target: stronger reservation intent from homepage traffic',
-            'Target: clearer menu discovery and scan speed on mobile',
-            'Target: improved trust perception through atmosphere and presentation quality'
+            'More reservation clicks',
+            'Faster menu scanning on mobile',
+            'A stronger first impression'
         ],
         deliverables: [
-            'Homepage + menu preview + reservation-first CTA system',
-            'Hospitality-focused visual hierarchy and card composition',
-            'Mobile-first layout and interaction polish',
-            'Technical SEO and metadata-ready page structure'
+            'Homepage, menu, and reservation flow',
+            'Hospitality-first layout',
+            'Mobile-first design and SEO-friendly structure'
         ],
         ctaLabel: 'Request a Similar Build'
     },
@@ -61,14 +60,14 @@ export const caseStudies: CaseStudyEntry[] = [
         niche: 'Landscaping and Outdoor Services',
         location: 'Toronto, ON (Live demonstration deployment)',
         businessType: 'Landscaping and Outdoor Services Business',
-        primaryProblem: 'Portfolio-heavy pages with unclear next action for new inquiries.',
-        demonstrates: 'Premium portfolio framing with stronger consultation intent.',
-        summary: 'Live demonstration site for a landscaping business that needs stronger project presentation, clearer local trust, and a better quote path.',
-        context: 'Live demonstration project showing how a landscaping company can move from generic service pages to a stronger portfolio-led website with clearer quote intent.',
-        problems: ['Portfolio-heavy pages with unclear next action', 'No lead qualification messaging', 'Unstructured service pages'],
-        built: ['Demonstrates premium portfolio framing with stronger consultation intent', 'Consultation-first CTA system', 'Service area and service category structure'],
-        targets: ['Target: strong visual credibility on mobile', 'Target: better consultation intent capture'],
-        deliverables: ['Homepage + services + projects architecture', 'Service-area and consultation flow', 'Premium residential proof presentation'],
+        primaryProblem: 'The site did not make it easy to request a quote.',
+        demonstrates: 'A stronger project showcase with a clearer quote path.',
+        summary: 'A landscaping site that shows projects well and makes it easy to ask for a quote.',
+        context: 'A demo that shows how a landscaping company can move from a generic service site to a stronger project-led one.',
+        problems: ['Project pages were hard to scan', 'The next step was not clear', 'Service pages felt unstructured'],
+        built: ['Stronger project framing', 'Quote request up front', 'Clear service-area structure'],
+        targets: ['Stronger trust on mobile', 'More quote requests'],
+        deliverables: ['Homepage, services, and projects', 'Service area and quote flow', 'Residential proof presentation'],
         ctaLabel: 'Request a Similar Build'
     },
     {
@@ -79,14 +78,14 @@ export const caseStudies: CaseStudyEntry[] = [
         niche: 'Roofing and Exterior Services',
         location: 'Toronto, ON (Live demonstration deployment)',
         businessType: 'Roofing and Exterior Services Business',
-        primaryProblem: 'Competing CTAs with weak hierarchy during high-intent visits.',
-        demonstrates: 'Clear CTA priority for urgent versus planned project inquiries.',
-        summary: 'Live demonstration site for a roofing and exterior-services business balancing urgent inspections with planned higher-ticket exterior work.',
-        context: 'Live demonstration project showing how a roofing and exterior-services company can structure inspection-led trust, urgent-versus-planned CTA clarity, and stronger operational credibility.',
-        problems: ['Competing CTAs with no hierarchy', 'Slow load from builder bloat', 'Weak trust structure'],
-        built: ['Demonstrates CTA hierarchy for urgent versus planned inquiries', 'Trust section layout', 'Performance-first page shell'],
-        targets: ['Target: clearer first-click conversion path', 'Target: improved mobile readability'],
-        deliverables: ['Homepage + services + inspection flow', 'Roofing service architecture', 'Operational trust and CTA hierarchy system'],
+        primaryProblem: 'Urgent and planned jobs shared the same CTA priority.',
+        demonstrates: 'Clear CTA priority for inspections and larger projects.',
+        summary: 'A roofing site that makes inspections easy to book and keeps the page clear.',
+        context: 'A demo showing how a roofing company can organize urgent inspections and larger exterior jobs.',
+        problems: ['CTAs competed with each other', 'The page felt heavy', 'Trust was too thin'],
+        built: ['Clear CTA hierarchy', 'Trust section up front', 'Lightweight page shell'],
+        targets: ['Clearer first click', 'Better mobile readability'],
+        deliverables: ['Homepage, services, and inspection flow', 'Roofing service layout', 'Trust and CTA system'],
         ctaLabel: 'Request a Similar Build'
     }
 ];

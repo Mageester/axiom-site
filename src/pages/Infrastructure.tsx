@@ -34,8 +34,8 @@ type ExpandableItem = {
 
 const SECTION_LINKS: readonly SectionLink[] = [
   { id: 'process', label: 'Process' },
-  { id: 'your-stack', label: 'Your Stack', shortLabel: 'Stack' },
-  { id: 'clarify', label: 'What We Clarify', shortLabel: 'Clarify' },
+  { id: 'your-stack', label: 'Your Setup', shortLabel: 'Setup' },
+  { id: 'clarify', label: 'Confirm', shortLabel: 'Confirm' },
   { id: 'faq', label: 'FAQ' },
 ];
 
@@ -43,142 +43,107 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     id: 'call',
     number: '01',
-    title: 'Online Strategy Call',
-    summary:
-      'Every project starts with a focused 30-minute Zoom meeting to understand your business, priorities, and required website capabilities.',
-    points: [
-      'Online only, clear agenda, no wasted time',
-      'Pages, menus, forms, maps, booking, gallery, quote flow',
-    ],
+    title: 'Intro Call',
+    summary: 'Every project starts with a 30-minute Zoom call to understand your business and what the site needs to do.',
+    points: ['Online only', 'Clear agenda'],
   },
   {
     id: 'scope',
     number: '02',
-    title: 'Scope and Package Recommendation',
-    summary:
-      'We translate requirements into a clear scope and recommend the package that best fits your goals, timeline, and technical needs.',
-    points: [
-      'What is included now vs. phased later',
-      'Delivery model aligned to your business reality',
-    ],
+    title: 'Scope Plan',
+    summary: 'We turn the requirements into a clear scope and recommend the package that fits best.',
+    points: ['What is included now', 'What can wait until later'],
   },
   {
     id: 'plan',
     number: '03',
-    title: 'Website Planning and Structure',
-    summary:
-      'Before build starts, we define structure, navigation, and conversion pathways so each page has a clear purpose.',
-    points: [
-      'Page hierarchy and menu logic',
-      'Content and CTA structure for faster buyer decisions',
-    ],
+    title: 'Site Plan',
+    summary: 'Before the build starts, we define the page structure, navigation, and main calls to action.',
+    points: ['Page order and menu structure', 'Clear calls to action'],
   },
   {
     id: 'build',
     number: '04',
-    title: 'Build and Review',
-    summary:
-      'Axiom implements the approved plan with performance-focused standards, then runs guided reviews to keep decisions efficient.',
-    points: [
-      'Desktop and mobile behavior verified',
-      'Refinement checkpoints without scope drift',
-    ],
+    title: 'Build and Check',
+    summary: 'We build the site, review it, and keep the work focused on the approved plan.',
+    points: ['Checked on desktop and mobile', 'No extra scope added'],
   },
   {
     id: 'launch',
     number: '05',
-    title: 'Launch and Handover',
-    summary:
-      'We launch through a controlled release process and ensure everything runs flawlessly before handing over the keys.',
-    points: [
-      'DNS, hosting, and domain routing handled cleanly',
-      'Post-launch checks for reliability and speed',
-    ],
+    title: 'Launch',
+    summary: 'We launch the site cleanly and make sure everything works before handoff.',
+    points: ['DNS and routing handled cleanly', 'Final checks before handoff'],
   },
 ];
 
 const STACK_OPTIONS: readonly StackOption[] = [
   {
     id: 'current',
-    label: 'Work Within Current Setup',
-    title: 'Work within your current setup and improve what matters',
-    summary:
-      'If your current domain and hosting are already in a good place, we can build within that environment and upgrade the site without forcing a full move.',
-    bullets: [
-      'Keep your current domain and provider',
-      'Avoid unnecessary migration work',
-      'Improve performance, structure, and user experience',
-    ],
+    label: 'Use Current Setup',
+    title: 'Keep your current setup and improve the site',
+    summary: 'If your domain and hosting are already fine, we can build inside that setup and improve the site without a full move.',
+    bullets: ['Keep your current domain and provider', 'Avoid unnecessary migration work', 'Improve speed, structure, and user experience'],
   },
   {
     id: 'domain-kept',
-    label: 'Keep Domain, Rebuild Site',
-    title: 'Keep the domain. Replace the site experience.',
-    summary:
-      'If the domain should stay but the website needs a full reset, we handle the rebuild and launch planning so the transition stays clean and low-friction.',
-    bullets: [
-      'Keep your existing domain in place',
-      'Launch a new site with a clean transition',
-      'Protect continuity for customers and search visibility',
-    ],
+    label: 'Keep Domain',
+    title: 'Keep the domain. Replace the site.',
+    summary: 'If the domain should stay but the website needs a reset, we handle the rebuild and launch plan.',
+    bullets: ['Keep your existing domain in place', 'Launch a new site with a clean transition', 'Protect continuity for customers and search'],
   },
   {
     id: 'managed',
-    label: 'Fully Managed by Axiom',
-    title: 'Let Axiom handle hosting, deployment, and upkeep',
-    summary:
-      'If you want a more hands-off model, we can manage the technical side directly so updates, releases, and ongoing site operations stay centralized.',
-    bullets: [
-      'One team handling the technical side',
-      'Cleaner updates and release control',
-      'Less internal overhead for your business',
-    ],
+    label: 'Fully Managed',
+    title: 'Let Axiom handle hosting and updates',
+    summary: 'If you want a hands-off model, we can manage the technical side directly.',
+    bullets: ['One team handling the technical side', 'Cleaner updates and release control', 'Less internal overhead for your business'],
   },
 ];
 
 const CLARIFY_ITEMS: readonly ExpandableItem[] = [
   {
-    title: 'Required pages and navigation flow',
-    body: 'We define exactly what pages are needed, how navigation should be organized, and where key actions should appear so users move through the site with minimal friction.',
+    title: 'Pages and navigation',
+    body: 'We define the pages you need, how they should be arranged, and where key actions should appear.',
   },
   {
-    title: 'Feature requirements by business model',
-    body: 'We scope feature requirements early, including booking, menu structures, maps, galleries, quote forms, and contact pathways aligned to your service model.',
+    title: 'Features the site needs',
+    body: 'We scope the features early, including booking, menus, maps, galleries, quote forms, and contact paths.',
   },
   {
-    title: 'Lead capture and form routing',
-    body: 'We clarify form inputs, destination routing, and response expectations so inbound leads are captured cleanly and handled without manual confusion.',
+    title: 'Forms and lead routing',
+    body: 'We define the form fields, where leads go, and what happens after someone sends a message.',
   },
   {
-    title: 'Content structure and message hierarchy',
-    body: 'We organize content blocks and messaging priorities around buyer intent so each page supports trust and conversion outcomes.',
+    title: 'Content order',
+    body: 'We arrange the content so each page reads in a clear order.',
   },
   {
-    title: 'Domain, hosting, and release path',
-    body: 'We confirm domain ownership, hosting responsibilities, and launch sequencing before production so rollout is smooth and predictable.',
+    title: 'Domain and launch',
+    body: 'We confirm domain ownership, hosting, and launch steps before production.',
   },
   {
-    title: 'Near-term and future expansion needs',
-    body: 'We identify what must ship now and what can expand later, so the initial build is stable without boxing your business into short-term decisions.',
+    title: 'Now vs. later',
+    body: 'We separate what needs to ship now from what can wait.',
   },
 ];
 
 const FAQ_ITEMS: readonly ExpandableItem[] = [
   {
     title: 'How are consultations conducted?',
-    body: 'Consultations are conducted online only through Zoom. This keeps scheduling fast and keeps the process focused.',
+    body: 'Consultations are online through Zoom.',
   },
   {
     title: 'How long is the first meeting?',
-    body: 'The initial consultation is 30 minutes. We use that time to understand your business and define what the website must include.',
+    body: 'The first call is 30 minutes.',
   },
   {
     title: 'Can Axiom work with my existing domain and provider?',
-    body: 'Yes. If your current setup is workable, we can build around it. If needed, we can also handle infrastructure directly.',
+    body: 'Yes. If your setup works, we can build around it. If needed, we can handle the technical side.',
   },
   {
     title: 'When do you recommend a package?',
-    body: 'After the strategy call and scope definition. Recommendations are based on the project requirements and delivery needs.',
+    body: 'After the first call and scope review.',
   },
 ];
 
@@ -445,7 +410,7 @@ const Infrastructure: React.FC = () => {
     <>
       <SEO
         title="Method | Axiom"
-        description="Axiom's delivery method keeps launches controlled: one clear consultation, a defined scope, and a clean handoff for high-trust service firms."
+        description="Axiom keeps projects clear with one call, a defined scope, and a clean launch."
       />
 
       <Layout>
@@ -453,14 +418,14 @@ const Infrastructure: React.FC = () => {
           <RevealBlock as="section" data-hero-root className="pt-8 md:pt-16" variant="feature">
             <div className="max-w-5xl">
               <article className="md:pr-6" data-reveal>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Delivery method</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Method</p>
                 <div className="mt-4 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2rem,8.2vw,4rem)] font-extrabold leading-[1.05] text-[#F2F4F7]">
-                    Delivery confidence from first call to handoff.
+                    A clear process from first call to launch.
                   </h1>
                 </div>
                 <p className="mt-5 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom scopes the stack, organizes the pages, and controls the launch so the project stays specific, low-friction, and easy to approve.
+                  We plan the site, build it, and handle launch so the project stays clear and easy to approve.
                 </p>
                 <div className="mt-8">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -511,7 +476,7 @@ const Infrastructure: React.FC = () => {
               <div className="mx-auto w-full max-w-[740px]" data-reveal>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Clear steps from first call to launch.</h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
-                  Each step removes uncertainty before the next decision.
+                  Each step keeps the project simple.
                 </p>
               </div>
 
@@ -615,7 +580,7 @@ const Infrastructure: React.FC = () => {
                 Keep what works. Replace what doesn&apos;t.
               </h2>
               <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We can stay inside your current setup, rebuild around your existing domain, or manage the technical side directly.
+                We can work in your current setup, rebuild around your domain, or handle the technical side directly.
               </p>
             </div>
 
@@ -672,7 +637,7 @@ const Infrastructure: React.FC = () => {
 
           <RevealBlock as="section" id="clarify" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What We Clarify</p>
+              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What we confirm</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What we confirm before build.</h2>
             </div>
 
@@ -710,7 +675,7 @@ const Infrastructure: React.FC = () => {
           <RevealBlock as="section" id="faq" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">FAQ</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">A few common questions.</h2>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Common questions.</h2>
             </div>
 
             <div className="grid gap-3">
@@ -749,12 +714,12 @@ const Infrastructure: React.FC = () => {
               className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12"
               data-reveal
             >
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Final step</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Final step</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                If the fit is right, we&apos;ll scope the work.
+                If it is a fit, we&apos;ll define the project.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                The first conversation covers goals, timing, and the level of support the project needs.
+                The first call covers goals, timing, and what the project needs.
               </p>
               <div className="mt-8 flex justify-center">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">

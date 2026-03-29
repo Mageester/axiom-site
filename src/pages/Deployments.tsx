@@ -30,23 +30,23 @@ const worksDisplayOrder = [
 
 const workPresentationBySlug: Record<string, { statusLabel: string; isLiveDemo: boolean }> = {
   'demonstration-restaurant-reservation-site': {
-    statusLabel: 'Live Deployment',
+    statusLabel: 'Live site',
     isLiveDemo: true,
   },
   'concept-landscaping-authority-site': {
-    statusLabel: 'Demo',
+    statusLabel: 'Demo site',
     isLiveDemo: false,
   },
   'concept-roofing-conversion-site': {
-    statusLabel: 'Demo',
+    statusLabel: 'Demo site',
     isLiveDemo: false,
   },
 };
 
 const improvementCopyBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'Built to create a clearer, more modern, and more trustworthy first impression for diners.',
-  'concept-landscaping-authority-site': 'Built to create a clearer, more modern, and more trustworthy first impression for homeowners.',
-  'concept-roofing-conversion-site': 'Built to create a clearer, more modern, and more trustworthy first impression for roofing inquiries.',
+  'demonstration-restaurant-reservation-site': 'Built to help diners trust the restaurant and book a table.',
+  'concept-landscaping-authority-site': 'Built to help homeowners feel confident requesting a quote.',
+  'concept-roofing-conversion-site': 'Built to help homeowners trust the company and book an inspection.',
 };
 
 const orderedCaseStudies = worksDisplayOrder
@@ -159,18 +159,18 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom"
-        description="Live deployments, demos, and case studies from the categories Axiom builds for, labeled clearly so you can judge fit and delivery quality quickly."
+        description="Live sites, demos, and case studies from the kinds of businesses Axiom builds for."
       />
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-0 pb-24 md:pb-28">
         <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0" variant="feature">
           <div className="max-w-4xl">
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
             <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">Execution evidence, labeled by category.</h1>
+              <h1 data-startup-heading className="text-left">Work samples, clearly labeled.</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              Live deployments, demos, and case studies from the kinds of websites Axiom builds for businesses that need stronger trust and clearer category fit.
+              Live sites, demos, and case studies from the kinds of businesses Axiom builds for.
             </p>
             <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3 md:mt-6 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
@@ -184,7 +184,7 @@ const Deployments: React.FC = () => {
               </Link>
             </div>
             <p data-startup-meta className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-300">
-              Labels stay explicit so you can see what is a Sample Build, a Demo, or a Live Deployment without second-guessing the context.
+              Each item is labeled as a sample, demo, or live site.
             </p>
           </div>
         </RevealBlock>
@@ -265,9 +265,9 @@ const Deployments: React.FC = () => {
           <div className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[600px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[160px]" />
 
           <div className="relative z-10">
-            <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this standard for your category?</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this for your business?</h2>
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-              We can scope a build around the business, the buyer, and the level of trust the site has to earn.
+              We can scope a build around your business, your buyers, and what the site needs to do.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <Link to="/apply#project-application-form" className="btn-primary btn-lg whitespace-nowrap">
