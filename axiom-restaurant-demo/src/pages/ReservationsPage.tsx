@@ -40,18 +40,23 @@ export function ReservationsPage() {
     <>
       <PageHero
         actions={
-          <ButtonAnchor href="tel:+14165550182" size="lg" variant="secondary">
-            Call concierge
-          </ButtonAnchor>
+          <>
+            <ButtonAnchor href="#reservation-request" size="lg" variant="primary">
+              Start reservation request
+            </ButtonAnchor>
+            <ButtonAnchor href="tel:+14165550182" size="lg" variant="secondary">
+              Call concierge
+            </ButtonAnchor>
+          </>
         }
         description={restaurantContent.reservations.intro}
         eyebrow="Reservations"
-        title="Reserve with the concierge"
+        title="Reserve directly with the concierge."
       />
 
       <Section
         description="A few essentials help us place the right table and confirm the pace of service."
-        title="Reservation details"
+        title="How reservations are handled"
       >
         <div className="reservation-brief">
           <div className="reservation-brief__panel">
@@ -78,6 +83,7 @@ export function ReservationsPage() {
       </Section>
 
       <Section
+        id="reservation-request"
         description="Share the basics and we will draft the details for concierge review."
         title="Reservation request form"
       >

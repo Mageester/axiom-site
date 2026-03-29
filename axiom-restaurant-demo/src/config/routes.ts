@@ -18,3 +18,7 @@ export const navItems: NavItem[] = [
   { label: 'About', path: routes.about },
   { label: 'Reservations', path: routes.reservations },
 ]
+
+export function normalizePathname(pathname: string) {
+  return pathname.replace(/\/+$/, '') || '/'
+}

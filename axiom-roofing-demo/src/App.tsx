@@ -12,12 +12,20 @@ type SectionIntroProps = {
   copy?: string;
 };
 
-const navItems: NavItem[] = [
-  { label: 'Services', href: '#services', id: 'services' },
-  { label: 'Proof', href: '#proof', id: 'proof' },
-  { label: 'Process', href: '#process', id: 'process' },
-  { label: 'Contact', href: '#contact', id: 'contact' },
-];
+const isInspectionRoute = typeof window !== 'undefined' && window.location.pathname.includes('/inspection');
+
+const navItems: NavItem[] = isInspectionRoute
+  ? [
+      { label: 'Proof', href: '#proof', id: 'proof' },
+      { label: 'Process', href: '#process', id: 'process' },
+      { label: 'Contact', href: '#contact', id: 'contact' },
+    ]
+  : [
+      { label: 'Services', href: '#services', id: 'services' },
+      { label: 'Proof', href: '#proof', id: 'proof' },
+      { label: 'Process', href: '#process', id: 'process' },
+      { label: 'Contact', href: '#contact', id: 'contact' },
+    ];
 
 const heroSignals = [
   { label: 'Priority intake', value: 'Call first for active leaks' },
@@ -95,7 +103,7 @@ const SectionIntro: React.FC<SectionIntroProps> = ({ eyebrow, title, copy }) => 
   </div>
 );
 
-const Header: React.FC<{ activeSection: string }> = ({ activeSection }) => (
+const Header: React.FC<{ activeSection: string; isInspectionRoute: boolean }> = ({ activeSection, isInspectionRoute }) => (
   <header className="sticky top-0 z-50 border-b border-white/10 bg-surface-base/90 backdrop-blur-xl">
     <div className="border-b border-white/10 bg-[#1a120d]/90">
       <div className="site-container flex min-h-10 items-center justify-between gap-4 py-2">
@@ -103,12 +111,21 @@ const Header: React.FC<{ activeSection: string }> = ({ activeSection }) => (
           <span className="h-1.5 w-1.5 rounded-full bg-ember-400" />
           Active leak or storm damage? Call first for triage.
         </p>
-        <a
-          href="#contact"
-          className="hidden text-[11px] font-semibold uppercase tracking-[0.14em] text-ember-300 lg:block"
-        >
-          Request inspection
-        </a>
+        {isInspectionRoute ? (
+          <a
+            href="tel:16475550164"
+            className="hidden text-[11px] font-semibold uppercase tracking-[0.14em] text-ember-300 lg:block"
+          >
+            Call for triage
+          </a>
+        ) : (
+          <a
+            href="/inspection"
+            className="hidden text-[11px] font-semibold uppercase tracking-[0.14em] text-ember-300 lg:block"
+          >
+            Request inspection
+          </a>
+        )}
       </div>
     </div>
 
@@ -152,9 +169,15 @@ const Header: React.FC<{ activeSection: string }> = ({ activeSection }) => (
           })}
         </nav>
 
-        <a href="#contact" className="btn-primary ml-auto md:ml-4">
-          Request inspection
-        </a>
+        {isInspectionRoute ? (
+          <a href="tel:16475550164" className="btn-secondary ml-auto md:ml-4">
+            Call for triage
+          </a>
+        ) : (
+          <a href="/inspection" className="btn-secondary ml-auto md:ml-4">
+            Request inspection
+          </a>
+        )}
       </div>
 
       <div className="mt-4 flex gap-2 overflow-x-auto pb-1 md:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -173,19 +196,40 @@ const Hero: React.FC = () => (
     <div className="site-container hero-grid">
       <div>
         <p className="section-kicker">Roofing and exterior protection | Toronto and Durham</p>
-        <h1 className="hero-title">Photo-backed roof inspections with a clear next step before work begins.</h1>
+        <h1 className="hero-title">
+          {isInspectionRoute
+            ? 'Request a photo-backed roof inspection.'
+            : 'Roofing and exterior protection backed by evidence.'}
+        </h1>
         <p className="hero-copy">
-          We identify the failure point, document the risk, and recommend the smallest durable fix first. If
-          replacement is the right call, you'll know why before crew day.
+          {isInspectionRoute
+            ? 'If there is an active leak, call first. Otherwise send the issue details and we will return the next step before crew day.'
+            : "We identify the failure point, document the risk, and point to the smallest durable fix first. If replacement is the right call, you'll know why before crew day."}
         </p>
 
         <div className="hero-actions">
-          <a href="#contact" className="btn-primary">
-            Request inspection
-          </a>
-          <a href="tel:16475550164" className="btn-secondary">
-            Call for triage
-          </a>
+          {isInspectionRoute ? (
+            <>
+              <a href="#contact" className="btn-primary">
+                Request inspection
+              </a>
+              <a
+                href="tel:16475550164"
+                className="inline-flex items-center text-[13px] font-medium uppercase tracking-[0.18em] text-stone-400 transition-colors hover:text-white"
+              >
+                Call for triage
+              </a>
+            </>
+          ) : (
+            <>
+              <a href="/inspection" className="btn-primary">
+                Request inspection
+              </a>
+              <a href="tel:16475550164" className="btn-secondary">
+                Call for triage
+              </a>
+            </>
+          )}
         </div>
 
         <ul className="hero-points">
@@ -206,7 +250,9 @@ const Hero: React.FC = () => (
           />
         </picture>
         <figcaption className="hero-caption">
-          First visit covers leak source, repair path, and whether replacement is actually warranted.
+          {isInspectionRoute
+            ? 'The first visit covers leak source, repair path, and whether replacement is actually warranted.'
+            : 'First visit covers leak source, repair path, and whether replacement is actually warranted.'}
         </figcaption>
       </figure>
     </div>
@@ -228,9 +274,13 @@ const Proof: React.FC = () => (
   <section id="proof" className="section-shell scroll-mt-32">
     <div className="section-inner">
       <SectionIntro
-        eyebrow="Project references"
-        title="Proof you can scan in a minute."
-        copy="Before, after, and the exact scope that changed the outcome. No vague full-service promises."
+        eyebrow={isInspectionRoute ? 'Inspection proof' : 'Project references'}
+        title={isInspectionRoute ? 'What the first visit confirms.' : 'Proof you can scan in a minute.'}
+        copy={
+          isInspectionRoute
+            ? 'Photo-backed notes show the failure point, the repair path, and whether replacement is actually warranted.'
+            : 'Before, after, and the exact scope that changed the outcome. No vague full-service promises.'
+        }
       />
 
       <div className="proof-grid">
@@ -285,7 +335,12 @@ const Proof: React.FC = () => (
   </section>
 );
 
-const Services: React.FC = () => (
+const Services: React.FC = () => {
+  if (isInspectionRoute) {
+    return null;
+  }
+
+  return (
   <section id="services" className="section-shell scroll-mt-32">
     <div className="section-inner">
       <SectionIntro
@@ -308,7 +363,8 @@ const Services: React.FC = () => (
       </div>
     </div>
   </section>
-);
+  )
+};
 
 const Process: React.FC = () => (
   <section id="process" className="section-shell scroll-mt-32">
@@ -316,8 +372,16 @@ const Process: React.FC = () => (
       <div>
         <SectionIntro
           eyebrow="Inspection path"
-          title="What we confirm before a crew is booked."
-          copy="You get the recommendation, the scope, and the schedule window before you commit."
+          title={
+            isInspectionRoute
+              ? 'How the inspection turns into scope.'
+              : 'What we confirm before a crew is booked.'
+          }
+          copy={
+            isInspectionRoute
+              ? 'You get the recommendation, the scope, and the schedule window before you commit.'
+              : 'You get the recommendation, the scope, and the schedule window before you commit.'
+          }
         />
 
         <div className="timeline">
@@ -352,10 +416,6 @@ const Process: React.FC = () => (
             </li>
           ))}
         </ul>
-
-        <a href="#contact" className="btn-secondary">
-          Book an inspection call
-        </a>
       </aside>
     </div>
   </section>
@@ -364,17 +424,61 @@ const Process: React.FC = () => (
 const ContactSection: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
 
+  if (!isInspectionRoute) {
+    return (
+      <section id="contact" className="section-shell scroll-mt-32 close-shell">
+        <div className="section-inner close-grid">
+          <div className="close-copy">
+            <SectionIntro
+              eyebrow="Inspection request"
+              title="Start with the inspection."
+              copy="If the roof is leaking, storm-damaged, or overdue for a clear read, the first visit should define the next step."
+            />
+
+            <a href="/inspection" className="btn-primary mt-8 w-full sm:w-auto">
+              Request inspection
+            </a>
+
+            <ul className="close-list">
+              {contactExpectations.map((item) => (
+                <li key={item}>
+                  <span />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="form-shell">
+            <h3>Need triage first?</h3>
+            <p>Call before crew day if water is active or the roof needs a fast read.</p>
+            <a href="tel:16475550164" className="btn-secondary mt-4 w-full">
+              Call for triage
+            </a>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="contact" className="section-shell scroll-mt-32 close-shell">
       <div className="section-inner close-grid">
-        <div className="close-copy">
-          <SectionIntro
-            eyebrow="Inspection request"
-            title="Send the issue and we will return the clear next step."
-            copy="For active leaks, call first so temporary protection can be triaged. For standard inspections, send the condition notes and timing. Address can follow during review."
-          />
+          <div className="close-copy">
+            <SectionIntro
+              eyebrow="Inspection request"
+              title={isInspectionRoute ? 'Send the issue. We will return the next step.' : 'Send the issue and we will return the clear next step.'}
+              copy={
+                isInspectionRoute
+                  ? 'For active leaks, call first so temporary protection can be triaged. For standard inspections, send the condition notes, roof age, and timing. Address can follow during review.'
+                  : 'For active leaks, call first so temporary protection can be triaged. For standard inspections, send the condition notes and timing. Address can follow during review.'
+              }
+            />
 
-          <a href="tel:16475550164" className="btn-primary mt-8 w-full sm:w-auto">
+          <a
+            href="tel:16475550164"
+            className="btn-secondary mt-8 w-full sm:w-auto"
+          >
             Call for triage
           </a>
 
@@ -436,25 +540,26 @@ const ContactSection: React.FC = () => {
 const Footer: React.FC = () => (
   <footer className="site-footer">
     <div className="site-container">
-      <div className="footer-cta">
-        <div className="footer-cta-copy">
-          <p className="footer-cta-kicker">Need a clear next step?</p>
-          <h2 className="footer-cta-title">Call for triage or request an inspection.</h2>
-          <p className="footer-cta-body">
-            We review the issue, confirm the right scope, and make sure the recommendation is written before
-            crew day.
-          </p>
-        </div>
+      {!isInspectionRoute ? (
+        <div className="footer-cta">
+          <div className="footer-cta-copy">
+            <p className="footer-cta-kicker">Need a clear next step?</p>
+            <h2 className="footer-cta-title">Call for triage or request an inspection.</h2>
+            <p className="footer-cta-body">
+              We review the issue, confirm the right scope, and make sure the recommendation is written before crew day.
+            </p>
+          </div>
 
-        <div className="footer-cta-actions">
-          <a href="tel:16475550164" className="btn-secondary">
-            Call for triage
-          </a>
-          <a href="#contact" className="btn-primary">
-            Request inspection
-          </a>
+          <div className="footer-cta-actions">
+            <a href="tel:16475550164" className="btn-secondary">
+              Call for triage
+            </a>
+            <a href="/inspection" className="btn-secondary">
+              Request inspection
+            </a>
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <div className="footer-grid">
         <div>
@@ -509,7 +614,7 @@ const App: React.FC = () => {
 
   return (
     <div className="page-shell">
-      <Header activeSection={activeSection} />
+      <Header activeSection={activeSection} isInspectionRoute={isInspectionRoute} />
       <main className="flex-1">
         <Hero />
         <Proof />

@@ -11,8 +11,6 @@ const menuImage =
   'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1400&h=1000&fit=crop'
 const privateDiningImage =
   'https://images.pexels.com/photos/28871005/pexels-photo-28871005.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop'
-const chefImage =
-  'https://images.pexels.com/photos/628776/pexels-photo-628776.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop'
 
 const heroSignals = [
   { label: 'Dinner service', value: 'Tuesday to Sunday' },
@@ -53,15 +51,6 @@ export function HomePage() {
         </div>
       </section>
 
-      <div className="hero-signals" aria-label="Dining signals">
-        {heroSignals.map((signal) => (
-          <div key={signal.label}>
-            <p className="hero-signals__label">{signal.label}</p>
-            <p className="hero-signals__value">{signal.value}</p>
-          </div>
-        ))}
-      </div>
-
       <Section
         description="A composed room with clear pacing, attentive service, and calm coastal tone."
         eyebrow="Signature evenings"
@@ -87,7 +76,7 @@ export function HomePage() {
             </div>
             <div className="experience-split__actions">
               <ButtonLink to={routes.reservations}>Reserve for dinner</ButtonLink>
-              <ButtonLink to={routes.about} variant="secondary">
+              <ButtonLink to={routes.about} variant="quiet">
                 Explore the dining room
               </ButtonLink>
             </div>
@@ -105,7 +94,7 @@ export function HomePage() {
             <p className="menu-split__copy">
               The menu moves in short arcs, edited for clarity, pairing rhythm, and a clean finish.
             </p>
-            <ButtonLink to={routes.menu} variant="secondary">
+            <ButtonLink to={routes.menu} variant="quiet">
               View full menu
             </ButtonLink>
             <div className="menu-split__image">
@@ -155,7 +144,7 @@ export function HomePage() {
             </ul>
             <div className="room-split__actions">
               <ButtonLink to={routes.reservations}>Reserve private dining</ButtonLink>
-              <ButtonAnchor href="tel:+14165550182" variant="secondary">
+              <ButtonAnchor href="tel:+14165550182" variant="quiet">
                 Call concierge
               </ButtonAnchor>
             </div>
@@ -172,28 +161,6 @@ export function HomePage() {
       </Section>
 
       <Section
-        description="Chef-led cuisine with calm, deliberate service."
-        eyebrow="From the kitchen"
-        title="Precision without ceremony."
-      >
-        <div className="chef-split">
-          <blockquote className="chef-note">
-            "We build menus that feel exacting without feeling formal. The goal is a room
-            that stays calm, responsive, and unmistakably special."
-            <cite>- Camille Hart, Executive Chef</cite>
-          </blockquote>
-          <div className="image-panel image-panel--tall">
-            <img
-              alt="Chef plating in an open kitchen setting"
-              src={chefImage}
-              loading="lazy"
-            />
-            <div className="image-panel__label">Kitchen pass</div>
-          </div>
-        </div>
-      </Section>
-
-      <Section
         className="section--final"
         description="Reservations open 30 days in advance. For hosted tables and private dining, contact our concierge directly."
         eyebrow="Reservations"
@@ -202,15 +169,12 @@ export function HomePage() {
         <div className="reserve-cta">
           <div className="reserve-cta__body">
             <p>
-              Reservations open 30 days in advance. For hosted tables and private dining, our concierge
-              can help coordinate the details.
+              Reservations open 30 days in advance. For hosted tables and private dining, concierge can
+              help coordinate the details.
             </p>
             <div className="reserve-cta__actions">
               <ButtonLink size="lg" to={routes.reservations}>
                 Reserve a table
-              </ButtonLink>
-              <ButtonLink size="lg" to={routes.menu} variant="secondary">
-                View menu
               </ButtonLink>
             </div>
           </div>

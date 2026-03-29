@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { navItems, routes } from '../../config/routes'
+import { NavLink, useLocation } from 'react-router-dom'
+import { normalizePathname, navItems, routes } from '../../config/routes'
 import { restaurantContent } from '../../content/restaurantContent'
-import { ButtonLink } from '../ui/Button'
+import { ButtonAnchor, ButtonLink } from '../ui/Button'
 
 export function SiteNav() {
   const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
+  const isReservationsPage = normalizePathname(location.pathname) === routes.reservations
 
   return (
     <header className="site-nav-wrap">
@@ -43,9 +45,20 @@ export function SiteNav() {
               {item.label}
             </NavLink>
           ))}
-          <ButtonLink className="primary-nav__reserve" size="md" to={routes.reservations}>
-            Reserve a table
-          </ButtonLink>
+          {isReservationsPage ? (
+            <ButtonAnchor
+              className="primary-nav__reserve"
+              href="tel:+14165550182"
+              size="md"
+              variant="quiet"
+            >
+              Call concierge
+            </ButtonAnchor>
+          ) : (
+            <ButtonLink className="primary-nav__reserve" size="md" to={routes.reservations} variant="secondary">
+              Reserve a table
+            </ButtonLink>
+          )}
         </nav>
       </div>
     </header>

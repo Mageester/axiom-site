@@ -160,18 +160,13 @@ export const restaurantContent: RestaurantContent = {
   },
   reservations: {
     intro:
-      'Reservations open 30 days in advance. For hosted tables and private dining, our concierge can help coordinate the details.',
+      'Direct requests begin with the form below. Hosted tables and private dining stay with concierge.',
     policies: [
       'A card is required to hold dinner reservations.',
       'Cancellations within 24 hours may incur a per-seat fee.',
       'Please share allergies or accessibility needs at least 48 hours before arrival.',
     ],
     channels: [
-      {
-        label: 'Reserve online',
-        value: 'OpenTable reservation portal',
-        href: 'https://www.opentable.com/',
-      },
       {
         label: 'Call concierge',
         value: '+1 (416) 555-0182',
