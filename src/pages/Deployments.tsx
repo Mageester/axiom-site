@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
@@ -151,6 +151,16 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
             >
               Open Live Site
             </a>
+          ) : work.demoUrl ? (
+            <a
+              href={work.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(event) => event.stopPropagation()}
+              className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
+            >
+              View Demo
+            </a>
           ) : work.statusLabel === 'In Progress' ? (
             <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
               Preview Soon
@@ -164,7 +174,6 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
 }
 
 const Deployments: React.FC = () => {
-  const navigate = useNavigate();
   const [statusFilter, setStatusFilter] = useState<'all' | 'live' | 'demo'>('all');
   const [industryFilter, setIndustryFilter] = useState('all');
 
@@ -183,11 +192,10 @@ const Deployments: React.FC = () => {
   }, [industryFilter, statusFilter]);
 
   const openWorkDetails = (work: WorkEntry) => {
-    if (work.isLiveDemo && work.demoUrl) {
+    if (work.demoUrl) {
       window.open(work.demoUrl, '_blank', 'noopener,noreferrer');
       return;
     }
-    navigate(`/works/${work.id}`);
   };
 
   const handleViewSamplesClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
