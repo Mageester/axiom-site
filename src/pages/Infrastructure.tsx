@@ -445,7 +445,7 @@ const Infrastructure: React.FC = () => {
     <>
       <SEO
         title="Method | Axiom"
-        description="Premium web systems for high-trust service firms. A clear process from consultation to a finalized, high-performing website."
+        description="Axiom's delivery method keeps launches controlled: one clear consultation, a defined scope, and a clean handoff for high-trust service firms."
       />
 
       <Layout>
@@ -453,13 +453,14 @@ const Infrastructure: React.FC = () => {
           <RevealBlock as="section" data-hero-root className="pt-8 md:pt-16" variant="feature">
             <div className="max-w-5xl">
               <article className="md:pr-6" data-reveal>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Delivery method</p>
                 <div className="mt-4 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2rem,8.2vw,4rem)] font-extrabold leading-[1.05] text-[#F2F4F7]">
-                    How the Axiom process works.
+                    Delivery confidence from first call to handoff.
                   </h1>
                 </div>
                 <p className="mt-5 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  A clear, structured path from your first Zoom consultation to launch. No guesswork, no bloated process, and no unclear handoff.
+                  Axiom scopes the stack, organizes the pages, and controls the launch so the project stays specific, low-friction, and easy to approve.
                 </p>
                 <div className="mt-8">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">

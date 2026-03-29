@@ -29,10 +29,10 @@ const WorkCaseStudyPage: React.FC = () => {
   const isLiveDemo = entry.label === 'Live Demo' && Boolean(entry.demoUrl);
   const detailNote =
     isLiveDemo
-      ? 'This page outlines a live project and the strategy behind it.'
+      ? 'This page shows the live build and the choices behind it.'
       : entry.label === 'In Progress'
         ? 'This project is currently in development. Build notes are public, but the live preview is restricted until launch.'
-        : `This page documents the layout intent, scope, and technical decisions for a ${entry.label.toLowerCase()}.`;
+        : `This page focuses on what was built, why it was built, and how it supports the category.`;
 
   return (
     <>

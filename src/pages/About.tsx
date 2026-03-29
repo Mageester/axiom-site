@@ -89,7 +89,7 @@ const About: React.FC = () => {
     <>
       <SEO
         title="About | Axiom"
-        description="Axiom builds high-performance custom websites for local businesses. Meet Riley Hinsperger and Aidan Magee and see how we work."
+        description="Axiom is a founder-led web partner for local businesses that want a serious operating standard, a better fit, and a cleaner delivery model."
       />
 
       <Layout>
@@ -97,17 +97,18 @@ const About: React.FC = () => {
           <RevealBlock as="section" data-hero-root className="pt-12 md:pt-18" variant="feature">
             <div className="max-w-5xl">
               <article className="p-7 md:p-10">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Operator philosophy</p>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.15rem,5.8vw,4.3rem)] font-extrabold leading-[1.06] text-[#F2F4F7]">
-                    About Axiom
+                    Built by operators, not a layer of agency polish.
                   </h1>
                 </div>
                 <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom started after seeing local businesses stuck with slow, outdated websites. We build modern websites with an engineering-first delivery standard.
+                  Axiom is for local businesses that want a serious web partner who thinks in systems, delivery, and fit for the business.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <a href="#why-axiom-exists" onClick={handleLearnMoreClick} className="btn-primary btn-lg whitespace-nowrap">
-                    Learn more
+                    See the philosophy
                   </a>
                   <Link
                     to="/method"
@@ -122,12 +123,9 @@ const About: React.FC = () => {
 
           <RevealBlock as="section" id="why-axiom-exists" className="scroll-mt-28 pt-16 md:pt-22">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why Axiom Exists</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why we work this way</h2>
               <p className="mt-5 text-sm leading-relaxed text-slate-300 md:text-base">
-                Too many local businesses have excellent service but websites that are slow, dated, or hard to use.
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
-                Most owners do not have time to build their own site, so they settle for cheap templates. We remove that compromise with custom, high-performance websites.
+                The point is not startup origin story. It is a clear operator philosophy for clients who want a site that matches the quality of the work behind it.
               </p>
             </div>
           </RevealBlock>
