@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
@@ -76,104 +76,57 @@ const STATUS_FILTERS = [
   { id: 'demo', label: 'Demo' },
 ] as const;
 
-function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry) => void }) {
-  return (
-    <div
-      role="link"
-      tabIndex={0}
-      onClick={() => onOpen(work)}
-      onKeyDown={(event) => {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
-        event.preventDefault();
-        onOpen(work);
-      }}
-      className="group/proof relative z-0 mx-auto flex h-full min-h-[34rem] w-full cursor-pointer rounded-[1.5rem] hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:min-h-[36rem]"
-    >
-      <article className="flex h-full flex-1 flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:border-white/20 group-hover/proof:shadow-[0_24px_54px_rgba(0,0,0,0.36)]">
-      {work.isLiveDemo && work.demoUrl ? (
-        <a
-          href={work.demoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(event) => event.stopPropagation()}
-          className="relative block h-[42%] overflow-hidden sm:h-[45%]"
-          aria-label={`Open live site for ${work.title}`}
-        >
-          <ResponsiveImage
-            source={work.image}
-            sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
-            alt={work.imageAlt ?? work.title}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/proof:scale-[1.03]"
-            loading="lazy"
-            decoding="async"
-            style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
-          <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
-            <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
-              Status: {work.statusLabel}
-            </span>
-          </div>
-        </a>
-      ) : (
-        <div className="relative h-[42%] overflow-hidden sm:h-[45%]">
-          <ResponsiveImage
-            source={work.image}
-            sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
-            alt={work.imageAlt ?? work.title}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/proof:scale-[1.03]"
-            loading="lazy"
-            decoding="async"
-            style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
-          <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
-            <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
-              Status: {work.statusLabel}
-            </span>
-          </div>
+function WorkCard({ work }: { work: WorkEntry }) {
+  const card = (
+    <article className="flex h-full flex-1 flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:border-white/20 group-hover/proof:shadow-[0_24px_54px_rgba(0,0,0,0.36)]">
+      <div className="relative h-[42%] overflow-hidden sm:h-[45%]">
+        <ResponsiveImage
+          source={work.image}
+          sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
+          alt={work.imageAlt ?? work.title}
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/proof:scale-[1.03]"
+          loading="lazy"
+          decoding="async"
+          style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
+        <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
+          <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+            Status: {work.statusLabel}
+          </span>
         </div>
-      )}
+      </div>
 
       <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-4 sm:p-6">
         <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">Business Type</p>
         <p className="mt-1 text-sm font-medium text-slate-200">{work.businessType}</p>
         <h3 className="mt-4 text-[1.35rem] font-semibold tracking-tight text-white sm:text-2xl">{work.title}</h3>
         <p className="mt-3 max-w-[34ch] text-[0.92rem] leading-relaxed text-slate-300/95 sm:text-[0.98rem]">{work.improvement}</p>
-        <div className="mt-auto flex flex-wrap items-center gap-3 pt-5 sm:gap-4 sm:pt-6">
-          {work.isLiveDemo && work.demoUrl ? (
-            <a
-              href={work.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(event) => event.stopPropagation()}
-              className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
-            >
-              Open Live Site
-            </a>
-          ) : work.statusLabel === 'In Progress' ? (
-            <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
-              Preview Soon
-            </span>
-          ) : null}
-          {!work.isLiveDemo ? (
-            <Link
-              to={`/works/${work.id}`}
-              onClick={(event) => event.stopPropagation()}
-              className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
-            >
-              View Details
-            </Link>
-          ) : null}
+        <div className="mt-auto pt-5 sm:pt-6">
+          <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/proof:text-[#e8bea8]">
+            View live site
+          </span>
         </div>
       </div>
-      </article>
-    </div>
+    </article>
+  );
+
+  return work.demoUrl ? (
+    <a
+      href={work.demoUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View live site for ${work.title}`}
+      className="group/proof relative z-0 mx-auto block h-full w-full cursor-pointer rounded-[1.5rem] hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:min-h-[36rem]"
+    >
+      {card}
+    </a>
+  ) : (
+    <div className="group/proof relative z-0 mx-auto h-full w-full rounded-[1.5rem] sm:min-h-[36rem]">{card}</div>
   );
 }
 
 const Deployments: React.FC = () => {
-  const navigate = useNavigate();
   const [statusFilter, setStatusFilter] = useState<'all' | 'live' | 'demo'>('all');
   const [industryFilter, setIndustryFilter] = useState('all');
 
@@ -190,14 +143,6 @@ const Deployments: React.FC = () => {
       return statusMatch && industryMatch;
     });
   }, [industryFilter, statusFilter]);
-
-  const openWorkDetails = (work: WorkEntry) => {
-    if (work.isLiveDemo && work.demoUrl) {
-      window.open(work.demoUrl, '_blank', 'noopener,noreferrer');
-      return;
-    }
-    navigate(`/works/${work.id}`);
-  };
 
   const handleViewSamplesClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     const target = document.getElementById('sample-builds');
@@ -288,7 +233,7 @@ const Deployments: React.FC = () => {
             <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-3">
               {filteredWorks.map((work, index) => (
                 <RevealBlock as="article" key={work.id} delay={index * 0.08} variant="card">
-                  <WorkCard work={work} onOpen={openWorkDetails} />
+                  <WorkCard work={work} />
                 </RevealBlock>
               ))}
             </div>
