@@ -96,7 +96,7 @@ const PartnerMarquee: React.FC = () => {
   const segment = [...signals, ...signals];
 
   return (
-    <section aria-label="Our standards" className="w-full">
+    <section aria-label="Delivery signals" className="w-full">
       <div className="marquee-shell hide-scrollbar relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] py-2 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div
           className="marquee-track"

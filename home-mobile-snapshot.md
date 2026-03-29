@@ -1,0 +1,222 @@
+- generic [ref=e4]:
+  - link "Skip to main content" [ref=e7] [cursor=pointer]:
+    - /url: "#main-content"
+  - navigation [ref=e8]:
+    - generic [ref=e9]:
+      - button "Axiom Infrastructure home" [ref=e11] [cursor=pointer]:
+        - img "Axiom Infrastructure logo" [ref=e14]
+      - button "Open site navigation" [ref=e266] [cursor=pointer]:
+        - generic [ref=e267]: Open site navigation
+        - img [ref=e268]
+  - generic:
+    - generic:
+      - paragraph: Navigation
+    - navigation:
+      - link:
+        - /url: /
+        - text: Home
+      - link:
+        - /url: /method
+        - text: Method
+      - link:
+        - /url: /works
+        - text: Work
+      - link:
+        - /url: /about
+        - text: About
+    - link:
+      - /url: /apply#project-application-form
+      - text: BOOK FREE CONSULTATION
+  - generic [ref=e22]:
+    - main [ref=e23]:
+      - generic [ref=e26]:
+        - heading "Premium websites for established local businesses." [level=1] [ref=e270]
+        - paragraph [ref=e28]: We shape the site, the structure, and the launch setup around trust, speed, and qualified inquiries. No templates, no vague handoff.
+        - generic [ref=e29]:
+          - link "Book Free Consultation" [ref=e30] [cursor=pointer]:
+            - /url: /apply
+          - link "View Our Process" [ref=e31] [cursor=pointer]:
+            - /url: /method
+        - generic [ref=e271]:
+          - generic [ref=e272]: 30-minute Zoom consultation
+          - generic [ref=e273]: Current site reviewed first
+          - generic [ref=e274]: Scope and fit discussed before quote
+      - generic [ref=e32]:
+        - paragraph [ref=e33]: Delivery signals
+        - region "Delivery signals" [ref=e34]:
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - generic [ref=e38]:
+                - img [ref=e39]
+                - generic [ref=e41]: Thorough QA
+              - generic [ref=e42]:
+                - img [ref=e43]
+                - generic [ref=e46]: Scope Locked
+              - generic [ref=e47]:
+                - img [ref=e48]
+                - generic [ref=e51]: Founder Reviewed
+              - generic [ref=e52]:
+                - img [ref=e53]
+                - generic [ref=e55]: Global Delivery
+              - generic [ref=e56]:
+                - img [ref=e57]
+                - generic [ref=e60]: Speed Verified
+              - generic [ref=e61]:
+                - img [ref=e62]
+                - generic [ref=e65]: Stricter Standards
+              - generic [ref=e66]:
+                - img [ref=e67]
+                - generic [ref=e69]: Reliable Uptime
+              - generic [ref=e70]:
+                - img [ref=e71]
+                - generic [ref=e74]: Launch Ready
+              - generic [ref=e75]:
+                - img [ref=e76]
+                - generic [ref=e78]: Thorough QA
+              - generic [ref=e79]:
+                - img [ref=e80]
+                - generic [ref=e83]: Scope Locked
+              - generic [ref=e84]:
+                - img [ref=e85]
+                - generic [ref=e88]: Founder Reviewed
+              - generic [ref=e89]:
+                - img [ref=e90]
+                - generic [ref=e92]: Global Delivery
+              - generic [ref=e93]:
+                - img [ref=e94]
+                - generic [ref=e97]: Speed Verified
+              - generic [ref=e98]:
+                - img [ref=e99]
+                - generic [ref=e102]: Stricter Standards
+              - generic [ref=e103]:
+                - img [ref=e104]
+                - generic [ref=e106]: Reliable Uptime
+              - generic [ref=e107]:
+                - img [ref=e108]
+                - generic [ref=e111]: Launch Ready
+            - generic [ref=e112]:
+              - generic [ref=e113]:
+                - img [ref=e114]
+                - generic [ref=e116]: Thorough QA
+              - generic [ref=e117]:
+                - img [ref=e118]
+                - generic [ref=e121]: Scope Locked
+              - generic [ref=e122]:
+                - img [ref=e123]
+                - generic [ref=e126]: Founder Reviewed
+              - generic [ref=e127]:
+                - img [ref=e128]
+                - generic [ref=e130]: Global Delivery
+              - generic [ref=e131]:
+                - img [ref=e132]
+                - generic [ref=e135]: Speed Verified
+              - generic [ref=e136]:
+                - img [ref=e137]
+                - generic [ref=e140]: Stricter Standards
+              - generic [ref=e141]:
+                - img [ref=e142]
+                - generic [ref=e144]: Reliable Uptime
+              - generic [ref=e145]:
+                - img [ref=e146]
+                - generic [ref=e149]: Launch Ready
+              - generic [ref=e150]:
+                - img [ref=e151]
+                - generic [ref=e153]: Thorough QA
+              - generic [ref=e154]:
+                - img [ref=e155]
+                - generic [ref=e158]: Scope Locked
+              - generic [ref=e159]:
+                - img [ref=e160]
+                - generic [ref=e163]: Founder Reviewed
+              - generic [ref=e164]:
+                - img [ref=e165]
+                - generic [ref=e167]: Global Delivery
+              - generic [ref=e168]:
+                - img [ref=e169]
+                - generic [ref=e172]: Speed Verified
+              - generic [ref=e173]:
+                - img [ref=e174]
+                - generic [ref=e177]: Stricter Standards
+              - generic [ref=e178]:
+                - img [ref=e179]
+                - generic [ref=e181]: Reliable Uptime
+              - generic [ref=e182]:
+                - img [ref=e183]
+                - generic [ref=e186]: Launch Ready
+      - generic [ref=e188]:
+        - generic [ref=e189]:
+          - paragraph [ref=e190]: Delivery process
+          - heading "A clear path from consultation to launch." [level=2] [ref=e191]
+          - list [ref=e192]:
+            - listitem [ref=e193]:
+              - paragraph [ref=e194]: 01 — We learn the business and what the site needs to do
+            - listitem [ref=e195]:
+              - paragraph [ref=e196]: 02 — We plan the pages, structure, and conversion flow
+            - listitem [ref=e197]:
+              - paragraph [ref=e198]: 03 — We build, test, and launch to a higher standard
+        - generic [ref=e199]:
+          - article [ref=e275]:
+            - heading "Built Around the Buyer Path" [level=3] [ref=e276]
+            - paragraph [ref=e277]: We start with what the visitor needs to understand before they call, book, or buy.
+          - article [ref=e278]:
+            - heading "Made to Feel Established" [level=3] [ref=e279]
+            - paragraph [ref=e280]: The site should look like a business that is already trusted, not one still trying to prove it.
+          - article [ref=e281]:
+            - heading "Structured for the Next Action" [level=3] [ref=e282]
+            - paragraph [ref=e283]: Calls, forms, and bookings are placed where they feel natural, not decorative.
+      - generic [ref=e202]:
+        - generic [ref=e203]:
+          - paragraph [ref=e204]: Launch standards
+          - heading "What every launch includes." [level=2] [ref=e205]
+          - paragraph [ref=e206]: Every Axiom build is structured to load fast, work cleanly on mobile, and guide visitors toward the right action.
+        - generic [ref=e207]:
+          - article [ref=e208]:
+            - img [ref=e210]
+            - heading "Fast on real devices" [level=3] [ref=e213]
+            - paragraph [ref=e214]: We keep the build light so it loads quickly and responds cleanly on mobile and desktop.
+          - article [ref=e215]:
+            - img [ref=e217]
+            - heading "Clear on small screens" [level=3] [ref=e220]
+            - paragraph [ref=e221]: Layouts stay readable and easy to use when the phone is the only screen that matters.
+          - article [ref=e222]:
+            - img [ref=e224]
+            - heading "Checked before launch" [level=3] [ref=e228]
+            - paragraph [ref=e229]: Forms, routes, and critical actions are tested before anything goes live.
+      - generic [ref=e232]:
+        - paragraph [ref=e233]: NEXT STEPS
+        - heading "Start with a consultation." [level=2] [ref=e234]
+        - paragraph [ref=e235]: Book a brief Zoom consultation to review your current site, the outcome you want, and the scope the project actually needs.
+        - link "Book Free Consultation" [ref=e237] [cursor=pointer]:
+          - /url: /apply
+        - generic [ref=e238]:
+          - generic [ref=e239]: 30-minute Zoom consultation
+          - generic [ref=e241]: Founder-led review
+          - generic [ref=e243]: Scope discussed before quote
+    - contentinfo [ref=e244]:
+      - generic [ref=e245]:
+        - generic [ref=e246]:
+          - paragraph [ref=e247]: AXIOM INFRASTRUCTURE
+          - paragraph [ref=e248]: Premium websites for established businesses that need clearer positioning, cleaner inquiry paths, and reliable delivery.
+          - paragraph [ref=e249]: Consultations are 30 minutes, online, and focused on fit, scope, and timing. Sample and demonstration work is labeled transparently.
+          - paragraph [ref=e250]: Copyright 2026 Axiom Infrastructure. All rights reserved.
+        - navigation [ref=e251]:
+          - paragraph [ref=e252]: Navigate
+          - link "Home" [ref=e253] [cursor=pointer]:
+            - /url: /
+          - link "Method" [ref=e254] [cursor=pointer]:
+            - /url: /method
+          - link "Work" [ref=e255] [cursor=pointer]:
+            - /url: /works
+          - link "About" [ref=e256] [cursor=pointer]:
+            - /url: /about
+        - navigation [ref=e257]:
+          - paragraph [ref=e258]: Engagement
+          - link "Delivery Method" [ref=e259] [cursor=pointer]:
+            - /url: /method
+          - link "Selected Work" [ref=e260] [cursor=pointer]:
+            - /url: /works
+        - navigation [ref=e261]:
+          - paragraph [ref=e262]: Contact
+          - link "contact@getaxiom.ca" [ref=e263] [cursor=pointer]:
+            - /url: mailto:contact@getaxiom.ca
+            - generic [ref=e264]: contact@getaxiom.ca

@@ -35,7 +35,7 @@ type ExpandableItem = {
 const SECTION_LINKS: readonly SectionLink[] = [
   { id: 'process', label: 'Process' },
   { id: 'your-stack', label: 'Your Stack', shortLabel: 'Stack' },
-  { id: 'clarify', label: 'What We Clarify', shortLabel: 'Clarify' },
+  { id: 'clarify', label: 'Scope', shortLabel: 'Scope' },
   { id: 'faq', label: 'FAQ' },
 ];
 
@@ -45,7 +45,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     number: '01',
     title: 'Online Strategy Call',
     summary:
-      'Every project starts with a focused 30-minute Zoom meeting to understand your business, priorities, and required website capabilities.',
+      'Every project starts with a focused 30-minute Zoom meeting to review your current site, priorities, and the capabilities the site needs to support.',
     points: [
       'Online only, clear agenda, no wasted time',
       'Pages, menus, forms, maps, booking, gallery, quote flow',
@@ -56,7 +56,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     number: '02',
     title: 'Scope and Package Recommendation',
     summary:
-      'We translate requirements into a clear scope and recommend the package that best fits your goals, timeline, and technical needs.',
+      'We translate what we learn into a clear scope and recommend the package that best fits your goals, timeline, and technical needs.',
     points: [
       'What is included now vs. phased later',
       'Delivery model aligned to your business reality',
@@ -67,7 +67,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     number: '03',
     title: 'Website Planning and Structure',
     summary:
-      'Before build starts, we define structure, navigation, and conversion pathways so each page has a clear purpose.',
+      'Before build starts, we define structure, navigation, and conversion pathways so each page has a clear job.',
     points: [
       'Page hierarchy and menu logic',
       'Content and CTA structure for faster buyer decisions',
@@ -78,7 +78,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     number: '04',
     title: 'Build and Review',
     summary:
-      'Axiom implements the approved plan with performance-focused standards, then runs guided reviews to keep decisions efficient.',
+      'Axiom implements the approved plan with performance-focused standards, then runs review checkpoints to keep decisions efficient.',
     points: [
       'Desktop and mobile behavior verified',
       'Refinement checkpoints without scope drift',
@@ -89,7 +89,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     number: '05',
     title: 'Launch and Handover',
     summary:
-      'We launch through a controlled release process and ensure everything runs flawlessly before handing over the keys.',
+      'We launch through a controlled release process and confirm everything is working before handoff.',
     points: [
       'DNS, hosting, and domain routing handled cleanly',
       'Post-launch checks for reliability and speed',
@@ -165,20 +165,20 @@ const CLARIFY_ITEMS: readonly ExpandableItem[] = [
 
 const FAQ_ITEMS: readonly ExpandableItem[] = [
   {
-    title: 'How are consultations conducted?',
-    body: 'Consultations are conducted online only through Zoom. This keeps scheduling fast and keeps the process focused.',
+    title: 'What happens on the first call?',
+    body: 'The first consultation is a 30-minute Zoom call. We use it to review your business, current site, and the work the project likely needs.',
   },
   {
-    title: 'How long is the first meeting?',
-    body: 'The initial consultation is 30 minutes. We use that time to understand your business and define what the website must include.',
+    title: 'What do you review?',
+    body: 'We look at fit, current site context, and the capabilities the website must support so scope stays specific.',
   },
   {
     title: 'Can Axiom work with my existing domain and provider?',
     body: 'Yes. If your current setup is workable, we can build around it. If needed, we can also handle infrastructure directly.',
   },
   {
-    title: 'When do you recommend a package?',
-    body: 'After the strategy call and scope definition. Recommendations are based on the project requirements and delivery needs.',
+    title: 'What happens after the call?',
+    body: 'After the strategy call and scope definition, we recommend the package that best fits the project requirements and delivery needs.',
   },
 ];
 
@@ -445,7 +445,7 @@ const Infrastructure: React.FC = () => {
     <>
       <SEO
         title="Method | Axiom"
-        description="Premium web systems for high-trust service firms. A clear process from consultation to a finalized, high-performing website."
+        description="Axiom uses a clear, founder-led process to scope, build, and launch premium websites for established local businesses."
       />
 
       <Layout>
@@ -455,11 +455,11 @@ const Infrastructure: React.FC = () => {
               <article className="md:pr-6" data-reveal>
                 <div className="mt-4 max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2rem,8.2vw,4rem)] font-extrabold leading-[1.05] text-[#F2F4F7]">
-                    How the Axiom process works.
+                    How we scope, build, and launch.
                   </h1>
                 </div>
                 <p className="mt-5 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  A clear, structured path from your first Zoom consultation to launch. No guesswork, no bloated process, and no unclear handoff.
+                  A clear, structured path from your first Zoom consultation to launch. We confirm fit, scope, and required features up front so the build stays tight.
                 </p>
                 <div className="mt-8">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -610,10 +610,10 @@ const Infrastructure: React.FC = () => {
           <RevealBlock as="section" id="your-stack" data-method-section className="pt-14 md:pt-18">
             <div className="mb-6 max-w-4xl" data-reveal>
               <h2 className="mt-1 text-[clamp(1.95rem,4.6vw,3.35rem)] font-bold leading-[1.08] tracking-tight text-[#F2F4F7]">
-                Keep what works. Replace what doesn&apos;t.
+                Use what already works. Replace what is holding the site back.
               </h2>
               <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We can work within your current setup, rebuild around your existing domain, or manage the technical side for you directly.
+                We can work within your current setup, rebuild around an existing domain, or manage the technical side for you directly.
               </p>
             </div>
 
@@ -670,8 +670,8 @@ const Infrastructure: React.FC = () => {
 
           <RevealBlock as="section" id="clarify" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What We Clarify</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Every project starts with a clear plan.</h2>
+              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Scope Details</p>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What we define before build starts.</h2>
             </div>
 
             <div className="grid gap-3">
@@ -708,7 +708,7 @@ const Infrastructure: React.FC = () => {
           <RevealBlock as="section" id="faq" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">FAQ</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Common process questions.</h2>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Questions about fit and scope.</h2>
             </div>
 
             <div className="grid gap-3">
@@ -749,10 +749,10 @@ const Infrastructure: React.FC = () => {
             >
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Final Step</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Book your consultation.
+                Start with a scope call.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We will review your requirements and recommend the package that best fits your business.
+                We&apos;ll review your current site, the work required, and whether the project is a fit before we recommend a package.
               </p>
               <div className="mt-8 flex justify-center">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">

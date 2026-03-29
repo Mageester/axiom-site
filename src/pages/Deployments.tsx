@@ -44,9 +44,9 @@ const workPresentationBySlug: Record<string, { statusLabel: string; isLiveDemo: 
 };
 
 const improvementCopyBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'Built to create a clearer, more modern, and more trustworthy first impression for diners.',
-  'concept-landscaping-authority-site': 'Built to create a clearer, more modern, and more trustworthy first impression for homeowners.',
-  'concept-roofing-conversion-site': 'Built to create a clearer, more modern, and more trustworthy first impression for roofing inquiries.',
+  'demonstration-restaurant-reservation-site': 'Built to make reservation intent and signature dishes easier to notice on the first scroll.',
+  'concept-landscaping-authority-site': 'Built to present outdoor services, seasonal work, and quote flow with more authority.',
+  'concept-roofing-conversion-site': 'Built to foreground roof repair, replacement, and inspection requests without noise.',
 };
 
 const orderedCaseStudies = worksDisplayOrder
@@ -156,15 +156,6 @@ function WorkCard({ work, onOpen }: { work: WorkEntry; onOpen: (work: WorkEntry)
               Preview Soon
             </span>
           ) : null}
-          {!work.isLiveDemo ? (
-            <Link
-              to={`/works/${work.id}`}
-              onClick={(event) => event.stopPropagation()}
-              className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors hover:text-white"
-            >
-              View Details
-            </Link>
-          ) : null}
         </div>
       </div>
       </article>
@@ -210,31 +201,31 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom"
-        description="View our featured work, sample builds, demos, and live deployments with clear labeling and business context."
+        description="View selected work, sample builds, demos, and live deployments with clear labeling and business context."
       />
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-0 pb-24 md:pb-28">
         <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-6 pb-1 md:px-8 md:pt-10 md:pb-0" variant="feature">
           <div className="max-w-4xl">
             <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">Work & Examples</h1>
+              <h1 data-startup-heading className="text-left">Selected work and live examples</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              Sample builds, demos, and live deployments from the kinds of websites Axiom builds for businesses that need a stronger online presence.
+              A small set of live deployments, sample builds, and category examples that show how we handle trust, structure, and the next step.
             </p>
             <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3 md:mt-6 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
-                View examples
+                View selected work
               </a>
               <Link
                 to="/method"
-                className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-white/25 hover:bg-white/[0.06] hover:text-axiom-text-main"
+                className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-slate-300 transition-colors hover:text-axiom-text-main"
               >
                 View our process
               </Link>
             </div>
             <p data-startup-meta className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-300">
-              Labels are explicit so you always know what is a Sample Build, a Demo, or a Live Deployment.
+              Every entry is clearly labeled as a Sample Build, Demo, or Live Deployment.
             </p>
           </div>
         </RevealBlock>
@@ -316,6 +307,9 @@ const Deployments: React.FC = () => {
 
           <div className="relative z-10">
             <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of execution?</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+              If one of these is close, we can scope the right build for your business without overbuilding it.
+            </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <Link to="/apply#project-application-form" className="btn-primary btn-lg whitespace-nowrap">
                 Book Free Consultation

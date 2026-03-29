@@ -179,7 +179,7 @@ const GeneralContactForm: React.FC = () => {
 
             if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg('Thanks. We will reply within one business day.');
+                setMsg('Thanks. We will review your submission within one business day and reply with next steps.');
                 return;
             }
 
@@ -477,7 +477,7 @@ const ProjectApplicationForm: React.FC = () => {
         <>
             <SEO
                 title="Apply | Axiom"
-                description="Tell us about your business and what you need. This is the best route for serious website projects."
+                description="Apply for a consultation with Axiom. We review fit, scope, and what your website needs to support before recommending next steps."
             />
             <Layout>
             <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
@@ -487,11 +487,11 @@ const ProjectApplicationForm: React.FC = () => {
                                 Apply
                             </p>
                             <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                                Tell us about your business and what you need.
+                                Apply for a consultation.
                             </h1>
                         </div>
                         <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Tell us about your business and what you need. This is the best route for serious website projects.
+                            Tell us about your business, current website, and what you want the new site to do. We use this to confirm fit and scope before recommending next steps.
                         </p>
                         <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
                             For general questions or an initial inquiry, use{' '}
@@ -501,7 +501,7 @@ const ProjectApplicationForm: React.FC = () => {
                             .
                         </p>
                         <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Step {step} of 2. This helps us understand scope and fit.
+                            Step {step} of 2. This helps us confirm scope and fit.
                         </p>
                         <div className="mx-auto mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
                             <div className={`h-full bg-[#B05D41] transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`} />
@@ -562,9 +562,9 @@ const ProjectApplicationForm: React.FC = () => {
                                             </button>
 
                                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">After You Apply</p>
+                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What Happens Next</p>
                                                 <p className="mt-3 text-sm text-slate-300">
-                                                    Once your request is submitted, we&apos;ll review the scope and next steps within 1 business day.
+                                                    We review every submission within 1 business day. If it looks like a fit, we&apos;ll confirm scope and next steps.
                                                 </p>
                                                 <p className="mt-3 text-sm text-slate-300">
                                                     If you only have a general question, use{' '}
