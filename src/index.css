@@ -327,6 +327,14 @@
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
   }
 
+  .btn-secondary:focus-visible,
+  .btn-ghost:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px rgba(212, 164, 142, 0.34),
+      0 0 0 6px rgba(9, 11, 16, 0.9);
+  }
+
   .btn-primary:focus-visible {
     outline: none;
     box-shadow:

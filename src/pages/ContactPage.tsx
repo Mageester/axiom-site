@@ -491,7 +491,7 @@ const ProjectApplicationForm: React.FC = () => {
                                 </h1>
                             </div>
                             <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                                Tell us about your business and what you need. This is the best route for serious website projects.
+                                We keep the intake light, then review fit before any scope discussion begins.
                             </p>
                             <p className="mt-3 max-w-2xl text-sm text-slate-400">
                                 For general questions or an initial inquiry, use{' '}
