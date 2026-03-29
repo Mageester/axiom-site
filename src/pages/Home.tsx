@@ -43,17 +43,17 @@ const selectedWork = selectedWorkEntries.map((entry) => {
 
 const capabilities = [
   {
-    title: 'Built Around the Buyer Path',
+    title: 'Built Around the Buying Decision',
     detail:
       'We start with what the visitor needs to understand before they call, book, or buy.',
   },
   {
-    title: 'Made to Feel Established',
+    title: 'Made to Feel Established Quickly',
     detail:
-      'The site should look like a business that is already trusted, not one still trying to prove it.',
+      'The site should read like an established business from the first scroll, not one still trying to prove itself.',
   },
   {
-    title: 'Structured for the Next Action',
+    title: 'Structured for the Next Step',
     detail:
       'Calls, forms, and bookings are placed where they feel natural, not decorative.',
   },
@@ -121,11 +121,11 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Premium websites for established local businesses.
+                    Premium websites for businesses that need clearer trust and better-qualified inquiries.
                   </h1>
                 </div>
                 <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We shape the site, the structure, and the launch setup around trust, speed, and qualified inquiries. No templates, no vague handoff.
+                  We review the current site, define the scope, and build around the next step before any work starts. No templates, no vague handoff.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -146,7 +146,7 @@ const Home: React.FC = () => {
                   <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
                   <span>Current site reviewed first</span>
                   <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
-                  <span>Scope and fit discussed before quote</span>
+                  <span>Scope and timing discussed before quote</span>
                 </div>
               </div>
             </div>
@@ -191,17 +191,17 @@ const Home: React.FC = () => {
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Selected work and live examples.
+                  Selected work.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  These examples show how the same standard is adapted across restaurants, landscaping, and roofing. Live demos are labeled clearly.
+                  Representative builds across restaurants, landscaping, and roofing. Each example is clearly labeled.
                 </p>
               </div>
               <Link
                 to="/works"
                 className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
               >
-                View Selected Work
+                View selected work
               </Link>
             </div>
 
@@ -285,10 +285,10 @@ const Home: React.FC = () => {
                 <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
                   <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Launch standards</p>
                   <h2 className="mt-4 max-w-[12ch] text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
-                    What every launch includes.
+                    What Axiom builds into every launch.
                   </h2>
                   <p className="mt-5 max-w-[38rem] text-sm leading-7 text-slate-300 md:text-base">
-                    Every Axiom build is structured to load fast, work cleanly on mobile, and guide visitors toward the right action.
+                    Every launch is built to load fast, read clearly on mobile, and keep the next action obvious.
                   </p>
                 </div>
 
@@ -331,10 +331,10 @@ const Home: React.FC = () => {
               <div className="relative z-10">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">NEXT STEPS</p>
                 <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Start with a consultation.
+                  Start with a fit check.
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Book a brief Zoom consultation to review your current site, the outcome you want, and the scope the project actually needs.
+                  Book a brief Zoom consultation. We review the current site, define what the project needs, and decide whether Axiom is the right fit.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">
