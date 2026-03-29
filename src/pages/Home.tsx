@@ -130,17 +130,17 @@ const method = [
 ];
 
 const operationalSignals = [
-  'Founder-led planning and review',
+  'A brief founder-led fit call to confirm the business and goals',
+  'A clear recommendation on scope, timing, and next step',
   'Requirements agreed before build begins',
-  'Every key page checked before launch',
 ];
 
 const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom | Premium Websites for Growth-Focused Businesses"
-        description="Axiom designs and builds premium websites for businesses that need stronger trust, clearer positioning, and better conversion structure."
+        title="Axiom | Premium Websites for Service Businesses"
+        description="Axiom designs and builds founder-led websites for established local companies that need sharper positioning, stronger trust, and a clearer path from first visit to inquiry."
       />
 
       <Layout>
@@ -150,15 +150,15 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Custom websites built for serious local businesses.
+                    Premium websites for service businesses that need trust fast.
                   </h1>
                 </div>
                 <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We build fast, professional websites that help established businesses look credible, rank higher, and generate more inquiries. No templates, no bloat.
+                  Axiom designs and builds fast, founder-led websites for established local companies that need sharper positioning, stronger trust, and a clearer path from first visit to inquiry.
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                            Book Free Consultation
+                    Book a Founder Consultation
                   </Link>
                   <Link
                     to="/method"
@@ -166,6 +166,16 @@ const Home: React.FC = () => {
                   >
                     View Our Process
                   </Link>
+                </div>
+                <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
+                  The consultation is a 30-minute founder-led fit call. We review your business, what the site needs to do, and whether Axiom is the right partner before any scope is discussed.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[12px] uppercase tracking-[0.16em] text-slate-400">
+                  <span>Founder-led review</span>
+                  <span className="hidden sm:inline">/</span>
+                  <span>Clear next step</span>
+                  <span className="hidden sm:inline">/</span>
+                  <span>Built for established local service businesses</span>
                 </div>
               </div>
             </div>
