@@ -568,12 +568,13 @@ const Infrastructure: React.FC = () => {
                     data-step-index={index}
                     data-reveal
                     aria-current={activeProcessStep === index ? 'step' : undefined}
-                    className={`axiom-bento card-snappy scroll-mt-32 rounded-2xl p-6 transition-all duration-300 motion-reduce:transform-none md:p-7 ${
+                    className={`relative scroll-mt-32 border-l pl-5 py-6 transition-all duration-300 motion-reduce:transform-none md:pl-8 md:py-7 ${
                       activeProcessStep === index
-                        ? 'border-[#d4a48e]/28 bg-[linear-gradient(180deg,rgba(24,33,49,0.92)_0%,rgba(16,23,38,0.96)_100%)] shadow-[0_18px_42px_rgba(0,0,0,0.26)]'
-                        : 'border-white/8 opacity-80'
+                        ? 'border-[#d4a48e]/30 bg-[linear-gradient(180deg,rgba(19,25,34,0.7)_0%,rgba(11,15,21,0.9)_100%)]'
+                        : 'border-white/10 opacity-85'
                     }`}
                   >
+                    <div className={`absolute left-[-0.3rem] top-7 h-2.5 w-2.5 rounded-full ${activeProcessStep === index ? 'bg-[#d4a48e] shadow-[0_0_0_4px_rgba(212,164,142,0.14)]' : 'bg-white/35'}`} />
                     <div className="grid gap-4 md:grid-cols-12 md:items-start">
                       <div className="md:col-span-2">
                         <button
@@ -679,7 +680,7 @@ const Infrastructure: React.FC = () => {
               {CLARIFY_ITEMS.map((item, index) => {
                 const expanded = openClarify === index;
                 return (
-                  <article key={item.title} className="axiom-bento rounded-2xl p-5 md:p-6" data-reveal>
+                  <article key={item.title} className="border-b border-white/10 py-5 md:py-6" data-reveal>
                     <button
                       type="button"
                       className="flex w-full items-center justify-between gap-4 text-left"
@@ -716,7 +717,7 @@ const Infrastructure: React.FC = () => {
               {FAQ_ITEMS.map((item, index) => {
                 const expanded = openFaq === index;
                 return (
-                  <article key={item.title} className="axiom-bento rounded-2xl p-5 md:p-6" data-reveal>
+                  <article key={item.title} className="border-b border-white/10 py-5 md:py-6" data-reveal>
                     <button
                       type="button"
                       className="flex w-full items-center justify-between gap-4 text-left"

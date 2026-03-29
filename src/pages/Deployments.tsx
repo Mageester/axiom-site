@@ -78,7 +78,11 @@ const STATUS_FILTERS = [
 
 function WorkCard({ work }: { work: WorkEntry }) {
   const card = (
-    <article className="flex h-full flex-1 flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1323]/84 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:border-white/20 group-hover/proof:shadow-[0_24px_54px_rgba(0,0,0,0.36)]">
+    <article className={`flex h-full flex-1 flex-col overflow-hidden rounded-[1.75rem] transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:shadow-[0_24px_54px_rgba(0,0,0,0.32)] ${
+      work.isLiveDemo
+        ? 'border border-white/10 bg-[linear-gradient(180deg,rgba(20,26,34,0.94)_0%,rgba(11,15,22,0.98)_100%)]'
+        : 'border border-white/8 bg-[linear-gradient(180deg,rgba(17,22,29,0.82)_0%,rgba(11,15,20,0.96)_100%)]'
+    }`}>
       <div className="relative h-[42%] overflow-hidden sm:h-[45%]">
         <ResponsiveImage
           source={work.image}
@@ -97,7 +101,7 @@ function WorkCard({ work }: { work: WorkEntry }) {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col bg-[#0c1221]/92 p-4 sm:p-6">
+      <div className="flex flex-1 flex-col px-4 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
         <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">Business Type</p>
         <p className="mt-1 text-sm font-medium text-slate-200">{work.businessType}</p>
         <h3 className="mt-4 text-[1.35rem] font-semibold tracking-tight text-white sm:text-2xl">{work.title}</h3>

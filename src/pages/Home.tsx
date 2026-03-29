@@ -334,30 +334,36 @@ const Home: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-12">
-                  {standardsCards.map((item, index) => (
-                    <RevealBlock
-                      as="article"
-                      key={item.title}
-                      delay={index * 0.06}
-                      variant="card"
-                      className={`group relative flex h-full min-h-[15.5rem] flex-col rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,25,41,0.82)_0%,rgba(12,18,31,0.94)_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_14px_34px_rgba(0,0,0,0.18)] transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:border-white/18 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_20px_42px_rgba(0,0,0,0.24)] md:p-7 ${item.desktopSpan}`}
-                      whileHover={{ y: -2 }}
-                      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent opacity-70" />
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(19,29,48,0.96)_0%,rgba(14,21,35,0.96)_100%)] text-[#d4a48e] transition-colors duration-300 group-hover:border-white/16 group-hover:text-[#e1b29b]">
+            <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-12">
+              {standardsCards.map((item, index) => (
+                <RevealBlock
+                  as="article"
+                  key={item.title}
+                  delay={index * 0.06}
+                  variant="card"
+                  className={`group relative flex h-full min-h-[15.5rem] flex-col rounded-[26px] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_28px_rgba(0,0,0,0.16)] transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_34px_rgba(0,0,0,0.22)] md:p-7 ${
+                    index === 0
+                      ? 'lg:col-span-6 border border-white/12 bg-[linear-gradient(180deg,rgba(24,31,40,0.96)_0%,rgba(15,19,26,0.98)_100%)]'
+                      : index < 3
+                        ? 'lg:col-span-3 border border-white/8 bg-[linear-gradient(180deg,rgba(20,25,32,0.8)_0%,rgba(13,17,23,0.92)_100%)]'
+                        : 'lg:col-span-6 border border-white/8 bg-white/[0.015]'
+                  }`}
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                >
+                      <div className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent opacity-70 ${index === 0 ? 'via-white/14' : 'via-white/10'}`} />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(19,29,48,0.86)_0%,rgba(14,21,35,0.9)_100%)] text-[#d4a48e] transition-colors duration-300 group-hover:border-white/16 group-hover:text-[#e1b29b]">
                         {item.icon}
                       </div>
-                      <h3 className="mt-6 text-[1.15rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.2rem]">
+                      <h3 className={`mt-6 font-semibold tracking-[-0.02em] text-[#F2F4F7] ${index === 0 ? 'text-[1.28rem] md:text-[1.45rem]' : 'text-[1.08rem] md:text-[1.15rem]'}`}>
                         {item.title}
                       </h3>
-                      <p className="mt-3 max-w-[36ch] text-sm leading-7 text-slate-300">
+                      <p className={`mt-3 text-sm leading-7 text-slate-300 ${index === 0 ? 'max-w-[34ch]' : 'max-w-[32ch]'}`}>
                         {item.detail}
                       </p>
-                    </RevealBlock>
-                  ))}
-                </div>
+                </RevealBlock>
+              ))}
+            </div>
               </div>
             </div>
           </RevealBlock>
