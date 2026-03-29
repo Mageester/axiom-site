@@ -183,7 +183,7 @@ const Home: React.FC = () => {
 
           <section className="pt-10 md:pt-14">
             <p className="mb-3 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-              Operational standards
+              Built-in baseline
             </p>
             <PartnerMarquee />
           </section>
@@ -215,7 +215,7 @@ const Home: React.FC = () => {
             </div>
             <div className="mt-7 grid gap-4 md:grid-cols-2">
               <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">How The Project Is Run</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Project controls</p>
                 <ul className="mt-3 space-y-2">
                   {operationalSignals.map((item) => (
                     <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>
@@ -223,7 +223,7 @@ const Home: React.FC = () => {
                 </ul>
               </article>
               <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">What The Site Has To Support</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Launch criteria</p>
                 <ul className="mt-3 space-y-2">
                   <li className="text-sm leading-relaxed text-slate-300">Clear positioning at first glance</li>
                   <li className="text-sm leading-relaxed text-slate-300">A credible next step for the right buyer</li>
@@ -371,22 +371,22 @@ const Home: React.FC = () => {
               </div>
 
               <div className="relative z-10">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">NEXT STEPS</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Start Your Project
+                  If the fit is right, we&apos;ll define the build.
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Book a brief consultation to discuss your business and current website goals. We will review your context and recommend a structured path forward.
+                  Book a brief consultation and we&apos;ll review the business, the current site, and the next step before any scope is discussed.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">
                   <Link to="/apply" className="btn-primary btn-attention btn-lg whitespace-nowrap">
-                                Book Free Consultation
+                    Start the conversation
                   </Link>
                 </div>
 
                 <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-5 gap-y-2">
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">30-minute Zoom consultation</span>
+                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">30-minute fit call</span>
                   <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
                   <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Online only</span>
                   <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />

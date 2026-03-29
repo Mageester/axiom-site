@@ -210,7 +210,7 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom"
-        description="Selected work, live deployments, and case studies from Axiom, labeled clearly so you can judge category relevance and delivery quality quickly."
+        description="Live deployments, demos, and case studies from the categories Axiom builds for, labeled clearly so you can judge fit and delivery quality quickly."
       />
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-0 pb-24 md:pb-28">
@@ -316,10 +316,13 @@ const Deployments: React.FC = () => {
           <div className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[600px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[160px]" />
 
           <div className="relative z-10">
-            <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of execution?</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this standard for your category?</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+              We can scope a build around the business, the buyer, and the level of trust the site has to earn.
+            </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <Link to="/apply#project-application-form" className="btn-primary btn-lg whitespace-nowrap">
-                Book Free Consultation
+                Start the conversation
               </Link>
               <Link
                 to="/method"

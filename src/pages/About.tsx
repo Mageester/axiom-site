@@ -132,7 +132,7 @@ const About: React.FC = () => {
 
           <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">The Problem With Most Websites</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Why most sites underperform</h2>
             </div>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {WEBSITE_PROBLEMS.map((item) => (
@@ -146,7 +146,7 @@ const About: React.FC = () => {
 
           <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">The Axiom Guarantee</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What the work is held to</h2>
             </div>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
               {DIFFERENTIATORS.map((item) => (
@@ -162,7 +162,7 @@ const About: React.FC = () => {
             <div className="mb-7">
               <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Founders</h2>
               <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Riley Hinsperger and Aidan Magee are equal partners. Both build the websites and stand behind delivery quality.
+                Riley Hinsperger and Aidan Magee are equal partners. Both build the work and stand behind delivery quality.
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
@@ -218,7 +218,7 @@ const About: React.FC = () => {
 
           <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Our Standards</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Operating standards</h2>
             </div>
             <div className="grid gap-4 md:grid-cols-3">
               {STANDARDS.map((item) => (
@@ -232,7 +232,7 @@ const About: React.FC = () => {
 
           <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="mb-7">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">How We Work</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Working principles</h2>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
               {VALUES.map((value) => (
@@ -272,11 +272,11 @@ const About: React.FC = () => {
                 If your business is serious, your website should be too.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Book a consultation and we will define the right scope for your business.
+                Book a consultation and we will confirm the fit, then define the right scope for your business.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                                Book Free Consultation
+                  Start the conversation
                 </Link>
                 <Link
                   to="/method"

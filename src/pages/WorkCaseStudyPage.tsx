@@ -91,7 +91,7 @@ const WorkCaseStudyPage: React.FC = () => {
                     </span>
                   ) : null}
                   <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
-                            Book Free Consultation
+                    Start the conversation
                   </Link>
                   <Link
                     to="/works"
@@ -167,7 +167,7 @@ const WorkCaseStudyPage: React.FC = () => {
                   </p>
                 </article>
                 <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Our Transparency Standard</h2>
+                  <h2 className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Transparency</h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate-300">
                     We label our portfolio clearly so you always know what is a live client website, a demonstration build, or an active concept. No fabricated results.
                   </p>
@@ -178,13 +178,13 @@ const WorkCaseStudyPage: React.FC = () => {
 
           <section className="pt-14 md:pt-16">
             <div className="rounded-3xl border border-white/10 bg-black/20 p-7 text-center md:p-10">
-              <h2 className="text-3xl font-semibold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of website quality?</h2>
+              <h2 className="text-3xl font-semibold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of execution?</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
                 We can scope a similar architecture for your business context and conversion goals without template constraints.
               </p>
               <div className="mt-7 flex items-center justify-center">
                 <Link to="/apply" className="btn-primary btn-lg inline-flex items-center justify-center">
-                                            Book Free Consultation
+                  Start the conversation
                 </Link>
               </div>
             </div>

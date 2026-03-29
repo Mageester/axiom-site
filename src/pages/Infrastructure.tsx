@@ -511,7 +511,7 @@ const Infrastructure: React.FC = () => {
               <div className="mx-auto w-full max-w-[740px]" data-reveal>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Clear steps from first call to launch.</h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
-                  The sequence is structured to reduce ambiguity and keep project decisions aligned.
+                  Each step removes uncertainty before the next decision.
                 </p>
               </div>
 
@@ -614,7 +614,7 @@ const Infrastructure: React.FC = () => {
                 Keep what works. Replace what doesn&apos;t.
               </h2>
               <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We can work within your current setup, rebuild around your existing domain, or manage the technical side for you directly.
+                We can stay inside your current setup, rebuild around your existing domain, or manage the technical side directly.
               </p>
             </div>
 
@@ -672,7 +672,7 @@ const Infrastructure: React.FC = () => {
           <RevealBlock as="section" id="clarify" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What We Clarify</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Every project starts with a clear plan.</h2>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What we confirm before build.</h2>
             </div>
 
             <div className="grid gap-3">
@@ -709,7 +709,7 @@ const Infrastructure: React.FC = () => {
           <RevealBlock as="section" id="faq" data-method-section className="pt-16 md:pt-22">
             <div className="mb-7" data-reveal>
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">FAQ</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Common process questions.</h2>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">A few common questions.</h2>
             </div>
 
             <div className="grid gap-3">
@@ -748,16 +748,16 @@ const Infrastructure: React.FC = () => {
               className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12"
               data-reveal
             >
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Final Step</p>
+              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Final step</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Book your consultation.
+                If the fit is right, we&apos;ll scope the work.
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We will review your requirements and recommend the package that best fits your business.
+                The first conversation covers goals, timing, and the level of support the project needs.
               </p>
               <div className="mt-8 flex justify-center">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                                Book Free Consultation
+                  Start the conversation
                 </Link>
               </div>
             </div>
