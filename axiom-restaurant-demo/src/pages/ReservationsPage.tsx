@@ -40,44 +40,65 @@ export function ReservationsPage() {
     <>
       <PageHero
         actions={
-          <ButtonAnchor href="tel:+14165550182" size="lg" variant="secondary">
-            Call concierge
-          </ButtonAnchor>
+          <>
+            <ButtonAnchor href="#request-form" size="lg" variant="primary">
+              Start reservation request
+            </ButtonAnchor>
+            <ButtonAnchor href="tel:+14165550182" size="lg" variant="secondary">
+              Call concierge
+            </ButtonAnchor>
+          </>
         }
         description={restaurantContent.reservations.intro}
         eyebrow="Reservations"
-        title="Reserve with the concierge"
+        title="Reserve with the room, not a marketplace."
       />
 
       <Section
-        description="A few essentials help us place the right table and confirm the pace of service."
-        title="Reservation details"
+        description="Choose the direct path first. The booking partner stays available for standard tables when instant inventory matters more than concierge handling."
+        title="How Atelier Meridian handles reservations"
       >
         <div className="reservation-brief">
           <div className="reservation-brief__panel">
-            <p className="reservation-brief__eyebrow">Booking window</p>
-            <h3>Reservations open 30 days ahead</h3>
-            <p>Private dining, hosted tables, and large parties are handled directly by concierge.</p>
+            <p className="reservation-brief__eyebrow">Direct reservation path</p>
+            <h3>Concierge reviews the table, timing, and service notes before confirming.</h3>
+            <p>
+              Reservations open 30 days ahead. Private dining, hosted tables, and larger parties
+              are kept in-house so the evening can be set properly from the first reply.
+            </p>
           </div>
 
-          <div className="reservation-brief__links">
-            {restaurantContent.reservations.channels.map((channel) => (
-              <a
-                className="reservation-link"
-                key={channel.label}
-                href={channel.href}
-                target={channel.href.startsWith('http') ? '_blank' : undefined}
-                rel={channel.href.startsWith('http') ? 'noreferrer' : undefined}
+          <div className="reservation-brief__support">
+            <div className="reservation-brief__links">
+              {restaurantContent.reservations.channels.map((channel) => (
+                <a className="reservation-link" key={channel.label} href={channel.href}>
+                  <span>{channel.label}</span>
+                  <strong>{channel.value}</strong>
+                </a>
+              ))}
+            </div>
+
+            <aside className="reservation-partner">
+              <p className="reservation-partner__eyebrow">
+                {restaurantContent.reservations.partnerBooking.label}
+              </p>
+              <h3>{restaurantContent.reservations.partnerBooking.value}</h3>
+              <p>{restaurantContent.reservations.partnerBooking.note}</p>
+              <ButtonAnchor
+                href={restaurantContent.reservations.partnerBooking.href}
+                rel="noreferrer"
+                target="_blank"
+                variant="secondary"
               >
-                <span>{channel.label}</span>
-                <strong>{channel.value}</strong>
-              </a>
-            ))}
+                Use booking partner
+              </ButtonAnchor>
+            </aside>
           </div>
         </div>
       </Section>
 
       <Section
+        id="request-form"
         description="Share the basics and we will draft the details for concierge review."
         title="Reservation request form"
       >

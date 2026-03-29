@@ -522,6 +522,11 @@ textarea:focus-visible {
   gap: var(--space-3);
 }
 
+.reservation-brief__support {
+  display: grid;
+  gap: var(--space-3);
+}
+
 .reservation-link {
   background: color-mix(in srgb, var(--color-surface) 84%, black);
   border: 1px solid color-mix(in srgb, var(--color-border) 92%, transparent);
@@ -554,6 +559,31 @@ textarea:focus-visible {
   color: var(--color-text-primary);
   font-family: var(--font-display);
   font-size: var(--size-lg);
+}
+
+.reservation-partner {
+  background: color-mix(in srgb, var(--color-surface) 76%, black);
+  border: 1px solid color-mix(in srgb, var(--color-border) 86%, transparent);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+.reservation-partner__eyebrow {
+  color: var(--color-text-muted);
+  font-size: var(--size-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reservation-partner h3 {
+  font-family: var(--font-display);
+  font-size: var(--size-lg);
+}
+
+.reservation-partner p {
+  color: var(--color-text-secondary);
 }
 
 .site-footer__closing {

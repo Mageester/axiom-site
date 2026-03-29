@@ -160,7 +160,7 @@ export const restaurantContent: RestaurantContent = {
   },
   reservations: {
     intro:
-      'Reservations open 30 days in advance. For hosted tables and private dining, our concierge can help coordinate the details.',
+      'Start with our direct reservation request or call concierge. Hosted tables and private dining stay with the room, not a generic booking marketplace.',
     policies: [
       'A card is required to hold dinner reservations.',
       'Cancellations within 24 hours may incur a per-seat fee.',
@@ -168,9 +168,9 @@ export const restaurantContent: RestaurantContent = {
     ],
     channels: [
       {
-        label: 'Reserve online',
-        value: 'OpenTable reservation portal',
-        href: 'https://www.opentable.com/',
+        label: 'Send a direct request',
+        value: 'Concierge-led reservation review',
+        href: '#request-form',
       },
       {
         label: 'Call concierge',
@@ -183,5 +183,12 @@ export const restaurantContent: RestaurantContent = {
         href: 'mailto:reservations@ateliermeridian.ca',
       },
     ],
+    partnerBooking: {
+      label: 'Optional booking partner',
+      value: 'OpenTable standard-table availability',
+      href: 'https://www.opentable.com/',
+      note:
+        'Use the partner portal only if you prefer instant self-serve inventory. Hosted tables, private dining, and nuanced requests stay with concierge.',
+    },
   },
 }

@@ -87,6 +87,11 @@ const imagery = {
   crew: '/images/roof-crew.webp',
 };
 
+const getRouteMode = () => {
+  const pathname = window.location.pathname;
+  return pathname.endsWith('/inspection') ? 'inspection' : 'home';
+};
+
 const SectionIntro: React.FC<SectionIntroProps> = ({ eyebrow, title, copy }) => (
   <div>
     <p className="section-kicker">{eyebrow}</p>
@@ -479,6 +484,7 @@ const Footer: React.FC = () => (
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('');
+  const routeMode = getRouteMode();
 
   useEffect(() => {
     const sectionIds = navItems.map((item) => item.id);
@@ -506,6 +512,29 @@ const App: React.FC = () => {
       window.removeEventListener('resize', updateActiveSection);
     };
   }, []);
+
+  useEffect(() => {
+    const metaDescription = document.querySelector('meta[name="description"]');
+    const metaContent =
+      routeMode === 'inspection'
+        ? 'Request a photo-backed roof inspection for repair-first recommendations, replacement guidance, and clear closeout in Toronto and Durham.'
+        : 'Blackridge Roofing & Exteriors provides photo-backed roof inspections, repairs, and replacements across Toronto and Durham.';
+
+    document.title =
+      routeMode === 'inspection'
+        ? 'Blackridge Roofing & Exteriors | Request an Inspection'
+        : 'Blackridge Roofing & Exteriors | Roofing Inspections, Repairs, and Replacements';
+
+    if (metaDescription) {
+      metaDescription.setAttribute('content', metaContent);
+    }
+
+    if (routeMode === 'inspection') {
+      requestAnimationFrame(() => {
+        document.getElementById('contact')?.scrollIntoView({ block: 'start' });
+      });
+    }
+  }, [routeMode]);
 
   return (
     <div className="page-shell">

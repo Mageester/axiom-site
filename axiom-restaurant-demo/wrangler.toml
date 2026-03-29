@@ -1,0 +1,7 @@
+name = "axiom-demos"
+compatibility_date = "2026-03-17"
+
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
+

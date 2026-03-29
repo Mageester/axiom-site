@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const primaryButton =
   'inline-flex min-h-[52px] items-center justify-center rounded-full bg-grove-400 px-7 text-[13px] font-semibold uppercase tracking-[0.24em] text-[#0b100a] transition-colors duration-200 hover:bg-grove-300 active:scale-[0.98]'
@@ -154,6 +154,11 @@ const Header = () => (
     </div>
   </header>
 )
+
+const getRouteMode = () => {
+  const pathname = window.location.pathname
+  return pathname.endsWith('/quote') ? 'quote' : 'home'
+}
 
 const Hero = () => (
   <section className="relative overflow-hidden px-4 pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-16">
@@ -515,19 +520,46 @@ const Footer = () => (
   </footer>
 )
 
-const App = () => (
-  <div className="min-h-screen bg-surface-base text-stone-200">
-    <Header />
-    <main id="top">
-      <Hero />
-      <Services />
-      <Proof />
-      <Projects />
-      <Materials />
-      <ContactForm />
-    </main>
-    <Footer />
-  </div>
-)
+const App = () => {
+  const routeMode = getRouteMode()
+
+  useEffect(() => {
+    const metaDescription = document.querySelector('meta[name="description"]')
+    const metaContent =
+      routeMode === 'quote'
+        ? 'Request a premium landscaping quote for patios, front entries, planting, and lighting in Toronto and the West GTA.'
+        : 'Northline Landscaping designs patios, front entries, planting, and lighting that make the property feel finished.'
+
+    document.title =
+      routeMode === 'quote'
+        ? 'Northline Landscaping | Request a Quote'
+        : 'Northline Landscaping | Outdoor Living and Property Transformation'
+
+    if (metaDescription) {
+      metaDescription.setAttribute('content', metaContent)
+    }
+
+    if (routeMode === 'quote') {
+      requestAnimationFrame(() => {
+        document.getElementById('contact')?.scrollIntoView({ block: 'start' })
+      })
+    }
+  }, [routeMode])
+
+  return (
+    <div className="min-h-screen bg-surface-base text-stone-200">
+      <Header />
+      <main id="top">
+        <Hero />
+        <Services />
+        <Proof />
+        <Projects />
+        <Materials />
+        <ContactForm />
+      </main>
+      <Footer />
+    </div>
+  )
+}
 
 export default App

@@ -21,6 +21,13 @@ export interface ContactChannelContent {
   href: string
 }
 
+export interface BookingPartnerContent {
+  label: string
+  value: string
+  href: string
+  note: string
+}
+
 export interface TeamMemberContent {
   name: string
   role: string
@@ -66,5 +73,6 @@ export interface RestaurantContent {
     intro: string
     policies: string[]
     channels: ContactChannelContent[]
+    partnerBooking: BookingPartnerContent
   }
 }
