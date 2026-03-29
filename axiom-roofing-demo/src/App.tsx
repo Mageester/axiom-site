@@ -180,16 +180,18 @@ const Header: React.FC<{ activeSection: string; isInspectionRoute: boolean }> = 
         )}
       </div>
 
-      <div className="mt-4 flex gap-2 overflow-x-auto pb-1 md:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {navItems.map((item) => (
-          <a key={item.id} href={item.href} className="nav-link">
-            {item.label}
-          </a>
-        ))}
+        {isInspectionRoute ? null : (
+          <div className="mt-4 flex gap-2 overflow-x-auto pb-1 md:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {navItems.map((item) => (
+              <a key={item.id} href={item.href} className="nav-link">
+                {item.label}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
-    </div>
-  </header>
-);
+    </header>
+  );
 
 const Hero: React.FC = () => (
   <section id="top" className="hero-shell scroll-mt-36">

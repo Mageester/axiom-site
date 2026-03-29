@@ -106,7 +106,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="menu-ledger">
-            {restaurantContent.menu.sections.map((section) => (
+            {restaurantContent.menu.sections.slice(0, 2).map((section) => (
               <div className="menu-ledger__section" key={section.title}>
                 <div className="menu-ledger__header">
                   <p className="menu-ledger__title">{section.title}</p>
