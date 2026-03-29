@@ -249,8 +249,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </a>
 
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div data-startup-bg className="fixed left-[-10%] top-[-20%] h-[50vw] w-[50vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
-        <div data-startup-bg className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B05D41] opacity-[0.15] blur-[120px]" />
+        <div data-startup-bg className="fixed left-[-10%] top-[-20%] h-[50vw] w-[50vw] rounded-full bg-[#697481] opacity-[0.13] blur-[120px]" />
+        <div data-startup-bg className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B06E52] opacity-[0.09] blur-[120px]" />
         <div data-startup-bg className="engineering-grid animate-grid-drift" />
         <div data-startup-bg className="global-noise-floor" />
       </div>
@@ -260,7 +260,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         data-startup-nav
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'border-b border-white/[0.08] bg-[rgba(9,12,18,0.68)] backdrop-blur-xl'
+            ? 'border-b border-white/[0.08] bg-[rgba(11,13,17,0.74)] backdrop-blur-xl'
             : 'border-b border-transparent bg-transparent backdrop-blur-0'
         }`}
       >
@@ -345,7 +345,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         aria-modal={isMobileMenuOpen ? 'true' : undefined}
         aria-hidden={!isMobileMenuOpen}
         aria-labelledby="mobile-menu-title"
-        className={`fixed inset-x-4 top-[5.5rem] z-50 rounded-2xl border border-white/15 bg-[rgba(10,11,13,0.96)] p-5 shadow-[0_28px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl transition-all duration-200 md:hidden ${
+        className={`fixed inset-x-4 top-[5.5rem] z-50 rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.96)] p-5 shadow-[0_28px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl transition-all duration-200 md:hidden ${
           isMobileMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >

@@ -4,20 +4,20 @@
 
 @layer base {
   :root {
-    --axiom-base: #090B10;
-    --axiom-elevated: #11161D;
-    --axiom-surface: #182131;
-    --axiom-border: #2A3444;
-    --axiom-accent: #C26E4E;
-    --accent: #C26E4E;
-    --accent2: #D88361;
-    --accent-muted: rgba(194, 110, 78, 0.2);
+    --axiom-base: #0A0C10;
+    --axiom-elevated: #11151A;
+    --axiom-surface: #181E25;
+    --axiom-border: #29313C;
+    --axiom-accent: #C87A57;
+    --accent: #C87A57;
+    --accent2: #D79A73;
+    --accent-muted: rgba(200, 122, 87, 0.18);
     --axiom-text-main: #F3F6FA;
     --axiom-text-primary: #CFD7E3;
     --axiom-text-mute: #9AA8B6;
-    --axiom-amber: #C26E4E;
-    --axiom-gold: #D6B07A;
-    --axiom-navy: #21324A;
+    --axiom-amber: #C87A57;
+    --axiom-gold: #CFA873;
+    --axiom-navy: #1F2833;
     --bg-main: var(--axiom-base);
     --bg-surface: var(--axiom-elevated);
     --bg-inset: #0D1118;
@@ -51,9 +51,9 @@
     color: var(--axiom-text-primary);
     background-color: var(--axiom-base);
     background-image:
-      radial-gradient(1200px 620px at -6% -24%, rgba(33, 50, 74, 0.34), transparent 60%),
-      radial-gradient(980px 560px at 112% 18%, rgba(194, 110, 78, 0.18), transparent 58%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 32%);
+      radial-gradient(1180px 620px at -8% -22%, rgba(90, 100, 114, 0.18), transparent 62%),
+      radial-gradient(920px 540px at 110% 14%, rgba(200, 122, 87, 0.1), transparent 58%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.014) 0%, rgba(255, 255, 255, 0) 34%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -67,10 +67,10 @@
     height: 230px;
     pointer-events: none;
     background:
-      radial-gradient(72% 100% at 50% 0%, rgba(194, 110, 78, 0.2) 0%, transparent 72%),
-      radial-gradient(56% 80% at 68% 8%, rgba(33, 50, 74, 0.2) 0%, transparent 74%);
-    filter: blur(30px);
-    opacity: 0.62;
+      radial-gradient(72% 100% at 50% 0%, rgba(112, 122, 136, 0.14) 0%, transparent 72%),
+      radial-gradient(56% 80% at 68% 8%, rgba(200, 122, 87, 0.11) 0%, transparent 74%);
+    filter: blur(34px);
+    opacity: 0.48;
     z-index: 1;
     animation: ambient-pan 24s ease-in-out infinite;
   }
@@ -156,9 +156,9 @@
     inset: 0;
     pointer-events: none;
     background-image:
-      radial-gradient(circle at top left, rgba(194, 110, 78, 0.06) 0%, transparent 58%),
-      radial-gradient(circle at bottom right, rgba(194, 110, 78, 0.04) 0%, transparent 58%);
-    filter: blur(86px);
+      radial-gradient(circle at top left, rgba(112, 122, 136, 0.05) 0%, transparent 58%),
+      radial-gradient(circle at bottom right, rgba(200, 122, 87, 0.03) 0%, transparent 58%);
+    filter: blur(96px);
     z-index: 1;
   }
 
@@ -190,7 +190,7 @@
     background-size: 4px 4px, 5px 5px;
     background-position: 0 0, 1px 1px;
     mix-blend-mode: overlay;
-    opacity: 0.05;
+    opacity: 0.035;
     z-index: 0;
   }
 
@@ -204,7 +204,7 @@
     inset: 0;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.02;
+    opacity: 0.014;
     mix-blend-mode: soft-light;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 220px 220px;
@@ -215,9 +215,9 @@
   .axiom-bento-card,
   .machined-card {
     @apply relative overflow-hidden rounded-2xl border border-white/10;
-    background: linear-gradient(180deg, rgba(24, 33, 49, 0.82) 0%, rgba(17, 22, 29, 0.82) 100%);
-    border-color: rgba(143, 155, 171, 0.24);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06), 0 4px 14px rgba(0, 0, 0, 0.42), 0 14px 28px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, rgba(28, 34, 42, 0.86) 0%, rgba(17, 21, 27, 0.93) 100%);
+    border-color: rgba(152, 162, 176, 0.18);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 4px 14px rgba(0, 0, 0, 0.38), 0 14px 28px rgba(0, 0, 0, 0.26);
     transform: translateZ(0);
     backface-visibility: hidden;
     transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 480ms cubic-bezier(0.22, 1, 0.36, 1), border-color 360ms ease;
@@ -230,7 +230,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.075);
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
     pointer-events: none;
   }
@@ -242,8 +242,8 @@
   .axiom-bento-card:focus-within,
   .machined-card:focus-within {
     transform: translate3d(0, -4px, 0);
-    border-color: rgba(194, 110, 78, 0.4);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 16px 28px rgba(0, 0, 0, 0.35), 0 24px 46px rgba(0, 0, 0, 0.45);
+    border-color: rgba(200, 122, 87, 0.28);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06), 0 16px 28px rgba(0, 0, 0, 0.28), 0 24px 46px rgba(0, 0, 0, 0.38);
   }
 
   .btn-primary {
@@ -259,15 +259,15 @@
     color: var(--axiom-text-main);
     font-weight: 600;
     letter-spacing: 0.01em;
-    background: linear-gradient(138deg, var(--accent2) -10%, var(--accent) 58%, #a15e42 110%);
-    background-size: 125% 125%;
-    background-position: 18% 28%;
-    border: 0.5px solid rgba(255, 255, 255, 0.52);
+    background: linear-gradient(145deg, #d28a64 -8%, #bf704e 54%, #9f5d43 112%);
+    background-size: 120% 120%;
+    background-position: 20% 28%;
+    border: 0.5px solid rgba(255, 255, 255, 0.42);
     box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.34),
-      inset 0 -6px 4px 0 rgba(0, 0, 0, 0.2),
-      0 4px 6px 0 rgba(0, 0, 0, 0.4),
-      0 4px 46px 0 rgba(194, 110, 78, 0.18);
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.28),
+      inset 0 -6px 4px 0 rgba(0, 0, 0, 0.18),
+      0 4px 6px 0 rgba(0, 0, 0, 0.34),
+      0 4px 34px 0 rgba(200, 122, 87, 0.12);
     transform: translateZ(0);
     backface-visibility: hidden;
     transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), filter 260ms ease, box-shadow 260ms ease, background-position 260ms ease;
@@ -286,13 +286,13 @@
 
   .btn-primary:hover {
     transform: translate3d(0, -3px, 0);
-    filter: brightness(1.05);
-    background-position: 86% 34%;
+    filter: brightness(1.03);
+    background-position: 80% 34%;
     box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.34),
-      inset 0 -6px 4px 0 rgba(0, 0, 0, 0.2),
-      0 10px 18px 0 rgba(0, 0, 0, 0.35),
-      0 16px 42px 0 rgba(194, 110, 78, 0.16);
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+      inset 0 -6px 4px 0 rgba(0, 0, 0, 0.18),
+      0 10px 18px 0 rgba(0, 0, 0, 0.3),
+      0 16px 42px 0 rgba(200, 122, 87, 0.1);
   }
 
   .btn-primary:hover::before {
@@ -310,8 +310,8 @@
     justify-content: center;
     white-space: nowrap;
     border-radius: 9999px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(222, 228, 236, 0.12);
+    background: rgba(255, 255, 255, 0.028);
     color: var(--axiom-text-main);
     font-weight: 600;
     letter-spacing: 0.01em;
@@ -322,8 +322,8 @@
   .btn-secondary:hover,
   .btn-ghost:hover {
     transform: translate3d(0, -2px, 0);
-    border-color: rgba(255, 255, 255, 0.24);
-    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
   }
 
@@ -332,7 +332,7 @@
     box-shadow:
       0 4px 20px rgba(0, 0, 0, 0.6),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
-      0 0 0 2px rgba(194, 110, 78, 0.36);
+      0 0 0 2px rgba(200, 122, 87, 0.32);
   }
 
   .btn-attention {
@@ -434,7 +434,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background-image: linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px);
+    background-image: linear-gradient(to right, rgba(147, 158, 172, 0.14) 1px, transparent 1px), linear-gradient(to bottom, rgba(147, 158, 172, 0.14) 1px, transparent 1px);
     background-size: 80px 80px;
     opacity: 0.1;
     -webkit-mask-image: radial-gradient(circle at top right, black, transparent 70%);
