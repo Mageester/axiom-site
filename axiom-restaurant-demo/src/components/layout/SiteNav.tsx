@@ -7,6 +7,7 @@ import { ButtonAnchor, ButtonLink } from '../ui/Button'
 export function SiteNav() {
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
+  const isHomePage = normalizePathname(location.pathname) === routes.home
   const isReservationsPage = normalizePathname(location.pathname) === routes.reservations
 
   return (
@@ -54,7 +55,7 @@ export function SiteNav() {
             >
               Call concierge
             </ButtonAnchor>
-          ) : (
+          ) : isHomePage ? null : (
             <ButtonLink className="primary-nav__reserve" size="md" to={routes.reservations} variant="secondary">
               Reserve a table
             </ButtonLink>

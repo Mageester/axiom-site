@@ -463,7 +463,7 @@ const ContactSection: React.FC = () => {
 
   return (
     <section id="contact" className="section-shell scroll-mt-32 close-shell">
-      <div className="section-inner close-grid">
+        <div className="section-inner close-grid">
           <div className="close-copy">
             <SectionIntro
               eyebrow="Inspection request"
@@ -475,12 +475,18 @@ const ContactSection: React.FC = () => {
               }
             />
 
-          <a
-            href="tel:16475550164"
-            className="btn-secondary mt-8 w-full sm:w-auto"
-          >
-            Call for triage
-          </a>
+            {isInspectionRoute ? (
+              <p className="mt-8 text-[13px] font-semibold uppercase tracking-[0.18em] text-stone-400">
+                Active leak? <a href="tel:16475550164" className="text-ember-300 transition-colors hover:text-white">Call for triage</a>
+              </p>
+            ) : (
+              <a
+                href="tel:16475550164"
+                className="btn-secondary mt-8 w-full sm:w-auto"
+              >
+                Call for triage
+              </a>
+            )}
 
           <ul className="close-list">
             {contactExpectations.map((item) => (

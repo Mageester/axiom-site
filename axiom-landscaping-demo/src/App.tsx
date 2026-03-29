@@ -77,7 +77,6 @@ const contactHeading = isQuoteRoute
 
 const navLinks = isQuoteRoute
   ? [
-      { label: 'Scope', href: '#services' },
       { label: 'Proof', href: '#proof' },
       { label: 'Contact', href: '#contact' },
     ]
@@ -244,18 +243,11 @@ const Hero = () => (
         </p>
         <div className="animate-rise-in-delay-2 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <a href={isQuoteRoute ? '#contact' : '/quote'} className={primaryButton}>{isQuoteRoute ? 'Share your scope' : 'Request a quote'}</a>
-          {isQuoteRoute ? (
-            <a
-              href="#proof"
-              className="inline-flex min-h-[52px] items-center justify-center rounded-full px-2 text-[13px] font-medium uppercase tracking-[0.2em] text-stone-400 transition-colors duration-200 hover:text-white"
-            >
-              View proof
-            </a>
-          ) : (
+          {!isQuoteRoute ? (
             <a href="#projects" className={secondaryButton}>
               View projects
             </a>
-          )}
+          ) : null}
         </div>
         <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[15px] text-stone-300">
           {['Toronto and West GTA', 'Photo-led scope reviews', 'Site visits by appointment'].map((point) => (
@@ -308,7 +300,8 @@ const Hero = () => (
   </section>
 )
 
-const Services = () => (
+const Services = () =>
+  isQuoteRoute ? null : (
   <section id="services" className="scroll-mt-28 px-4 py-20 sm:py-28">
     <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-16">
       <div className="max-w-xl">
@@ -317,12 +310,10 @@ const Services = () => (
           title={servicesHeading.title}
           body={servicesHeading.body}
         />
-        {!isQuoteRoute ? (
-          <a href="/quote" className={`${secondaryButton} mt-8`}>Request a quote</a>
-        ) : null}
+        <a href="/quote" className={`${secondaryButton} mt-8`}>Request a quote</a>
       </div>
       <div className="border-y border-white/8">
-        {(isQuoteRoute ? services.slice(0, 2) : services).map((service, index, array) => (
+        {services.map((service, index, array) => (
           <article key={service.number} className={`grid gap-4 px-5 py-6 sm:grid-cols-[90px_1fr] sm:gap-6 sm:px-7 sm:py-7 ${index < array.length - 1 ? 'border-b border-white/8' : ''}`}>
             <div className="flex items-center gap-3 sm:block">
               <span className="text-[12px] uppercase tracking-[0.32em] text-grove-300/70">{service.number}</span>
@@ -337,7 +328,7 @@ const Services = () => (
       </div>
     </div>
   </section>
-)
+  )
 
 const Proof = () => (
   <section id="proof" className="px-4 py-20 sm:py-28">
@@ -634,7 +625,7 @@ const App = () => (
     <Header />
     <main id="top">
       <Hero />
-      <Services />
+      {!isQuoteRoute ? <Services /> : null}
       <Proof />
       {!isQuoteRoute ? <Projects /> : null}
       {!isQuoteRoute ? <Materials /> : null}
