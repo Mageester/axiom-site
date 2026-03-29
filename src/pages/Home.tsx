@@ -158,7 +158,7 @@ const Home: React.FC = () => {
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book a Founder Consultation
+                    Book Free Consultation
                   </Link>
                   <Link
                     to="/method"
