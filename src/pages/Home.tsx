@@ -46,23 +46,23 @@ const selectedWork: WorkPreview[] = homeSelectedWorkSlugs
 
 const proofPoints = [
   {
-    title: 'Clear enough to trust',
-    body: 'We write simple pages that say what you do and why it matters.',
+    title: 'Visitors understand it faster',
+    body: 'The page says what you do, what people should do next, and how to contact you.',
   },
   {
-    title: 'Fast enough to use',
-    body: 'The site stays light, quick, and easy to read on a phone.',
+    title: 'Built by Aidan and Riley',
+    body: 'You work directly with the founders who design, write, and launch the site.',
   },
   {
-    title: 'Built by founders',
-    body: 'You work directly with the people doing the work.',
+    title: 'Made for real service work',
+    body: 'We focus on calls, quote requests, reservations, and simple forms.',
   },
 ];
 
 const processSteps = [
-  'We learn what you sell and what the site needs to say.',
-  'We shape the page around one clear next step.',
-  'We build, check, and launch without adding extra noise.',
+  'We learn what you sell, who you want to reach, and what the current site is missing.',
+  'We write the page around one clear action.',
+  'We build, check, and launch without adding work the business does not need.',
 ];
 
 const Home: React.FC = () => {
@@ -70,7 +70,7 @@ const Home: React.FC = () => {
     <>
       <SEO
         title="Axiom | Simple Websites for Service Businesses"
-        description="Axiom builds clear, fast websites for service businesses that want a better first impression and a simple next step."
+        description="Axiom is Aidan Magee and Riley Hinsperger. We build websites that help service businesses get more calls."
       />
 
       <Layout>
@@ -79,16 +79,16 @@ const Home: React.FC = () => {
             <div className="max-w-4xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Axiom Infrastructure</p>
               <h1 className="mt-4 max-w-3xl text-[clamp(2.4rem,5.6vw,4.8rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                Websites that help service businesses look established.
+                Websites that help service businesses get more calls.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                We build simple sites for businesses that want more trust, more calls, and less guesswork.
+                We are Aidan Magee and Riley Hinsperger. We build the site ourselves. Most businesses come to us after spending money on a site that looked fine but did not bring in leads.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
                   Start a project
                 </Link>
-                <p className="text-sm text-slate-300">One short call. No long pitch.</p>
+                <p className="text-sm text-slate-300">One short call. We review the business and the current site.</p>
               </div>
             </div>
           </section>
@@ -107,12 +107,12 @@ const Home: React.FC = () => {
           <section className="pt-20 md:pt-24">
             <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <div className="max-w-xl">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">What we focus on</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Why Axiom exists</p>
                 <h2 className="mt-3 text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-tight text-[#F2F4F7]">
-                  Clear pages. Fast loading. A simple next step.
+                  We make pages that help people decide faster.
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
-                  We keep the work grounded in the business. That means fewer pages, less noise, and copy people can understand quickly.
+                  Most clients come to us after a site that looked finished but did not bring in leads. We fix the order, the message, and the path to contact.
                 </p>
               </div>
 
@@ -136,6 +136,9 @@ const Home: React.FC = () => {
                 <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
                   Proof from real projects.
                 </h2>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+                  These examples are built around real business problems, not a visual style exercise.
+                </p>
               </div>
               <Link
                 to="/works"
@@ -195,14 +198,17 @@ const Home: React.FC = () => {
 
           <section className="pt-20 md:pt-24">
             <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-10 md:px-8 md:py-12">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Simple process</p>
+              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">What happens next</p>
               <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
-                We keep the process short.
+                Send the site and we will tell you what happens next.
               </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+                We review the business, the current site, and the lead path. If it is a fit, we reply within one business day with a clear next step.
+              </p>
               <ul className="mt-6 space-y-4">
-                <li className="text-sm leading-7 text-slate-300 md:text-base">One call to see if there is a fit.</li>
-                <li className="text-sm leading-7 text-slate-300 md:text-base">We outline the page and the message.</li>
-                <li className="text-sm leading-7 text-slate-300 md:text-base">Then we build, check, and launch.</li>
+                <li className="text-sm leading-7 text-slate-300 md:text-base">We review the site and the offer.</li>
+                <li className="text-sm leading-7 text-slate-300 md:text-base">We tell you what we would fix first.</li>
+                <li className="text-sm leading-7 text-slate-300 md:text-base">If it is a fit, we send the next step.</li>
               </ul>
               <p className="mt-6 text-sm leading-7 text-slate-300">
                 If that sounds right,{' '}

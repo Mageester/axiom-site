@@ -6,9 +6,9 @@ import { SEO } from '../components/SEO';
 
 const VALUES = [
   'Be clear.',
+  'Keep promises.',
   'Do the work well.',
-  'Tell the truth about what we can do.',
-  'Keep the process simple.',
+  'Stay close to the work.',
 ];
 
 const About: React.FC = () => {
@@ -16,7 +16,7 @@ const About: React.FC = () => {
     <>
       <SEO
         title="About | Axiom"
-        description="Axiom is a small founder-led studio that builds simple websites for service businesses."
+        description="Axiom is Aidan Magee and Riley Hinsperger. We build simple websites for service businesses that need a clearer next step."
       />
 
       <Layout>
@@ -25,11 +25,11 @@ const About: React.FC = () => {
             <div className="max-w-4xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">About</p>
               <h1 className="mt-4 max-w-3xl text-[clamp(2.4rem,5.2vw,4.4rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                We are two founders who like clear work.
+                We are Aidan Magee and Riley Hinsperger. We build websites that help service businesses get more calls.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                Axiom started because too many service businesses were stuck with websites that looked generic and said too little.
-                We wanted to build something simpler, sharper, and easier to trust.
+                Axiom started because too many businesses were paying for sites that looked finished but did not bring in leads.
+                We wanted a company that says things plainly, stays close to the work, and gives clients a clear answer.
               </p>
               <div className="mt-8">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -44,25 +44,25 @@ const About: React.FC = () => {
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Why we built Axiom</p>
                 <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
-                  We wanted a more honest kind of web design.
+                  We wanted a more useful kind of web design.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  Most small-business sites try to do too much. They hide the real offer, repeat the same point three ways, and bury the contact step.
+                  A lot of small-business sites hide the real offer, repeat the same point, and make contact harder than it should be.
                 </p>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  We keep the work simple so the site can do its job: explain the business, earn trust, and make it easy to reach out.
+                  We write the page in plain English, keep the order simple, and make it easy for people to reach out.
                 </p>
               </div>
 
               <div className="space-y-0 border-t border-white/10 pt-5">
                 <p className="text-sm leading-7 text-slate-300 md:text-base">
-                  We write the page in plain English.
+                  We say what the business does.
                 </p>
                 <p className="border-t border-white/[0.06] pt-4 text-sm leading-7 text-slate-300 md:text-base">
-                  We keep the layout calm and easy to read.
+                  We remove the parts that slow people down.
                 </p>
                 <p className="border-t border-white/[0.06] pt-4 text-sm leading-7 text-slate-300 md:text-base">
-                  We stay involved until the site is launched cleanly.
+                  We stay involved until launch is clean.
                 </p>
               </div>
             </div>
@@ -76,7 +76,7 @@ const About: React.FC = () => {
                   You work with us directly.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  There is no account layer and no handoff maze. We talk to clients ourselves and do the work ourselves.
+                  There is no account layer and no handoff maze. We talk to clients ourselves and ship the work ourselves.
                 </p>
               </div>
 
@@ -134,10 +134,10 @@ const About: React.FC = () => {
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
               <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
-                If your business needs a better site, let&apos;s talk.
+                If your site is not helping people contact you faster, send it over.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                We keep the conversation short and honest. If it is a fit, we will say so.
+                We will review it ourselves and tell you if we can help. If it is a fit, we will say what we would change first.
               </p>
               <p className="mt-4 text-sm leading-7 text-slate-300">
                 <Link to="/apply" className="text-[#F2F4F7] underline decoration-white/30 underline-offset-4 transition-colors hover:text-white">

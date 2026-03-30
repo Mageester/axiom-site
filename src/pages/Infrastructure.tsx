@@ -8,12 +8,12 @@ const PROCESS_STEPS = [
   {
     number: '01',
     title: 'We talk first',
-    body: 'We start with a short call to understand the business, the site, and what needs to change.',
+    body: 'We start with a short call to understand who the business serves and why the current site is falling short.',
   },
   {
     number: '02',
     title: 'We map the pages',
-    body: 'We decide what the site should say, what it should not say, and where the next step should live.',
+    body: 'We decide what the site should say, what it should not say, and how people should contact you.',
   },
   {
     number: '03',
@@ -23,13 +23,13 @@ const PROCESS_STEPS = [
 ];
 
 const METHOD_NOTES = [
-  'A real person reviews the project from the start.',
-  'We keep the page structure simple and easy to follow.',
-  'We only add what helps the business move forward.',
+  'Aidan and Riley review every project themselves.',
+  'We say what we would fix first.',
+  'We only add work that helps people contact you or buy.',
 ];
 
 const METHOD_HANDOFF = [
-  'A clear page plan',
+  'A page plan that matches the business',
   'Simple copy written in plain English',
   'A site that works on phones and desktop',
   'A clean handoff with no surprise extras',
@@ -52,13 +52,13 @@ const Infrastructure: React.FC = () => {
                 A simple process from first call to launch.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                We keep the work clear. You know what we are doing, why it matters, and what happens next.
+                We are Aidan Magee and Riley Hinsperger. We keep the process small because most projects start after a business has already spent money on a site that did not bring in enough leads.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
                   Start a project
                 </Link>
-                <p className="text-sm text-slate-300">One call. One plan. One launch.</p>
+                <p className="text-sm text-slate-300">We review the site, set the plan, and launch cleanly.</p>
               </div>
             </div>
           </section>
@@ -93,10 +93,10 @@ const Infrastructure: React.FC = () => {
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">What we need</p>
                 <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
-                  Enough context to do the work well.
+                  Send the current site, your offer, and the main problem.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  We do not need a long brief. We need a real description of the business, the offer, and the problem with the current site.
+                  That is enough for us to give you a clear next step.
                 </p>
               </div>
 
@@ -130,10 +130,10 @@ const Infrastructure: React.FC = () => {
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
               <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
-                If it feels like a fit, start the application.
+                Send the site and we will tell you what we would do first.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                We will look at the project, confirm fit, and tell you the simplest next move.
+                If it is a fit, we reply with a simple plan and a time to talk. If it is not, we say that clearly.
               </p>
               <p className="mt-4 text-sm leading-7 text-slate-300">
                 <Link to="/apply" className="text-[#F2F4F7] underline decoration-white/30 underline-offset-4 transition-colors hover:text-white">

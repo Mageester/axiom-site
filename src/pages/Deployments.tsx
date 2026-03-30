@@ -55,7 +55,7 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom"
-        description="Real examples from the kinds of service businesses Axiom builds for."
+        description="Real examples of service websites built to help people decide and contact the business faster."
       />
 
       <Layout>
@@ -67,7 +67,10 @@ const Deployments: React.FC = () => {
                 Real examples, clearly shown.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                These are the kinds of sites we build for service businesses. Each one is written simply and focused on the next step.
+                Most of these examples start with the same problem: the site looked finished, but it did not help visitors decide or contact the business quickly.
+              </p>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+                Aidan and Riley build and review the work themselves.
               </p>
               <div className="mt-8">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -138,10 +141,10 @@ const Deployments: React.FC = () => {
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
               <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
-                If you want this for your business, start the application.
+                If your site is not helping people contact you faster, send it over.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                We will look at the project, confirm fit, and tell you the simplest next move.
+                We will review it ourselves and tell you what we would fix first.
               </p>
               <p className="mt-4 text-sm leading-7 text-slate-300">
                 <Link to="/apply" className="text-[#F2F4F7] underline decoration-white/30 underline-offset-4 transition-colors hover:text-white">

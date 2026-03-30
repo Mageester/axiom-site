@@ -121,7 +121,7 @@ const SimpleApplyForm: React.FC = () => {
 
       if (response.ok && result?.ok !== false) {
         setStatus('success');
-        setMessage('Thanks. We will reply within one business day.');
+        setMessage('Thanks. We will reply within one business day with a clear next step.');
         return;
       }
 
@@ -142,10 +142,10 @@ const SimpleApplyForm: React.FC = () => {
       <div className="max-w-4xl">
         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Apply</p>
         <h1 className="mt-4 max-w-3xl text-[clamp(2.4rem,5.2vw,4.4rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-          Tell us what you need.
+          Send a short note. We read every inquiry ourselves.
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-          Send a short note. We will review it and reply within one business day.
+          If it is a fit, we send a short call time and tell you what we would change first. If it is not, we say that clearly.
         </p>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">
           If you want to email us directly, use{' '}
@@ -246,7 +246,7 @@ const SimpleApplyForm: React.FC = () => {
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 md:p-8">
             <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[#A7B3BC]">What happens next</p>
             <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
-              We read every inquiry ourselves. If it is a fit, we will reply with the simplest next step.
+              Aidan and Riley read every inquiry themselves. If it is a fit, we look at the site, the offer, and the current lead path, then send a simple next step.
             </p>
           </div>
 
@@ -263,9 +263,9 @@ const SimpleApplyForm: React.FC = () => {
           </div>
 
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 md:p-8">
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[#A7B3BC]">Looking for a faster answer?</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[#A7B3BC]">What helps us move faster</p>
             <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
-              Include your timeline, current site, and the main thing you want fixed. That helps us move faster.
+              Include your timeline, current site, and the main thing you want fixed. That is enough for us to start.
             </p>
           </div>
         </div>
@@ -279,7 +279,7 @@ const ContactPage: React.FC = () => {
     <>
       <SEO
         title="Apply | Axiom"
-        description="Tell us about your business and what you need. We will review fit before we talk scope."
+        description="Send a short note. We review every inquiry ourselves and reply within one business day."
       />
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">

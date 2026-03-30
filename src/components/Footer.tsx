@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         <div>
           <p className="text-2xl font-semibold tracking-tight text-[#F2F4F7] md:text-3xl">Axiom Infrastructure</p>
           <p className="mt-4 max-w-md text-sm leading-7 text-slate-300">
-            We build simple websites for service businesses. The work is clear, fast, and made to help people take the next step.
+            Aidan Magee and Riley Hinsperger build the work themselves. We make simple websites for service businesses that need clearer calls and fewer dead ends.
           </p>
         </div>
 
@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
             226-753-1833
           </a>
           <p className="max-w-sm text-sm leading-7 text-slate-400">
-            For project inquiries, start on the Apply page. For quick questions, email us.
+            Start on the Apply page. We review every inquiry ourselves and reply within one business day.
           </p>
         </div>
       </div>

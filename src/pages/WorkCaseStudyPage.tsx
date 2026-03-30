@@ -20,7 +20,7 @@ const WorkCaseStudyPage: React.FC = () => {
   const detailNote =
     entry.label === 'Live Demo' && entry.demoUrl
       ? 'This page shows the live site and the choices behind it.'
-      : 'This page shows what was built and why it was built.';
+      : 'This is the kind of work we do when the site has to make the next step obvious.';
 
   return (
     <>
@@ -117,10 +117,10 @@ const WorkCaseStudyPage: React.FC = () => {
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
               <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
-                Need this for your business?
+                If your site has the same problem, send it over.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                We can scope a similar build for your business without turning it into a template.
+                We will look at the current site, tell you what we would fix first, and say whether it is a fit.
               </p>
               <p className="mt-4 text-sm leading-7 text-slate-300">
                 <Link to="/apply" className="text-[#F2F4F7] underline decoration-white/30 underline-offset-4 transition-colors hover:text-white">
