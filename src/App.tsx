@@ -1,6 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import Home from './pages/Home';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -38,49 +37,36 @@ const LegacyLeadRedirect: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  const location = useLocation();
-
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={location.pathname}
-        className="min-h-screen overflow-x-hidden"
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -6 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <Suspense fallback={<RouteFallback />}>
-          <Routes location={location}>
-            <Route path="/" element={<OpsAwareHome />} />
-            <Route path="/method" element={<Infrastructure />} />
-            <Route path="/infrastructure" element={<Navigate to="/method" replace />} />
-            <Route path="/works" element={<Deployments />} />
-            <Route path="/works/:slug" element={<WorkCaseStudyPage />} />
-            <Route path="/deployments" element={<Navigate to="/works" replace />} />
-            <Route path="/apply" element={<ContactPage />} />
-            <Route path="/contact" element={<Navigate to="/apply" replace />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/architects" element={<Navigate to="/about" replace />} />
-            <Route path="/admin/login" element={<Login />} />
-            <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/hunt" element={<ProtectedRoute><Hunt /></ProtectedRoute>} />
-            <Route path="/vault" element={<ProtectedRoute><Vault /></ProtectedRoute>} />
-            <Route path="/triage" element={<ProtectedRoute><Triage /></ProtectedRoute>} />
-            <Route path="/settings" element={<ProtectedRoute><OmniscientSettings /></ProtectedRoute>} />
-            <Route path="/lead/:id" element={<ProtectedRoute><OmniscientLeadDetail /></ProtectedRoute>} />
-            <Route path="/campaigns" element={<Navigate to="/hunt" replace />} />
-            <Route path="/leads" element={<Navigate to="/vault" replace />} />
-            <Route path="/leads/:id" element={<LegacyLeadRedirect />} />
-            <Route path="/jobs" element={<ProtectedRoute><Jobs /></ProtectedRoute>} />
-            <Route path="/admin/inquiries" element={<ProtectedRoute><Inquiries /></ProtectedRoute>} />
-            <Route path="/admin/inquiries/:id" element={<ProtectedRoute><InquiryDetail /></ProtectedRoute>} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
-      </motion.div>
-    </AnimatePresence>
+    <Suspense fallback={<RouteFallback />}>
+      <Routes>
+        <Route path="/" element={<OpsAwareHome />} />
+        <Route path="/method" element={<Infrastructure />} />
+        <Route path="/infrastructure" element={<Navigate to="/method" replace />} />
+        <Route path="/works" element={<Deployments />} />
+        <Route path="/works/:slug" element={<WorkCaseStudyPage />} />
+        <Route path="/deployments" element={<Navigate to="/works" replace />} />
+        <Route path="/apply" element={<ContactPage />} />
+        <Route path="/contact" element={<Navigate to="/apply" replace />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/architects" element={<Navigate to="/about" replace />} />
+        <Route path="/admin/login" element={<Login />} />
+        <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/hunt" element={<ProtectedRoute><Hunt /></ProtectedRoute>} />
+        <Route path="/vault" element={<ProtectedRoute><Vault /></ProtectedRoute>} />
+        <Route path="/triage" element={<ProtectedRoute><Triage /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><OmniscientSettings /></ProtectedRoute>} />
+        <Route path="/lead/:id" element={<ProtectedRoute><OmniscientLeadDetail /></ProtectedRoute>} />
+        <Route path="/campaigns" element={<Navigate to="/hunt" replace />} />
+        <Route path="/leads" element={<Navigate to="/vault" replace />} />
+        <Route path="/leads/:id" element={<LegacyLeadRedirect />} />
+        <Route path="/jobs" element={<ProtectedRoute><Jobs /></ProtectedRoute>} />
+        <Route path="/admin/inquiries" element={<ProtectedRoute><Inquiries /></ProtectedRoute>} />
+        <Route path="/admin/inquiries/:id" element={<ProtectedRoute><InquiryDetail /></ProtectedRoute>} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 };
 

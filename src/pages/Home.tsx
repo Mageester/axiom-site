@@ -2,19 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
-import PartnerMarquee from '../components/PartnerMarquee';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
-import { RevealBlock } from '../components/ui/RevealBlock';
 import { caseStudies } from '../data/caseStudies';
 import { getWorkProofImage } from '../lib/workProofImages';
 
-const proofTypeLabel: Record<string, string> = {
-  'Sample Build': 'Sample',
-  'Concept Build': 'Demo site',
-  'Demonstration Site': 'Demo site',
-  'Live Demo': 'Live site',
-  'In Progress': 'In progress',
+type WorkPreview = {
+  id: string;
+  title: string;
+  summary: string;
+  image: string;
+  demoUrl?: string;
+  imageAlt?: string;
+  imagePosition?: string;
+  businessType: string;
+  label: string;
 };
 
 const homeSelectedWorkSlugs = [
@@ -23,376 +25,194 @@ const homeSelectedWorkSlugs = [
   'concept-roofing-conversion-site',
 ] as const;
 
-const selectedWorkEntries = homeSelectedWorkSlugs
+const selectedWork: WorkPreview[] = homeSelectedWorkSlugs
   .map((slug) => caseStudies.find((entry) => entry.slug === slug))
-  .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
+  .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry))
+  .map((entry) => {
+    const proofImage = getWorkProofImage(entry.slug);
 
-const selectedWork = selectedWorkEntries.map((entry) => {
-  const proofImage = getWorkProofImage(entry.slug);
-  return {
-    id: entry.slug,
-    title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-    summary: entry.summary.split('. ')[0].replace(/\.$/, '') + '.',
-    image: proofImage.source,
-    demoUrl: entry.demoUrl,
-    imageAlt: proofImage.alt,
-    imagePosition: proofImage.position,
-    projectType: proofTypeLabel[entry.label] ?? entry.label,
-  };
-});
+    return {
+      id: entry.slug,
+      title: entry.title,
+      summary: entry.summary,
+      image: proofImage.source,
+      demoUrl: entry.demoUrl,
+      imageAlt: proofImage.alt,
+      imagePosition: proofImage.position,
+      businessType: entry.businessType,
+      label: entry.label === 'Live Demo' ? 'Live site' : 'Demo',
+    };
+  });
 
-const capabilities = [
+const proofPoints = [
   {
-    title: 'Built for Your Business',
-    detail: 'We learn what you do, what needs to be on the site, and what the site needs to help you do.',
+    title: 'Clear enough to trust',
+    body: 'We write simple pages that say what you do and why it matters.',
   },
   {
-    title: 'Helps Build Trust',
-    detail: 'Clear structure and clean design help your business look established right away.',
+    title: 'Fast enough to use',
+    body: 'The site stays light, quick, and easy to read on a phone.',
   },
   {
-    title: 'Made to Bring In Inquiries',
-    detail: 'Calls, forms, and booking links are placed where people expect them.',
+    title: 'Built by founders',
+    body: 'You work directly with the people doing the work.',
   },
 ];
 
-const standardsCards = [
-  {
-    title: 'Fast Hosting',
-    detail: 'Hosting is set up for speed and steady uptime.',
-    desktopSpan: 'lg:col-span-4',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <path d="M7.5 15.5a3.5 3.5 0 0 1 .9-6.88 5 5 0 0 1 9.36 1.26A3 3 0 1 1 18 15.5H7.5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Built to Load Fast',
-    detail: 'Layouts, images, and interactions stay light.',
-    desktopSpan: 'lg:col-span-4',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <path d="M12 5v7l4 2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-        <path d="M20 12A8 8 0 1 1 8.3 4.7" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Works on Mobile',
-    detail: 'We plan for phones first so the site still feels easy to use on a small screen.',
-    desktopSpan: 'lg:col-span-4',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <rect height="16" rx="2.5" stroke="currentColor" strokeWidth="1.7" width="10" x="7" y="4" />
-        <path d="M10 7h4" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7" />
-        <circle cx="12" cy="17" fill="currentColor" r="1" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Easy to Read',
-    detail: 'Colors, spacing, and text are checked so the page stays readable.',
-    desktopSpan: 'lg:col-span-6',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="5" r="2" fill="currentColor" />
-        <path d="M6 9h12M12 7v12M8 21l4-7 4 7" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Checked Before Launch',
-    detail: 'Pages, forms, and key actions are tested before launch.',
-    desktopSpan: 'lg:col-span-6',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <path d="M8 7h8M8 12h4M8 17h6" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7" />
-        <path d="M17 16.5 18.8 18 22 14.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-        <rect height="16" rx="2.5" stroke="currentColor" strokeWidth="1.7" width="14" x="5" y="4" />
-      </svg>
-    ),
-  },
-];
-
-const method = [
-  '01 — We learn what the business needs',
-  '02 — We plan the pages and calls to action',
-  '03 — We build, test, and launch',
-];
-
-const operationalSignals = [
-  'Short fit call',
-  'Clear next step',
-  'Built for local service businesses',
+const processSteps = [
+  'We learn what you sell and what the site needs to say.',
+  'We shape the page around one clear next step.',
+  'We build, check, and launch without adding extra noise.',
 ];
 
 const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom | Premium Websites for Service Businesses"
-        description="Axiom builds websites for local businesses that need a better first impression and a clearer next step."
+        title="Axiom | Simple Websites for Service Businesses"
+        description="Axiom builds clear, fast websites for service businesses that want a better first impression and a simple next step."
       />
 
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="pt-12 md:pt-20">
-            <div className="max-w-5xl">
-              <div>
-                <div className="max-w-4xl overflow-hidden">
-                  <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Websites for service businesses that need a better first impression.
-                  </h1>
-                </div>
-                <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom builds fast, founder-led websites for local businesses that need a better site and a clearer next step.
-                </p>
-                <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book Free Consultation
-                  </Link>
-                  <Link
-                    to="/method"
-                    className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
-                  >
-                    View Our Process
-                  </Link>
-                </div>
-                <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
-                  The first call is 30 minutes. We review your business, the site, and fit before we talk scope.
-                </p>
-                <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[12px] uppercase tracking-[0.16em] text-slate-400">
-                  <span>Short fit call</span>
-                  <span className="hidden sm:inline">/</span>
-                  <span>Clear next step</span>
-                  <span className="hidden sm:inline">/</span>
-                  <span>Built for local businesses</span>
-                </div>
+          <section className="pt-12 md:pt-20">
+            <div className="max-w-4xl">
+              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Axiom Infrastructure</p>
+              <h1 className="mt-4 max-w-3xl text-[clamp(2.4rem,5.6vw,4.8rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
+                Websites that help service businesses look established.
+              </h1>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
+                We build simple sites for businesses that want more trust, more calls, and less guesswork.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
+                  Start a project
+                </Link>
+                <p className="text-sm text-slate-300">One short call. No long pitch.</p>
               </div>
             </div>
           </section>
 
-          <section className="pt-10 md:pt-14">
-            <p className="mb-3 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-              Included in every build
-            </p>
-            <PartnerMarquee />
+          <section className="pt-16 md:pt-20">
+            <div className="grid gap-6 md:grid-cols-3">
+              {proofPoints.map((item) => (
+                <div key={item.title} className="border-t border-white/10 pt-4">
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[#A7B3BC]">{item.title}</p>
+                  <p className="mt-3 max-w-sm text-sm leading-7 text-slate-300">{item.body}</p>
+                </div>
+              ))}
+            </div>
           </section>
 
-          <RevealBlock as="section" className="pt-20 md:pt-24">
-            <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
-              <div className="lg:col-span-4">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">How We Work</p>
-                <h2 className="mt-3 max-w-[20ch] text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                  A clear process for building your website.
+          <section className="pt-20 md:pt-24">
+            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+              <div className="max-w-xl">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">What we focus on</p>
+                <h2 className="mt-3 text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-tight text-[#F2F4F7]">
+                  Clear pages. Fast loading. A simple next step.
                 </h2>
-                <ol className="mt-5 space-y-3">
-                  {method.map((step) => (
-                    <li key={step} className="text-sm text-slate-300">
-                      <p>{step}</p>
-                    </li>
-                  ))}
-                </ol>
+                <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
+                  We keep the work grounded in the business. That means fewer pages, less noise, and copy people can understand quickly.
+                </p>
               </div>
 
-              <div className="grid gap-6 lg:col-span-8 md:grid-cols-3">
-                {capabilities.map((item, index) => (
-                  <RevealBlock as="article" key={item.title} className="axiom-bento h-full p-4 md:p-5" delay={index * 0.08} variant="card">
-                    <h3 className="text-base font-semibold text-[#F2F4F7]">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.detail}</p>
-                  </RevealBlock>
+              <div className="space-y-0">
+                {processSteps.map((step, index) => (
+                  <div key={step} className={`${index > 0 ? 'border-t border-white/8' : 'border-t border-white/8'} py-5`}>
+                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">
+                      {String(index + 1).padStart(2, '0')}
+                    </p>
+                    <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">{step}</p>
+                  </div>
                 ))}
               </div>
             </div>
-            <div className="mt-7 grid gap-4 md:grid-cols-2">
-              <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Project controls</p>
-                <ul className="mt-3 space-y-2">
-                  {operationalSignals.map((item) => (
-                    <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>
-                  ))}
-                </ul>
-              </article>
-              <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Launch criteria</p>
-                <ul className="mt-3 space-y-2">
-                  <li className="text-sm leading-relaxed text-slate-300">Clear positioning at first glance</li>
-                  <li className="text-sm leading-relaxed text-slate-300">A credible next step for the right buyer</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Clean performance across desktop and mobile</li>
-                </ul>
-              </article>
-            </div>
-          </RevealBlock>
+          </section>
 
-          <RevealBlock as="section" className="pt-16 md:pt-28" variant="feature">
-            <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
+          <section className="pt-20 md:pt-24">
+            <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work samples</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Live sites and demos from the kinds of businesses we build for.
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Recent work</p>
+                <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
+                  Proof from real projects.
                 </h2>
               </div>
               <Link
                 to="/works"
-                className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
+                className="text-sm text-slate-300 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white"
               >
-                See examples
+                See all work
               </Link>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {selectedWork.map((item, index) => {
+            <div className="mt-8 grid gap-6">
+              {selectedWork.map((item) => {
                 const card = (
-                  <RevealBlock
-                    as="article"
-                    delay={index * 0.08}
-                    variant="card"
-                    className="flex min-h-[30rem] cursor-pointer flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1221]/92 shadow-[0_10px_34px_rgba(0,0,0,0.18)] transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/deployment:-translate-y-1 group-hover/deployment:border-[#d4a48e]/30 group-hover/deployment:shadow-[0_24px_60px_rgba(0,0,0,0.34)] group-focus-visible/deployment:-translate-y-1 group-focus-visible/deployment:border-[#d4a48e]/35 group-focus-visible/deployment:shadow-[0_24px_60px_rgba(0,0,0,0.34)]"
-                    whileHover={{ y: -6 }}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <div className="relative overflow-hidden">
-                      <ResponsiveImage
-                        source={item.image}
-                        sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
-                        alt={item.imageAlt ?? item.title}
-                        className="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover/deployment:scale-[1.03] group-focus-visible/deployment:scale-[1.03]"
-                        loading="lazy"
-                        decoding="async"
-                        style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/12 to-transparent" />
-                      <div className="absolute left-4 top-4">
-                        <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
-                          {item.projectType}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-1 flex-col p-5 sm:p-6">
-                      <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-[1.55rem]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-slate-300/95">{item.summary}</p>
-
+                  <article className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0d1323]/82">
+                    <ResponsiveImage
+                      source={item.image}
+                      sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
+                      alt={item.imageAlt ?? item.title}
+                      className="aspect-[16/9] w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
+                    />
+                    <div className="p-6 md:p-7">
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">
+                        {item.businessType} / {item.label}
+                      </p>
+                      <h3 className="mt-3 text-[1.5rem] font-semibold tracking-tight text-[#F2F4F7]">{item.title}</h3>
+                      <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">{item.summary}</p>
                       {item.demoUrl ? (
-                        <div className="mt-auto pt-6">
-                          <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/deployment:text-[#e8bea8] group-focus-visible/deployment:text-[#e8bea8]">
-                            View demo
-                          </span>
+                        <div className="mt-5">
+                          <span className="text-sm text-[#d4a48e]">Live demo available</span>
                         </div>
                       ) : null}
                     </div>
-                  </RevealBlock>
+                  </article>
                 );
 
-                if (!item.demoUrl) {
-                  return React.cloneElement(card, { key: item.id });
+                if (item.demoUrl) {
+                  return (
+                    <a
+                      key={item.id}
+                      href={item.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+                      aria-label={`View live site for ${item.title}`}
+                    >
+                      {card}
+                    </a>
+                  );
                 }
 
-                return (
-                  <a
-                    key={item.id}
-                    href={item.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View live demo for ${item.title}`}
-                    className="group/deployment block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090d18]"
-                  >
-                    {card}
-                  </a>
-                );
+                return <div key={item.id}>{card}</div>;
               })}
             </div>
-          </RevealBlock>
+          </section>
 
-          <RevealBlock as="section" className="pt-20 md:pt-24" variant="feature">
-            <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(12,18,33,0.94)_0%,rgba(10,15,26,0.97)_100%)] px-6 py-12 shadow-[0_22px_70px_rgba(0,0,0,0.24)] md:px-8 md:py-14 lg:px-10 lg:py-16">
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute left-[10%] top-[-14%] h-40 w-40 rounded-full bg-[#4B6EAF]/10 blur-3xl md:h-52 md:w-52" />
-                <div className="absolute bottom-[-16%] right-[8%] h-44 w-44 rounded-full bg-[#B05D41]/10 blur-3xl md:h-56 md:w-56" />
-                <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
-              </div>
-
-              <div className="relative z-10">
-                <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">What is included</p>
-                  <h2 className="mt-4 max-w-[12ch] text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
-                    What every launch includes.
-                  </h2>
-                  <p className="mt-5 max-w-[38rem] text-sm leading-7 text-slate-300 md:text-base">
-                    A good website needs more than good design. Every Axiom build is made to load quickly, work on mobile, and help people take the next step.
-                  </p>
-                </div>
-
-            <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-12">
-              {standardsCards.map((item, index) => (
-                <RevealBlock
-                  as="article"
-                  key={item.title}
-                  delay={index * 0.06}
-                  variant="card"
-                  className={`group relative flex h-full min-h-[15.5rem] flex-col rounded-[26px] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_28px_rgba(0,0,0,0.16)] transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_34px_rgba(0,0,0,0.22)] md:p-7 ${
-                    index === 0
-                      ? 'lg:col-span-6 border border-white/12 bg-[linear-gradient(180deg,rgba(24,31,40,0.96)_0%,rgba(15,19,26,0.98)_100%)]'
-                      : index < 3
-                        ? 'lg:col-span-3 border border-white/8 bg-[linear-gradient(180deg,rgba(20,25,32,0.8)_0%,rgba(13,17,23,0.92)_100%)]'
-                        : 'lg:col-span-6 border border-white/8 bg-white/[0.015]'
-                  }`}
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                >
-                      <div className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent opacity-70 ${index === 0 ? 'via-white/14' : 'via-white/10'}`} />
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(19,29,48,0.86)_0%,rgba(14,21,35,0.9)_100%)] text-[#d4a48e] transition-colors duration-300 group-hover:border-white/16 group-hover:text-[#e1b29b]">
-                        {item.icon}
-                      </div>
-                      <h3 className={`mt-6 font-semibold tracking-[-0.02em] text-[#F2F4F7] ${index === 0 ? 'text-[1.28rem] md:text-[1.45rem]' : 'text-[1.08rem] md:text-[1.15rem]'}`}>
-                        {item.title}
-                      </h3>
-                      <p className={`mt-3 text-sm leading-7 text-slate-300 ${index === 0 ? 'max-w-[34ch]' : 'max-w-[32ch]'}`}>
-                        {item.detail}
-                      </p>
-                </RevealBlock>
-              ))}
+          <section className="pt-20 md:pt-24">
+            <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-10 md:px-8 md:py-12">
+              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Simple process</p>
+              <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
+                We keep the process short.
+              </h2>
+              <ul className="mt-6 space-y-4">
+                <li className="text-sm leading-7 text-slate-300 md:text-base">One call to see if there is a fit.</li>
+                <li className="text-sm leading-7 text-slate-300 md:text-base">We outline the page and the message.</li>
+                <li className="text-sm leading-7 text-slate-300 md:text-base">Then we build, check, and launch.</li>
+              </ul>
+              <p className="mt-6 text-sm leading-7 text-slate-300">
+                If that sounds right,{' '}
+                <Link to="/apply" className="text-[#F2F4F7] underline decoration-white/30 underline-offset-4 transition-colors hover:text-white">
+                  start on the Apply page
+                </Link>
+                .
+              </p>
             </div>
-              </div>
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" id="intake" className="pt-22 md:pt-26" variant="feature">
-            <div className="relative overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br from-[#0f1628]/88 via-[#101726]/82 to-[#0b1120]/88 p-8 text-center shadow-[0_22px_60px_rgba(0,0,0,0.35)] md:p-12">
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -top-24 left-[16%] h-52 w-52 rounded-full bg-[#B05D41]/14 blur-3xl" />
-                <div className="absolute -bottom-28 right-[10%] h-64 w-64 rounded-full bg-[#4B6EAF]/14 blur-3xl" />
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/28 to-transparent" />
-              </div>
-
-              <div className="relative z-10">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
-                <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  If it is a fit, we&apos;ll define the project.
-                </h2>
-                <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Book a short call. We&apos;ll review the business, the current site, and the next step before we talk scope.
-                </p>
-
-                <div className="mt-8 flex items-center justify-center">
-                  <Link to="/apply" className="btn-primary btn-attention btn-lg whitespace-nowrap">
-                    Start the conversation
-                  </Link>
-                </div>
-
-                <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-5 gap-y-2">
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">30-minute fit call</span>
-                  <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Online only</span>
-                  <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Founder-led review</span>
-                </div>
-              </div>
-            </div>
-          </RevealBlock>
+          </section>
         </main>
 
         <Footer />

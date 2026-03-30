@@ -1,47 +1,41 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const contactLinkClass =
-  'block text-sm text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]';
-
-const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `block text-sm transition-colors ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
+const linkClass = ({ isActive }: { isActive: boolean }) =>
+  `block text-sm transition-colors ${isActive ? 'text-[#F2F4F7]' : 'text-slate-300 hover:text-white'}`;
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full border-t border-[#31363B] bg-[#090A0B]">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-8 py-20 md:grid-cols-[1.8fr_1fr_1fr_1fr] md:items-start">
+    <footer className="relative z-10 border-t border-white/[0.06] bg-[#090A0B]">
+      <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-14 md:grid-cols-[1.6fr_1fr_1fr] md:px-10 md:py-16">
         <div>
-          <p className="text-3xl font-black leading-[1.05] tracking-tight text-[#F2F4F7] md:text-5xl">AXIOM INFRASTRUCTURE</p>
-          <p className="mt-4 max-w-md text-sm leading-[1.8] text-slate-300">
-            Founder-led websites for service businesses that need a better first impression and a clearer next step.
+          <p className="text-2xl font-semibold tracking-tight text-[#F2F4F7] md:text-3xl">Axiom Infrastructure</p>
+          <p className="mt-4 max-w-md text-sm leading-7 text-slate-300">
+            We build simple websites for service businesses. The work is clear, fast, and made to help people take the next step.
           </p>
-          <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-400">
-            Sample and demo work is labeled clearly. No fake results or client claims.
-          </p>
-          <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">Copyright 2026 Axiom Infrastructure. All rights reserved.</p>
         </div>
 
-        <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Navigate</p>
-          <NavLink to="/" className={routeLinkClass}>Home</NavLink>
-          <NavLink to="/method" className={routeLinkClass}>Method</NavLink>
-          <NavLink to="/works" className={routeLinkClass}>Work</NavLink>
-          <NavLink to="/about" className={routeLinkClass}>About</NavLink>
+        <nav className="space-y-3" aria-label="Footer pages">
+          <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[#A7B3BC]">Pages</p>
+          <NavLink to="/" className={linkClass}>Home</NavLink>
+          <NavLink to="/method" className={linkClass}>Method</NavLink>
+          <NavLink to="/works" className={linkClass}>Work</NavLink>
+          <NavLink to="/about" className={linkClass}>About</NavLink>
+          <NavLink to="/apply" className={linkClass}>Apply</NavLink>
         </nav>
 
-          <nav className="space-y-3">
-            <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Start</p>
-            <NavLink to="/apply" className={routeLinkClass}>Book Free Consultation</NavLink>
-            <NavLink to="/method" className={routeLinkClass}>Method</NavLink>
-          </nav>
-
-        <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Contact</p>
-          <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
-            <span className="block">contact@getaxiom.ca</span>
+        <div className="space-y-3">
+          <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[#A7B3BC]">Contact</p>
+          <a href="mailto:contact@getaxiom.ca" className="block text-sm text-slate-300 transition-colors hover:text-white">
+            contact@getaxiom.ca
           </a>
-        </nav>
+          <a href="tel:+12267531833" className="block text-sm text-slate-300 transition-colors hover:text-white">
+            226-753-1833
+          </a>
+          <p className="max-w-sm text-sm leading-7 text-slate-400">
+            For project inquiries, start on the Apply page. For quick questions, email us.
+          </p>
+        </div>
       </div>
     </footer>
   );
