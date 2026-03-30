@@ -246,7 +246,7 @@ const SimpleApplyForm: React.FC = () => {
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 md:p-8">
             <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[#A7B3BC]">What happens next</p>
             <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
-              Aidan and Riley read every inquiry themselves. If it is a fit, we look at the site, the offer, and the current lead path, then send a simple next step.
+              Aidan and Riley read every inquiry themselves. If it is a fit, we look at the site, the offer, and how people contact you, then send a simple next step.
             </p>
           </div>
 

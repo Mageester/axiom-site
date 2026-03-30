@@ -109,7 +109,7 @@ const Home: React.FC = () => {
               <div className="max-w-xl">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Why Axiom exists</p>
                 <h2 className="mt-3 text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-tight text-[#F2F4F7]">
-                  We make pages that help people decide faster.
+                  We make pages that help people understand what you do and contact you faster.
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
                   Most clients come to us after a site that looked finished but did not bring in leads. We fix the order, the message, and the path to contact.
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
 
               <div className="space-y-0">
                 {processSteps.map((step, index) => (
-                  <div key={step} className={`${index > 0 ? 'border-t border-white/8' : 'border-t border-white/8'} py-5`}>
+                  <div key={step} className="border-t border-white/[0.08] py-5">
                     <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">
                       {String(index + 1).padStart(2, '0')}
                     </p>
@@ -203,7 +203,7 @@ const Home: React.FC = () => {
                 Send the site and we will tell you what happens next.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                We review the business, the current site, and the lead path. If it is a fit, we reply within one business day with a clear next step.
+                We review the business, the current site, and how people contact you. If it is a fit, we reply within one business day with a clear next step.
               </p>
               <ul className="mt-6 space-y-4">
                 <li className="text-sm leading-7 text-slate-300 md:text-base">We review the site and the offer.</li>
