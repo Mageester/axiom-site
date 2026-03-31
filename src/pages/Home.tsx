@@ -46,49 +46,64 @@ const selectedWork: WorkPreview[] = homeSelectedWorkSlugs
 
 const proofPoints = [
   {
-    title: 'Visitors understand it faster',
-    body: 'The page says what you do, what people should do next, and how to contact you.',
+    title: 'Clearer trust on the first screen',
+    body: 'We rewrite the opening message, trust points, and next step so people know they are in the right place fast.',
   },
   {
-    title: 'Built by Aidan and Riley',
-    body: 'You work directly with the founders who design, write, and launch the site.',
+    title: 'Built by the two people you talk to',
+    body: 'Aidan and Riley do the structure, writing, design, and launch work themselves.',
   },
   {
-    title: 'Made for real service work',
-    body: 'We focus on calls, quote requests, reservations, and simple forms.',
+    title: 'Made for calls, quotes, and booked jobs',
+    body: 'We focus on service businesses that rely on trust, mobile traffic, and a clear path to contact.',
   },
 ];
 
 const processSteps = [
-  'We learn what you sell, who you want to reach, and what the current site is missing.',
-  'We write the page around one clear action.',
-  'We build, check, and launch without adding work the business does not need.',
+  'We audit what is making the current site feel weaker than the business behind it.',
+  'We rebuild the message, proof, and page order around one clear next step.',
+  'We launch a faster, cleaner site that is easier to trust and easier to contact.',
 ];
 
 const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom | Simple Websites for Service Businesses"
-        description="Axiom is Aidan Magee and Riley Hinsperger. We build websites that help service businesses get more calls."
+        title="Axiom | High-Trust Websites for Contractors and Service Businesses"
+        description="Axiom is Aidan Magee and Riley Hinsperger. We rebuild weak service business websites into clearer, higher-trust sites that help turn visitors into calls and quote requests."
       />
 
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
           <section className="pt-12 md:pt-20">
-            <div className="max-w-4xl">
+            <div className="max-w-5xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Axiom Infrastructure</p>
-              <h1 className="mt-4 max-w-3xl text-[clamp(2.4rem,5.6vw,4.8rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                Websites that help service businesses get more calls.
+              <h1 className="mt-4 max-w-4xl text-[clamp(2.4rem,5.6vw,4.8rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
+                High-trust websites for contractors and service businesses that need more qualified calls.
               </h1>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                We are Aidan Magee and Riley Hinsperger. We build the site ourselves. Most businesses come to us after spending money on a site that looked fine but did not bring in leads.
+              <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
+                We are Aidan Magee and Riley Hinsperger. We rebuild weak service business websites into clearer, faster pages that make the business look more credible and make the next step easier to take.
+              </p>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 md:text-base">
+                Most clients come to us after paying for a site that looked finished but still felt vague, thin on proof, or harder to contact through than it should have been.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Start a project
+                  Book a 30-minute fit call
                 </Link>
-                <p className="text-sm text-slate-300">One short call. We review the business and the current site.</p>
+                <Link
+                  to="/works"
+                  className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
+                >
+                  See work examples
+                </Link>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[12px] uppercase tracking-[0.16em] text-slate-400">
+                <span>Founder-led</span>
+                <span className="hidden sm:inline">/</span>
+                <span>Built for trust and conversion</span>
+                <span className="hidden sm:inline">/</span>
+                <span>Reply within one business day</span>
               </div>
             </div>
           </section>
@@ -109,10 +124,13 @@ const Home: React.FC = () => {
               <div className="max-w-xl">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Why Axiom exists</p>
                 <h2 className="mt-3 text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-tight text-[#F2F4F7]">
-                  We make pages that help people understand what you do and contact you faster.
+                  Too many good businesses still look smaller, weaker, or less proven than they really are online.
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
-                  Most clients come to us after a site that looked finished but did not bring in leads. We fix the order, the message, and the path to contact.
+                  A weak site does not just look dated. It creates doubt. People hesitate when the homepage is vague, the proof is thin, or the next step is harder to find than it should be.
+                </p>
+                <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
+                  We fix the message, the proof, and the path to contact so the site supports the business instead of quietly slowing it down.
                 </p>
               </div>
 
@@ -132,12 +150,12 @@ const Home: React.FC = () => {
           <section className="pt-20 md:pt-24">
             <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Recent work</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work examples</p>
                 <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
-                  Proof from real projects.
+                  Strategic builds shaped around real conversion problems.
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  These examples are built around real business problems, not a visual style exercise.
+                  These are live examples that show how we structure trust, call-to-action priority, and service-business messaging. They are here to show how we think, not to fake client proof.
                 </p>
               </div>
               <Link
@@ -198,22 +216,22 @@ const Home: React.FC = () => {
 
           <section className="pt-20 md:pt-24">
             <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-10 md:px-8 md:py-12">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">What happens next</p>
+              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
               <h2 className="mt-3 text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-[#F2F4F7]">
-                Send the site and we will tell you what happens next.
+                Book a fit call and we will tell you what we would fix first.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                We review the business, the current site, and how people contact you. If it is a fit, we reply within one business day with a clear next step.
+                We review the business, the current site, and where trust or conversion is breaking down. If it is a fit, we reply within one business day with a clear next step.
               </p>
               <ul className="mt-6 space-y-4">
-                <li className="text-sm leading-7 text-slate-300 md:text-base">We review the site and the offer.</li>
-                <li className="text-sm leading-7 text-slate-300 md:text-base">We tell you what we would fix first.</li>
-                <li className="text-sm leading-7 text-slate-300 md:text-base">If it is a fit, we send the next step.</li>
+                <li className="text-sm leading-7 text-slate-300 md:text-base">We review the offer, structure, trust signals, and contact path.</li>
+                <li className="text-sm leading-7 text-slate-300 md:text-base">We tell you what is likely costing you calls or quote requests.</li>
+                <li className="text-sm leading-7 text-slate-300 md:text-base">If it is a fit, we outline the best next move.</li>
               </ul>
               <p className="mt-6 text-sm leading-7 text-slate-300">
                 If that sounds right,{' '}
                 <Link to="/apply" className="text-[#F2F4F7] underline decoration-white/30 underline-offset-4 transition-colors hover:text-white">
-                  start on the Apply page
+                  book a 30-minute fit call
                 </Link>
                 .
               </p>

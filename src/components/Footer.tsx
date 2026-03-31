@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         <div>
           <p className="text-2xl font-semibold tracking-tight text-[#F2F4F7] md:text-3xl">Axiom Infrastructure</p>
           <p className="mt-4 max-w-md text-sm leading-7 text-slate-300">
-            Aidan Magee and Riley Hinsperger build the work themselves. We make simple websites for service businesses that need clearer calls and fewer dead ends.
+            Aidan Magee and Riley Hinsperger build the work themselves. We help contractors and service businesses look more credible online and make it easier for the right customers to contact them.
           </p>
         </div>
 

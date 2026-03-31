@@ -16,7 +16,7 @@ const About: React.FC = () => {
     <>
       <SEO
         title="About | Axiom"
-        description="Axiom is Aidan Magee and Riley Hinsperger. We build simple websites for service businesses that need a clearer next step."
+        description="Axiom is Aidan Magee and Riley Hinsperger. We build higher-trust websites for contractors and service businesses that need clearer messaging and a stronger path to contact."
       />
 
       <Layout>
@@ -25,15 +25,15 @@ const About: React.FC = () => {
             <div className="max-w-4xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">About</p>
               <h1 className="mt-4 max-w-3xl text-[clamp(2.4rem,5.2vw,4.4rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                We are Aidan Magee and Riley Hinsperger. We build websites that help service businesses get more calls.
+                We are Aidan Magee and Riley Hinsperger. We build higher-trust websites for contractors and service businesses.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                Axiom started because too many businesses were paying for sites that looked finished but did not bring in leads.
-                We wanted a company that says things plainly, stays close to the work, and gives clients a clear answer.
+                Axiom started because too many good businesses were paying for sites that looked finished but still felt vague, thin on proof, or harder to contact through than they should have been.
+                We wanted a company that says things plainly, stays close to the work, and fixes the parts that quietly cost businesses leads.
               </p>
               <div className="mt-8">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Start a project
+                  Book a fit call
                 </Link>
               </div>
             </div>
@@ -47,10 +47,10 @@ const About: React.FC = () => {
                   We wanted a more useful kind of web design.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  A lot of small-business sites hide the real offer, repeat the same point, and make contact harder than it should be.
+                  A lot of small-business sites weaken trust before a visitor ever reaches the contact form. The offer is vague, the proof is thin, the mobile layout is clumsy, or the call to action is buried.
                 </p>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  We write the page in plain English, keep the order simple, and make it easy for people to reach out.
+                  We fix the message, the page order, and the path to contact so the site feels clearer, stronger, and easier to act on.
                 </p>
               </div>
 
