@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
+import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 
 const VALUES = [
@@ -22,19 +23,39 @@ const About: React.FC = () => {
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
           <section className="pt-12 md:pt-20">
-            <div className="max-w-4xl">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">About</p>
-              <h1 className="mt-4 max-w-3xl text-[clamp(2.4rem,5.2vw,4.4rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                We are Aidan Magee and Riley Hinsperger. We build higher-trust websites for contractors and service businesses.
-              </h1>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                Axiom started because too many good businesses were paying for sites that looked finished but still felt vague, thin on proof, or harder to contact through than they should have been.
-                We wanted a company that says things plainly, stays close to the work, and fixes the parts that quietly cost businesses leads.
-              </p>
-              <div className="mt-8">
-                <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Book a fit call
-                </Link>
+            <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+              <div className="max-w-4xl">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">About</p>
+                <h1 className="mt-4 max-w-3xl text-[clamp(2.4rem,5.2vw,4.4rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
+                  We build higher-trust websites for contractors and service businesses.
+                </h1>
+                <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
+                  Axiom exists because too many good businesses still have sites that feel vague, thin on proof, or harder to contact through than they should be.
+                </p>
+                <div className="mt-8">
+                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
+                    Book a fit call
+                  </Link>
+                </div>
+              </div>
+
+              <div>
+                <article className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0d1323]/82 shadow-[0_24px_70px_rgba(0,0,0,0.26)]">
+                  <ResponsiveImage
+                    source="/images/work-landscaping.jpg"
+                    sizes="(min-width: 1024px) 38vw, 100vw"
+                    alt="Landscaping crew working on a residential outdoor project"
+                    className="aspect-[4/3] w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="p-5 md:p-6">
+                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What matters</p>
+                    <p className="mt-3 text-sm leading-7 text-slate-300">
+                      Clear message. Stronger trust. Easier next step.
+                    </p>
+                  </div>
+                </article>
               </div>
             </div>
           </section>
@@ -47,10 +68,7 @@ const About: React.FC = () => {
                   We wanted a more useful kind of web design.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  A lot of small-business sites weaken trust before a visitor ever reaches the contact form. The offer is vague, the proof is thin, the mobile layout is clumsy, or the call to action is buried.
-                </p>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  We fix the message, the page order, and the path to contact so the site feels clearer, stronger, and easier to act on.
+                  We fix vague messaging, thin proof, and buried calls to action so the site feels clearer and easier to act on.
                 </p>
               </div>
 
@@ -137,7 +155,7 @@ const About: React.FC = () => {
                 If your site is not helping people contact you faster, send it over.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                We will review it ourselves and tell you if we can help. If it is a fit, we will say what we would change first.
+                We will review it ourselves and tell you what we would change first.
               </p>
               <p className="mt-4 text-sm leading-7 text-slate-300">
                 <Link to="/apply" className="text-[#F2F4F7] underline decoration-white/30 underline-offset-4 transition-colors hover:text-white">
