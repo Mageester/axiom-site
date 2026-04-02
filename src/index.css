@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --axiom-build-rev: '2026-04-02-apex-cache-bust';
     --axiom-base: #0A0C10;
     --axiom-elevated: #11151A;
     --axiom-surface: #181E25;
