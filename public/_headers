@@ -3,18 +3,23 @@
 
 /
   X-Robots-Tag: index, follow, max-image-preview:large
+  Speculation-Rules: /speculation-rules.json
 
 /about
   X-Robots-Tag: index, follow, max-image-preview:large
+  Speculation-Rules: /speculation-rules.json
 
 /apply
   X-Robots-Tag: index, follow, max-image-preview:large
+  Speculation-Rules: /speculation-rules.json
 
 /method
   X-Robots-Tag: index, follow, max-image-preview:large
+  Speculation-Rules: /speculation-rules.json
 
 /works
   X-Robots-Tag: index, follow, max-image-preview:large
+  Speculation-Rules: /speculation-rules.json
 
 /admin/*
   X-Robots-Tag: noindex, nofollow
@@ -54,3 +59,7 @@
 
 /apple-touch-icon.png
   Cache-Control: public, max-age=604800
+
+/speculation-rules.json
+  Content-Type: application/speculationrules+json
+  Cache-Control: public, max-age=3600
