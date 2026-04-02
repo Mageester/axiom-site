@@ -476,8 +476,15 @@ const ProjectApplicationForm: React.FC = () => {
     return (
         <>
             <SEO
-                title="Apply | Axiom"
-                description="Tell us about your business and what you need. This is the best route for serious website projects."
+                title="Book a consultation | Axiom"
+                description="Book a founder-led consultation for a serious service-business website project. Use this form when you are ready to define scope, goals, and timing."
+                schema={{
+                    '@context': 'https://schema.org',
+                    '@type': 'ContactPage',
+                    name: 'Book a consultation | Axiom',
+                    description: 'Book a founder-led consultation for a serious service-business website project. Use this form when you are ready to define scope, goals, and timing.',
+                    url: 'https://getaxiom.ca/apply',
+                }}
             />
             <Layout>
             <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">

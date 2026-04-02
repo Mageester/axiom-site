@@ -90,6 +90,13 @@ const About: React.FC = () => {
       <SEO
         title="About | Axiom"
         description="Axiom is a founder-led web partner for local businesses that want a serious operating standard, a better fit, and a cleaner delivery model."
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: 'About | Axiom',
+          description: 'Axiom is a founder-led web partner for local businesses that want a serious operating standard, a better fit, and a cleaner delivery model.',
+          url: 'https://getaxiom.ca/about',
+        }}
       />
 
       <Layout>

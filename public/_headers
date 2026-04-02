@@ -1,6 +1,24 @@
 # Cloudflare Pages _headers
 # Applied to all routes. https://developers.cloudflare.com/pages/configuration/headers/
 
+/
+  X-Robots-Tag: index, follow, max-image-preview:large
+
+/about
+  X-Robots-Tag: index, follow, max-image-preview:large
+
+/apply
+  X-Robots-Tag: index, follow, max-image-preview:large
+
+/method
+  X-Robots-Tag: index, follow, max-image-preview:large
+
+/works
+  X-Robots-Tag: index, follow, max-image-preview:large
+
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+
 /*
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
@@ -10,6 +28,7 @@
   Content-Security-Policy: default-src 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'self'; script-src 'self' https://static.cloudflareinsights.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://api.resend.com https://static.cloudflareinsights.com; upgrade-insecure-requests
 
 /api/*
+  X-Robots-Tag: noindex, nofollow
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin

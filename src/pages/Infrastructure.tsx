@@ -446,6 +446,13 @@ const Infrastructure: React.FC = () => {
       <SEO
         title="Method | Axiom"
         description="Axiom's delivery method keeps launches controlled: one clear consultation, a defined scope, and a clean handoff for high-trust service firms."
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Method | Axiom',
+          description: "Axiom's delivery method keeps launches controlled: one clear consultation, a defined scope, and a clean handoff for high-trust service firms.",
+          url: 'https://getaxiom.ca/method',
+        }}
       />
 
       <Layout>

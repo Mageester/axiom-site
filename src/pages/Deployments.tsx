@@ -160,6 +160,13 @@ const Deployments: React.FC = () => {
       <SEO
         title="Work | Axiom"
         description="Live deployments, demos, and case studies from the categories Axiom builds for, labeled clearly so you can judge fit and delivery quality quickly."
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Work | Axiom',
+          description: 'Live deployments, demos, and case studies from the categories Axiom builds for, labeled clearly so you can judge fit and delivery quality quickly.',
+          url: 'https://getaxiom.ca/works',
+        }}
       />
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-0 pb-24 md:pb-28">

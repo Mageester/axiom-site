@@ -141,6 +141,12 @@ const Home: React.FC = () => {
       <SEO
         title="Axiom | Premium Websites for Service Businesses"
         description="Axiom designs and builds founder-led websites for established local companies that need sharper positioning, stronger trust, and a clearer path from first visit to inquiry."
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'Axiom Infrastructure',
+          url: 'https://getaxiom.ca',
+        }}
       />
 
       <Layout>
