@@ -8,7 +8,6 @@ const About = lazy(() => import('./pages/About'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const Deployments = lazy(() => import('./pages/Deployments'));
 const Infrastructure = lazy(() => import('./pages/Infrastructure'));
-const WorkCaseStudyPage = lazy(() => import('./pages/WorkCaseStudyPage'));
 const Login = lazy(() => import('./pages/admin/Login'));
 const Account = lazy(() => import('./pages/admin/Account'));
 const Jobs = lazy(() => import('./pages/admin/Jobs'));
@@ -56,7 +55,7 @@ const App: React.FC = () => {
             <Route path="/method" element={<Infrastructure />} />
             <Route path="/infrastructure" element={<Navigate to="/method" replace />} />
             <Route path="/works" element={<Deployments />} />
-            <Route path="/works/:slug" element={<WorkCaseStudyPage />} />
+            <Route path="/works/:slug" element={<Navigate to="/works" replace />} />
             <Route path="/deployments" element={<Navigate to="/works" replace />} />
             <Route path="/apply" element={<ContactPage />} />
             <Route path="/contact" element={<Navigate to="/apply" replace />} />

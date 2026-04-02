@@ -20,4 +20,7 @@
 /triage /index.html 200
 /vault /index.html 200
 /works /index.html 200
+/works/demonstration-restaurant-reservation-site /works 301
+/works/concept-landscaping-authority-site /works 301
+/works/concept-roofing-conversion-site /works 301
 /works/* /index.html 200
