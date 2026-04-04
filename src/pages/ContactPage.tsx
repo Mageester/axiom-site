@@ -457,7 +457,7 @@ const ProjectApplicationForm: React.FC = () => {
 
             if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg('Thanks for applying. One of our partners will review your submission within one business day.');
+                setMsg('Thanks for submitting your details. We\'ll review everything and get back to you within one business day.');
                 return;
             }
 
@@ -476,13 +476,13 @@ const ProjectApplicationForm: React.FC = () => {
     return (
         <>
             <SEO
-                title="Book a consultation | Axiom"
-                description="Book a founder-led consultation for a serious service-business website project. Use this form when you are ready to define scope, goals, and timing."
+                title="Book a Consultation | Axiom"
+                description="Book a free consultation with Axiom. Tell us about your business and what you need — we'll review your goals and explain what we'd build."
                 schema={{
                     '@context': 'https://schema.org',
                     '@type': 'ContactPage',
-                    name: 'Book a consultation | Axiom',
-                    description: 'Book a founder-led consultation for a serious service-business website project. Use this form when you are ready to define scope, goals, and timing.',
+                    name: 'Book a Consultation | Axiom',
+                    description: "Book a free consultation with Axiom. Tell us about your business and what you need \u2014 we'll review your goals and explain what we'd build.",
                     url: 'https://getaxiom.ca/apply',
                 }}
             />
@@ -491,14 +491,14 @@ const ProjectApplicationForm: React.FC = () => {
                 <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
                     <div className="mt-4 overflow-hidden">
                         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
-                                Apply
+                                Book a Consultation
                             </p>
                             <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
                                 Tell us about your business and what you need.
                             </h1>
                         </div>
                         <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Tell us about your business and what you need. This is the best route for serious website projects.
+                            Fill in the details below so we can understand your goals. This is the best route for website projects.
                         </p>
                         <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
                             For general questions or an initial inquiry, use{' '}

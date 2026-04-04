@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
         <div className="col-span-2 md:col-span-1">
           <p className="text-lg font-black leading-[1.02] tracking-tight text-[#F2F4F7] md:text-4xl">AXIOM INFRASTRUCTURE</p>
           <p className="mt-2 max-w-md text-[11px] leading-[1.45] text-slate-300 md:mt-3 md:text-sm">
-            Founder-led websites for established service businesses that need a sharper first impression and a cleaner path to inquiry.
+            Professional websites for businesses that want to look established, build trust, and get more inquiries.
           </p>
           <p className="mt-4 hidden text-[10px] uppercase tracking-[0.12em] text-slate-400 md:block md:mt-6">
             Copyright 2026 Axiom Infrastructure. All rights reserved.
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
         <nav className="space-y-1.5">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Start</p>
           <NavLink to="/apply" className={routeLinkClass}>Book Consultation</NavLink>
-          <NavLink to="/method" className={routeLinkClass}>Method</NavLink>
+          <NavLink to="/works" className={routeLinkClass}>View Our Work</NavLink>
         </nav>
 
         <nav className="col-span-2 space-y-1.5 md:col-span-1">

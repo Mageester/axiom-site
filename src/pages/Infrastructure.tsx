@@ -18,31 +18,31 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     number: '01',
     title: 'Discovery',
-    summary: 'Goals, scope, and fit are clarified early.',
+    summary: 'We learn about your business, your customers, and what the site needs to do.',
   },
   {
     number: '02',
-    title: 'Scope',
-    summary: 'Pages, structure, and package direction align.',
+    title: 'Plan',
+    summary: 'We agree on the pages, content, and goals before anything is built.',
   },
   {
     number: '03',
     title: 'Build',
-    summary: 'Design, content, and performance are handled with intent.',
+    summary: 'We design, build, and refine the site with care and attention to detail.',
   },
   {
     number: '04',
     title: 'Launch',
-    summary: 'Final review, technical checks, and a clean handoff.',
+    summary: 'Final review, testing, and your site goes live.',
   },
 ];
 
 const CHECKLIST_ITEMS: readonly ChecklistItem[] = [
-  { title: 'Required pages and navigation flow' },
-  { title: 'Lead capture and CTA placement' },
-  { title: 'Content structure and message hierarchy' },
-  { title: 'Domain, hosting, and launch path' },
-  { title: 'Future expansion considerations' },
+  { title: 'Pages and navigation' },
+  { title: 'Contact forms and calls-to-action' },
+  { title: 'Content and messaging' },
+  { title: 'Domain, hosting, and launch details' },
+  { title: 'Future updates and growth' },
 ];
 
 const CheckMark: React.FC = () => (
@@ -62,13 +62,13 @@ const Infrastructure: React.FC = () => {
     <>
       <SEO
         title="Method | Axiom"
-        description="Axiom's delivery method keeps launches controlled: one clear consultation, a defined scope, and a clean handoff for high-trust service firms."
+        description="How Axiom builds websites: a clear four-step process from first call to launch, designed for established businesses that value quality and accountability."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: 'Method | Axiom',
           description:
-            "Axiom's delivery method keeps launches controlled: one clear consultation, a defined scope, and a clean handoff for high-trust service firms.",
+            'How Axiom builds websites: a clear four-step process from first call to launch, designed for established businesses that value quality and accountability.',
           url: 'https://getaxiom.ca/method',
         }}
       />
@@ -82,11 +82,11 @@ const Infrastructure: React.FC = () => {
                 A clear process from first call to launch.
               </h1>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                Founder-led planning, sharper scope, and a cleaner handoff from strategy to launch.
+                One call to understand your business. A clear plan. A professional launch.
               </p>
               <div className="mt-6">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Start the conversation
+                  Book a Free Consultation
                 </Link>
               </div>
             </div>
@@ -97,7 +97,7 @@ const Infrastructure: React.FC = () => {
               <div>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Process</p>
                 <h2 className="mt-1 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                  Four steps. No wasted motion.
+                  A simple four-step process.
                 </h2>
               </div>
             </div>
@@ -139,7 +139,7 @@ const Infrastructure: React.FC = () => {
                     Pre-build checklist
                   </p>
                   <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
-                    What we confirm before build
+                    What we agree on before building
                   </h2>
                 </div>
               </div>
@@ -169,14 +169,14 @@ const Infrastructure: React.FC = () => {
               <div className="relative z-10 mx-auto max-w-2xl">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
-                  If the fit is right, we&apos;ll scope the work.
+                  Ready to get started?
                 </h2>
                 <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  The first conversation is where goals, timing, and the cleanest next step become clear.
+                  Book a free call and we&apos;ll review your current website, understand your goals, and explain what we&apos;d do.
                 </p>
                 <div className="mt-6 flex justify-center">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Start the conversation
+                    Book a Free Consultation
                   </Link>
                 </div>
               </div>

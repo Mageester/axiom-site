@@ -13,15 +13,15 @@ type CompactCard = {
 const WHO_AXIOM_IS: readonly CompactCard[] = [
   {
     title: 'Founder-led',
-    body: 'The people shaping the strategy are the same people shaping the build, so the work stays clear and accountable.',
+    body: 'The person shaping the strategy is the same person building the site. That means clarity and accountability from start to finish.',
   },
   {
-    title: 'Built for fit',
-    body: 'Axiom is for established service businesses that need a stronger first impression and a cleaner path to inquiry.',
+    title: 'Built for established businesses',
+    body: 'We work with businesses that are already operating and need a website that matches the quality of their actual work.',
   },
   {
-    title: 'Built to improve',
-    body: 'The goal is simple: make the business easier to trust, easier to understand, and easier to contact.',
+    title: 'Focused on results',
+    body: 'The goal is simple: make your business easier to trust, easier to understand, and easier to contact.',
   },
 ];
 
@@ -30,13 +30,13 @@ const About: React.FC = () => {
     <>
       <SEO
         title="About | Axiom"
-        description="Axiom is a founder-led studio for service businesses that need a sharper first impression, clearer messaging, and a more accountable delivery standard."
+        description="Axiom is a founder-led team that builds professional websites for established businesses — designed to look credible, communicate clearly, and bring in more customers."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
           name: 'About | Axiom',
           description:
-            'Axiom is a founder-led studio for service businesses that need a sharper first impression, clearer messaging, and a more accountable delivery standard.',
+            'Axiom is a founder-led team that builds professional websites for established businesses — designed to look credible, communicate clearly, and bring in more customers.',
           url: 'https://getaxiom.ca/about',
         }}
       />
@@ -49,15 +49,15 @@ const About: React.FC = () => {
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">About Axiom</p>
                 <div className="mt-3 max-w-3xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2rem,5.4vw,4rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
-                    Founder-led websites for businesses that need a sharper first impression.
-                  </h1>
-                </div>
-                <p data-startup-copy className="mt-3 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom is for service businesses that want a cleaner message, stronger trust, and a delivery standard that feels calm and accountable.
-                </p>
+                  A founder-led team that builds websites the right way.
+                </h1>
+              </div>
+              <p data-startup-copy className="mt-3 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
+                Axiom is for businesses that want a website that actually works — one that looks professional, communicates clearly, and brings in more customers.
+              </p>
                 <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Start the conversation
+                    Book a Free Consultation
                   </Link>
                 </div>
               </article>
@@ -68,10 +68,10 @@ const About: React.FC = () => {
             <div className="max-w-4xl">
               <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Who Axiom is</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Founder-led, buyer-facing, and built for service businesses.
+                Founder-led, quality-focused, and built for businesses that take their reputation seriously.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Axiom exists to make a business look established, communicate clearly, and move the right people forward with less friction.
+                Axiom exists to make your business look established, communicate clearly, and make it easier for the right customers to reach you.
               </p>
             </div>
 
@@ -104,11 +104,11 @@ const About: React.FC = () => {
                   If your business is serious, your website should feel that way too.
                 </h2>
                 <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Book a consultation and we&apos;ll confirm fit, goals, and the cleanest next step.
+                  Book a free consultation and we&apos;ll review your current site, understand your goals, and explain what we&apos;d do.
                 </p>
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Start the conversation
+                    Book a Free Consultation
                   </Link>
                   <Link
                     to="/works"

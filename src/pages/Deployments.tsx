@@ -44,9 +44,9 @@ const workPresentationBySlug: Record<string, { statusLabel: string; isLiveDemo: 
 };
 
 const improvementCopyBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'Built to create a clearer, more modern, and more trustworthy first impression for diners.',
-  'concept-landscaping-authority-site': 'Built to create a clearer, more modern, and more trustworthy first impression for homeowners.',
-  'concept-roofing-conversion-site': 'Built to create a clearer, more modern, and more trustworthy first impression for roofing inquiries.',
+  'demonstration-restaurant-reservation-site': 'A modern restaurant site designed to make a strong first impression and simplify reservations.',
+  'concept-landscaping-authority-site': 'A clean, professional site built to position a landscaping company as the trusted local choice.',
+  'concept-roofing-conversion-site': 'A conversion-focused site designed to turn homeowner searches into roofing inquiries.',
 };
 
 const orderedCaseStudies = worksDisplayOrder
@@ -157,12 +157,12 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom"
-        description="Live deployments, demos, and case studies from the categories Axiom builds for, labeled clearly so you can judge fit and delivery quality quickly."
+        description="Live examples of websites Axiom has built across different industries. See the quality, explore the demos, and judge for yourself."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'Work | Axiom',
-          description: 'Live deployments, demos, and case studies from the categories Axiom builds for, labeled clearly so you can judge fit and delivery quality quickly.',
+          description: 'Live examples of websites Axiom has built across different industries. See the quality, explore the demos, and judge for yourself.',
           url: 'https://getaxiom.ca/works',
         }}
       />
@@ -172,14 +172,14 @@ const Deployments: React.FC = () => {
           <div className="max-w-4xl">
             <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
             <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">Execution evidence, labeled by category.</h1>
+              <h1 data-startup-heading className="text-left">See what we build.</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              Live work from the categories Axiom builds for.
+              Live examples from different industries. Click any project to see it in action.
             </p>
             <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3 md:mt-5 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
-                View examples
+                View Examples
               </a>
             </div>
           </div>
@@ -261,19 +261,19 @@ const Deployments: React.FC = () => {
           <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[520px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[140px]" />
 
           <div className="relative z-10">
-            <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this standard for your category?</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Want this level of quality for your business?</h2>
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-              We can scope a build around the business, the buyer, and the level of trust the site has to earn.
+              Book a free consultation and we&apos;ll show you what we&apos;d build for your industry.
             </p>
             <div className="mt-5 flex flex-wrap items-center justify-center gap-4">
               <Link to="/apply#project-application-form" className="btn-primary btn-lg whitespace-nowrap">
-                Start the conversation
+                Book a Free Consultation
               </Link>
               <Link
                 to="/method"
                 className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-axiom-text-main hover:underline"
               >
-                View Our Process
+                See How It Works
                 <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
