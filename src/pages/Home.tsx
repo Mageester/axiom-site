@@ -180,8 +180,10 @@ const Home: React.FC = () => {
                   </Link>
                 </div>
               </div>
-              <div className="mt-10 max-w-4xl md:mt-14">
-                <BrandCarousel />
+              <div className="mt-10 flex justify-center md:mt-14">
+                <div className="w-full max-w-4xl">
+                  <BrandCarousel />
+                </div>
               </div>
             </div>
           </section>
