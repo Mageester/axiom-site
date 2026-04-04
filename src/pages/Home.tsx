@@ -177,7 +177,7 @@ const Home: React.FC = () => {
             </div>
           </section>
 
-          <section data-reveal="off" className="relative left-1/2 w-screen -translate-x-1/2 pt-10 md:pt-14">
+          <section data-reveal="off" className="pt-10 md:pt-14">
             <BrandCarousel />
           </section>
 

@@ -241,7 +241,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <div ref={layoutRef} className="relative min-h-screen overflow-x-clip bg-[var(--axiom-base)] text-[#ECEFF3]">
+    <div ref={layoutRef} className="relative min-h-screen overflow-x-hidden bg-[var(--axiom-base)] text-[#ECEFF3]">
       <Preloader targetRef={logoTargetRef} />
 
       <a href="#main-content" onClick={handleSkipToMain} className="skip-link">

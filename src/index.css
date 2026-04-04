@@ -385,17 +385,9 @@
   .marquee-track {
     display: flex;
     width: max-content;
+    gap: var(--marquee-gap, 2rem);
     will-change: transform;
     animation: marquee-loop var(--marquee-duration, 36s) linear infinite;
-  }
-
-  .marquee-segment {
-    display: flex;
-    align-items: center;
-    gap: var(--marquee-gap, 2rem);
-    padding-right: var(--marquee-gap, 2rem);
-    flex-shrink: 0;
-    min-width: max-content;
   }
 
   .status-dot {
@@ -732,16 +724,12 @@
   }
 
   .marquee-shell {
-    overflow-x: auto;
+    overflow: hidden;
   }
 
   .marquee-track {
     animation: none !important;
     transform: none !important;
     width: max-content;
-  }
-
-  .marquee-track .marquee-segment:last-child {
-    display: none;
   }
 }

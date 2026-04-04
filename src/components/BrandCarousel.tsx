@@ -69,6 +69,8 @@ const brands: BrandMark[] = [
   },
 ];
 
+const marqueeBrands = [...brands, ...brands];
+
 const BrandLogo: React.FC<{ brand: BrandMark }> = ({ brand }) => {
   const Icon = brand.icon;
 
@@ -76,7 +78,7 @@ const BrandLogo: React.FC<{ brand: BrandMark }> = ({ brand }) => {
     <div
       role="img"
       aria-label={brand.label}
-      className="inline-flex shrink-0 items-center gap-2.5 text-white/80 transition-colors duration-300 ease-out hover:text-white"
+      className="flex-none shrink-0 inline-flex items-center gap-2.5 text-white/80 transition-colors duration-300 ease-out hover:text-white"
     >
       {brand.asset ? (
         <img src={brand.asset} alt="" aria-hidden="true" className={brand.assetClassName} />
@@ -95,29 +97,31 @@ const BrandLogo: React.FC<{ brand: BrandMark }> = ({ brand }) => {
 };
 
 const BrandCarousel: React.FC = () => {
-  const segment = brands;
-
   return (
     <div
       aria-label="Technology partners and tools"
-      className="relative overflow-hidden border-y border-white/[0.08] bg-[linear-gradient(180deg,rgba(8,11,18,0.98),rgba(7,10,16,0.98))] py-7 md:py-9"
+      className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-y border-white/[0.08] bg-[linear-gradient(180deg,rgba(8,11,18,0.98),rgba(7,10,16,0.98))] py-7 md:py-9"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_36%,rgba(212,164,142,0.07),transparent_24%),radial-gradient(circle_at_82%_42%,rgba(255,255,255,0.035),transparent_20%),linear-gradient(to_right,rgba(255,255,255,0.01),transparent_14%,transparent_86%,rgba(255,255,255,0.01))]" />
       <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-16 bg-gradient-to-r from-[#070a10] to-transparent md:w-24" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-16 bg-gradient-to-l from-[#070a10] to-transparent md:w-24" />
 
-      <div className="marquee-shell relative overflow-hidden px-5 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] md:px-8">
-        <div
-          className="marquee-track items-center"
-          style={{ '--marquee-duration': '16s', '--marquee-gap': '4.5rem' } as React.CSSProperties}
-        >
-          {[0, 1].map((segmentIndex) => (
-            <div key={segmentIndex} aria-hidden={segmentIndex === 1} className="marquee-segment py-2 md:py-3">
-              {segment.map((brand, index) => (
-                <BrandLogo key={`${segmentIndex}-${brand.label}-${index}`} brand={brand} />
-              ))}
-            </div>
-          ))}
+      <div className="relative z-[2] px-5 md:px-8">
+        <div className="marquee-shell">
+          <div
+            className="marquee-track items-center"
+            style={{ '--marquee-duration': '18s', '--marquee-gap': 'clamp(2.4rem, 4vw, 4.75rem)' } as React.CSSProperties}
+          >
+            {marqueeBrands.map((brand, index) => (
+              <div
+                key={`${brand.label}-${index}`}
+                aria-hidden={index >= brands.length}
+                className="flex-none shrink-0 py-2 md:py-3"
+              >
+                <BrandLogo brand={brand} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
