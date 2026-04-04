@@ -109,7 +109,7 @@ const BrandCarousel: React.FC = () => {
       <div className="marquee-shell relative overflow-hidden px-5 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] md:px-8">
         <div
           className="marquee-track items-center"
-          style={{ '--marquee-duration': '26s', '--marquee-gap': '4.5rem' } as React.CSSProperties}
+          style={{ '--marquee-duration': '16s', '--marquee-gap': '4.5rem' } as React.CSSProperties}
         >
           {[0, 1].map((segmentIndex) => (
             <div key={segmentIndex} aria-hidden={segmentIndex === 1} className="marquee-segment py-2 md:py-3">
