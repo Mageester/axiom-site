@@ -175,6 +175,24 @@ const projectControls = ['Founder-led fit call', 'Scope aligned before build', '
 
 const launchStandards = ['Clear positioning at first glance', 'Strong trust and inquiry path', 'Clean performance across devices'];
 
+const processStages = [
+  {
+    number: '01',
+    title: 'Discover',
+    detail: 'Business goals, scope, and fit clarified early.',
+  },
+  {
+    number: '02',
+    title: 'Structure',
+    detail: 'Pages, hierarchy, and conversion flow mapped clearly.',
+  },
+  {
+    number: '03',
+    title: 'Launch',
+    detail: 'Performance, polish, and credibility checked before go-live.',
+  },
+];
+
 const Home: React.FC = () => {
   return (
     <>
@@ -222,100 +240,38 @@ const Home: React.FC = () => {
           </section>
 
           <RevealBlock as="section" className="pt-20 md:pt-24">
-            <div className="grid gap-8 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:gap-10">
-              <div className="max-w-xl lg:pt-1">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.24em] text-[#A7B3BC]">How We Work</p>
-                <h2 className="mt-3 max-w-[12ch] text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-12">
+              <div className="max-w-xl lg:pt-2">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">How We Work</p>
+                <h2 className="mt-3 max-w-[11ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
                   A clear process, built to move fast.
                 </h2>
-                <p className="mt-4 max-w-[34ch] text-sm leading-7 text-slate-300 md:text-base">
+                <p className="mt-4 max-w-[30ch] text-sm leading-7 text-slate-300 md:text-base">
                   Founder-led planning, sharp structure, and a cleaner path from first call to launch.
                 </p>
-
-                <ol className="mt-8 space-y-3">
-                  {workflowSteps.map((step) => (
-                    <li
-                      key={step.title}
-                      className="relative overflow-hidden rounded-[22px] border border-white/8 bg-[linear-gradient(180deg,rgba(17,22,30,0.96)_0%,rgba(11,15,22,0.98)_100%)] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_24px_rgba(0,0,0,0.16)]"
-                    >
-                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-                      <div className="flex items-start gap-4">
-                        <span className="flex h-11 w-11 flex-none items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] font-axiomMono text-[10px] font-semibold tracking-[0.18em] text-white/70">
-                          {step.number}
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-3">
-                            <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7]">{step.title}</h3>
-                            <div className="h-px flex-1 bg-white/[0.08]" />
-                          </div>
-                          <p className="mt-1.5 text-sm leading-6 text-slate-300">{step.detail}</p>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
               </div>
 
-              <div className="space-y-4 lg:pt-1">
-                <div className="grid gap-4 md:grid-cols-3">
-                  {workflowCards.map((item, index) => (
-                    <RevealBlock
-                      as="article"
-                      key={item.title}
-                      className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(18,24,33,0.94)_0%,rgba(10,14,22,0.98)_100%)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_14px_30px_rgba(0,0,0,0.2)]"
-                      delay={index * 0.06}
-                      variant="card"
-                    >
-                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
-                      <div className="flex items-center gap-3">
-                        <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-white/10 bg-white/[0.04] font-axiomMono text-[10px] font-semibold tracking-[0.18em] text-white/70">
-                          {item.number}
-                        </span>
-                        <div className="h-px flex-1 bg-white/[0.08]" />
-                      </div>
-                      <h3 className="mt-5 text-[1.05rem] font-semibold tracking-[-0.02em] text-[#F2F4F7]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-6 text-slate-300">{item.detail}</p>
-                    </RevealBlock>
-                  ))}
+              <div className="how-work-panel">
+                <div className="how-work-panel-header">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process / 03 stages</p>
                 </div>
 
-                <RevealBlock
-                  as="div"
-                  className="overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(13,18,26,0.98)_0%,rgba(9,12,18,0.99)_100%)] px-5 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_18px_40px_rgba(0,0,0,0.24)] md:px-6 md:py-6"
-                  variant="card"
-                >
-                  <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
-                    <div className="min-w-0 lg:w-[40%]">
-                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.2em] text-[#A7B3BC]">Project Controls</p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {projectControls.map((item) => (
-                          <span
-                            key={item}
-                            className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-[11px] font-medium tracking-[-0.01em] text-slate-200"
-                          >
-                            {item}
-                          </span>
-                        ))}
+                <div className="mt-6 grid gap-3 md:gap-4">
+                  {processStages.map((stage, index) => (
+                    <article key={stage.title} className={`how-work-stage how-work-stage-${index + 1}`}>
+                      <div className="how-work-stage-number">{stage.number}</div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-3">
+                          <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.08rem]">
+                            {stage.title}
+                          </h3>
+                          <div className="h-px flex-1 bg-white/[0.08]" />
+                        </div>
+                        <p className="mt-2 max-w-[28ch] text-sm leading-6 text-slate-300 md:text-[0.95rem]">{stage.detail}</p>
                       </div>
-                    </div>
-
-                    <div className="min-w-0 lg:w-[60%] lg:border-l lg:border-white/8 lg:pl-5">
-                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.2em] text-[#A7B3BC]">Launch Standards</p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {launchStandards.map((item) => (
-                          <span
-                            key={item}
-                            className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-[11px] font-medium tracking-[-0.01em] text-slate-200"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </RevealBlock>
+                    </article>
+                  ))}
+                </div>
               </div>
             </div>
           </RevealBlock>
