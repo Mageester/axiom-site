@@ -78,13 +78,13 @@ const BrandLogo: React.FC<{ brand: BrandMark }> = ({ brand }) => {
     <div
       role="img"
       aria-label={brand.label}
-      className="inline-flex h-10 flex-none shrink-0 items-center gap-2.5 text-white/60 transition-colors duration-300 ease-out hover:text-white/80 md:h-12"
+      className="inline-flex h-10 flex-none shrink-0 items-center gap-2.5 text-white/52 transition-colors duration-300 ease-out hover:text-white/72 md:h-12"
     >
       {brand.asset ? (
         <img src={brand.asset} alt="" aria-hidden="true" className={brand.assetClassName} />
       ) : (
         <>
-          {Icon ? <Icon aria-hidden="true" className={`shrink-0 text-white/[0.62] ${brand.iconClassName ?? ''}`} /> : null}
+          {Icon ? <Icon aria-hidden="true" className={`shrink-0 text-white/[0.56] ${brand.iconClassName ?? ''}`} /> : null}
           {brand.wordmark ? (
             <span className={`whitespace-nowrap ${brand.wordmarkClassName ?? 'font-axiomDisplay text-[1.5rem] font-semibold tracking-[-0.05em] text-white/80'}`}>
               {brand.wordmark}
@@ -98,14 +98,7 @@ const BrandLogo: React.FC<{ brand: BrandMark }> = ({ brand }) => {
 
 const BrandCarousel: React.FC = () => {
   return (
-    <div
-      aria-label="Technology partners and tools"
-      className="logo-marquee-panel"
-    >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_36%,rgba(212,164,142,0.07),transparent_24%),radial-gradient(circle_at_82%_42%,rgba(255,255,255,0.03),transparent_20%),linear-gradient(to_right,rgba(255,255,255,0.01),transparent_14%,transparent_86%,rgba(255,255,255,0.01))]" />
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-14 bg-gradient-to-r from-[#0b1018] via-[#0b1018]/94 to-transparent md:w-20" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-14 bg-gradient-to-l from-[#0b1018] via-[#0b1018]/94 to-transparent md:w-20" />
-
+    <div aria-label="Technology partners and tools" className="logo-marquee-wrap">
       <div className="logo-marquee-viewport">
         <div className="logo-marquee-shell">
           <div

@@ -383,42 +383,24 @@
     overflow: hidden;
   }
 
-  .logo-marquee-panel {
+  .logo-marquee-wrap {
     position: relative;
-    overflow: hidden;
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1.75rem;
-    background:
-      linear-gradient(180deg, rgba(11, 16, 24, 0.94) 0%, rgba(9, 13, 20, 0.98) 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.04),
-      0 16px 34px rgba(0, 0, 0, 0.16);
-  }
-
-  .logo-marquee-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 22%),
-      radial-gradient(circle at 50% 0%, rgba(212, 164, 142, 0.08), transparent 34%);
-    opacity: 0.7;
   }
 
   .logo-marquee-viewport {
     position: relative;
-    z-index: 2;
     overflow: hidden;
-    padding: 1rem 1.1rem;
+    padding-block: 0.55rem;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 6%, #000 14%, #000 86%, rgba(0, 0, 0, 0.2) 94%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 6%, #000 14%, #000 86%, rgba(0, 0, 0, 0.2) 94%, transparent 100%);
   }
 
   .logo-marquee-item {
     display: flex;
     flex: none;
     align-items: center;
-    padding-block: 0.35rem;
+    padding-block: 0.3rem;
   }
 
   .logo-marquee-track {
@@ -910,10 +892,10 @@
 
 @media (min-width: 768px) {
   .logo-marquee-viewport {
-    padding: 1.15rem 1.5rem;
+    padding-block: 0.7rem;
   }
 
   .logo-marquee-item {
-    padding-block: 0.45rem;
+    padding-block: 0.35rem;
   }
 }
