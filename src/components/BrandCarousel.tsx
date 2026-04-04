@@ -107,9 +107,9 @@ const BrandCarousel: React.FC = () => {
       <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-16 bg-gradient-to-l from-[#070a10] to-transparent md:w-24" />
 
       <div className="relative z-[2] px-5 md:px-8">
-        <div className="marquee-shell">
+        <div className="logo-marquee-shell">
           <div
-            className="marquee-track items-center"
+            className="logo-marquee-track items-center"
             style={{ '--marquee-duration': '18s', '--marquee-gap': 'clamp(2.4rem, 4vw, 4.75rem)' } as React.CSSProperties}
           >
             {marqueeBrands.map((brand, index) => (

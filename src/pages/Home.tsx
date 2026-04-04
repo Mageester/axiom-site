@@ -135,6 +135,46 @@ const operationalSignals = [
   'Requirements agreed before build begins',
 ];
 
+const workflowSteps = [
+  {
+    number: '01',
+    title: 'Discover',
+    detail: 'We learn the business, goals, and what the site needs to do.',
+  },
+  {
+    number: '02',
+    title: 'Structure',
+    detail: 'We define pages, flow, messaging, and conversion path.',
+  },
+  {
+    number: '03',
+    title: 'Build',
+    detail: 'We design, refine, test, and launch to a higher standard.',
+  },
+];
+
+const workflowCards = [
+  {
+    number: '01',
+    title: 'Discover',
+    detail: 'Business goals, scope, and fit clarified early.',
+  },
+  {
+    number: '02',
+    title: 'Structure',
+    detail: 'Pages, hierarchy, and conversion flow mapped clearly.',
+  },
+  {
+    number: '03',
+    title: 'Launch',
+    detail: 'Performance, polish, and credibility checked before go-live.',
+  },
+];
+
+const projectControls = ['Founder-led fit call', 'Scope aligned before build', 'Clear next step from day one'];
+
+const launchStandards = ['Clear positioning at first glance', 'Strong trust and inquiry path', 'Clean performance across devices'];
+
 const Home: React.FC = () => {
   return (
     <>
@@ -182,47 +222,101 @@ const Home: React.FC = () => {
           </section>
 
           <RevealBlock as="section" className="pt-20 md:pt-24">
-            <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
-              <div className="lg:col-span-4">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">How We Work</p>
-                <h2 className="mt-3 max-w-[20ch] text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                  A clear, professional process for building your website.
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:gap-10">
+              <div className="max-w-xl lg:pt-1">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.24em] text-[#A7B3BC]">How We Work</p>
+                <h2 className="mt-3 max-w-[12ch] text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
+                  A clear process, built to move fast.
                 </h2>
-                <ol className="mt-5 space-y-3">
-                  {method.map((step) => (
-                    <li key={step} className="text-sm text-slate-300">
-                      <p>{step}</p>
+                <p className="mt-4 max-w-[34ch] text-sm leading-7 text-slate-300 md:text-base">
+                  Founder-led planning, sharp structure, and a cleaner path from first call to launch.
+                </p>
+
+                <ol className="mt-8 space-y-3">
+                  {workflowSteps.map((step) => (
+                    <li
+                      key={step.title}
+                      className="relative overflow-hidden rounded-[22px] border border-white/8 bg-[linear-gradient(180deg,rgba(17,22,30,0.96)_0%,rgba(11,15,22,0.98)_100%)] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_24px_rgba(0,0,0,0.16)]"
+                    >
+                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+                      <div className="flex items-start gap-4">
+                        <span className="flex h-11 w-11 flex-none items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] font-axiomMono text-[10px] font-semibold tracking-[0.18em] text-white/70">
+                          {step.number}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-3">
+                            <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7]">{step.title}</h3>
+                            <div className="h-px flex-1 bg-white/[0.08]" />
+                          </div>
+                          <p className="mt-1.5 text-sm leading-6 text-slate-300">{step.detail}</p>
+                        </div>
+                      </div>
                     </li>
                   ))}
                 </ol>
               </div>
 
-              <div className="grid gap-6 lg:col-span-8 md:grid-cols-3">
-                {capabilities.map((item, index) => (
-                  <RevealBlock as="article" key={item.title} className="axiom-bento h-full p-4 md:p-5" delay={index * 0.08} variant="card">
-                    <h3 className="text-base font-semibold text-[#F2F4F7]">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.detail}</p>
-                  </RevealBlock>
-                ))}
-              </div>
-            </div>
-            <div className="mt-7 grid gap-4 md:grid-cols-2">
-              <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Project controls</p>
-                <ul className="mt-3 space-y-2">
-                  {operationalSignals.map((item) => (
-                    <li key={item} className="text-sm leading-relaxed text-slate-300">{item}</li>
+              <div className="space-y-4 lg:pt-1">
+                <div className="grid gap-4 md:grid-cols-3">
+                  {workflowCards.map((item, index) => (
+                    <RevealBlock
+                      as="article"
+                      key={item.title}
+                      className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(18,24,33,0.94)_0%,rgba(10,14,22,0.98)_100%)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_14px_30px_rgba(0,0,0,0.2)]"
+                      delay={index * 0.06}
+                      variant="card"
+                    >
+                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-white/10 bg-white/[0.04] font-axiomMono text-[10px] font-semibold tracking-[0.18em] text-white/70">
+                          {item.number}
+                        </span>
+                        <div className="h-px flex-1 bg-white/[0.08]" />
+                      </div>
+                      <h3 className="mt-5 text-[1.05rem] font-semibold tracking-[-0.02em] text-[#F2F4F7]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-300">{item.detail}</p>
+                    </RevealBlock>
                   ))}
-                </ul>
-              </article>
-              <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Launch criteria</p>
-                <ul className="mt-3 space-y-2">
-                  <li className="text-sm leading-relaxed text-slate-300">Clear positioning at first glance</li>
-                  <li className="text-sm leading-relaxed text-slate-300">A credible next step for the right buyer</li>
-                  <li className="text-sm leading-relaxed text-slate-300">Clean performance across desktop and mobile</li>
-                </ul>
-              </article>
+                </div>
+
+                <RevealBlock
+                  as="div"
+                  className="overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(13,18,26,0.98)_0%,rgba(9,12,18,0.99)_100%)] px-5 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_18px_40px_rgba(0,0,0,0.24)] md:px-6 md:py-6"
+                  variant="card"
+                >
+                  <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
+                    <div className="min-w-0 lg:w-[40%]">
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.2em] text-[#A7B3BC]">Project Controls</p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {projectControls.map((item) => (
+                          <span
+                            key={item}
+                            className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-[11px] font-medium tracking-[-0.01em] text-slate-200"
+                          >
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="min-w-0 lg:w-[60%] lg:border-l lg:border-white/8 lg:pl-5">
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.2em] text-[#A7B3BC]">Launch Standards</p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {launchStandards.map((item) => (
+                          <span
+                            key={item}
+                            className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-[11px] font-medium tracking-[-0.01em] text-slate-200"
+                          >
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </RevealBlock>
+              </div>
             </div>
           </RevealBlock>
 

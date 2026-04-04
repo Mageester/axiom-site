@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --axiom-build-rev: '2026-04-02-apex-cache-bust';
+    --axiom-build-rev: '2026-04-03-marquee-fix';
     --axiom-base: #0A0C10;
     --axiom-elevated: #11151A;
     --axiom-surface: #181E25;
@@ -378,11 +378,11 @@
     filter: brightness(1.04);
   }
 
-  .marquee-shell {
+  .logo-marquee-shell {
     position: relative;
   }
 
-  .marquee-track {
+  .logo-marquee-track {
     display: flex;
     width: max-content;
     gap: var(--marquee-gap, 2rem);
@@ -723,11 +723,11 @@
     transform: none;
   }
 
-  .marquee-shell {
+  .logo-marquee-shell {
     overflow: hidden;
   }
 
-  .marquee-track {
+  .logo-marquee-track {
     animation: none !important;
     transform: none !important;
     width: max-content;
