@@ -41,85 +41,22 @@ const selectedWork = selectedWorkEntries.map((entry) => {
   };
 });
 
-const capabilities = [
-  {
-    title: 'Built Around Your Business',
-    detail:
-      'We learn what you do, who your customers are, and what the website needs to accomplish.',
-  },
-  {
-    title: 'Made to Build Trust',
-    detail:
-      'Clean design and clear messaging make your business look established and professional from the first click.',
-  },
-  {
-    title: 'Designed to Get You Inquiries',
-    detail:
-      'Calls, forms, and booking actions are placed where they work — so the right visitors take the next step.',
-  },
-];
-
 const standardsCards = [
   {
-    title: 'Fast, Reliable Hosting',
-    detail:
-      'Sites are delivered globally for fast loading, reliable uptime, and a smooth experience for every visitor.',
-    desktopSpan: 'lg:col-span-4',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <path d="M7.5 15.5a3.5 3.5 0 0 1 .9-6.88 5 5 0 0 1 9.36 1.26A3 3 0 1 1 18 15.5H7.5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-      </svg>
-    ),
+    title: 'Clear on any screen',
+    detail: 'Spacing and type stay composed from desktop to mobile.',
   },
   {
-    title: 'Built for Speed',
-    detail:
-      'We structure layouts, media, and interactions to load instantly, so you never lose a visitor to slow wait times.',
-    desktopSpan: 'lg:col-span-4',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <path d="M12 5v7l4 2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-        <path d="M20 12A8 8 0 1 1 8.3 4.7" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-      </svg>
-    ),
+    title: 'Structured to earn trust',
+    detail: 'The page makes the business feel established before it asks for action.',
   },
   {
-    title: 'Flawless on Mobile',
-    detail:
-      'We design from the phone up, ensuring your website feels completely natural, credible, and easy to use on any device.',
-    desktopSpan: 'lg:col-span-4',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <rect height="16" rx="2.5" stroke="currentColor" strokeWidth="1.7" width="10" x="7" y="4" />
-        <path d="M10 7h4" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7" />
-        <circle cx="12" cy="17" fill="currentColor" r="1" />
-      </svg>
-    ),
+    title: 'Checked before launch',
+    detail: 'Core pages, forms, and mobile details are reviewed end to end.',
   },
   {
-    title: 'Clear and Accessible',
-    detail:
-      'Colors, contrast, structure, and text sizing are carefully reviewed to ensure a highly readable experience for everyone.',
-    desktopSpan: 'lg:col-span-6',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="5" r="2" fill="currentColor" />
-        <path d="M6 9h12M12 7v12M8 21l4-7 4 7" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Rigorous Pre-Launch Checks',
-    detail:
-      'Core pages, contact forms, mobile layouts, and critical actions are fully tested before your website goes live.',
-    desktopSpan: 'lg:col-span-6',
-    icon: (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <path d="M8 7h8M8 12h4M8 17h6" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7" />
-        <path d="M17 16.5 18.8 18 22 14.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7" />
-        <rect height="16" rx="2.5" stroke="currentColor" strokeWidth="1.7" width="14" x="5" y="4" />
-      </svg>
-    ),
+    title: 'Built to feel professional from first visit',
+    detail: 'The whole experience is polished enough to inspire confidence immediately.',
   },
 ];
 
@@ -307,54 +244,74 @@ const Home: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-20 md:pt-24" variant="feature">
-            <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(12,18,33,0.94)_0%,rgba(10,15,26,0.97)_100%)] px-6 py-12 shadow-[0_22px_70px_rgba(0,0,0,0.24)] md:px-8 md:py-14 lg:px-10 lg:py-16">
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute left-[10%] top-[-14%] h-40 w-40 rounded-full bg-[#4B6EAF]/10 blur-3xl md:h-52 md:w-52" />
-                <div className="absolute bottom-[-16%] right-[8%] h-44 w-44 rounded-full bg-[#B05D41]/10 blur-3xl md:h-56 md:w-56" />
-                <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-12">
+              <div className="max-w-xl lg:sticky lg:top-24">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">
+                  WHAT YOU GET
+                </p>
+                <h2 className="mt-3 max-w-[13ch] text-[clamp(2rem,4vw,3.5rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                  A clear standard, built into every site.
+                </h2>
+                <p className="mt-5 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
+                  Every Axiom site is shaped to feel composed, trustworthy, and ready to take inquiries from the first visit.
+                </p>
               </div>
 
-              <div className="relative z-10">
-                <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">WHAT YOU GET</p>
-                  <h2 className="mt-4 max-w-[12ch] text-[clamp(2rem,4vw,3.4rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
-                    Every website includes these.
-                  </h2>
-                  <p className="mt-5 max-w-[38rem] text-sm leading-7 text-slate-300 md:text-base">
-                    Good design is just the start. Every Axiom website is fast, flawless on mobile, and built to guide visitors toward calling or booking.
-                  </p>
+              <div className="standards-panel">
+                <div className="standards-lead">
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.2em] text-[#A7B3BC]">
+                      Included in every build
+                    </p>
+                    <span className="hidden rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/60 md:inline-flex">
+                      Axiom standard
+                    </span>
+                  </div>
+
+                  <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] lg:items-end">
+                    <div>
+                      <h3 className="max-w-[12ch] text-[clamp(1.8rem,3vw,2.6rem)] font-semibold tracking-[-0.04em] text-[#F2F4F7]">
+                        Fast, stable, and calm by default.
+                      </h3>
+                      <p className="mt-4 max-w-[30ch] text-sm leading-7 text-slate-300 md:text-base">
+                        Your site loads quickly, reads cleanly, and keeps the attention on your business.
+                      </p>
+                    </div>
+
+                    <div className="hidden lg:block">
+                      <div className="flex flex-col gap-3 border-l border-white/10 pl-5">
+                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-white/55">
+                          Why it matters
+                        </p>
+                        <p className="text-sm leading-6 text-slate-300">
+                          The experience feels established before it asks for action.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-12">
-              {standardsCards.map((item, index) => (
-                <RevealBlock
-                  as="article"
-                  key={item.title}
-                  delay={index * 0.06}
-                  variant="card"
-                  className={`group relative flex h-full min-h-[15.5rem] flex-col rounded-[26px] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_28px_rgba(0,0,0,0.16)] transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_34px_rgba(0,0,0,0.22)] md:p-7 ${
-                    index === 0
-                      ? 'lg:col-span-6 border border-white/12 bg-[linear-gradient(180deg,rgba(24,31,40,0.96)_0%,rgba(15,19,26,0.98)_100%)]'
-                      : index < 3
-                        ? 'lg:col-span-3 border border-white/8 bg-[linear-gradient(180deg,rgba(20,25,32,0.8)_0%,rgba(13,17,23,0.92)_100%)]'
-                        : 'lg:col-span-6 border border-white/8 bg-white/[0.015]'
-                  }`}
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                >
-                      <div className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent opacity-70 ${index === 0 ? 'via-white/14' : 'via-white/10'}`} />
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(19,29,48,0.86)_0%,rgba(14,21,35,0.9)_100%)] text-[#d4a48e] transition-colors duration-300 group-hover:border-white/16 group-hover:text-[#e1b29b]">
-                        {item.icon}
+                <div className="standards-support-grid">
+                  {standardsCards.slice(0, 4).map((item, index) => (
+                    <RevealBlock
+                      as="article"
+                      key={item.title}
+                      delay={index * 0.06}
+                      variant="card"
+                      className="standards-support-item"
+                    >
+                      <span className="standards-support-mark" aria-hidden="true" />
+                      <div className="min-w-0">
+                        <h4 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.04rem]">
+                          {item.title}
+                        </h4>
+                        <p className="mt-2 max-w-[30ch] text-sm leading-6 text-slate-300">
+                          {item.detail}
+                        </p>
                       </div>
-                      <h3 className={`mt-6 font-semibold tracking-[-0.02em] text-[#F2F4F7] ${index === 0 ? 'text-[1.28rem] md:text-[1.45rem]' : 'text-[1.08rem] md:text-[1.15rem]'}`}>
-                        {item.title}
-                      </h3>
-                      <p className={`mt-3 text-sm leading-7 text-slate-300 ${index === 0 ? 'max-w-[34ch]' : 'max-w-[32ch]'}`}>
-                        {item.detail}
-                      </p>
-                </RevealBlock>
-              ))}
-            </div>
+                    </RevealBlock>
+                  ))}
+                </div>
               </div>
             </div>
           </RevealBlock>
