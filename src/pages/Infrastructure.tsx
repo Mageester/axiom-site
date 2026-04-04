@@ -228,6 +228,102 @@ const StepIcon: React.FC<{ id: string }> = ({ id }) => {
   );
 };
 
+type TypingPhraseProps = {
+  text: string;
+  className?: string;
+  delay?: number;
+};
+
+const getPrefersReducedMotion = () => {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+};
+
+const getTypingStartDelay = (baseDelay: number) => {
+  if (typeof window === 'undefined') {
+    return baseDelay;
+  }
+
+  return window.sessionStorage.getItem('axiom-preloader-seen') === '1' ? baseDelay : Math.max(baseDelay, 3400);
+};
+
+const TypingPhrase: React.FC<TypingPhraseProps> = ({ text, className = '', delay = 360 }) => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(getPrefersReducedMotion);
+  const [displayedText, setDisplayedText] = useState(() => (getPrefersReducedMotion() ? text : ''));
+  const [startDelay] = useState(() => getTypingStartDelay(delay));
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncPreference = () => setPrefersReducedMotion(media.matches);
+
+    syncPreference();
+
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', syncPreference);
+      return () => media.removeEventListener('change', syncPreference);
+    }
+
+    media.addListener(syncPreference);
+    return () => media.removeListener(syncPreference);
+  }, []);
+
+  useEffect(() => {
+    if (rafRef.current !== null) {
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+
+    if (prefersReducedMotion) {
+      setDisplayedText(text);
+      return;
+    }
+
+    setDisplayedText('');
+
+    const startAt = performance.now() + startDelay;
+    const perCharMs = 32;
+    const totalChars = Math.max(text.length, 1);
+
+    const tick = (now: number) => {
+      if (now < startAt) {
+        rafRef.current = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      const elapsed = now - startAt;
+      const count = Math.min(totalChars, Math.max(1, Math.ceil(elapsed / perCharMs)));
+      setDisplayedText(text.slice(0, count));
+
+      if (count < totalChars) {
+        rafRef.current = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      rafRef.current = null;
+    };
+
+    rafRef.current = window.requestAnimationFrame(tick);
+
+    return () => {
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, [prefersReducedMotion, startDelay, text]);
+
+  return (
+    <span className={`inline-flex items-center whitespace-nowrap ${className}`} style={{ minWidth: `${Math.max(text.length + 1, 20)}ch` }}>
+      <span aria-hidden="true">{displayedText}</span>
+      <span className="sr-only">{text}</span>
+    </span>
+  );
+};
+
 const Infrastructure: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>(SECTION_LINKS[0].id);
   const [activeStack, setActiveStack] = useState<string>(STACK_OPTIONS[0].id);
@@ -469,6 +565,13 @@ const Infrastructure: React.FC = () => {
                 <p className="mt-5 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
                   Axiom scopes the stack, organizes the pages, and controls the launch so the project stays specific, low-friction, and easy to approve.
                 </p>
+                <div className="mt-6 flex items-center gap-3">
+                  <span aria-hidden="true" className="h-px w-8 rounded-full bg-gradient-to-r from-[#d4a48e]/70 to-transparent" />
+                  <TypingPhrase
+                    text="Built to move fast."
+                    className="font-axiomMono text-[10px] uppercase tracking-[0.24em] text-[#d4a48e]/90 md:text-[11px]"
+                  />
+                </div>
                 <div className="mt-8">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
                             Book Free Consultation
