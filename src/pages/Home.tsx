@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import BrandCarousel from '../components/BrandCarousel';
 import Layout from '../components/Layout';
-import PartnerMarquee from '../components/PartnerMarquee';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
@@ -181,10 +181,7 @@ const Home: React.FC = () => {
           </section>
 
           <section className="pt-10 md:pt-14">
-            <p className="mb-3 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-              Built-in baseline
-            </p>
-            <PartnerMarquee />
+            <BrandCarousel />
           </section>
 
           <RevealBlock as="section" className="pt-20 md:pt-24">
