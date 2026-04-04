@@ -18,7 +18,7 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
   useEffect(() => {
     if (!active) return;
 
-    const revealTimer = window.setTimeout(() => setRevealed(true), 40);
+    const revealTimer = window.setTimeout(() => setRevealed(true), 24);
 
     const departTimer = window.setTimeout(() => {
       const target = targetRef.current?.getBoundingClientRect();
@@ -30,12 +30,12 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
         setOffset({ x: targetX - centerX, y: targetY - centerY });
       }
       setDeparting(true);
-    }, 1600);
+    }, 950);
 
     const finishTimer = window.setTimeout(() => {
       window.sessionStorage.setItem('axiom-preloader-seen', '1');
       setActive(false);
-    }, 3200);
+    }, 1820);
 
     return () => {
       window.clearTimeout(revealTimer);
@@ -45,18 +45,16 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
   }, [active, targetRef]);
 
   const logoStyle = useMemo(() => {
-    const scale = departing ? 0.5 : revealed ? 1 : 12;
-    const opacity = departing ? 0.98 : revealed ? 1 : 0;
-    const blur = departing ? 0 : revealed ? 0 : 96;
-    const yLift = departing ? -8 : revealed ? 0 : 22;
+    const scale = departing ? 0.68 : revealed ? 1 : 1.08;
+    const opacity = departing ? 0.92 : revealed ? 1 : 0;
+    const yLift = departing ? -4 : revealed ? 0 : 12;
     const translate = departing ? `translate3d(${offset.x}px, ${offset.y + yLift}px, 0)` : `translate3d(0, ${yLift}px, 0)`;
 
     return {
       opacity,
-      filter: `blur(${blur}px)`,
-      willChange: 'transform, opacity, filter',
+      willChange: 'transform, opacity',
       transform: `translate(-50%, -50%) ${translate} scale(${scale})`,
-      transition: 'transform 1350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 900ms ease-out, filter 900ms ease-out',
+      transition: 'transform 880ms cubic-bezier(0.22, 1, 0.36, 1), opacity 520ms ease-out',
     } as React.CSSProperties;
   }, [departing, offset.x, offset.y, revealed]);
 
@@ -66,14 +64,14 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-[120] bg-black transition-opacity duration-[1100ms] ease-out ${departing ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100'}`}
+      className={`fixed inset-0 z-[120] bg-black transition-opacity duration-[820ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${departing ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100'}`}
       aria-hidden
     >
       <ResponsiveImage
         source={responsiveImages.logoClear}
         sizes="(min-width: 768px) 320px, 256px"
         alt="Axiom Infrastructure logo"
-        className="absolute left-1/2 top-1/2 h-40 w-auto object-contain drop-shadow-[0_0_48px_rgba(245,247,250,0.2)] md:h-48"
+        className="absolute left-1/2 top-1/2 h-40 w-auto object-contain drop-shadow-[0_0_34px_rgba(245,247,250,0.16)] md:h-48"
         style={logoStyle}
         decoding="async"
       />

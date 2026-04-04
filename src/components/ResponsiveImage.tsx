@@ -51,14 +51,14 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           srcSet={source.webpSrcSet}
           sizes={sizes}
           {...imgProps}
-          className={`${className ?? ''} block transition-opacity duration-500 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`.trim()}
+          className={`${className ?? ''} block transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${isLoaded ? 'opacity-100' : 'opacity-0'}`.trim()}
           onLoad={handleLoad}
           onError={handleError}
         />
       </picture>
       <span
         aria-hidden="true"
-        className={`pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.04] via-white/[0.08] to-white/[0.04] transition-opacity duration-500 ${
+        className={`pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.04] via-white/[0.08] to-white/[0.04] transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isLoaded ? 'opacity-0' : 'opacity-100 animate-pulse motion-reduce:animate-none'
         }`}
       />

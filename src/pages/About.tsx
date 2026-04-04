@@ -79,10 +79,10 @@ const About: React.FC = () => {
               {WHO_AXIOM_IS.map((item) => (
                 <article
                   key={item.title}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(15,20,29,0.96)_0%,rgba(10,14,21,0.98)_100%)] p-4 shadow-[0_14px_38px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d4a48e]/20 hover:shadow-[0_18px_48px_rgba(0,0,0,0.26)] md:p-5"
+                  className="motion-surface group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(15,20,29,0.96)_0%,rgba(10,14,21,0.98)_100%)] p-4 shadow-[0_12px_30px_rgba(0,0,0,0.16)] hover:-translate-y-px hover:border-[#d4a48e]/20 hover:shadow-[0_16px_36px_rgba(0,0,0,0.22)] md:p-5"
                 >
                   <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,164,142,0.08),transparent_46%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="motion-fade pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,164,142,0.08),transparent_46%)] opacity-0 group-hover:opacity-100" />
                   <div className="relative z-10">
                     <h3 className="text-lg font-semibold text-[#F2F4F7]">{item.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.body}</p>
@@ -112,7 +112,7 @@ const About: React.FC = () => {
                   </Link>
                   <Link
                     to="/works"
-                    className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-colors hover:border-white/30 hover:bg-white/[0.07]"
+                    className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07]"
                   >
                     View Work
                   </Link>

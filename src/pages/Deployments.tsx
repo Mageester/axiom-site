@@ -78,7 +78,7 @@ const STATUS_FILTERS = [
 
 function WorkCard({ work }: { work: WorkEntry }) {
   const card = (
-    <article className={`flex h-full flex-1 flex-col overflow-hidden rounded-[1.75rem] transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out group-hover/proof:-translate-y-1 group-hover/proof:shadow-[0_24px_54px_rgba(0,0,0,0.32)] ${
+    <article className={`motion-surface flex h-full flex-1 flex-col overflow-hidden rounded-[1.75rem] group-hover/proof:-translate-y-0.5 group-hover/proof:shadow-[0_18px_42px_rgba(0,0,0,0.26)] ${
       work.isLiveDemo
         ? 'border border-white/10 bg-[linear-gradient(180deg,rgba(20,26,34,0.94)_0%,rgba(11,15,22,0.98)_100%)]'
         : 'border border-white/8 bg-[linear-gradient(180deg,rgba(17,22,29,0.82)_0%,rgba(11,15,20,0.96)_100%)]'
@@ -88,7 +88,7 @@ function WorkCard({ work }: { work: WorkEntry }) {
           source={work.image}
           sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
           alt={work.imageAlt ?? work.title}
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/proof:scale-[1.03]"
+          className="motion-media h-full w-full object-cover group-hover/proof:scale-[1.015]"
           loading="lazy"
           decoding="async"
           style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
@@ -196,7 +196,7 @@ const Deployments: React.FC = () => {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => setStatusFilter(filter.id)}
-                    className={`rounded-full border px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:px-4 sm:py-2 sm:text-[11px] ${
+                    className={`rounded-full border px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:px-4 sm:py-2 sm:text-[11px] ${
                       selected
                         ? 'border-[#d4a48e]/35 bg-[#B05D41]/12 text-[#F2F4F7] shadow-[0_0_0_1px_rgba(212,164,142,0.12)]'
                         : 'border-white/12 bg-white/[0.03] text-slate-300 hover:border-white/25 hover:bg-white/[0.06] hover:text-[#F2F4F7]'
@@ -213,7 +213,7 @@ const Deployments: React.FC = () => {
               <select
                 value={industryFilter}
                 onChange={(event) => setIndustryFilter(event.target.value)}
-                className="w-full rounded-full border border-white/12 bg-[#0d1323]/80 px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#F2F4F7] outline-none transition-all focus:border-[#d4a48e]/45 focus:ring-2 focus:ring-[#d4a48e]/20 lg:w-auto lg:text-[11px]"
+                className="w-full rounded-full border border-white/12 bg-[#0d1323]/80 px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus:border-[#d4a48e]/45 focus:ring-2 focus:ring-[#d4a48e]/20 lg:w-auto lg:text-[11px]"
               >
                 <option value="all">All industries</option>
                 {availableIndustries
@@ -271,10 +271,10 @@ const Deployments: React.FC = () => {
               </Link>
               <Link
                 to="/method"
-                className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-axiom-text-main hover:underline"
+                className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-[color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-axiom-text-main hover:underline"
               >
                 See How It Works
-                <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-4 w-4 transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>

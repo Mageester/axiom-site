@@ -102,10 +102,10 @@ const Home: React.FC = () => {
                     Serious websites for serious businesses
                   </h1>
                 </div>
-                <p className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
+                <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
                   We build websites that help established businesses look professional, earn trust fast, and turn more visitors into customers.
                 </p>
-                <div className="mt-8 flex flex-wrap items-center gap-4">
+                <div data-startup-actions className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
                     Book Free Consultation
                   </Link>
@@ -117,11 +117,12 @@ const Home: React.FC = () => {
                   </Link>
                 </div>
               </div>
+              <div data-startup-meta className="mt-10 flex justify-center md:mt-14">
+                <div className="w-full max-w-4xl">
+                  <BrandCarousel />
+                </div>
+              </div>
             </div>
-          </section>
-
-          <section data-reveal="off" className="pt-10 md:pt-14">
-            <BrandCarousel />
           </section>
 
           <RevealBlock as="section" className="pt-20 md:pt-24">
@@ -184,16 +185,14 @@ const Home: React.FC = () => {
                     as="article"
                     delay={index * 0.08}
                     variant="card"
-                    className="flex min-h-[30rem] cursor-pointer flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1221]/92 shadow-[0_10px_34px_rgba(0,0,0,0.18)] transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/deployment:-translate-y-1 group-hover/deployment:border-[#d4a48e]/30 group-hover/deployment:shadow-[0_24px_60px_rgba(0,0,0,0.34)] group-focus-visible/deployment:-translate-y-1 group-focus-visible/deployment:border-[#d4a48e]/35 group-focus-visible/deployment:shadow-[0_24px_60px_rgba(0,0,0,0.34)]"
-                    whileHover={{ y: -6 }}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    className="motion-surface flex min-h-[30rem] cursor-pointer flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1221]/92 shadow-[0_10px_28px_rgba(0,0,0,0.16)] group-hover/deployment:-translate-y-0.5 group-hover/deployment:border-[#d4a48e]/30 group-hover/deployment:shadow-[0_18px_42px_rgba(0,0,0,0.26)] group-focus-visible/deployment:-translate-y-0.5 group-focus-visible/deployment:border-[#d4a48e]/35 group-focus-visible/deployment:shadow-[0_18px_42px_rgba(0,0,0,0.26)]"
                   >
                     <div className="relative overflow-hidden">
                       <ResponsiveImage
                         source={item.image}
                         sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
                         alt={item.imageAlt ?? item.title}
-                        className="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover/deployment:scale-[1.03] group-focus-visible/deployment:scale-[1.03]"
+                        className="motion-media aspect-[16/10] w-full object-cover group-hover/deployment:scale-[1.015] group-focus-visible/deployment:scale-[1.015]"
                         loading="lazy"
                         decoding="async"
                         style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
@@ -298,7 +297,7 @@ const Home: React.FC = () => {
                       key={item.title}
                       delay={index * 0.06}
                       variant="card"
-                      className="standards-support-item"
+                      className="standards-support-item motion-surface"
                     >
                       <span className="standards-support-mark" aria-hidden="true" />
                       <div className="min-w-0">
