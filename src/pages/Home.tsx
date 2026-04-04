@@ -173,14 +173,11 @@ const Home: React.FC = () => {
                     View Our Process
                   </Link>
                 </div>
-                <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
-                  The consultation is a 30-minute founder-led fit call. We review your business, what the site needs to do, and whether Axiom is the right partner before any scope is discussed.
-                </p>
               </div>
             </div>
           </section>
 
-          <section className="pt-10 md:pt-14">
+          <section data-reveal="off" className="relative left-1/2 w-screen -translate-x-1/2 pt-10 md:pt-14">
             <BrandCarousel />
           </section>
 
