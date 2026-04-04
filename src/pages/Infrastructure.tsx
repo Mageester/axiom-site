@@ -1,542 +1,63 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
-import { RevealBlock } from '../components/ui/RevealBlock';
-
-type SectionLink = {
-  id: string;
-  label: string;
-  shortLabel?: string;
-};
 
 type ProcessStep = {
-  id: string;
   number: string;
   title: string;
   summary: string;
-  points: readonly string[];
 };
 
-type StackOption = {
-  id: string;
-  label: string;
+type ChecklistItem = {
   title: string;
-  summary: string;
-  bullets: readonly string[];
 };
-
-type ExpandableItem = {
-  title: string;
-  body: string;
-};
-
-const SECTION_LINKS: readonly SectionLink[] = [
-  { id: 'process', label: 'Process' },
-  { id: 'your-stack', label: 'Your Stack', shortLabel: 'Stack' },
-  { id: 'clarify', label: 'What We Clarify', shortLabel: 'Clarify' },
-  { id: 'faq', label: 'FAQ' },
-];
 
 const PROCESS_STEPS: readonly ProcessStep[] = [
   {
-    id: 'call',
     number: '01',
-    title: 'Online Strategy Call',
-    summary:
-      'Every project starts with a focused 30-minute Zoom meeting to understand your business, priorities, and required website capabilities.',
-    points: [
-      'Online only, clear agenda, no wasted time',
-      'Pages, menus, forms, maps, booking, gallery, quote flow',
-    ],
+    title: 'Discovery',
+    summary: 'Goals, scope, and fit are clarified early.',
   },
   {
-    id: 'scope',
     number: '02',
-    title: 'Scope and Package Recommendation',
-    summary:
-      'We translate requirements into a clear scope and recommend the package that best fits your goals, timeline, and technical needs.',
-    points: [
-      'What is included now vs. phased later',
-      'Delivery model aligned to your business reality',
-    ],
+    title: 'Scope',
+    summary: 'Pages, structure, and package direction align.',
   },
   {
-    id: 'plan',
     number: '03',
-    title: 'Website Planning and Structure',
-    summary:
-      'Before build starts, we define structure, navigation, and conversion pathways so each page has a clear purpose.',
-    points: [
-      'Page hierarchy and menu logic',
-      'Content and CTA structure for faster buyer decisions',
-    ],
+    title: 'Build',
+    summary: 'Design, content, and performance are handled with intent.',
   },
   {
-    id: 'build',
     number: '04',
-    title: 'Build and Review',
-    summary:
-      'Axiom implements the approved plan with performance-focused standards, then runs guided reviews to keep decisions efficient.',
-    points: [
-      'Desktop and mobile behavior verified',
-      'Refinement checkpoints without scope drift',
-    ],
-  },
-  {
-    id: 'launch',
-    number: '05',
-    title: 'Launch and Handover',
-    summary:
-      'We launch through a controlled release process and ensure everything runs flawlessly before handing over the keys.',
-    points: [
-      'DNS, hosting, and domain routing handled cleanly',
-      'Post-launch checks for reliability and speed',
-    ],
+    title: 'Launch',
+    summary: 'Final review, technical checks, and a clean handoff.',
   },
 ];
 
-const STACK_OPTIONS: readonly StackOption[] = [
-  {
-    id: 'current',
-    label: 'Work Within Current Setup',
-    title: 'Work within your current setup and improve what matters',
-    summary:
-      'If your current domain and hosting are already in a good place, we can build within that environment and upgrade the site without forcing a full move.',
-    bullets: [
-      'Keep your current domain and provider',
-      'Avoid unnecessary migration work',
-      'Improve performance, structure, and user experience',
-    ],
-  },
-  {
-    id: 'domain-kept',
-    label: 'Keep Domain, Rebuild Site',
-    title: 'Keep the domain. Replace the site experience.',
-    summary:
-      'If the domain should stay but the website needs a full reset, we handle the rebuild and launch planning so the transition stays clean and low-friction.',
-    bullets: [
-      'Keep your existing domain in place',
-      'Launch a new site with a clean transition',
-      'Protect continuity for customers and search visibility',
-    ],
-  },
-  {
-    id: 'managed',
-    label: 'Fully Managed by Axiom',
-    title: 'Let Axiom handle hosting, deployment, and upkeep',
-    summary:
-      'If you want a more hands-off model, we can manage the technical side directly so updates, releases, and ongoing site operations stay centralized.',
-    bullets: [
-      'One team handling the technical side',
-      'Cleaner updates and release control',
-      'Less internal overhead for your business',
-    ],
-  },
+const CHECKLIST_ITEMS: readonly ChecklistItem[] = [
+  { title: 'Required pages and navigation flow' },
+  { title: 'Lead capture and CTA placement' },
+  { title: 'Content structure and message hierarchy' },
+  { title: 'Domain, hosting, and launch path' },
+  { title: 'Future expansion considerations' },
 ];
 
-const CLARIFY_ITEMS: readonly ExpandableItem[] = [
-  {
-    title: 'Required pages and navigation flow',
-    body: 'We define exactly what pages are needed, how navigation should be organized, and where key actions should appear so users move through the site with minimal friction.',
-  },
-  {
-    title: 'Feature requirements by business model',
-    body: 'We scope feature requirements early, including booking, menu structures, maps, galleries, quote forms, and contact pathways aligned to your service model.',
-  },
-  {
-    title: 'Lead capture and form routing',
-    body: 'We clarify form inputs, destination routing, and response expectations so inbound leads are captured cleanly and handled without manual confusion.',
-  },
-  {
-    title: 'Content structure and message hierarchy',
-    body: 'We organize content blocks and messaging priorities around buyer intent so each page supports trust and conversion outcomes.',
-  },
-  {
-    title: 'Domain, hosting, and release path',
-    body: 'We confirm domain ownership, hosting responsibilities, and launch sequencing before production so rollout is smooth and predictable.',
-  },
-  {
-    title: 'Near-term and future expansion needs',
-    body: 'We identify what must ship now and what can expand later, so the initial build is stable without boxing your business into short-term decisions.',
-  },
-];
-
-const FAQ_ITEMS: readonly ExpandableItem[] = [
-  {
-    title: 'How are consultations conducted?',
-    body: 'Consultations are conducted online only through Zoom. This keeps scheduling fast and keeps the process focused.',
-  },
-  {
-    title: 'How long is the first meeting?',
-    body: 'The initial consultation is 30 minutes. We use that time to understand your business and define what the website must include.',
-  },
-  {
-    title: 'Can Axiom work with my existing domain and provider?',
-    body: 'Yes. If your current setup is workable, we can build around it. If needed, we can also handle infrastructure directly.',
-  },
-  {
-    title: 'When do you recommend a package?',
-    body: 'After the strategy call and scope definition. Recommendations are based on the project requirements and delivery needs.',
-  },
-];
-
-const StepIcon: React.FC<{ id: string }> = ({ id }) => {
-  const common = 'h-5 w-5 text-[#d4a48e]';
-
-  if (id === 'call') {
-    return (
-      <svg viewBox="0 0 24 24" className={common} fill="none" aria-hidden>
-        <rect x="3.5" y="6.5" width="17" height="11" rx="2" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M10 18.5v2m4-2v2m-6.5 0h9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      </svg>
-    );
-  }
-
-  if (id === 'scope') {
-    return (
-      <svg viewBox="0 0 24 24" className={common} fill="none" aria-hidden>
-        <path d="M6 5.5h12M6 12h8M6 18.5h6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        <path d="m17.5 12.5 2 2 3-3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-
-  if (id === 'plan') {
-    return (
-      <svg viewBox="0 0 24 24" className={common} fill="none" aria-hidden>
-        <rect x="4" y="4" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
-        <rect x="13" y="4" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
-        <rect x="4" y="13" width="16" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
-      </svg>
-    );
-  }
-
-  if (id === 'build') {
-    return (
-      <svg viewBox="0 0 24 24" className={common} fill="none" aria-hidden>
-        <path d="M14.5 5.5a4.5 4.5 0 0 0-5.8 5.8l-4.2 4.2 1.5 1.5 4.2-4.2a4.5 4.5 0 0 0 5.8-5.8l-2.3 2.3-2-2 2.8-1.8Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" className={common} fill="none" aria-hidden>
-      <path d="M5 19h14M6 15.5l5.8-9.8a.25.25 0 0 1 .4 0l5.8 9.8M12 7.5v7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-};
-
-type TypingPhraseProps = {
-  text: string;
-  className?: string;
-  delay?: number;
-};
-
-const getPrefersReducedMotion = () => {
-  if (typeof window === 'undefined') {
-    return false;
-  }
-
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-};
-
-const getTypingStartDelay = (baseDelay: number) => {
-  if (typeof window === 'undefined') {
-    return baseDelay;
-  }
-
-  return window.sessionStorage.getItem('axiom-preloader-seen') === '1' ? baseDelay : Math.max(baseDelay, 3400);
-};
-
-const TypingPhrase: React.FC<TypingPhraseProps> = ({ text, className = '', delay = 360 }) => {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(getPrefersReducedMotion);
-  const [displayedText, setDisplayedText] = useState(() => (getPrefersReducedMotion() ? text : ''));
-  const [startDelay] = useState(() => getTypingStartDelay(delay));
-  const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const syncPreference = () => setPrefersReducedMotion(media.matches);
-
-    syncPreference();
-
-    if (typeof media.addEventListener === 'function') {
-      media.addEventListener('change', syncPreference);
-      return () => media.removeEventListener('change', syncPreference);
-    }
-
-    media.addListener(syncPreference);
-    return () => media.removeListener(syncPreference);
-  }, []);
-
-  useEffect(() => {
-    if (rafRef.current !== null) {
-      window.cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
-
-    if (prefersReducedMotion) {
-      setDisplayedText(text);
-      return;
-    }
-
-    setDisplayedText('');
-
-    const startAt = performance.now() + startDelay;
-    const perCharMs = 32;
-    const totalChars = Math.max(text.length, 1);
-
-    const tick = (now: number) => {
-      if (now < startAt) {
-        rafRef.current = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      const elapsed = now - startAt;
-      const count = Math.min(totalChars, Math.max(1, Math.ceil(elapsed / perCharMs)));
-      setDisplayedText(text.slice(0, count));
-
-      if (count < totalChars) {
-        rafRef.current = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      rafRef.current = null;
-    };
-
-    rafRef.current = window.requestAnimationFrame(tick);
-
-    return () => {
-      if (rafRef.current !== null) {
-        window.cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-    };
-  }, [prefersReducedMotion, startDelay, text]);
-
-  return (
-    <span className={`inline-flex items-center whitespace-nowrap ${className}`} style={{ minWidth: `${Math.max(text.length + 1, 20)}ch` }}>
-      <span aria-hidden="true">{displayedText}</span>
-      <span className="sr-only">{text}</span>
-    </span>
-  );
-};
+const CheckMark: React.FC = () => (
+  <svg viewBox="0 0 20 20" className="h-4 w-4 text-[#d4a48e]" fill="none" aria-hidden>
+    <path
+      d="M15.5 6.5 8.5 13.5 4.5 9.5"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const Infrastructure: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>(SECTION_LINKS[0].id);
-  const [activeStack, setActiveStack] = useState<string>(STACK_OPTIONS[0].id);
-  const [openClarify, setOpenClarify] = useState<number>(0);
-  const [openFaq, setOpenFaq] = useState<number>(0);
-  const [activeProcessStep, setActiveProcessStep] = useState<number>(0);
-  const [processScrollProgress, setProcessScrollProgress] = useState<number>(0);
-  const [isSectionNavPinned, setIsSectionNavPinned] = useState(false);
-  const [sectionNavHeight, setSectionNavHeight] = useState(0);
-  const sectionScrollFrame = useRef<number | null>(null);
-  const sectionNavRef = useRef<HTMLElement | null>(null);
-
-  const activeStackData = useMemo(
-    () => STACK_OPTIONS.find((option) => option.id === activeStack) ?? STACK_OPTIONS[0],
-    [activeStack]
-  );
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = 220;
-      let current = SECTION_LINKS[0].id;
-
-      SECTION_LINKS.forEach((link) => {
-        const element = document.getElementById(link.id);
-        if (!element) return;
-
-        if (window.scrollY + offset >= element.offsetTop) {
-          current = link.id;
-        }
-      });
-
-      setActiveSection(current);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const processCards = Array.from(document.querySelectorAll<HTMLElement>('[data-process-step]'));
-    if (processCards.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const indexValue = Number((entry.target as HTMLElement).dataset.stepIndex || 0);
-          setActiveProcessStep(Number.isNaN(indexValue) ? 0 : indexValue);
-        });
-      },
-      { rootMargin: '-25% 0px -55% 0px', threshold: 0.25 }
-    );
-
-    processCards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const sectionNav = sectionNavRef.current;
-    if (!sectionNav) return;
-
-    let rafId = 0;
-
-    const updatePinState = () => {
-      rafId = 0;
-      setSectionNavHeight(sectionNav.offsetHeight);
-      const pinThreshold = sectionNav.offsetTop - 92;
-      setIsSectionNavPinned(window.scrollY >= pinThreshold);
-    };
-
-    const handleScroll = () => {
-      if (rafId !== 0) return;
-      rafId = window.requestAnimationFrame(updatePinState);
-    };
-
-    updatePinState();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-
-    return () => {
-      if (rafId !== 0) {
-        window.cancelAnimationFrame(rafId);
-      }
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const processSection = document.getElementById('process');
-    if (!processSection) return;
-
-    let rafId = 0;
-
-    const updateProgress = () => {
-      rafId = 0;
-      const rect = processSection.getBoundingClientRect();
-      const sectionTop = rect.top + window.scrollY;
-      const sectionHeight = rect.height;
-      const start = sectionTop - window.innerHeight * 0.35;
-      const end = sectionTop + sectionHeight - window.innerHeight * 0.15;
-      const total = Math.max(end - start, 1);
-      const progress = Math.min(Math.max((window.scrollY - start) / total, 0), 1);
-
-      setProcessScrollProgress(progress * 100);
-    };
-
-    const handleScroll = () => {
-      if (rafId !== 0) return;
-      rafId = window.requestAnimationFrame(updateProgress);
-    };
-
-    updateProgress();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-
-    return () => {
-      if (rafId !== 0) {
-        window.cancelAnimationFrame(rafId);
-      }
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
-
-  useLayoutEffect(() => {
-    const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
-    if (nodes.length === 0) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      nodes.forEach((node) => node.classList.add('is-visible'));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries, currentObserver) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          currentObserver.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
-    );
-
-    nodes.forEach((node, index) => {
-      node.classList.add('reveal-on-scroll');
-      node.style.setProperty('--reveal-order', String(index % 6));
-      observer.observe(node);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(
-    () => () => {
-      if (sectionScrollFrame.current !== null) {
-        window.cancelAnimationFrame(sectionScrollFrame.current);
-      }
-    },
-    []
-  );
-
-  const scrollToTarget = (target: HTMLElement, topOffset: number) => {
-    const targetTop = Math.max(target.getBoundingClientRect().top + window.scrollY - topOffset, 0);
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (prefersReducedMotion) {
-      window.scrollTo({ top: targetTop, left: 0, behavior: 'auto' });
-      return;
-    }
-
-    const startTop = window.scrollY;
-    const distance = targetTop - startTop;
-    const duration = 560;
-    const startedAt = performance.now();
-    const easeInOut = (time: number) =>
-      time < 0.5 ? 4 * time * time * time : 1 - Math.pow(-2 * time + 2, 3) / 2;
-
-    if (sectionScrollFrame.current !== null) {
-      window.cancelAnimationFrame(sectionScrollFrame.current);
-    }
-
-    const animate = (now: number) => {
-      const elapsed = Math.min((now - startedAt) / duration, 1);
-      const eased = easeInOut(elapsed);
-      window.scrollTo({ top: startTop + distance * eased, left: 0, behavior: 'auto' });
-
-      if (elapsed < 1) {
-        sectionScrollFrame.current = window.requestAnimationFrame(animate);
-      } else {
-        sectionScrollFrame.current = null;
-      }
-    };
-
-    sectionScrollFrame.current = window.requestAnimationFrame(animate);
-  };
-
-  const scrollToSection = (event: React.MouseEvent<HTMLElement>, sectionId: string) => {
-    const isPlainLeftClick =
-      event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
-    if (!isPlainLeftClick) return;
-
-    const target = document.getElementById(sectionId);
-    if (!target) return;
-    event.preventDefault();
-    scrollToTarget(target, window.innerWidth >= 768 ? 132 : 118);
-  };
-
-  const processProgress = processScrollProgress;
-
   return (
     <>
       <SEO
@@ -546,333 +67,126 @@ const Infrastructure: React.FC = () => {
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: 'Method | Axiom',
-          description: "Axiom's delivery method keeps launches controlled: one clear consultation, a defined scope, and a clean handoff for high-trust service firms.",
+          description:
+            "Axiom's delivery method keeps launches controlled: one clear consultation, a defined scope, and a clean handoff for high-trust service firms.",
           url: 'https://getaxiom.ca/method',
         }}
       />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-5 pb-24 md:px-10 md:pb-32">
-          <RevealBlock as="section" data-hero-root className="pt-8 md:pt-16" variant="feature">
-            <div className="max-w-5xl">
-              <article className="md:pr-6" data-reveal>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Delivery method</p>
-                <div className="mt-4 max-w-4xl overflow-hidden">
-                  <h1 data-startup-heading className="text-[clamp(2rem,8.2vw,4rem)] font-extrabold leading-[1.05] text-[#F2F4F7]">
-                    Delivery confidence from first call to handoff.
-                  </h1>
-                </div>
-                <p className="mt-5 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom scopes the stack, organizes the pages, and controls the launch so the project stays specific, low-friction, and easy to approve.
-                </p>
-                <div className="mt-6 flex items-center gap-3">
-                  <span aria-hidden="true" className="h-px w-8 rounded-full bg-gradient-to-r from-[#d4a48e]/70 to-transparent" />
-                  <TypingPhrase
-                    text="Built to move fast."
-                    className="font-axiomMono text-[10px] uppercase tracking-[0.24em] text-[#d4a48e]/90 md:text-[11px]"
-                  />
-                </div>
-                <div className="mt-8">
-                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                            Book Free Consultation
-                  </Link>
-                </div>
-              </article>
-            </div>
-          </RevealBlock>
-
-          <div className="mt-8" data-reveal style={sectionNavHeight > 0 ? { minHeight: `${sectionNavHeight}px` } : undefined}>
-            <nav
-              ref={sectionNavRef}
-              aria-label="Method page sections"
-              className={`hide-scrollbar overflow-x-auto rounded-2xl border border-white/10 bg-[rgba(12,16,25,0.82)] p-1.5 backdrop-blur-lg transition-all duration-300 md:rounded-full md:p-1.5 ${
-                isSectionNavPinned
-                  ? 'fixed left-1/2 top-[5.25rem] z-40 w-[calc(100vw-2rem)] -translate-x-1/2 shadow-[0_18px_42px_rgba(0,0,0,0.28)] md:w-fit'
-                  : 'relative mx-auto w-full md:w-fit'
-              }`}
-            >
-              <ul className="flex min-w-max items-center gap-0.5 md:gap-1">
-                {SECTION_LINKS.map((link) => {
-                  const isActive = activeSection === link.id;
-                  return (
-                    <li key={link.id}>
-                      <a
-                        href={`#${link.id}`}
-                        onClick={(event) => scrollToSection(event, link.id)}
-                        className={`inline-flex rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors ${
-                          isActive
-                            ? 'bg-[#B05D41]/20 text-[#F2F4F7] ring-1 ring-[#B05D41]/40'
-                            : 'text-slate-300 hover:bg-white/[0.07] hover:text-[#F2F4F7]'
-                        }`}
-                        aria-current={isActive ? 'location' : undefined}
-                      >
-                        <span className="hidden md:inline">{link.label}</span>
-                        <span className="md:hidden">{link.shortLabel || link.label}</span>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-          </div>
-
-          <RevealBlock as="section" id="process" data-method-section className="pt-14 md:pt-20">
-            <div className="mx-auto w-full max-w-[1220px]">
-              <div className="mx-auto w-full max-w-[740px]" data-reveal>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">Clear steps from first call to launch.</h2>
-                <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
-                  Each step removes uncertainty before the next decision.
-                </p>
-              </div>
-
-              <nav
-                aria-label="Process steps"
-                className="mt-6 flex gap-2 overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.03] p-2 backdrop-blur-md"
-                data-reveal
-              >
-                {PROCESS_STEPS.map((step, index) => {
-                  const isActive = activeProcessStep === index;
-                  return (
-                    <button
-                      key={step.id}
-                      type="button"
-                      onClick={(event) => scrollToSection(event, `process-step-${step.id}`)}
-                      aria-current={isActive ? 'step' : undefined}
-                      className={`inline-flex min-w-max flex-1 items-center gap-3 rounded-xl border px-3.5 py-3 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 md:flex-none md:px-4 ${
-                        isActive
-                          ? 'border-[#d4a48e]/35 bg-[#B05D41]/12 text-[#F2F4F7] shadow-[0_0_0_1px_rgba(212,164,142,0.14)]'
-                          : 'border-transparent bg-transparent text-slate-300 hover:border-white/10 hover:bg-white/[0.05] hover:text-[#F2F4F7]'
-                      }`}
-                    >
-                      <span className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">
-                        {step.number}
-                      </span>
-                      <span className="text-xs font-medium uppercase tracking-[0.12em]">
-                        {step.title}
-                      </span>
-                    </button>
-                  );
-                })}
-              </nav>
-
-              <ol className="mx-auto mt-10 grid w-full max-w-[960px] gap-5 md:mt-12 md:gap-6">
-                <li className="axiom-bento rounded-2xl px-4 py-3 md:px-5 md:py-3.5" data-reveal aria-label="Step progress">
-                  <div className="flex items-center justify-between">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Progress</p>
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#d4a48e]">
-                      {activeProcessStep + 1} / {PROCESS_STEPS.length}
-                    </p>
-                  </div>
-                  <div className="mt-2 h-1 rounded-full bg-white/10">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-[#B05D41] to-[#F59768] transition-all duration-300 motion-reduce:transition-none"
-                      style={{ width: `${processProgress}%` }}
-                    />
-                  </div>
-                </li>
-                {PROCESS_STEPS.map((step, index) => (
-                  <li
-                    key={step.id}
-                    id={`process-step-${step.id}`}
-                    data-process-step
-                    data-step-index={index}
-                    data-reveal
-                    aria-current={activeProcessStep === index ? 'step' : undefined}
-                    className={`relative scroll-mt-32 border-l pl-5 py-6 transition-all duration-300 motion-reduce:transform-none md:pl-8 md:py-7 ${
-                      activeProcessStep === index
-                        ? 'border-[#d4a48e]/30 bg-[linear-gradient(180deg,rgba(19,25,34,0.7)_0%,rgba(11,15,21,0.9)_100%)]'
-                        : 'border-white/10 opacity-85'
-                    }`}
-                  >
-                    <div className={`absolute left-[-0.3rem] top-7 h-2.5 w-2.5 rounded-full ${activeProcessStep === index ? 'bg-[#d4a48e] shadow-[0_0_0_4px_rgba(212,164,142,0.14)]' : 'bg-white/35'}`} />
-                    <div className="grid gap-4 md:grid-cols-12 md:items-start">
-                      <div className="md:col-span-2">
-                        <button
-                          type="button"
-                          aria-label={`Jump to ${step.title}`}
-                          onClick={(event) => scrollToSection(event, `process-step-${step.id}`)}
-                          className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 font-axiomMono text-lg tracking-[0.18em] text-[#d4a48e] transition-all duration-300 hover:border-[#d4a48e]/28 hover:bg-[#B05D41]/12 hover:text-[#f0cfbf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
-                        >
-                          {step.number}
-                        </button>
-                      </div>
-                      <div className="md:col-span-10">
-                        <div className="flex items-center gap-3">
-                          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.03]">
-                            <StepIcon id={step.id} />
-                          </span>
-                          <h3 className="text-[clamp(1.16rem,2vw,1.55rem)] font-semibold text-[#F2F4F7]">{step.title}</h3>
-                        </div>
-                        <p className="mt-3 text-sm leading-relaxed text-slate-300 md:text-base">{step.summary}</p>
-                        <ul className="mt-4 space-y-2">
-                          {step.points.map((point) => (
-                            <li key={point} className="text-sm leading-relaxed text-slate-300">
-                              {point}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" id="your-stack" data-method-section className="pt-14 md:pt-18">
-            <div className="mb-6 max-w-4xl" data-reveal>
-              <h2 className="mt-1 text-[clamp(1.95rem,4.6vw,3.35rem)] font-bold leading-[1.08] tracking-tight text-[#F2F4F7]">
-                Keep what works. Replace what doesn&apos;t.
-              </h2>
-              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We can stay inside your current setup, rebuild around your existing domain, or manage the technical side directly.
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-6xl px-5 pb-24 md:px-10 md:pb-32">
+          <section className="pt-10 md:pt-16">
+            <div className="max-w-3xl">
+              <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Method</p>
+              <h1 className="mt-4 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.98] tracking-tight text-[#F2F4F7]">
+                A clear process from first call to launch.
+              </h1>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
+                Founder-led planning, sharper scope, and a cleaner handoff from strategy to launch.
               </p>
-            </div>
-
-            <div className="grid gap-3 lg:grid-cols-12 lg:gap-4">
-              <div className="lg:col-span-5" data-reveal>
-                <div
-                  role="group"
-                  aria-label="Website setup options"
-                  className="axiom-bento flex flex-col gap-1.5 rounded-2xl p-2.5 md:p-3"
-                >
-                  {STACK_OPTIONS.map((option) => {
-                    const selected = option.id === activeStack;
-                    return (
-                      <button
-                        key={option.id}
-                        type="button"
-                        aria-pressed={selected}
-                        onClick={() => setActiveStack(option.id)}
-                        className={`rounded-xl border px-4 py-3.5 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B05D41]/45 ${
-                          selected
-                            ? 'border-[#B05D41]/40 bg-[#B05D41]/14 text-[#F2F4F7] shadow-[inset_0_0_0_1px_rgba(176,93,65,0.16)]'
-                            : 'border-transparent text-slate-300 hover:border-white/10 hover:bg-white/[0.05] hover:text-[#F2F4F7]'
-                        }`}
-                      >
-                        {option.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="lg:col-span-7" data-reveal>
-                <article
-                  className="axiom-bento rounded-2xl p-6 md:p-7"
-                >
-                  <div
-                    key={activeStackData.id}
-                    className="animate-[fade-in-up_0.28s_ease-out] motion-reduce:animate-none"
-                  >
-                    <h3 className="text-[clamp(1.35rem,2.3vw,2rem)] font-semibold leading-tight text-[#F2F4F7]">{activeStackData.title}</h3>
-                    <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">{activeStackData.summary}</p>
-                    <ul className="mt-5 list-disc space-y-2.5 pl-5">
-                      {activeStackData.bullets.map((bullet) => (
-                        <li key={bullet} className="text-sm leading-relaxed text-slate-300 md:text-[0.97rem]">
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              </div>
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" id="clarify" data-method-section className="pt-16 md:pt-22">
-            <div className="mb-7" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What We Clarify</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">What we confirm before build.</h2>
-            </div>
-
-            <div className="grid gap-3">
-              {CLARIFY_ITEMS.map((item, index) => {
-                const expanded = openClarify === index;
-                return (
-                  <article key={item.title} className="border-b border-white/10 py-5 md:py-6" data-reveal>
-                    <button
-                      type="button"
-                      className="flex w-full items-center justify-between gap-4 text-left"
-                      aria-expanded={expanded}
-                      aria-controls={`clarify-panel-${index}`}
-                      onClick={() => setOpenClarify(expanded ? -1 : index)}
-                    >
-                      <span className="text-base font-semibold text-[#F2F4F7] md:text-lg">{item.title}</span>
-                      <span className="font-axiomMono text-xs uppercase tracking-[0.12em] text-[#d4a48e]">
-                        {expanded ? 'Hide' : 'Show'}
-                      </span>
-                    </button>
-                    <div
-                      id={`clarify-panel-${index}`}
-                      className={`overflow-hidden transition-all duration-300 motion-reduce:transition-none ${
-                        expanded ? 'mt-3 max-h-64 opacity-100' : 'max-h-0 opacity-0'
-                      }`}
-                    >
-                      <p className="text-sm leading-relaxed text-slate-300 md:text-base">{item.body}</p>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" id="faq" data-method-section className="pt-16 md:pt-22">
-            <div className="mb-7" data-reveal>
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">FAQ</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">A few common questions.</h2>
-            </div>
-
-            <div className="grid gap-3">
-              {FAQ_ITEMS.map((item, index) => {
-                const expanded = openFaq === index;
-                return (
-                  <article key={item.title} className="border-b border-white/10 py-5 md:py-6" data-reveal>
-                    <button
-                      type="button"
-                      className="flex w-full items-center justify-between gap-4 text-left"
-                      aria-expanded={expanded}
-                      aria-controls={`faq-panel-${index}`}
-                      onClick={() => setOpenFaq(expanded ? -1 : index)}
-                    >
-                      <span className="text-base font-semibold text-[#F2F4F7] md:text-lg">{item.title}</span>
-                      <span className="font-axiomMono text-xs uppercase tracking-[0.12em] text-[#d4a48e]">
-                        {expanded ? 'Hide' : 'Show'}
-                      </span>
-                    </button>
-                    <div
-                      id={`faq-panel-${index}`}
-                      className={`overflow-hidden transition-all duration-300 motion-reduce:transition-none ${
-                        expanded ? 'mt-3 max-h-56 opacity-100' : 'max-h-0 opacity-0'
-                      }`}
-                    >
-                      <p className="text-sm leading-relaxed text-slate-300 md:text-base">{item.body}</p>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
-            <div
-              className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827]/85 via-[#10141f]/80 to-[#0d1323]/85 p-8 text-center md:p-12"
-              data-reveal
-            >
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Final step</p>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                If the fit is right, we&apos;ll scope the work.
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                The first conversation covers goals, timing, and the level of support the project needs.
-              </p>
-              <div className="mt-8 flex justify-center">
+              <div className="mt-8">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
                   Start the conversation
                 </Link>
               </div>
             </div>
-          </RevealBlock>
+          </section>
+
+          <section className="pt-12 md:pt-16">
+            <div className="mb-5 flex flex-col gap-3 md:mb-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Process</p>
+                <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
+                  Four compact stages.
+                </h2>
+              </div>
+              <p className="max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
+                A tighter view of the work so the next step is always obvious.
+              </p>
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-2 md:gap-4">
+              {PROCESS_STEPS.map((step) => (
+                <article
+                  key={step.number}
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(15,20,29,0.96)_0%,rgba(10,14,21,0.98)_100%)] p-5 shadow-[0_16px_44px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d4a48e]/20 hover:shadow-[0_20px_54px_rgba(0,0,0,0.28)] md:p-6"
+                >
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,164,142,0.08),transparent_42%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="relative z-10 flex items-start justify-between gap-4">
+                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] font-axiomMono text-[11px] tracking-[0.18em] text-[#d4a48e]">
+                      {step.number}
+                    </span>
+                    <span className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
+                      Stage
+                    </span>
+                  </div>
+                  <div className="relative z-10 mt-5">
+                    <h3 className="text-[clamp(1.2rem,2vw,1.5rem)] font-semibold leading-tight text-[#F2F4F7]">
+                      {step.title}
+                    </h3>
+                    <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-300 md:text-[0.96rem]">
+                      {step.summary}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="pt-12 md:pt-16">
+            <article className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,18,26,0.98)_0%,rgba(10,13,19,0.98)_100%)] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.24)] md:p-7">
+              <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
+                    Pre-build checklist
+                  </p>
+                  <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.2rem]">
+                    What we confirm before build
+                  </h2>
+                </div>
+                <p className="max-w-md text-sm leading-relaxed text-slate-400">
+                  Compact, aligned, and locked before work begins.
+                </p>
+              </div>
+
+              <ul className="mt-6 divide-y divide-white/[0.07]">
+                {CHECKLIST_ITEMS.map((item) => (
+                  <li key={item.title} className="flex items-start gap-3 py-3.5 md:py-4">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
+                      <CheckMark />
+                    </span>
+                    <span className="text-sm font-medium leading-relaxed text-slate-200 md:text-[0.96rem]">
+                      {item.title}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </section>
+
+          <section className="pt-12 md:pt-16">
+            <article className="relative overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,23,34,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-7 text-center shadow-[0_24px_64px_rgba(0,0,0,0.28)] md:p-10">
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute -top-24 left-[14%] h-48 w-48 rounded-full bg-[#B05D41]/12 blur-3xl" />
+                <div className="absolute -bottom-24 right-[8%] h-56 w-56 rounded-full bg-[#4B6EAF]/12 blur-3xl" />
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              </div>
+              <div className="relative z-10 mx-auto max-w-2xl">
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                  If the fit is right, we&apos;ll scope the work.
+                </h2>
+                <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
+                  The first conversation is where goals, timing, and the cleanest next step become clear.
+                </p>
+                <div className="mt-8 flex justify-center">
+                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
+                    Start the conversation
+                  </Link>
+                </div>
+              </div>
+            </article>
+          </section>
         </main>
 
         <Footer />
