@@ -10,34 +10,36 @@ const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
 const Footer: React.FC = () => {
   return (
     <footer className="w-full border-t border-[#31363B] bg-[#090A0B]">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-8 py-20 md:grid-cols-[1.8fr_1fr_1fr_1fr] md:items-start">
-        <div>
-          <p className="text-3xl font-black leading-[1.05] tracking-tight text-[#F2F4F7] md:text-5xl">AXIOM INFRASTRUCTURE</p>
-          <p className="mt-4 max-w-md text-sm leading-[1.8] text-slate-300">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-x-6 gap-y-6 px-5 py-8 md:grid-cols-[1.6fr_0.9fr_0.9fr_1fr] md:gap-x-8 md:gap-y-10 md:px-8 md:py-12 md:items-start">
+        <div className="col-span-2 md:col-span-1">
+          <p className="text-xl font-black leading-[1.02] tracking-tight text-[#F2F4F7] md:text-4xl">AXIOM INFRASTRUCTURE</p>
+          <p className="mt-3 max-w-md text-xs leading-[1.7] text-slate-300 md:text-sm">
             Founder-led websites for established service businesses that need a sharper first impression and a cleaner path to inquiry.
           </p>
-          <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-400">
+          <p className="mt-2 hidden max-w-md text-[11px] leading-relaxed text-slate-400 md:block md:text-xs">
             Sample and demonstration work is labeled transparently. No fabricated results or client claims.
           </p>
-          <p className="mt-8 text-xs uppercase tracking-[0.1em] text-slate-300">Copyright 2026 Axiom Infrastructure. All rights reserved.</p>
+          <p className="mt-4 hidden text-[10px] uppercase tracking-[0.12em] text-slate-400 md:block md:mt-6">
+            Copyright 2026 Axiom Infrastructure. All rights reserved.
+          </p>
         </div>
 
-        <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Navigate</p>
+        <nav className="space-y-2.5">
+          <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Navigate</p>
           <NavLink to="/" className={routeLinkClass}>Home</NavLink>
           <NavLink to="/method" className={routeLinkClass}>Method</NavLink>
           <NavLink to="/works" className={routeLinkClass}>Work</NavLink>
           <NavLink to="/about" className={routeLinkClass}>About</NavLink>
         </nav>
 
-        <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Start</p>
+        <nav className="space-y-2.5">
+          <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Start</p>
           <NavLink to="/apply" className={routeLinkClass}>Book Consultation</NavLink>
           <NavLink to="/method" className={routeLinkClass}>Method</NavLink>
         </nav>
 
-        <nav className="space-y-3">
-          <p className="font-axiomMono text-xs uppercase tracking-[0.1em] text-[#A7B3BC]">Contact</p>
+        <nav className="space-y-2.5 col-span-2 md:col-span-1">
+          <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
           <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
             <span className="block">contact@getaxiom.ca</span>
           </a>
