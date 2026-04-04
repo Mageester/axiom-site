@@ -180,11 +180,10 @@ const Home: React.FC = () => {
                   </Link>
                 </div>
               </div>
+              <div className="mt-10 max-w-[68rem] md:mt-14">
+                <BrandCarousel />
+              </div>
             </div>
-          </section>
-
-          <section data-reveal="off" className="pt-10 md:pt-14">
-            <BrandCarousel />
           </section>
 
           <RevealBlock as="section" className="pt-20 md:pt-24">
