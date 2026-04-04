@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion, type HTMLMotionProps } from 'framer-motion';
+import { MOTION_EASE_STANDARD, REVEAL_SETTINGS } from '../../lib/motion';
 
 type RevealVariant = 'section' | 'card' | 'feature';
 type RevealTag = 'div' | 'section' | 'article';
@@ -13,15 +14,15 @@ interface RevealBlockProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
 
 const variants: Record<RevealVariant, { hidden: { opacity: number; y: number }; visible: { opacity: number; y: number } }> = {
   section: {
-    hidden: { opacity: 0, y: 22 },
+    hidden: { opacity: 0, y: REVEAL_SETTINGS.section.distance },
     visible: { opacity: 1, y: 0 },
   },
   card: {
-    hidden: { opacity: 0, y: 16 },
+    hidden: { opacity: 0, y: REVEAL_SETTINGS.card.distance },
     visible: { opacity: 1, y: 0 },
   },
   feature: {
-    hidden: { opacity: 0, y: 26 },
+    hidden: { opacity: 0, y: REVEAL_SETTINGS.feature.distance },
     visible: { opacity: 1, y: 0 },
   },
 };
@@ -45,7 +46,7 @@ export function RevealBlock({
 
   if (prefersReducedMotion) {
     return (
-      <Component {...props}>
+      <Component data-motion-managed="true" {...props}>
         {children}
       </Component>
     );
@@ -53,13 +54,14 @@ export function RevealBlock({
 
   return (
     <Component
+      data-motion-managed="true"
       initial={variants[variant].hidden}
       whileInView={variants[variant].visible}
-      viewport={{ once: true, amount: 0.16, margin: '0px 0px -10% 0px' }}
+      viewport={{ once: true, amount: 0.18, margin: '0px 0px -8% 0px' }}
       transition={{
-        duration: variant === 'card' ? 0.5 : 0.62,
+        duration: REVEAL_SETTINGS[variant].duration,
         delay,
-        ease: [0.22, 1, 0.36, 1],
+        ease: MOTION_EASE_STANDARD,
         ...transition,
       }}
       {...props}

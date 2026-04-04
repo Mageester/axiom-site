@@ -38,13 +38,27 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 8);
+    let rafId = 0;
+
+    const updateScrolledState = () => {
+      rafId = 0;
+      const nextIsScrolled = window.scrollY > 8;
+      setIsScrolled((previous) => (previous === nextIsScrolled ? previous : nextIsScrolled));
     };
 
-    handleScroll();
+    const handleScroll = () => {
+      if (rafId !== 0) return;
+      rafId = window.requestAnimationFrame(updateScrolledState);
+    };
+
+    updateScrolledState();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      if (rafId !== 0) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -52,13 +66,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     if (!root) return;
 
     const targets = Array.from(root.querySelectorAll<HTMLElement>('main > section, main > article'))
-      .filter((element, index) => index > 0 && !element.hasAttribute('data-hero-root') && element.dataset.reveal !== 'off');
+      .filter(
+        (element, index) =>
+          index > 0 &&
+          !element.hasAttribute('data-hero-root') &&
+          element.dataset.reveal !== 'off' &&
+          element.dataset.motionManaged !== 'true'
+      );
 
     if (targets.length === 0) return;
 
     targets.forEach((element, index) => {
       element.classList.add('reveal-on-scroll');
-      element.style.setProperty('--reveal-order', String(index % 4));
+      element.style.setProperty('--reveal-order', String(index % 3));
     });
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -74,7 +94,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
     );
 
     targets.forEach((element) => observer.observe(element));
@@ -163,40 +183,32 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         )
         .filter((element) => !element.closest('[aria-hidden="true"]'));
       const backgrounds = gsap.utils.toArray<HTMLElement>('[data-startup-bg]');
-      const cards = gsap.utils
-        .toArray<HTMLElement>('[data-glass-card], .axiom-bento, .axiom-bento-card, .machined-card')
-        .filter((element) => !element.closest('[aria-hidden="true"]'));
 
-      const timeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const timeline = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
       if (nav) {
-        gsap.set(nav, { autoAlpha: 0, y: -18 });
-        timeline.to(nav, { autoAlpha: 1, y: 0, duration: 0.5 }, 0);
+        gsap.set(nav, { autoAlpha: 0, y: -10 });
+        timeline.to(nav, { autoAlpha: 1, y: 0, duration: 0.42 }, 0);
       }
 
       if (logo) {
-        gsap.set(logo, { autoAlpha: 0, x: -28, transformOrigin: 'left center' });
-        timeline.to(logo, { autoAlpha: 1, x: 0, duration: 0.72, ease: 'expo.out' }, 0.08);
+        gsap.set(logo, { autoAlpha: 0, x: -18, transformOrigin: 'left center' });
+        timeline.to(logo, { autoAlpha: 1, x: 0, duration: 0.54 }, 0.06);
       }
 
       if (navLinks.length) {
-        gsap.set(navLinks, { autoAlpha: 0, y: -10 });
-        timeline.to(navLinks, { autoAlpha: 1, y: 0, duration: 0.42, stagger: 0.04 }, 0.18);
+        gsap.set(navLinks, { autoAlpha: 0, y: -8 });
+        timeline.to(navLinks, { autoAlpha: 1, y: 0, duration: 0.34, stagger: 0.03 }, 0.12);
       }
 
       if (heroContent.length) {
-        gsap.set(heroContent, { autoAlpha: 0, y: 18 });
-        timeline.to(heroContent, { autoAlpha: 1, y: 0, duration: 0.62, stagger: 0.08 }, 0.22);
+        gsap.set(heroContent, { autoAlpha: 0, y: 14 });
+        timeline.to(heroContent, { autoAlpha: 1, y: 0, duration: 0.54, stagger: 0.06 }, 0.16);
       }
 
       if (backgrounds.length) {
         gsap.set(backgrounds, { autoAlpha: 0 });
-        timeline.to(backgrounds, { autoAlpha: 0.07, duration: 0.8, stagger: 0.08, ease: 'power1.out' }, 0.16);
-      }
-
-      if (cards.length) {
-        gsap.set(cards, { autoAlpha: 0, y: 22 });
-        timeline.to(cards, { autoAlpha: 1, y: 0, duration: 0.56, stagger: 0.05 }, 0.36);
+        timeline.to(backgrounds, { autoAlpha: 0.06, duration: 0.72, stagger: 0.06, ease: 'power1.out' }, 0.08);
       }
     }, layoutRef);
 
@@ -209,11 +221,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const active = isActiveRoute(pathname, to);
 
     return [
-      'relative inline-flex items-center rounded-full px-3.5 py-2 font-medium uppercase tracking-[0.2em] text-[11px] transition-all duration-300',
+      'relative inline-flex items-center rounded-full px-3.5 py-2 font-medium uppercase tracking-[0.2em] text-[11px] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
       active
-        ? 'scale-[1.04] bg-white/[0.06] text-[#F2F4F7] shadow-[0_0_0_1px_rgba(212,164,142,0.18),0_0_20px_rgba(212,164,142,0.08)] after:absolute after:inset-x-3 after:bottom-[6px] after:h-[2px] after:rounded-full after:bg-[#d4a48e] after:content-[""]'
-        : 'text-white/55 hover:bg-white/[0.04] hover:text-[#EAEFF5]'
+        ? 'bg-white/[0.06] text-[#F2F4F7] shadow-[0_0_0_1px_rgba(212,164,142,0.16),0_12px_26px_rgba(0,0,0,0.16)] after:absolute after:inset-x-3 after:bottom-[6px] after:h-[2px] after:rounded-full after:bg-[#d4a48e] after:content-[""]'
+        : 'text-white/58 hover:bg-white/[0.04] hover:text-[#EAEFF5]'
     ].join(' ');
   };
 
@@ -221,7 +233,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const active = isActiveRoute(pathname, to);
 
     return [
-      'rounded-xl px-3 py-2.5 text-sm uppercase tracking-[0.14em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
+      'rounded-xl px-3 py-2.5 text-sm uppercase tracking-[0.14em] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
       active
         ? 'bg-white/[0.08] text-[#F2F4F7] shadow-[inset_0_0_0_1px_rgba(212,164,142,0.12)]'
         : 'text-slate-300 hover:bg-white/[0.05] hover:text-[#F2F4F7]'
@@ -258,9 +270,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <nav
         ref={navRef}
         data-startup-nav
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed left-0 right-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isScrolled
-            ? 'border-b border-white/[0.08] bg-[rgba(11,13,17,0.74)] backdrop-blur-xl'
+            ? 'border-b border-white/[0.08] bg-[rgba(11,13,17,0.72)] shadow-[0_10px_34px_rgba(0,0,0,0.16)] backdrop-blur-lg'
             : 'border-b border-transparent bg-transparent backdrop-blur-0'
         }`}
       >
@@ -270,14 +282,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               ref={logoTargetRef}
               type="button"
               onClick={() => navigate('/')}
-              className="inline-flex h-full origin-left items-center leading-none transition-transform duration-500 ease-out hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+              className="inline-flex h-full origin-left items-center leading-none transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
               aria-label="Axiom Infrastructure home"
             >
               <ResponsiveImage
                 source={responsiveImages.logoClear}
                 sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
                 alt="Axiom Infrastructure logo"
-                className="block h-16 w-auto max-w-none cursor-pointer object-contain object-left transition-all duration-500 hover:brightness-125 md:h-20 lg:h-24"
+                className="block h-16 w-auto max-w-none cursor-pointer object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-20 lg:h-24"
                 decoding="async"
               />
             </button>
@@ -308,7 +320,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               ref={mobileMenuButtonRef}
               type="button"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-[#F2F4F7] transition-all hover:border-white/35 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-[#F2F4F7] transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/35 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${
                 isMobileMenuOpen ? 'border-white/25 bg-white/[0.08]' : 'border-white/15 bg-white/[0.03]'
               }`}
               aria-label={isMobileMenuOpen ? 'Close site navigation' : 'Open site navigation'}
@@ -331,7 +343,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </nav>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/70 transition-opacity duration-200 md:hidden ${
+        className={`fixed inset-0 z-40 bg-black/70 transition-opacity duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
           isMobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -345,7 +357,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         aria-modal={isMobileMenuOpen ? 'true' : undefined}
         aria-hidden={!isMobileMenuOpen}
         aria-labelledby="mobile-menu-title"
-        className={`fixed inset-x-4 top-[5.5rem] z-50 rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.96)] p-5 shadow-[0_28px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl transition-all duration-200 md:hidden ${
+        className={`fixed inset-x-4 top-[5.5rem] z-50 rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.96)] p-5 shadow-[0_28px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
           isMobileMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >

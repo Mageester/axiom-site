@@ -78,13 +78,13 @@ const Infrastructure: React.FC = () => {
           <section className="pt-8 md:pt-12">
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Method</p>
-              <h1 className="mt-3 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
+              <h1 data-startup-heading className="mt-3 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
                 A clear process from first call to launch.
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
+              <p data-startup-copy className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
                 One call to understand your business. A clear plan. A professional launch.
               </p>
-              <div className="mt-6">
+              <div data-startup-actions className="mt-6">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
                   Book a Free Consultation
                 </Link>
@@ -106,10 +106,10 @@ const Infrastructure: React.FC = () => {
               {PROCESS_STEPS.map((step) => (
                 <article
                   key={step.number}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(15,20,29,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-4 shadow-[0_14px_38px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d4a48e]/20 hover:shadow-[0_18px_48px_rgba(0,0,0,0.26)] md:p-5"
+                  className="motion-surface group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(15,20,29,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-4 shadow-[0_12px_30px_rgba(0,0,0,0.16)] hover:-translate-y-px hover:border-[#d4a48e]/20 hover:shadow-[0_16px_36px_rgba(0,0,0,0.22)] md:p-5"
                 >
                   <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(212,164,142,0.1),transparent_42%)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="motion-fade pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(212,164,142,0.1),transparent_42%)] opacity-80 group-hover:opacity-100" />
                   <div className="relative z-10 flex items-start justify-between gap-4">
                     <div className="relative">
                       <span className="pointer-events-none absolute inset-[-0.85rem] rounded-full bg-[#B05D41]/10 blur-xl" />

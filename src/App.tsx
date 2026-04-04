@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { ROUTE_TRANSITION } from './lib/motion';
 import Home from './pages/Home';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -44,10 +45,10 @@ const App: React.FC = () => {
       <motion.div
         key={location.pathname}
         className="min-h-screen overflow-x-hidden"
-        initial={{ opacity: 0, y: 8 }}
+        initial={{ opacity: 0, y: 4 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -6 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        exit={{ opacity: 0, y: -3 }}
+        transition={ROUTE_TRANSITION}
       >
         <Suspense fallback={<RouteFallback />}>
           <Routes location={location}>

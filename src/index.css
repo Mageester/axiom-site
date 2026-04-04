@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --axiom-build-rev: '2026-04-03-marquee-fix';
+    --axiom-build-rev: '2026-04-04-motion-polish';
     --axiom-base: #0A0C10;
     --axiom-elevated: #11151A;
     --axiom-surface: #181E25;
@@ -28,6 +28,15 @@
     --text-secondary: var(--axiom-text-primary);
     --text-heading: var(--axiom-text-main);
     --text-body: var(--axiom-text-primary);
+    --motion-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+    --motion-ease-decelerate: cubic-bezier(0.16, 1, 0.3, 1);
+    --motion-duration-micro: 180ms;
+    --motion-duration-fast: 220ms;
+    --motion-duration-base: 320ms;
+    --motion-duration-slow: 520ms;
+    --motion-duration-reveal: 560ms;
+    --motion-lift-subtle: -2px;
+    --motion-lift-card: -3px;
   }
 
   html {
@@ -128,7 +137,11 @@
     padding: 0.85rem 1rem;
     text-transform: uppercase;
     transform: translateY(-160%);
-    transition: transform 220ms ease, opacity 220ms ease, border-color 220ms ease, background-color 220ms ease;
+    transition:
+      transform var(--motion-duration-fast) var(--motion-ease-standard),
+      opacity var(--motion-duration-fast) ease,
+      border-color var(--motion-duration-fast) ease,
+      background-color var(--motion-duration-fast) ease;
     opacity: 0;
   }
 
@@ -144,11 +157,12 @@
   select,
   textarea {
     transition:
-      color 220ms ease,
-      background-color 220ms ease,
-      border-color 220ms ease,
-      box-shadow 260ms ease,
-      transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+      color var(--motion-duration-fast) ease,
+      background-color var(--motion-duration-fast) ease,
+      border-color var(--motion-duration-fast) ease,
+      opacity var(--motion-duration-fast) ease,
+      box-shadow var(--motion-duration-base) ease,
+      transform var(--motion-duration-base) var(--motion-ease-standard);
   }
 
   body::after {
@@ -221,7 +235,10 @@
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 4px 14px rgba(0, 0, 0, 0.38), 0 14px 28px rgba(0, 0, 0, 0.26);
     transform: translateZ(0);
     backface-visibility: hidden;
-    transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 480ms cubic-bezier(0.22, 1, 0.36, 1), border-color 360ms ease;
+    transition:
+      transform var(--motion-duration-base) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-slow) var(--motion-ease-standard),
+      border-color var(--motion-duration-fast) ease;
   }
 
   .axiom-bento::before,
@@ -242,9 +259,9 @@
   .axiom-bento:focus-within,
   .axiom-bento-card:focus-within,
   .machined-card:focus-within {
-    transform: translate3d(0, -4px, 0);
+    transform: translate3d(0, var(--motion-lift-card), 0);
     border-color: rgba(200, 122, 87, 0.28);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06), 0 16px 28px rgba(0, 0, 0, 0.28), 0 24px 46px rgba(0, 0, 0, 0.38);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06), 0 12px 24px rgba(0, 0, 0, 0.24), 0 20px 38px rgba(0, 0, 0, 0.3);
   }
 
   .btn-primary {
@@ -271,7 +288,11 @@
       0 4px 34px 0 rgba(200, 122, 87, 0.12);
     transform: translateZ(0);
     backface-visibility: hidden;
-    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), filter 260ms ease, box-shadow 260ms ease, background-position 260ms ease;
+    transition:
+      transform var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-base) var(--motion-ease-standard),
+      background-position var(--motion-duration-fast) ease,
+      border-color var(--motion-duration-fast) ease;
   }
 
   .btn-primary::before {
@@ -281,19 +302,18 @@
     border-radius: inherit;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0));
     opacity: 0;
-    transition: opacity 220ms ease;
+    transition: opacity var(--motion-duration-fast) ease;
     pointer-events: none;
   }
 
   .btn-primary:hover {
-    transform: translate3d(0, -3px, 0);
-    filter: brightness(1.03);
-    background-position: 80% 34%;
+    transform: translate3d(0, var(--motion-lift-subtle), 0);
+    background-position: 68% 32%;
     box-shadow:
       inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
       inset 0 -6px 4px 0 rgba(0, 0, 0, 0.18),
-      0 10px 18px 0 rgba(0, 0, 0, 0.3),
-      0 16px 42px 0 rgba(200, 122, 87, 0.1);
+      0 8px 16px 0 rgba(0, 0, 0, 0.28),
+      0 14px 34px 0 rgba(200, 122, 87, 0.08);
   }
 
   .btn-primary:hover::before {
@@ -317,15 +337,19 @@
     font-weight: 600;
     letter-spacing: 0.01em;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
-    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), border-color 220ms ease, background-color 220ms ease, box-shadow 240ms ease;
+    transition:
+      transform var(--motion-duration-fast) var(--motion-ease-standard),
+      border-color var(--motion-duration-fast) ease,
+      background-color var(--motion-duration-fast) ease,
+      box-shadow var(--motion-duration-base) var(--motion-ease-standard);
   }
 
   .btn-secondary:hover,
   .btn-ghost:hover {
-    transform: translate3d(0, -2px, 0);
+    transform: translate3d(0, -1px, 0);
     border-color: rgba(255, 255, 255, 0.2);
     background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
   }
 
   .btn-primary:focus-visible {
@@ -348,7 +372,7 @@
     border-radius: inherit;
     background: linear-gradient(112deg, transparent 38%, rgba(255, 255, 255, 0.28) 50%, transparent 62%);
     transform: translateX(-140%) skewX(-14deg);
-    animation: btn-sheen 4.4s ease-in-out infinite;
+    animation: btn-sheen 5.6s ease-in-out infinite;
     pointer-events: none;
   }
 
@@ -370,12 +394,61 @@
 
   .magnetic-btn {
     transform: translateX(var(--mx, 0px)) translateY(var(--my, 0px)) scale(var(--ms, 1));
-    transition: transform 200ms cubic-bezier(0.2, 0.8, 0.4, 1), filter 200ms ease;
+    transition: transform var(--motion-duration-micro) var(--motion-ease-decelerate);
     will-change: transform;
   }
 
   .magnetic-btn.is-magnetic-active {
-    filter: brightness(1.04);
+    will-change: transform;
+  }
+
+  .motion-surface {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+    transition:
+      transform var(--motion-duration-base) var(--motion-ease-standard),
+      border-color var(--motion-duration-fast) ease,
+      box-shadow var(--motion-duration-slow) var(--motion-ease-standard),
+      background-color var(--motion-duration-fast) ease,
+      opacity var(--motion-duration-fast) ease;
+  }
+
+  .motion-media {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+    transition:
+      transform var(--motion-duration-slow) var(--motion-ease-standard),
+      opacity var(--motion-duration-base) ease;
+  }
+
+  .motion-fade {
+    transition: opacity var(--motion-duration-base) ease;
+  }
+
+  .motion-link-accent {
+    transition:
+      color var(--motion-duration-fast) ease,
+      opacity var(--motion-duration-fast) ease,
+      transform var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .motion-link-accent:hover,
+  .motion-link-accent:focus-visible {
+    transform: translate3d(0, -1px, 0);
+  }
+
+  .motion-floating {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+    transition:
+      transform var(--motion-duration-base) var(--motion-ease-standard),
+      opacity var(--motion-duration-fast) ease,
+      border-color var(--motion-duration-fast) ease,
+      background-color var(--motion-duration-fast) ease,
+      box-shadow var(--motion-duration-slow) var(--motion-ease-standard);
   }
 
   .logo-marquee-shell {
@@ -408,6 +481,8 @@
     width: max-content;
     gap: var(--marquee-gap, 2rem);
     will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
     animation: marquee-loop var(--marquee-duration, 36s) linear infinite;
   }
 
@@ -473,9 +548,9 @@
     padding: 0.95rem 1rem 0.95rem 0.95rem;
     transform: translate3d(0, 0, 0);
     transition:
-      transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 300ms ease;
+      transform var(--motion-duration-base) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-base) var(--motion-ease-standard),
+      border-color var(--motion-duration-fast) ease;
     transform-style: preserve-3d;
   }
 
@@ -487,8 +562,8 @@
     pointer-events: none;
     background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%);
     opacity: 0;
-    transform: translateX(-18%);
-    transition: opacity 320ms ease, transform 700ms ease;
+    transform: translateX(-10%);
+    transition: opacity var(--motion-duration-fast) ease, transform var(--motion-duration-slow) var(--motion-ease-standard);
   }
 
   .how-work-stage::after {
@@ -507,16 +582,16 @@
   }
 
   .how-work-stage:hover {
-    transform: translate3d(0, -3px, 0) rotateX(0.5deg);
+    transform: translate3d(0, var(--motion-lift-subtle), 0);
     border-color: rgba(255, 255, 255, 0.1);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.06),
-      0 16px 30px rgba(0, 0, 0, 0.2);
+      0 12px 24px rgba(0, 0, 0, 0.18);
   }
 
   .how-work-stage:hover::before {
     opacity: 1;
-    transform: translateX(18%);
+    transform: translateX(10%);
   }
 
   .how-work-stage-number {
@@ -555,13 +630,16 @@
   .card-snappy {
     transform: translateZ(0);
     backface-visibility: hidden;
-    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1), border-color 240ms ease;
+    transition:
+      transform var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-base) var(--motion-ease-standard),
+      border-color var(--motion-duration-fast) ease;
   }
 
   .card-snappy:hover,
   .card-snappy:focus-within {
-    transform: translate3d(0, -4px, 0);
-    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+    transform: translate3d(0, var(--motion-lift-card), 0);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
   }
 
   .animate-grid-drift {
@@ -627,10 +705,12 @@
 
   .reveal-on-scroll {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(14px);
     will-change: opacity, transform;
-    transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1), transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
-    transition-delay: calc(var(--reveal-order, 0) * 80ms);
+    transition:
+      opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+      transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    transition-delay: calc(var(--reveal-order, 0) * 60ms);
   }
 
   .reveal-on-scroll.is-visible {
@@ -639,12 +719,15 @@
   }
 
   .bento-hover {
-    transition: transform 500ms ease-out, box-shadow 500ms ease-out, border-color 500ms ease-out;
+    transition:
+      transform var(--motion-duration-base) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-slow) var(--motion-ease-standard),
+      border-color var(--motion-duration-fast) ease;
   }
 
   .bento-hover:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.7);
+    transform: translateY(var(--motion-lift-card)) scale(1.01);
+    box-shadow: 0 20px 34px rgba(0, 0, 0, 0.42);
   }
 
   .split-line {
@@ -706,7 +789,7 @@
   }
 
   78% {
-    opacity: 0.42;
+    opacity: 0.28;
   }
 
   100% {
@@ -839,6 +922,11 @@
   .axiom-bento,
   .axiom-bento-card,
   .machined-card,
+  .motion-surface,
+  .motion-media,
+  .motion-fade,
+  .motion-floating,
+  .motion-link-accent,
   .how-work-panel,
   .how-work-stage,
   body::before,
@@ -863,6 +951,11 @@
 
   .reveal-on-scroll {
     opacity: 1;
+  }
+
+  .motion-link-accent:hover,
+  .motion-link-accent:focus-visible {
+    transform: none;
   }
 
   .axiom-bento:hover,

@@ -104,15 +104,15 @@ const FloatingAffordances: React.FC = () => {
   return (
     <>
       <div
-        className={`fixed bottom-5 right-5 z-[55] hidden transition-all duration-300 ease-out md:block ${
-          showCta ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+        className={`fixed bottom-5 right-5 z-[55] hidden transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:block ${
+          showCta ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
         }`}
       >
         <Link
           to="/apply#project-application-form"
-          className="group inline-flex items-center gap-3 rounded-full border border-white/12 bg-[rgba(10,14,22,0.88)] px-4 py-3 text-left shadow-[0_16px_36px_rgba(0,0,0,0.28)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] hover:border-[#d4a48e]/35 hover:shadow-[0_20px_48px_rgba(0,0,0,0.34),0_0_0_1px_rgba(212,164,142,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+          className="motion-floating group inline-flex items-center gap-3 rounded-full border border-white/12 bg-[rgba(10,14,22,0.88)] px-4 py-3 text-left shadow-[0_14px_30px_rgba(0,0,0,0.24)] backdrop-blur-xl hover:-translate-y-px hover:border-[#d4a48e]/35 hover:shadow-[0_18px_36px_rgba(0,0,0,0.28),0_0_0_1px_rgba(212,164,142,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#e8bea8] transition-transform duration-300 group-hover:scale-105 group-hover:border-[#d4a48e]/30 group-hover:text-[#f0cfbf]">
+          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#e8bea8] transition-[transform,border-color,color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-px group-hover:border-[#d4a48e]/30 group-hover:text-[#f0cfbf]">
             <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
           </span>
           <span className="pr-1">
@@ -127,13 +127,13 @@ const FloatingAffordances: React.FC = () => {
       </div>
 
       <div
-        className={`fixed inset-x-4 bottom-4 z-[55] transition-all duration-300 ease-out md:hidden ${
-          showCta ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+        className={`fixed inset-x-4 bottom-4 z-[55] transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+          showCta ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
         }`}
       >
         <Link
           to="/apply#project-application-form"
-          className="flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-white/12 bg-[rgba(10,14,22,0.9)] px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-[#F2F4F7] shadow-[0_16px_34px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:border-[#d4a48e]/35 hover:shadow-[0_18px_42px_rgba(0,0,0,0.36),0_0_0_1px_rgba(212,164,142,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+          className="motion-floating flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-white/12 bg-[rgba(10,14,22,0.9)] px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-[#F2F4F7] shadow-[0_14px_30px_rgba(0,0,0,0.26)] backdrop-blur-xl hover:-translate-y-px hover:border-[#d4a48e]/35 hover:shadow-[0_18px_36px_rgba(0,0,0,0.3),0_0_0_1px_rgba(212,164,142,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
         >
           <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           Book Free Consultation
@@ -144,8 +144,8 @@ const FloatingAffordances: React.FC = () => {
         type="button"
         onClick={scrollToTop}
         aria-label="Back to top"
-        className={`fixed bottom-5 left-5 z-[55] inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/12 bg-[rgba(10,14,22,0.88)] text-[#F2F4F7] shadow-[0_16px_34px_rgba(0,0,0,0.28)] backdrop-blur-xl transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:border-[#d4a48e]/35 hover:shadow-[0_20px_48px_rgba(0,0,0,0.34),0_0_0_1px_rgba(212,164,142,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${
-          showBackToTop ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+        className={`motion-floating fixed bottom-5 left-5 z-[55] inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/12 bg-[rgba(10,14,22,0.88)] text-[#F2F4F7] shadow-[0_14px_30px_rgba(0,0,0,0.24)] backdrop-blur-xl hover:-translate-y-px hover:border-[#d4a48e]/35 hover:shadow-[0_18px_36px_rgba(0,0,0,0.28),0_0_0_1px_rgba(212,164,142,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${
+          showBackToTop ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
         }`}
       >
         <svg className="absolute inset-0 h-full w-full -rotate-90" aria-hidden="true" viewBox="0 0 44 44">

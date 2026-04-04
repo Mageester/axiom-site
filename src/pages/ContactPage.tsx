@@ -79,9 +79,9 @@ const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_activ
 const FALLBACK_SUBMIT_ERROR = 'Submission failed. Please retry or email contact@getaxiom.ca.';
 const FIELD_LABEL_CLASS = 'text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
 const FIELD_INPUT_CLASS =
-    'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-sm text-[#F2F4F7] outline-none transition-all placeholder:text-slate-500 focus:border-[#B05D41]/60 focus:ring-2 focus:ring-[#B05D41]/20';
+    'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500 focus:border-[#B05D41]/60 focus:ring-2 focus:ring-[#B05D41]/20';
 const SECONDARY_BUTTON_CLASS =
-    'inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-white/30 hover:bg-white/[0.06]';
+    'inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.06]';
 
 function getApiErrorMessage(payload: ApiResult | null) {
     if (!payload) return FALLBACK_SUBMIT_ERROR;
@@ -208,10 +208,10 @@ const GeneralContactForm: React.FC = () => {
                         Have a question or want to talk about your project? Get in touch.
                     </h1>
                 </div>
-                <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-200/90 md:text-base">
+                <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-200/90 md:text-base">
                     For general questions or an initial inquiry, send a message below.
                 </p>
-                <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-300">
+                <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-300">
                     For serious website projects, use{' '}
                     <Link to="/apply" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                         Apply
@@ -497,21 +497,21 @@ const ProjectApplicationForm: React.FC = () => {
                                 Tell us about your business and what you need.
                             </h1>
                         </div>
-                        <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
+                        <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
                             Fill in the details below so we can understand your goals. This is the best route for website projects.
                         </p>
-                        <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
+                        <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
                             For general questions or an initial inquiry, use{' '}
                             <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                 Contact
                             </Link>
                             .
                         </p>
-                        <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
+                        <p data-startup-actions className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
                             Step {step} of 2. This helps us understand scope and fit.
                         </p>
                         <div className="mx-auto mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
-                            <div className={`h-full bg-[#B05D41] transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`} />
+                            <div className={`h-full w-full origin-left bg-[#B05D41] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${step === 1 ? 'scale-x-50' : 'scale-x-100'}`} />
                         </div>
                     </section>
 
