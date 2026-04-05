@@ -3,23 +3,23 @@
 
 /
   X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: /speculation-rules.json
+  Speculation-Rules: "/speculation-rules.json"
 
 /about
   X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: /speculation-rules.json
+  Speculation-Rules: "/speculation-rules.json"
 
 /apply
   X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: /speculation-rules.json
+  Speculation-Rules: "/speculation-rules.json"
 
 /method
   X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: /speculation-rules.json
+  Speculation-Rules: "/speculation-rules.json"
 
 /works
   X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: /speculation-rules.json
+  Speculation-Rules: "/speculation-rules.json"
 
 /admin/*
   X-Robots-Tag: noindex, nofollow

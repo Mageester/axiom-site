@@ -3,12 +3,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { ROUTE_TRANSITION } from './lib/motion';
 import Home from './pages/Home';
+import About from './pages/About';
+import ContactPage from './pages/ContactPage';
+import Deployments from './pages/Deployments';
+import Infrastructure from './pages/Infrastructure';
 import ProtectedRoute from './components/ProtectedRoute';
 
-const About = lazy(() => import('./pages/About'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
-const Deployments = lazy(() => import('./pages/Deployments'));
-const Infrastructure = lazy(() => import('./pages/Infrastructure'));
 const Login = lazy(() => import('./pages/admin/Login'));
 const Account = lazy(() => import('./pages/admin/Account'));
 const Jobs = lazy(() => import('./pages/admin/Jobs'));
