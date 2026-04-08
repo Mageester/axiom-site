@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import BrandCarousel from '../components/BrandCarousel';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
@@ -34,74 +33,84 @@ const homepageWorkPreviewBySlug: Record<string, { title: string; summary: string
   },
 };
 
+const homepageWorkPresentationBySlug: Record<string, { statusLabel: string; ctaLabel: string }> = {
+  'demonstration-restaurant-reservation-site': {
+    statusLabel: 'Live',
+    ctaLabel: 'View live site',
+  },
+  'concept-landscaping-authority-site': {
+    statusLabel: 'Demo',
+    ctaLabel: 'View demo',
+  },
+  'concept-roofing-conversion-site': {
+    statusLabel: 'Demo',
+    ctaLabel: 'View demo',
+  },
+};
+
 const selectedWork = selectedWorkEntries.map((entry) => {
   const proofImage = getWorkProofImage(entry.slug);
   const preview = homepageWorkPreviewBySlug[entry.slug];
+  const presentation = homepageWorkPresentationBySlug[entry.slug] ?? {
+    statusLabel: entry.demoUrl ? 'Live' : 'Demo',
+    ctaLabel: entry.demoUrl ? 'View live site' : 'View demo',
+  };
+  const cleanTitle = preview?.title ?? entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '');
   return {
     id: entry.slug,
-    title: preview?.title ?? entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
+    title: cleanTitle,
     summary: preview?.summary ?? entry.summary.split('. ')[0].replace(/\.$/, '') + '.',
     image: proofImage.source,
     demoUrl: entry.demoUrl,
     imageAlt: proofImage.alt,
     imagePosition: proofImage.position,
-    projectType: 'Live site',
+    statusLabel: presentation.statusLabel,
+    ctaLabel: presentation.ctaLabel,
+    ariaLabel: `${presentation.ctaLabel} for ${cleanTitle}`,
   };
 });
 
-const heroProofPoints = [
-  {
-    title: 'Fast load times',
-    detail: 'Pages open quickly on phones.',
-  },
-  {
-    title: 'Clear mobile layouts',
-    detail: 'Text stays easy to read on small screens.',
-  },
-  {
-    title: 'Stronger trust',
-    detail: 'The site reads like a real business.',
-  },
-  {
-    title: 'Fewer weak pages',
-    detail: 'We cut the parts people skip.',
-  },
+const heroTrustPoints = [
+  'Fast on phones',
+  'Clear service pages',
+  'Proof up front',
+  'Easy contact path',
 ];
 
 const weakSiteCosts = [
   {
-    title: 'Smaller than it is',
-    detail: 'A thin site can make a real business seem less established.',
+    title: 'Looks smaller',
+    detail: 'The business can look less established than it is.',
   },
   {
-    title: 'Trust drops early',
-    detail: 'People leave before they see enough to call.',
+    title: 'Loses trust',
+    detail: 'Outdated pages make the company harder to trust.',
   },
   {
-    title: 'Proof gets buried',
-    detail: 'Reviews, photos, and past work are hard to find.',
+    title: 'Hides proof',
+    detail: 'Reviews, photos, and past jobs are hard to find.',
   },
   {
-    title: 'Contact gets missed',
-    detail: 'If the next step is hard to find, people move on.',
+    title: 'Misses contact',
+    detail: 'If the phone number or form is buried, people move on.',
   },
 ];
 
 const processStages = [
   {
     number: '01',
-    title: 'Talk',
-    detail: 'We look at the current site and the main goal.',
+    title: 'Review',
+    detail: 'We look at the current site and the main problem.',
   },
   {
     number: '02',
     title: 'Plan',
-    detail: 'We set the page list, proof, and next step.',
+    detail: 'We set the pages to keep, what proof to show, and where people should contact you.',
   },
   {
     number: '03',
     title: 'Build',
-    detail: 'We build the pages, check them on phones, and prepare launch.',
+    detail: 'We write, design, build, and check the site before launch.',
   },
 ];
 
@@ -110,7 +119,7 @@ const Home: React.FC = () => {
     <>
       <SEO
         title="Axiom | Websites for Serious Businesses"
-        description="Axiom builds websites for established businesses. Pages load quickly, stay clear on mobile, and help people trust the business sooner."
+        description="Axiom builds clear websites for established businesses. The pages work well on phones, make the business easier to trust, and make it easier to get in touch."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
@@ -126,42 +135,33 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Serious websites for serious businesses
+                    A website that looks like the business behind it
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom builds fast websites for established businesses. The pages are clear, easy to use on phones, and help people trust the business sooner.
+                  Axiom builds clear websites for established businesses. People can see what you do, trust what they see, and contact you without hunting.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                  <Link to="/method" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                    See how it works
+                  <Link to="/works" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                    See work
                   </Link>
                   <Link
-                    to="/apply"
+                    to="/method"
                     className="inline-flex w-full items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
                   >
-                    Talk to Axiom
+                    See process
                   </Link>
                 </div>
               </div>
-              <div data-startup-meta className="mt-8 flex flex-col items-center gap-4 md:mt-14 md:gap-8">
-                <div className="w-full max-w-4xl">
-                  <BrandCarousel />
-                </div>
-                <div className="w-full max-w-4xl overflow-hidden rounded-[1.5rem] border border-white/8 bg-white/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
-                  <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-4">
-                    {heroProofPoints.map((point) => (
-                      <div key={point.title} className="bg-white/[0.015] px-3.5 py-3.5 sm:px-5 sm:py-4">
-                        <p className="text-sm font-semibold tracking-[-0.02em] text-[#F2F4F7]">
-                          {point.title}
-                        </p>
-                        <p className="mt-1 text-sm leading-6 text-slate-300">
-                          {point.detail}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div data-startup-meta className="mt-8 w-full max-w-4xl border-t border-white/8 pt-5 md:mt-12 md:pt-6">
+                <ul className="grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
+                  {heroTrustPoints.map((point) => (
+                    <li key={point} className="flex items-center gap-2.5 text-sm text-slate-200/90">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#d4a48e]" aria-hidden="true" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </section>
@@ -169,12 +169,12 @@ const Home: React.FC = () => {
           <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-12">
               <div className="max-w-xl lg:pt-2">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">Why it matters</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">Weak sites</p>
                 <h2 className="mt-3 max-w-[11ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  What a weak site does.
+                  What a weak site costs.
                 </h2>
                 <p className="mt-4 max-w-[30ch] text-sm leading-7 text-slate-300 md:text-base">
-                  A weak site can make a good business look smaller, out of date, and harder to trust. It also makes contact harder.
+                  A weak site can make a solid business look smaller, less current, and harder to choose.
                 </p>
               </div>
 
@@ -207,59 +207,22 @@ const Home: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-16 md:pt-24">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-12">
-              <div className="max-w-xl lg:pt-2">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">What we cover first</p>
-                <h2 className="mt-3 max-w-[11ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  The first call is simple.
-                </h2>
-                <p className="mt-4 max-w-[30ch] text-sm leading-7 text-slate-300 md:text-base">
-                  We sort out the site, the pages, and the next step.
-                </p>
-              </div>
-
-              <div className="how-work-panel">
-                <div className="how-work-panel-header">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.22em] text-[#A7B3BC]">The steps</p>
-                </div>
-
-                <div className="mt-6 grid gap-3 md:gap-4">
-                  {processStages.map((stage, index) => (
-                    <article key={stage.title} className={`how-work-stage how-work-stage-${index + 1}`}>
-                      <div className="how-work-stage-number">{stage.number}</div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-3">
-                          <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.08rem]">
-                            {stage.title}
-                          </h3>
-                          <div className="h-px flex-1 bg-white/[0.08]" />
-                        </div>
-                        <p className="mt-2 max-w-[28ch] text-sm leading-6 text-slate-300 md:text-[0.95rem]">{stage.detail}</p>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" className="pt-14 md:pt-28" variant="feature">
+          <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
             <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  What these sites fixed.
+                  What changed.
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  Each one shows a clearer page, a better contact path, and less friction on mobile.
+                  This work shows what changed: clearer pages, stronger proof, and an easier way to get in touch.
                 </p>
               </div>
               <Link
                 to="/works"
                 className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
               >
-                See examples
+                See work
               </Link>
             </div>
 
@@ -285,7 +248,7 @@ const Home: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/12 to-transparent" />
                       <div className="absolute left-4 top-4">
                         <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
-                          {item.projectType}
+                          {item.statusLabel}
                         </span>
                       </div>
                     </div>
@@ -299,7 +262,7 @@ const Home: React.FC = () => {
                       {item.demoUrl ? (
                         <div className="mt-auto pt-6">
                           <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/deployment:text-[#e8bea8] group-focus-visible/deployment:text-[#e8bea8]">
-                            See site
+                            {item.ctaLabel}
                           </span>
                         </div>
                       ) : null}
@@ -317,7 +280,7 @@ const Home: React.FC = () => {
                     href={item.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`View live demo for ${item.title}`}
+                    aria-label={item.ariaLabel}
                     className="group/deployment block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090d18]"
                   >
                     {card}
@@ -327,7 +290,44 @@ const Home: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" id="intake" className="pt-16 md:pt-26" variant="feature">
+          <RevealBlock as="section" className="pt-16 md:pt-22">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-12">
+              <div className="max-w-xl lg:pt-2">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">Process</p>
+                <h2 className="mt-3 max-w-[12ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                  What the first call covers.
+                </h2>
+                <p className="mt-4 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
+                  We review the current site, the pages that matter, and the next step.
+                </p>
+              </div>
+
+              <div className="how-work-panel">
+                <div className="how-work-panel-header">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.22em] text-[#A7B3BC]">The steps</p>
+                </div>
+
+                <div className="mt-6 grid gap-3 md:gap-4">
+                  {processStages.map((stage, index) => (
+                    <article key={stage.title} className={`how-work-stage how-work-stage-${index + 1}`}>
+                      <div className="how-work-stage-number">{stage.number}</div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-3">
+                          <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.08rem]">
+                            {stage.title}
+                          </h3>
+                          <div className="h-px flex-1 bg-white/[0.08]" />
+                        </div>
+                        <p className="mt-2 max-w-[30ch] text-sm leading-6 text-slate-300 md:text-[0.95rem]">{stage.detail}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </RevealBlock>
+
+          <RevealBlock as="section" id="intake" className="pt-16 md:pt-24" variant="feature">
             <div className="relative overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br from-[#0f1628]/88 via-[#101726]/82 to-[#0b1120]/88 p-8 text-center shadow-[0_22px_60px_rgba(0,0,0,0.35)] md:p-12">
               <div className="pointer-events-none absolute inset-0">
                 <div className="absolute -top-24 left-[16%] h-52 w-52 rounded-full bg-[#B05D41]/14 blur-3xl" />
@@ -338,10 +338,10 @@ const Home: React.FC = () => {
               <div className="relative z-10">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Need a better website?
+                  We can review the site.
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  We&apos;ll look at your current site and tell you what needs work.
+                  We&apos;ll look at the current site and tell you what to fix first.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">

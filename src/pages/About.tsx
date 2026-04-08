@@ -63,7 +63,7 @@ const About: React.FC = () => {
                     to="/works"
                     className="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07] sm:w-auto"
                   >
-                    See examples
+                    See work
                   </Link>
                 </div>
               </div>
@@ -90,7 +90,7 @@ const About: React.FC = () => {
               <div>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mt-2 max-w-2xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  If it looks like a fit, we can talk.
+                  If the site feels weak, we can help.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
                   We can look at the current site and point out the first thing worth fixing.
@@ -104,7 +104,7 @@ const About: React.FC = () => {
                   to="/works"
                   className="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07] sm:w-auto"
                 >
-                  See examples
+                  See work
                 </Link>
               </div>
             </article>

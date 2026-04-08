@@ -44,16 +44,16 @@ const INITIAL_FORM: IntakeFormState = {
 };
 
 const SCALE_OPTIONS = [
-    { value: 'foundation', label: 'Foundation site ($500 CAD)' },
-    { value: 'authority', label: 'Growth site ($1,500 CAD)' },
+    { value: 'foundation', label: 'Basic site ($500 CAD)' },
+    { value: 'authority', label: 'Business site ($1,500 CAD)' },
     { value: 'expansion', label: 'Multi-location site ($3,000 CAD)' }
 ];
 
 const PAIN_POINTS_OPTIONS = [
-    'Losing leads to slow loading',
-    'Looks worse than my competitors',
-    'Losing high-paying jobs to stronger brands',
-    'Hard for customers to request service quickly',
+    'Site is slow',
+    'Looks worse than competitors',
+    'Proof is hard to find',
+    'Hard for people to call or ask for a quote',
     'Hard to update and manage'
 ];
 
@@ -64,7 +64,7 @@ const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_activ
     },
     {
         key: 'fit_trust_conversion_need',
-        label: 'Are you looking for a custom website rather than a template?'
+        label: 'Do you want a site built for your business, not a generic template?'
     },
     {
         key: 'fit_decision_owner_ready',
@@ -420,7 +420,7 @@ const ProjectApplicationForm: React.FC = () => {
         if (status === 'loading') return;
 
         const nextErrors: typeof errors = {};
-        if (!form.project_scale) nextErrors.project_scale = 'Please select an investment tier.';
+        if (!form.project_scale) nextErrors.project_scale = 'Please choose the kind of site you need.';
         if (form.details.trim().length < 10) nextErrors.details = 'Please share details (min 10 chars).';
         FIT_QUESTIONS.forEach((question) => {
             if (!form[question.key]) {
@@ -494,11 +494,11 @@ const ProjectApplicationForm: React.FC = () => {
                             Start a project
                         </p>
                         <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                            Tell us about your business and the website you need.
+                            Tell us about the site you need.
                         </h1>
                     </div>
                     <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                        Fill in the details below so we can see what the website needs to do.
+                        Two short steps. We review every request and reply within one business day.
                     </p>
                     <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
                         For a general question, use{' '}
@@ -507,17 +507,19 @@ const ProjectApplicationForm: React.FC = () => {
                         </Link>
                         .
                     </p>
-                    <p data-startup-actions className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                        Step {step} of 2. This takes about 2 minutes.
-                    </p>
-                    <div className="mx-auto mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
+                    <div data-startup-actions className="mx-auto mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">
+                        <span>Step {step} of 2</span>
+                        <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" aria-hidden="true" />
+                        <span>About 2 minutes</span>
+                    </div>
+                    <div className="mx-auto mt-4 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
                         <div className={`h-full w-full origin-left bg-[#B05D41] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${step === 1 ? 'scale-x-50' : 'scale-x-100'}`} />
                     </div>
                     </section>
 
-                    <section ref={formSectionRef} id="project-application-form" className="mx-auto mt-4 max-w-5xl">
+                    <section ref={formSectionRef} id="project-application-form" className="mx-auto mt-3 max-w-5xl">
                         <div className="axiom-bento p-6 md:p-8">
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-7">
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                                 <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
                                     {status === 'success' && (
                                         <div ref={successBoxRef} className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
@@ -536,7 +538,7 @@ const ProjectApplicationForm: React.FC = () => {
                                     )}
 
                                     {step === 1 ? (
-                                        <div className="flex flex-col gap-6">
+                                        <div className="flex flex-col gap-5">
                                             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                                                 <div className="flex flex-col gap-2">
                                                     <label className={FIELD_LABEL_CLASS}>Name</label>
@@ -554,14 +556,15 @@ const ProjectApplicationForm: React.FC = () => {
                                                     {errors.business_name && <p className="text-xs text-red-300">{errors.business_name}</p>}
                                                 </div>
                                                 <div className="flex flex-col gap-2">
-                                                    <label className={FIELD_LABEL_CLASS}>Phone</label>
+                                                    <label className={FIELD_LABEL_CLASS}>Phone (optional)</label>
                                                     <input type="tel" value={form.phone} onChange={(e) => setField('phone', e.target.value)} className={FIELD_INPUT_CLASS} />
                                                 </div>
                                             </div>
 
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>Current website</label>
-                                                <input type="url" placeholder="https://" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className={FIELD_INPUT_CLASS} />
+                                                <label className={FIELD_LABEL_CLASS}>Current website (optional)</label>
+                                                <input type="url" placeholder="https://your-site.com" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className={FIELD_INPUT_CLASS} />
+                                                <p className="text-xs text-slate-400">Leave this blank if you do not have a site yet.</p>
                                             </div>
 
                                             <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
@@ -569,32 +572,28 @@ const ProjectApplicationForm: React.FC = () => {
                                             </button>
 
                                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What happens next</p>
+                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Before you send it</p>
                                                 <p className="mt-3 text-sm text-slate-300">
-                                                    We'll review the details and reply within one business day.
+                                                    Phone and current website are optional.
                                                 </p>
                                                 <p className="mt-3 text-sm text-slate-300">
-                                                    If you only have a general question, use{' '}
-                                                    <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                                        Contact
-                                                    </Link>
-                                                    .
+                                                    Short answers are fine. We only need enough detail to understand the job.
                                                 </p>
                                             </div>
                                         </div>
                                     ) : (
-                                        <div className="flex flex-col gap-6">
+                                        <div className="flex flex-col gap-5">
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>Project Size</label>
+                                                <label className={FIELD_LABEL_CLASS}>What kind of site do you need?</label>
                                                 <select value={form.project_scale} onChange={(e) => setField('project_scale', e.target.value)} className={FIELD_INPUT_CLASS}>
-                                                    <option value="" disabled>Select project size...</option>
+                                                    <option value="" disabled>Select a site type...</option>
                                                     {SCALE_OPTIONS.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                                                 </select>
                                                 {errors.project_scale && <p className="text-xs text-red-300">{errors.project_scale}</p>}
                                             </div>
 
                                             <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>What needs attention</label>
+                                                <label className={FIELD_LABEL_CLASS}>What feels weak right now?</label>
                                                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                                     {PAIN_POINTS_OPTIONS.map(point => {
                                                         const selected = form.pain_points.includes(point);
@@ -615,7 +614,7 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>A few quick questions</label>
+                                                <label className={FIELD_LABEL_CLASS}>A few quick checks</label>
                                                 <div className="grid grid-cols-1 gap-3">
                                                     {FIT_QUESTIONS.map((question) => (
                                                         <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">
@@ -646,8 +645,9 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>What should the site do?</label>
-                                                <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Tell us what the site should do." className={`${FIELD_INPUT_CLASS} resize-none`} />
+                                                <label className={FIELD_LABEL_CLASS}>What should the site help with?</label>
+                                                <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Example: clearer service pages, better proof, and an easier way to get calls or quote requests." className={`${FIELD_INPUT_CLASS} resize-none`} />
+                                                <p className="text-xs text-slate-400">Short notes are fine.</p>
                                                 {errors.details && <p className="text-xs text-red-300">{errors.details}</p>}
                                             </div>
 

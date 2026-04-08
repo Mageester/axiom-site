@@ -8,8 +8,8 @@ type ScrollMetrics = {
   viewportHeight: number;
 };
 
-const CTA_SCROLL_THRESHOLD = 0.22;
-const BACK_TO_TOP_SCROLL_THRESHOLD = 1;
+const CTA_SCROLL_THRESHOLD = 0.34;
+const BACK_TO_TOP_SCROLL_THRESHOLD = 1.3;
 
 function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -78,7 +78,10 @@ const FloatingAffordances: React.FC = () => {
     };
   }, [pathname]);
 
-  const showCta = metrics.progress >= CTA_SCROLL_THRESHOLD && !pathname.startsWith('/apply');
+  const showCta =
+    metrics.progress >= CTA_SCROLL_THRESHOLD &&
+    !pathname.startsWith('/apply') &&
+    !pathname.startsWith('/contact');
   const showBackToTop = metrics.scrollY >= BACK_TO_TOP_SCROLL_THRESHOLD * metrics.viewportHeight;
 
   const ring = useMemo(() => {
@@ -104,39 +107,20 @@ const FloatingAffordances: React.FC = () => {
   return (
     <>
       <div
-        className={`fixed bottom-5 right-5 z-[55] hidden transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:block ${
+        className={`fixed bottom-4 right-4 z-[55] hidden transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:block ${
           showCta ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
         }`}
       >
         <Link
           to="/apply#project-application-form"
-          className="motion-floating group inline-flex items-center gap-3 rounded-full border border-white/12 bg-[rgba(10,14,22,0.88)] px-4 py-3 text-left shadow-[0_14px_30px_rgba(0,0,0,0.24)] backdrop-blur-xl hover:-translate-y-px hover:border-[#d4a48e]/35 hover:shadow-[0_18px_36px_rgba(0,0,0,0.28),0_0_0_1px_rgba(212,164,142,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+          className="motion-floating group inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-[rgba(10,14,22,0.82)] px-3.5 py-2.5 text-left shadow-[0_12px_24px_rgba(0,0,0,0.2)] backdrop-blur-lg hover:-translate-y-px hover:border-[#d4a48e]/30 hover:shadow-[0_16px_28px_rgba(0,0,0,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#e8bea8] transition-[transform,border-color,color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-px group-hover:border-[#d4a48e]/30 group-hover:text-[#f0cfbf]">
-            <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#e8bea8] transition-[transform,border-color,color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-px group-hover:border-[#d4a48e]/30 group-hover:text-[#f0cfbf]">
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </span>
-          <span className="pr-1">
-            <span className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-[#F2F4F7]">
-              Talk to Axiom
-            </span>
-            <span className="mt-0.5 block text-[10px] uppercase tracking-[0.18em] text-slate-400">
-              30-minute call
-            </span>
+          <span className="pr-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#F2F4F7]">
+            Talk to Axiom
           </span>
-        </Link>
-      </div>
-
-      <div
-        className={`fixed inset-x-4 bottom-4 z-[55] transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
-          showCta ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
-        }`}
-      >
-        <Link
-          to="/apply#project-application-form"
-          className="motion-floating flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-white/12 bg-[rgba(10,14,22,0.9)] px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-[#F2F4F7] shadow-[0_14px_30px_rgba(0,0,0,0.26)] backdrop-blur-xl hover:-translate-y-px hover:border-[#d4a48e]/35 hover:shadow-[0_18px_36px_rgba(0,0,0,0.3),0_0_0_1px_rgba(212,164,142,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
-        >
-          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          Talk to Axiom
         </Link>
       </div>
 
@@ -144,7 +128,7 @@ const FloatingAffordances: React.FC = () => {
         type="button"
         onClick={scrollToTop}
         aria-label="Back to top"
-        className={`motion-floating fixed bottom-5 left-5 z-[55] inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/12 bg-[rgba(10,14,22,0.88)] text-[#F2F4F7] shadow-[0_14px_30px_rgba(0,0,0,0.24)] backdrop-blur-xl hover:-translate-y-px hover:border-[#d4a48e]/35 hover:shadow-[0_18px_36px_rgba(0,0,0,0.28),0_0_0_1px_rgba(212,164,142,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${
+        className={`motion-floating fixed bottom-4 left-4 z-[55] hidden h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[rgba(10,14,22,0.82)] text-[#F2F4F7] shadow-[0_12px_24px_rgba(0,0,0,0.2)] backdrop-blur-lg hover:-translate-y-px hover:border-[#d4a48e]/30 hover:shadow-[0_16px_28px_rgba(0,0,0,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 md:inline-flex ${
           showBackToTop ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
         }`}
       >

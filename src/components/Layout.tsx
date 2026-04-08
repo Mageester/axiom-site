@@ -11,8 +11,9 @@ type LayoutProps = {
 };
 
 const NAV_ITEMS = [
-  { label: 'Examples', to: '/works' },
-  { label: 'About', to: '/about' },
+  { label: 'Home', to: '/' },
+  { label: 'Work', to: '/works' },
+  { label: 'Process', to: '/method' },
 ];
 
 const isActiveRoute = (pathname: string, to: string) => {
@@ -219,11 +220,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const active = isActiveRoute(pathname, to);
 
     return [
-      'relative inline-flex items-center rounded-full px-3.5 py-2 font-medium uppercase tracking-[0.2em] text-[11px] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]',
+      'inline-flex items-center py-2 text-sm font-medium transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
-      active
-        ? 'bg-white/[0.06] text-[#F2F4F7] shadow-[0_0_0_1px_rgba(212,164,142,0.16),0_12px_26px_rgba(0,0,0,0.16)] after:absolute after:inset-x-3 after:bottom-[6px] after:h-[2px] after:rounded-full after:bg-[#d4a48e] after:content-[""]'
-        : 'text-white/58 hover:bg-white/[0.04] hover:text-[#EAEFF5]'
+      active ? 'text-[#F2F4F7]' : 'text-white/62 hover:text-[#EAEFF5]'
     ].join(' ');
   };
 
@@ -231,10 +230,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const active = isActiveRoute(pathname, to);
 
     return [
-      'rounded-xl px-3 py-2.5 text-sm uppercase tracking-[0.14em] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
-      active
-        ? 'bg-white/[0.08] text-[#F2F4F7] shadow-[inset_0_0_0_1px_rgba(212,164,142,0.12)]'
-        : 'text-slate-300 hover:bg-white/[0.05] hover:text-[#F2F4F7]'
+      'rounded-xl px-3 py-2.5 text-base font-medium transition-[color,background-color,border-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
+      active ? 'bg-white/[0.06] text-[#F2F4F7]' : 'text-slate-300 hover:bg-white/[0.04] hover:text-[#F2F4F7]'
     ].join(' ');
   };
 
@@ -265,16 +262,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div data-startup-bg className="global-noise-floor" />
       </div>
 
-      <nav
-        ref={navRef}
-        data-startup-nav
-        className={`fixed left-0 right-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          isScrolled
-            ? 'border-b border-white/[0.08] bg-[rgba(11,13,17,0.72)] shadow-[0_10px_34px_rgba(0,0,0,0.16)] backdrop-blur-lg'
-            : 'border-b border-transparent bg-transparent backdrop-blur-0'
-        }`}
-      >
-        <div className="relative flex h-20 items-center px-6 md:px-12">
+      <nav ref={navRef} data-startup-nav className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-3 md:px-6 md:pt-4">
+        <div className="mx-auto max-w-7xl">
+          <div
+            className={`pointer-events-auto relative flex h-16 items-center rounded-[1.1rem] px-4 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-[4.25rem] md:px-6 ${
+              isScrolled
+                ? 'border border-white/[0.07] bg-[rgba(11,13,17,0.48)] shadow-[0_8px_24px_rgba(0,0,0,0.10)] backdrop-blur-md'
+                : 'border border-transparent bg-transparent shadow-none backdrop-blur-0'
+            }`}
+          >
           <div className="flex basis-[44%] flex-1 items-center justify-start">
               <button
                 ref={logoTargetRef}
@@ -287,13 +283,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   source={responsiveImages.logoClear}
                   sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
                   alt="Axiom logo"
-                  className="block h-16 w-auto max-w-none cursor-pointer object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-20 lg:h-24"
+                  className="block h-11 w-auto max-w-none cursor-pointer object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-14 lg:h-16"
                   decoding="async"
                 />
               </button>
           </div>
 
-          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-3 font-axiomMono md:flex">
+          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-7 md:flex">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.to}
@@ -308,8 +304,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
-            <Link to="/method" className="btn-primary btn-attention btn-sm px-4 py-2 text-sm">
-              See how it works
+            <Link to="/apply" className="btn-primary btn-sm px-4 py-2 text-sm">
+              Talk to Axiom
             </Link>
           </div>
 
@@ -338,6 +334,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </button>
           </div>
         </div>
+        </div>
       </nav>
 
       <div
@@ -355,7 +352,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         aria-modal={isMobileMenuOpen ? 'true' : undefined}
         aria-hidden={!isMobileMenuOpen}
         aria-labelledby="mobile-menu-title"
-        className={`fixed inset-x-4 top-[5.5rem] z-50 rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.96)] p-5 shadow-[0_28px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+        className={`fixed inset-x-4 top-[4.9rem] z-50 rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.94)] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.28)] backdrop-blur-lg transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
           isMobileMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >
@@ -380,11 +377,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </nav>
 
         <Link
-          to="/method"
+          to="/apply"
           onClick={() => setIsMobileMenuOpen(false)}
-          className="btn-primary btn-attention btn-lg mt-5 w-full"
+          className="btn-primary btn-lg mt-5 w-full"
         >
-          See how it works
+          Talk to Axiom
         </Link>
       </div>
 

@@ -23,18 +23,20 @@ const Footer: React.FC = () => {
 
         <nav className="space-y-1.5">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Pages</p>
-          <NavLink to="/works" className={routeLinkClass}>Examples</NavLink>
+          <NavLink to="/" className={routeLinkClass}>Home</NavLink>
+          <NavLink to="/works" className={routeLinkClass}>Work</NavLink>
+          <NavLink to="/method" className={routeLinkClass}>Process</NavLink>
           <NavLink to="/about" className={routeLinkClass}>About</NavLink>
         </nav>
 
         <nav className="space-y-1.5">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Next step</p>
-          <NavLink to="/method" className={routeLinkClass}>See how it works</NavLink>
           <NavLink to="/apply" className={routeLinkClass}>Talk to Axiom</NavLink>
         </nav>
 
         <nav className="col-span-2 space-y-1.5 md:col-span-1">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
+          <NavLink to="/contact" className={routeLinkClass}>Send a message</NavLink>
           <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
             <span className="block">contact@getaxiom.ca</span>
           </a>
