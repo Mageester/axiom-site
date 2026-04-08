@@ -6,47 +6,47 @@ const tiers = [
     {
         name: 'Foundation',
         price: '$500 CAD',
-        tag: 'Core Deployment',
-        desc: 'Launch-grade contractor infrastructure for replacing fragile agency templates.',
-        qualifier: 'Best for owner-led teams in one primary service territory.',
-        technical: '3-5 pages // edge hosting // conversion instrumentation',
+        tag: 'Starter',
+        desc: 'A clean site that replaces whatever you have now. Clear pages, fast on phones, easy to contact.',
+        qualifier: 'Good for one-person or small teams with one main service area.',
+        technical: '3–5 pages // fast hosting // contact tracking',
         features: [
-            'Offer architecture that frames premium positioning early',
-            'Emergency-ready intake flow for fast mobile conversions',
-            'Performance hardening with handoff baseline metrics',
+            'Clear service pages that show what you do upfront',
+            'Call and quote buttons that work well on phones',
+            'Speed and uptime handled for you',
         ],
-        cta: 'Apply for Foundation',
+        cta: 'Get started',
         packageParam: 'foundation',
     },
     {
         name: 'Growth',
         price: '$1,500 CAD',
-        tag: 'Growth System',
-        desc: 'Most selected by scaling teams who need stronger positioning and throughput at the same time.',
-        qualifier: 'Best for teams of 10+ targeting higher-ticket service work.',
-        technical: '7-10 pages // ROI dashboard // trust proof stack',
+        tag: 'Most popular',
+        desc: 'For businesses that want better leads, not just more traffic. Stronger pages, real proof, and fewer tire-kickers.',
+        qualifier: 'Good for teams of 10+ going after bigger jobs.',
+        technical: '7–10 pages // lead tracking // reviews and proof',
         features: [
-            'Qualification-first funnels that reduce low-margin leads',
-            'High-ticket service positioning across every key page',
-            'Priority launch support through first campaign cycle',
+            'Pages built to attract the right jobs, not the cheapest ones',
+            'Service pages that position you for higher-ticket work',
+            'Priority support through your first month live',
         ],
-        cta: 'Apply for Growth',
+        cta: 'Get started',
         packageParam: 'authority',
         featured: true,
     },
     {
         name: 'Multi-Location / Expansion',
         price: '$3,000 CAD',
-        tag: 'Bespoke Command',
-        desc: 'Custom architecture for multi-crew and multi-market growth teams.',
-        qualifier: 'Best for established teams expanding territories or acquisitions.',
-        technical: 'custom architecture // workflow integrations // executive reporting',
+        tag: 'Full build',
+        desc: 'For businesses with multiple crews, locations, or service areas that need one site to cover it all.',
+        qualifier: 'Good for established teams expanding into new areas.',
+        technical: 'custom build // tool connections // reporting',
         features: [
-            'Sales-process mapping from first click to closed work',
-            'CRM and dispatch integration strategy at implementation',
-            'Quarterly instrumentation review for growth accountability',
+            'Full sales path from first click to booked work',
+            'CRM and scheduling tool connections',
+            'Quarterly check-ins to make sure the site keeps working',
         ],
-        cta: 'Request Expansion Scope',
+        cta: 'Talk to us',
         packageParam: 'expansion',
     }
 ];
@@ -54,15 +54,15 @@ const tiers = [
 const faqs = [
     {
         q: 'How long does a typical build take?',
-        a: 'Foundation builds ship in 2 weeks. Growth builds take 3-4 weeks. Expansion programs are scoped in phased 4-8 week launches depending on integration depth. We work in focused sprints with weekly check-ins so timelines stay clear.'
+        a: 'Starter builds ship in 2 weeks. Growth builds take 3–4 weeks. Multi-location builds are scoped in phases over 4–8 weeks depending on complexity. We work in focused sprints with weekly check-ins.'
     },
     {
         q: 'Do I need to handle my own hosting?',
-        a: 'No. Every Axiom build is deployed to Cloudflare\'s global edge network — the same infrastructure used by Fortune 500 companies. Hosting, SSL, and CDN are included and managed for you.'
+        a: 'No. Every build goes on Cloudflare\'s network — the same one used by Fortune 500 companies. Hosting, SSL, and speed are included and handled for you.'
     },
     {
         q: 'What if I need changes after launch?',
-        a: 'Growth and Expansion engagements include 30 days of post-launch adjustments at no extra cost. After that, we offer optimization retainers. You always own your code with no lock-in.'
+        a: 'Growth and multi-location builds include 30 days of post-launch changes at no extra cost. After that, we offer ongoing support. You always own your code — no lock-in.'
     }
 ];
 
@@ -73,18 +73,18 @@ const ServicesPage: React.FC = () => {
     return (
         <div className="page-shell">
             <SEO
-                title="Infrastructure Investments | Axiom"
-                description="Explore Foundation, Growth, and Expansion infrastructure investments for local service businesses."
+                title="Pricing | Axiom"
+                description="Website pricing for local businesses. Starter, Growth, and Multi-Location builds with clear scope and no surprises."
             />
 
             {/* Header */}
             <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-12 sm:mb-16">
-                <p className="eyebrow-center">Infrastructure Investments</p>
+                <p className="eyebrow-center">Pricing</p>
                 <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
-                    Structured build tiers for serious local businesses.
+                    Clear pricing. No surprises.
                 </h1>
                 <p className="lead text-center mx-auto">
-                    Choose the infrastructure level that matches your growth stage and revenue goals.
+                    Three levels depending on what your business needs. Hosting, speed, and ownership included in all of them.
                 </p>
             </section>
 
@@ -97,7 +97,7 @@ const ServicesPage: React.FC = () => {
                     <div className="flex flex-col gap-1">
                         <h3 className="text-[17px] sm:text-[18px] font-semibold tracking-tight">Performance Guarantee</h3>
                         <p className="text-[14px] text-axiom-text-mute leading-[1.75]">
-                            If your site isn't loading in under one second, we'll fix it free. <span className="text-axiom-text-main font-medium">99.99% Edge Uptime guaranteed</span> or your month is on us.
+                            If your site isn't loading in under one second, we'll fix it free. <span className="text-axiom-text-main font-medium">99.99% uptime guaranteed</span> or your month is on us.
                         </p>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ const ServicesPage: React.FC = () => {
                             <h2 className="font-axiomSans text-[24px] font-semibold tracking-tight text-axiom-text-main">{tier.name}</h2>
                             {tier.featured && (
                                 <span className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-accent border border-axiom-accent/40 px-2 py-1 rounded">
-                                    Contractor's Choice
+                                    Most picked
                                 </span>
                             )}
                         </div>
@@ -153,7 +153,7 @@ const ServicesPage: React.FC = () => {
                 {[
                     {
                         label: 'Performance Guarantee',
-                        text: 'If your production site is not sub-second on modern mobile, we keep optimizing at no charge.',
+                        text: 'If your site isn\'t loading in under one second on phones, we keep working on it at no extra cost.',
                     },
                     {
                         label: 'Outcome Proof',
@@ -161,7 +161,7 @@ const ServicesPage: React.FC = () => {
                     },
                     {
                         label: 'Partner Capacity',
-                        text: 'Four active production partners per month to protect delivery quality.',
+                        text: 'We take on four projects a month to keep the quality up.',
                     },
                 ].map((item) => (
                     <div key={item.label} className="axiom-bento bg-axiom-surface border border-axiom-border p-4 sm:p-5">
@@ -177,16 +177,16 @@ const ServicesPage: React.FC = () => {
                     <div className="text-center mb-10">
                         <p className="eyebrow-center mb-4">Our Process</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
-                            The Path to Scale: Our Engineering Process.
+                            How the work runs.
                         </h2>
                     </div>
 
                     <div className="flex flex-col gap-4 md:grid md:grid-cols-4 md:gap-5">
                         {[
-                            { num: '01', title: 'Discovery & Audit', desc: 'We map your local market and identify lead-leakage in your current setup.' },
-                            { num: '02', title: 'Infrastructure Engineering', desc: 'We build your bespoke V8 Edge environment and automated intake pipelines.' },
-                            { num: '03', title: 'Performance Hardening', desc: 'We run 50+ point security and speed audits to ensure sub-second delivery.' },
-                            { num: '04', title: 'Launch & Support', desc: 'Your asset goes live on the global edge with 24/7 uptime monitoring.' },
+                            { num: '01', title: 'Review', desc: 'We look at your current site, your market, and what\'s not working.' },
+                            { num: '02', title: 'Build', desc: 'We write, design, and build the site with fast hosting and working forms.' },
+                            { num: '03', title: 'Test', desc: 'We check speed, forms, and every page on phones and desktop.' },
+                            { num: '04', title: 'Launch', desc: 'Your site goes live with monitoring to make sure everything stays up.' },
                         ].map((phase) => (
                             <div key={phase.num} className="axiom-bento md:p-6 flex flex-col overflow-hidden">
                                 {/* Mobile Accordion Header */}
@@ -286,7 +286,7 @@ const ServicesPage: React.FC = () => {
                             to="/apply"
                             className="btn-primary"
                         >
-                            Book Strategy Call
+                            Start a project
                         </Link>
                     </div>
                 </div>

@@ -135,11 +135,11 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Serious websites for serious businesses
+                    Your business is serious. Your site should be too.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  People should see what you do, find proof fast, and know how to reach you. We build sites that make that clear.
+                  We build websites where people can see what you do, find proof fast, and know how to reach you.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link to="/works" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">

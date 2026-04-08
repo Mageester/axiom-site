@@ -19,7 +19,7 @@ const AuditPage: React.FC = () => {
 
         if (companyFax.trim()) {
             setStatus('success');
-            setMsg('Axiom Blueprint Requested.');
+            setMsg('Review requested.');
             return;
         }
 
@@ -59,7 +59,7 @@ const AuditPage: React.FC = () => {
 
             if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg(result?.message || 'Axiom Blueprint Requested.');
+                setMsg(result?.message || 'Review requested.');
                 return;
             }
 
@@ -76,17 +76,17 @@ const AuditPage: React.FC = () => {
     return (
         <div className="page-shell min-h-[90vh] flex flex-col items-center justify-center relative overflow-hidden">
             <SEO
-                title="Complimentary Engineering Audit | Axiom Infrastructure"
-                description="Get a complimentary engineering audit of your website's performance, UX, and infrastructure."
+                title="Free Site Review | Axiom"
+                description="Get a free review of your website's speed, layout, and contact paths."
             />
             {/* Background glowing orb */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none z-0" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.015) 0%, transparent 60%)' }}></div>
 
             <div className="max-w-[600px] mx-auto w-full relative z-10 px-6 reveal">
                 <div className="text-center mb-12">
-                    <h1 className="text-[40px] md:text-[56px] font-semibold mb-6 text-axiom-text-main tracking-tight leading-[1.05]">Is your website<br />a liability?</h1>
+                    <h1 className="text-[40px] md:text-[56px] font-semibold mb-6 text-axiom-text-main tracking-tight leading-[1.05]">Is your site<br />costing you money?</h1>
                     <p className="text-[16px] text-axiom-text-mute max-w-lg mx-auto leading-relaxed">
-                        Most local business sites leak revenue due to outdated infrastructure. Get a complimentary engineering audit.
+                        Most local business sites lose leads because they're slow, confusing, or hard to contact through. Get a free review.
                     </p>
                 </div>
 
@@ -105,9 +105,9 @@ const AuditPage: React.FC = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <h2 className="text-[24px] font-semibold text-axiom-text-main mb-3">Axiom Blueprint Requested.</h2>
+                            <h2 className="text-[24px] font-semibold text-axiom-text-main mb-3">Review requested.</h2>
                             <p className="text-[14px] text-axiom-text-mute leading-relaxed max-w-sm">
-                                Our engineering team will review your infrastructure and respond within 24 hours.
+                                We'll look at your site and get back to you within 24 hours.
                             </p>
                         </div>
                     )}
@@ -135,7 +135,7 @@ const AuditPage: React.FC = () => {
                     </div>
 
                     <button disabled={status === 'loading' || status === 'success'} type="submit" className="btn-primary btn-lg w-full mt-4 disabled:opacity-50">
-                        {status === 'loading' ? 'Analyzing...' : 'Analyze My Infrastructure'}
+                        {status === 'loading' ? 'Reviewing...' : 'Get a free review'}
                     </button>
                 </form>
             </div>

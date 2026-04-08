@@ -135,12 +135,12 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom"
-        description="A small selection of restaurant, landscaping, and roofing sites that show how Axiom makes pages clearer and easier to use."
+        description="Restaurant, landscaping, and roofing sites we built. Each one shows what a clearer, faster site looks like."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'Work | Axiom',
-          description: 'A small selection of restaurant, landscaping, and roofing sites that show how Axiom makes pages clearer and easier to use.',
+          description: 'Restaurant, landscaping, and roofing sites we built. Each one shows what a clearer, faster site looks like.',
           url: 'https://getaxiom.ca/works',
         }}
       />
@@ -150,10 +150,10 @@ const Deployments: React.FC = () => {
           <div className="max-w-4xl">
             <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
             <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">Selected work that shows the standard.</h1>
+              <h1 data-startup-heading className="text-left">Sites we built. Problems we fixed.</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              One live site and two demos that show clearer pages, better proof, and easier contact.
+              One live site and two demos. Each one is clearer, faster, and easier to contact through.
             </p>
           </div>
         </RevealBlock>
@@ -172,9 +172,9 @@ const Deployments: React.FC = () => {
           <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[520px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[140px]" />
 
           <div className="relative z-10">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this kind of cleanup?</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Want the same thing for your site?</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We can review the site and tell you what to fix first.
+                We’ll review what you have and tell you what to fix first.
               </p>
               <div className="mt-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
                 <Link to="/apply#project-application-form" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">

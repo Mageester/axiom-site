@@ -20,56 +20,56 @@ const pricingTiers: PricingTier[] = [
     name: 'Foundation',
     price: '$500 CAD',
     packageParam: 'foundation',
-    bestFor: 'Best for owner-led teams operating in one core service territory.',
-    outcome: 'Ship a high-performance web asset that replaces fragile agency templates and captures urgent calls faster.',
-    technical: '3-5 pages // edge deployment // conversion instrumentation',
+    bestFor: 'Good for one-person or small teams with one main service area.',
+    outcome: 'A clean site that replaces whatever you have now. Clear pages, fast on phones, easy to contact.',
+    technical: '3–5 pages // fast hosting // contact tracking',
     includes: [
-      'Offer architecture and service hierarchy built for premium positioning',
-      'Mobile-first intake flow optimized for speed-to-call actions',
-      'Analytics baseline with lead source visibility at launch',
+      'Clear service pages that show what you do upfront',
+      'Call and quote buttons that work well on phones',
+      'Speed and analytics set up at launch',
     ],
-    boundary: 'Not included: multi-location rollout or custom workflow integrations.',
-    cta: 'Apply for Foundation',
+    boundary: 'Does not include multi-location pages or custom tool connections.',
+    cta: 'Get started',
   },
   {
     name: 'Growth',
     price: '$1,500 CAD',
     packageParam: 'authority',
     featured: true,
-    bestFor: 'Best for growth-stage teams scaling volume while protecting ticket quality.',
-    outcome: 'Deploy a conversion system that filters weak inquiries and increases close-ready opportunities.',
-    technical: '7-10 pages // ROI dashboard // trust proof architecture',
+    bestFor: 'Good for growing teams that want better leads, not just more traffic.',
+    outcome: 'Stronger pages, real proof, and a site that attracts the right jobs instead of the cheapest ones.',
+    technical: '7–10 pages // lead tracking // reviews and proof',
     includes: [
-      'Qualification-first funnels tuned to reduce low-margin jobs',
-      'Expanded service and market positioning across key revenue pages',
-      'Priority implementation support through first campaign cycle',
-      'ROI dashboard layer for leadership-level decision visibility',
+      'Pages built to attract higher-ticket work',
+      'Service and market pages that position you clearly',
+      'Priority support through your first month live',
+      'Lead tracking so you can see what\'s working',
     ],
-    boundary: 'Not included: enterprise back-office custom integrations.',
-    cta: 'Apply for Growth',
+    boundary: 'Does not include custom back-office integrations.',
+    cta: 'Get started',
   },
   {
     name: 'Multi-Location / Expansion',
     price: '$3,000 CAD',
     packageParam: 'expansion',
-    bestFor: 'Best for multi-crew teams expanding territories or integrating acquisitions.',
-    outcome: 'Engineer a scalable infrastructure platform that standardizes performance across regions and crews.',
-    technical: 'custom architecture // workflow mapping // executive reporting',
+    bestFor: 'Good for multi-crew teams expanding into new areas.',
+    outcome: 'One site that covers multiple locations, crews, and service areas without falling apart.',
+    technical: 'custom build // tool connections // reporting',
     includes: [
-      'Multi-location information architecture and conversion routing',
-      'Custom implementation roadmap with phased launch sequencing',
-      'CRM or dispatch integration planning for operational fit',
-      'Quarterly instrumentation reviews for sustained growth control',
+      'Pages and routing for each location and service area',
+      'Phased launch plan so nothing breaks',
+      'CRM or scheduling tool connections',
+      'Quarterly check-ins to keep the site working',
     ],
-    boundary: 'Not included: fixed scope before discovery and technical mapping.',
-    cta: 'Request Expansion Scope',
+    boundary: 'Scope is set after an initial review, not before.',
+    cta: 'Talk to us',
   },
 ];
 
 const trustSignals = [
   {
     label: 'Performance Guarantee',
-    detail: 'If your production build is not sub-second on modern mobile, we keep optimizing at no charge.',
+    detail: 'If your site isn\'t loading in under one second on phones, we keep working on it at no extra cost.',
   },
   {
     label: 'Outcome Proof',
@@ -77,7 +77,7 @@ const trustSignals = [
   },
   {
     label: 'Partner Capacity',
-    detail: 'We accept four active production partners per month to protect implementation quality.',
+    detail: 'We take on four projects a month to keep the quality up.',
   },
 ];
 
@@ -85,17 +85,17 @@ const PricingPage: React.FC = () => {
   return (
     <div className="page-shell">
       <SEO
-        title="Infrastructure Investment | Axiom Infrastructure"
-        description="High-ticket web infrastructure packages built for contractors who need measurable conversion and performance results."
+        title="Pricing | Axiom"
+        description="Website pricing for local businesses. Clear scope, no surprises, and a site you own."
       />
 
       <section className="max-w-3xl mx-auto text-center flex flex-col gap-5 mb-12 sm:mb-14">
-        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Infrastructure Investment</p>
+        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Pricing</p>
         <h1 className="text-[32px] sm:text-[44px] md:text-[54px] font-axiomSans font-semibold tracking-[-0.02em] leading-[1.06] text-axiom-text-main">
-          Pricing Built for Serious Growth Teams.
+          Clear pricing. No surprises.
         </h1>
         <p className="text-[16px] sm:text-[18px] text-axiom-text-main/85 leading-relaxed max-w-[760px] mx-auto">
-          Clear value ladder, explicit outcomes, and engineered delivery standards. No hidden fees. No commodity agency fluff.
+          Three levels depending on what your business needs. Hosting, speed, and ownership included in all of them.
         </p>
       </section>
 
@@ -110,7 +110,7 @@ const PricingPage: React.FC = () => {
                 <h2 className="font-axiomSans text-[22px] md:text-[24px] font-semibold tracking-tight text-axiom-text-main">{tier.name}</h2>
                 {tier.featured && (
                   <span className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-accent border border-axiom-accent/50 px-2 py-1 rounded">
-                    Contractor&apos;s Choice
+                    Most picked
                   </span>
                 )}
               </div>
@@ -160,15 +160,15 @@ const PricingPage: React.FC = () => {
 
       <section className="max-w-[1200px] mx-auto mt-12">
         <div className="axiom-bento bg-axiom-surface p-8 sm:p-10 text-center">
-          <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-axiom-text-mute mb-4">Execution Guarantee</p>
+          <p className="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-axiom-text-mute mb-4">Guarantee</p>
           <h2 className="text-[24px] sm:text-[30px] font-axiomSans font-semibold tracking-tight text-axiom-text-main mb-3">
-            If it does not improve qualified lead flow, we keep working.
+            If the site doesn't bring in better leads, we keep working.
           </h2>
           <p className="text-[15px] text-axiom-text-mute max-w-[760px] mx-auto leading-relaxed">
-            We scope tightly, instrument everything, and optimize until the conversion system performs. This is infrastructure, not a brochure website.
+            We scope tightly, track everything, and keep improving until the site does its job. This is a working tool, not a brochure.
           </p>
           <Link to="/apply" className="btn-primary mt-6">
-            Apply for Strategy Call
+            Start a project
           </Link>
         </div>
       </section>

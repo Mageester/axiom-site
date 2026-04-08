@@ -6,19 +6,19 @@ type Signal = {
 
 const signals: Signal[] = [
   { label: 'Thorough QA' },
-  { label: 'Scope Locked' },
-  { label: 'Founder Reviewed' },
-  { label: 'Global Delivery' },
-  { label: 'Speed Verified' },
-  { label: 'Stricter Standards' },
-  { label: 'Reliable Uptime' },
-  { label: 'Launch Ready' },
+  { label: 'Fixed scope' },
+  { label: 'Owner reviewed' },
+  { label: 'Fast everywhere' },
+  { label: 'Speed tested' },
+  { label: 'High standards' },
+  { label: 'Stays online' },
+  { label: 'Ready to launch' },
 ];
 
 const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
   const iconClass = 'h-3.5 w-3.5 shrink-0 text-slate-300/85';
 
-  if (label === 'Founder Reviewed') {
+  if (label === 'Owner reviewed') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.7" />
@@ -27,7 +27,7 @@ const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
     );
   }
 
-  if (label === 'Global Delivery') {
+  if (label === 'Fast everywhere') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <path d="M13 3 6.5 13h4L9.5 21 17.5 10h-4.5L13 3Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
@@ -35,7 +35,7 @@ const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
     );
   }
 
-  if (label === 'Speed Verified') {
+  if (label === 'Speed tested') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <path d="M5 15a7 7 0 1 1 14 0" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
@@ -44,7 +44,7 @@ const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
     );
   }
 
-  if (label === 'Stricter Standards') {
+  if (label === 'High standards') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <path d="M12 3 5.5 6v5.4c0 4.1 2.4 7.4 6.5 9.6 4.1-2.2 6.5-5.5 6.5-9.6V6L12 3Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
@@ -53,7 +53,7 @@ const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
     );
   }
 
-  if (label === 'Reliable Uptime') {
+  if (label === 'Stays online') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <path
@@ -67,7 +67,7 @@ const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
     );
   }
 
-  if (label === 'Launch Ready') {
+  if (label === 'Ready to launch') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <path d="M8.5 15.5c2.7.3 5.4-1 7.7-3.4 2-2 3.2-4.3 3.4-6.7-2.4.2-4.7 1.4-6.7 3.4-2.3 2.3-3.6 5-3.4 7.7Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
@@ -76,7 +76,7 @@ const SignalIcon: React.FC<{ label: string }> = ({ label }) => {
     );
   }
 
-  if (label === 'Scope Locked') {
+  if (label === 'Fixed scope') {
     return (
       <svg viewBox="0 0 24 24" className={iconClass} fill="none" aria-hidden>
         <rect x="6" y="10" width="12" height="10" rx="2" stroke="currentColor" strokeWidth="1.7" />

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
@@ -38,13 +38,13 @@ const Manifesto: React.FC = () => {
     return (
         <div className="page-shell">
             <SEO
-                title="The $100,000 Leak | Axiom Infrastructure"
-                description="Why cheap websites fail during peak season and how the math of downtime costs HVAC, roofing, and landscaping firms six figures a year."
+                title="The $100K Leak | Axiom"
+                description="Why cheap websites lose money during busy season, and what the real cost looks like for contractors."
             />
 
             {/* ---- MANIFESTO HEADER ---- */}
             <header className="max-w-[720px] mx-auto text-center flex flex-col items-center gap-5 mb-16 sm:mb-20">
-                <p className="eyebrow-center">Infrastructure Whitepaper</p>
+                <p className="eyebrow-center">The real cost</p>
 
                 <h1 className="hero-headline hero-fade-in">
                     The $100,000 Leak: Why Cheap Websites Fail During Peak Season.
@@ -60,7 +60,7 @@ const Manifesto: React.FC = () => {
 
                 {/* ---- SECTION 1: THE PROBLEM ---- */}
                 <section className="mb-6 sm:mb-8">
-                    <h2 className="axiom-command-heading mb-5 sm:mb-6">INFRASTRUCTURE COMMAND</h2>
+                    <h2 className="axiom-command-heading mb-5 sm:mb-6">THE PROBLEM</h2>
 
                     <div className="prose-editorial !leading-[1.6] max-w-[720px]">
                         <p>
@@ -79,7 +79,7 @@ const Manifesto: React.FC = () => {
                         <p>The calls don't wait. They go to whoever loads first.</p>
                     </div>
                     <div className="axiom-mono-callout">
-                        AXIOM // In peak season, speed wins the call before your crew ever picks up the phone.
+                        When it's busy, the fastest site gets the call. That's it.
                     </div>
                 </section>
 
@@ -87,7 +87,7 @@ const Manifesto: React.FC = () => {
 
                 {/* ---- SECTION 2: THE MATH ---- */}
                 <section className="my-10 sm:my-14">
-                    <h2 className="axiom-command-heading mb-5 sm:mb-6">MANDATORY PRECISION</h2>
+                    <h2 className="axiom-command-heading mb-5 sm:mb-6">THE MATH</h2>
 
                     <p className="lead mb-8 sm:mb-10">
                         Adjust the slider below to see the math your web designer never showed you.
@@ -105,8 +105,8 @@ const Manifesto: React.FC = () => {
                         />
                         <div className="h-px w-full bg-axiom-accent" />
                         <div className="relative axiom-glass border-0 rounded-none p-5 sm:p-8 md:p-10">
-                            <p className="font-axiomMono text-axiom-text-mute text-[11px] uppercase tracking-[0.2em] mb-4">ROI DASHBOARD</p>
-                            <h3 className="hero-headline text-[30px] sm:text-[36px] mb-6">The $120k Dashboard</h3>
+                            <p className="font-axiomMono text-axiom-text-mute text-[11px] uppercase tracking-[0.2em] mb-4">COST CALCULATOR</p>
+                            <h3 className="hero-headline text-[30px] sm:text-[36px] mb-6">What a slow site really costs</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                                 <div className="space-y-5">
                                     <div>
@@ -177,13 +177,13 @@ const Manifesto: React.FC = () => {
 
                                 <div className="space-y-4">
                                     <div className="axiom-bento-card p-4">
-                                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.12em] text-axiom-text-mute mb-2">Annual ROI Leak</p>
+                                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.12em] text-axiom-text-mute mb-2">Lost per year</p>
                                         <p className={`font-axiomMono text-[30px] leading-none tabular-nums ${outputTone}`}>
                                             ${displayAnnualLeak.toLocaleString()}
                                         </p>
                                     </div>
                                     <div className="axiom-bento-card p-4">
-                                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.12em] text-axiom-text-mute mb-2">Monthly Recovery Potential</p>
+                                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.12em] text-axiom-text-mute mb-2">Lost per month</p>
                                         <p className="font-axiomMono text-[24px] leading-none tabular-nums text-axiom-text-main">
                                             ${displayMonthlyLeak.toLocaleString()}
                                         </p>
@@ -203,7 +203,7 @@ const Manifesto: React.FC = () => {
                         That's not a marketing budget. That's a leak in your business.
                     </p>
                     <div className="axiom-mono-callout">
-                        AXIOM // Lost calls are not random. They are predictable infrastructure failure expressed as revenue loss.
+                        You're not losing calls randomly. Your site is too slow to catch them.
                     </div>
                 </section>
 
@@ -211,11 +211,11 @@ const Manifesto: React.FC = () => {
 
                 {/* ---- SECTION 3: THE FIX ---- */}
                 <section className="my-10 sm:my-14">
-                    <h2 className="axiom-command-heading mb-5 sm:mb-6">ELIMINATING ROI FRICTION</h2>
+                    <h2 className="axiom-command-heading mb-5 sm:mb-6">THE FIX</h2>
 
                     <div className="prose-editorial !leading-[1.6] max-w-[720px]">
                         <p>
-                            Axiom deploys your site on the same global edge network used by Shopify, Discord, and Cloudflare itself. Your pages are served from 300+ data centres worldwide.
+                            We put your site on the same network used by Shopify and Cloudflare. Your pages load from 300+ locations worldwide.
                         </p>
                         <p>
                             When that heatwave hits and 500 people search for AC repair at the same time, your site loads in <strong className="text-axiom-accent">0.4 seconds</strong>. Not 3.5. Not "kind of fast." Sub-second, every time, under any load.
@@ -228,9 +228,9 @@ const Manifesto: React.FC = () => {
                     {/* Stat bar — hard proof, breaks reading rhythm */}
                     <div className="stat-bar grid-cols-3 mt-10">
                         {[
-                            { label: 'Edge Load Time', value: '0.4s', color: 'text-axiom-accent' },
-                            { label: 'Uptime SLA', value: '99.99%', color: 'text-axiom-accent' },
-                            { label: 'Global Edge Nodes', value: '300+', color: 'text-axiom-accent' },
+                            { label: 'Load time', value: '0.4s', color: 'text-axiom-accent' },
+                            { label: 'Uptime', value: '99.99%', color: 'text-axiom-accent' },
+                            { label: 'Server locations', value: '300+', color: 'text-axiom-accent' },
                         ].map((stat) => (
                             <div key={stat.label} className="stat-bar-cell">
                                 <p className={`stat-bar-value text-[22px] sm:text-[28px] ${stat.color}`}>{stat.value}</p>
@@ -244,7 +244,7 @@ const Manifesto: React.FC = () => {
                         <p>One emergency install during peak season pays for your entire year of infrastructure.</p>
                     </div>
                     <div className="axiom-mono-callout">
-                        AXIOM // Infrastructure that stays online under pressure compounds margin while competitors stall.
+                        A site that stays fast under pressure keeps making money while the other guy's site is still loading.
                     </div>
                 </section>
 
@@ -252,11 +252,11 @@ const Manifesto: React.FC = () => {
 
                 {/* ---- SECTION 3.5: THE EVIDENCE ---- */}
                 <section className="my-10 sm:my-14">
-                    <h2 className="axiom-command-heading mb-5 sm:mb-6">THE ARCHITECTURE OF GROWTH</h2>
+                    <h2 className="axiom-command-heading mb-5 sm:mb-6">THE PROOF</h2>
 
                     <div className="prose-editorial !leading-[1.6] max-w-[720px]">
                         <p>
-                            We don't show mockups. Every Axiom concept architecture is a live, measurable deployment on Cloudflare's global edge. Here's what we've built for contractors in HVAC, roofing, and landscaping — purpose-engineered to capture revenue under pressure.
+                            We don't show mockups. Every site we build is live, fast, and measurable. Here's what we've built for contractors in HVAC, roofing, and landscaping.
                         </p>
                     </div>
 
@@ -265,7 +265,7 @@ const Manifesto: React.FC = () => {
                         {[
                             { label: 'Avg. Lighthouse', value: '98', color: 'text-axiom-accent' },
                             { label: 'Avg. Load Time', value: '0.38s', color: 'text-axiom-accent' },
-                            { label: 'Deployments Live', value: '3', color: 'text-axiom-accent' },
+                            { label: 'Sites Live', value: '3', color: 'text-axiom-accent' },
                         ].map((stat) => (
                             <div key={stat.label} className="stat-bar-cell">
                                 <p className={`stat-bar-value text-[22px] sm:text-[28px] ${stat.color}`}>{stat.value}</p>
@@ -276,7 +276,7 @@ const Manifesto: React.FC = () => {
 
                     {/* Competitive risk — tighten the screw */}
                     <div className="pull-quote" style={{ borderColor: 'var(--accent)' }}>
-                        <p>While you're reading this, the contractor down the road might be deploying with us. We take 4 partners per month. That's it.</p>
+                        <p>We take on 4 projects a month. That's it.</p>
                     </div>
 
                     <div className="text-center mt-6">
@@ -284,7 +284,7 @@ const Manifesto: React.FC = () => {
                             to="/concepts"
                             className="btn-secondary"
                         >
-                            View Live Deployments →
+                            See the work →
                         </Link>
                     </div>
                 </section>
@@ -293,21 +293,21 @@ const Manifesto: React.FC = () => {
 
                 {/* ---- SECTION 4: CTA ---- */}
                 <section className="inline-cta mt-10 sm:mt-14">
-                    <h2 className="axiom-command-heading mb-5 text-center">MACHINED SCALABILITY</h2>
+                    <h2 className="axiom-command-heading mb-5 text-center">NEXT STEP</h2>
                     <h2 className="text-[24px] sm:text-[32px] md:text-[36px] font-semibold tracking-tight">
                         Plug the leak.
                     </h2>
                     <p className="lead text-center mx-auto">
-                        Stop losing six figures a year to a website that wasn't built for peak season. See if Axiom is the right fit for your operation.
+                        Stop losing money to a site that can't keep up when it matters.
                     </p>
                     <Link
                         to="/apply"
                         className="btn-primary btn-lg"
                     >
-                        Plug the Leak with Axiom Infrastructure
+                        Start a project
                     </Link>
                     <p className="text-[12px] text-axiom-text-mute font-grotesk">
-                        Custom engagements starting at <span className="text-axiom-text-main font-semibold">$500 CAD</span>. <span className="text-axiom-accent font-semibold">Only 2 of 4 Partner Slots Remaining for This Month.</span>
+                        Starting at <span className="text-axiom-text-main font-semibold">$500 CAD</span>. <span className="text-axiom-accent font-semibold">2 spots left this month.</span>
                     </p>
                 </section>
             </article>
@@ -319,7 +319,7 @@ const Manifesto: React.FC = () => {
                         to="/apply"
                         className="btn-primary btn-lg magnetic-primary w-full"
                     >
-                        Plug the Leak
+                        Start a project
                     </Link>
                 </div>
             </div>

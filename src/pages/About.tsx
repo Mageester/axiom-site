@@ -13,11 +13,11 @@ type SnapshotRow = {
 const SNAPSHOT_ROWS: readonly SnapshotRow[] = [
   {
     label: 'Focus',
-    value: 'Established businesses that need a stronger site',
+    value: 'Established businesses that need a better site',
   },
   {
     label: 'We fix',
-    value: 'Pages, proof, and contact paths',
+    value: 'Weak pages, buried proof, hard-to-find contact info',
   },
   {
     label: 'Scope',
@@ -50,10 +50,10 @@ const About: React.FC = () => {
                   data-startup-heading
                   className="mt-3 text-[clamp(2.35rem,5.8vw,4.35rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]"
                 >
-                  Axiom helps good businesses look clear and easy to trust.
+                  We make good businesses easy to find and easy to trust.
                 </h1>
                 <p data-startup-copy className="mt-5 max-w-xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We fix weak pages, buried proof, and hard-to-find contact paths. The goal is a site people can understand quickly.
+                  We fix weak pages, buried proof, and hard-to-find contact info so people understand what you do the first time they look.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Link to="/apply" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -93,7 +93,7 @@ const About: React.FC = () => {
                   Most sites do not need more noise.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  They need clearer pages, better proof, and a next step people can find without thinking. That is why the work stays tight and direct.
+                  They need clearer pages, better proof, and a next step people can find without thinking. So that's what we build.
                 </p>
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
