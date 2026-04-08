@@ -82,8 +82,8 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom | Professional Websites for Established Businesses"
-        description="Axiom builds professional websites for established businesses that need a stronger online presence, clearer messaging, and more customer inquiries."
+        title="Axiom | Premium Web Infrastructure for Established Businesses"
+        description="Axiom builds premium web infrastructure for established businesses that need faster load times, cleaner structure, and a front door that holds up under real demand."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
@@ -99,21 +99,21 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Serious websites for serious businesses
+                    Premium web infrastructure for businesses that depend on the site
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We build websites that help established businesses look professional, earn trust fast, and turn more visitors into customers.
+                  Axiom builds fast, credible websites for established operators who need cleaner structure, stronger trust, and a front door that holds up under real demand.
                 </p>
                 <div data-startup-actions className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book Free Consultation
+                    Book a Build Call
                   </Link>
                   <Link
                     to="/method"
                     className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
                   >
-                    See How It Works
+                    See the Build Process
                   </Link>
                 </div>
               </div>
