@@ -283,7 +283,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   source={responsiveImages.logoClear}
                   sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
                   alt="Axiom logo"
-                  className="block h-10 w-auto max-w-none cursor-pointer object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-12 lg:h-14"
+                  className="block h-12 w-auto max-w-none cursor-pointer object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-14 lg:h-[3.75rem]"
                   decoding="async"
                 />
               </button>
