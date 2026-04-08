@@ -73,8 +73,8 @@ const selectedWork = selectedWorkEntries.map((entry) => {
 const heroTrustPoints = [
   'Fast on phones',
   'Easy to read',
-  'Proof in the right place',
-  'Easy next step',
+  'Proof up front',
+  'Plain language',
 ];
 
 const siteImprovements = [
@@ -88,11 +88,11 @@ const siteImprovements = [
   },
   {
     title: 'Better on phones',
-    detail: 'The site stays easy to use when people check it on mobile.',
+    detail: 'The site stays easy to use on phones.',
   },
   {
-    title: 'Fewer weak spots',
-    detail: 'Old pages, mixed messages, and buried contact points get cleaned up.',
+    title: 'Cleaner contact path',
+    detail: 'Contact details and forms stay easy to find.',
   },
 ];
 
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom | Websites for Serious Businesses"
+        title="Serious websites | Axiom"
         description="Axiom builds clear websites for established businesses. People can see what you do, find proof fast, and know how to contact you."
         schema={{
           '@context': 'https://schema.org',
@@ -135,21 +135,24 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Your business is serious. Your site should be too.
+                    Serious websites for serious businesses.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
                   We build websites where people can see what you do, find proof fast, and know how to reach you.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                  <Link to="/works" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                    See work
-                  </Link>
                   <Link
                     to="/apply"
-                    className="inline-flex w-full items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
+                    className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto"
                   >
                     Start a project
+                  </Link>
+                  <Link
+                    to="/works"
+                    className="inline-flex w-full items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
+                  >
+                    See work
                   </Link>
                 </div>
               </div>
@@ -167,23 +170,17 @@ const Home: React.FC = () => {
           </section>
 
           <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
-            <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  What these sites fixed.
-                </h2>
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  Each one shows a clearer offer, better proof, or an easier next step.
-                </p>
+              <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
+                  <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                    What these sites show.
+                  </h2>
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+                    Each one is clearer, easier to use, and easier to trust.
+                  </p>
+                </div>
               </div>
-              <Link
-                to="/works"
-                className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
-              >
-                See work
-              </Link>
-            </div>
 
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {selectedWork.map((item, index) => {
@@ -252,12 +249,12 @@ const Home: React.FC = () => {
           <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-12">
               <div className="max-w-xl lg:pt-2">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">What we fix</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">What improves</p>
                 <h2 className="mt-3 max-w-[10ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  What gets cleaned up.
+                  What gets better.
                 </h2>
                 <p className="mt-4 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
-                  Most sites do not need more pages. They need clearer pages, better proof, and fewer weak spots.
+                  Clear pages, stronger proof, and a simpler path to contact.
                 </p>
               </div>
 
@@ -338,10 +335,10 @@ const Home: React.FC = () => {
               <div className="relative z-10">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Start with a site review.
+                  Need a clearer site?
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  We&apos;ll look at the current site and tell you what needs attention first.
+                  We&apos;ll look at what you have and show the first fixes.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">

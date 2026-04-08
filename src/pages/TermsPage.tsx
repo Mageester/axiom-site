@@ -5,8 +5,8 @@ const TermsPage: React.FC = () => {
     return (
         <div className="pt-32 pb-24 px-6">
             <SEO
-                title="Terms of Service | Axiom Infrastructure"
-                description="Terms and conditions for utilizing Axiom Infrastructure web and digital services."
+                title="Terms | Axiom"
+                description="Terms for using the Axiom website and services."
             />
             <div className="max-w-[800px] mx-auto text-axiom-text-mute leading-relaxed">
                 <h1 className="text-[40px] font-semibold text-axiom-text-main mb-8 tracking-tight">Terms of Service</h1>
@@ -16,10 +16,10 @@ const TermsPage: React.FC = () => {
                 <p className="mb-6">By accessing our website and utilizing our services, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the service.</p>
 
                 <h2 className="text-[20px] font-semibold text-axiom-text-main mb-4 mt-8">2. Intellectual Property</h2>
-                <p className="mb-6">The Service and its original content (excluding initial client-provided assets), features, and functionality are and will remain the exclusive property of Axiom Infrastructure and its licensors.</p>
+                <p className="mb-6">The Service and its original content (excluding initial client-provided assets), features, and functionality are and will remain the exclusive property of Axiom and its licensors.</p>
 
                 <h2 className="text-[20px] font-semibold text-axiom-text-main mb-4 mt-8">3. Project Timelines & Bottlenecks</h2>
-                <p className="mb-6">Development timelines are contingent strictly upon client deliverables. Should a project stall for over 10 consecutive business days due to client delays in copy, assets, or feedback, Axiom Infrastructure reserves the right to deploy with functional placeholders and invoice the remaining milestone balances.</p>
+                <p className="mb-6">Development timelines are contingent strictly upon client deliverables. Should a project stall for over 10 consecutive business days due to client delays in copy, assets, or feedback, Axiom reserves the right to deploy with functional placeholders and invoice the remaining milestone balances.</p>
 
                 <h2 className="text-[20px] font-semibold text-axiom-text-main mb-4 mt-8">4. Payment Terms & Service Pausing</h2>
                 <p className="mb-6">All invoices are due Net-15. Accounts with unpaid balances exceeding 10 days past the due date are subject to service suspension, including the pausing of live hosted environments, until the balance and any associated reactivation fees are cleared in full.</p>

@@ -7,8 +7,8 @@ const Architects: React.FC = () => {
   return (
     <>
       <SEO
-        title="About | Axiom Infrastructure"
-        description="Senior-led team profile and operating principles for selective service-firm engagements."
+        title="Team | Axiom"
+        description="A small team focused on clear pages, proof, and easy contact paths."
       />
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 py-20 md:px-8 md:py-28">

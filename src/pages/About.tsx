@@ -13,15 +13,15 @@ type SnapshotRow = {
 const SNAPSHOT_ROWS: readonly SnapshotRow[] = [
   {
     label: 'Focus',
-    value: 'Established businesses that need a better site',
+    value: 'Businesses that need a clearer site',
   },
   {
     label: 'We fix',
     value: 'Weak pages, buried proof, hard-to-find contact info',
   },
   {
-    label: 'Scope',
-    value: 'Writing, design, build, launch',
+    label: 'Approach',
+    value: 'Clarity first, then proof, then build',
   },
 ];
 
@@ -30,12 +30,12 @@ const About: React.FC = () => {
     <>
       <SEO
         title="About | Axiom"
-        description="Axiom fixes weak pages, buried proof, and hard-to-find contact paths for established businesses."
+        description="Axiom builds clear websites for established businesses. The work stays focused on clarity, proof, and an easy path to contact."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
           name: 'About | Axiom',
-          description: 'Axiom fixes weak pages, buried proof, and hard-to-find contact paths for established businesses.',
+          description: 'Axiom builds clear websites for established businesses. The work stays focused on clarity, proof, and an easy path to contact.',
           url: 'https://getaxiom.ca/about',
         }}
       />
@@ -50,20 +50,14 @@ const About: React.FC = () => {
                   data-startup-heading
                   className="mt-3 text-[clamp(2.35rem,5.8vw,4.35rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]"
                 >
-                  We make good businesses easy to find and easy to trust.
+                  We build clear websites for businesses that need to be trusted fast.
                 </h1>
                 <p data-startup-copy className="mt-5 max-w-xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We fix weak pages, buried proof, and hard-to-find contact info so people understand what you do the first time they look.
+                  Axiom fixes weak pages, buried proof, and hard-to-find contact info so people can understand the business without digging.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Link to="/apply" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
                     Start a project
-                  </Link>
-                  <Link
-                    to="/works"
-                    className="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07] sm:w-auto"
-                  >
-                    See work
                   </Link>
                 </div>
               </div>
@@ -88,21 +82,34 @@ const About: React.FC = () => {
           <RevealBlock as="section" className="pt-10 md:pt-16" variant="feature">
             <article className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8">
               <div>
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Why it stays simple</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What the work is for</p>
                 <h2 className="mt-2 max-w-2xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Most sites do not need more noise.
+                  The work has a clear job.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  They need clearer pages, better proof, and a next step people can find without thinking. So that's what we build.
+                  Most sites do not need more pages or more effects. They need the offer to read clearly, proof to show fast, and the next step to stay obvious.
                 </p>
               </div>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Link to="/apply" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                  Start a project
-                </Link>
+
+              <div className="mt-6 grid gap-3 md:grid-cols-3">
+                <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4">
+                  <p className="text-sm font-semibold text-[#F2F4F7]">Clear offer</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">People know what the business does in the first few seconds.</p>
+                </div>
+                <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4">
+                  <p className="text-sm font-semibold text-[#F2F4F7]">Proof visible</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">Reviews, photos, and past work show up where they help.</p>
+                </div>
+                <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4">
+                  <p className="text-sm font-semibold text-[#F2F4F7]">Easy contact</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">Phone numbers and forms stay easy to find.</p>
+                </div>
+              </div>
+
+              <div className="mt-6">
                 <Link
                   to="/works"
-                  className="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07] sm:w-auto"
+                  className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
                 >
                   See work
                 </Link>

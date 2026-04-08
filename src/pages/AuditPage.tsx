@@ -76,8 +76,8 @@ const AuditPage: React.FC = () => {
     return (
         <div className="page-shell min-h-[90vh] flex flex-col items-center justify-center relative overflow-hidden">
             <SEO
-                title="Free Site Review | Axiom"
-                description="Get a free review of your website's speed, layout, and contact paths."
+                title="Site review | Axiom"
+                description="Get a plain review of your website's speed, layout, and contact path."
             />
             {/* Background glowing orb */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none z-0" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.015) 0%, transparent 60%)' }}></div>

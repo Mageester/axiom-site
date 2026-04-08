@@ -477,12 +477,12 @@ const ProjectApplicationForm: React.FC = () => {
         <>
             <SEO
                 title="Start a project | Axiom"
-                description="Tell us what you need and we'll reply with the next step within one business day."
+                description="Tell us what you need. We’ll reply within one business day."
                 schema={{
                     '@context': 'https://schema.org',
                     '@type': 'ContactPage',
                     name: 'Start a project | Axiom',
-                    description: 'Tell us what you need and we\'ll reply with the next step within one business day.',
+                    description: 'Tell us what you need. We’ll reply within one business day.',
                     url: 'https://getaxiom.ca/apply',
                 }}
             />
@@ -498,10 +498,10 @@ const ProjectApplicationForm: React.FC = () => {
                         </h1>
                     </div>
                     <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                        Start with the basics. We review every request and reply within one business day.
+                        Start with the basics. We’ll review it and reply within one business day.
                     </p>
                     <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
-                        For a general question, use{' '}
+                        Not a project? Use{' '}
                         <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                             Contact
                         </Link>
@@ -524,9 +524,9 @@ const ProjectApplicationForm: React.FC = () => {
                                     {status === 'success' && (
                                         <div ref={successBoxRef} className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
                                             <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
-                                            <p className="mt-2 text-sm text-slate-300">We&apos;ll review it and reply with the next step within one business day.</p>
+                                            <p className="mt-2 text-sm text-slate-300">We&apos;ll review it and reply within one business day.</p>
                                             <button type="button" onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
-                                                Send another request
+                                                Start another project
                                             </button>
                                         </div>
                                     )}
@@ -564,16 +564,12 @@ const ProjectApplicationForm: React.FC = () => {
                                             <div className="flex flex-col gap-2">
                                                 <label className={FIELD_LABEL_CLASS}>Current website (optional)</label>
                                                 <input type="url" placeholder="https://your-site.com" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className={FIELD_INPUT_CLASS} />
-                                                <p className="text-xs text-slate-400">Leave this blank if you do not have a site yet.</p>
+                                                <p className="text-xs text-slate-400">Optional if you have one.</p>
                                             </div>
 
                                             <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
-                                                Continue
+                                                Continue to step 2
                                             </button>
-
-                                            <p className="text-sm text-slate-400">
-                                                Phone and current website are optional. Short answers are fine.
-                                            </p>
                                         </div>
                                     ) : (
                                         <div className="flex flex-col gap-5">
@@ -587,7 +583,7 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>What feels weak right now?</label>
+                                                <label className={FIELD_LABEL_CLASS}>What needs attention first?</label>
                                                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                                     {PAIN_POINTS_OPTIONS.map(point => {
                                                         const selected = form.pain_points.includes(point);
@@ -608,7 +604,7 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>A few quick questions</label>
+                                                <label className={FIELD_LABEL_CLASS}>A few fit questions</label>
                                                 <div className="grid grid-cols-1 gap-3">
                                                     {FIT_QUESTIONS.map((question) => (
                                                         <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">
@@ -639,9 +635,8 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>What should the site help with first?</label>
+                                                <label className={FIELD_LABEL_CLASS}>What should the site do first?</label>
                                                 <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Example: clearer service pages, better proof, and an easier way to get calls or quote requests." className={`${FIELD_INPUT_CLASS} resize-none`} />
-                                                <p className="text-xs text-slate-400">Short notes are fine.</p>
                                                 {errors.details && <p className="text-xs text-red-300">{errors.details}</p>}
                                             </div>
 
@@ -650,7 +645,7 @@ const ProjectApplicationForm: React.FC = () => {
                                                     Back
                                                 </button>
                                                 <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg flex-1 disabled:cursor-not-allowed disabled:opacity-70">
-                                                    {status === 'loading' ? 'Sending...' : 'Send project details'}
+                                                    {status === 'loading' ? 'Sending...' : 'Start a project'}
                                                 </button>
                                             </div>
                                         </div>

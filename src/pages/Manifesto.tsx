@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
 const Manifesto: React.FC = () => {
-    const [showSticky, setShowSticky] = useState(false);
     const [lostCalls, setLostCalls] = useState(2);
     const avgTicket = 5000;
     const annualLeak = lostCalls * avgTicket * 12;
@@ -12,14 +11,6 @@ const Manifesto: React.FC = () => {
     const infrastructureInvestment = 7500;
     const paybackMonths = displayMonthlyLeak > 0 ? infrastructureInvestment / displayMonthlyLeak : 0;
     const outputTone = displayAnnualLeak >= 0 ? 'text-axiom-accent' : 'text-[#d27474]';
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setShowSticky(window.scrollY > 350);
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     useEffect(() => {
         const start = displayAnnualLeak;
@@ -38,8 +29,8 @@ const Manifesto: React.FC = () => {
     return (
         <div className="page-shell">
             <SEO
-                title="The $100K Leak | Axiom"
-                description="Why cheap websites lose money during busy season, and what the real cost looks like for contractors."
+                title="Why weak sites cost money | Axiom"
+                description="Why weak websites can cost money when busy days matter."
             />
 
             {/* ---- MANIFESTO HEADER ---- */}
@@ -284,7 +275,7 @@ const Manifesto: React.FC = () => {
                             to="/concepts"
                             className="btn-secondary"
                         >
-                            See the work →
+                            See work
                         </Link>
                     </div>
                 </section>
@@ -312,17 +303,6 @@ const Manifesto: React.FC = () => {
                 </section>
             </article>
 
-            {/* Mobile-only sticky CTA */}
-            <div className={`md:hidden fixed z-[45] bottom-4 left-0 w-full px-4 py-2 pointer-events-none transition-all duration-300 ease-in-out ${showSticky ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                <div className="pointer-events-auto">
-                    <Link
-                        to="/apply"
-                        className="btn-primary btn-lg magnetic-primary w-full"
-                    >
-                        Start a project
-                    </Link>
-                </div>
-            </div>
         </div>
     );
 };

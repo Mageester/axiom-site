@@ -12,7 +12,6 @@ import { getWorkProofImage } from '../lib/workProofImages';
 interface WorkEntry {
   id: string;
   title: string;
-  kind: 'live' | 'demo';
   statusLabel: string;
   ctaLabel: string;
   ariaLabel: string;
@@ -29,52 +28,21 @@ const worksDisplayOrder = [
   'concept-roofing-conversion-site',
 ] as const;
 
-const workPresentationBySlug: Record<
-  string,
-  { kind: 'live' | 'demo'; statusLabel: string; ctaLabel: string }
-> = {
-  'demonstration-restaurant-reservation-site': {
-    kind: 'live',
-    statusLabel: 'Live',
-    ctaLabel: 'View live site',
-  },
-  'concept-landscaping-authority-site': {
-    kind: 'demo',
-    statusLabel: 'Demo',
-    ctaLabel: 'View demo',
-  },
-  'concept-roofing-conversion-site': {
-    kind: 'demo',
-    statusLabel: 'Demo',
-    ctaLabel: 'View demo',
-  },
-};
-
-const improvementCopyBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'Menu and booking are easy to find, especially on phones.',
-  'concept-landscaping-authority-site': 'Past work is up front, and quote requests are easier to send.',
-  'concept-roofing-conversion-site': 'Storm calls and planned estimates each have a clear path.',
-};
-
 const orderedCaseStudies = worksDisplayOrder
   .map((slug) => caseStudies.find((entry) => entry.slug === slug))
   .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
 
 const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
   const proofImage = getWorkProofImage(entry.slug);
-  const presentation = workPresentationBySlug[entry.slug] ?? {
-    kind: entry.demoUrl ? 'live' : 'demo',
-    statusLabel: entry.demoUrl ? 'Live' : 'Demo',
-    ctaLabel: entry.demoUrl ? 'View live site' : 'View demo',
-  };
+  const statusLabel = entry.label;
+  const ctaLabel = entry.ctaLabel ?? (entry.label === 'Live' ? 'View live site' : 'View demo');
   return {
     id: entry.slug,
     title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-    kind: presentation.kind,
-    statusLabel: presentation.statusLabel,
-    ctaLabel: presentation.ctaLabel,
-    ariaLabel: `${presentation.ctaLabel} for ${entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '')}`,
-    improvement: improvementCopyBySlug[entry.slug] ?? 'Built to make the page clearer, easier to trust, and easier to contact.',
+    statusLabel,
+    ctaLabel,
+    ariaLabel: `${ctaLabel} for ${entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '')}`,
+    improvement: entry.summary,
     image: proofImage.source,
     demoUrl: entry.demoUrl,
     imageAlt: proofImage.alt,
@@ -150,10 +118,10 @@ const Deployments: React.FC = () => {
           <div className="max-w-4xl">
             <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
             <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">Sites we built. Problems we fixed.</h1>
+              <h1 data-startup-heading className="text-left">Selected work.</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              One live site and two demos. Each one is clearer, faster, and easier to contact through.
+              One live site and two demos. Each one shows a clearer page, easier contact, and cleaner mobile use.
             </p>
           </div>
         </RevealBlock>
@@ -179,15 +147,6 @@ const Deployments: React.FC = () => {
               <div className="mt-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
                 <Link to="/apply#project-application-form" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
                   Start a project
-                </Link>
-                <Link
-                  to="/method"
-                  className="group inline-flex w-full items-center justify-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-[color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-axiom-text-main hover:underline sm:w-auto"
-                >
-                  See process
-                  <svg className="h-4 w-4 transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
                 </Link>
               </div>
           </div>

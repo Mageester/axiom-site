@@ -19,7 +19,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     number: '01',
     title: 'Review',
-    summary: 'We look at the current site, what the business needs to say, and what people need to find.',
+    summary: 'We look at the current site, what needs to change, and what people should find first.',
   },
   {
     number: '02',
@@ -29,23 +29,23 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     number: '03',
     title: 'Build',
-    summary: 'We write, design, build, and check the site on phones and desktop.',
+    summary: 'We write the copy, shape the pages, and check how they hold up on phones and desktop.',
   },
   {
     number: '04',
     title: 'Launch',
-    summary: 'We test the forms, connect the domain, and make sure everything is ready to go live.',
+    summary: 'We test the forms, connect the domain, and make sure the site is ready to go live.',
   },
 ];
 
 const CHECKLIST_ITEMS: readonly ChecklistItem[] = [
   {
     title: 'Main pages',
-    detail: 'Which pages matter and how people should move through them.',
+    detail: 'Which pages matter and where people should go next.',
   },
   {
     title: 'Proof to show',
-    detail: 'Reviews, photos, past work, and anything else people should see early.',
+    detail: 'Reviews, photos, past work, and what should appear early.',
   },
   {
     title: 'Calls and forms',
@@ -53,11 +53,7 @@ const CHECKLIST_ITEMS: readonly ChecklistItem[] = [
   },
   {
     title: 'Domain and launch',
-    detail: 'What gets moved, tested, and checked before launch day.',
-  },
-  {
-    title: 'After-launch changes',
-    detail: 'The small fixes to make once the site is in front of real visitors.',
+    detail: 'What gets moved, tested, and checked before launch.',
   },
 ];
 
@@ -78,12 +74,12 @@ const Infrastructure: React.FC = () => {
     <>
       <SEO
         title="Process | Axiom"
-        description="How Axiom reviews the site, sets the page plan, builds it, and gets it ready to go live."
+        description="A simple process: review the site, plan the pages, build it, and get it ready to go live."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: 'Process | Axiom',
-          description: 'How Axiom reviews the site, sets the page plan, builds it, and gets it ready to go live.',
+          description: 'A simple process: review the site, plan the pages, build it, and get it ready to go live.',
           url: 'https://getaxiom.ca/method',
         }}
       />
@@ -94,10 +90,10 @@ const Infrastructure: React.FC = () => {
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
               <h1 data-startup-heading className="mt-3 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
-                A short process with clear decisions.
+                A short process that keeps decisions simple.
               </h1>
               <p data-startup-copy className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                We review the site, decide what needs to change, then build and launch.
+                We review the site, settle the pages, then build and launch it.
               </p>
               <div data-startup-actions className="mt-5">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -114,10 +110,10 @@ const Infrastructure: React.FC = () => {
                   <div>
                     <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">The steps</p>
                     <h2 className="mt-1 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                      From first review to launch.
+                      From review to launch.
                     </h2>
                     <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                      Everything important gets settled early, so the build stays clear.
+                      The main choices get settled early, so the build stays clear.
                     </p>
                   </div>
                 </div>
@@ -154,7 +150,7 @@ const Infrastructure: React.FC = () => {
               <article className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,18,26,0.98)_0%,rgba(10,13,19,0.98)_100%)] p-4 shadow-[0_18px_52px_rgba(0,0,0,0.22)] md:p-5 xl:mt-[3.4rem]">
                 <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between">
                   <div>
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
                       Before build starts
                     </p>
                     <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
@@ -197,14 +193,14 @@ const Infrastructure: React.FC = () => {
               <div className="relative z-10 mx-auto max-w-2xl">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
-                  Start with a site review.
+                  See the work first.
                 </h2>
                 <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  We&apos;ll look at your current site and tell you what needs attention first.
+                  See a few examples before you decide what needs attention first.
                 </p>
                 <div className="mt-6 flex justify-center">
-                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Start a project
+                  <Link to="/works" className="btn-primary btn-lg whitespace-nowrap">
+                    See work
                   </Link>
                 </div>
               </div>

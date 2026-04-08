@@ -15,7 +15,7 @@ const tiers = [
             'Call and quote buttons that work well on phones',
             'Speed and uptime handled for you',
         ],
-        cta: 'Get started',
+        cta: 'Start a project',
         packageParam: 'foundation',
     },
     {
@@ -30,7 +30,7 @@ const tiers = [
             'Service pages that position you for higher-ticket work',
             'Priority support through your first month live',
         ],
-        cta: 'Get started',
+        cta: 'Start a project',
         packageParam: 'authority',
         featured: true,
     },
@@ -46,7 +46,7 @@ const tiers = [
             'CRM and scheduling tool connections',
             'Quarterly check-ins to make sure the site keeps working',
         ],
-        cta: 'Talk to us',
+        cta: 'Start a project',
         packageParam: 'expansion',
     }
 ];
@@ -73,8 +73,8 @@ const ServicesPage: React.FC = () => {
     return (
         <div className="page-shell">
             <SEO
-                title="Pricing | Axiom"
-                description="Website pricing for local businesses. Starter, Growth, and Multi-Location builds with clear scope and no surprises."
+                title="Services | Axiom"
+                description="Website packages for local businesses. Clear scope and no surprises."
             />
 
             {/* Header */}

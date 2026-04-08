@@ -79,8 +79,8 @@ const ConceptsPage: React.FC = () => {
   return (
     <div className="page-shell">
       <SEO
-        title="Concepts | Axiom Infrastructure"
-        description="Explore Axiom Professional demo concepts for HVAC, roofing, and landscaping businesses."
+        title="Demo concepts | Axiom"
+        description="Demo sites for HVAC, roofing, and landscaping businesses. Each one shows a clearer path to the next step."
       />
 
       <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-16 sm:mb-20">

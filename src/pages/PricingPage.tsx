@@ -29,7 +29,7 @@ const pricingTiers: PricingTier[] = [
       'Speed and analytics set up at launch',
     ],
     boundary: 'Does not include multi-location pages or custom tool connections.',
-    cta: 'Get started',
+    cta: 'Start a project',
   },
   {
     name: 'Growth',
@@ -46,7 +46,7 @@ const pricingTiers: PricingTier[] = [
       'Lead tracking so you can see what\'s working',
     ],
     boundary: 'Does not include custom back-office integrations.',
-    cta: 'Get started',
+    cta: 'Start a project',
   },
   {
     name: 'Multi-Location / Expansion',
@@ -62,7 +62,7 @@ const pricingTiers: PricingTier[] = [
       'Quarterly check-ins to keep the site working',
     ],
     boundary: 'Scope is set after an initial review, not before.',
-    cta: 'Talk to us',
+    cta: 'Start a project',
   },
 ];
 
