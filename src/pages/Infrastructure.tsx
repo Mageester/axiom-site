@@ -7,7 +7,9 @@ import { SEO } from '../components/SEO';
 type ProcessStep = {
   number: string;
   title: string;
+  duration: string;
   summary: string;
+  bullets: readonly string[];
 };
 
 type ChecklistItem = {
@@ -19,41 +21,61 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     number: '01',
     title: 'Review',
+    duration: '1–2 days',
     summary: 'We look at the current site, what needs to change, and what people should find first.',
+    bullets: [
+      'We review the current site and note what needs to change.',
+      'You point out what must stay and share any access we need.',
+    ],
   },
   {
     number: '02',
     title: 'Plan',
+    duration: '2–3 days',
     summary: 'We settle the main pages, the proof to show, and where calls or forms should go.',
+    bullets: [
+      'We map the pages, proof, and contact path.',
+      'You confirm the main offer and the pages that matter most.',
+    ],
   },
   {
     number: '03',
     title: 'Build',
+    duration: '2–4 weeks',
     summary: 'We write the copy, shape the pages, and check how they hold up on phones and desktop.',
+    bullets: [
+      'We write, design, and build the pages.',
+      'You review the draft and send notes.',
+    ],
   },
   {
     number: '04',
     title: 'Launch',
+    duration: '1 day',
     summary: 'We test the forms, connect the domain, and make sure the site is ready to go live.',
+    bullets: [
+      'We test the forms, connect the domain, and check the live site.',
+      'You approve the final version and help us update old links if needed.',
+    ],
   },
 ];
 
 const CHECKLIST_ITEMS: readonly ChecklistItem[] = [
   {
-    title: 'Main pages',
-    detail: 'Which pages matter and where people should go next.',
+    title: 'Pages to build',
+    detail: 'Which pages matter most right now.',
   },
   {
     title: 'Proof to show',
-    detail: 'Reviews, photos, past work, and what should appear early.',
+    detail: 'Reviews, photos, and past work that should show up early.',
   },
   {
     title: 'Calls and forms',
     detail: 'Where each quote, call, or contact path should go.',
   },
   {
-    title: 'Domain and launch',
-    detail: 'What gets moved, tested, and checked before launch.',
+    title: 'Launch setup',
+    detail: 'Domain, redirects, and final checks before the site goes live.',
   },
 ];
 
@@ -73,13 +95,13 @@ const Infrastructure: React.FC = () => {
   return (
     <>
       <SEO
-        title="Process | Axiom"
-        description="A simple process: review the site, plan the pages, build it, and get it ready to go live."
+        title="Four stages from review to launch | Axiom"
+        description="A simple process: review the site, plan the pages, build the work, and launch it cleanly."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
-          name: 'Process | Axiom',
-          description: 'A simple process: review the site, plan the pages, build it, and get it ready to go live.',
+          name: 'Four stages from review to launch | Axiom',
+          description: 'A simple process: review the site, plan the pages, build the work, and launch it cleanly.',
           url: 'https://getaxiom.ca/method',
         }}
       />
@@ -90,10 +112,10 @@ const Infrastructure: React.FC = () => {
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
               <h1 data-startup-heading className="mt-3 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
-                A short process that keeps decisions simple.
+                Four stages that keep the work simple.
               </h1>
               <p data-startup-copy className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                We review the site, settle the pages, then build and launch it.
+                Each step shows what we do, what we need from you, and where the work is headed.
               </p>
               <div data-startup-actions className="mt-5">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -110,11 +132,30 @@ const Infrastructure: React.FC = () => {
                   <div>
                     <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">The steps</p>
                     <h2 className="mt-1 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                      From review to launch.
+                      What happens at each step.
                     </h2>
                     <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                      The main choices get settled early, so the build stays clear.
+                      The main choices get settled early so the build stays clear.
                     </p>
+                  </div>
+                </div>
+
+                <div className="mb-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+                  <div className="relative">
+                    <div className="absolute left-4 right-4 top-4 hidden h-px bg-white/10 md:block" />
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                      {PROCESS_STEPS.map((step) => (
+                        <div key={step.number} className="relative flex items-center gap-3">
+                          <span className="relative z-10 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-[#0f1524] font-axiomMono text-[10px] tracking-[0.18em] text-[#d4a48e]">
+                            {step.number}
+                          </span>
+                          <div>
+                            <p className="text-[10px] uppercase tracking-[0.18em] text-[#F2F4F7]">{step.title}</p>
+                            <p className="text-[11px] text-slate-400">{step.duration}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -133,14 +174,22 @@ const Infrastructure: React.FC = () => {
                             {step.number}
                           </span>
                         </div>
+                        <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">
+                          {step.duration}
+                        </span>
                       </div>
                       <div className="relative z-10 mt-4">
                         <h3 className="text-[clamp(1.2rem,2vw,1.5rem)] font-semibold leading-tight text-[#F2F4F7]">
                           {step.title}
                         </h3>
-                        <p className="mt-2.5 max-w-md text-sm leading-relaxed text-slate-300 md:text-[0.96rem]">
-                          {step.summary}
-                        </p>
+                        <ul className="mt-3 space-y-2.5">
+                          {step.bullets.map((bullet) => (
+                            <li key={bullet} className="flex gap-2 text-sm leading-6 text-slate-300 md:text-[0.96rem]">
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d4a48e]" aria-hidden="true" />
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </article>
                   ))}
@@ -148,13 +197,13 @@ const Infrastructure: React.FC = () => {
               </div>
 
               <article className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,18,26,0.98)_0%,rgba(10,13,19,0.98)_100%)] p-4 shadow-[0_18px_52px_rgba(0,0,0,0.22)] md:p-5 xl:mt-[3.4rem]">
-                <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between">
+              <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between">
                   <div>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
                       Before build starts
                     </p>
                     <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
-                      What gets settled first
+                      What we need first
                     </h2>
                     <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-300">
                       This keeps the work moving and cuts down on back-and-forth later.

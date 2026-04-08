@@ -13,7 +13,7 @@ type SnapshotRow = {
 const SNAPSHOT_ROWS: readonly SnapshotRow[] = [
   {
     label: 'Focus',
-    value: 'Businesses that need a clearer site',
+    value: 'Businesses that need a site people trust fast',
   },
   {
     label: 'We fix',
@@ -21,7 +21,7 @@ const SNAPSHOT_ROWS: readonly SnapshotRow[] = [
   },
   {
     label: 'Approach',
-    value: 'Clarity first, then proof, then build',
+    value: 'Clear pages, plain language, simple next step',
   },
 ];
 
@@ -30,12 +30,12 @@ const About: React.FC = () => {
     <>
       <SEO
         title="About | Axiom"
-        description="Axiom builds clear websites for established businesses. The work stays focused on clarity, proof, and an easy path to contact."
+        description="Axiom builds clear websites for businesses people need to trust fast. The work keeps pages simple, proof visible, and contact easy."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
           name: 'About | Axiom',
-          description: 'Axiom builds clear websites for established businesses. The work stays focused on clarity, proof, and an easy path to contact.',
+          description: 'Axiom builds clear websites for businesses people need to trust fast. The work keeps pages simple, proof visible, and contact easy.',
           url: 'https://getaxiom.ca/about',
         }}
       />
@@ -50,10 +50,10 @@ const About: React.FC = () => {
                   data-startup-heading
                   className="mt-3 text-[clamp(2.35rem,5.8vw,4.35rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]"
                 >
-                  We build clear websites for businesses that need to be trusted fast.
+                  Clear websites for businesses people need to trust fast.
                 </h1>
                 <p data-startup-copy className="mt-5 max-w-xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom fixes weak pages, buried proof, and hard-to-find contact info so people can understand the business without digging.
+                  Axiom fixes weak pages, buried proof, and hard-to-find contact info. The goal is simple: people should understand the business without digging.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Link to="/apply" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -66,7 +66,7 @@ const About: React.FC = () => {
                 data-startup-meta
                 className="border-t border-white/10 pt-5 md:border-l md:border-t-0 md:pl-8 md:pt-0"
               >
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What we fix</p>
                 <dl className="mt-4 space-y-4">
                   {SNAPSHOT_ROWS.map((row) => (
                     <div key={row.label} className="border-b border-white/[0.08] pb-4 last:border-b-0 last:pb-0">
@@ -84,7 +84,7 @@ const About: React.FC = () => {
               <div>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What the work is for</p>
                 <h2 className="mt-2 max-w-2xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  The work has a clear job.
+                  Make the business easy to trust.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
                   Most sites do not need more pages or more effects. They need the offer to read clearly, proof to show fast, and the next step to stay obvious.
@@ -98,11 +98,11 @@ const About: React.FC = () => {
                 </div>
                 <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4">
                   <p className="text-sm font-semibold text-[#F2F4F7]">Proof visible</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">Reviews, photos, and past work show up where they help.</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">Reviews, photos, and past work show up before doubt sets in.</p>
                 </div>
                 <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4">
                   <p className="text-sm font-semibold text-[#F2F4F7]">Easy contact</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">Phone numbers and forms stay easy to find.</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">Phone numbers, forms, and quote paths stay easy to find.</p>
                 </div>
               </div>
 

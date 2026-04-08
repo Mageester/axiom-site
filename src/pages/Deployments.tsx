@@ -102,13 +102,13 @@ const Deployments: React.FC = () => {
   return (
     <>
       <SEO
-        title="Work | Axiom"
-        description="Restaurant, landscaping, and roofing sites we built. Each one shows what a clearer, faster site looks like."
+        title="Selected work | Axiom"
+        description="One live site and two demos that show clearer pages, easier contact, and cleaner mobile use."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
-          name: 'Work | Axiom',
-          description: 'Restaurant, landscaping, and roofing sites we built. Each one shows what a clearer, faster site looks like.',
+          name: 'Selected work | Axiom',
+          description: 'One live site and two demos that show clearer pages, easier contact, and cleaner mobile use.',
           url: 'https://getaxiom.ca/works',
         }}
       />
@@ -121,7 +121,7 @@ const Deployments: React.FC = () => {
               <h1 data-startup-heading className="text-left">Selected work.</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              One live site and two demos. Each one shows a clearer page, easier contact, and cleaner mobile use.
+              One live site and two demos. Each one shows what got clearer, easier to use, and simpler on mobile.
             </p>
           </div>
         </RevealBlock>
@@ -140,9 +140,9 @@ const Deployments: React.FC = () => {
           <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[520px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[140px]" />
 
           <div className="relative z-10">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Want the same thing for your site?</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need the same kind of cleanup?</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We’ll review what you have and tell you what to fix first.
+                We&apos;ll review what you have and tell you what to fix first.
               </p>
               <div className="mt-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
                 <Link to="/apply#project-application-form" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">

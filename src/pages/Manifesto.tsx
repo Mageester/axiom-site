@@ -38,11 +38,11 @@ const Manifesto: React.FC = () => {
                 <p className="eyebrow-center">The real cost</p>
 
                 <h1 className="hero-headline hero-fade-in">
-                    The $100,000 Leak: Why Cheap Websites Fail During Peak Season.
+                    Why weak sites cost money.
                 </h1>
 
                 <p className="hero-subheading text-center mx-auto">
-                    The math your web designer never showed you.
+                    The math behind a slow or unclear site.
                 </p>
             </header>
 
@@ -270,14 +270,6 @@ const Manifesto: React.FC = () => {
                         <p>We take on 4 projects a month. That's it.</p>
                     </div>
 
-                    <div className="text-center mt-6">
-                        <Link
-                            to="/concepts"
-                            className="btn-secondary"
-                        >
-                            See work
-                        </Link>
-                    </div>
                 </section>
 
                 <div className="axiom-chapter-divider"></div>
@@ -296,6 +288,12 @@ const Manifesto: React.FC = () => {
                         className="btn-primary btn-lg"
                     >
                         Start a project
+                    </Link>
+                    <Link
+                        to="/works"
+                        className="btn-secondary mt-4"
+                    >
+                        See work
                     </Link>
                     <p className="text-[12px] text-axiom-text-mute font-grotesk">
                         Starting at <span className="text-axiom-text-main font-semibold">$500 CAD</span>. <span className="text-axiom-accent font-semibold">2 spots left this month.</span>

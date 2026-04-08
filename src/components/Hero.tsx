@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
     document.getElementById('intake')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const scrollToExamples = () => {
+  const scrollToWork = () => {
     window.scrollTo({ top: window.innerHeight * 0.9, behavior: 'smooth' });
   };
 
@@ -48,10 +48,10 @@ const Hero: React.FC = () => {
 
               <button
                 type="button"
-                onClick={scrollToExamples}
+                onClick={scrollToWork}
                 className="group inline-flex items-center text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-[#F2F4F7] hover:underline"
               >
-                See examples
+                See work
               </button>
             </div>
           </div>

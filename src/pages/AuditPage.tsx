@@ -76,8 +76,8 @@ const AuditPage: React.FC = () => {
     return (
         <div className="page-shell min-h-[90vh] flex flex-col items-center justify-center relative overflow-hidden">
             <SEO
-                title="Site review | Axiom"
-                description="Get a plain review of your website's speed, layout, and contact path."
+                title="Is your site costing you money? | Axiom"
+                description="Get a plain review of your site's speed, layout, and contact path."
             />
             {/* Background glowing orb */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none z-0" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.015) 0%, transparent 60%)' }}></div>
@@ -86,7 +86,7 @@ const AuditPage: React.FC = () => {
                 <div className="text-center mb-12">
                     <h1 className="text-[40px] md:text-[56px] font-semibold mb-6 text-axiom-text-main tracking-tight leading-[1.05]">Is your site<br />costing you money?</h1>
                     <p className="text-[16px] text-axiom-text-mute max-w-lg mx-auto leading-relaxed">
-                        Most local business sites lose leads because they're slow, confusing, or hard to contact through. Get a free review.
+                        Most local business sites lose leads because they're slow, confusing, or hard to contact through. Start a project and we’ll review it.
                     </p>
                 </div>
 
@@ -135,7 +135,7 @@ const AuditPage: React.FC = () => {
                     </div>
 
                     <button disabled={status === 'loading' || status === 'success'} type="submit" className="btn-primary btn-lg w-full mt-4 disabled:opacity-50">
-                        {status === 'loading' ? 'Reviewing...' : 'Get a free review'}
+                        {status === 'loading' ? 'Sending...' : 'Start a project'}
                     </button>
                 </form>
             </div>

@@ -7,6 +7,8 @@ import About from './pages/About';
 import ContactPage from './pages/ContactPage';
 import Deployments from './pages/Deployments';
 import Infrastructure from './pages/Infrastructure';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const Login = lazy(() => import('./pages/admin/Login'));
@@ -62,6 +64,8 @@ const App: React.FC = () => {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/architects" element={<Navigate to="/about" replace />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
             <Route path="/admin/login" element={<Login />} />
             <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />

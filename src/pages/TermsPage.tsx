@@ -5,7 +5,7 @@ const TermsPage: React.FC = () => {
     return (
         <div className="pt-32 pb-24 px-6">
             <SEO
-                title="Terms | Axiom"
+                title="Terms of Service | Axiom"
                 description="Terms for using the Axiom website and services."
             />
             <div className="max-w-[800px] mx-auto text-axiom-text-mute leading-relaxed">

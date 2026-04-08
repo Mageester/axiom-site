@@ -19,8 +19,8 @@ const Footer: React.FC = () => {
           <p className="mt-2 max-w-md text-[11px] leading-[1.45] text-slate-400">
             Replies within one business day.
           </p>
-          <p className="mt-4 hidden text-[10px] uppercase tracking-[0.12em] text-slate-400 md:block md:mt-6">
-            Copyright 2026 Axiom. All rights reserved.
+          <p className="mt-4 text-[10px] uppercase tracking-[0.12em] text-slate-400 md:mt-6">
+            © 2026 Axiom. All rights reserved.
           </p>
         </div>
 
@@ -46,6 +46,11 @@ const Footer: React.FC = () => {
           <a href="tel:+12267531833" className={contactLinkClass}>
             <span className="block">226-753-1833</span>
           </a>
+          <div className="pt-2">
+            <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Legal</p>
+            <NavLink to="/privacy" className={routeLinkClass}>Privacy Policy</NavLink>
+            <NavLink to="/terms" className={routeLinkClass}>Terms of Service</NavLink>
+          </div>
         </nav>
       </div>
     </footer>

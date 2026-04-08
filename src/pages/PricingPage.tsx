@@ -85,7 +85,7 @@ const PricingPage: React.FC = () => {
   return (
     <div className="page-shell">
       <SEO
-        title="Pricing | Axiom"
+        title="Clear pricing | Axiom"
         description="Website pricing for local businesses. Clear scope, no surprises, and a site you own."
       />
 

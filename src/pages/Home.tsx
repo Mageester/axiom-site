@@ -118,7 +118,7 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Serious websites | Axiom"
+        title="Serious websites for serious businesses | Axiom"
         description="Axiom builds clear websites for established businesses. People can see what you do, find proof fast, and know how to contact you."
         schema={{
           '@context': 'https://schema.org',

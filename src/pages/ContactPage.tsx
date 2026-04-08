@@ -342,7 +342,6 @@ const ProjectApplicationForm: React.FC = () => {
         };
     });
 
-    const [step, setStep] = useState<1 | 2>(1);
     const [status, setStatus] = useState<SubmitState>('');
     const [msg, setMsg] = useState('');
     const [errors, setErrors] = useState<Partial<Record<keyof IntakeFormState, string>>>({});
@@ -399,34 +398,16 @@ const ProjectApplicationForm: React.FC = () => {
         });
     };
 
-    const validateStep1 = () => {
-        const nextErrors: typeof errors = {};
-        if (form.name.trim().length < 2) nextErrors.name = 'Name is required.';
-        if (!form.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Valid email required.';
-        if (form.business_name.trim().length < 2) nextErrors.business_name = 'Business name required.';
-        setErrors(nextErrors);
-        return Object.keys(nextErrors).length === 0;
-    };
-
-    const handleNextStep = () => {
-        if (validateStep1()) {
-            setStep(2);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    };
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (status === 'loading') return;
 
         const nextErrors: typeof errors = {};
+        if (form.name.trim().length < 2) nextErrors.name = 'Name is required.';
+        if (!form.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Valid email required.';
+        if (form.business_name.trim().length < 2) nextErrors.business_name = 'Business name required.';
         if (!form.project_scale) nextErrors.project_scale = 'Please choose the kind of site you need.';
         if (form.details.trim().length < 10) nextErrors.details = 'Please share details (min 10 chars).';
-        FIT_QUESTIONS.forEach((question) => {
-            if (!form[question.key]) {
-                nextErrors[question.key] = 'Please choose yes or no.';
-            }
-        });
         if (Object.keys(nextErrors).length > 0) {
             setErrors(nextErrors);
             return;
@@ -476,12 +457,12 @@ const ProjectApplicationForm: React.FC = () => {
     return (
         <>
             <SEO
-                title="Start a project | Axiom"
+                title="Tell us what you need | Axiom"
                 description="Tell us what you need. We’ll reply within one business day."
                 schema={{
                     '@context': 'https://schema.org',
                     '@type': 'ContactPage',
-                    name: 'Start a project | Axiom',
+                    name: 'Tell us what you need | Axiom',
                     description: 'Tell us what you need. We’ll reply within one business day.',
                     url: 'https://getaxiom.ca/apply',
                 }}
@@ -508,12 +489,9 @@ const ProjectApplicationForm: React.FC = () => {
                         .
                     </p>
                     <div data-startup-actions className="mx-auto mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">
-                        <span>Step {step} of 2</span>
+                        <span>One page</span>
                         <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" aria-hidden="true" />
                         <span>About 2 minutes</span>
-                    </div>
-                    <div className="mx-auto mt-4 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
-                        <div className={`h-full w-full origin-left bg-[#B05D41] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${step === 1 ? 'scale-x-50' : 'scale-x-100'}`} />
                     </div>
                     </section>
 
@@ -525,7 +503,7 @@ const ProjectApplicationForm: React.FC = () => {
                                         <div ref={successBoxRef} className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
                                             <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
                                             <p className="mt-2 text-sm text-slate-300">We&apos;ll review it and reply within one business day.</p>
-                                            <button type="button" onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
+                                            <button type="button" onClick={() => { setStatus(''); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
                                                 Start another project
                                             </button>
                                         </div>
@@ -537,119 +515,116 @@ const ProjectApplicationForm: React.FC = () => {
                                         </div>
                                     )}
 
-                                    {step === 1 ? (
-                                        <div className="flex flex-col gap-5">
-                                            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                                                <div className="flex flex-col gap-2">
-                                                    <label className={FIELD_LABEL_CLASS}>Name</label>
-                                                    <input type="text" required minLength={2} value={form.name} onChange={(e) => setField('name', e.target.value)} className={FIELD_INPUT_CLASS} />
-                                                    {errors.name && <p className="text-xs text-red-300">{errors.name}</p>}
-                                                </div>
-                                                <div className="flex flex-col gap-2">
-                                                    <label className={FIELD_LABEL_CLASS}>Email</label>
-                                                    <input type="email" required value={form.email} onChange={(e) => setField('email', e.target.value)} className={FIELD_INPUT_CLASS} />
-                                                    {errors.email && <p className="text-xs text-red-300">{errors.email}</p>}
-                                                </div>
-                                                <div className="flex flex-col gap-2">
-                                                    <label className={FIELD_LABEL_CLASS}>Business name</label>
-                                                    <input type="text" required minLength={2} value={form.business_name} onChange={(e) => setField('business_name', e.target.value)} className={FIELD_INPUT_CLASS} />
-                                                    {errors.business_name && <p className="text-xs text-red-300">{errors.business_name}</p>}
-                                                </div>
-                                                <div className="flex flex-col gap-2">
-                                                    <label className={FIELD_LABEL_CLASS}>Phone (optional)</label>
-                                                    <input type="tel" value={form.phone} onChange={(e) => setField('phone', e.target.value)} className={FIELD_INPUT_CLASS} />
-                                                </div>
-                                            </div>
-
+                                    <div className="flex flex-col gap-6">
+                                        <section className="grid gap-5 sm:grid-cols-2">
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>Current website (optional)</label>
-                                                <input type="url" placeholder="https://your-site.com" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className={FIELD_INPUT_CLASS} />
-                                                <p className="text-xs text-slate-400">Optional if you have one.</p>
+                                                <label className={FIELD_LABEL_CLASS}>Name</label>
+                                                <input type="text" required minLength={2} value={form.name} onChange={(e) => setField('name', e.target.value)} className={FIELD_INPUT_CLASS} />
+                                                {errors.name && <p className="text-xs text-red-300">{errors.name}</p>}
                                             </div>
+                                            <div className="flex flex-col gap-2">
+                                                <label className={FIELD_LABEL_CLASS}>Email</label>
+                                                <input type="email" required value={form.email} onChange={(e) => setField('email', e.target.value)} className={FIELD_INPUT_CLASS} />
+                                                {errors.email && <p className="text-xs text-red-300">{errors.email}</p>}
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <label className={FIELD_LABEL_CLASS}>Business name</label>
+                                                <input type="text" required minLength={2} value={form.business_name} onChange={(e) => setField('business_name', e.target.value)} className={FIELD_INPUT_CLASS} />
+                                                {errors.business_name && <p className="text-xs text-red-300">{errors.business_name}</p>}
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <label className={FIELD_LABEL_CLASS}>Phone (optional)</label>
+                                                <input type="tel" value={form.phone} onChange={(e) => setField('phone', e.target.value)} className={FIELD_INPUT_CLASS} />
+                                            </div>
+                                        </section>
 
-                                            <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
-                                                Continue to step 2
+                                        <div className="flex flex-col gap-2">
+                                            <label className={FIELD_LABEL_CLASS}>Current website (optional)</label>
+                                            <input type="url" placeholder="https://your-site.com" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className={FIELD_INPUT_CLASS} />
+                                            <p className="text-xs text-slate-400">Optional if you have one.</p>
+                                        </div>
+
+                                        <div className="flex flex-col gap-2">
+                                            <label className={FIELD_LABEL_CLASS}>What kind of site do you need?</label>
+                                            <select value={form.project_scale} onChange={(e) => setField('project_scale', e.target.value)} className={FIELD_INPUT_CLASS}>
+                                                <option value="" disabled>Select a site type...</option>
+                                                {SCALE_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                                            </select>
+                                            {errors.project_scale && <p className="text-xs text-red-300">{errors.project_scale}</p>}
+                                        </div>
+
+                                        <div className="flex flex-col gap-3">
+                                            <label className={FIELD_LABEL_CLASS}>What needs attention first?</label>
+                                            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                                {PAIN_POINTS_OPTIONS.map((point) => {
+                                                    const selected = form.pain_points.includes(point);
+                                                    return (
+                                                        <button
+                                                            key={point}
+                                                            type="button"
+                                                            onClick={() => togglePainPoint(point)}
+                                                            className={`min-h-[50px] rounded-xl border px-3 py-2 text-left text-sm transition-colors ${selected
+                                                                ? 'border-[#B05D41]/45 bg-[#B05D41]/12 text-[#F2F4F7]'
+                                                                : 'border-white/10 bg-[#0f1524]/45 text-slate-300 hover:border-white/25'}`}
+                                                        >
+                                                            {point}
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+
+                                        <details className="group rounded-2xl border border-white/10 bg-[#0f1524]/45 p-4 md:p-5">
+                                            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left">
+                                                <span className="min-w-0">
+                                                    <span className={FIELD_LABEL_CLASS}>Project readiness questions (optional)</span>
+                                                    <span className="mt-1 block text-sm leading-relaxed text-slate-300">Answer these only if you want us to check fit before we start.</span>
+                                                </span>
+                                                <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180" fill="none" aria-hidden="true">
+                                                    <path d="M5.5 7.5 10 12l4.5-4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                                                </svg>
+                                            </summary>
+                                            <div className="mt-4 grid grid-cols-1 gap-3">
+                                                {FIT_QUESTIONS.map((question) => (
+                                                    <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">
+                                                        <p className="text-sm leading-relaxed text-slate-200">{question.label}</p>
+                                                        <div className="mt-3 grid grid-cols-2 gap-2 sm:max-w-[220px]">
+                                                            {(['yes', 'no'] as const).map((option) => {
+                                                                const isSelected = form[question.key] === option;
+                                                                return (
+                                                                    <button
+                                                                        key={option}
+                                                                        type="button"
+                                                                        onClick={() => setField(question.key, option)}
+                                                                        className={`rounded-lg border px-3 py-2 text-sm font-medium capitalize transition-colors ${isSelected
+                                                                            ? 'border-[#B05D41]/45 bg-[#B05D41]/12 text-[#F2F4F7]'
+                                                                            : 'border-white/10 bg-[#0f1524]/70 text-slate-300 hover:border-white/25'
+                                                                            }`}
+                                                                        aria-pressed={isSelected}
+                                                                    >
+                                                                        {option}
+                                                                    </button>
+                                                                );
+                                                            })}
+                                                        </div>
+                                                    </article>
+                                                ))}
+                                            </div>
+                                        </details>
+
+                                        <div className="flex flex-col gap-2">
+                                            <label className={FIELD_LABEL_CLASS}>What should the site do first?</label>
+                                            <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Example: clearer service pages, better proof, and an easier way to get calls or quote requests." className={`${FIELD_INPUT_CLASS} resize-none`} />
+                                            {errors.details && <p className="text-xs text-red-300">{errors.details}</p>}
+                                        </div>
+
+                                        <div className="flex flex-col gap-3">
+                                            <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
+                                                {status === 'loading' ? 'Sending...' : 'Start a project'}
                                             </button>
+                                            <p className="text-sm text-slate-400">We&apos;ll review and reply within one business day.</p>
                                         </div>
-                                    ) : (
-                                        <div className="flex flex-col gap-5">
-                                            <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>What kind of site do you need?</label>
-                                                <select value={form.project_scale} onChange={(e) => setField('project_scale', e.target.value)} className={FIELD_INPUT_CLASS}>
-                                                    <option value="" disabled>Select a site type...</option>
-                                                    {SCALE_OPTIONS.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
-                                                </select>
-                                                {errors.project_scale && <p className="text-xs text-red-300">{errors.project_scale}</p>}
-                                            </div>
-
-                                            <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>What needs attention first?</label>
-                                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                                                    {PAIN_POINTS_OPTIONS.map(point => {
-                                                        const selected = form.pain_points.includes(point);
-                                                        return (
-                                                            <button
-                                                                key={point}
-                                                                type="button"
-                                                                onClick={() => togglePainPoint(point)}
-                                                                className={`min-h-[50px] rounded-xl border px-3 py-2 text-left text-sm transition-colors ${selected
-                                                                    ? 'border-[#B05D41]/45 bg-[#B05D41]/12 text-[#F2F4F7]'
-                                                                    : 'border-white/10 bg-[#0f1524]/45 text-slate-300 hover:border-white/25'}`}
-                                                            >
-                                                                {point}
-                                                            </button>
-                                                        );
-                                                    })}
-                                                </div>
-                                            </div>
-
-                                            <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>A few fit questions</label>
-                                                <div className="grid grid-cols-1 gap-3">
-                                                    {FIT_QUESTIONS.map((question) => (
-                                                        <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">
-                                                            <p className="text-sm leading-relaxed text-slate-200">{question.label}</p>
-                                                            <div className="mt-3 grid grid-cols-2 gap-2 sm:max-w-[220px]">
-                                                                {(['yes', 'no'] as const).map((option) => {
-                                                                    const isSelected = form[question.key] === option;
-                                                                    return (
-                                                                        <button
-                                                                            key={option}
-                                                                            type="button"
-                                                                            onClick={() => setField(question.key, option)}
-                                                                            className={`rounded-lg border px-3 py-2 text-sm font-medium capitalize transition-colors ${isSelected
-                                                                                ? 'border-[#B05D41]/45 bg-[#B05D41]/12 text-[#F2F4F7]'
-                                                                                : 'border-white/10 bg-[#0f1524]/70 text-slate-300 hover:border-white/25'
-                                                                                }`}
-                                                                            aria-pressed={isSelected}
-                                                                        >
-                                                                            {option}
-                                                                        </button>
-                                                                    );
-                                                                })}
-                                                            </div>
-                                                            {errors[question.key] && <p className="mt-2 text-xs text-red-300">{errors[question.key]}</p>}
-                                                        </article>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>What should the site do first?</label>
-                                                <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Example: clearer service pages, better proof, and an easier way to get calls or quote requests." className={`${FIELD_INPUT_CLASS} resize-none`} />
-                                                {errors.details && <p className="text-xs text-red-300">{errors.details}</p>}
-                                            </div>
-
-                                            <div className="flex flex-col gap-3 sm:flex-row">
-                                                <button type="button" onClick={() => setStep(1)} className={SECONDARY_BUTTON_CLASS}>
-                                                    Back
-                                                </button>
-                                                <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg flex-1 disabled:cursor-not-allowed disabled:opacity-70">
-                                                    {status === 'loading' ? 'Sending...' : 'Start a project'}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    )}
+                                    </div>
                                 </fieldset>
                             </form>
                         </div>
