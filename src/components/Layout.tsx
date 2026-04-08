@@ -14,6 +14,7 @@ const NAV_ITEMS = [
   { label: 'Home', to: '/' },
   { label: 'Work', to: '/works' },
   { label: 'Process', to: '/method' },
+  { label: 'About', to: '/about' },
 ];
 
 const isActiveRoute = (pathname: string, to: string) => {
