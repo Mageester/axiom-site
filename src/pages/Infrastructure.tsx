@@ -12,18 +12,19 @@ type ProcessStep = {
 
 type ChecklistItem = {
   title: string;
+  detail: string;
 };
 
 const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     number: '01',
     title: 'Review',
-    summary: 'We look at the current site, what the business does, and what the pages need to answer.',
+    summary: 'We look at the current site, what the business needs to say, and what people need to find.',
   },
   {
     number: '02',
     title: 'Plan',
-    summary: 'We agree on the pages, proof, and contact path before design starts.',
+    summary: 'We settle the main pages, the proof to show, and where calls or forms should go.',
   },
   {
     number: '03',
@@ -33,16 +34,31 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     number: '04',
     title: 'Launch',
-    summary: 'We test the forms, connect the domain, and put it live.',
+    summary: 'We test the forms, connect the domain, and make sure everything is ready to go live.',
   },
 ];
 
 const CHECKLIST_ITEMS: readonly ChecklistItem[] = [
-  { title: 'Pages and menu' },
-  { title: 'Copy and proof' },
-  { title: 'Calls and forms' },
-  { title: 'Domain and launch' },
-  { title: 'After-launch changes' },
+  {
+    title: 'Main pages',
+    detail: 'Which pages matter and how people should move through them.',
+  },
+  {
+    title: 'Proof to show',
+    detail: 'Reviews, photos, past work, and anything else people should see early.',
+  },
+  {
+    title: 'Calls and forms',
+    detail: 'Where each quote, call, or contact path should go.',
+  },
+  {
+    title: 'Domain and launch',
+    detail: 'What gets moved, tested, and checked before launch day.',
+  },
+  {
+    title: 'After-launch changes',
+    detail: 'The small fixes to make once the site is in front of real visitors.',
+  },
 ];
 
 const CheckMark: React.FC = () => (
@@ -62,44 +78,47 @@ const Infrastructure: React.FC = () => {
     <>
       <SEO
         title="Process | Axiom"
-        description="How Axiom reviews, plans, builds, and launches a website."
+        description="How Axiom reviews the site, sets the page plan, builds it, and gets it ready to go live."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: 'Process | Axiom',
-          description: 'How Axiom reviews, plans, builds, and launches a website.',
+          description: 'How Axiom reviews the site, sets the page plan, builds it, and gets it ready to go live.',
           url: 'https://getaxiom.ca/method',
         }}
       />
 
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-6xl px-5 pb-14 md:px-10 md:pb-18">
-          <section className="pt-5 md:pt-10">
+          <section className="pt-4 md:pt-8">
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
               <h1 data-startup-heading className="mt-3 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
-                How the build works.
+                A short process with clear decisions.
               </h1>
               <p data-startup-copy className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                We review the current site, agree on the pages, build it, and launch it.
+                We review the site, decide what needs to change, then build and launch.
               </p>
               <div data-startup-actions className="mt-5">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Talk to Axiom
+                  Start a project
                 </Link>
               </div>
             </div>
           </section>
 
-          <section className="pt-7 md:pt-9">
+          <section className="pt-6 md:pt-8">
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] xl:items-start">
               <div>
                 <div className="mb-4 flex flex-col gap-2 md:mb-5 md:flex-row md:items-end md:justify-between">
                   <div>
                     <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">The steps</p>
                     <h2 className="mt-1 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                      The four steps.
+                      From first review to launch.
                     </h2>
+                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
+                      Everything important gets settled early, so the build stays clear.
+                    </p>
                   </div>
                 </div>
 
@@ -132,15 +151,18 @@ const Infrastructure: React.FC = () => {
                 </div>
               </div>
 
-              <article className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,18,26,0.98)_0%,rgba(10,13,19,0.98)_100%)] p-4 shadow-[0_18px_52px_rgba(0,0,0,0.22)] md:p-5 xl:mt-[2.4rem]">
+              <article className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,18,26,0.98)_0%,rgba(10,13,19,0.98)_100%)] p-4 shadow-[0_18px_52px_rgba(0,0,0,0.22)] md:p-5 xl:mt-[3.4rem]">
                 <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between">
                   <div>
                     <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
-                      Pre-build checklist
+                      Before build starts
                     </p>
                     <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
-                      What gets decided first
+                      What gets settled first
                     </h2>
+                    <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-300">
+                      This keeps the work moving and cuts down on back-and-forth later.
+                    </p>
                   </div>
                 </div>
 
@@ -150,9 +172,14 @@ const Infrastructure: React.FC = () => {
                       <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
                         <CheckMark />
                       </span>
-                      <span className="text-sm font-medium leading-relaxed text-slate-200 md:text-[0.96rem]">
-                        {item.title}
-                      </span>
+                      <div>
+                        <p className="text-sm font-medium leading-relaxed text-slate-200 md:text-[0.96rem]">
+                          {item.title}
+                        </p>
+                        <p className="mt-1 text-sm leading-relaxed text-slate-300">
+                          {item.detail}
+                        </p>
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -160,7 +187,7 @@ const Infrastructure: React.FC = () => {
             </div>
           </section>
 
-          <section className="pt-8 md:pt-10">
+          <section className="pt-7 md:pt-9">
             <article className="relative overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,23,34,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-5 text-center shadow-[0_20px_54px_rgba(0,0,0,0.24)] md:p-7">
               <div className="pointer-events-none absolute inset-0">
                 <div className="absolute -top-24 left-[14%] h-48 w-48 rounded-full bg-[#B05D41]/12 blur-3xl" />
@@ -170,14 +197,14 @@ const Infrastructure: React.FC = () => {
               <div className="relative z-10 mx-auto max-w-2xl">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
-                  Ready to talk?
+                  Start with a site review.
                 </h2>
                 <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  We&apos;ll look at your current website and tell you what needs to change.
+                  We&apos;ll look at your current site and tell you what needs attention first.
                 </p>
                 <div className="mt-6 flex justify-center">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Talk to Axiom
+                    Start a project
                   </Link>
                 </div>
               </div>

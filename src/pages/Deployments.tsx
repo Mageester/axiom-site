@@ -51,9 +51,9 @@ const workPresentationBySlug: Record<
 };
 
 const improvementCopyBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'The booking link is easy to find, and the menu is simple to scan.',
-  'concept-landscaping-authority-site': 'Past work is easier to see, and quote requests are easy to send.',
-  'concept-roofing-conversion-site': 'Urgent calls and planned estimates each have a clear path.',
+  'demonstration-restaurant-reservation-site': 'Menu and booking are easy to find, especially on phones.',
+  'concept-landscaping-authority-site': 'Past work is up front, and quote requests are easier to send.',
+  'concept-roofing-conversion-site': 'Storm calls and planned estimates each have a clear path.',
 };
 
 const orderedCaseStudies = worksDisplayOrder
@@ -84,11 +84,7 @@ const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
 
 function WorkCard({ work }: { work: WorkEntry }) {
   const card = (
-    <article className={`motion-surface flex h-full flex-1 flex-col overflow-hidden rounded-[1.75rem] group-hover/proof:-translate-y-0.5 group-hover/proof:shadow-[0_18px_42px_rgba(0,0,0,0.26)] ${
-      work.kind === 'live'
-        ? 'border border-white/10 bg-[linear-gradient(180deg,rgba(20,26,34,0.94)_0%,rgba(11,15,22,0.98)_100%)]'
-        : 'border border-white/8 bg-[linear-gradient(180deg,rgba(17,22,29,0.82)_0%,rgba(11,15,20,0.96)_100%)]'
-    }`}>
+    <article className="motion-surface flex h-full flex-1 flex-col overflow-hidden rounded-[1.75rem] border border-white/9 bg-[linear-gradient(180deg,rgba(18,23,31,0.9)_0%,rgba(11,15,21,0.98)_100%)] group-hover/proof:-translate-y-0.5 group-hover/proof:shadow-[0_18px_42px_rgba(0,0,0,0.26)]">
       <div className="relative h-[38%] overflow-hidden sm:h-[42%]">
         <ResponsiveImage
           source={work.image}
@@ -154,25 +150,15 @@ const Deployments: React.FC = () => {
           <div className="max-w-4xl">
             <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
             <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">Selected work.</h1>
+              <h1 data-startup-heading className="text-left">Selected work that shows the standard.</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              A small set of sites that show what gets fixed: clearer pages, proof people can see, and a simpler path to contact.
-            </p>
-            <p className="mt-5 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-              One live site. Two demos. Chosen to show the standard.
+              One live site and two demos that show clearer pages, better proof, and easier contact.
             </p>
           </div>
         </RevealBlock>
 
         <RevealBlock as="section" id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-8 pb-6 sm:px-6 md:px-8 md:pt-10">
-          <div className="mx-auto mb-6 max-w-3xl md:mb-8">
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">The selection</p>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-              Each example shows a different business problem being fixed. The point is not volume. It is clarity.
-            </p>
-          </div>
-
           <div className="mx-auto grid max-w-6xl gap-3.5 md:grid-cols-2 md:gap-4 xl:grid-cols-3">
             {works.map((work, index) => (
               <RevealBlock as="article" key={work.id} delay={index * 0.08} variant="card">
@@ -186,13 +172,13 @@ const Deployments: React.FC = () => {
           <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[520px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[140px]" />
 
           <div className="relative z-10">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need the same fixes?</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this kind of cleanup?</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We can review your site and show you what to fix first.
+                We can review the site and tell you what to fix first.
               </p>
               <div className="mt-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
                 <Link to="/apply#project-application-form" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                  Talk to Axiom
+                  Start a project
                 </Link>
                 <Link
                   to="/method"

@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
         <div className="col-span-2 md:col-span-1">
           <p className="text-lg font-black leading-[1.02] tracking-tight text-[#F2F4F7] md:text-4xl">AXIOM</p>
           <p className="mt-2 max-w-md text-[11px] leading-[1.45] text-slate-300 md:mt-3 md:text-sm">
-            Websites for established businesses.
+            Clear websites for established businesses.
           </p>
           <p className="mt-4 hidden text-[10px] uppercase tracking-[0.12em] text-slate-400 md:block md:mt-6">
             Copyright 2026 Axiom. All rights reserved.
@@ -31,14 +31,17 @@ const Footer: React.FC = () => {
 
         <nav className="space-y-1.5">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Next step</p>
-          <NavLink to="/apply" className={routeLinkClass}>Talk to Axiom</NavLink>
+          <NavLink to="/apply" className={routeLinkClass}>Start a project</NavLink>
         </nav>
 
         <nav className="col-span-2 space-y-1.5 md:col-span-1">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
-          <NavLink to="/contact" className={routeLinkClass}>Send a message</NavLink>
+          <NavLink to="/contact" className={routeLinkClass}>Contact</NavLink>
           <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
             <span className="block">contact@getaxiom.ca</span>
+          </a>
+          <a href="tel:+12267531833" className={contactLinkClass}>
+            <span className="block">226-753-1833</span>
           </a>
         </nav>
       </div>

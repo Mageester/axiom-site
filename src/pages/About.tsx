@@ -13,15 +13,15 @@ type SnapshotRow = {
 const SNAPSHOT_ROWS: readonly SnapshotRow[] = [
   {
     label: 'Focus',
-    value: 'Clear websites for established businesses',
+    value: 'Established businesses that need a stronger site',
+  },
+  {
+    label: 'We fix',
+    value: 'Pages, proof, and contact paths',
   },
   {
     label: 'Scope',
-    value: 'Pages, writing, build, launch',
-  },
-  {
-    label: 'Style',
-    value: 'Calm, direct, easy to use',
+    value: 'Writing, design, build, launch',
   },
 ];
 
@@ -30,12 +30,12 @@ const About: React.FC = () => {
     <>
       <SEO
         title="About | Axiom"
-        description="Axiom builds clear websites for established businesses."
+        description="Axiom fixes weak pages, buried proof, and hard-to-find contact paths for established businesses."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
           name: 'About | Axiom',
-          description: 'Axiom builds clear websites for established businesses.',
+          description: 'Axiom fixes weak pages, buried proof, and hard-to-find contact paths for established businesses.',
           url: 'https://getaxiom.ca/about',
         }}
       />
@@ -50,14 +50,14 @@ const About: React.FC = () => {
                   data-startup-heading
                   className="mt-3 text-[clamp(2.35rem,5.8vw,4.35rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]"
                 >
-                  Axiom builds websites that are easy to read and trust.
+                  Axiom helps good businesses look clear and easy to trust.
                 </h1>
                 <p data-startup-copy className="mt-5 max-w-xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  The work stays focused on what people need to know and how to reach you.
+                  We fix weak pages, buried proof, and hard-to-find contact paths. The goal is a site people can understand quickly.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Link to="/apply" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                    Talk to Axiom
+                    Start a project
                   </Link>
                   <Link
                     to="/works"
@@ -88,17 +88,17 @@ const About: React.FC = () => {
           <RevealBlock as="section" className="pt-10 md:pt-16" variant="feature">
             <article className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8">
               <div>
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Why it stays simple</p>
                 <h2 className="mt-2 max-w-2xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  If the site feels weak, we can help.
+                  Most sites do not need more noise.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  We can look at the current site and point out the first thing worth fixing.
+                  They need clearer pages, better proof, and a next step people can find without thinking. That is why the work stays tight and direct.
                 </p>
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link to="/apply" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                  Talk to Axiom
+                  Start a project
                 </Link>
                 <Link
                   to="/works"

@@ -60,15 +60,15 @@ const PAIN_POINTS_OPTIONS = [
 const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_active_demand' | 'fit_trust_conversion_need' | 'fit_decision_owner_ready' | 'fit_defined_scope_ready'>; label: string }> = [
     {
         key: 'fit_active_demand',
-        label: 'Are you currently taking on new clients or customers?'
+        label: 'Are you taking on new clients or customers right now?'
     },
     {
         key: 'fit_trust_conversion_need',
-        label: 'Do you want a site built for your business, not a generic template?'
+        label: 'Do you want the site to help with calls, leads, or booked work?'
     },
     {
         key: 'fit_decision_owner_ready',
-        label: 'Will you (or a single decision-maker) be available to review the site while we build it?'
+        label: 'Will one person be available to review the work while we build?'
     },
     {
         key: 'fit_defined_scope_ready',
@@ -199,17 +199,17 @@ const GeneralContactForm: React.FC = () => {
         <>
             <SEO
                 title="Contact | Axiom"
-                description="Ask a question or send a website note."
+                description="Send a question or a note about your site."
             />
             <section data-hero-root className="mx-auto max-w-3xl pt-8 text-center md:pt-16">
                 <div className="overflow-hidden">
                     <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Contact</p>
                     <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                        Need help with a website?
+                        Send a question or a note.
                     </h1>
                 </div>
                 <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-200/90 md:text-base">
-                    Use this form for a question or a simple note.
+                    Use this form for a quick question or a note about your site.
                 </p>
                 <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-300">
                     For website work, use{' '}
@@ -227,7 +227,7 @@ const GeneralContactForm: React.FC = () => {
                             {status === 'success' && (
                                 <div ref={successBoxRef} className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
                                     <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
-                                    <p className="mt-2 text-sm text-slate-300">We'll reply within one business day.</p>
+                                    <p className="mt-2 text-sm text-slate-300">We&apos;ll reply within one business day.</p>
                                     <button type="button" onClick={() => { setStatus(''); setForm(CONTACT_INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
                                         Send another message
                                     </button>
@@ -457,7 +457,7 @@ const ProjectApplicationForm: React.FC = () => {
 
             if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg('Thanks for submitting your details. We\'ll review everything and get back to you within one business day.');
+                setMsg('Thanks. We have what we need.');
                 return;
             }
 
@@ -476,13 +476,13 @@ const ProjectApplicationForm: React.FC = () => {
     return (
         <>
             <SEO
-                title="Start a Website Project | Axiom"
-                description="Tell us about your business and the site you need. We'll review it and reply with the next step."
+                title="Start a project | Axiom"
+                description="Tell us what you need and we'll reply with the next step within one business day."
                 schema={{
                     '@context': 'https://schema.org',
                     '@type': 'ContactPage',
-                    name: 'Start a Website Project | Axiom',
-                    description: 'Tell us about your business and the site you need. We\'ll review it and reply with the next step.',
+                    name: 'Start a project | Axiom',
+                    description: 'Tell us what you need and we\'ll reply with the next step within one business day.',
                     url: 'https://getaxiom.ca/apply',
                 }}
             />
@@ -494,11 +494,11 @@ const ProjectApplicationForm: React.FC = () => {
                             Start a project
                         </p>
                         <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                            Tell us about the site you need.
+                            Tell us what you need.
                         </h1>
                     </div>
                     <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                        Two short steps. We review every request and reply within one business day.
+                        Start with the basics. We review every request and reply within one business day.
                     </p>
                     <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
                         For a general question, use{' '}
@@ -524,7 +524,7 @@ const ProjectApplicationForm: React.FC = () => {
                                     {status === 'success' && (
                                         <div ref={successBoxRef} className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
                                             <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
-                                            <p className="mt-2 text-sm text-slate-300">We'll review it and reply within one business day.</p>
+                                            <p className="mt-2 text-sm text-slate-300">We&apos;ll review it and reply with the next step within one business day.</p>
                                             <button type="button" onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
                                                 Send another request
                                             </button>
@@ -571,15 +571,9 @@ const ProjectApplicationForm: React.FC = () => {
                                                 Continue
                                             </button>
 
-                                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Before you send it</p>
-                                                <p className="mt-3 text-sm text-slate-300">
-                                                    Phone and current website are optional.
-                                                </p>
-                                                <p className="mt-3 text-sm text-slate-300">
-                                                    Short answers are fine. We only need enough detail to understand the job.
-                                                </p>
-                                            </div>
+                                            <p className="text-sm text-slate-400">
+                                                Phone and current website are optional. Short answers are fine.
+                                            </p>
                                         </div>
                                     ) : (
                                         <div className="flex flex-col gap-5">
@@ -614,7 +608,7 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>A few quick checks</label>
+                                                <label className={FIELD_LABEL_CLASS}>A few quick questions</label>
                                                 <div className="grid grid-cols-1 gap-3">
                                                     {FIT_QUESTIONS.map((question) => (
                                                         <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">
@@ -645,7 +639,7 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>What should the site help with?</label>
+                                                <label className={FIELD_LABEL_CLASS}>What should the site help with first?</label>
                                                 <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Example: clearer service pages, better proof, and an easier way to get calls or quote requests." className={`${FIELD_INPUT_CLASS} resize-none`} />
                                                 <p className="text-xs text-slate-400">Short notes are fine.</p>
                                                 {errors.details && <p className="text-xs text-red-300">{errors.details}</p>}
@@ -656,7 +650,7 @@ const ProjectApplicationForm: React.FC = () => {
                                                     Back
                                                 </button>
                                                 <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg flex-1 disabled:cursor-not-allowed disabled:opacity-70">
-                                                    {status === 'loading' ? 'Sending...' : 'Send request'}
+                                                    {status === 'loading' ? 'Sending...' : 'Send project details'}
                                                 </button>
                                             </div>
                                         </div>

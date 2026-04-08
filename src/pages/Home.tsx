@@ -72,27 +72,27 @@ const selectedWork = selectedWorkEntries.map((entry) => {
 
 const heroTrustPoints = [
   'Fast on phones',
-  'Clear service pages',
-  'Proof up front',
-  'Easy contact path',
+  'Easy to read',
+  'Proof in the right place',
+  'Easy next step',
 ];
 
-const weakSiteCosts = [
+const siteImprovements = [
   {
-    title: 'Looks smaller',
-    detail: 'The business can look less established than it is.',
+    title: 'Clearer pages',
+    detail: 'People can tell what you do and where to go next.',
   },
   {
-    title: 'Loses trust',
-    detail: 'Outdated pages make the company harder to trust.',
+    title: 'Stronger proof',
+    detail: 'Reviews, photos, and past work show up sooner.',
   },
   {
-    title: 'Hides proof',
-    detail: 'Reviews, photos, and past jobs are hard to find.',
+    title: 'Better on phones',
+    detail: 'The site stays easy to use when people check it on mobile.',
   },
   {
-    title: 'Misses contact',
-    detail: 'If the phone number or form is buried, people move on.',
+    title: 'Fewer weak spots',
+    detail: 'Old pages, mixed messages, and buried contact points get cleaned up.',
   },
 ];
 
@@ -100,17 +100,17 @@ const processStages = [
   {
     number: '01',
     title: 'Review',
-    detail: 'We look at the current site and the main problem.',
+    detail: 'We review the current site and what needs to change.',
   },
   {
     number: '02',
     title: 'Plan',
-    detail: 'We set the pages to keep, what proof to show, and where people should contact you.',
+    detail: 'We decide which pages matter, what proof to show, and how people should get in touch.',
   },
   {
     number: '03',
     title: 'Build',
-    detail: 'We write, design, build, and check the site before launch.',
+    detail: 'We write, design, build, and check the site before it goes live.',
   },
 ];
 
@@ -119,7 +119,7 @@ const Home: React.FC = () => {
     <>
       <SEO
         title="Axiom | Websites for Serious Businesses"
-        description="Axiom builds clear websites for established businesses. The pages work well on phones, make the business easier to trust, and make it easier to get in touch."
+        description="Axiom builds clear websites for established businesses. People can see what you do, find proof fast, and know how to contact you."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
@@ -135,25 +135,25 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    A website that looks like the business behind it
+                    A site that makes the business easy to trust
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom builds clear websites for established businesses. People can see what you do, trust what they see, and contact you without hunting.
+                  People should see what you do, find proof fast, and know how to reach you. We build sites that make that clear.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link to="/works" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
                     See work
                   </Link>
                   <Link
-                    to="/method"
+                    to="/apply"
                     className="inline-flex w-full items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
                   >
-                    See process
+                    Start a project
                   </Link>
                 </div>
               </div>
-              <div data-startup-meta className="mt-8 w-full max-w-4xl border-t border-white/8 pt-5 md:mt-12 md:pt-6">
+              <div data-startup-meta className="mt-7 w-full max-w-4xl border-t border-white/8 pt-4 md:mt-10 md:pt-5">
                 <ul className="grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
                   {heroTrustPoints.map((point) => (
                     <li key={point} className="flex items-center gap-2.5 text-sm text-slate-200/90">
@@ -167,55 +167,14 @@ const Home: React.FC = () => {
           </section>
 
           <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-12">
-              <div className="max-w-xl lg:pt-2">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">Weak sites</p>
-                <h2 className="mt-3 max-w-[11ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  What a weak site costs.
-                </h2>
-                <p className="mt-4 max-w-[30ch] text-sm leading-7 text-slate-300 md:text-base">
-                  A weak site can make a solid business look smaller, less current, and harder to choose.
-                </p>
-              </div>
-
-              <div className="grid gap-3 md:grid-cols-2">
-                {weakSiteCosts.map((item, index) => (
-                  <RevealBlock
-                    as="article"
-                    key={item.title}
-                    delay={index * 0.05}
-                    variant="card"
-                    className="motion-surface relative overflow-hidden rounded-[1.35rem] border border-white/8 bg-white/[0.03] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.12)]"
-                  >
-                    <div className="flex items-start gap-3">
-                      <span
-                        className="mt-1 h-2.5 w-2.5 flex-none rounded-full bg-[#d4a48e] shadow-[0_0_0_4px_rgba(212,164,142,0.08)]"
-                        aria-hidden="true"
-                      />
-                      <div>
-                        <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7]">
-                          {item.title}
-                        </h3>
-                        <p className="mt-2 text-sm leading-6 text-slate-300">
-                          {item.detail}
-                        </p>
-                      </div>
-                    </div>
-                  </RevealBlock>
-                ))}
-              </div>
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
             <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  What changed.
+                  What these sites fixed.
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                  This work shows what changed: clearer pages, stronger proof, and an easier way to get in touch.
+                  Each one shows a clearer offer, better proof, or an easier next step.
                 </p>
               </div>
               <Link
@@ -290,15 +249,56 @@ const Home: React.FC = () => {
             </div>
           </RevealBlock>
 
+          <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-12">
+              <div className="max-w-xl lg:pt-2">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">What we fix</p>
+                <h2 className="mt-3 max-w-[10ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                  What gets cleaned up.
+                </h2>
+                <p className="mt-4 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
+                  Most sites do not need more pages. They need clearer pages, better proof, and fewer weak spots.
+                </p>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2">
+                {siteImprovements.map((item, index) => (
+                  <RevealBlock
+                    as="article"
+                    key={item.title}
+                    delay={index * 0.05}
+                    variant="card"
+                    className="motion-surface relative overflow-hidden rounded-[1.35rem] border border-white/8 bg-white/[0.03] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.12)]"
+                  >
+                    <div className="flex items-start gap-3">
+                      <span
+                        className="mt-1 h-2.5 w-2.5 flex-none rounded-full bg-[#d4a48e] shadow-[0_0_0_4px_rgba(212,164,142,0.08)]"
+                        aria-hidden="true"
+                      />
+                      <div>
+                        <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7]">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-6 text-slate-300">
+                          {item.detail}
+                        </p>
+                      </div>
+                    </div>
+                  </RevealBlock>
+                ))}
+              </div>
+            </div>
+          </RevealBlock>
+
           <RevealBlock as="section" className="pt-16 md:pt-22">
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-12">
               <div className="max-w-xl lg:pt-2">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">Process</p>
                 <h2 className="mt-3 max-w-[12ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  What the first call covers.
+                  How the work runs.
                 </h2>
                 <p className="mt-4 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
-                  We review the current site, the pages that matter, and the next step.
+                  We review the site, set the page plan, then build and check everything before launch.
                 </p>
               </div>
 
@@ -338,15 +338,15 @@ const Home: React.FC = () => {
               <div className="relative z-10">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  We can review the site.
+                  Start with a site review.
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  We&apos;ll look at the current site and tell you what to fix first.
+                  We&apos;ll look at the current site and tell you what needs attention first.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">
                   <Link to="/apply" className="btn-primary btn-attention btn-lg whitespace-nowrap">
-                    Talk to Axiom
+                    Start a project
                   </Link>
                 </div>
 

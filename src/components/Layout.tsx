@@ -222,7 +222,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return [
       'inline-flex items-center py-2 text-sm font-medium transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
-      active ? 'text-[#F2F4F7]' : 'text-white/62 hover:text-[#EAEFF5]'
+      active ? 'text-[#F2F4F7]' : 'text-white/64 hover:text-[#EAEFF5]'
     ].join(' ');
   };
 
@@ -262,12 +262,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div data-startup-bg className="global-noise-floor" />
       </div>
 
-      <nav ref={navRef} data-startup-nav className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-3 md:px-6 md:pt-4">
+      <nav ref={navRef} data-startup-nav className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-2.5 md:px-6 md:pt-3">
         <div className="mx-auto max-w-7xl">
           <div
-            className={`pointer-events-auto relative flex h-16 items-center rounded-[1.1rem] px-4 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-[4.25rem] md:px-6 ${
+            className={`pointer-events-auto relative flex h-[3.5rem] items-center rounded-[1rem] px-4 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-[3.85rem] md:px-5 ${
               isScrolled
-                ? 'border border-white/[0.07] bg-[rgba(11,13,17,0.48)] shadow-[0_8px_24px_rgba(0,0,0,0.10)] backdrop-blur-md'
+                ? 'border border-white/[0.06] bg-[rgba(10,12,16,0.34)] shadow-[0_6px_18px_rgba(0,0,0,0.08)] backdrop-blur-sm'
                 : 'border border-transparent bg-transparent shadow-none backdrop-blur-0'
             }`}
           >
@@ -283,13 +283,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   source={responsiveImages.logoClear}
                   sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
                   alt="Axiom logo"
-                  className="block h-11 w-auto max-w-none cursor-pointer object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-14 lg:h-16"
+                  className="block h-10 w-auto max-w-none cursor-pointer object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-12 lg:h-14"
                   decoding="async"
                 />
               </button>
           </div>
 
-          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-7 md:flex">
+          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-6 md:flex">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.to}
@@ -304,8 +304,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
-            <Link to="/apply" className="btn-primary btn-sm px-4 py-2 text-sm">
-              Talk to Axiom
+            <Link
+              to="/apply"
+              className="inline-flex items-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-2 text-sm font-medium text-[#F2F4F7] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/24 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+            >
+              Start a project
             </Link>
           </div>
 
@@ -379,9 +382,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Link
           to="/apply"
           onClick={() => setIsMobileMenuOpen(false)}
-          className="btn-primary btn-lg mt-5 w-full"
+          className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-3 text-sm font-medium text-[#F2F4F7] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/24 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
         >
-          Talk to Axiom
+          Start a project
         </Link>
       </div>
 
