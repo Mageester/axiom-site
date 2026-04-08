@@ -29,20 +29,20 @@ const BentoGrid: React.FC = () => {
           <ResponsiveImage
             source={responsiveImages.workAether}
             sizes="(min-width: 1024px) 50vw, 100vw"
-            alt="Premium website showcase"
+            alt="Website preview"
             className="h-full min-h-[520px] w-full object-cover object-center"
             loading="lazy"
             decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-8">
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Portfolio Showcase</p>
-            <h3 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Selected Work</h3>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Examples</p>
+            <h3 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Recent work</h3>
             <button
               type="button"
               className="mt-6 inline-flex h-11 items-center rounded-full border border-white/20 px-5 text-sm font-medium text-[#F5F7FA] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             >
-              View Project
+              See site
             </button>
           </div>
         </article>
@@ -56,19 +56,19 @@ const BentoGrid: React.FC = () => {
         <article className={cardShell}>
           <div className="flex h-full min-h-[300px] flex-col justify-between p-8">
             <div>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Strategic Depth</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Clear pages</p>
             <h3 className="mt-3 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">
-              Conversion Architecture for Premium Brands
+              Pages people can read fast
             </h3>
               <p className="mt-4 max-w-xl text-[15px] leading-[1.7] text-[#A7B3BC]">
-                Positioning, narrative sequencing, and offer framing engineered to move high-intent buyers from curiosity to action.
+                We shape the pages, proof, and next step so people know what the business does and how to contact it.
               </p>
             </div>
             <button
               type="button"
               className="mt-6 inline-flex h-11 w-fit items-center rounded-full border border-white/20 px-5 text-sm font-medium text-[#F5F7FA] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             >
-              View Project
+              See site
             </button>
           </div>
         </article>
@@ -83,14 +83,14 @@ const BentoGrid: React.FC = () => {
           <div className="flex h-full min-h-[320px] flex-col p-8">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">The Monolith</p>
-                <h3 className="mt-2 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">Project Thumbnail Stream</h3>
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Recent sites</p>
+                  <h3 className="mt-2 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">Project preview stream</h3>
               </div>
               <button
                 type="button"
                 className="inline-flex h-11 items-center rounded-full border border-white/20 px-5 text-sm font-medium text-[#F5F7FA] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               >
-                View Project
+                See site
               </button>
             </div>
             <div className="mt-8 flex gap-6 overflow-x-auto pb-2">

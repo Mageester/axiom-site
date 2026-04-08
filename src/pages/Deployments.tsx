@@ -30,23 +30,23 @@ const worksDisplayOrder = [
 
 const workPresentationBySlug: Record<string, { statusLabel: string; isLiveDemo: boolean }> = {
   'demonstration-restaurant-reservation-site': {
-    statusLabel: 'Live Deployment',
+    statusLabel: 'Live site',
     isLiveDemo: true,
   },
   'concept-landscaping-authority-site': {
-    statusLabel: 'Demo',
+    statusLabel: 'Demo site',
     isLiveDemo: false,
   },
   'concept-roofing-conversion-site': {
-    statusLabel: 'Demo',
+    statusLabel: 'Demo site',
     isLiveDemo: false,
   },
 };
 
 const improvementCopyBySlug: Record<string, string> = {
-  'demonstration-restaurant-reservation-site': 'A modern restaurant site designed to make a strong first impression and simplify reservations.',
-  'concept-landscaping-authority-site': 'A clean, professional site built to position a landscaping company as the trusted local choice.',
-  'concept-roofing-conversion-site': 'A conversion-focused site designed to turn homeowner searches into roofing inquiries.',
+  'demonstration-restaurant-reservation-site': 'The booking link is easy to find, and the menu is simple to scan.',
+  'concept-landscaping-authority-site': 'Past work is easier to see, and quote requests are easy to send.',
+  'concept-roofing-conversion-site': 'Urgent calls and planned estimates each have a clear path.',
 };
 
 const orderedCaseStudies = worksDisplayOrder
@@ -62,7 +62,7 @@ const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
     businessType: entry.businessType.replace(/\s+Business$/, ''),
     statusLabel: presentation.statusLabel,
     isLiveDemo: presentation.isLiveDemo,
-    improvement: improvementCopyBySlug[entry.slug] ?? 'Built to create a clearer, more modern, and more trustworthy first impression.',
+    improvement: improvementCopyBySlug[entry.slug] ?? 'Built to make the page clearer, easier to trust, and easier to contact.',
     image: proofImage.source,
     demoUrl: entry.demoUrl,
     imageAlt: proofImage.alt,
@@ -106,7 +106,7 @@ function WorkCard({ work }: { work: WorkEntry }) {
         <p className="mt-2 max-w-[34ch] text-[0.9rem] leading-relaxed text-slate-300/95 sm:text-[0.96rem]">{work.improvement}</p>
         <div className="mt-auto pt-3.5 sm:pt-4">
           <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/proof:text-[#e8bea8]">
-            View live site
+            See live site
           </span>
         </div>
       </div>
@@ -118,7 +118,7 @@ function WorkCard({ work }: { work: WorkEntry }) {
       href={work.demoUrl}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`View live site for ${work.title}`}
+      aria-label={`See live site for ${work.title}`}
       className="group/proof relative z-0 mx-auto block h-full w-full cursor-pointer rounded-[1.5rem] hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:min-h-[30rem]"
     >
       {card}
@@ -157,29 +157,29 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Work | Axiom"
-        description="Live examples of websites Axiom has built across different industries. See the quality, explore the demos, and judge for yourself."
+        description="Examples of sites Axiom has built for restaurants, landscaping companies, and roofers."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'Work | Axiom',
-          description: 'Live examples of websites Axiom has built across different industries. See the quality, explore the demos, and judge for yourself.',
+          description: 'Examples of sites Axiom has built for restaurants, landscaping companies, and roofers.',
           url: 'https://getaxiom.ca/works',
         }}
       />
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-0 pb-18 md:pb-24">
-        <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-5 pb-0 md:px-8 md:pt-8 md:pb-0" variant="feature">
+        <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-4 pb-0 md:px-8 md:pt-8 md:pb-0" variant="feature">
           <div className="max-w-4xl">
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
             <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">See what we build.</h1>
+              <h1 data-startup-heading className="text-left">Built for restaurants, landscaping, and roofing.</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              Live examples from different industries. Click any project to see it in action.
+              Each example makes the next step obvious and stays easy to use on phones.
             </p>
             <div data-startup-actions className="mt-5 flex flex-wrap items-center gap-3 md:mt-5 md:gap-3.5">
               <a href="#sample-builds" onClick={handleViewSamplesClick} className="btn-primary btn-lg whitespace-nowrap">
-                View Examples
+                See examples
               </a>
             </div>
           </div>
@@ -241,7 +241,7 @@ const Deployments: React.FC = () => {
             <div className="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-white/[0.03] p-8 text-center">
               <h2 className="text-2xl font-semibold text-[#F2F4F7]">No matching examples right now.</h2>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300">
-                Try a different status or industry filter to narrow the examples.
+                Try a different filter to narrow the examples.
               </p>
               <button
                 type="button"
@@ -261,24 +261,24 @@ const Deployments: React.FC = () => {
           <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[520px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[140px]" />
 
           <div className="relative z-10">
-            <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Want this level of quality for your business?</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-              Book a free consultation and we&apos;ll show you what we&apos;d build for your industry.
-            </p>
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-4">
-              <Link to="/apply#project-application-form" className="btn-primary btn-lg whitespace-nowrap">
-                Book a Free Consultation
-              </Link>
-              <Link
-                to="/method"
-                className="group inline-flex items-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-[color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-axiom-text-main hover:underline"
-              >
-                See How It Works
-                <svg className="h-4 w-4 transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need a site like this?</h2>
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+                We can show you what a clearer site would look like for your business.
+              </p>
+              <div className="mt-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+                <Link to="/apply#project-application-form" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                  Talk to Axiom
+                </Link>
+                <Link
+                  to="/method"
+                  className="group inline-flex w-full items-center justify-center gap-2 text-sm font-medium text-slate-300 underline-offset-4 transition-[color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-axiom-text-main hover:underline sm:w-auto"
+                >
+                  See how it works
+                  <svg className="h-4 w-4 transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
           </div>
         </RevealBlock>
 

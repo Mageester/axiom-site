@@ -22,7 +22,7 @@ export const BrandLockup: React.FC<BrandLockupProps> = ({
             {!imgError ? (
                 <img
                     src="/logo.png"
-                    alt="Axiom Infrastructure Logo"
+                    alt="Axiom logo"
                     className={logoSize}
                     onError={() => setImgError(true)}
                 />
@@ -35,7 +35,7 @@ export const BrandLockup: React.FC<BrandLockupProps> = ({
             )}
             {showText && (
                 <span className={`font-grotesk font-semibold tracking-widest uppercase ${textSize}`}>
-                    Axiom Infrastructure
+                    Axiom
                 </span>
             )}
         </div>

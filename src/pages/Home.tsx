@@ -9,14 +9,6 @@ import { RevealBlock } from '../components/ui/RevealBlock';
 import { caseStudies } from '../data/caseStudies';
 import { getWorkProofImage } from '../lib/workProofImages';
 
-const proofTypeLabel: Record<string, string> = {
-  'Sample Build': 'Sample Build',
-  'Concept Build': 'Concept Build',
-  'Demonstration Site': 'Demonstration Site',
-  'Live Demo': 'Live Demo',
-  'In Progress': 'In Progress',
-};
-
 const homeSelectedWorkSlugs = [
   'demonstration-restaurant-reservation-site',
   'concept-landscaping-authority-site',
@@ -27,17 +19,33 @@ const selectedWorkEntries = homeSelectedWorkSlugs
   .map((slug) => caseStudies.find((entry) => entry.slug === slug))
   .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
 
+const homepageWorkPreviewBySlug: Record<string, { title: string; summary: string }> = {
+  'demonstration-restaurant-reservation-site': {
+    title: 'Restaurant reservation site',
+    summary: 'Booking is easy to find, and the menu is simple to scan.',
+  },
+  'concept-landscaping-authority-site': {
+    title: 'Landscaping site',
+    summary: 'Past work is easier to see, and quote requests are easy to send.',
+  },
+  'concept-roofing-conversion-site': {
+    title: 'Roofing site',
+    summary: 'Urgent calls and planned estimates each have a clear path.',
+  },
+};
+
 const selectedWork = selectedWorkEntries.map((entry) => {
   const proofImage = getWorkProofImage(entry.slug);
+  const preview = homepageWorkPreviewBySlug[entry.slug];
   return {
     id: entry.slug,
-    title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-    summary: entry.summary.split('. ')[0].replace(/\.$/, '') + '.',
+    title: preview?.title ?? entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
+    summary: preview?.summary ?? entry.summary.split('. ')[0].replace(/\.$/, '') + '.',
     image: proofImage.source,
     demoUrl: entry.demoUrl,
     imageAlt: proofImage.alt,
     imagePosition: proofImage.position,
-    projectType: proofTypeLabel[entry.label] ?? entry.label,
+    projectType: 'Live site',
   };
 });
 
@@ -52,48 +60,48 @@ const heroProofPoints = [
   },
   {
     title: 'Stronger trust',
-    detail: 'The site looks steady from the first visit.',
+    detail: 'The site reads like a real business.',
   },
   {
     title: 'Fewer weak pages',
-    detail: 'We cut what gets in the way.',
+    detail: 'We cut the parts people skip.',
   },
 ];
 
-const standardsCards = [
+const weakSiteCosts = [
   {
-    title: 'Clear on any screen',
-    detail: 'Spacing and type stay composed from desktop to mobile.',
+    title: 'Smaller than it is',
+    detail: 'A thin site can make a real business seem less established.',
   },
   {
-    title: 'Structured to earn trust',
-    detail: 'The page makes the business feel established before it asks for action.',
+    title: 'Trust drops early',
+    detail: 'People leave before they see enough to call.',
   },
   {
-    title: 'Checked before launch',
-    detail: 'Core pages, forms, and mobile details are reviewed end to end.',
+    title: 'Proof gets buried',
+    detail: 'Reviews, photos, and past work are hard to find.',
   },
   {
-    title: 'Built to feel professional from first visit',
-    detail: 'The whole experience is polished enough to inspire confidence immediately.',
+    title: 'Contact gets missed',
+    detail: 'If the next step is hard to find, people move on.',
   },
 ];
 
 const processStages = [
   {
     number: '01',
-    title: 'Discover',
-    detail: 'We learn about your business, your customers, and your goals.',
+    title: 'Talk',
+    detail: 'We look at the current site and the main goal.',
   },
   {
     number: '02',
     title: 'Plan',
-    detail: 'We agree on the pages, content, and structure before anything is built.',
+    detail: 'We set the page list, proof, and next step.',
   },
   {
     number: '03',
-    title: 'Launch',
-    detail: 'We design, build, test, and deliver a site you can be proud of.',
+    title: 'Build',
+    detail: 'We build the pages, check them on phones, and prepare launch.',
   },
 ];
 
@@ -106,14 +114,14 @@ const Home: React.FC = () => {
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
-          name: 'Axiom Infrastructure',
+          name: 'Axiom',
           url: 'https://getaxiom.ca',
         }}
       />
 
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="pt-12 md:pt-20">
+          <section data-hero-root className="pt-10 md:pt-20">
             <div className="max-w-5xl">
               <div>
                 <div className="max-w-4xl overflow-hidden">
@@ -124,26 +132,26 @@ const Home: React.FC = () => {
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
                   Axiom builds fast websites for established businesses. The pages are clear, easy to use on phones, and help people trust the business sooner.
                 </p>
-                <div data-startup-actions className="mt-8 flex flex-wrap items-center gap-4">
-                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book a Call
+                <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+                  <Link to="/method" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                    See how it works
                   </Link>
                   <Link
-                    to="/method"
-                    className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
+                    to="/apply"
+                    className="inline-flex w-full items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
                   >
-                    See the Process
+                    Talk to Axiom
                   </Link>
                 </div>
               </div>
-              <div data-startup-meta className="mt-10 flex flex-col items-center gap-6 md:mt-14 md:gap-8">
+              <div data-startup-meta className="mt-8 flex flex-col items-center gap-4 md:mt-14 md:gap-8">
                 <div className="w-full max-w-4xl">
                   <BrandCarousel />
                 </div>
                 <div className="w-full max-w-4xl overflow-hidden rounded-[1.5rem] border border-white/8 bg-white/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
                   <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-4">
                     {heroProofPoints.map((point) => (
-                      <div key={point.title} className="bg-white/[0.015] px-4 py-4 sm:px-5">
+                      <div key={point.title} className="bg-white/[0.015] px-3.5 py-3.5 sm:px-5 sm:py-4">
                         <p className="text-sm font-semibold tracking-[-0.02em] text-[#F2F4F7]">
                           {point.title}
                         </p>
@@ -158,21 +166,62 @@ const Home: React.FC = () => {
             </div>
           </section>
 
-          <RevealBlock as="section" className="pt-20 md:pt-24">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-12">
+          <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-12">
               <div className="max-w-xl lg:pt-2">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">How We Work</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">Why it matters</p>
                 <h2 className="mt-3 max-w-[11ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  A simple process that keeps things clear.
+                  What a weak site does.
                 </h2>
                 <p className="mt-4 max-w-[30ch] text-sm leading-7 text-slate-300 md:text-base">
-                  One call to understand your business. A clear plan. A professional launch.
+                  A weak site can make a good business look smaller, out of date, and harder to trust. It also makes contact harder.
+                </p>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2">
+                {weakSiteCosts.map((item, index) => (
+                  <RevealBlock
+                    as="article"
+                    key={item.title}
+                    delay={index * 0.05}
+                    variant="card"
+                    className="motion-surface relative overflow-hidden rounded-[1.35rem] border border-white/8 bg-white/[0.03] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.12)]"
+                  >
+                    <div className="flex items-start gap-3">
+                      <span
+                        className="mt-1 h-2.5 w-2.5 flex-none rounded-full bg-[#d4a48e] shadow-[0_0_0_4px_rgba(212,164,142,0.08)]"
+                        aria-hidden="true"
+                      />
+                      <div>
+                        <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7]">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-6 text-slate-300">
+                          {item.detail}
+                        </p>
+                      </div>
+                    </div>
+                  </RevealBlock>
+                ))}
+              </div>
+            </div>
+          </RevealBlock>
+
+          <RevealBlock as="section" className="pt-16 md:pt-24">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-12">
+              <div className="max-w-xl lg:pt-2">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">What we cover first</p>
+                <h2 className="mt-3 max-w-[11ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                  The first call is simple.
+                </h2>
+                <p className="mt-4 max-w-[30ch] text-sm leading-7 text-slate-300 md:text-base">
+                  We sort out the site, the pages, and the next step.
                 </p>
               </div>
 
               <div className="how-work-panel">
                 <div className="how-work-panel-header">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.22em] text-[#A7B3BC]">Our process</p>
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.22em] text-[#A7B3BC]">The steps</p>
                 </div>
 
                 <div className="mt-6 grid gap-3 md:gap-4">
@@ -195,19 +244,22 @@ const Home: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-16 md:pt-28" variant="feature">
+          <RevealBlock as="section" className="pt-14 md:pt-28" variant="feature">
             <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  See what we build.
+                  What these sites fixed.
                 </h2>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+                  Each one shows a clearer page, a better contact path, and less friction on mobile.
+                </p>
               </div>
               <Link
                 to="/works"
                 className="inline-flex items-center rounded-full border border-white/12 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:border-white/28 hover:text-white"
               >
-                View all work
+                See examples
               </Link>
             </div>
 
@@ -247,7 +299,7 @@ const Home: React.FC = () => {
                       {item.demoUrl ? (
                         <div className="mt-auto pt-6">
                           <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/deployment:text-[#e8bea8] group-focus-visible/deployment:text-[#e8bea8]">
-                            View demo
+                            See site
                           </span>
                         </div>
                       ) : null}
@@ -275,80 +327,7 @@ const Home: React.FC = () => {
             </div>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-20 md:pt-24" variant="feature">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-12">
-              <div className="max-w-xl lg:sticky lg:top-24">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">
-                  WHAT YOU GET
-                </p>
-                <h2 className="mt-3 max-w-[13ch] text-[clamp(2rem,4vw,3.5rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  A clear standard, built into every site.
-                </h2>
-                <p className="mt-5 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
-                  Every Axiom site is shaped to feel composed, trustworthy, and ready to take inquiries from the first visit.
-                </p>
-              </div>
-
-              <div className="standards-panel">
-                <div className="standards-lead">
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.2em] text-[#A7B3BC]">
-                      Included in every build
-                    </p>
-                    <span className="hidden rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/60 md:inline-flex">
-                      Axiom standard
-                    </span>
-                  </div>
-
-                  <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] lg:items-end">
-                    <div>
-                      <h3 className="max-w-[12ch] text-[clamp(1.8rem,3vw,2.6rem)] font-semibold tracking-[-0.04em] text-[#F2F4F7]">
-                        Fast, stable, and calm by default.
-                      </h3>
-                      <p className="mt-4 max-w-[30ch] text-sm leading-7 text-slate-300 md:text-base">
-                        Your site loads quickly, reads cleanly, and keeps the attention on your business.
-                      </p>
-                    </div>
-
-                    <div className="hidden lg:block">
-                      <div className="flex flex-col gap-3 border-l border-white/10 pl-5">
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-white/55">
-                          Why it matters
-                        </p>
-                        <p className="text-sm leading-6 text-slate-300">
-                          The experience feels established before it asks for action.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="standards-support-grid">
-                  {standardsCards.slice(0, 4).map((item, index) => (
-                    <RevealBlock
-                      as="article"
-                      key={item.title}
-                      delay={index * 0.06}
-                      variant="card"
-                      className="standards-support-item motion-surface"
-                    >
-                      <span className="standards-support-mark" aria-hidden="true" />
-                      <div className="min-w-0">
-                        <h4 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.04rem]">
-                          {item.title}
-                        </h4>
-                        <p className="mt-2 max-w-[30ch] text-sm leading-6 text-slate-300">
-                          {item.detail}
-                        </p>
-                      </div>
-                    </RevealBlock>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </RevealBlock>
-
-          <RevealBlock as="section" id="intake" className="pt-22 md:pt-26" variant="feature">
+          <RevealBlock as="section" id="intake" className="pt-16 md:pt-26" variant="feature">
             <div className="relative overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br from-[#0f1628]/88 via-[#101726]/82 to-[#0b1120]/88 p-8 text-center shadow-[0_22px_60px_rgba(0,0,0,0.35)] md:p-12">
               <div className="pointer-events-none absolute inset-0">
                 <div className="absolute -top-24 left-[16%] h-52 w-52 rounded-full bg-[#B05D41]/14 blur-3xl" />
@@ -359,24 +338,24 @@ const Home: React.FC = () => {
               <div className="relative z-10">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Ready to upgrade your website?
+                  Need a better website?
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Book a free 30-minute call. We&apos;ll review your current website, understand your goals, and outline the best next step.
+                  We&apos;ll look at your current site and tell you what needs work.
                 </p>
 
                 <div className="mt-8 flex items-center justify-center">
                   <Link to="/apply" className="btn-primary btn-attention btn-lg whitespace-nowrap">
-                    Book a Free Consultation
+                    Talk to Axiom
                   </Link>
                 </div>
 
                 <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-5 gap-y-2">
                   <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">30-minute call</span>
                   <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Free, no obligation</span>
+                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">No obligation</span>
                   <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Founder-led</span>
+                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Clear next step</span>
                 </div>
               </div>
             </div>

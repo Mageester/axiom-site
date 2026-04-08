@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
     document.getElementById('intake')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const scrollToInfrastructure = () => {
+  const scrollToExamples = () => {
     window.scrollTo({ top: window.innerHeight * 0.9, behavior: 'smooth' });
   };
 
@@ -18,40 +18,40 @@ const Hero: React.FC = () => {
           <div className="mt-auto flex h-full flex-col items-start pb-12 text-left lg:col-span-5">
             <div className="relative mb-8">
               <div className="pointer-events-none absolute inset-0 rounded-full bg-[#253a7a]/30 blur-[200px]" />
-              <div className="relative inline-block px-4 py-1.5 rounded-full bg-[#1c253b] text-[#F59768] text-sm font-semibold tracking-wide border border-[#F59768]/20">
-                LIMITED: 2 DEPLOYMENT SLOTS REMAINING FOR Q1
+              <div className="relative inline-block rounded-full border border-[#F59768]/20 bg-[#1c253b] px-4 py-1.5 text-sm font-semibold tracking-wide text-[#F59768]">
+                Limited: 2 project slots left this month
               </div>
             </div>
 
             <div className="mb-10 overflow-hidden min-h-[2.3em] md:min-h-[1.2em]">
               <h1 data-startup-heading className="text-[clamp(2.5rem,5vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#F2F4F7] md:leading-[1.15]">
-                Defining Digital Identity.
+                Websites for serious businesses.
               </h1>
             </div>
 
             <p className="mb-8 max-w-lg text-lg leading-[1.65] text-slate-300">
-              We build sub-second web infrastructure with cinematic visuals and bullet-proof conversions for ambitious brands that demand elite performance.
+              We build fast websites that read clearly on phones and help people trust the business sooner.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
               <div className="flex flex-wrap items-center gap-3">
                 <MagneticWrapper className="inline-flex">
                   <button type="button" onClick={scrollToIntake} className="btn-primary btn-lg whitespace-nowrap">
-                    Let's Start Your Project
+                    Start a project
                   </button>
                 </MagneticWrapper>
                 <div className="inline-flex items-center gap-2 rounded-full bg-[#1c2e5a]/40 px-3 py-1">
                   <span className="size-2 rounded-full bg-[#F59768] animate-pulse"></span>
-                  <span className="text-xs font-medium text-[#F59768] tracking-wider">2 spots left for Q2</span>
+                  <span className="text-xs font-medium tracking-wider text-[#F59768]">2 spots left this month</span>
                 </div>
               </div>
 
               <button
                 type="button"
-                onClick={scrollToInfrastructure}
+                onClick={scrollToExamples}
                 className="group inline-flex items-center text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-[#F2F4F7] hover:underline"
               >
-                Explore Infrastructure
+                See examples
               </button>
             </div>
           </div>

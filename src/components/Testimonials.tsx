@@ -9,12 +9,12 @@ type FounderProfile = {
 const founders: FounderProfile[] = [
   {
     name: 'Aidan Magee',
-    role: 'Co-Founder & Architect',
+    role: 'Co-Founder',
     initials: 'AM',
   },
   {
     name: 'Riley Hinsperger',
-    role: 'Co-Founder & Architect',
+    role: 'Co-Founder',
     initials: 'RH',
   },
 ];
@@ -24,7 +24,7 @@ const Testimonials: React.FC = () => {
     <section className="mx-auto w-full max-w-6xl px-6 md:px-8">
       <div className="mb-8">
         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Founder Perspective</p>
-        <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Built by Co-Founders and Architects</h2>
+        <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Built by the founders</h2>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -44,7 +44,7 @@ const Testimonials: React.FC = () => {
             </div>
 
             <blockquote className="mt-6 text-lg italic leading-[1.6] text-[#F5F7FA]">
-              "We bridge the gap between ambitious visual concepts and operational reality."
+              "We build sites that are clear, fast, and easy to trust."
             </blockquote>
           </article>
         ))}

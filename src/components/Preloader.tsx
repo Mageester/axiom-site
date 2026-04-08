@@ -70,7 +70,7 @@ const Preloader: React.FC<PreloaderProps> = ({ targetRef }) => {
       <ResponsiveImage
         source={responsiveImages.logoClear}
         sizes="(min-width: 768px) 320px, 256px"
-        alt="Axiom Infrastructure logo"
+        alt="Axiom logo"
         className="absolute left-1/2 top-1/2 h-40 w-auto object-contain drop-shadow-[0_0_34px_rgba(245,247,250,0.16)] md:h-48"
         style={logoStyle}
         decoding="async"

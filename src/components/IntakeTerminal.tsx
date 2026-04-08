@@ -124,12 +124,12 @@ const IntakeTerminal: React.FC = () => {
         }`}
       >
         <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#22c55e] animate-pulse" aria-hidden />
-        <p className="text-[11px] font-medium tracking-[0.16em] uppercase text-[#A7B3BC]">Studio Availability : Open</p>
+        <p className="text-[11px] font-medium tracking-[0.16em] uppercase text-[#A7B3BC]">Open for new work</p>
       </div>
 
       <div className="mb-8 space-y-3">
-        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Start Your Project</h2>
-        <p className="text-slate-300 max-w-2xl">Choose your preferred path. If you send details, the intake form unlocks below.</p>
+        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Start a project</h2>
+        <p className="max-w-2xl text-slate-300">Pick the option that fits, then share the details we need to reply well.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -143,8 +143,8 @@ const IntakeTerminal: React.FC = () => {
             onClick={() => setActiveAction('consultation')}
             className={`${baseCardClass} w-full ${activeAction === 'consultation' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
-            <p className="font-semibold text-[#F2F4F7] text-lg">Book a Consultation</p>
-            <p className="mt-2 text-sm text-slate-300">Schedule a strategic session and map your goals with our team.</p>
+            <p className="text-lg font-semibold text-[#F2F4F7]">Talk to Axiom</p>
+            <p className="mt-2 text-sm text-slate-300">Talk through your site and the next step.</p>
           </button>
         </div>
 
@@ -158,8 +158,8 @@ const IntakeTerminal: React.FC = () => {
             onClick={() => setActiveAction('details')}
             className={`${baseCardClass} w-full ${activeAction === 'details' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
-            <p className="font-semibold text-[#F2F4F7] text-lg">Send Project Details</p>
-            <p className="mt-2 text-sm text-slate-300">Open the guided form and submit project scope, timing, and budget.</p>
+            <p className="text-lg font-semibold text-[#F2F4F7]">Send request</p>
+            <p className="mt-2 text-sm text-slate-300">Open the form and share scope, timing, and budget.</p>
           </button>
         </div>
 
@@ -173,8 +173,8 @@ const IntakeTerminal: React.FC = () => {
             onClick={() => setActiveAction('email')}
             className={`${baseCardClass} block ${activeAction === 'email' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
-            <p className="font-semibold text-[#F2F4F7] text-lg">Email Directly</p>
-            <p className="mt-2 text-sm text-slate-300">Reach us instantly at contact@getaxiom.ca for direct communication.</p>
+            <p className="text-lg font-semibold text-[#F2F4F7]">Email directly</p>
+            <p className="mt-2 text-sm text-slate-300">Reach us at contact@getaxiom.ca.</p>
           </a>
         </div>
       </div>
@@ -199,7 +199,7 @@ const IntakeTerminal: React.FC = () => {
           {submitState === 'success' ? (
             <div className="rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-8 text-center">
               <p className="text-xl md:text-2xl font-semibold tracking-tight text-[#F2F4F7]">
-                Transmission Received. The Architects will review your parameters and establish contact.
+                Thanks. We’ll review your details and reply within one business day.
               </p>
             </div>
           ) : (
@@ -261,13 +261,13 @@ const IntakeTerminal: React.FC = () => {
 
               {submitState === 'error' && (
                 <p className="md:col-span-2 text-sm text-red-300">
-                  Transmission failed. Please retry or email contact@getaxiom.ca.
+                  Request failed. Please retry or email contact@getaxiom.ca.
                 </p>
               )}
 
               <div className="md:col-span-2">
                 <button type="submit" disabled={isSubmitting} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                  {isSubmitting ? 'Transmitting...' : 'Send Project Details'}
+                  {isSubmitting ? 'Sending...' : 'Send request'}
                 </button>
               </div>
             </form>

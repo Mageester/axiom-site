@@ -44,9 +44,9 @@ const INITIAL_FORM: IntakeFormState = {
 };
 
 const SCALE_OPTIONS = [
-    { value: 'foundation', label: 'Foundation Build ($500 CAD)' },
-    { value: 'authority', label: 'Growth Build ($1,500 CAD)' },
-    { value: 'expansion', label: 'Custom or Multi-location Build ($3,000 CAD)' }
+    { value: 'foundation', label: 'Foundation site ($500 CAD)' },
+    { value: 'authority', label: 'Growth site ($1,500 CAD)' },
+    { value: 'expansion', label: 'Multi-location site ($3,000 CAD)' }
 ];
 
 const PAIN_POINTS_OPTIONS = [
@@ -64,11 +64,11 @@ const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_activ
     },
     {
         key: 'fit_trust_conversion_need',
-        label: 'Are you looking for a professional, custom website rather than a cheap template?'
+        label: 'Are you looking for a custom website rather than a template?'
     },
     {
         key: 'fit_decision_owner_ready',
-        label: 'Will you (or a single decision-maker) be available to review the project during the build?'
+        label: 'Will you (or a single decision-maker) be available to review the site while we build it?'
     },
     {
         key: 'fit_defined_scope_ready',
@@ -199,37 +199,37 @@ const GeneralContactForm: React.FC = () => {
         <>
             <SEO
                 title="Contact | Axiom"
-                description="Have a question or want to talk about your project? Get in touch."
+                description="Ask a question or send a website note."
             />
-            <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
+            <section data-hero-root className="mx-auto max-w-3xl pt-8 text-center md:pt-16">
                 <div className="overflow-hidden">
                     <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Contact</p>
                     <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                        Have a question or want to talk about your project? Get in touch.
+                        Need help with a website?
                     </h1>
                 </div>
                 <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-200/90 md:text-base">
-                    For general questions or an initial inquiry, send a message below.
+                    Use this form for a question or a simple note.
                 </p>
                 <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-300">
-                    For serious website projects, use{' '}
+                    For website work, use{' '}
                     <Link to="/apply" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                        Apply
+                        Start a project
                     </Link>
                     .
                 </p>
             </section>
 
-            <section className="mx-auto mt-5 max-w-5xl">
+            <section className="mx-auto mt-4 max-w-5xl">
                 <div className="axiom-bento p-6 md:p-8">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-7">
                         <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
                             {status === 'success' && (
                                 <div ref={successBoxRef} className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
                                     <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
-                                    <p className="mt-2 text-sm text-slate-300">We will get back to you within one business day.</p>
+                                    <p className="mt-2 text-sm text-slate-300">We'll reply within one business day.</p>
                                     <button type="button" onClick={() => { setStatus(''); setForm(CONTACT_INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
-                                        Send Another Message
+                                        Send another message
                                     </button>
                                 </div>
                             )}
@@ -242,7 +242,7 @@ const GeneralContactForm: React.FC = () => {
 
                             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                                 <div className="flex flex-col gap-2">
-                                    <label className={FIELD_LABEL_CLASS}>Your Name</label>
+                                    <label className={FIELD_LABEL_CLASS}>Name</label>
                                     <input type="text" required minLength={2} value={form.name} onChange={(event) => setField('name', event.target.value)} className={FIELD_INPUT_CLASS} />
                                     {errors.name && <p className="text-xs text-red-300">{errors.name}</p>}
                                 </div>
@@ -252,7 +252,7 @@ const GeneralContactForm: React.FC = () => {
                                     {errors.email && <p className="text-xs text-red-300">{errors.email}</p>}
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <label className={FIELD_LABEL_CLASS}>Business Name</label>
+                                    <label className={FIELD_LABEL_CLASS}>Business name</label>
                                     <input type="text" value={form.business_name} onChange={(event) => setField('business_name', event.target.value)} className={FIELD_INPUT_CLASS} />
                                 </div>
                             </div>
@@ -272,7 +272,7 @@ const GeneralContactForm: React.FC = () => {
                             </div>
 
                             <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                                {status === 'loading' ? 'Sending...' : 'Send Message'}
+                                {status === 'loading' ? 'Sending...' : 'Send message'}
                             </button>
                         </fieldset>
                     </form>
@@ -294,13 +294,13 @@ const GeneralContactForm: React.FC = () => {
                     </article>
 
                     <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need a scoped project?</p>
+                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need website work?</p>
                         <p className="mt-3 text-sm leading-relaxed text-slate-300">
                             Use{' '}
                             <Link to="/apply" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                Apply
+                                Start a project
                             </Link>{' '}
-                            for serious website work.
+                            for website work.
                         </p>
                     </article>
                 </div>
@@ -476,55 +476,55 @@ const ProjectApplicationForm: React.FC = () => {
     return (
         <>
             <SEO
-                title="Book a Consultation | Axiom"
-                description="Book a free consultation with Axiom. Tell us about your business and what you need — we'll review your goals and explain what we'd build."
+                title="Start a Website Project | Axiom"
+                description="Tell us about your business and the site you need. We'll review it and reply with the next step."
                 schema={{
                     '@context': 'https://schema.org',
                     '@type': 'ContactPage',
-                    name: 'Book a Consultation | Axiom',
-                    description: "Book a free consultation with Axiom. Tell us about your business and what you need \u2014 we'll review your goals and explain what we'd build.",
+                    name: 'Start a Website Project | Axiom',
+                    description: 'Tell us about your business and the site you need. We\'ll review it and reply with the next step.',
                     url: 'https://getaxiom.ca/apply',
                 }}
             />
             <Layout>
             <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
-                <section data-hero-root className="mx-auto max-w-3xl pt-10 text-center md:pt-16">
+                <section data-hero-root className="mx-auto max-w-3xl pt-8 text-center md:pt-16">
                     <div className="mt-4 overflow-hidden">
                         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
-                                Book a Consultation
-                            </p>
-                            <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                                Tell us about your business and what you need.
-                            </h1>
-                        </div>
-                        <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Fill in the details below so we can understand your goals. This is the best route for website projects.
+                            Start a project
                         </p>
-                        <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
-                            For general questions or an initial inquiry, use{' '}
-                            <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                Contact
-                            </Link>
-                            .
-                        </p>
-                        <p data-startup-actions className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                            Step {step} of 2. This helps us understand scope and fit.
-                        </p>
-                        <div className="mx-auto mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
-                            <div className={`h-full w-full origin-left bg-[#B05D41] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${step === 1 ? 'scale-x-50' : 'scale-x-100'}`} />
-                        </div>
+                        <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
+                            Tell us about your business and the website you need.
+                        </h1>
+                    </div>
+                    <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
+                        Fill in the details below so we can see what the website needs to do.
+                    </p>
+                    <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
+                        For a general question, use{' '}
+                        <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                            Contact
+                        </Link>
+                        .
+                    </p>
+                    <p data-startup-actions className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
+                        Step {step} of 2. This takes about 2 minutes.
+                    </p>
+                    <div className="mx-auto mt-5 h-[2px] w-full max-w-[440px] overflow-hidden rounded-full bg-white/10">
+                        <div className={`h-full w-full origin-left bg-[#B05D41] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${step === 1 ? 'scale-x-50' : 'scale-x-100'}`} />
+                    </div>
                     </section>
 
-                    <section ref={formSectionRef} id="project-application-form" className="mx-auto mt-5 max-w-5xl">
+                    <section ref={formSectionRef} id="project-application-form" className="mx-auto mt-4 max-w-5xl">
                         <div className="axiom-bento p-6 md:p-8">
                             <form onSubmit={handleSubmit} className="flex flex-col gap-7">
                                 <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
                                     {status === 'success' && (
                                         <div ref={successBoxRef} className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
                                             <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
-                                            <p className="mt-2 text-sm text-slate-300">A partner will review your submission and reply within one business day.</p>
+                                            <p className="mt-2 text-sm text-slate-300">We'll review it and reply within one business day.</p>
                                             <button type="button" onClick={() => { setStatus(''); setStep(1); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
-                                                Submit Another Application
+                                                Send another request
                                             </button>
                                         </div>
                                     )}
@@ -539,7 +539,7 @@ const ProjectApplicationForm: React.FC = () => {
                                         <div className="flex flex-col gap-6">
                                             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                                                 <div className="flex flex-col gap-2">
-                                                    <label className={FIELD_LABEL_CLASS}>Your Name</label>
+                                                    <label className={FIELD_LABEL_CLASS}>Name</label>
                                                     <input type="text" required minLength={2} value={form.name} onChange={(e) => setField('name', e.target.value)} className={FIELD_INPUT_CLASS} />
                                                     {errors.name && <p className="text-xs text-red-300">{errors.name}</p>}
                                                 </div>
@@ -549,7 +549,7 @@ const ProjectApplicationForm: React.FC = () => {
                                                     {errors.email && <p className="text-xs text-red-300">{errors.email}</p>}
                                                 </div>
                                                 <div className="flex flex-col gap-2">
-                                                    <label className={FIELD_LABEL_CLASS}>Business Name</label>
+                                                    <label className={FIELD_LABEL_CLASS}>Business name</label>
                                                     <input type="text" required minLength={2} value={form.business_name} onChange={(e) => setField('business_name', e.target.value)} className={FIELD_INPUT_CLASS} />
                                                     {errors.business_name && <p className="text-xs text-red-300">{errors.business_name}</p>}
                                                 </div>
@@ -560,18 +560,18 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>Current Website</label>
+                                                <label className={FIELD_LABEL_CLASS}>Current website</label>
                                                 <input type="url" placeholder="https://" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className={FIELD_INPUT_CLASS} />
                                             </div>
 
                                             <button type="button" onClick={handleNextStep} className="btn-primary btn-lg w-full">
-                                                Next
+                                                Continue
                                             </button>
 
                                             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">After You Apply</p>
+                                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">What happens next</p>
                                                 <p className="mt-3 text-sm text-slate-300">
-                                                    Once your request is submitted, we&apos;ll review the scope and next steps within 1 business day.
+                                                    We'll review the details and reply within one business day.
                                                 </p>
                                                 <p className="mt-3 text-sm text-slate-300">
                                                     If you only have a general question, use{' '}
@@ -585,16 +585,16 @@ const ProjectApplicationForm: React.FC = () => {
                                     ) : (
                                         <div className="flex flex-col gap-6">
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>Project Scope</label>
+                                                <label className={FIELD_LABEL_CLASS}>Project Size</label>
                                                 <select value={form.project_scale} onChange={(e) => setField('project_scale', e.target.value)} className={FIELD_INPUT_CLASS}>
-                                                    <option value="" disabled>Select your scope...</option>
+                                                    <option value="" disabled>Select project size...</option>
                                                     {SCALE_OPTIONS.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                                                 </select>
                                                 {errors.project_scale && <p className="text-xs text-red-300">{errors.project_scale}</p>}
                                             </div>
 
                                             <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>Current Website Problems</label>
+                                                <label className={FIELD_LABEL_CLASS}>What needs attention</label>
                                                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                                     {PAIN_POINTS_OPTIONS.map(point => {
                                                         const selected = form.pain_points.includes(point);
@@ -615,7 +615,7 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-3">
-                                                <label className={FIELD_LABEL_CLASS}>Fit Questions (Yes/No)</label>
+                                                <label className={FIELD_LABEL_CLASS}>A few quick questions</label>
                                                 <div className="grid grid-cols-1 gap-3">
                                                     {FIT_QUESTIONS.map((question) => (
                                                         <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">
@@ -646,8 +646,8 @@ const ProjectApplicationForm: React.FC = () => {
                                             </div>
 
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>Project Details</label>
-                                                <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="What do you need the site to do?" className={`${FIELD_INPUT_CLASS} resize-none`} />
+                                                <label className={FIELD_LABEL_CLASS}>What should the site do?</label>
+                                                <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Tell us what the site should do." className={`${FIELD_INPUT_CLASS} resize-none`} />
                                                 {errors.details && <p className="text-xs text-red-300">{errors.details}</p>}
                                             </div>
 
@@ -656,7 +656,7 @@ const ProjectApplicationForm: React.FC = () => {
                                                     Back
                                                 </button>
                                                 <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg flex-1 disabled:cursor-not-allowed disabled:opacity-70">
-                                                    {status === 'loading' ? 'Submitting...' : 'Submit Application'}
+                                                    {status === 'loading' ? 'Sending...' : 'Send request'}
                                                 </button>
                                             </div>
                                         </div>

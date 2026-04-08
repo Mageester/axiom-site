@@ -464,7 +464,7 @@
   .logo-marquee-viewport {
     position: relative;
     overflow: hidden;
-    padding-block: 0.55rem;
+    padding-block: 0.4rem;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 6%, #000 14%, #000 86%, rgba(0, 0, 0, 0.2) 94%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 6%, #000 14%, #000 86%, rgba(0, 0, 0, 0.2) 94%, transparent 100%);
   }
@@ -473,7 +473,7 @@
     display: flex;
     flex: none;
     align-items: center;
-    padding-block: 0.3rem;
+    padding-block: 0.2rem;
   }
 
   .logo-marquee-track {

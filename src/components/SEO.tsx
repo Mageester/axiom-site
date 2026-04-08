@@ -62,7 +62,7 @@ export const SEO: React.FC<SEOProps> = ({ title, description, image, schema }) =
       'og:image': fullImageUrl,
       'og:type': 'website',
       'og:url': pageUrl,
-      'og:site_name': 'Axiom Infrastructure',
+      'og:site_name': 'Axiom',
       'twitter:card': 'summary_large_image',
       'twitter:title': title,
       'twitter:description': description,

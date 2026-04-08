@@ -17,9 +17,9 @@ const StatsGrid: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div ref={oneReveal.ref} className={revealClass(oneReveal.isVisible)} style={{ transitionDelay: '0ms' }}>
           <article className={`${cardClass} flex flex-col space-y-4`}>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Performance Metric</p>
-            <h3 className="text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Revenue Supported: $50M+</h3>
-            <p className="text-sm leading-[1.7] text-slate-300">Systems backing eight-figure revenue.</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Result</p>
+            <h3 className="text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Revenue supported: $50M+</h3>
+            <p className="text-sm leading-[1.7] text-slate-300">Websites behind established service businesses.</p>
             <svg viewBox="0 0 260 70" className="w-full" role="img" aria-label="Decorative amber bar chart">
               <rect x="8" y="34" width="24" height="28" rx="4" fill="#F59768" opacity="0.45" />
               <rect x="44" y="22" width="24" height="40" rx="4" fill="#F59768" opacity="0.55" />
@@ -34,9 +34,9 @@ const StatsGrid: React.FC = () => {
 
         <div ref={twoReveal.ref} className={revealClass(twoReveal.isVisible)} style={{ transitionDelay: '100ms' }}>
           <article className={`${cardClass} flex flex-col space-y-4`}>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Performance Metric</p>
-            <h3 className="text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Assets Deployed: 150+</h3>
-            <p className="text-sm leading-[1.7] text-slate-300">Production-ready web infrastructure.</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Result</p>
+            <h3 className="text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Sites shipped: 150+</h3>
+            <p className="text-sm leading-[1.7] text-slate-300">Pages built to load quickly and stay clear on phones.</p>
             <svg viewBox="0 0 320 70" className="w-full" role="img" aria-label="Decorative amber sparkline">
               <path
                 d="M4 54 C30 42, 58 46, 84 34 C110 22, 138 24, 166 18 C194 12, 220 20, 248 14 C274 8, 296 10, 316 6"
@@ -52,9 +52,9 @@ const StatsGrid: React.FC = () => {
 
         <div ref={threeReveal.ref} className={revealClass(threeReveal.isVisible)} style={{ transitionDelay: '200ms' }}>
           <article className={`${cardClass} flex flex-col space-y-4`}>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Performance Metric</p>
-            <h3 className="text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Enterprise DNA: &lt;30ms</h3>
-            <p className="text-sm leading-[1.7] text-slate-300">Applying high-frequency architectural standards to your brand.</p>
+            <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-[#A7B3BC]">Result</p>
+            <h3 className="text-3xl font-black tracking-tight text-[#F2F4F7] md:text-4xl">Fast response: &lt;30ms</h3>
+            <p className="text-sm leading-[1.7] text-slate-300">Clean code and quick pages under pressure.</p>
             <svg viewBox="0 0 320 70" className="w-full" role="img" aria-label="Decorative amber wave line">
               <path
                 d="M0 38 C24 14, 48 62, 72 38 C96 14, 120 62, 144 38 C168 14, 192 62, 216 38 C240 14, 264 62, 288 38 C300 28, 310 34, 320 38"

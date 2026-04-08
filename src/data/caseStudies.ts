@@ -20,74 +20,73 @@ export type CaseStudyEntry = {
 export const caseStudies: CaseStudyEntry[] = [
     {
         slug: 'demonstration-restaurant-reservation-site',
-        title: 'Demo: Restaurant Reservation Site',
+        title: 'Restaurant reservation site',
         label: 'Live Demo',
         demoUrl: 'https://restaurant.getaxiom.ca',
         niche: 'Restaurant and Hospitality',
-        location: 'Toronto, ON (Live demonstration deployment)',
-        businessType: 'Restaurant Business',
-        primaryProblem: 'Weak atmosphere presentation and unclear reservation path for high-intent visitors.',
-        demonstrates: 'Photo-led hospitality framing with cleaner reservation-first conversion flow.',
-        summary: 'Demonstration site for a reservation-led restaurant brand that needs stronger atmosphere, sharper menu clarity, and higher booking confidence.',
-        context: 'Demonstration project showing how a restaurant brand can move from generic web presence to a premium, hospitality-driven booking experience.',
+        location: 'Toronto, ON (Live demo)',
+        businessType: 'Restaurant',
+        primaryProblem: 'Guests have to hunt for the booking link, and the menu is hard to read on phones.',
+        demonstrates: 'A clear menu, a visible reservation link, and a layout that feels like the room.',
+        summary: 'A restaurant site that gets people to the menu and the booking link fast.',
+        context: 'Built for restaurants that need the menu, booking, and room to show up right away.',
         problems: [
-            'Generic visuals that do not communicate dining atmosphere or food quality',
-            'Reservation actions are buried, creating drop-off during high-intent traffic',
-            'Menu information is hard to scan on mobile and lacks clear hierarchy'
+            'The booking link is hard to spot',
+            'The menu takes too long to read',
+            'The dining room is not clear enough'
         ],
         built: [
-            'Demonstrates photo-led hero and section composition aligned to hospitality buying behavior',
-            'Clear reservation path above the fold and reinforced through menu and proof sections',
-            'Structured menu and trust blocks designed for fast mobile scanning'
+            'Reservation link stays up front',
+            'Menu pages read well on mobile',
+            'Photos support the food and room'
         ],
         targets: [
-            'Target: stronger reservation intent from homepage traffic',
-            'Target: clearer menu discovery and scan speed on mobile',
-            'Target: improved trust perception through atmosphere and presentation quality'
+            'More bookings from homepage traffic',
+            'Less friction on phones',
+            'A stronger first impression'
         ],
         deliverables: [
-            'Homepage + menu preview + reservation-first CTA system',
-            'Hospitality-focused visual hierarchy and card composition',
-            'Mobile-first layout and interaction polish',
-            'Technical SEO and metadata-ready page structure'
+            'Homepage, menu, and reservation flow',
+            'Photo-led layout',
+            'Mobile-friendly page structure'
         ],
-        ctaLabel: 'Request a Similar Build'
+        ctaLabel: 'See this build'
     },
     {
         slug: 'concept-landscaping-authority-site',
-        title: 'Demo: Landscaping and Outdoor Services Site',
+        title: 'Landscaping site',
         label: 'Live Demo',
         demoUrl: 'https://landscaping.getaxiom.ca',
         niche: 'Landscaping and Outdoor Services',
-        location: 'Toronto, ON (Live demonstration deployment)',
-        businessType: 'Landscaping and Outdoor Services Business',
-        primaryProblem: 'Portfolio-heavy pages with unclear next action for new inquiries.',
-        demonstrates: 'Premium portfolio framing with stronger consultation intent.',
-        summary: 'Live demonstration site for a landscaping business that needs stronger project presentation, clearer local trust, and a better quote path.',
-        context: 'Live demonstration project showing how a landscaping company can move from generic service pages to a stronger portfolio-led website with clearer quote intent.',
-        problems: ['Portfolio-heavy pages with unclear next action', 'No lead qualification messaging', 'Unstructured service pages'],
-        built: ['Demonstrates premium portfolio framing with stronger consultation intent', 'Consultation-first CTA system', 'Service area and service category structure'],
-        targets: ['Target: strong visual credibility on mobile', 'Target: better consultation intent capture'],
-        deliverables: ['Homepage + services + projects architecture', 'Service-area and consultation flow', 'Premium residential proof presentation'],
-        ctaLabel: 'Request a Similar Build'
+        location: 'Toronto, ON (Live demo)',
+        businessType: 'Landscaping',
+        primaryProblem: 'Past work is buried, and quote requests take too many clicks.',
+        demonstrates: 'Project photos, service areas, and a simple quote path.',
+        summary: 'A landscaping site that puts the work first and shortens the quote path.',
+        context: 'Built for landscapers who need projects, services, and contact details to be easy to find.',
+        problems: ['Project photos are buried', 'Service areas are unclear', 'Quote requests take too many clicks'],
+        built: ['Project photos are up front', 'Service pages are plain', 'Quote form is short on phones'],
+        targets: ['More quote requests from local traffic', 'Stronger trust from project photos', 'Less friction on mobile'],
+        deliverables: ['Homepage, services, and projects', 'Quote request flow', 'Project photo presentation'],
+        ctaLabel: 'See this build'
     },
     {
         slug: 'concept-roofing-conversion-site',
-        title: 'Demo: Roofing and Exterior Services Site',
+        title: 'Roofing site',
         label: 'Live Demo',
         demoUrl: 'https://roofing.getaxiom.ca',
         niche: 'Roofing and Exterior Services',
-        location: 'Toronto, ON (Live demonstration deployment)',
-        businessType: 'Roofing and Exterior Services Business',
-        primaryProblem: 'Competing CTAs with weak hierarchy during high-intent visits.',
-        demonstrates: 'Clear CTA priority for urgent versus planned project inquiries.',
-        summary: 'Live demonstration site for a roofing and exterior-services business balancing urgent inspections with planned higher-ticket exterior work.',
-        context: 'Live demonstration project showing how a roofing and exterior-services company can structure inspection-led trust, urgent-versus-planned CTA clarity, and stronger operational credibility.',
-        problems: ['Competing CTAs with no hierarchy', 'Slow load from builder bloat', 'Weak trust structure'],
-        built: ['Demonstrates CTA hierarchy for urgent versus planned inquiries', 'Trust section layout', 'Performance-first page shell'],
-        targets: ['Target: clearer first-click conversion path', 'Target: improved mobile readability'],
-        deliverables: ['Homepage + services + inspection flow', 'Roofing service architecture', 'Operational trust and CTA hierarchy system'],
-        ctaLabel: 'Request a Similar Build'
+        location: 'Toronto, ON (Live demo)',
+        businessType: 'Roofing',
+        primaryProblem: 'Storm traffic needs a fast path to inspection and estimate requests.',
+        demonstrates: 'A clear path for urgent calls and planned roof work.',
+        summary: 'A roofing site that sends urgent calls and estimate requests to different places.',
+        context: 'Built for roofers who need storm damage calls and planned estimates to be obvious.',
+        problems: ['Storm traffic hits pages with mixed signals', 'Contact details are hard to find', 'Proof of past work is weak'],
+        built: ['Urgent and planned requests have separate paths', 'Trust blocks are easy to scan', 'The page loads quickly on phones'],
+        targets: ['Faster calls after storms', 'Clearer inspection requests', 'Less bounce on mobile'],
+        deliverables: ['Homepage, services, and inspection flow', 'Roofing service pages', 'Clear proof and contact sections'],
+        ctaLabel: 'See this build'
     }
 ];
 

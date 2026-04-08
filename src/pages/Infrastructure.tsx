@@ -17,32 +17,32 @@ type ChecklistItem = {
 const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     number: '01',
-    title: 'Discovery',
-    summary: 'We learn about your business, your customers, and what the site needs to do.',
+    title: 'Listen',
+    summary: 'We learn what your business does, who it serves, and what the site needs to answer.',
   },
   {
     number: '02',
     title: 'Plan',
-    summary: 'We agree on the pages, content, and goals before anything is built.',
+    summary: 'We agree on the pages, proof, and contact path before design starts.',
   },
   {
     number: '03',
     title: 'Build',
-    summary: 'We design, build, and refine the site with care and attention to detail.',
+    summary: 'We design and build the site, then check it on phones and desktop.',
   },
   {
     number: '04',
     title: 'Launch',
-    summary: 'Final review, testing, and your site goes live.',
+    summary: 'We test the forms, connect the domain, and go live.',
   },
 ];
 
 const CHECKLIST_ITEMS: readonly ChecklistItem[] = [
-  { title: 'Pages and navigation' },
-  { title: 'Contact forms and calls-to-action' },
-  { title: 'Content and messaging' },
-  { title: 'Domain, hosting, and launch details' },
-  { title: 'Future updates and growth' },
+  { title: 'Pages and menu' },
+  { title: 'Copy and proof' },
+  { title: 'Calls and forms' },
+  { title: 'Domain and launch' },
+  { title: 'After-launch changes' },
 ];
 
 const CheckMark: React.FC = () => (
@@ -62,37 +62,36 @@ const Infrastructure: React.FC = () => {
     <>
       <SEO
         title="Method | Axiom"
-        description="How Axiom builds websites: a clear four-step process from first call to launch, designed for established businesses that value quality and accountability."
+        description="How Axiom builds a website from the first call to launch."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           name: 'Method | Axiom',
-          description:
-            'How Axiom builds websites: a clear four-step process from first call to launch, designed for established businesses that value quality and accountability.',
+          description: 'How Axiom builds a website from the first call to launch.',
           url: 'https://getaxiom.ca/method',
         }}
       />
 
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-6xl px-5 pb-16 md:px-10 md:pb-20">
-          <section className="pt-8 md:pt-12">
+          <section className="pt-6 md:pt-12">
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Method</p>
               <h1 data-startup-heading className="mt-3 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
-                A clear process from first call to launch.
+                What happens from first call to launch.
               </h1>
               <p data-startup-copy className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                One call to understand your business. A clear plan. A professional launch.
+                We keep the steps short and the handoff clear.
               </p>
               <div data-startup-actions className="mt-6">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Book a Free Consultation
+                  Talk to Axiom
                 </Link>
               </div>
             </div>
           </section>
 
-          <section className="pt-10 md:pt-12">
+          <section className="pt-8 md:pt-12">
             <div className="mb-4 flex flex-col gap-2 md:mb-5 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Process</p>
@@ -131,7 +130,7 @@ const Infrastructure: React.FC = () => {
             </div>
           </section>
 
-          <section className="pt-10 md:pt-12">
+          <section className="pt-8 md:pt-12">
             <article className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,18,26,0.98)_0%,rgba(10,13,19,0.98)_100%)] p-4 shadow-[0_18px_52px_rgba(0,0,0,0.22)] md:p-5">
               <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between">
                 <div>
@@ -139,7 +138,7 @@ const Infrastructure: React.FC = () => {
                     Pre-build checklist
                   </p>
                   <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
-                    What we agree on before building
+                    What gets decided first
                   </h2>
                 </div>
               </div>
@@ -172,11 +171,11 @@ const Infrastructure: React.FC = () => {
                   Ready to get started?
                 </h2>
                 <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Book a free call and we&apos;ll review your current website, understand your goals, and explain what we&apos;d do.
+                  We&apos;ll look at your current website and tell you what needs to change.
                 </p>
                 <div className="mt-6 flex justify-center">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book a Free Consultation
+                    Talk to Axiom
                   </Link>
                 </div>
               </div>

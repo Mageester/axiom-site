@@ -11,9 +11,7 @@ type LayoutProps = {
 };
 
 const NAV_ITEMS = [
-  { label: 'Home', to: '/' },
-  { label: 'Method', to: '/method' },
-  { label: 'Work', to: '/works' },
+  { label: 'Examples', to: '/works' },
   { label: 'About', to: '/about' },
 ];
 
@@ -278,21 +276,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       >
         <div className="relative flex h-20 items-center px-6 md:px-12">
           <div className="flex basis-[44%] flex-1 items-center justify-start">
-            <button
-              ref={logoTargetRef}
-              type="button"
-              onClick={() => navigate('/')}
-              className="inline-flex h-full origin-left items-center leading-none transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
-              aria-label="Axiom Infrastructure home"
-            >
-              <ResponsiveImage
-                source={responsiveImages.logoClear}
-                sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
-                alt="Axiom Infrastructure logo"
-                className="block h-16 w-auto max-w-none cursor-pointer object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-20 lg:h-24"
-                decoding="async"
-              />
-            </button>
+              <button
+                ref={logoTargetRef}
+                type="button"
+                onClick={() => navigate('/')}
+                className="inline-flex h-full origin-left items-center leading-none transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+                aria-label="Axiom home"
+              >
+                <ResponsiveImage
+                  source={responsiveImages.logoClear}
+                  sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
+                  alt="Axiom logo"
+                  className="block h-16 w-auto max-w-none cursor-pointer object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-20 lg:h-24"
+                  decoding="async"
+                />
+              </button>
           </div>
 
           <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-3 font-axiomMono md:flex">
@@ -310,8 +308,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
-            <Link to="/apply#project-application-form" className="btn-primary btn-attention btn-sm px-4 py-2 text-sm">
-              BOOK FREE CONSULTATION
+            <Link to="/method" className="btn-primary btn-attention btn-sm px-4 py-2 text-sm">
+              See how it works
             </Link>
           </div>
 
@@ -382,15 +380,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </nav>
 
         <Link
-          to="/apply#project-application-form"
+          to="/method"
           onClick={() => setIsMobileMenuOpen(false)}
           className="btn-primary btn-attention btn-lg mt-5 w-full"
         >
-          BOOK FREE CONSULTATION
+          See how it works
         </Link>
       </div>
 
-      <div className="relative z-10 pt-24 noise-overlay md:pt-28">{children}</div>
+      <div className="relative z-10 pt-20 noise-overlay md:pt-28">{children}</div>
 
       <FloatingAffordances />
     </div>

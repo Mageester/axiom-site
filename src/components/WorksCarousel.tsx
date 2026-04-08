@@ -30,7 +30,7 @@ const WorksCarousel: React.FC = () => {
     <section id="works" className="w-full px-6 md:px-8" aria-label="Selected work carousel">
       <div className="mb-8">
         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected Work</p>
-        <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Execution in Production</h2>
+        <h2 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Built for real businesses</h2>
       </div>
 
       <div className="marquee-shell hide-scrollbar overflow-hidden">

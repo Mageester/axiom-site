@@ -16,51 +16,51 @@ const brands: BrandMark[] = [
   {
     label: 'hotjar',
     icon: SiHotjar,
-    iconClassName: 'h-6 w-6 md:h-7 md:w-7',
+    iconClassName: 'h-5 w-5 md:h-7 md:w-7',
     wordmark: 'hotjar',
-    wordmarkClassName: 'font-axiomDisplay text-[1.4rem] font-semibold tracking-[-0.05em] text-white/[0.68] md:text-[1.65rem]',
+    wordmarkClassName: 'font-axiomDisplay text-[1.16rem] font-semibold tracking-[-0.05em] text-white/[0.68] md:text-[1.65rem]',
   },
   {
     label: 'blender',
     icon: SiBlender,
-    iconClassName: 'h-6 w-6 md:h-7 md:w-7',
+    iconClassName: 'h-5 w-5 md:h-7 md:w-7',
     wordmark: 'blender',
-    wordmarkClassName: 'font-axiomDisplay text-[1.34rem] font-semibold tracking-[-0.05em] text-white/[0.68] md:text-[1.58rem]',
+    wordmarkClassName: 'font-axiomDisplay text-[1.12rem] font-semibold tracking-[-0.05em] text-white/[0.68] md:text-[1.58rem]',
   },
   {
     label: 'figma',
     icon: SiFigma,
-    iconClassName: 'h-6 w-6 md:h-7 md:w-7',
+    iconClassName: 'h-5 w-5 md:h-7 md:w-7',
     wordmark: 'Figma',
-    wordmarkClassName: 'font-axiomDisplay text-[1.38rem] font-semibold tracking-[-0.045em] text-white/[0.7] md:text-[1.62rem]',
+    wordmarkClassName: 'font-axiomDisplay text-[1.14rem] font-semibold tracking-[-0.045em] text-white/[0.7] md:text-[1.62rem]',
   },
   {
     label: 'hostinger',
     icon: SiHostinger,
-    iconClassName: 'h-6 w-6 md:h-7 md:w-7',
+    iconClassName: 'h-5 w-5 md:h-7 md:w-7',
     wordmark: 'HOSTINGER',
-    wordmarkClassName: 'font-axiomMono text-[0.84rem] font-medium uppercase tracking-[0.2em] text-white/[0.62] md:text-[0.92rem]',
+    wordmarkClassName: 'font-axiomMono text-[0.78rem] font-medium uppercase tracking-[0.2em] text-white/[0.62] md:text-[0.92rem]',
   },
   {
     label: 'gsap',
     icon: SiGsap,
-    iconClassName: 'h-6 w-6 md:h-7 md:w-7',
+    iconClassName: 'h-5 w-5 md:h-7 md:w-7',
     wordmark: 'GSAP',
-    wordmarkClassName: 'font-axiomDisplay text-[1.42rem] font-semibold tracking-[-0.06em] text-white/[0.72] md:text-[1.7rem]',
+    wordmarkClassName: 'font-axiomDisplay text-[1.16rem] font-semibold tracking-[-0.06em] text-white/[0.72] md:text-[1.7rem]',
   },
   {
     label: 'notion',
     icon: SiNotion,
-    iconClassName: 'h-6 w-6 md:h-7 md:w-7',
+    iconClassName: 'h-5 w-5 md:h-7 md:w-7',
     wordmark: 'Notion',
-    wordmarkClassName: 'font-axiomDisplay text-[1.38rem] font-semibold tracking-[-0.045em] text-white/[0.7] md:text-[1.62rem]',
+    wordmarkClassName: 'font-axiomDisplay text-[1.14rem] font-semibold tracking-[-0.045em] text-white/[0.7] md:text-[1.62rem]',
   },
   {
     label: 'vercel',
     icon: SiVercel,
-    iconClassName: 'h-6 w-6 md:h-7 md:w-7',
+    iconClassName: 'h-5 w-5 md:h-7 md:w-7',
     wordmark: 'Vercel',
-    wordmarkClassName: 'font-axiomDisplay text-[1.38rem] font-semibold tracking-[-0.045em] text-white/[0.7] md:text-[1.62rem]',
+    wordmarkClassName: 'font-axiomDisplay text-[1.14rem] font-semibold tracking-[-0.045em] text-white/[0.7] md:text-[1.62rem]',
   },
   {
     label: 'aws',
@@ -103,7 +103,7 @@ const BrandCarousel: React.FC = () => {
         <div className="logo-marquee-shell">
           <div
             className="logo-marquee-track items-center"
-            style={{ '--marquee-duration': '24s', '--marquee-gap': 'clamp(1.9rem, 3vw, 3.4rem)' } as React.CSSProperties}
+            style={{ '--marquee-duration': '24s', '--marquee-gap': 'clamp(1.2rem, 3vw, 3.4rem)' } as React.CSSProperties}
           >
             {marqueeBrands.map((brand, index) => (
               <div

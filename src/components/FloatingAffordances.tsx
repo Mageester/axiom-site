@@ -117,10 +117,10 @@ const FloatingAffordances: React.FC = () => {
           </span>
           <span className="pr-1">
             <span className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-[#F2F4F7]">
-              Book Free Consultation
+              Talk to Axiom
             </span>
             <span className="mt-0.5 block text-[10px] uppercase tracking-[0.18em] text-slate-400">
-              30-minute Zoom call
+              30-minute call
             </span>
           </span>
         </Link>
@@ -136,7 +136,7 @@ const FloatingAffordances: React.FC = () => {
           className="motion-floating flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-white/12 bg-[rgba(10,14,22,0.9)] px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-[#F2F4F7] shadow-[0_14px_30px_rgba(0,0,0,0.26)] backdrop-blur-xl hover:-translate-y-px hover:border-[#d4a48e]/35 hover:shadow-[0_18px_36px_rgba(0,0,0,0.3),0_0_0_1px_rgba(212,164,142,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
         >
           <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          Book Free Consultation
+          Talk to Axiom
         </Link>
       </div>
 
