@@ -41,6 +41,25 @@ const selectedWork = selectedWorkEntries.map((entry) => {
   };
 });
 
+const heroProofPoints = [
+  {
+    title: 'Fast load times',
+    detail: 'Pages open quickly on phones.',
+  },
+  {
+    title: 'Clear mobile layouts',
+    detail: 'Text stays easy to read on small screens.',
+  },
+  {
+    title: 'Stronger trust',
+    detail: 'The site looks steady from the first visit.',
+  },
+  {
+    title: 'Fewer weak pages',
+    detail: 'We cut what gets in the way.',
+  },
+];
+
 const standardsCards = [
   {
     title: 'Clear on any screen',
@@ -82,8 +101,8 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom | Premium Web Infrastructure for Established Businesses"
-        description="Axiom builds premium web infrastructure for established businesses that need faster load times, cleaner structure, and a front door that holds up under real demand."
+        title="Axiom | Websites for Serious Businesses"
+        description="Axiom builds websites for established businesses. Pages load quickly, stay clear on mobile, and help people trust the business sooner."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
@@ -103,23 +122,37 @@ const Home: React.FC = () => {
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom builds fast, credible websites for established operators who need cleaner structure, stronger trust, and a front door that holds up under real demand.
+                  Axiom builds fast websites for established businesses. The pages are clear, easy to use on phones, and help people trust the business sooner.
                 </p>
                 <div data-startup-actions className="mt-8 flex flex-wrap items-center gap-4">
                   <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Book a Build Call
+                    Book a Call
                   </Link>
                   <Link
                     to="/method"
                     className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
                   >
-                    See the Build Process
+                    See the Process
                   </Link>
                 </div>
               </div>
-              <div data-startup-meta className="mt-10 flex justify-center md:mt-14">
+              <div data-startup-meta className="mt-10 flex flex-col items-center gap-6 md:mt-14 md:gap-8">
                 <div className="w-full max-w-4xl">
                   <BrandCarousel />
+                </div>
+                <div className="w-full max-w-4xl overflow-hidden rounded-[1.5rem] border border-white/8 bg-white/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+                  <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-4">
+                    {heroProofPoints.map((point) => (
+                      <div key={point.title} className="bg-white/[0.015] px-4 py-4 sm:px-5">
+                        <p className="text-sm font-semibold tracking-[-0.02em] text-[#F2F4F7]">
+                          {point.title}
+                        </p>
+                        <p className="mt-1 text-sm leading-6 text-slate-300">
+                          {point.detail}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
