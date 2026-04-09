@@ -9,6 +9,15 @@ import { caseStudies } from '../data/caseStudies';
 import type { ResponsiveSource } from '../lib/responsiveImages';
 import { getWorkProofImage } from '../lib/workProofImages';
 
+const landscapingAfterAvif = new URL('../../axiom-landscaping-demo/public/images/landscaping-after.avif', import.meta.url).href;
+const landscapingAfterWebp = new URL('../../axiom-landscaping-demo/public/images/landscaping-after.webp', import.meta.url).href;
+
+const landscapingAfterSource: ResponsiveSource = {
+  fallbackSrc: landscapingAfterWebp,
+  avifSrcSet: `${landscapingAfterAvif} 1024w`,
+  webpSrcSet: `${landscapingAfterWebp} 1024w`,
+};
+
 interface WorkEntry {
   id: string;
   title: string;
@@ -32,21 +41,45 @@ const orderedCaseStudies = worksDisplayOrder
   .map((slug) => caseStudies.find((entry) => entry.slug === slug))
   .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
 
+const workPresentationBySlug: Record<string, { statusLabel: string; ctaLabel: string; improvement: string; image?: ResponsiveSource; imageAlt?: string; imagePosition?: string }> = {
+  'demonstration-restaurant-reservation-site': {
+    statusLabel: 'Live site',
+    ctaLabel: 'View live site',
+    improvement: 'The menu and booking link stay visible on phones.',
+  },
+  'concept-landscaping-authority-site': {
+    statusLabel: 'Demo build',
+    ctaLabel: 'Open demo',
+    improvement: 'Past projects stay up front, and quote requests take fewer steps.',
+    image: landscapingAfterSource,
+    imageAlt: 'Finished backyard with fresh lawn, planting beds, and a covered patio',
+    imagePosition: 'center 56%',
+  },
+  'concept-roofing-conversion-site': {
+    statusLabel: 'Demo build',
+    ctaLabel: 'Open demo',
+    improvement: 'Urgent calls and estimate requests have separate paths.',
+  },
+};
+
 const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
+  const presentation = workPresentationBySlug[entry.slug] ?? {
+    statusLabel: entry.label === 'Live' ? 'Live site' : 'Demo build',
+    ctaLabel: entry.label === 'Live' ? 'View live site' : 'Open demo',
+    improvement: entry.summary,
+  };
   const proofImage = getWorkProofImage(entry.slug);
-  const statusLabel = entry.label;
-  const ctaLabel = entry.ctaLabel ?? (entry.label === 'Live' ? 'View live site' : 'View demo');
   return {
     id: entry.slug,
     title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-    statusLabel,
-    ctaLabel,
-    ariaLabel: `${ctaLabel} for ${entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '')}`,
-    improvement: entry.summary,
-    image: proofImage.source,
+    statusLabel: presentation.statusLabel,
+    ctaLabel: presentation.ctaLabel,
+    ariaLabel: `${presentation.ctaLabel} for ${entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '')}`,
+    improvement: presentation.improvement,
+    image: presentation.image ?? proofImage.source,
     demoUrl: entry.demoUrl,
-    imageAlt: proofImage.alt,
-    imagePosition: proofImage.position,
+    imageAlt: presentation.imageAlt ?? proofImage.alt,
+    imagePosition: presentation.imagePosition ?? proofImage.position,
   };
 });
 
@@ -103,12 +136,12 @@ const Deployments: React.FC = () => {
     <>
       <SEO
         title="Selected work | Axiom"
-        description="One live site and two demos that show clearer pages, easier contact, and cleaner mobile use."
+        description="A small, selective set of live and demo builds that show clearer pages, easier contact, and cleaner mobile use."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'Selected work | Axiom',
-          description: 'One live site and two demos that show clearer pages, easier contact, and cleaner mobile use.',
+          description: 'A small, selective set of live and demo builds that show clearer pages, easier contact, and cleaner mobile use.',
           url: 'https://getaxiom.ca/works',
         }}
       />
@@ -121,7 +154,7 @@ const Deployments: React.FC = () => {
               <h1 data-startup-heading className="text-left">Selected work.</h1>
             </div>
             <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              One live site and two demos. Each one shows what got clearer, easier to use, and simpler on mobile.
+              A small, selective set of live and demo builds. Each one focuses on clearer structure, easier contact, and cleaner mobile use.
             </p>
           </div>
         </RevealBlock>
@@ -140,9 +173,9 @@ const Deployments: React.FC = () => {
           <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[520px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[140px]" />
 
           <div className="relative z-10">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need the same kind of cleanup?</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of clarity on your site?</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                We&apos;ll review what you have and tell you what to fix first.
+                Send the site through. We&apos;ll show the first changes worth making.
               </p>
               <div className="mt-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
                 <Link to="/apply#project-application-form" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
