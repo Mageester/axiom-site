@@ -60,19 +60,19 @@ const PAIN_POINTS_OPTIONS = [
 const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_active_demand' | 'fit_trust_conversion_need' | 'fit_decision_owner_ready' | 'fit_defined_scope_ready'>; label: string }> = [
     {
         key: 'fit_active_demand',
-        label: 'Are you taking on new clients or customers right now?'
+        label: 'Are you taking on new clients or customers?'
     },
     {
         key: 'fit_trust_conversion_need',
-        label: 'Do you want the site to help with calls, leads, or booked work?'
+        label: 'Should the site help with calls, leads, or booked work?'
     },
     {
         key: 'fit_decision_owner_ready',
-        label: 'Will one person be available to review the work while we build?'
+        label: 'Will one person be available to review the work during the build?'
     },
     {
         key: 'fit_defined_scope_ready',
-        label: 'Are you ready to start this project within the next few weeks?'
+        label: 'Are you ready to start in the next few weeks?'
     }
 ];
 
@@ -198,8 +198,8 @@ const GeneralContactForm: React.FC = () => {
     return (
         <>
             <SEO
-                title="Contact | Axiom"
-                description="Send a question or a note about your site."
+                title="Contact"
+                description="Send a note about your site."
             />
             <section data-hero-root className="mx-auto max-w-3xl pt-8 text-center md:pt-16">
                 <div className="overflow-hidden">
@@ -457,13 +457,13 @@ const ProjectApplicationForm: React.FC = () => {
     return (
         <>
             <SEO
-                title="Tell us what you need | Axiom"
-                description="Tell us what you need. We’ll reply within one business day."
+                title="Start a project"
+                description="Tell us what you need. We'll reply within one business day."
                 schema={{
                     '@context': 'https://schema.org',
                     '@type': 'ContactPage',
-                    name: 'Tell us what you need | Axiom',
-                    description: 'Tell us what you need. We’ll reply within one business day.',
+                    name: 'Start a project',
+                    description: "Tell us what you need. We'll reply within one business day.",
                     url: 'https://getaxiom.ca/apply',
                 }}
             />
@@ -479,7 +479,7 @@ const ProjectApplicationForm: React.FC = () => {
                         </h1>
                     </div>
                     <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                        Start with the basics. We’ll review it and reply within one business day.
+                        Share the basics. We'll review it and reply within one business day.
                     </p>
                     <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
                         Not a project? Use{' '}
@@ -533,28 +533,28 @@ const ProjectApplicationForm: React.FC = () => {
                                                 {errors.business_name && <p className="text-xs text-red-300">{errors.business_name}</p>}
                                             </div>
                                             <div className="flex flex-col gap-2">
-                                                <label className={FIELD_LABEL_CLASS}>Phone (optional)</label>
+                                                <label className={FIELD_LABEL_CLASS}>Phone number (optional)</label>
                                                 <input type="tel" value={form.phone} onChange={(e) => setField('phone', e.target.value)} className={FIELD_INPUT_CLASS} />
                                             </div>
                                         </section>
 
                                         <div className="flex flex-col gap-2">
-                                            <label className={FIELD_LABEL_CLASS}>Current website (optional)</label>
+                                            <label className={FIELD_LABEL_CLASS}>Website (optional)</label>
                                             <input type="url" placeholder="https://your-site.com" value={form.current_website} onChange={(e) => setField('current_website', e.target.value)} className={FIELD_INPUT_CLASS} />
-                                            <p className="text-xs text-slate-400">Optional if you have one.</p>
+                                            <p className="text-xs text-slate-400">Only if you already have one.</p>
                                         </div>
 
                                         <div className="flex flex-col gap-2">
-                                            <label className={FIELD_LABEL_CLASS}>What kind of site do you need?</label>
+                                            <label className={FIELD_LABEL_CLASS}>What type of site do you need?</label>
                                             <select value={form.project_scale} onChange={(e) => setField('project_scale', e.target.value)} className={FIELD_INPUT_CLASS}>
-                                                <option value="" disabled>Select a site type...</option>
+                                                <option value="" disabled>Choose a site type...</option>
                                                 {SCALE_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                                             </select>
                                             {errors.project_scale && <p className="text-xs text-red-300">{errors.project_scale}</p>}
                                         </div>
 
                                         <div className="flex flex-col gap-3">
-                                            <label className={FIELD_LABEL_CLASS}>What needs attention first?</label>
+                                            <label className={FIELD_LABEL_CLASS}>What needs the most attention?</label>
                                             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                                 {PAIN_POINTS_OPTIONS.map((point) => {
                                                     const selected = form.pain_points.includes(point);
@@ -577,8 +577,8 @@ const ProjectApplicationForm: React.FC = () => {
                                         <details className="group rounded-2xl border border-white/10 bg-[#0f1524]/45 p-4 md:p-5">
                                             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left">
                                                 <span className="min-w-0">
-                                                    <span className={FIELD_LABEL_CLASS}>Project readiness questions (optional)</span>
-                                                    <span className="mt-1 block text-sm leading-relaxed text-slate-300">Answer these only if you want us to check fit before we start.</span>
+                                                    <span className={FIELD_LABEL_CLASS}>Fit check (optional)</span>
+                                                    <span className="mt-1 block text-sm leading-relaxed text-slate-300">Use this only if you want us to check fit first.</span>
                                                 </span>
                                                 <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180" fill="none" aria-hidden="true">
                                                     <path d="M5.5 7.5 10 12l4.5-4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -613,8 +613,8 @@ const ProjectApplicationForm: React.FC = () => {
                                         </details>
 
                                         <div className="flex flex-col gap-2">
-                                            <label className={FIELD_LABEL_CLASS}>What should the site do first?</label>
-                                            <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Example: clearer service pages, better proof, and an easier way to get calls or quote requests." className={`${FIELD_INPUT_CLASS} resize-none`} />
+                                            <label className={FIELD_LABEL_CLASS}>What should the site focus on first?</label>
+                                            <textarea rows={4} required minLength={10} value={form.details} onChange={(e) => setField('details', e.target.value)} placeholder="Example: clearer service pages, stronger proof, and an easier way to call or request a quote." className={`${FIELD_INPUT_CLASS} resize-none`} />
                                             {errors.details && <p className="text-xs text-red-300">{errors.details}</p>}
                                         </div>
 
@@ -622,7 +622,7 @@ const ProjectApplicationForm: React.FC = () => {
                                             <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
                                                 {status === 'loading' ? 'Sending...' : 'Start a project'}
                                             </button>
-                                            <p className="text-sm text-slate-400">We&apos;ll review and reply within one business day.</p>
+                                            <p className="text-sm text-slate-400">We&apos;ll reply within one business day.</p>
                                         </div>
                                     </div>
                                 </fieldset>

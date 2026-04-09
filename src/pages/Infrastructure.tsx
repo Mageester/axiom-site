@@ -95,13 +95,13 @@ const Infrastructure: React.FC = () => {
   return (
     <>
       <SEO
-        title="Four stages from review to launch | Axiom"
-        description="A simple process: review the site, plan the pages, build the work, and launch it cleanly."
+        title="Process"
+        description="A simple four-step process from review to launch."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
-          name: 'Four stages from review to launch | Axiom',
-          description: 'A simple process: review the site, plan the pages, build the work, and launch it cleanly.',
+          name: 'Process',
+          description: 'A simple four-step process from review to launch.',
           url: 'https://getaxiom.ca/method',
         }}
       />
@@ -112,10 +112,10 @@ const Infrastructure: React.FC = () => {
             <div className="max-w-3xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
               <h1 data-startup-heading className="mt-3 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
-                Four stages that keep the work simple.
+                Four stages from review to launch.
               </h1>
               <p data-startup-copy className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                Each step shows what we do, what we need from you, and where the work is headed.
+                Each step shows what happens, what we need from you, and where the work is headed.
               </p>
               <div data-startup-actions className="mt-5">
                 <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
@@ -132,7 +132,7 @@ const Infrastructure: React.FC = () => {
                   <div>
                     <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">The steps</p>
                     <h2 className="mt-1 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                      What happens at each step.
+                      What happens at each stage.
                     </h2>
                     <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
                       The main choices get settled early so the build stays clear.
@@ -242,14 +242,14 @@ const Infrastructure: React.FC = () => {
               <div className="relative z-10 mx-auto max-w-2xl">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
-                  See the work first.
+                  Start with a review.
                 </h2>
                 <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  See a few examples before you decide what needs attention first.
+                  We&apos;ll look at the site and show the first changes worth making.
                 </p>
                 <div className="mt-6 flex justify-center">
-                  <Link to="/works" className="btn-primary btn-lg whitespace-nowrap">
-                    See work
+                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
+                    Start a project
                   </Link>
                 </div>
               </div>

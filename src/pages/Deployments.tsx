@@ -135,13 +135,13 @@ const Deployments: React.FC = () => {
   return (
     <>
       <SEO
-        title="Selected work | Axiom"
-        description="A small, selective set of live and demo builds that show clearer pages, easier contact, and cleaner mobile use."
+        title="Work"
+        description="Live and demo builds with clearer pages and easier contact."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
-          name: 'Selected work | Axiom',
-          description: 'A small, selective set of live and demo builds that show clearer pages, easier contact, and cleaner mobile use.',
+          name: 'Work',
+          description: 'Live and demo builds with clearer pages and easier contact.',
           url: 'https://getaxiom.ca/works',
         }}
       />

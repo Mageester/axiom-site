@@ -29,13 +29,13 @@ const About: React.FC = () => {
   return (
     <>
       <SEO
-        title="About | Axiom"
-        description="Axiom builds clear websites for businesses that need trust quickly. The work keeps pages plain, proof visible, and contact easy."
+        title="About"
+        description="Axiom builds clear websites that keep proof visible and contact easy."
         schema={{
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
-          name: 'About | Axiom',
-          description: 'Axiom builds clear websites for businesses that need trust quickly. The work keeps pages plain, proof visible, and contact easy.',
+          name: 'About',
+          description: 'Axiom builds clear websites that keep proof visible and contact easy.',
           url: 'https://getaxiom.ca/about',
         }}
       />
