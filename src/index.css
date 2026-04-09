@@ -1128,6 +1128,68 @@
   }
 }
 
+@media (hover: none), (pointer: coarse) {
+  body::before,
+  body::after {
+    animation: none;
+    filter: none;
+  }
+
+  [data-startup-bg],
+  .global-noise-floor,
+  .engineering-grid,
+  .animate-grid-drift,
+  .animate-scan-sweep,
+  .animate-logo-cloud,
+  .animate-marquee,
+  .animate-infinite-scroll,
+  .animate-marquee-infinite {
+    animation: none !important;
+    filter: none !important;
+  }
+
+  [data-startup-bg] {
+    display: none;
+  }
+
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  [class*='blur-'] {
+    filter: none !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .motion-surface,
+  .motion-media,
+  .motion-floating,
+  .motion-link-accent,
+  .bento-hover,
+  .axiom-bento,
+  .axiom-bento-card,
+  .machined-card {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-ghost:hover {
+    transform: none;
+  }
+}
+
 @media (min-width: 768px) {
   .logo-marquee-viewport {
     padding-block: 0.7rem;

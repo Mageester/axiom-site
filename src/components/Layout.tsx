@@ -4,6 +4,7 @@ import FloatingAffordances from './FloatingAffordances';
 import ResponsiveImage from './ResponsiveImage';
 import { responsiveImages } from '../lib/responsiveImages';
 import { CTA } from '../lib/cta';
+import { shouldDisableHeavyMotion } from '../lib/motionPreferences';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -31,6 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const disableHeavyMotion = shouldDisableHeavyMotion();
 
   useEffect(() => {
     let rafId = 0;
@@ -57,6 +59,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    if (disableHeavyMotion) {
+      const root = layoutRef.current;
+      if (!root) return;
+
+      const targets = Array.from(root.querySelectorAll<HTMLElement>('main > section, main > article'))
+        .filter(
+          (element, index) =>
+            index > 0 &&
+            !element.hasAttribute('data-hero-root') &&
+            element.dataset.reveal !== 'off' &&
+            element.dataset.motionManaged !== 'true'
+        );
+
+      targets.forEach((element) => element.classList.add('is-visible'));
+      return;
+    }
+
     const root = layoutRef.current;
     if (!root) return;
 
@@ -95,7 +114,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     targets.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
-  }, [location.pathname]);
+  }, [disableHeavyMotion, location.pathname]);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -201,19 +220,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         Skip to main content
       </a>
 
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div data-startup-bg className="fixed left-[-10%] top-[-20%] h-[50vw] w-[50vw] rounded-full bg-[#697481] opacity-[0.13] blur-[120px]" />
-        <div data-startup-bg className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B06E52] opacity-[0.09] blur-[120px]" />
-        <div data-startup-bg className="engineering-grid animate-grid-drift" />
-        <div data-startup-bg className="global-noise-floor" />
-      </div>
+      {!disableHeavyMotion && (
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <div data-startup-bg className="fixed left-[-10%] top-[-20%] h-[50vw] w-[50vw] rounded-full bg-[#697481] opacity-[0.13] blur-[120px]" />
+          <div data-startup-bg className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B06E52] opacity-[0.09] blur-[120px]" />
+          <div data-startup-bg className="engineering-grid animate-grid-drift" />
+          <div data-startup-bg className="global-noise-floor" />
+        </div>
+      )}
 
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-2.5 md:px-6 md:pt-3">
         <div className="mx-auto max-w-7xl">
           <div
             className={`pointer-events-auto relative flex h-[3.5rem] items-center rounded-[1rem] px-4 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-[3.85rem] md:px-5 ${
               isScrolled
-                ? 'border border-white/[0.06] bg-[rgba(10,12,16,0.34)] shadow-[0_6px_18px_rgba(0,0,0,0.08)] backdrop-blur-sm'
+                ? 'border border-white/[0.06] bg-[rgba(10,12,16,0.34)] shadow-[0_6px_18px_rgba(0,0,0,0.08)] backdrop-blur-0 md:backdrop-blur-sm'
                 : 'border border-transparent bg-transparent shadow-none backdrop-blur-0'
             }`}
           >
@@ -304,7 +325,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         aria-modal={isMobileMenuOpen ? 'true' : undefined}
         aria-hidden={!isMobileMenuOpen}
         aria-labelledby="mobile-menu-title"
-        className={`fixed inset-x-4 top-[4.9rem] z-50 rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.94)] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.28)] backdrop-blur-lg transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+        className={`fixed inset-x-4 top-[4.9rem] z-50 rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.94)] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.28)] backdrop-blur-0 transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
           isMobileMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >
@@ -337,9 +358,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </Link>
       </div>
 
-      <div className="relative z-10 pt-20 noise-overlay md:pt-28">{children}</div>
+      <div className={`relative z-10 pt-20 md:pt-28 ${disableHeavyMotion ? '' : 'noise-overlay'}`}>{children}</div>
 
-      <FloatingAffordances />
+      {!disableHeavyMotion && <FloatingAffordances />}
     </div>
   );
 };

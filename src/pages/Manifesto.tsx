@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 import { CTA } from '../lib/cta';
+import { shouldDisableHeavyMotion } from '../lib/motionPreferences';
 import { SEO_ROUTES } from '../lib/seo';
 
 const Manifesto: React.FC = () => {
@@ -9,12 +10,18 @@ const Manifesto: React.FC = () => {
     const avgTicket = 5000;
     const annualLeak = lostCalls * avgTicket * 12;
     const [displayAnnualLeak, setDisplayAnnualLeak] = useState(annualLeak);
+    const disableHeavyMotion = shouldDisableHeavyMotion();
     const displayMonthlyLeak = Math.round(displayAnnualLeak / 12);
     const infrastructureInvestment = 7500;
     const paybackMonths = displayMonthlyLeak > 0 ? infrastructureInvestment / displayMonthlyLeak : 0;
     const outputTone = displayAnnualLeak >= 0 ? 'text-axiom-accent' : 'text-[#d27474]';
 
     useEffect(() => {
+        if (disableHeavyMotion) {
+            setDisplayAnnualLeak(annualLeak);
+            return;
+        }
+
         const start = displayAnnualLeak;
         const delta = annualLeak - start;
         const startTime = performance.now();
@@ -26,7 +33,7 @@ const Manifesto: React.FC = () => {
         };
         raf = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(raf);
-    }, [annualLeak]);
+    }, [annualLeak, disableHeavyMotion]);
 
     return (
         <div className="page-shell">
@@ -307,4 +314,3 @@ const Manifesto: React.FC = () => {
 };
 
 export default Manifesto;
-
