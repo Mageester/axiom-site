@@ -1,99 +1,138 @@
 import React, { useEffect } from 'react';
+import {
+  DEFAULT_OG_IMAGE,
+  DEFAULT_SEO_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  formatSeoTitle,
+  toCanonicalUrl,
+} from '../lib/seo';
 
 interface SEOProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
   image?: string;
-  schema?: Record<string, any>;
+  noIndex?: boolean;
+  schema?: Record<string, unknown>;
 }
+const MANAGED_ATTR = 'data-axiom-seo';
 
-const DEFAULT_OG_IMAGE = '/og-image.png';
-const SITE_URL = 'https://getaxiom.ca';
+const upsertUniqueHeadTag = <T extends HTMLElement>(selector: string, create: () => T) => {
+  const existing = Array.from(document.head.querySelectorAll(selector)) as T[];
+  const primary = existing[0] ?? create();
 
-const getPageUrl = () => {
-  if (typeof window === 'undefined') {
-    return SITE_URL;
+  if (!existing[0]) {
+    document.head.appendChild(primary);
   }
 
-  return new URL(window.location.pathname, SITE_URL).toString();
+  for (let index = 1; index < existing.length; index += 1) {
+    existing[index].remove();
+  }
+
+  primary.setAttribute(MANAGED_ATTR, 'true');
+  return primary;
 };
 
-const setMetaTag = (key: string, value: string) => {
-  const isOg = key.startsWith('og:');
-  const isTwitter = key.startsWith('twitter:');
-  const attr = isOg || isTwitter ? 'property' : 'name';
-  const selector = `meta[${attr}="${key}"]`;
+const removeLegacyMetaVariant = (key: string) => {
+  const legacyAttr = key.startsWith('og:') ? 'name' : key.startsWith('twitter:') ? 'property' : null;
+  if (!legacyAttr) return;
 
-  let el = document.querySelector(selector) as HTMLMetaElement | null;
-  if (!el) {
-    el = document.createElement('meta');
-    el.setAttribute(attr, key);
-    document.head.appendChild(el);
-  }
+  Array.from(document.head.querySelectorAll(`meta[${legacyAttr}="${key}"]`)).forEach((node) => {
+    node.remove();
+  });
+};
+
+const upsertMetaTag = (key: string, value: string) => {
+  removeLegacyMetaVariant(key);
+  const isOg = key.startsWith('og:');
+  const attr = isOg ? 'property' : 'name';
+  const selector = `meta[${attr}="${key}"]`;
+  const el = upsertUniqueHeadTag<HTMLMetaElement>(selector, () => {
+    const node = document.createElement('meta');
+    node.setAttribute(attr, key);
+    return node;
+  });
 
   el.setAttribute('content', value);
 };
 
-const setCanonicalLink = (href: string) => {
-  let el = document.querySelector('link[rel="canonical"][data-axiom-canonical="true"]') as HTMLLinkElement | null;
-  if (!el) {
-    el = document.createElement('link');
-    el.setAttribute('rel', 'canonical');
-    el.setAttribute('data-axiom-canonical', 'true');
-    document.head.appendChild(el);
-  }
+const upsertCanonicalLink = (href: string) => {
+  const selector = 'link[rel="canonical"]';
+  const el = upsertUniqueHeadTag<HTMLLinkElement>(selector, () => {
+    const node = document.createElement('link');
+    node.setAttribute('rel', 'canonical');
+    return node;
+  });
 
   el.setAttribute('href', href);
 };
 
-export const SEO: React.FC<SEOProps> = ({ title, description, image, schema }) => {
-  useEffect(() => {
-    document.title = title;
+const syncTitleTag = (value: string) => {
+  const existing = Array.from(document.head.querySelectorAll('title'));
+  const primary = existing[0] ?? document.createElement('title');
 
-    const pageUrl = getPageUrl();
+  if (!existing[0]) {
+    document.head.appendChild(primary);
+  }
+
+  for (let index = 1; index < existing.length; index += 1) {
+    existing[index].remove();
+  }
+
+  primary.setAttribute(MANAGED_ATTR, 'true');
+  primary.textContent = value;
+  document.title = value;
+};
+
+const syncSchema = (schema?: Record<string, unknown>) => {
+  const existing = Array.from(document.head.querySelectorAll('script[type="application/ld+json"]'));
+  existing.forEach((node) => node.remove());
+
+  if (!schema) {
+    return;
+  }
+
+  const scriptTag = document.createElement('script');
+  scriptTag.setAttribute('type', 'application/ld+json');
+  scriptTag.dataset.axiomSeo = 'true';
+  scriptTag.textContent = JSON.stringify(schema);
+  document.head.appendChild(scriptTag);
+};
+
+export const SEO: React.FC<SEOProps> = ({ title, description, canonicalPath, image, noIndex, schema }) => {
+  useEffect(() => {
+    const resolvedTitle = formatSeoTitle(title);
+    const resolvedDescription = description?.trim() || DEFAULT_SEO_DESCRIPTION;
+    const pageUrl = canonicalPath ? toCanonicalUrl(canonicalPath) : toCanonicalUrl(typeof window === 'undefined' ? '/' : window.location.pathname);
     const ogImage = image || DEFAULT_OG_IMAGE;
     const fullImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
 
     const metaTags: Record<string, string> = {
-      'description': description,
-      'robots': 'index,follow,max-image-preview:large',
-      'og:title': title,
-      'og:description': description,
+      'description': resolvedDescription,
+      'robots': noIndex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large',
+      'og:title': resolvedTitle,
+      'og:description': resolvedDescription,
       'og:image': fullImageUrl,
       'og:type': 'website',
       'og:url': pageUrl,
-      'og:site_name': 'Axiom',
+      'og:site_name': SITE_NAME,
       'twitter:card': 'summary_large_image',
-      'twitter:title': title,
-      'twitter:description': description,
+      'twitter:title': resolvedTitle,
+      'twitter:description': resolvedDescription,
       'twitter:image': fullImageUrl,
     };
 
+    syncTitleTag(resolvedTitle);
+
     Object.entries(metaTags).forEach(([key, value]) => {
-      setMetaTag(key, value);
+      upsertMetaTag(key, value);
     });
 
-    setCanonicalLink(pageUrl);
+    upsertCanonicalLink(pageUrl);
 
-    // JSON-LD Schema
-    let scriptTag = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
-    if (schema) {
-      if (!scriptTag) {
-        scriptTag = document.createElement('script');
-        scriptTag.setAttribute('type', 'application/ld+json');
-        document.head.appendChild(scriptTag);
-      }
-      scriptTag.textContent = JSON.stringify(schema);
-    } else if (scriptTag) {
-      scriptTag.remove();
-    }
-
-    return () => {
-      if (scriptTag && document.head.contains(scriptTag)) {
-        scriptTag.remove();
-      }
-    };
-  }, [title, description, image, schema]);
+    syncSchema(schema);
+  }, [title, description, canonicalPath, image, noIndex, schema]);
 
   return null;
 };

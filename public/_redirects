@@ -1,7 +1,8 @@
 /works/demonstration-restaurant-reservation-site /works 301
 /works/concept-landscaping-authority-site /works 301
 /works/concept-roofing-conversion-site /works 301
-/contact /apply 301
+/apply /start-a-project 301
 /architects /about 301
 /deployments /works 301
 /infrastructure /method 301
+/* /index.html 200

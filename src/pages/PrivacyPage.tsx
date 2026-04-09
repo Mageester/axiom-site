@@ -1,12 +1,12 @@
 ﻿import React from 'react';
 import { SEO } from '../components/SEO';
+import { SEO_ROUTES } from '../lib/seo';
 
 const PrivacyPage: React.FC = () => {
     return (
         <div className="pt-32 pb-24 px-6">
             <SEO
-                title="Privacy Policy | Axiom"
-                description="Privacy policy for the Axiom website and contact forms."
+                {...SEO_ROUTES.privacy}
             />
             <div className="max-w-[800px] mx-auto text-axiom-text-mute leading-relaxed">
                 <h1 className="text-[40px] font-semibold text-axiom-text-main mb-8 tracking-tight">Privacy Policy</h1>
@@ -39,4 +39,3 @@ const PrivacyPage: React.FC = () => {
 };
 
 export default PrivacyPage;
-

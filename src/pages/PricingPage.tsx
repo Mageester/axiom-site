@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
+import { createStartProjectHref } from '../lib/cta';
+import { SEO_ROUTES } from '../lib/seo';
 
 type PricingTier = {
   name: string;
@@ -85,8 +87,7 @@ const PricingPage: React.FC = () => {
   return (
     <div className="page-shell">
       <SEO
-        title="Clear pricing | Axiom"
-        description="Website pricing for local businesses. Clear scope, no surprises, and a site you own."
+        {...SEO_ROUTES.pricing}
       />
 
       <section className="max-w-3xl mx-auto text-center flex flex-col gap-5 mb-12 sm:mb-14">
@@ -139,7 +140,7 @@ const PricingPage: React.FC = () => {
               <p className="font-axiomSans text-[12px] text-axiom-text-mute/90 border-t border-axiom-border pt-3">{tier.boundary}</p>
 
               <Link
-                to={`/apply?package=${tier.packageParam}`}
+                to={createStartProjectHref(tier.packageParam)}
                 className="btn-primary btn-md magnetic-primary w-full"
               >
                 {tier.cta}
@@ -167,7 +168,7 @@ const PricingPage: React.FC = () => {
           <p className="text-[15px] text-axiom-text-mute max-w-[760px] mx-auto leading-relaxed">
             We scope tightly, track everything, and keep improving until the site does its job. This is a working tool, not a brochure.
           </p>
-          <Link to="/apply" className="btn-primary mt-6">
+          <Link to="/start-a-project" className="btn-primary mt-6">
             Start a project
           </Link>
         </div>
@@ -177,8 +178,5 @@ const PricingPage: React.FC = () => {
 };
 
 export default PricingPage;
-
-
-
 
 

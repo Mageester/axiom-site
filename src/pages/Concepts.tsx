@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
+import { CTA } from '../lib/cta';
+import { SEO_ROUTES } from '../lib/seo';
 
 type BlueprintItem = {
   label: string;
@@ -79,8 +81,7 @@ const ConceptsPage: React.FC = () => {
   return (
     <div className="page-shell">
       <SEO
-        title="Demo concepts | Axiom"
-        description="Demo sites for HVAC, roofing, and landscaping businesses. Each one shows a clearer path to the next step."
+        {...SEO_ROUTES.concepts}
       />
 
       <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-16 sm:mb-20">
@@ -191,7 +192,7 @@ const ConceptsPage: React.FC = () => {
                   onClick={(event) => event.stopPropagation()}
                   className="btn-primary w-full"
                 >
-                  View Demo {'->'}
+                  Open demo
                 </a>
 
                 <button
@@ -218,8 +219,8 @@ const ConceptsPage: React.FC = () => {
           <p className="lead text-center mx-auto">
             Every build is engineered from scratch for your specific market. No templates. No shared layouts. No recycled designs from another contractor down the road.
           </p>
-          <Link to="/apply" className="btn-primary">
-            Book Strategy Call
+          <Link to={CTA.primary.to} className="btn-primary">
+            {CTA.primary.label}
           </Link>
         </div>
       </section>

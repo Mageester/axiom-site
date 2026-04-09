@@ -5,8 +5,9 @@ import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
-import { caseStudies } from '../data/caseStudies';
 import type { ResponsiveSource } from '../lib/responsiveImages';
+import { CTA } from '../lib/cta';
+import { SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 
 const landscapingAfterAvif = new URL('../../axiom-landscaping-demo/public/images/landscaping-after.avif', import.meta.url).href;
@@ -18,116 +19,188 @@ const landscapingAfterSource: ResponsiveSource = {
   webpSrcSet: `${landscapingAfterWebp} 1024w`,
 };
 
-interface WorkEntry {
+type ProofBlockData = {
   id: string;
   title: string;
+  summary: string;
+  businessType: string;
   statusLabel: string;
   ctaLabel: string;
-  ariaLabel: string;
-  improvement: string;
+  demoUrl: string;
+  proofSignal: string;
+  originalWeakness: string;
+  improved: string;
+  whyBetter: string;
+  highlights: readonly string[];
   image: ResponsiveSource;
-  demoUrl?: string;
-  imageAlt?: string;
+  imageAlt: string;
   imagePosition?: string;
-}
+};
 
-const worksDisplayOrder = [
-  'demonstration-restaurant-reservation-site',
-  'concept-landscaping-authority-site',
-  'concept-roofing-conversion-site',
+type ProofDefinitionProps = {
+  label: string;
+  value: string;
+};
+
+const restaurantProofImage = getWorkProofImage('demonstration-restaurant-reservation-site');
+const roofingProofImage = getWorkProofImage('concept-roofing-conversion-site');
+
+const proofNotes = [
+  {
+    label: 'Live and demo mix',
+    value: 'One live site and two working demos.',
+  },
+  {
+    label: 'Reading order',
+    value: 'Business type, weakness, improvement, reason.',
+  },
+  {
+    label: 'How to inspect',
+    value: 'Use the links to verify the structure yourself.',
+  },
 ] as const;
 
-const orderedCaseStudies = worksDisplayOrder
-  .map((slug) => caseStudies.find((entry) => entry.slug === slug))
-  .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
-
-const workPresentationBySlug: Record<string, { statusLabel: string; ctaLabel: string; improvement: string; image?: ResponsiveSource; imageAlt?: string; imagePosition?: string }> = {
-  'demonstration-restaurant-reservation-site': {
+const proofBlocks: readonly ProofBlockData[] = [
+  {
+    id: 'demonstration-restaurant-reservation-site',
+    title: 'Restaurant reservation site',
+    summary: 'A restaurant site that keeps the booking link easy to find and the menu simple to scan on phones.',
+    businessType: 'Restaurant and hospitality',
     statusLabel: 'Live site',
-    ctaLabel: 'View live site',
-    improvement: 'The menu and booking link stay visible on phones.',
+    ctaLabel: 'Open live site',
+    demoUrl: 'https://restaurant.getaxiom.ca',
+    proofSignal: 'Live on restaurant.getaxiom.ca',
+    originalWeakness: 'Guests had to hunt for the booking link, and the menu was hard to read on phones.',
+    improved: 'The reservation path stays visible and the menu reads cleanly on mobile.',
+    whyBetter:
+      'People can book or check the menu without digging through the page, which matters when the decision happens fast.',
+    highlights: ['Reservation first', 'Menu readable on phones', 'Room and food still supported'],
+    image: restaurantProofImage.source,
+    imageAlt: restaurantProofImage.alt,
+    imagePosition: restaurantProofImage.position,
   },
-  'concept-landscaping-authority-site': {
-    statusLabel: 'Demo build',
+  {
+    id: 'concept-landscaping-authority-site',
+    title: 'Landscaping site',
+    summary: 'A landscaping site that puts past work first and shortens the quote path.',
+    businessType: 'Landscaping and outdoor services',
+    statusLabel: 'Working demo',
     ctaLabel: 'Open demo',
-    improvement: 'Past projects stay up front, and quote requests take fewer steps.',
+    demoUrl: 'https://landscaping.getaxiom.ca',
+    proofSignal: 'Working demo',
+    originalWeakness: 'Past work was buried, and quote requests took too many clicks.',
+    improved: 'Project photos come forward and the quote path is shorter.',
+    whyBetter:
+      'Local buyers can judge the work first and request a quote without digging through pages.',
+    highlights: ['Project photos up front', 'Plain service pages', 'Short quote path'],
     image: landscapingAfterSource,
     imageAlt: 'Finished backyard with fresh lawn, planting beds, and a covered patio',
     imagePosition: 'center 56%',
   },
-  'concept-roofing-conversion-site': {
-    statusLabel: 'Demo build',
+  {
+    id: 'concept-roofing-conversion-site',
+    title: 'Roofing site',
+    summary: 'A roofing site that separates urgent calls from planned estimate requests.',
+    businessType: 'Roofing and exterior services',
+    statusLabel: 'Working demo',
     ctaLabel: 'Open demo',
-    improvement: 'Urgent calls and estimate requests have separate paths.',
+    demoUrl: 'https://roofing.getaxiom.ca',
+    proofSignal: 'Working demo',
+    originalWeakness: 'Storm traffic needs a fast path to inspection and estimate requests.',
+    improved: 'Urgent calls and planned estimates have separate paths.',
+    whyBetter:
+      'Different visitors need different actions, so the page removes friction instead of making everyone read the same route.',
+    highlights: ['Urgent and planned paths split', 'Trust blocks easy to scan', 'Fast on phones'],
+    image: roofingProofImage.source,
+    imageAlt: roofingProofImage.alt,
+    imagePosition: roofingProofImage.position,
   },
-};
+];
 
-const works: WorkEntry[] = orderedCaseStudies.map((entry) => {
-  const presentation = workPresentationBySlug[entry.slug] ?? {
-    statusLabel: entry.label === 'Live' ? 'Live site' : 'Demo build',
-    ctaLabel: entry.label === 'Live' ? 'View live site' : 'Open demo',
-    improvement: entry.summary,
-  };
-  const proofImage = getWorkProofImage(entry.slug);
-  return {
-    id: entry.slug,
-    title: entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, ''),
-    statusLabel: presentation.statusLabel,
-    ctaLabel: presentation.ctaLabel,
-    ariaLabel: `${presentation.ctaLabel} for ${entry.title.replace(/^Sample:\s*/, '').replace(/^Demo:\s*/, '')}`,
-    improvement: presentation.improvement,
-    image: presentation.image ?? proofImage.source,
-    demoUrl: entry.demoUrl,
-    imageAlt: presentation.imageAlt ?? proofImage.alt,
-    imagePosition: presentation.imagePosition ?? proofImage.position,
-  };
-});
-
-function WorkCard({ work }: { work: WorkEntry }) {
-  const card = (
-    <article className="motion-surface flex h-full flex-1 flex-col overflow-hidden rounded-[1.75rem] border border-white/9 bg-[linear-gradient(180deg,rgba(18,23,31,0.9)_0%,rgba(11,15,21,0.98)_100%)] group-hover/proof:-translate-y-0.5 group-hover/proof:shadow-[0_18px_42px_rgba(0,0,0,0.26)]">
-      <div className="relative h-[38%] overflow-hidden sm:h-[42%]">
-        <ResponsiveImage
-          source={work.image}
-          sizes="(min-width: 1280px) 960px, (min-width: 768px) 90vw, 100vw"
-          alt={work.imageAlt ?? work.title}
-          className="motion-media h-full w-full object-cover group-hover/proof:scale-[1.015]"
-          loading="lazy"
-          decoding="async"
-          style={work.imagePosition ? { objectPosition: work.imagePosition } : undefined}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent" />
-        <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2">
-          <span className="inline-block rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/78 backdrop-blur-md">
-            {work.statusLabel}
-          </span>
-        </div>
-      </div>
-
-      <div className="flex flex-1 flex-col px-4 pb-3.5 pt-3 sm:px-5 sm:pb-4 sm:pt-3.5">
-        <h3 className="text-[1.28rem] font-semibold tracking-tight text-white sm:text-[1.95rem]">{work.title}</h3>
-        <p className="mt-2 max-w-[34ch] text-[0.9rem] leading-relaxed text-slate-300/95 sm:text-[0.96rem]">{work.improvement}</p>
-        <div className="mt-auto pt-3.5 sm:pt-4">
-          <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/proof:text-[#e8bea8]">
-            {work.ctaLabel}
-          </span>
-        </div>
-      </div>
-    </article>
+function ProofDefinition({ label, value }: ProofDefinitionProps) {
+  return (
+    <div className="rounded-2xl border border-white/8 bg-white/[0.025] p-4 md:p-5">
+      <dt className="text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">{label}</dt>
+      <dd className="mt-2 text-sm leading-relaxed text-slate-300 md:text-[0.98rem]">{value}</dd>
+    </div>
   );
+}
 
-  return work.demoUrl ? (
-    <a
-      href={work.demoUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={work.ariaLabel}
-      className="group/proof relative z-0 mx-auto block h-full w-full cursor-pointer rounded-[1.5rem] hover:z-20 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 sm:min-h-[30rem]"
-    >
-      {card}
-    </a>
-  ) : (
-    <div className="group/proof relative z-0 mx-auto h-full w-full rounded-[1.5rem] sm:min-h-[30rem]">{card}</div>
+function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) {
+  const isAboveTheFold = index === 0;
+
+  return (
+    <RevealBlock as="div" delay={index * 0.08} variant="feature">
+      <article className="group/proof motion-surface grid gap-6 rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.96)_0%,rgba(10,13,18,0.99)_100%)] p-5 transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)] md:p-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(18rem,0.92fr)] lg:p-8">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex rounded-full border border-white/10 bg-black/40 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/78 backdrop-blur-md">
+              {proof.statusLabel}
+            </span>
+            <span className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">
+              {proof.businessType}
+            </span>
+          </div>
+
+          <h3 className="mt-4 text-[clamp(1.75rem,3vw,2.55rem)] font-semibold tracking-tight text-[#F2F4F7]">
+            {proof.title}
+          </h3>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">{proof.summary}</p>
+
+          <dl className="mt-6 grid gap-3 sm:grid-cols-2">
+            <ProofDefinition label="Business type" value={proof.businessType} />
+            <ProofDefinition label="Original weakness" value={proof.originalWeakness} />
+            <ProofDefinition label="What Axiom improved" value={proof.improved} />
+            <ProofDefinition label="Why the new structure is better" value={proof.whyBetter} />
+          </dl>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {proof.highlights.map((point) => (
+              <span
+                key={point}
+                className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300"
+              >
+                {point}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <a
+              href={proof.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${proof.ctaLabel} for ${proof.title}`}
+              className="btn-primary btn-lg whitespace-nowrap"
+            >
+              {proof.ctaLabel}
+            </a>
+            <span className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
+              {proof.proofSignal}
+            </span>
+          </div>
+        </div>
+
+        <figure className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0b1120]">
+          <ResponsiveImage
+            source={proof.image}
+            sizes="(min-width: 1280px) 560px, (min-width: 768px) 42vw, 100vw"
+            alt={proof.imageAlt}
+            className="motion-media aspect-[4/3] w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/proof:scale-[1.02]"
+            loading={isAboveTheFold ? 'eager' : 'lazy'}
+            fetchPriority={isAboveTheFold ? 'high' : 'auto'}
+            decoding="async"
+            style={proof.imagePosition ? { objectPosition: proof.imagePosition } : undefined}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/48 via-black/8 to-transparent" />
+          <div className="absolute left-4 top-4">
+            <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/78 backdrop-blur-md">
+              {proof.statusLabel}
+            </span>
+          </div>
+        </figure>
+      </article>
+    </RevealBlock>
   );
 }
 
@@ -135,57 +208,101 @@ const Deployments: React.FC = () => {
   return (
     <>
       <SEO
-        title="Work"
-        description="Live and demo builds with clearer pages and easier contact."
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'CollectionPage',
-          name: 'Work',
-          description: 'Live and demo builds with clearer pages and easier contact.',
-          url: 'https://getaxiom.ca/works',
-        }}
+        {...SEO_ROUTES.work}
       />
+
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-0 pb-18 md:pb-24">
-        <RevealBlock as="section" data-hero-root className="relative mx-auto w-full max-w-7xl overflow-visible px-6 pt-4 pb-0 md:px-8 md:pt-8 md:pb-0" variant="feature">
-          <div className="max-w-4xl">
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
-            <div className="mt-2.5 max-w-4xl overflow-hidden">
-              <h1 data-startup-heading className="text-left">Selected work.</h1>
-            </div>
-            <p data-startup-copy className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-200/90 md:text-base">
-              A small, selective set of live and demo builds. Each one focuses on clearer structure, easier contact, and cleaner mobile use.
-            </p>
-          </div>
-        </RevealBlock>
-
-        <RevealBlock as="section" id="sample-builds" className="scroll-mt-28 mx-auto w-full max-w-7xl overflow-visible px-4 pt-8 pb-6 sm:px-6 md:px-8 md:pt-10">
-          <div className="mx-auto grid max-w-6xl gap-3.5 md:grid-cols-2 md:gap-4 xl:grid-cols-3">
-            {works.map((work, index) => (
-              <RevealBlock as="article" key={work.id} delay={index * 0.08} variant="card">
-                <WorkCard work={work} />
-              </RevealBlock>
-            ))}
-          </div>
-        </RevealBlock>
-
-        <RevealBlock as="section" className="relative mx-auto flex w-full max-w-5xl flex-col items-center overflow-visible px-6 pb-10 text-center md:px-8">
-          <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[520px] -translate-x-1/2 rounded-full bg-[#B05D41]/[0.08] blur-[140px]" />
-
-          <div className="relative z-10">
-              <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">Need this level of clarity on your site?</h2>
-              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                Send the site through. We&apos;ll show the first changes worth making.
-              </p>
-              <div className="mt-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-                <Link to="/apply#project-application-form" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                  Start a project
-                </Link>
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
+          <RevealBlock as="section" data-hero-root className="pt-12 md:pt-20">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(18rem,0.92fr)] lg:items-start">
+              <div className="max-w-4xl">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work / Verification</p>
+                <div className="mt-2.5 max-w-4xl overflow-hidden">
+                  <h1
+                    data-startup-heading
+                    className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]"
+                  >
+                    Examples you can verify.
+                  </h1>
+                </div>
+                <p data-startup-copy className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
+                  Three builds. One live, two demos. Each block shows the business type, the original weakness, what changed,
+                  and why the new structure is better.
+                </p>
+                <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+                  <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                    {CTA.primary.label}
+                  </Link>
+                  <Link
+                    to={CTA.process.to}
+                    className="inline-flex w-full items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
+                  >
+                    {CTA.process.label}
+                  </Link>
+                </div>
               </div>
-          </div>
-        </RevealBlock>
 
+              <aside className="rounded-3xl border border-white/10 bg-white/[0.02] p-5 md:p-6">
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What to verify</p>
+                <ul className="mt-4 space-y-4">
+                  {proofNotes.map((note) => (
+                    <li key={note.label} className="border-b border-white/[0.08] pb-4 last:border-b-0 last:pb-0">
+                      <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">{note.label}</p>
+                      <p className="mt-1.5 text-sm leading-relaxed text-slate-200">{note.value}</p>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            </div>
+          </RevealBlock>
+
+          <RevealBlock as="section" className="pt-16 md:pt-24">
+            <div className="max-w-3xl">
+              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof blocks</p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                Read each example as a teardown, not a gallery tile.
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+                The point is to verify capability quickly: what the business is, what was getting in the way, what changed,
+                and why the new structure is better.
+              </p>
+            </div>
+
+            <div className="mt-8 space-y-6 md:space-y-8">
+              {proofBlocks.map((proof, index) => (
+                <ProofBlock key={proof.id} proof={proof} index={index} />
+              ))}
+            </div>
+          </RevealBlock>
+
+          <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
+            <article className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div className="max-w-2xl">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
+                  <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                    Want this level of clarity on your site?
+                  </h2>
+                  <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
+                    Start a project and we&apos;ll review the current site, what&apos;s missing, and the first fixes that matter.
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
+                    {CTA.primary.label}
+                  </Link>
+                  <Link
+                    to={CTA.process.to}
+                    className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07]"
+                  >
+                    {CTA.process.label}
+                  </Link>
+                </div>
+              </div>
+            </article>
+          </RevealBlock>
         </main>
+
         <Footer />
       </Layout>
     </>

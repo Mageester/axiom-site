@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { CTA } from '../lib/cta';
 
 const contactLinkClass =
-  'motion-link-accent block text-sm text-[#B05D41] hover:text-[#d7a189]';
+  'motion-link-accent inline-flex min-h-11 items-center py-1.5 text-sm text-[#B05D41] hover:text-[#d7a189]';
 
 const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `motion-link-accent block text-sm ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
+  `motion-link-accent inline-flex min-h-11 items-center py-1.5 text-sm ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
 
 const Footer: React.FC = () => {
   return (
@@ -24,7 +25,7 @@ const Footer: React.FC = () => {
           </p>
         </div>
 
-        <nav className="space-y-1.5">
+        <nav className="space-y-1.5" aria-label="Site pages">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Pages</p>
           <NavLink to="/" className={routeLinkClass}>Home</NavLink>
           <NavLink to="/works" className={routeLinkClass}>Work</NavLink>
@@ -32,19 +33,20 @@ const Footer: React.FC = () => {
           <NavLink to="/about" className={routeLinkClass}>About</NavLink>
         </nav>
 
-        <nav className="space-y-1.5">
+        <nav className="space-y-1.5" aria-label="Next step">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Next step</p>
-          <NavLink to="/apply" className={routeLinkClass}>Start a project</NavLink>
+          <NavLink to={CTA.primary.to} className={routeLinkClass}>{CTA.primary.label}</NavLink>
+          <NavLink to={CTA.work.to} className={routeLinkClass}>{CTA.work.label}</NavLink>
         </nav>
 
-        <nav className="col-span-2 space-y-1.5 md:col-span-1">
+        <nav className="col-span-2 space-y-1.5 md:col-span-1" aria-label="Contact and legal">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
           <NavLink to="/contact" className={routeLinkClass}>Contact</NavLink>
           <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
-            <span className="block">contact@getaxiom.ca</span>
+            contact@getaxiom.ca
           </a>
           <a href="tel:+12267531833" className={contactLinkClass}>
-            <span className="block">226-753-1833</span>
+            226-753-1833
           </a>
           <div className="pt-2">
             <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Legal</p>

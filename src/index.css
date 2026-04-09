@@ -45,19 +45,13 @@
     overflow-x: hidden;
   }
 
-  html.lenis {
-    height: auto;
-  }
-
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-
   body {
     @apply bg-axiom-base text-axiom-text-main font-axiomSans leading-[1.6];
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
     color: var(--axiom-text-primary);
     background-color: var(--axiom-base);
     background-image:
@@ -336,6 +330,9 @@
     color: var(--axiom-text-main);
     font-weight: 600;
     letter-spacing: 0.01em;
+    min-height: 3rem;
+    padding-block: 0.8rem;
+    padding-inline: 1.35rem;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
     transition:
       transform var(--motion-duration-fast) var(--motion-ease-standard),
@@ -840,13 +837,30 @@
   }
 
   .reveal-on-scroll {
+    --reveal-distance: 14px;
+    --reveal-duration: var(--motion-duration-reveal);
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(var(--reveal-distance));
     will-change: opacity, transform;
     transition:
-      opacity var(--motion-duration-reveal) var(--motion-ease-standard),
-      transform var(--motion-duration-reveal) var(--motion-ease-standard);
-    transition-delay: calc(var(--reveal-order, 0) * 60ms);
+      opacity var(--reveal-duration) var(--motion-ease-standard),
+      transform var(--reveal-duration) var(--motion-ease-standard);
+    transition-delay: var(--reveal-delay, calc(var(--reveal-order, 0) * 60ms));
+  }
+
+  .reveal-on-scroll[data-reveal-variant='card'] {
+    --reveal-distance: 10px;
+    --reveal-duration: 460ms;
+  }
+
+  .reveal-on-scroll[data-reveal-variant='feature'] {
+    --reveal-distance: 18px;
+    --reveal-duration: 580ms;
+  }
+
+  .reveal-on-scroll[data-reveal-variant='section'] {
+    --reveal-distance: 14px;
+    --reveal-duration: 560ms;
   }
 
   .reveal-on-scroll.is-visible {
@@ -1046,11 +1060,6 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  html.lenis,
-  html.lenis body {
-    scroll-behavior: auto !important;
   }
 
   .btn-primary,

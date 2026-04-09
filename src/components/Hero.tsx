@@ -1,6 +1,7 @@
 import React from 'react';
 import MagneticWrapper from './MagneticWrapper';
 import PartnerMarquee from './PartnerMarquee';
+import { CTA } from '../lib/cta';
 
 const Hero: React.FC = () => {
   const scrollToIntake = () => {
@@ -37,7 +38,7 @@ const Hero: React.FC = () => {
               <div className="flex flex-wrap items-center gap-3">
                 <MagneticWrapper className="inline-flex">
                   <button type="button" onClick={scrollToIntake} className="btn-primary btn-lg whitespace-nowrap">
-                    Start a project
+                    {CTA.primary.label}
                   </button>
                 </MagneticWrapper>
                 <div className="inline-flex items-center gap-2 rounded-full bg-[#1c2e5a]/40 px-3 py-1">
@@ -49,20 +50,18 @@ const Hero: React.FC = () => {
               <button
                 type="button"
                 onClick={scrollToWork}
-                className="group inline-flex items-center text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-[#F2F4F7] hover:underline"
+                className="group inline-flex min-h-11 items-center justify-center px-1 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-[#F2F4F7] hover:underline"
               >
-                See work
+                {CTA.work.label}
               </button>
             </div>
           </div>
 
           <div className="relative flex w-full items-center justify-center lg:col-span-7 perspective-[1000px]">
             <div data-glass-card className="relative w-full aspect-square md:aspect-[4/3] rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(176,93,65,0.15)] transform md:-rotate-y-12 md:rotate-x-6 hover:rotate-0 transition-transform duration-700">
-              <div className="absolute inset-0 bg-[#0d1323]"></div>
-              <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] animate-[spin_20s_linear_infinite] opacity-50">
-                <div className="absolute inset-0 bg-[conic-gradient(from_90deg_at_50%_50%,#0d1323_0%,#B05D41_50%,#0d1323_100%)] blur-[80px]"></div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-90"></div>
+              <div className="absolute inset-0 bg-[#0d1323]" />
+              <div className="absolute inset-[-20%] bg-[radial-gradient(circle_at_50%_42%,rgba(176,93,65,0.34),transparent_36%),radial-gradient(circle_at_28%_68%,rgba(88,110,170,0.18),transparent_28%),conic-gradient(from_90deg_at_50%_50%,rgba(13,19,35,0.96)_0%,rgba(176,93,65,0.78)_52%,rgba(13,19,35,0.96)_100%)] opacity-55 blur-[80px]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-90" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-32 h-32 rounded-full border border-white/5 bg-white/5 backdrop-blur-xl flex items-center justify-center shadow-[inset_0_0_20px_rgba(255,255,255,0.1)]">
                   <span className="text-white/40 font-bold tracking-widest text-sm">AXIOM</span>

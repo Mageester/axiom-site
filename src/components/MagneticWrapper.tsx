@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import React from 'react';
 
 type MagneticWrapperProps = {
   children: React.ReactNode;
@@ -14,70 +13,52 @@ const MagneticWrapper: React.FC<MagneticWrapperProps> = ({
   radius = 20,
   strength = 6,
 }) => {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const applyOffset = (element: HTMLDivElement, dx: number, dy: number) => {
+    element.style.setProperty('--mx', `${dx.toFixed(2)}px`);
+    element.style.setProperty('--my', `${dy.toFixed(2)}px`);
+    element.style.setProperty('--ms', '1.05');
+    element.classList.add('is-magnetic-active');
+  };
 
-  useEffect(() => {
-    const node = wrapperRef.current;
-    if (!node) return;
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const resetOffset = (element: HTMLDivElement) => {
+    element.style.setProperty('--mx', '0px');
+    element.style.setProperty('--my', '0px');
+    element.style.setProperty('--ms', '1');
+    element.classList.remove('is-magnetic-active');
+  };
 
-    const handleMove = (event: MouseEvent) => {
-      const rect = node.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = event.clientX - cx;
-      const dy = event.clientY - cy;
-      const distance = Math.hypot(dx, dy);
+  const handlePointerMove: React.PointerEventHandler<HTMLDivElement> = (event) => {
+    if (event.pointerType !== 'mouse') return;
 
-      if (distance > radius) {
-        gsap.to(node, {
-          x: 0,
-          y: 0,
-          scale: 1,
-          duration: 0.38,
-          ease: 'elastic.out(1,0.5)',
-          overwrite: true,
-        });
-        return;
-      }
+    const node = event.currentTarget;
+    const rect = node.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = event.clientX - cx;
+    const dy = event.clientY - cy;
+    const distance = Math.hypot(dx, dy);
 
-      const force = ((radius - distance) / radius) * strength;
-      const mx = distance > 0 ? (dx / distance) * force : 0;
-      const my = distance > 0 ? (dy / distance) * force : 0;
+    if (distance > radius) {
+      resetOffset(node);
+      return;
+    }
 
-      gsap.to(node, {
-        x: Number(mx.toFixed(2)),
-        y: Number(my.toFixed(2)),
-        scale: 1.05,
-        duration: 0.26,
-        ease: 'power3.out',
-        overwrite: true,
-      });
-    };
+    const force = ((radius - distance) / radius) * strength;
+    const mx = distance > 0 ? (dx / distance) * force : 0;
+    const my = distance > 0 ? (dy / distance) * force : 0;
+    applyOffset(node, mx, my);
+  };
 
-    const reset = () => {
-      gsap.to(node, {
-        x: 0,
-        y: 0,
-        scale: 1,
-        duration: 0.38,
-        ease: 'elastic.out(1,0.5)',
-        overwrite: true,
-      });
-    };
+  const handlePointerLeave: React.PointerEventHandler<HTMLDivElement> = (event) => {
+    if (event.pointerType !== 'mouse') return;
+    resetOffset(event.currentTarget);
+  };
 
-    window.addEventListener('mousemove', handleMove);
-    node.addEventListener('mouseleave', reset);
-    return () => {
-      window.removeEventListener('mousemove', handleMove);
-      node.removeEventListener('mouseleave', reset);
-    };
-  }, [radius, strength]);
-
-    return (
+  return (
     <div
-      ref={wrapperRef}
-      className={`transform-gpu ${className}`}
+      className={`magnetic-btn ${className}`}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
     >
       {children}
     </div>

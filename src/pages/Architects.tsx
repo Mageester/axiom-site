@@ -2,13 +2,14 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
+import { CTA } from '../lib/cta';
+import { SEO_ROUTES } from '../lib/seo';
 
 const Architects: React.FC = () => {
   return (
     <>
       <SEO
-        title="Team | Axiom"
-        description="A small team focused on clear pages, proof, and easy contact paths."
+        {...SEO_ROUTES.about}
       />
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 py-20 md:px-8 md:py-28">
@@ -19,8 +20,8 @@ const Architects: React.FC = () => {
                 Delivery Team
               </h1>
               <p className="mt-4 max-w-2xl text-slate-200/90">Axiom is a senior-led team focused on positioning precision, conversion clarity, and controlled delivery.</p>
-              <a href="/apply" className="mt-8 inline-flex text-sm font-medium text-[#B05D41] transition-colors hover:text-[#d7a189]">
-                            Book Free Consultation
+              <a href={CTA.primary.to} className="mt-8 inline-flex text-sm font-medium text-[#B05D41] transition-colors hover:text-[#d7a189]">
+                            {CTA.primary.label}
               </a>
             </article>
             <article className="md:col-span-4 rounded-2xl border border-white/10 bg-[#0d1323]/60 p-8 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] backdrop-blur-xl">

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
+import { CTA } from '../lib/cta';
+import { SEO_ROUTES } from '../lib/seo';
 
 type ProcessStep = {
   number: string;
@@ -95,15 +97,7 @@ const Infrastructure: React.FC = () => {
   return (
     <>
       <SEO
-        title="Process"
-        description="A simple four-step process from review to launch."
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'WebPage',
-          name: 'Process',
-          description: 'A simple four-step process from review to launch.',
-          url: 'https://getaxiom.ca/method',
-        }}
+        {...SEO_ROUTES.process}
       />
 
       <Layout>
@@ -118,9 +112,17 @@ const Infrastructure: React.FC = () => {
                 Each step shows what happens, what we need from you, and where the work is headed.
               </p>
               <div data-startup-actions className="mt-5">
-                <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                  Start a project
-                </Link>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
+                    {CTA.primary.label}
+                  </Link>
+                  <Link
+                    to={CTA.work.to}
+                    className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07]"
+                  >
+                    {CTA.work.label}
+                  </Link>
+                </div>
               </div>
             </div>
           </section>
@@ -247,9 +249,15 @@ const Infrastructure: React.FC = () => {
                 <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
                   We&apos;ll look at the site and show the first changes worth making.
                 </p>
-                <div className="mt-6 flex justify-center">
-                  <Link to="/apply" className="btn-primary btn-lg whitespace-nowrap">
-                    Start a project
+                <div className="mt-6 flex flex-wrap justify-center gap-3">
+                  <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
+                    {CTA.primary.label}
+                  </Link>
+                  <Link
+                    to={CTA.work.to}
+                    className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07]"
+                  >
+                    {CTA.work.label}
                   </Link>
                 </div>
               </div>

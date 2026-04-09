@@ -6,6 +6,8 @@ import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
 import { caseStudies } from '../data/caseStudies';
+import { CTA } from '../lib/cta';
+import { HOME_JSON_LD, SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 
 const homeSelectedWorkSlugs = [
@@ -21,11 +23,11 @@ const selectedWorkEntries = homeSelectedWorkSlugs
 const homepageWorkPreviewBySlug: Record<string, { title: string; summary: string }> = {
   'demonstration-restaurant-reservation-site': {
     title: 'Restaurant reservation site',
-    summary: 'Booking is easy to find, and the menu is simple to scan.',
+    summary: 'Booking is easy to find, and the menu stays readable on phones.',
   },
   'concept-landscaping-authority-site': {
     title: 'Landscaping site',
-    summary: 'Past work is easier to see, and quote requests are easy to send.',
+    summary: 'Past work comes forward, and quote requests stay short.',
   },
   'concept-roofing-conversion-site': {
     title: 'Roofing site',
@@ -69,30 +71,31 @@ const selectedWork = selectedWorkEntries.map((entry) => {
     ariaLabel: `${presentation.ctaLabel} for ${cleanTitle}`,
   };
 });
+const hasSelectedWork = selectedWork.length > 0;
 
 const heroTrustPoints = [
-  'Fast on phones',
-  'Easy to read',
-  'Proof up front',
-  'Plain language',
+  'Service first',
+  'Proof visible',
+  'Works on phones',
+  'Contact clear',
 ];
 
 const siteImprovements = [
   {
-    title: 'Clearer pages',
-    detail: 'People can tell what you do and where to go next.',
+    title: 'Show the service',
+    detail: 'People should know what you do before they start hunting.',
   },
   {
-    title: 'Stronger proof',
-    detail: 'Reviews, photos, and past work show up sooner.',
+    title: 'Show the proof',
+    detail: 'Photos, reviews, and past work should be easy to find.',
   },
   {
-    title: 'Better on phones',
-    detail: 'The site stays easy to use on phones.',
+    title: 'Show the contact path',
+    detail: 'Phone, form, and email need to be obvious.',
   },
   {
-    title: 'Cleaner contact path',
-    detail: 'Contact details and forms stay easy to find.',
+    title: 'Work on phones',
+    detail: 'The layout has to stay readable and usable on a small screen.',
   },
 ];
 
@@ -100,17 +103,17 @@ const processStages = [
   {
     number: '01',
     title: 'Review',
-    detail: 'We review the current site and what needs to change.',
+    detail: 'We look at the current site and the gaps that are costing trust.',
   },
   {
     number: '02',
     title: 'Plan',
-    detail: 'We decide which pages matter, what proof to show, and how people should get in touch.',
+    detail: 'We agree on the pages, proof, and contact path before design starts.',
   },
   {
     number: '03',
     title: 'Build',
-    detail: 'We write, design, build, and check the site before it goes live.',
+    detail: 'We write, design, test, and launch the site with mobile checks in place.',
   },
 ];
 
@@ -118,14 +121,8 @@ const Home: React.FC = () => {
   return (
     <>
       <SEO
-        title="Axiom"
-        description="Clear websites that keep proof visible and contact easy."
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          name: 'Axiom',
-          url: 'https://getaxiom.ca',
-        }}
+        {...SEO_ROUTES.home}
+        schema={HOME_JSON_LD}
       />
 
       <Layout>
@@ -135,24 +132,24 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Serious websites for serious businesses.
+                    Clear websites for established businesses.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We build websites where people can see what you do, find proof fast, and know how to reach you.
+                  We build sites that show the service, the proof, and the contact path fast.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link
-                    to="/apply"
+                    to={CTA.primary.to}
                     className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto"
                   >
-                    Start a project
+                    {CTA.primary.label}
                   </Link>
                   <Link
-                    to="/works"
-                    className="inline-flex w-full items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
+                    to={CTA.work.to}
+                    className="inline-flex min-h-11 w-full items-center justify-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
                   >
-                    See work
+                    {CTA.work.label}
                   </Link>
                 </div>
               </div>
@@ -172,114 +169,131 @@ const Home: React.FC = () => {
           <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
               <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
                   <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                    What these sites show.
+                    What the standard looks like.
                   </h2>
                   <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                    Each one is clearer, easier to use, and easier to trust.
+                    These examples keep the service, proof, and contact path visible.
                   </p>
                 </div>
               </div>
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {selectedWork.map((item, index) => {
-                const card = (
-                  <RevealBlock
-                    as="article"
-                    delay={index * 0.08}
-                    variant="card"
-                    className="motion-surface flex min-h-[30rem] cursor-pointer flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1221]/92 shadow-[0_10px_28px_rgba(0,0,0,0.16)] group-hover/deployment:-translate-y-0.5 group-hover/deployment:border-[#d4a48e]/30 group-hover/deployment:shadow-[0_18px_42px_rgba(0,0,0,0.26)] group-focus-visible/deployment:-translate-y-0.5 group-focus-visible/deployment:border-[#d4a48e]/35 group-focus-visible/deployment:shadow-[0_18px_42px_rgba(0,0,0,0.26)]"
-                  >
-                    <div className="relative overflow-hidden">
-                      <ResponsiveImage
-                        source={item.image}
-                        sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
-                        alt={item.imageAlt ?? item.title}
-                        className="motion-media aspect-[16/10] w-full object-cover group-hover/deployment:scale-[1.015] group-focus-visible/deployment:scale-[1.015]"
-                        loading="lazy"
-                        decoding="async"
-                        style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/12 to-transparent" />
-                      <div className="absolute left-4 top-4">
-                        <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
-                          {item.statusLabel}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-1 flex-col p-5 sm:p-6">
-                      <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-[1.55rem]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-slate-300/95">{item.summary}</p>
-
-                      {item.demoUrl ? (
-                        <div className="mt-auto pt-6">
-                          <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/deployment:text-[#e8bea8] group-focus-visible/deployment:text-[#e8bea8]">
-                            {item.ctaLabel}
+            {hasSelectedWork ? (
+              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {selectedWork.map((item, index) => {
+                  const card = (
+                    <RevealBlock
+                      as="article"
+                      delay={index * 0.08}
+                      variant="card"
+                      className="motion-surface flex min-h-[30rem] cursor-pointer flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1221]/92 shadow-[0_10px_28px_rgba(0,0,0,0.16)] group-hover/deployment:-translate-y-0.5 group-hover/deployment:border-[#d4a48e]/30 group-hover/deployment:shadow-[0_18px_42px_rgba(0,0,0,0.26)] group-focus-visible/deployment:-translate-y-0.5 group-focus-visible/deployment:border-[#d4a48e]/35 group-focus-visible/deployment:shadow-[0_18px_42px_rgba(0,0,0,0.26)]"
+                    >
+                      <div className="relative overflow-hidden">
+                        <ResponsiveImage
+                          source={item.image}
+                          sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
+                          alt={item.imageAlt ?? item.title}
+                          className="motion-media aspect-[16/10] w-full object-cover group-hover/deployment:scale-[1.015] group-focus-visible/deployment:scale-[1.015]"
+                          loading="lazy"
+                          decoding="async"
+                          style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/12 to-transparent" />
+                        <div className="absolute left-4 top-4">
+                          <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
+                            {item.statusLabel}
                           </span>
                         </div>
-                      ) : null}
-                    </div>
-                  </RevealBlock>
-                );
+                      </div>
 
-                if (!item.demoUrl) {
-                  return React.cloneElement(card, { key: item.id });
-                }
+                      <div className="flex flex-1 flex-col p-5 sm:p-6">
+                        <h3 className="text-[1.35rem] font-semibold tracking-tight text-white sm:text-[1.55rem]">
+                          {item.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-relaxed text-slate-300/95">{item.summary}</p>
 
-                return (
-                  <a
-                    key={item.id}
-                    href={item.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={item.ariaLabel}
-                    className="group/deployment block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090d18]"
-                  >
-                    {card}
-                  </a>
-                );
-              })}
-            </div>
+                        {item.demoUrl ? (
+                          <div className="mt-auto pt-6">
+                            <span className="inline-flex items-center text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d4a48e] transition-colors group-hover/deployment:text-[#e8bea8] group-focus-visible/deployment:text-[#e8bea8]">
+                              {item.ctaLabel}
+                            </span>
+                          </div>
+                        ) : null}
+                      </div>
+                    </RevealBlock>
+                  );
+
+                  if (!item.demoUrl) {
+                    return React.cloneElement(card, { key: item.id });
+                  }
+
+                  return (
+                    <a
+                      key={item.id}
+                      href={item.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={item.ariaLabel}
+                      className="group/deployment block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#090d18]"
+                    >
+                      {card}
+                    </a>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-[#F2F4F7]">
+                  Current examples are unavailable.
+                </h3>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
+                  The work page still shows the current proof structure, and the intake page is open if you want to start a project now.
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <Link to={CTA.work.to} className="btn-primary btn-lg w-full sm:w-auto">
+                    {CTA.work.label}
+                  </Link>
+                  <Link to={CTA.primary.to} className="btn-secondary w-full sm:w-auto">
+                    {CTA.primary.label}
+                  </Link>
+                </div>
+              </div>
+            )}
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-12">
               <div className="max-w-xl lg:pt-2">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">What improves</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">What matters</p>
                 <h2 className="mt-3 max-w-[10ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  What gets better.
+                  What a good site has to do.
                 </h2>
                 <p className="mt-4 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
-                  Clear pages, stronger proof, and a simpler path to contact.
+                  If people have to hunt for the service, proof, or contact path, the site is making the decision harder.
                 </p>
               </div>
 
-              <div className="grid gap-3 md:grid-cols-2">
+              <div className="divide-y divide-white/10 border-y border-white/10">
                 {siteImprovements.map((item, index) => (
                   <RevealBlock
-                    as="article"
+                    as="div"
                     key={item.title}
                     delay={index * 0.05}
                     variant="card"
-                    className="motion-surface relative overflow-hidden rounded-[1.35rem] border border-white/8 bg-white/[0.03] p-5 shadow-[0_10px_24px_rgba(0,0,0,0.12)]"
+                    className="grid gap-4 py-5 md:grid-cols-[5rem_minmax(0,1fr)] md:gap-6 md:py-6"
                   >
-                    <div className="flex items-start gap-3">
-                      <span
-                        className="mt-1 h-2.5 w-2.5 flex-none rounded-full bg-[#d4a48e] shadow-[0_0_0_4px_rgba(212,164,142,0.08)]"
-                        aria-hidden="true"
-                      />
-                      <div>
-                        <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7]">
-                          {item.title}
-                        </h3>
-                        <p className="mt-2 text-sm leading-6 text-slate-300">
-                          {item.detail}
-                        </p>
-                      </div>
+                    <div className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">
+                      0{index + 1}
+                    </div>
+                    <div>
+                      <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-300">
+                        {item.detail}
+                      </p>
                     </div>
                   </RevealBlock>
                 ))}
@@ -295,64 +309,58 @@ const Home: React.FC = () => {
                   How the work runs.
                 </h2>
                 <p className="mt-4 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
-                  We review the site, set the page plan, then build and check everything before launch.
+                  We keep the process short so the work stays focused.
                 </p>
               </div>
 
-              <div className="how-work-panel">
-                <div className="how-work-panel-header">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.22em] text-[#A7B3BC]">The steps</p>
-                </div>
-
-                <div className="mt-6 grid gap-3 md:gap-4">
-                  {processStages.map((stage, index) => (
-                    <article key={stage.title} className={`how-work-stage how-work-stage-${index + 1}`}>
-                      <div className="how-work-stage-number">{stage.number}</div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-3">
-                          <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.08rem]">
-                            {stage.title}
-                          </h3>
-                          <div className="h-px flex-1 bg-white/[0.08]" />
-                        </div>
-                        <p className="mt-2 max-w-[30ch] text-sm leading-6 text-slate-300 md:text-[0.95rem]">{stage.detail}</p>
-                      </div>
-                    </article>
-                  ))}
-                </div>
+              <div className="divide-y divide-white/10 border-y border-white/10">
+                {processStages.map((stage, index) => (
+                  <RevealBlock
+                    as="div"
+                    key={stage.title}
+                    delay={index * 0.05}
+                    variant="card"
+                    className="grid gap-4 py-5 md:grid-cols-[5rem_minmax(0,1fr)] md:gap-6 md:py-6"
+                  >
+                    <div className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">
+                      {stage.number}
+                    </div>
+                    <div>
+                      <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.08rem]">
+                        {stage.title}
+                      </h3>
+                      <p className="mt-2 max-w-[30ch] text-sm leading-6 text-slate-300 md:text-[0.95rem]">
+                        {stage.detail}
+                      </p>
+                    </div>
+                  </RevealBlock>
+                ))}
               </div>
             </div>
           </RevealBlock>
 
           <RevealBlock as="section" id="intake" className="pt-16 md:pt-24" variant="feature">
-            <div className="relative overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br from-[#0f1628]/88 via-[#101726]/82 to-[#0b1120]/88 p-8 text-center shadow-[0_22px_60px_rgba(0,0,0,0.35)] md:p-12">
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -top-24 left-[16%] h-52 w-52 rounded-full bg-[#B05D41]/14 blur-3xl" />
-                <div className="absolute -bottom-28 right-[10%] h-64 w-64 rounded-full bg-[#4B6EAF]/14 blur-3xl" />
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/28 to-transparent" />
-              </div>
-
-              <div className="relative z-10">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-8 md:p-12">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              <div className="relative z-10 max-w-3xl">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
-                <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Need a clearer site?
+                <h2 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                  Want a clearer site?
                 </h2>
-                <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  We&apos;ll look at what you have and show the first fixes.
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+                  Start a project and we&apos;ll review the current site, what&apos;s missing, and the first fixes that matter.
                 </p>
 
-                <div className="mt-8 flex items-center justify-center">
-                  <Link to="/apply" className="btn-primary btn-attention btn-lg whitespace-nowrap">
-                    Start a project
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
+                    {CTA.primary.label}
                   </Link>
-                </div>
-
-                <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-5 gap-y-2">
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">30-minute call</span>
-                  <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">No obligation</span>
-                  <span className="hidden h-1 w-1 rounded-full bg-white/35 md:inline-block" />
-                  <span className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-300">Clear next step</span>
+                  <Link
+                    to={CTA.process.to}
+                    className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07]"
+                  >
+                    {CTA.process.label}
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
+import { CTA } from '../lib/cta';
+import { SEO_ROUTES } from '../lib/seo';
 
 const Manifesto: React.FC = () => {
     const [lostCalls, setLostCalls] = useState(2);
@@ -29,8 +31,7 @@ const Manifesto: React.FC = () => {
     return (
         <div className="page-shell">
             <SEO
-                title="Why weak sites cost money | Axiom"
-                description="Why weak websites can cost money when busy days matter."
+                {...SEO_ROUTES.manifesto}
             />
 
             {/* ---- MANIFESTO HEADER ---- */}
@@ -284,16 +285,16 @@ const Manifesto: React.FC = () => {
                         Stop losing money to a site that can't keep up when it matters.
                     </p>
                     <Link
-                        to="/apply"
+                        to="/start-a-project"
                         className="btn-primary btn-lg"
                     >
                         Start a project
                     </Link>
                     <Link
-                        to="/works"
+                        to={CTA.work.to}
                         className="btn-secondary mt-4"
                     >
-                        See work
+                        {CTA.work.label}
                     </Link>
                     <p className="text-[12px] text-axiom-text-mute font-grotesk">
                         Starting at <span className="text-axiom-text-main font-semibold">$500 CAD</span>. <span className="text-axiom-accent font-semibold">2 spots left this month.</span>
@@ -306,7 +307,4 @@ const Manifesto: React.FC = () => {
 };
 
 export default Manifesto;
-
-
-
 

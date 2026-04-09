@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
+import { createStartProjectHref } from '../lib/cta';
+import { SEO_ROUTES } from '../lib/seo';
 
 const tiers = [
     {
@@ -73,8 +75,7 @@ const ServicesPage: React.FC = () => {
     return (
         <div className="page-shell">
             <SEO
-                title="Services | Axiom"
-                description="Website packages for local businesses. Clear scope and no surprises."
+                {...SEO_ROUTES.services}
             />
 
             {/* Header */}
@@ -140,7 +141,7 @@ const ServicesPage: React.FC = () => {
                         <p className="font-axiomSans text-[12px] text-axiom-text-mute">{tier.qualifier}</p>
 
                         <Link
-                            to={`/apply?package=${tier.packageParam}`}
+                            to={createStartProjectHref(tier.packageParam)}
                             className="btn-primary btn-md magnetic-primary w-full"
                         >
                             {tier.cta}
@@ -258,7 +259,7 @@ const ServicesPage: React.FC = () => {
                     <div className="text-center mb-8">
                         <p className="eyebrow-center mb-4">Common Questions</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
-                            Before you apply.
+                            Before you start a project.
                         </h2>
                     </div>
 
@@ -283,7 +284,7 @@ const ServicesPage: React.FC = () => {
 
                     <div className="text-center mt-8">
                         <Link
-                            to="/apply"
+                            to="/start-a-project"
                             className="btn-primary"
                         >
                             Start a project
@@ -296,9 +297,6 @@ const ServicesPage: React.FC = () => {
 };
 
 export default ServicesPage;
-
-
-
 
 
 

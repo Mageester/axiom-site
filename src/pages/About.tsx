@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
+import { CTA } from '../lib/cta';
+import { SEO_ROUTES } from '../lib/seo';
 import { RevealBlock } from '../components/ui/RevealBlock';
 
 type SnapshotRow = {
@@ -29,15 +31,7 @@ const About: React.FC = () => {
   return (
     <>
       <SEO
-        title="About"
-        description="Axiom builds clear websites that keep proof visible and contact easy."
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'AboutPage',
-          name: 'About',
-          description: 'Axiom builds clear websites that keep proof visible and contact easy.',
-          url: 'https://getaxiom.ca/about',
-        }}
+        {...SEO_ROUTES.about}
       />
 
       <Layout>
@@ -56,7 +50,7 @@ const About: React.FC = () => {
                   Axiom fixes weak pages, buried proof, and hard-to-find contact details. People should understand the business quickly, without digging.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <Link to="/apply" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                  <Link to="/start-a-project" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
                     Start a project
                   </Link>
                 </div>
@@ -108,10 +102,10 @@ const About: React.FC = () => {
 
               <div className="mt-6">
                 <Link
-                  to="/works"
+                  to={CTA.work.to}
                   className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white"
                 >
-                  See work
+                  {CTA.work.label}
                 </Link>
               </div>
             </article>
