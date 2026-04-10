@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
           </p>
         </div>
 
-        <nav className="space-y-1.5" aria-label="Site pages">
+        <nav className="flex flex-col items-start gap-2" aria-label="Site pages">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Pages</p>
           <NavLink to="/" className={routeLinkClass}>Home</NavLink>
           <NavLink to="/works" className={routeLinkClass}>Work</NavLink>
@@ -33,16 +33,16 @@ const Footer: React.FC = () => {
           <NavLink to="/about" className={routeLinkClass}>About</NavLink>
         </nav>
 
-        <nav className="space-y-1.5" aria-label="Next step">
+        <nav className="flex flex-col items-start gap-2" aria-label="Next step">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Next step</p>
           <NavLink to={CTA.primary.to} className={routeLinkClass}>{CTA.primary.label}</NavLink>
           <NavLink to={CTA.work.to} className={routeLinkClass}>{CTA.work.label}</NavLink>
         </nav>
 
-        <nav className="col-span-2 space-y-1.5 md:col-span-1" aria-label="Contact and legal">
+        <nav className="col-span-2 flex flex-col items-start gap-2 md:col-span-1" aria-label="Contact and legal">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
           <div className="flex flex-col items-start gap-2">
-            <NavLink to={CTA.contact.to} className={routeLinkClass}>Contact page</NavLink>
+            <NavLink to={CTA.contact.to} className={routeLinkClass}>Contact</NavLink>
             <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
               contact@getaxiom.ca
             </a>
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
               226-753-1833
             </a>
           </div>
-          <div className="pt-2">
+          <div className="mt-3 flex flex-col items-start gap-2">
             <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Legal</p>
             <NavLink to="/privacy" className={routeLinkClass}>Privacy Policy</NavLink>
             <NavLink to="/terms" className={routeLinkClass}>Terms of Service</NavLink>
