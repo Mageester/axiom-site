@@ -47,16 +47,16 @@ const roofingProofImage = getWorkProofImage('concept-roofing-conversion-site');
 
 const proofNotes = [
   {
-    label: 'Live and demo mix',
+    label: 'Format',
     value: 'One live site and two working demos.',
   },
   {
-    label: 'Reading order',
-    value: 'Business type, weakness, improvement, reason.',
+    label: 'Structure',
+    value: 'Business, issue, change, result.',
   },
   {
-    label: 'How to inspect',
-    value: 'Use the links to verify the structure yourself.',
+    label: 'Links',
+    value: 'Live links are included where available.',
   },
 ] as const;
 
@@ -216,18 +216,17 @@ const Deployments: React.FC = () => {
           <RevealBlock as="section" data-hero-root className="pt-12 md:pt-20">
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(18rem,0.92fr)] lg:items-start">
               <div className="max-w-4xl">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work / Verification</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
                 <div className="mt-2.5 max-w-4xl overflow-hidden">
                   <h1
                     data-startup-heading
                     className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]"
                   >
-                    Examples you can verify.
+                    Work that holds up.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Three builds. One live, two demos. Each block shows the business type, the original weakness, what changed,
-                  and why the new structure is better.
+                  One live site and two working demos. Each example shows the issue, the change, and the result.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -243,7 +242,7 @@ const Deployments: React.FC = () => {
               </div>
 
               <aside className="rounded-3xl border border-white/10 bg-white/[0.02] p-5 md:p-6">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What to verify</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
                 <ul className="mt-4 space-y-4">
                   {proofNotes.map((note) => (
                     <li key={note.label} className="border-b border-white/[0.08] pb-4 last:border-b-0 last:pb-0">
@@ -258,13 +257,12 @@ const Deployments: React.FC = () => {
 
           <RevealBlock as="section" className="pt-16 md:pt-24">
             <div className="max-w-3xl">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Proof blocks</p>
+              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Read each example as a teardown, not a gallery tile.
+                Each example shows the business, issue, change, and result.
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                The point is to verify capability quickly: what the business is, what was getting in the way, what changed,
-                and why the new structure is better.
+                The format stays consistent so the details are easy to compare.
               </p>
             </div>
 

@@ -61,8 +61,8 @@ export const SEO_ROUTES = {
         canonicalPath: '/',
     },
     work: {
-        title: 'Proof you can verify',
-        description: 'Teardown-style examples that show the business type, the weakness, the improvement, and why the new structure is better.',
+        title: 'Selected work',
+        description: 'Live and working examples that show the issue, the change, and the result.',
         canonicalPath: '/works',
     },
     process: {
