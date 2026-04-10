@@ -289,12 +289,6 @@ const Deployments: React.FC = () => {
                   <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
                     {CTA.primary.label}
                   </Link>
-                  <Link
-                    to={CTA.process.to}
-                    className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07]"
-                  >
-                    {CTA.process.label}
-                  </Link>
                 </div>
               </div>
             </article>
