@@ -39,7 +39,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
     const updateScrolledState = () => {
       rafId = 0;
-      const nextIsScrolled = window.scrollY > 8;
+      const nextIsScrolled = window.scrollY > 12;
       setIsScrolled((previous) => (previous === nextIsScrolled ? previous : nextIsScrolled));
     };
 
@@ -232,9 +232,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-2.5 md:px-6 md:pt-3">
         <div className="mx-auto max-w-[92rem]">
           <div
-            className={`pointer-events-auto relative flex h-[3.35rem] items-center rounded-[1rem] px-4 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-[3.65rem] md:px-5 ${
+            className={`pointer-events-auto relative flex h-[3.2rem] items-center rounded-[1rem] px-4 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-[3.5rem] md:px-5 ${
               isScrolled
-                ? 'border border-white/[0.045] bg-[rgba(8,10,13,0.24)] shadow-[0_2px_10px_rgba(0,0,0,0.05)] backdrop-blur-sm md:backdrop-blur-md'
+                ? 'border border-white/[0.03] bg-[linear-gradient(180deg,rgba(10,12,16,0.11)_0%,rgba(10,12,16,0.05)_100%)] shadow-[0_1px_0_rgba(255,255,255,0.02),0_10px_22px_rgba(0,0,0,0.035)] backdrop-blur-xl backdrop-saturate-150 md:backdrop-blur-2xl'
                 : 'border border-transparent bg-transparent shadow-none backdrop-blur-0'
             }`}
           >
