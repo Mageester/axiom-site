@@ -64,19 +64,19 @@ const PAIN_POINTS_OPTIONS = [
 const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_active_demand' | 'fit_trust_conversion_need' | 'fit_decision_owner_ready' | 'fit_defined_scope_ready'>; label: string }> = [
     {
         key: 'fit_active_demand',
-        label: 'Are you actively taking new work?'
+        label: 'Are you taking on new work?'
     },
     {
         key: 'fit_trust_conversion_need',
-        label: 'Should the site drive calls, quotes, or bookings?'
+        label: 'Should the site help with calls, quotes, or bookings?'
     },
     {
         key: 'fit_decision_owner_ready',
-        label: 'Will one person approve the direction?'
+        label: 'Who will review the direction?'
     },
     {
         key: 'fit_defined_scope_ready',
-        label: 'Are you looking to start in the next few weeks?'
+        label: 'When are you hoping to start?'
     }
 ];
 
@@ -567,7 +567,7 @@ const ProjectIntakeForm: React.FC = () => {
                         </h1>
                     </div>
                     <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                        Share the business name, current site, and what needs to change. We&apos;ll review it and reply within one business day.
+                        Share the business name, current site, and what needs to change. We&apos;ll reply within one business day with next steps.
                     </p>
                     <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
                         Not a project? Use{' '}
@@ -579,9 +579,9 @@ const ProjectIntakeForm: React.FC = () => {
                     <div data-startup-actions className="mx-auto mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">
                         <span>One short form</span>
                         <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" aria-hidden="true" />
-                        <span>Review within one business day</span>
+                        <span>Reply within one business day</span>
                         <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" aria-hidden="true" />
-                        <span>Selective by design</span>
+                        <span>Clear next steps</span>
                     </div>
                     </section>
 
@@ -598,7 +598,7 @@ const ProjectIntakeForm: React.FC = () => {
                                     <div ref={successBoxRef} role="status" aria-live="polite" className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
                                         <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-emerald-100/80">Request received</p>
                                         <h2 className="mt-3 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg || 'Request received.'}</h2>
-                                        <p className="mt-2 text-sm text-slate-300">We&apos;ll review the details and reply within one business day. If the scope is clear, we&apos;ll send next steps.</p>
+                                        <p className="mt-2 text-sm text-slate-300">We&apos;ll review the details and reply within one business day with next steps.</p>
                                         <button type="button" onClick={() => { setStatus(''); setMsg(''); setErrors({}); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
                                             Start another project
                                         </button>
@@ -644,7 +644,7 @@ const ProjectIntakeForm: React.FC = () => {
 
                                                 <div className="flex flex-col gap-2">
                                                     <label htmlFor={PROJECT_FIELD_IDS.project_scale} className={FIELD_LABEL_CLASS}>Project type</label>
-                                                    <p id={`${PROJECT_FIELD_IDS.project_scale}-helper`} className={FIELD_HELPER_CLASS}>Choose the closest fit. We&apos;ll refine scope after review.</p>
+                                                    <p id={`${PROJECT_FIELD_IDS.project_scale}-helper`} className={FIELD_HELPER_CLASS}>Choose the closest option. We&apos;ll refine scope after review.</p>
                                                     <select id={PROJECT_FIELD_IDS.project_scale} value={form.project_scale} onChange={(event) => setField('project_scale', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.project_scale} aria-describedby={errors.project_scale ? `${PROJECT_FIELD_IDS.project_scale}-helper ${PROJECT_FIELD_IDS.project_scale}-error` : `${PROJECT_FIELD_IDS.project_scale}-helper`}>
                                                         <option value="" disabled>Choose a project type...</option>
                                                         {SCALE_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
@@ -682,8 +682,8 @@ const ProjectIntakeForm: React.FC = () => {
                                             <details className="group rounded-2xl border border-white/10 bg-[#0f1524]/45 p-4 md:p-5">
                                                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left">
                                                     <span className="min-w-0">
-                                                        <span className={FIELD_LABEL_CLASS}>Optional review questions</span>
-                                                        <span className="mt-1 block text-sm leading-relaxed text-slate-300">Use this only if you want us to confirm fit before a call.</span>
+                                                        <span className={FIELD_LABEL_CLASS}>Optional project questions</span>
+                                                        <span className="mt-1 block text-sm leading-relaxed text-slate-300">Use this only if you want a few extra questions before a call.</span>
                                                     </span>
                                                     <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180" fill="none" aria-hidden="true">
                                                         <path d="M5.5 7.5 10 12l4.5-4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -727,9 +727,9 @@ const ProjectIntakeForm: React.FC = () => {
 
                                         <div className="flex flex-col gap-3">
                                             <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                                                {status === 'loading' ? 'Sending...' : 'Request review'}
+                                                {status === 'loading' ? 'Sending...' : 'Send details'}
                                             </button>
-                                            <p className="text-sm text-slate-400">If it&apos;s a fit, we&apos;ll reply within one business day.</p>
+                                            <p className="text-sm text-slate-400">We&apos;ll reply within one business day with next steps.</p>
                                         </div>
                                     </fieldset>
                                 )}
