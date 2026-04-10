@@ -247,8 +247,8 @@ const Deployments: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
-            <article className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8 lg:p-10">
-              <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+              <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
                 <div className="max-w-2xl">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                   <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
@@ -258,7 +258,21 @@ const Deployments: React.FC = () => {
                     Start a project and we&apos;ll review the current site, what&apos;s missing, and the first fixes that matter.
                   </p>
                 </div>
-                <div className="flex flex-wrap items-center gap-3 lg:justify-end">
+                <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What happens next</p>
+                  <div className="mt-4 divide-y divide-white/[0.08]">
+                    <div className="py-3 first:pt-0 last:pb-0">
+                      <p className="text-sm font-medium text-[#F2F4F7]">Current site</p>
+                    </div>
+                    <div className="py-3 first:pt-0 last:pb-0">
+                      <p className="text-sm font-medium text-[#F2F4F7]">What&apos;s missing</p>
+                    </div>
+                    <div className="py-3 first:pt-0 last:pb-0">
+                      <p className="text-sm font-medium text-[#F2F4F7]">First fixes</p>
+                    </div>
+                  </div>
+                </aside>
+                <div className="flex flex-wrap items-center gap-3 lg:col-span-2 lg:justify-end">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
                     {CTA.primary.label}
                   </Link>

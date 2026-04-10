@@ -82,8 +82,8 @@ const About: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-10 md:pt-16" variant="feature">
-            <article className="overflow-hidden rounded-[2.25rem] border border-white/10 bg-white/[0.02]">
-              <div className="grid lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:items-stretch">
+            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02]">
+              <div className="grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-stretch">
                 <div className="p-6 md:p-8 lg:p-10">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What the work does</p>
                   <h2 className="mt-2 max-w-2xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
@@ -103,27 +103,29 @@ const About: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="border-t border-white/10 lg:border-l lg:border-t-0">
-                  <div className="divide-y divide-white/10">
-                    <div className="grid gap-2 px-6 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-8 md:py-6 lg:px-10">
-                      <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">01</div>
-                      <div>
-                        <p className="text-sm font-semibold text-[#F2F4F7]">Clear offer</p>
-                        <p className="mt-2 text-sm leading-6 text-slate-300">People know what the business does in the first few seconds.</p>
+                <div className="border-t border-white/10 p-4 md:p-6 lg:border-l lg:border-t-0 lg:p-6">
+                  <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.03]">
+                    <div className="divide-y divide-white/10">
+                      <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
+                        <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">01</div>
+                        <div>
+                          <p className="text-sm font-semibold text-[#F2F4F7]">Clear offer</p>
+                          <p className="mt-2 text-sm leading-6 text-slate-300">People know what the business does in the first few seconds.</p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="grid gap-2 px-6 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-8 md:py-6 lg:px-10">
-                      <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">02</div>
-                      <div>
-                        <p className="text-sm font-semibold text-[#F2F4F7]">Proof visible</p>
-                        <p className="mt-2 text-sm leading-6 text-slate-300">Reviews, photos, and past work show up before doubt sets in.</p>
+                      <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
+                        <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">02</div>
+                        <div>
+                          <p className="text-sm font-semibold text-[#F2F4F7]">Proof visible</p>
+                          <p className="mt-2 text-sm leading-6 text-slate-300">Reviews, photos, and past work show up before doubt sets in.</p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="grid gap-2 px-6 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-8 md:py-6 lg:px-10">
-                      <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">03</div>
-                      <div>
-                        <p className="text-sm font-semibold text-[#F2F4F7]">Easy contact</p>
-                        <p className="mt-2 text-sm leading-6 text-slate-300">Phone numbers, forms, and quote paths stay easy to find.</p>
+                      <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
+                        <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">03</div>
+                        <div>
+                          <p className="text-sm font-semibold text-[#F2F4F7]">Easy contact</p>
+                          <p className="mt-2 text-sm leading-6 text-slate-300">Phone numbers, forms, and quote paths stay easy to find.</p>
+                        </div>
                       </div>
                     </div>
                   </div>

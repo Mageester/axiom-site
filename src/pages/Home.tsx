@@ -340,24 +340,40 @@ const Home: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" id="intake" className="pt-16 md:pt-24" variant="feature">
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-8 md:p-12">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-              <div className="relative z-10 max-w-3xl">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
-                <h2 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Want a clearer site?
-                </h2>
-                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  Start a project and we&apos;ll review the current site, what&apos;s missing, and the first fixes that matter.
-                </p>
+            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+              <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+                <div className="max-w-3xl">
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
+                  <h2 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                    Want a clearer site?
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+                    Start a project and we&apos;ll review the current site, what&apos;s missing, and the first fixes that matter.
+                  </p>
 
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
-                    {CTA.primary.label}
-                  </Link>
+                  <div className="mt-8 flex flex-wrap items-center gap-3">
+                    <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
+                      {CTA.primary.label}
+                    </Link>
+                  </div>
                 </div>
+
+                <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What happens next</p>
+                  <div className="mt-4 divide-y divide-white/[0.08]">
+                    <div className="py-3 first:pt-0 last:pb-0">
+                      <p className="text-sm font-medium text-[#F2F4F7]">Review current site</p>
+                    </div>
+                    <div className="py-3 first:pt-0 last:pb-0">
+                      <p className="text-sm font-medium text-[#F2F4F7]">See what&apos;s missing</p>
+                    </div>
+                    <div className="py-3 first:pt-0 last:pb-0">
+                      <p className="text-sm font-medium text-[#F2F4F7]">Show the first fixes</p>
+                    </div>
+                  </div>
+                </aside>
               </div>
-            </div>
+            </article>
           </RevealBlock>
         </main>
 
