@@ -14,15 +14,15 @@ type SnapshotRow = {
 
 const SNAPSHOT_ROWS: readonly SnapshotRow[] = [
   {
-    label: 'Who it serves',
-    value: 'Businesses that need people to trust the site quickly',
+    label: 'Built for',
+    value: 'Established businesses that need the site to do more of the explaining',
   },
   {
-    label: 'What gets fixed',
+    label: 'Fixed first',
     value: 'Weak pages, buried proof, and unclear contact paths',
   },
   {
-    label: 'How it reads',
+    label: 'Writing rule',
     value: 'Plain language, visible proof, and one clear next step',
   },
 ];
@@ -32,6 +32,7 @@ const About: React.FC = () => {
     <>
       <SEO
         {...SEO_ROUTES.about}
+        description="Axiom builds clear websites that explain the offer, surface proof, and make the next step obvious."
       />
 
       <Layout>
@@ -44,10 +45,10 @@ const About: React.FC = () => {
                   data-startup-heading
                   className="mt-3 text-[clamp(2.35rem,5.8vw,4.35rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]"
                 >
-                  Clear websites for businesses that need trust quickly.
+                  Clear websites that help businesses build trust.
                 </h1>
                 <p data-startup-copy className="mt-5 max-w-xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Axiom fixes weak pages, buried proof, and hard-to-find contact details. People should understand the business quickly, without digging.
+                  Axiom fixes weak pages, buried proof, and hard-to-find contact details. People should understand the business and the next step without digging.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Link to="/start-a-project" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -60,7 +61,7 @@ const About: React.FC = () => {
                 data-startup-meta
                 className="border-t border-white/10 pt-5 md:border-l md:border-t-0 md:pl-8 md:pt-0"
               >
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What we fix</p>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
                 <dl className="mt-4 space-y-4">
                   {SNAPSHOT_ROWS.map((row) => (
                     <div key={row.label} className="border-b border-white/[0.08] pb-4 last:border-b-0 last:pb-0">
@@ -78,7 +79,7 @@ const About: React.FC = () => {
               <div>
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What the work does</p>
                 <h2 className="mt-2 max-w-2xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                  Make the business easy to trust from the first page.
+                  Make the business easier to trust.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
                   Most sites do not need more pages or more effects. They need the offer to read clearly, proof to appear early, and the next step to stay obvious.
