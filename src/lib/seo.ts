@@ -72,7 +72,7 @@ export const SEO_ROUTES = {
     },
     about: {
         title: 'About',
-        description: 'A small senior-led team focused on clear pages, visible proof, and easy contact paths.',
+        description: 'Clear websites that explain the offer, surface proof, and make the next step obvious.',
         canonicalPath: '/about',
     },
     startProject: {

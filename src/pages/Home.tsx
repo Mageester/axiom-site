@@ -126,7 +126,7 @@ const Home: React.FC = () => {
       />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[88rem] px-6 pb-24 md:px-10 md:pb-32">
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-10 md:pt-20">
             <div className="max-w-6xl">
               <div>

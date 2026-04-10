@@ -239,7 +239,7 @@ const ServicesPage: React.FC = () => {
                             <p className="text-[13px] text-axiom-text-mute leading-[1.7]">40% bounce rate. Nearly half your potential customers leave before the page finishes loading.</p>
                         </div>
                         <div className="bg-axiom-elevated border border-axiom-border rounded-md p-5 sm:p-6 flex flex-col gap-2">
-                            <p className="big-figure-label text-axiom-text-mute">Axiom Site</p>
+                            <p className="big-figure-label text-axiom-text-mute">Axiom site</p>
                             <p className="text-[24px] sm:text-[28px] font-bold text-axiom-text-mute tracking-tight font-grotesk">0.4s Load Time</p>
                             <p className="text-[13px] text-axiom-text-mute leading-[1.7]">Captures the leads they lose. Every fraction of a second is revenue you're either earning or giving away.</p>
                         </div>

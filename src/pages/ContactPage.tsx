@@ -402,7 +402,7 @@ const ContactPage: React.FC = () => {
 
     return (
         <Layout>
-            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[88rem] px-6 pb-24 md:px-10 md:pb-28">
+            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-28">
                 <GeneralContactForm />
             </main>
             <Footer />
