@@ -402,7 +402,7 @@ const ContactPage: React.FC = () => {
 
     return (
         <Layout>
-            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
+            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[88rem] px-6 pb-24 md:px-10 md:pb-28">
                 <GeneralContactForm />
             </main>
             <Footer />
@@ -556,8 +556,8 @@ const ProjectIntakeForm: React.FC = () => {
                 {...SEO_ROUTES.startProject}
             />
             <Layout>
-            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-28">
-                <section data-hero-root className="mx-auto max-w-3xl pt-8 text-center md:pt-16">
+            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[88rem] px-6 pb-24 md:px-10 md:pb-28">
+                <section data-hero-root className="mx-auto max-w-4xl pt-8 text-center md:pt-16">
                     <div className="mt-4 overflow-hidden">
                         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
                             Start a project
@@ -585,8 +585,9 @@ const ProjectIntakeForm: React.FC = () => {
                     </div>
                     </section>
 
-                    <section ref={formSectionRef} id="start-project-form" className="mx-auto mt-3 max-w-5xl">
-                        <div className="axiom-bento p-6 md:p-8">
+                    <section ref={formSectionRef} id="start-project-form" className="mx-auto mt-6 max-w-[88rem]">
+                        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.42fr)_minmax(18rem,0.58fr)] xl:items-start">
+                            <div className="axiom-bento p-6 md:p-8">
                             <form onSubmit={handleSubmit} className="flex flex-col gap-6" aria-busy={status === 'loading'}>
                                 {status === 'error' && (
                                     <div role="alert" className="rounded-2xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-sm text-red-100">
@@ -734,6 +735,32 @@ const ProjectIntakeForm: React.FC = () => {
                                     </fieldset>
                                 )}
                             </form>
+                            </div>
+
+                            <div className="grid gap-4 self-start">
+                                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Direct Contact</p>
+                                    <div className="mt-3 space-y-2 text-sm text-slate-300">
+                                        <a href="mailto:contact@getaxiom.ca" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                            contact@getaxiom.ca
+                                        </a>
+                                        <a href="tel:+12267531833" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                            226-753-1833
+                                        </a>
+                                    </div>
+                                </article>
+
+                                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need website work?</p>
+                                    <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                                        Use{' '}
+                                        <Link to={PROJECT_PATH} className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                            Start a project
+                                        </Link>{' '}
+                                        for website work.
+                                    </p>
+                                </article>
+                            </div>
                         </div>
                     </section>
                 </main>

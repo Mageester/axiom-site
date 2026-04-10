@@ -101,9 +101,9 @@ const Infrastructure: React.FC = () => {
       />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-6xl px-5 pb-14 md:px-10 md:pb-18">
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[88rem] px-5 pb-14 md:px-10 md:pb-18">
           <section className="pt-4 md:pt-8">
-            <div className="max-w-3xl">
+            <div className="max-w-4xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
               <h1 data-startup-heading className="mt-3 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
                 Four stages from review to launch.
@@ -128,7 +128,7 @@ const Infrastructure: React.FC = () => {
           </section>
 
           <section className="pt-6 md:pt-8">
-            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] xl:items-start">
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)] xl:items-start xl:gap-8">
               <div>
                 <div className="mb-4 flex flex-col gap-2 md:mb-5 md:flex-row md:items-end md:justify-between">
                   <div>
@@ -142,7 +142,7 @@ const Infrastructure: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mb-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+                <div className="mb-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
                   <div className="relative">
                     <div className="absolute left-4 right-4 top-4 hidden h-px bg-white/10 md:block" />
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -161,11 +161,11 @@ const Infrastructure: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="grid gap-2.5 md:grid-cols-2 md:gap-3">
+                <div className="grid gap-3 md:grid-cols-2 md:gap-4">
                   {PROCESS_STEPS.map((step) => (
                     <article
                       key={step.number}
-                      className="motion-surface group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(15,20,29,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-4 shadow-[0_12px_30px_rgba(0,0,0,0.16)] hover:-translate-y-px hover:border-[#d4a48e]/20 hover:shadow-[0_16px_36px_rgba(0,0,0,0.22)] md:p-5"
+                      className="motion-surface group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(15,20,29,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-5 shadow-[0_12px_30px_rgba(0,0,0,0.16)] hover:-translate-y-px hover:border-[#d4a48e]/20 hover:shadow-[0_16px_36px_rgba(0,0,0,0.22)] md:p-6"
                     >
                       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
                       <div className="motion-fade pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(212,164,142,0.1),transparent_42%)] opacity-80 group-hover:opacity-100" />
@@ -198,10 +198,10 @@ const Infrastructure: React.FC = () => {
                 </div>
               </div>
 
-              <article className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,18,26,0.98)_0%,rgba(10,13,19,0.98)_100%)] p-4 shadow-[0_18px_52px_rgba(0,0,0,0.22)] md:p-5 xl:mt-[3.4rem]">
-              <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between">
+              <article className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,18,26,0.98)_0%,rgba(10,13,19,0.98)_100%)] p-5 shadow-[0_18px_52px_rgba(0,0,0,0.22)] md:p-6 xl:mt-[3.4rem]">
+                <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between">
                   <div>
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
+                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
                       Before build starts
                     </p>
                     <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
@@ -241,15 +241,17 @@ const Infrastructure: React.FC = () => {
                 <div className="absolute -bottom-24 right-[8%] h-56 w-56 rounded-full bg-[#4B6EAF]/12 blur-3xl" />
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
               </div>
-              <div className="relative z-10 mx-auto max-w-2xl">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
-                <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
-                  Start with a review.
-                </h2>
-                <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                  We&apos;ll look at the site and show the first changes worth making.
-                </p>
-                <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <div className="relative z-10 mx-auto grid max-w-4xl gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:text-left">
+                <div>
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
+                  <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
+                    Start with a review.
+                  </h2>
+                  <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base lg:mx-0">
+                    We&apos;ll look at the site and show the first changes worth making.
+                  </p>
+                </div>
+                <div className="flex flex-wrap justify-center gap-3 lg:justify-end">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
                     {CTA.primary.label}
                   </Link>

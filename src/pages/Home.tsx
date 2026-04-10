@@ -126,9 +126,9 @@ const Home: React.FC = () => {
       />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[88rem] px-6 pb-24 md:px-10 md:pb-32">
           <section data-hero-root className="pt-10 md:pt-20">
-            <div className="max-w-5xl">
+            <div className="max-w-6xl">
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
@@ -264,13 +264,13 @@ const Home: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-12">
-              <div className="max-w-xl lg:pt-2">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] lg:items-start lg:gap-14">
+              <div className="max-w-2xl lg:pt-2">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">What matters</p>
-                <h2 className="mt-3 max-w-[10ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                <h2 className="mt-3 max-w-[12ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
                   What a good site has to do.
                 </h2>
-                <p className="mt-4 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
+                <p className="mt-4 max-w-[36ch] text-sm leading-7 text-slate-300 md:text-base">
                   If people have to hunt for the service, proof, or contact path, the site is making the decision harder.
                 </p>
               </div>
@@ -302,13 +302,13 @@ const Home: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-22">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-12">
-              <div className="max-w-xl lg:pt-2">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] lg:items-start lg:gap-14">
+              <div className="max-w-2xl lg:pt-2">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">Process</p>
                 <h2 className="mt-3 max-w-[12ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
                   How the work runs.
                 </h2>
-                <p className="mt-4 max-w-[32ch] text-sm leading-7 text-slate-300 md:text-base">
+                <p className="mt-4 max-w-[36ch] text-sm leading-7 text-slate-300 md:text-base">
                   We keep the process short so the work stays focused.
                 </p>
               </div>

@@ -131,7 +131,7 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
 
   return (
     <RevealBlock as="div" delay={index * 0.08} variant="feature">
-      <article className="group/proof motion-surface grid gap-6 rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.96)_0%,rgba(10,13,18,0.99)_100%)] p-5 transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)] md:p-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(18rem,0.92fr)] lg:p-8">
+      <article className="group/proof motion-surface grid gap-6 rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.96)_0%,rgba(10,13,18,0.99)_100%)] p-5 transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)] md:p-6 lg:grid-cols-[minmax(0,1.14fr)_minmax(20rem,0.86fr)] lg:p-8">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex rounded-full border border-white/10 bg-black/40 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/78 backdrop-blur-md">
@@ -212,10 +212,10 @@ const Deployments: React.FC = () => {
       />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[88rem] px-6 pb-24 md:px-10 md:pb-32">
           <RevealBlock as="section" data-hero-root className="pt-12 md:pt-20">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(18rem,0.92fr)] lg:items-start">
-              <div className="max-w-4xl">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,1.14fr)_minmax(20rem,0.86fr)] lg:items-start lg:gap-12">
+              <div className="max-w-5xl">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
                 <div className="mt-2.5 max-w-4xl overflow-hidden">
                   <h1
@@ -241,7 +241,7 @@ const Deployments: React.FC = () => {
                 </div>
               </div>
 
-              <aside className="rounded-3xl border border-white/10 bg-white/[0.02] p-5 md:p-6">
+              <aside className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-7">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
                 <ul className="mt-4 space-y-4">
                   {proofNotes.map((note) => (
@@ -256,7 +256,7 @@ const Deployments: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-24">
-            <div className="max-w-3xl">
+            <div className="max-w-4xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                 Each example shows the business, issue, change, and result.
