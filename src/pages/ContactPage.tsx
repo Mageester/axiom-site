@@ -556,39 +556,59 @@ const ProjectIntakeForm: React.FC = () => {
                 {...SEO_ROUTES.startProject}
             />
             <Layout>
-            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[88rem] px-6 pb-24 md:px-10 md:pb-28">
-                <section data-hero-root className="mx-auto max-w-4xl pt-8 text-center md:pt-16">
-                    <div className="mt-4 overflow-hidden">
-                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
-                            Start a project
-                        </p>
-                        <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                            Tell us what the business needs.
-                        </h1>
-                    </div>
-                    <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                        Share the business name, current site, and what needs to change. We&apos;ll reply within one business day with next steps.
-                    </p>
-                    <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
-                        Not a project? Use{' '}
-                        <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                            Contact
-                        </Link>
-                        .
-                    </p>
-                    <div data-startup-actions className="mx-auto mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">
-                        <span>One short form</span>
-                        <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" aria-hidden="true" />
-                        <span>Reply within one business day</span>
-                        <span className="hidden h-1 w-1 rounded-full bg-white/30 sm:inline-block" aria-hidden="true" />
-                        <span>Clear next steps</span>
-                    </div>
-                    </section>
+            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-5 pb-16 md:px-10 md:pb-24">
+                <section data-hero-root className="pt-8 md:pt-16">
+                    <div className="grid gap-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.72fr)] xl:items-start">
+                        <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 text-left shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
+                            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
+                                Start a project
+                            </p>
+                            <h1 data-startup-heading className="mt-3 max-w-3xl text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
+                                Tell us what the business needs.
+                            </h1>
+                            <p data-startup-copy className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
+                                Share the business name, current site, and what needs to change. We&apos;ll reply within one business day with next steps.
+                            </p>
+                            <p data-startup-meta className="mt-3 max-w-2xl text-sm text-slate-400">
+                                Not a project? Use{' '}
+                                <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                    Contact
+                                </Link>
+                                .
+                            </p>
+                        </article>
 
-                    <section ref={formSectionRef} id="start-project-form" className="mx-auto mt-6 max-w-[88rem]">
-                        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.42fr)_minmax(18rem,0.58fr)] xl:items-start">
-                            <div className="axiom-bento p-6 md:p-8">
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-6" aria-busy={status === 'loading'}>
+                        <aside className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_12px_36px_rgba(0,0,0,0.18)] md:p-6 xl:mt-8">
+                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
+                            <div className="mt-5 divide-y divide-white/[0.08]">
+                                <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                                    <span className="text-sm font-medium text-[#F2F4F7]">One short form</span>
+                                </div>
+                                <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                                    <span className="text-sm font-medium text-[#F2F4F7]">Reply within one business day</span>
+                                </div>
+                                <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                                    <span className="text-sm font-medium text-[#F2F4F7]">Clear next steps</span>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+
+                <section ref={formSectionRef} id="start-project-form" className="mt-7">
+                    <div className="grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
+                        <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] shadow-[0_20px_56px_rgba(0,0,0,0.24)]">
+                            <div className="border-b border-white/10 p-6 md:p-7 lg:p-8">
+                                <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+                                    <div>
+                                        <p className={FIELD_LABEL_CLASS}>Project intake</p>
+                                        <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Share the essentials.</h2>
+                                    </div>
+                                    <p className="text-sm text-slate-400">Reply within one business day</p>
+                                </div>
+                            </div>
+
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-6 md:p-7 lg:p-8" aria-busy={status === 'loading'}>
                                 {status === 'error' && (
                                     <div role="alert" className="rounded-2xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-sm text-red-100">
                                         {msg}
@@ -735,34 +755,34 @@ const ProjectIntakeForm: React.FC = () => {
                                     </fieldset>
                                 )}
                             </form>
-                            </div>
+                        </article>
 
-                            <div className="grid gap-4 self-start">
-                                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Direct Contact</p>
-                                    <div className="mt-3 space-y-2 text-sm text-slate-300">
-                                        <a href="mailto:contact@getaxiom.ca" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                            contact@getaxiom.ca
-                                        </a>
-                                        <a href="tel:+12267531833" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                            226-753-1833
-                                        </a>
-                                    </div>
-                                </article>
+                        <div className="grid gap-4 self-start xl:sticky xl:top-28">
+                            <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
+                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Direct Contact</p>
+                                <div className="mt-3 space-y-2 text-sm text-slate-300">
+                                    <a href="mailto:contact@getaxiom.ca" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                        contact@getaxiom.ca
+                                    </a>
+                                    <a href="tel:+12267531833" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                        226-753-1833
+                                    </a>
+                                </div>
+                            </article>
 
-                                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need website work?</p>
-                                    <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                                        Use{' '}
-                                        <Link to={PROJECT_PATH} className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                            Start a project
-                                        </Link>{' '}
-                                        for website work.
-                                    </p>
-                                </article>
-                            </div>
+                            <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
+                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">General questions</p>
+                                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                                    Use{' '}
+                                    <Link to="/contact" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                        Contact
+                                    </Link>{' '}
+                                    for a quick note or anything that is not a project.
+                                </p>
+                            </article>
                         </div>
-                    </section>
+                    </div>
+                </section>
                 </main>
                 <Footer />
             </Layout>

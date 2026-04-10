@@ -23,7 +23,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     number: '01',
     title: 'Review',
-    duration: '1–2 days',
+    duration: '1-2 days',
     summary: 'We look at the current site, what needs to change, and what people should find first.',
     bullets: [
       'We review the current site and note what needs to change.',
@@ -101,18 +101,18 @@ const Infrastructure: React.FC = () => {
       />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[88rem] px-5 pb-14 md:px-10 md:pb-18">
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-5 pb-16 md:px-10 md:pb-24">
           <section className="pt-4 md:pt-8">
-            <div className="max-w-4xl">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
-              <h1 data-startup-heading className="mt-3 text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
-                Four stages from review to launch.
-              </h1>
-              <p data-startup-copy className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                Each step shows what happens, what we need from you, and where the work is headed.
-              </p>
-              <div data-startup-actions className="mt-5">
-                <div className="flex flex-wrap items-center gap-3">
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(22rem,0.68fr)] xl:items-start">
+              <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
+                <h1 data-startup-heading className="mt-3 max-w-3xl text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
+                  Four stages from review to launch.
+                </h1>
+                <p data-startup-copy className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
+                  Each stage keeps the work clear, the decisions early, and the launch path simple.
+                </p>
+                <div data-startup-actions className="mt-6 flex flex-wrap items-center gap-3">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
                     {CTA.primary.label}
                   </Link>
@@ -123,99 +123,90 @@ const Infrastructure: React.FC = () => {
                     {CTA.work.label}
                   </Link>
                 </div>
-              </div>
+              </article>
+
+              <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_12px_36px_rgba(0,0,0,0.18)] md:p-6 xl:mt-8">
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
+                <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7]">What each stage covers.</h2>
+                <div className="mt-5 divide-y divide-white/[0.08]">
+                  {PROCESS_STEPS.map((step) => (
+                    <div key={step.number} className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                      <div className="min-w-0">
+                        <p className="font-axiomMono text-[11px] tracking-[0.18em] text-[#d4a48e]">{step.number}</p>
+                        <p className="mt-1 text-sm font-medium text-[#F2F4F7]">{step.title}</p>
+                      </div>
+                      <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">
+                        {step.duration}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </article>
             </div>
           </section>
 
-          <section className="pt-6 md:pt-8">
-            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)] xl:items-start xl:gap-8">
+          <section className="pt-8 md:pt-10">
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.7fr)] xl:items-start xl:gap-8">
               <div>
-                <div className="mb-4 flex flex-col gap-2 md:mb-5 md:flex-row md:items-end md:justify-between">
-                  <div>
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">The steps</p>
-                    <h2 className="mt-1 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                      What happens at each stage.
-                    </h2>
-                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                      The main choices get settled early so the build stays clear.
-                    </p>
-                  </div>
+                <div className="mb-5 flex flex-col gap-2 md:mb-6">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">The steps</p>
+                  <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
+                    What happens at each stage.
+                  </h2>
+                  <p className="max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
+                    The main choices get settled early so the build stays clear.
+                  </p>
                 </div>
 
-                <div className="mb-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
-                  <div className="relative">
-                    <div className="absolute left-4 right-4 top-4 hidden h-px bg-white/10 md:block" />
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                      {PROCESS_STEPS.map((step) => (
-                        <div key={step.number} className="relative flex items-center gap-3">
-                          <span className="relative z-10 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-[#0f1524] font-axiomMono text-[10px] tracking-[0.18em] text-[#d4a48e]">
-                            {step.number}
-                          </span>
-                          <div>
-                            <p className="text-[10px] uppercase tracking-[0.18em] text-[#F2F4F7]">{step.title}</p>
-                            <p className="text-[11px] text-slate-400">{step.duration}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid gap-3 md:grid-cols-2 md:gap-4">
+                <div className="space-y-4">
                   {PROCESS_STEPS.map((step) => (
                     <article
                       key={step.number}
-                      className="motion-surface group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(15,20,29,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-5 shadow-[0_12px_30px_rgba(0,0,0,0.16)] hover:-translate-y-px hover:border-[#d4a48e]/20 hover:shadow-[0_16px_36px_rgba(0,0,0,0.22)] md:p-6"
+                      className="motion-surface overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.98)_0%,rgba(9,12,18,0.99)_100%)] shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
                     >
-                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
-                      <div className="motion-fade pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(212,164,142,0.1),transparent_42%)] opacity-80 group-hover:opacity-100" />
-                      <div className="relative z-10 flex items-start justify-between gap-4">
-                        <div className="relative">
-                          <span className="pointer-events-none absolute inset-[-0.85rem] rounded-full bg-[#B05D41]/10 blur-xl" />
-                          <span className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] font-axiomMono text-[11px] tracking-[0.18em] text-[#d4a48e]">
-                            {step.number}
+                      <div className="grid gap-0 lg:grid-cols-[11rem_minmax(0,1fr)]">
+                        <div className="flex items-start justify-between gap-4 border-b border-white/10 p-5 md:p-6 lg:flex-col lg:justify-between lg:border-b-0 lg:border-r">
+                          <div>
+                            <p className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#d4a48e]">
+                              {step.number}
+                            </p>
+                            <h3 className="mt-2 text-[1.1rem] font-semibold text-[#F2F4F7]">{step.title}</h3>
+                          </div>
+                          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">
+                            {step.duration}
                           </span>
                         </div>
-                        <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">
-                          {step.duration}
-                        </span>
-                      </div>
-                      <div className="relative z-10 mt-4">
-                        <h3 className="text-[clamp(1.2rem,2vw,1.5rem)] font-semibold leading-tight text-[#F2F4F7]">
-                          {step.title}
-                        </h3>
-                        <ul className="mt-3 space-y-2.5">
-                          {step.bullets.map((bullet) => (
-                            <li key={bullet} className="flex gap-2 text-sm leading-6 text-slate-300 md:text-[0.96rem]">
-                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d4a48e]" aria-hidden="true" />
-                              <span>{bullet}</span>
-                            </li>
-                          ))}
-                        </ul>
+                        <div className="p-5 md:p-6 lg:p-7">
+                          <p className="max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">{step.summary}</p>
+                          <ul className="mt-4 space-y-2.5">
+                            {step.bullets.map((bullet) => (
+                              <li key={bullet} className="flex gap-2 text-sm leading-6 text-slate-300 md:text-[0.96rem]">
+                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d4a48e]" aria-hidden="true" />
+                                <span>{bullet}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </article>
                   ))}
                 </div>
               </div>
 
-              <article className="overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,18,26,0.98)_0%,rgba(10,13,19,0.98)_100%)] p-5 shadow-[0_18px_52px_rgba(0,0,0,0.22)] md:p-6 xl:mt-[3.4rem]">
-                <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between">
-                  <div>
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
-                      Before build starts
-                    </p>
-                    <h2 className="mt-1.5 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
-                      What we need first
-                    </h2>
-                    <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-300">
-                      This keeps the work moving and cuts down on back-and-forth later.
-                    </p>
-                  </div>
-                </div>
+              <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] md:p-6 xl:sticky xl:top-28">
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
+                  Before build starts
+                </p>
+                <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
+                  What we need first
+                </h2>
+                <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-300">
+                  This keeps the work moving and cuts down on back-and-forth later.
+                </p>
 
-                <ul className="mt-4 divide-y divide-white/[0.07]">
+                <ul className="mt-5 divide-y divide-white/[0.08]">
                   {CHECKLIST_ITEMS.map((item) => (
-                    <li key={item.title} className="flex items-start gap-3 py-3 md:py-3.5">
+                    <li key={item.title} className="flex items-start gap-3 py-3.5 first:pt-0 last:pb-0">
                       <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
                         <CheckMark />
                       </span>
@@ -234,24 +225,19 @@ const Infrastructure: React.FC = () => {
             </div>
           </section>
 
-          <section className="pt-7 md:pt-9">
-            <article className="relative overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,23,34,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-5 text-center shadow-[0_20px_54px_rgba(0,0,0,0.24)] md:p-7">
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -top-24 left-[14%] h-48 w-48 rounded-full bg-[#B05D41]/12 blur-3xl" />
-                <div className="absolute -bottom-24 right-[8%] h-56 w-56 rounded-full bg-[#4B6EAF]/12 blur-3xl" />
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-              </div>
-              <div className="relative z-10 mx-auto grid max-w-4xl gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:text-left">
+          <section className="pt-8 md:pt-10">
+            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+              <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
                 <div>
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                   <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
                     Start with a review.
                   </h2>
-                  <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base lg:mx-0">
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base lg:mt-3">
                     We&apos;ll look at the site and show the first changes worth making.
                   </p>
                 </div>
-                <div className="flex flex-wrap justify-center gap-3 lg:justify-end">
+                <div className="flex flex-wrap gap-3 lg:justify-end">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
                     {CTA.primary.label}
                   </Link>
