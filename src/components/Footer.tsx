@@ -11,7 +11,7 @@ const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
 const Footer: React.FC = () => {
   return (
     <footer className="w-full border-t border-[#31363B] bg-[#090A0B]">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-x-6 gap-y-3 px-5 py-5 md:grid-cols-[1.6fr_0.9fr_0.9fr_1fr] md:gap-x-8 md:gap-y-10 md:px-8 md:py-12 md:items-start">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-x-6 gap-y-5 px-5 py-6 md:grid-cols-[1.6fr_0.9fr_0.9fr_1fr] md:items-start md:gap-x-10 md:gap-y-10 md:px-8 md:py-12">
         <div className="col-span-2 md:col-span-1">
           <p className="text-lg font-black leading-[1.02] tracking-tight text-[#F2F4F7] md:text-4xl">AXIOM</p>
           <p className="mt-2 max-w-md text-[11px] leading-[1.45] text-slate-300 md:mt-3 md:text-sm">
@@ -41,13 +41,15 @@ const Footer: React.FC = () => {
 
         <nav className="col-span-2 space-y-1.5 md:col-span-1" aria-label="Contact and legal">
           <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
-          <NavLink to="/contact" className={routeLinkClass}>Contact</NavLink>
-          <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
-            contact@getaxiom.ca
-          </a>
-          <a href="tel:+12267531833" className={contactLinkClass}>
-            226-753-1833
-          </a>
+          <div className="flex flex-col items-start gap-2">
+            <NavLink to={CTA.contact.to} className={routeLinkClass}>Contact page</NavLink>
+            <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
+              contact@getaxiom.ca
+            </a>
+            <a href="tel:+12267531833" className={contactLinkClass}>
+              226-753-1833
+            </a>
+          </div>
           <div className="pt-2">
             <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Legal</p>
             <NavLink to="/privacy" className={routeLinkClass}>Privacy Policy</NavLink>
