@@ -202,13 +202,13 @@ const IntakeTerminal: React.FC = () => {
       <div className="mt-8 flex flex-col gap-2 text-sm md:flex-row md:items-center md:gap-6">
         <a
           href="mailto:contact@getaxiom.ca"
-          className="inline-flex min-h-11 w-fit items-center text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]"
+          className="flex min-h-11 w-fit items-center text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]"
         >
           contact@getaxiom.ca
         </a>
         <a
           href="tel:+12267531833"
-          className="inline-flex min-h-11 w-fit items-center text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]"
+          className="flex min-h-11 w-fit items-center text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]"
         >
           226-753-1833
         </a>

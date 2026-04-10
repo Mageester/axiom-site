@@ -367,10 +367,10 @@ const GeneralContactForm: React.FC = () => {
                     <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                         <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Direct Contact</p>
                         <div className="mt-3 space-y-2 text-sm text-slate-300">
-                            <a href="mailto:contact@getaxiom.ca" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                            <a href="mailto:contact@getaxiom.ca" className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                 contact@getaxiom.ca
                             </a>
-                            <a href="tel:+12267531833" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                            <a href="tel:+12267531833" className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                 226-753-1833
                             </a>
                         </div>
@@ -761,10 +761,10 @@ const ProjectIntakeForm: React.FC = () => {
                             <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
                                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Direct Contact</p>
                                 <div className="mt-3 space-y-2 text-sm text-slate-300">
-                                    <a href="mailto:contact@getaxiom.ca" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                    <a href="mailto:contact@getaxiom.ca" className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                         contact@getaxiom.ca
                                     </a>
-                                    <a href="tel:+12267531833" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                    <a href="tel:+12267531833" className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                         226-753-1833
                                     </a>
                                 </div>

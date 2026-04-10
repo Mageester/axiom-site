@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { CTA } from '../lib/cta';
 
 const contactLinkClass =
-  'motion-link-accent inline-flex min-h-11 items-center py-1 text-sm leading-6 text-[#B05D41] hover:text-[#d7a189]';
+  'motion-link-accent flex w-fit min-h-11 items-center py-1 text-sm leading-6 text-[#B05D41] hover:text-[#d7a189]';
 
 const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `motion-link-accent inline-flex min-h-11 items-center py-1 text-sm leading-6 ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
+  `motion-link-accent flex w-fit min-h-11 items-center py-1 text-sm leading-6 ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
 
 const Footer: React.FC = () => {
   return (
