@@ -63,77 +63,112 @@ const manifestoOutcome = [
   'For clients, that means a digital presence that behaves like an asset. It supports sales, strengthens authority, and keeps doing its job long after the launch announcement is forgotten.',
 ] as const;
 
+const accentColor = '#d4a48e';
+const sectionLabelClass = 'font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#d4a48e]';
+
 const ManifestoPage: React.FC = () => {
   return (
     <>
       <SEO {...SEO_ROUTES.manifesto} />
 
       <Layout disableAmbientMotion hidePrimaryCta>
-        <main id="main-content" tabIndex={-1} className="w-full bg-[#0A0A0A] text-[#F8F8F8]">
-          {/* Hero: a full-height thesis statement with no CTA pressure. */}
-          <section
-            data-hero-root
-            data-reveal="off"
-            aria-labelledby="manifesto-hero-title"
-            className="flex min-h-[calc(100vh-5rem)] items-center justify-center px-6 py-[120px] md:min-h-[calc(100vh-7rem)] md:px-10"
-          >
-            <div className="mx-auto flex w-full max-w-[900px] flex-col items-center text-center">
-              <div className="h-1 w-[200px] rounded-full bg-[#D4AF37]" aria-hidden="true" />
-              <header className="mt-10">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#D4AF37]">
-                  Manifesto
-                </p>
-                <h1
-                  id="manifesto-hero-title"
-                  className="mt-6 text-[36px] font-bold leading-[1.1] tracking-[-0.02em] text-[#F8F8F8] md:text-[56px]"
-                >
-                  We build websites like infrastructure.
-                </h1>
-                <p className="mx-auto mt-6 max-w-[720px] text-[18px] font-normal leading-[1.75] text-[#B8B8B8]">
-                  Axiom believes a website should operate as a durable business system: clear in its message, rigorous in its execution, and accountable to outcomes.
-                </p>
-              </header>
-              <p className="mt-10 text-[13px] uppercase tracking-[0.18em] text-[#B8B8B8]">
-                Read the manifesto below
-              </p>
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
+          <section data-hero-root className="relative pt-10 md:pt-20">
+            <div className="max-w-6xl">
+              <div>
+                <div className="h-1 w-[200px] rounded-full bg-[#d4a48e]" aria-hidden="true" />
+                <header className="mt-10 max-w-4xl">
+                  <p className={sectionLabelClass}>Manifesto</p>
+                  <div className="mt-6 max-w-4xl overflow-hidden">
+                    <h1
+                      id="manifesto-hero-title"
+                      className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]"
+                    >
+                      We build websites like infrastructure.
+                    </h1>
+                  </div>
+                  <p className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
+                    Axiom believes a website should operate as a durable business system: clear in its message, rigorous in its execution, and accountable to outcomes.
+                  </p>
+                  <p className="mt-8 text-sm leading-6 text-slate-400">Read the manifesto below</p>
+                </header>
+              </div>
+            </div>
+
+            <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 pointer-events-none xl:block opacity-40" aria-hidden="true">
+              <svg width="480" height="480" viewBox="0 0 480 480" fill="none">
+                <defs>
+                  <radialGradient id="manifesto-topology-fade" cx="50%" cy="50%" r="50%">
+                    <stop offset="40%" stopColor="white" stopOpacity="1" />
+                    <stop offset="100%" stopColor="white" stopOpacity="0" />
+                  </radialGradient>
+                  <mask id="manifesto-topology-mask">
+                    <rect width="480" height="480" fill="url(#manifesto-topology-fade)" />
+                  </mask>
+                </defs>
+                <g mask="url(#manifesto-topology-mask)">
+                  <g stroke="rgba(255,255,255,0.1)" strokeWidth="0.5">
+                    <path d="M40 40V440" />
+                    <path d="M120 40V440" />
+                    <path d="M200 40V440" />
+                    <path d="M280 40V440" />
+                    <path d="M360 40V440" />
+                    <path d="M440 40V440" />
+                    <path d="M40 40H440" />
+                    <path d="M40 120H440" />
+                    <path d="M40 200H440" />
+                    <path d="M40 280H440" />
+                    <path d="M40 360H440" />
+                    <path d="M40 440H440" />
+                    <path d="M40 40L200 200L360 120L440 280" />
+                    <path d="M120 440L200 280L360 360L440 200" />
+                    <path d="M120 120L280 280L360 360" />
+                    <path d="M40 280L120 200L280 120L440 40" />
+                  </g>
+                  <g stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" fill="none">
+                    <circle cx="120" cy="120" r="7" />
+                    <circle cx="200" cy="200" r="9" />
+                    <circle cx="280" cy="120" r="8" />
+                    <circle cx="360" cy="360" r="10" />
+                    <circle cx="440" cy="280" r="7" />
+                  </g>
+                  <g fill={accentColor}>
+                    <circle cx="120" cy="120" r="3.5" fillOpacity="0.3" />
+                    <circle cx="280" cy="120" r="3.5" fillOpacity="0.3" />
+                    <circle cx="360" cy="360" r="3.5" fillOpacity="0.3" />
+                  </g>
+                </g>
+              </svg>
             </div>
           </section>
 
-          {/* Core manifesto: six non-negotiable beliefs rendered in a single authoritative column. */}
-          <section
-            data-reveal="off"
-            aria-labelledby="manifesto-beliefs-title"
-            className="border-t border-[#333333] px-6 py-[60px] md:px-10 md:py-[100px]"
-          >
-            <div className="mx-auto w-full max-w-[900px]">
-              <header className="max-w-[680px]">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#D4AF37]">
-                  What We Believe
-                </p>
+          <section aria-labelledby="manifesto-beliefs-title" className="pt-16 md:pt-20">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] lg:items-start lg:gap-14">
+              <div className="max-w-2xl lg:pt-2">
+                <p className={sectionLabelClass}>What We Believe</p>
                 <h2
                   id="manifesto-beliefs-title"
-                  className="mt-5 text-[28px] font-bold leading-[1.2] tracking-[-0.02em] text-[#F8F8F8] md:text-[40px]"
+                  className="mt-3 max-w-[12ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]"
                 >
                   These are the standards behind every decision we make.
                 </h2>
-              </header>
+              </div>
 
-              <ol className="mt-14 flex list-none flex-col gap-[80px] p-0">
+              <ol className="list-none divide-y divide-white/10 border-y border-white/10 p-0">
                 {manifestoPrinciples.map((principle) => (
-                  <li key={principle.number} className="border-l-4 border-[#D4AF37] pl-[30px]">
-                    <article aria-labelledby={`principle-${principle.number}-title`}>
-                      <p className="text-[18px] font-bold leading-none tracking-[0.1em] text-[#D4AF37]">
+                  <li key={principle.number}>
+                    <article className="grid gap-4 py-5 md:grid-cols-[5rem_minmax(0,1fr)] md:gap-6 md:py-6">
+                      <div className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#d4a48e] md:pt-1">
                         {principle.number}
-                      </p>
-                      <h3
-                        id={`principle-${principle.number}-title`}
-                        className="mt-5 text-[22px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#D4AF37]"
-                      >
-                        {principle.title}
-                      </h3>
-                      <p className="mt-4 max-w-[720px] text-[16px] leading-[1.75] text-[#B8B8B8]">
-                        {principle.description}
-                      </p>
+                      </div>
+                      <div>
+                        <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.08rem]">
+                          {principle.title}
+                        </h3>
+                        <p className="mt-2 max-w-[38rem] text-sm leading-6 text-slate-300 md:text-[0.95rem]">
+                          {principle.description}
+                        </p>
+                      </div>
                     </article>
                   </li>
                 ))}
@@ -141,103 +176,88 @@ const ManifestoPage: React.FC = () => {
             </div>
           </section>
 
-          {/* Refusals: short hard lines with no explanatory padding. */}
-          <section
-            data-reveal="off"
-            aria-labelledby="manifesto-refuse-title"
-            className="border-t border-[#333333] bg-[#1A1A1A] px-6 py-[60px] md:px-10 md:py-[100px]"
-          >
-            <div className="mx-auto w-full max-w-[900px]">
-              <header className="max-w-[680px]">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#D4AF37]">
-                  What We Refuse
-                </p>
-                <h2
-                  id="manifesto-refuse-title"
-                  className="mt-5 text-[28px] font-bold leading-[1.2] tracking-[-0.02em] text-[#F8F8F8] md:text-[40px]"
-                >
-                  These are the lines we do not cross.
-                </h2>
-              </header>
-
-              <ul className="mt-12 space-y-6">
-                {manifestoRefusals.map((refusal, index) => (
-                  <li
-                    key={refusal}
-                    className="grid grid-cols-[44px_minmax(0,1fr)] items-start gap-4 text-left"
+          <section aria-labelledby="manifesto-refuse-title" className="pt-16 md:pt-22">
+            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start">
+                <div className="max-w-2xl">
+                  <p className={sectionLabelClass}>What We Refuse</p>
+                  <h2
+                    id="manifesto-refuse-title"
+                    className="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]"
                   >
-                    <span className="pt-0.5 text-[16px] font-semibold tracking-[0.08em] text-[#D4AF37]">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="text-[16px] font-normal leading-[1.75] text-[#F8F8F8]">
-                      {refusal}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                    These are the lines we do not cross.
+                  </h2>
+                </div>
+
+                <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
+                  <div className="divide-y divide-white/[0.08]">
+                    {manifestoRefusals.map((refusal, index) => (
+                      <div key={refusal} className="grid gap-3 py-4 first:pt-0 last:pb-0 md:grid-cols-[3rem_minmax(0,1fr)] md:gap-5">
+                        <div className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#d4a48e] md:pt-1">
+                          {String(index + 1).padStart(2, '0')}
+                        </div>
+                        <p className="text-sm font-semibold leading-7 text-[#F2F4F7] md:text-[15px]">{refusal}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
           </section>
 
-          {/* Outcome: bridge the philosophy back to client reality without selling. */}
-          <section
-            data-reveal="off"
-            aria-labelledby="manifesto-outcome-title"
-            className="border-t border-[#333333] px-6 py-[60px] md:px-10 md:py-[100px]"
-          >
-            <div className="mx-auto w-full max-w-[700px] text-center">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#D4AF37]">
-                The Outcome
-              </p>
-              <h2
-                id="manifesto-outcome-title"
-                className="mt-5 text-[28px] font-bold leading-[1.2] tracking-[-0.02em] text-[#F8F8F8] md:text-[40px]"
-              >
-                What this philosophy produces in practice.
-              </h2>
-              <div className="mt-8 space-y-6">
-                {manifestoOutcome.map((paragraph) => (
-                  <p key={paragraph} className="text-[16px] leading-[1.75] text-[#B8B8B8]">
-                    {paragraph}
+          <section aria-labelledby="manifesto-outcome-title" className="pt-16 md:pt-22 scroll-mt-28">
+            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:items-start">
+                <div className="max-w-2xl">
+                  <p className={sectionLabelClass}>The Outcome</p>
+                  <h2
+                    id="manifesto-outcome-title"
+                    className="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]"
+                  >
+                    What this philosophy produces in practice.
+                  </h2>
+                </div>
+
+                <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
+                  <div className="space-y-6">
+                    {manifestoOutcome.map((paragraph) => (
+                      <p key={paragraph} className="text-sm leading-7 text-slate-300 md:text-base">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section aria-labelledby="manifesto-next-step-title" className="pt-16 md:pt-24">
+            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+              <div className="max-w-3xl">
+                  <p className={sectionLabelClass}>Next Step</p>
+                  <h2
+                    id="manifesto-next-step-title"
+                    className="mt-3 max-w-4xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl"
+                  >
+                    The philosophy is only useful if it shows up in the work.
+                  </h2>
+                  <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
+                    If you want to see how these standards translate into real decisions, the work explains the application. If you want to discuss your own project, the conversation is open.
                   </p>
-                ))}
-              </div>
-            </div>
-          </section>
 
-          {/* Soft CTA: respectful next steps for readers who want more context. */}
-          <section
-            data-reveal="off"
-            aria-labelledby="manifesto-next-step-title"
-            className="border-t border-[#333333] bg-[#1A1A1A] px-6 py-[60px] md:px-10 md:py-[100px]"
-          >
-            <div className="mx-auto flex w-full max-w-[700px] flex-col items-center text-center">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#D4AF37]">
-                Next Step
-              </p>
-              <h2
-                id="manifesto-next-step-title"
-                className="mt-5 text-[28px] font-bold leading-[1.2] tracking-[-0.02em] text-[#F8F8F8] md:text-[40px]"
-              >
-                The philosophy is only useful if it shows up in the work.
-              </h2>
-              <p className="mt-6 max-w-[640px] text-[16px] leading-[1.75] text-[#B8B8B8]">
-                If you want to see how these standards translate into real decisions, the work explains the application. If you want to discuss your own project, the conversation is open.
-              </p>
-              <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link
-                  to="/works"
-                  className="inline-flex min-h-12 items-center justify-center rounded-none border-2 border-[#D4AF37] px-6 py-3 text-[16px] font-medium text-[#D4AF37] transition-colors duration-200 hover:bg-[#D4AF37] hover:text-[#0A0A0A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8C547] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A1A1A]"
-                >
-                  See how we think
-                </Link>
-                <Link
-                  to="/contact"
-                  className="inline-flex min-h-12 items-center justify-center rounded-none border-2 border-transparent px-6 py-3 text-[16px] font-medium text-[#B8B8B8] underline decoration-transparent underline-offset-[6px] transition-colors duration-200 hover:text-[#E8C547] hover:decoration-[#E8C547] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8C547] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A1A1A]"
-                >
-                  Let&apos;s talk about your project
-                </Link>
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+                    <Link to="/works" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                      See how we think
+                    </Link>
+                    <Link
+                      to="/contact"
+                      className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-full border border-white/25 px-6 py-2.5 text-sm font-semibold text-white/80 transition-colors duration-200 hover:border-white/50 hover:text-white sm:w-auto"
+                    >
+                      Let&apos;s talk about your project
+                    </Link>
+                  </div>
               </div>
-            </div>
+            </article>
           </section>
         </main>
 
