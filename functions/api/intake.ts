@@ -270,7 +270,7 @@ function normalizePrimaryGoal(value: string) {
     if (raw === 'landing_page' || raw.includes('landing')) return 'landing_page';
     if (raw === 'maintenance' || raw.includes('maint')) return 'maintenance';
     if (raw === 'seo_performance' || raw.includes('seo') || raw.includes('performance')) return 'seo_performance';
-    if (raw === 'new_site' || raw.includes('foundation') || raw.includes('authority') || raw.includes('expansion') || raw.includes('audit')) {
+    if (raw === 'new_site' || raw.includes('foundation') || raw.includes('authority') || raw.includes('expansion') || raw.includes('simple') || raw.includes('standard') || raw.includes('premium') || raw.includes('audit')) {
         return 'new_site';
     }
     return 'not_sure';
@@ -309,28 +309,12 @@ function buildInternalEmail(params: {
     name: string;
     email: string;
     businessName: string;
-    phone: string;
     website: string;
     projectScale: string;
     primaryGoal: string;
     details: string;
     sourcePath: string;
-    painPoints: string[];
-    fitAssessment: Array<{ question: string; answer: '' | 'yes' | 'no' }>;
 }) {
-    const painPoints = params.painPoints.length ? params.painPoints : ['None provided'];
-    const painPointsHtml = painPoints.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
-    const painPointsText = painPoints.map((item) => `- ${item}`).join('\n');
-    const fitAssessment = params.fitAssessment.length
-        ? params.fitAssessment
-        : [{ question: 'No fit assessment provided', answer: '' as const }];
-    const fitAssessmentHtml = fitAssessment
-        .map((item) => `<li>${escapeHtml(item.question)} <strong>${escapeHtml(item.answer || 'not answered')}</strong></li>`)
-        .join('');
-    const fitAssessmentText = fitAssessment
-        .map((item) => `- ${item.question}: ${item.answer || 'not answered'}`)
-        .join('\n');
-
     const html = `
         <div style="font-family:Arial,sans-serif;color:#1a1a1a;max-width:640px;margin:0 auto;">
             <h2 style="margin:0 0 16px 0;color:#0d1323;">New Axiom Intake Submission</h2>
@@ -338,16 +322,11 @@ function buildInternalEmail(params: {
                 <tr><td style="padding:6px 0;width:180px;"><strong>Name</strong></td><td>${escapeHtml(params.name)}</td></tr>
                 <tr><td style="padding:6px 0;"><strong>Email</strong></td><td><a href="mailto:${escapeHtml(params.email)}">${escapeHtml(params.email)}</a></td></tr>
                 <tr><td style="padding:6px 0;"><strong>Business</strong></td><td>${escapeHtml(params.businessName || 'Not provided')}</td></tr>
-                <tr><td style="padding:6px 0;"><strong>Phone</strong></td><td>${escapeHtml(params.phone || 'Not provided')}</td></tr>
                 <tr><td style="padding:6px 0;"><strong>Website</strong></td><td>${params.website ? `<a href="${escapeHtml(params.website)}">${escapeHtml(params.website)}</a>` : 'Not provided'}</td></tr>
                 <tr><td style="padding:6px 0;"><strong>Scale / Goal</strong></td><td>${escapeHtml(params.projectScale || params.primaryGoal || 'Not provided')}</td></tr>
                 <tr><td style="padding:6px 0;"><strong>Source Path</strong></td><td>${escapeHtml(params.sourcePath || 'Not provided')}</td></tr>
             </table>
-            <h3 style="margin:24px 0 8px 0;">Pain Points</h3>
-            <ul style="margin:0 0 20px 18px;padding:0;">${painPointsHtml}</ul>
-            <h3 style="margin:0 0 8px 0;">Best-Fit Assessment</h3>
-            <ul style="margin:0 0 20px 18px;padding:0;">${fitAssessmentHtml}</ul>
-            <h3 style="margin:0 0 8px 0;">Details</h3>
+            <h3 style="margin:24px 0 8px 0;">Project Description</h3>
             <div style="background:#f4f5f7;border:1px solid #e7e7e7;border-radius:8px;padding:14px;white-space:pre-wrap;">${escapeHtml(params.details)}</div>
         </div>
     `;
@@ -358,18 +337,11 @@ function buildInternalEmail(params: {
         `Name: ${params.name}`,
         `Email: ${params.email}`,
         `Business: ${params.businessName || 'Not provided'}`,
-        `Phone: ${params.phone || 'Not provided'}`,
         `Website: ${params.website || 'Not provided'}`,
         `Scale / Goal: ${params.projectScale || params.primaryGoal || 'Not provided'}`,
         `Source Path: ${params.sourcePath || 'Not provided'}`,
         '',
-        'Pain Points:',
-        painPointsText,
-        '',
-        'Best-Fit Assessment:',
-        fitAssessmentText,
-        '',
-        'Details:',
+        'Project Description:',
         params.details
     ].join('\n');
 
@@ -486,37 +458,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         const primaryGoal = normalizePrimaryGoal(primaryGoalInput || projectScale);
         const sourcePath = (body.source_path || body.sourcePath || '').trim();
         const details = body.details.trim();
-        const painPoints = parsePainPoints(body.pain_points || body.painPoints || '');
-        const fitAssessment = [
-            {
-                question: 'Active service demand and clear offer',
-                answer: normalizeYesNo(body.fit_active_demand || body.fitActiveDemand || '')
-            },
-            {
-                question: 'Needs trust and conversion improvement',
-                answer: normalizeYesNo(body.fit_trust_conversion_need || body.fitTrustConversionNeed || '')
-            },
-            {
-                question: 'Clear decision owner available',
-                answer: normalizeYesNo(body.fit_decision_owner_ready || body.fitDecisionOwnerReady || '')
-            },
-            {
-                question: 'Ready to execute within defined scope',
-                answer: normalizeYesNo(body.fit_defined_scope_ready || body.fitDefinedScopeReady || '')
-            }
-        ];
 
         try {
             await ensureWebsiteInquiriesSchema(env);
             if (env.DB?.prepare) {
                 const inquiryId = crypto.randomUUID();
                 const createdAt = new Date().toISOString();
-                const fitSummary = fitAssessment
-                    .map(({ question, answer }) => `${question}: ${answer || 'not answered'}`)
-                    .join('; ');
-                const combinedDetails = painPoints.length
-                    ? `${details}\n\nPain points: ${painPoints.join(', ')}\n\nFit assessment: ${fitSummary}`
-                    : `${details}\n\nFit assessment: ${fitSummary}`;
 
                 await env.DB.prepare(`
                     INSERT INTO website_inquiries (
@@ -532,7 +479,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
                     phone || null,
                     normalizedWebsite || null,
                     primaryGoal,
-                    combinedDetails,
+                    details,
                     sourcePath || null,
                     request.headers.get('User-Agent') || null,
                     ipHash
@@ -554,14 +501,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             name,
             email,
             businessName,
-            phone,
             website: normalizedWebsite,
             projectScale,
             primaryGoal: primaryGoalInput || primaryGoal,
             details,
-            sourcePath,
-            painPoints,
-            fitAssessment
+            sourcePath
         });
         const confirmationEmail = buildConfirmationEmail({ name });
 

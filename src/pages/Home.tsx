@@ -117,6 +117,12 @@ const processStages = [
   },
 ];
 
+const manifestoTeaserPoints = [
+  'Most sites hide the service until people start hunting.',
+  'Proof arrives too late to build trust when it matters.',
+  'Calls and quote requests pick up friction instead of clarity.',
+];
+
 const Home: React.FC = () => {
   return (
     <>
@@ -132,11 +138,11 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Serious websites for serious businesses.
+                    Web infrastructure for service businesses in KW and across Ontario.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We build sites that show the service, the proof, and the contact path fast.
+                  Axiom Infrastructure builds clear, fast sites for service businesses that need the service, the proof, and the contact path to stay obvious.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link
@@ -165,6 +171,44 @@ const Home: React.FC = () => {
               </div>
             </div>
           </section>
+
+          <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature">
+            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,1.16fr)_minmax(18rem,0.84fr)] lg:items-start">
+                <div className="max-w-3xl">
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Why it matters</p>
+                  <h2 className="mt-3 max-w-[16ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                    Most service-business sites lose trust before the first call.
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+                    The Manifesto lays out why brochure-site thinking fails service businesses in KW and across Ontario, and what the web presence actually needs to do if it is supposed to help sales.
+                  </p>
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <Link to="/manifesto" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                      Read Why It Matters
+                    </Link>
+                    <Link
+                      to={CTA.primary.to}
+                      className="inline-flex min-h-11 items-center justify-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
+                    >
+                      Start a project
+                    </Link>
+                  </div>
+                </div>
+
+                <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What the page covers</p>
+                  <div className="mt-4 divide-y divide-white/[0.08]">
+                    {manifestoTeaserPoints.map((point) => (
+                      <div key={point} className="py-3 first:pt-0 last:pb-0">
+                        <p className="text-sm leading-relaxed text-slate-300">{point}</p>
+                      </div>
+                    ))}
+                  </div>
+                </aside>
+              </div>
+            </article>
+          </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
               <div className="mb-7 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">

@@ -18,9 +18,13 @@ export async function onRequest(context: any) {
     const { request, env, next } = context;
     const url = new URL(request.url);
     const adminAccessToken = String(env?.ADMIN_ACCESS_TOKEN || '').trim();
-    const isPublicIntake = url.pathname === '/api/intake';
+    const isPublicSubmission = (
+        (url.pathname === '/api/intake' && (request.method === 'POST' || request.method === 'OPTIONS')) ||
+        (url.pathname === '/api/contact' && (request.method === 'POST' || request.method === 'OPTIONS')) ||
+        (url.pathname === '/api/inquiries' && (request.method === 'POST' || request.method === 'OPTIONS'))
+    );
 
-    if (adminAccessToken && !isPublicIntake) {
+    if (adminAccessToken && !isPublicSubmission) {
         const provided = request.headers.get('X-Admin-Token') || '';
         if (!provided || !constantTimeEqualString(provided, adminAccessToken)) {
             logEvent('warn', 'admin.edge_token.denied', {
@@ -31,7 +35,7 @@ export async function onRequest(context: any) {
         }
     }
 
-    if (isPublicIntake) {
+    if (isPublicSubmission) {
         return next();
     }
 

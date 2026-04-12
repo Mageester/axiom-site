@@ -12,72 +12,32 @@ type ApiResult = {
     message?: string;
     details?: string;
 };
-type YesNoAnswer = '' | 'yes' | 'no';
 
 type IntakeFormState = {
     name: string;
     email: string;
     business_name: string;
-    phone: string;
     current_website: string;
     project_scale: string;
-    pain_points: string[];
     details: string;
-    fit_active_demand: YesNoAnswer;
-    fit_trust_conversion_need: YesNoAnswer;
-    fit_decision_owner_ready: YesNoAnswer;
-    fit_defined_scope_ready: YesNoAnswer;
 };
 
 const INITIAL_FORM: IntakeFormState = {
     name: '',
     email: '',
     business_name: '',
-    phone: '',
     current_website: '',
     project_scale: '',
-    pain_points: [],
-    details: '',
-    fit_active_demand: '',
-    fit_trust_conversion_need: '',
-    fit_decision_owner_ready: '',
-    fit_defined_scope_ready: ''
+    details: ''
 };
 
 const PROJECT_PATH = '/start-a-project';
 const LEGACY_PROJECT_PATH = '/apply';
 
 const SCALE_OPTIONS = [
-    { value: 'foundation', label: 'New site or rebuild' },
-    { value: 'authority', label: 'Existing site, rebuilt' },
-    { value: 'expansion', label: 'Multi-location or larger site' }
-];
-
-const PAIN_POINTS_OPTIONS = [
-    'Site is slow to load',
-    'It is not clear what you do',
-    'Proof is buried',
-    'Calls or quote requests are hard to find',
-    'Updating content is awkward'
-];
-
-const FIT_QUESTIONS: ReadonlyArray<{ key: keyof Pick<IntakeFormState, 'fit_active_demand' | 'fit_trust_conversion_need' | 'fit_decision_owner_ready' | 'fit_defined_scope_ready'>; label: string }> = [
-    {
-        key: 'fit_active_demand',
-        label: 'Are you taking on new work?'
-    },
-    {
-        key: 'fit_trust_conversion_need',
-        label: 'Should the site help with calls, quotes, or bookings?'
-    },
-    {
-        key: 'fit_decision_owner_ready',
-        label: 'Who will review the direction?'
-    },
-    {
-        key: 'fit_defined_scope_ready',
-        label: 'When are you hoping to start?'
-    }
+    { value: 'simple', label: 'Simple' },
+    { value: 'standard', label: 'Standard' },
+    { value: 'premium', label: 'Premium' }
 ];
 
 const FALLBACK_SUBMIT_ERROR = 'Submission failed. Please retry or email contact@getaxiom.ca.';
@@ -88,17 +48,12 @@ const FIELD_INPUT_CLASS =
 const SECONDARY_BUTTON_CLASS =
     'inline-flex min-h-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.06]';
 const PROJECT_FIELD_IDS = {
-    name: 'project-name',
+    name: 'project-full-name',
     email: 'project-email',
     business_name: 'project-business-name',
-    phone: 'project-phone',
-    current_website: 'project-current-website',
-    project_scale: 'project-type',
+    current_website: 'project-website-url',
+    project_scale: 'project-scale',
     details: 'project-details',
-    fit_active_demand: 'project-fit-active-demand',
-    fit_trust_conversion_need: 'project-fit-trust-conversion-need',
-    fit_decision_owner_ready: 'project-fit-decision-owner-ready',
-    fit_defined_scope_ready: 'project-fit-defined-scope-ready'
 } as const;
 
 function getApiErrorMessage(payload: ApiResult | null) {
@@ -205,7 +160,7 @@ const GeneralContactForm: React.FC = () => {
                 primary_goal: 'General inquiry',
                 source_path: window.location.pathname,
             };
-            const res = await fetch('/api/intake', {
+            const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -415,9 +370,9 @@ const ProjectIntakeForm: React.FC = () => {
     const [form, setForm] = useState<IntakeFormState>(() => {
         const packageParam = (searchParams.get('package') || '').toLowerCase();
         const normalizedPackage =
-            packageParam === 'starter' ? 'foundation' :
-                packageParam === 'professional' ? 'authority' :
-                    packageParam === 'enterprise' ? 'expansion' :
+            packageParam === 'starter' || packageParam === 'foundation' ? 'simple' :
+                packageParam === 'professional' || packageParam === 'authority' ? 'standard' :
+                    packageParam === 'enterprise' || packageParam === 'expansion' ? 'premium' :
                         packageParam;
         return {
             ...INITIAL_FORM,
@@ -460,7 +415,7 @@ const ProjectIntakeForm: React.FC = () => {
         return () => window.cancelAnimationFrame(rafId);
     }, []);
 
-    const setField = (key: keyof IntakeFormState, value: string | string[]) => {
+    const setField = (key: keyof IntakeFormState, value: string) => {
         if (errors[key]) {
             setErrors(prev => {
                 const next = { ...prev };
@@ -469,16 +424,6 @@ const ProjectIntakeForm: React.FC = () => {
             });
         }
         setForm(prev => ({ ...prev, [key]: value }));
-    };
-
-    const togglePainPoint = (point: string) => {
-        setForm(prev => {
-            const current = prev.pain_points;
-            const updated = current.includes(point)
-                ? current.filter(p => p !== point)
-                : [...current, point];
-            return { ...prev, pain_points: updated };
-        });
     };
 
     const focusFirstError = (nextErrors: Partial<Record<keyof IntakeFormState, string>>) => {
@@ -498,7 +443,7 @@ const ProjectIntakeForm: React.FC = () => {
         if (form.name.trim().length < 2) nextErrors.name = 'Please enter your name.';
         if (!form.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Please use a valid work email.';
         if (form.business_name.trim().length < 2) nextErrors.business_name = 'Please enter the business name.';
-        if (!form.project_scale) nextErrors.project_scale = 'Choose the closest project type.';
+        if (!form.project_scale) nextErrors.project_scale = 'Choose the closest project scale.';
         if (form.details.trim().length < 10) nextErrors.details = 'Please share a little more detail.';
         if (Object.keys(nextErrors).length > 0) {
             setStatus('');
@@ -516,8 +461,13 @@ const ProjectIntakeForm: React.FC = () => {
             const controller = new AbortController();
             timeoutId = window.setTimeout(() => controller.abort(), 15000);
             const payload = {
-                ...form,
-                pain_points: form.pain_points.join(', '),
+                name: form.name.trim(),
+                email: form.email.trim(),
+                business_name: form.business_name.trim(),
+                current_website: form.current_website.trim(),
+                project_scale: form.project_scale,
+                details: form.details.trim(),
+                primary_goal: 'new_site',
                 source_path: window.location.pathname
             };
             const res = await fetch('/api/intake', {
@@ -567,7 +517,7 @@ const ProjectIntakeForm: React.FC = () => {
                                 Tell us what the business needs.
                             </h1>
                             <p data-startup-copy className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                                Share the business name, current site, and what needs to change. We&apos;ll reply within one business day with next steps.
+                                Share the basics and we&apos;ll reply within one business day with the next step.
                             </p>
                             <p data-startup-meta className="mt-3 max-w-2xl text-sm text-slate-400">
                                 Not a project? Use{' '}
@@ -629,14 +579,14 @@ const ProjectIntakeForm: React.FC = () => {
                                         <section className="grid gap-6">
                                             <div className="grid gap-5 sm:grid-cols-2">
                                                 <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.name} className={FIELD_LABEL_CLASS}>Your name</label>
+                                                    <label htmlFor={PROJECT_FIELD_IDS.name} className={FIELD_LABEL_CLASS}>Full name</label>
                                                     <p id={`${PROJECT_FIELD_IDS.name}-helper`} className={FIELD_HELPER_CLASS}>Who should we address?</p>
                                                     <input type="text" id={PROJECT_FIELD_IDS.name} required minLength={2} autoComplete="name" value={form.name} onChange={(event) => setField('name', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.name} aria-describedby={errors.name ? `${PROJECT_FIELD_IDS.name}-helper ${PROJECT_FIELD_IDS.name}-error` : `${PROJECT_FIELD_IDS.name}-helper`} />
                                                     {errors.name && <p id={`${PROJECT_FIELD_IDS.name}-error`} className="text-xs text-red-300">{errors.name}</p>}
                                                 </div>
 
                                                 <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.email} className={FIELD_LABEL_CLASS}>Work email</label>
+                                                    <label htmlFor={PROJECT_FIELD_IDS.email} className={FIELD_LABEL_CLASS}>Email address</label>
                                                     <p id={`${PROJECT_FIELD_IDS.email}-helper`} className={FIELD_HELPER_CLASS}>We'll reply here.</p>
                                                     <input type="email" id={PROJECT_FIELD_IDS.email} required autoComplete="email" value={form.email} onChange={(event) => setField('email', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.email} aria-describedby={errors.email ? `${PROJECT_FIELD_IDS.email}-helper ${PROJECT_FIELD_IDS.email}-error` : `${PROJECT_FIELD_IDS.email}-helper`} />
                                                     {errors.email && <p id={`${PROJECT_FIELD_IDS.email}-error`} className="text-xs text-red-300">{errors.email}</p>}
@@ -650,98 +600,26 @@ const ProjectIntakeForm: React.FC = () => {
                                                 </div>
 
                                                 <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.phone} className={FIELD_LABEL_CLASS}>Phone (optional)</label>
-                                                    <p id={`${PROJECT_FIELD_IDS.phone}-helper`} className={FIELD_HELPER_CLASS}>Only if a call is easier.</p>
-                                                    <input type="tel" id={PROJECT_FIELD_IDS.phone} autoComplete="tel" value={form.phone} onChange={(event) => setField('phone', event.target.value)} className={FIELD_INPUT_CLASS} aria-describedby={`${PROJECT_FIELD_IDS.phone}-helper`} />
-                                                </div>
-                                            </div>
-
-                                            <div className="grid gap-5 sm:grid-cols-2">
-                                                <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.current_website} className={FIELD_LABEL_CLASS}>Current website (optional)</label>
-                                                    <p id={`${PROJECT_FIELD_IDS.current_website}-helper`} className={FIELD_HELPER_CLASS}>Add it if there is already a site.</p>
+                                                    <label htmlFor={PROJECT_FIELD_IDS.current_website} className={FIELD_LABEL_CLASS}>Website URL</label>
+                                                    <p id={`${PROJECT_FIELD_IDS.current_website}-helper`} className={FIELD_HELPER_CLASS}>Optional. Add it if there is already a site.</p>
                                                     <input type="url" id={PROJECT_FIELD_IDS.current_website} placeholder="https://example.com" autoComplete="url" value={form.current_website} onChange={(event) => setField('current_website', event.target.value)} className={FIELD_INPUT_CLASS} aria-describedby={`${PROJECT_FIELD_IDS.current_website}-helper`} />
                                                 </div>
-
-                                                <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.project_scale} className={FIELD_LABEL_CLASS}>Project type</label>
-                                                    <p id={`${PROJECT_FIELD_IDS.project_scale}-helper`} className={FIELD_HELPER_CLASS}>Choose the closest option. We&apos;ll refine scope after review.</p>
-                                                    <select id={PROJECT_FIELD_IDS.project_scale} value={form.project_scale} onChange={(event) => setField('project_scale', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.project_scale} aria-describedby={errors.project_scale ? `${PROJECT_FIELD_IDS.project_scale}-helper ${PROJECT_FIELD_IDS.project_scale}-error` : `${PROJECT_FIELD_IDS.project_scale}-helper`}>
-                                                        <option value="" disabled>Choose a project type...</option>
-                                                        {SCALE_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
-                                                    </select>
-                                                    {errors.project_scale && <p id={`${PROJECT_FIELD_IDS.project_scale}-error`} className="text-xs text-red-300">{errors.project_scale}</p>}
-                                                </div>
                                             </div>
-                                        </section>
-
-                                        <section className="grid gap-5">
-                                            <fieldset className="flex min-w-0 flex-col gap-3 border-0 p-0">
-                                                <legend className={FIELD_LABEL_CLASS}>What needs the most attention?</legend>
-                                                <p id="project-pain-points-helper" className={FIELD_HELPER_CLASS}>Select any that apply.</p>
-                                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                                                    {PAIN_POINTS_OPTIONS.map((point) => {
-                                                        const selected = form.pain_points.includes(point);
-                                                        return (
-                                                            <button
-                                                                key={point}
-                                                                type="button"
-                                                                onClick={() => togglePainPoint(point)}
-                                                                aria-pressed={selected}
-                                                                aria-describedby="project-pain-points-helper"
-                                                                className={`min-h-[50px] rounded-xl border px-3 py-2 text-left text-sm transition-colors ${selected
-                                                                    ? 'border-[#B05D41]/45 bg-[#B05D41]/12 text-[#F2F4F7]'
-                                                                    : 'border-white/10 bg-[#0f1524]/45 text-slate-300 hover:border-white/25'}`}
-                                                            >
-                                                                {point}
-                                                            </button>
-                                                        );
-                                                    })}
-                                                </div>
-                                            </fieldset>
-
-                                            <details className="group rounded-2xl border border-white/10 bg-[#0f1524]/45 p-4 md:p-5">
-                                                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left">
-                                                    <span className="min-w-0">
-                                                        <span className={FIELD_LABEL_CLASS}>Optional project questions</span>
-                                                        <span className="mt-1 block text-sm leading-relaxed text-slate-300">Use this only if you want a few extra questions before a call.</span>
-                                                    </span>
-                                                    <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180" fill="none" aria-hidden="true">
-                                                        <path d="M5.5 7.5 10 12l4.5-4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                                                    </svg>
-                                                </summary>
-                                                <div className="mt-4 grid grid-cols-1 gap-3">
-                                                    {FIT_QUESTIONS.map((question) => (
-                                                        <article key={question.key} className="rounded-xl border border-white/10 bg-[#0f1524]/45 p-4">
-                                                            <p className="text-sm leading-relaxed text-slate-200">{question.label}</p>
-                                                            <div className="mt-3 grid grid-cols-2 gap-2 sm:max-w-[220px]">
-                                                                {(['yes', 'no'] as const).map((option) => {
-                                                                    const isSelected = form[question.key] === option;
-                                                                    return (
-                                                                        <button
-                                                                            key={option}
-                                                                            type="button"
-                                                                            onClick={() => setField(question.key, option)}
-                                                                            aria-pressed={isSelected}
-                                                                            className={`min-h-11 rounded-lg border px-3 py-2.5 text-sm font-medium capitalize transition-colors ${isSelected
-                                                                                ? 'border-[#B05D41]/45 bg-[#B05D41]/12 text-[#F2F4F7]'
-                                                                                : 'border-white/10 bg-[#0f1524]/70 text-slate-300 hover:border-white/25'
-                                                                                }`}
-                                                                        >
-                                                                            {option}
-                                                                        </button>
-                                                                    );
-                                                                })}
-                                                            </div>
-                                                        </article>
-                                                    ))}
-                                                </div>
-                                            </details>
 
                                             <div className="flex flex-col gap-2">
-                                                <label htmlFor={PROJECT_FIELD_IDS.details} className={FIELD_LABEL_CLASS}>What should the site do better?</label>
-                                                <p id={`${PROJECT_FIELD_IDS.details}-helper`} className={FIELD_HELPER_CLASS}>A few short sentences are enough.</p>
-                                                <textarea rows={4} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="Example: make the service clearer, show proof earlier, and make quotes easier to request." className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
+                                                <label htmlFor={PROJECT_FIELD_IDS.project_scale} className={FIELD_LABEL_CLASS}>Project scale</label>
+                                                <p id={`${PROJECT_FIELD_IDS.project_scale}-helper`} className={FIELD_HELPER_CLASS}>Choose the closest fit for the scope you have in mind.</p>
+                                                <select id={PROJECT_FIELD_IDS.project_scale} value={form.project_scale} onChange={(event) => setField('project_scale', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.project_scale} aria-describedby={errors.project_scale ? `${PROJECT_FIELD_IDS.project_scale}-helper ${PROJECT_FIELD_IDS.project_scale}-error` : `${PROJECT_FIELD_IDS.project_scale}-helper`}>
+                                                    <option value="" disabled>Choose a project scale...</option>
+                                                    {SCALE_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                                                </select>
+                                                {errors.project_scale && <p id={`${PROJECT_FIELD_IDS.project_scale}-error`} className="text-xs text-red-300">{errors.project_scale}</p>}
+                                            </div>
+
+                                            <div className="flex flex-col gap-2">
+                                                <label htmlFor={PROJECT_FIELD_IDS.details} className={FIELD_LABEL_CLASS}>Brief project description</label>
+                                                <p id={`${PROJECT_FIELD_IDS.details}-helper`} className={FIELD_HELPER_CLASS}>Three short lines is enough.</p>
+                                                <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="Briefly describe what you need and what the site should help with." className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
                                                 {errors.details && <p id={`${PROJECT_FIELD_IDS.details}-error`} className="text-xs text-red-300">{errors.details}</p>}
                                             </div>
                                         </section>

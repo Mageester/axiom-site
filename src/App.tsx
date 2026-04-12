@@ -11,7 +11,6 @@ import Manifesto from './pages/Manifesto';
 import Infrastructure from './pages/Infrastructure';
 import NotFoundPage from './pages/NotFoundPage';
 import PricingPage from './pages/PricingPage';
-import ServicesPage from './pages/ServicesPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 const Login = lazy(() => import('./pages/admin/Login'));
@@ -76,7 +75,7 @@ const App: React.FC = () => {
           <Route path="/works/:slug" element={<Navigate to="/works" replace />} />
           <Route path="/deployments" element={<Navigate to="/works" replace />} />
           <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services" element={<Navigate to="/pricing" replace />} />
           <Route path="/concepts" element={<Concepts />} />
           <Route path="/manifesto" element={<Manifesto />} />
           <Route path="/audit" element={<AuditPage />} />

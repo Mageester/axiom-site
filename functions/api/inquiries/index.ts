@@ -1,6 +1,10 @@
 import { z } from 'zod';
 import { apiError, d1ErrorMessage, json } from '../_utils/http';
 import { INQUIRY_STATUSES, ensureWebsiteInquiriesSchema } from '../_utils/inquiries';
+import {
+    onRequestOptions as intakeOptions,
+    onRequestPost as intakePost
+} from '../intake';
 
 const QuerySchema = z.object({
     status: z.enum(INQUIRY_STATUSES).optional(),
@@ -52,3 +56,6 @@ export async function onRequestGet(context: any) {
         return apiError(500, d1ErrorMessage(e, 'Failed to load inquiries'));
     }
 }
+
+export const onRequestPost = intakePost;
+export const onRequestOptions = intakeOptions;

@@ -13,10 +13,6 @@
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
 
-/services
-  X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: "/speculation-rules.json"
-
 /concepts
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
