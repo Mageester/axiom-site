@@ -118,9 +118,9 @@ const processStages = [
 ];
 
 const manifestoTeaserPoints = [
-  'Most sites hide the service until people start hunting.',
-  'Proof arrives too late to build trust when it matters.',
-  'Calls and quote requests pick up friction instead of clarity.',
+  'Websites should be treated as infrastructure, not decoration.',
+  'Clarity, performance, and consistency are non-negotiable.',
+  'The work should reflect standards, not shortcuts.',
 ];
 
 const Home: React.FC = () => {
@@ -221,16 +221,16 @@ const Home: React.FC = () => {
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="grid gap-8 lg:grid-cols-[minmax(0,1.16fr)_minmax(18rem,0.84fr)] lg:items-start">
                 <div className="max-w-3xl">
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Why it matters</p>
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Manifesto</p>
                   <h2 className="mt-3 max-w-[16ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                    Most service-business sites lose trust before the first call.
+                    The philosophy behind how Axiom builds.
                   </h2>
                   <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                    The Manifesto lays out why brochure-site thinking fails service businesses in KW and across Ontario, and what the web presence actually needs to do if it is supposed to help sales.
+                    The manifesto explains what Axiom believes, what it refuses to compromise on, and why each site is treated as infrastructure instead of decoration.
                   </p>
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                     <Link to="/manifesto" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                      Read Why It Matters
+                      Read the manifesto
                     </Link>
                     <Link
                       to={CTA.primary.to}

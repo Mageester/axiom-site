@@ -8,12 +8,14 @@ import { shouldDisableHeavyMotion } from '../lib/motionPreferences';
 
 type LayoutProps = {
   children: React.ReactNode;
+  disableAmbientMotion?: boolean;
+  hidePrimaryCta?: boolean;
 };
 
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
   { label: 'Work', to: '/works' },
-  { label: 'Why It Matters', to: '/manifesto' },
+  { label: 'Manifesto', to: '/manifesto' },
   { label: 'Process', to: '/method' },
   { label: 'About', to: '/about' },
 ];
@@ -26,7 +28,11 @@ const isActiveRoute = (pathname: string, to: string) => {
   return pathname === to || pathname.startsWith(`${to}/`);
 };
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  disableAmbientMotion = false,
+  hidePrimaryCta = false,
+}) => {
   const layoutRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
@@ -34,6 +40,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const disableHeavyMotion = shouldDisableHeavyMotion();
+  const disableAmbientVisuals = disableHeavyMotion || disableAmbientMotion;
 
   useEffect(() => {
     let rafId = 0;
@@ -60,7 +67,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (disableHeavyMotion) {
+    if (disableAmbientVisuals) {
       const root = layoutRef.current;
       if (!root) return;
 
@@ -115,7 +122,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     targets.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
-  }, [disableHeavyMotion, location.pathname]);
+  }, [disableAmbientVisuals, location.pathname]);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -221,7 +228,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         Skip to main content
       </a>
 
-      {!disableHeavyMotion && (
+      {!disableAmbientVisuals && (
         <div className="pointer-events-none absolute inset-0 z-0">
           <div data-startup-bg className="fixed left-[-10%] top-[-20%] h-[50vw] w-[50vw] rounded-full bg-[#697481] opacity-[0.13] blur-[120px]" />
           <div data-startup-bg className="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B06E52] opacity-[0.09] blur-[120px]" />
@@ -276,12 +283,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </nav>
 
           <div className="hidden flex-1 basis-[44%] items-center justify-end md:flex">
-            <Link
-              to={CTA.primary.to}
-              className="inline-flex items-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-2 text-sm font-medium text-[#F2F4F7] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/24 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
-            >
-              {CTA.primary.label}
-            </Link>
+            {!hidePrimaryCta && (
+              <Link
+                to={CTA.primary.to}
+                className="inline-flex items-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-2 text-sm font-medium text-[#F2F4F7] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/24 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+              >
+                {CTA.primary.label}
+              </Link>
+            )}
           </div>
 
           <div className="flex flex-1 basis-[44%] items-center justify-end md:hidden">
@@ -350,18 +359,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           ))}
         </nav>
 
-        <Link
-          to={CTA.primary.to}
-          onClick={() => setIsMobileMenuOpen(false)}
-          className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-3 text-sm font-medium text-[#F2F4F7] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/24 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
-        >
-          {CTA.primary.label}
-        </Link>
+        {!hidePrimaryCta && (
+          <Link
+            to={CTA.primary.to}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-3 text-sm font-medium text-[#F2F4F7] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/24 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+          >
+            {CTA.primary.label}
+          </Link>
+        )}
       </div>
 
-      <div className={`relative z-10 pt-20 md:pt-28 ${disableHeavyMotion ? '' : 'noise-overlay'}`}>{children}</div>
+      <div className={`relative z-10 pt-20 md:pt-28 ${disableAmbientVisuals ? '' : 'noise-overlay'}`}>{children}</div>
 
-      {!disableHeavyMotion && <FloatingAffordances />}
+      {!disableAmbientVisuals && <FloatingAffordances />}
     </div>
   );
 };

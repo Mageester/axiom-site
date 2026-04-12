@@ -101,8 +101,8 @@ export const SEO_ROUTES = {
         canonicalPath: '/concepts',
     },
     manifesto: {
-        title: 'Why weak sites cost money',
-        description: 'Why weak websites can cost money when busy days matter and calls need to land quickly.',
+        title: 'Manifesto',
+        description: 'Axiom\'s philosophy on building websites as infrastructure: clear standards, hard boundaries, and the principles that guide the work.',
         canonicalPath: '/manifesto',
     },
     audit: {
