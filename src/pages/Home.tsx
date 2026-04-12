@@ -133,12 +133,12 @@ const Home: React.FC = () => {
 
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="pt-10 md:pt-20">
+          <section data-hero-root className="relative pt-10 md:pt-20">
             <div className="max-w-6xl">
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Web infrastructure for service businesses in KW and across Ontario.
+                    Infrastructure That Scales Your Empire
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-prose text-base leading-relaxed text-slate-200/90 md:text-lg">
@@ -153,22 +153,67 @@ const Home: React.FC = () => {
                   </Link>
                   <Link
                     to={CTA.work.to}
-                    className="inline-flex min-h-11 w-full items-center justify-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
+                    className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-white/25 px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-white/80 transition-colors duration-200 hover:border-white/50 hover:text-white sm:w-auto"
                   >
                     {CTA.work.label}
                   </Link>
                 </div>
               </div>
               <div data-startup-meta className="mt-7 w-full max-w-4xl border-t border-white/8 pt-4 md:mt-10 md:pt-5">
-                <ul className="grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
+                <ul className="mt-1 grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
                   {heroTrustPoints.map((point) => (
-                    <li key={point} className="flex items-center gap-2.5 text-sm text-slate-200/90">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#d4a48e]" aria-hidden="true" />
-                      <span>{point}</span>
+                    <li key={point} className="flex items-center gap-2.5 text-[13.5px] text-slate-100">
+                      <span className="h-2 w-2 rounded-full bg-[#d4a48e]" aria-hidden="true" />
+                      <span className="font-medium">{point}</span>
                     </li>
                   ))}
                 </ul>
               </div>
+            </div>
+            <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 pointer-events-none xl:block opacity-40" aria-hidden="true">
+              <svg width="480" height="480" viewBox="0 0 480 480" fill="none">
+                <defs>
+                  <radialGradient id="hero-topology-fade" cx="50%" cy="50%" r="50%">
+                    <stop offset="40%" stopColor="white" stopOpacity="1" />
+                    <stop offset="100%" stopColor="white" stopOpacity="0" />
+                  </radialGradient>
+                  <mask id="hero-topology-mask">
+                    <rect width="480" height="480" fill="url(#hero-topology-fade)" />
+                  </mask>
+                </defs>
+                <g mask="url(#hero-topology-mask)">
+                  <g stroke="rgba(255,255,255,0.1)" strokeWidth="0.5">
+                    <path d="M40 40V440" />
+                    <path d="M120 40V440" />
+                    <path d="M200 40V440" />
+                    <path d="M280 40V440" />
+                    <path d="M360 40V440" />
+                    <path d="M440 40V440" />
+                    <path d="M40 40H440" />
+                    <path d="M40 120H440" />
+                    <path d="M40 200H440" />
+                    <path d="M40 280H440" />
+                    <path d="M40 360H440" />
+                    <path d="M40 440H440" />
+                    <path d="M40 40L200 200L360 120L440 280" />
+                    <path d="M120 440L200 280L360 360L440 200" />
+                    <path d="M120 120L280 280L360 360" />
+                    <path d="M40 280L120 200L280 120L440 40" />
+                  </g>
+                  <g stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" fill="none">
+                    <circle cx="120" cy="120" r="7" />
+                    <circle cx="200" cy="200" r="9" />
+                    <circle cx="280" cy="120" r="8" />
+                    <circle cx="360" cy="360" r="10" />
+                    <circle cx="440" cy="280" r="7" />
+                  </g>
+                  <g fill="#d4a48e">
+                    <circle cx="120" cy="120" r="3.5" fillOpacity="0.3" />
+                    <circle cx="280" cy="120" r="3.5" fillOpacity="0.3" />
+                    <circle cx="360" cy="360" r="3.5" fillOpacity="0.3" />
+                  </g>
+                </g>
+              </svg>
             </div>
           </section>
 
@@ -197,11 +242,11 @@ const Home: React.FC = () => {
                 </div>
 
                 <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What the page covers</p>
+                  <p className="font-axiomMono text-[11.5px] uppercase tracking-[0.2em] text-[#A7B3BC]">What the page covers</p>
                   <div className="mt-4 divide-y divide-white/[0.08]">
                     {manifestoTeaserPoints.map((point) => (
-                      <div key={point} className="py-3 first:pt-0 last:pb-0">
-                        <p className="text-sm leading-relaxed text-slate-300">{point}</p>
+                      <div key={point} className="py-4 first:pt-0 last:pb-0">
+                        <p className="text-[14px] leading-[1.8] text-slate-200">{point}</p>
                       </div>
                     ))}
                   </div>

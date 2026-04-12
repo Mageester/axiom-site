@@ -485,27 +485,27 @@ body::after {
 }
 
 .cascade>*:nth-child(3) {
-  animation-delay: 160ms;
+  animation-delay: 120ms;
 }
 
 .cascade>*:nth-child(4) {
-  animation-delay: 240ms;
+  animation-delay: 120ms;
 }
 
 .cascade>*:nth-child(5) {
-  animation-delay: 320ms;
+  animation-delay: 120ms;
 }
 
 .cascade>*:nth-child(6) {
-  animation-delay: 400ms;
+  animation-delay: 120ms;
 }
 
 .cascade>*:nth-child(7) {
-  animation-delay: 480ms;
+  animation-delay: 120ms;
 }
 
 .cascade>*:nth-child(8) {
-  animation-delay: 560ms;
+  animation-delay: 120ms;
 }
 
 /* ========== GRADIENT TEXT (Enhanced) ========== */
