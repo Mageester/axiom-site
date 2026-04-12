@@ -15,7 +15,7 @@ type LayoutProps = {
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
   { label: 'Work', to: '/works' },
-  { label: 'Manifesto', to: '/manifesto' },
+  { label: 'Our Approach', to: '/manifesto' },
   { label: 'Process', to: '/method' },
   { label: 'About', to: '/about' },
 ];
@@ -67,6 +67,11 @@ const Layout: React.FC<LayoutProps> = ({
   }, []);
 
   useEffect(() => {
+    const setRevealState = (element: HTMLElement, visible: boolean) => {
+      element.dataset.revealState = visible ? 'visible' : 'hidden';
+      element.classList.toggle('is-visible', visible);
+    };
+
     if (disableAmbientVisuals) {
       const root = layoutRef.current;
       if (!root) return;
@@ -80,7 +85,7 @@ const Layout: React.FC<LayoutProps> = ({
             element.dataset.motionManaged !== 'true'
         );
 
-      targets.forEach((element) => element.classList.add('is-visible'));
+      targets.forEach((element) => setRevealState(element, true));
       return;
     }
 
@@ -101,10 +106,12 @@ const Layout: React.FC<LayoutProps> = ({
     targets.forEach((element, index) => {
       element.classList.add('reveal-on-scroll');
       element.style.setProperty('--reveal-order', String(index % 3));
+      const isNearViewport = element.getBoundingClientRect().top <= window.innerHeight * 0.94;
+      setRevealState(element, isNearViewport);
     });
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      targets.forEach((element) => element.classList.add('is-visible'));
+      targets.forEach((element) => setRevealState(element, true));
       return () => undefined;
     }
 
@@ -112,7 +119,9 @@ const Layout: React.FC<LayoutProps> = ({
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
+          if (entry.target instanceof HTMLElement) {
+            setRevealState(entry.target, true);
+          }
           observer.unobserve(entry.target);
         });
       },

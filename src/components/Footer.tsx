@@ -18,9 +18,6 @@ const Footer: React.FC = () => {
             <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">
               Clear websites for established businesses.
             </p>
-            <p className="mt-2 max-w-md text-sm leading-6 text-slate-400">
-              Replies within one business day.
-            </p>
             <p className="mt-6 text-[10px] uppercase tracking-[0.12em] text-slate-400">
               &copy; 2026 Axiom. All rights reserved.
             </p>

@@ -56,7 +56,7 @@ export const HOME_JSON_LD = {
 
 export const SEO_ROUTES = {
     home: {
-        title: 'Clear websites for established businesses',
+        title: 'Websites for Service Businesses',
         description: DEFAULT_SEO_DESCRIPTION,
         canonicalPath: '/',
     },

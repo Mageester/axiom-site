@@ -35,6 +35,7 @@ export function RevealBlock({
       ref={reveal.ref}
       data-motion-managed="true"
       data-reveal-variant={variant}
+      data-reveal-state={reveal.isVisible ? 'visible' : 'hidden'}
       className={['reveal-on-scroll', reveal.isVisible ? 'is-visible' : '', className].filter(Boolean).join(' ')}
       style={revealStyle}
       {...props}

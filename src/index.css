@@ -839,8 +839,8 @@
   .reveal-on-scroll {
     --reveal-distance: 12px;
     --reveal-duration: 0.38s;
-    opacity: 0;
-    transform: translateY(var(--reveal-distance));
+    opacity: 1;
+    transform: none;
     will-change: opacity, transform;
     transition:
       opacity var(--reveal-duration) cubic-bezier(0.22, 1, 0.36, 1),
@@ -863,9 +863,15 @@
     --reveal-duration: 0.38s;
   }
 
-  .reveal-on-scroll.is-visible {
+  .reveal-on-scroll[data-reveal-state='hidden'] {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+  }
+
+  .reveal-on-scroll.is-visible,
+  .reveal-on-scroll[data-reveal-state='visible'] {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 
   .bento-hover {
@@ -1096,6 +1102,9 @@
 
   .reveal-on-scroll {
     opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
   }
 
   .motion-link-accent:hover,

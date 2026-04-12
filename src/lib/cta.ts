@@ -7,7 +7,7 @@ export const CTA_PATHS = {
 
 export const CTA_LABELS = {
     primary: 'Start a project',
-    work: 'See the work',
+    work: 'See the Work',
     process: 'See the process',
     contact: 'Contact',
     review: 'Request review',

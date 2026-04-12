@@ -9,7 +9,7 @@ type RevealResult<T extends HTMLElement> = {
 
 const useReveal = <T extends HTMLElement>(): RevealResult<T> => {
   const ref = useRef<T | null>(null);
-  const [isVisible, setIsVisible] = useState(() => shouldDisableHeavyMotion());
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (shouldDisableHeavyMotion()) {
@@ -18,7 +18,15 @@ const useReveal = <T extends HTMLElement>(): RevealResult<T> => {
     }
 
     const element = ref.current;
-    if (!element || isVisible) return;
+    if (!element) return;
+
+    const isNearViewport = element.getBoundingClientRect().top <= window.innerHeight * 0.94;
+    if (isNearViewport) {
+      setIsVisible(true);
+      return;
+    }
+
+    setIsVisible(false);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -34,7 +42,7 @@ const useReveal = <T extends HTMLElement>(): RevealResult<T> => {
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, [isVisible]);
+  }, []);
 
   return { ref, isVisible };
 };
