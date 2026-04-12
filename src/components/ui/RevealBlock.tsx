@@ -22,10 +22,11 @@ export function RevealBlock({
 }: RevealBlockProps) {
   const reveal = useReveal<HTMLElement>();
   const Component = as;
-  const revealStyle = delay > 0
+  const cappedDelay = Math.min(delay, 0.12);
+  const revealStyle = cappedDelay > 0
     ? ({
         ...style,
-        ['--reveal-delay' as any]: `${delay}s`,
+        ['--reveal-delay' as any]: `${cappedDelay}s`,
       } as React.CSSProperties)
     : style;
 
