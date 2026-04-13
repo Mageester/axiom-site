@@ -14,7 +14,7 @@ import PricingPage from './pages/PricingPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 
-const BUILD_REV = '2026-04-13-cache-fix';
+const BUILD_REV = '2026-04-13-origin-cache-refresh';
 const Login = lazy(() => import('./pages/admin/Login'));
 const Account = lazy(() => import('./pages/admin/Account'));
 const Jobs = lazy(() => import('./pages/admin/Jobs'));
