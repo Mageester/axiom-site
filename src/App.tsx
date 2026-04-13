@@ -77,14 +77,17 @@ const App: React.FC = () => {
         <Routes location={location}>
           <Route path="/" element={<OpsAwareHome />} />
           <Route path="/method" element={<Infrastructure />} />
+          <Route path="/process" element={<Navigate to="/method" replace />} />
           <Route path="/infrastructure" element={<Navigate to="/method" replace />} />
           <Route path="/works" element={<Deployments />} />
+          <Route path="/work" element={<Navigate to="/works" replace />} />
           <Route path="/works/:slug" element={<Navigate to="/works" replace />} />
           <Route path="/deployments" element={<Navigate to="/works" replace />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/services" element={<Navigate to="/pricing" replace />} />
           <Route path="/concepts" element={<Concepts />} />
           <Route path="/approach" element={<Approach />} />
+          <Route path="/our-approach" element={<Navigate to="/approach" replace />} />
           <Route path="/manifesto" element={<Navigate to="/approach" replace />} />
           <Route path="/audit" element={<AuditPage />} />
           <Route path="/start-a-project" element={<ContactPage />} />
