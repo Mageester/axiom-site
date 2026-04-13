@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { RefObject } from 'react';
-import { shouldDisableHeavyMotion } from '../lib/motionPreferences';
+import { shouldDisableRevealMotion } from '../lib/motionPreferences';
 
 type RevealResult<T extends HTMLElement> = {
   isVisible: boolean;
@@ -12,7 +12,7 @@ const useReveal = <T extends HTMLElement>(): RevealResult<T> => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (shouldDisableHeavyMotion()) {
+    if (shouldDisableRevealMotion()) {
       setIsVisible(true);
       return;
     }

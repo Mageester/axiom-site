@@ -4,7 +4,7 @@ import FloatingAffordances from './FloatingAffordances';
 import ResponsiveImage from './ResponsiveImage';
 import { responsiveImages } from '../lib/responsiveImages';
 import { CTA } from '../lib/cta';
-import { shouldDisableHeavyMotion } from '../lib/motionPreferences';
+import { shouldDisableHeavyMotion, shouldDisableRevealMotion } from '../lib/motionPreferences';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -41,6 +41,7 @@ const Layout: React.FC<LayoutProps> = ({
   const location = useLocation();
   const disableHeavyMotion = shouldDisableHeavyMotion();
   const disableAmbientVisuals = disableHeavyMotion || disableAmbientMotion;
+  const disableRevealMotion = shouldDisableRevealMotion() || disableAmbientMotion;
 
   useEffect(() => {
     let rafId = 0;
@@ -72,7 +73,7 @@ const Layout: React.FC<LayoutProps> = ({
       element.classList.toggle('is-visible', visible);
     };
 
-    if (disableAmbientVisuals) {
+    if (disableRevealMotion) {
       const root = layoutRef.current;
       if (!root) return;
 
@@ -131,7 +132,7 @@ const Layout: React.FC<LayoutProps> = ({
     targets.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
-  }, [disableAmbientVisuals, location.pathname]);
+  }, [disableRevealMotion, location.pathname]);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -249,6 +250,7 @@ const Layout: React.FC<LayoutProps> = ({
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-2.5 md:px-6 md:pt-3">
         <div className="mx-auto max-w-[92rem]">
           <div
+            data-navbar-shell
             className={`pointer-events-auto relative flex h-[3.2rem] items-center rounded-[1rem] px-4 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-[3.5rem] md:px-5 ${
               isScrolled
                 ? 'border border-white/[0.03] bg-[linear-gradient(180deg,rgba(10,12,16,0.11)_0%,rgba(10,12,16,0.05)_100%)] shadow-[0_1px_0_rgba(255,255,255,0.02),0_10px_22px_rgba(0,0,0,0.035)] backdrop-blur-xl backdrop-saturate-150 md:backdrop-blur-2xl'

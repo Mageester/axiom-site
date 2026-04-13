@@ -1214,18 +1214,25 @@
     -webkit-backdrop-filter: none !important;
   }
 
+  [data-navbar-shell].backdrop-blur-xl {
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+  }
+
   [class*='blur-'] {
     filter: none !important;
   }
 
   .reveal-on-scroll {
-    opacity: 1;
-    transform: none;
-    transition: none;
     will-change: auto;
   }
 
-  .motion-surface,
+  .logo-marquee-track {
+    animation: marquee-loop var(--marquee-duration, 36s) linear infinite;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
   .motion-media,
   .motion-floating,
   .motion-link-accent,

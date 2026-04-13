@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
+import WorkPreviewGrid from '../components/WorkPreviewGrid';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
 import { caseStudies } from '../data/caseStudies';
@@ -175,6 +176,8 @@ const Home: React.FC = () => {
               </div>
             </div>
           </section>
+
+          <WorkPreviewGrid />
 
           <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature">
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
