@@ -97,12 +97,12 @@ export const SEO_ROUTES = {
     },
     concepts: {
         title: 'Concepts',
-        description: 'Demo sites for HVAC, roofing, and landscaping businesses. Each one shows a clearer path to the next step.',
+        description: 'Demo sites showing how a clear offer, real proof, and one obvious next step turn a website into something that actually works.',
         canonicalPath: '/concepts',
     },
     approach: {
         title: 'Our Approach',
-        description: 'Axiom keeps websites clear, fast, and easy to act on for service businesses.',
+        description: 'Axiom keeps websites clear, fast, and easy to act on — so businesses earn attention and trust without the noise.',
         canonicalPath: '/approach',
     },
     audit: {
