@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useLayoutEffect } from 'react';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import Home from './pages/Home';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -63,6 +63,10 @@ const LegacyProjectRedirect: React.FC = () => {
 
 const App: React.FC = () => {
   const location = useLocation();
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen overflow-x-hidden">
