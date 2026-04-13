@@ -7,7 +7,7 @@ import AuditPage from './pages/AuditPage';
 import ContactPage from './pages/ContactPage';
 import Concepts from './pages/Concepts';
 import Deployments from './pages/Deployments';
-import Manifesto from './pages/Manifesto';
+import Approach from './pages/Approach';
 import Infrastructure from './pages/Infrastructure';
 import NotFoundPage from './pages/NotFoundPage';
 import PricingPage from './pages/PricingPage';
@@ -81,7 +81,8 @@ const App: React.FC = () => {
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/services" element={<Navigate to="/pricing" replace />} />
           <Route path="/concepts" element={<Concepts />} />
-          <Route path="/manifesto" element={<Manifesto />} />
+          <Route path="/approach" element={<Approach />} />
+          <Route path="/manifesto" element={<Navigate to="/approach" replace />} />
           <Route path="/audit" element={<AuditPage />} />
           <Route path="/start-a-project" element={<ContactPage />} />
           <Route path="/apply" element={<LegacyProjectRedirect />} />

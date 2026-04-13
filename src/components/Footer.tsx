@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
             <div className="space-y-1.5">
               <NavLink to="/" className={routeLinkClass}>Home</NavLink>
               <NavLink to="/works" className={routeLinkClass}>Work</NavLink>
-              <NavLink to="/manifesto" className={routeLinkClass}>Manifesto</NavLink>
+              <NavLink to="/approach" className={routeLinkClass}>Our Approach</NavLink>
               <NavLink to="/method" className={routeLinkClass}>Process</NavLink>
               <NavLink to="/about" className={routeLinkClass}>About</NavLink>
             </div>
