@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
+import TechLogos from '../components/TechLogos';
 import WorkPreviewGrid from '../components/WorkPreviewGrid';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
@@ -30,13 +31,6 @@ const homeSelectedWorkSlugs = [
 const selectedWorkEntries = homeSelectedWorkSlugs
   .map((slug) => caseStudies.find((entry) => entry.slug === slug))
   .filter((entry): entry is (typeof caseStudies)[number] => Boolean(entry));
-
-const heroTrustPoints = [
-  'Clients find you fast',
-  'Looks sharp on any screen',
-  'Built to get calls',
-  'Launched in weeks',
-] as const;
 
 const homepageBenefitCallouts = [
   'Your service is the first thing visitors see - not buried three scrolls down',
@@ -127,33 +121,30 @@ const Home: React.FC = () => {
             <div className="max-w-6xl">
               <div>
                 <div className="max-w-4xl overflow-hidden">
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
+                    WEBSITES FOR SERVICE BUSINESSES
+                  </p>
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Clear websites for service businesses in Ontario.
+                    Your service, your proof, one call to action.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We build sites where your service, proof, and contact info are impossible to miss. For roofers, landscapers, HVAC, and trades.
+                  We build websites for roofers, landscapers, HVAC companies, and trades in Kitchener-Waterloo and across Ontario. Your service is front and center. Your best work is visible. Your phone number is obvious.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                  <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                    {CTA.primary.label}
+                  <Link to={CTA.work.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                    See our work
                   </Link>
                   <Link
-                    to={CTA.work.to}
+                    to="/audit"
                     className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-white/25 px-6 py-2.5 text-sm font-semibold text-white/80 transition-colors duration-200 hover:border-white/50 hover:text-white sm:w-auto"
                   >
-                    See the Work
+                    Get a free site review
                   </Link>
                 </div>
-                <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-200/90 md:text-[15px]">
-                  {heroTrustPoints.map((point, index) => (
-                    <React.Fragment key={point}>
-                      {index > 0 ? <span aria-hidden="true"> &middot; </span> : null}
-                      <span>{point}</span>
-                    </React.Fragment>
-                  ))}
+                <p className="mt-4 text-sm leading-6 text-slate-400">
+                  No contracts &middot; Delivered in 14&ndash;21 days &middot; Replies within one business day
                 </p>
-                <p className="mt-2 text-sm leading-6 text-slate-400">Replies within one business day.</p>
               </div>
             </div>
             <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 xl:block" aria-hidden="true">
@@ -369,6 +360,8 @@ const Home: React.FC = () => {
               </div>
             </article>
           </RevealBlock>
+
+          <TechLogos />
         </main>
 
         <Footer />

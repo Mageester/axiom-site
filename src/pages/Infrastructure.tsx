@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
@@ -10,9 +10,10 @@ import { responsiveImages } from '../lib/responsiveImages';
 import { SEO_ROUTES } from '../lib/seo';
 
 type ProcessStep = {
-  number: string;
+  id: string;
+  dayLabel: string;
   title: string;
-  duration: string;
+  timelineDescription: string;
   summary: string;
   bullets: readonly string[];
 };
@@ -24,9 +25,10 @@ type ChecklistItem = {
 
 const PROCESS_STEPS: readonly ProcessStep[] = [
   {
-    number: '01',
+    id: 'review',
+    dayLabel: 'Day 1',
     title: 'Review',
-    duration: '1-2 days',
+    timelineDescription: 'We audit the current site and identify the friction that costs trust and leads.',
     summary: 'We look at the current site, what needs to change, and what people should find first.',
     bullets: [
       'We review the current site and note what needs to change.',
@@ -34,9 +36,10 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     ],
   },
   {
-    number: '02',
-    title: 'Plan',
-    duration: '2–3 days',
+    id: 'scope',
+    dayLabel: 'Day 3',
+    title: 'Scope',
+    timelineDescription: 'We lock the page structure, proof blocks, and call paths before design starts.',
     summary: 'We settle the main pages, the proof to show, and where calls or forms should go.',
     bullets: [
       'We map the pages, proof, and contact path.',
@@ -44,9 +47,10 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     ],
   },
   {
-    number: '03',
+    id: 'build',
+    dayLabel: 'Day 7',
     title: 'Build',
-    duration: '2–4 weeks',
+    timelineDescription: 'We write, design, and test the build so service, proof, and contact stay clear.',
     summary: 'We write the copy, shape the pages, and check how they hold up on phones and desktop.',
     bullets: [
       'We write, design, and build the pages.',
@@ -54,9 +58,10 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     ],
   },
   {
-    number: '04',
+    id: 'launch',
+    dayLabel: 'Day 14-21',
     title: 'Launch',
-    duration: '1 day',
+    timelineDescription: 'We run launch checks, connect the domain, and ship with clear next steps.',
     summary: 'We test the forms, connect the domain, and make sure the site is ready to go live.',
     bullets: [
       'We test the forms, connect the domain, and check the live site.',
@@ -96,7 +101,48 @@ const CheckMark: React.FC = () => (
   </svg>
 );
 
+const ProcessTimeline: React.FC = () => (
+  <RevealBlock
+    as="div"
+    variant="feature"
+    className="reveal-stagger mt-7 overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-5 shadow-[0_14px_32px_rgba(0,0,0,0.18)] md:p-7"
+  >
+    <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-4">
+      {PROCESS_STEPS.map((step, index) => (
+        <React.Fragment key={step.id}>
+          <RevealBlock
+            as="article"
+            delay={index * 0.06}
+            variant="card"
+            className="relative pl-7 lg:flex-1 lg:pl-0"
+          >
+            {index < PROCESS_STEPS.length - 1 ? (
+              <div className="absolute left-[0.6rem] top-[3.1rem] bottom-[-1.4rem] w-[2px] bg-white/10 lg:hidden" aria-hidden="true" />
+            ) : null}
+            <span className="absolute left-0 top-[0.95rem] h-3 w-3 rounded-full border border-white/20 bg-[#0f1524] lg:hidden" aria-hidden="true" />
+            <p className="font-axiomDisplay text-[clamp(1.6rem,3vw,2.2rem)] leading-none text-accent">{step.dayLabel}</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">{step.title}</h3>
+            <p className="mt-2 text-sm leading-6 text-[#A7B3BC]">{step.timelineDescription}</p>
+          </RevealBlock>
+          {index < PROCESS_STEPS.length - 1 ? (
+            <div className="hidden h-[2px] flex-1 self-start bg-white/10 lg:block lg:translate-y-7" aria-hidden="true" />
+          ) : null}
+        </React.Fragment>
+      ))}
+    </div>
+  </RevealBlock>
+);
+
 const Infrastructure: React.FC = () => {
+  const [expandedSteps, setExpandedSteps] = useState<Record<string, boolean>>({});
+
+  const toggleStep = (stepId: string) => {
+    setExpandedSteps((previous) => ({
+      ...previous,
+      [stepId]: !previous[stepId],
+    }));
+  };
+
   return (
     <>
       <SEO
@@ -133,14 +179,11 @@ const Infrastructure: React.FC = () => {
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7]">What each stage covers.</h2>
                 <div className="mt-5 divide-y divide-white/[0.08]">
                   {PROCESS_STEPS.map((step) => (
-                    <div key={step.number} className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                    <div key={step.id} className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
                       <div className="min-w-0">
-                        <p className="font-axiomMono text-[11px] tracking-[0.18em] text-[#d4a48e]">{step.number}</p>
+                        <p className="font-axiomMono text-[11px] tracking-[0.18em] text-[#d4a48e]">{step.dayLabel}</p>
                         <p className="mt-1 text-sm font-medium text-[#F2F4F7]">{step.title}</p>
                       </div>
-                      <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">
-                        {step.duration}
-                      </span>
                     </div>
                   ))}
                 </div>
@@ -154,11 +197,11 @@ const Infrastructure: React.FC = () => {
                   source={responsiveImages.workAether}
                   sizes="(min-width: 768px) 100vw, 100vw"
                   alt="Process mapping and design architecture"
-                  className="w-full h-[24rem] md:h-[32rem] object-cover"
+                  className="h-[24rem] w-full object-cover md:h-[32rem]"
                   style={{ objectPosition: 'center 40%' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 max-w-lg">
+              <div className="absolute bottom-6 left-6 max-w-lg md:bottom-10 md:left-10">
                   <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#d4a48e]">The Output</p>
                   <p className="mt-3 text-[1.35rem] font-medium leading-[1.4] text-[#F2F4F7] sm:text-2xl">
                     A clear path creates a sharp result.
@@ -171,46 +214,58 @@ const Infrastructure: React.FC = () => {
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.7fr)] xl:items-start xl:gap-8">
               <div>
                 <div className="mb-5 flex flex-col gap-2 md:mb-6">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">The steps</p>
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Timeline</p>
                   <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-                    What happens at each stage.
+                    How the build moves.
                   </h2>
                   <p className="max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-                    The main choices get settled early so the build stays clear.
+                    Clear checkpoints keep decisions early and launch predictable.
                   </p>
                 </div>
 
-                <div className="space-y-4 reveal-stagger">
-                    {PROCESS_STEPS.map((step, index) => (
-                      <RevealBlock as="article" key={step.number} delay={index * 0.08} variant="card"
-                      className="motion-surface overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.98)_0%,rgba(9,12,18,0.99)_100%)] shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
-                    >
-                      <div className="grid gap-0 lg:grid-cols-[11rem_minmax(0,1fr)]">
-                        <div className="flex items-start justify-between gap-4 border-b border-white/10 p-5 md:p-6 lg:flex-col lg:justify-between lg:border-b-0 lg:border-r">
-                          <div>
-                            <p className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#d4a48e]">
-                              {step.number}
-                            </p>
-                            <h3 className="mt-2 text-[1.1rem] font-semibold text-[#F2F4F7]">{step.title}</h3>
+                <ProcessTimeline />
+
+                <div className="mt-7 space-y-4">
+                  {PROCESS_STEPS.map((step, index) => {
+                    const isExpanded = Boolean(expandedSteps[step.id]);
+                    return (
+                      <RevealBlock
+                        as="article"
+                        key={step.id}
+                        delay={index * 0.06}
+                        variant="card"
+                        className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-5 shadow-[0_12px_30px_rgba(0,0,0,0.16)] md:p-6"
+                      >
+                        <div className="flex flex-wrap items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{step.dayLabel}</p>
+                            <h3 className="mt-2 text-[1.08rem] font-semibold text-[#F2F4F7]">{step.title}</h3>
+                            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">{step.summary}</p>
                           </div>
-                          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-300">
-                            {step.duration}
-                          </span>
+                          <button
+                            type="button"
+                            onClick={() => toggleStep(step.id)}
+                            className="inline-flex min-h-11 items-center text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+                          >
+                            {isExpanded ? 'Show less' : 'Read more'}
+                          </button>
                         </div>
-                        <div className="p-5 md:p-6 lg:p-7">
-                          <p className="max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">{step.summary}</p>
-                          <ul className="mt-4 space-y-2.5">
-                            {step.bullets.map((bullet) => (
-                              <li key={bullet} className="flex gap-2 text-sm leading-6 text-slate-300 md:text-[0.96rem]">
-                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d4a48e]" aria-hidden="true" />
-                                <span>{bullet}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </RevealBlock>
-                  ))}
+
+                        {isExpanded ? (
+                          <div className="mt-4 border-t border-white/10 pt-4">
+                            <ul className="space-y-2.5">
+                              {step.bullets.map((bullet) => (
+                                <li key={bullet} className="flex gap-2 text-sm leading-6 text-slate-300 md:text-[0.96rem]">
+                                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d4a48e]" aria-hidden="true" />
+                                  <span>{bullet}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : null}
+                      </RevealBlock>
+                    );
+                  })}
                 </div>
               </div>
 

@@ -47,8 +47,6 @@ const FIELD_LABEL_CLASS = 'text-[11px] font-axiomMono uppercase tracking-[0.16em
 const FIELD_HELPER_CLASS = 'text-xs leading-5 text-slate-400';
 const FIELD_INPUT_CLASS =
     'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500';
-const SECONDARY_BUTTON_CLASS =
-    'inline-flex min-h-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.06]';
 const PROJECT_FIELD_IDS = {
     name: 'project-full-name',
     email: 'project-email',
@@ -89,10 +87,94 @@ const CONTACT_FIELD_IDS = {
 
 type ContactFieldKey = keyof ContactFormState;
 
+const CONTACT_PHONE_DISPLAY = '(226) 753-1833';
+const CONTACT_PHONE_HREF = 'tel:+12267531833';
+const CONTACT_EMAIL = 'contact@getaxiom.ca';
+const SUCCESS_FADE_OUT_DURATION = 'calc(var(--motion-duration-base) - 20ms)';
+const SUCCESS_IN_DURATION = 'calc(var(--motion-duration-base) + 80ms)';
+const SUCCESS_IN_DELAY = '200ms';
+
+type CallUsCardProps = {
+    className?: string;
+    showEmail?: boolean;
+};
+
+const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = false }) => (
+    <article className={`rounded-2xl border border-[#B05D41]/30 bg-[#B05D41]/10 p-5 md:p-6 ${className}`.trim()}>
+        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#B05D41]">Call us</p>
+        <a
+            href={CONTACT_PHONE_HREF}
+            className="mt-3 inline-flex min-h-11 items-center text-[clamp(1.75rem,2.8vw,2.35rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#B05D41] transition-colors hover:text-[#d7a189]"
+        >
+            {CONTACT_PHONE_DISPLAY}
+        </a>
+        {showEmail && (
+            <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="mt-4 inline-flex min-h-11 items-center text-sm leading-6 text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+            >
+                {CONTACT_EMAIL}
+            </a>
+        )}
+    </article>
+);
+
+function createInitialIntakeForm(searchParams: URLSearchParams): IntakeFormState {
+    const packageParam = (searchParams.get('package') || '').toLowerCase();
+    const normalizedPackage =
+        packageParam === 'starter' || packageParam === 'foundation' ? 'simple' :
+            packageParam === 'professional' || packageParam === 'authority' ? 'standard' :
+                packageParam === 'enterprise' || packageParam === 'expansion' ? 'premium' :
+                    packageParam;
+
+    return {
+        ...INITIAL_FORM,
+        project_scale: SCALE_OPTIONS.some((option) => option.value === normalizedPackage) ? normalizedPackage : ''
+    };
+}
+
+type SubmissionSuccessStateProps = {
+    onReset: () => void;
+    className?: string;
+};
+
+const SubmissionSuccessState: React.FC<SubmissionSuccessStateProps> = ({ onReset, className = '' }) => (
+    <div
+        role="status"
+        aria-live="polite"
+        className={`rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center ${className}`.trim()}
+        style={{
+            animation: `intake-success-in ${SUCCESS_IN_DURATION} var(--motion-ease-decelerate) ${SUCCESS_IN_DELAY} both`
+        }}
+    >
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-emerald-400/35 bg-emerald-500/15">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-emerald-400" aria-hidden="true">
+                <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+        </div>
+        <h2 className="mt-5 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Message received.</h2>
+        <p className="mt-2 text-sm leading-7 text-slate-300">
+            We&apos;ll reply within one business day. If it&apos;s urgent, call us at{' '}
+            <a href={CONTACT_PHONE_HREF} className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                {CONTACT_PHONE_DISPLAY}
+            </a>
+            .
+        </p>
+        <button
+            type="button"
+            onClick={onReset}
+            className="mt-6 inline-flex min-h-11 items-center text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+        >
+            Send another message
+        </button>
+    </div>
+);
+
 const GeneralContactForm: React.FC = () => {
     const [form, setForm] = useState<ContactFormState>(CONTACT_INITIAL_FORM);
     const [status, setStatus] = useState<SubmitState>('');
     const [msg, setMsg] = useState('');
+    const [showSuccessState, setShowSuccessState] = useState(false);
     const [errors, setErrors] = useState<Partial<Record<keyof ContactFormState, string>>>({});
     const successBoxRef = useRef<HTMLDivElement>(null);
 
@@ -106,7 +188,20 @@ const GeneralContactForm: React.FC = () => {
     };
 
     useEffect(() => {
-        if (status !== 'success') return;
+        if (status !== 'success') {
+            setShowSuccessState(false);
+            return;
+        }
+
+        const timeoutId = window.setTimeout(() => {
+            setShowSuccessState(true);
+        }, 300);
+
+        return () => window.clearTimeout(timeoutId);
+    }, [status]);
+
+    useEffect(() => {
+        if (!showSuccessState) return;
 
         const scrollToSuccess = () => {
             const target = successBoxRef.current;
@@ -118,7 +213,15 @@ const GeneralContactForm: React.FC = () => {
 
         const rafId = window.requestAnimationFrame(scrollToSuccess);
         return () => window.cancelAnimationFrame(rafId);
-    }, [status]);
+    }, [showSuccessState]);
+
+    const resetGeneralForm = () => {
+        setStatus('');
+        setMsg('');
+        setErrors({});
+        setShowSuccessState(false);
+        setForm(CONTACT_INITIAL_FORM);
+    };
 
     const setField = (key: keyof ContactFormState, value: string) => {
         if (errors[key]) {
@@ -175,7 +278,7 @@ const GeneralContactForm: React.FC = () => {
 
             if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg('Thanks. We will reply within one business day.');
+                setMsg('');
                 return;
             }
 
@@ -215,6 +318,10 @@ const GeneralContactForm: React.FC = () => {
                 </p>
             </section>
 
+            <section className="mx-auto mt-6 max-w-5xl">
+                <CallUsCard />
+            </section>
+
             <section className="mx-auto mt-4 max-w-5xl">
                 <div className="axiom-bento p-6 md:p-8">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-7" aria-busy={status === 'loading'}>
@@ -224,96 +331,92 @@ const GeneralContactForm: React.FC = () => {
                             </div>
                         )}
 
-                        {status === 'success' ? (
-                            <div ref={successBoxRef} role="status" aria-live="polite" className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
-                                <h2 className="text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg}</h2>
-                                <p className="mt-2 text-sm text-slate-300">We&apos;ll reply within one business day.</p>
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setStatus('');
-                                        setMsg('');
-                                        setErrors({});
-                                        setForm(CONTACT_INITIAL_FORM);
-                                    }}
-                                    className={`${SECONDARY_BUTTON_CLASS} mt-5`}
-                                >
-                                    Send another message
-                                </button>
+                        {!showSuccessState ? (
+                            <div
+                                style={{
+                                    opacity: status === 'success' ? 0 : 1,
+                                    transform: status === 'success' ? 'translateY(-8px)' : 'translateY(0)',
+                                    transition: `opacity ${SUCCESS_FADE_OUT_DURATION} var(--motion-ease-decelerate), transform ${SUCCESS_FADE_OUT_DURATION} var(--motion-ease-decelerate)`,
+                                    pointerEvents: status === 'success' ? 'none' : 'auto'
+                                }}
+                            >
+                                <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
+                                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                                        <div className="flex flex-col gap-2">
+                                            <label htmlFor={CONTACT_FIELD_IDS.name} className={FIELD_LABEL_CLASS}>Name</label>
+                                            <p id={`${CONTACT_FIELD_IDS.name}-helper`} className={FIELD_HELPER_CLASS}>Who should we address?</p>
+                                            <input
+                                                id={CONTACT_FIELD_IDS.name}
+                                                type="text"
+                                                required
+                                                minLength={2}
+                                                autoComplete="name"
+                                                value={form.name}
+                                                onChange={(event) => setField('name', event.target.value)}
+                                                className={FIELD_INPUT_CLASS}
+                                                aria-invalid={!!errors.name}
+                                                aria-describedby={errors.name ? `${CONTACT_FIELD_IDS.name}-helper ${CONTACT_FIELD_IDS.name}-error` : `${CONTACT_FIELD_IDS.name}-helper`}
+                                            />
+                                            {errors.name && <p id={`${CONTACT_FIELD_IDS.name}-error`} className="text-xs text-red-300">{errors.name}</p>}
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <label htmlFor={CONTACT_FIELD_IDS.email} className={FIELD_LABEL_CLASS}>Email</label>
+                                            <p id={`${CONTACT_FIELD_IDS.email}-helper`} className={FIELD_HELPER_CLASS}>Where should we reply?</p>
+                                            <input
+                                                id={CONTACT_FIELD_IDS.email}
+                                                type="email"
+                                                required
+                                                autoComplete="email"
+                                                value={form.email}
+                                                onChange={(event) => setField('email', event.target.value)}
+                                                className={FIELD_INPUT_CLASS}
+                                                aria-invalid={!!errors.email}
+                                                aria-describedby={errors.email ? `${CONTACT_FIELD_IDS.email}-helper ${CONTACT_FIELD_IDS.email}-error` : `${CONTACT_FIELD_IDS.email}-helper`}
+                                            />
+                                            {errors.email && <p id={`${CONTACT_FIELD_IDS.email}-error`} className="text-xs text-red-300">{errors.email}</p>}
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <label htmlFor={CONTACT_FIELD_IDS.business_name} className={FIELD_LABEL_CLASS}>Business name</label>
+                                            <p id={`${CONTACT_FIELD_IDS.business_name}-helper`} className={FIELD_HELPER_CLASS}>Optional, if the reply should use a company name.</p>
+                                            <input
+                                                id={CONTACT_FIELD_IDS.business_name}
+                                                type="text"
+                                                autoComplete="organization"
+                                                value={form.business_name}
+                                                onChange={(event) => setField('business_name', event.target.value)}
+                                                className={FIELD_INPUT_CLASS}
+                                                aria-describedby={`${CONTACT_FIELD_IDS.business_name}-helper`}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col gap-2">
+                                        <label htmlFor={CONTACT_FIELD_IDS.message} className={FIELD_LABEL_CLASS}>Message</label>
+                                        <p id={`${CONTACT_FIELD_IDS.message}-helper`} className={FIELD_HELPER_CLASS}>A few short sentences are enough.</p>
+                                        <textarea
+                                            id={CONTACT_FIELD_IDS.message}
+                                            rows={5}
+                                            required
+                                            minLength={10}
+                                            value={form.message}
+                                            onChange={(event) => setField('message', event.target.value)}
+                                            placeholder="Tell us what you need help with."
+                                            className={`${FIELD_INPUT_CLASS} resize-none`}
+                                            aria-invalid={!!errors.message}
+                                            aria-describedby={errors.message ? `${CONTACT_FIELD_IDS.message}-helper ${CONTACT_FIELD_IDS.message}-error` : `${CONTACT_FIELD_IDS.message}-helper`}
+                                        />
+                                        {errors.message && <p id={`${CONTACT_FIELD_IDS.message}-error`} className="text-xs text-red-300">{errors.message}</p>}
+                                    </div>
+
+                                    <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
+                                        {status === 'loading' ? 'Sending...' : 'Send message'}
+                                    </button>
+                                </fieldset>
                             </div>
                         ) : (
-                            <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
-                                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                                    <div className="flex flex-col gap-2">
-                                        <label htmlFor={CONTACT_FIELD_IDS.name} className={FIELD_LABEL_CLASS}>Name</label>
-                                        <p id={`${CONTACT_FIELD_IDS.name}-helper`} className={FIELD_HELPER_CLASS}>Who should we address?</p>
-                                        <input
-                                            id={CONTACT_FIELD_IDS.name}
-                                            type="text"
-                                            required
-                                            minLength={2}
-                                            autoComplete="name"
-                                            value={form.name}
-                                            onChange={(event) => setField('name', event.target.value)}
-                                            className={FIELD_INPUT_CLASS}
-                                            aria-invalid={!!errors.name}
-                                            aria-describedby={errors.name ? `${CONTACT_FIELD_IDS.name}-helper ${CONTACT_FIELD_IDS.name}-error` : `${CONTACT_FIELD_IDS.name}-helper`}
-                                        />
-                                        {errors.name && <p id={`${CONTACT_FIELD_IDS.name}-error`} className="text-xs text-red-300">{errors.name}</p>}
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <label htmlFor={CONTACT_FIELD_IDS.email} className={FIELD_LABEL_CLASS}>Email</label>
-                                        <p id={`${CONTACT_FIELD_IDS.email}-helper`} className={FIELD_HELPER_CLASS}>Where should we reply?</p>
-                                        <input
-                                            id={CONTACT_FIELD_IDS.email}
-                                            type="email"
-                                            required
-                                            autoComplete="email"
-                                            value={form.email}
-                                            onChange={(event) => setField('email', event.target.value)}
-                                            className={FIELD_INPUT_CLASS}
-                                            aria-invalid={!!errors.email}
-                                            aria-describedby={errors.email ? `${CONTACT_FIELD_IDS.email}-helper ${CONTACT_FIELD_IDS.email}-error` : `${CONTACT_FIELD_IDS.email}-helper`}
-                                        />
-                                        {errors.email && <p id={`${CONTACT_FIELD_IDS.email}-error`} className="text-xs text-red-300">{errors.email}</p>}
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <label htmlFor={CONTACT_FIELD_IDS.business_name} className={FIELD_LABEL_CLASS}>Business name</label>
-                                        <p id={`${CONTACT_FIELD_IDS.business_name}-helper`} className={FIELD_HELPER_CLASS}>Optional, if the reply should use a company name.</p>
-                                        <input
-                                            id={CONTACT_FIELD_IDS.business_name}
-                                            type="text"
-                                            autoComplete="organization"
-                                            value={form.business_name}
-                                            onChange={(event) => setField('business_name', event.target.value)}
-                                            className={FIELD_INPUT_CLASS}
-                                            aria-describedby={`${CONTACT_FIELD_IDS.business_name}-helper`}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col gap-2">
-                                    <label htmlFor={CONTACT_FIELD_IDS.message} className={FIELD_LABEL_CLASS}>Message</label>
-                                    <p id={`${CONTACT_FIELD_IDS.message}-helper`} className={FIELD_HELPER_CLASS}>A few short sentences are enough.</p>
-                                    <textarea
-                                        id={CONTACT_FIELD_IDS.message}
-                                        rows={5}
-                                        required
-                                        minLength={10}
-                                        value={form.message}
-                                        onChange={(event) => setField('message', event.target.value)}
-                                        placeholder="Tell us what you need help with."
-                                        className={`${FIELD_INPUT_CLASS} resize-none`}
-                                        aria-invalid={!!errors.message}
-                                        aria-describedby={errors.message ? `${CONTACT_FIELD_IDS.message}-helper ${CONTACT_FIELD_IDS.message}-error` : `${CONTACT_FIELD_IDS.message}-helper`}
-                                    />
-                                    {errors.message && <p id={`${CONTACT_FIELD_IDS.message}-error`} className="text-xs text-red-300">{errors.message}</p>}
-                                </div>
-
-                                <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                                    {status === 'loading' ? 'Sending...' : 'Send message'}
-                                </button>
-                            </fieldset>
+                            <div ref={successBoxRef}>
+                                <SubmissionSuccessState onReset={resetGeneralForm} />
+                            </div>
                         )}
                     </form>
                 </div>
@@ -322,13 +425,10 @@ const GeneralContactForm: React.FC = () => {
             <section className="mx-auto mt-6 max-w-5xl">
                 <div className="grid gap-4 md:grid-cols-2">
                     <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Direct Contact</p>
+                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Email</p>
                         <div className="mt-3 space-y-2 text-sm text-slate-300">
-                            <a href="mailto:contact@getaxiom.ca" className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                contact@getaxiom.ca
-                            </a>
-                            <a href="tel:+12267531833" className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                226-753-1833
+                            <a href={`mailto:${CONTACT_EMAIL}`} className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                {CONTACT_EMAIL}
                             </a>
                         </div>
                     </article>
@@ -369,27 +469,30 @@ const ContactPage: React.FC = () => {
 
 const ProjectIntakeForm: React.FC = () => {
     const [searchParams] = useSearchParams();
-    const [form, setForm] = useState<IntakeFormState>(() => {
-        const packageParam = (searchParams.get('package') || '').toLowerCase();
-        const normalizedPackage =
-            packageParam === 'starter' || packageParam === 'foundation' ? 'simple' :
-                packageParam === 'professional' || packageParam === 'authority' ? 'standard' :
-                    packageParam === 'enterprise' || packageParam === 'expansion' ? 'premium' :
-                        packageParam;
-        return {
-            ...INITIAL_FORM,
-            project_scale: SCALE_OPTIONS.some(o => o.value === normalizedPackage) ? normalizedPackage : ''
-        };
-    });
+    const [form, setForm] = useState<IntakeFormState>(() => createInitialIntakeForm(searchParams));
 
     const [status, setStatus] = useState<SubmitState>('');
     const [msg, setMsg] = useState('');
+    const [showSuccessState, setShowSuccessState] = useState(false);
     const [errors, setErrors] = useState<Partial<Record<keyof IntakeFormState, string>>>({});
     const successBoxRef = useRef<HTMLDivElement>(null);
     const formSectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        if (status !== 'success') return;
+        if (status !== 'success') {
+            setShowSuccessState(false);
+            return;
+        }
+
+        const timeoutId = window.setTimeout(() => {
+            setShowSuccessState(true);
+        }, 300);
+
+        return () => window.clearTimeout(timeoutId);
+    }, [status]);
+
+    useEffect(() => {
+        if (!showSuccessState) return;
 
         const scrollToSuccess = () => {
             const target = successBoxRef.current;
@@ -401,7 +504,7 @@ const ProjectIntakeForm: React.FC = () => {
 
         const rafId = window.requestAnimationFrame(scrollToSuccess);
         return () => window.cancelAnimationFrame(rafId);
-    }, [status]);
+    }, [showSuccessState]);
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -435,6 +538,14 @@ const ProjectIntakeForm: React.FC = () => {
         window.requestAnimationFrame(() => {
             document.getElementById(PROJECT_FIELD_IDS[firstErrorKey])?.focus();
         });
+    };
+
+    const resetProjectForm = () => {
+        setStatus('');
+        setMsg('');
+        setErrors({});
+        setShowSuccessState(false);
+        setForm(createInitialIntakeForm(searchParams));
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -485,7 +596,7 @@ const ProjectIntakeForm: React.FC = () => {
 
             if (res.ok && result?.ok !== false) {
                 setStatus('success');
-                setMsg('Request received.');
+                setMsg('');
                 setErrors({});
                 return;
             }
@@ -561,123 +672,99 @@ const ProjectIntakeForm: React.FC = () => {
                 <section ref={formSectionRef} id="start-project-form" className="mt-7">
                     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
                         <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] shadow-[0_20px_56px_rgba(0,0,0,0.24)]">
-                            {status === 'success' ? (
+                            {!showSuccessState ? (
                                 <div
-                                    ref={successBoxRef}
-                                    role="status"
-                                    aria-live="polite"
-                                    className="flex flex-col items-center justify-center p-10 text-center md:p-14 lg:p-16"
                                     style={{
-                                        animation: 'intake-success-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+                                        opacity: status === 'success' ? 0 : 1,
+                                        transform: status === 'success' ? 'translateY(-8px)' : 'translateY(0)',
+                                        transition: `opacity ${SUCCESS_FADE_OUT_DURATION} var(--motion-ease-decelerate), transform ${SUCCESS_FADE_OUT_DURATION} var(--motion-ease-decelerate)`,
+                                        pointerEvents: status === 'success' ? 'none' : 'auto'
                                     }}
                                 >
-                                    <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[#C87A57]/30 bg-[#C87A57]/10">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C87A57" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                                            <path d="M20 6 9 17l-5-5" />
-                                        </svg>
+                                    <div className="border-b border-white/10 p-6 md:p-7 lg:p-8">
+                                        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+                                            <div>
+                                                <p className={FIELD_LABEL_CLASS}>Project intake</p>
+                                                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Share the essentials.</h2>
+                                            </div>
+                                            <p className="text-sm text-slate-400">Reply within one business day</p>
+                                        </div>
                                     </div>
-                                    <h2 className="font-axiomDisplay text-[clamp(1.6rem,2.8vw,2.2rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
-                                        We have what we need.
-                                    </h2>
-                                    <p className="mt-3 max-w-md text-sm leading-7 text-slate-300 md:text-base">
-                                        Expect a reply within one business day with the next step.
-                                    </p>
-                                    <Link to="/" className={`${SECONDARY_BUTTON_CLASS} mt-8`}>
-                                        Back to home
-                                    </Link>
+
+                                    <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-6 md:p-7 lg:p-8" aria-busy={status === 'loading'}>
+                                        {status === 'error' && (
+                                            <div role="alert" className="rounded-2xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-sm text-red-100">
+                                                {msg}
+                                            </div>
+                                        )}
+
+                                        <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
+                                            <section className="grid gap-6">
+                                                <div className="grid gap-5 sm:grid-cols-2">
+                                                    <div className="flex flex-col gap-2">
+                                                        <label htmlFor={PROJECT_FIELD_IDS.name} className={FIELD_LABEL_CLASS}>Full name</label>
+                                                        <p id={`${PROJECT_FIELD_IDS.name}-helper`} className={FIELD_HELPER_CLASS}>Who should we address?</p>
+                                                        <input type="text" id={PROJECT_FIELD_IDS.name} required minLength={2} autoComplete="name" value={form.name} onChange={(event) => setField('name', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.name} aria-describedby={errors.name ? `${PROJECT_FIELD_IDS.name}-helper ${PROJECT_FIELD_IDS.name}-error` : `${PROJECT_FIELD_IDS.name}-helper`} />
+                                                        {errors.name && <p id={`${PROJECT_FIELD_IDS.name}-error`} className="text-xs text-red-300">{errors.name}</p>}
+                                                    </div>
+
+                                                    <div className="flex flex-col gap-2">
+                                                        <label htmlFor={PROJECT_FIELD_IDS.email} className={FIELD_LABEL_CLASS}>Email address</label>
+                                                        <p id={`${PROJECT_FIELD_IDS.email}-helper`} className={FIELD_HELPER_CLASS}>We'll reply here.</p>
+                                                        <input type="email" id={PROJECT_FIELD_IDS.email} required autoComplete="email" value={form.email} onChange={(event) => setField('email', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.email} aria-describedby={errors.email ? `${PROJECT_FIELD_IDS.email}-helper ${PROJECT_FIELD_IDS.email}-error` : `${PROJECT_FIELD_IDS.email}-helper`} />
+                                                        {errors.email && <p id={`${PROJECT_FIELD_IDS.email}-error`} className="text-xs text-red-300">{errors.email}</p>}
+                                                    </div>
+
+                                                    <div className="flex flex-col gap-2">
+                                                        <label htmlFor={PROJECT_FIELD_IDS.business_name} className={FIELD_LABEL_CLASS}>Business name</label>
+                                                        <p id={`${PROJECT_FIELD_IDS.business_name}-helper`} className={FIELD_HELPER_CLASS}>Use the company name people know.</p>
+                                                        <input type="text" id={PROJECT_FIELD_IDS.business_name} required minLength={2} autoComplete="organization" value={form.business_name} onChange={(event) => setField('business_name', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.business_name} aria-describedby={errors.business_name ? `${PROJECT_FIELD_IDS.business_name}-helper ${PROJECT_FIELD_IDS.business_name}-error` : `${PROJECT_FIELD_IDS.business_name}-helper`} />
+                                                        {errors.business_name && <p id={`${PROJECT_FIELD_IDS.business_name}-error`} className="text-xs text-red-300">{errors.business_name}</p>}
+                                                    </div>
+
+                                                    <div className="flex flex-col gap-2">
+                                                        <label htmlFor={PROJECT_FIELD_IDS.current_website} className={FIELD_LABEL_CLASS}>Website URL</label>
+                                                        <p id={`${PROJECT_FIELD_IDS.current_website}-helper`} className={FIELD_HELPER_CLASS}>Optional. Add it if there is already a site.</p>
+                                                        <input type="url" id={PROJECT_FIELD_IDS.current_website} placeholder="https://example.com" autoComplete="url" value={form.current_website} onChange={(event) => setField('current_website', event.target.value)} className={FIELD_INPUT_CLASS} aria-describedby={`${PROJECT_FIELD_IDS.current_website}-helper`} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-col gap-2">
+                                                    <label htmlFor={PROJECT_FIELD_IDS.project_scale} className={FIELD_LABEL_CLASS}>Project scale</label>
+                                                    <p id={`${PROJECT_FIELD_IDS.project_scale}-helper`} className={FIELD_HELPER_CLASS}>Choose the closest fit for the scope you have in mind.</p>
+                                                    <select id={PROJECT_FIELD_IDS.project_scale} value={form.project_scale} onChange={(event) => setField('project_scale', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.project_scale} aria-describedby={errors.project_scale ? `${PROJECT_FIELD_IDS.project_scale}-helper ${PROJECT_FIELD_IDS.project_scale}-error` : `${PROJECT_FIELD_IDS.project_scale}-helper`}>
+                                                        <option value="" disabled>Choose a project scale...</option>
+                                                        {SCALE_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                                                    </select>
+                                                    {errors.project_scale && <p id={`${PROJECT_FIELD_IDS.project_scale}-error`} className="text-xs text-red-300">{errors.project_scale}</p>}
+                                                </div>
+
+                                                <div className="flex flex-col gap-2">
+                                                    <label htmlFor={PROJECT_FIELD_IDS.details} className={FIELD_LABEL_CLASS}>Brief project description</label>
+                                                    <p id={`${PROJECT_FIELD_IDS.details}-helper`} className={FIELD_HELPER_CLASS}>Three short lines is enough.</p>
+                                                    <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="Briefly describe what you need and what the site should help with." className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
+                                                    {errors.details && <p id={`${PROJECT_FIELD_IDS.details}-error`} className="text-xs text-red-300">{errors.details}</p>}
+                                                </div>
+                                            </section>
+
+                                            <div className="flex flex-col gap-3">
+                                                <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
+                                                    {status === 'loading' ? 'Sending...' : 'Send details'}
+                                                </button>
+                                                <p className="text-sm text-slate-400">We&apos;ll reply within one business day with next steps.</p>
+                                            </div>
+                                        </fieldset>
+                                    </form>
                                 </div>
                             ) : (
-                                <>
-                            <div className="border-b border-white/10 p-6 md:p-7 lg:p-8">
-                                <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-                                    <div>
-                                        <p className={FIELD_LABEL_CLASS}>Project intake</p>
-                                        <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Share the essentials.</h2>
-                                    </div>
-                                    <p className="text-sm text-slate-400">Reply within one business day</p>
+                                <div ref={successBoxRef} className="p-10 md:p-14 lg:p-16">
+                                    <SubmissionSuccessState onReset={resetProjectForm} />
                                 </div>
-                            </div>
-
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-6 md:p-7 lg:p-8" aria-busy={status === 'loading'}>
-                                {status === 'error' && (
-                                    <div role="alert" className="rounded-2xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-sm text-red-100">
-                                        {msg}
-                                    </div>
-                                )}
-
-                                    <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
-                                        <section className="grid gap-6">
-                                            <div className="grid gap-5 sm:grid-cols-2">
-                                                <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.name} className={FIELD_LABEL_CLASS}>Full name</label>
-                                                    <p id={`${PROJECT_FIELD_IDS.name}-helper`} className={FIELD_HELPER_CLASS}>Who should we address?</p>
-                                                    <input type="text" id={PROJECT_FIELD_IDS.name} required minLength={2} autoComplete="name" value={form.name} onChange={(event) => setField('name', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.name} aria-describedby={errors.name ? `${PROJECT_FIELD_IDS.name}-helper ${PROJECT_FIELD_IDS.name}-error` : `${PROJECT_FIELD_IDS.name}-helper`} />
-                                                    {errors.name && <p id={`${PROJECT_FIELD_IDS.name}-error`} className="text-xs text-red-300">{errors.name}</p>}
-                                                </div>
-
-                                                <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.email} className={FIELD_LABEL_CLASS}>Email address</label>
-                                                    <p id={`${PROJECT_FIELD_IDS.email}-helper`} className={FIELD_HELPER_CLASS}>We'll reply here.</p>
-                                                    <input type="email" id={PROJECT_FIELD_IDS.email} required autoComplete="email" value={form.email} onChange={(event) => setField('email', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.email} aria-describedby={errors.email ? `${PROJECT_FIELD_IDS.email}-helper ${PROJECT_FIELD_IDS.email}-error` : `${PROJECT_FIELD_IDS.email}-helper`} />
-                                                    {errors.email && <p id={`${PROJECT_FIELD_IDS.email}-error`} className="text-xs text-red-300">{errors.email}</p>}
-                                                </div>
-
-                                                <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.business_name} className={FIELD_LABEL_CLASS}>Business name</label>
-                                                    <p id={`${PROJECT_FIELD_IDS.business_name}-helper`} className={FIELD_HELPER_CLASS}>Use the company name people know.</p>
-                                                    <input type="text" id={PROJECT_FIELD_IDS.business_name} required minLength={2} autoComplete="organization" value={form.business_name} onChange={(event) => setField('business_name', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.business_name} aria-describedby={errors.business_name ? `${PROJECT_FIELD_IDS.business_name}-helper ${PROJECT_FIELD_IDS.business_name}-error` : `${PROJECT_FIELD_IDS.business_name}-helper`} />
-                                                    {errors.business_name && <p id={`${PROJECT_FIELD_IDS.business_name}-error`} className="text-xs text-red-300">{errors.business_name}</p>}
-                                                </div>
-
-                                                <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.current_website} className={FIELD_LABEL_CLASS}>Website URL</label>
-                                                    <p id={`${PROJECT_FIELD_IDS.current_website}-helper`} className={FIELD_HELPER_CLASS}>Optional. Add it if there is already a site.</p>
-                                                    <input type="url" id={PROJECT_FIELD_IDS.current_website} placeholder="https://example.com" autoComplete="url" value={form.current_website} onChange={(event) => setField('current_website', event.target.value)} className={FIELD_INPUT_CLASS} aria-describedby={`${PROJECT_FIELD_IDS.current_website}-helper`} />
-                                                </div>
-                                            </div>
-
-                                            <div className="flex flex-col gap-2">
-                                                <label htmlFor={PROJECT_FIELD_IDS.project_scale} className={FIELD_LABEL_CLASS}>Project scale</label>
-                                                <p id={`${PROJECT_FIELD_IDS.project_scale}-helper`} className={FIELD_HELPER_CLASS}>Choose the closest fit for the scope you have in mind.</p>
-                                                <select id={PROJECT_FIELD_IDS.project_scale} value={form.project_scale} onChange={(event) => setField('project_scale', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.project_scale} aria-describedby={errors.project_scale ? `${PROJECT_FIELD_IDS.project_scale}-helper ${PROJECT_FIELD_IDS.project_scale}-error` : `${PROJECT_FIELD_IDS.project_scale}-helper`}>
-                                                    <option value="" disabled>Choose a project scale...</option>
-                                                    {SCALE_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
-                                                </select>
-                                                {errors.project_scale && <p id={`${PROJECT_FIELD_IDS.project_scale}-error`} className="text-xs text-red-300">{errors.project_scale}</p>}
-                                            </div>
-
-                                            <div className="flex flex-col gap-2">
-                                                <label htmlFor={PROJECT_FIELD_IDS.details} className={FIELD_LABEL_CLASS}>Brief project description</label>
-                                                <p id={`${PROJECT_FIELD_IDS.details}-helper`} className={FIELD_HELPER_CLASS}>Three short lines is enough.</p>
-                                                <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="Briefly describe what you need and what the site should help with." className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
-                                                {errors.details && <p id={`${PROJECT_FIELD_IDS.details}-error`} className="text-xs text-red-300">{errors.details}</p>}
-                                            </div>
-                                        </section>
-
-                                        <div className="flex flex-col gap-3">
-                                            <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                                                {status === 'loading' ? 'Sending...' : 'Send details'}
-                                            </button>
-                                            <p className="text-sm text-slate-400">We&apos;ll reply within one business day with next steps.</p>
-                                        </div>
-                                    </fieldset>
-                            </form>
-                            </>
                             )}
                         </article>
 
                         <div className="grid gap-4 self-start xl:sticky xl:top-28">
-                            <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
-                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Direct Contact</p>
-                                <div className="mt-3 space-y-2 text-sm text-slate-300">
-                                    <a href="mailto:contact@getaxiom.ca" className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                        contact@getaxiom.ca
-                                    </a>
-                                    <a href="tel:+12267531833" className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                        226-753-1833
-                                    </a>
-                                </div>
-                            </article>
+                            <CallUsCard showEmail />
 
                             <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
                                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">General questions</p>

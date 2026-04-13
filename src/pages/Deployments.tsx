@@ -137,6 +137,11 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
             <h3 className="mt-4 text-[clamp(1.9rem,3vw,2.9rem)] font-semibold tracking-tight text-[#F2F4F7]">
               {proof.title}
             </h3>
+            <div className="mt-3">
+              <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-0.5 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/60">
+                DEMO BUILD
+              </span>
+            </div>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">{proof.summary}</p>
 
             <dl className="mt-6 divide-y divide-white/[0.08] border-t border-white/10">
@@ -243,10 +248,10 @@ const Deployments: React.FC = () => {
             <div className="max-w-4xl">
               <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                Each example shows the business, issue, change, and result.
+                What we build
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                The same structure keeps the comparisons easy to read.
+                Demo sites showing what a clear service-business website looks like.
               </p>
             </div>
 

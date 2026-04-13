@@ -1,15 +1,3 @@
 User-agent: *
-Disallow: /admin/
-Disallow: /api/
-Disallow: /account
-Disallow: /dashboard
-Disallow: /hunt
-Disallow: /vault
-Disallow: /triage
-Disallow: /settings
-Disallow: /lead/
-Disallow: /jobs
-Disallow: /campaigns
-Disallow: /leads
-
+Allow: /
 Sitemap: https://getaxiom.ca/sitemap.xml

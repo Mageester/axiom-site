@@ -247,7 +247,7 @@ const Layout: React.FC<LayoutProps> = ({
         </div>
       )}
 
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-2.5 md:px-6 md:pt-3">
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-[55] px-4 pt-2.5 md:px-6 md:pt-3">
         <div className="mx-auto max-w-[92rem]">
           <div
             data-navbar-shell
@@ -332,7 +332,7 @@ const Layout: React.FC<LayoutProps> = ({
       </header>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/70 transition-opacity duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+        className={`fixed inset-0 z-[54] bg-black/70 transition-opacity duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
           isMobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -346,7 +346,7 @@ const Layout: React.FC<LayoutProps> = ({
         aria-modal={isMobileMenuOpen ? 'true' : undefined}
         aria-hidden={!isMobileMenuOpen}
         aria-labelledby="mobile-menu-title"
-        className={`fixed inset-x-4 top-[4.9rem] z-50 rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.94)] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.28)] backdrop-blur-0 transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+        className={`fixed inset-x-4 top-[4.9rem] z-[55] rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.94)] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.28)] backdrop-blur-0 transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
           isMobileMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >

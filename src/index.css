@@ -41,7 +41,7 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 7rem;
     overflow-x: hidden;
   }
 
@@ -106,6 +106,13 @@
   main[id],
   section[id],
   article[id] {
+    scroll-margin-top: 7rem;
+  }
+
+  h1[id],
+  h2[id],
+  h3[id],
+  h4[id] {
     scroll-margin-top: 7rem;
   }
 

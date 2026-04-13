@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { CTA } from '../lib/cta';
 
 const contactLinkClass =
-  'motion-link-accent flex w-fit min-h-11 items-center py-1 text-sm leading-6 text-[#B05D41] hover:text-[#d7a189]';
+  'inline-flex min-h-11 items-center py-1 font-axiomMono text-sm leading-6 text-[#A7B3BC] transition-colors hover:text-[#F2F4F7]';
 
 const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
   `motion-link-accent flex w-fit min-h-11 items-center py-1 text-sm leading-6 ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
@@ -47,12 +47,14 @@ const Footer: React.FC = () => {
               <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
               <div className="space-y-1.5">
                 <NavLink to={CTA.contact.to} className={routeLinkClass}>Contact</NavLink>
-                <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
-                  contact@getaxiom.ca
-                </a>
-                <a href="tel:+12267531833" className={contactLinkClass}>
-                  226-753-1833
-                </a>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                  <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
+                    contact@getaxiom.ca
+                  </a>
+                  <a href="tel:+12267531833" className={contactLinkClass}>
+                    (226) 753-1833
+                  </a>
+                </div>
               </div>
             </nav>
 

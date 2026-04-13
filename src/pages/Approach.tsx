@@ -57,7 +57,7 @@ const Approach: React.FC = () => {
             </div>
           </section>
 
-          <section aria-labelledby="approach-principles-title" className="pt-24 md:pt-28">
+          <section aria-labelledby="approach-principles-title" className="pt-28 md:pt-32">
             <div className="max-w-6xl">
               <h2 id="approach-principles-title" className="sr-only">
                 Three principles
@@ -80,7 +80,7 @@ const Approach: React.FC = () => {
             </div>
           </section>
 
-          <section className="pt-24 md:pt-28">
+          <section className="pt-28 md:pt-32">
             <article className="machined-card overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-3xl">
