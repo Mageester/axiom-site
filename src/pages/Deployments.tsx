@@ -215,14 +215,25 @@ const Deployments: React.FC = () => {
                 </div>
               </div>
 
-              <aside className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-7">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">In this set</p>
-                <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300">
-                  {proofNotes.map((note) => (
-                    <p key={note}>
-                      {note}
-                    </p>
-                  ))}
+              <aside className="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0b1120] shadow-[0_12px_36px_rgba(0,0,0,0.18)]">
+                <div className="relative h-[13rem] w-full border-b border-white/10">
+                    <ResponsiveImage source={responsiveImages.workHvac} sizes="(min-width: 1280px) 400px, 100vw" alt="HVAC business website preview" className="h-full w-full object-cover" style={{ objectPosition: 'center 50%' }} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <div className="absolute bottom-4 left-5">
+                      <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
+                        Proven Models
+                      </span>
+                    </div>
+                </div>
+                <div className="flex-1 bg-white/[0.02] p-6 md:p-7">
+                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">In this set</p>
+                  <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300">
+                    {proofNotes.map((note) => (
+                      <p key={note}>
+                        {note}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </aside>
             </div>

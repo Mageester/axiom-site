@@ -9,6 +9,7 @@ import { caseStudies } from '../data/caseStudies';
 import { CTA } from '../lib/cta';
 import { HOME_JSON_LD, SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
+import { responsiveImages } from '../lib/responsiveImages';
 
 type HomepageWorkPresentation = {
   title: string;
@@ -154,50 +155,24 @@ const Home: React.FC = () => {
                 <p className="mt-2 text-sm leading-6 text-slate-400">Replies within one business day.</p>
               </div>
             </div>
-            <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 pointer-events-none xl:block opacity-40" aria-hidden="true">
-              <svg width="480" height="480" viewBox="0 0 480 480" fill="none">
-                <defs>
-                  <radialGradient id="hero-topology-fade" cx="50%" cy="50%" r="50%">
-                    <stop offset="40%" stopColor="white" stopOpacity="1" />
-                    <stop offset="100%" stopColor="white" stopOpacity="0" />
-                  </radialGradient>
-                  <mask id="hero-topology-mask">
-                    <rect width="480" height="480" fill="url(#hero-topology-fade)" />
-                  </mask>
-                </defs>
-                <g mask="url(#hero-topology-mask)">
-                  <g stroke="rgba(255,255,255,0.1)" strokeWidth="0.5">
-                    <path d="M40 40V440" />
-                    <path d="M120 40V440" />
-                    <path d="M200 40V440" />
-                    <path d="M280 40V440" />
-                    <path d="M360 40V440" />
-                    <path d="M440 40V440" />
-                    <path d="M40 40H440" />
-                    <path d="M40 120H440" />
-                    <path d="M40 200H440" />
-                    <path d="M40 280H440" />
-                    <path d="M40 360H440" />
-                    <path d="M40 440H440" />
-                    <path d="M40 40L200 200L360 120L440 280" />
-                    <path d="M120 440L200 280L360 360L440 200" />
-                    <path d="M120 120L280 280L360 360" />
-                    <path d="M40 280L120 200L280 120L440 40" />
-                  </g>
-                  <g stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" fill="none">
-                    <circle cx="120" cy="120" r="7" />
-                    <circle cx="200" cy="200" r="9" />
-                    <circle cx="280" cy="120" r="8" />
-                    <circle cx="360" cy="360" r="10" />
-                    <circle cx="440" cy="280" r="7" />
-                  </g>
-                  <g fill="#d4a48e">
-                    <circle cx="120" cy="120" r="3.5" fillOpacity="0.3" />
-                    <circle cx="280" cy="120" r="3.5" fillOpacity="0.3" />
-                    <circle cx="360" cy="360" r="3.5" fillOpacity="0.3" />
-                  </g>
-                </g>
-              </svg>
+            <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 xl:block" aria-hidden="true">
+              <div className="relative w-[520px] overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_24px_54px_rgba(0,0,0,0.3)] bg-white/[0.02]">
+                <ResponsiveImage
+                  source={responsiveImages.workLandscaping}
+                  sizes="(min-width: 1280px) 520px, 100vw"
+                  alt="Premium service website design"
+                  className="aspect-[4/3] w-full object-cover"
+                  style={{ objectPosition: 'center 45%' }}
+                  loading="eager"
+                  fetchPriority="high"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                <div className="absolute bottom-6 left-6">
+                  <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
+                    System Output
+                  </span>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -314,47 +289,7 @@ const Home: React.FC = () => {
                   );
                 })}
               </div>
-            ) : (
-              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Work</p>
-                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-[#F2F4F7]">
-                  Current examples are unavailable.
-                </h3>
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
-                  The work page still shows the current proof structure, and the intake page is open if you want to start a project now.
-                </p>
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <Link to={CTA.work.to} className="btn-primary btn-lg w-full sm:w-auto">
-                    {CTA.work.label}
-                  </Link>
-                  <Link to={CTA.primary.to} className="btn-secondary w-full sm:w-auto">
-                    {CTA.primary.label}
-                  </Link>
-                </div>
-              </div>
-            )}
-          </RevealBlock>
-
-          <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
-            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
-              <div className="mx-auto max-w-xl text-center">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Social proof</p>
-                <h2 className="mt-3 text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  Work in progress.
-                </h2>
-                <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
-                  Client results are being documented. The work section shows the approach.
-                </p>
-                <div className="mt-8">
-                  <Link
-                    to={CTA.work.to}
-                    className="btn-secondary inline-flex items-center gap-2"
-                  >
-                    See the work
-                  </Link>
-                </div>
-              </div>
-            </article>
+            ) : null}
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-22">

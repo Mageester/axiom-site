@@ -6,6 +6,8 @@ import { SEO } from '../components/SEO';
 import { CTA } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 import { RevealBlock } from '../components/ui/RevealBlock';
+import ResponsiveImage from '../components/ResponsiveImage';
+import { responsiveImages } from '../lib/responsiveImages';
 
 type SnapshotRow = {
   label: string;
@@ -79,6 +81,25 @@ const About: React.FC = () => {
                 </aside>
               </div>
             </article>
+          </RevealBlock>
+
+          <RevealBlock as="section" className="pt-10 md:pt-16">
+            <div className="relative overflow-hidden rounded-[2.25rem] border border-white/10 bg-[#0b1120] shadow-[0_18px_52px_rgba(0,0,0,0.2)]">
+              <ResponsiveImage
+                  source={responsiveImages.workRestaurant}
+                  sizes="(min-width: 768px) 100vw, 100vw"
+                  alt="Axiom built restaurant site showing clear proof and offer"
+                  className="w-full h-[28rem] md:h-[36rem] object-cover"
+                  style={{ objectPosition: 'center 35%' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 max-w-lg">
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Visual Evidence</p>
+                  <p className="mt-3 text-[1.35rem] font-medium leading-[1.4] text-[#F2F4F7] sm:text-2xl">
+                    Premium execution signals authority immediately.
+                  </p>
+              </div>
+            </div>
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-10 md:pt-16" variant="feature">

@@ -95,51 +95,6 @@ const ManifestoPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 pointer-events-none xl:block opacity-40" aria-hidden="true">
-              <svg width="480" height="480" viewBox="0 0 480 480" fill="none">
-                <defs>
-                  <radialGradient id="manifesto-topology-fade" cx="50%" cy="50%" r="50%">
-                    <stop offset="40%" stopColor="white" stopOpacity="1" />
-                    <stop offset="100%" stopColor="white" stopOpacity="0" />
-                  </radialGradient>
-                  <mask id="manifesto-topology-mask">
-                    <rect width="480" height="480" fill="url(#manifesto-topology-fade)" />
-                  </mask>
-                </defs>
-                <g mask="url(#manifesto-topology-mask)">
-                  <g stroke="rgba(255,255,255,0.1)" strokeWidth="0.5">
-                    <path d="M40 40V440" />
-                    <path d="M120 40V440" />
-                    <path d="M200 40V440" />
-                    <path d="M280 40V440" />
-                    <path d="M360 40V440" />
-                    <path d="M440 40V440" />
-                    <path d="M40 40H440" />
-                    <path d="M40 120H440" />
-                    <path d="M40 200H440" />
-                    <path d="M40 280H440" />
-                    <path d="M40 360H440" />
-                    <path d="M40 440H440" />
-                    <path d="M40 40L200 200L360 120L440 280" />
-                    <path d="M120 440L200 280L360 360L440 200" />
-                    <path d="M120 120L280 280L360 360" />
-                    <path d="M40 280L120 200L280 120L440 40" />
-                  </g>
-                  <g stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" fill="none">
-                    <circle cx="120" cy="120" r="7" />
-                    <circle cx="200" cy="200" r="9" />
-                    <circle cx="280" cy="120" r="8" />
-                    <circle cx="360" cy="360" r="10" />
-                    <circle cx="440" cy="280" r="7" />
-                  </g>
-                  <g fill={accentColor}>
-                    <circle cx="120" cy="120" r="3.5" fillOpacity="0.3" />
-                    <circle cx="280" cy="120" r="3.5" fillOpacity="0.3" />
-                    <circle cx="360" cy="360" r="3.5" fillOpacity="0.3" />
-                  </g>
-                </g>
-              </svg>
-            </div>
           </section>
 
           <section aria-labelledby="manifesto-beliefs-title" className="pt-24 md:pt-28">

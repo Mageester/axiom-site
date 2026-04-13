@@ -146,7 +146,26 @@ const Infrastructure: React.FC = () => {
             </div>
           </section>
 
-          <section className="pt-8 md:pt-10">
+          <RevealBlock as="section" className="pt-10 md:pt-16">
+            <div className="relative overflow-hidden rounded-[2.25rem] border border-white/10 bg-[#0b1120] shadow-[0_18px_52px_rgba(0,0,0,0.2)]">
+              <ResponsiveImage
+                  source={responsiveImages.workAether}
+                  sizes="(min-width: 768px) 100vw, 100vw"
+                  alt="Process mapping and design architecture"
+                  className="w-full h-[24rem] md:h-[32rem] object-cover"
+                  style={{ objectPosition: 'center 40%' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 max-w-lg">
+                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#d4a48e]">The Output</p>
+                  <p className="mt-3 text-[1.35rem] font-medium leading-[1.4] text-[#F2F4F7] sm:text-2xl">
+                    A clear path creates a sharp result.
+                  </p>
+              </div>
+            </div>
+          </RevealBlock>
+
+          <section className="pt-8 md:pt-14">
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.7fr)] xl:items-start xl:gap-8">
               <div>
                 <div className="mb-5 flex flex-col gap-2 md:mb-6">

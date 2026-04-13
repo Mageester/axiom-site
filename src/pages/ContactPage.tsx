@@ -4,6 +4,8 @@ import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
 import { SEO_ROUTES } from '../lib/seo';
+import ResponsiveImage from '../components/ResponsiveImage';
+import { responsiveImages } from '../lib/responsiveImages';
 
 type SubmitState = '' | 'loading' | 'success' | 'error';
 type ApiResult = {
@@ -528,17 +530,28 @@ const ProjectIntakeForm: React.FC = () => {
                             </p>
                         </article>
 
-                        <aside className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_12px_36px_rgba(0,0,0,0.18)] md:p-6 xl:mt-8">
-                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
-                            <div className="mt-5 divide-y divide-white/[0.08]">
-                                <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                                    <span className="text-sm font-medium text-[#F2F4F7]">One short form</span>
+                        <aside className="flex flex-col overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0b1120] shadow-[0_12px_36px_rgba(0,0,0,0.18)] xl:mt-8">
+                            <div className="relative h-[13rem] w-full border-b border-white/10">
+                                <ResponsiveImage source={responsiveImages.workRoofing} sizes="(min-width: 1280px) 400px, 100vw" alt="Roofing site structure and design" className="h-full w-full object-cover" style={{ objectPosition: 'center 40%' }} />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                                <div className="absolute bottom-4 left-5">
+                                  <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
+                                    Project Started
+                                  </span>
                                 </div>
-                                <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                                    <span className="text-sm font-medium text-[#F2F4F7]">Reply within one business day</span>
-                                </div>
-                                <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                                    <span className="text-sm font-medium text-[#F2F4F7]">Clear next steps</span>
+                            </div>
+                            <div className="flex-1 bg-white/[0.03] p-5 md:p-6">
+                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
+                                <div className="mt-5 divide-y divide-white/[0.08]">
+                                    <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                                        <span className="text-sm font-medium text-[#F2F4F7]">One short form</span>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                                        <span className="text-sm font-medium text-[#F2F4F7]">Reply within one business day</span>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                                        <span className="text-sm font-medium text-[#F2F4F7]">Clear next steps</span>
+                                    </div>
                                 </div>
                             </div>
                         </aside>
