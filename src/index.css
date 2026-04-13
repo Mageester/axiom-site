@@ -159,6 +159,36 @@
       transform var(--motion-duration-base) var(--motion-ease-standard);
   }
 
+  /* Form field states — focus / valid / invalid */
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    border-color: var(--axiom-accent);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+    outline: none;
+  }
+
+  input:valid:not(:placeholder-shown),
+  textarea:valid:not(:placeholder-shown) {
+    border-color: rgba(100, 200, 140, 0.35);
+  }
+
+  input:invalid:not(:placeholder-shown):not(:focus),
+  textarea:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: rgba(220, 80, 80, 0.35);
+  }
+
+  /* Keep focus glow visible even when valid/invalid */
+  input:focus-visible:valid,
+  input:focus-visible:invalid,
+  textarea:focus-visible:valid,
+  textarea:focus-visible:invalid,
+  select:focus-visible:valid,
+  select:focus-visible:invalid {
+    border-color: var(--axiom-accent);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+  }
+
   body::after {
     content: '';
     position: fixed;
@@ -837,42 +867,45 @@
   }
 
   .reveal-on-scroll {
-    --reveal-distance: 12px;
-    --reveal-duration: 0.38s;
-    opacity: 1;
-    transform: none;
+    opacity: 0;
+    transform: translateY(16px);
     will-change: opacity, transform;
     transition:
-      opacity var(--reveal-duration) cubic-bezier(0.22, 1, 0.36, 1),
-      transform var(--reveal-duration) cubic-bezier(0.22, 1, 0.36, 1);
+      opacity var(--motion-duration-reveal) var(--motion-ease-decelerate),
+      transform var(--motion-duration-reveal) var(--motion-ease-decelerate);
     transition-delay: var(--reveal-delay, calc(var(--reveal-order, 0) * 60ms));
   }
 
   .reveal-on-scroll[data-reveal-variant='card'] {
-    --reveal-distance: 12px;
-    --reveal-duration: 0.38s;
+    transform: translateY(12px);
   }
 
   .reveal-on-scroll[data-reveal-variant='feature'] {
-    --reveal-distance: 12px;
-    --reveal-duration: 0.38s;
+    transform: translateY(14px);
   }
 
   .reveal-on-scroll[data-reveal-variant='section'] {
-    --reveal-distance: 12px;
-    --reveal-duration: 0.38s;
+    transform: translateY(16px);
   }
 
   .reveal-on-scroll[data-reveal-state='hidden'] {
     opacity: 0;
-    transform: translateY(var(--reveal-distance));
+    transform: translateY(16px);
   }
 
   .reveal-on-scroll.is-visible,
   .reveal-on-scroll[data-reveal-state='visible'] {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
   }
+
+  /* Stagger delays for grouped reveal children */
+  .reveal-stagger > .reveal-on-scroll:nth-child(1) { transition-delay: 0ms; }
+  .reveal-stagger > .reveal-on-scroll:nth-child(2) { transition-delay: 80ms; }
+  .reveal-stagger > .reveal-on-scroll:nth-child(3) { transition-delay: 160ms; }
+  .reveal-stagger > .reveal-on-scroll:nth-child(4) { transition-delay: 240ms; }
+  .reveal-stagger > .reveal-on-scroll:nth-child(5) { transition-delay: 320ms; }
+  .reveal-stagger > .reveal-on-scroll:nth-child(6) { transition-delay: 400ms; }
 
   .bento-hover {
     transition:
@@ -905,6 +938,18 @@
   .startup-char {
     display: inline-block;
     will-change: transform, opacity;
+  }
+}
+
+@keyframes intake-success-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

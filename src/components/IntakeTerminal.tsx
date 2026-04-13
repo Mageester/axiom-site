@@ -18,7 +18,7 @@ const baseCardClass =
   'rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-6 machined-card transition-all duration-300 text-left';
 
 const inputClass =
-  'w-full rounded-xl px-5 py-4 text-[#F5F7FA] placeholder-[#A7B3BC] bg-white/[0.03] border border-white/10 border-t border-t-white/10 outline-none transition-all duration-300 focus:ring-2 focus:ring-[#B05D41]/40';
+  'w-full rounded-xl px-5 py-4 text-[#F5F7FA] placeholder-[#A7B3BC] bg-white/[0.03] border border-white/10 border-t border-t-white/10 outline-none transition-all duration-300';
 
 const INITIAL_FORM: IntakeFormState = {
   name: '',

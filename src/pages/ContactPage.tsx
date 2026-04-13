@@ -40,11 +40,11 @@ const SCALE_OPTIONS = [
     { value: 'premium', label: 'Premium' }
 ];
 
-const FALLBACK_SUBMIT_ERROR = 'Submission failed. Please retry or email contact@getaxiom.ca.';
+const FALLBACK_SUBMIT_ERROR = 'Something went wrong. Email us directly at contact@getaxiom.ca';
 const FIELD_LABEL_CLASS = 'text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
 const FIELD_HELPER_CLASS = 'text-xs leading-5 text-slate-400';
 const FIELD_INPUT_CLASS =
-    'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500 focus:border-[#B05D41]/60 focus:ring-2 focus:ring-[#B05D41]/20';
+    'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500';
 const SECONDARY_BUTTON_CLASS =
     'inline-flex min-h-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.06]';
 const PROJECT_FIELD_IDS = {
@@ -548,6 +548,33 @@ const ProjectIntakeForm: React.FC = () => {
                 <section ref={formSectionRef} id="start-project-form" className="mt-7">
                     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
                         <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] shadow-[0_20px_56px_rgba(0,0,0,0.24)]">
+                            {status === 'success' ? (
+                                <div
+                                    ref={successBoxRef}
+                                    role="status"
+                                    aria-live="polite"
+                                    className="flex flex-col items-center justify-center p-10 text-center md:p-14 lg:p-16"
+                                    style={{
+                                        animation: 'intake-success-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+                                    }}
+                                >
+                                    <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[#C87A57]/30 bg-[#C87A57]/10">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C87A57" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                            <path d="M20 6 9 17l-5-5" />
+                                        </svg>
+                                    </div>
+                                    <h2 className="font-axiomDisplay text-[clamp(1.6rem,2.8vw,2.2rem)] font-bold tracking-[-0.03em] text-[#F2F4F7]">
+                                        We have what we need.
+                                    </h2>
+                                    <p className="mt-3 max-w-md text-sm leading-7 text-slate-300 md:text-base">
+                                        Expect a reply within one business day with the next step.
+                                    </p>
+                                    <Link to="/" className={`${SECONDARY_BUTTON_CLASS} mt-8`}>
+                                        Back to home
+                                    </Link>
+                                </div>
+                            ) : (
+                                <>
                             <div className="border-b border-white/10 p-6 md:p-7 lg:p-8">
                                 <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                                     <div>
@@ -565,16 +592,6 @@ const ProjectIntakeForm: React.FC = () => {
                                     </div>
                                 )}
 
-                                {status === 'success' ? (
-                                    <div ref={successBoxRef} role="status" aria-live="polite" className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
-                                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-emerald-100/80">Request received</p>
-                                        <h2 className="mt-3 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{msg || 'Request received.'}</h2>
-                                        <p className="mt-2 text-sm text-slate-300">We&apos;ll review the details and reply within one business day with next steps.</p>
-                                        <button type="button" onClick={() => { setStatus(''); setMsg(''); setErrors({}); setForm(INITIAL_FORM); }} className={`${SECONDARY_BUTTON_CLASS} mt-5`}>
-                                            Start another project
-                                        </button>
-                                    </div>
-                                ) : (
                                     <fieldset disabled={status === 'loading'} className="contents disabled:cursor-not-allowed disabled:opacity-80">
                                         <section className="grid gap-6">
                                             <div className="grid gap-5 sm:grid-cols-2">
@@ -631,8 +648,9 @@ const ProjectIntakeForm: React.FC = () => {
                                             <p className="text-sm text-slate-400">We&apos;ll reply within one business day with next steps.</p>
                                         </div>
                                     </fieldset>
-                                )}
                             </form>
+                            </>
+                            )}
                         </article>
 
                         <div className="grid gap-4 self-start xl:sticky xl:top-28">

@@ -239,7 +239,7 @@ const Deployments: React.FC = () => {
               </p>
             </div>
 
-            <div className="mt-10 space-y-8 md:space-y-10">
+            <div className="mt-10 space-y-8 md:space-y-10 reveal-stagger">
               {proofBlocks.map((proof, index) => (
                 <ProofBlock key={proof.id} proof={proof} index={index} />
               ))}

@@ -142,7 +142,7 @@ const ManifestoPage: React.FC = () => {
             </div>
           </section>
 
-          <section aria-labelledby="manifesto-beliefs-title" className="pt-16 md:pt-20">
+          <section aria-labelledby="manifesto-beliefs-title" className="pt-24 md:pt-28">
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] lg:items-start lg:gap-14">
               <div className="max-w-2xl lg:pt-2">
                 <p className={sectionLabelClass}>What We Believe</p>
@@ -176,7 +176,7 @@ const ManifestoPage: React.FC = () => {
             </div>
           </section>
 
-          <section aria-labelledby="manifesto-refuse-title" className="pt-16 md:pt-22">
+          <section aria-labelledby="manifesto-refuse-title" className="pt-24 md:pt-28">
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start">
                 <div className="max-w-2xl">
@@ -205,7 +205,7 @@ const ManifestoPage: React.FC = () => {
             </article>
           </section>
 
-          <section aria-labelledby="manifesto-outcome-title" className="pt-16 md:pt-22 scroll-mt-28">
+          <section aria-labelledby="manifesto-outcome-title" className="pt-24 md:pt-28 scroll-mt-32">
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="grid gap-8 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:items-start">
                 <div className="max-w-2xl">
@@ -231,7 +231,7 @@ const ManifestoPage: React.FC = () => {
             </article>
           </section>
 
-          <section aria-labelledby="manifesto-next-step-title" className="pt-16 md:pt-24">
+          <section aria-labelledby="manifesto-next-step-title" className="pt-24 md:pt-28">
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="max-w-3xl">
                   <p className={sectionLabelClass}>Next Step</p>

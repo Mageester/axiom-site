@@ -37,7 +37,7 @@ const useReveal = <T extends HTMLElement>(): RevealResult<T> => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.12 }
     );
 
     observer.observe(element);

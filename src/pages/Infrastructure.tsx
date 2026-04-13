@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
+import { RevealBlock } from '../components/ui/RevealBlock';
 import { CTA } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 
@@ -158,10 +159,9 @@ const Infrastructure: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="space-y-4">
-                  {PROCESS_STEPS.map((step) => (
-                    <article
-                      key={step.number}
+                <div className="space-y-4 reveal-stagger">
+                    {PROCESS_STEPS.map((step, index) => (
+                      <RevealBlock as="article" key={step.number} delay={index * 0.08} variant="card"
                       className="motion-surface overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.98)_0%,rgba(9,12,18,0.99)_100%)] shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
                     >
                       <div className="grid gap-0 lg:grid-cols-[11rem_minmax(0,1fr)]">
@@ -188,7 +188,7 @@ const Infrastructure: React.FC = () => {
                           </ul>
                         </div>
                       </div>
-                    </article>
+                    </RevealBlock>
                   ))}
                 </div>
               </div>

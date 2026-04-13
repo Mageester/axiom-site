@@ -18,12 +18,6 @@ type HomepageWorkPresentation = {
   ctaLabel: string;
 };
 
-type TestimonialEntry = {
-  quote: string;
-  name: string;
-  businessType: string;
-  location: string;
-};
 
 const homeSelectedWorkSlugs = [
   'demonstration-restaurant-reservation-site',
@@ -96,22 +90,6 @@ const selectedWork = selectedWorkEntries.map((entry) => {
 
 const hasSelectedWork = selectedWork.length > 0;
 
-const testimonialEntries: readonly TestimonialEntry[] = [
-  {
-    quote:
-      'Placeholder quote: the new site finally shows our work clearly and gives people one obvious way to reach us.',
-    name: 'Placeholder Client 01',
-    businessType: 'Landscaping company',
-    location: 'Kitchener, ON',
-  },
-  {
-    quote:
-      'Placeholder quote: people stopped asking basic questions because the site answered them before they called.',
-    name: 'Placeholder Client 02',
-    businessType: 'Roofing contractor',
-    location: 'Hamilton, ON',
-  },
-] as const;
 
 const processStages = [
   {
@@ -359,38 +337,21 @@ const Home: React.FC = () => {
 
           <RevealBlock as="section" className="pt-16 md:pt-22" variant="feature">
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:items-start">
-                <div className="max-w-2xl">
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Social proof</p>
-                  <h2 className="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                    The proof should sound like the client.
-                  </h2>
-                  <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300 md:text-base">
-                    Placeholder testimonial structure until live client quotes are ready to publish.
-                  </p>
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {testimonialEntries.map((testimonial, index) => (
-                    <RevealBlock
-                      key={`${testimonial.name}-${testimonial.location}`}
-                      as="article"
-                      delay={index * 0.04}
-                      variant="card"
-                      className="motion-surface flex h-full flex-col rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6"
-                    >
-                      <blockquote className="text-base leading-7 text-[#F2F4F7]">
-                        &ldquo;{testimonial.quote}&rdquo;
-                      </blockquote>
-                      <div className="mt-6 border-t border-white/[0.08] pt-4">
-                        <p className="text-sm font-semibold text-[#F2F4F7]">{testimonial.name}</p>
-                        <p className="mt-1 text-sm leading-6 text-slate-300">
-                          {testimonial.businessType}
-                        </p>
-                        <p className="text-sm leading-6 text-slate-400">{testimonial.location}</p>
-                      </div>
-                    </RevealBlock>
-                  ))}
+              <div className="mx-auto max-w-xl text-center">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Social proof</p>
+                <h2 className="mt-3 text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                  Work in progress.
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-slate-300 md:text-base">
+                  Client results are being documented. The work section shows the approach.
+                </p>
+                <div className="mt-8">
+                  <Link
+                    to={CTA.work.to}
+                    className="btn-secondary inline-flex items-center gap-2"
+                  >
+                    See the work
+                  </Link>
                 </div>
               </div>
             </article>
