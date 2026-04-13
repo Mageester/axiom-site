@@ -4,13 +4,17 @@ export type ResponsiveSource = {
   webpSrcSet: string;
 };
 
+export const fallbackResponsiveImage: ResponsiveSource = {
+  fallbackSrc: '/images/work-aether.jpg',
+  avifSrcSet:
+    '/images/work-aether-640.avif 640w, /images/work-aether-960.avif 960w, /images/work-aether-1280.avif 1280w',
+  webpSrcSet:
+    '/images/work-aether-640.webp 640w, /images/work-aether-960.webp 960w, /images/work-aether-1280.webp 1280w',
+};
+
 export const responsiveImages = {
   workAether: {
-    fallbackSrc: '/images/work-aether.jpg',
-    avifSrcSet:
-      '/images/work-aether-640.avif 640w, /images/work-aether-960.avif 960w, /images/work-aether-1280.avif 1280w',
-    webpSrcSet:
-      '/images/work-aether-640.webp 640w, /images/work-aether-960.webp 960w, /images/work-aether-1280.webp 1280w',
+    ...fallbackResponsiveImage,
   },
   workRestaurant: {
     fallbackSrc: '/images/work-restaurant.jpg',

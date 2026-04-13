@@ -1,8 +1,8 @@
 import React from 'react';
-import { ResponsiveSource } from '../lib/responsiveImages';
+import { fallbackResponsiveImage, type ResponsiveSource } from '../lib/responsiveImages';
 
 type ResponsiveImageProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'sizes'> & {
-  source: ResponsiveSource;
+  source?: ResponsiveSource | null;
   sizes: string;
 };
 
@@ -14,12 +14,14 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   decoding = 'async',
   ...imgProps
 }) => {
+  const imageSource = source ?? fallbackResponsiveImage;
+
   return (
     <picture className="block">
-      <source type="image/avif" srcSet={source.avifSrcSet} sizes={sizes} />
-      <source type="image/webp" srcSet={source.webpSrcSet} sizes={sizes} />
+      <source type="image/avif" srcSet={imageSource.avifSrcSet} sizes={sizes} />
+      <source type="image/webp" srcSet={imageSource.webpSrcSet} sizes={sizes} />
       <img
-        src={source.fallbackSrc}
+        src={imageSource.fallbackSrc}
         loading={loading}
         decoding={decoding}
         {...imgProps}

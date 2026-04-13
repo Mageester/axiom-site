@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
+import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
 import { CTA } from '../lib/cta';
+import { responsiveImages } from '../lib/responsiveImages';
 import { SEO_ROUTES } from '../lib/seo';
 
 type ProcessStep = {

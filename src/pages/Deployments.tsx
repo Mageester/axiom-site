@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
-import type { ResponsiveSource } from '../lib/responsiveImages';
+import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
 import { CTA } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
