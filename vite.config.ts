@@ -29,6 +29,13 @@ export default defineConfig({
   },
   build: {
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        // Avoid entry assets named index-*.js because custom-domain edge rewrites
+        // are currently poisoning that URL shape with HTML responses.
+        entryFileNames: 'assets/app-[hash].js',
+      },
+    },
   },
   server: {
     proxy: {
