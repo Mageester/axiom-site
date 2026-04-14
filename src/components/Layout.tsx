@@ -13,11 +13,7 @@ type LayoutProps = {
 };
 
 const NAV_ITEMS = [
-  { label: 'Home', to: '/' },
   { label: 'Work', to: '/works' },
-  { label: 'Our Approach', to: '/approach' },
-  { label: 'Process', to: '/method' },
-  { label: 'About', to: '/about' },
   { label: 'Pricing', to: '/pricing' },
 ];
 
@@ -206,7 +202,7 @@ const Layout: React.FC<LayoutProps> = ({
     const active = isActiveRoute(pathname, to);
 
     return [
-      'inline-flex items-center py-2 text-sm font-medium transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]',
+      'inline-flex items-center py-2 text-[15px] md:text-sm font-medium transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45',
       active ? 'text-[#F2F4F7]' : 'text-white/64 hover:text-[#EAEFF5]'
     ].join(' ');
@@ -267,7 +263,7 @@ const Layout: React.FC<LayoutProps> = ({
                 <ResponsiveImage
                   source={responsiveImages.logoClear}
                   sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
-                  alt="Axiom logo"
+                  alt="Axiom Infrastructure logo"
                   width={515}
                   height={163}
                   loading="eager"
@@ -352,7 +348,7 @@ const Layout: React.FC<LayoutProps> = ({
         }`}
       >
         <div className="mb-5 flex items-center">
-          <p id="mobile-menu-title" className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
+          <p id="mobile-menu-title" className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
             Primary navigation
           </p>
         </div>

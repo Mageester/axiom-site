@@ -1,7 +1,7 @@
 export const SITE_NAME = 'Axiom';
 export const SITE_URL = 'https://getaxiom.ca';
-export const DEFAULT_OG_IMAGE = '/og-image.png';
-export const DEFAULT_SEO_DESCRIPTION = 'Axiom builds clear websites for serious businesses. Service, proof, and contact stay easy to find.';
+export const DEFAULT_OG_IMAGE = '/og-default.jpg';
+export const DEFAULT_SEO_DESCRIPTION = 'Premium web design and development for local service businesses.';
 export const SITE_EMAIL = 'contact@getaxiom.ca';
 export const SITE_TELEPHONE = '+12267531833';
 
@@ -14,8 +14,7 @@ export type SeoRouteMeta = {
 };
 
 export const formatSeoTitle = (title?: string) => {
-    const baseTitle = title?.trim() || 'Axiom';
-    return /axiom/i.test(baseTitle) ? baseTitle : `${baseTitle} | ${SITE_NAME}`;
+    return title?.trim() || 'Axiom';
 };
 
 export const toCanonicalUrl = (canonicalPath?: string) => {
@@ -23,105 +22,92 @@ export const toCanonicalUrl = (canonicalPath?: string) => {
     return new URL(canonicalPath, SITE_URL).toString();
 };
 
-export const ORGANIZATION_SCHEMA = {
-    '@type': 'Organization',
-    '@id': `${SITE_URL}/#organization`,
-    name: SITE_NAME,
-    url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
-    email: SITE_EMAIL,
-    telephone: SITE_TELEPHONE,
-    contactPoint: [
-        {
-            '@type': 'ContactPoint',
-            contactType: 'customer service',
-            email: SITE_EMAIL,
-            telephone: SITE_TELEPHONE,
-        },
-    ],
+export const LOCAL_BUSINESS_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Axiom Infrastructure",
+  "url": "https://getaxiom.ca",
+  "telephone": "(226) 753-1833",
+  "email": "contact@getaxiom.ca",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Kitchener",
+    "addressRegion": "ON",
+    "addressCountry": "CA"
+  },
+  "areaServed": [
+    "Kitchener", "Waterloo", "Guelph", 
+    "Cambridge", "Ontario"
+  ],
+  "description": "Premium web design and development for Ontario service businesses.",
+  "priceRange": "$$"
 } as const;
 
 export const WEBSITE_SCHEMA = {
-    '@type': 'WebSite',
-    '@id': `${SITE_URL}/#website`,
-    name: SITE_NAME,
-    url: SITE_URL,
-    publisher: { '@id': `${SITE_URL}/#organization` },
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Axiom Infrastructure",
+  "url": "https://getaxiom.ca"
 } as const;
 
 export const HOME_JSON_LD = {
     '@context': 'https://schema.org',
-    '@graph': [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA],
+    '@graph': [LOCAL_BUSINESS_SCHEMA, WEBSITE_SCHEMA],
 } as const;
 
 export const SEO_ROUTES = {
     home: {
-        title: 'Websites for Service Businesses',
-        description: DEFAULT_SEO_DESCRIPTION,
+        title: 'Premium Web Design for Ontario Businesses | Axiom',
+        description: 'Axiom builds fast, clear websites for Ontario businesses. You own it outright — no monthly fees. Based in Kitchener. Reply within one business day.',
         canonicalPath: '/',
     },
     work: {
-        title: 'Selected work',
-        description: 'Live and working examples that show the issue, the change, and the result.',
-        canonicalPath: '/works',
-    },
-    process: {
-        title: 'How the work runs',
-        description: 'A four-step process from review to launch with clear checkpoints and no vague handoffs.',
-        canonicalPath: '/method',
-    },
-    about: {
-        title: 'About',
-        description: 'Clear websites that explain the offer, surface proof, and make the next step obvious.',
-        canonicalPath: '/about',
-    },
-    startProject: {
-        title: 'Start a Project',
-        description: 'A short intake for serious businesses. Tell us what the business needs and we will reply within one business day.',
-        canonicalPath: '/start-a-project',
-    },
-    contact: {
-        title: 'Contact',
-        description: 'Send a question or note about an existing site. We will reply within one business day.',
-        canonicalPath: '/contact',
+        title: 'Web Design Portfolio | Axiom',
+        description: 'See websites Axiom has built for service businesses across Ontario. Roofing, landscaping, restaurants, and more. Clear, fast, conversion-focused.',
+        canonicalPath: '/work',
     },
     pricing: {
-        title: 'Pricing',
-        description: 'Website pricing for serious businesses. Clear scope, no surprises, and a site you own.',
+        title: 'Web Design Pricing Ontario | Axiom',
+        description: 'Transparent web design pricing for Ontario businesses. Three tiers starting at $1,200. Full ownership, fast delivery, no hidden fees.',
         canonicalPath: '/pricing',
     },
-    services: {
-        title: 'Services',
-        description: 'Website packages for local businesses with clear scope, practical deliverables, and no noise.',
-        canonicalPath: '/services',
-    },
-    concepts: {
-        title: 'Concepts',
-        description: 'Project builds showing how a clear offer, real proof, and one obvious next step turn a website into something that actually works.',
-        canonicalPath: '/concepts',
+    about: {
+        title: 'About Axiom | Ontario Web Agency',
+        description: 'Axiom Infrastructure is an Ontario-based web agency focused on one thing: websites that earn trust and get businesses contacted. Senior-led, selective, precise.',
+        canonicalPath: '/about',
     },
     approach: {
-        title: 'Our Approach',
-        description: 'Axiom keeps websites clear, fast, and easy to act on — so businesses earn attention and trust without the noise.',
+        title: 'Our Approach to Web Design | Axiom',
+        description: 'Learn how Axiom approaches web design — clarity first, proof early, one clear path to contact. Built for businesses that need results, not decoration.',
         canonicalPath: '/approach',
     },
+    process: {
+        title: 'Our Build Process | Axiom',
+        description: 'Axiom\'s build process runs in four clear stages from review to launch. You know what\'s happening at every step.',
+        canonicalPath: '/infrastructure',
+    },
+    contact: {
+        title: 'Start a Project | Axiom',
+        description: 'Start a project with Axiom. Share your scope and we\'ll reply within one business day with exactly what your business needs.',
+        canonicalPath: '/contact',
+    },
     audit: {
-        title: 'Site Review',
-        description: 'Get a plain review of your site\'s speed, layout, and contact path.',
+        title: 'Free Website Audit | Axiom',
+        description: 'Get a free website audit from Axiom. We\'ll review your current site and tell you exactly what it\'s costing you — within 24 hours.',
         canonicalPath: '/audit',
     },
     privacy: {
-        title: 'Privacy Policy',
+        title: 'Privacy Policy | Axiom',
         description: 'Privacy policy for the Axiom website and contact forms.',
         canonicalPath: '/privacy',
     },
     terms: {
-        title: 'Terms of Service',
+        title: 'Terms of Service | Axiom',
         description: 'Terms for using the Axiom website and services.',
         canonicalPath: '/terms',
     },
     notFound: {
-        title: 'Page not found',
+        title: 'Page not found | Axiom',
         description: 'The page you requested is not available. Use the main links to continue.',
         canonicalPath: '/404',
         noIndex: true,

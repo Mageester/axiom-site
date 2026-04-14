@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { CTA } from '../lib/cta';
 
 const contactLinkClass =
-  'inline-flex min-h-11 items-center py-1 font-axiomMono text-sm leading-6 text-[#A7B3BC] transition-colors hover:text-[#F2F4F7]';
+  'inline-flex min-h-11 items-center py-1 font-axiomMono text-[15px] md:text-sm leading-6 text-[#A7B3BC] transition-colors hover:text-[#F2F4F7]';
 
 const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `motion-link-accent flex w-fit min-h-11 items-center py-1 text-sm leading-6 ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
+  `motion-link-accent flex w-fit min-h-11 items-center py-1 text-[15px] md:text-sm leading-6 ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
 
 const Footer: React.FC = () => {
   return (
@@ -15,11 +15,11 @@ const Footer: React.FC = () => {
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_repeat(2,minmax(0,0.72fr))_minmax(0,0.84fr)] lg:gap-10 xl:gap-12">
           <div className="max-w-md">
             <p className="text-2xl font-black leading-[1.02] tracking-tight text-[#F2F4F7] md:text-4xl">AXIOM</p>
-            <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">
+            <p className="mt-3 max-w-md text-[15px] md:text-sm leading-6 text-slate-300">
               Built for businesses that are serious about growth.
             </p>
-            <p className="mt-6 text-[10px] uppercase tracking-[0.12em] text-slate-400">
-              &copy; 2026 Axiom. All rights reserved.
+            <p className="mt-6 text-[15px] md:text-[10px] uppercase tracking-[0.12em] text-slate-400">
+              &copy; 2026 Axiom Infrastructure. All rights reserved.
             </p>
           </div>
 
