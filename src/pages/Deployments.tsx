@@ -98,6 +98,90 @@ const proofBlocks: readonly ProofBlockData[] = [
   },
 ];
 
+type ConceptProjectData = {
+  title: string;
+  subtitle: string;
+  positioning: string;
+  desc: string;
+  roi: string;
+  url: string;
+  capabilities: string[];
+};
+
+const conceptProjects: readonly ConceptProjectData[] = [
+  {
+    title: 'HVAC Performance',
+    subtitle: 'Apex Climate Systems',
+    positioning: 'Dispatch-first infrastructure for emergency HVAC demand windows.',
+    desc: 'When the first heatwave hits and your phones blow up, this system filters the tire-kickers so your techs only roll trucks for high-ticket emergency installs.',
+    roi: 'Double your emergency dispatch rate during peak weather events.',
+    url: 'https://hvac.getaxiom.ca',
+    capabilities: ['Emergency dispatch banner', 'Diagnostic intake routing', 'Dispatch qualification filter'],
+  },
+  {
+    title: 'Roofing Performance',
+    subtitle: 'Summit Roofing Co.',
+    positioning: 'Storm protocol conversion system for high-volume inspection demand.',
+    desc: "When hail storms hit and every roof in town leaks, your site loads instantly while your competitors' sites crash. You get the calls. They get voicemail.",
+    roi: "Capture storm-season leads while competitors' sites go down.",
+    url: 'https://roofing.getaxiom.ca',
+    capabilities: ['Storm protocol timeline', 'Material selector', 'Inspection funnel'],
+  },
+  {
+    title: 'Landscaping Performance',
+    subtitle: 'Verdant Landscapes',
+    positioning: 'Portfolio-grade consultation system for premium outdoor projects.',
+    desc: "You're bidding on $50K hardscape projects against companies with $200 websites. This fixes the gap between the quality of your work and the quality of your online presence.",
+    roi: 'Win premium design contracts with a portfolio that matches your craft.',
+    url: 'https://landscaping.getaxiom.ca',
+    capabilities: ['Featured project portfolio', 'Seasonal program flow', 'Design consultation funnel'],
+  },
+] as const;
+
+function ConceptProjectCard({ project, index }: { project: ConceptProjectData; index: number }) {
+  return (
+    <RevealBlock as="div" delay={index * 0.08} variant="feature">
+      <article className="flex h-full flex-col rounded-[2.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.95)_0%,rgba(10,13,18,0.98)_100%)] p-5 shadow-[0_12px_34px_rgba(0,0,0,0.18)] md:p-6">
+        <div className="flex flex-col gap-2">
+          <p className="section-eyebrow">{project.subtitle}</p>
+          <h3 className="text-[22px] font-semibold tracking-tight text-[#F2F4F7] sm:text-[24px]">
+            {project.title}
+          </h3>
+          <p className="text-[14px] leading-[1.65] text-slate-200/90">{project.positioning}</p>
+        </div>
+
+        <div className="mt-5 rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-4">
+          <p className="section-eyebrow">Outcome signal</p>
+          <p className="mt-3 text-[13px] leading-[1.7] text-slate-300">{project.roi}</p>
+        </div>
+
+        <p className="mt-4 text-[13px] leading-[1.7] text-slate-300">{project.desc}</p>
+
+        <ul className="mt-5 space-y-2">
+          {project.capabilities.map((capability) => (
+            <li key={capability} className="flex items-start gap-2 text-[13px] leading-relaxed text-slate-300">
+              <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-axiom-accent" />
+              <span>{capability}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-auto pt-6">
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary btn-lg w-full whitespace-nowrap"
+            aria-label={`Open ${project.title}`}
+          >
+            Open project
+          </a>
+        </div>
+      </article>
+    </RevealBlock>
+  );
+}
+
 function NarrativeRow({ label, value }: NarrativeRowProps) {
   return (
     <div className="grid gap-2 py-4 first:pt-0 md:grid-cols-[10.5rem_minmax(0,1fr)] md:gap-5">
@@ -252,6 +336,24 @@ const Deployments: React.FC = () => {
                 </div>
               </div>
             </article>
+          </RevealBlock>
+
+          <RevealBlock as="section" className="pt-16 md:pt-24">
+            <div className="max-w-4xl">
+              <p className="section-eyebrow">Concept builds</p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                More concept projects
+              </h2>
+              <p className="mt-3 max-w-2xl text-[15px] leading-7 text-slate-300 md:text-base">
+                The HVAC, roofing, and landscaping concepts also live here so work, proof, and demos stay in one place.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              {conceptProjects.map((project, index) => (
+                <ConceptProjectCard key={project.title} project={project} index={index} />
+              ))}
+            </div>
           </RevealBlock>
         </main>
 

@@ -91,7 +91,7 @@ const Approach: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link to="/works" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                  <Link to="/work" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
                     See the work
                   </Link>
                   <Link

@@ -1,7 +1,7 @@
 export const CTA_PATHS = {
     startProject: '/start-a-project',
-    work: '/works',
-    process: '/method',
+    work: '/work',
+    process: '/process',
     contact: '/contact'
 } as const;
 

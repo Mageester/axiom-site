@@ -84,17 +84,23 @@ export const SEO_ROUTES = {
     process: {
         title: 'Our Build Process | Axiom',
         description: 'Axiom\'s build process runs in four clear stages from review to launch. You know what\'s happening at every step.',
-        canonicalPath: '/infrastructure',
+        canonicalPath: '/process',
     },
     contact: {
+        title: 'Contact Axiom | Ontario Web Agency',
+        description: 'Send a question or note about your site. Reply within one business day.',
+        canonicalPath: '/contact',
+    },
+    startProject: {
         title: 'Start a Project | Axiom',
         description: 'Start a project with Axiom. Share your scope and we\'ll reply within one business day with exactly what your business needs.',
-        canonicalPath: '/contact',
+        canonicalPath: '/start-a-project',
     },
     audit: {
         title: 'Free Website Audit | Axiom',
         description: 'Get a free website audit from Axiom. We\'ll review your current site and tell you exactly what it\'s costing you — within 24 hours.',
-        canonicalPath: '/audit',
+        canonicalPath: '/admin/audit',
+        noIndex: true,
     },
     privacy: {
         title: 'Privacy Policy | Axiom',

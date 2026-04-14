@@ -13,15 +13,15 @@
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
 
-/concepts
+/work
+  X-Robots-Tag: index, follow, max-image-preview:large
+  Speculation-Rules: "/speculation-rules.json"
+
+/process
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
 
 /approach
-  X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: "/speculation-rules.json"
-
-/audit
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
 
@@ -33,16 +33,11 @@
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
 
-/apply
+/admin/audit
   X-Robots-Tag: noindex, nofollow
 
-/method
-  X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: "/speculation-rules.json"
-
-/works
-  X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: "/speculation-rules.json"
+/admin/*
+  X-Robots-Tag: noindex, nofollow
 
 /privacy
   X-Robots-Tag: index, follow, max-image-preview:large
@@ -52,9 +47,6 @@
   Speculation-Rules: "/speculation-rules.json"
 
 /404
-  X-Robots-Tag: noindex, nofollow
-
-/admin/*
   X-Robots-Tag: noindex, nofollow
 
 /account

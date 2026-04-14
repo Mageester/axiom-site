@@ -5,7 +5,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import About from './pages/About';
 import AuditPage from './pages/AuditPage';
 import ContactPage from './pages/ContactPage';
-import Concepts from './pages/Concepts';
 import Deployments from './pages/Deployments';
 import Approach from './pages/Approach';
 import Infrastructure from './pages/Infrastructure';
@@ -58,11 +57,6 @@ const LegacyLeadRedirect: React.FC = () => {
   return <Navigate to={id ? `/lead/${id}` : '/vault'} replace />;
 };
 
-const LegacyProjectRedirect: React.FC = () => {
-  const location = useLocation();
-  return <Navigate to={{ pathname: '/start-a-project', search: location.search, hash: location.hash }} replace />;
-};
-
 const App: React.FC = () => {
   const location = useLocation();
 
@@ -76,22 +70,21 @@ const App: React.FC = () => {
       <Suspense fallback={<RouteFallback />}>
         <Routes location={location}>
           <Route path="/" element={<OpsAwareHome />} />
-          <Route path="/method" element={<Infrastructure />} />
-          <Route path="/process" element={<Navigate to="/method" replace />} />
-          <Route path="/infrastructure" element={<Navigate to="/method" replace />} />
-          <Route path="/works" element={<Deployments />} />
-          <Route path="/work" element={<Navigate to="/works" replace />} />
-          <Route path="/works/:slug" element={<Navigate to="/works" replace />} />
-          <Route path="/deployments" element={<Navigate to="/works" replace />} />
+          <Route path="/work" element={<Deployments />} />
+          <Route path="/works" element={<Navigate to="/work" replace />} />
+          <Route path="/works/:slug" element={<Navigate to="/work" replace />} />
+          <Route path="/deployments" element={<Navigate to="/work" replace />} />
+          <Route path="/concepts" element={<Navigate to="/work" replace />} />
+          <Route path="/process" element={<Infrastructure />} />
+          <Route path="/method" element={<Navigate to="/process" replace />} />
+          <Route path="/infrastructure" element={<Navigate to="/process" replace />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/services" element={<Navigate to="/pricing" replace />} />
-          <Route path="/concepts" element={<Concepts />} />
           <Route path="/approach" element={<Approach />} />
           <Route path="/our-approach" element={<Navigate to="/approach" replace />} />
           <Route path="/manifesto" element={<Navigate to="/approach" replace />} />
-          <Route path="/audit" element={<AuditPage />} />
           <Route path="/start-a-project" element={<ContactPage />} />
-          <Route path="/apply" element={<LegacyProjectRedirect />} />
+          <Route path="/apply" element={<Navigate to="/start-a-project" replace />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/architects" element={<Navigate to="/about" replace />} />
@@ -99,6 +92,7 @@ const App: React.FC = () => {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin/audit" element={<ProtectedRoute><AuditPage /></ProtectedRoute>} />
           <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/hunt" element={<ProtectedRoute><Hunt /></ProtectedRoute>} />

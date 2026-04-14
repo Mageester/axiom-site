@@ -13,7 +13,7 @@ type LayoutProps = {
 };
 
 const NAV_ITEMS = [
-  { label: 'Work', to: '/works' },
+  { label: 'Work', to: '/work' },
   { label: 'About', to: '/about' },
   { label: 'Pricing', to: '/pricing' },
 ];

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Phone } from 'lucide-react';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
@@ -30,7 +31,6 @@ const INITIAL_FORM: IntakeFormState = {
 };
 
 const PROJECT_PATH = '/start-a-project';
-const LEGACY_PROJECT_PATH = '/apply';
 
 const FALLBACK_SUBMIT_ERROR = 'Something went wrong. Email us directly at contact@getaxiom.ca';
 const FIELD_LABEL_CLASS = 'text-[15px] md:text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
@@ -90,32 +90,60 @@ type CallUsCardProps = {
 };
 
 const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = false, plainPhone = false }) => {
-    if (plainPhone) {
-        return (
-            <article className={`rounded-2xl border border-white/10 p-5 md:p-6 ${className}`.trim()}>
-                <p className="section-eyebrow">Call us</p>
-                <p className="mt-3 text-[15px] md:text-sm leading-6 text-slate-100">{CONTACT_PHONE_DISPLAY}</p>
-            </article>
-        );
-    }
+    const shellClass = `
+        relative overflow-hidden rounded-[2rem]
+        border border-[#d4a48e]/16
+        bg-[linear-gradient(180deg,rgba(15,20,25,0.98)_0%,rgba(8,10,14,0.99)_100%)]
+        shadow-[0_20px_60px_rgba(0,0,0,0.28)]
+        ring-1 ring-inset ring-white/[0.02]
+        px-6 py-7 md:px-7 md:py-8 lg:px-8 lg:py-9
+        ${className}
+    `.replace(/\s+/g, ' ').trim();
 
     return (
-        <article className={`rounded-2xl border border-[#B05D41]/30 bg-[#B05D41]/10 p-5 md:p-6 ${className}`.trim()}>
-            <p className="section-eyebrow">Call us</p>
-            <a
-                href={CONTACT_PHONE_HREF}
-                className="mt-3 inline-flex min-h-11 items-center text-[clamp(1.75rem,2.8vw,2.35rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#B05D41] transition-colors hover:text-[#d7a189]"
-            >
-                {CONTACT_PHONE_DISPLAY}
-            </a>
-            {showEmail && (
-                <a
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    className="mt-4 inline-flex min-h-11 items-center text-[15px] md:text-sm leading-6 text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
-                >
-                    {CONTACT_EMAIL}
-                </a>
-            )}
+        <article className={shellClass}>
+            <div
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d4a48e]/65 to-transparent"
+            />
+            <div
+                aria-hidden="true"
+                className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-[#d4a48e]/60 via-[#d4a48e]/15 to-transparent"
+            />
+            <div className="relative flex flex-col gap-7">
+                <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d4a48e]/20 bg-[#d4a48e]/10 text-[#d4a48e] shadow-[0_0_0_1px_rgba(212,164,142,0.08)]">
+                        <Phone className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <div className="space-y-2">
+                        <p className="section-eyebrow">Call us</p>
+                        <div className="h-px w-16 bg-gradient-to-r from-[#d4a48e]/70 to-transparent" aria-hidden="true" />
+                    </div>
+                </div>
+
+                <div className="space-y-3">
+                    <a
+                        href={CONTACT_PHONE_HREF}
+                        className="inline-flex min-h-11 items-center text-[clamp(1.8rem,3vw,2.55rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#F6EBDD] transition-colors hover:text-[#f0d7c6]"
+                    >
+                        {CONTACT_PHONE_DISPLAY}
+                    </a>
+                    {showEmail ? (
+                        <a
+                            href={`mailto:${CONTACT_EMAIL}`}
+                            className="inline-flex min-h-11 items-center text-[15px] md:text-sm leading-6 text-slate-300 transition-colors hover:text-white"
+                        >
+                            {CONTACT_EMAIL}
+                        </a>
+                    ) : (
+                        <p className="max-w-sm text-[15px] md:text-sm leading-6 text-slate-400">
+                            {plainPhone
+                                ? 'For quick questions and direct project conversations.'
+                                : 'For direct project questions and a quick response.'}
+                        </p>
+                    )}
+                </div>
+            </div>
         </article>
     );
 };
@@ -438,7 +466,7 @@ const GeneralContactForm: React.FC = () => {
 
 const ContactPage: React.FC = () => {
     const location = useLocation();
-    const isProjectRoute = location.pathname.startsWith(LEGACY_PROJECT_PATH) || location.pathname.startsWith(PROJECT_PATH);
+    const isProjectRoute = location.pathname.startsWith(PROJECT_PATH);
 
     if (isProjectRoute) {
         return <ProjectIntakeForm />;
