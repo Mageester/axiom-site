@@ -80,7 +80,7 @@ const ServicesPage: React.FC = () => {
 
             {/* Header */}
             <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-12 sm:mb-16">
-                <p className="eyebrow-center">Pricing</p>
+                <p className="section-eyebrow">Pricing</p>
                 <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
                     Three ways to work with us.
                 </h1>
@@ -120,10 +120,10 @@ const ServicesPage: React.FC = () => {
                             )}
                         </div>
 
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-text-mute">{tier.tag}</p>
+                        <p className="section-eyebrow">{tier.tag}</p>
                         <p className="font-axiomSans text-[32px] font-bold leading-none text-axiom-text-main">{tier.price}</p>
                         <p className="font-axiomSans text-[14px] text-axiom-text-main/90 leading-relaxed">{tier.desc}</p>
-                        <p className="font-axiomMono text-[11px] uppercase tracking-[0.1em] text-axiom-text-mute">{tier.technical}</p>
+                        <p className="section-eyebrow">{tier.technical}</p>
 
                         <ul className="space-y-3 flex-1">
                             {tier.features.map((f) => (
@@ -166,7 +166,7 @@ const ServicesPage: React.FC = () => {
                     },
                 ].map((item) => (
                     <div key={item.label} className="axiom-bento bg-axiom-surface border border-axiom-border p-4 sm:p-5">
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-text-mute">{item.label}</p>
+                        <p className="section-eyebrow">{item.label}</p>
                         <p className="font-axiomSans text-[14px] text-axiom-text-main/90 leading-relaxed mt-2">{item.text}</p>
                     </div>
                 ))}
@@ -176,7 +176,7 @@ const ServicesPage: React.FC = () => {
             <section className="max-w-[1100px] mx-auto mt-14 sm:mt-20">
                 <div className="axiom-bento p-8 sm:p-10 md:p-12">
                     <div className="text-center mb-10">
-                        <p className="eyebrow-center mb-4">Our Process</p>
+                        <p className="section-eyebrow mb-4">Our Process</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
                             Simple from day one.
                         </h2>
@@ -221,7 +221,7 @@ const ServicesPage: React.FC = () => {
             <section className="max-w-[1100px] mx-auto mt-12 sm:mt-16">
                 <div className="axiom-bento p-8 sm:p-10 md:p-12">
                     <div className="text-center mb-10">
-                        <p className="eyebrow-center mb-4">The Math</p>
+                        <p className="section-eyebrow mb-4">The Math</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
                             Every month with a weak website is a month your competitor is winning the job.
                         </h2>
@@ -229,17 +229,17 @@ const ServicesPage: React.FC = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mb-8">
                         <div className="axiom-bento p-5 sm:p-6 flex flex-col gap-2">
-                            <p className="big-figure-label text-axiom-text-mute">Typical Deal Value</p>
+                            <p className="section-eyebrow">Typical Deal Value</p>
                             <p className="text-[24px] sm:text-[28px] font-bold tracking-tight font-grotesk">$1,500 – $15,000</p>
                             <p className="text-[13px] text-axiom-text-mute leading-[1.7]">New projects, retainers, and long-term client relationships.</p>
                         </div>
                         <div className="bg-axiom-elevated border border-axiom-border rounded-md p-5 sm:p-6 flex flex-col gap-2">
-                            <p className="big-figure-label text-axiom-text-mute">Competitor Site</p>
+                            <p className="section-eyebrow">Competitor Site</p>
                             <p className="text-[24px] sm:text-[28px] font-bold text-axiom-text-mute tracking-tight font-grotesk">3.5s Load Time</p>
                             <p className="text-[13px] text-axiom-text-mute leading-[1.7]">40% bounce rate. Nearly half your potential customers leave before the page finishes loading.</p>
                         </div>
                         <div className="bg-axiom-elevated border border-axiom-border rounded-md p-5 sm:p-6 flex flex-col gap-2">
-                            <p className="big-figure-label text-axiom-text-mute">Axiom site</p>
+                            <p className="section-eyebrow">Axiom site</p>
                             <p className="text-[24px] sm:text-[28px] font-bold text-axiom-text-mute tracking-tight font-grotesk">0.4s Load Time</p>
                             <p className="text-[13px] text-axiom-text-mute leading-[1.7]">Captures the leads they lose. Every fraction of a second is revenue you're either earning or giving away.</p>
                         </div>
@@ -257,7 +257,7 @@ const ServicesPage: React.FC = () => {
             <section className="max-w-[1100px] mx-auto mt-14 sm:mt-20">
                 <div className="axiom-bento p-8 sm:p-10 md:p-12">
                     <div className="text-center mb-8">
-                        <p className="eyebrow-center mb-4">Common Questions</p>
+                        <p className="section-eyebrow mb-4">Common Questions</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
                             Before you start a project.
                         </h2>

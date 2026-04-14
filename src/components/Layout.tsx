@@ -349,7 +349,7 @@ const Layout: React.FC<LayoutProps> = ({
         }`}
       >
         <div className="mb-5 flex items-center">
-          <p id="mobile-menu-title" className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
+              <p id="mobile-menu-title" className="section-eyebrow">
             Primary navigation
           </p>
         </div>

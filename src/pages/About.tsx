@@ -20,7 +20,7 @@ const About: React.FC = () => {
           <RevealBlock as="section" data-hero-root className="pt-10 md:pt-16">
             <article className="overflow-hidden rounded-[2.25rem] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.18)] md:p-8 lg:p-10">
               <div className="max-w-4xl">
-                <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">About</p>
+                <p className="section-eyebrow">About</p>
                 <h1
                   data-startup-heading
                   className="mt-3 text-[clamp(2.35rem,5.8vw,4.35rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]"
@@ -43,7 +43,7 @@ const About: React.FC = () => {
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02]">
               <div className="grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-stretch">
                 <div className="p-6 md:p-8 lg:p-10">
-                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What the work does</p>
+                  <p className="section-eyebrow">What the work does</p>
                   <h2 className="mt-2 max-w-2xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                   The work is done when the site doesn’t need explaining.
                   </h2>
@@ -95,9 +95,7 @@ const About: React.FC = () => {
           <RevealBlock as="section" className="pt-10 md:pt-16" variant="feature">
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.18)] md:p-8 lg:p-10">
               <div className="max-w-4xl">
-                <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
-                  THE TEAM
-                </p>
+                <p className="section-eyebrow">THE TEAM</p>
                 <h2 className="mt-2 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                   Built by two people who are serious about this.
                 </h2>

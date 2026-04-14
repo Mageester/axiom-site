@@ -41,7 +41,7 @@ const TrustCarousel: React.FC = () => {
                   key={`${segmentIndex}-${card.heading}-${index}`}
                   className="min-w-[270px] max-w-[300px] rounded-2xl border border-white/10 bg-[#0d1323]/65 p-5 backdrop-blur-md md:min-w-[320px]"
                 >
-                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{card.heading}</p>
+                  <p className="section-eyebrow">{card.heading}</p>
                   <p className="mt-3 text-[15px] md:text-sm leading-relaxed text-slate-300">{card.detail}</p>
                 </article>
               ))}

@@ -36,7 +36,7 @@ const BentoGrid: React.FC = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-8">
-            <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Examples</p>
+            <p className="section-eyebrow">Examples</p>
             <h3 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Recent work</h3>
             <button
               type="button"
@@ -56,7 +56,7 @@ const BentoGrid: React.FC = () => {
         <article className={cardShell}>
           <div className="flex h-full min-h-[300px] flex-col justify-between p-8">
             <div>
-            <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Clear pages</p>
+            <p className="section-eyebrow">Clear pages</p>
               <h3 className="mt-3 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">
               Pages people can read fast
             </h3>
@@ -83,7 +83,7 @@ const BentoGrid: React.FC = () => {
           <div className="flex h-full min-h-[320px] flex-col p-8">
             <div className="flex items-center justify-between gap-4">
               <div>
-                  <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Recent sites</p>
+                  <p className="section-eyebrow">Recent sites</p>
                   <h3 className="mt-2 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">Project preview stream</h3>
               </div>
               <button

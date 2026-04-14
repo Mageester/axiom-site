@@ -50,7 +50,7 @@ const proofBlocks: readonly ProofBlockData[] = [
     title: 'Restaurant reservation site',
     summary: 'A restaurant site where the booking link, menu, and hours are impossible to miss on a phone.',
     businessType: 'Restaurant and hospitality',
-    badgeLabel: 'Example build',
+    badgeLabel: 'Concept build',
     statusLabel: 'Live site',
     ctaLabel: 'View the build →',
     demoUrl: 'https://restaurant.getaxiom.ca',
@@ -67,7 +67,7 @@ const proofBlocks: readonly ProofBlockData[] = [
     title: 'Landscaping site',
     summary: 'A landscaping site that leads with past work and makes it easy to request a quote in under 30 seconds.',
     businessType: 'Landscaping and outdoor services',
-    badgeLabel: 'Concept project',
+    badgeLabel: 'Concept build',
     statusLabel: 'Selected build',
     ctaLabel: 'View the build →',
     demoUrl: 'https://landscaping.getaxiom.ca',
@@ -84,7 +84,7 @@ const proofBlocks: readonly ProofBlockData[] = [
     title: 'Roofing site',
     summary: 'A roofing site that separates urgent calls from estimate requests - so the right jobs reach you the right way.',
     businessType: 'Roofing and exterior services',
-    badgeLabel: 'Concept project',
+    badgeLabel: 'Concept build',
     statusLabel: 'Selected build',
     ctaLabel: 'View the build →',
     demoUrl: 'https://roofing.getaxiom.ca',
@@ -101,7 +101,7 @@ const proofBlocks: readonly ProofBlockData[] = [
 function NarrativeRow({ label, value }: NarrativeRowProps) {
   return (
     <div className="grid gap-2 py-4 first:pt-0 md:grid-cols-[10.5rem_minmax(0,1fr)] md:gap-5">
-      <dt className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC] md:pt-1">
+      <dt className="section-eyebrow md:pt-1">
         {label}
       </dt>
       <dd className="text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-[0.98rem]">{value}</dd>
@@ -153,7 +153,7 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
           </div>
 
           <figure className={`relative overflow-hidden bg-[#0b1120] ${imageOrderClass}`}>
-            <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex rounded-full border border-white/15 bg-[#09101d]/80 px-3 py-1 font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-white/90 shadow-[0_12px_28px_rgba(0,0,0,0.24)] backdrop-blur-sm">
+            <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex rounded-full border border-white/15 bg-[#09101d]/80 px-2.5 py-1 font-axiomMono text-[10px] uppercase tracking-[0.18em] text-white shadow-[0_12px_28px_rgba(0,0,0,0.24)] backdrop-blur-sm">
               {proof.badgeLabel}
             </span>
             <ResponsiveImage
@@ -182,44 +182,36 @@ const Deployments: React.FC = () => {
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
           <RevealBlock as="section" data-hero-root className="pt-12 md:pt-20">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,1.18fr)_minmax(20rem,0.82fr)] lg:items-end lg:gap-12">
-              <div className="max-w-5xl">
-                <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">WORK</p>
-                <div className="mt-2.5 overflow-hidden">
-                  <h1
-                    data-startup-heading
-                    className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]"
-                  >
-                    What we actually build.
-                  </h1>
-                </div>
-                <p data-startup-copy className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Every project starts with an honest look at what your current site is costing you. Then we build the version that fixes it.
-                </p>
-                <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                  <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                    {CTA.primary.label}
-                  </Link>
-                  <Link
-                    to={CTA.process.to}
-                    className="inline-flex w-full items-center text-[15px] md:text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
-                  >
-                    {CTA.process.label}
-                  </Link>
-                </div>
+            <div className="max-w-5xl">
+              <p className="section-eyebrow">WORK</p>
+              <div className="mt-2.5 overflow-hidden">
+                <h1
+                  data-startup-heading
+                  className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]"
+                >
+                  The standard we build to.
+                </h1>
               </div>
-
-              <aside className="machined-card flex min-h-[13rem] items-center justify-center rounded-3xl border border-white/10 bg-[var(--axiom-elevated)] p-6 md:p-8">
-                <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.24em] text-[#A7B3BC]">
-                  Clarity · Proof · Contact
-                </p>
-              </aside>
+              <p data-startup-copy className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
+                Every project starts with your current site. These show what the fixed version looks like.
+              </p>
+              <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+                <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                  {CTA.primary.label}
+                </Link>
+                <Link
+                  to={CTA.process.to}
+                  className="inline-flex w-full items-center text-[15px] md:text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
+                >
+                  {CTA.process.label}
+                </Link>
+              </div>
             </div>
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-24">
             <div className="max-w-4xl">
-              <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
+              <p className="section-eyebrow">Examples</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                 What we build
               </h2>
@@ -236,10 +228,10 @@ const Deployments: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-24" variant="feature">
-            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+            <article className="cta-banner">
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
                 <div className="max-w-2xl">
-                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
+                  <p className="section-eyebrow">Next step</p>
                   <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                     Ready to stop losing jobs to a bad site?
                   </h2>
@@ -248,7 +240,7 @@ const Deployments: React.FC = () => {
                   </p>
                 </div>
                 <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What happens next</p>
+                  <p className="section-eyebrow">What happens next</p>
                   <p className="mt-4 font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.16em] text-[#F2F4F7]">
                     Review → Scope → Build → Launch
                   </p>

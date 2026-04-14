@@ -44,7 +44,7 @@ const Approach: React.FC = () => {
           <section data-hero-root className="relative pt-10 md:pt-20">
             <div className="max-w-6xl">
               <div className="max-w-4xl">
-                <p className={eyebrowClass}>Our Approach</p>
+                <p className="section-eyebrow">Our Approach</p>
                 <div className="mt-6 max-w-4xl overflow-hidden">
                   <h1 className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
                     We build to one standard.
@@ -81,10 +81,10 @@ const Approach: React.FC = () => {
           </section>
 
           <section className="pt-28 md:pt-32">
-            <article className="machined-card overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+            <article className="cta-banner">
               <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-3xl">
-                  <p className={eyebrowClass}>Next Step</p>
+                  <p className="section-eyebrow">Next Step</p>
                   <h2 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                     If the site still needs explanation, the work is not done.
                   </h2>

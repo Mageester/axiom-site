@@ -14,31 +14,6 @@ const homepageBenefitCallouts = [
   'One clear path to call, email, or request a quote - no hunting required',
 ] as const;
 
-const HERO_VIDEO_SRC = '/assets/axiom-hero.mp4';
-
-const processStages = [
-  {
-    number: '01',
-    title: 'Review',
-    detail: 'We review the current site, the friction points, and what is costing you trust. Usually takes 24-48 hours.',
-  },
-  {
-    number: '02',
-    title: 'Plan',
-    detail: 'You get a one-page scope doc before we touch anything, so the pages, proof, and next steps are clear up front.',
-  },
-  {
-    number: '03',
-    title: 'Build',
-    detail: 'We write, design, test, and launch the site. That includes copywriting, mobile testing, and speed optimization.',
-  },
-  {
-    number: '04',
-    title: 'Support',
-    detail: 'We stay available after launch for updates, fixes, and follow-up questions.',
-  },
-] as const;
-
 const Home: React.FC = () => {
   return (
     <>
@@ -46,167 +21,56 @@ const Home: React.FC = () => {
 
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="relative isolate overflow-hidden pt-10 md:pt-20">
-            <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden bg-[#0a0c10]">
-              <video
-                className="absolute inset-0 h-full w-full object-cover opacity-80"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-              >
-                <source src={HERO_VIDEO_SRC} type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,12,16,0.44)_0%,rgba(10,12,16,0.82)_100%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(200,122,87,0.14),transparent_42%)]" />
-            </div>
-
-            <div className="relative z-10 max-w-6xl">
-              <div>
-                <div className="max-w-4xl overflow-hidden">
-                  <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Your website is losing you jobs.
-                  </h1>
-                </div>
-                <p data-startup-copy className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Most business sites are slow, unclear, and built by someone who doesn’t understand what makes people call. We fix that — fast build, full ownership, zero recurring fees.
-                </p>
-                <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                  <Link to={CTA.work.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                    See our work
-                  </Link>
-                  <Link
-                    to={CTA.primary.to}
-                    className="btn-secondary btn-lg w-full whitespace-nowrap sm:w-auto"
-                  >
-                    Start a project
-                  </Link>
-                </div>
+          <section data-hero-root className="relative isolate bg-[#0a0c10] pt-10 md:pt-20">
+            <div className="max-w-5xl">
+              <div className="max-w-4xl overflow-hidden">
+                <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
+                  Your website is losing you jobs.
+                </h1>
               </div>
-            </div>
-            <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 xl:block" aria-hidden="true">
-              <div className="relative w-[520px] overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_24px_54px_rgba(0,0,0,0.3)] bg-white/[0.02]">
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0d1323]">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(176,93,65,0.34),transparent_36%),radial-gradient(circle_at_28%_68%,rgba(88,110,170,0.18),transparent_28%),conic-gradient(from_90deg_at_50%_50%,rgba(13,19,35,0.96)_0%,rgba(176,93,65,0.78)_52%,rgba(13,19,35,0.96)_100%)] opacity-55 blur-[80px]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="flex h-32 w-32 items-center justify-center rounded-full border border-white/5 bg-white/5 text-white/40 shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] backdrop-blur-xl">
-                      <span className="font-bold tracking-widest text-[15px] md:text-sm">AXIOM</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute bottom-6 left-6">
-                  <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
-                    System Output
-                  </span>
-                </div>
+              <p data-startup-copy className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
+                Most business sites are slow, unclear, and built by someone who doesn’t understand what makes people call. We fix that — fast build, full ownership, zero recurring fees.
+              </p>
+              <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+                <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                  Start a project
+                </Link>
+                <Link
+                  to={CTA.work.to}
+                  className="btn-secondary btn-lg w-full whitespace-nowrap sm:w-auto"
+                >
+                  See our work
+                </Link>
               </div>
             </div>
           </section>
-
-          <RevealBlock as="section" className="pt-16 md:pt-20">
-            <div className="mx-auto w-full max-w-[600px]">
-              <article className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8">
-                {/* TODO: Replace with real client testimonial */}
-                <div className="absolute left-5 top-4 select-none font-serif text-[4.5rem] leading-none text-white/10 md:left-6 md:top-2 md:text-[5.75rem]">
-                  “
-                </div>
-                <div className="relative mx-auto flex max-w-[34rem] flex-col items-center text-center">
-                  <p className="text-[18px] leading-relaxed text-[#F2F4F7] md:text-[20px] md:leading-[1.7]">
-                    They rebuilt our site in two weeks. We started getting quote requests the same day it went live.
-                  </p>
-                  <p className="mt-5 text-[15px] italic leading-relaxed text-slate-400 md:text-sm">
-                    — Local roofing contractor, Kitchener ON
-                  </p>
-                </div>
-              </article>
-            </div>
-          </RevealBlock>
 
           <WorkPreviewGrid />
 
           <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature">
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start">
-                <div className="max-w-2xl">
-                  <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Why it matters</p>
-                  <h2 className="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                    A slow site signals an unprofessional business.
-                  </h2>
-                  <p className="mt-4 max-w-xl text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">
-                    A confusing site sends the job to your competitor. A site with no clear next step leaves money on the table. We audit all three before anything gets built.
-                  </p>
-                  <div className="mt-8">
-                    <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                      {CTA.primary.label}
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
-                  <div className="divide-y divide-white/[0.08]">
-                    {[
-                      "The offer isn't clear. Visitors can't tell what the business does or who it's for.",
-                      "There's no proof. Reviews, photos, and past work are buried three pages deep.",
-                      'The next step is missing. No clear way to call, book, or request a quote.',
-                    ].map((callout, index) => (
-                      <div key={callout} className="grid gap-3 py-4 first:pt-0 last:pb-0 md:grid-cols-[3rem_minmax(0,1fr)] md:gap-5">
-                        <div className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">
-                          0{index + 1}
-                        </div>
-                        <p className="text-[15px] md:text-sm leading-7 text-slate-200 md:text-[15px]">{callout}</p>
-                      </div>
-                    ))}
-                  </div>
+              <div className="max-w-2xl">
+                <p className="section-eyebrow">Why it matters</p>
+                <h2 className="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                  A slow site signals an unprofessional business.
+                </h2>
+                <p className="mt-4 max-w-xl text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">
+                  A confusing site sends the job to your competitor. A site with no clear next step leaves money on the table. We audit all three before anything gets built.
+                </p>
+                <div className="mt-8">
+                  <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                    {CTA.primary.label}
+                  </Link>
                 </div>
               </div>
             </article>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-16 md:pt-22">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] lg:items-start lg:gap-14">
-              <div className="max-w-2xl lg:pt-2">
-                <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">Process</p>
-                <h2 className="mt-3 max-w-[12ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  Simple from day one.
-                </h2>
-                <p className="mt-4 max-w-[36ch] text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">
-                  You’ll know exactly what’s being built, when it goes live, and what it will do for your business. No back-and-forth. No surprises.
-                </p>
-              </div>
-
-              <div className="divide-y divide-white/10 border-y border-white/10">
-                {processStages.map((stage, index) => (
-                  <RevealBlock
-                    as="div"
-                    key={stage.title}
-                    delay={index * 0.05}
-                    variant="card"
-                    className="grid gap-4 py-5 md:grid-cols-[5rem_minmax(0,1fr)] md:gap-6 md:py-6"
-                  >
-                    <div className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">
-                      {stage.number}
-                    </div>
-                    <div>
-                      <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-[#F2F4F7] md:text-[1.08rem]">
-                        {stage.title}
-                      </h3>
-                      <p className="mt-2 max-w-[38ch] text-[15px] md:text-sm leading-6 text-slate-300 md:text-[0.95rem]">
-                        {stage.detail}
-                      </p>
-                    </div>
-                  </RevealBlock>
-                ))}
-              </div>
-            </div>
-          </RevealBlock>
-
           <RevealBlock as="section" id="intake" className="pt-16 md:pt-24" variant="feature">
-            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+            <article className="cta-banner">
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
                 <div className="max-w-3xl">
-                  <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
+                  <p className="section-eyebrow">Next step</p>
                   <h2 className="mt-3 max-w-4xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                 If the site isn’t earning trust, it’s costing you work.
                   </h2>
@@ -222,7 +86,7 @@ const Home: React.FC = () => {
                 </div>
 
                 <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What happens next</p>
+                  <p className="section-eyebrow">What happens next</p>
                   <div className="mt-4">
                     <p className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">Review → Scope → Build → Launch</p>
                   </div>

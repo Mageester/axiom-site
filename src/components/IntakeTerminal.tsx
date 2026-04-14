@@ -142,7 +142,7 @@ const IntakeTerminal: React.FC = () => {
         }`}
       >
         <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#22c55e] animate-pulse" aria-hidden />
-        <p className="text-[15px] md:text-[11px] font-medium tracking-[0.16em] uppercase text-[#A7B3BC]">Open for new work</p>
+        <p className="section-eyebrow">Open for new work</p>
       </div>
 
       <div className="mb-8 space-y-3">

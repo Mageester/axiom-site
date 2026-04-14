@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="w-full border-t border-[#31363B] bg-[#090A0B]">
       <div className="mx-auto w-full max-w-[92rem] px-5 py-10 md:px-8 md:py-12 lg:px-10 lg:py-14">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_repeat(2,minmax(0,0.72fr))_minmax(0,0.84fr)] lg:gap-10 xl:gap-12">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_repeat(3,minmax(0,0.78fr))] lg:gap-10 xl:gap-12">
           <div className="max-w-md">
             <p className="text-2xl font-black leading-[1.02] tracking-tight text-[#F2F4F7] md:text-4xl">AXIOM</p>
             <p className="mt-3 max-w-md text-[15px] md:text-sm leading-6 text-slate-300">
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
           </div>
 
           <nav className="space-y-3" aria-label="Site pages">
-            <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Pages</p>
+            <p className="section-eyebrow">Pages</p>
             <div className="space-y-1.5">
               <NavLink to="/" className={routeLinkClass}>Home</NavLink>
               <NavLink to="/works" className={routeLinkClass}>Work</NavLink>
@@ -35,38 +35,28 @@ const Footer: React.FC = () => {
             </div>
           </nav>
 
-          <nav className="space-y-3" aria-label="Next step">
-            <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Next step</p>
+          <nav className="space-y-3" aria-label="Contact">
+            <p className="section-eyebrow">Contact</p>
             <div className="space-y-1.5">
-              <NavLink to={CTA.primary.to} className={routeLinkClass}>{CTA.primary.label}</NavLink>
-              <NavLink to={CTA.work.to} className={routeLinkClass}>{CTA.work.label}</NavLink>
+              <NavLink to={CTA.contact.to} className={routeLinkClass}>Contact</NavLink>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
+                  contact@getaxiom.ca
+                </a>
+                <a href="tel:+12267531833" className={contactLinkClass}>
+                  (226) 753-1833
+                </a>
+              </div>
             </div>
           </nav>
 
-          <div className="space-y-6">
-            <nav className="space-y-3" aria-label="Contact">
-              <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Contact</p>
-              <div className="space-y-1.5">
-                <NavLink to={CTA.contact.to} className={routeLinkClass}>Contact</NavLink>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                  <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
-                    contact@getaxiom.ca
-                  </a>
-                  <a href="tel:+12267531833" className={contactLinkClass}>
-                    (226) 753-1833
-                  </a>
-                </div>
-              </div>
-            </nav>
-
-            <nav className="space-y-3 border-t border-white/[0.08] pt-5" aria-label="Legal">
-              <p className="font-axiomMono text-[9px] uppercase tracking-[0.14em] text-[#A7B3BC]">Legal</p>
-              <div className="space-y-1.5">
-                <NavLink to="/privacy" className={routeLinkClass}>Privacy Policy</NavLink>
-                <NavLink to="/terms" className={routeLinkClass}>Terms of Service</NavLink>
-              </div>
-            </nav>
-          </div>
+          <nav className="space-y-3 border-t border-white/[0.08] pt-5" aria-label="Legal">
+            <p className="section-eyebrow">Legal</p>
+            <div className="space-y-1.5">
+              <NavLink to="/privacy" className={routeLinkClass}>Privacy Policy</NavLink>
+              <NavLink to="/terms" className={routeLinkClass}>Terms of Service</NavLink>
+            </div>
+          </nav>
         </div>
       </div>
     </footer>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
@@ -132,15 +132,6 @@ const ProcessTimeline: React.FC = () => (
 );
 
 const Infrastructure: React.FC = () => {
-  const [expandedSteps, setExpandedSteps] = useState<Record<string, boolean>>({});
-
-  const toggleStep = (stepId: string) => {
-    setExpandedSteps((previous) => ({
-      ...previous,
-      [stepId]: !previous[stepId],
-    }));
-  };
-
   return (
     <>
       <SEO
@@ -151,8 +142,8 @@ const Infrastructure: React.FC = () => {
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-5 pb-16 md:px-10 md:pb-24">
           <section className="pt-4 md:pt-8">
             <div className="max-w-5xl">
-              <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
-                <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
+              <article className="cta-banner">
+                <p className="section-eyebrow">Process</p>
                 <h1 data-startup-heading className="mt-3 max-w-3xl text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
                   Four stages from review to launch.
                 </h1>
@@ -178,7 +169,7 @@ const Infrastructure: React.FC = () => {
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.7fr)] xl:items-start xl:gap-8">
               <div>
                 <div className="mb-5 flex flex-col gap-2 md:mb-6">
-                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Timeline</p>
+                  <p className="section-eyebrow">Timeline</p>
                   <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
                     How the build moves.
                   </h2>
@@ -188,55 +179,10 @@ const Infrastructure: React.FC = () => {
                 </div>
 
                 <ProcessTimeline />
-
-                <div className="mt-7 space-y-4">
-                  {PROCESS_STEPS.map((step, index) => {
-                    const isExpanded = Boolean(expandedSteps[step.id]);
-                    return (
-                      <RevealBlock
-                        as="article"
-                        key={step.id}
-                        delay={index * 0.06}
-                        variant="card"
-                        className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-5 shadow-[0_12px_30px_rgba(0,0,0,0.16)] md:p-6"
-                      >
-                        <div className="flex flex-wrap items-start justify-between gap-3">
-                          <div className="min-w-0">
-                            <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{step.dayLabel}</p>
-                            <h3 className="mt-2 text-[1.08rem] font-semibold text-[#F2F4F7]">{step.title}</h3>
-                            <p className="mt-2 max-w-2xl text-[15px] md:text-sm leading-6 text-slate-300">{step.summary}</p>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => toggleStep(step.id)}
-                            className="inline-flex min-h-11 items-center text-[15px] md:text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
-                          >
-                            {isExpanded ? 'Show less' : 'Read more'}
-                          </button>
-                        </div>
-
-                        {isExpanded ? (
-                          <div className="mt-4 border-t border-white/10 pt-4">
-                            <ul className="space-y-2.5">
-                              {step.bullets.map((bullet) => (
-                                <li key={bullet} className="flex gap-2 text-[15px] md:text-sm leading-6 text-slate-300 md:text-[0.96rem]">
-                                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d4a48e]" aria-hidden="true" />
-                                  <span>{bullet}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
-                      </RevealBlock>
-                    );
-                  })}
-                </div>
               </div>
 
               <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] md:p-6 xl:sticky xl:top-28">
-                <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
-                  Before we build
-                </p>
+                <p className="section-eyebrow">Before we build</p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
                   What we need before Day 7.
                 </h2>
@@ -269,7 +215,7 @@ const Infrastructure: React.FC = () => {
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
                 <div>
-                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
+                  <p className="section-eyebrow">Next step</p>
                   <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
                     Start with a review.
                   </h2>
@@ -278,7 +224,7 @@ const Infrastructure: React.FC = () => {
                   </p>
                 </div>
                 <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What comes next</p>
+                  <p className="section-eyebrow">What comes next</p>
                   <div className="mt-4 divide-y divide-white/[0.08]">
                     <div className="py-3 first:pt-0 last:pb-0">
                       <p className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">Review</p>

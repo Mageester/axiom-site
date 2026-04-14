@@ -295,6 +295,42 @@
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06), 0 12px 24px rgba(0, 0, 0, 0.24), 0 20px 38px rgba(0, 0, 0, 0.3);
   }
 
+  .section-eyebrow {
+    @apply font-axiomMono uppercase;
+    color: var(--axiom-text-mute);
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.2em;
+  }
+
+  @media (min-width: 768px) {
+    .section-eyebrow {
+      font-size: 12px;
+    }
+  }
+
+  .cta-banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, rgba(16, 21, 31, 0.96) 0%, rgba(10, 13, 19, 0.98) 100%);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
+    padding: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .cta-banner {
+      padding: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cta-banner {
+      padding: 2.5rem;
+    }
+  }
+
   .btn-primary {
     position: relative;
     overflow: hidden;

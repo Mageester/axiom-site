@@ -93,13 +93,10 @@ const WorkPreviewGrid: React.FC = () => {
     <section aria-labelledby="work-preview-grid-heading" className="pt-16 md:pt-20">
       <div className="mx-auto w-full max-w-6xl">
         <div className="max-w-2xl">
-          <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">SELECTED WORK</p>
+          <p className="section-eyebrow">SELECTED WORK</p>
           <h2 id="work-preview-grid-heading" className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-            Browser-frame previews.
+            Selected work
           </h2>
-          <p className="mt-3 max-w-2xl text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">
-            Built for different businesses. Same result: clear offer, visible proof, one path to contact.
-          </p>
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-3">

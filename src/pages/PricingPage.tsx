@@ -19,7 +19,7 @@ const pricingTiers: readonly PricingTier[] = [
   {
     name: 'Starter',
     price: '$1,200',
-    description: 'For businesses that need to look credible and start getting calls.',
+    description: 'For local businesses that need a site that actually converts visitors into calls.',
     features: [
       '3 pages',
       'Mobile-ready',
@@ -32,7 +32,7 @@ const pricingTiers: readonly PricingTier[] = [
   {
     name: 'Growth',
     price: '$2,200',
-    description: 'For businesses actively trying to grow locally and convert more traffic.',
+    description: 'For businesses ready to dominate local search and stop losing jobs to competitors.',
     features: [
       '5 pages',
       'SEO foundation',
@@ -67,15 +67,13 @@ const PricingPage: React.FC = () => {
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-16 md:px-10 md:pb-20">
       {/* SECTION 1: HERO */}
       <section className="mx-auto mb-16 flex max-w-3xl flex-col gap-6 text-center sm:mb-24 pt-10">
-        <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
-          PRICING
-        </p>
+        <p className="section-eyebrow">PRICING</p>
         <div>
           <h1 className="text-[40px] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7] sm:text-[48px] md:text-[60px]">
-            Straightforward pricing.
+            One investment. Full ownership.
           </h1>
           <h2 className="mt-2 text-[24px] font-axiomSans font-medium tracking-tight text-slate-300 md:text-[32px]">
-            You own it outright.
+            No monthly fees. No recurring charges. You own everything we build.
           </h2>
         </div>
         <p className="mx-auto max-w-[760px] text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">

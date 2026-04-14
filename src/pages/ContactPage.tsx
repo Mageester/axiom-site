@@ -93,7 +93,7 @@ const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = fal
     if (plainPhone) {
         return (
             <article className={`rounded-2xl border border-white/10 p-5 md:p-6 ${className}`.trim()}>
-                <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-slate-400">Call us</p>
+                <p className="section-eyebrow">Call us</p>
                 <p className="mt-3 text-[15px] md:text-sm leading-6 text-slate-100">{CONTACT_PHONE_DISPLAY}</p>
             </article>
         );
@@ -101,7 +101,7 @@ const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = fal
 
     return (
         <article className={`rounded-2xl border border-[#B05D41]/30 bg-[#B05D41]/10 p-5 md:p-6 ${className}`.trim()}>
-            <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-[#B05D41]">Call us</p>
+            <p className="section-eyebrow">Call us</p>
             <a
                 href={CONTACT_PHONE_HREF}
                 className="mt-3 inline-flex min-h-11 items-center text-[clamp(1.75rem,2.8vw,2.35rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#B05D41] transition-colors hover:text-[#d7a189]"
@@ -288,7 +288,7 @@ const GeneralContactForm: React.FC = () => {
             />
             <section data-hero-root className="mx-auto max-w-3xl pt-8 text-center md:pt-16">
                 <div className="overflow-hidden">
-                    <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Contact</p>
+                    <p className="section-eyebrow">Contact</p>
                     <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
                         Send a question or a note.
                     </h1>
@@ -412,7 +412,7 @@ const GeneralContactForm: React.FC = () => {
             <section className="mx-auto mt-6 max-w-5xl">
                 <div className="grid gap-4 md:grid-cols-2">
                     <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                        <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-slate-400">Email</p>
+                                <p className="section-eyebrow">Email</p>
                         <div className="mt-3 space-y-2 text-[15px] md:text-sm text-slate-300">
                             <a href={`mailto:${CONTACT_EMAIL}`} className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                 {CONTACT_EMAIL}
@@ -421,7 +421,7 @@ const GeneralContactForm: React.FC = () => {
                     </article>
 
                     <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                        <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-slate-400">Need website work?</p>
+                        <p className="section-eyebrow">Need website work?</p>
                         <p className="mt-3 text-[15px] md:text-sm leading-relaxed text-slate-300">
                             Use{' '}
                             <Link to={PROJECT_PATH} className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
@@ -628,11 +628,11 @@ const ProjectIntakeForm: React.FC = () => {
                         <aside className="flex flex-col overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0b1120] shadow-[0_12px_36px_rgba(0,0,0,0.18)] xl:mt-8">
                             <div className="border-b border-white/10 p-5 md:p-6">
                                 <div className="rounded-[1.25rem] border border-white/10 bg-[#0f1524]/70 p-4">
-                                    <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Reply within one business day.</p>
+                                    <p className="section-eyebrow">Reply within one business day.</p>
                                 </div>
                             </div>
                             <div className="flex-1 bg-white/[0.03] p-5 md:p-6">
-                                <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
+                                <p className="section-eyebrow">At a glance</p>
                                 <div className="mt-5 divide-y divide-white/[0.08]">
                                     <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
                                         <span className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">One short form</span>
@@ -661,7 +661,7 @@ const ProjectIntakeForm: React.FC = () => {
                                     <div className="border-b border-white/10 p-6 md:p-7 lg:p-8">
                                         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                                             <div>
-                                                <p className={FIELD_LABEL_CLASS}>Project intake</p>
+                                                <p className="section-eyebrow">Project intake</p>
                                                 <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Let’s get to work.</h2>
                                             </div>
                                             <p className="text-[15px] md:text-sm text-slate-400">Tell us what your business does, what’s broken about your current site, and when you want to move. We’ll reply within one business day.</p>
@@ -734,7 +734,7 @@ const ProjectIntakeForm: React.FC = () => {
                             <CallUsCard showEmail />
 
                             <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
-                                <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-slate-400">General questions</p>
+                                <p className="section-eyebrow">General questions</p>
                                 <p className="mt-3 text-[15px] md:text-sm leading-relaxed text-slate-300">
                                     Use{' '}
                                     <Link to="/contact" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">

@@ -85,7 +85,7 @@ const ConceptsPage: React.FC = () => {
       />
 
       <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-16 sm:mb-20">
-        <p className="eyebrow-center">Professional Concepts</p>
+        <p className="section-eyebrow">Professional Concepts</p>
         <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
           Real sites built for real contractors. Not templates.
         </h1>
@@ -114,13 +114,13 @@ const ConceptsPage: React.FC = () => {
               <div className="h-[3px] -mx-6 -mt-6 mb-1 bg-axiom-accent" />
 
               <div className="flex flex-col gap-2">
-                <p className="big-figure-label text-axiom-text-mute">{demo.subtitle}</p>
+                <p className="section-eyebrow">{demo.subtitle}</p>
                 <h2 className="text-[22px] sm:text-[24px] font-semibold tracking-tight text-axiom-text-main">{demo.title}</h2>
                 <p className="text-[14px] text-axiom-text-main/90 leading-[1.65]">{demo.positioning}</p>
               </div>
 
               <div className="axiom-bento-card p-4">
-                <p className="big-figure-label text-axiom-text-mute mb-3">Core Capabilities</p>
+                <p className="section-eyebrow mb-3">Core Capabilities</p>
                 <ul className="space-y-2">
                   {demo.capabilities.slice(0, 3).map((capability) => (
                     <li key={capability} className="flex items-start gap-2 text-[13px] text-axiom-text-mute leading-relaxed">
@@ -135,14 +135,14 @@ const ConceptsPage: React.FC = () => {
                 <div className="p-4 flex gap-3 items-start border-b border-axiom-border">
                   <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-border"></div>
                   <div>
-                    <p className="big-figure-label text-axiom-text-mute/70 mb-1">Problem</p>
+                    <p className="section-eyebrow mb-1">Problem</p>
                     <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.problem}</p>
                   </div>
                 </div>
                 <div className="p-4 flex gap-3 items-start">
                   <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-accent/45"></div>
                   <div>
-                    <p className="big-figure-label text-axiom-accent/85 mb-1">Solution</p>
+                    <p className="section-eyebrow mb-1">Solution</p>
                     <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.solution}</p>
                   </div>
                 </div>
@@ -153,30 +153,30 @@ const ConceptsPage: React.FC = () => {
                   <div className="p-4 flex gap-3 items-start border-b border-axiom-border">
                     <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-border"></div>
                     <div>
-                      <p className="big-figure-label text-axiom-text-mute/70 mb-1">Problem</p>
+                      <p className="section-eyebrow mb-1">Problem</p>
                       <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.problem}</p>
                     </div>
                   </div>
                   <div className="p-4 flex gap-3 items-start">
                     <div className="w-1 self-stretch rounded-full shrink-0 bg-axiom-accent/45"></div>
                     <div>
-                      <p className="big-figure-label text-axiom-accent/85 mb-1">Solution</p>
+                      <p className="section-eyebrow mb-1">Solution</p>
                       <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.solution}</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="axiom-bento-card p-4">
-                  <p className="big-figure-label text-axiom-text-mute mb-2">Outcome Signal</p>
+                <p className="section-eyebrow mb-2">Outcome Signal</p>
                   <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{demo.roi}</p>
                 </div>
 
                 {demo.blueprint && (
                   <div className="axiom-bento-card p-4 flex flex-col gap-3">
-                    <p className="big-figure-label text-axiom-accent">Project Deep-Dive</p>
+                    <p className="section-eyebrow">Project Deep-Dive</p>
                     {demo.blueprint.map((item) => (
                       <div key={item.label} className="flex gap-3 items-start">
-                        <span className="big-figure-label text-axiom-text-mute shrink-0 w-16 mt-0.5">{item.label}</span>
+                        <span className="section-eyebrow shrink-0 w-16 mt-0.5">{item.label}</span>
                         <p className="text-[13px] text-axiom-text-mute leading-[1.7]">{item.text}</p>
                       </div>
                     ))}
