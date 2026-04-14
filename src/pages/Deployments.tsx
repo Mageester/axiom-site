@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
@@ -47,7 +47,7 @@ const proofBlocks: readonly ProofBlockData[] = [
   {
     id: 'demonstration-restaurant-reservation-site',
     title: 'Restaurant reservation site',
-    summary: 'A restaurant site that keeps the booking link easy to find and the menu simple to scan on phones.',
+    summary: 'A restaurant site where the booking link, menu, and hours are impossible to miss on a phone.',
     businessType: 'Restaurant and hospitality',
     statusLabel: 'Live site',
     ctaLabel: 'View the build →',
@@ -63,7 +63,7 @@ const proofBlocks: readonly ProofBlockData[] = [
   {
     id: 'concept-landscaping-authority-site',
     title: 'Landscaping site',
-    summary: 'A landscaping site that puts past work first and shortens the quote path.',
+    summary: 'A landscaping site that leads with past work and makes it easy to request a quote in under 30 seconds.',
     businessType: 'Landscaping and outdoor services',
     statusLabel: 'Selected build',
     ctaLabel: 'View the build →',
@@ -79,7 +79,7 @@ const proofBlocks: readonly ProofBlockData[] = [
   {
     id: 'concept-roofing-conversion-site',
     title: 'Roofing site',
-    summary: 'A roofing site that separates urgent calls from planned estimate requests.',
+    summary: 'A roofing site that separates urgent calls from estimate requests - so the right jobs reach you the right way.',
     businessType: 'Roofing and exterior services',
     statusLabel: 'Selected build',
     ctaLabel: 'View the build →',
@@ -183,11 +183,11 @@ const Deployments: React.FC = () => {
                     data-startup-heading
                     className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]"
                   >
-                    Proof over polish.
+                    What we actually build.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Each build starts with what the site is costing the business. The result is a site that earns trust before the first call.
+                  Every project starts with an honest look at what your current site is costing you. Then we build the version that fixes it.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -234,7 +234,7 @@ const Deployments: React.FC = () => {
                 <div className="max-w-2xl">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                   <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                    Want this for your business?
+                    Ready to stop losing jobs to a bad site?
                   </h2>
                   <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
                     Start a project and we&apos;ll review the current site, what&apos;s missing, and the first fixes that matter.
@@ -248,7 +248,7 @@ const Deployments: React.FC = () => {
                 </aside>
                 <div className="flex flex-wrap items-center gap-3 lg:col-span-2 lg:justify-end">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
-                    Start a project
+                    Start a project &rarr;
                   </Link>
                 </div>
               </div>
@@ -263,4 +263,3 @@ const Deployments: React.FC = () => {
 };
 
 export default Deployments;
-

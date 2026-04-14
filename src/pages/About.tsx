@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
@@ -28,7 +28,7 @@ const About: React.FC = () => {
                   We build sites that earn attention before anyone explains them.
                 </h1>
                 <p data-startup-copy className="mt-5 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Most business owners don&apos;t need a fancier website. They need one that actually works — where someone lands, immediately understands what you do, and knows exactly how to reach you. That&apos;s it. That&apos;s all we build.
+                  You don&apos;t need more pages, better fonts, or a redesign for the sake of it. You need a site where someone lands, immediately gets what you do, and knows exactly how to reach you. That&apos;s the only problem we solve &mdash; and we solve it completely.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Link to="/start-a-project" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -67,22 +67,22 @@ const About: React.FC = () => {
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
                         <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">01</div>
                         <div>
-                          <p className="text-sm font-semibold text-[#F2F4F7]">What you do — obvious in seconds.</p>
+                          <p className="text-sm font-semibold text-[#F2F4F7]">What you do, who you serve, and why you&apos;re the right call &mdash; readable before they scroll.</p>
                           <p className="mt-2 text-sm leading-6 text-slate-300">Not five clicks in. Not buried. Front and center, the moment someone lands.</p>
                         </div>
                       </div>
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
                         <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">02</div>
                         <div>
-                          <p className="text-sm font-semibold text-[#F2F4F7]">Why you — proven before they scroll.</p>
-                          <p className="mt-2 text-sm leading-6 text-slate-300">Reviews, past work, and results show up early. Doubt doesn&apos;t get a chance to settle.</p>
+                          <p className="text-sm font-semibold text-[#F2F4F7]">Your reviews, past work, and results are front and center.</p>
+                          <p className="mt-2 text-sm leading-6 text-slate-300">Doubt doesn&apos;t get a chance.</p>
                         </div>
                       </div>
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
                         <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">03</div>
                         <div>
-                          <p className="text-sm font-semibold text-[#F2F4F7]">One clear action.</p>
-                          <p className="mt-2 text-sm leading-6 text-slate-300">Call, book, or request a quote. One path. No hunting, no confusion.</p>
+                          <p className="text-sm font-semibold text-[#F2F4F7]">One path forward.</p>
+                          <p className="mt-2 text-sm leading-6 text-slate-300">Call, book, or request a quote &mdash; no hunting, no dead ends.</p>
                         </div>
                       </div>
                     </div>
@@ -100,4 +100,3 @@ const About: React.FC = () => {
 };
 
 export default About;
-

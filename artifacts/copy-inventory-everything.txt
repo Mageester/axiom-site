@@ -1,0 +1,3715 @@
+Page: About
+Section: Article
+Copy: Call, book, or request a quote. One path. No hunting, no confusion.
+
+Page: About
+Section: Article
+Copy: Most business owners don't need a fancier website. They need one that actually works ? where someone lands, immediately understands what you do, and knows exactly how to reach you. That's it. That's all we build.
+
+Page: About
+Section: Article
+Copy: Most sites do not need more pages or more effects. They need the offer to read clearly, proof to appear early, and the next step to stay obvious.
+
+Page: About
+Section: Article
+Copy: Not five clicks in. Not buried. Front and center, the moment someone lands.
+
+Page: About
+Section: Article
+Copy: One clear action.
+
+Page: About
+Section: Article
+Copy: Reviews, past work, and results show up early. Doubt doesn't get a chance to settle.
+
+Page: About
+Section: Article
+Copy: See the work &rarr;
+
+Page: About
+Section: Article
+Copy: Start a project
+
+Page: About
+Section: Article
+Copy: The work is done when the site doesn't need explaining.
+
+Page: About
+Section: Article
+Copy: We build sites that earn attention before anyone explains them.
+
+Page: About
+Section: Article
+Copy: What the work does
+
+Page: About
+Section: Article
+Copy: What you do ? obvious in seconds.
+
+Page: About
+Section: Article
+Copy: Why you ? proven before they scroll.
+
+Page: Admin Account
+Section: Data
+Copy: New passphrases do not match
+
+Page: Admin Account
+Section: Form
+Copy: (Min 10 chars)
+
+Page: Admin Account
+Section: Form
+Copy: Confirm New Passphrase
+
+Page: Admin Account
+Section: Form
+Copy: Current Passphrase
+
+Page: Admin Account
+Section: Form
+Copy: New Passphrase
+
+Page: Admin Account
+Section: Form
+Copy: Write Configuration
+
+Page: Admin Account
+Section: General
+Copy: Active Identity:
+
+Page: Admin Account
+Section: General
+Copy: Immediate Passphrase Rotation Required
+
+Page: Admin Account
+Section: General
+Copy: Operator Authorization Settings
+
+Page: Admin Account
+Section: General
+Copy: Terminate Session
+
+Page: Admin Campaigns
+Section: Form
+Copy: Commence Engine
+
+Page: Admin Campaigns
+Section: Form
+Copy: e.g. Cambridge, ON
+
+Page: Admin Campaigns
+Section: Form
+Copy: e.g. Roofers, Concrete, Med-Spas
+
+Page: Admin Campaigns
+Section: Form
+Copy: How deep to scroll in Maps (1 = fast, 15 = deep)
+
+Page: Admin Campaigns
+Section: Form
+Copy: Max Scroll Depth
+
+Page: Admin Campaigns
+Section: Form
+Copy: Niche / Profession
+
+Page: Admin Campaigns
+Section: Form
+Copy: Radius (km)
+
+Page: Admin Campaigns
+Section: Form
+Copy: Streaming Extraction...
+
+Page: Admin Campaigns
+Section: Form
+Copy: Target City
+
+Page: Admin Campaigns
+Section: General
+Copy: Active Deployments
+
+Page: Admin Campaigns
+Section: General
+Copy: Deep-mine qualified prospects missing websites, analyze their digital footprint, and auto-export to CSV.
+
+Page: Admin Campaigns
+Section: General
+Copy: Download CSV Payload
+
+Page: Admin Campaigns
+Section: General
+Copy: Export Completed Safely
+
+Page: Admin Campaigns
+Section: General
+Copy: Intelligence Campaigns
+
+Page: Admin Campaigns
+Section: General
+Copy: Leads Gathered
+
+Page: Admin Campaigns
+Section: General
+Copy: Outreach CSV
+
+Page: Admin Campaigns
+Section: General
+Copy: The Omniscient
+
+Page: Admin Campaigns
+Section: General
+Copy: View Pipeline
+
+Page: Admin Campaigns
+Section: General
+Copy: Waiting for commands...
+
+Page: Admin Inquiries
+Section: Form
+Copy: All statuses
+
+Page: Admin Inquiries
+Section: Form
+Copy: Search business, contact, email
+
+Page: Admin Inquiries
+Section: General
+Copy: Loading inquiries...
+
+Page: Admin Inquiries
+Section: General
+Copy: No inquiries found.
+
+Page: Admin Inquiries
+Section: General
+Copy: Website Inquiries
+
+Page: Admin InquiryDetail
+Section: General
+Copy: ← Back to Inquiries
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Contact Name
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Current Website
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Inquiry not found
+
+Page: Admin InquiryDetail
+Section: General
+Copy: IP Hash:
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Loading inquiry...
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Mark Spam
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Not provided
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Primary Goal
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Project Details
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Save Status
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Source Path:
+
+Page: Admin InquiryDetail
+Section: General
+Copy: Submission Details
+
+Page: Admin InquiryDetail
+Section: General
+Copy: User Agent:
+
+Page: Admin Jobs
+Section: General
+Copy: Connecting to queue module...
+
+Page: Admin Jobs
+Section: General
+Copy: Execution Commencing...
+
+Page: Admin Jobs
+Section: General
+Copy: Force Queue Execution
+
+Page: Admin Jobs
+Section: General
+Copy: No active telemetry stats
+
+Page: Admin Jobs
+Section: General
+Copy: Recent Tasks
+
+Page: Admin Jobs
+Section: General
+Copy: System Job Queue
+
+Page: Admin Jobs
+Section: General
+Copy: Task Type
+
+Page: Admin LeadDetail
+Section: General
+Copy: ← Back to Pipeline
+
+Page: Admin LeadDetail
+Section: General
+Copy: Add tag
+
+Page: Admin LeadDetail
+Section: General
+Copy: Add timestamped note entry...
+
+Page: Admin LeadDetail
+Section: General
+Copy: Adding…
+
+Page: Admin LeadDetail
+Section: General
+Copy: Audit Intelligence
+
+Page: Admin LeadDetail
+Section: General
+Copy: Checked:
+
+Page: Admin LeadDetail
+Section: General
+Copy: Closed / Won
+
+Page: Admin LeadDetail
+Section: General
+Copy: Contact & Operations
+
+Page: Admin LeadDetail
+Section: General
+Copy: Decrypting intelligence...
+
+Page: Admin LeadDetail
+Section: General
+Copy: Do Not Contact
+
+Page: Admin LeadDetail
+Section: General
+Copy: Email Template
+
+Page: Admin LeadDetail
+Section: General
+Copy: Lead not found
+
+Page: Admin LeadDetail
+Section: General
+Copy: Lead Quality
+
+Page: Admin LeadDetail
+Section: General
+Copy: Mark lead as DNC
+
+Page: Admin LeadDetail
+Section: General
+Copy: Needs Data
+
+Page: Admin LeadDetail
+Section: General
+Copy: No email
+
+Page: Admin LeadDetail
+Section: General
+Copy: No note history yet.
+
+Page: Admin LeadDetail
+Section: General
+Copy: No phone
+
+Page: Admin LeadDetail
+Section: General
+Copy: No tags yet.
+
+Page: Admin LeadDetail
+Section: General
+Copy: Notes History
+
+Page: Admin LeadDetail
+Section: General
+Copy: Operator Notes (Current)
+
+Page: Admin LeadDetail
+Section: General
+Copy: Outreach Ammunition
+
+Page: Admin LeadDetail
+Section: General
+Copy: Outreach Assistant
+
+Page: Admin LeadDetail
+Section: General
+Copy: Outreach Sent
+
+Page: Admin LeadDetail
+Section: General
+Copy: Pipeline Status
+
+Page: Admin LeadDetail
+Section: General
+Copy: Qualified Meeting
+
+Page: Admin LeadDetail
+Section: General
+Copy: Ready to Contact
+
+Page: Admin LeadDetail
+Section: General
+Copy: Reason (optional)
+
+Page: Admin LeadDetail
+Section: General
+Copy: Save Operations Data
+
+Page: Admin LeadDetail
+Section: General
+Copy: SMS Template
+
+Page: Admin LeadDetail
+Section: General
+Copy: Speed (ms)
+
+Page: Admin LeadDetail
+Section: General
+Copy: Uncontacted (New)
+
+Page: Admin LeadDetail
+Section: General
+Copy: Website Intelligence
+
+Page: Admin LeadDetail
+Section: General
+Copy: Writing memory...
+
+Page: Admin Leads
+Section: General
+Copy: ← Back to Campaigns
+
+Page: Admin Leads
+Section: General
+Copy: All Tags
+
+Page: Admin Leads
+Section: General
+Copy: Bulk Add Tag
+
+Page: Admin Leads
+Section: General
+Copy: Bulk Mark DNC
+
+Page: Admin Leads
+Section: General
+Copy: Bulk Status
+
+Page: Admin Leads
+Section: General
+Copy: Duplicate of
+
+Page: Admin Leads
+Section: General
+Copy: Export Selection
+
+Page: Admin Leads
+Section: General
+Copy: Fetching intelligence...
+
+Page: Admin Leads
+Section: General
+Copy: Hiding Duplicates
+
+Page: Admin Leads
+Section: General
+Copy: Lead Intelligence Pipeline
+
+Page: Admin Leads
+Section: General
+Copy: Mark Closed
+
+Page: Admin Leads
+Section: General
+Copy: Mark Contacted
+
+Page: Admin Leads
+Section: General
+Copy: Mark Disqualified
+
+Page: Admin Leads
+Section: General
+Copy: Mark DNC
+
+Page: Admin Leads
+Section: General
+Copy: Mark New
+
+Page: Admin Leads
+Section: General
+Copy: Mark Qualified
+
+Page: Admin Leads
+Section: General
+Copy: No email
+
+Page: Admin Leads
+Section: General
+Copy: Select Visible
+
+Page: Admin Leads
+Section: General
+Copy: Show Duplicates
+
+Page: Admin Leads
+Section: General
+Copy: Sort: Newest
+
+Page: Admin Leads
+Section: General
+Copy: Sort: Opportunity
+
+Page: Admin Leads
+Section: General
+Copy: Sort: Quality
+
+Page: Admin Leads
+Section: General
+Copy: Sort: Status
+
+Page: Admin Leads
+Section: General
+Copy: Targets Visible
+
+Page: Admin Leads
+Section: General
+Copy: Unselect Visible
+
+Page: Admin Leads
+Section: General
+Copy: Unset DNC
+
+Page: Admin Login
+Section: Form
+Copy: Establish Session
+
+Page: Admin Login
+Section: Form
+Copy: operator email (or username)
+
+Page: Admin Login
+Section: Form
+Copy: Redirecting to requested admin page after login
+
+Page: Admin Login
+Section: General
+Copy: Operator Authorization Required
+
+Page: Admin Login
+Section: General
+Copy: System Access
+
+Page: Admin OmniscientSettings
+Section: General
+Copy: Loading runtime status...
+
+Page: Admin Vault
+Section: General
+Copy: Filter, sort, and export your enriched targets.
+
+Page: Admin Vault
+Section: General
+Copy: Lead Intelligence Database
+
+Page: Admin Vault
+Section: General
+Copy: Loading vault intelligence...
+
+Page: Admin Vault
+Section: General
+Copy: The Vault
+
+Page: Admin Vault
+Section: General
+Copy: Your secured repository of AI-enriched, qualified business intelligence.
+
+Page: Approach
+Section: Article
+Copy: If the site still needs explanation, the work is not done.
+
+Page: Approach
+Section: Article
+Copy: Next Step
+
+Page: Approach
+Section: Article
+Copy: See the work
+
+Page: Approach
+Section: Article
+Copy: Start a project &rarr;
+
+Page: Approach
+Section: Data
+Copy: A visitor should understand the offer, the proof, and the next step without decoding the page.
+
+Page: Approach
+Section: Data
+Copy: Clarity comes first
+
+Page: Approach
+Section: Data
+Copy: Fast pages keep trust high and reduce drop-off on phones, where most people first meet the site.
+
+Page: Approach
+Section: Data
+Copy: Proof beats polish
+
+Page: Approach
+Section: Data
+Copy: Specific examples, outcomes, and contact paths do more work than vague slogans or long copy.
+
+Page: Approach
+Section: Data
+Copy: Speed protects trust
+
+Page: Approach
+Section: Section
+Copy: Clear websites are built on a few hard rules.
+
+Page: Approach
+Section: Section
+Copy: Our Approach
+
+Page: Approach
+Section: Section
+Copy: Three principles
+
+Page: Approach
+Section: Section
+Copy: We keep the work focused on clarity, speed, and proof ? so businesses can earn attention and trust without the noise.
+
+Page: Architects
+Section: Article
+Copy: Axiom is a senior-led team focused on positioning precision, conversion clarity, and controlled delivery.
+
+Page: Architects
+Section: Article
+Copy: Delivery Team
+
+Page: Architects
+Section: Article
+Copy: Operating Principle
+
+Page: Architects
+Section: Article
+Copy: Selective Engagements
+
+Page: Architects
+Section: Article
+Copy: We keep active engagements limited to protect execution quality.
+
+Page: AuditPage
+Section: Data
+Copy: Automated request for a complimentary engineering audit.
+
+Page: AuditPage
+Section: Form
+Copy: Company Fax
+
+Page: AuditPage
+Section: Form
+Copy: Request review
+
+Page: AuditPage
+Section: Form
+Copy: Review requested.
+
+Page: AuditPage
+Section: Form
+Copy: Start another review
+
+Page: AuditPage
+Section: Form
+Copy: Use the public URL if you have one.
+
+Page: AuditPage
+Section: Form
+Copy: We'll look at your site and get back to you within 24 hours.
+
+Page: AuditPage
+Section: Form
+Copy: Website URL
+
+Page: AuditPage
+Section: Form
+Copy: Where should we reply?
+
+Page: AuditPage
+Section: Form
+Copy: Who should we address?
+
+Page: AuditPage
+Section: General
+Copy: costing you money?
+
+Page: AuditPage
+Section: General
+Copy: Is your site
+
+Page: AuditPage
+Section: General
+Copy: Most local business sites lose leads because they're slow, confusing, or hard to contact through. Start a project and we'll review it.
+
+Page: Backend api/_middleware
+Section: Data
+Copy: Logged out
+
+Page: Backend api/_utils/inquiries
+Section: Data
+Copy: Invalid website URL
+
+Page: Backend api/_utils/omniscient-export
+Section: Data
+Copy: [Content_Types].xml
+
+Page: Backend api/_utils/omniscient-intelligence
+Section: Data
+Copy: grand opening
+
+Page: Backend api/_utils/omniscient-intelligence
+Section: Data
+Copy: just opened
+
+Page: Backend api/_utils/omniscient-intelligence
+Section: Data
+Copy: looking for
+
+Page: Backend api/_utils/omniscient-intelligence
+Section: Data
+Copy: new location
+
+Page: Backend api/_utils/omniscient-intelligence
+Section: Data
+Copy: new management
+
+Page: Backend api/_utils/omniscient-intelligence
+Section: Data
+Copy: second location
+
+Page: Backend api/_utils/omniscient-intelligence
+Section: Data
+Copy: under new
+
+Page: Backend api/auth/change-password
+Section: Data
+Copy: Password updated successfully
+
+Page: Backend api/auth/logout
+Section: Data
+Copy: Logged out
+
+Page: Backend api/campaigns/[id]/index
+Section: Data
+Copy: Campaign deleted
+
+Page: Backend api/campaigns/index
+Section: Data
+Copy: All campaigns deleted
+
+Page: Backend api/campaigns/index
+Section: Data
+Copy: Campaign created
+
+Page: Backend api/intake
+Section: Data
+Copy: Transmission received. Confirmation email sent.
+
+Page: Backend api/leads/[id]/tags
+Section: Data
+Copy: Tag added
+
+Page: Backend api/leads/[id]/tags
+Section: Data
+Copy: Tag removed
+
+Page: Backend api/leads/bulk
+Section: Data
+Copy: Bulk DNC updated
+
+Page: Backend api/leads/bulk
+Section: Data
+Copy: Bulk status updated
+
+Page: Backend api/leads/bulk
+Section: Data
+Copy: Bulk tag added
+
+Page: Backend api/leads/bulk
+Section: Data
+Copy: Bulk tag removed
+
+Page: Backend api/leads/bulk
+Section: Data
+Copy: Tag not found
+
+Page: Backend api/omniscient/scrape
+Section: Data
+Copy: [AI] Gemini key not configured. Running heuristic-only enrichment.
+
+Page: Backend api/omniscient/scrape
+Section: Data
+Copy: [DONE] AXIOM extraction complete
+
+Page: Backend api/omniscient/scrape
+Section: Data
+Copy: [DONE] Export the protected results from The Vault or /api/omniscient/leads/export.
+
+Page: Backend api/omniscient/scrape
+Section: Data
+Copy: [EMAIL] Resolver found no vetted public email
+
+Page: Backend api/omniscient/scrape
+Section: Data
+Copy: [ENGINE] Intelligence modules online: scoring, dedupe, contact validation, public email resolver
+
+Page: Backend api/omniscient/scrape
+Section: Data
+Copy: [MAPS] Infinite scroll extraction started
+
+Page: Backend api/omniscient/scrape
+Section: Data
+Copy: [WEB] No website. Searching public footprint...
+
+Page: Backend api/public/website-request
+Section: Data
+Copy: Website request submitted successfully
+
+Page: Backend server.js
+Section: Data
+Copy: [🌐] Injecting infinite scroll bypass...
+
+Page: Backend server.js
+Section: Data
+Copy: [🔍] No website detected. Searching footprint...
+
+Page: Backend server.js
+Section: Data
+Copy: Request body is empty or not valid JSON. Ensure Content-Type: application/json is set.
+
+Page: Concepts
+Section: Article
+Copy: Core Capabilities
+
+Page: Concepts
+Section: Article
+Copy: Hide details
+
+Page: Concepts
+Section: Article
+Copy: Open project
+
+Page: Concepts
+Section: Article
+Copy: Outcome Signal
+
+Page: Concepts
+Section: Article
+Copy: Project Deep-Dive
+
+Page: Concepts
+Section: Article
+Copy: Show details
+
+Page: Concepts
+Section: Data
+Copy: 0.3s load time achieved on 3G networks in rural Ontario field testing.
+
+Page: Concepts
+Section: Data
+Copy: 22% increase in high-ticket emergency installs in Month 1 post-launch.
+
+Page: Concepts
+Section: Data
+Copy: A portfolio-grade digital experience that positions you as the premium choice before the first phone call.
+
+Page: Concepts
+Section: Data
+Copy: An intake system that asks the right questions upfront, filters out the tire-kickers, and routes real emergency calls straight to dispatch.
+
+Page: Concepts
+Section: Data
+Copy: Apex Climate Systems
+
+Page: Concepts
+Section: Data
+Copy: Capture emergency 'No-AC' calls during 35C+ heatwaves in Southern Ontario.
+
+Page: Concepts
+Section: Data
+Copy: Capture storm-season leads while competitors' sites go down.
+
+Page: Concepts
+Section: Data
+Copy: Competing for $50K+ design projects with a website that looks like a $500 template.
+
+Page: Concepts
+Section: Data
+Copy: Double your emergency dispatch rate during peak weather events.
+
+Page: Concepts
+Section: Data
+Copy: Edge-deployed infrastructure that handles traffic spikes without flinching. Your site loads in under a second, even when half the county is searching for roof repair.
+
+Page: Concepts
+Section: Data
+Copy: Every time a big storm rolls through, your site grinds to a halt from the traffic spike - and those leads go to whoever loads first.
+
+Page: Concepts
+Section: Data
+Copy: HVAC Performance
+
+Page: Concepts
+Section: Data
+Copy: Landscaping Performance
+
+Page: Concepts
+Section: Data
+Copy: Roofing Performance
+
+Page: Concepts
+Section: Data
+Copy: Summit Roofing Co.
+
+Page: Concepts
+Section: Data
+Copy: Unqualified calls burning dispatch hours - your techs are rolling trucks for $89 tune-ups instead of $4,000 compressor replacements.
+
+Page: Concepts
+Section: Data
+Copy: Verdant Landscapes
+
+Page: Concepts
+Section: Data
+Copy: When hail storms hit and every roof in town leaks, your site loads instantly while your competitors' sites crash. You get the calls. They get voicemail.
+
+Page: Concepts
+Section: Data
+Copy: When the first heatwave hits and your phones blow up, this system filters the tire-kickers so your techs only roll trucks for high-ticket emergency installs.
+
+Page: Concepts
+Section: Data
+Copy: Win premium design contracts with a portfolio that matches your craft.
+
+Page: Concepts
+Section: Data
+Copy: You're bidding on $50K hardscape projects against companies with $200 websites. This fixes the gap between the quality of your work and the quality of your online presence.
+
+Page: Concepts
+Section: Section
+Copy: Each concept is engineered from scratch for a specific industry. Different layouts, different funnels, different conversion strategies.
+
+Page: Concepts
+Section: Section
+Copy: Every build is engineered from scratch for your specific market. No templates. No shared layouts. No recycled designs from another contractor down the road.
+
+Page: Concepts
+Section: Section
+Copy: Professional Concepts
+
+Page: Concepts
+Section: Section
+Copy: Real sites built for real contractors. Not templates.
+
+Page: Concepts
+Section: Section
+Copy: Want this built for your trade?
+
+Page: ContactPage
+Section: Article
+Copy: Call us
+
+Page: ContactPage
+Section: Article
+Copy: for a quick note or anything that is not a project.
+
+Page: ContactPage
+Section: Article
+Copy: for website work.
+
+Page: ContactPage
+Section: Article
+Copy: General questions
+
+Page: ContactPage
+Section: Article
+Copy: Let's talk about your site.
+
+Page: ContactPage
+Section: Article
+Copy: Need website work?
+
+Page: ContactPage
+Section: Article
+Copy: Not a project? Use
+
+Page: ContactPage
+Section: Article
+Copy: Project intake
+
+Page: ContactPage
+Section: Article
+Copy: Share the basics and we'll reply within one business day with the next step.
+
+Page: ContactPage
+Section: Article
+Copy: Start a project
+
+Page: ContactPage
+Section: Article
+Copy: Tell us what the business needs.
+
+Page: ContactPage
+Section: Article
+Copy: Tell us what you've got and what you want. We'll reply within one business day.
+
+Page: ContactPage
+Section: Aside
+Copy: At a glance
+
+Page: ContactPage
+Section: Aside
+Copy: One short form
+
+Page: ContactPage
+Section: Aside
+Copy: Reply within one business day
+
+Page: ContactPage
+Section: Aside
+Copy: Reply within one business day.
+
+Page: ContactPage
+Section: Form
+Copy: A few short sentences are enough.
+
+Page: ContactPage
+Section: Form
+Copy: Business name
+
+Page: ContactPage
+Section: Form
+Copy: Optional, if the reply should use a company name.
+
+Page: ContactPage
+Section: Form
+Copy: Send it →
+
+Page: ContactPage
+Section: Form
+Copy: Send message
+
+Page: ContactPage
+Section: Form
+Copy: Tell us what you need help with.
+
+Page: ContactPage
+Section: Form
+Copy: We'll reply within one business day with next steps.
+
+Page: ContactPage
+Section: Form
+Copy: Where should we reply?
+
+Page: ContactPage
+Section: Form
+Copy: Who should we address?
+
+Page: ContactPage
+Section: General
+Copy: Got it.
+
+Page: ContactPage
+Section: General
+Copy: Send another message
+
+Page: ContactPage
+Section: General
+Copy: We'll review and reply within one business day.
+
+Page: ContactPage
+Section: Section
+Copy: Brief project description
+
+Page: ContactPage
+Section: Section
+Copy: Business name
+
+Page: ContactPage
+Section: Section
+Copy: Email address
+
+Page: ContactPage
+Section: Section
+Copy: For website work, use
+
+Page: ContactPage
+Section: Section
+Copy: Full name
+
+Page: ContactPage
+Section: Section
+Copy: Optional. Add it if there is already a site.
+
+Page: ContactPage
+Section: Section
+Copy: Send a question or a note.
+
+Page: ContactPage
+Section: Section
+Copy: Start a project
+
+Page: ContactPage
+Section: Section
+Copy: Three short lines is enough.
+
+Page: ContactPage
+Section: Section
+Copy: Use the company name people know.
+
+Page: ContactPage
+Section: Section
+Copy: Use this form for a quick question or a note about your site.
+
+Page: ContactPage
+Section: Section
+Copy: We'll reply here.
+
+Page: ContactPage
+Section: Section
+Copy: Website URL
+
+Page: ContactPage
+Section: Section
+Copy: What does your business do, what's wrong with your current site, and when do you want to move?
+
+Page: ContactPage
+Section: Section
+Copy: Who should we address?
+
+Page: Deployments
+Section: Article
+Copy: Next step
+
+Page: Deployments
+Section: Article
+Copy: Start a project
+
+Page: Deployments
+Section: Article
+Copy: Start a project and we'll review the current site, what's missing, and the first fixes that matter.
+
+Page: Deployments
+Section: Article
+Copy: Want this for your business?
+
+Page: Deployments
+Section: Aside
+Copy: Clarity &middot; Proof &middot; Contact
+
+Page: Deployments
+Section: Aside
+Copy: Review &rarr; Scope &rarr; Build &rarr; Launch
+
+Page: Deployments
+Section: Aside
+Copy: What happens next
+
+Page: Deployments
+Section: Data
+Copy: A landscaping site that puts past work first and shortens the quote path.
+
+Page: Deployments
+Section: Data
+Copy: A restaurant site that keeps the booking link easy to find and the menu simple to scan on phones.
+
+Page: Deployments
+Section: Data
+Copy: A roofing site that separates urgent calls from planned estimate requests.
+
+Page: Deployments
+Section: Data
+Copy: Landscaping site
+
+Page: Deployments
+Section: Data
+Copy: Live site
+
+Page: Deployments
+Section: Data
+Copy: Restaurant reservation site
+
+Page: Deployments
+Section: Data
+Copy: Roofing site
+
+Page: Deployments
+Section: Data
+Copy: Selected build
+
+Page: Deployments
+Section: Data
+Copy: View the build →
+
+Page: Deployments
+Section: Main
+Copy: Each build starts with what the site is costing the business. The result is a site that earns trust before the first call.
+
+Page: Deployments
+Section: Main
+Copy: Examples showing what a clear service-business website looks like.
+
+Page: Deployments
+Section: Main
+Copy: Proof over polish.
+
+Page: Deployments
+Section: Main
+Copy: What we build
+
+Page: Global Footer
+Section: Footer
+Copy: &copy; 2026 Axiom. All rights reserved.
+
+Page: Global Footer
+Section: Footer
+Copy: Websites built for businesses that mean it.
+
+Page: Global Footer
+Section: Navigation
+Copy: (226) 753-1833
+
+Page: Global Footer
+Section: Navigation
+Copy: contact@getaxiom.ca
+
+Page: Global Footer
+Section: Navigation
+Copy: Next step
+
+Page: Global Footer
+Section: Navigation
+Copy: Our Approach
+
+Page: Global Footer
+Section: Navigation
+Copy: Privacy Policy
+
+Page: Global Footer
+Section: Navigation
+Copy: Terms of Service
+
+Page: Global Navigation
+Section: Data
+Copy: Our Approach
+
+Page: Global Navigation
+Section: General
+Copy: Primary navigation
+
+Page: Global Navigation
+Section: General
+Copy: Skip to main content
+
+Page: Global Navigation
+Section: Header
+Copy: Axiom logo
+
+Page: Global Navigation
+Section: Header
+Copy: Close primary navigation
+
+Page: Global Navigation
+Section: Header
+Copy: Open primary navigation
+
+Page: Home
+Section: Article
+Copy: If the site isn't earning trust, it's costing you work.
+
+Page: Home
+Section: Article
+Copy: Most sites lose the client in the first ten seconds.
+
+Page: Home
+Section: Article
+Copy: Next step
+
+Page: Home
+Section: Article
+Copy: Start a project →
+
+Page: Home
+Section: Article
+Copy: We fix all three before we touch the design.
+
+Page: Home
+Section: Article
+Copy: We'll review your current site, show what's costing you trust, and tell you exactly what to fix.
+
+Page: Home
+Section: Article
+Copy: Why it matters
+
+Page: Home
+Section: Aside
+Copy: Review → Scope → Build → Launch
+
+Page: Home
+Section: Aside
+Copy: What happens next
+
+Page: Home
+Section: Main
+Copy: How the work runs.
+
+Page: Home
+Section: Main
+Copy: The process stays simple so you know what is happening, what comes next, and what you are getting.
+
+Page: Home
+Section: Section
+Copy: Premium service website design
+
+Page: Home
+Section: Section
+Copy: See our work
+
+Page: Home
+Section: Section
+Copy: Start a project
+
+Page: Home
+Section: Section
+Copy: System Output
+
+Page: Home
+Section: Section
+Copy: The site should do the work before they call.
+
+Page: Home
+Section: Section
+Copy: We build websites for businesses that need to be taken seriously ? clear offer, visible proof, one path forward.
+
+Page: Infrastructure
+Section: Article
+Copy: Before we build
+
+Page: Infrastructure
+Section: Article
+Copy: Each stage keeps the work clear, the decisions early, and the launch path simple.
+
+Page: Infrastructure
+Section: Article
+Copy: Four stages from review to launch.
+
+Page: Infrastructure
+Section: Article
+Copy: Next step
+
+Page: Infrastructure
+Section: Article
+Copy: Start with a review.
+
+Page: Infrastructure
+Section: Article
+Copy: This keeps the work moving and cuts down on back-and-forth later.
+
+Page: Infrastructure
+Section: Article
+Copy: We'll look at the site and show the first changes worth making.
+
+Page: Infrastructure
+Section: Article
+Copy: What we need before Day 7.
+
+Page: Infrastructure
+Section: Aside
+Copy: What comes next
+
+Page: Infrastructure
+Section: Data
+Copy: Domain and redirects
+
+Page: Infrastructure
+Section: Data
+Copy: Pages to build
+
+Page: Infrastructure
+Section: Data
+Copy: Proof to surface
+
+Page: Infrastructure
+Section: Data
+Copy: Quote and contact paths
+
+Page: Infrastructure
+Section: Data
+Copy: We look at the current site, what needs to change, and what people should find first.
+
+Page: Infrastructure
+Section: Data
+Copy: We settle the main pages, the proof to show, and where calls or forms should go.
+
+Page: Infrastructure
+Section: Data
+Copy: We test the forms, connect the domain, and make sure the site is ready to go live.
+
+Page: Infrastructure
+Section: Data
+Copy: We write the copy, shape the pages, and check how they hold up on phones and desktop.
+
+Page: Infrastructure
+Section: Section
+Copy: Clear checkpoints keep decisions early and launch predictable.
+
+Page: Infrastructure
+Section: Section
+Copy: How the build moves.
+
+Page: Infrastructure
+Section: Section
+Copy: Read more
+
+Page: Infrastructure
+Section: Section
+Copy: Show less
+
+Page: NotFoundPage
+Section: Section
+Copy: Or return to
+
+Page: NotFoundPage
+Section: Section
+Copy: Requested path
+
+Page: NotFoundPage
+Section: Section
+Copy: That page isn't here.
+
+Page: NotFoundPage
+Section: Section
+Copy: The address you opened does not point to a live page. Use the main links below to continue.
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: Active Site
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: AI Enriched
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: Avg Rating
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: Elite (80+)
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: Email Rate
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: Has Contact
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: High (60-79)
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: Low (<40)
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: Medium (40-59)
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: Raw Leads
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: With Phone
+
+Page: Omniscient DashboardClient
+Section: Data
+Copy: With Social
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: % contact rate
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: 30 days
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Avg Score
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: City Distribution
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Command Center
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Engine Idle
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Lead Acquisition Timeline
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Lead Pipeline Funnel
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: lead quality index
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Loading intelligence...
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Niche Breakdown
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: No data yet.
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: No data yet. Run an extraction.
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: No recent activity.
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: No scored leads yet. Run an extraction.
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: NO SITE
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: No Website
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: prime targets
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Real-time intelligence overview of your entire lead pipeline.
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Recent Activity
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Score Tiers
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: targets acquired
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Top Scored Leads
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: Total Leads
+
+Page: Omniscient DashboardClient
+Section: General
+Copy: With Email
+
+Page: Omniscient DossierClient
+Section: General
+Copy: Back to Vault
+
+Page: Omniscient DossierClient
+Section: General
+Copy: Lead Dossier
+
+Page: Omniscient DossierClient
+Section: General
+Copy: Lead Not Found
+
+Page: Omniscient DossierClient
+Section: General
+Copy: Score Breakdown
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Add niche + city combos to process sequentially.
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Add to Queue
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Build multi-target extraction queues, deep-mine prospects with AI intelligence, and auto-score every lead.
+
+Page: Omniscient HuntClient
+Section: General
+Copy: e.g. Kitchener
+
+Page: Omniscient HuntClient
+Section: General
+Copy: e.g. Roofers, Med-Spas
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Export S/A/B (CSV)
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Export S/A/B (XLSX)
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Extraction Queue
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Go Triage
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Hunt Complete 🎉
+
+Page: Omniscient HuntClient
+Section: General
+Copy: km • D:
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Launch Queue (
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Niche / Profession
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Open Vault
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Processing Queue...
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Queue Builder
+
+Page: Omniscient HuntClient
+Section: General
+Copy: R:
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Radius (km)
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Scroll Depth
+
+Page: Omniscient HuntClient
+Section: General
+Copy: Target City
+
+Page: Omniscient HuntClient
+Section: General
+Copy: The Hunt
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Admin emails
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Allowed sign-up emails
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: App base URL
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Auth requests:
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Browser rendering binding
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Client-only display preferences remain local to the operator browser.
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Cloudflare-safe limits for auth, exports, and scrape operations.
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Database target
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Display & Performance
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Export requests:
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Gemini server key
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Internal runtime status for the protected Omniscient deployment.
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Performance Mode
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Reduce decorative effects for longer sessions or lower-powered devices.
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Runtime Controls
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Scrape concurrency:
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Scrape requests:
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Scrape timeout:
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Security Posture
+
+Page: Omniscient SettingsClient
+Section: General
+Copy: Sensitive configuration is server-side only and never editable from this screen.
+
+Page: Omniscient Shared app-shell
+Section: Main
+Copy: System Online
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: ⌘1
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: ⌘2
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: ⌘3
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: ⌘4
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: ⌘5
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: Browse lead database
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: Command center overview
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: Configure engine
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: Extract & enrich leads
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: Speed triage leads
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: The Hunt
+
+Page: Omniscient Shared app-sidebar
+Section: Data
+Copy: The Vault
+
+Page: Omniscient Shared app-sidebar
+Section: General
+Copy: ENGINE v4.0
+
+Page: Omniscient Shared app-sidebar
+Section: General
+Copy: Omniscient v4
+
+Page: Omniscient Shared dossier/call-sheet
+Section: General
+Copy: &ldquo;
+
+Page: Omniscient Shared dossier/call-sheet
+Section: General
+Copy: &rdquo;
+
+Page: Omniscient Shared dossier/call-sheet
+Section: General
+Copy: Call Opener
+
+Page: Omniscient Shared dossier/call-sheet
+Section: General
+Copy: Follow-up Question
+
+Page: Omniscient Shared dossier/call-sheet
+Section: General
+Copy: Next Step
+
+Page: Omniscient Shared dossier/call-sheet
+Section: General
+Copy: Objection Handlers
+
+Page: Omniscient Shared dossier/contact-quality
+Section: General
+Copy: Contact Quality
+
+Page: Omniscient Shared dossier/contact-quality
+Section: General
+Copy: Email Type
+
+Page: Omniscient Shared dossier/contact-quality
+Section: General
+Copy: No contact quality data available.
+
+Page: Omniscient Shared dossier/contact-quality
+Section: General
+Copy: Phone Confidence
+
+Page: Omniscient Shared dossier/disqualifiers-panel
+Section: General
+Copy: Primary Reason
+
+Page: Omniscient Shared dossier/identity-card
+Section: General
+Copy: Has Site
+
+Page: Omniscient Shared dossier/identity-card
+Section: General
+Copy: No Site
+
+Page: Omniscient Shared dossier/operational-history
+Section: General
+Copy: &rdquo;
+
+Page: Omniscient Shared dossier/operational-history
+Section: General
+Copy: Add a note... (⌘+Enter to save)
+
+Page: Omniscient Shared dossier/operational-history
+Section: General
+Copy: No notes matching &ldquo;
+
+Page: Omniscient Shared dossier/operational-history
+Section: General
+Copy: No notes yet. Press N to focus.
+
+Page: Omniscient Shared dossier/operational-history
+Section: General
+Copy: Search notes...
+
+Page: Omniscient Shared dossier/pain-signals-panel
+Section: General
+Copy: No pain signals captured yet
+
+Page: Omniscient Shared dossier/pain-signals-panel
+Section: General
+Copy: Pain Signals
+
+Page: Omniscient Shared dossier/pain-signals-panel
+Section: General
+Copy: Run a fresh extraction for this niche/city.
+
+Page: Omniscient Shared dossier/quick-actions
+Section: General
+Copy: Quick Actions
+
+Page: Omniscient Shared dossier/website-assessment-panel
+Section: General
+Copy: No website assessment data available.
+
+Page: Omniscient Shared dossier/website-assessment-panel
+Section: General
+Copy: Overall Grade
+
+Page: Omniscient Shared dossier/website-assessment-panel
+Section: General
+Copy: Top Fixes
+
+Page: Omniscient Shared dossier/website-assessment-panel
+Section: General
+Copy: Website Assessment
+
+Page: Omniscient Shared hunt/issues-panel
+Section: General
+Copy: Issues (
+
+Page: Omniscient Shared hunt/ops-hud
+Section: Data
+Copy: DQ'd
+
+Page: Omniscient Shared hunt/ops-hud
+Section: General
+Copy: Cancel (Esc)
+
+Page: Omniscient Shared hunt/ops-hud
+Section: General
+Copy: Pause (Space)
+
+Page: Omniscient Shared hunt/ops-hud
+Section: General
+Copy: Paused (buffering)
+
+Page: Omniscient Shared hunt/ops-hud
+Section: General
+Copy: Resume (Space)
+
+Page: Omniscient Shared hunt/queue-summary
+Section: General
+Copy: m remaining
+
+Page: Omniscient Shared hunt/terminal-panel
+Section: General
+Copy: Awaiting extraction data...
+
+Page: Omniscient Shared hunt/terminal-panel
+Section: General
+Copy: Jump to Live
+
+Page: Omniscient Shared hunt/terminal-panel
+Section: General
+Copy: lines)
+
+Page: Omniscient Shared hunt/terminal-panel
+Section: General
+Copy: Raw Feed
+
+Page: Omniscient Shared hunt/terminal-panel
+Section: General
+Copy: Search logs...
+
+Page: Omniscient Shared layout-breadcrumb
+Section: Data
+Copy: The Hunt
+
+Page: Omniscient Shared layout-breadcrumb
+Section: Data
+Copy: The Vault
+
+Page: Omniscient Shared system/command-palette
+Section: General
+Copy: esc close
+
+Page: Omniscient Shared system/command-palette
+Section: General
+Copy: No commands found
+
+Page: Omniscient Shared system/command-palette
+Section: General
+Copy: Try a different search term
+
+Page: Omniscient Shared system/command-palette
+Section: General
+Copy: Type a command or search…
+
+Page: Omniscient Shared system/performance-toggle
+Section: General
+Copy: Full effects enabled ? click to reduce motion for better performance
+
+Page: Omniscient Shared system/performance-toggle
+Section: General
+Copy: Full FX
+
+Page: Omniscient Shared system/performance-toggle
+Section: General
+Copy: Perf Mode
+
+Page: Omniscient Shared system/performance-toggle
+Section: General
+Copy: Performance Mode ON ? reduced animations, no particles, shorter transitions
+
+Page: Omniscient Shared system/search-trigger
+Section: General
+Copy: ⌘K
+
+Page: Omniscient Shared system/search-trigger
+Section: General
+Copy: Search…
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Close palette / modal
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Command Palette
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Execute command
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Go to Dashboard
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Go to Settings
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Go to The Hunt
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Go to The Vault
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Navigate results
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Open command palette
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: Data
+Copy: Show this help
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: General
+Copy: anytime to toggle this panel
+
+Page: Omniscient Shared system/shortcuts-modal
+Section: General
+Copy: Keyboard Shortcuts
+
+Page: Omniscient Shared triage/action-dock
+Section: Data
+Copy: Call Now
+
+Page: Omniscient Shared triage/action-dock
+Section: Data
+Copy: Follow Up
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: &rdquo;
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: Call List
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: Confirm?
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: Copy Emails
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: Copy Phones
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: Export CSV
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: Leads marked "Keep" during triage
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: No leads in call list yet
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: No matches for &ldquo;
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: Press 1 during triage to keep leads
+
+Page: Omniscient Shared triage/call-list-drawer
+Section: General
+Copy: Search kept leads...
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: Call Opener
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: Has Site
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: ID:
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: No assessment data
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: No email
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: No pain signals
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: No phone
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: No Site
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: Overall Grade
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: Pain Signals
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: Source:
+
+Page: Omniscient Shared triage/triage-card
+Section: General
+Copy: Website Assessment
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: ★ 3.5+
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: ★ 3+
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: ★ 4.5+
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: ★ 4+
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: ★ Any
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: Call List
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: Keyboard shortcuts (?)
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: No Site
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: Only leads with email
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: Only leads with phone
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: Only leads without a website
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: Open call list drawer
+
+Page: Omniscient Shared triage/triage-filter-bar
+Section: General
+Copy: Reset triage session
+
+Page: Omniscient Shared ui/copy-button
+Section: General
+Copy: Copied!
+
+Page: Omniscient Shared ui/sidebar
+Section: General
+Copy: Displays the mobile sidebar.
+
+Page: Omniscient Shared ui/sidebar
+Section: General
+Copy: Toggle Sidebar
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: AI Tactical Note
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: All Leads
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Business Name
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Contact Name
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Current Page
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Date Added
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Export only leads visible on this page
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Export what matches your current filters
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Export your entire database
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Filtered Results
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Social Link
+
+Page: Omniscient Shared VaultDataTable
+Section: Data
+Copy: Website Status
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Added:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Advanced Filters
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: AI Intelligence
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: All Cities (
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: All Niches (
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: City:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Clear all filters
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: columns ×
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Columns to Include
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Contact Details
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Contact:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Data Availability
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Data Scope
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Date Range
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Date:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Deselect All
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: e.g. 10
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: e.g. 100
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: e.g. 4.0
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: e.g. 5.0
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Email:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Export Settings
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Format:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Has Site
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Has Website
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: matching your filters
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Max Rating
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Max Reviews
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Min Rating
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Min Reviews
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Niche:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: No contact details found.
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: No leads found
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: No Site
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: No Website
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Phone:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Rating:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Reviews:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Run an extraction to populate your vault
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Search anything ? business, niche, city, email, notes...
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Select All
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Social:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Status:
+
+Page: Omniscient Shared VaultDataTable
+Section: General
+Copy: Try adjusting your filters
+
+Page: Omniscient TriageClient
+Section: General
+Copy: Adjust your filters or run a new extraction.
+
+Page: Omniscient TriageClient
+Section: General
+Copy: All Done!
+
+Page: Omniscient TriageClient
+Section: General
+Copy: Go Hunt
+
+Page: Omniscient TriageClient
+Section: General
+Copy: leads in this batch.
+
+Page: Omniscient TriageClient
+Section: General
+Copy: No Leads Match
+
+Page: Omniscient TriageClient
+Section: General
+Copy: Open Call List
+
+Page: Omniscient TriageClient
+Section: General
+Copy: Reset Filters
+
+Page: Omniscient TriageClient
+Section: General
+Copy: Start Over
+
+Page: Omniscient TriageClient
+Section: General
+Copy: Triage Shortcuts
+
+Page: Omniscient TriageClient
+Section: General
+Copy: You've processed all
+
+Page: PricingPage
+Section: Data
+Copy: 3 pages · mobile-ready · contact form · delivered in 14 days
+
+Page: PricingPage
+Section: Data
+Copy: 5 pages · SEO basics · Google Business setup · delivered in 21 days
+
+Page: PricingPage
+Section: Data
+Copy: Let's talk
+
+Page: PricingPage
+Section: Data
+Copy: Multi-page · integrations · ongoing support
+
+Page: PricingPage
+Section: Data
+Copy: Start a project
+
+Page: PricingPage
+Section: Section
+Copy: Clear pricing. No surprises.
+
+Page: PricingPage
+Section: Section
+Copy: Three options for businesses that want a site to work hard from day one.
+
+Page: PrivacyPage
+Section: General
+Copy: 1. Information Collection
+
+Page: PrivacyPage
+Section: General
+Copy: 2. Use of Data
+
+Page: PrivacyPage
+Section: General
+Copy: 3. Transfer Of Data
+
+Page: PrivacyPage
+Section: General
+Copy: 4. Security Of Data
+
+Page: PrivacyPage
+Section: General
+Copy: 5. Analytics
+
+Page: PrivacyPage
+Section: General
+Copy: Axiom uses the collected data for various purposes:
+
+Page: PrivacyPage
+Section: General
+Copy: Last Updated:
+
+Page: PrivacyPage
+Section: General
+Copy: Privacy Policy
+
+Page: PrivacyPage
+Section: General
+Copy: The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.
+
+Page: PrivacyPage
+Section: General
+Copy: To monitor the usage of the Service
+
+Page: PrivacyPage
+Section: General
+Copy: To notify you about changes to our Service
+
+Page: PrivacyPage
+Section: General
+Copy: To provide analysis or valuable information so that we can improve the Service
+
+Page: PrivacyPage
+Section: General
+Copy: To provide and maintain the Service
+
+Page: PrivacyPage
+Section: General
+Copy: To provide customer care and support
+
+Page: PrivacyPage
+Section: General
+Copy: We collect several different types of information for various purposes to provide and improve our Service to you. This includes personal data provided exclusively via direct contact or scheduled consultation requests.
+
+Page: PrivacyPage
+Section: General
+Copy: We may use third-party Service Providers to monitor and analyze the use of our Service, such as Google Analytics, subject strictly to their respective privacy frameworks.
+
+Page: PrivacyPage
+Section: General
+Copy: Your information, including Personal Data, may be transferred to ? and maintained on ? computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from your jurisdiction.
+
+Page: ServicesPage
+Section: Article
+Copy: Most picked
+
+Page: ServicesPage
+Section: Data
+Copy: "We signed two new clients in week one from leads that used to bounce." - Business Owner
+
+Page: ServicesPage
+Section: Data
+Copy: $1,500 CAD
+
+Page: ServicesPage
+Section: Data
+Copy: $3,000 CAD
+
+Page: ServicesPage
+Section: Data
+Copy: $500 CAD
+
+Page: ServicesPage
+Section: Data
+Copy: 3?5 pages // fast hosting // contact tracking
+
+Page: ServicesPage
+Section: Data
+Copy: 7?10 pages // lead tracking // reviews and proof
+
+Page: ServicesPage
+Section: Data
+Copy: A clean site that replaces whatever you have now. Clear pages, fast on phones, easy to contact.
+
+Page: ServicesPage
+Section: Data
+Copy: Call and quote buttons that work well on phones
+
+Page: ServicesPage
+Section: Data
+Copy: Clear service pages that show what you do upfront
+
+Page: ServicesPage
+Section: Data
+Copy: CRM and scheduling tool connections
+
+Page: ServicesPage
+Section: Data
+Copy: custom build // tool connections // reporting
+
+Page: ServicesPage
+Section: Data
+Copy: Do I need to handle my own hosting?
+
+Page: ServicesPage
+Section: Data
+Copy: For businesses that want better clients, not just more traffic. Stronger pages, real proof, and a clearer offer.
+
+Page: ServicesPage
+Section: Data
+Copy: For businesses with multiple crews, locations, or service areas that need one site to cover it all.
+
+Page: ServicesPage
+Section: Data
+Copy: Full build
+
+Page: ServicesPage
+Section: Data
+Copy: Full path from first click to a signed client
+
+Page: ServicesPage
+Section: Data
+Copy: Good for established teams expanding into new areas.
+
+Page: ServicesPage
+Section: Data
+Copy: Good for one-person or small teams with one main service area.
+
+Page: ServicesPage
+Section: Data
+Copy: Good for teams of 10+ ready to move up-market.
+
+Page: ServicesPage
+Section: Data
+Copy: Growth and multi-location builds include 30 days of post-launch changes at no extra cost. After that, we offer ongoing support. You always own your code ? no lock-in.
+
+Page: ServicesPage
+Section: Data
+Copy: How long does a typical build take?
+
+Page: ServicesPage
+Section: Data
+Copy: If your site loads slow, we fix it. Free. No asterisks. That's the standard we build to.
+
+Page: ServicesPage
+Section: Data
+Copy: Most popular
+
+Page: ServicesPage
+Section: Data
+Copy: Multi-Location / Expansion
+
+Page: ServicesPage
+Section: Data
+Copy: No. Every build goes on Cloudflare's network ? the same one used by Fortune 500 companies. Hosting, SSL, and speed are included and handled for you.
+
+Page: ServicesPage
+Section: Data
+Copy: Outcome Proof
+
+Page: ServicesPage
+Section: Data
+Copy: Pages built to attract the right jobs, not the cheapest ones
+
+Page: ServicesPage
+Section: Data
+Copy: Partner Capacity
+
+Page: ServicesPage
+Section: Data
+Copy: Performance Guarantee
+
+Page: ServicesPage
+Section: Data
+Copy: Priority support through your first month live
+
+Page: ServicesPage
+Section: Data
+Copy: Quarterly check-ins to make sure the site keeps working
+
+Page: ServicesPage
+Section: Data
+Copy: Service pages that position you for higher-ticket work
+
+Page: ServicesPage
+Section: Data
+Copy: Speed and uptime handled for you
+
+Page: ServicesPage
+Section: Data
+Copy: Start a project
+
+Page: ServicesPage
+Section: Data
+Copy: Starter builds ship in 2 weeks. Growth builds take 3?4 weeks. Multi-location builds are scoped in phases over 4?8 weeks depending on complexity. We work in focused sprints with weekly check-ins.
+
+Page: ServicesPage
+Section: Data
+Copy: We check speed, forms, and every page on phones and desktop.
+
+Page: ServicesPage
+Section: Data
+Copy: We look at your current site, your market, and what's not working.
+
+Page: ServicesPage
+Section: Data
+Copy: We take on four projects a month to keep the quality up.
+
+Page: ServicesPage
+Section: Data
+Copy: We write, design, and build the site with fast hosting and working forms.
+
+Page: ServicesPage
+Section: Data
+Copy: What if I need changes after launch?
+
+Page: ServicesPage
+Section: Data
+Copy: Your site goes live with monitoring to make sure everything stays up.
+
+Page: ServicesPage
+Section: Section
+Copy: $1,500 ? $15,000
+
+Page: ServicesPage
+Section: Section
+Copy: 0.4s Load Time
+
+Page: ServicesPage
+Section: Section
+Copy: 3.5s Load Time
+
+Page: ServicesPage
+Section: Section
+Copy: 40% bounce rate. Nearly half your potential customers leave before the page finishes loading.
+
+Page: ServicesPage
+Section: Section
+Copy: A bad site doesn't just fail to convert ? it actively sends people to whoever looks more credible. We fix that.
+
+Page: ServicesPage
+Section: Section
+Copy: Axiom site
+
+Page: ServicesPage
+Section: Section
+Copy: Before you start a project.
+
+Page: ServicesPage
+Section: Section
+Copy: Captures the leads they lose. Every fraction of a second is revenue you're either earning or giving away.
+
+Page: ServicesPage
+Section: Section
+Copy: Common Questions
+
+Page: ServicesPage
+Section: Section
+Copy: Competitor Site
+
+Page: ServicesPage
+Section: Section
+Copy: Every month with a weak website is a month your competitor is winning the job.
+
+Page: ServicesPage
+Section: Section
+Copy: Every package includes hosting, speed optimization, and full ownership. No recurring fees for things you should already own.
+
+Page: ServicesPage
+Section: Section
+Copy: How the work runs.
+
+Page: ServicesPage
+Section: Section
+Copy: If your site loads slow, we fix it. Free. No asterisks. That's the standard we build to.
+
+Page: ServicesPage
+Section: Section
+Copy: New projects, retainers, and long-term client relationships.
+
+Page: ServicesPage
+Section: Section
+Copy: Our Process
+
+Page: ServicesPage
+Section: Section
+Copy: Performance Guarantee
+
+Page: ServicesPage
+Section: Section
+Copy: Start a project
+
+Page: ServicesPage
+Section: Section
+Copy: The Math
+
+Page: ServicesPage
+Section: Section
+Copy: Three ways to work with us.
+
+Page: ServicesPage
+Section: Section
+Copy: Typical Deal Value
+
+Page: Shared admin/OmniscientShell
+Section: Aside
+Copy: Axiom Ops
+
+Page: Shared admin/OmniscientShell
+Section: Aside
+Copy: Internal lead intelligence running inside the Axiom ops stack.
+
+Page: Shared admin/OmniscientShell
+Section: Aside
+Copy: Sign out
+
+Page: Shared admin/OmniscientShell
+Section: Data
+Copy: The Hunt
+
+Page: Shared admin/OmniscientShell
+Section: Data
+Copy: The Vault
+
+Page: Shared admin/OmniscientShell
+Section: General
+Copy: Protected Operations
+
+Page: Shared BentoGrid
+Section: Article
+Copy: Clear pages
+
+Page: Shared BentoGrid
+Section: Article
+Copy: Pages people can read fast
+
+Page: Shared BentoGrid
+Section: Article
+Copy: Project preview stream
+
+Page: Shared BentoGrid
+Section: Article
+Copy: Recent sites
+
+Page: Shared BentoGrid
+Section: Article
+Copy: Recent work
+
+Page: Shared BentoGrid
+Section: Article
+Copy: See site
+
+Page: Shared BentoGrid
+Section: Article
+Copy: We build the page so the first five seconds do all the work ? what you do, why you're the right call, and how to reach you. Clear. Fast. Done.
+
+Page: Shared BentoGrid
+Section: Article
+Copy: Website preview
+
+Page: Shared BentoGrid
+Section: Data
+Copy: Cinematic project thumbnail four
+
+Page: Shared BentoGrid
+Section: Data
+Copy: Cinematic project thumbnail one
+
+Page: Shared BentoGrid
+Section: Data
+Copy: Cinematic project thumbnail three
+
+Page: Shared BentoGrid
+Section: Data
+Copy: Cinematic project thumbnail two
+
+Page: Shared BrandLockup
+Section: General
+Copy: Axiom logo
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: A clear menu, a visible reservation link, and a layout that feels like the room.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: A clear path for urgent calls and planned roof work.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: A landscaping site that puts past work first and shortens the quote path.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: A restaurant site that keeps the menu and booking link easy to find.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: A roofing site that separates urgent calls from planned estimate requests.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Built for landscapers who need projects, services, and contact details to be easy to find.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Built for restaurants that need the menu, booking, and room to show up right away.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Built for roofers who need storm damage calls and planned estimates to be obvious.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Guests have to hunt for the booking link, and the menu is hard to read on phones.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Landscaping site
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Past work is buried, and quote requests take too many clicks.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Project photos, service areas, and a simple quote path.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Restaurant reservation site
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Roofing site
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: Storm traffic needs a fast path to inspection and estimate requests.
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: View live site
+
+Page: Shared Data caseStudies
+Section: Data
+Copy: View project
+
+Page: Shared Data deployments
+Section: Data
+Copy: +185%
+
+Page: Shared Data deployments
+Section: Data
+Copy: Apex Industrial Contracting
+
+Page: Shared Data deployments
+Section: Data
+Copy: LCP Achieved
+
+Page: Shared Data deployments
+Section: Data
+Copy: Nexus Healthcare Clinics
+
+Page: Shared Data deployments
+Section: Data
+Copy: Patient Bookings
+
+Page: Shared Data deployments
+Section: Data
+Copy: Project Aether
+
+Page: Shared Data deployments
+Section: Data
+Copy: Qualified Leads
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: +164%
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: +195%
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: +223%
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: +310%
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: 1.4% → 5.2%
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: 12 → 89/mo
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: 2.1% → 6.8%
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: 7.3s → 0.9s
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: 8 → 62
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Avg Page Load
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Consultation Requests
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Conversion Rate
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Lead Conv. Rate
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: New Patient Bookings
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Online Bookings
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Online Bookings / Mo
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Page Load
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Apex
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Clarity
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Ember
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Hearth
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Ironclad
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Lifeline
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Luxe
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Meridian
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Sovereign
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Project Terrain
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Qualified Leads / Mo
+
+Page: Shared Data deployments.data
+Section: Data
+Copy: Quote Requests / Month
+
+Page: Shared Data seo
+Section: Data
+Copy: A four-step process from review to launch with clear checkpoints and no vague handoffs.
+
+Page: Shared Data seo
+Section: Data
+Copy: A short intake for serious businesses. Tell us what the business needs and we will reply within one business day.
+
+Page: Shared Data seo
+Section: Data
+Copy: Axiom keeps websites clear, fast, and easy to act on ? so businesses earn attention and trust without the noise.
+
+Page: Shared Data seo
+Section: Data
+Copy: Clear websites that explain the offer, surface proof, and make the next step obvious.
+
+Page: Shared Data seo
+Section: Data
+Copy: Get a plain review of your site's speed, layout, and contact path.
+
+Page: Shared Data seo
+Section: Data
+Copy: How the work runs
+
+Page: Shared Data seo
+Section: Data
+Copy: Live and working examples that show the issue, the change, and the result.
+
+Page: Shared Data seo
+Section: Data
+Copy: Our Approach
+
+Page: Shared Data seo
+Section: Data
+Copy: Page not found
+
+Page: Shared Data seo
+Section: Data
+Copy: Privacy Policy
+
+Page: Shared Data seo
+Section: Data
+Copy: Privacy policy for the Axiom website and contact forms.
+
+Page: Shared Data seo
+Section: Data
+Copy: Project builds showing how a clear offer, real proof, and one obvious next step turn a website into something that actually works.
+
+Page: Shared Data seo
+Section: Data
+Copy: Selected work
+
+Page: Shared Data seo
+Section: Data
+Copy: Send a question or note about an existing site. We will reply within one business day.
+
+Page: Shared Data seo
+Section: Data
+Copy: Site Review
+
+Page: Shared Data seo
+Section: Data
+Copy: Start a Project
+
+Page: Shared Data seo
+Section: Data
+Copy: Terms for using the Axiom website and services.
+
+Page: Shared Data seo
+Section: Data
+Copy: Terms of Service
+
+Page: Shared Data seo
+Section: Data
+Copy: The page you requested is not available. Use the main links to continue.
+
+Page: Shared Data seo
+Section: Data
+Copy: Website packages for local businesses with clear scope, practical deliverables, and no noise.
+
+Page: Shared Data seo
+Section: Data
+Copy: Website pricing for serious businesses. Clear scope, no surprises, and a site you own.
+
+Page: Shared Data seo
+Section: Data
+Copy: Websites for Service Businesses
+
+Page: Shared Data workProofImages
+Section: Data
+Copy: Premium residential exterior with strong curb appeal and outdoor project framing
+
+Page: Shared Data workProofImages
+Section: Data
+Copy: Roofing crew working on a residential roof during an active exterior project
+
+Page: Shared Data workProofImages
+Section: Data
+Copy: Server presenting plated dishes in a warmly lit dining room
+
+Page: Shared Hero
+Section: Section
+Copy: If it isn't, it's working against you. Axiom builds sites for Ontario businesses that are ready to grow ? fast, clear, and built to convert.
+
+Page: Shared Hero
+Section: Section
+Copy: Now taking new projects
+
+Page: Shared Hero
+Section: Section
+Copy: Taking projects now
+
+Page: Shared Hero
+Section: Section
+Copy: Your website should be bringing you clients.
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: A few short sentences are enough.
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: Company Fax
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: Full name
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: Project Details
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: Request failed. Please retry or email contact@getaxiom.ca.
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: Send it →
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: What does your business do, what's wrong with your current site, and when do you want to move?
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: Where should we reply?
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: Who should we address?
+
+Page: Shared IntakeTerminal
+Section: Form
+Copy: you@company.com
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: contact@getaxiom.ca
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Email directly
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Got it. We'll review and reply within one business day.
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Let's talk about your site.
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Open for new work
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Open the form and share scope, timing, and budget.
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Reach us at contact@getaxiom.ca.
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Send request
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Talk through your site and the next step.
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Talk to Axiom
+
+Page: Shared IntakeTerminal
+Section: Section
+Copy: Tell us what you've got and what you want. We'll reply within one business day.
+
+Page: Shared PartnerMarquee
+Section: Data
+Copy: Built to convert
+
+Page: Shared PartnerMarquee
+Section: Data
+Copy: Loads in under a second
+
+Page: Shared PartnerMarquee
+Section: Data
+Copy: No bloat
+
+Page: Shared PartnerMarquee
+Section: Data
+Copy: QA before launch
+
+Page: Shared PartnerMarquee
+Section: Data
+Copy: Reviewed by a human, not a template
+
+Page: Shared PartnerMarquee
+Section: Data
+Copy: Stays fast
+
+Page: Shared PartnerMarquee
+Section: Data
+Copy: You own it fully
+
+Page: Shared ProtectedRoute
+Section: General
+Copy: Checking access.
+
+Page: Shared ProtectedRoute
+Section: General
+Copy: Secure area
+
+Page: Shared StatsGrid
+Section: Article
+Copy: <30ms response time
+
+Page: Shared StatsGrid
+Section: Article
+Copy: Built for phones first
+
+Page: Shared StatsGrid
+Section: Article
+Copy: One point of contact
+
+Page: Shared StatsGrid
+Section: Article
+Copy: Tested, not estimated.
+
+Page: Shared StatsGrid
+Section: Article
+Copy: Where your clients are actually browsing.
+
+Page: Shared StatsGrid
+Section: Article
+Copy: You deal with the builder, not a middleman.
+
+Page: Shared TrustCarousel
+Section: Data
+Copy: Form Path Integrity
+
+Page: Shared TrustCarousel
+Section: Data
+Copy: Interaction Reliability
+
+Page: Shared TrustCarousel
+Section: Data
+Copy: Positioning Clarity
+
+Page: Shared TrustCarousel
+Section: Data
+Copy: Release Discipline
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Landscaping & Outdoor
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Landscaping project
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Landscaping project site preview
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Project photos and quote requests are presented without clutter.
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Reservations, menu access, and contact details stay visible on every screen.
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Restaurant & Hospitality
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Restaurant project
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Restaurant project site preview
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Roofing & Exterior Services
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Roofing project
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Roofing project site preview
+
+Page: Shared WorkPreviewGrid
+Section: Data
+Copy: Urgent calls and estimate requests each have a clear path.
+
+Page: Shared WorkPreviewGrid
+Section: Section
+Copy: Browser-frame previews.
+
+Page: Shared WorkPreviewGrid
+Section: Section
+Copy: Built for different businesses. Same result: clear offer, visible proof, one path to contact.
+
+Page: Shared WorkPreviewGrid
+Section: Section
+Copy: SELECTED WORK
+
+Page: Shared WorksCarousel
+Section: Data
+Copy: Project Aether
+
+Page: Shared WorksCarousel
+Section: Data
+Copy: Project Aether interface showcase
+
+Page: Shared WorksCarousel
+Section: Data
+Copy: Project Nexus
+
+Page: Shared WorksCarousel
+Section: Data
+Copy: Project Nexus interface showcase
+
+Page: Shared WorksCarousel
+Section: Data
+Copy: Project Sentinel
+
+Page: Shared WorksCarousel
+Section: Data
+Copy: Project Sentinel interface showcase
+
+Page: Shared WorksCarousel
+Section: Section
+Copy: Built for real businesses
+
+Page: Shared WorksCarousel
+Section: Section
+Copy: Selected Work
+
+Page: src/App.tsx
+Section: General
+Copy: Loading page
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Browse lead database
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Command center overview
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Configure preferences
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Download entire database as raw CSV
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Download entire database as styled spreadsheet
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Download qualified leads as raw CSV
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Download qualified leads as styled spreadsheet
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Export all leads CSV
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Export all leads XLSX
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Export S/A/B as CSV
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Export S/A/B as XLSX
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Extract & enrich leads
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: High rating (4★+)
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Keyboard shortcuts
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Leads with email
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: No Website leads
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Open command palette
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Open dossier for the newest lead
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Open Hunt panel
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Open Most Recent Lead
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Quick Filters
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Reduce animations for better FPS
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Search commands…
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Show contactable leads only
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Show leads missing a website
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Show leads rated 4 stars or above
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Show top-tier qualified leads
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Speed triage leads one at a time
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Start a new extraction
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Start Triage (S/A/B)
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: The Hunt
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: The Vault
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Tier S & A leads
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Toggle Performance Mode
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Triage Mode
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: Triage top-tier leads only
+
+Page: src/omniscient/lib/commands.ts
+Section: Data
+Copy: View all hotkeys
+
+Page: src/omniscient/lib/ui/storage.ts
+Section: Data
+Copy: Call Back
+
+Page: src/omniscient/lib/ui/storage.ts
+Section: Data
+Copy: Not Interested
+
+Page: src/omniscient/lib/ui/storage.ts
+Section: Data
+Copy: Wrong Number
+
+Page: src/omniscient/lib/ui/tokens.ts
+Section: Data
+Copy: No Website
+
+Page: TermsPage
+Section: General
+Copy: 1. Agreement to Terms
+
+Page: TermsPage
+Section: General
+Copy: 2. Intellectual Property
+
+Page: TermsPage
+Section: General
+Copy: 3. Project Timelines & Bottlenecks
+
+Page: TermsPage
+Section: General
+Copy: 4. Payment Terms & Service Pausing
+
+Page: TermsPage
+Section: General
+Copy: 5. Governing Law
+
+Page: TermsPage
+Section: General
+Copy: 6. Changes
+
+Page: TermsPage
+Section: General
+Copy: All invoices are due Net-15. Accounts with unpaid balances exceeding 10 days past the due date are subject to service suspension, including the pausing of live hosted environments, until the balance and any associated reactivation fees are cleared in full.
+
+Page: TermsPage
+Section: General
+Copy: By accessing our website and utilizing our services, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the service.
+
+Page: TermsPage
+Section: General
+Copy: Development timelines are contingent strictly upon client deliverables. Should a project stall for over 10 consecutive business days due to client delays in copy, assets, or feedback, Axiom reserves the right to deploy with functional placeholders and invoice the remaining milestone balances.
+
+Page: TermsPage
+Section: General
+Copy: Last Updated:
+
+Page: TermsPage
+Section: General
+Copy: Terms of Service
+
+Page: TermsPage
+Section: General
+Copy: The Service and its original content (excluding initial client-provided assets), features, and functionality are and will remain the exclusive property of Axiom and its licensors.
+
+Page: TermsPage
+Section: General
+Copy: These Terms shall be governed and construed in accordance with the laws of Ontario, Canada, without regard to its conflict of law provisions.
+
+Page: TermsPage
+Section: General
+Copy: We reserve the right, at our sole discretion, to modify or replace these Terms at any time. Material changes will be communicated via active agency channels.

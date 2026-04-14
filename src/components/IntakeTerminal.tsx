@@ -146,8 +146,8 @@ const IntakeTerminal: React.FC = () => {
       </div>
 
       <div className="mb-8 space-y-3">
-        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Let&apos;s talk about your site.</h2>
-        <p className="max-w-2xl text-slate-300">Tell us what you&apos;ve got and what you want. We&apos;ll reply within one business day.</p>
+        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Let&apos;s get to work.</h2>
+        <p className="max-w-2xl text-slate-300">Tell us what your business does, what&apos;s broken about your current site, and when you want to move. We&apos;ll reply within one business day.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -219,7 +219,7 @@ const IntakeTerminal: React.FC = () => {
           {submitState === 'success' ? (
             <div role="status" aria-live="polite" className="rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-8 text-center">
               <p className="text-xl md:text-2xl font-semibold tracking-tight text-[#F2F4F7]">
-                Got it. We&apos;ll review and reply within one business day.
+                Received. We&apos;ll review and reply within one business day.
               </p>
             </div>
           ) : (
@@ -313,4 +313,3 @@ const IntakeTerminal: React.FC = () => {
 };
 
 export default IntakeTerminal;
-

@@ -14,21 +14,21 @@ type ApproachPrinciple = {
 const approachPrinciples: readonly ApproachPrinciple[] = [
   {
     number: '01',
-    title: 'Clarity comes first',
+    title: 'Clarity over everything',
     description:
-      'A visitor should understand the offer, the proof, and the next step without decoding the page.',
+      'Your offer has to be readable the moment someone lands. Not buried, not vague. If they have to work for it, they&apos;re already gone.',
   },
   {
     number: '02',
-    title: 'Speed protects trust',
+    title: "Proof closes deals. Polish doesn't.",
     description:
-      'Fast pages keep trust high and reduce drop-off on phones, where most people first meet the site.',
+      'Real results, real reviews, and real work shown early. That&apos;s what converts a visitor into a call.',
   },
   {
     number: '03',
-    title: 'Proof beats polish',
+    title: 'Slow sites lose jobs.',
     description:
-      'Specific examples, outcomes, and contact paths do more work than vague slogans or long copy.',
+      'Most people find you on their phone. If your site takes more than two seconds, they&apos;ve already moved on. Every build we ship loads fast &mdash; tested, not assumed.',
   },
 ] as const;
 
@@ -47,11 +47,11 @@ const Approach: React.FC = () => {
                 <p className={eyebrowClass}>Our Approach</p>
                 <div className="mt-6 max-w-4xl overflow-hidden">
                   <h1 className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Clear websites are built on a few hard rules.
+                    We build to one standard.
                   </h1>
                 </div>
                 <p className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We keep the work focused on clarity, speed, and proof — so businesses can earn attention and trust without the noise.
+                  If someone lands on your site and can&apos;t tell what you do, who you serve, and how to contact you in under five seconds &mdash; the site is broken. We don&apos;t ship broken sites.
                 </p>
               </div>
             </div>

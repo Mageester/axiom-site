@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
             <div className="relative mb-8">
               <div className="pointer-events-none absolute inset-0 rounded-full bg-[#253a7a]/30 blur-[200px]" />
               <div className="relative inline-block rounded-full border border-[#F59768]/20 bg-[#1c253b] px-4 py-1.5 text-sm font-semibold tracking-wide text-[#F59768]">
-                Now taking new projects
+                Taking new projects &mdash; Ontario-based
               </div>
             </div>
 

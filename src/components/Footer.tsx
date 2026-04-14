@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
           <div className="max-w-md">
             <p className="text-2xl font-black leading-[1.02] tracking-tight text-[#F2F4F7] md:text-4xl">AXIOM</p>
             <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">
-              Websites built for businesses that mean it.
+              Built for businesses that are serious about growth.
             </p>
             <p className="mt-6 text-[10px] uppercase tracking-[0.12em] text-slate-400">
               &copy; 2026 Axiom. All rights reserved.

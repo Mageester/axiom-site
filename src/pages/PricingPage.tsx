@@ -17,14 +17,14 @@ const pricingTiers: readonly PricingTier[] = [
   {
     name: 'Starter',
     price: '$2,500',
-    details: '3 pages · mobile-ready · contact form · delivered in 14 days',
+    details: '3 pages. Contact form. Mobile-ready. Live in 14 days. Enough to look credible and start getting calls.',
     cta: 'Start a project',
     href: createStartProjectHref('starter'),
   },
   {
     name: 'Standard',
     price: '$4,000',
-    details: '5 pages · SEO basics · Google Business setup · delivered in 21 days',
+    details: '5 pages. SEO foundation. Google Business profile set up. Built to be found and trusted.',
     cta: 'Start a project',
     href: createStartProjectHref('standard'),
     featured: true,
@@ -32,7 +32,7 @@ const pricingTiers: readonly PricingTier[] = [
   {
     name: 'Custom',
     price: "Let's talk",
-    details: 'Multi-page · integrations · ongoing support',
+    details: "Larger scope, deeper build. Integrations, automations, and ongoing support. Let's talk about what your business actually needs.",
     cta: "Let's talk",
     href: '/contact',
   },
@@ -49,10 +49,10 @@ const PricingPage: React.FC = () => {
       <section className="mx-auto mb-12 flex max-w-3xl flex-col gap-5 text-center sm:mb-14">
         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Pricing</p>
         <h1 className="text-[32px] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-axiom-text-main sm:text-[44px] md:text-[54px]">
-          Clear pricing. No surprises.
+          Straightforward pricing. You own it outright.
         </h1>
         <p className="mx-auto max-w-[760px] text-[16px] leading-relaxed text-axiom-text-main/85 sm:text-[18px]">
-          Three options for businesses that want a site to work hard from day one.
+          No monthly fees for things you should already own. Three tiers based on what your business actually needs &mdash; nothing inflated, nothing missing.
         </p>
       </section>
 
