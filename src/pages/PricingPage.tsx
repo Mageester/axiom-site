@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
 import { SEO_ROUTES } from '../lib/seo';
 
@@ -58,9 +60,11 @@ const pricingTiers: readonly PricingTier[] = [
 
 const PricingPage: React.FC = () => {
   return (
-    <div className="page-shell">
+    <>
       <SEO {...SEO_ROUTES.pricing} />
-
+      
+      <Layout>
+        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-16 md:px-10 md:pb-20">
       {/* SECTION 1: HERO */}
       <section className="mx-auto mb-16 flex max-w-3xl flex-col gap-6 text-center sm:mb-24 pt-10">
         <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
@@ -141,7 +145,11 @@ const PricingPage: React.FC = () => {
           Start a project →
         </Link>
       </section>
-    </div>
+        </main>
+        
+        <Footer />
+      </Layout>
+    </>
   );
 };
 
