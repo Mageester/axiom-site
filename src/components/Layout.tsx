@@ -297,7 +297,7 @@ const Layout: React.FC<LayoutProps> = ({
             {!hidePrimaryCta && (
               <Link
                 to={CTA.primary.to}
-                className="inline-flex items-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-2 text-sm font-medium text-[#F2F4F7] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/24 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+                className="btn-primary btn-md whitespace-nowrap"
               >
                 {CTA.primary.label}
               </Link>
@@ -374,7 +374,7 @@ const Layout: React.FC<LayoutProps> = ({
           <Link
             to={CTA.primary.to}
             onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-3 text-sm font-medium text-[#F2F4F7] transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/24 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+            className="btn-primary btn-md mt-5 w-full justify-center"
           >
             {CTA.primary.label}
           </Link>

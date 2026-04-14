@@ -11,7 +11,7 @@ export const CTA_LABELS = {
     process: 'See the process',
     contact: 'Contact',
     review: 'Request review',
-    demo: 'Open demo',
+    demo: 'Open build',
     liveSite: 'Open live site'
 } as const;
 

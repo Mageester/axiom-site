@@ -18,25 +18,25 @@ const browserDots = [
 
 const workPreviews: WorkPreview[] = [
   {
-    name: 'Restaurant demo',
+    name: 'Restaurant project',
     description: 'Reservations, menu access, and contact details stay visible on every screen.',
     industryTag: 'Restaurant & Hospitality',
     image: responsiveImages.workRestaurant,
-    alt: 'Restaurant demo site preview',
+    alt: 'Restaurant project site preview',
   },
   {
-    name: 'Landscaping demo',
+    name: 'Landscaping project',
     description: 'Project photos and quote requests are presented without clutter.',
     industryTag: 'Landscaping & Outdoor',
     image: responsiveImages.workLandscaping,
-    alt: 'Landscaping demo site preview',
+    alt: 'Landscaping project site preview',
   },
   {
-    name: 'Roofing demo',
+    name: 'Roofing project',
     description: 'Urgent calls and estimate requests each have a clear path.',
     industryTag: 'Roofing & Exterior Services',
     image: responsiveImages.workRoofing,
-    alt: 'Roofing demo site preview',
+    alt: 'Roofing project site preview',
   },
 ];
 

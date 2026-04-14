@@ -192,7 +192,7 @@ const ConceptsPage: React.FC = () => {
                   onClick={(event) => event.stopPropagation()}
                   className="btn-primary w-full"
                 >
-                  Open demo
+                  Open project
                 </a>
 
                 <button

@@ -1,7 +1,7 @@
 export type CaseStudyEntry = {
     slug: string;
     title: string;
-    label: 'Live' | 'Demo' | 'In Progress';
+    label: 'Live' | 'Project' | 'In Progress';
     demoUrl?: string;
     niche: string;
     location: string;
@@ -55,10 +55,10 @@ export const caseStudies: CaseStudyEntry[] = [
     {
         slug: 'concept-landscaping-authority-site',
         title: 'Landscaping site',
-        label: 'Demo',
+        label: 'Project',
         demoUrl: 'https://landscaping.getaxiom.ca',
         niche: 'Landscaping and Outdoor Services',
-        location: 'Toronto, ON (Demo)',
+        location: 'Toronto, ON (Project)',
         businessType: 'Landscaping',
         primaryProblem: 'Past work is buried, and quote requests take too many clicks.',
         demonstrates: 'Project photos, service areas, and a simple quote path.',
@@ -68,15 +68,15 @@ export const caseStudies: CaseStudyEntry[] = [
         built: ['Project photos are up front', 'Service pages are plain', 'Quote form is short on phones'],
         targets: ['More quote requests from local traffic', 'Stronger trust from project photos', 'Less friction on mobile'],
         deliverables: ['Homepage, services, and projects', 'Quote request flow', 'Project photo presentation'],
-        ctaLabel: 'View demo'
+        ctaLabel: 'View project'
     },
     {
         slug: 'concept-roofing-conversion-site',
         title: 'Roofing site',
-        label: 'Demo',
+        label: 'Project',
         demoUrl: 'https://roofing.getaxiom.ca',
         niche: 'Roofing and Exterior Services',
-        location: 'Toronto, ON (Demo)',
+        location: 'Toronto, ON (Project)',
         businessType: 'Roofing',
         primaryProblem: 'Storm traffic needs a fast path to inspection and estimate requests.',
         demonstrates: 'A clear path for urgent calls and planned roof work.',
@@ -86,7 +86,7 @@ export const caseStudies: CaseStudyEntry[] = [
         built: ['Urgent and planned requests have separate paths', 'Trust blocks are easy to scan', 'The page loads quickly on phones'],
         targets: ['Faster calls after storms', 'Clearer inspection requests', 'Less bounce on mobile'],
         deliverables: ['Homepage, services, and inspection flow', 'Roofing service pages', 'Clear proof and contact sections'],
-        ctaLabel: 'View demo'
+        ctaLabel: 'View project'
     }
 ];
 

@@ -1,7 +1,7 @@
 export const SITE_NAME = 'Axiom';
 export const SITE_URL = 'https://getaxiom.ca';
 export const DEFAULT_OG_IMAGE = '/og-image.png';
-export const DEFAULT_SEO_DESCRIPTION = 'Axiom builds clear websites for established businesses. Service, proof, and contact stay easy to find.';
+export const DEFAULT_SEO_DESCRIPTION = 'Axiom builds clear websites for serious businesses. Service, proof, and contact stay easy to find.';
 export const SITE_EMAIL = 'contact@getaxiom.ca';
 export const SITE_TELEPHONE = '+12267531833';
 
@@ -77,7 +77,7 @@ export const SEO_ROUTES = {
     },
     startProject: {
         title: 'Start a Project',
-        description: 'A short intake for established businesses. Tell us what the business needs and we will reply within one business day.',
+        description: 'A short intake for serious businesses. Tell us what the business needs and we will reply within one business day.',
         canonicalPath: '/start-a-project',
     },
     contact: {
@@ -87,7 +87,7 @@ export const SEO_ROUTES = {
     },
     pricing: {
         title: 'Pricing',
-        description: 'Website pricing for established businesses. Clear scope, no surprises, and a site you own.',
+        description: 'Website pricing for serious businesses. Clear scope, no surprises, and a site you own.',
         canonicalPath: '/pricing',
     },
     services: {
@@ -97,7 +97,7 @@ export const SEO_ROUTES = {
     },
     concepts: {
         title: 'Concepts',
-        description: 'Demo sites showing how a clear offer, real proof, and one obvious next step turn a website into something that actually works.',
+        description: 'Project builds showing how a clear offer, real proof, and one obvious next step turn a website into something that actually works.',
         canonicalPath: '/concepts',
     },
     approach: {

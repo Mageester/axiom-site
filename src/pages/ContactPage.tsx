@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
 import { SEO_ROUTES } from '../lib/seo';
-import ResponsiveImage from '../components/ResponsiveImage';
-import { responsiveImages } from '../lib/responsiveImages';
 
 type SubmitState = '' | 'loading' | 'success' | 'error';
 type ApiResult = {
@@ -20,7 +18,6 @@ type IntakeFormState = {
     email: string;
     business_name: string;
     current_website: string;
-    project_scale: string;
     details: string;
 };
 
@@ -29,18 +26,11 @@ const INITIAL_FORM: IntakeFormState = {
     email: '',
     business_name: '',
     current_website: '',
-    project_scale: '',
     details: ''
 };
 
 const PROJECT_PATH = '/start-a-project';
 const LEGACY_PROJECT_PATH = '/apply';
-
-const SCALE_OPTIONS = [
-    { value: 'simple', label: 'Simple' },
-    { value: 'standard', label: 'Standard' },
-    { value: 'premium', label: 'Premium' }
-];
 
 const FALLBACK_SUBMIT_ERROR = 'Something went wrong. Email us directly at contact@getaxiom.ca';
 const FIELD_LABEL_CLASS = 'text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
@@ -52,7 +42,6 @@ const PROJECT_FIELD_IDS = {
     email: 'project-email',
     business_name: 'project-business-name',
     current_website: 'project-website-url',
-    project_scale: 'project-scale',
     details: 'project-details',
 } as const;
 
@@ -97,40 +86,42 @@ const SUCCESS_IN_DELAY = '200ms';
 type CallUsCardProps = {
     className?: string;
     showEmail?: boolean;
+    plainPhone?: boolean;
 };
 
-const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = false }) => (
-    <article className={`rounded-2xl border border-[#B05D41]/30 bg-[#B05D41]/10 p-5 md:p-6 ${className}`.trim()}>
-        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#B05D41]">Call us</p>
-        <a
-            href={CONTACT_PHONE_HREF}
-            className="mt-3 inline-flex min-h-11 items-center text-[clamp(1.75rem,2.8vw,2.35rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#B05D41] transition-colors hover:text-[#d7a189]"
-        >
-            {CONTACT_PHONE_DISPLAY}
-        </a>
-        {showEmail && (
+const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = false, plainPhone = false }) => {
+    if (plainPhone) {
+        return (
+            <article className={`rounded-2xl border border-white/10 p-5 md:p-6 ${className}`.trim()}>
+                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Call us</p>
+                <p className="mt-3 text-sm leading-6 text-slate-100">{CONTACT_PHONE_DISPLAY}</p>
+            </article>
+        );
+    }
+
+    return (
+        <article className={`rounded-2xl border border-[#B05D41]/30 bg-[#B05D41]/10 p-5 md:p-6 ${className}`.trim()}>
+            <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#B05D41]">Call us</p>
             <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="mt-4 inline-flex min-h-11 items-center text-sm leading-6 text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+                href={CONTACT_PHONE_HREF}
+                className="mt-3 inline-flex min-h-11 items-center text-[clamp(1.75rem,2.8vw,2.35rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#B05D41] transition-colors hover:text-[#d7a189]"
             >
-                {CONTACT_EMAIL}
+                {CONTACT_PHONE_DISPLAY}
             </a>
-        )}
-    </article>
-);
+            {showEmail && (
+                <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="mt-4 inline-flex min-h-11 items-center text-sm leading-6 text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+                >
+                    {CONTACT_EMAIL}
+                </a>
+            )}
+        </article>
+    );
+};
 
-function createInitialIntakeForm(searchParams: URLSearchParams): IntakeFormState {
-    const packageParam = (searchParams.get('package') || '').toLowerCase();
-    const normalizedPackage =
-        packageParam === 'starter' || packageParam === 'foundation' ? 'simple' :
-            packageParam === 'professional' || packageParam === 'authority' ? 'standard' :
-                packageParam === 'enterprise' || packageParam === 'expansion' ? 'premium' :
-                    packageParam;
-
-    return {
-        ...INITIAL_FORM,
-        project_scale: SCALE_OPTIONS.some((option) => option.value === normalizedPackage) ? normalizedPackage : ''
-    };
+function createInitialIntakeForm(): IntakeFormState {
+    return { ...INITIAL_FORM };
 }
 
 type SubmissionSuccessStateProps = {
@@ -319,7 +310,7 @@ const GeneralContactForm: React.FC = () => {
             </section>
 
             <section className="mx-auto mt-6 max-w-5xl">
-                <CallUsCard />
+                <CallUsCard plainPhone />
             </section>
 
             <section className="mx-auto mt-4 max-w-5xl">
@@ -468,8 +459,7 @@ const ContactPage: React.FC = () => {
 };
 
 const ProjectIntakeForm: React.FC = () => {
-    const [searchParams] = useSearchParams();
-    const [form, setForm] = useState<IntakeFormState>(() => createInitialIntakeForm(searchParams));
+    const [form, setForm] = useState<IntakeFormState>(() => createInitialIntakeForm());
 
     const [status, setStatus] = useState<SubmitState>('');
     const [msg, setMsg] = useState('');
@@ -545,7 +535,7 @@ const ProjectIntakeForm: React.FC = () => {
         setMsg('');
         setErrors({});
         setShowSuccessState(false);
-        setForm(createInitialIntakeForm(searchParams));
+        setForm(createInitialIntakeForm());
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -556,7 +546,6 @@ const ProjectIntakeForm: React.FC = () => {
         if (form.name.trim().length < 2) nextErrors.name = 'Please enter your name.';
         if (!form.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Please use a valid work email.';
         if (form.business_name.trim().length < 2) nextErrors.business_name = 'Please enter the business name.';
-        if (!form.project_scale) nextErrors.project_scale = 'Choose the closest project scale.';
         if (form.details.trim().length < 10) nextErrors.details = 'Please share a little more detail.';
         if (Object.keys(nextErrors).length > 0) {
             setStatus('');
@@ -578,7 +567,6 @@ const ProjectIntakeForm: React.FC = () => {
                 email: form.email.trim(),
                 business_name: form.business_name.trim(),
                 current_website: form.current_website.trim(),
-                project_scale: form.project_scale,
                 details: form.details.trim(),
                 primary_goal: 'new_site',
                 source_path: window.location.pathname
@@ -642,13 +630,9 @@ const ProjectIntakeForm: React.FC = () => {
                         </article>
 
                         <aside className="flex flex-col overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0b1120] shadow-[0_12px_36px_rgba(0,0,0,0.18)] xl:mt-8">
-                            <div className="relative h-[13rem] w-full border-b border-white/10">
-                                <ResponsiveImage source={responsiveImages.workRoofing} sizes="(min-width: 1280px) 400px, 100vw" alt="Roofing site structure and design" className="h-full w-full object-cover" style={{ objectPosition: 'center 40%' }} />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                                <div className="absolute bottom-4 left-5">
-                                  <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
-                                    Project Started
-                                  </span>
+                            <div className="border-b border-white/10 p-5 md:p-6">
+                                <div className="rounded-[1.25rem] border border-white/10 bg-[#0f1524]/70 p-4">
+                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Reply within one business day.</p>
                                 </div>
                             </div>
                             <div className="flex-1 bg-white/[0.03] p-5 md:p-6">
@@ -659,9 +643,6 @@ const ProjectIntakeForm: React.FC = () => {
                                     </div>
                                     <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
                                         <span className="text-sm font-medium text-[#F2F4F7]">Reply within one business day</span>
-                                    </div>
-                                    <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                                        <span className="text-sm font-medium text-[#F2F4F7]">Clear next steps</span>
                                     </div>
                                 </div>
                             </div>
@@ -727,16 +708,6 @@ const ProjectIntakeForm: React.FC = () => {
                                                         <p id={`${PROJECT_FIELD_IDS.current_website}-helper`} className={FIELD_HELPER_CLASS}>Optional. Add it if there is already a site.</p>
                                                         <input type="url" id={PROJECT_FIELD_IDS.current_website} placeholder="https://example.com" autoComplete="url" value={form.current_website} onChange={(event) => setField('current_website', event.target.value)} className={FIELD_INPUT_CLASS} aria-describedby={`${PROJECT_FIELD_IDS.current_website}-helper`} />
                                                     </div>
-                                                </div>
-
-                                                <div className="flex flex-col gap-2">
-                                                    <label htmlFor={PROJECT_FIELD_IDS.project_scale} className={FIELD_LABEL_CLASS}>Project scale</label>
-                                                    <p id={`${PROJECT_FIELD_IDS.project_scale}-helper`} className={FIELD_HELPER_CLASS}>Choose the closest fit for the scope you have in mind.</p>
-                                                    <select id={PROJECT_FIELD_IDS.project_scale} value={form.project_scale} onChange={(event) => setField('project_scale', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.project_scale} aria-describedby={errors.project_scale ? `${PROJECT_FIELD_IDS.project_scale}-helper ${PROJECT_FIELD_IDS.project_scale}-error` : `${PROJECT_FIELD_IDS.project_scale}-helper`}>
-                                                        <option value="" disabled>Choose a project scale...</option>
-                                                        {SCALE_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
-                                                    </select>
-                                                    {errors.project_scale && <p id={`${PROJECT_FIELD_IDS.project_scale}-error`} className="text-xs text-red-300">{errors.project_scale}</p>}
                                                 </div>
 
                                                 <div className="flex flex-col gap-2">
