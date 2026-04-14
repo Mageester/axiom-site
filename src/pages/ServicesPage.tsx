@@ -178,7 +178,7 @@ const ServicesPage: React.FC = () => {
                     <div className="text-center mb-10">
                         <p className="eyebrow-center mb-4">Our Process</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
-                            How the work runs.
+                            Simple from day one.
                         </h2>
                     </div>
 
@@ -297,7 +297,3 @@ const ServicesPage: React.FC = () => {
 };
 
 export default ServicesPage;
-
-
-
-

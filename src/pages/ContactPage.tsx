@@ -143,9 +143,9 @@ const SubmissionSuccessState: React.FC<SubmissionSuccessStateProps> = ({ onReset
                 <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
         </div>
-        <h2 className="mt-5 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Got it.</h2>
+        <h2 className="mt-5 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Received.</h2>
         <p className="mt-2 text-sm leading-7 text-slate-300">
-            We&apos;ll review and reply within one business day.
+            Received. We&apos;ll review and reply within one business day.
         </p>
         <button
             type="button"
@@ -662,9 +662,9 @@ const ProjectIntakeForm: React.FC = () => {
                                         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                                             <div>
                                                 <p className={FIELD_LABEL_CLASS}>Project intake</p>
-                                                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Let&apos;s talk about your site.</h2>
+                                                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Let&apos;s get to work.</h2>
                                             </div>
-                                            <p className="text-sm text-slate-400">Tell us what you&apos;ve got and what you want. We&apos;ll reply within one business day.</p>
+                                            <p className="text-sm text-slate-400">Tell us what your business does, what&apos;s broken about your current site, and when you want to move. We&apos;ll reply within one business day.</p>
                                         </div>
                                     </div>
 

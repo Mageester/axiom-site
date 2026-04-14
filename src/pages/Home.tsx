@@ -51,11 +51,11 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    The site should do the work before they call.
+                    Your website is losing you jobs.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We build websites for businesses that need to be taken seriously — clear offer, visible proof, one path forward.
+                  Most business sites are slow, unclear, and built by someone who doesn&apos;t understand what makes people call. We fix that &mdash; fast build, full ownership, zero recurring fees.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link to={CTA.work.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -99,10 +99,10 @@ const Home: React.FC = () => {
                 <div className="max-w-2xl">
                   <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Why it matters</p>
                   <h2 className="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                    Most sites lose the client in the first ten seconds.
+                    A slow site signals an unprofessional business.
                   </h2>
                   <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300 md:text-base">
-                    We fix all three before we touch the design.
+                    A confusing site sends the job to your competitor. A site with no clear next step leaves money on the table. We audit all three before anything gets built.
                   </p>
                   <div className="mt-8">
                     <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -136,10 +136,10 @@ const Home: React.FC = () => {
               <div className="max-w-2xl lg:pt-2">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.26em] text-[#A7B3BC]">Process</p>
                 <h2 className="mt-3 max-w-[12ch] text-[clamp(2rem,4vw,3.45rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                  How the work runs.
+                  Simple from day one.
                 </h2>
                 <p className="mt-4 max-w-[36ch] text-sm leading-7 text-slate-300 md:text-base">
-                  The process stays simple so you know what is happening, what comes next, and what you are getting.
+                  You&apos;ll know exactly what&apos;s being built, when it goes live, and what it will do for your business. No back-and-forth. No surprises.
                 </p>
               </div>
 

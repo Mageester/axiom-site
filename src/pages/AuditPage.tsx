@@ -141,10 +141,9 @@ const AuditPage: React.FC = () => {
 
             <div className="max-w-[600px] mx-auto w-full relative z-10 px-6 reveal">
                 <div className="text-center mb-12">
-                    <h1 className="text-[40px] md:text-[56px] font-semibold mb-6 text-axiom-text-main tracking-tight leading-[1.05]">Is your site<br />costing you money?</h1>
+                    <h1 className="text-[40px] md:text-[56px] font-semibold mb-6 text-axiom-text-main tracking-tight leading-[1.05]">Is your website costing you work?</h1>
                     <p className="text-[16px] text-axiom-text-mute max-w-lg mx-auto leading-relaxed">
-                        Most local business sites lose leads because they're slow, confusing, or hard to contact through. Start a project and we’ll review it.
-                    </p>
+                        Most business sites are bleeding leads quietly. Slow load times, no clear contact path, nothing that builds trust fast. Drop your URL and we&apos;ll tell you exactly what it&apos;s costing you &mdash; free, within 24 hours.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="axiom-glass p-8 md:p-10 flex flex-col gap-6 rounded-sm relative overflow-hidden" aria-busy={status === 'loading'}>
@@ -249,7 +248,7 @@ const AuditPage: React.FC = () => {
                     </div>
 
                     <button disabled={status === 'loading' || status === 'success'} type="submit" className="btn-primary btn-lg w-full mt-4 disabled:opacity-50">
-                        {status === 'loading' ? 'Sending...' : 'Request review'}
+                        {status === 'loading' ? 'Sending...' : 'Get my site reviewed &rarr;'}
                     </button>
                 </form>
             </div>
