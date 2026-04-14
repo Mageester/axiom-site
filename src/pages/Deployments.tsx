@@ -141,7 +141,7 @@ const conceptProjects: readonly ConceptProjectData[] = [
 function ConceptProjectCard({ project, index }: { project: ConceptProjectData; index: number }) {
   return (
     <RevealBlock as="div" delay={index * 0.08} variant="feature">
-      <article className="flex h-full flex-col rounded-[2.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.95)_0%,rgba(10,13,18,0.98)_100%)] p-5 shadow-[0_12px_34px_rgba(0,0,0,0.18)] md:p-6">
+      <article className="flex h-full flex-col rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.95)_0%,rgba(10,13,18,0.98)_100%)] p-5 shadow-[0_12px_34px_rgba(0,0,0,0.18)] md:p-6">
         <div className="flex flex-col gap-2">
           <p className="section-eyebrow">{project.subtitle}</p>
           <h3 className="text-[22px] font-semibold tracking-tight text-[#F2F4F7] sm:text-[24px]">
@@ -184,11 +184,11 @@ function ConceptProjectCard({ project, index }: { project: ConceptProjectData; i
 
 function NarrativeRow({ label, value }: NarrativeRowProps) {
   return (
-    <div className="grid gap-2 py-4 first:pt-0 md:grid-cols-[10.5rem_minmax(0,1fr)] md:gap-5">
-      <dt className="section-eyebrow md:pt-1">
+    <div className="flex flex-col gap-2 py-4 first:pt-0 sm:grid sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-5">
+      <dt className="section-eyebrow sm:pt-1">
         {label}
       </dt>
-      <dd className="text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-[0.98rem]">{value}</dd>
+      <dd className="text-sm md:text-[15px] leading-relaxed text-slate-300">{value}</dd>
     </div>
   );
 }
@@ -200,14 +200,14 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
 
   return (
     <RevealBlock as="div" delay={index * 0.08} variant="feature">
-      <article className="group/proof overflow-hidden rounded-[2.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.95)_0%,rgba(10,13,18,0.98)_100%)] shadow-[0_12px_34px_rgba(0,0,0,0.18)] transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_20px_44px_rgba(0,0,0,0.24)]">
+      <article className="group/proof overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.95)_0%,rgba(10,13,18,0.98)_100%)] shadow-[0_12px_34px_rgba(0,0,0,0.18)] transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_20px_44px_rgba(0,0,0,0.24)]">
         <div className="grid gap-0 lg:grid-cols-[minmax(0,0.98fr)_minmax(0,1.02fr)] lg:items-stretch">
           <div className={`min-w-0 p-5 md:p-6 lg:p-8 ${textOrderClass}`}>
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="inline-flex rounded-full border border-white/10 bg-black/40 px-3 py-1 font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-white/78">
+              <span className="inline-flex rounded-full border border-white/10 bg-black/40 px-3 py-1 font-axiomMono text-xs uppercase tracking-wide text-white/78">
                 {proof.statusLabel}
               </span>
-              <span className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-slate-400">
+              <span className="font-axiomMono text-xs uppercase tracking-wide text-slate-400">
                 {proof.businessType}
               </span>
             </div>
@@ -215,7 +215,7 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
             <h3 className="mt-4 text-[clamp(1.9rem,3vw,2.9rem)] font-semibold tracking-tight text-[#F2F4F7]">
               {proof.title}
             </h3>
-            <p className="mt-3 max-w-2xl text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">{proof.summary}</p>
+            <p className="mt-3 max-w-2xl text-sm md:text-[15px] leading-relaxed text-slate-300">{proof.summary}</p>
 
             <dl className="mt-6 divide-y divide-white/[0.08] border-t border-white/10">
               <NarrativeRow label="Original weakness" value={proof.originalWeakness} />
@@ -237,7 +237,7 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
           </div>
 
           <figure className={`relative overflow-hidden bg-[#0b1120] ${imageOrderClass}`}>
-            <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex rounded-full border border-white/15 bg-[#09101d]/80 px-2.5 py-1 font-axiomMono text-[10px] uppercase tracking-[0.18em] text-white shadow-[0_12px_28px_rgba(0,0,0,0.24)] backdrop-blur-sm">
+            <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex rounded-full border border-white/15 bg-[#09101d]/80 px-2.5 py-1 font-axiomMono text-xs uppercase tracking-wide text-white shadow-[0_12px_28px_rgba(0,0,0,0.24)] backdrop-blur-sm">
               {proof.badgeLabel}
             </span>
             <ResponsiveImage
@@ -285,7 +285,7 @@ const Deployments: React.FC = () => {
                 </Link>
                 <Link
                   to={CTA.process.to}
-                  className="inline-flex w-full items-center text-[15px] md:text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
+                  className="inline-flex w-full items-center text-sm md:text-[15px] font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
                 >
                   {CTA.process.label}
                 </Link>
@@ -299,7 +299,7 @@ const Deployments: React.FC = () => {
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                 What we build
               </h2>
-              <p className="mt-3 max-w-2xl text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">
+              <p className="mt-3 max-w-2xl text-sm md:text-[15px] leading-relaxed text-slate-300">
                 Examples showing what a clear service-business website looks like.
               </p>
             </div>
@@ -319,13 +319,13 @@ const Deployments: React.FC = () => {
                   <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                     Ready to stop losing jobs to a bad site?
                   </h2>
-                  <p className="mt-4 text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-base">
+                  <p className="mt-4 text-sm md:text-[15px] leading-relaxed text-slate-300">
                 Start a project and we’ll review the current site, what’s missing, and the first fixes that matter.
                   </p>
                 </div>
-                <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+                <aside className="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5">
                   <p className="section-eyebrow">What happens next</p>
-                  <p className="mt-4 font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.16em] text-[#F2F4F7]">
+                  <p className="mt-4 font-axiomMono text-xs uppercase tracking-wide text-[#F2F4F7]">
                     Review → Scope → Build → Launch
                   </p>
                 </aside>

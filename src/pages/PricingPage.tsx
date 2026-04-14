@@ -66,7 +66,7 @@ const PricingPage: React.FC = () => {
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-16 md:px-10 md:pb-20">
       {/* SECTION 1: HERO */}
-      <section className="mx-auto mb-16 flex max-w-3xl flex-col gap-6 text-center sm:mb-24 pt-10">
+      <section className="mx-auto mb-16 flex max-w-3xl flex-col gap-6 text-center sm:mb-24 pt-16 md:pt-24">
         <p className="section-eyebrow">PRICING</p>
         <div>
           <h1 className="text-[40px] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7] sm:text-[48px] md:text-[60px]">
@@ -87,14 +87,14 @@ const PricingPage: React.FC = () => {
           {pricingTiers.map((tier) => (
             <article
               key={tier.name}
-              className={`machined-card flex h-full flex-col gap-8 rounded-2xl border bg-[#10141c]/40 p-8 sm:p-10 transition-colors ${
+              className={`machined-card flex h-full flex-col gap-8 rounded-[var(--radius-card)] border bg-[#10141c]/40 p-8 sm:p-10 transition-colors ${
                 tier.recommended
-                  ? 'border-[#B05D41]/60'
+                  ? 'border-t-2 border-t-axiom-accent border-white/10 shadow-[0_12px_44px_rgba(200,122,87,0.12)]'
                   : 'border-white/10'
               }`}
             >
               <div>
-                <h3 className="font-axiomMono text-[15px] md:text-[12px] uppercase tracking-[0.18em] text-[#A7B3BC]">
+                <h3 className="font-axiomMono text-xs uppercase tracking-wide text-[#A7B3BC]">
                   {tier.name}
                 </h3>
                 <p className="mt-6 font-axiomDisplay text-[40px] leading-none tracking-[-0.04em] text-[#F2F4F7]">
@@ -107,7 +107,7 @@ const PricingPage: React.FC = () => {
 
               <ul className="mb-2 mt-auto flex flex-col gap-3">
                 {tier.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-[15px] md:text-[14px] leading-6 text-slate-300">
+                  <li key={idx} className="flex items-start gap-3 text-sm md:text-[15px] leading-relaxed text-slate-300">
                     <span className="text-slate-500">·</span>
                     <span>{feature}</span>
                   </li>
@@ -124,7 +124,7 @@ const PricingPage: React.FC = () => {
 
       {/* SECTION 3: GUARANTEE CALLOUT */}
       <section className="mx-auto mb-20 max-w-[1200px] sm:mb-32">
-        <article className="w-full overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
+        <article className="w-full overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
           <div className="border-l-4 border-[#B05D41] px-6 py-10 md:px-8 md:py-12 lg:px-10">
             <div className="max-w-4xl">
               <h2 className="text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
@@ -139,16 +139,18 @@ const PricingPage: React.FC = () => {
       </section>
 
       {/* SECTION 4: CLOSING CTA */}
-      <section className="mx-auto mb-24 max-w-2xl text-center sm:mb-32">
-        <h2 className="text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
-          Not sure which tier fits?
-        </h2>
-        <p className="mt-4 mb-8 text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
-          Start a project and we will tell you exactly what your business needs. One business day response, no pressure.
-        </p>
-        <Link to="/contact" className="btn-primary btn-lg inline-flex">
-          Start a project →
-        </Link>
+      <section className="mx-auto mb-24 max-w-[1200px] sm:mb-32 rounded-[var(--radius-card)] bg-[#131821] p-10 md:p-16 border border-white/10">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
+            Not sure which tier fits?
+          </h2>
+          <p className="mt-4 mb-8 text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
+            Start a project and we will tell you exactly what your business needs. One business day response, no pressure.
+          </p>
+          <Link to="/contact" className="btn-primary btn-lg inline-flex">
+            Start a project →
+          </Link>
+        </div>
       </section>
         </main>
         

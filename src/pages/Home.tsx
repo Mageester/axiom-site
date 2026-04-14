@@ -21,7 +21,7 @@ const Home: React.FC = () => {
 
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="relative isolate bg-[#0a0c10] pt-10 md:pt-20">
+          <section data-hero-root className="relative isolate bg-[#0a0c10] pt-16 md:pt-24">
             <div className="max-w-5xl">
               <div className="max-w-4xl overflow-hidden">
                 <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
@@ -48,13 +48,13 @@ const Home: React.FC = () => {
           <WorkPreviewGrid />
 
           <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature">
-            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+            <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="max-w-2xl">
                 <p className="section-eyebrow">Why it matters</p>
                 <h2 className="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
                   A slow site signals an unprofessional business.
                 </h2>
-                <p className="mt-4 max-w-xl text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">
+                <p className="mt-4 max-w-xl text-sm md:text-[15px] leading-relaxed text-slate-300">
                   A confusing site sends the job to your competitor. A site with no clear next step leaves money on the table. We audit all three before anything gets built.
                 </p>
                 <div className="mt-8">
@@ -74,7 +74,7 @@ const Home: React.FC = () => {
                   <h2 className="mt-3 max-w-4xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                 If the site isn’t earning trust, it’s costing you work.
                   </h2>
-                  <p className="mt-4 max-w-3xl text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-base">
+                  <p className="mt-4 max-w-3xl text-sm md:text-[15px] leading-relaxed text-slate-300">
                 We’ll review your current site, show what’s costing you trust, and tell you exactly what to fix.
                   </p>
 
@@ -85,10 +85,10 @@ const Home: React.FC = () => {
                   </div>
                 </div>
 
-                <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+                <aside className="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5">
                   <p className="section-eyebrow">What happens next</p>
                   <div className="mt-4">
-                    <p className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">Review → Scope → Build → Launch</p>
+                    <p className="text-sm md:text-[15px] font-medium text-[#F2F4F7]">Review → Scope → Build → Launch</p>
                   </div>
                 </aside>
               </div>

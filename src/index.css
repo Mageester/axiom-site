@@ -15,10 +15,12 @@
     --accent-muted: rgba(200, 122, 87, 0.18);
     --axiom-text-main: #F3F6FA;
     --axiom-text-primary: #CFD7E3;
-    --axiom-text-mute: #9AA8B6;
+    --axiom-text-mute: #B0C0D0;
     --axiom-amber: #C87A57;
     --axiom-gold: #CFA873;
     --axiom-navy: #1F2833;
+    --radius-card: 1.5rem;
+    --radius-component: 0.75rem;
     --bg-main: var(--axiom-base);
     --bg-surface: var(--axiom-elevated);
     --bg-inset: #0D1118;
@@ -129,7 +131,7 @@
     top: 1rem;
     z-index: 80;
     border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 9999px;
+    border-radius: var(--radius-component);
     background: rgba(9, 11, 16, 0.96);
     color: var(--axiom-text-main);
     font-size: 0.75rem;
@@ -312,7 +314,7 @@
   .cta-banner {
     position: relative;
     overflow: hidden;
-    border-radius: 2rem;
+    border-radius: var(--radius-card);
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: linear-gradient(180deg, rgba(16, 21, 31, 0.96) 0%, rgba(10, 13, 19, 0.98) 100%);
     box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
@@ -339,7 +341,7 @@
     justify-content: center;
     white-space: nowrap;
     height: 3.5rem;
-    border-radius: 9999px;
+    border-radius: var(--radius-component);
     padding-inline: 1.5rem;
     color: var(--axiom-text-main);
     font-weight: 600;
@@ -397,7 +399,7 @@
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    border-radius: 9999px;
+    border-radius: var(--radius-component);
     border: 1px solid rgba(222, 228, 236, 0.12);
     background: rgba(255, 255, 255, 0.028);
     color: var(--axiom-text-main);
@@ -560,7 +562,7 @@
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 2rem;
+    border-radius: var(--radius-card);
     background:
       radial-gradient(circle at 14% 0%, rgba(200, 122, 87, 0.12), transparent 28%),
       radial-gradient(circle at 84% 16%, rgba(75, 110, 175, 0.1), transparent 26%),
@@ -597,7 +599,7 @@
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 1.7rem;
+    border-radius: var(--radius-card);
     background: linear-gradient(180deg, rgba(24, 31, 41, 0.95) 0%, rgba(13, 17, 23, 0.98) 100%);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.05),
@@ -647,7 +649,7 @@
     overflow: hidden;
     min-height: 100%;
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 1.35rem;
+    border-radius: var(--radius-card);
     background: rgba(255, 255, 255, 0.018);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.035),
@@ -696,7 +698,7 @@
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 2rem;
+    border-radius: var(--radius-card);
     background:
       radial-gradient(circle at 18% 0%, rgba(212, 164, 142, 0.14), transparent 28%),
       linear-gradient(180deg, rgba(14, 18, 26, 0.98) 0%, rgba(8, 11, 17, 0.99) 100%);
@@ -745,7 +747,7 @@
     gap: 1rem;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 1.35rem;
+    border-radius: var(--radius-card);
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.015) 100%);
     box-shadow:

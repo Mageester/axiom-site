@@ -31,17 +31,6 @@ const INITIAL_FORM: IntakeFormState = {
 };
 
 const PROJECT_PATH = '/start-a-project';
-
-const FALLBACK_SUBMIT_ERROR = 'Something went wrong. Email us directly at contact@getaxiom.ca';
-const FIELD_LABEL_CLASS = 'text-[15px] md:text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
-const FIELD_HELPER_CLASS = 'text-[15px] md:text-xs leading-5 text-slate-400';
-const FIELD_INPUT_CLASS =
-    'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-[15px] md:text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500';
-const PROJECT_FIELD_IDS = {
-    name: 'project-full-name',
-    email: 'project-email',
-    business_name: 'project-business-name',
-    current_website: 'project-website-url',
     details: 'project-details',
 } as const;
 
@@ -161,7 +150,7 @@ const SubmissionSuccessState: React.FC<SubmissionSuccessStateProps> = ({ onReset
     <div
         role="status"
         aria-live="polite"
-        className={`rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-7 text-center ${className}`.trim()}
+        className={`rounded-[var(--radius-card)] border border-emerald-400/30 bg-emerald-500/10 p-7 text-center ${className}`.trim()}
         style={{
             animation: `intake-success-in ${SUCCESS_IN_DURATION} var(--motion-ease-decelerate) ${SUCCESS_IN_DELAY} both`
         }}
@@ -341,7 +330,7 @@ const GeneralContactForm: React.FC = () => {
                 <div className="axiom-bento p-6 md:p-8">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-7" aria-busy={status === 'loading'}>
                         {status === 'error' && (
-                            <div role="alert" aria-live="assertive" className="rounded-xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-[15px] md:text-sm text-red-100">
+                            <div role="alert" aria-live="assertive" className="rounded-[var(--radius-component)] border border-red-400/35 bg-red-500/10 px-4 py-3 text-[15px] md:text-sm text-red-100">
                                 {msg}
                             </div>
                         )}
@@ -424,7 +413,7 @@ const GeneralContactForm: React.FC = () => {
                                     </div>
 
                                     <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                                        {status === 'loading' ? 'Sending...' : 'Send message'}
+                                        {status === 'loading' ? 'Sending...' : 'Send message →'}
                                     </button>
                                 </fieldset>
                             </div>
@@ -439,7 +428,7 @@ const GeneralContactForm: React.FC = () => {
 
             <section className="mx-auto mt-6 max-w-5xl">
                 <div className="grid gap-4 md:grid-cols-2">
-                    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                    <article className="rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-5">
                                 <p className="section-eyebrow">Email</p>
                         <div className="mt-3 space-y-2 text-[15px] md:text-sm text-slate-300">
                             <a href={`mailto:${CONTACT_EMAIL}`} className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
@@ -448,7 +437,7 @@ const GeneralContactForm: React.FC = () => {
                         </div>
                     </article>
 
-                    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                    <article className="rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-5">
                         <p className="section-eyebrow">Need website work?</p>
                         <p className="mt-3 text-[15px] md:text-sm leading-relaxed text-slate-300">
                             Use{' '}
@@ -634,7 +623,7 @@ const ProjectIntakeForm: React.FC = () => {
             <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-5 pb-16 md:px-10 md:pb-24">
                 <section data-hero-root className="pt-8 md:pt-16">
                     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.72fr)] xl:items-start">
-                        <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 text-left shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
+                        <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 text-left shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
                             <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
                                 Start a project
                             </p>
@@ -653,9 +642,9 @@ const ProjectIntakeForm: React.FC = () => {
                             </p>
                         </article>
 
-                        <aside className="flex flex-col overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0b1120] shadow-[0_12px_36px_rgba(0,0,0,0.18)] xl:mt-8">
+                        <aside className="flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.18)] xl:mt-8">
                             <div className="border-b border-white/10 p-5 md:p-6">
-                                <div className="rounded-[1.25rem] border border-white/10 bg-[#0f1524]/70 p-4">
+                                <div className="rounded-[var(--radius-card)] border border-white/10 bg-[#0f1524]/70 p-4">
                                     <p className="section-eyebrow">Reply within one business day.</p>
                                 </div>
                             </div>
@@ -676,7 +665,7 @@ const ProjectIntakeForm: React.FC = () => {
 
                 <section ref={formSectionRef} id="start-project-form" className="mt-7">
                     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
-                        <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] shadow-[0_20px_56px_rgba(0,0,0,0.24)]">
+                        <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] shadow-[0_20px_56px_rgba(0,0,0,0.24)]">
                             {!showSuccessState ? (
                                 <div
                                     style={{
@@ -698,7 +687,7 @@ const ProjectIntakeForm: React.FC = () => {
 
                                     <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-6 md:p-7 lg:p-8" aria-busy={status === 'loading'}>
                                         {status === 'error' && (
-                                            <div role="alert" className="rounded-2xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-[15px] md:text-sm text-red-100">
+                                            <div role="alert" className="rounded-[var(--radius-component)] border border-red-400/35 bg-red-500/10 px-4 py-3 text-[15px] md:text-sm text-red-100">
                                                 {msg}
                                             </div>
                                         )}
@@ -761,7 +750,7 @@ const ProjectIntakeForm: React.FC = () => {
                         <div className="grid gap-4 self-start xl:sticky xl:top-28">
                             <CallUsCard showEmail />
 
-                            <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
+                            <article className="rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-5 md:p-6">
                                 <p className="section-eyebrow">General questions</p>
                                 <p className="mt-3 text-[15px] md:text-sm leading-relaxed text-slate-300">
                                     Use{' '}

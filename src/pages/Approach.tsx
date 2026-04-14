@@ -32,7 +32,7 @@ const approachPrinciples: readonly ApproachPrinciple[] = [
   },
 ] as const;
 
-const eyebrowClass = 'font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#d4a48e]';
+const eyebrowClass = 'font-axiomMono text-xs uppercase tracking-wide text-[#d4a48e]';
 
 const Approach: React.FC = () => {
   return (
@@ -41,7 +41,7 @@ const Approach: React.FC = () => {
 
       <Layout disableAmbientMotion hidePrimaryCta>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
-          <section data-hero-root className="relative pt-10 md:pt-20">
+          <section data-hero-root className="relative pt-16 md:pt-24">
             <div className="max-w-6xl">
               <div className="max-w-4xl">
                 <p className="section-eyebrow">Our Approach</p>
@@ -67,13 +67,13 @@ const Approach: React.FC = () => {
                 {approachPrinciples.map((principle) => (
                   <article
                     key={principle.number}
-                    className="machined-card h-full rounded-2xl border border-white/10 bg-[var(--axiom-elevated)] p-6 md:p-7"
+                    className="machined-card h-full rounded-[var(--radius-card)] border border-white/10 bg-[var(--axiom-elevated)] p-6 md:p-7"
                   >
                     <p className={eyebrowClass}>{principle.number}</p>
                     <h3 className="mt-3 text-[1.05rem] font-semibold tracking-tight text-[#F2F4F7]">
                       {principle.title}
                     </h3>
-                    <p className="mt-3 text-[15px] md:text-sm leading-6 text-slate-300">{principle.description}</p>
+                    <p className="mt-3 text-sm md:text-[15px] leading-relaxed text-slate-300">{principle.description}</p>
                   </article>
                 ))}
               </div>

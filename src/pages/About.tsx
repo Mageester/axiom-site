@@ -18,7 +18,7 @@ const About: React.FC = () => {
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-16 md:px-10 md:pb-20">
           <RevealBlock as="section" data-hero-root className="pt-10 md:pt-16">
-            <article className="overflow-hidden rounded-[2.25rem] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.18)] md:p-8 lg:p-10">
+            <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.18)] md:p-8 lg:p-10">
               <div className="max-w-4xl">
                 <p className="section-eyebrow">About</p>
                 <h1
@@ -40,7 +40,7 @@ const About: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-10 md:pt-16" variant="feature">
-            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02]">
+            <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02]">
               <div className="grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-stretch">
                 <div className="p-6 md:p-8 lg:p-10">
                   <p className="section-eyebrow">What the work does</p>
@@ -62,7 +62,7 @@ const About: React.FC = () => {
                 </div>
 
                 <div className="border-t border-white/10 p-4 md:p-6 lg:border-l lg:border-t-0 lg:p-6">
-                  <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.03]">
+                  <div className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-2">
                     <div className="divide-y divide-white/10">
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
                         <div className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">01</div>
@@ -93,7 +93,7 @@ const About: React.FC = () => {
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-10 md:pt-16" variant="feature">
-            <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.18)] md:p-8 lg:p-10">
+            <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.18)] md:p-8 lg:p-10">
               <div className="max-w-4xl">
                 <p className="section-eyebrow">THE TEAM</p>
                 <h2 className="mt-2 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
@@ -101,30 +101,32 @@ const About: React.FC = () => {
                 </h2>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-4 md:mt-10">
-                <article className="flex min-w-[16rem] flex-1 items-start gap-4 rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 md:min-w-[18rem] md:p-6">
+              <div className="mt-8 rounded-[var(--radius-card)] border border-white/5 bg-white/[0.01] p-3 md:mt-10 lg:p-4">
+                <div className="flex flex-col md:flex-row flex-wrap gap-4">
+                <article className="flex min-w-[16rem] flex-1 items-center gap-4 rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-5 md:min-w-[18rem] md:p-6 shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(19,24,34,0.98)_0%,rgba(10,13,18,0.98)_100%)] font-axiomMono text-[15px] uppercase tracking-[0.16em] text-[#F2F4F7]">
                     AV
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex flex-col justify-center gap-0.5">
                     <h3 className="text-[18px] font-semibold tracking-tight text-[#F2F4F7]">Aidan</h3>
-                    <p className="mt-1 text-[15px] md:text-sm leading-relaxed text-slate-300">
+                    <p className="text-sm md:text-[15px] leading-relaxed text-slate-300">
                       Co-founder — strategy, systems, client work
                     </p>
                   </div>
                 </article>
 
-                <article className="flex min-w-[16rem] flex-1 items-start gap-4 rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 md:min-w-[18rem] md:p-6">
+                <article className="flex min-w-[16rem] flex-1 items-center gap-4 rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-5 md:min-w-[18rem] md:p-6 shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(19,24,34,0.98)_0%,rgba(10,13,18,0.98)_100%)] font-axiomMono text-[15px] uppercase tracking-[0.16em] text-[#F2F4F7]">
                     RL
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex flex-col justify-center gap-0.5">
                     <h3 className="text-[18px] font-semibold tracking-tight text-[#F2F4F7]">Riley</h3>
-                    <p className="mt-1 text-[15px] md:text-sm leading-relaxed text-slate-300">
+                    <p className="text-sm md:text-[15px] leading-relaxed text-slate-300">
                       Co-founder — design, build, technical delivery
                     </p>
                   </div>
                 </article>
+                </div>
               </div>
 
               <p className="mt-6 max-w-3xl text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-base">
