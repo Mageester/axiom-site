@@ -18,7 +18,7 @@ const baseCardClass =
   'rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-6 machined-card transition-all duration-300 text-left';
 
 const inputClass =
-  'w-full rounded-xl px-5 py-4 text-[#F5F7FA] placeholder-[#A7B3BC] bg-white/[0.03] border border-white/10 border-t border-t-white/10 outline-none transition-all duration-300';
+  'w-full rounded-xl px-5 py-4 text-[16px] text-[#F5F7FA] placeholder-[#A7B3BC] bg-white/[0.03] border border-white/10 border-t border-t-white/10 outline-none transition-all duration-300';
 
 const INITIAL_FORM: IntakeFormState = {
   name: '',
@@ -142,12 +142,12 @@ const IntakeTerminal: React.FC = () => {
         }`}
       >
         <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#22c55e] animate-pulse" aria-hidden />
-        <p className="text-[11px] font-medium tracking-[0.16em] uppercase text-[#A7B3BC]">Open for new work</p>
+        <p className="text-[15px] md:text-[11px] font-medium tracking-[0.16em] uppercase text-[#A7B3BC]">Open for new work</p>
       </div>
 
       <div className="mb-8 space-y-3">
-        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Let&apos;s get to work.</h2>
-        <p className="max-w-2xl text-slate-300">Tell us what your business does, what&apos;s broken about your current site, and when you want to move. We&apos;ll reply within one business day.</p>
+        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Let’s get to work.</h2>
+        <p className="max-w-2xl text-slate-300">Tell us what your business does, what’s broken about your current site, and when you want to move. We’ll reply within one business day.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -163,7 +163,7 @@ const IntakeTerminal: React.FC = () => {
             className={`${baseCardClass} w-full ${activeAction === 'consultation' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
             <p className="text-lg font-semibold text-[#F2F4F7]">Talk to Axiom</p>
-            <p className="mt-2 text-sm text-slate-300">Talk through your site and the next step.</p>
+            <p className="mt-2 text-[15px] md:text-sm text-slate-300">Talk through your site and the next step.</p>
           </button>
         </div>
 
@@ -179,7 +179,7 @@ const IntakeTerminal: React.FC = () => {
             className={`${baseCardClass} w-full ${activeAction === 'details' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
             <p className="text-lg font-semibold text-[#F2F4F7]">Send request</p>
-            <p className="mt-2 text-sm text-slate-300">Open the form and share scope, timing, and budget.</p>
+            <p className="mt-2 text-[15px] md:text-sm text-slate-300">Open the form and share scope, timing, and budget.</p>
           </button>
         </div>
 
@@ -194,12 +194,12 @@ const IntakeTerminal: React.FC = () => {
             className={`${baseCardClass} block ${activeAction === 'email' ? 'border-[#B05D41]/70' : 'hover:border-[#B05D41]/50'}`}
           >
             <p className="text-lg font-semibold text-[#F2F4F7]">Email directly</p>
-            <p className="mt-2 text-sm text-slate-300">Reach us at contact@getaxiom.ca.</p>
+            <p className="mt-2 text-[15px] md:text-sm text-slate-300">Reach us at contact@getaxiom.ca.</p>
           </a>
         </div>
       </div>
 
-      <div className="mt-8 flex flex-col gap-2 text-sm md:flex-row md:items-center md:gap-6">
+      <div className="mt-8 flex flex-col gap-2 text-[15px] md:text-sm md:flex-row md:items-center md:gap-6">
         <a
           href="mailto:contact@getaxiom.ca"
           className="flex min-h-11 w-fit items-center text-[#B05D41] transition-all duration-300 hover:text-[#d7a189] hover:drop-shadow-[0_0_12px_rgba(176,93,65,0.45)]"
@@ -219,14 +219,14 @@ const IntakeTerminal: React.FC = () => {
           {submitState === 'success' ? (
             <div role="status" aria-live="polite" className="rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-8 text-center">
               <p className="text-xl md:text-2xl font-semibold tracking-tight text-[#F2F4F7]">
-                Received. We&apos;ll review and reply within one business day.
+      Received. We’ll review and reply within one business day.
               </p>
             </div>
           ) : (
             <form className="grid grid-cols-1 md:grid-cols-2 gap-5" onSubmit={handleSubmit} aria-busy={isSubmitting}>
               <label className="space-y-2" htmlFor={FIELD_IDS.name}>
-                <span className="text-sm text-[#A7B3BC]">Name</span>
-                <p id={`${FIELD_IDS.name}-helper`} className="text-xs text-slate-400">Who should we address?</p>
+                <span className="text-[15px] md:text-sm text-[#A7B3BC]">Name</span>
+                <p id={`${FIELD_IDS.name}-helper`} className="text-[15px] md:text-xs text-slate-400">Who should we address?</p>
                 <input
                   id={FIELD_IDS.name}
                   type="text"
@@ -240,12 +240,12 @@ const IntakeTerminal: React.FC = () => {
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? `${FIELD_IDS.name}-helper ${FIELD_IDS.name}-error` : `${FIELD_IDS.name}-helper`}
                 />
-                {errors.name && <p id={`${FIELD_IDS.name}-error`} className="text-xs text-red-300">{errors.name}</p>}
+                {errors.name && <p id={`${FIELD_IDS.name}-error`} className="text-[15px] md:text-xs text-red-300">{errors.name}</p>}
               </label>
 
               <label className="space-y-2" htmlFor={FIELD_IDS.email}>
-                <span className="text-sm text-[#A7B3BC]">Email</span>
-                <p id={`${FIELD_IDS.email}-helper`} className="text-xs text-slate-400">Where should we reply?</p>
+                <span className="text-[15px] md:text-sm text-[#A7B3BC]">Email</span>
+                <p id={`${FIELD_IDS.email}-helper`} className="text-[15px] md:text-xs text-slate-400">Where should we reply?</p>
                 <input
                   id={FIELD_IDS.email}
                   type="email"
@@ -259,12 +259,12 @@ const IntakeTerminal: React.FC = () => {
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? `${FIELD_IDS.email}-helper ${FIELD_IDS.email}-error` : `${FIELD_IDS.email}-helper`}
                 />
-                {errors.email && <p id={`${FIELD_IDS.email}-error`} className="text-xs text-red-300">{errors.email}</p>}
+                {errors.email && <p id={`${FIELD_IDS.email}-error`} className="text-[15px] md:text-xs text-red-300">{errors.email}</p>}
               </label>
 
               <label className="space-y-2 md:col-span-2" htmlFor={FIELD_IDS.details}>
-                <span className="text-sm text-[#A7B3BC]">Project Details</span>
-                <p id={`${FIELD_IDS.details}-helper`} className="text-xs text-slate-400">A few short sentences are enough.</p>
+                <span className="text-[15px] md:text-sm text-[#A7B3BC]">Project Details</span>
+                <p id={`${FIELD_IDS.details}-helper`} className="text-[15px] md:text-xs text-slate-400">A few short sentences are enough.</p>
                 <textarea
                   id={FIELD_IDS.details}
                   name="details"
@@ -272,12 +272,12 @@ const IntakeTerminal: React.FC = () => {
                   required
                   value={form.details}
                   onChange={(event) => setField('details', event.target.value)}
-                  placeholder="What does your business do, what&apos;s wrong with your current site, and when do you want to move?"
+        placeholder="What does your business do, what’s wrong with your current site, and when do you want to move?"
                   className={inputClass}
                   aria-invalid={!!errors.details}
                   aria-describedby={errors.details ? `${FIELD_IDS.details}-helper ${FIELD_IDS.details}-error` : `${FIELD_IDS.details}-helper`}
                 />
-                {errors.details && <p id={`${FIELD_IDS.details}-error`} className="text-xs text-red-300">{errors.details}</p>}
+                {errors.details && <p id={`${FIELD_IDS.details}-error`} className="text-[15px] md:text-xs text-red-300">{errors.details}</p>}
               </label>
 
               <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
@@ -294,7 +294,7 @@ const IntakeTerminal: React.FC = () => {
               </div>
 
               {submitState === 'error' && (
-                <p role="alert" className="md:col-span-2 text-sm text-red-300">
+                <p role="alert" className="md:col-span-2 text-[15px] md:text-sm text-red-300">
                   Request failed. Please retry or email contact@getaxiom.ca.
                 </p>
               )}

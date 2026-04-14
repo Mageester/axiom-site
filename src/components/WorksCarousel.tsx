@@ -29,7 +29,7 @@ const WorksCarousel: React.FC = () => {
   return (
     <section id="works" className="w-full px-6 md:px-8" aria-labelledby="selected-work-heading">
       <div className="mb-8">
-        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected Work</p>
+        <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected Work</p>
         <h2 id="selected-work-heading" className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Built for real businesses</h2>
       </div>
 
@@ -54,7 +54,7 @@ const WorksCarousel: React.FC = () => {
                     decoding="async"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6">
-                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{project.sector}</p>
+                    <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{project.sector}</p>
                     <h3 className="mt-2 text-xl font-semibold text-white">{project.title}</h3>
                   </div>
                 </article>

@@ -120,7 +120,7 @@ const ProcessTimeline: React.FC = () => (
             <span className="absolute left-0 top-[0.95rem] h-3 w-3 rounded-full border border-white/20 bg-[#0f1524] lg:hidden" aria-hidden="true" />
             <p className="font-axiomDisplay text-[clamp(1.6rem,3vw,2.2rem)] leading-none text-accent">{step.dayLabel}</p>
             <h3 className="mt-3 text-lg font-semibold text-white">{step.title}</h3>
-            <p className="mt-2 text-sm leading-6 text-[#A7B3BC]">{step.timelineDescription}</p>
+            <p className="mt-2 text-[15px] md:text-sm leading-6 text-[#A7B3BC]">{step.timelineDescription}</p>
           </RevealBlock>
           {index < PROCESS_STEPS.length - 1 ? (
             <div className="hidden h-[2px] flex-1 self-start bg-white/10 lg:block lg:translate-y-7" aria-hidden="true" />
@@ -152,7 +152,7 @@ const Infrastructure: React.FC = () => {
           <section className="pt-4 md:pt-8">
             <div className="max-w-5xl">
               <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
+                <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
                 <h1 data-startup-heading className="mt-3 max-w-3xl text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
                   Four stages from review to launch.
                 </h1>
@@ -165,7 +165,7 @@ const Infrastructure: React.FC = () => {
                   </Link>
                   <Link
                     to={CTA.work.to}
-                    className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07]"
+                    className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-[15px] md:text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07]"
                   >
                     {CTA.work.label}
                   </Link>
@@ -178,11 +178,11 @@ const Infrastructure: React.FC = () => {
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.7fr)] xl:items-start xl:gap-8">
               <div>
                 <div className="mb-5 flex flex-col gap-2 md:mb-6">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Timeline</p>
+                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Timeline</p>
                   <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
                     How the build moves.
                   </h2>
-                  <p className="max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
+                  <p className="max-w-xl text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-base">
                     Clear checkpoints keep decisions early and launch predictable.
                   </p>
                 </div>
@@ -202,14 +202,14 @@ const Infrastructure: React.FC = () => {
                       >
                         <div className="flex flex-wrap items-start justify-between gap-3">
                           <div className="min-w-0">
-                            <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{step.dayLabel}</p>
+                            <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-[#d4a48e]">{step.dayLabel}</p>
                             <h3 className="mt-2 text-[1.08rem] font-semibold text-[#F2F4F7]">{step.title}</h3>
-                            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">{step.summary}</p>
+                            <p className="mt-2 max-w-2xl text-[15px] md:text-sm leading-6 text-slate-300">{step.summary}</p>
                           </div>
                           <button
                             type="button"
                             onClick={() => toggleStep(step.id)}
-                            className="inline-flex min-h-11 items-center text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+                            className="inline-flex min-h-11 items-center text-[15px] md:text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
                           >
                             {isExpanded ? 'Show less' : 'Read more'}
                           </button>
@@ -219,7 +219,7 @@ const Infrastructure: React.FC = () => {
                           <div className="mt-4 border-t border-white/10 pt-4">
                             <ul className="space-y-2.5">
                               {step.bullets.map((bullet) => (
-                                <li key={bullet} className="flex gap-2 text-sm leading-6 text-slate-300 md:text-[0.96rem]">
+                                <li key={bullet} className="flex gap-2 text-[15px] md:text-sm leading-6 text-slate-300 md:text-[0.96rem]">
                                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d4a48e]" aria-hidden="true" />
                                   <span>{bullet}</span>
                                 </li>
@@ -234,13 +234,13 @@ const Infrastructure: React.FC = () => {
               </div>
 
               <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] md:p-6 xl:sticky xl:top-28">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
+                <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
                   Before we build
                 </p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
                   What we need before Day 7.
                 </h2>
-                <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-300">
+                <p className="mt-2 max-w-md text-[15px] md:text-sm leading-relaxed text-slate-300">
                   This keeps the work moving and cuts down on back-and-forth later.
                 </p>
 
@@ -251,10 +251,10 @@ const Infrastructure: React.FC = () => {
                         <CheckMark />
                       </span>
                       <div>
-                        <p className="text-sm font-medium leading-relaxed text-slate-200 md:text-[0.96rem]">
+                        <p className="text-[15px] md:text-sm font-medium leading-relaxed text-slate-200 md:text-[0.96rem]">
                           {item.title}
                         </p>
-                        <p className="mt-1 text-sm leading-relaxed text-slate-300">
+                        <p className="mt-1 text-[15px] md:text-sm leading-relaxed text-slate-300">
                           {item.detail}
                         </p>
                       </div>
@@ -269,28 +269,28 @@ const Infrastructure: React.FC = () => {
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
                 <div>
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
+                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                   <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
                     Start with a review.
                   </h2>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base lg:mt-3">
-                    We&apos;ll look at the site and show the first changes worth making.
+                  <p className="mt-3 max-w-xl text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-base lg:mt-3">
+                    We’ll look at the site and show the first changes worth making.
                   </p>
                 </div>
                 <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What comes next</p>
+                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What comes next</p>
                   <div className="mt-4 divide-y divide-white/[0.08]">
                     <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">Review</p>
+                      <p className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">Review</p>
                     </div>
                     <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">Plan</p>
+                      <p className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">Plan</p>
                     </div>
                     <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">Build</p>
+                      <p className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">Build</p>
                     </div>
                     <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">Launch</p>
+                      <p className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">Launch</p>
                     </div>
                   </div>
                 </aside>

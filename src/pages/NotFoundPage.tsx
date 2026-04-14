@@ -19,7 +19,7 @@ const NotFoundPage: React.FC = () => {
           <section className="max-w-3xl">
             <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">404</p>
             <h1 className="mt-3 text-[clamp(2.4rem,5vw,4.5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-              That page isn&apos;t here.
+              That page isn’t here.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
               The address you opened does not point to a live page. Use the main links below to continue.

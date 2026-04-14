@@ -67,7 +67,7 @@ const PricingPage: React.FC = () => {
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-16 md:px-10 md:pb-20">
       {/* SECTION 1: HERO */}
       <section className="mx-auto mb-16 flex max-w-3xl flex-col gap-6 text-center sm:mb-24 pt-10">
-        <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
+        <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
           PRICING
         </p>
         <div>
@@ -96,7 +96,7 @@ const PricingPage: React.FC = () => {
               }`}
             >
               <div>
-                <h3 className="font-axiomMono text-[12px] uppercase tracking-[0.18em] text-[#A7B3BC]">
+                <h3 className="font-axiomMono text-[15px] md:text-[12px] uppercase tracking-[0.18em] text-[#A7B3BC]">
                   {tier.name}
                 </h3>
                 <p className="mt-6 font-axiomDisplay text-[40px] leading-none tracking-[-0.04em] text-[#F2F4F7]">
@@ -109,7 +109,7 @@ const PricingPage: React.FC = () => {
 
               <ul className="mb-2 mt-auto flex flex-col gap-3">
                 {tier.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-[14px] leading-6 text-slate-300">
+                  <li key={idx} className="flex items-start gap-3 text-[15px] md:text-[14px] leading-6 text-slate-300">
                     <span className="text-slate-500">·</span>
                     <span>{feature}</span>
                   </li>
@@ -124,13 +124,20 @@ const PricingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 3: GUARANTEE STRIP */}
-      <section className="mx-auto max-w-[1200px] mb-20 sm:mb-32">
-        <div className="border-y border-white/10 py-10 px-6 text-center">
-          <p className="mx-auto max-w-4xl text-[18px] font-medium leading-relaxed tracking-tight text-[#F2F4F7] sm:text-[22px] md:leading-normal">
-            If your site loads in over one second, we fix it free. No asterisks. That is the standard we build to.
-          </p>
-        </div>
+      {/* SECTION 3: GUARANTEE CALLOUT */}
+      <section className="mx-auto mb-20 max-w-[1200px] sm:mb-32">
+        <article className="w-full overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
+          <div className="border-l-4 border-[#B05D41] px-6 py-10 md:px-8 md:py-12 lg:px-10">
+            <div className="max-w-4xl">
+              <h2 className="text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                If your site loads in over one second, we fix it free.
+              </h2>
+              <p className="mt-4 text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
+                No asterisks. That is the standard we build to.
+              </p>
+            </div>
+          </div>
+        </article>
       </section>
 
       {/* SECTION 4: CLOSING CTA */}

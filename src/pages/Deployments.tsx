@@ -24,6 +24,7 @@ type ProofBlockData = {
   title: string;
   summary: string;
   businessType: string;
+  badgeLabel: string;
   statusLabel: string;
   ctaLabel: string;
   demoUrl: string;
@@ -49,6 +50,7 @@ const proofBlocks: readonly ProofBlockData[] = [
     title: 'Restaurant reservation site',
     summary: 'A restaurant site where the booking link, menu, and hours are impossible to miss on a phone.',
     businessType: 'Restaurant and hospitality',
+    badgeLabel: 'Example build',
     statusLabel: 'Live site',
     ctaLabel: 'View the build →',
     demoUrl: 'https://restaurant.getaxiom.ca',
@@ -65,6 +67,7 @@ const proofBlocks: readonly ProofBlockData[] = [
     title: 'Landscaping site',
     summary: 'A landscaping site that leads with past work and makes it easy to request a quote in under 30 seconds.',
     businessType: 'Landscaping and outdoor services',
+    badgeLabel: 'Concept project',
     statusLabel: 'Selected build',
     ctaLabel: 'View the build →',
     demoUrl: 'https://landscaping.getaxiom.ca',
@@ -81,6 +84,7 @@ const proofBlocks: readonly ProofBlockData[] = [
     title: 'Roofing site',
     summary: 'A roofing site that separates urgent calls from estimate requests - so the right jobs reach you the right way.',
     businessType: 'Roofing and exterior services',
+    badgeLabel: 'Concept project',
     statusLabel: 'Selected build',
     ctaLabel: 'View the build →',
     demoUrl: 'https://roofing.getaxiom.ca',
@@ -97,10 +101,10 @@ const proofBlocks: readonly ProofBlockData[] = [
 function NarrativeRow({ label, value }: NarrativeRowProps) {
   return (
     <div className="grid gap-2 py-4 first:pt-0 md:grid-cols-[10.5rem_minmax(0,1fr)] md:gap-5">
-      <dt className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC] md:pt-1">
+      <dt className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC] md:pt-1">
         {label}
       </dt>
-      <dd className="text-sm leading-relaxed text-slate-300 md:text-[0.98rem]">{value}</dd>
+      <dd className="text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-[0.98rem]">{value}</dd>
     </div>
   );
 }
@@ -116,10 +120,10 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
         <div className="grid gap-0 lg:grid-cols-[minmax(0,0.98fr)_minmax(0,1.02fr)] lg:items-stretch">
           <div className={`min-w-0 p-5 md:p-6 lg:p-8 ${textOrderClass}`}>
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="inline-flex rounded-full border border-white/10 bg-black/40 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/78">
+              <span className="inline-flex rounded-full border border-white/10 bg-black/40 px-3 py-1 font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-white/78">
                 {proof.statusLabel}
               </span>
-              <span className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-slate-400">
+              <span className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-slate-400">
                 {proof.businessType}
               </span>
             </div>
@@ -127,7 +131,7 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
             <h3 className="mt-4 text-[clamp(1.9rem,3vw,2.9rem)] font-semibold tracking-tight text-[#F2F4F7]">
               {proof.title}
             </h3>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">{proof.summary}</p>
+            <p className="mt-3 max-w-2xl text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">{proof.summary}</p>
 
             <dl className="mt-6 divide-y divide-white/[0.08] border-t border-white/10">
               <NarrativeRow label="Original weakness" value={proof.originalWeakness} />
@@ -149,9 +153,12 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
           </div>
 
           <figure className={`relative overflow-hidden bg-[#0b1120] ${imageOrderClass}`}>
+            <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex rounded-full border border-white/15 bg-[#09101d]/80 px-3 py-1 font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-white/90 shadow-[0_12px_28px_rgba(0,0,0,0.24)] backdrop-blur-sm">
+              {proof.badgeLabel}
+            </span>
             <ResponsiveImage
               source={proof.image}
-              sizes="(min-width: 1280px) 44vw, (min-width: 768px) 50vw, 100vw"
+              sizes="(min-width: 1280px) 44vw, (min-width: 768px) 50vw, w-full"
               alt={proof.imageAlt}
               className="motion-media aspect-[4/3] w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/proof:scale-[1.015]"
               loading={index === 0 ? 'eager' : 'lazy'}
@@ -177,7 +184,7 @@ const Deployments: React.FC = () => {
           <RevealBlock as="section" data-hero-root className="pt-12 md:pt-20">
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1.18fr)_minmax(20rem,0.82fr)] lg:items-end lg:gap-12">
               <div className="max-w-5xl">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">WORK</p>
+                <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">WORK</p>
                 <div className="mt-2.5 overflow-hidden">
                   <h1
                     data-startup-heading
@@ -195,7 +202,7 @@ const Deployments: React.FC = () => {
                   </Link>
                   <Link
                     to={CTA.process.to}
-                    className="inline-flex w-full items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
+                    className="inline-flex w-full items-center text-[15px] md:text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto"
                   >
                     {CTA.process.label}
                   </Link>
@@ -203,8 +210,8 @@ const Deployments: React.FC = () => {
               </div>
 
               <aside className="machined-card flex min-h-[13rem] items-center justify-center rounded-3xl border border-white/10 bg-[var(--axiom-elevated)] p-6 md:p-8">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.24em] text-[#A7B3BC]">
-                  Clarity &middot; Proof &middot; Contact
+                <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.24em] text-[#A7B3BC]">
+                  Clarity · Proof · Contact
                 </p>
               </aside>
             </div>
@@ -212,11 +219,11 @@ const Deployments: React.FC = () => {
 
           <RevealBlock as="section" className="pt-16 md:pt-24">
             <div className="max-w-4xl">
-              <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
+              <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Examples</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                 What we build
               </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+              <p className="mt-3 max-w-2xl text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">
                 Examples showing what a clear service-business website looks like.
               </p>
             </div>
@@ -232,23 +239,23 @@ const Deployments: React.FC = () => {
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
                 <div className="max-w-2xl">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
+                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                   <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
                     Ready to stop losing jobs to a bad site?
                   </h2>
-                  <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
-                    Start a project and we&apos;ll review the current site, what&apos;s missing, and the first fixes that matter.
+                  <p className="mt-4 text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-base">
+                Start a project and we’ll review the current site, what’s missing, and the first fixes that matter.
                   </p>
                 </div>
                 <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What happens next</p>
-                  <p className="mt-4 font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[#F2F4F7]">
-                    Review &rarr; Scope &rarr; Build &rarr; Launch
+                  <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What happens next</p>
+                  <p className="mt-4 font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.16em] text-[#F2F4F7]">
+                    Review → Scope → Build → Launch
                   </p>
                 </aside>
                 <div className="flex flex-wrap items-center gap-3 lg:col-span-2 lg:justify-end">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
-                    Start a project &rarr;
+                    Start a project →
                   </Link>
                 </div>
               </div>

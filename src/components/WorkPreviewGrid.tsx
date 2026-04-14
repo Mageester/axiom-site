@@ -40,7 +40,7 @@ const workPreviews: WorkPreview[] = [
   },
 ];
 
-const browserImageSizes = '(min-width: 1024px) 24rem, (min-width: 768px) 50vw, 100vw';
+const browserImageSizes = '(min-width: 1024px) 24rem, (min-width: 768px) 50vw, w-full';
 
 const WorkPreviewCard: React.FC<{ preview: WorkPreview; index: number }> = ({ preview, index }) => {
   return (
@@ -75,11 +75,11 @@ const WorkPreviewCard: React.FC<{ preview: WorkPreview; index: number }> = ({ pr
       <div className="flex flex-1 flex-col p-5 md:p-6">
         <div>
           <h3 className="text-[1.1rem] font-semibold tracking-tight text-[#F2F4F7]">{preview.name}</h3>
-          <p className="mt-2 text-sm leading-6 text-slate-300">{preview.description}</p>
+          <p className="mt-2 text-[15px] md:text-sm leading-6 text-slate-300">{preview.description}</p>
         </div>
 
         <div className="mt-5">
-          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/65">
+          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-white/65">
             {preview.industryTag}
           </span>
         </div>
@@ -93,11 +93,11 @@ const WorkPreviewGrid: React.FC = () => {
     <section aria-labelledby="work-preview-grid-heading" className="pt-16 md:pt-20">
       <div className="mx-auto w-full max-w-6xl">
         <div className="max-w-2xl">
-          <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">SELECTED WORK</p>
+          <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">SELECTED WORK</p>
           <h2 id="work-preview-grid-heading" className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
             Browser-frame previews.
           </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+          <p className="mt-3 max-w-2xl text-[15px] md:text-sm leading-7 text-slate-300 md:text-base">
             Built for different businesses. Same result: clear offer, visible proof, one path to contact.
           </p>
         </div>

@@ -33,10 +33,10 @@ const PROJECT_PATH = '/start-a-project';
 const LEGACY_PROJECT_PATH = '/apply';
 
 const FALLBACK_SUBMIT_ERROR = 'Something went wrong. Email us directly at contact@getaxiom.ca';
-const FIELD_LABEL_CLASS = 'text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
-const FIELD_HELPER_CLASS = 'text-xs leading-5 text-slate-400';
+const FIELD_LABEL_CLASS = 'text-[15px] md:text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
+const FIELD_HELPER_CLASS = 'text-[15px] md:text-xs leading-5 text-slate-400';
 const FIELD_INPUT_CLASS =
-    'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500';
+    'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-[15px] md:text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500';
 const PROJECT_FIELD_IDS = {
     name: 'project-full-name',
     email: 'project-email',
@@ -93,15 +93,15 @@ const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = fal
     if (plainPhone) {
         return (
             <article className={`rounded-2xl border border-white/10 p-5 md:p-6 ${className}`.trim()}>
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Call us</p>
-                <p className="mt-3 text-sm leading-6 text-slate-100">{CONTACT_PHONE_DISPLAY}</p>
+                <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-slate-400">Call us</p>
+                <p className="mt-3 text-[15px] md:text-sm leading-6 text-slate-100">{CONTACT_PHONE_DISPLAY}</p>
             </article>
         );
     }
 
     return (
         <article className={`rounded-2xl border border-[#B05D41]/30 bg-[#B05D41]/10 p-5 md:p-6 ${className}`.trim()}>
-            <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-[#B05D41]">Call us</p>
+            <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-[#B05D41]">Call us</p>
             <a
                 href={CONTACT_PHONE_HREF}
                 className="mt-3 inline-flex min-h-11 items-center text-[clamp(1.75rem,2.8vw,2.35rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#B05D41] transition-colors hover:text-[#d7a189]"
@@ -111,7 +111,7 @@ const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = fal
             {showEmail && (
                 <a
                     href={`mailto:${CONTACT_EMAIL}`}
-                    className="mt-4 inline-flex min-h-11 items-center text-sm leading-6 text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+                    className="mt-4 inline-flex min-h-11 items-center text-[15px] md:text-sm leading-6 text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
                 >
                     {CONTACT_EMAIL}
                 </a>
@@ -144,13 +144,13 @@ const SubmissionSuccessState: React.FC<SubmissionSuccessStateProps> = ({ onReset
             </svg>
         </div>
         <h2 className="mt-5 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Received.</h2>
-        <p className="mt-2 text-sm leading-7 text-slate-300">
-            Received. We&apos;ll review and reply within one business day.
+        <p className="mt-2 text-[15px] md:text-sm leading-7 text-slate-300">
+            Received. We’ll review and reply within one business day.
         </p>
         <button
             type="button"
             onClick={onReset}
-            className="mt-6 inline-flex min-h-11 items-center text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+            className="mt-6 inline-flex min-h-11 items-center text-[15px] md:text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
         >
             Send another message
         </button>
@@ -288,15 +288,15 @@ const GeneralContactForm: React.FC = () => {
             />
             <section data-hero-root className="mx-auto max-w-3xl pt-8 text-center md:pt-16">
                 <div className="overflow-hidden">
-                    <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Contact</p>
+                    <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">Contact</p>
                     <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
                         Send a question or a note.
                     </h1>
                 </div>
-                <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-sm text-slate-200/90 md:text-base">
+                <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-[15px] md:text-sm text-slate-200/90 md:text-base">
                     Use this form for a quick question or a note about your site.
                 </p>
-                <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-sm text-slate-300">
+                <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-[15px] md:text-sm text-slate-300">
                     For website work, use{' '}
                     <Link to={PROJECT_PATH} className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                         Start a project
@@ -313,7 +313,7 @@ const GeneralContactForm: React.FC = () => {
                 <div className="axiom-bento p-6 md:p-8">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-7" aria-busy={status === 'loading'}>
                         {status === 'error' && (
-                            <div role="alert" aria-live="assertive" className="rounded-xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-sm text-red-100">
+                            <div role="alert" aria-live="assertive" className="rounded-xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-[15px] md:text-sm text-red-100">
                                 {msg}
                             </div>
                         )}
@@ -344,7 +344,7 @@ const GeneralContactForm: React.FC = () => {
                                                 aria-invalid={!!errors.name}
                                                 aria-describedby={errors.name ? `${CONTACT_FIELD_IDS.name}-helper ${CONTACT_FIELD_IDS.name}-error` : `${CONTACT_FIELD_IDS.name}-helper`}
                                             />
-                                            {errors.name && <p id={`${CONTACT_FIELD_IDS.name}-error`} className="text-xs text-red-300">{errors.name}</p>}
+                                            {errors.name && <p id={`${CONTACT_FIELD_IDS.name}-error`} className="text-[15px] md:text-xs text-red-300">{errors.name}</p>}
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <label htmlFor={CONTACT_FIELD_IDS.email} className={FIELD_LABEL_CLASS}>Email</label>
@@ -360,7 +360,7 @@ const GeneralContactForm: React.FC = () => {
                                                 aria-invalid={!!errors.email}
                                                 aria-describedby={errors.email ? `${CONTACT_FIELD_IDS.email}-helper ${CONTACT_FIELD_IDS.email}-error` : `${CONTACT_FIELD_IDS.email}-helper`}
                                             />
-                                            {errors.email && <p id={`${CONTACT_FIELD_IDS.email}-error`} className="text-xs text-red-300">{errors.email}</p>}
+                                            {errors.email && <p id={`${CONTACT_FIELD_IDS.email}-error`} className="text-[15px] md:text-xs text-red-300">{errors.email}</p>}
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <label htmlFor={CONTACT_FIELD_IDS.business_name} className={FIELD_LABEL_CLASS}>Business name</label>
@@ -392,7 +392,7 @@ const GeneralContactForm: React.FC = () => {
                                             aria-invalid={!!errors.message}
                                             aria-describedby={errors.message ? `${CONTACT_FIELD_IDS.message}-helper ${CONTACT_FIELD_IDS.message}-error` : `${CONTACT_FIELD_IDS.message}-helper`}
                                         />
-                                        {errors.message && <p id={`${CONTACT_FIELD_IDS.message}-error`} className="text-xs text-red-300">{errors.message}</p>}
+                                        {errors.message && <p id={`${CONTACT_FIELD_IDS.message}-error`} className="text-[15px] md:text-xs text-red-300">{errors.message}</p>}
                                     </div>
 
                                     <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
@@ -412,8 +412,8 @@ const GeneralContactForm: React.FC = () => {
             <section className="mx-auto mt-6 max-w-5xl">
                 <div className="grid gap-4 md:grid-cols-2">
                     <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Email</p>
-                        <div className="mt-3 space-y-2 text-sm text-slate-300">
+                        <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-slate-400">Email</p>
+                        <div className="mt-3 space-y-2 text-[15px] md:text-sm text-slate-300">
                             <a href={`mailto:${CONTACT_EMAIL}`} className="flex w-fit min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                 {CONTACT_EMAIL}
                             </a>
@@ -421,8 +421,8 @@ const GeneralContactForm: React.FC = () => {
                     </article>
 
                     <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                        <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">Need website work?</p>
-                        <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                        <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-slate-400">Need website work?</p>
+                        <p className="mt-3 text-[15px] md:text-sm leading-relaxed text-slate-300">
                             Use{' '}
                             <Link to={PROJECT_PATH} className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                 Start a project
@@ -607,16 +607,16 @@ const ProjectIntakeForm: React.FC = () => {
                 <section data-hero-root className="pt-8 md:pt-16">
                     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.72fr)] xl:items-start">
                         <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 text-left shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
-                            <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
+                            <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
                                 Start a project
                             </p>
                             <h1 data-startup-heading className="mt-3 max-w-3xl text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
                                 Tell us what the business needs.
                             </h1>
-                            <p data-startup-copy className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-                                Share the basics and we&apos;ll reply within one business day with the next step.
+                            <p data-startup-copy className="mt-4 max-w-2xl text-[15px] md:text-sm text-slate-300 md:text-base">
+                                Share the basics and we’ll reply within one business day with the next step.
                             </p>
-                            <p data-startup-meta className="mt-3 max-w-2xl text-sm text-slate-400">
+                            <p data-startup-meta className="mt-3 max-w-2xl text-[15px] md:text-sm text-slate-400">
                                 Not a project? Use{' '}
                                 <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                     Contact
@@ -628,17 +628,17 @@ const ProjectIntakeForm: React.FC = () => {
                         <aside className="flex flex-col overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0b1120] shadow-[0_12px_36px_rgba(0,0,0,0.18)] xl:mt-8">
                             <div className="border-b border-white/10 p-5 md:p-6">
                                 <div className="rounded-[1.25rem] border border-white/10 bg-[#0f1524]/70 p-4">
-                                    <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Reply within one business day.</p>
+                                    <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Reply within one business day.</p>
                                 </div>
                             </div>
                             <div className="flex-1 bg-white/[0.03] p-5 md:p-6">
-                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
+                                <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
                                 <div className="mt-5 divide-y divide-white/[0.08]">
                                     <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                                        <span className="text-sm font-medium text-[#F2F4F7]">One short form</span>
+                                        <span className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">One short form</span>
                                     </div>
                                     <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                                        <span className="text-sm font-medium text-[#F2F4F7]">Reply within one business day</span>
+                                        <span className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">Reply within one business day</span>
                                     </div>
                                 </div>
                             </div>
@@ -662,15 +662,15 @@ const ProjectIntakeForm: React.FC = () => {
                                         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                                             <div>
                                                 <p className={FIELD_LABEL_CLASS}>Project intake</p>
-                                                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Let&apos;s get to work.</h2>
+                                                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Let’s get to work.</h2>
                                             </div>
-                                            <p className="text-sm text-slate-400">Tell us what your business does, what&apos;s broken about your current site, and when you want to move. We&apos;ll reply within one business day.</p>
+                                            <p className="text-[15px] md:text-sm text-slate-400">Tell us what your business does, what’s broken about your current site, and when you want to move. We’ll reply within one business day.</p>
                                         </div>
                                     </div>
 
                                     <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-6 md:p-7 lg:p-8" aria-busy={status === 'loading'}>
                                         {status === 'error' && (
-                                            <div role="alert" className="rounded-2xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-sm text-red-100">
+                                            <div role="alert" className="rounded-2xl border border-red-400/35 bg-red-500/10 px-4 py-3 text-[15px] md:text-sm text-red-100">
                                                 {msg}
                                             </div>
                                         )}
@@ -682,21 +682,21 @@ const ProjectIntakeForm: React.FC = () => {
                                                         <label htmlFor={PROJECT_FIELD_IDS.name} className={FIELD_LABEL_CLASS}>Full name</label>
                                                         <p id={`${PROJECT_FIELD_IDS.name}-helper`} className={FIELD_HELPER_CLASS}>Who should we address?</p>
                                                         <input type="text" id={PROJECT_FIELD_IDS.name} required minLength={2} autoComplete="name" value={form.name} onChange={(event) => setField('name', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.name} aria-describedby={errors.name ? `${PROJECT_FIELD_IDS.name}-helper ${PROJECT_FIELD_IDS.name}-error` : `${PROJECT_FIELD_IDS.name}-helper`} />
-                                                        {errors.name && <p id={`${PROJECT_FIELD_IDS.name}-error`} className="text-xs text-red-300">{errors.name}</p>}
+                                                        {errors.name && <p id={`${PROJECT_FIELD_IDS.name}-error`} className="text-[15px] md:text-xs text-red-300">{errors.name}</p>}
                                                     </div>
 
                                                     <div className="flex flex-col gap-2">
                                                         <label htmlFor={PROJECT_FIELD_IDS.email} className={FIELD_LABEL_CLASS}>Email address</label>
                                                         <p id={`${PROJECT_FIELD_IDS.email}-helper`} className={FIELD_HELPER_CLASS}>We'll reply here.</p>
                                                         <input type="email" id={PROJECT_FIELD_IDS.email} required autoComplete="email" value={form.email} onChange={(event) => setField('email', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.email} aria-describedby={errors.email ? `${PROJECT_FIELD_IDS.email}-helper ${PROJECT_FIELD_IDS.email}-error` : `${PROJECT_FIELD_IDS.email}-helper`} />
-                                                        {errors.email && <p id={`${PROJECT_FIELD_IDS.email}-error`} className="text-xs text-red-300">{errors.email}</p>}
+                                                        {errors.email && <p id={`${PROJECT_FIELD_IDS.email}-error`} className="text-[15px] md:text-xs text-red-300">{errors.email}</p>}
                                                     </div>
 
                                                     <div className="flex flex-col gap-2">
                                                         <label htmlFor={PROJECT_FIELD_IDS.business_name} className={FIELD_LABEL_CLASS}>Business name</label>
                                                         <p id={`${PROJECT_FIELD_IDS.business_name}-helper`} className={FIELD_HELPER_CLASS}>Use the company name people know.</p>
                                                         <input type="text" id={PROJECT_FIELD_IDS.business_name} required minLength={2} autoComplete="organization" value={form.business_name} onChange={(event) => setField('business_name', event.target.value)} className={FIELD_INPUT_CLASS} aria-invalid={!!errors.business_name} aria-describedby={errors.business_name ? `${PROJECT_FIELD_IDS.business_name}-helper ${PROJECT_FIELD_IDS.business_name}-error` : `${PROJECT_FIELD_IDS.business_name}-helper`} />
-                                                        {errors.business_name && <p id={`${PROJECT_FIELD_IDS.business_name}-error`} className="text-xs text-red-300">{errors.business_name}</p>}
+                                                        {errors.business_name && <p id={`${PROJECT_FIELD_IDS.business_name}-error`} className="text-[15px] md:text-xs text-red-300">{errors.business_name}</p>}
                                                     </div>
 
                                                     <div className="flex flex-col gap-2">
@@ -709,8 +709,8 @@ const ProjectIntakeForm: React.FC = () => {
                                                 <div className="flex flex-col gap-2">
                                                     <label htmlFor={PROJECT_FIELD_IDS.details} className={FIELD_LABEL_CLASS}>Brief project description</label>
                                                     <p id={`${PROJECT_FIELD_IDS.details}-helper`} className={FIELD_HELPER_CLASS}>Three short lines is enough.</p>
-                                                    <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="What does your business do, what&apos;s wrong with your current site, and when do you want to move?" className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
-                                                    {errors.details && <p id={`${PROJECT_FIELD_IDS.details}-error`} className="text-xs text-red-300">{errors.details}</p>}
+                                                    <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="What does your business do, what’s wrong with your current site, and when do you want to move?" className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
+                                                    {errors.details && <p id={`${PROJECT_FIELD_IDS.details}-error`} className="text-[15px] md:text-xs text-red-300">{errors.details}</p>}
                                                 </div>
                                             </section>
 
@@ -718,7 +718,7 @@ const ProjectIntakeForm: React.FC = () => {
                                                 <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
                                                     {status === 'loading' ? 'Sending...' : 'Send it →'}
                                                 </button>
-                                                <p className="text-sm text-slate-400">We&apos;ll reply within one business day with next steps.</p>
+                                                <p className="text-[15px] md:text-sm text-slate-400">We’ll reply within one business day with next steps.</p>
                                             </div>
                                         </fieldset>
                                     </form>
@@ -734,8 +734,8 @@ const ProjectIntakeForm: React.FC = () => {
                             <CallUsCard showEmail />
 
                             <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
-                                <p className="font-axiomMono text-[10px] uppercase tracking-[0.14em] text-slate-400">General questions</p>
-                                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                                <p className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.14em] text-slate-400">General questions</p>
+                                <p className="mt-3 text-[15px] md:text-sm leading-relaxed text-slate-300">
                                     Use{' '}
                                     <Link to="/contact" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
                                         Contact

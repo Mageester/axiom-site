@@ -15,24 +15,24 @@ const approachPrinciples: readonly ApproachPrinciple[] = [
   {
     number: '01',
     title: 'Clarity over everything',
-    description:
-      'Your offer has to be readable the moment someone lands. Not buried, not vague. If they have to work for it, they&apos;re already gone.',
+      description:
+        'Your offer has to be readable the moment someone lands. Not buried, not vague. If they have to work for it, they’re already gone.',
   },
   {
     number: '02',
     title: "Proof closes deals. Polish doesn't.",
-    description:
-      'Real results, real reviews, and real work shown early. That&apos;s what converts a visitor into a call.',
+      description:
+        'Real results, real reviews, and real work shown early. That’s what converts a visitor into a call.',
   },
   {
     number: '03',
     title: 'Slow sites lose jobs.',
-    description:
-      'Most people find you on their phone. If your site takes more than two seconds, they&apos;ve already moved on. Every build we ship loads fast &mdash; tested, not assumed.',
+      description:
+        'Most people find you on their phone. If your site takes more than two seconds, they’ve already moved on. Every build we ship loads fast — tested, not assumed.',
   },
 ] as const;
 
-const eyebrowClass = 'font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#d4a48e]';
+const eyebrowClass = 'font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-[#d4a48e]';
 
 const Approach: React.FC = () => {
   return (
@@ -51,7 +51,7 @@ const Approach: React.FC = () => {
                   </h1>
                 </div>
                 <p className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  If someone lands on your site and can&apos;t tell what you do, who you serve, and how to contact you in under five seconds &mdash; the site is broken. We don&apos;t ship broken sites.
+        If someone lands on your site and can’t tell what you do, who you serve, and how to contact you in under five seconds — the site is broken. We don’t ship broken sites.
                 </p>
               </div>
             </div>
@@ -73,7 +73,7 @@ const Approach: React.FC = () => {
                     <h3 className="mt-3 text-[1.05rem] font-semibold tracking-tight text-[#F2F4F7]">
                       {principle.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-6 text-slate-300">{principle.description}</p>
+                    <p className="mt-3 text-[15px] md:text-sm leading-6 text-slate-300">{principle.description}</p>
                   </article>
                 ))}
               </div>
@@ -98,7 +98,7 @@ const Approach: React.FC = () => {
                     to="/start-a-project"
                     className="btn-secondary btn-lg w-full whitespace-nowrap sm:w-auto"
                   >
-                    Start a project &rarr;
+                    Start a project →
                   </Link>
                 </div>
               </div>

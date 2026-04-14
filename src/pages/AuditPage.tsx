@@ -143,7 +143,7 @@ const AuditPage: React.FC = () => {
                 <div className="text-center mb-12">
                     <h1 className="text-[40px] md:text-[56px] font-semibold mb-6 text-axiom-text-main tracking-tight leading-[1.05]">Is your website costing you work?</h1>
                     <p className="text-[16px] text-axiom-text-mute max-w-lg mx-auto leading-relaxed">
-                        Most business sites are bleeding leads quietly. Slow load times, no clear contact path, nothing that builds trust fast. Drop your URL and we&apos;ll tell you exactly what it&apos;s costing you &mdash; free, within 24 hours.</p>
+                        Most business sites are bleeding leads quietly. Slow load times, no clear contact path, nothing that builds trust fast. Drop your URL and we’ll tell you exactly what it’s costing you — free, within 24 hours.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="axiom-glass p-8 md:p-10 flex flex-col gap-6 rounded-sm relative overflow-hidden" aria-busy={status === 'loading'}>
@@ -170,7 +170,7 @@ const AuditPage: React.FC = () => {
                                 </svg>
                             </div>
                             <h2 className="text-[24px] font-semibold text-axiom-text-main mb-3">Review requested.</h2>
-                            <p className="text-[14px] text-axiom-text-mute leading-relaxed max-w-sm">
+                            <p className="text-[15px] md:text-[14px] text-axiom-text-mute leading-relaxed max-w-sm">
                                 We'll look at your site and get back to you within 24 hours.
                             </p>
                             <div className="mt-6 flex w-full max-w-sm flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
@@ -185,15 +185,15 @@ const AuditPage: React.FC = () => {
                     )}
 
                     {status === 'error' && (
-                        <div role="alert" aria-live="assertive" className="bg-axiom-elevated border border-axiom-border text-axiom-text-mute p-5 rounded-[2px] text-[13px] font-mono leading-relaxed mb-2 flex items-start gap-4 animate-in fade-in duration-300">
+                        <div role="alert" aria-live="assertive" className="bg-axiom-elevated border border-axiom-border text-axiom-text-mute p-5 rounded-[2px] text-[15px] md:text-[13px] font-mono leading-relaxed mb-2 flex items-start gap-4 animate-in fade-in duration-300">
                             <div className="w-2 h-2 mt-1.5 bg-axiom-accent/70 rounded-sm shrink-0"></div>
                             <p>{msg}</p>
                         </div>
                     )}
 
                     <div className="flex flex-col gap-3">
-                        <label htmlFor={AUDIT_FIELD_IDS.name} className="text-[12px] font-mono text-axiom-text-mute/80 uppercase tracking-widest pl-1">Name</label>
-                        <p id={`${AUDIT_FIELD_IDS.name}-helper`} className="text-[12px] text-axiom-text-mute/70 pl-1">Who should we address?</p>
+                        <label htmlFor={AUDIT_FIELD_IDS.name} className="text-[15px] md:text-[12px] font-mono text-axiom-text-mute/80 uppercase tracking-widest pl-1">Name</label>
+                        <p id={`${AUDIT_FIELD_IDS.name}-helper`} className="text-[15px] md:text-[12px] text-axiom-text-mute/70 pl-1">Who should we address?</p>
                         <input
                             id={AUDIT_FIELD_IDS.name}
                             type="text"
@@ -207,12 +207,12 @@ const AuditPage: React.FC = () => {
                             aria-invalid={!!errors.name}
                             aria-describedby={errors.name ? `${AUDIT_FIELD_IDS.name}-helper ${AUDIT_FIELD_IDS.name}-error` : `${AUDIT_FIELD_IDS.name}-helper`}
                         />
-                        {errors.name && <p id={`${AUDIT_FIELD_IDS.name}-error`} className="text-sm text-red-300">{errors.name}</p>}
+                        {errors.name && <p id={`${AUDIT_FIELD_IDS.name}-error`} className="text-[15px] md:text-sm text-red-300">{errors.name}</p>}
                     </div>
 
                     <div className="flex flex-col gap-3">
-                        <label htmlFor={AUDIT_FIELD_IDS.email} className="text-[12px] font-mono text-axiom-text-mute/80 uppercase tracking-widest pl-1">Email</label>
-                        <p id={`${AUDIT_FIELD_IDS.email}-helper`} className="text-[12px] text-axiom-text-mute/70 pl-1">Where should we reply?</p>
+                        <label htmlFor={AUDIT_FIELD_IDS.email} className="text-[15px] md:text-[12px] font-mono text-axiom-text-mute/80 uppercase tracking-widest pl-1">Email</label>
+                        <p id={`${AUDIT_FIELD_IDS.email}-helper`} className="text-[15px] md:text-[12px] text-axiom-text-mute/70 pl-1">Where should we reply?</p>
                         <input
                             id={AUDIT_FIELD_IDS.email}
                             type="email"
@@ -225,12 +225,12 @@ const AuditPage: React.FC = () => {
                             aria-invalid={!!errors.email}
                             aria-describedby={errors.email ? `${AUDIT_FIELD_IDS.email}-helper ${AUDIT_FIELD_IDS.email}-error` : `${AUDIT_FIELD_IDS.email}-helper`}
                         />
-                        {errors.email && <p id={`${AUDIT_FIELD_IDS.email}-error`} className="text-sm text-red-300">{errors.email}</p>}
+                        {errors.email && <p id={`${AUDIT_FIELD_IDS.email}-error`} className="text-[15px] md:text-sm text-red-300">{errors.email}</p>}
                     </div>
 
                     <div className="flex flex-col gap-3">
-                        <label htmlFor={AUDIT_FIELD_IDS.website} className="text-[12px] font-mono text-axiom-text-mute/80 uppercase tracking-widest pl-1">Website URL</label>
-                        <p id={`${AUDIT_FIELD_IDS.website}-helper`} className="text-[12px] text-axiom-text-mute/70 pl-1">Use the public URL if you have one.</p>
+                        <label htmlFor={AUDIT_FIELD_IDS.website} className="text-[15px] md:text-[12px] font-mono text-axiom-text-mute/80 uppercase tracking-widest pl-1">Website URL</label>
+                        <p id={`${AUDIT_FIELD_IDS.website}-helper`} className="text-[15px] md:text-[12px] text-axiom-text-mute/70 pl-1">Use the public URL if you have one.</p>
                         <input
                             id={AUDIT_FIELD_IDS.website}
                             type="url"
@@ -244,11 +244,11 @@ const AuditPage: React.FC = () => {
                             aria-invalid={!!errors.website}
                             aria-describedby={errors.website ? `${AUDIT_FIELD_IDS.website}-helper ${AUDIT_FIELD_IDS.website}-error` : `${AUDIT_FIELD_IDS.website}-helper`}
                         />
-                        {errors.website && <p id={`${AUDIT_FIELD_IDS.website}-error`} className="text-sm text-red-300">{errors.website}</p>}
+                        {errors.website && <p id={`${AUDIT_FIELD_IDS.website}-error`} className="text-[15px] md:text-sm text-red-300">{errors.website}</p>}
                     </div>
 
                     <button disabled={status === 'loading' || status === 'success'} type="submit" className="btn-primary btn-lg w-full mt-4 disabled:opacity-50">
-                        {status === 'loading' ? 'Sending...' : 'Get my site reviewed &rarr;'}
+                        {status === 'loading' ? 'Sending...' : 'Get my site reviewed →'}
                     </button>
                 </form>
             </div>

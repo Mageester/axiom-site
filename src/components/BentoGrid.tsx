@@ -28,7 +28,7 @@ const BentoGrid: React.FC = () => {
         <article className={cardShell}>
           <ResponsiveImage
             source={responsiveImages.workAether}
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(min-width: 1024px) 50vw, w-full"
             alt="Website preview"
             className="h-full min-h-[520px] w-full object-cover object-center"
             loading="lazy"
@@ -36,11 +36,11 @@ const BentoGrid: React.FC = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-8">
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Examples</p>
+            <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Examples</p>
             <h3 className="mt-3 text-3xl font-black tracking-tight text-[#F5F7FA] md:text-4xl">Recent work</h3>
             <button
               type="button"
-              className="mt-6 inline-flex h-11 items-center rounded-full border border-white/20 px-5 text-sm font-medium text-[#F5F7FA] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              className="mt-6 inline-flex h-11 items-center rounded-full border border-white/20 px-5 text-[15px] md:text-sm font-medium text-[#F5F7FA] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             >
               See site
             </button>
@@ -56,17 +56,17 @@ const BentoGrid: React.FC = () => {
         <article className={cardShell}>
           <div className="flex h-full min-h-[300px] flex-col justify-between p-8">
             <div>
-            <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Clear pages</p>
+            <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Clear pages</p>
               <h3 className="mt-3 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">
               Pages people can read fast
             </h3>
               <p className="mt-4 max-w-xl text-[15px] leading-[1.7] text-[#A7B3BC]">
-                We build the page so the first five seconds do all the work — what you do, why you&apos;re the right call, and how to reach you. Clear. Fast. Done.
+                We build the page so the first five seconds do all the work — what you do, why you’re the right call, and how to reach you. Clear. Fast. Done.
               </p>
             </div>
             <button
               type="button"
-              className="mt-6 inline-flex h-11 w-fit items-center rounded-full border border-white/20 px-5 text-sm font-medium text-[#F5F7FA] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              className="mt-6 inline-flex h-11 w-fit items-center rounded-full border border-white/20 px-5 text-[15px] md:text-sm font-medium text-[#F5F7FA] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             >
               See site
             </button>
@@ -83,12 +83,12 @@ const BentoGrid: React.FC = () => {
           <div className="flex h-full min-h-[320px] flex-col p-8">
             <div className="flex items-center justify-between gap-4">
               <div>
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Recent sites</p>
+                  <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Recent sites</p>
                   <h3 className="mt-2 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">Project preview stream</h3>
               </div>
               <button
                 type="button"
-                className="inline-flex h-11 items-center rounded-full border border-white/20 px-5 text-sm font-medium text-[#F5F7FA] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                className="inline-flex h-11 items-center rounded-full border border-white/20 px-5 text-[15px] md:text-sm font-medium text-[#F5F7FA] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               >
                 See site
               </button>

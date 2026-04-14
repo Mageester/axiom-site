@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
               Built for businesses that are serious about growth.
             </p>
             <p className="mt-6 text-[15px] md:text-[10px] uppercase tracking-[0.12em] text-slate-400">
-              &copy; 2026 Axiom Infrastructure. All rights reserved.
+              © 2026 Axiom Infrastructure. All rights reserved.
             </p>
           </div>
 

@@ -98,7 +98,7 @@ const ServicesPage: React.FC = () => {
                     <div className="flex flex-col gap-1">
                         <h3 className="text-[17px] sm:text-[18px] font-semibold tracking-tight">Performance Guarantee</h3>
                         <p className="text-[14px] text-axiom-text-mute leading-[1.75]">
-                            If your site loads slow, we fix it. Free. No asterisks. That&apos;s the standard we build to.
+                            If your site loads slow, we fix it. Free. No asterisks. That’s the standard we build to.
                         </p>
                     </div>
                 </div>
@@ -247,7 +247,7 @@ const ServicesPage: React.FC = () => {
 
                     <div className="axiom-bento p-5 sm:p-6 text-center">
                         <p className="text-[15px] sm:text-[16px] text-axiom-text-main leading-[1.7] font-medium">
-                            A bad site doesn&apos;t just fail to convert — it actively sends people to whoever looks more credible. We fix that.
+                            A bad site doesn’t just fail to convert — it actively sends people to whoever looks more credible. We fix that.
                         </p>
                     </div>
                 </div>

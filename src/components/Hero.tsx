@@ -3,6 +3,8 @@ import MagneticWrapper from './MagneticWrapper';
 import PartnerMarquee from './PartnerMarquee';
 import { CTA } from '../lib/cta';
 
+const HERO_VIDEO_SRC = '/assets/axiom-hero.mp4';
+
 const Hero: React.FC = () => {
   const scrollToIntake = () => {
     document.getElementById('intake')?.scrollIntoView({ behavior: 'smooth' });
@@ -13,14 +15,29 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section data-hero-root className="min-h-[90vh]">
-      <div className="flex min-h-[90vh] flex-col justify-center">
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-8 lg:grid-cols-12 lg:gap-0">
+    <section data-hero-root className="relative isolate min-h-[90vh] overflow-hidden">
+      <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden bg-[#0a0c10]">
+        <video
+          className="absolute inset-0 h-full w-full object-cover opacity-80"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src={HERO_VIDEO_SRC} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,12,16,0.42)_0%,rgba(10,12,16,0.72)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(200,122,87,0.16),transparent_42%)]" />
+      </div>
+
+      <div className="relative z-10 flex min-h-[90vh] flex-col justify-center">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-8 lg:grid-cols-12 lg:gap-0">
           <div className="mt-auto flex h-full flex-col items-start pb-12 text-left lg:col-span-5">
             <div className="relative mb-8">
               <div className="pointer-events-none absolute inset-0 rounded-full bg-[#253a7a]/30 blur-[200px]" />
-              <div className="relative inline-block rounded-full border border-[#F59768]/20 bg-[#1c253b] px-4 py-1.5 text-sm font-semibold tracking-wide text-[#F59768]">
-                Taking new projects &mdash; Ontario-based
+              <div className="relative inline-block rounded-full border border-[#F59768]/20 bg-[#1c253b] px-4 py-1.5 text-[15px] md:text-sm font-semibold tracking-wide text-[#F59768]">
+                Taking new projects — Ontario-based
               </div>
             </div>
 
@@ -31,7 +48,7 @@ const Hero: React.FC = () => {
             </div>
 
             <p className="mb-8 max-w-lg text-lg leading-[1.65] text-slate-300">
-              If it isn&apos;t, it&apos;s working against you. Axiom builds sites for Ontario businesses that are ready to grow — fast, clear, and built to convert.
+              If it isn’t, it’s working against you. Axiom builds sites for Ontario businesses that are ready to grow — fast, clear, and built to convert.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
@@ -43,14 +60,14 @@ const Hero: React.FC = () => {
                 </MagneticWrapper>
                 <div className="inline-flex items-center gap-2 rounded-full bg-[#1c2e5a]/40 px-3 py-1">
                   <span className="size-2 rounded-full bg-[#F59768] animate-pulse"></span>
-                  <span className="text-xs font-medium tracking-wider text-[#F59768]">Taking projects now</span>
+                  <span className="text-[15px] md:text-xs font-medium tracking-wider text-[#F59768]">Taking projects now</span>
                 </div>
               </div>
 
               <button
                 type="button"
                 onClick={scrollToWork}
-                className="group inline-flex min-h-11 items-center justify-center px-1 text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-[#F2F4F7] hover:underline"
+                className="group inline-flex min-h-11 items-center justify-center px-1 text-[15px] md:text-sm font-medium text-slate-300 underline-offset-4 transition-colors hover:text-[#F2F4F7] hover:underline"
               >
                 {CTA.work.label}
               </button>
@@ -64,7 +81,7 @@ const Hero: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-90" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-32 h-32 rounded-full border border-white/5 bg-white/5 backdrop-blur-xl flex items-center justify-center shadow-[inset_0_0_20px_rgba(255,255,255,0.1)]">
-                  <span className="text-white/40 font-bold tracking-widest text-sm">AXIOM</span>
+                  <span className="text-white/40 font-bold tracking-widest text-[15px] md:text-sm">AXIOM</span>
                 </div>
               </div>
             </div>
