@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { label: 'Our Approach', to: '/approach' },
   { label: 'Process', to: '/method' },
   { label: 'About', to: '/about' },
+  { label: 'Pricing', to: '/pricing' },
 ];
 
 const isActiveRoute = (pathname: string, to: string) => {
