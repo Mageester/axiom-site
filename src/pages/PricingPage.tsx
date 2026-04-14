@@ -52,7 +52,7 @@ const PricingPage: React.FC = () => {
           Clear pricing. No surprises.
         </h1>
         <p className="mx-auto max-w-[760px] text-[16px] leading-relaxed text-axiom-text-main/85 sm:text-[18px]">
-          Three options for service businesses that want a site to work hard from day one.
+          Three options for businesses that want a site to work hard from day one.
         </p>
       </section>
 

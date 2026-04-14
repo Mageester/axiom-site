@@ -51,7 +51,7 @@ const Approach: React.FC = () => {
                   </h1>
                 </div>
                 <p className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We keep the work focused on clarity, speed, and proof so service businesses can earn attention and action without noise.
+                  We keep the work focused on clarity, speed, and proof — so businesses can earn attention and trust without the noise.
                 </p>
               </div>
             </div>

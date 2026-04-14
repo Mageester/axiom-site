@@ -24,8 +24,8 @@ const tiers = [
         name: 'Growth',
         price: '$1,500 CAD',
         tag: 'Most popular',
-        desc: 'For businesses that want better leads, not just more traffic. Stronger pages, real proof, and fewer tire-kickers.',
-        qualifier: 'Good for teams of 10+ going after bigger jobs.',
+        desc: 'For businesses that want better leads, not just more traffic. Stronger pages, real proof, and a clearer offer.',
+        qualifier: 'Good for teams of 10+ ready to move up-market.',
         technical: '7–10 pages // lead tracking // reviews and proof',
         features: [
             'Pages built to attract the right jobs, not the cheapest ones',
@@ -44,7 +44,7 @@ const tiers = [
         qualifier: 'Good for established teams expanding into new areas.',
         technical: 'custom build // tool connections // reporting',
         features: [
-            'Full sales path from first click to booked work',
+            'Full path from first click to a signed client',
             'CRM and scheduling tool connections',
             'Quarterly check-ins to make sure the site keeps working',
         ],
@@ -158,7 +158,7 @@ const ServicesPage: React.FC = () => {
                     },
                     {
                         label: 'Outcome Proof',
-                        text: '"We closed two replacement jobs in week one from leads that used to bounce." - Ontario HVAC Owner',
+                        text: '"We signed two new clients in week one from leads that used to bounce." - Business Owner',
                     },
                     {
                         label: 'Partner Capacity',
@@ -229,9 +229,9 @@ const ServicesPage: React.FC = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mb-8">
                         <div className="axiom-bento p-5 sm:p-6 flex flex-col gap-2">
-                            <p className="big-figure-label text-axiom-text-mute">Avg. HVAC Lead Value</p>
+                            <p className="big-figure-label text-axiom-text-mute">Typical Deal Value</p>
                             <p className="text-[24px] sm:text-[28px] font-bold tracking-tight font-grotesk">$1,500 – $15,000</p>
-                            <p className="text-[13px] text-axiom-text-mute leading-[1.7]">Emergency installs, full system replacements, and commercial maintenance contracts.</p>
+                            <p className="text-[13px] text-axiom-text-mute leading-[1.7]">New projects, retainers, and long-term client relationships.</p>
                         </div>
                         <div className="bg-axiom-elevated border border-axiom-border rounded-md p-5 sm:p-6 flex flex-col gap-2">
                             <p className="big-figure-label text-axiom-text-mute">Competitor Site</p>

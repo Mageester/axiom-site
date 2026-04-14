@@ -12,7 +12,7 @@ import { HOME_JSON_LD, SEO_ROUTES } from '../lib/seo';
 import { responsiveImages } from '../lib/responsiveImages';
 
 const homepageBenefitCallouts = [
-  'Your service is the first thing visitors see - not buried three scrolls down',
+  'Your offer is the first thing visitors see — not buried three scrolls down',
   'Real proof (reviews, photos, past work) builds trust before they pick up the phone',
   'One clear path to call, email, or request a quote - no hunting required',
 ] as const;
@@ -52,14 +52,14 @@ const Home: React.FC = () => {
               <div>
                 <div className="max-w-4xl overflow-hidden">
                   <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
-                    WEBSITES FOR SERVICE BUSINESSES
+                    PREMIUM WEB DESIGN
                   </p>
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
                     Your service, your proof, one call to action.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We build websites for roofers, landscapers, HVAC companies, and trades in Kitchener-Waterloo and across Ontario. Your service is front and center. Your best work is visible. Your phone number is obvious.
+                  We build websites for businesses that want a strong online presence. Your offer is clear. Your best work is visible. Your next step is obvious.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link to={CTA.work.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -178,7 +178,7 @@ const Home: React.FC = () => {
                 <div className="max-w-3xl">
                   <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
                   <h2 className="mt-3 max-w-4xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                    Most service businesses are losing calls to a site they haven&apos;t updated in years.
+                    Most businesses are losing clients to a site they haven&apos;t updated in years.
                   </h2>
                   <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
                     We&apos;ll review your current site, show you what&apos;s costing you trust, and tell you exactly what to fix - no cost, no obligation.

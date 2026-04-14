@@ -56,7 +56,7 @@ export const HOME_JSON_LD = {
 
 export const SEO_ROUTES = {
     home: {
-        title: 'Websites for Service Businesses',
+        title: 'PREMIUM WEB DESIGN',
         description: DEFAULT_SEO_DESCRIPTION,
         canonicalPath: '/',
     },
@@ -97,12 +97,12 @@ export const SEO_ROUTES = {
     },
     concepts: {
         title: 'Concepts',
-        description: 'Demo sites for HVAC, roofing, and landscaping businesses. Each one shows a clearer path to the next step.',
+        description: 'Demo sites showing how a clear offer, real proof, and one obvious next step turn a website into something that actually works. Each one shows a clearer path to the next step.',
         canonicalPath: '/concepts',
     },
     approach: {
         title: 'Our Approach',
-        description: 'Axiom keeps websites clear, fast, and easy to act on for service businesses.',
+        description: 'Axiom keeps websites clear, fast, and easy to act on — so businesses can earn attention and trust without the noise.',
         canonicalPath: '/approach',
     },
     audit: {

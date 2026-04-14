@@ -96,7 +96,7 @@ const About: React.FC = () => {
               <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 max-w-lg">
                   <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Visual Evidence</p>
                   <p className="mt-3 text-[1.35rem] font-medium leading-[1.4] text-[#F2F4F7] sm:text-2xl">
-                    Premium execution signals authority immediately.
+                    A sharp design signals authority immediately.
                   </p>
               </div>
             </div>
