@@ -1,8 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { chromium } from 'playwright';
-import { exec } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '../dist');
@@ -17,55 +15,25 @@ const routes = [
   '/start-a-project'
 ];
 
-async function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+async function seedRouteShells() {
+  const sourceHtml = await fs.readFile(path.join(distDir, 'index.html'), 'utf8');
 
-async function startServer() {
-  const child = exec('npm run preview');
-  await sleep(3000); // Wait for server to start
-  return child;
+  for (const route of routes) {
+    if (route === '/') {
+      continue;
+    }
+
+    const routeDir = path.join(distDir, route.substring(1));
+    await fs.mkdir(routeDir, { recursive: true });
+    await fs.writeFile(path.join(routeDir, 'index.html'), sourceHtml);
+    console.log(`Seeded ${route} to ${path.join(routeDir, 'index.html')}`);
+  }
 }
 
 async function prerender() {
-  console.log('Starting prerender...');
-  const serverProcess = await startServer();
-  const browser = await chromium.launch();
-
-  const port = 4173; // Default vite preview port
-
-  try {
-    for (const route of routes) {
-      const page = await browser.newPage();
-      const url = `http://localhost:${port}${route}`;
-      console.log(`Prerendering ${url}...`);
-
-      await page.goto(url, { waitUntil: 'commit', timeout: 15000 });
-
-      // Wait briefly so client-side effects can settle before snapshotting.
-      await sleep(1500);
-
-      const html = await page.content();
-
-      let filePath;
-      if (route === '/') {
-        filePath = path.join(distDir, 'index.html');
-      } else {
-        const routeDir = path.join(distDir, route.substring(1));
-        await fs.mkdir(routeDir, { recursive: true });
-        filePath = path.join(routeDir, 'index.html');
-      }
-
-      await fs.writeFile(filePath, html);
-      console.log(`Saved ${route} to ${filePath}`);
-      await page.close();
-    }
-  } finally {
-    await browser.close();
-    serverProcess.kill();
-  }
-
-  console.log('Prerender complete.');
+  console.log('Seeding route shells...');
+  await seedRouteShells();
+  console.log('Route shell seeding complete.');
 }
 
 prerender().catch(console.error);
