@@ -82,10 +82,10 @@ const ServicesPage: React.FC = () => {
             <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-12 sm:mb-16">
                 <p className="eyebrow-center">Pricing</p>
                 <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
-                    Clear pricing. No surprises.
+                    Three ways to work with us.
                 </h1>
                 <p className="lead text-center mx-auto">
-                    Three levels depending on what your business needs. Hosting, speed, and ownership included in all of them.
+                    Every package includes hosting, speed optimization, and full ownership. No recurring fees for things you should already own.
                 </p>
             </section>
 
@@ -98,7 +98,7 @@ const ServicesPage: React.FC = () => {
                     <div className="flex flex-col gap-1">
                         <h3 className="text-[17px] sm:text-[18px] font-semibold tracking-tight">Performance Guarantee</h3>
                         <p className="text-[14px] text-axiom-text-mute leading-[1.75]">
-                            If your site isn't loading in under one second, we'll fix it free. <span className="text-axiom-text-main font-medium">99.99% uptime guaranteed</span> or your month is on us.
+                            If your site loads slow, we fix it. Free. No asterisks. That&apos;s the standard we build to.
                         </p>
                     </div>
                 </div>
@@ -154,7 +154,7 @@ const ServicesPage: React.FC = () => {
                 {[
                     {
                         label: 'Performance Guarantee',
-                        text: 'If your site isn\'t loading in under one second on phones, we keep working on it at no extra cost.',
+                        text: "If your site loads slow, we fix it. Free. No asterisks. That's the standard we build to.",
                     },
                     {
                         label: 'Outcome Proof',
@@ -223,7 +223,7 @@ const ServicesPage: React.FC = () => {
                     <div className="text-center mb-10">
                         <p className="eyebrow-center mb-4">The Math</p>
                         <h2 className="text-[24px] sm:text-[30px] md:text-[40px] font-semibold tracking-tight">
-                            The Cost of Doing Nothing.
+                            Every month with a weak website is a month your competitor is winning the job.
                         </h2>
                     </div>
 
@@ -247,7 +247,7 @@ const ServicesPage: React.FC = () => {
 
                     <div className="axiom-bento p-5 sm:p-6 text-center">
                         <p className="text-[15px] sm:text-[16px] text-axiom-text-main leading-[1.7] font-medium">
-                            A single new client pays for your <span className="text-axiom-text-mute">entire year</span> of infrastructure.
+                            A bad site doesn&apos;t just fail to convert — it actively sends people to whoever looks more credible. We fix that.
                         </p>
                     </div>
                 </div>

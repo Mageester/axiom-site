@@ -26,12 +26,12 @@ const Hero: React.FC = () => {
 
             <div className="mb-10 overflow-hidden min-h-[2.3em] md:min-h-[1.2em]">
               <h1 data-startup-heading className="text-[clamp(2.5rem,5vw,5rem)] font-extrabold leading-[1.1] tracking-tight text-[#F2F4F7] md:leading-[1.15]">
-                Websites for serious businesses.
+                Your website should be bringing you clients.
               </h1>
             </div>
 
             <p className="mb-8 max-w-lg text-lg leading-[1.65] text-slate-300">
-              We build fast, clear websites. People can tell what you do and how to reach you.
+              If it isn&apos;t, it&apos;s working against you. Axiom builds sites for Ontario businesses that are ready to grow — fast, clear, and built to convert.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">

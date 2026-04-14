@@ -5,14 +5,14 @@ type Signal = {
 };
 
 const signals: Signal[] = [
-  { label: 'Thorough QA' },
-  { label: 'Fixed scope' },
-  { label: 'Owner reviewed' },
-  { label: 'Fast everywhere' },
-  { label: 'Speed tested' },
-  { label: 'High standards' },
-  { label: 'Stays online' },
-  { label: 'Ready to launch' },
+  { label: 'Loads in under a second' },
+  { label: 'Built to convert' },
+  { label: 'You own it fully' },
+  { label: 'Ontario-based' },
+  { label: 'No bloat' },
+  { label: 'QA before launch' },
+  { label: 'Stays fast' },
+  { label: 'Reviewed by a human, not a template' },
 ];
 
 const SignalIcon: React.FC<{ label: string }> = ({ label }) => {

@@ -143,13 +143,9 @@ const SubmissionSuccessState: React.FC<SubmissionSuccessStateProps> = ({ onReset
                 <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
         </div>
-        <h2 className="mt-5 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Message received.</h2>
+        <h2 className="mt-5 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Got it.</h2>
         <p className="mt-2 text-sm leading-7 text-slate-300">
-            We&apos;ll reply within one business day. If it&apos;s urgent, call us at{' '}
-            <a href={CONTACT_PHONE_HREF} className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                {CONTACT_PHONE_DISPLAY}
-            </a>
-            .
+            We&apos;ll review and reply within one business day.
         </p>
         <button
             type="button"
@@ -666,9 +662,9 @@ const ProjectIntakeForm: React.FC = () => {
                                         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                                             <div>
                                                 <p className={FIELD_LABEL_CLASS}>Project intake</p>
-                                                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Share the essentials.</h2>
+                                                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Let&apos;s talk about your site.</h2>
                                             </div>
-                                            <p className="text-sm text-slate-400">Reply within one business day</p>
+                                            <p className="text-sm text-slate-400">Tell us what you&apos;ve got and what you want. We&apos;ll reply within one business day.</p>
                                         </div>
                                     </div>
 
@@ -713,14 +709,14 @@ const ProjectIntakeForm: React.FC = () => {
                                                 <div className="flex flex-col gap-2">
                                                     <label htmlFor={PROJECT_FIELD_IDS.details} className={FIELD_LABEL_CLASS}>Brief project description</label>
                                                     <p id={`${PROJECT_FIELD_IDS.details}-helper`} className={FIELD_HELPER_CLASS}>Three short lines is enough.</p>
-                                                    <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="Briefly describe what you need and what the site should help with." className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
+                                                    <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="What does your business do, what&apos;s wrong with your current site, and when do you want to move?" className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
                                                     {errors.details && <p id={`${PROJECT_FIELD_IDS.details}-error`} className="text-xs text-red-300">{errors.details}</p>}
                                                 </div>
                                             </section>
 
                                             <div className="flex flex-col gap-3">
                                                 <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                                                    {status === 'loading' ? 'Sending...' : 'Send details'}
+                                                    {status === 'loading' ? 'Sending...' : 'Send it →'}
                                                 </button>
                                                 <p className="text-sm text-slate-400">We&apos;ll reply within one business day with next steps.</p>
                                             </div>

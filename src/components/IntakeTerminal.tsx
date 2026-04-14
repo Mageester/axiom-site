@@ -146,8 +146,8 @@ const IntakeTerminal: React.FC = () => {
       </div>
 
       <div className="mb-8 space-y-3">
-        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Start a project</h2>
-        <p className="max-w-2xl text-slate-300">Pick the option that fits, then share the details we need to reply well.</p>
+        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Let&apos;s talk about your site.</h2>
+        <p className="max-w-2xl text-slate-300">Tell us what you&apos;ve got and what you want. We&apos;ll reply within one business day.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -219,7 +219,7 @@ const IntakeTerminal: React.FC = () => {
           {submitState === 'success' ? (
             <div role="status" aria-live="polite" className="rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-8 text-center">
               <p className="text-xl md:text-2xl font-semibold tracking-tight text-[#F2F4F7]">
-                Thanks. We’ll review your details and reply within one business day.
+                Got it. We&apos;ll review and reply within one business day.
               </p>
             </div>
           ) : (
@@ -272,7 +272,7 @@ const IntakeTerminal: React.FC = () => {
                   required
                   value={form.details}
                   onChange={(event) => setField('details', event.target.value)}
-                  placeholder="Share scope, goals, and timeline."
+                  placeholder="What does your business do, what&apos;s wrong with your current site, and when do you want to move?"
                   className={inputClass}
                   aria-invalid={!!errors.details}
                   aria-describedby={errors.details ? `${FIELD_IDS.details}-helper ${FIELD_IDS.details}-error` : `${FIELD_IDS.details}-helper`}
@@ -301,7 +301,7 @@ const IntakeTerminal: React.FC = () => {
 
               <div className="md:col-span-2">
                 <button type="submit" disabled={isSubmitting} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                  {isSubmitting ? 'Sending...' : 'Send request'}
+                  {isSubmitting ? 'Sending...' : 'Send it →'}
                 </button>
               </div>
             </form>
@@ -313,3 +313,4 @@ const IntakeTerminal: React.FC = () => {
 };
 
 export default IntakeTerminal;
+

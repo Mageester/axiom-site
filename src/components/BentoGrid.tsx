@@ -57,11 +57,11 @@ const BentoGrid: React.FC = () => {
           <div className="flex h-full min-h-[300px] flex-col justify-between p-8">
             <div>
             <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Clear pages</p>
-            <h3 className="mt-3 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">
+              <h3 className="mt-3 text-2xl font-black tracking-tight text-[#F5F7FA] md:text-3xl">
               Pages people can read fast
             </h3>
               <p className="mt-4 max-w-xl text-[15px] leading-[1.7] text-[#A7B3BC]">
-                We shape the pages, proof, and next step so people know what the business does and how to contact it.
+                We build the page so the first five seconds do all the work — what you do, why you&apos;re the right call, and how to reach you. Clear. Fast. Done.
               </p>
             </div>
             <button

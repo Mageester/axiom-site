@@ -28,7 +28,7 @@ const About: React.FC = () => {
                   We build sites that earn attention before anyone explains them.
                 </h1>
                 <p data-startup-copy className="mt-5 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  Most sites need more pages, more effects, or more content - they don&apos;t. They need the offer to read clearly, the proof to appear early, and the next step to stay obvious. That&apos;s the only problem we solve.
+                  Most business owners don&apos;t need a fancier website. They need one that actually works — where someone lands, immediately understands what you do, and knows exactly how to reach you. That&apos;s it. That&apos;s all we build.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Link to="/start-a-project" className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -67,22 +67,22 @@ const About: React.FC = () => {
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
                         <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">01</div>
                         <div>
-                          <p className="text-sm font-semibold text-[#F2F4F7]">Clear offer</p>
-                          <p className="mt-2 text-sm leading-6 text-slate-300">What the business does and who it&apos;s for &mdash; readable in the first five seconds.</p>
+                          <p className="text-sm font-semibold text-[#F2F4F7]">What you do — obvious in seconds.</p>
+                          <p className="mt-2 text-sm leading-6 text-slate-300">Not five clicks in. Not buried. Front and center, the moment someone lands.</p>
                         </div>
                       </div>
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
                         <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">02</div>
                         <div>
-                          <p className="text-sm font-semibold text-[#F2F4F7]">Proof visible</p>
-                          <p className="mt-2 text-sm leading-6 text-slate-300">Past work, results, and reviews show up before doubt does.</p>
+                          <p className="text-sm font-semibold text-[#F2F4F7]">Why you — proven before they scroll.</p>
+                          <p className="mt-2 text-sm leading-6 text-slate-300">Reviews, past work, and results show up early. Doubt doesn&apos;t get a chance to settle.</p>
                         </div>
                       </div>
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
                         <div className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">03</div>
                         <div>
-                          <p className="text-sm font-semibold text-[#F2F4F7]">One next step</p>
-                          <p className="mt-2 text-sm leading-6 text-slate-300">Call, quote, or book &mdash; one clear path, no hunting required.</p>
+                          <p className="text-sm font-semibold text-[#F2F4F7]">One clear action.</p>
+                          <p className="mt-2 text-sm leading-6 text-slate-300">Call, book, or request a quote. One path. No hunting, no confusion.</p>
                         </div>
                       </div>
                     </div>
