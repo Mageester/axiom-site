@@ -5,7 +5,7 @@ import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages
 type WorkPreview = {
   name: string;
   description: string;
-  href: string;
+  industryTag: string;
   image: ResponsiveSource;
   alt: string;
 };
@@ -20,21 +20,21 @@ const workPreviews: WorkPreview[] = [
   {
     name: 'Restaurant demo',
     description: 'Reservations, menu access, and contact details stay visible on every screen.',
-    href: 'https://restaurant.getaxiom.ca',
+    industryTag: 'Restaurant & Hospitality',
     image: responsiveImages.workRestaurant,
     alt: 'Restaurant demo site preview',
   },
   {
     name: 'Landscaping demo',
     description: 'Project photos and quote requests are presented without clutter.',
-    href: 'https://landscaping.getaxiom.ca',
+    industryTag: 'Landscaping & Outdoor',
     image: responsiveImages.workLandscaping,
     alt: 'Landscaping demo site preview',
   },
   {
     name: 'Roofing demo',
     description: 'Urgent calls and estimate requests each have a clear path.',
-    href: 'https://roofing.getaxiom.ca',
+    industryTag: 'Roofing & Exterior Services',
     image: responsiveImages.workRoofing,
     alt: 'Roofing demo site preview',
   },
@@ -78,15 +78,11 @@ const WorkPreviewCard: React.FC<{ preview: WorkPreview; index: number }> = ({ pr
           <p className="mt-2 text-sm leading-6 text-slate-300">{preview.description}</p>
         </div>
 
-        <a
-          href={preview.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-5 inline-flex items-center text-sm font-semibold text-[#d4a48e] transition-colors hover:text-[#e8bea8]"
-          aria-label={`View ${preview.name.toLowerCase()} in a new tab`}
-        >
-          View site &rarr;
-        </a>
+        <div className="mt-5">
+          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/65">
+            {preview.industryTag}
+          </span>
+        </div>
       </div>
     </RevealBlock>
   );
@@ -97,12 +93,12 @@ const WorkPreviewGrid: React.FC = () => {
     <section aria-labelledby="work-preview-grid-heading" className="pt-16 md:pt-20">
       <div className="mx-auto w-full max-w-6xl">
         <div className="max-w-2xl">
-          <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Live demos</p>
+          <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">SELECTED WORK</p>
           <h2 id="work-preview-grid-heading" className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
             Browser-frame previews.
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-            Three demo sites shown in a browser-style frame, so the layout reads like a live product instead of a generic gallery.
+            Built for different businesses. Same result: clear offer, visible proof, one path to contact.
           </p>
         </div>
 

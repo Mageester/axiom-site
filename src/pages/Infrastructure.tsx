@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
-import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
 import { CTA } from '../lib/cta';
-import { responsiveImages } from '../lib/responsiveImages';
 import { SEO_ROUTES } from '../lib/seo';
 
 type ProcessStep = {
@@ -76,15 +74,15 @@ const CHECKLIST_ITEMS: readonly ChecklistItem[] = [
     detail: 'Which pages matter most right now.',
   },
   {
-    title: 'Proof to show',
+    title: 'Proof to surface',
     detail: 'Reviews, photos, and past work that should show up early.',
   },
   {
-    title: 'Calls and forms',
+    title: 'Quote and contact paths',
     detail: 'Where each quote, call, or contact path should go.',
   },
   {
-    title: 'Launch setup',
+    title: 'Domain and redirects',
     detail: 'Domain, redirects, and final checks before the site goes live.',
   },
 ];
@@ -152,7 +150,7 @@ const Infrastructure: React.FC = () => {
       <Layout>
         <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-5 pb-16 md:px-10 md:pb-24">
           <section className="pt-4 md:pt-8">
-            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(22rem,0.68fr)] xl:items-start">
+            <div className="max-w-5xl">
               <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
                 <p className="font-axiomMono text-[11px] uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
                 <h1 data-startup-heading className="mt-3 max-w-3xl text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
@@ -173,44 +171,10 @@ const Infrastructure: React.FC = () => {
                   </Link>
                 </div>
               </article>
-
-              <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_12px_36px_rgba(0,0,0,0.18)] md:p-6 xl:mt-8">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">At a glance</p>
-                <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7]">What each stage covers.</h2>
-                <div className="mt-5 divide-y divide-white/[0.08]">
-                  {PROCESS_STEPS.map((step) => (
-                    <div key={step.id} className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                      <div className="min-w-0">
-                        <p className="font-axiomMono text-[11px] tracking-[0.18em] text-[#d4a48e]">{step.dayLabel}</p>
-                        <p className="mt-1 text-sm font-medium text-[#F2F4F7]">{step.title}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </article>
             </div>
           </section>
 
-          <RevealBlock as="section" className="pt-10 md:pt-16">
-            <div className="relative overflow-hidden rounded-[2.25rem] border border-white/10 bg-[#0b1120] shadow-[0_18px_52px_rgba(0,0,0,0.2)]">
-              <ResponsiveImage
-                  source={responsiveImages.workAether}
-                  sizes="(min-width: 768px) 100vw, 100vw"
-                  alt="Process mapping and design architecture"
-                  className="h-[24rem] w-full object-cover md:h-[32rem]"
-                  style={{ objectPosition: 'center 40%' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-6 left-6 max-w-lg md:bottom-10 md:left-10">
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#d4a48e]">The Output</p>
-                  <p className="mt-3 text-[1.35rem] font-medium leading-[1.4] text-[#F2F4F7] sm:text-2xl">
-                    A clear path creates a sharp result.
-                  </p>
-              </div>
-            </div>
-          </RevealBlock>
-
-          <section className="pt-8 md:pt-14">
+          <section className="pt-6 md:pt-10">
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.7fr)] xl:items-start xl:gap-8">
               <div>
                 <div className="mb-5 flex flex-col gap-2 md:mb-6">
@@ -271,10 +235,10 @@ const Infrastructure: React.FC = () => {
 
               <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] md:p-6 xl:sticky xl:top-28">
                 <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
-                  Before build starts
+                  Before we build
                 </p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
-                  What we need first
+                  What we need before Day 7.
                 </h2>
                 <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-300">
                   This keeps the work moving and cuts down on back-and-forth later.

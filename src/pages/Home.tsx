@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
-import TechLogos from '../components/TechLogos';
 import WorkPreviewGrid from '../components/WorkPreviewGrid';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
@@ -51,30 +50,24 @@ const Home: React.FC = () => {
             <div className="max-w-6xl">
               <div>
                 <div className="max-w-4xl overflow-hidden">
-                  <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">
-                    PREMIUM WEB DESIGN
-                  </p>
                   <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                    Your service, your proof, one call to action.
+                    The site should do the work before they call.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  We build websites for businesses that want a strong online presence. Your offer is clear. Your best work is visible. Your next step is obvious.
+                  We build websites for businesses that need to be taken seriously — clear offer, visible proof, one path forward.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link to={CTA.work.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
                     See our work
                   </Link>
                   <Link
-                    to="/audit"
-                    className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-white/25 px-6 py-2.5 text-sm font-semibold text-white/80 transition-colors duration-200 hover:border-white/50 hover:text-white sm:w-auto"
+                    to={CTA.primary.to}
+                    className="btn-secondary btn-lg w-full whitespace-nowrap sm:w-auto"
                   >
-                    Get a free site review
+                    Start a project
                   </Link>
                 </div>
-                <p className="mt-4 text-sm leading-6 text-slate-400">
-                  No contracts &middot; Delivered in 14&ndash;21 days &middot; Replies within one business day
-                </p>
               </div>
             </div>
             <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 xl:block" aria-hidden="true">
@@ -106,10 +99,10 @@ const Home: React.FC = () => {
                 <div className="max-w-2xl">
                   <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Why it matters</p>
                   <h2 className="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                    What a better site fixes right away.
+                    Most sites lose the client in the first ten seconds.
                   </h2>
                   <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300 md:text-base">
-                    People should understand the service, see proof, and know exactly how to reach you without digging.
+                    We fix all three before we touch the design.
                   </p>
                   <div className="mt-8">
                     <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -120,7 +113,11 @@ const Home: React.FC = () => {
 
                 <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 md:p-6">
                   <div className="divide-y divide-white/[0.08]">
-                    {homepageBenefitCallouts.map((callout, index) => (
+                    {[
+                      "The offer isn't clear. Visitors can't tell what the business does or who it's for.",
+                      "There's no proof. Reviews, photos, and past work are buried three pages deep.",
+                      'The next step is missing. No clear way to call, book, or request a quote.',
+                    ].map((callout, index) => (
                       <div key={callout} className="grid gap-3 py-4 first:pt-0 last:pb-0 md:grid-cols-[3rem_minmax(0,1fr)] md:gap-5">
                         <div className="font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">
                           0{index + 1}
@@ -178,38 +175,29 @@ const Home: React.FC = () => {
                 <div className="max-w-3xl">
                   <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Next step</p>
                   <h2 className="mt-3 max-w-4xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                    Most businesses are losing clients to a site they haven&apos;t updated in years.
+                    If the site isn&apos;t earning trust, it&apos;s costing you work.
                   </h2>
                   <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-base">
-                    We&apos;ll review your current site, show you what&apos;s costing you trust, and tell you exactly what to fix - no cost, no obligation.
+                    We&apos;ll review your current site, show what&apos;s costing you trust, and tell you exactly what to fix.
                   </p>
 
                   <div className="mt-8 flex flex-wrap items-center gap-3">
                     <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
-                      {CTA.primary.label}
+                      Start a project →
                     </Link>
                   </div>
                 </div>
 
                 <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What happens next</p>
-                  <div className="mt-4 divide-y divide-white/[0.08]">
-                    <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">Review your current site</p>
-                    </div>
-                    <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">Show what is costing you trust</p>
-                    </div>
-                    <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">Tell you exactly what to fix</p>
-                    </div>
+                  <div className="mt-4">
+                    <p className="text-sm font-medium text-[#F2F4F7]">Review → Scope → Build → Launch</p>
                   </div>
                 </aside>
               </div>
             </article>
           </RevealBlock>
 
-          <TechLogos />
         </main>
 
         <Footer />
@@ -219,4 +207,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-                                                                               

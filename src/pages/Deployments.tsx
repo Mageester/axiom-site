@@ -1,11 +1,11 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
-import { responsiveImages, type ResponsiveSource } from '../lib/responsiveImages';
+import { type ResponsiveSource } from '../lib/responsiveImages';
 import { CTA } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
@@ -27,7 +27,6 @@ type ProofBlockData = {
   statusLabel: string;
   ctaLabel: string;
   demoUrl: string;
-  proofSignal: string;
   originalWeakness: string;
   improved: string;
   whyBetter: string;
@@ -41,12 +40,6 @@ type NarrativeRowProps = {
   value: string;
 };
 
-const proofNotes = [
-  'One live site and two working demos.',
-  'Business, issue, change, result.',
-  'Live links are included where available.',
-] as const;
-
 const restaurantProofImage = getWorkProofImage('demonstration-restaurant-reservation-site');
 const roofingProofImage = getWorkProofImage('concept-roofing-conversion-site');
 
@@ -57,9 +50,8 @@ const proofBlocks: readonly ProofBlockData[] = [
     summary: 'A restaurant site that keeps the booking link easy to find and the menu simple to scan on phones.',
     businessType: 'Restaurant and hospitality',
     statusLabel: 'Live site',
-    ctaLabel: 'Open live site',
+    ctaLabel: 'View the build →',
     demoUrl: 'https://restaurant.getaxiom.ca',
-    proofSignal: 'Live on restaurant.getaxiom.ca',
     originalWeakness: 'Guests had to hunt for the booking link, and the menu was hard to read on phones.',
     improved: 'The reservation path stays visible and the menu reads cleanly on mobile.',
     whyBetter:
@@ -73,10 +65,9 @@ const proofBlocks: readonly ProofBlockData[] = [
     title: 'Landscaping site',
     summary: 'A landscaping site that puts past work first and shortens the quote path.',
     businessType: 'Landscaping and outdoor services',
-    statusLabel: 'Working demo',
-    ctaLabel: 'Open demo',
+    statusLabel: 'Selected build',
+    ctaLabel: 'View the build →',
     demoUrl: 'https://landscaping.getaxiom.ca',
-    proofSignal: 'Working demo',
     originalWeakness: 'Past work was buried, and quote requests took too many clicks.',
     improved: 'Project photos come forward and the quote path is shorter.',
     whyBetter:
@@ -90,10 +81,9 @@ const proofBlocks: readonly ProofBlockData[] = [
     title: 'Roofing site',
     summary: 'A roofing site that separates urgent calls from planned estimate requests.',
     businessType: 'Roofing and exterior services',
-    statusLabel: 'Working demo',
-    ctaLabel: 'Open demo',
+    statusLabel: 'Selected build',
+    ctaLabel: 'View the build →',
     demoUrl: 'https://roofing.getaxiom.ca',
-    proofSignal: 'Working demo',
     originalWeakness: 'Storm traffic needs a fast path to inspection and estimate requests.',
     improved: 'Urgent calls and planned estimates have separate paths.',
     whyBetter:
@@ -137,11 +127,6 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
             <h3 className="mt-4 text-[clamp(1.9rem,3vw,2.9rem)] font-semibold tracking-tight text-[#F2F4F7]">
               {proof.title}
             </h3>
-            <div className="mt-3">
-              <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-0.5 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/60">
-                DEMO BUILD
-              </span>
-            </div>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">{proof.summary}</p>
 
             <dl className="mt-6 divide-y divide-white/[0.08] border-t border-white/10">
@@ -160,9 +145,6 @@ function ProofBlock({ proof, index }: { proof: ProofBlockData; index: number }) 
               >
                 {proof.ctaLabel}
               </a>
-              <span className="text-sm leading-relaxed text-slate-400">
-                {proof.proofSignal}
-              </span>
             </div>
           </div>
 
@@ -195,17 +177,17 @@ const Deployments: React.FC = () => {
           <RevealBlock as="section" data-hero-root className="pt-12 md:pt-20">
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1.18fr)_minmax(20rem,0.82fr)] lg:items-end lg:gap-12">
               <div className="max-w-5xl">
-                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Selected work</p>
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">WORK</p>
                 <div className="mt-2.5 overflow-hidden">
                   <h1
                     data-startup-heading
                     className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]"
                   >
-                    Work that holds up.
+                    Proof over polish.
                   </h1>
                 </div>
                 <p data-startup-copy className="mt-6 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-                  One live site and two working demos. Each example shows the issue, the change, and the result.
+                  Each build starts with what the site is costing the business. The result is a site that earns trust before the first call.
                 </p>
                 <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -220,26 +202,10 @@ const Deployments: React.FC = () => {
                 </div>
               </div>
 
-              <aside className="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0b1120] shadow-[0_12px_36px_rgba(0,0,0,0.18)]">
-                <div className="relative h-[13rem] w-full border-b border-white/10">
-                    <ResponsiveImage source={responsiveImages.workHvac} sizes="(min-width: 1280px) 400px, 100vw" alt="HVAC business website preview" className="h-full w-full object-cover" style={{ objectPosition: 'center 50%' }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                    <div className="absolute bottom-4 left-5">
-                      <span className="inline-flex rounded-full border border-white/10 bg-black/45 px-3 py-1 font-axiomMono text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">
-                        Proven Models
-                      </span>
-                    </div>
-                </div>
-                <div className="flex-1 bg-white/[0.02] p-6 md:p-7">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">In this set</p>
-                  <div className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300">
-                    {proofNotes.map((note) => (
-                      <p key={note}>
-                        {note}
-                      </p>
-                    ))}
-                  </div>
-                </div>
+              <aside className="machined-card flex min-h-[13rem] items-center justify-center rounded-3xl border border-white/10 bg-[var(--axiom-elevated)] p-6 md:p-8">
+                <p className="font-axiomMono text-[11px] uppercase tracking-[0.24em] text-[#A7B3BC]">
+                  Clarity &middot; Proof &middot; Contact
+                </p>
               </aside>
             </div>
           </RevealBlock>
@@ -251,7 +217,7 @@ const Deployments: React.FC = () => {
                 What we build
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                Demo sites showing what a clear service-business website looks like.
+                Examples showing what a clear service-business website looks like.
               </p>
             </div>
 
@@ -268,7 +234,7 @@ const Deployments: React.FC = () => {
                 <div className="max-w-2xl">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                   <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                    Want this level of clarity on your site?
+                    Want this for your business?
                   </h2>
                   <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
                     Start a project and we&apos;ll review the current site, what&apos;s missing, and the first fixes that matter.
@@ -276,21 +242,13 @@ const Deployments: React.FC = () => {
                 </div>
                 <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
                   <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What happens next</p>
-                  <div className="mt-4 divide-y divide-white/[0.08]">
-                    <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">Current site</p>
-                    </div>
-                    <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">What&apos;s missing</p>
-                    </div>
-                    <div className="py-3 first:pt-0 last:pb-0">
-                      <p className="text-sm font-medium text-[#F2F4F7]">First fixes</p>
-                    </div>
-                  </div>
+                  <p className="mt-4 font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[#F2F4F7]">
+                    Review &rarr; Scope &rarr; Build &rarr; Launch
+                  </p>
                 </aside>
                 <div className="flex flex-wrap items-center gap-3 lg:col-span-2 lg:justify-end">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
-                    {CTA.primary.label}
+                    Start a project
                   </Link>
                 </div>
               </div>
@@ -305,3 +263,4 @@ const Deployments: React.FC = () => {
 };
 
 export default Deployments;
+
