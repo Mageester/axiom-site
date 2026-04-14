@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import useReveal from '../../hooks/useReveal';
 
 type RevealVariant = 'section' | 'card' | 'feature';
@@ -32,7 +32,7 @@ export function RevealBlock({
 
   return (
     <Component
-      ref={reveal.ref}
+      ref={reveal.ref as unknown as React.Ref<HTMLDivElement>}
       data-motion-managed="true"
       data-reveal-variant={variant}
       data-reveal-state={reveal.isVisible ? 'visible' : 'hidden'}
@@ -44,3 +44,4 @@ export function RevealBlock({
     </Component>
   );
 }
+

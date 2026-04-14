@@ -30,38 +30,41 @@ async function startServer() {
 async function prerender() {
   console.log('Starting prerender...');
   const serverProcess = await startServer();
-  
   const browser = await chromium.launch();
-  const page = await browser.newPage();
-  
+
   const port = 4173; // Default vite preview port
 
-  for (const route of routes) {
-    const url = `http://localhost:${port}${route}`;
-    console.log(`Prerendering ${url}...`);
-    
-    await page.goto(url, { waitUntil: 'networkidle' });
-    
-    // Wait for a brief moment to ensure animations/effects settle if any
-    await sleep(1000);
-    
-    const html = await page.content();
-    
-    let filePath;
-    if (route === '/') {
-      filePath = path.join(distDir, 'index.html');
-    } else {
-      const routeDir = path.join(distDir, route.substring(1));
-      await fs.mkdir(routeDir, { recursive: true });
-      filePath = path.join(routeDir, 'index.html');
+  try {
+    for (const route of routes) {
+      const page = await browser.newPage();
+      const url = `http://localhost:${port}${route}`;
+      console.log(`Prerendering ${url}...`);
+
+      await page.goto(url, { waitUntil: 'commit', timeout: 15000 });
+
+      // Wait briefly so client-side effects can settle before snapshotting.
+      await sleep(1500);
+
+      const html = await page.content();
+
+      let filePath;
+      if (route === '/') {
+        filePath = path.join(distDir, 'index.html');
+      } else {
+        const routeDir = path.join(distDir, route.substring(1));
+        await fs.mkdir(routeDir, { recursive: true });
+        filePath = path.join(routeDir, 'index.html');
+      }
+
+      await fs.writeFile(filePath, html);
+      console.log(`Saved ${route} to ${filePath}`);
+      await page.close();
     }
-    
-    await fs.writeFile(filePath, html);
-    console.log(`Saved ${route} to ${filePath}`);
+  } finally {
+    await browser.close();
+    serverProcess.kill();
   }
-  
-  await browser.close();
-  serverProcess.kill();
+
   console.log('Prerender complete.');
 }
 

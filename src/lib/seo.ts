@@ -1,4 +1,4 @@
-export const SITE_NAME = 'Axiom';
+﻿export const SITE_NAME = 'Axiom';
 export const SITE_URL = 'https://getaxiom.ca';
 export const DEFAULT_OG_IMAGE = '/og-default.jpg';
 export const DEFAULT_SEO_DESCRIPTION = 'Premium web design and development for local service businesses.';
@@ -58,7 +58,7 @@ export const HOME_JSON_LD = {
 export const SEO_ROUTES = {
     home: {
         title: 'Premium Web Design for Ontario Businesses | Axiom',
-        description: 'Axiom builds fast, clear websites for Ontario businesses. You own it outright — no monthly fees. Based in Kitchener. Reply within one business day.',
+        description: 'Axiom builds fast, clear websites for Ontario businesses. You own it outright â€” no monthly fees. Based in Kitchener. Reply within one business day.',
         canonicalPath: '/',
     },
     work: {
@@ -66,9 +66,19 @@ export const SEO_ROUTES = {
         description: 'See websites Axiom has built for service businesses across Ontario. Roofing, landscaping, restaurants, and more. Clear, fast, conversion-focused.',
         canonicalPath: '/work',
     },
+    concepts: {
+        title: 'Concept Projects | Axiom',
+        description: 'See concept builds for HVAC, roofing, and landscaping websites designed to convert more local leads.',
+        canonicalPath: '/work',
+    },
     pricing: {
         title: 'Web Design Pricing Ontario | Axiom',
         description: 'Transparent web design pricing for Ontario businesses. Three tiers starting at $1,200. Full ownership, fast delivery, no hidden fees.',
+        canonicalPath: '/pricing',
+    },
+    services: {
+        title: 'Web Design Services | Axiom',
+        description: 'Web design services for Ontario businesses that need a clear offer, proof, and a fast path to contact.',
         canonicalPath: '/pricing',
     },
     about: {
@@ -78,7 +88,7 @@ export const SEO_ROUTES = {
     },
     approach: {
         title: 'Our Approach to Web Design | Axiom',
-        description: 'Learn how Axiom approaches web design — clarity first, proof early, one clear path to contact. Built for businesses that need results, not decoration.',
+        description: 'Learn how Axiom approaches web design â€” clarity first, proof early, one clear path to contact. Built for businesses that need results, not decoration.',
         canonicalPath: '/approach',
     },
     process: {
@@ -98,7 +108,7 @@ export const SEO_ROUTES = {
     },
     audit: {
         title: 'Free Website Audit | Axiom',
-        description: 'Get a free website audit from Axiom. We\'ll review your current site and tell you exactly what it\'s costing you — within 24 hours.',
+        description: 'Get a free website audit from Axiom. We\'ll review your current site and tell you exactly what it\'s costing you â€” within 24 hours.',
         canonicalPath: '/admin/audit',
         noIndex: true,
     },
@@ -119,3 +129,5 @@ export const SEO_ROUTES = {
         noIndex: true,
     },
 } as const satisfies Record<string, SeoRouteMeta>;
+
+

@@ -1,4 +1,5 @@
-﻿import { Link } from 'react-router-dom';
+﻿import React from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
@@ -260,3 +261,4 @@ const Infrastructure: React.FC = () => {
 };
 
 export default Infrastructure;
+

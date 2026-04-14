@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone } from 'lucide-react';
 import Footer from '../components/Footer';
@@ -38,6 +38,12 @@ const PROJECT_FIELD_IDS = {
     current_website: 'project-website-url',
     details: 'project-details',
 } as const;
+
+const FALLBACK_SUBMIT_ERROR = 'Something went wrong. Email us directly at contact@getaxiom.ca';
+const FIELD_LABEL_CLASS = 'text-[15px] md:text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
+const FIELD_HELPER_CLASS = 'text-[15px] md:text-xs leading-5 text-slate-400';
+const FIELD_INPUT_CLASS =
+    'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-[15px] md:text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500';
 
 function getApiErrorMessage(payload: ApiResult | null) {
     if (!payload) return FALLBACK_SUBMIT_ERROR;
@@ -167,7 +173,7 @@ const SubmissionSuccessState: React.FC<SubmissionSuccessStateProps> = ({ onReset
         </div>
         <h2 className="mt-5 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Received.</h2>
         <p className="mt-2 text-[15px] md:text-sm leading-7 text-slate-300">
-            Received. We’ll review and reply within one business day.
+            Received. Weâ€™ll review and reply within one business day.
         </p>
         <button
             type="button"
@@ -418,7 +424,7 @@ const GeneralContactForm: React.FC = () => {
                                     </div>
 
                                     <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                                        {status === 'loading' ? 'Sending...' : 'Send message →'}
+                                        {status === 'loading' ? 'Sending...' : 'Send message â†’'}
                                     </button>
                                 </fieldset>
                             </div>
@@ -636,7 +642,7 @@ const ProjectIntakeForm: React.FC = () => {
                                 Tell us what the business needs.
                             </h1>
                             <p data-startup-copy className="mt-4 max-w-2xl text-[15px] md:text-sm text-slate-300 md:text-base">
-                                Share the basics and we’ll reply within one business day with the next step.
+                                Share the basics and weâ€™ll reply within one business day with the next step.
                             </p>
                             <p data-startup-meta className="mt-3 max-w-2xl text-[15px] md:text-sm text-slate-400">
                                 Not a project? Use{' '}
@@ -684,9 +690,9 @@ const ProjectIntakeForm: React.FC = () => {
                                         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                                             <div>
                                                 <p className="section-eyebrow">Project intake</p>
-                                                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Let’s get to work.</h2>
+                                                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Letâ€™s get to work.</h2>
                                             </div>
-                                            <p className="text-[15px] md:text-sm text-slate-400">Tell us what your business does, what’s broken about your current site, and when you want to move. We’ll reply within one business day.</p>
+                                            <p className="text-[15px] md:text-sm text-slate-400">Tell us what your business does, whatâ€™s broken about your current site, and when you want to move. Weâ€™ll reply within one business day.</p>
                                         </div>
                                     </div>
 
@@ -731,16 +737,16 @@ const ProjectIntakeForm: React.FC = () => {
                                                 <div className="flex flex-col gap-2">
                                                     <label htmlFor={PROJECT_FIELD_IDS.details} className={FIELD_LABEL_CLASS}>Brief project description</label>
                                                     <p id={`${PROJECT_FIELD_IDS.details}-helper`} className={FIELD_HELPER_CLASS}>Three short lines is enough.</p>
-                                                    <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="What does your business do, what’s wrong with your current site, and when do you want to move?" className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
+                                                    <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="What does your business do, whatâ€™s wrong with your current site, and when do you want to move?" className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
                                                     {errors.details && <p id={`${PROJECT_FIELD_IDS.details}-error`} className="text-[15px] md:text-xs text-red-300">{errors.details}</p>}
                                                 </div>
                                             </section>
 
                                             <div className="flex flex-col gap-3">
                                                 <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                                                    {status === 'loading' ? 'Sending...' : 'Send it →'}
+                                                    {status === 'loading' ? 'Sending...' : 'Send it â†’'}
                                                 </button>
-                                                <p className="text-[15px] md:text-sm text-slate-400">We’ll reply within one business day with next steps.</p>
+                                                <p className="text-[15px] md:text-sm text-slate-400">Weâ€™ll reply within one business day with next steps.</p>
                                             </div>
                                         </fieldset>
                                     </form>
@@ -776,4 +782,5 @@ const ProjectIntakeForm: React.FC = () => {
 };
 
 export default ContactPage;
+
 
