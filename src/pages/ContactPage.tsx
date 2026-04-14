@@ -31,6 +31,11 @@ const INITIAL_FORM: IntakeFormState = {
 };
 
 const PROJECT_PATH = '/start-a-project';
+const PROJECT_FIELD_IDS = {
+    name: 'project-full-name',
+    email: 'project-email',
+    business_name: 'project-business-name',
+    current_website: 'project-website-url',
     details: 'project-details',
 } as const;
 
@@ -771,3 +776,4 @@ const ProjectIntakeForm: React.FC = () => {
 };
 
 export default ContactPage;
+

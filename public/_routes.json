@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/",
+    "/work",
+    "/pricing",
+    "/about",
+    "/process",
+    "/contact",
+    "/start-a-project",
+    "/assets/*",
+    "/images/*",
+    "/photos/*",
+    "/partners/*",
+    "/favicon.ico",
+    "/favicon.png",
+    "/favicon.svg",
+    "/logo.png",
+    "/logo.svg",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/apple-touch-icon.png",
+    "/favicon-32x32.png",
+    "/favicon-48x48.png",
+    "/og-image.png",
+    "/.well-known/*"
+  ]
+}
