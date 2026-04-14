@@ -25,7 +25,7 @@ const Home: React.FC = () => {
             <div className="max-w-5xl">
               <div className="max-w-4xl overflow-hidden">
                 <h1 data-startup-heading className="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-                  Your website is losing you jobs.
+                  Your website is losing you clients.
                 </h1>
               </div>
               <p data-startup-copy className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
