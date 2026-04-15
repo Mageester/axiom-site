@@ -121,17 +121,17 @@ const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = fal
                     </div>
                 </div>
 
-                <div className="space-y-3">
+                <div className="flex flex-col gap-3">
                     <a
                         href={CONTACT_PHONE_HREF}
-                        className="inline-flex min-h-11 items-center text-[clamp(1.8rem,3vw,2.55rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#F6EBDD] transition-colors hover:text-[#f0d7c6]"
+                        className="inline-flex min-h-11 w-fit items-center text-[clamp(1.8rem,3vw,2.55rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#F6EBDD] transition-colors hover:text-[#f0d7c6]"
                     >
                         {CONTACT_PHONE_DISPLAY}
                     </a>
                     {showEmail ? (
                         <a
                             href={`mailto:${CONTACT_EMAIL}`}
-                            className="inline-flex min-h-11 items-center text-[15px] md:text-sm leading-6 text-slate-300 transition-colors hover:text-white"
+                            className="inline-flex min-h-11 w-fit items-center text-[15px] md:text-sm leading-6 text-slate-300 transition-colors hover:text-white"
                         >
                             {CONTACT_EMAIL}
                         </a>
