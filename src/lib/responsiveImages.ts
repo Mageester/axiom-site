@@ -78,18 +78,14 @@ export const responsiveImages = {
     webpSrcSet: '/photos/logoclear-320.webp 320w, /photos/logoclear-512.webp 512w, /photos/logoclear-768.webp 768w',
   },
   founderAidan: {
-    fallbackSrc: '/photos/aidan-headshot.jpg',
-    avifSrcSet:
-      '/photos/aidan-headshot-160.avif 160w, /photos/aidan-headshot-192.avif 192w, /photos/aidan-headshot-256.avif 256w',
-    webpSrcSet:
-      '/photos/aidan-headshot-160.webp 160w, /photos/aidan-headshot-192.webp 192w, /photos/aidan-headshot-256.webp 256w',
+    fallbackSrc: '/images/team-mark.jpg',
+    avifSrcSet: '/images/team-mark.jpg',
+    webpSrcSet: '/images/team-mark.jpg',
   },
   founderRiley: {
-    fallbackSrc: '/photos/riley-headshot.jpg',
-    avifSrcSet:
-      '/photos/riley-headshot-160.avif 160w, /photos/riley-headshot-192.avif 192w, /photos/riley-headshot-256.avif 256w',
-    webpSrcSet:
-      '/photos/riley-headshot-160.webp 160w, /photos/riley-headshot-192.webp 192w, /photos/riley-headshot-256.webp 256w',
+    fallbackSrc: '/images/team-mark.jpg',
+    avifSrcSet: '/images/team-mark.jpg',
+    webpSrcSet: '/images/team-mark.jpg',
   },
 } as const satisfies Record<string, ResponsiveSource>;
 
