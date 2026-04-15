@@ -148,8 +148,13 @@ const CallUsCard: React.FC<CallUsCardProps> = ({ className = '', showEmail = fal
     );
 };
 
-function createInitialIntakeForm(): IntakeFormState {
-    return { ...INITIAL_FORM };
+function createInitialIntakeForm(details = ''): IntakeFormState {
+    return { ...INITIAL_FORM, details };
+}
+
+function getProjectDescriptionFromSearch(search: string) {
+    const params = new URLSearchParams(search);
+    return params.get('type') === 'review' ? 'Free site review' : '';
 }
 
 type SubmissionSuccessStateProps = {
@@ -483,7 +488,9 @@ const ContactPage: React.FC = () => {
 };
 
 const ProjectIntakeForm: React.FC = () => {
-    const [form, setForm] = useState<IntakeFormState>(() => createInitialIntakeForm());
+    const location = useLocation();
+    const initialForm = createInitialIntakeForm(getProjectDescriptionFromSearch(location.search));
+    const [form, setForm] = useState<IntakeFormState>(() => initialForm);
 
     const [status, setStatus] = useState<SubmitState>('');
     const [msg, setMsg] = useState('');
@@ -559,7 +566,7 @@ const ProjectIntakeForm: React.FC = () => {
         setMsg('');
         setErrors({});
         setShowSuccessState(false);
-        setForm(createInitialIntakeForm());
+        setForm(initialForm);
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

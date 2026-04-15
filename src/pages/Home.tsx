@@ -8,6 +8,8 @@ import { RevealBlock } from '../components/ui/RevealBlock';
 import { CTA } from '../lib/cta';
 import { HOME_JSON_LD, SEO_ROUTES } from '../lib/seo';
 
+const FREE_SITE_REVIEW_PATH = `${CTA.primary.to}?type=review`;
+
 const homepageBenefitCallouts = [
   'Your offer is the first thing visitors see — not buried three scrolls down',
   'Real proof (reviews, photos, past work) builds trust before they pick up the phone',
@@ -62,6 +64,12 @@ const Home: React.FC = () => {
               <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                 <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
                   Start a project
+                </Link>
+                <Link
+                  to={FREE_SITE_REVIEW_PATH}
+                  className="btn-secondary btn-lg w-full whitespace-nowrap sm:w-auto"
+                >
+                  Get a free site review
                 </Link>
                 <Link
                   to={CTA.work.to}
