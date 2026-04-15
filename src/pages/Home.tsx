@@ -14,6 +14,20 @@ const homepageBenefitCallouts = [
   'One clear path to call, email, or request a quote - no hunting required',
 ] as const;
 
+type ClientTestimonial = {
+  quote: string;
+  clientName: string;
+  businessName: string;
+};
+
+const clientTestimonials: readonly ClientTestimonial[] = [
+  {
+    quote: 'They bridge the gap between ambitious visual concepts and operational reality.',
+    clientName: 'Jake Young',
+    businessName: 'FormDr',
+  },
+] as const;
+
 const Home: React.FC = () => {
   return (
     <>
@@ -46,6 +60,35 @@ const Home: React.FC = () => {
           </section>
 
           <WorkPreviewGrid />
+
+          <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature" aria-labelledby="clients-say-heading">
+            <div className="max-w-4xl">
+              <p className="section-eyebrow">Testimonials</p>
+              <h2 id="clients-say-heading" className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                What clients say
+              </h2>
+            </div>
+
+            <div className="mt-10 max-w-4xl">
+              {clientTestimonials.map((testimonial) => (
+                <article key={testimonial.clientName} className="machined-card flex h-full flex-col gap-6 p-6 md:p-8">
+                  <div className="space-y-4">
+                    <p className="section-eyebrow">Client testimonial</p>
+                    <blockquote className="max-w-3xl text-[clamp(1.3rem,2vw,1.85rem)] font-medium leading-[1.45] tracking-[-0.03em] text-[#F2F4F7]">
+                      {testimonial.quote}
+                    </blockquote>
+                  </div>
+
+                  <div className="flex flex-col gap-1 border-t border-white/10 pt-5 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                      <p className="text-[15px] md:text-base font-semibold text-[#F2F4F7]">{testimonial.clientName}</p>
+                      <p className="text-[15px] md:text-sm text-slate-400">{testimonial.businessName}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature">
             <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
