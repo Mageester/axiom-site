@@ -25,10 +25,6 @@
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
 
-/contact
-  X-Robots-Tag: index, follow, max-image-preview:large
-  Speculation-Rules: "/speculation-rules.json"
-
 /start-a-project
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"

@@ -31,6 +31,7 @@ const INITIAL_FORM: IntakeFormState = {
 };
 
 const PROJECT_PATH = '/start-a-project';
+const QUESTION_PATH = `${PROJECT_PATH}?type=question`;
 const PROJECT_FIELD_IDS = {
     name: 'project-full-name',
     email: 'project-email',
@@ -44,6 +45,38 @@ const FIELD_LABEL_CLASS = 'text-[15px] md:text-[11px] font-axiomMono uppercase t
 const FIELD_HELPER_CLASS = 'text-[15px] md:text-xs leading-5 text-slate-400';
 const FIELD_INPUT_CLASS =
     'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-[15px] md:text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500';
+
+type IntakeMode = 'project' | 'question';
+
+const getIntakeModeFromSearch = (search: string): IntakeMode => {
+    const params = new URLSearchParams(search);
+    return params.get('type') === 'question' ? 'question' : 'project';
+};
+
+const IntakeToggle: React.FC<{ mode: IntakeMode }> = ({ mode }) => (
+    <div className="mt-6 inline-flex w-full max-w-xl rounded-full border border-white/10 bg-white/[0.03] p-1 sm:w-auto">
+        <Link
+            to={PROJECT_PATH}
+            aria-current={mode === 'project' ? 'page' : undefined}
+            className={[
+                'inline-flex min-h-11 flex-1 items-center justify-center rounded-full px-4 text-[15px] font-medium transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:text-sm',
+                mode === 'project' ? 'bg-[#d4a48e] text-[#10141c] shadow-[0_8px_20px_rgba(212,164,142,0.22)]' : 'text-slate-300 hover:text-[#F2F4F7]'
+            ].join(' ')}
+        >
+            I have a project
+        </Link>
+        <Link
+            to={QUESTION_PATH}
+            aria-current={mode === 'question' ? 'page' : undefined}
+            className={[
+                'inline-flex min-h-11 flex-1 items-center justify-center rounded-full px-4 text-[15px] font-medium transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] md:text-sm',
+                mode === 'question' ? 'bg-[#d4a48e] text-[#10141c] shadow-[0_8px_20px_rgba(212,164,142,0.22)]' : 'text-slate-300 hover:text-[#F2F4F7]'
+            ].join(' ')}
+        >
+            Just a question
+        </Link>
+    </div>
+);
 
 function getApiErrorMessage(payload: ApiResult | null) {
     if (!payload) return FALLBACK_SUBMIT_ERROR;
@@ -191,6 +224,8 @@ const SubmissionSuccessState: React.FC<SubmissionSuccessStateProps> = ({ onReset
 );
 
 const GeneralContactForm: React.FC = () => {
+    const location = useLocation();
+    const mode = getIntakeModeFromSearch(location.search);
     const [form, setForm] = useState<ContactFormState>(CONTACT_INITIAL_FORM);
     const [status, setStatus] = useState<SubmitState>('');
     const [msg, setMsg] = useState('');
@@ -317,25 +352,22 @@ const GeneralContactForm: React.FC = () => {
     return (
         <>
             <SEO
-                {...SEO_ROUTES.contact}
+                {...SEO_ROUTES.startProject}
             />
             <section data-hero-root className="mx-auto max-w-3xl pt-8 text-center md:pt-16">
                 <div className="overflow-hidden">
                     <p className="section-eyebrow">Contact</p>
                     <h1 data-startup-heading className="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
-                        Send a question or a note.
+                        Just a question.
                     </h1>
                 </div>
                 <p data-startup-copy className="mx-auto mt-4 max-w-2xl text-[15px] md:text-sm text-slate-200/90 md:text-base">
                     Use this form for a quick question or a note about your site.
                 </p>
                 <p data-startup-meta className="mx-auto mt-3 max-w-2xl text-[15px] md:text-sm text-slate-300">
-                    For website work, use{' '}
-                    <Link to={PROJECT_PATH} className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                        Start a project
-                    </Link>
-                    .
+                    Need website work? Use the toggle below.
                 </p>
+                <IntakeToggle mode={mode} />
             </section>
 
             <section className="mx-auto mt-6 max-w-5xl">
@@ -471,24 +503,18 @@ const GeneralContactForm: React.FC = () => {
 
 const ContactPage: React.FC = () => {
     const location = useLocation();
-    const isProjectRoute = location.pathname.startsWith(PROJECT_PATH);
+    const mode = getIntakeModeFromSearch(location.search);
 
-    if (isProjectRoute) {
-        return <ProjectIntakeForm />;
+    if (mode === 'question') {
+        return <GeneralContactForm />;
     }
 
-    return (
-        <Layout>
-            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-28">
-                <GeneralContactForm />
-            </main>
-            <Footer />
-        </Layout>
-    );
+    return <ProjectIntakeForm />;
 };
 
 const ProjectIntakeForm: React.FC = () => {
     const location = useLocation();
+    const mode = getIntakeModeFromSearch(location.search);
     const initialForm = createInitialIntakeForm(getProjectDescriptionFromSearch(location.search));
     const [form, setForm] = useState<IntakeFormState>(() => initialForm);
 
@@ -652,12 +678,9 @@ const ProjectIntakeForm: React.FC = () => {
                                 Share the basics and we’ll reply within one business day with the next step.
                             </p>
                             <p data-startup-meta className="mt-3 max-w-2xl text-[15px] md:text-sm text-slate-400">
-                                Not a project? Use{' '}
-                                <Link to="/contact" className="text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                    Contact
-                                </Link>
-                                .
+                                Need a question? Use the toggle below.
                             </p>
+                            <IntakeToggle mode={mode} />
                         </article>
 
                         <aside className="flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.18)] xl:mt-8">
@@ -772,8 +795,8 @@ const ProjectIntakeForm: React.FC = () => {
                                 <p className="section-eyebrow">General questions</p>
                                 <p className="mt-3 text-[15px] md:text-sm leading-relaxed text-slate-300">
                                     Use{' '}
-                                    <Link to="/contact" className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
-                                        Contact
+                                    <Link to={QUESTION_PATH} className="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">
+                                        Just a question
                                     </Link>{' '}
                                     for a quick note or anything that is not a project.
                                 </p>

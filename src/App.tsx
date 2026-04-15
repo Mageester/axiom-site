@@ -85,7 +85,7 @@ const App: React.FC = () => {
           <Route path="/manifesto" element={<Navigate to="/approach" replace />} />
           <Route path="/start-a-project" element={<ContactPage />} />
           <Route path="/apply" element={<Navigate to="/start-a-project" replace />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/contact" element={<Navigate to="/start-a-project?type=question" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/architects" element={<Navigate to="/about" replace />} />
           <Route path="/404" element={<NotFoundPage />} />

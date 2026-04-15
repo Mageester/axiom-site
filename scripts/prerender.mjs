@@ -11,7 +11,6 @@ const routes = [
   '/pricing',
   '/about',
   '/process',
-  '/contact',
   '/start-a-project'
 ];
 

@@ -31,11 +31,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://getaxiom.ca/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://getaxiom.ca/start-a-project</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

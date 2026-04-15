@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
+import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 
 type PricingTier = {
@@ -27,7 +28,7 @@ const pricingTiers: readonly PricingTier[] = [
       'Live in 14 days'
     ],
     cta: 'Start a project →',
-    href: '/contact',
+    href: CTA_PATHS.startProject,
   },
   {
     name: 'Growth',
@@ -40,7 +41,7 @@ const pricingTiers: readonly PricingTier[] = [
       'Live in 21 days'
     ],
     cta: 'Start a project →',
-    href: '/contact',
+    href: CTA_PATHS.startProject,
     recommended: true,
   },
   {
@@ -54,7 +55,7 @@ const pricingTiers: readonly PricingTier[] = [
       'Timeline scoped on intake'
     ],
     cta: "Let's talk →",
-    href: '/contact',
+    href: CTA_PATHS.startProject,
   },
 ] as const;
 
@@ -147,7 +148,7 @@ const PricingPage: React.FC = () => {
           <p className="mt-4 mb-8 text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
             Start a project and we will tell you exactly what your business needs. One business day response, no pressure.
           </p>
-          <Link to="/contact" className="btn-primary btn-lg inline-flex">
+          <Link to={CTA_PATHS.startProject} className="btn-primary btn-lg inline-flex">
             Start a project →
           </Link>
         </div>
