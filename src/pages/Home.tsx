@@ -75,6 +75,22 @@ const Home: React.FC = () => {
 
           <WorkPreviewGrid />
 
+          <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature" aria-labelledby="speed-guarantee-heading">
+            <article className="w-full overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
+              <div className="border-l-4 border-[#B05D41] px-5 py-8 md:px-7 md:py-10">
+                <div className="max-w-4xl">
+                  <p className="section-eyebrow">Speed guarantee</p>
+                  <h2 id="speed-guarantee-heading" className="mt-3 text-[clamp(1.75rem,3vw,2.65rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                    If your site loads in over one second, we fix it free.
+                  </h2>
+                  <p className="mt-3 max-w-2xl text-sm md:text-[15px] leading-relaxed text-slate-400">
+                    No asterisks. That is the standard we build to.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </RevealBlock>
+
           <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature" aria-labelledby="clients-say-heading">
             <div className="max-w-4xl">
               <p className="section-eyebrow">Testimonials</p>
