@@ -2,6 +2,21 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, PRICING_JSON_LD } from '../lib/seo';
+import { 
+  Zap, 
+  TrendingUp, 
+  Cpu, 
+  FileText, 
+  RotateCcw, 
+  Clock, 
+  Search, 
+  MapPin, 
+  Server, 
+  Layout, 
+  MessageSquare, 
+  UserCheck, 
+  CreditCard 
+} from 'lucide-react';
 
 const pricingTiers = [
   {
@@ -11,6 +26,7 @@ const pricingTiers = [
     features: ['3 pages', 'Mobile-ready', 'Contact form', 'Live in 14 days'],
     cta: 'Start a project →',
     href: CTA_PATHS.startProject,
+    icon: Zap,
   },
   {
     name: 'Growth',
@@ -20,6 +36,7 @@ const pricingTiers = [
     cta: 'Start a project →',
     href: CTA_PATHS.startProject,
     recommended: true,
+    icon: TrendingUp,
   },
   {
     name: 'Custom',
@@ -28,66 +45,77 @@ const pricingTiers = [
     features: ['Unlimited pages', 'Integrations & automations', 'Ongoing support available', 'Timeline scoped on intake'],
     cta: "Let's talk →",
     href: CTA_PATHS.startProject,
+    icon: Cpu,
   },
 ] as const;
 
 const comparisonRows = [
   {
     label: 'Pages included',
+    icon: FileText,
     starter: '3 pages',
     growth: '5 pages',
     custom: 'Scoped to the project',
   },
   {
     label: 'Revisions',
+    icon: RotateCcw,
     starter: '2 rounds',
     growth: '3 rounds',
     custom: 'Scoped in the proposal',
   },
   {
     label: 'Turnaround',
+    icon: Clock,
     starter: '14 days',
     growth: '21 days',
     custom: 'Timeline scoped on intake',
   },
   {
     label: 'SEO setup',
+    icon: Search,
     starter: 'Basic on-page setup',
     growth: 'Local SEO foundation',
     custom: 'Custom strategy',
   },
   {
     label: 'Google Business profile',
+    icon: MapPin,
     starter: 'Guidance only',
     growth: 'Setup + optimization',
     custom: 'Included if needed',
   },
   {
     label: 'Hosting guidance',
+    icon: Server,
     starter: 'Included',
     growth: 'Included',
     custom: 'Included',
   },
   {
     label: 'CMS / editing capability',
+    icon: Layout,
     starter: 'Light content updates',
     growth: 'Editable content workflow',
     custom: 'Custom editing setup',
   },
   {
     label: 'Post-launch support',
+    icon: MessageSquare,
     starter: 'Launch support',
     growth: 'Post-launch support',
     custom: 'Scoped support available',
   },
   {
     label: 'Ownership',
+    icon: UserCheck,
     starter: 'Full ownership',
     growth: 'Full ownership',
     custom: 'Full ownership',
   },
   {
     label: 'Recurring fees',
+    icon: CreditCard,
     starter: 'None',
     growth: 'None',
     custom: 'None',
@@ -165,7 +193,10 @@ const faqItems = [
             }`}
           >
             <div>
-              <h3 class="font-axiomMono text-xs uppercase tracking-wide text-[#A7B3BC]">{tier.name}</h3>
+              <div class="flex items-center justify-between">
+                <h3 class="font-axiomMono text-xs uppercase tracking-wide text-[#A7B3BC]">{tier.name}</h3>
+                <tier.icon class={`h-5 w-5 ${tier.recommended ? 'text-axiom-accent' : 'text-slate-500/50'}`} stroke-width={1.5} />
+              </div>
               <p class="mt-6 font-axiomDisplay text-[40px] leading-none tracking-[-0.04em] text-[#F2F4F7]">{tier.price}</p>
               <p class="mt-4 text-[15px] leading-relaxed text-slate-300">{tier.description}</p>
             </div>
@@ -221,7 +252,10 @@ const faqItems = [
               {comparisonRows.map((row) => (
                 <tr class="border-b border-white/[0.06] align-top last:border-b-0">
                   <th scope="row" class="py-4 pr-6 text-[14px] font-medium text-[#F2F4F7] sm:text-[15px]">
-                    {row.label}
+                    <div class="flex items-center gap-2.5">
+                      <row.icon class="h-3.5 w-3.5 shrink-0 text-slate-500/70" stroke-width={1.5} />
+                      <span>{row.label}</span>
+                    </div>
                   </th>
                   <td class="py-4 pr-6 text-[14px] leading-relaxed text-slate-300 sm:text-[15px]">
                     {row.starter}
