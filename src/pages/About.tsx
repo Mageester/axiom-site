@@ -7,6 +7,26 @@ import { CTA } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 import { RevealBlock } from '../components/ui/RevealBlock';
 
+const aboutPrinciples = [
+  {
+    number: '01',
+    title: 'Clarity over everything',
+    description:
+      'Your offer has to be readable the moment someone lands. Not buried, not vague. If they have to work for it, they’re already gone.',
+  },
+  {
+    number: '02',
+    title: "Proof closes deals. Polish doesn't.",
+    description: 'Real results, real reviews, and real work shown early. That’s what converts a visitor into a call.',
+  },
+  {
+    number: '03',
+    title: 'Slow sites lose jobs.',
+    description:
+      'Most people find you on their phone. If your site takes more than two seconds, they’ve already moved on. Every build we ship loads fast — tested, not assumed.',
+  },
+] as const;
+
 const About: React.FC = () => {
   return (
     <>
@@ -148,6 +168,37 @@ const About: React.FC = () => {
               <p className="mt-6 max-w-3xl text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-base">
                 We’re based in Kitchener-Waterloo. We don’t use templates, we don’t outsource, and we don’t take on projects we can’t do well. Every site is built by us.
               </p>
+            </article>
+          </RevealBlock>
+
+          <RevealBlock as="section" className="pt-10 md:pt-16" variant="feature">
+            <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.18)] md:p-8 lg:p-10">
+              <div className="max-w-4xl">
+                <p className="section-eyebrow">OUR APPROACH</p>
+                <h2 className="mt-2 max-w-3xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                  Three principles that shape every build.
+                </h2>
+                <p className="mt-4 max-w-3xl text-[15px] md:text-sm leading-relaxed text-slate-300 md:text-base">
+                  The site has to read clearly, prove the point early, and make the next step obvious.
+                </p>
+              </div>
+
+              <div className="mt-8 grid gap-4 md:grid-cols-3">
+                {aboutPrinciples.map((principle) => (
+                  <article
+                    key={principle.number}
+                    className="machined-card h-full rounded-[var(--radius-card)] border border-white/10 bg-[var(--axiom-elevated)] p-6 md:p-7"
+                  >
+                    <p className="font-axiomMono text-xs uppercase tracking-wide text-[#d4a48e]">{principle.number}</p>
+                    <h3 className="mt-3 text-[1.05rem] font-semibold tracking-tight text-[#F2F4F7]">
+                      {principle.title}
+                    </h3>
+                    <p className="mt-3 text-sm md:text-[15px] leading-relaxed text-slate-300">
+                      {principle.description}
+                    </p>
+                  </article>
+                ))}
+              </div>
             </article>
           </RevealBlock>
         </main>

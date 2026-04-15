@@ -89,7 +89,7 @@ export const SEO_ROUTES = {
     approach: {
         title: 'Our Approach to Web Design | Axiom',
         description: 'Learn how Axiom approaches web design — clarity first, proof early, one clear path to contact. Built for businesses that need results, not decoration.',
-        canonicalPath: '/approach',
+        canonicalPath: '/about',
     },
     process: {
         title: 'Our Build Process | Axiom',
