@@ -103,29 +103,45 @@ const About: React.FC = () => {
 
               <div className="mt-8 rounded-[var(--radius-card)] border border-white/5 bg-white/[0.01] p-3 md:mt-10 lg:p-4">
                 <div className="flex flex-col md:flex-row flex-wrap gap-4">
-                <article className="flex min-w-[16rem] flex-1 items-center gap-4 rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-5 md:min-w-[18rem] md:p-6 shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(19,24,34,0.98)_0%,rgba(10,13,18,0.98)_100%)] font-axiomMono text-[15px] uppercase tracking-[0.16em] text-[#F2F4F7]">
-                    AV
-                  </div>
-                  <div className="min-w-0 flex flex-col justify-center gap-0.5">
-                    <h3 className="text-[18px] font-semibold tracking-tight text-[#F2F4F7]">Aidan</h3>
-                    <p className="text-sm md:text-[15px] leading-relaxed text-slate-300">
-                      Co-founder — strategy, systems, client work
-                    </p>
-                  </div>
-                </article>
+                  <article className="flex min-w-[16rem] flex-1 items-start gap-4 rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-5 md:min-w-[18rem] md:p-6 shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
+                    <img
+                      src="/photos/aidan-headshot.jpg"
+                      alt="Aidan headshot"
+                      className="h-16 w-16 shrink-0 rounded-full border border-white/10 object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="min-w-0">
+                      <h3 className="text-[18px] font-semibold tracking-tight text-[#F2F4F7]">Aidan</h3>
+                      <p className="text-sm md:text-[15px] leading-relaxed text-slate-300">
+                        Co-founder — strategy, systems, client work
+                      </p>
+                      <p className="mt-3 text-sm md:text-[15px] leading-relaxed text-slate-400">
+                        Aidan keeps the project anchored to the business goal, the offer, and the next step a customer should take.
+                        He handles the strategy, scope, and client communication so the work stays clear from first call to launch.
+                      </p>
+                    </div>
+                  </article>
 
-                <article className="flex min-w-[16rem] flex-1 items-center gap-4 rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-5 md:min-w-[18rem] md:p-6 shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(19,24,34,0.98)_0%,rgba(10,13,18,0.98)_100%)] font-axiomMono text-[15px] uppercase tracking-[0.16em] text-[#F2F4F7]">
-                    RL
-                  </div>
-                  <div className="min-w-0 flex flex-col justify-center gap-0.5">
-                    <h3 className="text-[18px] font-semibold tracking-tight text-[#F2F4F7]">Riley</h3>
-                    <p className="text-sm md:text-[15px] leading-relaxed text-slate-300">
-                      Co-founder — design, build, technical delivery
-                    </p>
-                  </div>
-                </article>
+                  <article className="flex min-w-[16rem] flex-1 items-start gap-4 rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-5 md:min-w-[18rem] md:p-6 shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
+                    <img
+                      src="/photos/riley-headshot.jpg"
+                      alt="Riley headshot"
+                      className="h-16 w-16 shrink-0 rounded-full border border-white/10 object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="min-w-0">
+                      <h3 className="text-[18px] font-semibold tracking-tight text-[#F2F4F7]">Riley</h3>
+                      <p className="text-sm md:text-[15px] leading-relaxed text-slate-300">
+                        Co-founder — design, build, technical delivery
+                      </p>
+                      <p className="mt-3 text-sm md:text-[15px] leading-relaxed text-slate-400">
+                        Riley translates the strategy into the actual site, from visual direction through implementation.
+                        He handles design, build quality, and technical delivery so the final result stays fast, stable, and clean.
+                      </p>
+                    </div>
+                  </article>
                 </div>
               </div>
 
