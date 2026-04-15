@@ -381,7 +381,7 @@ const Layout: React.FC<LayoutProps> = ({
 
       <div className={`relative z-10 pt-20 md:pt-28 ${disableAmbientVisuals ? '' : 'noise-overlay'}`}>{children}</div>
 
-      {!disableAmbientVisuals && <FloatingAffordances />}
+      {!disableAmbientVisuals && <FloatingAffordances mobileMenuOpen={isMobileMenuOpen} />}
     </div>
   );
 };
