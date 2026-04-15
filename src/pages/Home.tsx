@@ -45,6 +45,20 @@ const Home: React.FC = () => {
               <p data-startup-copy className="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
                 Most business sites are slow, unclear, and built by someone who doesn’t understand what makes people call. We fix that — fast build, full ownership, zero recurring fees.
               </p>
+              <div
+                className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 section-eyebrow"
+                aria-label="Axiom performance highlights"
+              >
+                <span>12+ builds shipped</span>
+                <span aria-hidden="true" className="text-white/30">
+                  ·
+                </span>
+                <span>Sub-1s load times</span>
+                <span aria-hidden="true" className="text-white/30">
+                  ·
+                </span>
+                <span>Reply in 24hrs</span>
+              </div>
               <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                 <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
                   Start a project
