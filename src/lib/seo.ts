@@ -1,6 +1,6 @@
 export const SITE_NAME = 'Axiom';
 export const SITE_URL = 'https://getaxiom.ca';
-export const DEFAULT_OG_IMAGE = '/og-default.jpg';
+export const DEFAULT_OG_IMAGE = '/og-image.png';
 export const DEFAULT_SEO_DESCRIPTION = 'Premium web design and development for local service businesses.';
 export const SITE_EMAIL = 'contact@getaxiom.ca';
 export const SITE_TELEPHONE = '+12267531833';
@@ -143,6 +143,11 @@ export const SEO_ROUTES = {
         title: 'Terms of Service | Axiom',
         description: 'Terms for using the Axiom website and services.',
         canonicalPath: '/terms',
+    },
+    contact: {
+        title: 'Contact Axiom | Ontario Web Agency',
+        description: 'Ask a question or send a quick note to Axiom. Replies arrive within one business day.',
+        canonicalPath: '/contact',
     },
     notFound: {
         title: 'Page not found | Axiom',

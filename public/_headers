@@ -25,6 +25,10 @@
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
 
+/contact
+  X-Robots-Tag: index, follow, max-image-preview:large
+  Speculation-Rules: "/speculation-rules.json"
+
 /admin/audit
   X-Robots-Tag: noindex, nofollow
 
