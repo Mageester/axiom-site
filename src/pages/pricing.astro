@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { SEO_ROUTES } from '../lib/seo';
+import { SEO_ROUTES, PRICING_JSON_LD } from '../lib/seo';
 
 const pricingTiers = [
   {
@@ -138,15 +138,15 @@ const faqItems = [
 ] as const;
 ---
 
-<SiteLayout title={SEO_ROUTES.pricing.title} description={SEO_ROUTES.pricing.description} canonicalPath="/pricing">
+<SiteLayout title={SEO_ROUTES.pricing.title} description={SEO_ROUTES.pricing.description} canonicalPath="/pricing" schema={PRICING_JSON_LD}>
   <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 md:pb-20">
     <section class="mx-auto mb-16 flex max-w-3xl flex-col gap-6 pt-16 text-center sm:mb-24 md:pt-24">
       <p class="section-eyebrow">Pricing</p>
       <div>
-        <h1 class="text-[40px] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7] sm:text-[48px] md:text-[60px]">
+        <h1 class="text-[clamp(2.45rem,5.8vw,4rem)] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7]">
           One investment. Full ownership.
         </h1>
-        <h2 class="mt-2 text-[24px] font-axiomSans font-medium tracking-tight text-slate-300 md:text-[32px]">
+        <h2 class="mt-2 text-[clamp(1.45rem,2.8vw,2rem)] font-axiomSans font-medium tracking-tight text-slate-300">
           No monthly fees. No recurring charges. You own everything we build.
         </h2>
       </div>
@@ -272,7 +272,7 @@ const faqItems = [
 
     <section class="mx-auto mb-24 max-w-[1200px] rounded-[var(--radius-card)] border border-white/10 bg-[#131821] p-10 sm:mb-32 md:p-16">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
+        <h2 class="text-[clamp(2rem,4vw,2.5rem)] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7]">
           Not sure which tier fits?
         </h2>
         <p class="mt-4 mb-8 text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">

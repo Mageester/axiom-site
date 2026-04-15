@@ -3,7 +3,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA } from '../lib/cta';
 import FounderAvatar from '../components/site/FounderAvatar.tsx';
 import { responsiveImages } from '../lib/responsiveImages';
-import { SEO_ROUTES } from '../lib/seo';
+import { SEO_ROUTES, ABOUT_JSON_LD } from '../lib/seo';
 
 const aboutPrinciples = [
   {
@@ -26,7 +26,7 @@ const aboutPrinciples = [
 ] as const;
 ---
 
-<SiteLayout title={SEO_ROUTES.about.title} description={SEO_ROUTES.about.description} canonicalPath="/about">
+<SiteLayout title={SEO_ROUTES.about.title} description={SEO_ROUTES.about.description} canonicalPath="/about" schema={ABOUT_JSON_LD}>
   <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 md:pb-20">
     <section class="pt-10 md:pt-16">
       <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.18)] md:p-8 lg:p-10">

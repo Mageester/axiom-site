@@ -6,7 +6,7 @@ import FounderAvatar from '../components/site/FounderAvatar';
 import { SEO } from '../components/SEO';
 import { CTA } from '../lib/cta';
 import { responsiveImages } from '../lib/responsiveImages';
-import { SEO_ROUTES } from '../lib/seo';
+import { SEO_ROUTES, ABOUT_JSON_LD } from '../lib/seo';
 import { RevealBlock } from '../components/ui/RevealBlock';
 
 const aboutPrinciples = [
@@ -34,6 +34,7 @@ const About: React.FC = () => {
     <>
       <SEO
         {...SEO_ROUTES.about}
+        schema={ABOUT_JSON_LD}
         description="Axiom builds clear websites that explain the offer, surface proof, and make the next step obvious."
       />
 

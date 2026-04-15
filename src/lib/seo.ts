@@ -1,4 +1,4 @@
-﻿export const SITE_NAME = 'Axiom';
+export const SITE_NAME = 'Axiom';
 export const SITE_URL = 'https://getaxiom.ca';
 export const DEFAULT_OG_IMAGE = '/og-default.jpg';
 export const DEFAULT_SEO_DESCRIPTION = 'Premium web design and development for local service businesses.';
@@ -53,6 +53,33 @@ export const WEBSITE_SCHEMA = {
 export const HOME_JSON_LD = {
     '@context': 'https://schema.org',
     '@graph': [LOCAL_BUSINESS_SCHEMA, WEBSITE_SCHEMA],
+} as const;
+
+export const PRICING_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  'name': 'Web Design Services',
+  'provider': LOCAL_BUSINESS_SCHEMA,
+  'offers': [
+    {
+      '@type': 'Offer',
+      'name': 'Starter',
+      'price': '1200.00',
+      'priceCurrency': 'CAD'
+    },
+    {
+      '@type': 'Offer',
+      'name': 'Growth',
+      'price': '2200.00',
+      'priceCurrency': 'CAD'
+    }
+  ]
+} as const;
+
+export const ABOUT_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  'mainEntity': LOCAL_BUSINESS_SCHEMA
 } as const;
 
 export const SEO_ROUTES = {
@@ -124,5 +151,3 @@ export const SEO_ROUTES = {
         noIndex: true,
     },
 } as const satisfies Record<string, SeoRouteMeta>;
-
-

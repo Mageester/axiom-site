@@ -6,14 +6,7 @@ import { SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 import type { ResponsiveSource } from '../lib/responsiveImages';
 
-const landscapingAfterAvif = new URL('../../axiom-landscaping-demo/public/images/landscaping-after.avif', import.meta.url).href;
-const landscapingAfterWebp = new URL('../../axiom-landscaping-demo/public/images/landscaping-after.webp', import.meta.url).href;
 
-const landscapingAfterSource: ResponsiveSource = {
-  fallbackSrc: landscapingAfterWebp,
-  avifSrcSet: `${landscapingAfterAvif} 1024w`,
-  webpSrcSet: `${landscapingAfterWebp} 1024w`,
-};
 
 const proofBlocks = [
   {
@@ -44,9 +37,9 @@ const proofBlocks = [
     originalWeakness: 'Past work was buried, and quote requests took too many clicks.',
     improved: 'Project photos come forward and the quote path is shorter.',
     whyBetter: 'Local buyers can judge the work first and request a quote without digging through pages.',
-    image: landscapingAfterSource,
-    imageAlt: 'Finished backyard with fresh lawn, planting beds, and a covered patio',
-    imagePosition: 'center 56%',
+    image: getWorkProofImage('concept-landscaping-authority-site').source,
+    imageAlt: getWorkProofImage('concept-landscaping-authority-site').alt ?? 'Finished backyard with fresh lawn, planting beds, and a covered patio',
+    imagePosition: getWorkProofImage('concept-landscaping-authority-site').position ?? 'center 56%',
   },
   {
     id: 'concept-roofing-conversion-site',

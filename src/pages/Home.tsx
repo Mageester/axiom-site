@@ -123,6 +123,8 @@ const Home: React.FC = () => {
                       <img
                         src={card.screenshot}
                         alt={card.screenshotAlt}
+                        width={1200}
+                        height={840}
                         className="h-auto w-full object-cover"
                         loading="lazy"
                         decoding="async"

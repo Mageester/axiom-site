@@ -1,23 +1,17 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ResponsiveImage from '../components/ResponsiveImage';
 import { SEO } from '../components/SEO';
+
 import { RevealBlock } from '../components/ui/RevealBlock';
 import { type ResponsiveSource } from '../lib/responsiveImages';
 import { CTA } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 
-const landscapingAfterAvif = new URL('../../axiom-landscaping-demo/public/images/landscaping-after.avif', import.meta.url).href;
-const landscapingAfterWebp = new URL('../../axiom-landscaping-demo/public/images/landscaping-after.webp', import.meta.url).href;
-
-const landscapingAfterSource: ResponsiveSource = {
-  fallbackSrc: landscapingAfterWebp,
-  avifSrcSet: `${landscapingAfterAvif} 1024w`,
-  webpSrcSet: `${landscapingAfterWebp} 1024w`,
-};
+const landscapingProofImage = getWorkProofImage('concept-landscaping-authority-site');
 
 type ProofBlockData = {
   id: string;
@@ -75,9 +69,9 @@ const proofBlocks: readonly ProofBlockData[] = [
     improved: 'Project photos come forward and the quote path is shorter.',
     whyBetter:
       'Local buyers can judge the work first and request a quote without digging through pages.',
-    image: landscapingAfterSource,
-    imageAlt: 'Finished backyard with fresh lawn, planting beds, and a covered patio',
-    imagePosition: 'center 56%',
+    image: landscapingProofImage.source,
+    imageAlt: landscapingProofImage.alt ?? 'Finished backyard with fresh lawn, planting beds, and a covered patio',
+    imagePosition: landscapingProofImage.position ?? 'center 56%',
   },
   {
     id: 'concept-roofing-conversion-site',

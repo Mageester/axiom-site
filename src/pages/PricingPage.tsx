@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import { SEO } from '../components/SEO';
 import { CTA_PATHS } from '../lib/cta';
-import { SEO_ROUTES } from '../lib/seo';
+import { SEO_ROUTES, PRICING_JSON_LD } from '../lib/seo';
 
 type PricingTier = {
   name: string;
@@ -62,7 +62,7 @@ const pricingTiers: readonly PricingTier[] = [
 const PricingPage: React.FC = () => {
   return (
     <>
-      <SEO {...SEO_ROUTES.pricing} />
+      <SEO {...SEO_ROUTES.pricing} schema={PRICING_JSON_LD} />
       
       <Layout>
         <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-16 md:pb-20">
@@ -70,10 +70,10 @@ const PricingPage: React.FC = () => {
       <section className="mb-16 flex flex-col gap-6 text-center pt-16 sm:mb-24 md:pt-24">
         <p className="section-eyebrow">PRICING</p>
         <div>
-          <h1 className="text-[40px] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7] sm:text-[48px] md:text-[60px]">
+          <h1 className="text-[clamp(2.45rem,5.8vw,4rem)] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7]">
             One investment. Full ownership.
           </h1>
-          <h2 className="mt-2 text-[24px] font-axiomSans font-medium tracking-tight text-slate-300 md:text-[32px]">
+          <h2 className="mt-2 text-[clamp(1.45rem,2.8vw,2rem)] font-axiomSans font-medium tracking-tight text-slate-300">
             No monthly fees. No recurring charges. You own everything we build.
           </h2>
         </div>
@@ -142,7 +142,7 @@ const PricingPage: React.FC = () => {
       {/* SECTION 4: CLOSING CTA */}
       <section className="mb-24 rounded-[var(--radius-card)] border border-white/10 bg-[#131821] p-10 sm:mb-32 md:p-16">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
+          <h2 className="text-[clamp(2rem,4vw,2.5rem)] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7]">
             Not sure which tier fits?
           </h2>
           <p className="mt-4 mb-8 text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">

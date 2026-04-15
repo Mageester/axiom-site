@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
+import Layout from '../components/Layout';
 import { createStartProjectHref } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 
@@ -73,15 +74,18 @@ const ServicesPage: React.FC = () => {
     const [openFaq, setOpenFaq] = useState<string | null>(null);
 
     return (
-        <div className="page-shell">
+        <>
             <SEO
                 {...SEO_ROUTES.services}
             />
 
+            <Layout>
+            <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-16 md:pb-24">
+
             {/* Header */}
-            <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-12 sm:mb-16">
+            <section className="max-w-3xl mx-auto text-center flex flex-col gap-4 sm:gap-5 mb-12 sm:mb-16 pt-16 md:pt-24">
                 <p className="section-eyebrow">Pricing</p>
-                <h1 className="text-[28px] sm:text-[40px] md:text-[48px] font-semibold tracking-tight leading-[1.08]">
+                <h1 className="text-[clamp(2.2rem,5vw,3.8rem)] font-extrabold tracking-tight leading-[1.08] text-[#F2F4F7]">
                     Three ways to work with us.
                 </h1>
                 <p className="lead text-center mx-auto">
@@ -91,8 +95,8 @@ const ServicesPage: React.FC = () => {
 
             {/* SLA Guarantee Banner */}
             <section className="max-w-[1100px] mx-auto mb-10 sm:mb-12">
-                <div className="axiom-bento border-[var(--accent)]/15 p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 text-center sm:text-left">
-                    <div className="w-14 h-14 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-[24px] shrink-0">
+                <div className="axiom-bento border-[var(--axiom-accent)]/15 p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 text-center sm:text-left">
+                    <div className="w-14 h-14 rounded-full bg-[var(--axiom-accent)]/10 border border-[var(--axiom-accent)]/20 flex items-center justify-center text-[24px] shrink-0">
                         •
                     </div>
                     <div className="flex flex-col gap-1">
@@ -114,7 +118,7 @@ const ServicesPage: React.FC = () => {
                         <div className="flex items-center justify-between gap-3">
                             <h2 className="font-axiomSans text-[24px] font-semibold tracking-tight text-axiom-text-main">{tier.name}</h2>
                             {tier.featured && (
-                <span className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-accent border border-axiom-accent/40 px-2 py-1 rounded">
+                                <span className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-accent border border-axiom-accent/40 px-2 py-1 rounded">
                                     Most picked
                                 </span>
                             )}
@@ -196,15 +200,15 @@ const ServicesPage: React.FC = () => {
                                     className="md:hidden w-full flex items-center justify-between p-5 text-left"
                                 >
                                     <div className="flex items-center gap-4">
-                                        <span className="text-[20px] font-bold text-[var(--accent)] font-axiomMono">{phase.num}</span>
+                                        <span className="text-[20px] font-bold text-[var(--axiom-accent)] font-axiomMono">{phase.num}</span>
                                         <h3 className="text-[15px] font-semibold text-axiom-text-main tracking-tight">{phase.title}</h3>
                                     </div>
-                                    <svg className={`w-4 h-4 text-axiom-text-mute transition-transform duration-300 ${openStep === phase.num ? 'rotate-180 text-[var(--accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                    <svg className={`w-4 h-4 text-axiom-text-mute transition-transform duration-300 ${openStep === phase.num ? 'rotate-180 text-[var(--axiom-accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                                 </button>
 
                                 {/* Mobile Accordion Content / Desktop Full View */}
                                 <div className={`px-5 pb-5 md:p-0 transition-all duration-300 md:!block ${openStep === phase.num ? 'block' : 'hidden md:block'}`}>
-                                    <span className="hidden md:block text-[26px] font-bold text-[var(--accent)]/15 font-grotesk mb-3">{phase.num}</span>
+                                    <span className="hidden md:block text-[26px] font-bold text-[var(--axiom-accent)]/15 font-grotesk mb-3">{phase.num}</span>
                                     <h3 className="hidden md:block text-[16px] font-semibold tracking-tight mb-3">{phase.title}</h3>
                                     <p className="text-[13px] sm:text-[14px] text-axiom-text-mute leading-[1.7]">{phase.desc}</p>
                                 </div>
@@ -271,7 +275,7 @@ const ServicesPage: React.FC = () => {
                                     className="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors gap-4"
                                 >
                                     <h3 className="text-[14px] sm:text-[15px] font-semibold tracking-tight">{faq.q}</h3>
-                                    <svg className={`w-4 h-4 shrink-0 text-axiom-text-mute transition-transform duration-300 ${openFaq === faq.q ? 'rotate-180 text-[var(--accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                    <svg className={`w-4 h-4 shrink-0 text-axiom-text-mute transition-transform duration-300 ${openFaq === faq.q ? 'rotate-180 text-[var(--axiom-accent)]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                                 </button>
                                 {openFaq === faq.q && (
                                     <div className="px-5 pb-5 animate-in fade-in slide-in-from-top-2 duration-300">
@@ -292,7 +296,9 @@ const ServicesPage: React.FC = () => {
                     </div>
                 </div>
             </section>
-        </div>
+            </main>
+            </Layout>
+        </>
     );
 };
 
