@@ -134,7 +134,7 @@ const IntakeTerminal: React.FC = () => {
   };
 
   return (
-    <section id="intake" className="w-full max-w-6xl mx-auto px-6 py-28">
+    <section id="intake" className="axiom-container py-28">
       <div
         ref={statusReveal.ref}
         className={`mb-10 flex w-fit items-center gap-3 rounded-full border border-white/10 border-t border-t-white/10 bg-[#111827]/70 px-4 py-2 machined-card transition-all duration-700 ease-out ${

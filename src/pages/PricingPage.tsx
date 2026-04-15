@@ -65,9 +65,9 @@ const PricingPage: React.FC = () => {
       <SEO {...SEO_ROUTES.pricing} />
       
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-16 md:px-10 md:pb-20">
+        <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-16 md:pb-20">
       {/* SECTION 1: HERO */}
-      <section className="mx-auto mb-16 flex max-w-3xl flex-col gap-6 text-center sm:mb-24 pt-16 md:pt-24">
+      <section className="mb-16 flex flex-col gap-6 text-center pt-16 sm:mb-24 md:pt-24">
         <p className="section-eyebrow">PRICING</p>
         <div>
           <h1 className="text-[40px] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7] sm:text-[48px] md:text-[60px]">
@@ -83,7 +83,7 @@ const PricingPage: React.FC = () => {
       </section>
 
       {/* SECTION 2: PRICING CARDS */}
-      <section className="mx-auto max-w-[1200px] mb-16 sm:mb-24">
+      <section className="mb-16 sm:mb-24">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6">
           {pricingTiers.map((tier) => (
             <article
@@ -124,7 +124,7 @@ const PricingPage: React.FC = () => {
       </section>
 
       {/* SECTION 3: GUARANTEE CALLOUT */}
-      <section className="mx-auto mb-20 max-w-[1200px] sm:mb-32">
+      <section className="mb-20 sm:mb-32">
         <article className="w-full overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
           <div className="border-l-4 border-[#B05D41] px-6 py-10 md:px-8 md:py-12 lg:px-10">
             <div className="max-w-4xl">
@@ -140,7 +140,7 @@ const PricingPage: React.FC = () => {
       </section>
 
       {/* SECTION 4: CLOSING CTA */}
-      <section className="mx-auto mb-24 max-w-[1200px] sm:mb-32 rounded-[var(--radius-card)] bg-[#131821] p-10 md:p-16 border border-white/10">
+      <section className="mb-24 rounded-[var(--radius-card)] border border-white/10 bg-[#131821] p-10 sm:mb-32 md:p-16">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
             Not sure which tier fits?

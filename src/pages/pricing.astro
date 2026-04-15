@@ -1,0 +1,303 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { CTA_PATHS } from '../lib/cta';
+import { SEO_ROUTES } from '../lib/seo';
+
+const pricingTiers = [
+  {
+    name: 'Starter',
+    price: '$1,200',
+    description: 'For local businesses that need a site that actually converts visitors into calls.',
+    features: ['3 pages', 'Mobile-ready', 'Contact form', 'Live in 14 days'],
+    cta: 'Start a project →',
+    href: CTA_PATHS.startProject,
+  },
+  {
+    name: 'Growth',
+    price: '$2,200',
+    description: 'For businesses ready to dominate local search and stop losing jobs to competitors.',
+    features: ['5 pages', 'SEO foundation', 'Google Business profile setup', 'Live in 21 days'],
+    cta: 'Start a project →',
+    href: CTA_PATHS.startProject,
+    recommended: true,
+  },
+  {
+    name: 'Custom',
+    price: 'From $3,500',
+    description: 'Larger scope, deeper build. Scoped per project.',
+    features: ['Unlimited pages', 'Integrations & automations', 'Ongoing support available', 'Timeline scoped on intake'],
+    cta: "Let's talk →",
+    href: CTA_PATHS.startProject,
+  },
+] as const;
+
+const comparisonRows = [
+  {
+    label: 'Pages included',
+    starter: '3 pages',
+    growth: '5 pages',
+    custom: 'Scoped to the project',
+  },
+  {
+    label: 'Revisions',
+    starter: '2 rounds',
+    growth: '3 rounds',
+    custom: 'Scoped in the proposal',
+  },
+  {
+    label: 'Turnaround',
+    starter: '14 days',
+    growth: '21 days',
+    custom: 'Timeline scoped on intake',
+  },
+  {
+    label: 'SEO setup',
+    starter: 'Basic on-page setup',
+    growth: 'Local SEO foundation',
+    custom: 'Custom strategy',
+  },
+  {
+    label: 'Google Business profile',
+    starter: 'Guidance only',
+    growth: 'Setup + optimization',
+    custom: 'Included if needed',
+  },
+  {
+    label: 'Hosting guidance',
+    starter: 'Included',
+    growth: 'Included',
+    custom: 'Included',
+  },
+  {
+    label: 'CMS / editing capability',
+    starter: 'Light content updates',
+    growth: 'Editable content workflow',
+    custom: 'Custom editing setup',
+  },
+  {
+    label: 'Post-launch support',
+    starter: 'Launch support',
+    growth: 'Post-launch support',
+    custom: 'Scoped support available',
+  },
+  {
+    label: 'Ownership',
+    starter: 'Full ownership',
+    growth: 'Full ownership',
+    custom: 'Full ownership',
+  },
+  {
+    label: 'Recurring fees',
+    starter: 'None',
+    growth: 'None',
+    custom: 'None',
+  },
+] as const;
+
+const faqItems = [
+  {
+    question: 'Do I own the code?',
+    answer:
+      'Yes. You own the site, the copy we build for you, and the final handoff files. There are no hidden licensing fees or lease-style arrangements.',
+  },
+  {
+    question: 'Can I edit the site myself?',
+    answer:
+      'If the project needs self-editing, we set it up with a simple editing workflow and show you how to use it. If you want us to handle updates instead, we can do that too.',
+  },
+  {
+    question: 'What if I need changes after launch?',
+    answer:
+      'Small launch fixes are included after go-live. If you need larger changes, new pages, or ongoing edits, we scope them clearly before any work starts.',
+  },
+  {
+    question: 'Is hosting included?',
+    answer:
+      'We handle hosting guidance and the deployment setup so you are not left guessing. If a separate hosting account is needed, we tell you exactly what to use and what it costs.',
+  },
+  {
+    question: 'How do revisions work?',
+    answer:
+      'Each package includes a set number of revision rounds. We collect feedback in batches so the project keeps moving and you do not waste time on tiny back-and-forth edits.',
+  },
+  {
+    question: "What's the payment schedule?",
+    answer:
+      'Typical projects start with a deposit, then the balance is due by milestone or before launch depending on scope. If a project needs a custom schedule, we will spell it out before we start.',
+  },
+  {
+    question: 'Do you work with businesses outside Ontario?',
+    answer:
+      'Yes. Ontario service businesses are the main focus, but we can work with the right fit outside the province if the project matches our approach.',
+  },
+  {
+    question: 'What makes Axiom different?',
+    answer:
+      'The process is built around clarity, speed, and ownership. You get a site that is easy to understand, fast to load, and built to turn visitors into calls without recurring platform baggage.',
+  },
+] as const;
+---
+
+<SiteLayout title={SEO_ROUTES.pricing.title} description={SEO_ROUTES.pricing.description} canonicalPath="/pricing">
+  <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 md:pb-20">
+    <section class="mx-auto mb-16 flex max-w-3xl flex-col gap-6 pt-16 text-center sm:mb-24 md:pt-24">
+      <p class="section-eyebrow">Pricing</p>
+      <div>
+        <h1 class="text-[40px] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7] sm:text-[48px] md:text-[60px]">
+          One investment. Full ownership.
+        </h1>
+        <h2 class="mt-2 text-[24px] font-axiomSans font-medium tracking-tight text-slate-300 md:text-[32px]">
+          No monthly fees. No recurring charges. You own everything we build.
+        </h2>
+      </div>
+      <p class="mx-auto max-w-[760px] text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
+        No monthly platform fees. No recurring charges for things you should already own. Three tiers based on what
+        your business actually needs.
+      </p>
+    </section>
+
+    <section class="mx-auto mb-16 max-w-[1200px] sm:mb-24">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6">
+        {pricingTiers.map((tier) => (
+          <article
+            class={`machined-card flex h-full flex-col gap-8 rounded-[var(--radius-card)] border bg-[#10141c]/40 p-8 transition-colors sm:p-10 ${
+              tier.recommended ? 'border-t-2 border-t-axiom-accent border-white/10 shadow-[0_12px_44px_rgba(200,122,87,0.12)]' : 'border-white/10'
+            }`}
+          >
+            <div>
+              <h3 class="font-axiomMono text-xs uppercase tracking-wide text-[#A7B3BC]">{tier.name}</h3>
+              <p class="mt-6 font-axiomDisplay text-[40px] leading-none tracking-[-0.04em] text-[#F2F4F7]">{tier.price}</p>
+              <p class="mt-4 text-[15px] leading-relaxed text-slate-300">{tier.description}</p>
+            </div>
+
+            <ul class="mb-2 mt-auto flex flex-col gap-3">
+              {tier.features.map((feature) => (
+                <li class="flex items-start gap-3 text-sm leading-relaxed text-slate-300 md:text-[15px]">
+                  <span class="text-slate-500">·</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a href={tier.href} class="btn-primary btn-md w-full justify-center">
+              {tier.cta}
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto mb-16 max-w-[1200px] sm:mb-24">
+      <article class="machined-card overflow-hidden rounded-[var(--radius-card)] p-6 sm:p-8 md:p-10">
+        <div class="max-w-3xl">
+          <p class="section-eyebrow">Compare the tiers</p>
+          <h2 class="mt-3 text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
+            What each package includes.
+          </h2>
+          <p class="mt-4 max-w-2xl text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
+            Use this to compare the structure, support, and ownership before you book a call.
+          </p>
+        </div>
+
+        <div class="mt-8 overflow-x-auto">
+          <table class="min-w-full border-collapse text-left">
+            <thead>
+              <tr class="border-b border-white/10">
+                <th scope="col" class="pb-4 pr-6 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Feature
+                </th>
+                <th scope="col" class="pb-4 pr-6 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Starter
+                </th>
+                <th scope="col" class="pb-4 pr-6 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Growth
+                </th>
+                <th scope="col" class="pb-4 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                  Custom
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr class="border-b border-white/[0.06] align-top last:border-b-0">
+                  <th scope="row" class="py-4 pr-6 text-[14px] font-medium text-[#F2F4F7] sm:text-[15px]">
+                    {row.label}
+                  </th>
+                  <td class="py-4 pr-6 text-[14px] leading-relaxed text-slate-300 sm:text-[15px]">
+                    {row.starter}
+                  </td>
+                  <td class="py-4 pr-6 text-[14px] leading-relaxed text-slate-300 sm:text-[15px]">
+                    {row.growth}
+                  </td>
+                  <td class="py-4 text-[14px] leading-relaxed text-slate-300 sm:text-[15px]">
+                    {row.custom}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="mx-auto mb-16 max-w-[1200px] sm:mb-24">
+      <div class="max-w-3xl">
+        <p class="section-eyebrow">Frequently asked questions</p>
+        <h2 class="mt-3 text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
+          Answers before the call.
+        </h2>
+      </div>
+
+      <div class="mt-8 grid gap-4">
+        {faqItems.map((item) => (
+          <details class="machined-card group overflow-hidden rounded-[var(--radius-card)]">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 sm:px-8">
+              <span class="text-[16px] font-semibold tracking-[-0.01em] text-[#F2F4F7] sm:text-[18px]">
+                {item.question}
+              </span>
+              <span
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition-transform duration-200 group-open:rotate-45"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </summary>
+            <div class="px-6 pb-6 sm:px-8 sm:pb-8">
+              <p class="max-w-3xl text-[15px] leading-relaxed text-slate-300 sm:text-[16px]">{item.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto mb-24 max-w-[1200px] rounded-[var(--radius-card)] border border-white/10 bg-[#131821] p-10 sm:mb-32 md:p-16">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
+          Not sure which tier fits?
+        </h2>
+        <p class="mt-4 mb-8 text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
+          Start a project and we will tell you exactly what your business needs. One business day response, no
+          pressure.
+        </p>
+        <a href={CTA_PATHS.startProject} class="btn-primary btn-lg inline-flex">
+          Start a project →
+        </a>
+      </div>
+    </section>
+
+    <section class="mx-auto mb-24 max-w-[1200px] sm:mb-32">
+      <article class="machined-card rounded-[var(--radius-card)] px-6 py-10 text-center sm:px-8 sm:py-12 md:px-10 md:py-14">
+        <p class="section-eyebrow">Final step</p>
+        <h2 class="mt-3 text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
+          Still have questions?
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
+          If you want a quick fit check, send the details and we will tell you what makes sense.
+        </p>
+        <a href={CTA_PATHS.contact} class="btn-primary btn-lg mt-8 inline-flex">
+          Contact us →
+        </a>
+      </article>
+    </section>
+  </main>
+</SiteLayout>

@@ -1,0 +1,49 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { SEO_ROUTES } from '../lib/seo';
+---
+
+<SiteLayout title={SEO_ROUTES.privacy.title} description={SEO_ROUTES.privacy.description} canonicalPath="/privacy">
+  <main id="main-content" tabindex="-1" class="axiom-container w-full pb-24 pt-32">
+    <div class="mx-auto max-w-[800px] text-axiom-text-mute leading-relaxed">
+      <h1 class="mb-8 text-[40px] font-semibold tracking-tight text-axiom-text-main">Privacy Policy</h1>
+      <p class="mb-6">Last Updated: {new Date().toLocaleDateString('en-CA')}</p>
+
+      <h2 class="mb-4 mt-12 text-[20px] font-semibold text-axiom-text-main">1. Information Collection</h2>
+      <p class="mb-6">
+        We collect several different types of information for various purposes to provide and improve our Service to
+        you. This includes personal data provided exclusively via direct contact or scheduled consultation requests.
+      </p>
+
+      <h2 class="mb-4 mt-8 text-[20px] font-semibold text-axiom-text-main">2. Use of Data</h2>
+      <p class="mb-4">Axiom uses the collected data for various purposes:</p>
+      <ul class="mb-6 list-disc pl-6">
+        <li>To provide and maintain the Service</li>
+        <li>To notify you about changes to our Service</li>
+        <li>To provide customer care and support</li>
+        <li>To provide analysis or valuable information so that we can improve the Service</li>
+        <li>To monitor the usage of the Service</li>
+      </ul>
+
+      <h2 class="mb-4 mt-8 text-[20px] font-semibold text-axiom-text-main">3. Transfer Of Data</h2>
+      <p class="mb-6">
+        Your information, including Personal Data, may be transferred to - and maintained on - computers located
+        outside of your state, province, country or other governmental jurisdiction where the data protection laws may
+        differ than those from your jurisdiction.
+      </p>
+
+      <h2 class="mb-4 mt-8 text-[20px] font-semibold text-axiom-text-main">4. Security Of Data</h2>
+      <p class="mb-6">
+        The security of your data is important to us, but remember that no method of transmission over the Internet,
+        or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to
+        protect your Personal Data, we cannot guarantee its absolute security.
+      </p>
+
+      <h2 class="mb-4 mt-8 text-[20px] font-semibold text-axiom-text-main">5. Analytics</h2>
+      <p class="mb-6">
+        We may use third-party Service Providers to monitor and analyze the use of our Service, such as Google
+        Analytics, subject strictly to their respective privacy frameworks.
+      </p>
+    </div>
+  </main>
+</SiteLayout>

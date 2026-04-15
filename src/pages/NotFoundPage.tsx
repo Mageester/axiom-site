@@ -26,7 +26,7 @@ const NotFoundPage: React.FC = () => {
             </p>
 
             <div className="mt-7 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-              <p className="font-axiomMono text-[10px] uppercase tracking-[0.16em] text-[#A7B3BC]">Requested path</p>
+              <p className="font-axiomMono text-xs uppercase tracking-[0.16em] text-[#A7B3BC]">Requested path</p>
               <p className="mt-2 break-all font-axiomMono text-[13px] text-[#F2F4F7]">
                 {requestedPath}
               </p>

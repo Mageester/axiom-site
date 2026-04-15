@@ -1,0 +1,295 @@
+---
+type Kind = 'contact' | 'project';
+
+type Props = {
+  kind: Kind;
+  endpoint: '/api/contact' | '/api/intake';
+  title: string;
+  eyebrow: string;
+  description: string;
+  helper: string;
+  submitLabel: string;
+  successTitle: string;
+  successText: string;
+  noteLinkHref: string;
+  noteLinkLabel: string;
+  noteText: string;
+};
+
+const {
+  kind,
+  endpoint,
+  title,
+  eyebrow,
+  description,
+  helper,
+  submitLabel,
+  successTitle,
+  successText,
+  noteLinkHref,
+  noteLinkLabel,
+  noteText,
+} = Astro.props;
+
+const fieldLabelClass = 'text-[15px] md:text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
+const fieldHelpClass = 'text-[15px] md:text-xs leading-5 text-slate-400';
+const fieldInputClass =
+  'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-[15px] md:text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500';
+---
+
+<article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] shadow-[0_20px_56px_rgba(0,0,0,0.24)]">
+  <div class="border-b border-white/10 p-6 md:p-7 lg:p-8">
+    <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="section-eyebrow">{eyebrow}</p>
+        <h2 class="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">{title}</h2>
+      </div>
+      <p class="text-[15px] md:text-sm text-slate-400">{description}</p>
+    </div>
+  </div>
+
+  <div class="p-6 md:p-7 lg:p-8">
+    <div data-intake-success class="hidden rounded-[var(--radius-card)] border border-emerald-400/30 bg-emerald-500/10 p-7 text-center">
+      <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-emerald-400/35 bg-emerald-500/15">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-emerald-400" aria-hidden="true">
+          <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <h3 class="mt-5 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">{successTitle}</h3>
+      <p class="mt-2 text-[15px] md:text-sm leading-7 text-slate-300">{successText}</p>
+      <button
+        type="button"
+        data-intake-reset
+        class="mt-6 inline-flex min-h-11 items-center text-[15px] md:text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
+      >
+        Send another message
+      </button>
+    </div>
+
+    <form
+      data-axiom-intake-form
+      data-intake-kind={kind}
+      data-intake-endpoint={endpoint}
+      class="flex flex-col gap-6"
+      aria-busy="false"
+    >
+      <div data-intake-alert class="hidden rounded-[var(--radius-component)] border border-red-400/35 bg-red-500/10 px-4 py-3 text-[15px] md:text-sm text-red-100" role="alert" aria-live="assertive"></div>
+
+      <fieldset class="contents">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div class="flex flex-col gap-2">
+            <label for={`${kind}-name`} class={fieldLabelClass}>Name</label>
+            <p id={`${kind}-name-helper`} class={fieldHelpClass}>Who should we address?</p>
+            <input
+              id={`${kind}-name`}
+              name="name"
+              type="text"
+              required
+              minLength="2"
+              autoComplete="name"
+              class={fieldInputClass}
+              aria-describedby={`${kind}-name-helper`}
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for={`${kind}-email`} class={fieldLabelClass}>Email</label>
+            <p id={`${kind}-email-helper`} class={fieldHelpClass}>Where should we reply?</p>
+            <input
+              id={`${kind}-email`}
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              class={fieldInputClass}
+              aria-describedby={`${kind}-email-helper`}
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for={`${kind}-business`} class={fieldLabelClass}>Business name</label>
+            <p id={`${kind}-business-helper`} class={fieldHelpClass}>Optional, if the reply should use a company name.</p>
+            <input
+              id={`${kind}-business`}
+              name="business_name"
+              type="text"
+              autoComplete="organization"
+              class={fieldInputClass}
+              aria-describedby={`${kind}-business-helper`}
+            />
+          </div>
+
+          {kind === 'project' ? (
+            <div class="flex flex-col gap-2">
+              <label for={`${kind}-website`} class={fieldLabelClass}>Website URL</label>
+              <p id={`${kind}-website-helper`} class={fieldHelpClass}>Optional. Add it if there is already a site.</p>
+              <input
+                id={`${kind}-website`}
+                name="current_website"
+                type="url"
+                placeholder="https://example.com"
+                autoComplete="url"
+                class={fieldInputClass}
+                aria-describedby={`${kind}-website-helper`}
+              />
+            </div>
+          ) : (
+            <div class="flex flex-col gap-2">
+              <label for={`${kind}-website`} class={fieldLabelClass}>Website URL</label>
+              <p id={`${kind}-website-helper`} class={fieldHelpClass}>Optional. Add it if you are following up on an existing site.</p>
+              <input
+                id={`${kind}-website`}
+                name="current_website"
+                type="url"
+                placeholder="https://example.com"
+                autoComplete="url"
+                class={fieldInputClass}
+                aria-describedby={`${kind}-website-helper`}
+              />
+            </div>
+          )}
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for={`${kind}-details`} class={fieldLabelClass}>
+            {kind === 'project' ? 'Brief project description' : 'Message'}
+          </label>
+          <p id={`${kind}-details-helper`} class={fieldHelpClass}>
+            {helper}
+          </p>
+          <textarea
+            id={`${kind}-details`}
+            name={kind === 'project' ? 'details' : 'message'}
+            rows="4"
+            required
+            minLength="10"
+            placeholder={kind === 'project' ? 'What does your business do, what is wrong with the current site, and when do you want to move?' : 'Tell us what you need help with.'}
+            class={`${fieldInputClass} resize-none`}
+            aria-describedby={`${kind}-details-helper`}
+          ></textarea>
+        </div>
+      </fieldset>
+
+      <input type="hidden" name="source_path" value={Astro.url.pathname + Astro.url.search} />
+
+      <div class="flex flex-col gap-3">
+        <button type="submit" class="btn-primary btn-lg w-full">
+          {submitLabel}
+        </button>
+        <p class="text-[15px] md:text-sm text-slate-400">{noteText} <a href={noteLinkHref} class="underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">{noteLinkLabel}</a>.</p>
+      </div>
+    </form>
+  </div>
+</article>
+
+<script is:inline>
+  const initIntakeForms = () => {
+    const forms = document.querySelectorAll('[data-axiom-intake-form]');
+
+    forms.forEach((form) => {
+      if (!(form instanceof HTMLFormElement)) return;
+      if (form.dataset.intakeInitialized === 'true') return;
+      form.dataset.intakeInitialized = 'true';
+
+      const endpoint = form.dataset.intakeEndpoint || '/api/contact';
+      const alertBox = form.querySelector('[data-intake-alert]');
+      const successBox = form.closest('article')?.querySelector('[data-intake-success]');
+      const resetButton = form.closest('article')?.querySelector('[data-intake-reset]');
+      const submitButton = form.querySelector('button[type="submit"]');
+
+      const showAlert = (message) => {
+        if (!(alertBox instanceof HTMLElement)) return;
+        alertBox.textContent = message;
+        alertBox.classList.remove('hidden');
+      };
+
+      const clearAlert = () => {
+        if (!(alertBox instanceof HTMLElement)) return;
+        alertBox.textContent = '';
+        alertBox.classList.add('hidden');
+      };
+
+      const setBusy = (busy) => {
+        form.setAttribute('aria-busy', String(busy));
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = busy;
+          submitButton.textContent = busy ? 'Sending...' : form.dataset.intakeKind === 'project' ? 'Send it →' : 'Send message →';
+        }
+      };
+
+      const resetToForm = () => {
+        form.reset();
+        clearAlert();
+        if (successBox instanceof HTMLElement) {
+          successBox.classList.add('hidden');
+        }
+        form.classList.remove('hidden');
+      };
+
+      if (resetButton instanceof HTMLButtonElement) {
+        resetButton.addEventListener('click', resetToForm);
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        clearAlert();
+        setBusy(true);
+
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+
+        const body = form.dataset.intakeKind === 'project'
+          ? {
+              name: String(payload.name || '').trim(),
+              email: String(payload.email || '').trim(),
+              business_name: String(payload.business_name || '').trim(),
+              current_website: String(payload.current_website || '').trim(),
+              details: String(payload.details || '').trim(),
+              primary_goal: 'new_site',
+              source_path: String(payload.source_path || '').trim(),
+            }
+          : {
+              name: String(payload.name || '').trim(),
+              email: String(payload.email || '').trim(),
+              business_name: String(payload.business_name || '').trim(),
+              message: String(payload.message || '').trim(),
+              source_path: String(payload.source_path || '').trim(),
+            };
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify(body),
+          });
+
+          const result = await response.json().catch(() => null);
+          if (!response.ok || !result || result.ok === false) {
+            const message = result?.details ? `${result.error || 'Submission failed'} ${result.details}` : result?.error || 'Submission failed';
+            showAlert(message);
+            setBusy(false);
+            return;
+          }
+
+          if (successBox instanceof HTMLElement) {
+            successBox.classList.remove('hidden');
+          }
+          form.classList.add('hidden');
+          setBusy(false);
+        } catch (error) {
+          showAlert('Something went wrong. Please email contact@getaxiom.ca.');
+          setBusy(false);
+        }
+      });
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIntakeForms, { once: true });
+  } else {
+    initIntakeForms();
+  }
+</script>

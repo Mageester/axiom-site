@@ -1,0 +1,52 @@
+---
+import '../index.css';
+import { SITE_NAME, SITE_URL } from '../lib/seo';
+
+type Props = {
+  title?: string;
+  description?: string;
+  noIndex?: boolean;
+};
+
+const {
+  title = 'Axiom Admin',
+  description = 'Private admin area for Axiom Infrastructure.',
+  noIndex = true,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-CA" class="scroll-smooth bg-[#0B0B0C] text-[#F3F4F6]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0B0C" />
+    <meta name="generator" content="Astro" />
+    <meta name="robots" content={noIndex ? 'noindex,nofollow' : 'index,follow'} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={SITE_URL} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={SITE_NAME} />
+  </head>
+  <body class="min-h-screen bg-[var(--axiom-base)] text-[#ECEFF3] antialiased">
+    <div class="relative flex min-h-screen items-center justify-center px-6 py-10">
+      <div class="w-full max-w-6xl">
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>

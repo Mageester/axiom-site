@@ -1,0 +1,184 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import SocialProof from '../components/site/SocialProof.tsx';
+import WorkPreviewGrid from '../components/site/WorkPreviewGrid.astro';
+import { CTA } from '../lib/cta';
+import { HOME_JSON_LD, SEO_ROUTES } from '../lib/seo';
+
+const lighthouseCards = [
+  {
+    title: 'Typical local business site: 35/100',
+    score: '35/100',
+    screenshot: '/images/lighthouse-before.png',
+    screenshotAlt: 'Lighthouse performance report for a typical local business site',
+    description: 'Slow, unclear, and full of unnecessary friction before a visitor can even decide to call.',
+    accentClass: 'border-l-4 border-[#f29e5d]/70',
+    scoreClass: 'text-[#f29e5d]',
+  },
+  {
+    title: 'Axiom build: 98/100',
+    score: '98/100',
+    screenshot: '/images/lighthouse-after.png',
+    screenshotAlt: 'Lighthouse performance report for an Axiom build',
+    description: 'Lean structure, fast load, and a clear next step without the usual performance drag.',
+    accentClass: 'border-l-4 border-[#d4a48e]/70',
+    scoreClass: 'text-[#7ce0b1]',
+  },
+] as const;
+---
+
+<SiteLayout title={SEO_ROUTES.home.title} description={SEO_ROUTES.home.description} canonicalPath="/" schema={HOME_JSON_LD}>
+  <main id="main-content" tabindex="-1" class="w-full pb-24 md:pb-32">
+    <section data-hero-root class="relative isolate bg-[#0a0c10] pt-16 md:pt-24">
+      <div class="axiom-container">
+        <div class="max-w-5xl">
+          <div class="max-w-4xl overflow-hidden">
+            <h1 data-startup-heading class="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
+              Clear websites for Ontario service businesses. From $1,200. Yours in 14 days.
+            </h1>
+          </div>
+          <p data-startup-copy class="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
+            Most business sites are slow, unclear, and built by someone who does not understand what makes people call.
+            We fix that with clear pages, full ownership, and a fast build process.
+          </p>
+          <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 section-eyebrow" aria-label="Axiom performance highlights">
+            <span>Built for more quote requests</span>
+            <span aria-hidden="true" class="text-white/30">·</span>
+            <span>Sub-1s load times</span>
+            <span aria-hidden="true" class="text-white/30">·</span>
+            <span>Reply in 24hrs</span>
+          </div>
+          <div data-startup-actions class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <a href={CTA.primary.to} class="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+              Start a project
+            </a>
+            <a href={`${CTA.primary.to}?type=review`} class="btn-secondary btn-lg w-full whitespace-nowrap sm:w-auto">
+              Get a free site review
+            </a>
+            <a href={CTA.work.to} class="btn-secondary btn-lg w-full whitespace-nowrap sm:w-auto">
+              See our work
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <WorkPreviewGrid />
+
+    <section class="pt-16 md:pt-20" aria-labelledby="pagespeed-heading">
+      <div class="axiom-container">
+        <div class="max-w-4xl">
+          <p class="section-eyebrow">Performance proof</p>
+          <h2 id="pagespeed-heading" class="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+            Before and after PageSpeed
+          </h2>
+          <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-[15px]">
+            Lighthouse screenshots from a typical local-business experience versus the Axiom rebuild.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          {lighthouseCards.map((card) => (
+            <article class={`machined-card overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)] ${card.accentClass}`}>
+              <div class="border-b border-white/10 bg-[#07090c] p-3 md:p-4">
+                <div class="overflow-hidden rounded-[calc(var(--radius-card)-0.5rem)] border border-white/10 bg-black/20">
+                  <img src={card.screenshot} alt={card.screenshotAlt} class="h-auto w-full object-cover" loading="lazy" decoding="async" />
+                </div>
+              </div>
+
+              <div class="p-6 md:p-7">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="section-eyebrow">Lighthouse</p>
+                    <h3 class="mt-2 text-[1.35rem] font-bold tracking-tight text-[#F2F4F7]">{card.title}</h3>
+                  </div>
+                  <span class={`rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm font-semibold ${card.scoreClass}`}>
+                    {card.score}
+                  </span>
+                </div>
+                <p class="mt-4 text-[15px] leading-relaxed text-slate-300">{card.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="pt-16 md:pt-20">
+      <div class="axiom-container">
+        <article class="w-full overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
+          <div class="border-l-4 border-[#B05D41] px-5 py-8 md:px-7 md:py-10">
+            <div class="max-w-4xl">
+              <p class="section-eyebrow">Speed guarantee</p>
+              <h2 id="speed-guarantee-heading" class="mt-3 text-[clamp(1.75rem,3vw,2.65rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+                If your site loads in over one second, we fix it free.
+              </h2>
+              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400 md:text-[15px]">
+                No asterisks. That is the standard we build to.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="pt-16 md:pt-20" aria-labelledby="social-proof-heading">
+      <div class="axiom-container">
+        <SocialProof headingId="social-proof-heading" />
+      </div>
+    </section>
+
+    <section class="pt-16 md:pt-20">
+      <div class="axiom-container">
+        <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+          <div class="max-w-2xl">
+            <p class="section-eyebrow">Why it matters</p>
+            <h2 class="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
+              A slow site signals an unprofessional business.
+            </h2>
+            <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-300 md:text-[15px]">
+              A confusing site sends the job to your competitor. A site with no clear next step leaves money on the table.
+              We audit all three before anything gets built.
+            </p>
+            <div class="mt-8">
+              <a href={CTA.primary.to} class="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
+                {CTA.primary.label}
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="intake" class="pt-16 md:pt-24">
+      <div class="axiom-container">
+        <article class="cta-banner">
+          <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+            <div class="max-w-3xl">
+              <p class="section-eyebrow">Next step</p>
+              <h2 class="mt-3 max-w-4xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                If the site is not earning trust, it is costing you work.
+              </h2>
+              <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-[15px]">
+                We will review your current site, show what is costing you trust, and tell you exactly what to fix.
+              </p>
+
+              <div class="mt-8 flex flex-wrap items-center gap-3">
+                <a href={CTA.primary.to} class="btn-primary btn-lg whitespace-nowrap">
+                  Start a project →
+                </a>
+              </div>
+            </div>
+
+            <aside class="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5">
+              <p class="section-eyebrow">What happens next</p>
+              <div class="mt-4">
+                <p class="text-sm font-medium text-[#F2F4F7]">Review → Scope → Build → Launch</p>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</SiteLayout>

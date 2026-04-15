@@ -40,9 +40,9 @@ const Approach: React.FC = () => {
       <SEO {...SEO_ROUTES.approach} />
 
       <Layout disableAmbientMotion hidePrimaryCta>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
+        <main id="main-content" tabIndex={-1} className="w-full pb-24 md:pb-32">
           <section data-hero-root className="relative pt-16 md:pt-24">
-            <div className="max-w-6xl">
+            <div className="axiom-container">
               <div className="max-w-4xl">
                 <p className="section-eyebrow">Our Approach</p>
                 <div className="mt-6 max-w-4xl overflow-hidden">
@@ -58,7 +58,7 @@ const Approach: React.FC = () => {
           </section>
 
           <section aria-labelledby="approach-principles-title" className="pt-28 md:pt-32">
-            <div className="max-w-6xl">
+            <div className="axiom-container">
               <h2 id="approach-principles-title" className="sr-only">
                 Three principles
               </h2>

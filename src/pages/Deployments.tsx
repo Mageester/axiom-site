@@ -264,7 +264,7 @@ const Deployments: React.FC = () => {
       <SEO {...SEO_ROUTES.work} />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
+        <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-24 md:pb-32">
           <RevealBlock as="section" data-hero-root className="pt-12 md:pt-20">
             <div className="max-w-5xl">
               <p className="section-eyebrow">WORK</p>

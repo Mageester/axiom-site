@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
+import SocialProof from '../components/site/SocialProof';
 import WorkPreviewGrid from '../components/WorkPreviewGrid';
 import { SEO } from '../components/SEO';
 import { RevealBlock } from '../components/ui/RevealBlock';
@@ -16,12 +17,6 @@ const homepageBenefitCallouts = [
   'One clear path to call, email, or request a quote - no hunting required',
 ] as const;
 
-type ClientTestimonial = {
-  quote: string;
-  clientName: string;
-  businessName: string;
-};
-
 type LighthouseCard = {
   title: string;
   score: string;
@@ -31,14 +26,6 @@ type LighthouseCard = {
   accentClass: string;
   scoreClass: string;
 };
-
-const clientTestimonials: readonly ClientTestimonial[] = [
-  {
-    quote: 'They bridge the gap between ambitious visual concepts and operational reality.',
-    clientName: 'Jake Young',
-    businessName: 'FormDr',
-  },
-] as const;
 
 const lighthouseCards: readonly LighthouseCard[] = [
   {
@@ -67,7 +54,7 @@ const Home: React.FC = () => {
       <SEO {...SEO_ROUTES.home} schema={HOME_JSON_LD} />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-24 md:px-10 md:pb-32">
+        <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-24 md:pb-32">
           <section data-hero-root className="relative isolate bg-[#0a0c10] pt-16 md:pt-24">
             <div className="max-w-5xl">
               <div className="max-w-4xl overflow-hidden">
@@ -178,33 +165,8 @@ const Home: React.FC = () => {
             </article>
           </RevealBlock>
 
-          <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature" aria-labelledby="clients-say-heading">
-            <div className="max-w-4xl">
-              <p className="section-eyebrow">Testimonials</p>
-              <h2 id="clients-say-heading" className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                What clients say
-              </h2>
-            </div>
-
-            <div className="mt-10 max-w-4xl">
-              {clientTestimonials.map((testimonial) => (
-                <article key={testimonial.clientName} className="machined-card flex h-full flex-col gap-6 p-6 md:p-8">
-                  <div className="space-y-4">
-                    <p className="section-eyebrow">Client testimonial</p>
-                    <blockquote className="max-w-3xl text-[clamp(1.3rem,2vw,1.85rem)] font-medium leading-[1.45] tracking-[-0.03em] text-[#F2F4F7]">
-                      {testimonial.quote}
-                    </blockquote>
-                  </div>
-
-                  <div className="flex flex-col gap-1 border-t border-white/10 pt-5 sm:flex-row sm:items-end sm:justify-between">
-                    <div>
-                      <p className="text-[15px] md:text-base font-semibold text-[#F2F4F7]">{testimonial.clientName}</p>
-                      <p className="text-[15px] md:text-sm text-slate-400">{testimonial.businessName}</p>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+          <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature" aria-labelledby="social-proof-heading">
+            <SocialProof headingId="social-proof-heading" />
           </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature">

@@ -1,0 +1,39 @@
+---
+import type { ResponsiveSource } from '../../lib/responsiveImages';
+
+type Props = {
+  source: ResponsiveSource;
+  alt: string;
+  sizes: string;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  decoding?: 'async' | 'sync' | 'auto';
+  objectPosition?: string;
+};
+
+const {
+  source,
+  alt,
+  sizes,
+  class: className = '',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  decoding = 'async',
+  objectPosition,
+} = Astro.props;
+---
+
+<picture>
+  <source type="image/avif" srcset={source.avifSrcSet} sizes={sizes} />
+  <source type="image/webp" srcset={source.webpSrcSet} sizes={sizes} />
+  <img
+    src={source.fallbackSrc}
+    alt={alt}
+    class={className}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding={decoding}
+    style={objectPosition ? `object-position:${objectPosition};` : undefined}
+  />
+</picture>

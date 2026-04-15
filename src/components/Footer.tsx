@@ -11,14 +11,14 @@ const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
 const Footer: React.FC = () => {
   return (
     <footer className="w-full border-t border-[#31363B] bg-[#090A0B]">
-      <div className="mx-auto w-full max-w-[92rem] px-5 py-10 md:px-8 md:py-12 lg:px-10 lg:py-14">
+      <div className="axiom-container py-10 md:py-12 lg:py-14">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_repeat(3,minmax(0,0.78fr))] lg:gap-10 xl:gap-12">
           <div className="max-w-md">
             <p className="text-2xl font-black leading-[1.02] tracking-tight text-[#F2F4F7] md:text-4xl">AXIOM</p>
             <p className="mt-3 max-w-md text-[15px] md:text-sm leading-6 text-slate-300">
               Built for businesses that are serious about growth.
             </p>
-            <p className="mt-6 text-[15px] md:text-[10px] uppercase tracking-[0.12em] text-slate-400">
+            <p className="mt-6 text-[15px] md:text-xs uppercase tracking-[0.12em] text-slate-400">
               © 2026 Axiom Infrastructure. All rights reserved.
             </p>
           </div>

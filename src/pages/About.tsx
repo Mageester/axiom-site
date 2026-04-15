@@ -36,7 +36,7 @@ const About: React.FC = () => {
       />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-6 pb-16 md:px-10 md:pb-20">
+        <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-16 md:pb-20">
           <RevealBlock as="section" data-hero-root className="pt-10 md:pt-16">
             <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.18)] md:p-8 lg:p-10">
               <div className="max-w-4xl">
@@ -85,21 +85,21 @@ const About: React.FC = () => {
                   <div className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-2">
                     <div className="divide-y divide-white/10">
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
-                        <div className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">01</div>
+                        <div className="font-axiomMono text-[15px] md:text-xs uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">01</div>
                         <div>
                           <p className="text-[15px] md:text-sm font-semibold text-[#F2F4F7]">What you do, who you serve, and why you’re the right call — readable before they scroll.</p>
                           <p className="mt-2 text-[15px] md:text-sm leading-6 text-slate-300">Not five clicks in. Not buried. Front and center, the moment someone lands.</p>
                         </div>
                       </div>
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
-                        <div className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">02</div>
+                        <div className="font-axiomMono text-[15px] md:text-xs uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">02</div>
                         <div>
                           <p className="text-[15px] md:text-sm font-semibold text-[#F2F4F7]">Your reviews, past work, and results are front and center.</p>
                           <p className="mt-2 text-[15px] md:text-sm leading-6 text-slate-300">Doubt doesn’t get a chance.</p>
                         </div>
                       </div>
                       <div className="grid gap-2 px-5 py-5 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-5 md:px-6 md:py-6">
-                        <div className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">03</div>
+                        <div className="font-axiomMono text-[15px] md:text-xs uppercase tracking-[0.18em] text-[#A7B3BC] md:pt-1">03</div>
                         <div>
                           <p className="text-[15px] md:text-sm font-semibold text-[#F2F4F7]">One path forward.</p>
                           <p className="mt-2 text-[15px] md:text-sm leading-6 text-slate-300">Call, book, or request a quote — no hunting, no dead ends.</p>

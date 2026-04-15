@@ -1,0 +1,87 @@
+---
+import ResponsivePicture from './ResponsivePicture.astro';
+import { responsiveImages, type ResponsiveSource } from '../../lib/responsiveImages';
+
+type WorkPreview = {
+  name: string;
+  description: string;
+  industryTag: string;
+  image: ResponsiveSource;
+  alt: string;
+};
+
+const browserDots = ['bg-[#ff5f57]', 'bg-[#febc2e]', 'bg-[#28c840]'] as const;
+
+const workPreviews: WorkPreview[] = [
+  {
+    name: 'Restaurant project',
+    description: 'Reservations, menu access, and contact details stay visible on every screen.',
+    industryTag: 'Restaurant & Hospitality',
+    image: responsiveImages.workRestaurant,
+    alt: 'Restaurant project site preview',
+  },
+  {
+    name: 'Landscaping project',
+    description: 'Project photos and quote requests are presented without clutter.',
+    industryTag: 'Landscaping & Outdoor',
+    image: responsiveImages.workLandscaping,
+    alt: 'Landscaping project site preview',
+  },
+  {
+    name: 'Roofing project',
+    description: 'Urgent calls and estimate requests each have a clear path.',
+    industryTag: 'Roofing & Exterior Services',
+    image: responsiveImages.workRoofing,
+    alt: 'Roofing project site preview',
+  },
+];
+
+const browserImageSizes = '(min-width: 1024px) 24rem, (min-width: 768px) 50vw, 100vw';
+---
+
+<section aria-labelledby="work-preview-grid-heading" class="pt-16 md:pt-20">
+<div class="axiom-container axiom-container--wide">
+    <div class="max-w-2xl">
+      <p class="section-eyebrow">Selected work</p>
+      <h2 id="work-preview-grid-heading" class="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+        Selected work
+      </h2>
+    </div>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-3">
+      {workPreviews.map((preview) => (
+        <article class="machined-card flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[var(--axiom-elevated)]">
+          <div class="border-b border-white/10 bg-[#0b0f16] px-4 py-3">
+            <div class="flex items-center gap-2">
+              {browserDots.map((dot) => (
+                <span class={`h-3 w-3 rounded-full ${dot}`} aria-hidden="true"></span>
+              ))}
+            </div>
+          </div>
+
+          <div class="overflow-hidden border-b border-white/10 bg-[#090d15]">
+            <ResponsivePicture
+              source={preview.image}
+              sizes={browserImageSizes}
+              alt={preview.alt}
+              class="aspect-[16/10] h-full w-full object-cover"
+            />
+          </div>
+
+          <div class="flex flex-1 flex-col p-5 md:p-6">
+            <div>
+              <h3 class="text-[1.1rem] font-semibold tracking-tight text-[#F2F4F7]">{preview.name}</h3>
+              <p class="mt-2 text-[15px] md:text-sm leading-6 text-slate-300">{preview.description}</p>
+            </div>
+
+            <div class="mt-5">
+              <span class="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[15px] md:text-xs uppercase tracking-[0.16em] text-white/65">
+                {preview.industryTag}
+              </span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

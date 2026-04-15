@@ -79,7 +79,7 @@ const WorkPreviewCard: React.FC<{ preview: WorkPreview; index: number }> = ({ pr
         </div>
 
         <div className="mt-5">
-          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-white/65">
+          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[15px] md:text-xs uppercase tracking-[0.16em] text-white/65">
             {preview.industryTag}
           </span>
         </div>
@@ -91,7 +91,7 @@ const WorkPreviewCard: React.FC<{ preview: WorkPreview; index: number }> = ({ pr
 const WorkPreviewGrid: React.FC = () => {
   return (
     <section aria-labelledby="work-preview-grid-heading" className="pt-16 md:pt-20">
-      <div className="mx-auto w-full max-w-6xl">
+      <div className="axiom-container axiom-container--wide">
         <div className="max-w-2xl">
           <p className="section-eyebrow">SELECTED WORK</p>
           <h2 id="work-preview-grid-heading" className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">

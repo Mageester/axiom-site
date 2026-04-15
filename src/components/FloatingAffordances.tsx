@@ -115,7 +115,7 @@ const FloatingAffordances: React.FC<FloatingAffordancesProps> = ({ mobileMenuOpe
         aria-hidden={!showMobileCta}
       >
         <div className="border-t border-white/[0.08] bg-[linear-gradient(180deg,rgba(10,12,16,0.86)_0%,rgba(8,10,14,0.95)_100%)] backdrop-blur-xl backdrop-saturate-150 shadow-[0_-10px_30px_rgba(0,0,0,0.18)]">
-          <div className="mx-auto flex max-w-[92rem] items-center gap-3 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3">
+          <div className="axiom-container flex items-center gap-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3">
             <Link
               to={CTA.primary.to}
               className="btn-primary btn-md flex-1 justify-center"

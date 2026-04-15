@@ -1,0 +1,110 @@
+---
+import { CTA } from '../../lib/cta';
+import { responsiveImages } from '../../lib/responsiveImages';
+
+type Props = {
+  hidePrimaryCta?: boolean;
+};
+
+const { hidePrimaryCta = false } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Work', to: '/work' },
+  { label: 'About', to: '/about' },
+  { label: 'Pricing', to: '/pricing' },
+] as const;
+
+const isActiveRoute = (to: string) => {
+  if (to === '/') {
+    return pathname === '/';
+  }
+
+  return pathname === to || pathname.startsWith(`${to}/`);
+};
+---
+
+<header class="pointer-events-none fixed inset-x-0 top-0 z-[55]">
+  <div class="axiom-container pt-2.5 md:pt-3">
+    <div
+      data-navbar-shell
+      class="pointer-events-auto relative flex h-[3.2rem] items-center rounded-[1rem] border border-white/[0.03] bg-[linear-gradient(180deg,rgba(10,12,16,0.11)_0%,rgba(10,12,16,0.05)_100%)] px-4 shadow-[0_1px_0_rgba(255,255,255,0.02),0_10px_22px_rgba(0,0,0,0.035)] backdrop-blur-xl backdrop-saturate-150 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-[3.5rem] md:px-5"
+    >
+      <div class="flex basis-[44%] flex-1 items-center justify-start">
+        <a
+          href="/"
+          aria-label="Axiom home"
+          class="inline-flex h-full origin-left items-center leading-none transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+        >
+          <img
+            src={responsiveImages.logoClear.fallbackSrc}
+            srcset={responsiveImages.logoClear.webpSrcSet}
+            alt="Axiom Infrastructure logo"
+            width="515"
+            height="163"
+            loading="eager"
+            fetchpriority="high"
+            class="block h-12 w-auto max-w-none object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-14 lg:h-[3.75rem]"
+            decoding="async"
+          />
+        </a>
+      </div>
+
+      <nav class="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-6 md:flex" aria-label="Primary navigation">
+        {navItems.map((item) => (
+          <a
+            href={item.to}
+            aria-current={isActiveRoute(item.to) ? 'page' : undefined}
+            class={`inline-flex items-center py-2 text-[15px] md:text-sm font-medium transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${isActiveRoute(item.to) ? 'text-[#F2F4F7]' : 'text-white/64 hover:text-[#EAEFF5]'}`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="hidden flex-1 basis-[44%] items-center justify-end md:flex">
+        {!hidePrimaryCta ? (
+          <a href={CTA.primary.to} class="btn-primary btn-md whitespace-nowrap">
+            {CTA.primary.label}
+          </a>
+        ) : null}
+      </div>
+
+      <details class="group relative flex flex-1 basis-[44%] items-center justify-end md:hidden">
+        <summary
+          class="inline-flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full border border-white/15 bg-white/[0.03] text-[#F2F4F7] transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/35 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 group-open:border-white/25 group-open:bg-white/[0.08]"
+          aria-label="Open primary navigation"
+        >
+          <span class="sr-only">Open primary navigation</span>
+          <svg viewBox="0 0 24 24" class="h-5 w-5 group-open:hidden" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+          <svg viewBox="0 0 24 24" class="hidden h-5 w-5 group-open:block" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+        </summary>
+
+        <div class="absolute right-0 top-[4.35rem] w-[min(24rem,calc(100vw-2rem))] rounded-2xl border border-white/15 bg-[rgba(12,14,18,0.96)] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+          <p class="section-eyebrow">Primary navigation</p>
+          <nav class="mt-4 flex flex-col gap-1" aria-label="Primary navigation">
+            {navItems.map((item) => (
+              <a
+                href={item.to}
+                aria-current={isActiveRoute(item.to) ? 'page' : undefined}
+                class={`min-h-11 rounded-xl px-3 py-3 text-base font-medium transition-[color,background-color,border-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${isActiveRoute(item.to) ? 'bg-white/[0.06] text-[#F2F4F7]' : 'text-slate-300 hover:bg-white/[0.04] hover:text-[#F2F4F7]'}`}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {!hidePrimaryCta ? (
+            <a href={CTA.primary.to} class="btn-primary btn-md mt-5 w-full justify-center">
+              {CTA.primary.label}
+            </a>
+          ) : null}
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

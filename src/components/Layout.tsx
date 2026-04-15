@@ -245,8 +245,8 @@ const Layout: React.FC<LayoutProps> = ({
         </div>
       )}
 
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-[55] px-4 pt-2.5 md:px-6 md:pt-3">
-        <div className="mx-auto max-w-[92rem]">
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-[55] pt-2.5 md:pt-3">
+        <div className="axiom-container">
           <div
             data-navbar-shell
             className={`pointer-events-auto relative flex h-[3.2rem] items-center rounded-[1rem] px-4 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-[3.5rem] md:px-5 ${

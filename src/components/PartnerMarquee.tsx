@@ -110,7 +110,7 @@ const PartnerMarquee: React.FC = () => {
                   className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-[#10182a]/70 px-3.5 py-1.5"
                 >
                   <SignalIcon label={label} />
-                  <span className="font-axiomMono text-[15px] md:text-[10px] uppercase tracking-[0.16em] text-slate-300">{label}</span>
+                  <span className="font-axiomMono text-[15px] md:text-xs uppercase tracking-[0.16em] text-slate-300">{label}</span>
                 </div>
               ))}
             </div>

@@ -664,7 +664,7 @@ const ProjectIntakeForm: React.FC = () => {
                 {...SEO_ROUTES.startProject}
             />
             <Layout>
-            <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-5 pb-16 md:px-10 md:pb-24">
+            <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-16 md:pb-24">
                 <section data-hero-root className="pt-8 md:pt-16">
                     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.72fr)] xl:items-start">
                         <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 text-left shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">

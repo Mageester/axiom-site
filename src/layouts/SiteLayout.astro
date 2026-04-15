@@ -1,0 +1,135 @@
+---
+import '../index.css';
+import Footer from '../components/site/Footer.astro';
+import Header from '../components/site/Header.astro';
+import {
+  DEFAULT_OG_IMAGE,
+  DEFAULT_SEO_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  formatSeoTitle,
+  toCanonicalUrl,
+} from '../lib/seo';
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  noIndex?: boolean;
+  schema?: Record<string, unknown>;
+  hidePrimaryCta?: boolean;
+  showFooter?: boolean;
+};
+
+const {
+  title,
+  description,
+  canonicalPath,
+  image,
+  noIndex = false,
+  schema,
+  hidePrimaryCta = false,
+  showFooter = true,
+} = Astro.props;
+
+const resolvedTitle = formatSeoTitle(title);
+const resolvedDescription = description?.trim() || DEFAULT_SEO_DESCRIPTION;
+const resolvedCanonical = toCanonicalUrl(canonicalPath || Astro.url.pathname);
+const resolvedImage = image || DEFAULT_OG_IMAGE;
+const resolvedImageUrl = resolvedImage.startsWith('http') ? resolvedImage : `${SITE_URL}${resolvedImage}`;
+const buildRev = '2026-04-15-astro-static';
+---
+
+<!doctype html>
+<html lang="en-CA" class="scroll-smooth bg-[#0B0B0C] text-[#F3F4F6]" data-axiom-build-rev={buildRev}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0B0C" />
+    <meta name="generator" content="Astro" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={resolvedDescription} />
+    <meta name="robots" content={noIndex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large'} />
+    <link rel="canonical" href={resolvedCanonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={resolvedCanonical} />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={resolvedDescription} />
+    <meta property="og:image" content={resolvedImageUrl} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_CA" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={resolvedDescription} />
+    <meta name="twitter:image" content={resolvedImageUrl} />
+
+    {schema ? <script type="application/ld+json" set:html={JSON.stringify(schema)} /> : null}
+  </head>
+  <body class="antialiased font-inter min-h-screen flex flex-col">
+    <noscript>
+      <section
+        style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px;background:#0b0b0c;color:#c67b5c;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"
+      >
+        <div
+          style="width:min(100%,40rem);border:1px solid rgba(198,123,92,0.28);border-radius:24px;padding:32px;background:rgba(18,18,20,0.96);box-shadow:0 24px 64px rgba(0,0,0,0.32);"
+        >
+          <p style="margin:0 0 12px 0;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#d4987e;">
+            Axiom Infrastructure
+          </p>
+          <h1 style="margin:0 0 16px 0;font-size:clamp(2rem,5vw,3rem);line-height:1.05;color:#f2dfd5;">
+            Clear websites for established businesses.
+          </h1>
+          <p style="margin:0 0 16px 0;font-size:1rem;line-height:1.7;color:#d7b09d;">
+            JavaScript is only required for the interactive intake forms and admin tools.
+          </p>
+          <p style="margin:0;font-size:0.95rem;line-height:1.6;color:#d7b09d;">
+            For questions or project inquiries, email
+            <a
+              href="mailto:contact@getaxiom.ca"
+              style="color:#f2dfd5;text-decoration:underline;text-decoration-color:rgba(242,223,213,0.45);"
+            >
+              contact@getaxiom.ca
+            </a>.
+          </p>
+        </div>
+      </section>
+    </noscript>
+
+    <Header hidePrimaryCta={hidePrimaryCta} />
+
+    <div class="relative z-10 pt-20 md:pt-28 noise-overlay">
+      <div class="pointer-events-none absolute inset-0 z-0">
+        <div data-startup-bg class="fixed left-[-10%] top-[-20%] h-[50vw] w-[50vw] rounded-full bg-[#697481] opacity-[0.13] blur-[120px]" />
+        <div data-startup-bg class="fixed bottom-[-10%] right-[-5%] h-[40vw] w-[40vw] rounded-full bg-[#B06E52] opacity-[0.09] blur-[120px]" />
+        <div data-startup-bg class="engineering-grid animate-grid-drift" />
+        <div data-startup-bg class="global-noise-floor" />
+      </div>
+
+      <div class="relative z-10">
+        <slot />
+      </div>
+    </div>
+
+    {showFooter ? <Footer /> : null}
+  </body>
+</html>

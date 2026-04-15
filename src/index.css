@@ -300,16 +300,21 @@
   .section-eyebrow {
     @apply font-axiomMono uppercase;
     color: var(--axiom-text-mute);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1;
     letter-spacing: 0.2em;
   }
 
-  @media (min-width: 768px) {
-    .section-eyebrow {
-      font-size: 12px;
-    }
-  }
+.axiom-container {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.axiom-container--wide {
+  max-width: 80rem;
+}
 
   .cta-banner {
     position: relative;

@@ -140,7 +140,7 @@ const Infrastructure: React.FC = () => {
       />
 
       <Layout>
-        <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[92rem] px-5 pb-16 md:px-10 md:pb-24">
+        <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-16 md:pb-24">
           <section className="pt-4 md:pt-8">
             <div className="max-w-5xl">
               <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
@@ -170,7 +170,7 @@ const Infrastructure: React.FC = () => {
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.7fr)] xl:items-start xl:gap-8">
               <div>
                 <div className="mb-5 flex flex-col gap-2 md:mb-6">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Timeline</p>
+                  <p className="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Timeline</p>
                   <h2 className="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
                     How the build moves.
                   </h2>
@@ -184,7 +184,7 @@ const Infrastructure: React.FC = () => {
               </div>
 
               <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] md:p-6 xl:sticky xl:top-28">
-                <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">
+                <p className="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">
                   Before we build
                 </p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
@@ -219,7 +219,7 @@ const Infrastructure: React.FC = () => {
             <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
                 <div>
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
+                  <p className="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
                   <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
                     Start with a review.
                   </h2>
@@ -228,7 +228,7 @@ const Infrastructure: React.FC = () => {
                   </p>
                 </div>
                 <aside className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-                  <p className="font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC]">What comes next</p>
+                  <p className="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">What comes next</p>
                   <div className="mt-4 divide-y divide-white/[0.08]">
                     <div className="py-3 first:pt-0 last:pb-0">
                       <p className="text-sm font-medium text-[#F2F4F7]">Review</p>

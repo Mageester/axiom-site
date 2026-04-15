@@ -114,7 +114,7 @@ const ServicesPage: React.FC = () => {
                         <div className="flex items-center justify-between gap-3">
                             <h2 className="font-axiomSans text-[24px] font-semibold tracking-tight text-axiom-text-main">{tier.name}</h2>
                             {tier.featured && (
-                                <span className="font-axiomMono text-[10px] uppercase tracking-[0.1em] text-axiom-accent border border-axiom-accent/40 px-2 py-1 rounded">
+                <span className="font-axiomMono text-xs uppercase tracking-[0.1em] text-axiom-accent border border-axiom-accent/40 px-2 py-1 rounded">
                                     Most picked
                                 </span>
                             )}
