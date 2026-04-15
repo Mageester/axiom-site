@@ -199,27 +199,70 @@ const SubmissionSuccessState: React.FC<SubmissionSuccessStateProps> = ({ onReset
     <div
         role="status"
         aria-live="polite"
-        className={`rounded-[var(--radius-card)] border border-emerald-400/30 bg-emerald-500/10 p-7 text-center ${className}`.trim()}
+        className={`rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-7 ${className}`.trim()}
         style={{
             animation: `intake-success-in ${SUCCESS_IN_DURATION} var(--motion-ease-decelerate) ${SUCCESS_IN_DELAY} both`
         }}
     >
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-emerald-400/35 bg-emerald-500/15">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-emerald-400" aria-hidden="true">
-                <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+        <div className="flex items-start gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#d4a48e]/30 bg-[#d4a48e]/12 text-[#d4a48e] shadow-[0_0_0_1px_rgba(212,164,142,0.08)]" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+            </div>
+            <div className="min-w-0 text-left">
+                <p className="section-eyebrow text-[#d4a48e]">Received</p>
+                <h2 className="mt-2 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Here’s what happens next</h2>
+                <p className="mt-2 text-[15px] md:text-sm leading-7 text-slate-300">
+                    We’ll review your submission and reply with next steps.
+                </p>
+            </div>
         </div>
-        <h2 className="mt-5 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Received.</h2>
-        <p className="mt-2 text-[15px] md:text-sm leading-7 text-slate-300">
-            Received. We’ll review and reply within one business day.
-        </p>
-        <button
-            type="button"
-            onClick={onReset}
-            className="mt-6 inline-flex min-h-11 items-center text-[15px] md:text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white"
-        >
-            Send another message
-        </button>
+
+        <ol className="mt-6 space-y-3 text-left">
+            <li className="flex gap-4 rounded-[var(--radius-card)] border border-[#d4a48e]/28 bg-[#d4a48e]/10 p-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d4a48e]/35 bg-[#d4a48e]/15 text-[#d4a48e]" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                </div>
+                <div className="min-w-0">
+                    <p className="font-medium text-[#F6EBDD]">We review your submission</p>
+                    <p className="mt-1 text-[15px] md:text-sm leading-6 text-slate-300">Checked internally and marked complete.</p>
+                </div>
+            </li>
+            <li className="flex gap-4 rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#F2F4F7]" aria-hidden="true">
+                    <span className="font-axiomDisplay text-[1rem] leading-none">2</span>
+                </div>
+                <div className="min-w-0">
+                    <p className="font-medium text-[#F2F4F7]">You get a reply within 1 business day with our initial assessment</p>
+                    <p className="mt-1 text-[15px] md:text-sm leading-6 text-slate-300">We’ll review the scope, the site, and the fastest path forward.</p>
+                </div>
+            </li>
+            <li className="flex gap-4 rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#F2F4F7]" aria-hidden="true">
+                    <span className="font-axiomDisplay text-[1rem] leading-none">3</span>
+                </div>
+                <div className="min-w-0">
+                    <p className="font-medium text-[#F2F4F7]">If there’s a fit, we scope and quote — no commitment</p>
+                    <p className="mt-1 text-[15px] md:text-sm leading-6 text-slate-300">You’ll know the next step before making any decision.</p>
+                </div>
+            </li>
+        </ol>
+
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a href="/work" className="btn-secondary btn-md inline-flex w-full justify-center sm:w-auto">
+                While you wait, see our work →
+            </a>
+            <button
+                type="button"
+                onClick={onReset}
+                className="inline-flex min-h-11 items-center justify-center text-[15px] md:text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white sm:w-auto"
+            >
+                Send another message
+            </button>
+        </div>
     </div>
 );
 

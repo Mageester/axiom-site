@@ -71,6 +71,18 @@ const photoJobs = [
     fallback: { path: fromRoot('public', 'images', 'hero-chip.jpg'), width: 1280, quality: 74 },
   },
   {
+    input: fromRoot('public', 'photos', 'aidan-headshot.jpg'),
+    baseName: fromRoot('public', 'photos', 'aidan-headshot'),
+    widths: [160, 192, 256],
+    fallback: { path: fromRoot('public', 'photos', 'aidan-headshot.jpg'), width: 256, quality: 74 },
+  },
+  {
+    input: fromRoot('public', 'photos', 'riley-headshot.jpg'),
+    baseName: fromRoot('public', 'photos', 'riley-headshot'),
+    widths: [160, 192, 256],
+    fallback: { path: fromRoot('public', 'photos', 'riley-headshot.jpg'), width: 256, quality: 74 },
+  },
+  {
     input: fromRoot('public', 'images', 'avatar-daniel.jpg'),
     baseName: fromRoot('public', 'images', 'avatar-daniel'),
     widths: [320, 480, 768],

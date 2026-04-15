@@ -39,7 +39,7 @@ export default {
             fontFamily: {
                 axiomSans: ['Inter', 'Satoshi', 'sans-serif'],
                 axiomDisplay: ['"Space Grotesk"', 'Inter', 'sans-serif'],
-                axiomMono: ['Sora', 'Inter', 'sans-serif'],
+                axiomMono: ['"Space Grotesk"', 'Inter', 'sans-serif'],
                 grotesk: ['"Space Grotesk"', 'Inter', 'sans-serif'],
                 inter: ['Inter', 'sans-serif'],
             },

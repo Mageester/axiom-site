@@ -90,7 +90,7 @@ const WorkPreviewCard: React.FC<{ preview: WorkPreview; index: number }> = ({ pr
 
 const WorkPreviewGrid: React.FC = () => {
   return (
-    <section aria-labelledby="work-preview-grid-heading" className="pt-16 md:pt-20">
+    <section data-work-preview-grid aria-labelledby="work-preview-grid-heading" className="pt-16 md:pt-20">
       <div className="axiom-container axiom-container--wide">
         <div className="max-w-2xl">
           <p className="section-eyebrow">SELECTED WORK</p>

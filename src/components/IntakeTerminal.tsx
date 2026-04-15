@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { z } from 'zod';
 import useReveal from '../hooks/useReveal';
 
@@ -146,8 +146,8 @@ const IntakeTerminal: React.FC = () => {
       </div>
 
       <div className="mb-8 space-y-3">
-        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Let’s get to work.</h2>
-        <p className="max-w-2xl text-slate-300">Tell us what your business does, what’s broken about your current site, and when you want to move. We’ll reply within one business day.</p>
+        <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#F2F4F7]">Letâ€™s get to work.</h2>
+        <p className="max-w-2xl text-slate-300">Tell us what your business does, whatâ€™s broken about your current site, and when you want to move. Weâ€™ll reply within one business day.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -217,10 +217,69 @@ const IntakeTerminal: React.FC = () => {
       {activeAction === 'details' && (
         <div className="mt-8 rounded-2xl border border-white/10 border-t border-t-white/10 bg-[#10141c]/70 p-6 md:p-8 machined-card">
           {submitState === 'success' ? (
-            <div role="status" aria-live="polite" className="rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-8 text-center">
-              <p className="text-xl md:text-2xl font-semibold tracking-tight text-[#F2F4F7]">
-      Received. We’ll review and reply within one business day.
-              </p>
+            <div
+              role="status"
+              aria-live="polite"
+              className="rounded-2xl border border-white/10 border-t border-t-white/10 bg-white/[0.04] backdrop-blur-md p-6 md:p-8"
+            >
+              <div className="max-w-2xl">
+                <p className="section-eyebrow mb-3 text-[#B05D41]">Received</p>
+                <h3 className="font-axiomHeading text-2xl md:text-3xl tracking-tight text-[#F2F4F7]">
+                  Here&apos;s what happens next
+                </h3>
+                <div className="mt-6 space-y-4">
+                  <div className="flex gap-4 rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                    <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#B05D41] text-white shadow-[0_0_0_1px_rgba(176,93,65,0.22)]">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-base font-semibold text-[#F2F4F7]">We review your submission</p>
+                      <p className="mt-1 text-[15px] md:text-sm leading-6 text-slate-300">
+                        We look over your goals, current site, and timeline so we can reply with a useful first read.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4 rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                    <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full border border-white/10 bg-white/5 text-[#B05D41]">
+                      <span className="text-sm font-semibold">2</span>
+                    </div>
+                    <div>
+                      <p className="text-base font-semibold text-[#F2F4F7]">You get a reply within 1 business day with our initial assessment</p>
+                      <p className="mt-1 text-[15px] md:text-sm leading-6 text-slate-300">
+                        We&apos;ll outline the fit, the rough shape of the project, and whether the scope looks right for your needs.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4 rounded-2xl border border-white/10 bg-black/20 p-4 md:p-5">
+                    <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full border border-white/10 bg-white/5 text-[#B05D41]">
+                      <span className="text-sm font-semibold">3</span>
+                    </div>
+                    <div>
+                      <p className="text-base font-semibold text-[#F2F4F7]">If there&apos;s a fit, we scope and quote — no commitment</p>
+                      <p className="mt-1 text-[15px] md:text-sm leading-6 text-slate-300">
+                        If it&apos;s a match, we send a clear plan and price so you can decide without pressure.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <a
+                    href="/work"
+                    className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-medium text-[#F2F4F7] transition-colors duration-300 hover:border-white/20 hover:bg-white/10"
+                  >
+                    While you wait, see our work {'→'}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/10 px-5 py-3 text-sm font-medium text-slate-300 transition-colors duration-300 hover:border-white/20 hover:text-[#F2F4F7]"
+                  >
+                    Send another message
+                  </button>
+                </div>
+              </div>
             </div>
           ) : (
             <form className="grid grid-cols-1 md:grid-cols-2 gap-5" onSubmit={handleSubmit} aria-busy={isSubmitting}>
@@ -272,7 +331,7 @@ const IntakeTerminal: React.FC = () => {
                   required
                   value={form.details}
                   onChange={(event) => setField('details', event.target.value)}
-        placeholder="What does your business do, what’s wrong with your current site, and when do you want to move?"
+        placeholder="What does your business do, whatâ€™s wrong with your current site, and when do you want to move?"
                   className={inputClass}
                   aria-invalid={!!errors.details}
                   aria-describedby={errors.details ? `${FIELD_IDS.details}-helper ${FIELD_IDS.details}-error` : `${FIELD_IDS.details}-helper`}
@@ -301,7 +360,7 @@ const IntakeTerminal: React.FC = () => {
 
               <div className="md:col-span-2">
                 <button type="submit" disabled={isSubmitting} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
-                  {isSubmitting ? 'Sending...' : 'Send it →'}
+                  {isSubmitting ? 'Sending...' : 'Send it â†’'}
                 </button>
               </div>
             </form>
@@ -313,3 +372,4 @@ const IntakeTerminal: React.FC = () => {
 };
 
 export default IntakeTerminal;
+

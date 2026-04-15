@@ -818,7 +818,7 @@
     border-radius: 9999px;
     background: rgba(255, 255, 255, 0.035);
     color: rgba(242, 244, 247, 0.72);
-    font-family: var(--font-axiomMono, monospace);
+    font-family: 'Space Grotesk', Inter, sans-serif;
     font-size: 0.625rem;
     font-weight: 600;
     letter-spacing: 0.18em;

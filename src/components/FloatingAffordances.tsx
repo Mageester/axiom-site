@@ -15,6 +15,10 @@ type FloatingAffordancesProps = {
 };
 
 const BACK_TO_TOP_SCROLL_THRESHOLD = 1.3;
+const MOBILE_BAR_SCROLL_THRESHOLD = 0.38;
+const MOBILE_BAR_SESSION_KEY = 'axiom-mobile-bar-unlocked';
+const MOBILE_VIEWPORT_QUERY = '(max-width: 767px)';
+const WORK_PREVIEW_SELECTOR = '[data-work-preview-grid]';
 
 function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -54,18 +58,62 @@ const FloatingAffordances: React.FC<FloatingAffordancesProps> = ({ mobileMenuOpe
   const { pathname } = useLocation();
   const prefersReducedMotion = usePrefersReducedMotion();
   const [metrics, setMetrics] = useState<ScrollMetrics>(() => getScrollMetrics());
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [showMobileBar, setShowMobileBar] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    const media = window.matchMedia(MOBILE_VIEWPORT_QUERY);
+    const updateViewport = () => setIsMobileViewport(media.matches);
+
+    updateViewport();
+    media.addEventListener('change', updateViewport);
+
+    return () => media.removeEventListener('change', updateViewport);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!isMobileViewport) {
+      setShowMobileBar(false);
+      return;
+    }
+
+    try {
+      if (window.sessionStorage.getItem(MOBILE_BAR_SESSION_KEY) === '1') {
+        setShowMobileBar(true);
+        return;
+      }
+    } catch {
+      // Ignore storage failures and fall back to in-memory gating.
+    }
+
     let rafId = 0;
+    let observer: IntersectionObserver | null = null;
+
+    const unlockMobileBar = () => {
+      setShowMobileBar((previous) => {
+        if (previous) return previous;
+
+        try {
+          window.sessionStorage.setItem(MOBILE_BAR_SESSION_KEY, '1');
+        } catch {
+          // Ignore storage failures.
+        }
+
+        return true;
+      });
+    };
 
     const updateMetrics = () => {
       rafId = 0;
-      setMetrics(getScrollMetrics());
-      const hero = document.querySelector<HTMLElement>('main [data-hero-root]');
-      setShowMobileBar(Boolean(hero && hero.getBoundingClientRect().bottom <= 0));
+      const nextMetrics = getScrollMetrics();
+      setMetrics(nextMetrics);
+
+      if (nextMetrics.progress >= MOBILE_BAR_SCROLL_THRESHOLD) {
+        unlockMobileBar();
+      }
     };
 
     const onScroll = () => {
@@ -73,18 +121,36 @@ const FloatingAffordances: React.FC<FloatingAffordancesProps> = ({ mobileMenuOpe
       rafId = window.requestAnimationFrame(updateMetrics);
     };
 
+    const workPreviewGrid = document.querySelector<HTMLElement>(WORK_PREVIEW_SELECTOR);
+    if (workPreviewGrid && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            unlockMobileBar();
+          }
+        },
+        {
+          root: null,
+          threshold: 0.01,
+          rootMargin: '0px 0px -35% 0px',
+        },
+      );
+      observer.observe(workPreviewGrid);
+    }
+
     updateMetrics();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
 
     return () => {
+      observer?.disconnect();
       if (rafId !== 0) {
         window.cancelAnimationFrame(rafId);
       }
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [pathname]);
+  }, [isMobileViewport, pathname]);
 
   const showBackToTop = !mobileMenuOpen && metrics.scrollY >= BACK_TO_TOP_SCROLL_THRESHOLD * metrics.viewportHeight;
 
@@ -104,34 +170,33 @@ const FloatingAffordances: React.FC<FloatingAffordancesProps> = ({ mobileMenuOpe
     });
   };
 
-  const showMobileCta = !mobileMenuOpen && showMobileBar;
+  const showMobileCta = isMobileViewport && !mobileMenuOpen && showMobileBar;
 
   return (
     <>
-      <div
-        className={`fixed inset-x-0 bottom-0 z-[56] md:hidden transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          showMobileCta ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
-        }`}
-        aria-hidden={!showMobileCta}
-      >
-        <div className="border-t border-white/[0.08] bg-[linear-gradient(180deg,rgba(10,12,16,0.86)_0%,rgba(8,10,14,0.95)_100%)] backdrop-blur-xl backdrop-saturate-150 shadow-[0_-10px_30px_rgba(0,0,0,0.18)]">
-          <div className="axiom-container flex items-center gap-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3">
-            <Link
-              to={CTA.primary.to}
-              className="btn-primary btn-md flex-1 justify-center"
-            >
-              {CTA.primary.label}
-            </Link>
-            <a
-              href={`tel:${SITE_TELEPHONE}`}
-              aria-label="Call Axiom"
-              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-component)] border border-white/12 bg-white/[0.03] text-[#F2F4F7] shadow-[0_6px_18px_rgba(0,0,0,0.16)] transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
-            >
-              <Phone className="h-4 w-4" aria-hidden="true" />
-            </a>
+      {isMobileViewport ? (
+        <div
+          className={`fixed inset-x-0 bottom-0 z-[56] transition-[opacity,transform] duration-300 ease-[var(--motion-ease-standard)] motion-reduce:transition-none ${
+            showMobileCta ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
+          }`}
+          aria-hidden={!showMobileCta}
+        >
+          <div className="border-t border-white/[0.08] bg-[linear-gradient(180deg,rgba(10,12,16,0.86)_0%,rgba(8,10,14,0.95)_100%)] shadow-[0_-10px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl backdrop-saturate-150">
+            <div className="axiom-container flex items-center gap-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3">
+              <Link to={CTA.primary.to} className="btn-primary btn-md flex-1 justify-center">
+                {CTA.primary.label}
+              </Link>
+              <a
+                href={`tel:${SITE_TELEPHONE}`}
+                aria-label="Call Axiom"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-component)] border border-white/12 bg-white/[0.03] text-[#F2F4F7] shadow-[0_6px_18px_rgba(0,0,0,0.16)] transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[var(--motion-ease-standard)] hover:-translate-y-px hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
+              >
+                <Phone className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
 
       {showBackToTop && (
         <button

@@ -1,6 +1,8 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA } from '../lib/cta';
+import FounderAvatar from '../components/site/FounderAvatar.tsx';
+import { responsiveImages } from '../lib/responsiveImages';
 import { SEO_ROUTES } from '../lib/seo';
 
 const aboutPrinciples = [
@@ -111,15 +113,14 @@ const aboutPrinciples = [
           </h2>
         </div>
 
-        <div class="mt-8 rounded-[var(--radius-card)] border border-white/5 bg-white/[0.01] p-3 md:mt-10 lg:p-4">
+          <div class="mt-8 rounded-[var(--radius-card)] border border-white/5 bg-white/[0.01] p-3 md:mt-10 lg:p-4">
           <div class="flex flex-col gap-4 md:flex-row md:flex-wrap">
             <article class="flex min-w-[16rem] flex-1 items-start gap-4 rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-5 shadow-[0_8px_24px_rgba(0,0,0,0.12)] md:min-w-[18rem] md:p-6">
-              <img
-                src="/photos/aidan-headshot.jpg"
-                alt="Aidan headshot"
-                class="h-16 w-16 shrink-0 rounded-full border border-white/10 object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-                loading="lazy"
-                decoding="async"
+              <FounderAvatar
+                source={responsiveImages.founderAidan}
+                alt="Portrait of Aidan, co-founder of Axiom"
+                initials="AA"
+                name="Aidan"
               />
               <div class="min-w-0">
                 <h3 class="text-[18px] font-semibold tracking-tight text-[#F2F4F7]">Aidan</h3>
@@ -133,12 +134,11 @@ const aboutPrinciples = [
             </article>
 
             <article class="flex min-w-[16rem] flex-1 items-start gap-4 rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-5 shadow-[0_8px_24px_rgba(0,0,0,0.12)] md:min-w-[18rem] md:p-6">
-              <img
-                src="/photos/riley-headshot.jpg"
-                alt="Riley headshot"
-                class="h-16 w-16 shrink-0 rounded-full border border-white/10 object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-                loading="lazy"
-                decoding="async"
+              <FounderAvatar
+                source={responsiveImages.founderRiley}
+                alt="Portrait of Riley, co-founder of Axiom"
+                initials="RR"
+                name="Riley"
               />
               <div class="min-w-0">
                 <h3 class="text-[18px] font-semibold tracking-tight text-[#F2F4F7]">Riley</h3>

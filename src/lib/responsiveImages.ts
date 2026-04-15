@@ -77,6 +77,20 @@ export const responsiveImages = {
     avifSrcSet: '/photos/logoclear-320.avif 320w, /photos/logoclear-512.avif 512w, /photos/logoclear-768.avif 768w',
     webpSrcSet: '/photos/logoclear-320.webp 320w, /photos/logoclear-512.webp 512w, /photos/logoclear-768.webp 768w',
   },
+  founderAidan: {
+    fallbackSrc: '/photos/aidan-headshot.jpg',
+    avifSrcSet:
+      '/photos/aidan-headshot-160.avif 160w, /photos/aidan-headshot-192.avif 192w, /photos/aidan-headshot-256.avif 256w',
+    webpSrcSet:
+      '/photos/aidan-headshot-160.webp 160w, /photos/aidan-headshot-192.webp 192w, /photos/aidan-headshot-256.webp 256w',
+  },
+  founderRiley: {
+    fallbackSrc: '/photos/riley-headshot.jpg',
+    avifSrcSet:
+      '/photos/riley-headshot-160.avif 160w, /photos/riley-headshot-192.avif 192w, /photos/riley-headshot-256.avif 256w',
+    webpSrcSet:
+      '/photos/riley-headshot-160.webp 160w, /photos/riley-headshot-192.webp 192w, /photos/riley-headshot-256.webp 256w',
+  },
 } as const satisfies Record<string, ResponsiveSource>;
 
 export type ResponsiveImageKey = keyof typeof responsiveImages;
