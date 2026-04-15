@@ -4,25 +4,28 @@ import SocialProof from '../components/site/SocialProof.tsx';
 import WorkPreviewGrid from '../components/site/WorkPreviewGrid.astro';
 import { CTA } from '../lib/cta';
 import { HOME_JSON_LD, SEO_ROUTES } from '../lib/seo';
+import { Zap, MousePointer2, Smartphone, Cpu } from 'lucide-react';
 
-const lighthouseCards = [
+const proofCards = [
   {
-    title: 'Typical local business site: 35/100',
-    score: '35/100',
-    screenshot: '/images/lighthouse-before.png',
-    screenshotAlt: 'Lighthouse performance report for a typical local business site',
-    description: 'Slow, unclear, and full of unnecessary friction before a visitor can even decide to call.',
-    accentClass: 'border-l-4 border-[#f29e5d]/70',
-    scoreClass: 'text-[#f29e5d]',
+    title: 'Fast first impression',
+    description: 'Visitors should not be waiting for oversized pages, bloated templates, or unnecessary effects before they can even decide to contact you.',
+    icon: Zap,
   },
   {
-    title: 'Axiom build: 98/100',
-    score: '98/100',
-    screenshot: '/images/lighthouse-after.png',
-    screenshotAlt: 'Lighthouse performance report for an Axiom build',
-    description: 'Lean structure, fast load, and a clear next step without the usual performance drag.',
-    accentClass: 'border-l-4 border-[#d4a48e]/70',
-    scoreClass: 'text-[#7ce0b1]',
+    title: 'Cleaner path to action',
+    description: 'Every page is structured to make the next step obvious, so people can call, book, or inquire without hunting through clutter.',
+    icon: MousePointer2,
+  },
+  {
+    title: 'Mobile-ready by default',
+    description: 'Most local traffic is mobile. The site needs to feel fast, readable, and dependable on a phone, not just acceptable on desktop.',
+    icon: Smartphone,
+  },
+  {
+    title: 'Performance without the usual bloat',
+    description: 'We focus on lean builds, controlled assets, and intentional structure instead of layering on plugins and visual noise that slow everything down.',
+    icon: Cpu,
   },
 ] as const;
 ---
@@ -65,41 +68,37 @@ const lighthouseCards = [
 
     <WorkPreviewGrid />
 
-    <section class="pt-16 md:pt-20" aria-labelledby="pagespeed-heading">
+    <section class="pt-16 md:pt-20" aria-labelledby="performance-proof-heading">
       <div class="axiom-container">
         <div class="max-w-4xl">
           <p class="section-eyebrow">Performance proof</p>
-          <h2 id="pagespeed-heading" class="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-            Before and after PageSpeed
+          <h2 id="performance-proof-heading" class="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+            Built to load fast, rank cleanly, and stay easy to use.
           </h2>
-          <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-[15px]">
-            Lighthouse screenshots from a typical local-business experience versus the Axiom rebuild.
+          <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-[17px]">
+            Most local-business websites feel slow, cluttered, and harder to trust than they should. 
+            We build lean, mobile-ready sites that load quickly, guide visitors clearly, and remove the friction that usually costs calls.
           </p>
         </div>
 
-        <div class="mt-10 grid gap-4 md:grid-cols-2">
-          {lighthouseCards.map((card) => (
-            <article class={`machined-card overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)] ${card.accentClass}`}>
-              <div class="border-b border-white/10 bg-[#07090c] p-3 md:p-4">
-                <div class="overflow-hidden rounded-[calc(var(--radius-card)-0.5rem)] border border-white/10 bg-black/20">
-                  <img src={card.screenshot} alt={card.screenshotAlt} width="1200" height="840" class="h-auto w-full object-cover" loading="lazy" decoding="async" />
-                </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-2">
+          {proofCards.map((card) => (
+            <article class="machined-card p-6 md:p-8 flex flex-col gap-5 rounded-[var(--radius-card)] border border-white/10 bg-[#10141c]/40 transition-colors hover:bg-[#10141c]/60">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-axiom-accent/80">
+                <card.icon class="h-5 w-5" stroke-width={1.5} />
               </div>
-
-              <div class="p-6 md:p-7">
-                <div class="flex items-start justify-between gap-4">
-                  <div>
-                    <p class="section-eyebrow">Lighthouse</p>
-                    <h3 class="mt-2 text-[1.35rem] font-bold tracking-tight text-[#F2F4F7]">{card.title}</h3>
-                  </div>
-                  <span class={`rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm font-semibold ${card.scoreClass}`}>
-                    {card.score}
-                  </span>
-                </div>
-                <p class="mt-4 text-[15px] leading-relaxed text-slate-300">{card.description}</p>
+              <div>
+                <h3 class="text-lg font-bold tracking-tight text-[#F2F4F7]">{card.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-400 md:text-[15px]">{card.description}</p>
               </div>
             </article>
           ))}
+        </div>
+
+        <div class="mt-10 border-t border-white/5 pt-8 text-center">
+          <p class="text-xs font-axiomMono uppercase tracking-widest text-slate-500">
+            Performance is not just a score. It affects trust, usability, and whether someone stays long enough to contact you.
+          </p>
         </div>
       </div>
     </section>
