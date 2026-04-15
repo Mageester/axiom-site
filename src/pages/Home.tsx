@@ -22,11 +22,42 @@ type ClientTestimonial = {
   businessName: string;
 };
 
+type LighthouseCard = {
+  title: string;
+  score: string;
+  screenshot: string;
+  screenshotAlt: string;
+  description: string;
+  accentClass: string;
+  scoreClass: string;
+};
+
 const clientTestimonials: readonly ClientTestimonial[] = [
   {
     quote: 'They bridge the gap between ambitious visual concepts and operational reality.',
     clientName: 'Jake Young',
     businessName: 'FormDr',
+  },
+] as const;
+
+const lighthouseCards: readonly LighthouseCard[] = [
+  {
+    title: 'Typical local business site: 35/100',
+    score: '35/100',
+    screenshot: '/images/lighthouse-before.png',
+    screenshotAlt: 'Lighthouse performance report for a typical local business site',
+    description: 'Slow, unclear, and full of unnecessary friction before a visitor can even decide to call.',
+    accentClass: 'border-l-4 border-[#f29e5d]/70',
+    scoreClass: 'text-[#f29e5d]',
+  },
+  {
+    title: 'Axiom build: 98/100',
+    score: '98/100',
+    screenshot: '/images/lighthouse-after.png',
+    screenshotAlt: 'Lighthouse performance report for an Axiom build',
+    description: 'Lean structure, fast load, and a clear next step without the usual performance drag.',
+    accentClass: 'border-l-4 border-[#d4a48e]/70',
+    scoreClass: 'text-[#7ce0b1]',
   },
 ] as const;
 
@@ -82,6 +113,54 @@ const Home: React.FC = () => {
           </section>
 
           <WorkPreviewGrid />
+
+          <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature" aria-labelledby="pagespeed-heading">
+            <div className="max-w-4xl">
+              <p className="section-eyebrow">Performance proof</p>
+              <h2 id="pagespeed-heading" className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
+                Before and after PageSpeed
+              </h2>
+              <p className="mt-4 max-w-3xl text-sm md:text-[15px] leading-relaxed text-slate-300">
+                Lighthouse screenshots from a typical local-business experience versus the Axiom rebuild.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-4 md:grid-cols-2">
+              {lighthouseCards.map((card) => (
+                <article
+                  key={card.title}
+                  className={`machined-card overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)] ${card.accentClass}`}
+                >
+                  <div className="border-b border-white/10 bg-[#07090c] p-3 md:p-4">
+                    <div className="overflow-hidden rounded-[calc(var(--radius-card)-0.5rem)] border border-white/10 bg-black/20">
+                      <img
+                        src={card.screenshot}
+                        alt={card.screenshotAlt}
+                        className="h-auto w-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="p-6 md:p-7">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="section-eyebrow">Lighthouse</p>
+                        <h3 className="mt-2 text-[1.35rem] font-bold tracking-tight text-[#F2F4F7]">
+                          {card.title}
+                        </h3>
+                      </div>
+                      <span className={`rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-sm font-semibold ${card.scoreClass}`}>
+                        {card.score}
+                      </span>
+                    </div>
+                    <p className="mt-4 text-[15px] md:text-sm leading-relaxed text-slate-300">{card.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </RevealBlock>
 
           <RevealBlock as="section" className="pt-16 md:pt-20" variant="feature" aria-labelledby="speed-guarantee-heading">
             <article className="w-full overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
