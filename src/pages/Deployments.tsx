@@ -52,7 +52,7 @@ const proofBlocks: readonly ProofBlockData[] = [
     businessType: 'Restaurant and hospitality',
     badgeLabel: 'Concept build',
     statusLabel: 'Live site',
-    ctaLabel: 'View the build â†’',
+    ctaLabel: 'View the build →',
     demoUrl: 'https://restaurant.getaxiom.ca',
     originalWeakness: 'Guests had to hunt for the booking link, and the menu was hard to read on phones.',
     improved: 'The reservation path stays visible and the menu reads cleanly on mobile.',
@@ -69,7 +69,7 @@ const proofBlocks: readonly ProofBlockData[] = [
     businessType: 'Landscaping and outdoor services',
     badgeLabel: 'Concept build',
     statusLabel: 'Selected build',
-    ctaLabel: 'View the build â†’',
+    ctaLabel: 'View the build →',
     demoUrl: 'https://landscaping.getaxiom.ca',
     originalWeakness: 'Past work was buried, and quote requests took too many clicks.',
     improved: 'Project photos come forward and the quote path is shorter.',
@@ -86,7 +86,7 @@ const proofBlocks: readonly ProofBlockData[] = [
     businessType: 'Roofing and exterior services',
     badgeLabel: 'Concept build',
     statusLabel: 'Selected build',
-    ctaLabel: 'View the build â†’',
+    ctaLabel: 'View the build →',
     demoUrl: 'https://roofing.getaxiom.ca',
     originalWeakness: 'Storm traffic needs a fast path to inspection and estimate requests.',
     improved: 'Urgent calls and planned estimates have separate paths.',
@@ -320,18 +320,18 @@ const Deployments: React.FC = () => {
                     Ready to stop losing jobs to a bad site?
                   </h2>
                   <p className="mt-4 text-sm md:text-[15px] leading-relaxed text-slate-300">
-                Start a project and weâ€™ll review the current site, whatâ€™s missing, and the first fixes that matter.
+                Start a project and we’ll review the current site, what’s missing, and the first fixes that matter.
                   </p>
                 </div>
                 <aside className="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5">
                   <p className="section-eyebrow">What happens next</p>
                   <p className="mt-4 font-axiomMono text-xs uppercase tracking-wide text-[#F2F4F7]">
-                    Review â†’ Scope â†’ Build â†’ Launch
+                    Review → Scope → Build → Launch
                   </p>
                 </aside>
                 <div className="flex flex-wrap items-center gap-3 lg:col-span-2 lg:justify-end">
                   <Link to={CTA.primary.to} className="btn-primary btn-lg whitespace-nowrap">
-                    Start a project â†’
+                    Start a project →
                   </Link>
                 </div>
               </div>

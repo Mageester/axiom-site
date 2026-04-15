@@ -58,7 +58,7 @@ export const HOME_JSON_LD = {
 export const SEO_ROUTES = {
     home: {
         title: 'Premium Web Design for Ontario Businesses | Axiom',
-        description: 'Axiom builds fast, clear websites for Ontario businesses. You own it outright â€” no monthly fees. Based in Kitchener. Reply within one business day.',
+        description: 'Axiom builds fast, clear websites for Ontario businesses. You own it outright — no monthly fees. Based in Kitchener. Reply within one business day.',
         canonicalPath: '/',
     },
     work: {
@@ -88,7 +88,7 @@ export const SEO_ROUTES = {
     },
     approach: {
         title: 'Our Approach to Web Design | Axiom',
-        description: 'Learn how Axiom approaches web design â€” clarity first, proof early, one clear path to contact. Built for businesses that need results, not decoration.',
+        description: 'Learn how Axiom approaches web design — clarity first, proof early, one clear path to contact. Built for businesses that need results, not decoration.',
         canonicalPath: '/approach',
     },
     process: {
@@ -108,7 +108,7 @@ export const SEO_ROUTES = {
     },
     audit: {
         title: 'Free Website Audit | Axiom',
-        description: 'Get a free website audit from Axiom. We\'ll review your current site and tell you exactly what it\'s costing you â€” within 24 hours.',
+        description: 'Get a free website audit from Axiom. We\'ll review your current site and tell you exactly what it\'s costing you — within 24 hours.',
         canonicalPath: '/admin/audit',
         noIndex: true,
     },
