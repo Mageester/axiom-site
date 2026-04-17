@@ -26,18 +26,6 @@ const MOBILE_LINKS: NavLink[] = [
 
 const isActive = (pathname: string, href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
-const BrandMark = () => (
-  <span
-    aria-hidden="true"
-    className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.03]"
-  >
-    <span
-      className="h-3.5 w-3.5 rounded-[4px]"
-      style={{ background: 'var(--accent)', boxShadow: '0 0 0 5px var(--accent-glow)' }}
-    />
-  </span>
-);
-
 export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) => {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -78,9 +66,14 @@ export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) =>
               : 'border-[color:var(--hairline)] bg-[rgba(10,10,12,0.7)] px-4 py-3.5 shadow-[0_16px_30px_rgba(0,0,0,0.16)]'
           )}
         >
-          <a href="/" className="flex items-center gap-3 text-[15px] font-semibold tracking-[-0.01em]">
-            <BrandMark />
-            <span className="tracking-[0.18em]">AXIOM</span>
+          <a href="/" className="flex items-center gap-3" aria-label="Axiom Infrastructure home">
+            <img
+              src="/axiomtransparentlogo.png"
+              alt="Axiom"
+              className="block h-9 w-auto select-none object-contain sm:h-10"
+              loading="eager"
+              decoding="async"
+            />
           </a>
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -148,9 +141,14 @@ export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) =>
       >
         <div className="mx-auto flex h-full max-w-5xl flex-col justify-between pt-20">
           <div className="flex items-center justify-between">
-            <a href="/" className="flex items-center gap-3 text-[15px] font-semibold tracking-[0.18em]">
-              <BrandMark />
-              <span>AXIOM</span>
+            <a href="/" className="flex items-center gap-3" aria-label="Axiom Infrastructure home">
+              <img
+                src="/axiomtransparentlogo.png"
+                alt="Axiom"
+                className="block h-9 w-auto select-none object-contain sm:h-10"
+                loading="eager"
+                decoding="async"
+              />
             </a>
             <button
               type="button"
