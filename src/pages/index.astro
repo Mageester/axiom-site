@@ -98,6 +98,33 @@ const processStages = [
     description: 'We ship the site, verify the handoff, and make ownership complete.',
   },
 ] as const;
+
+const services = [
+  {
+    label: 'Conversion Site',
+    description:
+      'Designed to turn visitors into booked jobs. Clear offer, friction-free contact paths, and trust signals placed where they convert.',
+    href: '/work',
+  },
+  {
+    label: 'Authority Site',
+    description:
+      'Establishes credibility in competitive markets. Portfolio, reviews, and credentials structured to hold the room.',
+    href: '/work',
+  },
+  {
+    label: 'Rebuild & Migrate',
+    description:
+      'Your current site stripped and rebuilt correctly — same domain, zero downtime, measurably faster on day one.',
+    href: '/process',
+  },
+] as const;
+
+const stats = [
+  { value: '14', unit: 'DAYS', description: 'Typical turnaround from kickoff to live.' },
+  { value: '<1s', unit: 'LOAD', description: 'Performance floor, guaranteed in writing.' },
+  { value: '100%', unit: 'OWNERSHIP', description: 'Full code delivery. No subscriptions.' },
+] as const;
 ---
 
 <SiteLayout
@@ -113,8 +140,8 @@ const processStages = [
         class="pointer-events-none absolute inset-0"
         style="
           background:
-            radial-gradient(circle at 82% 12%, rgba(200, 122, 87, 0.04) 0%, rgba(200, 122, 87, 0.02) 14%, transparent 36%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.018) 0%, transparent 18%);
+            radial-gradient(circle at 82% 12%, var(--accent-surface) 0%, var(--accent-surface-strong) 14%, transparent 36%),
+            linear-gradient(180deg, var(--surface-panel-strong) 0%, transparent 18%);
         "
       />
       <div
@@ -122,8 +149,8 @@ const processStages = [
         class="pointer-events-none absolute inset-0 opacity-[0.03]"
         style="
           background-image:
-            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9) 0.6px, transparent 0.6px),
-            radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.85) 0.6px, transparent 0.6px);
+            radial-gradient(circle at 20% 20%, var(--hero-noise-dot) 0.6px, transparent 0.6px),
+            radial-gradient(circle at 80% 70%, var(--hero-noise-dot-alt) 0.6px, transparent 0.6px);
           background-size: 4px 4px, 5px 5px;
           background-position: 0 0, 1px 1px;
           mix-blend-mode: overlay;
@@ -160,7 +187,7 @@ const processStages = [
       </div>
     </section>
 
-    <section class="border-y border-[color:var(--hairline)] bg-white/[0.015] py-6 md:py-8">
+    <section class="border-y border-[color:var(--hairline)] bg-[color:var(--surface-panel)] py-6 md:py-8">
       <div class="axiom-container space-y-4">
         <p class="text-center font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-secondary)]">
           TRUSTED BY OPERATORS WHO KNOW THE DIFFERENCE
@@ -191,7 +218,7 @@ const processStages = [
               data-reveal-item
               data-reveal-state="hidden"
               style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
-              className="group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:bg-[var(--surface-2)] hover:border-white/[0.1]"
+              className="group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)]"
             >
               <figure class="relative overflow-hidden border-b border-[color:var(--hairline)]">
                 <ResponsivePicture
@@ -203,7 +230,7 @@ const processStages = [
                   fetchpriority="low"
                   objectPosition={card.position}
                 />
-                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--overlay-black-soft),transparent)]" />
               </figure>
 
               <div class="flex h-full flex-col p-6 sm:p-7">
@@ -223,6 +250,36 @@ const processStages = [
                 </div>
               </div>
             </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="axiom-container">
+        <div class="max-w-3xl">
+          <Eyebrow>WHAT WE BUILD</Eyebrow>
+          <h2 class="mt-4 max-w-2xl">
+            Three formats. One outcome.
+          </h2>
+        </div>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {services.map((service) => (
+            <a
+              href={service.href}
+              class="group flex flex-col gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-1)] p-6 transition-[border-color,background-color] duration-200 hover:border-[color:var(--hairline-strong)] hover:bg-[var(--surface-2)] sm:p-7"
+            >
+              <p class="text-[19px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                {service.label}
+              </p>
+              <p class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                {service.description}
+              </p>
+              <span class="mt-auto font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-opacity duration-200 group-hover:opacity-80">
+                See examples →
+              </span>
+            </a>
           ))}
         </div>
       </div>
@@ -280,7 +337,7 @@ const processStages = [
               className="flex-1 min-w-[220px] p-0"
             >
               <div class="flex h-full flex-col gap-4 p-6 sm:p-7">
-                <span class="font-mono text-[12px] uppercase tracking-[0.08em] text-[var(--accent)]">
+                <span class="font-mono text-[12px] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                   {stage.day}
                 </span>
                 <div>
@@ -298,7 +355,7 @@ const processStages = [
 
         <div class="mt-6">
           <Button asChild variant="ghost" className="px-0">
-            <a href="/process">See the full process -></a>
+            <a href="/process">See the full process →</a>
           </Button>
         </div>
       </div>
@@ -320,6 +377,26 @@ const processStages = [
       </div>
     </section>
 
+    <section class="border-t border-[color:var(--hairline)]">
+      <div class="axiom-container py-10 md:py-14">
+        <dl class="grid grid-cols-1 gap-10 sm:grid-cols-3">
+          {stats.map((stat) => (
+            <div class="flex flex-col gap-1">
+              <dd class="text-[52px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] md:text-[64px]">
+                {stat.value}
+              </dd>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--accent-solid)]">
+                {stat.unit}
+              </dt>
+              <p class="mt-2 text-[14px] leading-[1.6] text-[var(--text-secondary)]">
+                {stat.description}
+              </p>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
     <section class="border-t border-[color:var(--hairline)] bg-[var(--surface-2)]">
       <div class="axiom-container py-12 md:py-16">
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.75fr)] lg:items-end">
@@ -337,7 +414,7 @@ const processStages = [
               <a href="/start">Start a project</a>
             </Button>
             <p class="axiom-metric text-[var(--text-muted)]">
-              Review -> Scope -> Build -> Launch
+              Review → Scope → Build → Launch
             </p>
           </div>
         </div>
