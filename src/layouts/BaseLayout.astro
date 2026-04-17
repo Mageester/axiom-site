@@ -1,0 +1,148 @@
+---
+import '../index.css';
+import '../styles/globals.css';
+import { Footer } from '../components/layout/Footer';
+import { Nav } from '../components/layout/Nav';
+import {
+  DEFAULT_OG_IMAGE,
+  DEFAULT_SEO_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  formatSeoTitle,
+  toCanonicalUrl,
+} from '../lib/seo';
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  noIndex?: boolean;
+  schema?: Record<string, unknown>;
+  hidePrimaryCta?: boolean;
+  showNav?: boolean;
+  showFooter?: boolean;
+};
+
+const {
+  title,
+  description,
+  canonicalPath,
+  image,
+  noIndex = false,
+  schema,
+  hidePrimaryCta = false,
+  showNav = true,
+  showFooter = true,
+} = Astro.props as Props;
+
+const resolvedTitle = formatSeoTitle(title);
+const resolvedDescription = description?.trim() || DEFAULT_SEO_DESCRIPTION;
+const resolvedCanonical = toCanonicalUrl(canonicalPath || Astro.url.pathname);
+const resolvedImage = image || DEFAULT_OG_IMAGE;
+const resolvedImageUrl = resolvedImage.startsWith('http') ? resolvedImage : `${SITE_URL}${resolvedImage}`;
+const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth bg-[var(--bg-base)] text-[var(--text-primary)]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0A0A0C" />
+    <meta name="generator" content="Astro" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <link rel="preconnect" href="https://assets.vercel.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/vercel/geist-font@1.4.2/packages/next/dist/fonts/geist-sans/GeistVF.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="https://assets.vercel.com/raw/upload/v1660068731/fonts/4/Inter.var.latin.woff2"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={resolvedDescription} />
+    <meta name="robots" content={noIndex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large'} />
+    <link rel="canonical" href={resolvedCanonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={resolvedCanonical} />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={resolvedDescription} />
+    <meta property="og:image" content={resolvedImageUrl} />
+    <meta property="og:site_name" content={SITE_NAME} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={resolvedDescription} />
+    <meta name="twitter:image" content={resolvedImageUrl} />
+
+    {schema ? <script type="application/ld+json" set:html={JSON.stringify(schema)} /> : null}
+    <script is:inline>
+      {`
+        (() => {
+          const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const revealables = Array.from(document.querySelectorAll('[data-reveal]'));
+
+          const show = (el) => {
+            el.setAttribute('data-reveal-state', 'visible');
+            el.querySelectorAll('[data-reveal-item]').forEach((item) => {
+              item.setAttribute('data-reveal-state', 'visible');
+            });
+          };
+
+          if (reduced) {
+            revealables.forEach(show);
+            return;
+          }
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                show(entry.target);
+                observer.unobserve(entry.target);
+              });
+            },
+            {
+              threshold: 0.14,
+              rootMargin: '0px 0px -8% 0px',
+            }
+          );
+
+          revealables.forEach((el) => observer.observe(el));
+        })();
+      `}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    {showNav ? <Nav client:load pathname={Astro.url.pathname} hidePrimaryCta={hidePrimaryCta} /> : null}
+
+    <div class={`relative z-10 ${shellPaddingClass}`}>
+      <slot />
+    </div>
+
+    {showFooter ? <Footer pathname={Astro.url.pathname} /> : null}
+  </body>
+</html>

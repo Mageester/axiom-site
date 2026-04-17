@@ -48,18 +48,13 @@
   }
 
   body {
-    @apply bg-axiom-base text-axiom-text-main font-axiomSans leading-[1.6];
+    @apply bg-background font-body leading-[1.65];
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
-    color: var(--axiom-text-primary);
-    background-color: var(--axiom-base);
-    background-image:
-      radial-gradient(1180px 620px at -8% -22%, rgba(90, 100, 114, 0.18), transparent 62%),
-      radial-gradient(920px 540px at 110% 14%, rgba(200, 122, 87, 0.1), transparent 58%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.014) 0%, rgba(255, 255, 255, 0) 34%);
+    color: var(--text-secondary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -91,13 +86,15 @@
   h1,
   h2,
   h3 {
-    @apply font-axiomDisplay tracking-tight leading-tight text-axiom-text-main;
+    @apply font-axiomDisplay tracking-tight leading-tight text-axiom-text;
   }
 
   h1 {
-    font-size: clamp(2.5rem, 5vw, 5rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.1 !important;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-family: var(--font-display);
   }
 
   p {

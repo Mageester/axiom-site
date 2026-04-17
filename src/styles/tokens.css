@@ -1,0 +1,49 @@
+/* Accent option chosen: OPTION A - Refined Copper */
+
+:root {
+  --bg-base: #0a0a0c;
+  --surface-1: #101014;
+  --surface-2: #16161c;
+  --hairline: rgba(255, 255, 255, 0.06);
+  --text-primary: #f5f5f7;
+  --text-secondary: #b8b8be;
+  --text-muted: #5a5a62;
+
+  --accent: linear-gradient(135deg, #e8a27b 0%, #c97a4e 100%);
+  --accent-glow: rgba(232, 162, 123, 0.25);
+
+  --content-width: 1240px;
+  --gutter-mobile: 24px;
+  --gutter-desktop: 48px;
+  --section-space-mobile: 72px;
+  --section-space-desktop: 120px;
+  --radius-card: 16px;
+
+  --transition-standard: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --reveal-duration: 600ms;
+  --reveal-distance: 16px;
+  --reveal-stagger: 80ms;
+
+  --font-display: 'Geist Sans', 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Legacy aliases kept for existing components and pages. */
+  --axiom-base: var(--bg-base);
+  --axiom-elevated: var(--surface-1);
+  --axiom-surface: var(--surface-2);
+  --axiom-border: var(--hairline);
+  --axiom-text-main: var(--text-primary);
+  --axiom-text-primary: var(--text-secondary);
+  --axiom-text-mute: var(--text-muted);
+  --axiom-accent: #c97a4e;
+  --accent2: rgba(232, 162, 123, 0.85);
+  --accent-muted: rgba(232, 162, 123, 0.18);
+  --bg-main: var(--bg-base);
+  --bg-surface: var(--surface-1);
+  --bg-inset: var(--surface-2);
+  --border-panel: var(--hairline);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --text-heading: var(--text-primary);
+  --text-body: var(--text-secondary);
+}

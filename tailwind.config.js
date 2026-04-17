@@ -1,91 +1,70 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-        "./src/**/*.{astro,html,js,ts,jsx,tsx,md,mdx}",
-    ],
-    theme: {
-        extend: {
-            /* ── Spacing Scale ─────────────────────────────
-               [4, 8, 12, 16, 24, 32, 48, 64, 96]
-               Available as p-1, p-2, p-3, p-4, p-6, p-8, p-12, p-16, p-24
-               Plus custom semantic tokens below.
-               ────────────────────────────────────────────── */
-            spacing: {
-                '18': '4.5rem',   /* 72px  — between 64 and 96 */
-                '22': '5.5rem',   /* 88px  — between 64 and 96 */
-                'section': '4rem',       /* 64px  — default section gap */
-                'section-lg': '6rem',    /* 96px  — hero/landing section gap */
-            },
-            colors: {
-                background: 'var(--bg-main)',
-                surface: 'var(--bg-surface)',
-                inset: 'var(--bg-inset)',
-                'axiom-base': 'var(--axiom-base)',
-                'axiom-elevated': 'var(--axiom-elevated)',
-                'axiom-surface': 'var(--axiom-surface)',
-                'axiom-border': 'var(--axiom-border)',
-                'axiom-accent': 'var(--axiom-accent)',
-                'axiom-accent-2': 'var(--accent2)',
-                'axiom-text-main': 'var(--axiom-text-main)',
-                'axiom-text-mute': 'var(--axiom-text-mute)',
-                accent2: 'var(--accent2)',
-                accent: {
-                    DEFAULT: 'var(--accent)',
-                    secondary: 'var(--accent2)',
-                    muted: 'var(--accent-muted)',
-                },
-                panel: 'var(--border-panel)',
-            },
-            fontFamily: {
-                axiomSans: ['Inter', 'Satoshi', 'sans-serif'],
-                axiomDisplay: ['"Space Grotesk"', 'Inter', 'sans-serif'],
-                axiomMono: ['"Space Grotesk"', 'Inter', 'sans-serif'],
-                grotesk: ['"Space Grotesk"', 'Inter', 'sans-serif'],
-                inter: ['Inter', 'sans-serif'],
-            },
-            fontSize: {
-                /* ── Typography Scale ─────────────────────── */
-                'display': ['48px', { lineHeight: '1.08', letterSpacing: '-0.02em', fontWeight: '600' }],
-                'h1': ['40px', { lineHeight: '48px', letterSpacing: '-0.02em', fontWeight: '600' }],
-                'h2': ['32px', { lineHeight: '40px', letterSpacing: '-0.015em', fontWeight: '600' }],
-                'h3': ['24px', { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' }],
-                'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
-                'body': ['16px', { lineHeight: '26px', fontWeight: '400' }],
-                'body-sm': ['14px', { lineHeight: '20px', fontWeight: '400' }],
-                'caption': ['12px', { lineHeight: '16px', fontWeight: '500' }],
-                'overline': ['10.5px', { lineHeight: '16px', letterSpacing: '0.18em', fontWeight: '500' }],
-            },
-            maxWidth: {
-                'prose': '42rem',      /* ~67 chars at body size */
-                'prose-sm': '36rem',   /* ~58 chars — tighter */
-                'container': '1100px', /* standard content width */
-                'container-lg': '1200px',
-            },
-            borderColor: {
-                subtle: 'var(--border-subtle)',
-                panel: 'var(--border-panel)',
-            },
-            textColor: {
-                primary: 'var(--text-primary)',
-                secondary: 'var(--text-secondary)',
-                heading: 'var(--text-heading)',
-                body: 'var(--text-body)',
-            },
-            backgroundColor: {
-                subtle: 'var(--border-subtle)',
-            },
-            borderRadius: {
-                'panel': '6px',    /* standard card/panel radius */
-                'button': '4px',   /* CTA button radius */
-                'input': '4px',    /* form input radius */
-            },
-            boxShadow: {
-                'panel': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.02)',
-                'panel-hover': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.04), 0 4px 16px -8px rgba(0, 0, 0, 0.4)',
-                'glow-subtle': '0 0 24px rgba(255, 255, 255, 0.04)',
-                'glow-accent': '0 0 24px rgba(228, 87, 46, 0.2)',
-            },
+  content: ['./src/**/*.{astro,html,js,ts,jsx,tsx,md,mdx}'],
+  theme: {
+    extend: {
+      colors: {
+        background: 'var(--bg-base)',
+        surface: 'var(--surface-1)',
+        elevated: 'var(--surface-2)',
+        hairline: 'var(--hairline)',
+        text: {
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+          muted: 'var(--text-muted)',
         },
+        axiom: {
+          base: 'var(--axiom-base)',
+          elevated: 'var(--axiom-elevated)',
+          surface: 'var(--axiom-surface)',
+          border: 'var(--axiom-border)',
+          accent: 'var(--axiom-accent)',
+          text: 'var(--axiom-text-main)',
+          mute: 'var(--axiom-text-mute)',
+        },
+        accent: {
+          DEFAULT: 'var(--axiom-accent)',
+          muted: 'var(--accent-muted)',
+        },
+      },
+      fontFamily: {
+        display: ['var(--font-display)'],
+        body: ['var(--font-body)'],
+        mono: ['var(--font-mono)'],
+        axiomSans: ['var(--font-body)'],
+        axiomDisplay: ['var(--font-display)'],
+        axiomMono: ['var(--font-mono)'],
+        grotesk: ['var(--font-display)'],
+        inter: ['var(--font-body)'],
+      },
+      fontSize: {
+        display: ['clamp(48px, 7vw, 96px)', { lineHeight: '1.02', letterSpacing: '-0.035em', fontWeight: '600' }],
+        h1: ['clamp(48px, 7vw, 96px)', { lineHeight: '1.02', letterSpacing: '-0.035em', fontWeight: '600' }],
+        h2: ['clamp(32px, 4vw, 52px)', { lineHeight: '1.08', letterSpacing: '-0.025em', fontWeight: '500' }],
+        h3: ['22px', { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '600' }],
+        h4: ['18px', { lineHeight: '1.4', fontWeight: '600' }],
+        bodyLg: ['17px', { lineHeight: '1.6', fontWeight: '400' }],
+        body: ['15px', { lineHeight: '1.65', fontWeight: '400' }],
+        bodySm: ['13px', { lineHeight: '1.55', fontWeight: '400' }],
+        eyebrow: ['11px', { lineHeight: '1.2', letterSpacing: '0.12em', fontWeight: '500' }],
+        metric: ['12px', { lineHeight: '1.2', letterSpacing: '0.08em', fontWeight: '400' }],
+        button: ['14px', { lineHeight: '1.2', fontWeight: '500' }],
+      },
+      spacing: {
+        section: '72px',
+        'section-lg': '120px',
+      },
+      maxWidth: {
+        container: '1240px',
+      },
+      borderRadius: {
+        card: '16px',
+        pill: '999px',
+      },
+      boxShadow: {
+        card: 'inset 0 1px 0 rgba(255,255,255,0.04)',
+      },
     },
-    plugins: [],
-}
+  },
+  plugins: [],
+};
