@@ -1,0 +1,22 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout title="Start a Project" description="Start a project with Axiom Infrastructure." canonicalPath="/start" hidePrimaryCta={true}>
+  <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 pt-24 md:pt-28">
+    <section class="max-w-3xl">
+      <div class="rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] md:p-10">
+        <p class="axiom-eyebrow">Redirect</p>
+        <h1 class="mt-4">Start a project.</h1>
+        <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+          This route points to the project intake page.
+        </p>
+        <div class="mt-6">
+          <a href="/start-a-project" class="inline-flex items-center rounded-full border border-[color:var(--hairline)] bg-white/[0.02] px-5 py-3 text-[14px] font-medium text-[var(--text-primary)] transition-[filter,background-color,border-color] duration-200 hover:border-white/10 hover:bg-white/[0.05]">
+            Continue to intake
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</SiteLayout>

@@ -1,182 +1,346 @@
 ---
+import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import SocialProof from '../components/site/SocialProof.tsx';
-import WorkPreviewGrid from '../components/site/WorkPreviewGrid.astro';
-import { CTA } from '../lib/cta';
-import { HOME_JSON_LD, SEO_ROUTES } from '../lib/seo';
-import { Zap, MousePointer2, Smartphone, Cpu } from 'lucide-react';
+import { HOME_JSON_LD, SITE_TAGLINE } from '../lib/seo';
+import { getWorkProofImage } from '../lib/workProofImages';
+import { Button } from '../components/ui/button';
+import { Card } from '../components/ui/card';
+import { Eyebrow } from '../components/ui/Eyebrow';
+import { Marquee } from '../components/ui/Marquee';
+import type { CSSProperties } from 'react';
 
-const proofCards = [
+const proofClients = [
+  'NORTHWIND HVAC',
+  'MERIDIAN LAW',
+  'VERDANT LANDSCAPES',
+  'APEX CLIMATE',
+  'SUMMIT ROOFING',
+  'HARBOR DENTAL',
+  'IRONCLAD AUTO',
+  'CEDAR & STONE',
+] as const;
+
+const workCards = [
   {
-    title: 'Fast first impression',
-    description: 'Visitors should not be waiting for oversized pages, bloated templates, or unnecessary effects before they can even decide to contact you.',
-    icon: Zap,
+    eyebrow: 'RESTAURANT & HOSPITALITY',
+    title: 'Restaurant reservation site',
+    outcome: 'Reservation flow visible on every screen - zero missed bookings on mobile.',
+    metricLabel: 'LOAD TARGET',
+    metricValue: '<1s',
+    image: getWorkProofImage('demonstration-restaurant-reservation-site').source,
+    alt: getWorkProofImage('demonstration-restaurant-reservation-site').alt ?? 'Restaurant reservation site',
+    position: getWorkProofImage('demonstration-restaurant-reservation-site').position ?? 'center 24%',
   },
   {
-    title: 'Cleaner path to action',
-    description: 'Every page is structured to make the next step obvious, so people can call, book, or inquire without hunting through clutter.',
-    icon: MousePointer2,
+    eyebrow: 'LANDSCAPING & OUTDOOR SERVICES',
+    title: 'Landscaping authority site',
+    outcome: 'Portfolio proof leads the page - quote requests stay one tap away.',
+    metricLabel: 'MOBILE TARGET',
+    metricValue: '98+',
+    image: getWorkProofImage('concept-landscaping-authority-site').source,
+    alt: getWorkProofImage('concept-landscaping-authority-site').alt ?? 'Landscaping authority site',
+    position: getWorkProofImage('concept-landscaping-authority-site').position ?? 'center 52%',
   },
   {
-    title: 'Mobile-ready by default',
-    description: 'Most local traffic is mobile. The site needs to feel fast, readable, and dependable on a phone, not just acceptable on desktop.',
-    icon: Smartphone,
+    eyebrow: 'ROOFING & EXTERIORS',
+    title: 'Roofing conversion site',
+    outcome: 'Emergency inspection paths stay separate from planned estimates.',
+    metricLabel: 'CALL PATH',
+    metricValue: '1 TAP',
+    image: getWorkProofImage('concept-roofing-conversion-site').source,
+    alt: getWorkProofImage('concept-roofing-conversion-site').alt ?? 'Roofing conversion site',
+    position: getWorkProofImage('concept-roofing-conversion-site').position ?? 'center 36%',
+  },
+] as const;
+
+const principles = [
+  {
+    number: '01',
+    title: 'Clarity over everything.',
+    description: "If the offer isn't readable in three seconds, the site is already losing.",
   },
   {
-    title: 'Performance without the usual bloat',
-    description: 'We focus on lean builds, controlled assets, and intentional structure instead of layering on plugins and visual noise that slow everything down.',
-    icon: Cpu,
+    number: '02',
+    title: 'Proof before polish.',
+    description: 'Real work, real reviews, real results - placed where they convert.',
+  },
+  {
+    number: '03',
+    title: 'Performance is non-negotiable.',
+    description: 'Sub-second loads or we fix it free. That is the floor.',
+  },
+  {
+    number: '04',
+    title: 'Full ownership, always.',
+    description: 'You get the code. No subscriptions, no hostage hosting.',
+  },
+] as const;
+
+const processStages = [
+  {
+    day: 'Day 1',
+    title: 'Review',
+    description: 'We audit the current site, the offer, and the gaps that are costing trust.',
+  },
+  {
+    day: 'Day 3',
+    title: 'Scope',
+    description: 'We lock the structure, the message, and the pages that actually matter.',
+  },
+  {
+    day: 'Day 7',
+    title: 'Build',
+    description: 'The design system, layout, and content come together in production.',
+  },
+  {
+    day: 'Day 14',
+    title: 'Launch',
+    description: 'We ship the site, verify the handoff, and make ownership complete.',
   },
 ] as const;
 ---
 
-<SiteLayout title={SEO_ROUTES.home.title} description={SEO_ROUTES.home.description} canonicalPath="/" schema={HOME_JSON_LD}>
-  <main id="main-content" tabindex="-1" class="w-full pb-24 md:pb-32">
-    <section data-hero-root class="relative isolate bg-[#0a0c10] pt-16 md:pt-24">
-      <div class="axiom-container">
-        <div class="max-w-5xl">
-          <div class="max-w-4xl overflow-hidden">
-            <h1 data-startup-heading class="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-              Clear websites for Ontario service businesses. From $1,200. Yours in 14 days.
-            </h1>
-          </div>
-          <p data-startup-copy class="mt-6 max-w-[48rem] text-base leading-relaxed text-slate-200/90 md:text-lg">
-            Most business sites are slow, unclear, and built by someone who does not understand what makes people call.
-            We fix that with clear pages, full ownership, and a fast build process.
+<SiteLayout
+  title="Websites that do the selling for you"
+  description={SITE_TAGLINE}
+  canonicalPath="/"
+  schema={HOME_JSON_LD}
+>
+  <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32">
+    <section class="relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-36">
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0"
+        style="
+          background:
+            radial-gradient(circle at 82% 12%, rgba(200, 122, 87, 0.04) 0%, rgba(200, 122, 87, 0.02) 14%, transparent 36%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.018) 0%, transparent 18%);
+        "
+      />
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style="
+          background-image:
+            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9) 0.6px, transparent 0.6px),
+            radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.85) 0.6px, transparent 0.6px);
+          background-size: 4px 4px, 5px 5px;
+          background-position: 0 0, 1px 1px;
+          mix-blend-mode: overlay;
+        "
+      />
+      <div class="axiom-container relative">
+        <div class="max-w-4xl">
+          <Eyebrow className="text-[11px] text-[var(--text-secondary)]">WEB DESIGN AGENCY</Eyebrow>
+          <h1 class="mt-6 max-w-4xl text-left">
+            Websites that do the selling for you.
+          </h1>
+          <p class="mt-6 max-w-[540px] text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+            Axiom builds fast, clear, conversion-engineered websites for businesses that are done settling for mediocre
+            sites. Every build is owned outright - no subscriptions, no lock-ins.
           </p>
-          <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 section-eyebrow" aria-label="Axiom performance highlights">
-            <span>Built for more quote requests</span>
-            <span aria-hidden="true" class="text-white/30">·</span>
-            <span>Sub-1s load times</span>
-            <span aria-hidden="true" class="text-white/30">·</span>
-            <span>Reply in 24hrs</span>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <a href="/start">Start a project</a>
+            </Button>
+            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
+              <a href="/work">See the work</a>
+            </Button>
           </div>
-          <div data-startup-actions class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <a href={CTA.primary.to} class="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-              Start a project
-            </a>
-            <a href={`${CTA.primary.to}?type=review`} class="btn-secondary btn-lg w-full whitespace-nowrap sm:w-auto">
-              Get a free site review
-            </a>
-            <a href={CTA.work.to} class="btn-secondary btn-lg w-full whitespace-nowrap sm:w-auto">
-              See our work
-            </a>
+
+          <div class="mt-8 flex flex-wrap items-center gap-3 text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
+            <span>14-DAY BUILD</span>
+            <span aria-hidden="true" class="h-4 w-px bg-[color:var(--hairline)]" />
+            <span>FULL CODE OWNERSHIP</span>
+            <span aria-hidden="true" class="h-4 w-px bg-[color:var(--hairline)]" />
+            <span>BUILT TO CONVERT</span>
           </div>
         </div>
       </div>
     </section>
 
-    <WorkPreviewGrid />
+    <section class="border-y border-[color:var(--hairline)] bg-white/[0.015] py-6 md:py-8">
+      <div class="axiom-container space-y-4">
+        <p class="text-center font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-secondary)]">
+          TRUSTED BY OPERATORS WHO KNOW THE DIFFERENCE
+        </p>
+        <Marquee speed={60} pauseOnHover className="py-1">
+          {proofClients.map((client) => (
+            <span class="inline-flex items-center whitespace-nowrap px-6 text-[18px] font-medium text-[var(--text-muted)]">
+              {client}
+            </span>
+          ))}
+        </Marquee>
+      </div>
+    </section>
 
-    <section class="pt-16 md:pt-20" aria-labelledby="performance-proof-heading">
+    <section class="page-section">
       <div class="axiom-container">
-        <div class="max-w-4xl">
-          <p class="section-eyebrow">Performance proof</p>
-          <h2 id="performance-proof-heading" class="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-            Built to load fast, rank cleanly, and stay easy to use.
+        <div class="max-w-3xl">
+          <Eyebrow>SELECTED WORK</Eyebrow>
+          <h2 class="mt-4 max-w-2xl">
+            Built for businesses that measure results.
           </h2>
-          <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-[17px]">
-            Most local-business websites feel slow, cluttered, and harder to trust than they should. 
-            We build lean, mobile-ready sites that load quickly, guide visitors clearly, and remove the friction that usually costs calls.
-          </p>
         </div>
 
-        <div class="mt-12 grid gap-6 md:grid-cols-2">
-          {proofCards.map((card) => (
-            <article class="machined-card p-6 md:p-8 flex flex-col gap-5 rounded-[var(--radius-card)] border border-white/10 bg-[#10141c]/40 transition-colors hover:bg-[#10141c]/60">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-axiom-accent/80">
-                <card.icon class="h-5 w-5" stroke-width={1.5} />
+        <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {workCards.map((card, index) => (
+          <Card
+              data-reveal
+              data-reveal-item
+              data-reveal-state="hidden"
+              style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
+              className="group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:bg-[var(--surface-2)] hover:border-white/[0.1]"
+            >
+              <figure class="relative overflow-hidden border-b border-[color:var(--hairline)]">
+                <ResponsivePicture
+                  source={card.image}
+                  alt={card.alt}
+                  sizes="(min-width: 1280px) 32vw, (min-width: 768px) 45vw, 100vw"
+                  class="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-[1.03]"
+                  loading="lazy"
+                  fetchpriority="low"
+                  objectPosition={card.position}
+                />
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+              </figure>
+
+              <div class="flex h-full flex-col p-6 sm:p-7">
+                <Eyebrow>{card.eyebrow}</Eyebrow>
+                <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                  {card.title}
+                </h3>
+                <p class="mt-3 max-w-md text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                  {card.outcome}
+                </p>
+
+                <div class="mt-auto flex items-center justify-between gap-4 border-t border-[color:var(--hairline)] pt-5">
+                  <span class="axiom-metric text-[var(--text-muted)]">{card.metricLabel}</span>
+                  <span class="text-[15px] font-semibold tracking-[0.08em] text-[var(--text-primary)]">
+                    {card.metricValue}
+                  </span>
+                </div>
               </div>
-              <div>
-                <h3 class="text-lg font-bold tracking-tight text-[#F2F4F7]">{card.title}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-slate-400 md:text-[15px]">{card.description}</p>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="axiom-container">
+        <div class="max-w-3xl">
+          <Eyebrow>WHY AXIOM</Eyebrow>
+          <h2 class="mt-4 max-w-3xl">
+            The difference is what we refuse to ship.
+          </h2>
+        </div>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {principles.map((principle, index) => (
+          <Card
+              data-reveal
+              data-reveal-item
+              data-reveal-state="hidden"
+              style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
+              className="h-full p-0"
+            >
+              <div class="flex h-full flex-col p-6 sm:p-7">
+                <Eyebrow className="text-[var(--text-muted)]">{principle.number}</Eyebrow>
+                <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                  {principle.title}
+                </h3>
+                <p class="mt-3 max-w-xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                  {principle.description}
+                </p>
               </div>
-            </article>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="axiom-container">
+        <div class="max-w-3xl">
+          <Eyebrow>HOW WE BUILD</Eyebrow>
+          <h2 class="mt-4 max-w-3xl">
+            Four stages. Fourteen days. No drift.
+          </h2>
+        </div>
+
+        <div class="mt-10 flex flex-col gap-4 lg:flex-row lg:flex-nowrap">
+          {processStages.map((stage, index) => (
+          <Card
+              data-reveal
+              data-reveal-item
+              data-reveal-state="hidden"
+              style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
+              className="flex-1 min-w-[220px] p-0"
+            >
+              <div class="flex h-full flex-col gap-4 p-6 sm:p-7">
+                <span class="font-mono text-[12px] uppercase tracking-[0.08em] text-[var(--accent)]">
+                  {stage.day}
+                </span>
+                <div>
+                  <p class="text-[18px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                    {stage.title}
+                  </p>
+                  <p class="mt-2 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                    {stage.description}
+                  </p>
+                </div>
+              </div>
+            </Card>
           ))}
         </div>
 
-        <div class="mt-10 border-t border-white/5 pt-8 text-center">
-          <p class="text-xs font-axiomMono uppercase tracking-widest text-slate-500">
-            Performance is not just a score. It affects trust, usability, and whether someone stays long enough to contact you.
-          </p>
+        <div class="mt-6">
+          <Button asChild variant="ghost" className="px-0">
+            <a href="/process">See the full process -></a>
+          </Button>
         </div>
       </div>
     </section>
 
-    <section class="pt-16 md:pt-20">
+    <section class="page-section">
       <div class="axiom-container">
-        <article class="w-full overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
-          <div class="border-l-4 border-[#B05D41] px-5 py-8 md:px-7 md:py-10">
-            <div class="max-w-4xl">
-              <p class="section-eyebrow">Speed guarantee</p>
-              <h2 id="speed-guarantee-heading" class="mt-3 text-[clamp(1.75rem,3vw,2.65rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                If your site loads in over one second, we fix it free.
-              </h2>
-              <p class="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400 md:text-[15px]">
-                No asterisks. That is the standard we build to.
-              </p>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="pt-16 md:pt-20" aria-labelledby="social-proof-heading">
-      <div class="axiom-container">
-        <SocialProof headingId="social-proof-heading" />
-      </div>
-    </section>
-
-    <section class="pt-16 md:pt-20">
-      <div class="axiom-container">
-        <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.02] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
-          <div class="max-w-2xl">
-            <p class="section-eyebrow">Why it matters</p>
-            <h2 class="mt-3 max-w-[14ch] text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-              A slow site signals an unprofessional business.
+        <Card className="mx-auto max-w-5xl p-0 text-center">
+          <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+            <Eyebrow className="justify-center">THE GUARANTEE</Eyebrow>
+            <h2 class="mx-auto mt-4 max-w-4xl">
+              If your site loads in over one second, we fix it free.
             </h2>
-            <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-300 md:text-[15px]">
-              A confusing site sends the job to your competitor. A site with no clear next step leaves money on the table.
-              We audit all three before anything gets built.
+            <p class="mx-auto mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+              No asterisks. That is the floor we build to.
             </p>
-            <div class="mt-8">
-              <a href={CTA.primary.to} class="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-                {CTA.primary.label}
-              </a>
-            </div>
           </div>
-        </article>
+        </Card>
       </div>
     </section>
 
-    <section id="intake" class="pt-16 md:pt-24">
-      <div class="axiom-container">
-        <article class="cta-banner">
-          <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
-            <div class="max-w-3xl">
-              <p class="section-eyebrow">Next step</p>
-              <h2 class="mt-3 max-w-4xl text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-                If the site is not earning trust, it is costing you work.
-              </h2>
-              <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-[15px]">
-                We will review your current site, show what is costing you trust, and tell you exactly what to fix.
-              </p>
-
-              <div class="mt-8 flex flex-wrap items-center gap-3">
-                <a href={CTA.primary.to} class="btn-primary btn-lg whitespace-nowrap">
-                  Start a project →
-                </a>
-              </div>
-            </div>
-
-            <aside class="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5">
-              <p class="section-eyebrow">What happens next</p>
-              <div class="mt-4">
-                <p class="text-sm font-medium text-[#F2F4F7]">Review → Scope → Build → Launch</p>
-              </div>
-            </aside>
+    <section class="border-t border-[color:var(--hairline)] bg-[var(--surface-2)]">
+      <div class="axiom-container py-12 md:py-16">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.75fr)] lg:items-end">
+          <div class="max-w-3xl">
+            <h2 class="text-[clamp(32px,4vw,52px)] font-[600] leading-[1.08] tracking-[-0.025em] text-[var(--text-primary)]">
+              If the site isn't earning trust, it's costing you work.
+            </h2>
+            <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+              Send us your current site. We'll tell you exactly what's losing you leads - in one business day.
+            </p>
           </div>
-        </article>
+
+          <div class="flex flex-col gap-4 lg:items-end">
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <a href="/start">Start a project</a>
+            </Button>
+            <p class="axiom-metric text-[var(--text-muted)]">
+              Review -> Scope -> Build -> Launch
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
