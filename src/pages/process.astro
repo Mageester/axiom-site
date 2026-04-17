@@ -2,160 +2,142 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
+import { Button } from '../components/ui/button';
+import { Card } from '../components/ui/card';
+import { Eyebrow } from '../components/ui/Eyebrow';
 
 const processSteps = [
   {
-    id: 'review',
     dayLabel: 'Day 1',
     title: 'Review',
-    timelineDescription: 'We audit the current site and identify the friction that costs trust and leads.',
+    timelineDescription:
+      'We audit the current site, the offer, and the friction points that are costing trust. We also identify the pages and proof that should move first.',
   },
   {
-    id: 'scope',
     dayLabel: 'Day 3',
     title: 'Scope',
-    timelineDescription: 'We lock the page structure, proof blocks, and call paths before design starts.',
+    timelineDescription:
+      'We lock the page structure, the call paths, and the content priorities before design starts. That keeps the build focused and the decisions early.',
   },
   {
-    id: 'build',
     dayLabel: 'Day 7',
     title: 'Build',
-    timelineDescription: 'We write, design, and test the build so service, proof, and contact stay clear.',
+    timelineDescription:
+      'We write, design, and test the site in production conditions. The layout, hierarchy, and interactions stay simple enough to ship cleanly.',
   },
   {
-    id: 'launch',
-    dayLabel: 'Day 14-21',
+    dayLabel: 'Day 14',
     title: 'Launch',
-    timelineDescription: 'We run launch checks, connect the domain, and ship with clear next steps.',
+    timelineDescription:
+      'We run launch checks, connect the domain, and hand over the site with a clear technical finish. The result is predictable, not improvised.',
   },
 ] as const;
 
 const checklistItems = [
   { title: 'Pages to build', detail: 'Which pages matter most right now.' },
   { title: 'Proof to surface', detail: 'Reviews, photos, and past work that should show up early.' },
-  { title: 'Quote and contact paths', detail: 'Where each quote, call, or contact path should go.' },
-  { title: 'Domain and redirects', detail: 'Domain, redirects, and final checks before the site goes live.' },
+  { title: 'Quote and contact paths', detail: 'Where each call-to-action should go.' },
+  { title: 'Domain and redirects', detail: 'Final technical handoff, redirects, and live launch checks.' },
 ] as const;
 ---
 
 <SiteLayout title={SEO_ROUTES.process.title} description={SEO_ROUTES.process.description} canonicalPath="/process">
-  <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 md:pb-24">
-    <section class="pt-12 sm:pt-16 md:pt-20">
-      <div class="max-w-5xl">
-        <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.2)] sm:p-8 md:p-10">
-          <p class="font-axiomMono text-xs uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
-          <h1 class="mt-3 max-w-3xl text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
-            Four stages from review to launch.
-          </h1>
-          <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-            Each stage keeps the work clear, the decisions early, and the launch path simple.
-          </p>
-          <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a href={CTA.primary.to} class="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-              {CTA.primary.label}
-            </a>
-            <a href={CTA.work.to} class="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07] sm:w-auto">
-              {CTA.work.label}
-            </a>
-          </div>
-        </article>
+  <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
+    <section class="axiom-container pt-12 md:pt-20">
+      <div class="max-w-3xl">
+        <Eyebrow>PROCESS</Eyebrow>
+        <h1 class="mt-4">Four stages. From review to launch.</h1>
+        <p class="mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+          Every stage keeps the work clear, the decisions early, and the launch predictable.
+        </p>
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Button asChild size="lg" className="w-full sm:w-auto">
+            <a href="/start">Start a project</a>
+          </Button>
+          <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
+            <a href="/work">See the work</a>
+          </Button>
+        </div>
       </div>
     </section>
 
-    <section class="pt-12 sm:pt-16 md:pt-20">
-      <div class="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.7fr)] xl:items-start xl:gap-8">
-        <div>
-          <div class="mb-6 flex flex-col gap-3 md:mb-8">
-            <p class="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Timeline</p>
-            <h2 class="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
-              How the build moves.
-            </h2>
-            <p class="max-w-xl text-sm leading-relaxed text-slate-300 md:text-base">
-              Clear checkpoints keep decisions early and launch predictable.
-            </p>
-          </div>
+    <section class="page-section">
+      <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.72fr)] xl:items-start xl:gap-8">
+        <Card className="p-0">
+          <div class="flex flex-col gap-4 p-6 sm:p-7 lg:flex-row lg:items-stretch lg:gap-0">
+            {processSteps.map((step, index) => (
+              <>
+                <article class="relative flex min-w-[200px] flex-1 flex-col rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-white/[0.015] px-5 pb-6 pt-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                  <span
+                    aria-hidden="true"
+                    class="absolute left-5 top-5 h-3 w-3 rounded-full bg-[var(--accent)] shadow-[0_0_0_4px_rgba(232,162,123,0.16)]"
+                  />
+                  <p class="font-axiomMono text-[clamp(3rem,5vw,3.5rem)] leading-none tracking-[-0.06em] text-[var(--accent)]">
+                    {step.dayLabel}
+                  </p>
+                  <h2 class="mt-4 text-[18px] font-semibold leading-[1.4] tracking-[-0.015em] text-[var(--text-primary)]">
+                    {step.title}
+                  </h2>
+                  <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-secondary)]">
+                    {step.timelineDescription}
+                  </p>
+                </article>
 
-          <article class="reveal-stagger mt-6 overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-5 shadow-[0_14px_32px_rgba(0,0,0,0.18)] sm:p-6 md:p-7">
-            <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-4">
-              {processSteps.map((step, index) => (
-                <>
-                  <article class="relative pl-7 lg:flex-1 lg:pl-0">
-                    {index < processSteps.length - 1 ? (
-                      <div class="absolute left-[0.6rem] top-[2.9rem] bottom-[-1.3rem] w-[2px] bg-white/10 lg:hidden" aria-hidden="true"></div>
-                    ) : null}
-                    <span class="absolute left-0 top-[0.9rem] h-3 w-3 rounded-full border border-white/20 bg-[#0f1524] lg:hidden" aria-hidden="true"></span>
-                    <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 lg:grid-cols-1 lg:gap-0">
-                      <p class="whitespace-nowrap font-axiomDisplay text-[1.3rem] leading-none text-accent sm:text-[1.6rem] lg:text-[clamp(1.6rem,3vw,2.2rem)]">
-                        {step.dayLabel}
-                      </p>
-                      <div class="min-w-0">
-                        <h3 class="text-[15px] font-semibold text-white sm:text-lg">{step.title}</h3>
-                        <p class="mt-1.5 text-sm leading-6 text-[#A7B3BC]">{step.timelineDescription}</p>
-                      </div>
-                    </div>
-                  </article>
-                  {index < processSteps.length - 1 ? (
-                    <div class="hidden h-[2px] flex-1 self-start bg-white/10 lg:block lg:translate-y-7" aria-hidden="true"></div>
-                  ) : null}
-                </>
-              ))}
-            </div>
-          </article>
-        </div>
-
-        <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] sm:p-6 xl:sticky xl:top-28">
-          <p class="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Before we build</p>
-          <h2 class="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
-            What we need before Day 7.
-          </h2>
-          <p class="mt-3 max-w-md text-sm leading-relaxed text-slate-300">
-            This keeps the work moving and cuts down on back-and-forth later.
-          </p>
-
-          <ul class="mt-5 divide-y divide-white/[0.08]">
-            {checklistItems.map((item) => (
-              <li class="flex items-start gap-3 py-4 first:pt-0 last:pb-0">
-                <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
-                  <svg viewBox="0 0 20 20" class="h-4 w-4 text-[#d4a48e]" fill="none" aria-hidden="true">
-                    <path d="M15.5 6.5 8.5 13.5 4.5 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg>
-                </span>
-                <div>
-                  <p class="text-sm font-medium leading-relaxed text-slate-200 md:text-[0.96rem]">{item.title}</p>
-                  <p class="mt-1 text-sm leading-relaxed text-slate-300">{item.detail}</p>
-                </div>
-              </li>
+                {index < processSteps.length - 1 ? (
+                  <div
+                    aria-hidden="true"
+                    class="hidden lg:block relative flex-none self-center px-3"
+                  >
+                    <div class="h-px w-10 bg-[color:var(--hairline)]" />
+                    <div class="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent)] shadow-[0_0_0_4px_rgba(232,162,123,0.14)]" />
+                  </div>
+                ) : null}
+              </>
             ))}
-          </ul>
-        </article>
+          </div>
+        </Card>
+
+        <Card className="self-start p-0 xl:sticky xl:top-28">
+          <div class="p-6 sm:p-7">
+            <Eyebrow>WHAT WE NEED BEFORE DAY 7</Eyebrow>
+            <p class="mt-4 max-w-md text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+              The closer this is to the actual business, the cleaner the build becomes.
+            </p>
+
+            <ul class="mt-6 divide-y divide-[color:var(--hairline)]">
+              {checklistItems.map((item) => (
+                <li class="flex items-start gap-3 py-4 first:pt-0 last:pb-0">
+                  <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--accent)] shadow-[0_0_0_4px_rgba(232,162,123,0.12)]" />
+                  <div>
+                    <p class="text-[15px] font-semibold leading-[1.4] text-[var(--text-primary)]">{item.title}</p>
+                    <p class="mt-1 text-[14px] leading-[1.65] text-[var(--text-secondary)]">{item.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Card>
       </div>
     </section>
 
-    <section class="pt-12 sm:pt-16 md:pt-20">
-      <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] sm:p-8 md:p-10">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
-          <div>
-            <p class="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
-            <h2 class="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
-              Ready to see what should change first?
-            </h2>
-            <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base lg:mt-4">
-              Send the site and we will point to the clearest next move.
+    <section class="page-section">
+      <div class="axiom-container">
+        <Card className="mx-auto max-w-5xl p-0">
+          <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+            <Eyebrow>THE GUARANTEE</Eyebrow>
+            <h2 class="mt-4 max-w-4xl">Ready to stop losing jobs to a weaker site?</h2>
+            <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+              No asterisks. That is the floor we build to.
             </p>
+            <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <Button asChild>
+                <a href="/start">Start a project</a>
+              </Button>
+              <p class="axiom-metric text-[var(--text-muted)]">Review -> Scope -> Build -> Launch</p>
+            </div>
           </div>
-          <aside class="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
-            <p class="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">What to send</p>
-            <p class="mt-3 text-sm leading-relaxed text-slate-300">
-              A current site, a rough goal, and any deadline are enough to begin.
-            </p>
-          </aside>
-          <div class="flex flex-col gap-3 lg:col-span-2 lg:items-end">
-            <a href={CTA.primary.to} class="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-              {CTA.primary.label}
-            </a>
-          </div>
-        </div>
-      </article>
+        </Card>
+      </div>
     </section>
   </main>
 </SiteLayout>
