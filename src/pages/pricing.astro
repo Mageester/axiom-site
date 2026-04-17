@@ -2,363 +2,373 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, PRICING_JSON_LD } from '../lib/seo';
-import { 
-  Zap, 
-  TrendingUp, 
-  Cpu, 
-  FileText, 
-  RotateCcw, 
-  Clock, 
-  Search, 
-  MapPin, 
-  Server, 
-  Layout, 
-  MessageSquare, 
-  UserCheck, 
-  CreditCard 
-} from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { Card } from '../components/ui/card';
+import { Eyebrow } from '../components/ui/Eyebrow';
 
 const pricingTiers = [
   {
+    key: 'starter',
     name: 'Starter',
     price: '$1,200',
-    description: 'For local businesses that need a site that actually converts visitors into calls.',
     features: ['3 pages', 'Mobile-ready', 'Contact form', 'Live in 14 days'],
-    cta: 'Start a project →',
+    cta: 'Start a project',
     href: CTA_PATHS.startProject,
-    icon: Zap,
+    variant: 'secondary',
   },
   {
+    key: 'growth',
     name: 'Growth',
     price: '$2,200',
-    description: 'For businesses ready to dominate local search and stop losing jobs to competitors.',
-    features: ['5 pages', 'SEO foundation', 'Google Business profile setup', 'Live in 21 days'],
-    cta: 'Start a project →',
+    features: ['5 pages', 'SEO foundation', 'Google Business setup', 'Live in 21 days'],
+    cta: 'Start a project',
     href: CTA_PATHS.startProject,
-    recommended: true,
-    icon: TrendingUp,
+    variant: 'primary',
+    highlighted: true,
   },
   {
+    key: 'custom',
     name: 'Custom',
     price: 'From $3,500',
-    description: 'Larger scope, deeper build. Scoped per project.',
-    features: ['Unlimited pages', 'Integrations & automations', 'Ongoing support available', 'Timeline scoped on intake'],
-    cta: "Let's talk →",
+    features: ['Unlimited pages', 'Integrations & automations', 'Ongoing support', 'Timeline scoped on intake'],
+    cta: 'Start a project',
     href: CTA_PATHS.startProject,
-    icon: Cpu,
+    variant: 'secondary',
   },
 ] as const;
 
 const comparisonRows = [
   {
     label: 'Pages included',
-    icon: FileText,
     starter: '3 pages',
     growth: '5 pages',
-    custom: 'Scoped to the project',
+    custom: 'Unlimited pages',
   },
   {
-    label: 'Revisions',
-    icon: RotateCcw,
+    label: 'Revision rounds',
     starter: '2 rounds',
     growth: '3 rounds',
-    custom: 'Scoped in the proposal',
+    custom: 'Scoped with the project',
   },
   {
     label: 'Turnaround',
-    icon: Clock,
     starter: '14 days',
     growth: '21 days',
-    custom: 'Timeline scoped on intake',
+    custom: 'Scoped on intake',
   },
   {
     label: 'SEO setup',
-    icon: Search,
     starter: 'Basic on-page setup',
-    growth: 'Local SEO foundation',
+    growth: 'SEO foundation',
     custom: 'Custom strategy',
   },
   {
-    label: 'Google Business profile',
-    icon: MapPin,
+    label: 'Google Business setup',
     starter: 'Guidance only',
-    growth: 'Setup + optimization',
+    growth: 'Included',
     custom: 'Included if needed',
   },
   {
     label: 'Hosting guidance',
-    icon: Server,
     starter: 'Included',
     growth: 'Included',
     custom: 'Included',
   },
   {
-    label: 'CMS / editing capability',
-    icon: Layout,
+    label: 'Editing workflow',
     starter: 'Light content updates',
-    growth: 'Editable content workflow',
-    custom: 'Custom editing setup',
+    growth: 'Editable content flow',
+    custom: 'Custom setup',
   },
   {
     label: 'Post-launch support',
-    icon: MessageSquare,
     starter: 'Launch support',
     growth: 'Post-launch support',
-    custom: 'Scoped support available',
+    custom: 'Scoped support',
   },
   {
     label: 'Ownership',
-    icon: UserCheck,
     starter: 'Full ownership',
     growth: 'Full ownership',
     custom: 'Full ownership',
   },
   {
     label: 'Recurring fees',
-    icon: CreditCard,
     starter: 'None',
     growth: 'None',
     custom: 'None',
   },
 ] as const;
 
+const mobileComparisonTiers = pricingTiers.map((tier) => ({
+  ...tier,
+  rows: comparisonRows.map((row) => ({
+    label: row.label,
+    value: row[tier.key as keyof typeof row],
+  })),
+}));
+
 const faqItems = [
   {
     question: 'Do I own the code?',
     answer:
-      'Yes. You own the site, the copy we build for you, and the final handoff files. There are no hidden licensing fees or lease-style arrangements.',
+      'Yes. You own the site, the source files, and the final handoff. There are no lease-style terms or hidden licensing fees.',
   },
   {
     question: 'Can I edit the site myself?',
     answer:
-      'If the project needs self-editing, we set it up with a simple editing workflow and show you how to use it. If you want us to handle updates instead, we can do that too.',
+      'If self-editing matters, we set up a simple workflow and show you how to use it. If you want us to handle updates instead, we can do that too.',
   },
   {
     question: 'What if I need changes after launch?',
     answer:
-      'Small launch fixes are included after go-live. If you need larger changes, new pages, or ongoing edits, we scope them clearly before any work starts.',
+      'Small launch fixes are included after go-live. Larger changes or new pages are scoped clearly before any work starts.',
   },
   {
     question: 'Is hosting included?',
     answer:
-      'We handle hosting guidance and the deployment setup so you are not left guessing. If a separate hosting account is needed, we tell you exactly what to use and what it costs.',
+      'We handle the deployment setup and tell you exactly what the site needs. If a separate hosting account is required, we make that clear before launch.',
   },
   {
     question: 'How do revisions work?',
     answer:
-      'Each package includes a set number of revision rounds. We collect feedback in batches so the project keeps moving and you do not waste time on tiny back-and-forth edits.',
+      'Each package includes a set number of revision rounds. We collect feedback in batches so the project keeps moving instead of stalling.',
   },
   {
     question: "What's the payment schedule?",
     answer:
-      'Typical projects start with a deposit, then the balance is due by milestone or before launch depending on scope. If a project needs a custom schedule, we will spell it out before we start.',
+      'Projects usually start with a deposit and finish by milestone or before launch. If the scope needs a custom schedule, we will spell it out first.',
   },
   {
-    question: 'Do you work with businesses outside Ontario?',
+    question: 'Do you work with businesses outside your area?',
     answer:
-      'Yes. Ontario service businesses are the main focus, but we can work with the right fit outside the province if the project matches our approach.',
+      'Yes. We work with the right fit wherever the project makes sense, as long as the scope matches our approach.',
   },
   {
     question: 'What makes Axiom different?',
     answer:
-      'The process is built around clarity, speed, and ownership. You get a site that is easy to understand, fast to load, and built to turn visitors into calls without recurring platform baggage.',
+      'The process is built around clarity, speed, and ownership. You get a site that is easy to understand, fast to load, and built to turn visitors into calls.',
   },
 ] as const;
 ---
 
 <SiteLayout title={SEO_ROUTES.pricing.title} description={SEO_ROUTES.pricing.description} canonicalPath="/pricing" schema={PRICING_JSON_LD}>
-  <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 md:pb-20">
-    <section class="mx-auto mb-12 flex max-w-3xl flex-col gap-6 pt-12 text-center sm:mb-24 sm:pt-16 md:pt-24">
-      <p class="section-eyebrow">Pricing</p>
-      <div>
-        <h1 class="text-[clamp(2.45rem,5.8vw,4rem)] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7]">
-          One investment. Full ownership.
-        </h1>
-        <h2 class="mt-2 text-[clamp(1.45rem,2.8vw,2rem)] font-axiomSans font-medium tracking-tight text-slate-300">
-          No monthly fees. No recurring charges. You own everything we build.
-        </h2>
+  <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
+    <section class="axiom-container pt-12 md:pt-20">
+      <div class="max-w-3xl">
+        <Eyebrow>PRICING</Eyebrow>
+        <h1 class="mt-4">One investment. Full ownership.</h1>
+        <p class="mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+          No monthly fees. No recurring charges. You own everything we build. Three tiers based on what the business actually needs.
+        </p>
       </div>
-      <p class="mx-auto max-w-[760px] text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
-        No monthly platform fees. No recurring charges for things you should already own. Three tiers based on what
-        your business actually needs.
-      </p>
     </section>
 
-    <section class="mx-auto mb-12 max-w-[1200px] sm:mb-24">
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
-        {pricingTiers.map((tier) => (
-          <article
-            class={`machined-card flex h-full flex-col gap-6 rounded-[var(--radius-card)] border bg-[#10141c]/40 p-6 transition-colors sm:p-8 ${
-              tier.recommended ? 'border-t-2 border-t-axiom-accent border-white/10 shadow-[0_12px_44px_rgba(200,122,87,0.12)]' : 'border-white/10'
-            }`}
-          >
-            <div>
-              <div class="flex items-center justify-between">
-                <h3 class="font-axiomMono text-xs uppercase tracking-wide text-[#A7B3BC]">{tier.name}</h3>
-                <tier.icon class={`h-5 w-5 ${tier.recommended ? 'text-axiom-accent' : 'text-slate-500/50'}`} stroke-width={1.5} />
+    <section class="page-section">
+      <div class="axiom-container">
+        <div class="grid gap-5 lg:grid-cols-3">
+          {pricingTiers.map((tier, index) => (
+            <Card
+              padding="none"
+              hoverLift
+              className={`relative overflow-hidden ${tier.highlighted ? 'border-[color:rgba(232,162,123,0.28)] bg-[var(--surface-2)] shadow-[0_0_0_1px_rgba(232,162,123,0.14),0_24px_56px_rgba(200,122,87,0.12)]' : 'bg-[var(--surface-1)]'}`}
+            >
+              {tier.highlighted ? (
+                <div
+                  aria-hidden="true"
+                  class="pointer-events-none absolute inset-0"
+                  style="
+                    background:
+                      radial-gradient(circle at top, rgba(232, 162, 123, 0.12) 0%, transparent 42%),
+                      linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 24%);
+                  "
+                />
+              ) : null}
+
+              <div class="relative flex h-full flex-col p-6 sm:p-7">
+                {tier.highlighted ? <Eyebrow className="text-[var(--accent)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
+
+                {!tier.highlighted ? <p class="mt-2 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]">{tier.name}</p> : null}
+
+                <p class="mt-5 text-[56px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)]">
+                  {tier.price}
+                </p>
+
+                <ul class="mt-6 space-y-3">
+                  {tier.features.map((feature) => (
+                    <li class="flex items-start gap-3 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                      <span class="mt-1.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.02]">
+                        <svg viewBox="0 0 20 20" class="h-3.5 w-3.5 text-[var(--accent)]" fill="none" aria-hidden="true">
+                          <path d="M15.2 5.8 8.5 12.5 4.8 8.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="mt-auto pt-8">
+                  <Button asChild variant={tier.variant} className="w-full">
+                    <a href={tier.href}>{tier.cta}</a>
+                  </Button>
+                </div>
               </div>
-              <p class="mt-6 font-axiomDisplay text-[40px] leading-none tracking-[-0.04em] text-[#F2F4F7]">{tier.price}</p>
-              <p class="mt-4 text-[15px] leading-relaxed text-slate-300">{tier.description}</p>
-            </div>
-
-            <ul class="mb-2 mt-auto flex flex-col gap-3">
-              {tier.features.map((feature) => (
-                <li class="flex items-start gap-3 text-sm leading-relaxed text-slate-300 md:text-[15px]">
-                  <span class="text-slate-500">·</span>
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            <a href={tier.href} class="btn-primary btn-md w-full justify-center">
-              {tier.cta}
-            </a>
-          </article>
-        ))}
+            </Card>
+          ))}
+        </div>
       </div>
     </section>
 
-    <section class="mx-auto mb-12 max-w-[1200px] sm:mb-24">
-      <article class="machined-card overflow-hidden rounded-[var(--radius-card)] p-6 sm:p-8 md:p-10">
+    <section class="page-section">
+      <div class="axiom-container">
         <div class="max-w-3xl">
-          <p class="section-eyebrow">Compare the tiers</p>
-          <h2 class="mt-3 text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
-            What each package includes.
-          </h2>
-          <p class="mt-4 max-w-2xl text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
+          <Eyebrow>COMPARE THE TIERS</Eyebrow>
+          <h2 class="mt-4 max-w-2xl">What each package includes.</h2>
+          <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
             Use this to compare the structure, support, and ownership before you book a call.
           </p>
         </div>
 
-        <div class="mt-8 grid gap-3 md:hidden">
-          {comparisonRows.map((row) => (
-            <article class="rounded-[22px] border border-white/10 bg-white/[0.03] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
-              <div class="flex items-start gap-3">
-                <row.icon class="mt-0.5 h-4 w-4 shrink-0 text-slate-500/70" stroke-width={1.5} />
-                <div class="min-w-0 flex-1">
-                  <p class="text-[14px] font-medium text-[#F2F4F7]">{row.label}</p>
-                  <div class="mt-3 grid gap-2 sm:grid-cols-3">
-                    <div class="rounded-xl border border-white/10 bg-[#0A0D13] px-3 py-3">
-                      <p class="text-[10px] uppercase tracking-[0.16em] text-slate-500">Starter</p>
-                      <p class="mt-1 text-[13px] leading-relaxed text-slate-200">{row.starter}</p>
+        <div class="mt-8 grid gap-4 md:hidden">
+          {mobileComparisonTiers.map((tier) => (
+            <Card
+              padding="none"
+              className={`overflow-hidden ${tier.highlighted ? 'border-[color:rgba(232,162,123,0.28)] bg-[var(--surface-2)] shadow-[0_0_0_1px_rgba(232,162,123,0.12)]' : 'bg-[var(--surface-1)]'}`}
+            >
+              <div class="p-6">
+                {tier.highlighted ? <Eyebrow className="text-[var(--accent)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
+                <div class="mt-4 flex items-end justify-between gap-4">
+                  <p class="text-[2.75rem] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)]">{tier.price}</p>
+                  <Button asChild variant={tier.variant} size="sm">
+                    <a href={tier.href}>{tier.cta}</a>
+                  </Button>
+                </div>
+
+                <div class="mt-6 space-y-3 border-t border-[color:var(--hairline)] pt-5">
+                  {tier.rows.map((row) => (
+                    <div class="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
+                      <p class="text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]">{row.label}</p>
+                      <p class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.value}</p>
                     </div>
-                    <div class="rounded-xl border border-white/10 bg-[#0A0D13] px-3 py-3">
-                      <p class="text-[10px] uppercase tracking-[0.16em] text-slate-500">Growth</p>
-                      <p class="mt-1 text-[13px] leading-relaxed text-slate-200">{row.growth}</p>
-                    </div>
-                    <div class="rounded-xl border border-white/10 bg-[#0A0D13] px-3 py-3">
-                      <p class="text-[10px] uppercase tracking-[0.16em] text-slate-500">Custom</p>
-                      <p class="mt-1 text-[13px] leading-relaxed text-slate-200">{row.custom}</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-            </article>
+            </Card>
           ))}
         </div>
 
-        <div class="mt-8 hidden overflow-x-auto md:block">
+        <div class="mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
           <table class="min-w-full border-collapse text-left">
-            <thead>
-              <tr class="border-b border-white/10">
-                <th scope="col" class="pb-4 pr-6 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+            <thead class="sticky top-24 z-20 bg-[rgba(10,10,12,0.96)] backdrop-blur-sm">
+              <tr class="border-b border-[color:var(--hairline)]">
+                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
                   Feature
                 </th>
-                <th scope="col" class="pb-4 pr-6 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
                   Starter
                 </th>
-                <th scope="col" class="pb-4 pr-6 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
                   Growth
                 </th>
-                <th scope="col" class="pb-4 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
                   Custom
                 </th>
               </tr>
             </thead>
             <tbody>
               {comparisonRows.map((row) => (
-                <tr class="border-b border-white/[0.06] align-top last:border-b-0">
-                  <th scope="row" class="py-4 pr-6 text-[14px] font-medium text-[#F2F4F7] sm:text-[15px]">
-                    <div class="flex items-center gap-2.5">
-                      <row.icon class="h-3.5 w-3.5 shrink-0 text-slate-500/70" stroke-width={1.5} />
-                      <span>{row.label}</span>
-                    </div>
+                <tr class="border-b border-[color:var(--hairline)] last:border-b-0">
+                  <th scope="row" class="px-6 py-4 text-[15px] font-medium text-[var(--text-primary)]">
+                    {row.label}
                   </th>
-                  <td class="py-4 pr-6 text-[14px] leading-relaxed text-slate-300 sm:text-[15px]">
-                    {row.starter}
-                  </td>
-                  <td class="py-4 pr-6 text-[14px] leading-relaxed text-slate-300 sm:text-[15px]">
-                    {row.growth}
-                  </td>
-                  <td class="py-4 text-[14px] leading-relaxed text-slate-300 sm:text-[15px]">
-                    {row.custom}
-                  </td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.starter}</td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.growth}</td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.custom}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </article>
+      </div>
     </section>
 
-    <section class="mx-auto mb-12 max-w-[1200px] sm:mb-24">
-      <div class="max-w-3xl">
-        <p class="section-eyebrow">Frequently asked questions</p>
-        <h2 class="mt-3 text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
-          Answers before the call.
-        </h2>
-      </div>
+    <section class="page-section">
+      <div class="axiom-container">
+        <div class="max-w-3xl">
+          <Eyebrow>FAQ</Eyebrow>
+          <h2 class="mt-4 max-w-2xl">Answers before the call.</h2>
+        </div>
 
-      <div class="mt-6 grid gap-3 sm:mt-8 sm:gap-4">
-        {faqItems.map((item) => (
-          <details class="machined-card group overflow-hidden rounded-[var(--radius-card)]">
-            <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-left sm:px-8 sm:py-5">
-              <span class="text-[15px] font-semibold tracking-[-0.01em] text-[#F2F4F7] sm:text-[18px]">
-                {item.question}
-              </span>
-              <span
-                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition-transform duration-200 group-open:rotate-45 sm:h-8 sm:w-8"
-                aria-hidden="true"
-              >
-                +
-              </span>
-            </summary>
-            <div class="px-5 pb-5 sm:px-8 sm:pb-8">
-              <p class="max-w-3xl text-[15px] leading-relaxed text-slate-300 sm:text-[16px]">{item.answer}</p>
+        <div class="mt-8">
+          <div class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)]">
+            {faqItems.map((item, index) => (
+              <details class="group" data-faq>
+                <summary class={`flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left ${index === 0 ? '' : 'border-t border-[color:var(--hairline)]'}`}>
+                  <span class="text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)] md:text-[18px]">
+                    {item.question}
+                  </span>
+                  <span
+                    class="faq-toggle relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.03] text-[var(--text-primary)] transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    aria-hidden="true"
+                  >
+                    <span class="faq-toggle-line absolute h-px w-3.5 bg-current transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]" />
+                    <span class="faq-toggle-vertical absolute h-3.5 w-px bg-current transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]" />
+                  </span>
+                </summary>
+                <div class="faq-panel grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
+                  <div class="overflow-hidden">
+                    <div class="px-6 pb-5 pt-1 md:pb-6">
+                      <p class="max-w-3xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[16px]">
+                        {item.answer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="axiom-container">
+        <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
+          <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
+            <div class="max-w-3xl">
+              <h2 class="max-w-3xl">
+                Not sure which tier fits?
+              </h2>
+              <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+                Start a project and we&apos;ll tell you exactly what the business needs. One business day, no pressure.
+              </p>
             </div>
-          </details>
-        ))}
-      </div>
-    </section>
 
-    <section class="mx-auto mb-16 max-w-[1200px] rounded-[var(--radius-card)] border border-white/10 bg-[#131821] p-6 sm:mb-24 sm:p-10 md:p-16">
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-[clamp(2rem,4vw,2.5rem)] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7]">
-          Not sure which tier fits?
-        </h2>
-        <p class="mt-4 mb-8 text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
-          Start a project and we will tell you exactly what your business needs. One business day response, no
-          pressure.
-        </p>
-        <a href={CTA_PATHS.startProject} class="btn-primary btn-lg inline-flex">
-          Start a project →
-        </a>
+            <Button asChild size="lg" className="w-full lg:w-auto">
+              <a href={CTA_PATHS.startProject}>Start a project</a>
+            </Button>
+          </div>
+        </Card>
       </div>
-    </section>
-
-    <section class="mx-auto mb-20 max-w-[1200px] sm:mb-32">
-      <article class="machined-card rounded-[var(--radius-card)] px-6 py-8 text-center sm:px-8 sm:py-12 md:px-10 md:py-14">
-        <p class="section-eyebrow">Final step</p>
-        <h2 class="mt-3 text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
-          Still have questions?
-        </h2>
-        <p class="mx-auto mt-4 max-w-2xl text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
-          If you want a quick fit check, send the details and we will tell you what makes sense.
-        </p>
-        <a href={CTA_PATHS.contact} class="btn-primary btn-lg mt-8 inline-flex">
-          Contact us →
-        </a>
-      </article>
     </section>
   </main>
+
+  <style>
+    details[data-faq][open] .faq-panel {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    details[data-faq][open] .faq-toggle-vertical {
+      transform: scaleY(0);
+    }
+
+    details[data-faq][open] .faq-toggle {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    details[data-faq] summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
 </SiteLayout>
