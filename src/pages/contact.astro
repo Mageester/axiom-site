@@ -1,68 +1,67 @@
 ---
+import { Phone } from 'lucide-react';
 import IntakeForm from '../components/site/IntakeForm.astro';
+import { Card } from '../components/ui/card';
+import { Eyebrow } from '../components/ui/Eyebrow';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { SEO_ROUTES } from '../lib/seo';
+import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
 ---
 
 <SiteLayout {...SEO_ROUTES.contact}>
-  <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 md:pb-24">
-    <section data-hero-root class="mx-auto max-w-3xl pt-8 text-center md:pt-16">
-      <div class="overflow-hidden">
-        <p class="section-eyebrow">Contact</p>
-        <h1 class="text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">Just a question.</h1>
+  <main id="main-content" tabindex="-1" class="pb-24 md:pb-32">
+    <section class="axiom-container pt-12 md:pt-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <Eyebrow>CONTACT</Eyebrow>
+        <h1 class="mt-4">Just a question.</h1>
+        <p class="mx-auto mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+          Use this form for a quick question or a note about your site. Need website work? Use the project intake page.
+        </p>
       </div>
-      <p class="mx-auto mt-4 max-w-2xl text-[15px] text-slate-200/90 md:text-sm md:text-base">
-        Use this form for a quick question or a note about your site.
-      </p>
-      <p class="mx-auto mt-3 max-w-2xl text-[15px] text-slate-300 md:text-sm">
-        Need website work? Use the project intake page.
-      </p>
     </section>
 
-    <section class="mx-auto mt-6 max-w-5xl">
-      <article class="relative overflow-hidden rounded-[2rem] border border-[#d4a48e]/16 bg-[linear-gradient(180deg,rgba(15,20,25,0.98)_0%,rgba(8,10,14,0.99)_100%)] px-6 py-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)] ring-1 ring-inset ring-white/[0.02] md:px-7 md:py-8 lg:px-8 lg:py-9">
-        <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#d4a48e]/65 to-transparent"></div>
-        <div aria-hidden="true" class="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-[#d4a48e]/60 via-[#d4a48e]/15 to-transparent"></div>
-        <div class="relative flex flex-col gap-7">
-          <div class="flex items-center gap-3">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d4a48e]/20 bg-[#d4a48e]/10 text-[#d4a48e] shadow-[0_0_0_1px_rgba(212,164,142,0.08)]">
-              <svg viewBox="0 0 24 24" class="h-4 w-4" aria-hidden="true" fill="none">
-                <path d="M3 7.5h18M7 7.5V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.5M6 7.5l1 13h10l1-13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </span>
+    <section class="page-section">
+      <div class="axiom-container mx-auto max-w-5xl space-y-6">
+        <Card padding="lg" className="w-full">
+          <div class="flex flex-col gap-6">
+            <div class="flex items-center gap-4">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:rgba(232,162,123,0.22)] bg-[color:rgba(232,162,123,0.1)] text-[var(--accent)] shadow-[0_0_0_1px_rgba(232,162,123,0.06)]" aria-hidden="true">
+                <Phone className="h-4 w-4" />
+              </span>
+              <Eyebrow>CALL US</Eyebrow>
+            </div>
+
             <div class="space-y-2">
-              <p class="section-eyebrow">Call us</p>
-              <div class="h-px w-16 bg-gradient-to-r from-[#d4a48e]/70 to-transparent" aria-hidden="true"></div>
+              <a
+                href={`tel:${SITE_TELEPHONE}`}
+                class="inline-flex min-h-11 items-center font-axiomDisplay text-[clamp(2.25rem,4vw,2.625rem)] font-medium leading-none tracking-[-0.02em] text-[var(--text-primary)] transition-colors hover:text-white"
+              >
+                (226) 753-1833
+              </a>
+              <a
+                href={`mailto:${SITE_EMAIL}`}
+                class="inline-flex min-h-11 items-center text-[15px] font-medium leading-6 text-[var(--text-secondary)] transition-colors hover:text-white"
+              >
+                contact@getaxiom.ca
+              </a>
             </div>
           </div>
+        </Card>
 
-          <div class="flex flex-col gap-3">
-            <a href="tel:+12267531833" class="inline-flex min-h-11 w-fit items-center text-[clamp(1.8rem,3vw,2.55rem)] font-axiomDisplay font-semibold leading-none tracking-tight text-[#F6EBDD] transition-colors hover:text-[#f0d7c6]">
-              (226) 753-1833
-            </a>
-            <a href="mailto:contact@getaxiom.ca" class="inline-flex min-h-11 w-fit items-center text-[15px] leading-6 text-slate-300 transition-colors hover:text-white md:text-sm">
-              contact@getaxiom.ca
-            </a>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <section class="mx-auto mt-4 max-w-5xl">
-      <IntakeForm
-        kind="contact"
-        endpoint="/api/contact"
-        title="Send the note."
-        eyebrow="Question form"
-        description="Use this for a quick question or a note about your site."
-        helper="Tell us what you need help with."
-        submitLabel="Send message →"
-        successTitle="Received."
-        successText="Received. We will review and reply within one business day."
-        noteLinkHref="/start"
-        noteLinkLabel="project intake page"
-        noteText="Need website work? Use the"
-      />
+        <IntakeForm
+          kind="contact"
+          endpoint="/api/contact"
+          title="Send the note."
+          eyebrow="QUESTION FORM"
+          description="Use this for a quick question or a note about your site."
+          helper="A short note is enough. Tell us what you need help with."
+          submitLabel="Send message →"
+          successTitle="Received."
+          successText="Received. We will review and reply within one business day."
+          noteLinkHref="/start"
+          noteLinkLabel="project intake page"
+          noteText="Need website work? Use the"
+        />
+      </div>
     </section>
   </main>
 </SiteLayout>

@@ -143,7 +143,7 @@ export const SEO_ROUTES = {
   },
   contact: {
     title: 'Contact',
-    description: 'Start a conversation with Axiom Infrastructure.',
+    description: 'Use this form for a quick question or a note about your site. Need website work? Use the project intake page.',
     canonicalPath: '/contact',
   },
   notFound: {
