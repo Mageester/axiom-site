@@ -31,24 +31,24 @@ const {
   noteText,
 } = Astro.props;
 
-const fieldLabelClass = 'font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:text-[11px]';
-const fieldHelpClass = 'text-[13px] leading-5 text-slate-400 md:text-xs';
+const fieldLabelClass = 'axiom-eyebrow text-[10px] text-[var(--text-muted)] md:text-[11px]';
+const fieldHelpClass = 'text-[13px] leading-5 text-[var(--text-secondary)] md:text-xs';
 const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:text-xs';
 ---
 
-<article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] shadow-[0_20px_56px_rgba(0,0,0,0.24)]">
-  <div class="border-b border-white/10 p-6 md:p-7 lg:p-8">
+<article class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_56px_rgba(0,0,0,0.24)]">
+  <div class="border-b border-[color:var(--hairline)] p-6 md:p-7 lg:p-8">
     <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
       <div>
         <p class="section-eyebrow">{eyebrow}</p>
-        <h2 class="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">{title}</h2>
+        <h2 class="mt-2 text-[28px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">{title}</h2>
       </div>
-      <p class="text-[15px] md:text-sm text-slate-400">{description}</p>
+      <p class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">{description}</p>
     </div>
   </div>
 
   <div class="p-6 md:p-7 lg:p-8">
-    <div data-intake-success class="hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-7" role="status" aria-live="polite">
+    <div data-intake-success class="hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-2)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] md:p-7" role="status" aria-live="polite">
       <div class="flex items-start gap-4">
         <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#d4a48e]/30 bg-[#d4a48e]/12 text-[#d4a48e] shadow-[0_0_0_1px_rgba(212,164,142,0.08)]" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -56,40 +56,40 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
           </svg>
         </div>
         <div class="min-w-0 text-left">
-          <p class="section-eyebrow text-[#d4a48e]">{successTitle}</p>
-          <h3 class="mt-2 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Here's what happens next</h3>
-          <p class="mt-2 text-[15px] md:text-sm leading-7 text-slate-300">{successText}</p>
+          <p class="section-eyebrow text-[var(--accent)]">{successTitle}</p>
+          <h3 class="mt-2 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[var(--text-primary)]">Here&apos;s what happens next</h3>
+          <p class="mt-2 text-[15px] md:text-sm leading-7 text-[var(--text-secondary)]">{successText}</p>
         </div>
       </div>
 
       <ol class="mt-6 space-y-3">
-        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[#d4a48e]/28 bg-[#d4a48e]/10 p-4">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d4a48e]/35 bg-[#d4a48e]/15 text-[#d4a48e]" aria-hidden="true">
+        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-white/[0.03] p-4">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.04] text-[var(--accent)]" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </div>
           <div class="min-w-0">
-            <p class="font-medium text-[#F6EBDD]">We review your submission</p>
-            <p class="mt-1 text-[15px] md:text-sm leading-6 text-slate-300">Checked internally and marked complete.</p>
+            <p class="font-medium text-[var(--text-primary)]">We review your submission</p>
+            <p class="mt-1 text-[15px] md:text-sm leading-6 text-[var(--text-secondary)]">Checked internally and marked complete.</p>
           </div>
         </li>
-        <li class="flex gap-4 rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-4">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#F2F4F7]" aria-hidden="true">
+        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-white/[0.03] p-4">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.04] text-[var(--text-primary)]" aria-hidden="true">
             <span class="font-axiomDisplay text-[1rem] leading-none">2</span>
           </div>
           <div class="min-w-0">
-            <p class="font-medium text-[#F2F4F7]">You get a reply within 1 business day with our initial assessment</p>
-            <p class="mt-1 text-[15px] md:text-sm leading-6 text-slate-300">We'll review the scope, the site, and the fastest path forward.</p>
+            <p class="font-medium text-[var(--text-primary)]">You get a reply within 1 business day with our initial assessment</p>
+            <p class="mt-1 text-[15px] md:text-sm leading-6 text-[var(--text-secondary)]">We&apos;ll review the scope, the site, and the fastest path forward.</p>
           </div>
         </li>
-        <li class="flex gap-4 rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-4">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#F2F4F7]" aria-hidden="true">
+        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-white/[0.03] p-4">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.04] text-[var(--text-primary)]" aria-hidden="true">
             <span class="font-axiomDisplay text-[1rem] leading-none">3</span>
           </div>
           <div class="min-w-0">
-            <p class="font-medium text-[#F2F4F7]">If there's a fit, we scope and quote - no commitment</p>
-            <p class="mt-1 text-[15px] md:text-sm leading-6 text-slate-300">You'll know the next step before making any decision.</p>
+            <p class="font-medium text-[var(--text-primary)]">If there&apos;s a fit, we scope and quote - no commitment</p>
+            <p class="mt-1 text-[15px] md:text-sm leading-6 text-[var(--text-secondary)]">You&apos;ll know the next step before making any decision.</p>
           </div>
         </li>
       </ol>
@@ -101,7 +101,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
         <button
           type="button"
           data-intake-reset
-          class="inline-flex min-h-11 items-center justify-center text-[15px] md:text-sm text-slate-300 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white sm:w-auto"
+          class="inline-flex min-h-11 items-center justify-center text-[15px] md:text-sm text-[var(--text-secondary)] underline decoration-white/40 underline-offset-2 transition-colors hover:text-white sm:w-auto"
         >
           Send another message
         </button>
@@ -284,13 +284,13 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
 
 <style>
   [data-axiom-intake-form] {
-    --intake-field-border: rgba(255, 255, 255, 0.1);
-    --intake-field-border-hover: rgba(255, 255, 255, 0.16);
-    --intake-field-border-focus: rgba(212, 164, 142, 0.42);
+    --intake-field-border: var(--hairline);
+    --intake-field-border-hover: rgba(255, 255, 255, 0.1);
+    --intake-field-border-focus: rgba(232, 162, 123, 0.42);
     --intake-field-border-error: rgba(228, 130, 121, 0.42);
-    --intake-field-bg: rgba(12, 17, 27, 0.74);
-    --intake-field-bg-hover: rgba(15, 21, 36, 0.84);
-    --intake-field-bg-focus: rgba(18, 25, 40, 0.94);
+    --intake-field-bg: var(--surface-2);
+    --intake-field-bg-hover: #1a1a20;
+    --intake-field-bg-focus: #1d1d24;
   }
 
   [data-axiom-intake-form] [data-intake-field] {
@@ -298,10 +298,10 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
     -webkit-appearance: none;
     width: 100%;
     min-height: 3.5rem;
-    border-radius: 1rem;
+    border-radius: 10px;
     border: 1px solid var(--intake-field-border);
     background: var(--intake-field-bg);
-    padding: 0.95rem 1rem;
+    padding: 0.875rem 1rem;
     color: #f2f4f7;
     font-size: 16px;
     line-height: 1.5;
@@ -332,7 +332,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
     border-color: var(--intake-field-border-focus);
     background: var(--intake-field-bg-focus);
     box-shadow:
-      0 0 0 3px rgba(212, 164, 142, 0.14),
+      0 0 0 2px rgba(232, 162, 123, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.04);
     outline: none;
   }
@@ -379,7 +379,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
 
   [data-axiom-intake-form] button[type='submit']:focus-visible {
     box-shadow:
-      0 0 0 3px rgba(212, 164, 142, 0.14),
+      0 0 0 2px rgba(232, 162, 123, 0.2),
       0 8px 24px rgba(0, 0, 0, 0.28);
   }
 </style>

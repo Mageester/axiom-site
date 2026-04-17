@@ -115,6 +115,11 @@ export const SEO_ROUTES = {
     description: 'A simple sequence from discovery to launch.',
     canonicalPath: '/process',
   },
+  start: {
+    title: 'Start a Project',
+    description: 'Share the basics. We reply within one business day with the next step.',
+    canonicalPath: '/start',
+  },
   startProject: {
     title: 'Start a Project',
     description: 'Share your scope and move the work forward.',
