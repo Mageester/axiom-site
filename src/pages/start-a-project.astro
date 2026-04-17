@@ -6,9 +6,9 @@ import { SEO_ROUTES } from '../lib/seo';
 
 <SiteLayout title={SEO_ROUTES.startProject.title} description={SEO_ROUTES.startProject.description} canonicalPath="/start-a-project">
   <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 md:pb-24">
-    <section class="pt-8 md:pt-16">
-      <div class="grid gap-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.72fr)] xl:items-start">
-        <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 text-left shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
+    <section class="pt-12 sm:pt-16 md:pt-20">
+      <div class="max-w-3xl">
+        <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 text-left shadow-[0_18px_52px_rgba(0,0,0,0.2)] sm:p-8 md:p-10">
           <p class="font-axiomMono text-[15px] uppercase tracking-[0.2em] text-axiom-text-mute md:text-[11px]">Start a project</p>
           <h1 class="mt-3 max-w-3xl text-[clamp(2rem,4.2vw,3.3rem)] font-extrabold leading-[1.08] text-[#F2F4F7]">
             Tell us what the business needs.
@@ -16,34 +16,17 @@ import { SEO_ROUTES } from '../lib/seo';
           <p class="mt-4 max-w-2xl text-[15px] text-slate-300 md:text-sm md:text-base">
             Share the basics and we will reply within one business day with the next step.
           </p>
-          <p class="mt-3 max-w-2xl text-[15px] text-slate-400 md:text-sm">
-            Need a question? Use the contact page.
-          </p>
+          <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-axiomMono text-[11px] uppercase tracking-[0.18em] text-[#d4a48e]">
+            <span>One short form</span>
+            <span aria-hidden="true" class="text-white/25">·</span>
+            <span>Reply within one business day</span>
+          </div>
         </article>
-
-        <aside class="flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.18)] xl:mt-8">
-          <div class="border-b border-white/10 p-5 md:p-6">
-            <div class="rounded-[var(--radius-card)] border border-white/10 bg-[#0f1524]/70 p-4">
-              <p class="section-eyebrow">Reply within one business day.</p>
-            </div>
-          </div>
-          <div class="flex-1 bg-white/[0.03] p-5 md:p-6">
-            <p class="section-eyebrow">At a glance</p>
-            <div class="mt-5 divide-y divide-white/[0.08]">
-              <div class="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                <span class="text-[15px] font-medium text-[#F2F4F7] md:text-sm">One short form</span>
-              </div>
-              <div class="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                <span class="text-[15px] font-medium text-[#F2F4F7] md:text-sm">Reply within one business day</span>
-              </div>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <section class="mt-7">
-      <div class="grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
+    <section class="mt-6 sm:mt-8 md:mt-10">
+      <div class="grid gap-5 sm:gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
         <IntakeForm
           kind="project"
           endpoint="/api/intake"
@@ -51,7 +34,7 @@ import { SEO_ROUTES } from '../lib/seo';
           eyebrow="Project intake"
           description="Tell us what your business does, what is broken about your current site, and when you want to move."
           helper="Three short lines is enough."
-          submitLabel="Send it →"
+          submitLabel="Send it â†’"
           successTitle="Received."
           successText="Received. We will review and reply within one business day."
           noteLinkHref="/contact"
@@ -60,7 +43,7 @@ import { SEO_ROUTES } from '../lib/seo';
         />
 
         <div class="grid gap-4 self-start xl:sticky xl:top-28">
-          <article class="rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-5 md:p-6">
+          <article class="rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-4 sm:p-5 md:p-6">
             <p class="section-eyebrow">General questions</p>
             <p class="mt-3 text-[15px] leading-relaxed text-slate-300 md:text-sm">
               Use <a href="/contact" class="inline-flex min-h-11 items-center text-slate-100 underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">the contact page</a> for a quick note or anything that is not a project.

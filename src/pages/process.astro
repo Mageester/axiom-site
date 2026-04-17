@@ -40,9 +40,9 @@ const checklistItems = [
 
 <SiteLayout title={SEO_ROUTES.process.title} description={SEO_ROUTES.process.description} canonicalPath="/process">
   <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 md:pb-24">
-    <section class="pt-4 md:pt-8">
+    <section class="pt-12 sm:pt-16 md:pt-20">
       <div class="max-w-5xl">
-        <article class="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
+        <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 shadow-[0_18px_52px_rgba(0,0,0,0.2)] sm:p-8 md:p-10">
           <p class="font-axiomMono text-xs uppercase tracking-[0.22em] text-[#A7B3BC]">Process</p>
           <h1 class="mt-3 max-w-3xl text-[clamp(2.35rem,7vw,4.7rem)] font-extrabold leading-[0.96] tracking-tight text-[#F2F4F7]">
             Four stages from review to launch.
@@ -50,11 +50,11 @@ const checklistItems = [
           <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-200/90 md:text-lg">
             Each stage keeps the work clear, the decisions early, and the launch path simple.
           </p>
-          <div class="mt-6 flex flex-wrap items-center gap-3">
-            <a href={CTA.primary.to} class="btn-primary btn-lg whitespace-nowrap">
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a href={CTA.primary.to} class="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
               {CTA.primary.label}
             </a>
-            <a href={CTA.work.to} class="inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07]">
+            <a href={CTA.work.to} class="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-medium text-slate-200 transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:border-white/30 hover:bg-white/[0.07] sm:w-auto">
               {CTA.work.label}
             </a>
           </div>
@@ -62,10 +62,10 @@ const checklistItems = [
       </div>
     </section>
 
-    <section class="pt-6 md:pt-10">
+    <section class="pt-12 sm:pt-16 md:pt-20">
       <div class="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.7fr)] xl:items-start xl:gap-8">
         <div>
-          <div class="mb-5 flex flex-col gap-2 md:mb-6">
+          <div class="mb-6 flex flex-col gap-3 md:mb-8">
             <p class="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Timeline</p>
             <h2 class="text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-4xl">
               How the build moves.
@@ -75,18 +75,24 @@ const checklistItems = [
             </p>
           </div>
 
-          <article class="reveal-stagger mt-7 overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-5 shadow-[0_14px_32px_rgba(0,0,0,0.18)] md:p-7">
+          <article class="reveal-stagger mt-6 overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.98)_0%,rgba(9,12,18,0.99)_100%)] p-5 shadow-[0_14px_32px_rgba(0,0,0,0.18)] sm:p-6 md:p-7">
             <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-4">
               {processSteps.map((step, index) => (
                 <>
                   <article class="relative pl-7 lg:flex-1 lg:pl-0">
                     {index < processSteps.length - 1 ? (
-                      <div class="absolute left-[0.6rem] top-[3.1rem] bottom-[-1.4rem] w-[2px] bg-white/10 lg:hidden" aria-hidden="true"></div>
+                      <div class="absolute left-[0.6rem] top-[2.9rem] bottom-[-1.3rem] w-[2px] bg-white/10 lg:hidden" aria-hidden="true"></div>
                     ) : null}
-                    <span class="absolute left-0 top-[0.95rem] h-3 w-3 rounded-full border border-white/20 bg-[#0f1524] lg:hidden" aria-hidden="true"></span>
-                    <p class="font-axiomDisplay text-[clamp(1.6rem,3vw,2.2rem)] leading-none text-accent">{step.dayLabel}</p>
-                    <h3 class="mt-3 text-lg font-semibold text-white">{step.title}</h3>
-                    <p class="mt-2 text-sm leading-6 text-[#A7B3BC]">{step.timelineDescription}</p>
+                    <span class="absolute left-0 top-[0.9rem] h-3 w-3 rounded-full border border-white/20 bg-[#0f1524] lg:hidden" aria-hidden="true"></span>
+                    <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 lg:grid-cols-1 lg:gap-0">
+                      <p class="whitespace-nowrap font-axiomDisplay text-[1.3rem] leading-none text-accent sm:text-[1.6rem] lg:text-[clamp(1.6rem,3vw,2.2rem)]">
+                        {step.dayLabel}
+                      </p>
+                      <div class="min-w-0">
+                        <h3 class="text-[15px] font-semibold text-white sm:text-lg">{step.title}</h3>
+                        <p class="mt-1.5 text-sm leading-6 text-[#A7B3BC]">{step.timelineDescription}</p>
+                      </div>
+                    </div>
                   </article>
                   {index < processSteps.length - 1 ? (
                     <div class="hidden h-[2px] flex-1 self-start bg-white/10 lg:block lg:translate-y-7" aria-hidden="true"></div>
@@ -97,18 +103,18 @@ const checklistItems = [
           </article>
         </div>
 
-        <article class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] md:p-6 xl:sticky xl:top-28">
+        <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5 shadow-[0_18px_42px_rgba(0,0,0,0.18)] sm:p-6 xl:sticky xl:top-28">
           <p class="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Before we build</p>
-          <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
+          <h2 class="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
             What we need before Day 7.
           </h2>
-          <p class="mt-2 max-w-md text-sm leading-relaxed text-slate-300">
+          <p class="mt-3 max-w-md text-sm leading-relaxed text-slate-300">
             This keeps the work moving and cuts down on back-and-forth later.
           </p>
 
           <ul class="mt-5 divide-y divide-white/[0.08]">
             {checklistItems.map((item) => (
-              <li class="flex items-start gap-3 py-3.5 first:pt-0 last:pb-0">
+              <li class="flex items-start gap-3 py-4 first:pt-0 last:pb-0">
                 <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
                   <svg viewBox="0 0 20 20" class="h-4 w-4 text-[#d4a48e]" fill="none" aria-hidden="true">
                     <path d="M15.5 6.5 8.5 13.5 4.5 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -125,29 +131,26 @@ const checklistItems = [
       </div>
     </section>
 
-    <section class="pt-8 md:pt-10">
-      <article class="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-8 lg:p-10">
+    <section class="pt-12 sm:pt-16 md:pt-20">
+      <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] sm:p-8 md:p-10">
         <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
           <div>
             <p class="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">Next step</p>
-            <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
-              Start with a review.
+            <h2 class="mt-3 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.8rem]">
+              Ready to see what should change first?
             </h2>
-            <p class="mt-3 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base lg:mt-3">
-              We will look at the site and show the first changes worth making.
+            <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-300 md:text-base lg:mt-4">
+              Send the site and we will point to the clearest next move.
             </p>
           </div>
-          <aside class="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-            <p class="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">What comes next</p>
-            <div class="mt-4 divide-y divide-white/[0.08]">
-              <div class="py-3 first:pt-0 last:pb-0"><p class="text-sm font-medium text-[#F2F4F7]">Review</p></div>
-              <div class="py-3 first:pt-0 last:pb-0"><p class="text-sm font-medium text-[#F2F4F7]">Plan</p></div>
-              <div class="py-3 first:pt-0 last:pb-0"><p class="text-sm font-medium text-[#F2F4F7]">Build</p></div>
-              <div class="py-3 first:pt-0 last:pb-0"><p class="text-sm font-medium text-[#F2F4F7]">Launch</p></div>
-            </div>
+          <aside class="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+            <p class="font-axiomMono text-xs uppercase tracking-[0.18em] text-[#A7B3BC]">What to send</p>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">
+              A current site, a rough goal, and any deadline are enough to begin.
+            </p>
           </aside>
-          <div class="flex flex-wrap gap-3 lg:col-span-2 lg:justify-end">
-            <a href={CTA.primary.to} class="btn-primary btn-lg whitespace-nowrap">
+          <div class="flex flex-col gap-3 lg:col-span-2 lg:items-end">
+            <a href={CTA.primary.to} class="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
               {CTA.primary.label}
             </a>
           </div>

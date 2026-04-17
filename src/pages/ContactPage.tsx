@@ -708,8 +708,8 @@ const ProjectIntakeForm: React.FC = () => {
             />
             <Layout>
             <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-16 md:pb-24">
-                <section data-hero-root className="pt-8 md:pt-16">
-                    <div className="grid gap-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.72fr)] xl:items-start">
+                <section data-hero-root className="pt-6 md:pt-10">
+                    <div className="max-w-3xl">
                         <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] p-6 text-left shadow-[0_18px_52px_rgba(0,0,0,0.2)] md:p-8 lg:p-10">
                             <p className="font-axiomMono text-[15px] md:text-[11px] uppercase tracking-[0.2em] text-axiom-text-mute">
                                 Start a project
@@ -720,34 +720,19 @@ const ProjectIntakeForm: React.FC = () => {
                             <p data-startup-copy className="mt-4 max-w-2xl text-[15px] md:text-sm text-slate-300 md:text-base">
                                 Share the basics and we’ll reply within one business day with the next step.
                             </p>
-                            <p data-startup-meta className="mt-3 max-w-2xl text-[15px] md:text-sm text-slate-400">
-                                Need a question? Use the toggle below.
-                            </p>
-                            <IntakeToggle mode={mode} />
+                            <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 section-eyebrow text-[#d4a48e]">
+                                <span>One short form</span>
+                                <span aria-hidden="true" className="text-white/25">·</span>
+                                <span>Reply within one business day</span>
+                            </div>
+                            <div className="mt-5">
+                                <IntakeToggle mode={mode} />
+                            </div>
                         </article>
-
-                        <aside className="flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(16,21,31,0.96)_0%,rgba(10,13,19,0.98)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.18)] xl:mt-8">
-                            <div className="border-b border-white/10 p-5 md:p-6">
-                                <div className="rounded-[var(--radius-card)] border border-white/10 bg-[#0f1524]/70 p-4">
-                                    <p className="section-eyebrow">Reply within one business day.</p>
-                                </div>
-                            </div>
-                            <div className="flex-1 bg-white/[0.03] p-5 md:p-6">
-                                <p className="section-eyebrow">At a glance</p>
-                                <div className="mt-5 divide-y divide-white/[0.08]">
-                                    <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                                        <span className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">One short form</span>
-                                    </div>
-                                    <div className="flex items-start justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                                        <span className="text-[15px] md:text-sm font-medium text-[#F2F4F7]">Reply within one business day</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </aside>
                     </div>
                 </section>
 
-                <section ref={formSectionRef} id="start-project-form" className="mt-7">
+                <section ref={formSectionRef} id="start-project-form" className="mt-4 md:mt-6">
                     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
                         <article className="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] shadow-[0_20px_56px_rgba(0,0,0,0.24)]">
                             {!showSuccessState ? (

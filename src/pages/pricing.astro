@@ -168,7 +168,7 @@ const faqItems = [
 
 <SiteLayout title={SEO_ROUTES.pricing.title} description={SEO_ROUTES.pricing.description} canonicalPath="/pricing" schema={PRICING_JSON_LD}>
   <main id="main-content" tabindex="-1" class="axiom-container w-full pb-16 md:pb-20">
-    <section class="mx-auto mb-16 flex max-w-3xl flex-col gap-6 pt-16 text-center sm:mb-24 md:pt-24">
+    <section class="mx-auto mb-12 flex max-w-3xl flex-col gap-6 pt-12 text-center sm:mb-24 sm:pt-16 md:pt-24">
       <p class="section-eyebrow">Pricing</p>
       <div>
         <h1 class="text-[clamp(2.45rem,5.8vw,4rem)] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7]">
@@ -184,11 +184,11 @@ const faqItems = [
       </p>
     </section>
 
-    <section class="mx-auto mb-16 max-w-[1200px] sm:mb-24">
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6">
+    <section class="mx-auto mb-12 max-w-[1200px] sm:mb-24">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
         {pricingTiers.map((tier) => (
           <article
-            class={`machined-card flex h-full flex-col gap-8 rounded-[var(--radius-card)] border bg-[#10141c]/40 p-8 transition-colors sm:p-10 ${
+            class={`machined-card flex h-full flex-col gap-6 rounded-[var(--radius-card)] border bg-[#10141c]/40 p-6 transition-colors sm:p-8 ${
               tier.recommended ? 'border-t-2 border-t-axiom-accent border-white/10 shadow-[0_12px_44px_rgba(200,122,87,0.12)]' : 'border-white/10'
             }`}
           >
@@ -218,7 +218,7 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="mx-auto mb-16 max-w-[1200px] sm:mb-24">
+    <section class="mx-auto mb-12 max-w-[1200px] sm:mb-24">
       <article class="machined-card overflow-hidden rounded-[var(--radius-card)] p-6 sm:p-8 md:p-10">
         <div class="max-w-3xl">
           <p class="section-eyebrow">Compare the tiers</p>
@@ -230,7 +230,34 @@ const faqItems = [
           </p>
         </div>
 
-        <div class="mt-8 overflow-x-auto">
+        <div class="mt-8 grid gap-3 md:hidden">
+          {comparisonRows.map((row) => (
+            <article class="rounded-[22px] border border-white/10 bg-white/[0.03] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+              <div class="flex items-start gap-3">
+                <row.icon class="mt-0.5 h-4 w-4 shrink-0 text-slate-500/70" stroke-width={1.5} />
+                <div class="min-w-0 flex-1">
+                  <p class="text-[14px] font-medium text-[#F2F4F7]">{row.label}</p>
+                  <div class="mt-3 grid gap-2 sm:grid-cols-3">
+                    <div class="rounded-xl border border-white/10 bg-[#0A0D13] px-3 py-3">
+                      <p class="text-[10px] uppercase tracking-[0.16em] text-slate-500">Starter</p>
+                      <p class="mt-1 text-[13px] leading-relaxed text-slate-200">{row.starter}</p>
+                    </div>
+                    <div class="rounded-xl border border-white/10 bg-[#0A0D13] px-3 py-3">
+                      <p class="text-[10px] uppercase tracking-[0.16em] text-slate-500">Growth</p>
+                      <p class="mt-1 text-[13px] leading-relaxed text-slate-200">{row.growth}</p>
+                    </div>
+                    <div class="rounded-xl border border-white/10 bg-[#0A0D13] px-3 py-3">
+                      <p class="text-[10px] uppercase tracking-[0.16em] text-slate-500">Custom</p>
+                      <p class="mt-1 text-[13px] leading-relaxed text-slate-200">{row.custom}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-8 hidden overflow-x-auto md:block">
           <table class="min-w-full border-collapse text-left">
             <thead>
               <tr class="border-b border-white/10">
@@ -274,7 +301,7 @@ const faqItems = [
       </article>
     </section>
 
-    <section class="mx-auto mb-16 max-w-[1200px] sm:mb-24">
+    <section class="mx-auto mb-12 max-w-[1200px] sm:mb-24">
       <div class="max-w-3xl">
         <p class="section-eyebrow">Frequently asked questions</p>
         <h2 class="mt-3 text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
@@ -282,21 +309,21 @@ const faqItems = [
         </h2>
       </div>
 
-      <div class="mt-8 grid gap-4">
+      <div class="mt-6 grid gap-3 sm:mt-8 sm:gap-4">
         {faqItems.map((item) => (
           <details class="machined-card group overflow-hidden rounded-[var(--radius-card)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 sm:px-8">
-              <span class="text-[16px] font-semibold tracking-[-0.01em] text-[#F2F4F7] sm:text-[18px]">
+            <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-left sm:px-8 sm:py-5">
+              <span class="text-[15px] font-semibold tracking-[-0.01em] text-[#F2F4F7] sm:text-[18px]">
                 {item.question}
               </span>
               <span
-                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition-transform duration-200 group-open:rotate-45"
+                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition-transform duration-200 group-open:rotate-45 sm:h-8 sm:w-8"
                 aria-hidden="true"
               >
                 +
               </span>
             </summary>
-            <div class="px-6 pb-6 sm:px-8 sm:pb-8">
+            <div class="px-5 pb-5 sm:px-8 sm:pb-8">
               <p class="max-w-3xl text-[15px] leading-relaxed text-slate-300 sm:text-[16px]">{item.answer}</p>
             </div>
           </details>
@@ -304,7 +331,7 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="mx-auto mb-24 max-w-[1200px] rounded-[var(--radius-card)] border border-white/10 bg-[#131821] p-10 sm:mb-32 md:p-16">
+    <section class="mx-auto mb-16 max-w-[1200px] rounded-[var(--radius-card)] border border-white/10 bg-[#131821] p-6 sm:mb-24 sm:p-10 md:p-16">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-[clamp(2rem,4vw,2.5rem)] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7]">
           Not sure which tier fits?
@@ -319,8 +346,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="mx-auto mb-24 max-w-[1200px] sm:mb-32">
-      <article class="machined-card rounded-[var(--radius-card)] px-6 py-10 text-center sm:px-8 sm:py-12 md:px-10 md:py-14">
+    <section class="mx-auto mb-20 max-w-[1200px] sm:mb-32">
+      <article class="machined-card rounded-[var(--radius-card)] px-6 py-8 text-center sm:px-8 sm:py-12 md:px-10 md:py-14">
         <p class="section-eyebrow">Final step</p>
         <h2 class="mt-3 text-[32px] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7] sm:text-[40px]">
           Still have questions?

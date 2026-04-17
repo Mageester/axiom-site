@@ -168,34 +168,13 @@
       transform var(--motion-duration-base) var(--motion-ease-standard);
   }
 
-  /* Form field states — focus / valid / invalid */
+  /* Form fields should stay neutral unless a component opts into validation styling. */
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible {
     border-color: var(--axiom-accent);
     box-shadow: 0 0 0 3px var(--accent-muted);
     outline: none;
-  }
-
-  input:valid:not(:placeholder-shown),
-  textarea:valid:not(:placeholder-shown) {
-    border-color: rgba(100, 200, 140, 0.35);
-  }
-
-  input:invalid:not(:placeholder-shown):not(:focus),
-  textarea:invalid:not(:placeholder-shown):not(:focus) {
-    border-color: rgba(220, 80, 80, 0.35);
-  }
-
-  /* Keep focus glow visible even when valid/invalid */
-  input:focus-visible:valid,
-  input:focus-visible:invalid,
-  textarea:focus-visible:valid,
-  textarea:focus-visible:invalid,
-  select:focus-visible:valid,
-  select:focus-visible:invalid {
-    border-color: var(--axiom-accent);
-    box-shadow: 0 0 0 3px var(--accent-muted);
   }
 
   body::after {

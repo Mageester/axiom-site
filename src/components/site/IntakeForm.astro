@@ -31,10 +31,9 @@ const {
   noteText,
 } = Astro.props;
 
-const fieldLabelClass = 'text-[15px] md:text-[11px] font-axiomMono uppercase tracking-[0.16em] text-[#A7B3BC]';
-const fieldHelpClass = 'text-[15px] md:text-xs leading-5 text-slate-400';
-const fieldInputClass =
-  'w-full rounded-xl border border-white/10 bg-[#0f1524]/70 px-4 py-3 text-[15px] md:text-sm text-[#F2F4F7] outline-none transition-[border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-slate-500';
+const fieldLabelClass = 'font-axiomMono text-[10px] uppercase tracking-[0.18em] text-[#A7B3BC] md:text-[11px]';
+const fieldHelpClass = 'text-[13px] leading-5 text-slate-400 md:text-xs';
+const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:text-xs';
 ---
 
 <article class="overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,31,0.96)_0%,rgba(10,13,19,0.99)_100%)] shadow-[0_20px_56px_rgba(0,0,0,0.24)]">
@@ -49,7 +48,7 @@ const fieldInputClass =
   </div>
 
   <div class="p-6 md:p-7 lg:p-8">
-    <div data-intake-success class="hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-7">
+    <div data-intake-success class="hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] p-6 shadow-[0_18px_44px_rgba(0,0,0,0.22)] md:p-7" role="status" aria-live="polite">
       <div class="flex items-start gap-4">
         <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#d4a48e]/30 bg-[#d4a48e]/12 text-[#d4a48e] shadow-[0_0_0_1px_rgba(212,164,142,0.08)]" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -57,7 +56,7 @@ const fieldInputClass =
           </svg>
         </div>
         <div class="min-w-0 text-left">
-          <p class="section-eyebrow text-[#d4a48e]">Received</p>
+          <p class="section-eyebrow text-[#d4a48e]">{successTitle}</p>
           <h3 class="mt-2 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[#F2F4F7]">Here's what happens next</h3>
           <p class="mt-2 text-[15px] md:text-sm leading-7 text-slate-300">{successText}</p>
         </div>
@@ -113,14 +112,15 @@ const fieldInputClass =
       data-axiom-intake-form
       data-intake-kind={kind}
       data-intake-endpoint={endpoint}
-      class="flex flex-col gap-6"
+      class="flex flex-col gap-5 md:gap-6"
       aria-busy="false"
+      noValidate
     >
       <div data-intake-alert class="hidden rounded-[var(--radius-component)] border border-red-400/35 bg-red-500/10 px-4 py-3 text-[15px] md:text-sm text-red-100" role="alert" aria-live="assertive"></div>
 
       <fieldset class="contents">
-        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <div class="flex flex-col gap-2">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6">
+          <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
             <label for={`${kind}-name`} class={fieldLabelClass}>Name</label>
             <p id={`${kind}-name-helper`} class={fieldHelpClass}>Who should we address?</p>
             <input
@@ -130,12 +130,22 @@ const fieldInputClass =
               required
               minLength="2"
               autoComplete="name"
-              class={fieldInputClass}
+              enterkeyhint="next"
+              autocapitalize="words"
+              spellcheck="false"
+              class="data-intake-field"
+              data-intake-field
+              data-intake-field-key="name"
+              data-intake-helper-id={`${kind}-name-helper`}
+              data-intake-error-id={`${kind}-name-error`}
+              data-intake-required-message="Please enter your name."
+              data-intake-too-short-message="Please use at least 2 characters."
               aria-describedby={`${kind}-name-helper`}
             />
+            <p id={`${kind}-name-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
           </div>
 
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
             <label for={`${kind}-email`} class={fieldLabelClass}>Email</label>
             <p id={`${kind}-email-helper`} class={fieldHelpClass}>Where should we reply?</p>
             <input
@@ -144,12 +154,23 @@ const fieldInputClass =
               type="email"
               required
               autoComplete="email"
-              class={fieldInputClass}
+              enterkeyhint="next"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              class="data-intake-field"
+              data-intake-field
+              data-intake-field-key="email"
+              data-intake-helper-id={`${kind}-email-helper`}
+              data-intake-error-id={`${kind}-email-error`}
+              data-intake-required-message="Please enter an email address."
+              data-intake-type-message="Please enter a valid email address."
               aria-describedby={`${kind}-email-helper`}
             />
+            <p id={`${kind}-email-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
           </div>
 
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
             <label for={`${kind}-business`} class={fieldLabelClass}>Business name</label>
             <p id={`${kind}-business-helper`} class={fieldHelpClass}>Optional, if the reply should use a company name.</p>
             <input
@@ -157,13 +178,21 @@ const fieldInputClass =
               name="business_name"
               type="text"
               autoComplete="organization"
-              class={fieldInputClass}
+              enterkeyhint="next"
+              autocapitalize="words"
+              spellcheck="false"
+              class="data-intake-field"
+              data-intake-field
+              data-intake-field-key="business_name"
+              data-intake-helper-id={`${kind}-business-helper`}
+              data-intake-error-id={`${kind}-business-error`}
               aria-describedby={`${kind}-business-helper`}
             />
+            <p id={`${kind}-business-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
           </div>
 
           {kind === 'project' ? (
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
               <label for={`${kind}-website`} class={fieldLabelClass}>Website URL</label>
               <p id={`${kind}-website-helper`} class={fieldHelpClass}>Optional. Add it if there is already a site.</p>
               <input
@@ -172,12 +201,22 @@ const fieldInputClass =
                 type="url"
                 placeholder="https://example.com"
                 autoComplete="url"
-                class={fieldInputClass}
+                enterkeyhint="next"
+                autocapitalize="none"
+                autocorrect="off"
+                spellcheck="false"
+                class="data-intake-field"
+                data-intake-field
+                data-intake-field-key="current_website"
+                data-intake-helper-id={`${kind}-website-helper`}
+                data-intake-error-id={`${kind}-website-error`}
+                data-intake-type-message="Please enter a valid website URL."
                 aria-describedby={`${kind}-website-helper`}
               />
+              <p id={`${kind}-website-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
             </div>
           ) : (
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
               <label for={`${kind}-website`} class={fieldLabelClass}>Website URL</label>
               <p id={`${kind}-website-helper`} class={fieldHelpClass}>Optional. Add it if you are following up on an existing site.</p>
               <input
@@ -186,14 +225,24 @@ const fieldInputClass =
                 type="url"
                 placeholder="https://example.com"
                 autoComplete="url"
-                class={fieldInputClass}
+                enterkeyhint="next"
+                autocapitalize="none"
+                autocorrect="off"
+                spellcheck="false"
+                class="data-intake-field"
+                data-intake-field
+                data-intake-field-key="current_website"
+                data-intake-helper-id={`${kind}-website-helper`}
+                data-intake-error-id={`${kind}-website-error`}
+                data-intake-type-message="Please enter a valid website URL."
                 aria-describedby={`${kind}-website-helper`}
               />
+              <p id={`${kind}-website-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
             </div>
           )}
         </div>
 
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
           <label for={`${kind}-details`} class={fieldLabelClass}>
             {kind === 'project' ? 'Brief project description' : 'Message'}
           </label>
@@ -203,42 +252,219 @@ const fieldInputClass =
           <textarea
             id={`${kind}-details`}
             name={kind === 'project' ? 'details' : 'message'}
-            rows="4"
+            rows="5"
             required
             minLength="10"
             placeholder={kind === 'project' ? 'What does your business do, what is wrong with the current site, and when do you want to move?' : 'Tell us what you need help with.'}
-            class={`${fieldInputClass} resize-none`}
+            enterkeyhint="send"
+            class="data-intake-field data-intake-textarea"
+            data-intake-field
+            data-intake-field-key={kind === 'project' ? 'details' : 'message'}
+            data-intake-helper-id={`${kind}-details-helper`}
+            data-intake-error-id={`${kind}-details-error`}
+            data-intake-required-message={kind === 'project' ? 'Please share a little more detail.' : 'Please add a message.'}
+            data-intake-too-short-message="Please share a little more detail."
             aria-describedby={`${kind}-details-helper`}
           ></textarea>
+          <p id={`${kind}-details-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
         </div>
       </fieldset>
 
       <input type="hidden" name="source_path" value={Astro.url.pathname + Astro.url.search} />
 
-      <div class="flex flex-col gap-3">
-        <button type="submit" class="btn-primary btn-lg w-full">
+      <div class="flex flex-col gap-4">
+        <button type="submit" class="btn-primary btn-lg w-full rounded-[1rem]">
           {submitLabel}
         </button>
-        <p class="text-[15px] md:text-sm text-slate-400">{noteText} <a href={noteLinkHref} class="underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">{noteLinkLabel}</a>.</p>
+        <p class="text-[13px] leading-5 text-slate-400 md:text-sm">{noteText} <a href={noteLinkHref} class="underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">{noteLinkLabel}</a>.</p>
       </div>
     </form>
   </div>
 </article>
 
+<style>
+  [data-axiom-intake-form] {
+    --intake-field-border: rgba(255, 255, 255, 0.1);
+    --intake-field-border-hover: rgba(255, 255, 255, 0.16);
+    --intake-field-border-focus: rgba(212, 164, 142, 0.42);
+    --intake-field-border-error: rgba(228, 130, 121, 0.42);
+    --intake-field-bg: rgba(12, 17, 27, 0.74);
+    --intake-field-bg-hover: rgba(15, 21, 36, 0.84);
+    --intake-field-bg-focus: rgba(18, 25, 40, 0.94);
+  }
+
+  [data-axiom-intake-form] [data-intake-field] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    min-height: 3.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--intake-field-border);
+    background: var(--intake-field-bg);
+    padding: 0.95rem 1rem;
+    color: #f2f4f7;
+    font-size: 16px;
+    line-height: 1.5;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 1px 0 rgba(255, 255, 255, 0.01);
+    caret-color: #f2f4f7;
+  }
+
+  [data-axiom-intake-form] [data-intake-field].data-intake-textarea {
+    min-height: 10.5rem;
+    resize: vertical;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  [data-axiom-intake-form] [data-intake-field]::placeholder {
+    color: rgba(148, 163, 184, 0.78);
+    opacity: 1;
+  }
+
+  [data-axiom-intake-form] [data-intake-field]:hover:not(:disabled) {
+    border-color: var(--intake-field-border-hover);
+    background: var(--intake-field-bg-hover);
+  }
+
+  [data-axiom-intake-form] [data-intake-field]:focus-visible {
+    border-color: var(--intake-field-border-focus);
+    background: var(--intake-field-bg-focus);
+    box-shadow:
+      0 0 0 3px rgba(212, 164, 142, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    outline: none;
+  }
+
+  [data-axiom-intake-form] [data-intake-field][aria-invalid='true'] {
+    border-color: var(--intake-field-border-error);
+  }
+
+  [data-axiom-intake-form] [data-intake-field][aria-invalid='true']:focus-visible {
+    border-color: var(--intake-field-border-focus);
+    box-shadow:
+      0 0 0 3px rgba(212, 164, 142, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  [data-axiom-intake-form] [data-intake-field]:disabled {
+    cursor: not-allowed;
+    opacity: 0.72;
+  }
+
+  [data-axiom-intake-form] [data-intake-field-error]:not([hidden]) {
+    display: block;
+  }
+
+  [data-axiom-intake-form] [data-intake-alert]:not([hidden]) {
+    display: block;
+  }
+
+  [data-axiom-intake-form] [data-intake-success] {
+    scroll-margin-top: 6rem;
+  }
+
+  [data-axiom-intake-form] input:-webkit-autofill,
+  [data-axiom-intake-form] input:-webkit-autofill:hover,
+  [data-axiom-intake-form] input:-webkit-autofill:focus,
+  [data-axiom-intake-form] textarea:-webkit-autofill,
+  [data-axiom-intake-form] textarea:-webkit-autofill:hover,
+  [data-axiom-intake-form] textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f2f4f7;
+    caret-color: #f2f4f7;
+    box-shadow: 0 0 0px 1000px rgba(12, 17, 27, 0.98) inset;
+    transition: background-color 9999s ease-in-out 0s, color 9999s ease-in-out 0s;
+  }
+
+  [data-axiom-intake-form] button[type='submit']:focus-visible {
+    box-shadow:
+      0 0 0 3px rgba(212, 164, 142, 0.14),
+      0 8px 24px rgba(0, 0, 0, 0.28);
+  }
+</style>
+
 <script is:inline>
   const initIntakeForms = () => {
     const forms = document.querySelectorAll('[data-axiom-intake-form]');
+    const FIELD_CONFIG = {
+      name: {
+        required: 'Please enter your name.',
+        tooShort: 'Please use at least 2 characters.'
+      },
+      email: {
+        required: 'Please enter an email address.',
+        typeMismatch: 'Please enter a valid email address.'
+      },
+      business_name: {},
+      current_website: {
+        typeMismatch: 'Please enter a valid website URL.'
+      },
+      details: {
+        required: 'Please share a little more detail.',
+        tooShort: 'Please share a little more detail.'
+      },
+      message: {
+        required: 'Please add a message.',
+        tooShort: 'Please share a little more detail.'
+      }
+    };
+
+    const updateFieldState = (form, field, force = false) => {
+      if (!(field instanceof HTMLElement)) return true;
+
+      const key = field.dataset.intakeFieldKey || '';
+      const helperId = field.dataset.intakeHelperId || '';
+      const errorId = field.dataset.intakeErrorId || '';
+      const errorEl = errorId ? form.querySelector(`#${errorId}`) : null;
+      const isTouched = force || field.dataset.touched === 'true' || form.dataset.validationAttempted === 'true';
+      let error = '';
+
+      if (isTouched && 'validity' in field) {
+        const config = FIELD_CONFIG[key] || {};
+        if (field.validity.valueMissing) {
+          error = config.required || 'Please complete this field.';
+        } else if (field.validity.typeMismatch) {
+          error = config.typeMismatch || 'Please enter a valid value.';
+        } else if (field.validity.tooShort) {
+          error = config.tooShort || 'Please use a longer value.';
+        }
+      }
+
+      if (errorEl instanceof HTMLElement) {
+        errorEl.textContent = error;
+        errorEl.hidden = !error;
+      }
+
+      if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
+        if (error) {
+          field.setAttribute('aria-invalid', 'true');
+          field.dataset.fieldState = 'invalid';
+        } else {
+          field.removeAttribute('aria-invalid');
+          delete field.dataset.fieldState;
+        }
+
+        if (helperId) {
+          field.setAttribute('aria-describedby', error ? `${helperId} ${errorId}` : helperId);
+        }
+      }
+
+      return error.length === 0;
+    };
 
     forms.forEach((form) => {
       if (!(form instanceof HTMLFormElement)) return;
       if (form.dataset.intakeInitialized === 'true') return;
       form.dataset.intakeInitialized = 'true';
+      form.dataset.validationAttempted = 'false';
 
       const endpoint = form.dataset.intakeEndpoint || '/api/contact';
       const alertBox = form.querySelector('[data-intake-alert]');
       const successBox = form.closest('article')?.querySelector('[data-intake-success]');
       const resetButton = form.closest('article')?.querySelector('[data-intake-reset]');
       const submitButton = form.querySelector('button[type="submit"]');
+      const fields = Array.from(form.querySelectorAll('[data-intake-field]'));
 
       const showAlert = (message) => {
         if (!(alertBox instanceof HTMLElement)) return;
@@ -252,30 +478,100 @@ const fieldInputClass =
         alertBox.classList.add('hidden');
       };
 
+      const syncAllFieldStates = (force = false) => {
+        let firstInvalidField = null;
+        let hasErrors = false;
+
+        fields.forEach((field) => {
+          const isValid = updateFieldState(form, field, force);
+          if (!isValid && !firstInvalidField) {
+            firstInvalidField = field;
+          }
+          if (!isValid) {
+            hasErrors = true;
+          }
+        });
+
+        return { firstInvalidField, hasErrors };
+      };
+
       const setBusy = (busy) => {
         form.setAttribute('aria-busy', String(busy));
+        form.dataset.submitting = String(busy);
+        fields.forEach((field) => {
+          if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
+            field.disabled = busy;
+          }
+        });
         if (submitButton instanceof HTMLButtonElement) {
           submitButton.disabled = busy;
-          submitButton.textContent = busy ? 'Sending...' : form.dataset.intakeKind === 'project' ? 'Send it â†’' : 'Send message â†’';
+          submitButton.textContent = busy ? 'Sending...' : form.dataset.intakeKind === 'project' ? 'Send it →' : 'Send message →';
         }
       };
 
       const resetToForm = () => {
         form.reset();
         clearAlert();
+        form.dataset.validationAttempted = 'false';
+        delete form.dataset.submitting;
+        fields.forEach((field) => {
+          if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
+            field.disabled = false;
+            field.dataset.touched = 'false';
+            field.removeAttribute('aria-invalid');
+            delete field.dataset.fieldState;
+            const errorId = field.dataset.intakeErrorId || '';
+            const errorEl = errorId ? form.querySelector(`#${errorId}`) : null;
+            if (errorEl instanceof HTMLElement) {
+              errorEl.textContent = '';
+              errorEl.hidden = true;
+            }
+          }
+        });
         if (successBox instanceof HTMLElement) {
           successBox.classList.add('hidden');
         }
         form.classList.remove('hidden');
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+        }
       };
 
       if (resetButton instanceof HTMLButtonElement) {
         resetButton.addEventListener('click', resetToForm);
       }
 
+      fields.forEach((field) => {
+        if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement)) return;
+
+        field.addEventListener('blur', () => {
+          field.dataset.touched = 'true';
+          updateFieldState(form, field);
+        });
+
+        field.addEventListener('input', () => {
+          if (field.dataset.touched === 'true' || form.dataset.validationAttempted === 'true') {
+            updateFieldState(form, field);
+          }
+        });
+      });
+
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        form.dataset.validationAttempted = 'true';
         clearAlert();
+        const { firstInvalidField, hasErrors } = syncAllFieldStates(true);
+
+        if (hasErrors) {
+          showAlert('Please review the highlighted fields.');
+          if (firstInvalidField instanceof HTMLElement) {
+            window.requestAnimationFrame(() => {
+              firstInvalidField.focus({ preventScroll: false });
+            });
+          }
+          return;
+        }
+
         setBusy(true);
 
         const formData = new FormData(form);
@@ -327,6 +623,8 @@ const fieldInputClass =
           setBusy(false);
         }
       });
+
+      syncAllFieldStates(false);
     });
   };
 

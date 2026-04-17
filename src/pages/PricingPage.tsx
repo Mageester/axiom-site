@@ -158,7 +158,7 @@ const PricingPage: React.FC = () => {
       <Layout>
         <main id="main-content" tabIndex={-1} className="axiom-container w-full pb-16 md:pb-20">
       {/* SECTION 1: HERO */}
-      <section className="mb-16 flex flex-col gap-6 text-center pt-16 sm:mb-24 md:pt-24">
+      <section className="mb-12 flex flex-col gap-6 text-center pt-12 sm:mb-24 sm:pt-16 md:pt-24">
         <p className="section-eyebrow">PRICING</p>
         <div>
           <h1 className="text-[clamp(2.45rem,5.8vw,4rem)] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7]">
@@ -174,12 +174,12 @@ const PricingPage: React.FC = () => {
       </section>
 
       {/* SECTION 2: PRICING CARDS */}
-      <section className="mb-16 sm:mb-24">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6">
+      <section className="mb-12 sm:mb-24">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
           {pricingTiers.map((tier) => (
             <article
               key={tier.name}
-              className={`machined-card flex h-full flex-col gap-8 rounded-[var(--radius-card)] border bg-[#10141c]/40 p-8 sm:p-10 transition-colors ${
+              className={`machined-card flex h-full flex-col gap-6 rounded-[var(--radius-card)] border bg-[#10141c]/40 p-6 sm:p-8 transition-colors ${
                 tier.recommended
                   ? 'border-t-2 border-t-axiom-accent border-white/10 shadow-[0_12px_44px_rgba(200,122,87,0.12)]'
                   : 'border-white/10'
@@ -218,7 +218,7 @@ const PricingPage: React.FC = () => {
       </section>
 
       {/* SECTION 3: COMPARISON TABLE */}
-      <section className="mb-16 sm:mb-24">
+      <section className="mb-12 sm:mb-24">
         <article className="machined-card overflow-hidden rounded-[var(--radius-card)] p-6 sm:p-8 md:p-10">
           <div className="max-w-3xl">
             <p className="section-eyebrow">Compare the tiers</p>
@@ -230,7 +230,37 @@ const PricingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="mt-8 overflow-x-auto">
+          <div className="mt-8 grid gap-3 md:hidden">
+            {comparisonRows.map((row) => (
+              <article
+                key={row.label}
+                className="rounded-[22px] border border-white/10 bg-white/[0.03] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]"
+              >
+                <div className="flex items-start gap-3">
+                  <row.icon className="mt-0.5 h-4 w-4 shrink-0 text-slate-500/70" strokeWidth={1.5} />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[14px] font-medium text-[#F2F4F7]">{row.label}</p>
+                    <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                      <div className="rounded-xl border border-white/10 bg-[#0A0D13] px-3 py-3">
+                        <p className="text-[10px] uppercase tracking-[0.16em] text-slate-500">Starter</p>
+                        <p className="mt-1 text-[13px] leading-relaxed text-slate-200">{row.starter}</p>
+                      </div>
+                      <div className="rounded-xl border border-white/10 bg-[#0A0D13] px-3 py-3">
+                        <p className="text-[10px] uppercase tracking-[0.16em] text-slate-500">Growth</p>
+                        <p className="mt-1 text-[13px] leading-relaxed text-slate-200">{row.growth}</p>
+                      </div>
+                      <div className="rounded-xl border border-white/10 bg-[#0A0D13] px-3 py-3">
+                        <p className="text-[10px] uppercase tracking-[0.16em] text-slate-500">Custom</p>
+                        <p className="mt-1 text-[13px] leading-relaxed text-slate-200">{row.custom}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-8 hidden overflow-x-auto md:block">
             <table className="min-w-full border-collapse text-left">
               <thead>
                 <tr className="border-b border-white/10">
@@ -275,9 +305,9 @@ const PricingPage: React.FC = () => {
       </section>
 
       {/* SECTION 4: GUARANTEE CALLOUT */}
-      <section className="mb-20 sm:mb-32">
+      <section className="mb-16 sm:mb-32">
         <article className="w-full overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
-          <div className="border-l-4 border-[#B05D41] px-6 py-10 md:px-8 md:py-12 lg:px-10">
+          <div className="border-l-4 border-[#B05D41] px-5 py-8 md:px-8 md:py-12 lg:px-10">
             <div className="max-w-4xl">
               <h2 className="text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
                 If your site loads in over one second, we fix it free.
@@ -291,7 +321,7 @@ const PricingPage: React.FC = () => {
       </section>
 
       {/* SECTION 5: CLOSING CTA */}
-      <section className="mb-24 rounded-[var(--radius-card)] border border-white/10 bg-[#131821] p-10 sm:mb-32 md:p-16">
+      <section className="mb-20 rounded-[var(--radius-card)] border border-white/10 bg-[#131821] p-6 sm:mb-32 sm:p-10 md:p-16">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-[clamp(2rem,4vw,2.5rem)] font-axiomSans font-semibold tracking-[-0.02em] text-[#F2F4F7]">
             Not sure which tier fits?
