@@ -1,188 +1,146 @@
 ---
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { CTA } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
-import type { ResponsiveSource } from '../lib/responsiveImages';
+import { Button } from '../components/ui/button';
+import { Card } from '../components/ui/card';
+import { Eyebrow } from '../components/ui/Eyebrow';
+import type { CSSProperties } from 'react';
 
-
-
-const proofBlocks = [
+const featuredBuilds = [
   {
-    id: 'demonstration-restaurant-reservation-site',
-    title: 'Restaurant reservation site',
-    summary: 'A restaurant site where the booking link, menu, and hours are impossible to miss on a phone.',
-    businessType: 'Restaurant and hospitality',
-    badgeLabel: 'Demonstration',
-    statusLabel: 'Build example',
-    ctaLabel: 'View the build →',
-    demoUrl: 'https://restaurant.getaxiom.ca',
+    eyebrow: 'BUILD CONCEPT · RESTAURANT & HOSPITALITY',
+    title: 'A reservation site that does not hide the booking.',
     originalWeakness: 'Guests had to hunt for the booking link, and the menu was hard to read on phones.',
-    improved: 'The reservation path stays visible and the menu reads cleanly on mobile.',
-    whyBetter: 'People can book or check the menu without digging through the page, which matters when the decision happens fast.',
+    axiomChanged: 'The reservation path stays visible and the menu reads cleanly on mobile.',
+    whyItWorks:
+      'People can book or check the menu without digging through the page, which matters when the decision happens fast.',
     image: getWorkProofImage('demonstration-restaurant-reservation-site').source,
-    imageAlt: getWorkProofImage('demonstration-restaurant-reservation-site').alt ?? 'Restaurant reservation site',
-    imagePosition: 'center 24%',
+    alt: getWorkProofImage('demonstration-restaurant-reservation-site').alt ?? 'Restaurant reservation site',
+    position: 'center 24%',
+    href: 'https://restaurant.getaxiom.ca',
   },
   {
-    id: 'concept-landscaping-authority-site',
-    title: 'Landscaping site',
-    summary: 'A landscaping site that leads with past work and makes it easy to request a quote in under 30 seconds.',
-    businessType: 'Landscaping and outdoor services',
-    badgeLabel: 'Demonstration',
-    statusLabel: 'Build example',
-    ctaLabel: 'View the build →',
-    demoUrl: 'https://landscaping.getaxiom.ca',
+    eyebrow: 'BUILD CONCEPT · LANDSCAPING & OUTDOOR SERVICES',
+    title: 'A landscaping site that puts the work in front.',
     originalWeakness: 'Past work was buried, and quote requests took too many clicks.',
-    improved: 'Project photos come forward and the quote path is shorter.',
-    whyBetter: 'Local buyers can judge the work first and request a quote without digging through pages.',
+    axiomChanged: 'Project photos come forward and the quote path is shorter.',
+    whyItWorks: 'Buyers can judge the quality first and request a quote without digging through pages.',
     image: getWorkProofImage('concept-landscaping-authority-site').source,
-    imageAlt: getWorkProofImage('concept-landscaping-authority-site').alt ?? 'Finished backyard with fresh lawn, planting beds, and a covered patio',
-    imagePosition: getWorkProofImage('concept-landscaping-authority-site').position ?? 'center 56%',
+    alt: getWorkProofImage('concept-landscaping-authority-site').alt ?? 'Landscaping authority site',
+    position: 'center 52%',
+    href: 'https://landscaping.getaxiom.ca',
   },
   {
-    id: 'concept-roofing-conversion-site',
-    title: 'Roofing site',
-    summary: 'A roofing site that separates urgent calls from estimate requests - so the right jobs reach you the right way.',
-    businessType: 'Roofing and exterior services',
-    badgeLabel: 'Demonstration',
-    statusLabel: 'Build example',
-    ctaLabel: 'View the build →',
-    demoUrl: 'https://roofing.getaxiom.ca',
+    eyebrow: 'BUILD CONCEPT · ROOFING & EXTERIORS',
+    title: 'A roofing site that separates urgent from planned.',
     originalWeakness: 'Storm traffic needs a fast path to inspection and estimate requests.',
-    improved: 'Urgent calls and planned estimates have separate paths.',
-    whyBetter: 'Different visitors need different actions, so the page removes friction instead of making everyone read the same route.',
+    axiomChanged: 'Urgent calls and planned estimates have separate paths.',
+    whyItWorks: 'Different visitors need different actions, so the page removes friction instead of making everyone read the same route.',
     image: getWorkProofImage('concept-roofing-conversion-site').source,
-    imageAlt: getWorkProofImage('concept-roofing-conversion-site').alt ?? 'Roofing conversion site',
-    imagePosition: 'center 36%',
+    alt: getWorkProofImage('concept-roofing-conversion-site').alt ?? 'Roofing conversion site',
+    position: 'center 36%',
+    href: 'https://roofing.getaxiom.ca',
   },
 ] as const;
 
 const conceptProjects = [
   {
-    title: 'HVAC Performance',
+    eyebrow: 'HVAC PERFORMANCE',
     subtitle: 'Apex Climate Systems',
-    positioning: 'Dispatch-first infrastructure for emergency HVAC demand windows.',
-    desc: 'When the first heatwave hits and your phones blow up, this system filters the tire-kickers so your techs only roll trucks for high-ticket emergency installs.',
-    roi: 'Designed to lift emergency dispatch rates during peak weather events.',
-    url: 'https://hvac.getaxiom.ca',
-    capabilities: ['Emergency dispatch banner', 'Diagnostic intake routing', 'Dispatch qualification filter'],
+    title: 'Dispatch-first infrastructure for urgent HVAC demand.',
+    outcome: 'Designed to lift emergency dispatch rates during peak weather events.',
+    bullets: ['Emergency dispatch banner', 'Diagnostic intake routing', 'Dispatch qualification filter'],
+    href: 'https://hvac.getaxiom.ca',
   },
   {
-    title: 'Roofing Performance',
+    eyebrow: 'ROOFING PERFORMANCE',
     subtitle: 'Summit Roofing Co.',
-    positioning: 'Storm protocol conversion system for high-volume inspection demand.',
-    desc: "When hail storms hit and every roof in town leaks, your site loads instantly while your competitors' sites crash. You get the calls. They get voicemail.",
-    roi: "Designed to capture storm-season leads while competitors' sites go down.",
-    url: 'https://roofing.getaxiom.ca',
-    capabilities: ['Storm protocol timeline', 'Material selector', 'Inspection funnel'],
+    title: 'Storm protocol conversion system for inspection demand.',
+    outcome: "Designed to capture storm-season leads while competitors' sites go down.",
+    bullets: ['Storm protocol timeline', 'Material selector', 'Inspection funnel'],
+    href: 'https://roofing.getaxiom.ca',
   },
   {
-    title: 'Landscaping Performance',
+    eyebrow: 'LANDSCAPING PERFORMANCE',
     subtitle: 'Verdant Landscapes',
-    positioning: 'Portfolio-grade consultation system for premium outdoor projects.',
-    desc: "You're bidding on $50K hardscape projects against companies with $200 websites. This fixes the gap between the quality of your work and the quality of your online presence.",
-    roi: 'Designed to position premium design work with a portfolio that matches your craft.',
-    url: 'https://landscaping.getaxiom.ca',
-    capabilities: ['Featured project portfolio', 'Seasonal program flow', 'Design consultation funnel'],
+    title: 'Portfolio-grade consultation system for premium outdoor projects.',
+    outcome: 'Designed to position premium design work with a portfolio that matches the craft.',
+    bullets: ['Featured project portfolio', 'Seasonal program flow', 'Design consultation funnel'],
+    href: 'https://landscaping.getaxiom.ca',
   },
 ] as const;
 ---
 
 <SiteLayout title={SEO_ROUTES.work.title} description={SEO_ROUTES.work.description} canonicalPath="/work">
-  <main id="main-content" tabindex="-1" class="axiom-container w-full pb-24 md:pb-32">
-    <section class="pt-12 md:pt-20">
-      <div class="max-w-5xl">
-        <p class="section-eyebrow">Work</p>
-        <div class="mt-2.5 overflow-hidden">
-          <h1 class="text-[clamp(2.45rem,5.8vw,5rem)] font-extrabold leading-[1.04] text-[#F2F4F7]">
-            The standard we build to.
-          </h1>
-        </div>
-        <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-200/90 md:text-lg">
-          Every project starts with your current site. These show what the fixed version looks like.
+  <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
+    <section class="axiom-container pt-12 md:pt-20">
+      <div class="max-w-3xl">
+        <Eyebrow>WORK</Eyebrow>
+        <h1 class="mt-4">The standard we build to.</h1>
+        <p class="mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+          Every project is built to convert, load fast, and stay easy to run. These are the concepts that show what that
+          looks like.
         </p>
-        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-          <a href={CTA.primary.to} class="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
-            {CTA.primary.label}
-          </a>
-          <a href={CTA.process.to} class="inline-flex w-full items-center text-sm font-semibold uppercase tracking-[0.14em] text-white/70 transition-colors hover:text-white sm:w-auto md:text-[15px]">
-            {CTA.process.label}
-          </a>
+        <div class="mt-7">
+          <Button asChild size="lg">
+            <a href="/start">Start a project</a>
+          </Button>
         </div>
       </div>
     </section>
 
-    <section class="pt-16 md:pt-24">
-      <div class="max-w-4xl">
-        <p class="section-eyebrow">Examples</p>
-        <h2 class="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-          What we build
-        </h2>
-        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-[15px]">
-          Examples showing what a clear service-business website looks like.
-        </p>
-      </div>
+    <section class="page-section">
+      <div class="axiom-container space-y-8 md:space-y-10">
+        {featuredBuilds.map((build, index) => {
+          const imageFirst = index % 2 === 0;
 
-      <div class="mt-10 space-y-8 md:space-y-10">
-        {proofBlocks.map((proof, index) => {
-          const isReversed = index % 2 === 1;
           return (
-            <article class="group/proof overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.95)_0%,rgba(10,13,18,0.98)_100%)] shadow-[0_12px_34px_rgba(0,0,0,0.18)] transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_20px_44px_rgba(0,0,0,0.24)]">
-              <div class={`grid gap-0 lg:grid-cols-[minmax(0,0.98fr)_minmax(0,1.02fr)] lg:items-stretch ${isReversed ? '' : ''}`}>
-                <div class={`min-w-0 p-5 md:p-6 lg:p-8 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
-                  <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-                    <span class="inline-flex rounded-full border border-white/10 bg-black/40 px-3 py-1 font-axiomMono text-xs uppercase tracking-wide text-white/78">
-                      {proof.statusLabel}
-                    </span>
-                    <span class="font-axiomMono text-xs uppercase tracking-wide text-slate-400">
-                      {proof.businessType}
-                    </span>
-                  </div>
+            <article class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+              <div class={`grid gap-0 lg:grid-cols-2 ${imageFirst ? '' : ''}`}>
+                <figure class={`relative overflow-hidden border-[color:var(--hairline)] ${imageFirst ? 'lg:border-r' : 'lg:order-2 lg:border-l'}`}>
+                  <ResponsivePicture
+                    source={build.image}
+                    alt={build.alt}
+                    sizes="(min-width: 1280px) 50vw, 100vw"
+                    class="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-[1.03]"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={index === 0 ? 'high' : 'low'}
+                    objectPosition={build.position}
+                  />
+                  <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-transparent" />
+                </figure>
 
-                  <h3 class="mt-4 text-[clamp(1.9rem,3vw,2.9rem)] font-semibold tracking-tight text-[#F2F4F7]">
-                    {proof.title}
-                  </h3>
-                  <p class="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-[15px]">{proof.summary}</p>
+                <div class={`flex h-full flex-col p-6 sm:p-8 lg:p-10 ${imageFirst ? '' : 'lg:order-1'}`}>
+                  <Eyebrow>{build.eyebrow}</Eyebrow>
+                  <h2 class="mt-4 max-w-xl text-[clamp(32px,4vw,52px)] font-[500] leading-[1.08] tracking-[-0.025em] text-[var(--text-primary)]">
+                    {build.title}
+                  </h2>
 
-                  <dl class="mt-6 divide-y divide-white/[0.08] border-t border-white/10">
-                    <div class="flex flex-col gap-2 py-4 first:pt-0 sm:grid sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-5">
-                      <dt class="section-eyebrow sm:pt-1">Original weakness</dt>
-                      <dd class="text-sm leading-relaxed text-slate-300 md:text-[15px]">{proof.originalWeakness}</dd>
+                  <dl class="mt-8 space-y-5">
+                    <div class="space-y-2">
+                      <dt class="axiom-metric text-[var(--text-muted)]">ORIGINAL WEAKNESS</dt>
+                      <dd class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">{build.originalWeakness}</dd>
                     </div>
-                    <div class="flex flex-col gap-2 py-4 first:pt-0 sm:grid sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-5">
-                      <dt class="section-eyebrow sm:pt-1">Axiom changed</dt>
-                      <dd class="text-sm leading-relaxed text-slate-300 md:text-[15px]">{proof.improved}</dd>
+                    <div class="space-y-2 border-t border-[color:var(--hairline)] pt-5">
+                      <dt class="axiom-metric text-[var(--text-muted)]">AXIOM CHANGED</dt>
+                      <dd class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">{build.axiomChanged}</dd>
                     </div>
-                    <div class="flex flex-col gap-2 py-4 first:pt-0 sm:grid sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-5">
-                      <dt class="section-eyebrow sm:pt-1">Why it works</dt>
-                      <dd class="text-sm leading-relaxed text-slate-300 md:text-[15px]">{proof.whyBetter}</dd>
+                    <div class="space-y-2 border-t border-[color:var(--hairline)] pt-5">
+                      <dt class="axiom-metric text-[var(--text-muted)]">WHY IT WORKS</dt>
+                      <dd class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">{build.whyItWorks}</dd>
                     </div>
                   </dl>
 
-                  <div class="mt-6 flex flex-wrap items-center gap-3">
-                    <a href={proof.demoUrl} target="_blank" rel="noopener noreferrer" class="btn-primary btn-lg whitespace-nowrap" aria-label={`${proof.ctaLabel} for ${proof.title}`}>
-                      {proof.ctaLabel}
-                    </a>
+                  <div class="mt-8">
+                    <Button asChild variant="ghost" className="px-0">
+                      <a href={build.href} target="_blank" rel="noopener noreferrer">
+                        View the build ->
+                      </a>
+                    </Button>
                   </div>
                 </div>
-
-                <figure class={`relative overflow-hidden bg-[#0b1120] ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <span class="pointer-events-none absolute left-4 top-4 z-10 inline-flex rounded-full border border-white/15 bg-[#09101d]/80 px-2.5 py-1 font-axiomMono text-xs uppercase tracking-wide text-white shadow-[0_12px_28px_rgba(0,0,0,0.24)] backdrop-blur-sm">
-                    {proof.badgeLabel}
-                  </span>
-                  <ResponsivePicture
-                    source={proof.image}
-                    sizes="(min-width: 1280px) 44vw, (min-width: 768px) 50vw, 100vw"
-                    alt={proof.imageAlt}
-                    class="motion-media aspect-[4/3] w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/proof:scale-[1.015]"
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                    fetchpriority={index === 0 ? 'high' : 'auto'}
-                    objectPosition={proof.imagePosition}
-                  />
-                  <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-transparent"></div>
-                </figure>
               </div>
             </article>
           );
@@ -190,76 +148,72 @@ const conceptProjects = [
       </div>
     </section>
 
-    <section class="pt-16 md:pt-24">
-      <article class="cta-banner">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
-          <div class="max-w-2xl">
-            <p class="section-eyebrow">Next step</p>
-            <h2 class="mt-2 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-              Ready to stop losing jobs to a bad site?
-            </h2>
-            <p class="mt-4 text-sm leading-relaxed text-slate-300 md:text-[15px]">
-              Start a project and we will review the current site, what is missing, and the first fixes that matter.
-            </p>
-          </div>
-          <aside class="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-5">
-            <p class="section-eyebrow">What happens next</p>
-            <p class="mt-4 font-axiomMono text-xs uppercase tracking-wide text-[#F2F4F7]">
-              Review → Scope → Build → Launch
-            </p>
-          </aside>
-          <div class="flex flex-wrap items-center gap-3 lg:col-span-2 lg:justify-end">
-            <a href={CTA.primary.to} class="btn-primary btn-lg whitespace-nowrap">
-              Start a project →
-            </a>
-          </div>
+    <section class="page-section">
+      <div class="axiom-container">
+        <div class="max-w-3xl">
+          <Eyebrow>CONCEPT LIBRARY</Eyebrow>
+          <h2 class="mt-4 max-w-2xl">More concepts. Same standard.</h2>
         </div>
-      </article>
+
+        <div class="mt-10 grid gap-5 lg:grid-cols-3">
+          {conceptProjects.map((project, index) => (
+            <Card
+              data-reveal
+              data-reveal-item
+              data-reveal-state="hidden"
+              style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
+              className="h-full p-0"
+            >
+              <div class="flex h-full flex-col p-6 sm:p-7">
+                <Eyebrow>{project.eyebrow}</Eyebrow>
+                <p class="mt-4 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]">
+                  {project.subtitle}
+                </p>
+                <h3 class="mt-3 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                  {project.title}
+                </h3>
+                <p class="mt-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{project.outcome}</p>
+
+                <ul class="mt-5 space-y-3">
+                  {project.bullets.map((bullet) => (
+                    <li class="flex items-start gap-2 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                      <span class="mt-[0.55rem] h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="mt-auto pt-6">
+                  <Button asChild variant="ghost" className="px-0">
+                    <a href={project.href} target="_blank" rel="noopener noreferrer">
+                      Open project ->
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
     </section>
 
-    <section class="pt-16 md:pt-24">
-      <div class="max-w-4xl">
-        <p class="section-eyebrow">Concept builds</p>
-        <h2 class="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
-          More concept projects
-        </h2>
-        <p class="mt-3 max-w-2xl text-[15px] leading-7 text-slate-300 md:text-base">
-          The HVAC, roofing, and landscaping concepts also live here so work, proof, and demos stay in one place.
-        </p>
-      </div>
-
-      <div class="mt-10 grid gap-5 lg:grid-cols-3">
-        {conceptProjects.map((project) => (
-          <article class="flex h-full flex-col rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(17,22,30,0.95)_0%,rgba(10,13,18,0.98)_100%)] p-5 shadow-[0_12px_34px_rgba(0,0,0,0.18)] md:p-6">
-            <div class="flex flex-col gap-2">
-              <p class="section-eyebrow">{project.subtitle}</p>
-              <h3 class="text-[22px] font-semibold tracking-tight text-[#F2F4F7] sm:text-[24px]">{project.title}</h3>
-              <p class="text-[14px] leading-[1.65] text-slate-200/90">{project.positioning}</p>
+    <section class="page-section">
+      <div class="axiom-container">
+        <Card className="mx-auto max-w-5xl p-0">
+          <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+            <Eyebrow>THE GUARANTEE</Eyebrow>
+            <h2 class="mt-4 max-w-4xl">Ready to stop losing jobs to a weaker site?</h2>
+            <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+              No asterisks. That is the floor we build to.
+            </p>
+            <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <Button asChild>
+                <a href="/start">Start a project</a>
+              </Button>
+              <p class="axiom-metric text-[var(--text-muted)]">Review -> Scope -> Build -> Launch</p>
             </div>
-
-            <div class="mt-5 rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-4">
-              <p class="section-eyebrow">Outcome signal</p>
-              <p class="mt-3 text-[13px] leading-[1.7] text-slate-300">{project.roi}</p>
-            </div>
-
-            <p class="mt-4 text-[13px] leading-[1.7] text-slate-300">{project.desc}</p>
-
-            <ul class="mt-5 space-y-2">
-              {project.capabilities.map((capability) => (
-                <li class="flex items-start gap-2 text-[13px] leading-relaxed text-slate-300">
-                  <span class="mt-[7px] h-1.5 w-1.5 rounded-full bg-axiom-accent"></span>
-                  <span>{capability}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div class="mt-auto pt-6">
-              <a href={project.url} target="_blank" rel="noopener noreferrer" class="btn-primary btn-lg w-full whitespace-nowrap" aria-label={`Open ${project.title}`}>
-                Open project
-              </a>
-            </div>
-          </article>
-        ))}
+          </div>
+        </Card>
       </div>
     </section>
   </main>
