@@ -148,7 +148,7 @@ export const SEO_ROUTES = {
   },
   notFound: {
     title: 'Page not found',
-    description: 'The page you requested is not available.',
+    description: "Use the main links to continue, or head back home.",
     canonicalPath: '/404',
     noIndex: true,
   },
