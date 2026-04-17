@@ -61,18 +61,23 @@ export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) =>
         <div
           className={cn(
             'axiom-container flex items-center justify-between rounded-full border backdrop-blur-[20px] transition-[padding,border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]',
-            scrolled
-              ? 'border-[color:rgba(255,255,255,0.1)] bg-[rgba(10,10,12,0.82)] px-4 py-2.5 shadow-[0_20px_40px_rgba(0,0,0,0.24)]'
-              : 'border-[color:var(--hairline)] bg-[rgba(10,10,12,0.7)] px-4 py-3.5 shadow-[0_16px_30px_rgba(0,0,0,0.16)]'
+            scrolled ? 'border-[color:var(--hairline-strong)] px-4 py-2.5' : 'border-[color:var(--hairline)] px-4 py-3.5'
           )}
+          style={{
+            backgroundColor: scrolled ? 'var(--nav-shell-bg-scrolled)' : 'var(--nav-shell-bg)',
+            boxShadow: scrolled ? 'var(--shadow-nav-scrolled)' : 'var(--shadow-nav-rest)',
+          }}
         >
           <a href="/" className="flex items-center gap-3" aria-label="Axiom Infrastructure home">
             <img
-              src="/axiomtransparentlogo.png"
+              src="/axiomtransparentlogo.webp"
               alt="Axiom"
+              width={240}
+              height={63}
               className="block h-9 w-auto select-none object-contain sm:h-10"
               loading="eager"
               decoding="async"
+              fetchPriority="high"
             />
           </a>
 
@@ -100,7 +105,7 @@ export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) =>
 
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.03] text-[var(--text-primary)] transition-[filter,border-color,background-color] duration-200 hover:border-white/10 hover:bg-white/[0.05] md:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] transition-[filter,border-color,background-color] duration-200 hover:border-[color:var(--hairline-strong)] hover:bg-[color:var(--surface-overlay-press)] md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0"
               aria-label={open ? 'Close navigation' : 'Open navigation'}
               aria-expanded={open}
               aria-controls="mobile-nav-panel"
@@ -134,25 +139,29 @@ export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) =>
       <div
         id="mobile-nav-panel"
         className={cn(
-          'fixed inset-0 z-40 bg-[rgba(10,10,12,0.96)] px-6 py-8 backdrop-blur-[24px] transition-[opacity,visibility] duration-200 md:hidden',
-          open ? 'visible opacity-100' : 'invisible opacity-0'
+          'fixed inset-0 z-40 px-6 py-8 backdrop-blur-[24px] transition-[opacity,visibility] duration-200 md:hidden',
+          open ? 'visible opacity-100 pointer-events-auto' : 'invisible opacity-0 pointer-events-none'
         )}
+        style={{ backgroundColor: 'var(--nav-panel-bg)' }}
         aria-hidden={!open}
       >
         <div className="mx-auto flex h-full max-w-5xl flex-col justify-between pt-20">
           <div className="flex items-center justify-between">
             <a href="/" className="flex items-center gap-3" aria-label="Axiom Infrastructure home">
               <img
-                src="/axiomtransparentlogo.png"
+                src="/axiomtransparentlogo.webp"
                 alt="Axiom"
+                width={240}
+                height={63}
                 className="block h-9 w-auto select-none object-contain sm:h-10"
                 loading="eager"
                 decoding="async"
+                fetchPriority="high"
               />
             </a>
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.03] text-[var(--text-primary)]"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0"
               aria-label="Close navigation"
               onClick={() => setOpen(false)}
             >
