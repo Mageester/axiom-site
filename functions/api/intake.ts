@@ -411,6 +411,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
                 origin: requestOrigin,
                 length: honeypot.length
             });
+            return jsonResponse(request, env, { ok: true }, 200);
         }
 
         const clientIp = getClientIp(request);

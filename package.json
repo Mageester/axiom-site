@@ -11,7 +11,8 @@
     "build:watch": "astro build --watch",
     "dev:intake:web": "astro dev --host 127.0.0.1 --port 5173 --strictPort",
     "dev:intake:api": "wrangler pages dev dist --local --port 10000 --compatibility-date=2026-03-07",
-    "intake:smoke": "node scripts/intake-smoke.mjs"
+    "intake:smoke": "node scripts/intake-smoke.mjs",
+    "test:intake": "node --test tests/intake-smoke.test.mjs"
   },
   "dependencies": {
     "@cloudflare/playwright": "^1.1.2",
