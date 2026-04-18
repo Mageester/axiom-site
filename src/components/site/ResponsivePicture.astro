@@ -6,6 +6,7 @@ type Props = {
   alt: string;
   sizes: string;
   class?: string;
+  style?: string | Record<string, any>;
   loading?: 'eager' | 'lazy';
   fetchpriority?: 'high' | 'low' | 'auto';
   decoding?: 'async' | 'sync' | 'auto';
@@ -17,23 +18,30 @@ const {
   alt,
   sizes,
   class: className = '',
+  style: styleProp = '',
   loading = 'lazy',
   fetchpriority = 'auto',
   decoding = 'async',
   objectPosition,
 } = Astro.props;
+
+// Merge objectPosition into style if provided
+const mergedStyle = [
+  styleProp,
+  objectPosition ? `object-position: ${objectPosition};` : ''
+].filter(Boolean).join(' ');
 ---
 
-<picture class="block h-full w-full bg-white/5">
+<picture class={`block h-full w-full ${className}`.trim()}>
   <source type="image/avif" srcset={source.avifSrcSet} sizes={sizes} />
   <source type="image/webp" srcset={source.webpSrcSet} sizes={sizes} />
   <img
     src={source.fallbackSrc}
     alt={alt}
-    class={`block h-full w-full bg-white/5 ${className}`.trim()}
+    class="block h-full w-full object-cover"
     loading={loading}
     fetchpriority={fetchpriority}
     decoding={decoding}
-    style={objectPosition ? `object-position:${objectPosition};` : undefined}
+    style={mergedStyle}
   />
 </picture>

@@ -299,15 +299,7 @@ h4 {
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-.case-image {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 700ms ease-out;
-  will-change: clip-path;
-}
 
-.case-image[data-motion-visible='true'] {
-  clip-path: inset(0 0 0 0);
-}
 
 .counter {
   opacity: 0;
