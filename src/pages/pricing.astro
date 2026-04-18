@@ -9,7 +9,7 @@ import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 
 const isCheckmark = (val: string) => 
-  ['Included', 'Full ownership', 'Included if needed', 'None', 'SEO foundation', 'SEO preservation', 'Included'].some(k => val.toLowerCase() === k.toLowerCase());
+  ['Included'].some((k) => val.toLowerCase() === k.toLowerCase());
 
 const pricingTiers = [
   {
@@ -261,7 +261,10 @@ const faqItems = [
                         <p class="text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{row.label}</p>
                         <div class="text-[15px] leading-[1.65] text-white/60">
                           {isCheckmark(row.value) ? (
-                            <DrawIcon name="check" size={16} className="text-[#C9A96E]" />
+                            <span class="inline-flex items-center text-[#C9A96E]">
+                              <DrawIcon name="check" size={16} className="is-active" />
+                              <span class="sr-only">{row.value}</span>
+                            </span>
                           ) : (
                             row.value
                           )}
@@ -277,7 +280,7 @@ const faqItems = [
 
         <FadeIn client:load as="div" className="mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
           <table class="min-w-full border-collapse text-left">
-            <thead class="sticky top-24 z-20 bg-[color:var(--nav-panel-bg)] backdrop-blur-sm">
+            <thead class="bg-[color:var(--nav-panel-bg)]">
               <tr class="border-b border-[color:var(--hairline)]">
                 <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   Feature
@@ -303,13 +306,28 @@ const faqItems = [
                     {row.label}
                   </th>
                   <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60 bg-[linear-gradient(180deg,rgba(232,162,123,0.02),transparent)]">
-                    {isCheckmark(row.growth) ? <DrawIcon name="check" size={18} className="text-[#C9A96E]" /> : row.growth}
+                    {isCheckmark(row.growth) ? (
+                      <span class="inline-flex items-center text-[#C9A96E]">
+                        <DrawIcon name="check" size={18} className="is-active" />
+                        <span class="sr-only">{row.growth}</span>
+                      </span>
+                    ) : row.growth}
                   </td>
                   <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">
-                    {isCheckmark(row.signature) ? <DrawIcon name="check" size={18} className="text-[#C9A96E]" /> : row.signature}
+                    {isCheckmark(row.signature) ? (
+                      <span class="inline-flex items-center text-[#C9A96E]">
+                        <DrawIcon name="check" size={18} className="is-active" />
+                        <span class="sr-only">{row.signature}</span>
+                      </span>
+                    ) : row.signature}
                   </td>
                   <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">
-                    {isCheckmark(row.rebuild) ? <DrawIcon name="check" size={18} className="text-[#C9A96E]" /> : row.rebuild}
+                    {isCheckmark(row.rebuild) ? (
+                      <span class="inline-flex items-center text-[#C9A96E]">
+                        <DrawIcon name="check" size={18} className="is-active" />
+                        <span class="sr-only">{row.rebuild}</span>
+                      </span>
+                    ) : row.rebuild}
                   </td>
                 </tr>
               ))}
