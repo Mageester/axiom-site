@@ -27,10 +27,10 @@ const { title, updated, sections } = Astro.props as Props;
         <Eyebrow>LEGAL</Eyebrow>
       </FadeIn>
       <FadeIn client:load delay={100}>
-        <h1 class="mt-4 max-w-3xl">{title}</h1>
+        <h1 class="mt-4 max-w-[760px]">{title}</h1>
       </FadeIn>
       <FadeIn client:load delay={200}>
-        <p class="section-copy mt-4 text-sm">
+        <p class="section-copy mt-4 max-w-[760px] text-sm">
           Last updated: {updated}
         </p>
       </FadeIn>
@@ -43,15 +43,17 @@ const { title, updated, sections } = Astro.props as Props;
         <div class="rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[var(--shadow-card)]">
           <p class="axiom-eyebrow">On this page</p>
           <nav class="mt-4 space-y-1.5" aria-label="Table of contents">
-            {sections.map((section) => (
+            {sections.map((section, index) => (
               <a
                 href={`#${section.id}`}
-                class="group flex items-start gap-3 rounded-[12px] border border-transparent px-3 py-2 transition-[background-color,border-color,color] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-[color:var(--hairline)] hover:bg-[color:var(--surface-overlay)]"
+                data-legal-nav-link={section.id}
+                data-legal-nav-active={index === 0 ? 'true' : 'false'}
+                class="group flex items-start gap-3 rounded-[12px] border border-transparent px-3 py-2 transition-[background-color,border-color,color] duration-200 ease-out hover:border-[color:var(--hairline)] hover:bg-[color:var(--surface-overlay)]"
               >
-                <span class="font-axiomMono text-[11px] font-medium leading-none tracking-[0.08em] text-[var(--accent-solid)]">
+                <span class="font-axiomMono text-[11px] font-medium leading-none tracking-[0.08em] text-[var(--text-secondary)] transition-colors duration-200 ease-out" data-legal-nav-number>
                   {section.number}
                 </span>
-                <span class="text-[13px] leading-[1.45] text-[var(--text-secondary)] transition-colors duration-200 group-hover:text-[var(--text-primary)]">
+                <span class="text-[13px] leading-[1.45] text-[var(--text-secondary)] transition-colors duration-200 ease-out group-hover:text-[var(--text-primary)]" data-legal-nav-title>
                   {section.title}
                 </span>
               </a>
@@ -69,6 +71,7 @@ const { title, updated, sections } = Astro.props as Props;
                   client:load
                   as="section"
                   id={section.id}
+                  data-legal-section
                   class={`scroll-mt-28 ${index === 0 ? '' : 'border-t border-[color:var(--hairline)] pt-8'}`}
                   delay={Math.min(index * 100, 400)}
                 >
@@ -124,3 +127,86 @@ const { title, updated, sections } = Astro.props as Props;
     </div>
   </section>
 </main>
+
+<script>
+  (() => {
+    const sections = Array.from(document.querySelectorAll('[data-legal-section]'));
+    const links = Array.from(document.querySelectorAll('[data-legal-nav-link]'));
+
+    if (!sections.length || !links.length || !('IntersectionObserver' in window)) {
+      return;
+    }
+
+    const linkById = new Map(
+      links.map((link) => [link.getAttribute('data-legal-nav-link') || '', link])
+    );
+    const sectionIndexById = new Map(
+      sections.map((section, index) => [section.id, index])
+    );
+
+    let activeId = sections[0]?.id || '';
+
+    const setActive = (nextId) => {
+      if (!nextId || nextId === activeId) return;
+      activeId = nextId;
+
+      links.forEach((link) => {
+        const isActive = link.getAttribute('data-legal-nav-link') === nextId;
+        link.setAttribute('data-legal-nav-active', isActive ? 'true' : 'false');
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting);
+
+        if (!visible.length) return;
+
+        const activationLine = window.innerHeight * 0.3;
+        visible.sort((a, b) => {
+          const aDistance = Math.abs(a.boundingClientRect.top - activationLine);
+          const bDistance = Math.abs(b.boundingClientRect.top - activationLine);
+
+          if (aDistance !== bDistance) return aDistance - bDistance;
+
+          return (sectionIndexById.get(a.target.id) || 0) - (sectionIndexById.get(b.target.id) || 0);
+        });
+
+        setActive(visible[0].target.id);
+      },
+      {
+        rootMargin: '-30% 0px -60% 0px',
+        threshold: 0,
+      }
+    );
+
+    const syncInitialState = () => {
+      const hashTarget = window.location.hash.replace('#', '');
+      if (hashTarget && linkById.has(hashTarget)) {
+        activeId = hashTarget;
+      }
+
+      links.forEach((link) => {
+        const isActive = link.getAttribute('data-legal-nav-link') === activeId;
+        link.setAttribute('data-legal-nav-active', isActive ? 'true' : 'false');
+      });
+    };
+
+    syncInitialState();
+    sections.forEach((section) => observer.observe(section));
+
+    window.addEventListener('hashchange', syncInitialState);
+  })();
+</script>
+
+<style>
+  a[data-legal-nav-active='true'] {
+    border-color: var(--accent-border);
+    background: var(--surface-overlay);
+  }
+
+  a[data-legal-nav-active='true'] [data-legal-nav-number],
+  a[data-legal-nav-active='true'] [data-legal-nav-title] {
+    color: var(--accent-solid);
+  }
+</style>

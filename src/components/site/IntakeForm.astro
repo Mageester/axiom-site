@@ -563,7 +563,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
         });
         if (submitButton instanceof HTMLButtonElement) {
           submitButton.disabled = busy;
-          submitButton.textContent = busy ? 'Sending...' : form.dataset.intakeKind === 'project' ? 'Send it →' : 'Send message →';
+          submitButton.textContent = busy ? 'Sending...' : form.dataset.intakeKind === 'project' ? 'Submit project brief →' : 'Send message →';
         }
       };
 

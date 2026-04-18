@@ -44,7 +44,7 @@ import { Eyebrow } from '../components/ui/Eyebrow';
             eyebrow="PROJECT INTAKE"
             description="Tell us what the business does, what&apos;s broken about the current site, and when you want to move."
             helper="Three short lines is enough. What does the business do, what is wrong with the current site, and when do you want to move?"
-            submitLabel={`Send it \u2192`}
+            submitLabel={`Submit project brief \u2192`}
             successTitle="Received."
             successText="Received. We will review and reply within one business day."
             noteLinkHref="/contact"
@@ -60,12 +60,24 @@ import { Eyebrow } from '../components/ui/Eyebrow';
               <p class="section-copy mt-4">
                 Use the contact page for a quick note or anything that is not a project.
               </p>
-              <div class="mt-6">
+              <div class="mt-6 space-y-3">
                 <a
                   href="/contact"
                   class="inline-flex items-center text-[15px] font-medium text-[var(--text-primary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-[color,opacity] duration-200 hover:text-[var(--text-primary)]"
                 >
                   Contact page &rarr;
+                </a>
+                <a
+                  href="/process"
+                  class="block text-[15px] font-medium text-[var(--text-secondary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-[color,opacity] duration-200 hover:text-[var(--text-primary)]"
+                >
+                  Timeline questions &rarr;
+                </a>
+                <a
+                  href="/pricing"
+                  class="block text-[15px] font-medium text-[var(--text-secondary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-[color,opacity] duration-200 hover:text-[var(--text-primary)]"
+                >
+                  Pricing questions &rarr;
                 </a>
               </div>
             </div>

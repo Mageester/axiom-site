@@ -1,6 +1,6 @@
 ---
 import { FadeIn } from '../components/ui/FadeIn';
-import { Phone } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import IntakeForm from '../components/site/IntakeForm.astro';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
@@ -15,7 +15,7 @@ import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
         <Eyebrow>CONTACT</Eyebrow>
         <h1 class="mt-4">Just a question.</h1>
         <p class="section-copy mx-auto mt-5 text-center md:text-[17px]">
-          Use this form for a quick question or a note about your site. Need website work? Use the project intake page.
+          For quick questions and short notes. For projects, use the intake page.
         </p>
       </FadeIn>
     </section>
@@ -24,24 +24,34 @@ import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
       <div class="axiom-container mx-auto max-w-5xl space-y-6">
         <FadeIn client:load as="div">
           <Card padding="lg" className="w-full">
-            <div class="flex flex-col gap-6">
-              <div class="flex items-center gap-4">
-                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--accent-surface)] text-[var(--accent-solid)] shadow-[var(--shadow-brand-ring-soft)]" aria-hidden="true">
-                  <Phone className="h-4 w-4" />
-                </span>
-                <Eyebrow>CALL US</Eyebrow>
-              </div>
+            <div class="grid gap-6 md:grid-cols-2 md:gap-0">
+              <div class="flex h-full flex-col gap-4 md:border-r md:border-[color:var(--hairline)] md:pr-6">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--accent-surface)] text-[var(--accent-solid)] shadow-[var(--shadow-brand-ring-soft)]" aria-hidden="true">
+                    <Phone className="h-4 w-4" />
+                  </span>
+                  <Eyebrow>CALL</Eyebrow>
+                </div>
 
-              <div class="space-y-2">
                 <a
                   href={`tel:${SITE_TELEPHONE}`}
-                  class="inline-flex min-h-11 items-center font-display text-[clamp(2.25rem,4vw,2.625rem)] font-medium leading-none tracking-[-0.02em] text-[var(--text-primary)] transition-colors hover:text-[var(--text-primary)]"
+                  class="inline-flex min-h-11 items-center font-display text-[clamp(2rem,4vw,2.55rem)] font-medium leading-none tracking-[-0.03em] text-[var(--text-primary)] transition-colors hover:text-[var(--text-primary)]"
                 >
                   (226) 753-1833
                 </a>
+              </div>
+
+              <div class="flex h-full flex-col gap-4 md:pl-6">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--accent-surface)] text-[var(--accent-solid)] shadow-[var(--shadow-brand-ring-soft)]" aria-hidden="true">
+                    <Mail className="h-4 w-4" />
+                  </span>
+                  <Eyebrow>EMAIL</Eyebrow>
+                </div>
+
                 <a
                   href={`mailto:${SITE_EMAIL}`}
-                  class="inline-flex min-h-11 items-center text-[15px] font-medium leading-6 text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+                  class="inline-flex min-h-11 items-center font-display text-[clamp(2rem,4vw,2.55rem)] font-medium leading-none tracking-[-0.03em] text-[var(--text-primary)] transition-colors hover:text-[var(--text-primary)]"
                 >
                   contact@getaxiom.ca
                 </a>
@@ -58,7 +68,7 @@ import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
             eyebrow="QUESTION FORM"
             description="Use this for a quick question or a note about your site."
             helper="A short note is enough. Tell us what you need help with."
-            submitLabel={`Send message \u2192`}
+            submitLabel={`Send the note \u2192`}
             successTitle="Received."
             successText="Received. We will review and reply within one business day."
             noteLinkHref="/start"
