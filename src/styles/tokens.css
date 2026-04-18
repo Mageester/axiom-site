@@ -56,8 +56,8 @@
   --reveal-distance: 16px;
   --reveal-stagger: 80ms;
 
-  --font-display: 'Geist Sans', 'Inter Variable', 'Inter', system-ui, sans-serif;
-  --font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-display: 'Geist Sans', system-ui, sans-serif;
+  --font-body: 'Geist Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --body-hero-glow: radial-gradient(circle at top, rgba(232, 162, 123, 0.09), transparent 32%);
