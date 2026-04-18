@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { RefObject } from 'react';
 import { shouldDisableRevealMotion } from '../lib/motionPreferences';
 
@@ -11,7 +11,9 @@ const useReveal = <T extends HTMLElement>(): RevealResult<T> => {
   const ref = useRef<T | null>(null);
   const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
+  const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
+  useIsomorphicLayoutEffect(() => {
     if (shouldDisableRevealMotion()) {
       setIsVisible(true);
       return;
@@ -37,7 +39,7 @@ const useReveal = <T extends HTMLElement>(): RevealResult<T> => {
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.15 }
     );
 
     observer.observe(element);

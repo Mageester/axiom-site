@@ -5,10 +5,10 @@ import AdminLayout from '../layouts/AdminLayout.astro';
 
 <AdminLayout title="Axiom Admin" description="Private admin area for Axiom Infrastructure." noIndex={true}>
   <div class="space-y-6">
-    <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_16px_36px_rgba(0,0,0,0.26)] md:p-8">
-      <p class="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[#A7B3BC]">Secure area</p>
-      <div class="mt-4 h-10 w-64 max-w-full animate-pulse rounded bg-white/8"></div>
-      <p class="mt-4 text-sm text-slate-300">Loading admin tools.</p>
+    <div class="rounded-3xl border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-6 shadow-[var(--shadow-card-elevated)] md:p-8">
+      <p class="font-axiomMono text-[11px] uppercase tracking-[0.2em] text-[var(--text-muted)]">Secure area</p>
+      <div class="mt-4 h-10 w-64 max-w-full animate-pulse rounded bg-[color:var(--surface-overlay-press)]"></div>
+      <p class="mt-4 text-sm text-[var(--text-secondary)]">Loading admin tools.</p>
     </div>
 
     <AdminShell client:only="react" />

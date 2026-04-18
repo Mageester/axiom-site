@@ -21,8 +21,8 @@ function AnimatedStat({ description, duration, target, unit }: AnimatedStatProps
   const { ref: countRef, value, isDone } = useCountUp<HTMLDListElement>(target, duration);
   const [showUnit, setShowUnit] = useState(false);
   const visibilityClass = isVisible
-    ? 'opacity-100 translate-y-0 scale-100'
-    : 'opacity-0 translate-y-4 scale-[0.985]';
+    ? 'opacity-100 translate-y-0'
+    : 'opacity-0 translate-y-4';
 
   useEffect(() => {
     if (!isDone) return;
@@ -45,7 +45,7 @@ function AnimatedStat({ description, duration, target, unit }: AnimatedStatProps
       ref={blockRef}
       className={[
         visibilityClass,
-        'flex flex-col gap-1 motion-safe:transition-[opacity,transform] motion-safe:duration-700 motion-safe:ease-out motion-safe:will-change-[opacity,transform] motion-safe:transform-gpu motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:transition-none',
+        'flex flex-col gap-1 motion-safe:transition-[opacity,transform] motion-safe:duration-700 motion-safe:ease-out motion-safe:will-change-[opacity,transform] motion-safe:transform-gpu motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none',
       ]
         .filter(Boolean)
         .join(' ')}
@@ -95,7 +95,7 @@ function StaticStat({ description, unit, value }: StaticStatProps) {
       ref={blockRef}
       className={[
         visibilityClass,
-        'flex flex-col gap-1 motion-safe:transition-[opacity,transform] motion-safe:duration-700 motion-safe:ease-out motion-safe:will-change-[opacity,transform] motion-safe:transform-gpu motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:transition-none',
+        'flex flex-col gap-1 motion-safe:transition-[opacity,transform] motion-safe:duration-700 motion-safe:ease-out motion-safe:will-change-[opacity,transform] motion-safe:transform-gpu motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none',
       ]
         .filter(Boolean)
         .join(' ')}

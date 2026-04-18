@@ -32,17 +32,17 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--bg-base);
+  background-color: var(--bg-base);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
-  background:
+  background-color: var(--bg-base);
+  background-image:
     var(--body-hero-glow),
-    var(--body-hero-glow-2),
-    var(--bg-base);
+    var(--body-hero-glow-2);
   color: var(--text-secondary);
   font-family: var(--font-body);
   font-size: 15px;
@@ -138,11 +138,11 @@ dd {
   color: var(--text-secondary);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
 h6,
 button,
 nav,
@@ -168,7 +168,7 @@ h2 {
   font-family: var(--font-display);
   font-size: clamp(32px, 4vw, 52px);
   font-weight: 500;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.025em;
   font-feature-settings: 'ss01';
 }
@@ -215,9 +215,22 @@ h4 {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.section-heading {
+  max-width: 34rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.section-copy {
+  max-width: 32rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .font-display,

@@ -28,7 +28,6 @@ export function useFadeInOnScroll<T extends HTMLElement>(): FadeInResult<T> {
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
     const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
     const visibleRatio = rect.height > 0 ? Math.max(0, visibleHeight / rect.height) : 0;
-
     setIsVisible(visibleRatio >= 0.15);
 
     const observer = new IntersectionObserver(

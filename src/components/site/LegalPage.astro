@@ -30,7 +30,7 @@ const { title, updated, sections } = Astro.props as Props;
         <h1 class="mt-4 max-w-3xl">{title}</h1>
       </FadeIn>
       <FadeIn client:load delay={200}>
-        <p class="mt-4 text-[13px] leading-6 text-[var(--text-secondary)]">
+        <p class="section-copy mt-4 text-sm">
           Last updated: {updated}
         </p>
       </FadeIn>
@@ -41,7 +41,7 @@ const { title, updated, sections } = Astro.props as Props;
     <div class="axiom-container xl:grid xl:grid-cols-[11rem_minmax(0,760px)] xl:justify-center xl:gap-8">
       <FadeIn client:load as="aside" className="hidden self-start xl:sticky xl:top-32 xl:block">
         <div class="rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[var(--shadow-card)]">
-          <p class="axiom-eyebrow text-[var(--text-secondary)]">On this page</p>
+          <p class="axiom-eyebrow">On this page</p>
           <nav class="mt-4 space-y-1.5" aria-label="Table of contents">
             {sections.map((section) => (
               <a
@@ -76,14 +76,14 @@ const { title, updated, sections } = Astro.props as Props;
                     <span class="shrink-0 font-axiomMono text-[20px] font-medium leading-none tracking-[-0.02em] text-[var(--accent-solid)]">
                       {section.number}
                     </span>
-                    <h2 class="font-body text-[20px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                    <h2 class="section-heading font-body text-[20px] font-semibold text-[var(--text-primary)]">
                       {section.title}
                     </h2>
                   </div>
 
                   <div class="mt-4 space-y-4">
                     {section.paragraphs.map((paragraph) => (
-                      <p class="text-[15px] leading-[1.7] text-[var(--text-secondary)]">
+                      <p class="section-copy">
                         {paragraph}
                       </p>
                     ))}
@@ -91,7 +91,7 @@ const { title, updated, sections } = Astro.props as Props;
                     {section.bullets && section.bullets.length > 0 && (
                       <ul class="space-y-3 pt-1">
                         {section.bullets.map((bullet) => (
-                          <li class="flex gap-3 text-[15px] leading-[1.7] text-[var(--text-secondary)]">
+                          <li class="flex gap-3 text-[15px] leading-[1.7] text-white/60">
                             <span
                               aria-hidden="true"
                               class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[var(--accent-solid)]"
@@ -109,7 +109,7 @@ const { title, updated, sections } = Astro.props as Props;
         </article>
 
         <FadeIn client:load as="article" className="w-full max-w-[760px] rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] px-5 py-4 shadow-[var(--shadow-card)] sm:px-6" delay={200}>
-          <p class="text-[15px] leading-[1.7] text-[var(--text-secondary)]">
+          <p class="section-copy">
             Questions? Email
             <a
               href={`mailto:${SITE_EMAIL}`}

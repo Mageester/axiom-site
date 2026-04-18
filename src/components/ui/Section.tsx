@@ -24,7 +24,7 @@ export const Section: React.FC<SectionProps> = ({
             data-reveal
             data-reveal-item
             data-reveal-state="hidden"
-            style={{ '--reveal-delay': `${index * 80}ms` } as React.CSSProperties}
+            style={{ '--reveal-delay': `${Math.min(index * 100, 400)}ms` } as React.CSSProperties}
           >
             {child}
           </div>

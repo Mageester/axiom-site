@@ -24,13 +24,13 @@ const {
 } = Astro.props;
 ---
 
-<picture>
+<picture class="block h-full w-full bg-white/5">
   <source type="image/avif" srcset={source.avifSrcSet} sizes={sizes} />
   <source type="image/webp" srcset={source.webpSrcSet} sizes={sizes} />
   <img
     src={source.fallbackSrc}
     alt={alt}
-    class={className}
+    class={`block h-full w-full bg-white/5 ${className}`.trim()}
     loading={loading}
     fetchpriority={fetchpriority}
     decoding={decoding}

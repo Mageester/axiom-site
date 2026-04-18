@@ -61,9 +61,9 @@ export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) =>
     <>
       <header className="fixed inset-x-0 top-6 z-50 px-3 sm:px-6">
         <div
-          className={cn(
-            'axiom-container flex items-center justify-between rounded-full border backdrop-blur-[20px] transition-[padding,border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]',
-            scrolled ? 'border-[color:var(--hairline-strong)] px-4 py-2.5' : 'border-[color:var(--hairline)] px-4 py-3.5'
+        className={cn(
+            'axiom-container flex items-center justify-between rounded-full border px-4 py-3.5 backdrop-blur-[20px] transition-[border-color,background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]',
+            scrolled ? 'border-[color:var(--hairline-strong)]' : 'border-[color:var(--hairline)]'
           )}
           style={{
             backgroundColor: scrolled ? 'var(--nav-shell-bg-scrolled)' : 'var(--nav-shell-bg)',

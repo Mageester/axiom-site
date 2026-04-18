@@ -33,7 +33,7 @@ const ctaClasses =
 <header id="site-header" class="fixed inset-x-0 top-6 z-50 px-3 sm:px-6">
   <div
     id="nav-shell"
-    class="axiom-container flex items-center justify-between rounded-full border border-[color:var(--hairline)] px-4 py-3.5 backdrop-blur-[20px] transition-[padding,border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]"
+    class="axiom-container flex items-center justify-between rounded-full border border-[color:var(--hairline)] px-4 py-3.5 backdrop-blur-[20px] transition-[border-color,background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]"
     style="background-color: var(--nav-shell-bg); box-shadow: var(--shadow-nav-rest);"
   >
     <a href="/" class="flex items-center" aria-label="Axiom Infrastructure home">
@@ -187,7 +187,6 @@ const ctaClasses =
 
   /* Scrolled shell state */
   #nav-shell[data-scrolled] {
-    padding-block: 0.625rem; /* py-2.5 */
     border-color: var(--hairline-strong);
     background-color: var(--nav-shell-bg-scrolled) !important;
     box-shadow: var(--shadow-nav-scrolled) !important;

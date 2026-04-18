@@ -49,7 +49,7 @@ const processSteps = [
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PROCESS</Eyebrow>
         <h1 class="mt-4">Four stages. From review to launch.</h1>
-        <p class="mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+        <p class="section-copy mt-5 md:text-[17px]">
           Every stage keeps the work clear, the decisions early, and the launch predictable.
         </p>
         <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -73,12 +73,12 @@ const processSteps = [
                   <p class="font-axiomMono text-[clamp(2.6rem,4vw,3.25rem)] leading-none tracking-[-0.06em] text-[var(--accent-solid)]">
                     {step.dayLabel}
                   </p>
-                  <h2 class="mt-4 text-[18px] font-semibold leading-[1.4] tracking-[-0.015em] text-[var(--text-primary)]">
-                    {step.title}
-                  </h2>
-                  <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-secondary)]">
-                    {step.timelineDescription}
-                  </p>
+          <h2 class="section-heading mt-4 text-[18px] font-semibold text-[var(--text-primary)]">
+            {step.title}
+          </h2>
+          <p class="section-copy mt-3 text-[14px]">
+            {step.timelineDescription}
+          </p>
 
                   {step.bullets.length > 0 ? (
                     <div class="mt-5 flex flex-1 flex-col rounded-[calc(var(--radius-card)-0.35rem)] border border-[color:var(--hairline)] bg-[color:var(--surface-2)] p-4">
@@ -90,12 +90,12 @@ const processSteps = [
                           <li class="flex items-start gap-3">
                             <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-solid)]" />
                             <div>
-                              <p class="text-[14px] font-semibold leading-[1.45] text-[var(--text-primary)]">
-                                {item.title}
-                              </p>
-                              <p class="mt-1 text-[13px] leading-[1.6] text-[var(--text-secondary)]">
-                                {item.detail}
-                              </p>
+                      <p class="text-[14px] font-semibold leading-[1.45] text-white">
+                        {item.title}
+                      </p>
+                      <p class="mt-1 text-[13px] leading-[1.6] text-white/60">
+                        {item.detail}
+                      </p>
                             </div>
                           </li>
                         ))}
@@ -116,8 +116,8 @@ const processSteps = [
           <Card className="mx-auto max-w-5xl p-0">
             <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>THE GUARANTEE</Eyebrow>
-              <h2 class="mt-4 max-w-4xl">Ready to stop losing jobs to a weaker site?</h2>
-              <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+              <h2 class="section-heading mt-4">Ready to stop losing jobs to a weaker site?</h2>
+              <p class="section-copy mt-4">
                 No asterisks. That is the floor we build to.
               </p>
               <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

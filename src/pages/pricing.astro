@@ -159,7 +159,7 @@ const faqItems = [
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PRICING</Eyebrow>
         <h1 class="mt-4">One investment. Full ownership.</h1>
-        <p class="mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+        <p class="section-copy mt-5 md:text-[17px]">
           No monthly fees. No recurring charges. You own everything we build. Three tiers based on what the business actually needs.
         </p>
       </FadeIn>
@@ -198,7 +198,7 @@ const faqItems = [
 
                   <ul class="mt-6 space-y-3">
                     {tier.features.map((feature) => (
-                      <li class="flex items-start gap-3 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                        <li class="flex items-start gap-3 text-[15px] leading-[1.65] text-white/60">
                         <span class="mt-1.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-panel-strong)]">
                           <svg viewBox="0 0 20 20" class="h-3.5 w-3.5 text-[var(--accent-solid)]" fill="none" aria-hidden="true">
                             <path d="M15.2 5.8 8.5 12.5 4.8 8.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
@@ -226,8 +226,8 @@ const faqItems = [
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>COMPARE THE TIERS</Eyebrow>
-          <h2 class="mt-4 max-w-2xl">What each package includes.</h2>
-          <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+          <h2 class="section-heading mt-4">What each package includes.</h2>
+          <p class="section-copy mt-4 md:text-[17px]">
             Use this to compare the structure, support, and ownership before you book a call.
           </p>
         </FadeIn>
@@ -252,7 +252,7 @@ const faqItems = [
                     {tier.rows.map((row) => (
                       <div class="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
                         <p class="text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{row.label}</p>
-                        <p class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.value}</p>
+                      <p class="text-[15px] leading-[1.65] text-white/60">{row.value}</p>
                       </div>
                     ))}
                   </div>
@@ -286,9 +286,9 @@ const faqItems = [
                   <th scope="row" class="px-6 py-4 text-[15px] font-medium text-[var(--text-primary)]">
                     {row.label}
                   </th>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.starter}</td>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.growth}</td>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.custom}</td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.starter}</td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.growth}</td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.custom}</td>
                 </tr>
               ))}
             </tbody>
@@ -301,7 +301,7 @@ const faqItems = [
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>FAQ</Eyebrow>
-          <h2 class="mt-4 max-w-2xl">Answers before the call.</h2>
+          <h2 class="section-heading mt-4">Answers before the call.</h2>
         </FadeIn>
 
         <FadeIn client:load className="mt-8">
@@ -320,12 +320,12 @@ const faqItems = [
                     <span class="faq-toggle-vertical absolute h-3.5 w-px bg-current transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]" />
                   </span>
                 </summary>
-                <div class="faq-panel grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
+                <div class="faq-panel grid grid-rows-[0fr] opacity-0 translate-y-1 transition-[opacity,transform] duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
                   <div class="overflow-hidden">
                     <div class="px-6 pb-5 pt-1 md:pb-6">
-                      <p class="max-w-3xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[16px]">
-                        {item.answer}
-                      </p>
+                <p class="section-copy md:text-[16px]">
+                  {item.answer}
+                </p>
                     </div>
                   </div>
                 </div>
@@ -342,10 +342,10 @@ const faqItems = [
           <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
             <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
               <div class="max-w-3xl">
-                <h2 class="max-w-3xl">
+                <h2 class="section-heading">
                   Not sure which tier fits?
                 </h2>
-                <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+                <p class="section-copy mt-4 md:text-[17px]">
                   Start a project and we&apos;ll tell you exactly what the business needs. One business day, no pressure.
                 </p>
               </div>
@@ -364,6 +364,7 @@ const faqItems = [
     details[data-faq][open] .faq-panel {
       grid-template-rows: 1fr;
       opacity: 1;
+      transform: translateY(0);
     }
 
     details[data-faq][open] .faq-toggle-vertical {

@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --axiom-build-rev: '2026-04-04-motion-polish';
-    --axiom-base: #0A0C10;
+    --axiom-base: #0d0d0d;
     --axiom-elevated: #11151A;
     --axiom-surface: #181E25;
     --axiom-border: #29313C;
@@ -45,13 +45,15 @@
     scroll-behavior: smooth;
     scroll-padding-top: 7rem;
     overflow-x: hidden;
+    background-color: #0d0d0d;
   }
 
   body {
-    @apply bg-background font-body leading-[1.65];
+    @apply font-body leading-[1.65];
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    background-color: #0d0d0d;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     color: var(--text-secondary);
@@ -95,6 +97,11 @@
     line-height: 1.02;
     letter-spacing: -0.035em;
     font-family: var(--font-display);
+  }
+
+  h2 {
+    line-height: 1.1;
+    letter-spacing: -0.025em;
   }
 
   p {
@@ -285,10 +292,24 @@
 
   .section-eyebrow {
     @apply font-axiomMono uppercase;
-    color: var(--axiom-text-mute);
-    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
     line-height: 1;
+    font-weight: 500;
     letter-spacing: 0.2em;
+  }
+
+  .section-heading {
+    max-width: 34rem;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  .section-copy {
+    max-width: 32rem;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.6);
   }
 
 .axiom-container {
@@ -916,7 +937,7 @@
     transition:
       opacity var(--motion-duration-reveal) var(--motion-ease-decelerate),
       transform var(--motion-duration-reveal) var(--motion-ease-decelerate);
-    transition-delay: var(--reveal-delay, calc(var(--reveal-order, 0) * 60ms));
+    transition-delay: var(--reveal-delay, calc(var(--reveal-order, 0) * 100ms));
   }
 
   .reveal-on-scroll[data-reveal-variant='card'] {
@@ -944,10 +965,10 @@
 
   /* Stagger delays for grouped reveal children */
   .reveal-stagger > .reveal-on-scroll:nth-child(1) { transition-delay: 0ms; }
-  .reveal-stagger > .reveal-on-scroll:nth-child(2) { transition-delay: 80ms; }
-  .reveal-stagger > .reveal-on-scroll:nth-child(3) { transition-delay: 160ms; }
-  .reveal-stagger > .reveal-on-scroll:nth-child(4) { transition-delay: 240ms; }
-  .reveal-stagger > .reveal-on-scroll:nth-child(5) { transition-delay: 320ms; }
+  .reveal-stagger > .reveal-on-scroll:nth-child(2) { transition-delay: 100ms; }
+  .reveal-stagger > .reveal-on-scroll:nth-child(3) { transition-delay: 200ms; }
+  .reveal-stagger > .reveal-on-scroll:nth-child(4) { transition-delay: 300ms; }
+  .reveal-stagger > .reveal-on-scroll:nth-child(5) { transition-delay: 400ms; }
   .reveal-stagger > .reveal-on-scroll:nth-child(6) { transition-delay: 400ms; }
 
   .bento-hover {

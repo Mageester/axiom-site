@@ -46,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
             <BrandMark />
             <span className="text-[15px] font-semibold tracking-[0.18em] text-[var(--text-primary)]">AXIOM</span>
           </a>
-          <p className="max-w-sm text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+          <p className="max-w-sm text-sm italic leading-relaxed text-white/40">
             Websites built to convert. Not to decorate.
           </p>
           <p className="text-[13px] leading-[1.55] text-[var(--text-muted)]">© {year} Axiom Infrastructure.</p>

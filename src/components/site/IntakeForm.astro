@@ -1,4 +1,7 @@
-﻿---
+---
+import { Button } from '../ui/button';
+import { Eyebrow } from '../ui/Eyebrow';
+
 type Kind = 'contact' | 'project';
 
 type Props = {
@@ -29,82 +32,83 @@ const {
   noteLinkHref,
   noteLinkLabel,
   noteText,
-} = Astro.props;
+} = Astro.props as Props;
 
-const fieldLabelClass = 'axiom-eyebrow text-[10px] text-[var(--text-muted)] md:text-[11px]';
-const fieldHelpClass = 'text-[13px] leading-5 text-[var(--text-secondary)] md:text-xs';
-const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:text-xs';
+const fieldLabelClass = 'axiom-eyebrow text-[11px] font-medium uppercase tracking-[0.2em] text-white/40';
+const fieldHelpClass = 'text-[13px] leading-5 text-white/60 md:text-xs';
+const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-error)] md:text-xs';
 ---
 
-<article class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_56px_rgba(0,0,0,0.24)]">
+<article class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[var(--shadow-card-elevated)]">
   <div class="border-b border-[color:var(--hairline)] p-6 md:p-7 lg:p-8">
     <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
       <div>
-        <p class="section-eyebrow">{eyebrow}</p>
-        <h2 class="mt-2 text-[28px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">{title}</h2>
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <h2 class="section-heading mt-2 text-[28px] font-semibold text-[var(--text-primary)]">{title}</h2>
       </div>
-      <p class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">{description}</p>
+      <p class="section-copy">{description}</p>
     </div>
   </div>
 
   <div class="p-6 md:p-7 lg:p-8">
-    <div data-intake-success class="hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-2)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] md:p-7" role="status" aria-live="polite">
+    <div data-intake-success class="hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-2)] p-6 shadow-[var(--shadow-card)] md:p-7" role="status" aria-live="polite">
       <div class="flex items-start gap-4">
-        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#d4a48e]/30 bg-[#d4a48e]/12 text-[#d4a48e] shadow-[0_0_0_1px_rgba(212,164,142,0.08)]" aria-hidden="true">
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--accent-surface)] text-[var(--accent-solid)] shadow-[var(--shadow-brand-ring-soft)]" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </div>
         <div class="min-w-0 text-left">
-          <p class="section-eyebrow text-[var(--accent)]">{successTitle}</p>
+          <Eyebrow className="text-[var(--accent-solid)]">{successTitle}</Eyebrow>
           <h3 class="mt-2 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[var(--text-primary)]">Here&apos;s what happens next</h3>
-          <p class="mt-2 text-[15px] md:text-sm leading-7 text-[var(--text-secondary)]">{successText}</p>
+          <p class="section-copy mt-2">{successText}</p>
         </div>
       </div>
 
       <ol class="mt-6 space-y-3">
-        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-white/[0.03] p-4">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.04] text-[var(--accent)]" aria-hidden="true">
+        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay-strong)] text-[var(--accent-solid)]" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </div>
           <div class="min-w-0">
             <p class="font-medium text-[var(--text-primary)]">We review your submission</p>
-            <p class="mt-1 text-[15px] md:text-sm leading-6 text-[var(--text-secondary)]">Checked internally and marked complete.</p>
+            <p class="mt-1 text-[15px] leading-6 text-white/60">Checked internally and marked complete.</p>
           </div>
         </li>
-        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-white/[0.03] p-4">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.04] text-[var(--text-primary)]" aria-hidden="true">
-            <span class="font-axiomDisplay text-[1rem] leading-none">2</span>
+        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay-strong)] text-[var(--text-primary)]" aria-hidden="true">
+            <span class="font-display text-[1rem] leading-none">2</span>
           </div>
           <div class="min-w-0">
             <p class="font-medium text-[var(--text-primary)]">You get a reply within 1 business day with our initial assessment</p>
-            <p class="mt-1 text-[15px] md:text-sm leading-6 text-[var(--text-secondary)]">We&apos;ll review the scope, the site, and the fastest path forward.</p>
+            <p class="mt-1 text-[15px] leading-6 text-white/60">We&apos;ll review the scope, the site, and the fastest path forward.</p>
           </div>
         </li>
-        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-white/[0.03] p-4">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.04] text-[var(--text-primary)]" aria-hidden="true">
-            <span class="font-axiomDisplay text-[1rem] leading-none">3</span>
+        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay-strong)] text-[var(--text-primary)]" aria-hidden="true">
+            <span class="font-display text-[1rem] leading-none">3</span>
           </div>
           <div class="min-w-0">
             <p class="font-medium text-[var(--text-primary)]">If there&apos;s a fit, we scope and quote - no commitment</p>
-            <p class="mt-1 text-[15px] md:text-sm leading-6 text-[var(--text-secondary)]">You&apos;ll know the next step before making any decision.</p>
+            <p class="mt-1 text-[15px] leading-6 text-white/60">You&apos;ll know the next step before making any decision.</p>
           </div>
         </li>
       </ol>
 
       <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <a href="/work" class="btn-secondary btn-md inline-flex w-full justify-center sm:w-auto">
-          While you wait, see our work {'→'}
-        </a>
-        <button
+        <Button asChild variant="secondary" size="md" className="w-full sm:w-auto">
+          <a href="/work">While you wait, see our work →</a>
+        </Button>
+        <Button
           type="button"
+          variant="ghost"
+          className="px-0 sm:w-auto"
           data-intake-reset
-          class="inline-flex min-h-11 items-center justify-center text-[15px] md:text-sm text-[var(--text-secondary)] underline decoration-white/40 underline-offset-2 transition-colors hover:text-white sm:w-auto"
         >
           Send another message
-        </button>
+        </Button>
       </div>
     </div>
 
@@ -116,7 +120,12 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
       aria-busy="false"
       noValidate
     >
-      <div data-intake-alert class="hidden rounded-[var(--radius-component)] border border-red-400/35 bg-red-500/10 px-4 py-3 text-[15px] md:text-sm text-red-100" role="alert" aria-live="assertive"></div>
+      <div
+        data-intake-alert
+        class="hidden rounded-[var(--radius-card)] border border-[color:var(--error-border)] bg-[color:var(--error-surface)] px-4 py-3 text-[15px] text-[var(--error-text)] md:text-sm"
+        role="alert"
+        aria-live="assertive"
+      ></div>
 
       <fieldset class="contents">
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6">
@@ -246,9 +255,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
           <label for={`${kind}-details`} class={fieldLabelClass}>
             {kind === 'project' ? 'Brief project description' : 'Message'}
           </label>
-          <p id={`${kind}-details-helper`} class={fieldHelpClass}>
-            {helper}
-          </p>
+          <p id={`${kind}-details-helper`} class={fieldHelpClass}>{helper}</p>
           <textarea
             id={`${kind}-details`}
             name={kind === 'project' ? 'details' : 'message'}
@@ -273,10 +280,16 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
       <input type="hidden" name="source_path" value={Astro.url.pathname + Astro.url.search} />
 
       <div class="flex flex-col gap-4">
-        <button type="submit" class="btn-primary btn-lg w-full rounded-[1rem]">
+        <Button type="submit" size="lg" className="w-full rounded-[1rem]">
           {submitLabel}
-        </button>
-        <p class="text-[13px] leading-5 text-slate-400 md:text-sm">{noteText} <a href={noteLinkHref} class="underline decoration-white/40 underline-offset-2 transition-colors hover:text-white">{noteLinkLabel}</a>.</p>
+        </Button>
+        <p class="text-[13px] leading-5 text-[var(--text-secondary)] md:text-sm">
+          {noteText}{' '}
+          <a href={noteLinkHref} class="underline decoration-[color:var(--border-strong)] underline-offset-2 transition-colors hover:text-[var(--text-primary)]">
+            {noteLinkLabel}
+          </a>
+          .
+        </p>
       </div>
     </form>
   </div>
@@ -285,12 +298,12 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
 <style>
   [data-axiom-intake-form] {
     --intake-field-border: var(--hairline);
-    --intake-field-border-hover: rgba(255, 255, 255, 0.1);
-    --intake-field-border-focus: rgba(232, 162, 123, 0.42);
-    --intake-field-border-error: rgba(228, 130, 121, 0.42);
-    --intake-field-bg: var(--surface-2);
-    --intake-field-bg-hover: #1a1a20;
-    --intake-field-bg-focus: #1d1d24;
+    --intake-field-border-hover: var(--hairline-strong);
+    --intake-field-border-focus: var(--accent-border);
+    --intake-field-border-error: var(--text-error);
+    --intake-field-bg: var(--surface-input);
+    --intake-field-bg-hover: var(--surface-input-hover);
+    --intake-field-bg-focus: var(--surface-input-focus);
   }
 
   [data-axiom-intake-form] [data-intake-field] {
@@ -302,13 +315,11 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
     border: 1px solid var(--intake-field-border);
     background: var(--intake-field-bg);
     padding: 0.875rem 1rem;
-    color: #f2f4f7;
+    color: var(--text-primary);
     font-size: 16px;
     line-height: 1.5;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.03),
-      0 1px 0 rgba(255, 255, 255, 0.01);
-    caret-color: #f2f4f7;
+    box-shadow: var(--shadow-field-base);
+    caret-color: var(--text-primary);
   }
 
   [data-axiom-intake-form] [data-intake-field].data-intake-textarea {
@@ -319,7 +330,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
   }
 
   [data-axiom-intake-form] [data-intake-field]::placeholder {
-    color: rgba(148, 163, 184, 0.78);
+    color: var(--text-placeholder);
     opacity: 1;
   }
 
@@ -331,9 +342,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
   [data-axiom-intake-form] [data-intake-field]:focus-visible {
     border-color: var(--intake-field-border-focus);
     background: var(--intake-field-bg-focus);
-    box-shadow:
-      0 0 0 2px rgba(232, 162, 123, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    box-shadow: var(--shadow-field-focus), var(--shadow-field-base);
     outline: none;
   }
 
@@ -343,9 +352,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
 
   [data-axiom-intake-form] [data-intake-field][aria-invalid='true']:focus-visible {
     border-color: var(--intake-field-border-focus);
-    box-shadow:
-      0 0 0 3px rgba(212, 164, 142, 0.14),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    box-shadow: var(--shadow-field-focus-error), var(--shadow-field-base);
   }
 
   [data-axiom-intake-form] [data-intake-field]:disabled {
@@ -371,16 +378,14 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
   [data-axiom-intake-form] textarea:-webkit-autofill,
   [data-axiom-intake-form] textarea:-webkit-autofill:hover,
   [data-axiom-intake-form] textarea:-webkit-autofill:focus {
-    -webkit-text-fill-color: #f2f4f7;
-    caret-color: #f2f4f7;
-    box-shadow: 0 0 0px 1000px rgba(12, 17, 27, 0.98) inset;
+    -webkit-text-fill-color: var(--text-primary);
+    caret-color: var(--text-primary);
+    box-shadow: var(--shadow-field-autofill);
     transition: background-color 9999s ease-in-out 0s, color 9999s ease-in-out 0s;
   }
-
+  
   [data-axiom-intake-form] button[type='submit']:focus-visible {
-    box-shadow:
-      0 0 0 2px rgba(232, 162, 123, 0.2),
-      0 8px 24px rgba(0, 0, 0, 0.28);
+    box-shadow: var(--shadow-field-focus), var(--shadow-field-submit-focus);
   }
 </style>
 
@@ -634,4 +639,3 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[#E7B2A8] md:t
     initIntakeForms();
   }
 </script>
-
