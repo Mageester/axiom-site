@@ -14,7 +14,15 @@ const Footer: React.FC = () => {
       <div className="axiom-container py-10 md:py-12 lg:py-14">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_repeat(3,minmax(0,0.78fr))] lg:gap-10 xl:gap-12">
           <div className="max-w-md">
-            <p className="text-2xl font-black leading-[1.02] tracking-tight text-[#F2F4F7] md:text-4xl">AXIOM</p>
+            <img
+              src="/axiomtransparentlogo.webp"
+              alt="Axiom Infrastructure"
+              width={240}
+              height={63}
+              className="block h-10 w-auto select-none object-contain"
+              loading="lazy"
+              decoding="async"
+            />
             <p className="mt-3 max-w-md text-[15px] md:text-sm leading-6 text-slate-300">
               Built for businesses that are serious about growth.
             </p>

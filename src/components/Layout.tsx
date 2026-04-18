@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import FloatingAffordances from './FloatingAffordances';
-import ResponsiveImage from './ResponsiveImage';
-import { responsiveImages } from '../lib/responsiveImages';
 import { CTA } from '../lib/cta';
 import { shouldDisableHeavyMotion, shouldDisableRevealMotion } from '../lib/motionPreferences';
 
@@ -261,15 +259,13 @@ const Layout: React.FC<LayoutProps> = ({
                 aria-label="Axiom home"
                 className="inline-flex h-full origin-left items-center leading-none transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45"
               >
-                <ResponsiveImage
-                  source={responsiveImages.logoClear}
-                  sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
-                  alt="Axiom Infrastructure logo"
-                  width={515}
-                  height={163}
+                <img
+                  src="/axiomtransparentlogo.webp"
+                  alt="Axiom Infrastructure"
+                  width={240}
+                  height={63}
                   loading="eager"
-                  fetchPriority="high"
-                  className="block h-12 w-auto max-w-none object-contain object-left transition-opacity duration-200 hover:opacity-95 md:h-14 lg:h-[3.75rem]"
+                  className="block h-9 w-auto select-none object-contain sm:h-10"
                   decoding="async"
                 />
               </Link>
