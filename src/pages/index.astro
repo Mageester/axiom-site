@@ -8,6 +8,7 @@ import { HomepageStats } from '../components/site/HomepageStats';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import DrawIcon from '../components/ui/DrawIcon.astro';
 
 const industries = [
   { label: 'HVAC & CLIMATE', icon: 'hvac' },
@@ -62,21 +63,25 @@ const principles = [
     number: '01',
     title: 'Clarity over everything.',
     description: "If the offer isn't readable in three seconds, the site is already losing.",
+    icon: 'eye',
   },
   {
     number: '02',
     title: 'Proof before polish.',
     description: 'Real work, real reviews, real results - placed where they convert.',
+    icon: 'shield-check',
   },
   {
     number: '03',
     title: 'Performance is non-negotiable.',
     description: 'Sub-second loads or we fix it free. That is the floor.',
+    icon: 'bolt',
   },
   {
     number: '04',
     title: 'Full ownership, always.',
     description: 'You get the code. No subscriptions, no hostage hosting.',
+    icon: 'key',
   },
 ] as const;
 
@@ -109,18 +114,21 @@ const services = [
     description:
       'Designed to turn visitors into booked jobs. Clear offer, friction-free contact paths, and trust signals placed where they convert.',
     href: '/work',
+    icon: 'target',
   },
   {
     label: 'Authority Site',
     description:
       'Establishes credibility in competitive markets. Portfolio, reviews, and credentials structured to hold the room.',
     href: '/work',
+    icon: 'crown',
   },
   {
     label: 'Rebuild & Migrate',
     description:
       'Your current site stripped and rebuilt correctly - same domain, zero downtime, measurably faster on day one.',
     href: '/process',
+    icon: 'refresh',
   },
 ] as const;
 
@@ -366,6 +374,7 @@ const services = [
                 href={service.href}
                 class="group flex h-full flex-col gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-1)] p-6 transition-[border-color,background-color] duration-200 hover:border-[color:var(--hairline-strong)] hover:bg-[var(--surface-2)] sm:p-7"
               >
+                <DrawIcon name={service.icon} />
                 <p class="text-[19px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
                   {service.label}
                 </p>
@@ -396,6 +405,7 @@ const services = [
             <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
               <Card className="h-full p-0">
                 <div class="flex h-full flex-col p-6 sm:p-7">
+                  <DrawIcon name={principle.icon} className="mb-4" />
                   <Eyebrow className="text-[var(--text-muted)]">{principle.number}</Eyebrow>
                   <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
                     {principle.title}

@@ -159,6 +159,20 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
 
             observeReveal('[data-reveal], .section-block, main h1, main h2');
 
+            const observeIcons = () => {
+              const icons = document.querySelectorAll('[data-draw-icon]');
+              const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add('is-active');
+                    observer.unobserve(entry.target);
+                  }
+                });
+              }, { threshold: 0.15 });
+              icons.forEach((icon) => observer.observe(icon));
+            };
+            observeIcons();
+
             const animateCounter = (element) => {
               if (!(element instanceof HTMLElement)) return;
               if (element.dataset.motionAnimated === 'true') return;

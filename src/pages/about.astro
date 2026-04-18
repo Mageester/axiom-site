@@ -6,6 +6,7 @@ import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import DrawIcon from '../components/ui/DrawIcon.astro';
 
 const whatTheWorkDoes = [
   {
@@ -46,18 +47,21 @@ const principles = [
   {
     number: '01',
     title: 'Clarity over everything',
+    icon: 'eye',
     description:
       'If the offer is not readable in a few seconds, the site is already losing. Clarity comes before polish.',
   },
   {
     number: '02',
     title: 'Proof closes deals',
+    icon: 'shield-check',
     description:
       'Real work, real reviews, and real results should show up early. That is what moves a visitor toward a call.',
   },
   {
     number: '03',
     title: 'Slow sites lose jobs',
+    icon: 'bolt',
     description:
       'Most people are on a phone. If the site drags, they leave. We build for speed and verify it before launch.',
   },
@@ -207,6 +211,7 @@ const principles = [
             <FadeIn client:load delay={Math.min(index * 100, 400)}>
               <Card className="h-full p-0">
               <div class="flex h-full flex-col p-6 sm:p-7">
+                <DrawIcon name={principle.icon} className="mb-4" />
                 <Eyebrow>{principle.number}</Eyebrow>
                 <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
                   {principle.title}
