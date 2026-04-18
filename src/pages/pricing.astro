@@ -6,6 +6,10 @@ import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import DrawIcon from '../components/ui/DrawIcon.astro';
+
+const isCheckmark = (val: string) => 
+  ['Included', 'Full ownership', 'Included if needed', 'None', 'SEO foundation', 'SEO preservation', 'Included'].some(k => val.toLowerCase() === k.toLowerCase());
 
 const pricingTiers = [
   {
@@ -204,10 +208,8 @@ const faqItems = [
                   <ul class="mt-6 space-y-3">
                     {tier.features.map((feature) => (
                         <li class="flex items-start gap-3 text-[15px] leading-[1.65] text-white/60">
-                        <span class="mt-1.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-panel-strong)]">
-                          <svg viewBox="0 0 20 20" class="h-3.5 w-3.5 text-[var(--accent-solid)]" fill="none" aria-hidden="true">
-                            <path d="M15.2 5.8 8.5 12.5 4.8 8.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-                          </svg>
+                        <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-panel-strong)]">
+                          <DrawIcon name="check" size={12} className="text-[#C9A96E]" />
                         </span>
                         <span>{feature}</span>
                       </li>
@@ -257,7 +259,13 @@ const faqItems = [
                     {tier.rows.map((row) => (
                       <div class="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
                         <p class="text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{row.label}</p>
-                      <p class="text-[15px] leading-[1.65] text-white/60">{row.value}</p>
+                        <div class="text-[15px] leading-[1.65] text-white/60">
+                          {isCheckmark(row.value) ? (
+                            <DrawIcon name="check" size={16} className="text-[#C9A96E]" />
+                          ) : (
+                            row.value
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -290,13 +298,19 @@ const faqItems = [
             </thead>
             <tbody>
               {comparisonRows.map((row) => (
-                <tr class="border-b border-[color:var(--hairline)] odd:bg-[rgba(255,255,255,0.02)] last:border-b-0">
+                <tr class="border-b border-[rgba(255,255,255,0.06)] odd:bg-[#0f0f0f] even:bg-[#111111] last:border-b-0">
                   <th scope="row" class="px-6 py-4 text-[15px] font-medium text-[var(--text-primary)]">
                     {row.label}
                   </th>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60 bg-[linear-gradient(180deg,rgba(232,162,123,0.04),transparent)]">{row.growth}</td>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.signature}</td>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.rebuild}</td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60 bg-[linear-gradient(180deg,rgba(232,162,123,0.02),transparent)]">
+                    {isCheckmark(row.growth) ? <DrawIcon name="check" size={18} className="text-[#C9A96E]" /> : row.growth}
+                  </td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">
+                    {isCheckmark(row.signature) ? <DrawIcon name="check" size={18} className="text-[#C9A96E]" /> : row.signature}
+                  </td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">
+                    {isCheckmark(row.rebuild) ? <DrawIcon name="check" size={18} className="text-[#C9A96E]" /> : row.rebuild}
+                  </td>
                 </tr>
               ))}
             </tbody>
