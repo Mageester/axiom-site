@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { RefObject } from 'react';
 
 type FadeInResult<T extends HTMLElement> = {
@@ -8,16 +8,28 @@ type FadeInResult<T extends HTMLElement> = {
 
 export function useFadeInOnScroll<T extends HTMLElement>(): FadeInResult<T> {
   const ref = useRef<T | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
+  const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
+  useIsomorphicLayoutEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    if (typeof IntersectionObserver === 'undefined') {
+    if (
+      typeof IntersectionObserver === 'undefined' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       setIsVisible(true);
       return;
     }
+
+    const rect = element.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+    const visibleRatio = rect.height > 0 ? Math.max(0, visibleHeight / rect.height) : 0;
+
+    setIsVisible(visibleRatio >= 0.15);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -38,4 +50,3 @@ export function useFadeInOnScroll<T extends HTMLElement>(): FadeInResult<T> {
 
   return { ref, isVisible };
 }
-

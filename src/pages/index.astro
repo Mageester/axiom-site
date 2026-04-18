@@ -4,6 +4,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { HOME_JSON_LD, SITE_TAGLINE } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 import { FadeIn } from '../components/ui/FadeIn';
+import { HomepageStats } from '../components/site/HomepageStats';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
@@ -120,11 +121,6 @@ const services = [
   },
 ] as const;
 
-const stats = [
-  { value: '14', unit: 'DAYS', description: 'Typical turnaround from kickoff to live.' },
-  { value: '<1s', unit: 'LOAD', description: 'Performance floor, guaranteed in writing.' },
-  { value: '100%', unit: 'OWNERSHIP', description: 'Full code delivery. No subscriptions.' },
-] as const;
 ---
 
 <SiteLayout
@@ -371,27 +367,7 @@ const stats = [
       </div>
     </section>
 
-    <section class="border-t border-[color:var(--hairline)]">
-      <div class="axiom-container py-10 md:py-14">
-        <dl class="grid grid-cols-1 gap-10 sm:grid-cols-3">
-          {stats.map((stat, index) => (
-            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
-              <div class="flex flex-col gap-1">
-                <dd class="text-[52px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] md:text-[64px]">
-                  {stat.value}
-                </dd>
-                <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--accent-solid)]">
-                  {stat.unit}
-                </dt>
-                <p class="mt-2 text-[14px] leading-[1.6] text-[var(--text-secondary)]">
-                  {stat.description}
-                </p>
-              </div>
-            </FadeIn>
-          ))}
-        </dl>
-      </div>
-    </section>
+    <HomepageStats client:load />
 
     <section class="border-t border-[color:var(--hairline)] bg-[var(--surface-2)]">
       <div class="axiom-container py-12 md:py-16">
