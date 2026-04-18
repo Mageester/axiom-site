@@ -201,13 +201,19 @@ const ctaClasses =
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  import { whenDocumentReady } from '../../lib/domReady.js';
+
+  whenDocumentReady(document, () => {
     const toggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
     const panel = document.getElementById('mobile-nav-panel') as HTMLElement | null;
     const shell = document.getElementById('nav-shell') as HTMLElement | null;
 
+    if (!toggle || !panel) return;
+    if (toggle.dataset.navBound === 'true') return;
+
+    toggle.dataset.navBound = 'true';
+
     function openMenu() {
-      if (!panel || !toggle) return;
       panel.removeAttribute('inert');
       panel.classList.add('nav-open');
       panel.setAttribute('aria-hidden', 'false');
@@ -217,7 +223,6 @@ const ctaClasses =
     }
 
     function closeMenu() {
-      if (!panel || !toggle) return;
       panel.classList.remove('nav-open');
       panel.setAttribute('aria-hidden', 'true');
       toggle.setAttribute('aria-expanded', 'false');
@@ -227,13 +232,13 @@ const ctaClasses =
       panel.addEventListener('transitionend', () => panel.setAttribute('inert', ''), { once: true });
     }
 
-    toggle?.addEventListener('click', () => {
+    toggle.addEventListener('click', () => {
       toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
     });
 
     document.getElementById('nav-close')?.addEventListener('click', closeMenu);
 
-    panel?.querySelectorAll('[data-nav-close]').forEach((el) => {
+    panel.querySelectorAll('[data-nav-close]').forEach((el) => {
       el.addEventListener('click', closeMenu);
     });
 
