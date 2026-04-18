@@ -33,13 +33,14 @@ const processSteps = [
     title: 'Launch',
     timelineDescription:
       'We run launch checks, connect the domain, and hand over the site with a clear technical finish. The result is predictable, not improvised.',
-    bullets: [
-      { title: 'Pages to build', detail: 'Which pages matter most right now.' },
-      { title: 'Proof to surface', detail: 'Reviews, photos, and past work that should show up early.' },
-      { title: 'Quote and contact paths', detail: 'Where each call-to-action should go.' },
-      { title: 'Domain and redirects', detail: 'Final technical handoff, redirects, and live launch checks.' },
-    ] as const,
   },
+] as const;
+
+const launchChecklist = [
+  { title: 'Pages to build', detail: 'Which pages matter most right now.' },
+  { title: 'Proof to surface', detail: 'Reviews, photos, and past work that should show up early.' },
+  { title: 'Quote and contact paths', detail: 'Where each call-to-action should go.' },
+  { title: 'Domain and redirects', detail: 'Final technical handoff, redirects, and live launch checks.' },
 ] as const;
 ---
 
@@ -67,8 +68,10 @@ const processSteps = [
       <div class="axiom-container">
         <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 xl:items-start">
           {processSteps.map((step, index) => (
-            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
-              <Card className="p-0">
+            <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
+              <div
+                className="group h-full rounded-[var(--radius-card)] border border-transparent bg-[var(--surface-1)] shadow-[var(--shadow-card)] transition-[transform,border-color,box-shadow,background-color] duration-200 ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:border-[color:rgba(201,122,78,0.2)] motion-safe:hover:shadow-[0_18px_40px_rgba(201,122,78,0.08)] motion-safe:hover:bg-[var(--surface-2)]"
+              >
                 <div class="flex flex-col p-6 sm:p-7">
                   <p class="font-axiomMono text-[clamp(2.6rem,4vw,3.25rem)] leading-none tracking-[-0.06em] text-[var(--accent-solid)]">
                     {step.dayLabel}
@@ -79,31 +82,32 @@ const processSteps = [
                   <p class="section-copy mt-3 text-[14px]">
                     {step.timelineDescription}
                   </p>
-
-                  {step.bullets.length > 0 ? (
-                    <div class="mt-4 border-t border-[color:var(--hairline)] pt-4">
-                      <p class="font-axiomMono text-[11px] uppercase tracking-[0.12em] text-[var(--text-muted)]">
-                        Launch checklist
-                      </p>
-                      <ul class="mt-4 space-y-3">
-                        {step.bullets.map((item) => (
-                          <li class="flex items-start gap-3">
-                            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-solid)]" />
-                            <div>
-                              <p class="text-[14px] font-semibold leading-[1.45] text-white">
-                                {item.title}
-                              </p>
-                              <p class="mt-1 text-[13px] leading-[1.6] text-white/60">
-                                {item.detail}
-                              </p>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
                 </div>
-              </Card>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="axiom-container">
+        <FadeIn client:load className="max-w-3xl">
+          <Eyebrow>LAUNCH CHECKLIST</Eyebrow>
+          <h2 class="section-heading mt-4">What launch day actually looks like.</h2>
+        </FadeIn>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {launchChecklist.map((item, index) => (
+            <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
+              <div class="h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
+                <p class="text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                  {item.title}
+                </p>
+                <p class="section-copy mt-3 text-[14px]">
+                  {item.detail}
+                </p>
+              </div>
             </FadeIn>
           ))}
         </div>
