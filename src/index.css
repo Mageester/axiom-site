@@ -352,6 +352,7 @@
   .btn-primary {
     position: relative;
     overflow: hidden;
+    isolation: isolate;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -390,6 +391,21 @@
     opacity: 0;
     transition: opacity var(--motion-duration-fast) ease;
     pointer-events: none;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle 200px at var(--btn-glow-x, 50%) var(--btn-glow-y, 50%),
+      rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.25) 0%,
+      transparent 68%
+    );
+    opacity: var(--btn-glow-opacity, 0);
+    transition: opacity 400ms ease-out;
+    pointer-events: none;
+    mix-blend-mode: screen;
   }
 
   .btn-primary:hover {

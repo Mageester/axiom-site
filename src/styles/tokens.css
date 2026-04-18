@@ -58,7 +58,7 @@
 
   --transition-standard: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --reveal-duration: 600ms;
-  --reveal-distance: 16px;
+  --reveal-distance: 20px;
   --reveal-stagger: 80ms;
 
   --font-display: 'Geist Sans', system-ui, sans-serif;

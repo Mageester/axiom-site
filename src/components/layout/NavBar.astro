@@ -36,17 +36,15 @@ const ctaClasses =
     class="axiom-container flex items-center justify-between rounded-full border border-[color:var(--hairline)] px-4 py-3.5 backdrop-blur-[20px] transition-[border-color,background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]"
     style="background-color: var(--nav-shell-bg); box-shadow: var(--shadow-nav-rest);"
   >
-    <a href="/" class="flex items-center" aria-label="Axiom Infrastructure home">
-      <img
-        src="/axiomtransparentlogo.webp"
-        alt="Axiom"
-        width="240"
-        height="63"
-        class="block h-9 w-auto select-none object-contain sm:h-10"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
-      />
+    <a href="/" class="site-logo flex items-center" aria-label="Axiom Infrastructure home">
+      <span class="inline-flex items-center gap-2 leading-none">
+        <svg viewBox="0 0 120 40" aria-hidden="true" class="site-logo-mark h-9 w-9 shrink-0 sm:h-10 sm:w-10">
+          <path d="M20 5L5 35h6l3-6h12l3 6h6L20 5zm-3 15l4-8 4 8h-8z" fill="var(--accent-solid)" />
+        </svg>
+        <span class="site-logo-wordmark font-axiomDisplay text-[1.45rem] font-semibold tracking-[-0.06em] text-[var(--text-primary)] sm:text-[1.58rem]">
+          AXIOM
+        </span>
+      </span>
     </a>
 
     <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -54,7 +52,7 @@ const ctaClasses =
         <a
           href={link.href}
           aria-current={isActive(link.href) ? 'page' : undefined}
-          class={`text-[14px] font-medium transition-[color,opacity] duration-200 hover:text-[var(--text-primary)] ${
+          class={`motion-link-accent text-[14px] font-medium transition-[color,opacity] duration-200 hover:text-[var(--text-primary)] ${
             isActive(link.href) ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'
           }`}
         >

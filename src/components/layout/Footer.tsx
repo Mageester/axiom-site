@@ -24,7 +24,7 @@ const isActive = (pathname: string, href: string) => pathname === href || pathna
 
 export const Footer: React.FC<FooterProps> = ({ pathname }) => {
   const year = new Date().getFullYear();
-  const footerLinkClass = 'text-[15px] text-white/40 transition-colors duration-200 hover:text-white/80';
+  const footerLinkClass = 'motion-link-accent text-[15px] text-white/40 transition-colors duration-200 hover:text-white/80';
 
   return (
     <footer className="border-t border-[color:var(--hairline)] px-6 py-20 md:px-12">
