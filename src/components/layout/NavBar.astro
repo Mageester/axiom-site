@@ -99,6 +99,7 @@ const ctaClasses =
   aria-modal="true"
   aria-label="Site navigation"
   aria-hidden="true"
+  inert
   class="fixed inset-0 z-40 px-6 py-8 backdrop-blur-[24px] md:hidden"
   style="background-color: var(--nav-panel-bg);"
 >
@@ -154,6 +155,12 @@ const ctaClasses =
 </div>
 
 <style>
+  /* Eliminate 300ms iOS tap delay on nav buttons */
+  #nav-toggle,
+  #nav-close {
+    touch-action: manipulation;
+  }
+
   /* Panel visibility - toggled by JS adding/removing .nav-open */
   #mobile-nav-panel {
     visibility: hidden;
@@ -201,6 +208,7 @@ const ctaClasses =
 
     function openMenu() {
       if (!panel || !toggle) return;
+      panel.removeAttribute('inert');
       panel.classList.add('nav-open');
       panel.setAttribute('aria-hidden', 'false');
       toggle.setAttribute('aria-expanded', 'true');
@@ -215,6 +223,8 @@ const ctaClasses =
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', 'Open navigation');
       document.body.style.overflow = '';
+      // Restore inert after transition so backdrop-blur doesn't block iOS touches
+      panel.addEventListener('transitionend', () => panel.setAttribute('inert', ''), { once: true });
     }
 
     toggle?.addEventListener('click', () => {
