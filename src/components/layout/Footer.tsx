@@ -22,18 +22,6 @@ const LEGAL = [
 
 const isActive = (pathname: string, href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
-const BrandMark = () => (
-  <span
-    aria-hidden="true"
-    className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)]"
-  >
-    <span
-      className="h-3.5 w-3.5 rounded-[4px]"
-      style={{ background: 'var(--accent-solid)', boxShadow: 'var(--shadow-brand-ring)' }}
-    />
-  </span>
-);
-
 export const Footer: React.FC<FooterProps> = ({ pathname }) => {
   const year = new Date().getFullYear();
   const footerLinkClass = 'text-[15px] text-white/40 transition-colors duration-200 hover:text-white/80';
@@ -42,9 +30,17 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
     <footer className="border-t border-[color:var(--hairline)] px-6 py-20 md:px-12">
       <div className="axiom-container grid gap-12 md:grid-cols-2 xl:grid-cols-4">
         <div className="space-y-6">
-          <a href="/" className="flex items-center gap-3">
-            <BrandMark />
-            <span className="text-[15px] font-semibold tracking-[0.18em] text-[var(--text-primary)]">AXIOM</span>
+          <a href="/" className="inline-flex items-center" aria-label="Axiom Infrastructure home">
+            <img
+              src="/axiomtransparentlogo.webp"
+              alt="Axiom Infrastructure"
+              width={240}
+              height={63}
+              className="block h-10 w-auto select-none object-contain"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
           </a>
           <p className="max-w-sm text-sm italic leading-relaxed text-white/40">
             Websites built to convert. Not to decorate.
