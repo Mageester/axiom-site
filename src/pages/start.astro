@@ -1,5 +1,6 @@
 ---
 import IntakeForm from '../components/site/IntakeForm.astro';
+import { FadeIn } from '../components/ui/FadeIn';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -8,9 +9,9 @@ import { SEO_ROUTES } from '../lib/seo';
 ---
 
 <SiteLayout title={SEO_ROUTES.start.title} description={SEO_ROUTES.start.description} canonicalPath={SEO_ROUTES.start.canonicalPath}>
-  <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
+  <main id="main-content" tabindex="-1" class="-mt-28 pb-24 md:-mt-32 md:pb-32">
     <section class="axiom-container pt-12 md:pt-20">
-      <div class="max-w-3xl">
+      <FadeIn client:load className="max-w-3xl">
         <Eyebrow>START A PROJECT</Eyebrow>
         <h1 class="mt-4 max-w-4xl">
           Tell us what the business needs.
@@ -21,7 +22,7 @@ import { SEO_ROUTES } from '../lib/seo';
 
         <div class="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
           <span>ONE SHORT FORM</span>
-          <span aria-hidden="true" class="text-[var(--text-muted)]">·</span>
+          <span aria-hidden="true" class="text-[var(--text-muted)]">Â·</span>
           <span>REPLY WITHIN ONE BUSINESS DAY</span>
         </div>
 
@@ -30,12 +31,12 @@ import { SEO_ROUTES } from '../lib/seo';
             <a href="#project-intake">Start a project</a>
           </Button>
         </div>
-      </div>
+      </FadeIn>
     </section>
 
     <section class="page-section">
       <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
-        <div id="project-intake" class="scroll-mt-32">
+        <FadeIn client:load as="div" id="project-intake" className="scroll-mt-32">
           <IntakeForm
             kind="project"
             endpoint="/api/intake"
@@ -43,31 +44,33 @@ import { SEO_ROUTES } from '../lib/seo';
             eyebrow="PROJECT INTAKE"
             description="Tell us what the business does, what&apos;s broken about the current site, and when you want to move."
             helper="Three short lines is enough. What does the business do, what is wrong with the current site, and when do you want to move?"
-            submitLabel="Send it →"
+            submitLabel="Send it â†’"
             successTitle="Received."
             successText="Received. We will review and reply within one business day."
             noteLinkHref="/contact"
             noteLinkLabel="contact page"
             noteText="Need a question instead? Use the"
           />
-        </div>
+        </FadeIn>
 
-        <Card className="self-start p-0 xl:sticky xl:top-28">
-          <div class="p-6 sm:p-7">
-            <Eyebrow>GENERAL QUESTIONS</Eyebrow>
-            <p class="mt-4 max-w-md text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-              Use the contact page for a quick note or anything that is not a project.
-            </p>
-            <div class="mt-6">
-              <a
-                href="/contact"
-                class="inline-flex items-center text-[15px] font-medium text-[var(--text-primary)] underline decoration-white/40 underline-offset-4 transition-[color,opacity] duration-200 hover:text-white"
-              >
-                Contact page →
-              </a>
+        <FadeIn client:load as="div">
+          <Card className="self-start p-0 xl:sticky xl:top-28">
+            <div class="p-6 sm:p-7">
+              <Eyebrow>GENERAL QUESTIONS</Eyebrow>
+              <p class="mt-4 max-w-md text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                Use the contact page for a quick note or anything that is not a project.
+              </p>
+              <div class="mt-6">
+                <a
+                  href="/contact"
+                  class="inline-flex items-center text-[15px] font-medium text-[var(--text-primary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-[color,opacity] duration-200 hover:text-[var(--text-primary)]"
+                >
+                  Contact page â†’ 
+                </a>
+              </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </FadeIn>
       </div>
     </section>
   </main>

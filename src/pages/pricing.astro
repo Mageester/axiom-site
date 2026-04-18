@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, PRICING_JSON_LD } from '../lib/seo';
+import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
@@ -155,65 +156,67 @@ const faqItems = [
 <SiteLayout title={SEO_ROUTES.pricing.title} description={SEO_ROUTES.pricing.description} canonicalPath="/pricing" schema={PRICING_JSON_LD}>
   <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
     <section class="axiom-container pt-12 md:pt-20">
-      <div class="max-w-3xl">
+      <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PRICING</Eyebrow>
         <h1 class="mt-4">One investment. Full ownership.</h1>
         <p class="mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
           No monthly fees. No recurring charges. You own everything we build. Three tiers based on what the business actually needs.
         </p>
-      </div>
+      </FadeIn>
     </section>
 
     <section class="page-section">
       <div class="axiom-container">
         <div class="grid gap-5 lg:grid-cols-3">
           {pricingTiers.map((tier, index) => (
-            <Card
-              padding="none"
-              hoverLift
-              className={`relative overflow-hidden ${tier.highlighted ? 'border-[color:rgba(232,162,123,0.28)] bg-[var(--surface-2)] shadow-[0_0_0_1px_rgba(232,162,123,0.14),0_24px_56px_rgba(200,122,87,0.12)]' : 'bg-[var(--surface-1)]'}`}
-            >
-              {tier.highlighted ? (
-                <div
-                  aria-hidden="true"
-                  class="pointer-events-none absolute inset-0"
-                  style="
-                    background:
-                      radial-gradient(circle at top, rgba(232, 162, 123, 0.12) 0%, transparent 42%),
-                      linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 24%);
-                  "
-                />
-              ) : null}
+            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+              <Card
+                padding="none"
+                hoverLift
+                className={`relative overflow-hidden ${tier.highlighted ? 'border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[var(--shadow-card-highlight)]' : 'bg-[var(--surface-1)]'}`}
+              >
+                {tier.highlighted ? (
+                  <div
+                    aria-hidden="true"
+                    class="pointer-events-none absolute inset-0"
+                    style="
+                      background:
+                        radial-gradient(circle at top, var(--accent-surface-strong) 0%, transparent 42%),
+                        linear-gradient(180deg, var(--surface-overlay-strong) 0%, transparent 24%);
+                    "
+                  />
+                ) : null}
 
-              <div class="relative flex h-full flex-col p-6 sm:p-7">
-                {tier.highlighted ? <Eyebrow className="text-[var(--accent)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
+                <div class="relative flex h-full flex-col p-6 sm:p-7">
+                  {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
 
-                {!tier.highlighted ? <p class="mt-2 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]">{tier.name}</p> : null}
+                  {!tier.highlighted ? <p class="mt-2 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{tier.name}</p> : null}
 
-                <p class="mt-5 text-[56px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)]">
-                  {tier.price}
-                </p>
+                  <p class="mt-5 text-[56px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)]">
+                    {tier.price}
+                  </p>
 
-                <ul class="mt-6 space-y-3">
-                  {tier.features.map((feature) => (
-                    <li class="flex items-start gap-3 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-                      <span class="mt-1.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.02]">
-                        <svg viewBox="0 0 20 20" class="h-3.5 w-3.5 text-[var(--accent)]" fill="none" aria-hidden="true">
-                          <path d="M15.2 5.8 8.5 12.5 4.8 8.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                      </span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <ul class="mt-6 space-y-3">
+                    {tier.features.map((feature) => (
+                      <li class="flex items-start gap-3 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                        <span class="mt-1.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-panel-strong)]">
+                          <svg viewBox="0 0 20 20" class="h-3.5 w-3.5 text-[var(--accent-solid)]" fill="none" aria-hidden="true">
+                            <path d="M15.2 5.8 8.5 12.5 4.8 8.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                <div class="mt-auto pt-8">
-                  <Button asChild variant={tier.variant} className="w-full">
-                    <a href={tier.href}>{tier.cta}</a>
-                  </Button>
+                  <div class="mt-auto pt-8">
+                    <Button asChild variant={tier.variant} className="w-full">
+                      <a href={tier.href}>{tier.cta}</a>
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -221,56 +224,58 @@ const faqItems = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="max-w-3xl">
+        <FadeIn client:load className="max-w-3xl">
           <Eyebrow>COMPARE THE TIERS</Eyebrow>
           <h2 class="mt-4 max-w-2xl">What each package includes.</h2>
           <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
             Use this to compare the structure, support, and ownership before you book a call.
           </p>
-        </div>
+        </FadeIn>
 
         <div class="mt-8 grid gap-4 md:hidden">
-          {mobileComparisonTiers.map((tier) => (
-            <Card
-              padding="none"
-              className={`overflow-hidden ${tier.highlighted ? 'border-[color:rgba(232,162,123,0.28)] bg-[var(--surface-2)] shadow-[0_0_0_1px_rgba(232,162,123,0.12)]' : 'bg-[var(--surface-1)]'}`}
-            >
-              <div class="p-6">
-                {tier.highlighted ? <Eyebrow className="text-[var(--accent)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
-                <div class="mt-4 flex items-end justify-between gap-4">
-                  <p class="text-[2.75rem] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)]">{tier.price}</p>
-                  <Button asChild variant={tier.variant} size="sm">
-                    <a href={tier.href}>{tier.cta}</a>
-                  </Button>
-                </div>
+          {mobileComparisonTiers.map((tier, index) => (
+            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+              <Card
+                padding="none"
+                className={`overflow-hidden ${tier.highlighted ? 'border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[0_0_0_1px_var(--accent-shadow-medium)]' : 'bg-[var(--surface-1)]'}`}
+              >
+                <div class="p-6">
+                  {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
+                  <div class="mt-4 flex items-end justify-between gap-4">
+                    <p class="text-[2.75rem] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)]">{tier.price}</p>
+                    <Button asChild variant={tier.variant} size="sm">
+                      <a href={tier.href}>{tier.cta}</a>
+                    </Button>
+                  </div>
 
-                <div class="mt-6 space-y-3 border-t border-[color:var(--hairline)] pt-5">
-                  {tier.rows.map((row) => (
-                    <div class="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
-                      <p class="text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]">{row.label}</p>
-                      <p class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.value}</p>
-                    </div>
-                  ))}
+                  <div class="mt-6 space-y-3 border-t border-[color:var(--hairline)] pt-5">
+                    {tier.rows.map((row) => (
+                      <div class="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
+                        <p class="text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{row.label}</p>
+                        <p class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">{row.value}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </FadeIn>
           ))}
         </div>
 
-        <div class="mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
+        <FadeIn client:load as="div" className="mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
           <table class="min-w-full border-collapse text-left">
-            <thead class="sticky top-24 z-20 bg-[rgba(10,10,12,0.96)] backdrop-blur-sm">
+            <thead class="sticky top-24 z-20 bg-[color:var(--nav-panel-bg)] backdrop-blur-sm">
               <tr class="border-b border-[color:var(--hairline)]">
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   Feature
                 </th>
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   Starter
                 </th>
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   Growth
                 </th>
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   Custom
                 </th>
               </tr>
@@ -294,12 +299,12 @@ const faqItems = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="max-w-3xl">
+        <FadeIn client:load className="max-w-3xl">
           <Eyebrow>FAQ</Eyebrow>
           <h2 class="mt-4 max-w-2xl">Answers before the call.</h2>
-        </div>
+        </FadeIn>
 
-        <div class="mt-8">
+        <FadeIn client:load className="mt-8">
           <div class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)]">
             {faqItems.map((item, index) => (
               <details class="group" data-faq>
@@ -308,7 +313,7 @@ const faqItems = [
                     {item.question}
                   </span>
                   <span
-                    class="faq-toggle relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.03] text-[var(--text-primary)] transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    class="faq-toggle relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
                     aria-hidden="true"
                   >
                     <span class="faq-toggle-line absolute h-px w-3.5 bg-current transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]" />
@@ -327,28 +332,30 @@ const faqItems = [
               </details>
             ))}
           </div>
-        </div>
+        </FadeIn>
       </div>
     </section>
 
     <section class="page-section">
       <div class="axiom-container">
-        <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
-          <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
-            <div class="max-w-3xl">
-              <h2 class="max-w-3xl">
-                Not sure which tier fits?
-              </h2>
-              <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
-                Start a project and we&apos;ll tell you exactly what the business needs. One business day, no pressure.
-              </p>
-            </div>
+        <FadeIn client:load as="div">
+          <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
+            <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
+              <div class="max-w-3xl">
+                <h2 class="max-w-3xl">
+                  Not sure which tier fits?
+                </h2>
+                <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+                  Start a project and we&apos;ll tell you exactly what the business needs. One business day, no pressure.
+                </p>
+              </div>
 
-            <Button asChild size="lg" className="w-full lg:w-auto">
-              <a href={CTA_PATHS.startProject}>Start a project</a>
-            </Button>
-          </div>
-        </Card>
+              <Button asChild size="lg" className="w-full lg:w-auto">
+                <a href={CTA_PATHS.startProject}>Start a project</a>
+              </Button>
+            </div>
+          </Card>
+        </FadeIn>
       </div>
     </section>
   </main>
@@ -364,7 +371,7 @@ const faqItems = [
     }
 
     details[data-faq][open] .faq-toggle {
-      background: rgba(255, 255, 255, 0.06);
+      background: var(--surface-overlay-press);
     }
 
     details[data-faq] summary::-webkit-details-marker {

@@ -1,4 +1,5 @@
 ---
+import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
@@ -9,28 +10,30 @@ import { SEO_ROUTES } from '../lib/seo';
 <SiteLayout title={SEO_ROUTES.notFound.title} description={SEO_ROUTES.notFound.description} canonicalPath="/404" noIndex={true}>
   <main id="main-content" tabindex="-1" class="axiom-container flex min-h-[calc(100svh-6rem)] items-center py-24 md:py-32">
     <section class="w-full">
-      <Card padding="none" className="mx-auto w-full max-w-[640px]">
-        <div class="p-8 sm:p-12">
-          <div class="max-w-xl">
-            <Eyebrow>404 · NOT FOUND</Eyebrow>
-            <h1 class="mt-4">
-              This page doesn't exist yet.
-            </h1>
-            <p class="mt-4 max-w-lg text-[15px] leading-[1.7] text-[var(--text-secondary)]">
-              Use the main links to continue, or head back home.
-            </p>
+      <FadeIn client:load as="div">
+        <Card padding="none" className="mx-auto w-full max-w-[640px]">
+          <div class="p-8 sm:p-12">
+            <div class="max-w-xl">
+              <Eyebrow>404 Â· NOT FOUND</Eyebrow>
+              <h1 class="mt-4">
+                This page doesn't exist yet.
+              </h1>
+              <p class="mt-4 max-w-lg text-[15px] leading-[1.7] text-[var(--text-secondary)]">
+                Use the main links to continue, or head back home.
+              </p>
 
-            <div class="mt-10 grid grid-cols-2 gap-3">
-              <Button asChild size="lg" className="w-full">
-                <a href="/">Home</a>
-              </Button>
-              <Button asChild variant="ghost" size="lg" className="w-full">
-                <a href="/work">See the work</a>
-              </Button>
+              <div class="mt-10 grid grid-cols-2 gap-3">
+                <Button asChild size="lg" className="w-full">
+                  <a href="/">Home</a>
+                </Button>
+                <Button asChild variant="ghost" size="lg" className="w-full">
+                  <a href="/work">See the work</a>
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+      </FadeIn>
     </section>
   </main>
 </SiteLayout>

@@ -25,17 +25,18 @@ const isActive = (pathname: string, href: string) => pathname === href || pathna
 const BrandMark = () => (
   <span
     aria-hidden="true"
-    className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.03]"
+    className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)]"
   >
     <span
       className="h-3.5 w-3.5 rounded-[4px]"
-      style={{ background: 'var(--accent)', boxShadow: '0 0 0 5px var(--accent-glow)' }}
+      style={{ background: 'var(--accent-solid)', boxShadow: 'var(--shadow-brand-ring)' }}
     />
   </span>
 );
 
 export const Footer: React.FC<FooterProps> = ({ pathname }) => {
   const year = new Date().getFullYear();
+  const footerLinkClass = 'text-[15px] text-white/40 transition-colors duration-200 hover:text-white/80';
 
   return (
     <footer className="border-t border-[color:var(--hairline)] px-6 py-20 md:px-12">
@@ -59,8 +60,8 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
                 <a
                   href={link.href}
                   className={cn(
-                    'text-[15px] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]',
-                    isActive(pathname, link.href) && 'text-[var(--text-primary)]'
+                    footerLinkClass,
+                    isActive(pathname, link.href) && 'text-white/80'
                   )}
                 >
                   {link.label}
@@ -74,17 +75,17 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
           <Eyebrow>Contact</Eyebrow>
           <ul className="space-y-3">
             <li>
-              <a href="mailto:contact@getaxiom.ca" className="text-[15px] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]">
+              <a href="mailto:contact@getaxiom.ca" className={footerLinkClass}>
                 contact@getaxiom.ca
               </a>
             </li>
             <li>
-              <a href="tel:+12267531833" className="text-[15px] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]">
+              <a href="tel:+12267531833" className={footerLinkClass}>
                 (226) 753-1833
               </a>
             </li>
             <li>
-              <Button asChild variant="ghost" className="px-0 text-[15px]">
+              <Button asChild className="text-[15px]">
                 <a href="/start-a-project">Start a project</a>
               </Button>
             </li>
@@ -99,8 +100,8 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
                 <a
                   href={link.href}
                   className={cn(
-                    'text-[15px] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]',
-                    isActive(pathname, link.href) && 'text-[var(--text-primary)]'
+                    footerLinkClass,
+                    isActive(pathname, link.href) && 'text-white/80'
                   )}
                 >
                   {link.label}

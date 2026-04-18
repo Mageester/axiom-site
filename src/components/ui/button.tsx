@@ -13,9 +13,9 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'border border-transparent bg-[var(--accent)] text-[#0A0A0C] shadow-[0_14px_36px_rgba(0,0,0,0.24),0_0_0_1px_rgba(255,255,255,0.04)] hover:brightness-110',
+    'border border-transparent shadow-[var(--shadow-button-primary)] hover:brightness-110 motion-safe:hover:scale-[1.03] motion-safe:hover:shadow-[var(--shadow-button-primary-hover),0_0_20px_rgba(210,160,100,0.3)]',
   secondary:
-    'border border-[color:var(--hairline)] bg-white/[0.02] text-[var(--text-primary)] hover:border-white/10 hover:bg-white/[0.045] hover:brightness-105',
+    'border border-[color:var(--hairline)] bg-[color:var(--surface-panel)] text-[var(--text-primary)] hover:border-[color:var(--hairline-strong)] hover:bg-[color:var(--surface-overlay)] hover:brightness-105',
   ghost:
     'border border-transparent bg-transparent text-[var(--text-primary)] underline decoration-transparent decoration-1 underline-offset-4 hover:decoration-current hover:brightness-110',
 };
@@ -27,18 +27,22 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-normal transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-glow)] focus-visible:ring-offset-0 active:scale-[0.98]';
+  'inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-normal motion-safe:transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] motion-safe:duration-200 motion-safe:ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 motion-safe:active:scale-[0.98]';
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', asChild = false, type = 'button', children, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', asChild = false, type = 'button', children, style, ...props }, ref) => {
     const classes = cn(baseClasses, variantClasses[variant], sizeClasses[size], className);
+    const mergedStyle =
+      variant === 'primary'
+        ? { background: 'var(--accent)', color: 'var(--text-on-accent)', ...(style ?? {}) }
+        : style;
 
     if (asChild && React.isValidElement(children)) {
-      return <Slot className={classes}>{children}</Slot>;
+      return <Slot className={classes} style={mergedStyle}>{children}</Slot>;
     }
 
     return (
-      <button ref={ref} className={classes} type={type} {...props}>
+      <button ref={ref} className={classes} style={mergedStyle} type={type} {...props}>
         {children}
       </button>
     );

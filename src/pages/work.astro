@@ -3,14 +3,14 @@ import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
+import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
-import type { CSSProperties } from 'react';
 
 const featuredBuilds = [
   {
-    eyebrow: 'BUILD CONCEPT · RESTAURANT & HOSPITALITY',
+    eyebrow: 'BUILD CONCEPT Â· RESTAURANT & HOSPITALITY',
     title: 'A reservation site that does not hide the booking.',
     originalWeakness: 'Guests had to hunt for the booking link, and the menu was hard to read on phones.',
     axiomChanged: 'The reservation path stays visible and the menu reads cleanly on mobile.',
@@ -22,7 +22,7 @@ const featuredBuilds = [
     href: 'https://restaurant.getaxiom.ca',
   },
   {
-    eyebrow: 'BUILD CONCEPT · LANDSCAPING & OUTDOOR SERVICES',
+    eyebrow: 'BUILD CONCEPT Â· LANDSCAPING & OUTDOOR SERVICES',
     title: 'A landscaping site that puts the work in front.',
     originalWeakness: 'Past work was buried, and quote requests took too many clicks.',
     axiomChanged: 'Project photos come forward and the quote path is shorter.',
@@ -33,7 +33,7 @@ const featuredBuilds = [
     href: 'https://landscaping.getaxiom.ca',
   },
   {
-    eyebrow: 'BUILD CONCEPT · ROOFING & EXTERIORS',
+    eyebrow: 'BUILD CONCEPT Â· ROOFING & EXTERIORS',
     title: 'A roofing site that separates urgent from planned.',
     originalWeakness: 'Storm traffic needs a fast path to inspection and estimate requests.',
     axiomChanged: 'Urgent calls and planned estimates have separate paths.',
@@ -74,9 +74,9 @@ const conceptProjects = [
 ---
 
 <SiteLayout title={SEO_ROUTES.work.title} description={SEO_ROUTES.work.description} canonicalPath="/work">
-  <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
+  <main id="main-content" tabindex="-1" class="-mt-28 pb-24 md:-mt-32 md:pb-32">
     <section class="axiom-container pt-12 md:pt-20">
-      <div class="max-w-3xl">
+      <FadeIn client:load className="max-w-3xl">
         <Eyebrow>WORK</Eyebrow>
         <h1 class="mt-4">The standard we build to.</h1>
         <p class="mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
@@ -88,7 +88,7 @@ const conceptProjects = [
             <a href="/start">Start a project</a>
           </Button>
         </div>
-      </div>
+      </FadeIn>
     </section>
 
     <section class="page-section">
@@ -97,7 +97,7 @@ const conceptProjects = [
           const imageFirst = index % 2 === 0;
 
           return (
-            <article class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <FadeIn client:load as="article" delay={Math.min(index * 100, 400)} className="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[var(--shadow-card)]">
               <div class={`grid gap-0 lg:grid-cols-2 ${imageFirst ? '' : ''}`}>
                 <figure class={`relative overflow-hidden border-[color:var(--hairline)] ${imageFirst ? 'lg:border-r' : 'lg:order-2 lg:border-l'}`}>
                   <ResponsivePicture
@@ -109,7 +109,7 @@ const conceptProjects = [
                     fetchpriority={index === 0 ? 'high' : 'low'}
                     objectPosition={build.position}
                   />
-                  <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-transparent" />
+                  <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--overlay-black-soft),transparent)]" />
                 </figure>
 
                 <div class={`flex h-full flex-col p-6 sm:p-8 lg:p-10 ${imageFirst ? '' : 'lg:order-1'}`}>
@@ -136,13 +136,13 @@ const conceptProjects = [
                   <div class="mt-8">
                     <Button asChild variant="ghost" className="px-0">
                       <a href={build.href} target="_blank" rel="noopener noreferrer">
-                        View the build ->
+                        View the build â†’
                       </a>
                     </Button>
                   </div>
                 </div>
               </div>
-            </article>
+            </FadeIn>
           );
         })}
       </div>
@@ -150,48 +150,44 @@ const conceptProjects = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="max-w-3xl">
+        <FadeIn client:load className="max-w-3xl">
           <Eyebrow>CONCEPT LIBRARY</Eyebrow>
           <h2 class="mt-4 max-w-2xl">More concepts. Same standard.</h2>
-        </div>
+        </FadeIn>
 
         <div class="mt-10 grid gap-5 lg:grid-cols-3">
           {conceptProjects.map((project, index) => (
-            <Card
-              data-reveal
-              data-reveal-item
-              data-reveal-state="hidden"
-              style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
-              className="h-full p-0"
-            >
-              <div class="flex h-full flex-col p-6 sm:p-7">
-                <Eyebrow>{project.eyebrow}</Eyebrow>
-                <p class="mt-4 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]">
-                  {project.subtitle}
-                </p>
-                <h3 class="mt-3 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
-                  {project.title}
-                </h3>
-                <p class="mt-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{project.outcome}</p>
+            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+              <Card className="h-full p-0">
+                <div class="flex h-full flex-col p-6 sm:p-7">
+                  <Eyebrow>{project.eyebrow}</Eyebrow>
+                  <p class="mt-4 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]">
+                    {project.subtitle}
+                  </p>
+                  <h3 class="mt-3 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                    {project.title}
+                  </h3>
+                  <p class="mt-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{project.outcome}</p>
 
-                <ul class="mt-5 space-y-3">
-                  {project.bullets.map((bullet) => (
-                    <li class="flex items-start gap-2 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-                      <span class="mt-[0.55rem] h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <ul class="mt-5 space-y-3">
+                    {project.bullets.map((bullet) => (
+                      <li class="flex items-start gap-2 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                        <span class="mt-[0.55rem] h-1.5 w-1.5 rounded-full bg-[var(--accent-solid)]" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                <div class="mt-auto pt-6">
-                  <Button asChild variant="ghost" className="px-0">
-                    <a href={project.href} target="_blank" rel="noopener noreferrer">
-                      Open project ->
-                    </a>
-                  </Button>
+                  <div class="mt-auto pt-6">
+                    <Button asChild variant="ghost" className="px-0">
+                      <a href={project.href} target="_blank" rel="noopener noreferrer">
+                        Open project â†’
+                      </a>
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -199,21 +195,23 @@ const conceptProjects = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <Card className="mx-auto max-w-5xl p-0">
-          <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
-            <Eyebrow>THE GUARANTEE</Eyebrow>
-            <h2 class="mt-4 max-w-4xl">Ready to stop losing jobs to a weaker site?</h2>
-            <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-              No asterisks. That is the floor we build to.
-            </p>
-            <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <Button asChild>
-                <a href="/start">Start a project</a>
-              </Button>
-              <p class="axiom-metric text-[var(--text-muted)]">Review -> Scope -> Build -> Launch</p>
+        <FadeIn client:load as="div">
+          <Card className="mx-auto max-w-5xl p-0">
+            <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+              <Eyebrow>THE GUARANTEE</Eyebrow>
+              <h2 class="mt-4 max-w-4xl">Ready to stop losing jobs to a weaker site?</h2>
+              <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                No asterisks. That is the floor we build to.
+              </p>
+              <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <Button asChild>
+                  <a href="/start">Start a project</a>
+                </Button>
+                <p class="axiom-metric text-[var(--text-muted)]">Review â†’ Scope â†’ Build â†’ Launch</p>
+              </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </FadeIn>
       </div>
     </section>
   </main>

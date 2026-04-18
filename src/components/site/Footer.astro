@@ -6,11 +6,11 @@ const pathname = Astro.url.pathname;
 
 const routeLinkClass = (to: string) => {
   const active = pathname === to || pathname.startsWith(`${to}/`);
-  return active ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]';
+  return active ? 'text-white/80' : 'text-white/40 hover:text-white/80';
 };
 
 const contactLinkClass =
-  'inline-flex min-h-11 items-center py-1 font-axiomMono text-[15px] md:text-sm leading-6 text-[#A7B3BC] transition-colors hover:text-[#F2F4F7]';
+  'inline-flex min-h-11 items-center py-1 font-axiomMono text-[15px] md:text-sm leading-6 text-white/40 transition-colors duration-200 hover:text-white/80';
 ---
 
 <footer class="w-full border-t border-[#31363B] bg-[#090A0B]">

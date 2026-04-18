@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, ABOUT_JSON_LD } from '../lib/seo';
+import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
@@ -65,25 +66,31 @@ const principles = [
   <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
     <section class="axiom-container pt-12 md:pt-20">
       <div class="max-w-3xl">
-        <Eyebrow>ABOUT</Eyebrow>
-        <h1 class="mt-4 max-w-4xl">
-          We build sites that earn attention before anyone explains them.
-        </h1>
-        <p class="mt-5 max-w-3xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
-          You do not need more pages, better fonts, or a redesign for its own sake. You need a site that lands the
-          offer instantly and routes the right people to the right action. That is the only problem we solve.
-        </p>
-        <div class="mt-7">
+        <FadeIn client:load>
+          <Eyebrow>ABOUT</Eyebrow>
+        </FadeIn>
+        <FadeIn client:load delay={100}>
+          <h1 class="mt-4 max-w-4xl">
+            We build sites that earn attention before anyone explains them.
+          </h1>
+        </FadeIn>
+        <FadeIn client:load delay={200}>
+          <p class="mt-5 max-w-3xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+            You do not need more pages, better fonts, or a redesign for its own sake. You need a site that lands the
+            offer instantly and routes the right people to the right action. That is the only problem we solve.
+          </p>
+        </FadeIn>
+        <FadeIn client:load delay={300} className="mt-7">
           <Button asChild size="lg">
             <a href={CTA_PATHS.startProject}>Start a project</a>
           </Button>
-        </div>
+        </FadeIn>
       </div>
     </section>
 
     <section class="page-section">
       <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)] xl:items-start xl:gap-8">
-        <div class="space-y-5">
+        <FadeIn client:load as="div" className="space-y-5">
           <Eyebrow>WHAT THE WORK DOES</Eyebrow>
           <h2 class="max-w-2xl">The work is done when the site does not need explaining.</h2>
           <p class="max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
@@ -93,18 +100,18 @@ const principles = [
           <Button asChild variant="ghost" className="px-0">
             <a href="/work">See the work</a>
           </Button>
-        </div>
+        </FadeIn>
 
         <Card className="p-0">
           <div class="p-6 sm:p-7">
             {whatTheWorkDoes.map((item, index) => (
-              <div class={`grid gap-4 py-5 first:pt-0 last:pb-0 sm:grid-cols-[4rem_minmax(0,1fr)] ${index > 0 ? 'border-t border-[color:var(--hairline)]' : ''}`}>
+              <FadeIn client:load as="div" delay={Math.min(index * 100, 400)} className={`grid gap-4 py-5 first:pt-0 last:pb-0 sm:grid-cols-[4rem_minmax(0,1fr)] ${index > 0 ? 'border-t border-[color:var(--hairline)]' : ''}`}>
                 <div class="axiom-metric text-[var(--text-muted)] sm:pt-1">{item.number}</div>
                 <div>
                   <p class="text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">{item.title}</p>
                   <p class="mt-2 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{item.description}</p>
                 </div>
-              </div>
+              </FadeIn>
             ))}
           </div>
         </Card>
@@ -114,26 +121,31 @@ const principles = [
     <section class="page-section">
       <div class="axiom-container">
         <div class="max-w-3xl">
-          <Eyebrow>THE TEAM</Eyebrow>
-          <h2 class="mt-4 max-w-3xl">Built by two operators who take this seriously.</h2>
+          <FadeIn client:load>
+            <Eyebrow>THE TEAM</Eyebrow>
+          </FadeIn>
+          <FadeIn client:load delay={100}>
+            <h2 class="mt-4 max-w-3xl">Built by two operators who take this seriously.</h2>
+          </FadeIn>
         </div>
 
         <div class="mt-10 grid gap-5 lg:grid-cols-2">
-          {team.map((member) => (
-            <Card className="p-0">
+          {team.map((member, index) => (
+            <FadeIn client:load delay={Math.min(index * 100, 400)}>
+              <Card className="p-0">
               <div class="flex h-full items-start gap-4 p-6 sm:p-7">
                 <div
                   aria-hidden="true"
-                  class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-white/[0.03]"
+                  class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)]"
                 >
-                  <span class="flex h-7 w-7 items-center justify-center rounded-[8px] bg-[var(--accent)] shadow-[0_0_0_4px_rgba(232,162,123,0.14)]">
-                    <span class="h-3.5 w-3.5 rounded-[3px] bg-[#0A0A0C]" />
+                  <span class="flex h-7 w-7 items-center justify-center rounded-[8px] bg-[var(--accent-solid)] shadow-[0_0_0_4px_var(--accent-surface-alt)]">
+                    <span class="h-3.5 w-3.5 rounded-[3px] bg-[var(--bg-base)]" />
                   </span>
                 </div>
 
                 <div class="min-w-0">
                   <h3 class="text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">{member.name}</h3>
-                  <p class="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-muted)]">
+                  <p class="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-secondary)]">
                     {member.role}
                   </p>
                   <p class="mt-4 max-w-[34ch] text-[15px] leading-[1.65] text-[var(--text-secondary)]">
@@ -141,26 +153,34 @@ const principles = [
                   </p>
                 </div>
               </div>
-            </Card>
+              </Card>
+            </FadeIn>
           ))}
         </div>
 
-        <p class="mt-6 max-w-4xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
-          Based in Kitchener-Waterloo. Serving businesses globally. No templates, no outsourcing, no projects we cannot do well.
-        </p>
+        <FadeIn client:load delay={200}>
+          <p class="mt-6 max-w-4xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
+            Based in Kitchener-Waterloo. Serving businesses globally. No templates, no outsourcing, no projects we cannot do well.
+          </p>
+        </FadeIn>
       </div>
     </section>
 
     <section class="page-section">
       <div class="axiom-container">
         <div class="max-w-3xl">
-          <Eyebrow>OUR APPROACH</Eyebrow>
-          <h2 class="mt-4 max-w-3xl">Three principles that shape every build.</h2>
+          <FadeIn client:load>
+            <Eyebrow>OUR APPROACH</Eyebrow>
+          </FadeIn>
+          <FadeIn client:load delay={100}>
+            <h2 class="mt-4 max-w-3xl">Three principles that shape every build.</h2>
+          </FadeIn>
         </div>
 
         <div class="mt-10 grid gap-5 md:grid-cols-3">
-          {principles.map((principle) => (
-            <Card className="h-full p-0">
+          {principles.map((principle, index) => (
+            <FadeIn client:load delay={Math.min(index * 100, 400)}>
+              <Card className="h-full p-0">
               <div class="flex h-full flex-col p-6 sm:p-7">
                 <Eyebrow>{principle.number}</Eyebrow>
                 <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
@@ -168,7 +188,8 @@ const principles = [
                 </h3>
                 <p class="mt-4 text-[15px] leading-[1.65] text-[var(--text-secondary)]">{principle.description}</p>
               </div>
-            </Card>
+              </Card>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -176,7 +197,8 @@ const principles = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
+        <FadeIn client:load>
+          <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
           <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
             <div class="max-w-3xl">
               <h2 class="max-w-3xl">
@@ -191,7 +213,8 @@ const principles = [
               <a href={CTA_PATHS.startProject}>Start a project</a>
             </Button>
           </div>
-        </Card>
+          </Card>
+        </FadeIn>
       </div>
     </section>
   </main>

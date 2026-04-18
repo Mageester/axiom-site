@@ -27,10 +27,10 @@ export function Card({ className, variant = 'default', padding = 'md', hoverLift
   return (
     <div
       className={cn(
-        'rounded-[var(--radius-card)] border border-[color:var(--hairline)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]',
+        'rounded-[var(--radius-card)] border border-white/10 shadow-[var(--shadow-card)] motion-safe:transition-[transform,background-color,border-color,box-shadow] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:scale-[1.02] motion-safe:hover:border-white/20 motion-safe:hover:shadow-[var(--shadow-card-hover)]',
         variantClasses[variant],
         paddingClasses[padding],
-        hoverLift && 'hover:-translate-y-0.5 hover:bg-[var(--surface-2)]',
+        hoverLift && 'motion-safe:hover:bg-[var(--surface-2)]',
         className
       )}
       {...props}

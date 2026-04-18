@@ -29,6 +29,8 @@ const isActive = (pathname: string, href: string) => pathname === href || pathna
 export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) => {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const navLinkClass =
+    'relative inline-flex items-center pb-1 text-[14px] font-medium text-white/60 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 motion-safe:after:content-[\'\'] motion-safe:after:absolute motion-safe:after:left-0 motion-safe:after:bottom-0 motion-safe:after:h-px motion-safe:after:w-full motion-safe:after:origin-left motion-safe:after:scale-x-0 motion-safe:after:bg-current motion-safe:after:transition-transform motion-safe:after:duration-200 motion-safe:after:ease-out motion-safe:hover:after:scale-x-100 motion-reduce:after:scale-x-100';
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 100);
@@ -87,8 +89,8 @@ export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) =>
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'text-[14px] font-medium text-[var(--text-secondary)] transition-[color,opacity] duration-200 hover:text-[var(--text-primary)]',
-                  isActive(pathname, link.href) && 'text-[var(--text-primary)]'
+                  navLinkClass,
+                  isActive(pathname, link.href) && 'text-white'
                 )}
               >
                 {link.label}
@@ -176,7 +178,8 @@ export const Nav: React.FC<NavProps> = ({ pathname, hidePrimaryCta = false }) =>
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  'block text-[clamp(2.5rem,8vw,4.75rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-[var(--text-primary)] transition-opacity duration-200',
+                  'block text-[clamp(2.5rem,8vw,4.75rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-white/60 transition-colors duration-200 hover:text-white',
+                  isActive(pathname, link.href) && 'text-white',
                   index === 0 ? 'mt-2' : ''
                 )}
               >

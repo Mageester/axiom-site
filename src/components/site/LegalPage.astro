@@ -1,4 +1,5 @@
 ---
+import { FadeIn } from '../ui/FadeIn';
 import { Eyebrow } from '../ui/Eyebrow';
 import { SITE_EMAIL } from '../../lib/seo';
 
@@ -22,26 +23,32 @@ const { title, updated, sections } = Astro.props as Props;
 <main id="main-content" tabindex="-1" class="pb-24 md:pb-32">
   <section class="page-section pt-12 md:pt-20">
     <div class="axiom-container max-w-[760px]">
-      <Eyebrow>LEGAL</Eyebrow>
-      <h1 class="mt-4 max-w-3xl">{title}</h1>
-      <p class="mt-4 text-[13px] leading-6 text-[var(--text-secondary)]">
-        Last updated: {updated}
-      </p>
+      <FadeIn client:load>
+        <Eyebrow>LEGAL</Eyebrow>
+      </FadeIn>
+      <FadeIn client:load delay={100}>
+        <h1 class="mt-4 max-w-3xl">{title}</h1>
+      </FadeIn>
+      <FadeIn client:load delay={200}>
+        <p class="mt-4 text-[13px] leading-6 text-[var(--text-secondary)]">
+          Last updated: {updated}
+        </p>
+      </FadeIn>
     </div>
   </section>
 
   <section class="page-section-tight">
     <div class="axiom-container xl:grid xl:grid-cols-[11rem_minmax(0,760px)] xl:justify-center xl:gap-8">
-      <aside class="hidden self-start xl:sticky xl:top-32 xl:block">
-        <div class="rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+      <FadeIn client:load as="aside" className="hidden self-start xl:sticky xl:top-32 xl:block">
+        <div class="rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[var(--shadow-card)]">
           <p class="axiom-eyebrow text-[var(--text-secondary)]">On this page</p>
           <nav class="mt-4 space-y-1.5" aria-label="Table of contents">
             {sections.map((section) => (
               <a
                 href={`#${section.id}`}
-                class="group flex items-start gap-3 rounded-[12px] border border-transparent px-3 py-2 transition-[background-color,border-color,color] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-[color:var(--hairline)] hover:bg-white/[0.03]"
+                class="group flex items-start gap-3 rounded-[12px] border border-transparent px-3 py-2 transition-[background-color,border-color,color] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-[color:var(--hairline)] hover:bg-[color:var(--surface-overlay)]"
               >
-                <span class="font-axiomMono text-[11px] font-medium leading-none tracking-[0.08em] text-[var(--accent)]">
+                <span class="font-axiomMono text-[11px] font-medium leading-none tracking-[0.08em] text-[var(--accent-solid)]">
                   {section.number}
                 </span>
                 <span class="text-[13px] leading-[1.45] text-[var(--text-secondary)] transition-colors duration-200 group-hover:text-[var(--text-primary)]">
@@ -51,19 +58,22 @@ const { title, updated, sections } = Astro.props as Props;
             ))}
           </nav>
         </div>
-      </aside>
+      </FadeIn>
 
       <div class="flex flex-col gap-6">
-        <article class="w-full max-w-[760px] overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+        <article class="w-full max-w-[760px] overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[var(--shadow-card)]">
           <div class="p-6 sm:p-8 lg:p-12">
             <div class="space-y-8">
               {sections.map((section, index) => (
-                <section
+                <FadeIn
+                  client:load
+                  as="section"
                   id={section.id}
                   class={`scroll-mt-28 ${index === 0 ? '' : 'border-t border-[color:var(--hairline)] pt-8'}`}
+                  delay={Math.min(index * 100, 400)}
                 >
                   <div class="flex items-start gap-4">
-                    <span class="shrink-0 font-axiomMono text-[20px] font-medium leading-none tracking-[-0.02em] text-[var(--accent)]">
+                    <span class="shrink-0 font-axiomMono text-[20px] font-medium leading-none tracking-[-0.02em] text-[var(--accent-solid)]">
                       {section.number}
                     </span>
                     <h2 class="font-body text-[20px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
@@ -84,7 +94,7 @@ const { title, updated, sections } = Astro.props as Props;
                           <li class="flex gap-3 text-[15px] leading-[1.7] text-[var(--text-secondary)]">
                             <span
                               aria-hidden="true"
-                              class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[var(--accent)]"
+                              class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[var(--accent-solid)]"
                             ></span>
                             <span>{bullet}</span>
                           </li>
@@ -92,17 +102,24 @@ const { title, updated, sections } = Astro.props as Props;
                       </ul>
                     )}
                   </div>
-                </section>
+                </FadeIn>
               ))}
             </div>
           </div>
         </article>
 
-        <article class="w-full max-w-[760px] rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:px-6">
+        <FadeIn client:load as="article" className="w-full max-w-[760px] rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] px-5 py-4 shadow-[var(--shadow-card)] sm:px-6" delay={200}>
           <p class="text-[15px] leading-[1.7] text-[var(--text-secondary)]">
-            Questions? Email <a href={`mailto:${SITE_EMAIL}`} class="text-[var(--text-primary)] underline decoration-white/40 underline-offset-4 transition-colors hover:text-white">{SITE_EMAIL}</a> — we reply within one business day.
+            Questions? Email
+            <a
+              href={`mailto:${SITE_EMAIL}`}
+              class="text-[var(--text-primary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-colors hover:text-[var(--text-primary)]"
+            >
+              {SITE_EMAIL}
+            </a>
+            â€” we reply within one business day.
           </p>
-        </article>
+        </FadeIn>
       </div>
     </div>
   </section>

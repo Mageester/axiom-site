@@ -3,11 +3,11 @@ import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { HOME_JSON_LD, SITE_TAGLINE } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
+import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { Marquee } from '../components/ui/Marquee';
-import type { CSSProperties } from 'react';
 
 const proofClients = [
   'NORTHWIND HVAC',
@@ -115,7 +115,7 @@ const services = [
   {
     label: 'Rebuild & Migrate',
     description:
-      'Your current site stripped and rebuilt correctly — same domain, zero downtime, measurably faster on day one.',
+      'Your current site stripped and rebuilt correctly - same domain, zero downtime, measurably faster on day one.',
     href: '/process',
   },
 ] as const;
@@ -157,7 +157,7 @@ const stats = [
         "
       />
       <div class="axiom-container relative">
-        <div class="max-w-4xl">
+        <FadeIn client:load className="max-w-4xl">
           <Eyebrow className="text-[11px] text-[var(--text-secondary)]">WEB DESIGN AGENCY</Eyebrow>
           <h1 class="mt-6 max-w-4xl text-left">
             Websites that do the selling for you.
@@ -183,7 +183,7 @@ const stats = [
             <span aria-hidden="true" class="h-4 w-px bg-[color:var(--hairline)]" />
             <span>BUILT TO CONVERT</span>
           </div>
-        </div>
+        </FadeIn>
       </div>
     </section>
 
@@ -204,52 +204,50 @@ const stats = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="max-w-3xl">
+        <FadeIn client:load className="max-w-3xl">
           <Eyebrow>SELECTED WORK</Eyebrow>
           <h2 class="mt-4 max-w-2xl">
             Built for businesses that measure results.
           </h2>
-        </div>
+        </FadeIn>
 
         <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {workCards.map((card, index) => (
-          <Card
-              data-reveal
-              data-reveal-item
-              data-reveal-state="hidden"
-              style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
-              className="group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)]"
-            >
-              <figure class="relative overflow-hidden border-b border-[color:var(--hairline)]">
-                <ResponsivePicture
-                  source={card.image}
-                  alt={card.alt}
-                  sizes="(min-width: 1280px) 32vw, (min-width: 768px) 45vw, 100vw"
-                  class="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-[1.03]"
-                  loading="lazy"
-                  fetchpriority="low"
-                  objectPosition={card.position}
-                />
-                <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--overlay-black-soft),transparent)]" />
-              </figure>
+            <FadeIn client:load delay={Math.min(index * 100, 400)}>
+              <Card
+                className="group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)]"
+              >
+                <figure class="relative overflow-hidden border-b border-[color:var(--hairline)]">
+                  <ResponsivePicture
+                    source={card.image}
+                    alt={card.alt}
+                    sizes="(min-width: 1280px) 32vw, (min-width: 768px) 45vw, 100vw"
+                    class="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-[1.03]"
+                    loading="lazy"
+                    fetchpriority="low"
+                    objectPosition={card.position}
+                  />
+                  <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--overlay-black-soft),transparent)]" />
+                </figure>
 
-              <div class="flex h-full flex-col p-6 sm:p-7">
-                <Eyebrow>{card.eyebrow}</Eyebrow>
-                <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
-                  {card.title}
-                </h3>
-                <p class="mt-3 max-w-md text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-                  {card.outcome}
-                </p>
+                <div class="flex h-full flex-col p-6 sm:p-7">
+                  <Eyebrow>{card.eyebrow}</Eyebrow>
+                  <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                    {card.title}
+                  </h3>
+                  <p class="mt-3 max-w-md text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                    {card.outcome}
+                  </p>
 
-                <div class="mt-auto flex items-center justify-between gap-4 border-t border-[color:var(--hairline)] pt-5">
-                  <span class="axiom-metric text-[var(--text-muted)]">{card.metricLabel}</span>
-                  <span class="text-[15px] font-semibold tracking-[0.08em] text-[var(--text-primary)]">
-                    {card.metricValue}
-                  </span>
+                  <div class="mt-auto flex items-center justify-between gap-4 border-t border-[color:var(--hairline)] pt-5">
+                    <span class="axiom-metric text-[var(--text-muted)]">{card.metricLabel}</span>
+                    <span class="text-[15px] font-semibold tracking-[0.08em] text-[var(--text-primary)]">
+                      {card.metricValue}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -257,29 +255,31 @@ const stats = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="max-w-3xl">
+        <FadeIn client:load className="max-w-3xl">
           <Eyebrow>WHAT WE BUILD</Eyebrow>
           <h2 class="mt-4 max-w-2xl">
             Three formats. One outcome.
           </h2>
-        </div>
+        </FadeIn>
 
         <div class="mt-10 grid gap-5 md:grid-cols-3">
-          {services.map((service) => (
-            <a
-              href={service.href}
-              class="group flex flex-col gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-1)] p-6 transition-[border-color,background-color] duration-200 hover:border-[color:var(--hairline-strong)] hover:bg-[var(--surface-2)] sm:p-7"
-            >
-              <p class="text-[19px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
-                {service.label}
-              </p>
-              <p class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-                {service.description}
-              </p>
-              <span class="mt-auto font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-opacity duration-200 group-hover:opacity-80">
-                See examples →
-              </span>
-            </a>
+          {services.map((service, index) => (
+            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+              <a
+                href={service.href}
+                class="group flex h-full flex-col gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-1)] p-6 transition-[border-color,background-color] duration-200 hover:border-[color:var(--hairline-strong)] hover:bg-[var(--surface-2)] sm:p-7"
+              >
+                <p class="text-[19px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                  {service.label}
+                </p>
+                <p class="text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                  {service.description}
+                </p>
+                <span class="mt-auto font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-opacity duration-200 group-hover:opacity-80">
+                  See examples â†’
+                </span>
+              </a>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -287,32 +287,28 @@ const stats = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="max-w-3xl">
+        <FadeIn client:load className="max-w-3xl">
           <Eyebrow>WHY AXIOM</Eyebrow>
           <h2 class="mt-4 max-w-3xl">
             The difference is what we refuse to ship.
           </h2>
-        </div>
+        </FadeIn>
 
         <div class="mt-10 grid gap-5 md:grid-cols-2">
           {principles.map((principle, index) => (
-          <Card
-              data-reveal
-              data-reveal-item
-              data-reveal-state="hidden"
-              style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
-              className="h-full p-0"
-            >
-              <div class="flex h-full flex-col p-6 sm:p-7">
-                <Eyebrow className="text-[var(--text-muted)]">{principle.number}</Eyebrow>
-                <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
-                  {principle.title}
-                </h3>
-                <p class="mt-3 max-w-xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-                  {principle.description}
-                </p>
-              </div>
-            </Card>
+            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+              <Card className="h-full p-0">
+                <div class="flex h-full flex-col p-6 sm:p-7">
+                  <Eyebrow className="text-[var(--text-muted)]">{principle.number}</Eyebrow>
+                  <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                    {principle.title}
+                  </h3>
+                  <p class="mt-3 max-w-xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                    {principle.description}
+                  </p>
+                </div>
+              </Card>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -320,42 +316,38 @@ const stats = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="max-w-3xl">
+        <FadeIn client:load className="max-w-3xl">
           <Eyebrow>HOW WE BUILD</Eyebrow>
           <h2 class="mt-4 max-w-3xl">
             Four stages. Fourteen days. No drift.
           </h2>
-        </div>
+        </FadeIn>
 
         <div class="mt-10 flex flex-col gap-4 lg:flex-row lg:flex-nowrap">
           {processStages.map((stage, index) => (
-          <Card
-              data-reveal
-              data-reveal-item
-              data-reveal-state="hidden"
-              style={{ '--reveal-delay': `${index * 80}ms` } as CSSProperties}
-              className="flex-1 min-w-[220px] p-0"
-            >
-              <div class="flex h-full flex-col gap-4 p-6 sm:p-7">
-                <span class="font-mono text-[12px] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
-                  {stage.day}
-                </span>
-                <div>
-                  <p class="text-[18px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
-                    {stage.title}
-                  </p>
-                  <p class="mt-2 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-                    {stage.description}
-                  </p>
+            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+              <Card className="flex-1 min-w-[220px] p-0">
+                <div class="flex h-full flex-col gap-4 p-6 sm:p-7">
+                  <span class="font-mono text-[12px] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
+                    {stage.day}
+                  </span>
+                  <div>
+                    <p class="text-[18px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                      {stage.title}
+                    </p>
+                    <p class="mt-2 text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                      {stage.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </FadeIn>
           ))}
         </div>
 
         <div class="mt-6">
           <Button asChild variant="ghost" className="px-0">
-            <a href="/process">See the full process →</a>
+            <a href="/process">See the full process â†’</a>
           </Button>
         </div>
       </div>
@@ -363,35 +355,39 @@ const stats = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <Card className="mx-auto max-w-5xl p-0 text-center">
-          <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
-            <Eyebrow className="justify-center">THE GUARANTEE</Eyebrow>
-            <h2 class="mx-auto mt-4 max-w-4xl">
-              If your site loads in over one second, we fix it free.
-            </h2>
-            <p class="mx-auto mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-              No asterisks. That is the floor we build to.
-            </p>
-          </div>
-        </Card>
+        <FadeIn client:load as="div">
+          <Card className="mx-auto max-w-5xl p-0 text-center">
+            <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+              <Eyebrow className="justify-center">THE GUARANTEE</Eyebrow>
+              <h2 class="mx-auto mt-4 max-w-4xl">
+                If your site loads in over one second, we fix it free.
+              </h2>
+              <p class="mx-auto mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                No asterisks. That is the floor we build to.
+              </p>
+            </div>
+          </Card>
+        </FadeIn>
       </div>
     </section>
 
     <section class="border-t border-[color:var(--hairline)]">
       <div class="axiom-container py-10 md:py-14">
         <dl class="grid grid-cols-1 gap-10 sm:grid-cols-3">
-          {stats.map((stat) => (
-            <div class="flex flex-col gap-1">
-              <dd class="text-[52px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] md:text-[64px]">
-                {stat.value}
-              </dd>
-              <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--accent-solid)]">
-                {stat.unit}
-              </dt>
-              <p class="mt-2 text-[14px] leading-[1.6] text-[var(--text-secondary)]">
-                {stat.description}
-              </p>
-            </div>
+          {stats.map((stat, index) => (
+            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+              <div class="flex flex-col gap-1">
+                <dd class="text-[52px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] md:text-[64px]">
+                  {stat.value}
+                </dd>
+                <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--accent-solid)]">
+                  {stat.unit}
+                </dt>
+                <p class="mt-2 text-[14px] leading-[1.6] text-[var(--text-secondary)]">
+                  {stat.description}
+                </p>
+              </div>
+            </FadeIn>
           ))}
         </dl>
       </div>
@@ -400,23 +396,25 @@ const stats = [
     <section class="border-t border-[color:var(--hairline)] bg-[var(--surface-2)]">
       <div class="axiom-container py-12 md:py-16">
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.75fr)] lg:items-end">
-          <div class="max-w-3xl">
+          <FadeIn client:load as="div" className="max-w-3xl">
             <h2 class="text-[clamp(32px,4vw,52px)] font-[600] leading-[1.08] tracking-[-0.025em] text-[var(--text-primary)]">
               If the site isn't earning trust, it's costing you work.
             </h2>
             <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
               Send us your current site. We'll tell you exactly what's losing you leads - in one business day.
             </p>
-          </div>
+          </FadeIn>
 
-          <div class="flex flex-col gap-4 lg:items-end">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href="/start">Start a project</a>
-            </Button>
-            <p class="axiom-metric text-[var(--text-muted)]">
-              Review → Scope → Build → Launch
-            </p>
-          </div>
+          <FadeIn client:load delay={100} as="div">
+            <div class="flex flex-col gap-4 lg:items-end">
+              <Button asChild size="lg" className="w-full sm:w-auto">
+                <a href="/start">Start a project</a>
+              </Button>
+              <p class="axiom-metric text-[var(--text-muted)]">
+                Review â†’ Scope â†’ Build â†’ Launch
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </div>
     </section>

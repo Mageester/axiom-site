@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { CTA } from '../lib/cta';
+import { FadeIn } from '../components/ui/FadeIn';
 import { SEO_ROUTES } from '../lib/seo';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -12,39 +12,41 @@ const processSteps = [
     title: 'Review',
     timelineDescription:
       'We audit the current site, the offer, and the friction points that are costing trust. We also identify the pages and proof that should move first.',
+    bullets: [] as const,
   },
   {
     dayLabel: 'Day 3',
     title: 'Scope',
     timelineDescription:
       'We lock the page structure, the call paths, and the content priorities before design starts. That keeps the build focused and the decisions early.',
+    bullets: [] as const,
   },
   {
     dayLabel: 'Day 7',
     title: 'Build',
     timelineDescription:
       'We write, design, and test the site in production conditions. The layout, hierarchy, and interactions stay simple enough to ship cleanly.',
+    bullets: [] as const,
   },
   {
     dayLabel: 'Day 14',
     title: 'Launch',
     timelineDescription:
       'We run launch checks, connect the domain, and hand over the site with a clear technical finish. The result is predictable, not improvised.',
+    bullets: [
+      { title: 'Pages to build', detail: 'Which pages matter most right now.' },
+      { title: 'Proof to surface', detail: 'Reviews, photos, and past work that should show up early.' },
+      { title: 'Quote and contact paths', detail: 'Where each call-to-action should go.' },
+      { title: 'Domain and redirects', detail: 'Final technical handoff, redirects, and live launch checks.' },
+    ] as const,
   },
-] as const;
-
-const checklistItems = [
-  { title: 'Pages to build', detail: 'Which pages matter most right now.' },
-  { title: 'Proof to surface', detail: 'Reviews, photos, and past work that should show up early.' },
-  { title: 'Quote and contact paths', detail: 'Where each call-to-action should go.' },
-  { title: 'Domain and redirects', detail: 'Final technical handoff, redirects, and live launch checks.' },
 ] as const;
 ---
 
 <SiteLayout title={SEO_ROUTES.process.title} description={SEO_ROUTES.process.description} canonicalPath="/process">
   <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
     <section class="axiom-container pt-12 md:pt-20">
-      <div class="max-w-3xl">
+      <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PROCESS</Eyebrow>
         <h1 class="mt-4">Four stages. From review to launch.</h1>
         <p class="mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
@@ -58,21 +60,17 @@ const checklistItems = [
             <a href="/work">See the work</a>
           </Button>
         </div>
-      </div>
+      </FadeIn>
     </section>
 
     <section class="page-section">
-      <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.72fr)] xl:items-start xl:gap-8">
-        <Card className="p-0">
-          <div class="flex flex-col gap-4 p-6 sm:p-7 lg:flex-row lg:items-stretch lg:gap-0">
-            {processSteps.map((step, index) => (
-              <>
-                <article class="relative flex min-w-[200px] flex-1 flex-col rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-white/[0.015] px-5 pb-6 pt-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-                  <span
-                    aria-hidden="true"
-                    class="absolute left-5 top-5 h-3 w-3 rounded-full bg-[var(--accent)] shadow-[0_0_0_4px_rgba(232,162,123,0.16)]"
-                  />
-                  <p class="font-axiomMono text-[clamp(3rem,5vw,3.5rem)] leading-none tracking-[-0.06em] text-[var(--accent)]">
+      <div class="axiom-container">
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 xl:items-stretch">
+          {processSteps.map((step, index) => (
+            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+              <Card className="h-full p-0">
+                <div class="flex h-full flex-col p-6 sm:p-7">
+                  <p class="font-axiomMono text-[clamp(2.6rem,4vw,3.25rem)] leading-none tracking-[-0.06em] text-[var(--accent-solid)]">
                     {step.dayLabel}
                   </p>
                   <h2 class="mt-4 text-[18px] font-semibold leading-[1.4] tracking-[-0.015em] text-[var(--text-primary)]">
@@ -81,62 +79,56 @@ const checklistItems = [
                   <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-secondary)]">
                     {step.timelineDescription}
                   </p>
-                </article>
 
-                {index < processSteps.length - 1 ? (
-                  <div
-                    aria-hidden="true"
-                    class="hidden lg:block relative flex-none self-center px-3"
-                  >
-                    <div class="h-px w-10 bg-[color:var(--hairline)]" />
-                    <div class="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent)] shadow-[0_0_0_4px_rgba(232,162,123,0.14)]" />
-                  </div>
-                ) : null}
-              </>
-            ))}
-          </div>
-        </Card>
-
-        <Card className="self-start p-0 xl:sticky xl:top-28">
-          <div class="p-6 sm:p-7">
-            <Eyebrow>WHAT WE NEED BEFORE DAY 7</Eyebrow>
-            <p class="mt-4 max-w-md text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-              The closer this is to the actual business, the cleaner the build becomes.
-            </p>
-
-            <ul class="mt-6 divide-y divide-[color:var(--hairline)]">
-              {checklistItems.map((item) => (
-                <li class="flex items-start gap-3 py-4 first:pt-0 last:pb-0">
-                  <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--accent)] shadow-[0_0_0_4px_rgba(232,162,123,0.12)]" />
-                  <div>
-                    <p class="text-[15px] font-semibold leading-[1.4] text-[var(--text-primary)]">{item.title}</p>
-                    <p class="mt-1 text-[14px] leading-[1.65] text-[var(--text-secondary)]">{item.detail}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Card>
+                  {step.bullets.length > 0 ? (
+                    <div class="mt-5 flex flex-1 flex-col rounded-[calc(var(--radius-card)-0.35rem)] border border-[color:var(--hairline)] bg-[color:var(--surface-2)] p-4">
+                      <p class="font-axiomMono text-[11px] uppercase tracking-[0.12em] text-[var(--text-muted)]">
+                        Launch checklist
+                      </p>
+                      <ul class="mt-4 space-y-3">
+                        {step.bullets.map((item) => (
+                          <li class="flex items-start gap-3">
+                            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-solid)]" />
+                            <div>
+                              <p class="text-[14px] font-semibold leading-[1.45] text-[var(--text-primary)]">
+                                {item.title}
+                              </p>
+                              <p class="mt-1 text-[13px] leading-[1.6] text-[var(--text-secondary)]">
+                                {item.detail}
+                              </p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </div>
+              </Card>
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
 
     <section class="page-section">
       <div class="axiom-container">
-        <Card className="mx-auto max-w-5xl p-0">
-          <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
-            <Eyebrow>THE GUARANTEE</Eyebrow>
-            <h2 class="mt-4 max-w-4xl">Ready to stop losing jobs to a weaker site?</h2>
-            <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
-              No asterisks. That is the floor we build to.
-            </p>
-            <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <Button asChild>
-                <a href="/start">Start a project</a>
-              </Button>
-              <p class="axiom-metric text-[var(--text-muted)]">Review -> Scope -> Build -> Launch</p>
+        <FadeIn client:load as="div">
+          <Card className="mx-auto max-w-5xl p-0">
+            <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+              <Eyebrow>THE GUARANTEE</Eyebrow>
+              <h2 class="mt-4 max-w-4xl">Ready to stop losing jobs to a weaker site?</h2>
+              <p class="mt-4 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)]">
+                No asterisks. That is the floor we build to.
+              </p>
+              <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <Button asChild>
+                  <a href="/start">Start a project</a>
+                </Button>
+                <p class="axiom-metric text-[var(--text-muted)]">Review â†’ Scope â†’ Build â†’ Launch</p>
+              </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </FadeIn>
       </div>
     </section>
   </main>

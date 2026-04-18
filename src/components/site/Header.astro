@@ -15,6 +15,9 @@ const navItems = [
   { label: 'Pricing', to: '/pricing' },
 ] as const;
 
+const navLinkBase =
+  "relative inline-flex items-center pb-1 text-[15px] md:text-sm font-medium text-white/60 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 motion-safe:after:content-[''] motion-safe:after:absolute motion-safe:after:left-0 motion-safe:after:bottom-0 motion-safe:after:h-px motion-safe:after:w-full motion-safe:after:origin-left motion-safe:after:scale-x-0 motion-safe:after:bg-current motion-safe:after:transition-transform motion-safe:after:duration-200 motion-safe:after:ease-out motion-safe:hover:after:scale-x-100 motion-reduce:after:scale-x-100";
+
 const isActiveRoute = (to: string) => {
   if (to === '/') {
     return pathname === '/';
@@ -55,7 +58,7 @@ const isActiveRoute = (to: string) => {
           <a
             href={item.to}
             aria-current={isActiveRoute(item.to) ? 'page' : undefined}
-            class={`inline-flex items-center py-2 text-[15px] md:text-sm font-medium transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${isActiveRoute(item.to) ? 'text-[#F2F4F7]' : 'text-white/64 hover:text-[#EAEFF5]'}`}
+            class={`${navLinkBase} ${isActiveRoute(item.to) ? 'text-[#F2F4F7]' : ''}`}
           >
             {item.label}
           </a>
@@ -91,7 +94,7 @@ const isActiveRoute = (to: string) => {
               <a
                 href={item.to}
                 aria-current={isActiveRoute(item.to) ? 'page' : undefined}
-                class={`min-h-11 rounded-xl px-3 py-3 text-base font-medium transition-[color,background-color,border-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${isActiveRoute(item.to) ? 'bg-white/[0.06] text-[#F2F4F7]' : 'text-slate-300 hover:bg-white/[0.04] hover:text-[#F2F4F7]'}`}
+                class={`min-h-11 rounded-xl px-3 py-3 text-base font-medium transition-[color,background-color,border-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a48e]/45 ${isActiveRoute(item.to) ? 'bg-white/[0.06] text-[#F2F4F7]' : 'text-white/60 hover:bg-white/[0.04] hover:text-[#F2F4F7]'}`}
               >
                 {item.label}
               </a>

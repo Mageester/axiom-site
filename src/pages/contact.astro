@@ -1,4 +1,5 @@
 ---
+import { FadeIn } from '../components/ui/FadeIn';
 import { Phone } from 'lucide-react';
 import IntakeForm from '../components/site/IntakeForm.astro';
 import { Card } from '../components/ui/card';
@@ -10,57 +11,61 @@ import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
 <SiteLayout {...SEO_ROUTES.contact}>
   <main id="main-content" tabindex="-1" class="pb-24 md:pb-32">
     <section class="axiom-container pt-12 md:pt-20">
-      <div class="mx-auto max-w-3xl text-center">
+      <FadeIn client:load className="mx-auto max-w-3xl text-center">
         <Eyebrow>CONTACT</Eyebrow>
         <h1 class="mt-4">Just a question.</h1>
         <p class="mx-auto mt-5 max-w-2xl text-[15px] leading-[1.65] text-[var(--text-secondary)] md:text-[17px]">
           Use this form for a quick question or a note about your site. Need website work? Use the project intake page.
         </p>
-      </div>
+      </FadeIn>
     </section>
 
     <section class="page-section">
       <div class="axiom-container mx-auto max-w-5xl space-y-6">
-        <Card padding="lg" className="w-full">
-          <div class="flex flex-col gap-6">
-            <div class="flex items-center gap-4">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:rgba(232,162,123,0.22)] bg-[color:rgba(232,162,123,0.1)] text-[var(--accent)] shadow-[0_0_0_1px_rgba(232,162,123,0.06)]" aria-hidden="true">
-                <Phone className="h-4 w-4" />
-              </span>
-              <Eyebrow>CALL US</Eyebrow>
-            </div>
+        <FadeIn client:load as="div">
+          <Card padding="lg" className="w-full">
+            <div class="flex flex-col gap-6">
+              <div class="flex items-center gap-4">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--accent-surface)] text-[var(--accent-solid)] shadow-[var(--shadow-brand-ring-soft)]" aria-hidden="true">
+                  <Phone className="h-4 w-4" />
+                </span>
+                <Eyebrow>CALL US</Eyebrow>
+              </div>
 
-            <div class="space-y-2">
-              <a
-                href={`tel:${SITE_TELEPHONE}`}
-                class="inline-flex min-h-11 items-center font-axiomDisplay text-[clamp(2.25rem,4vw,2.625rem)] font-medium leading-none tracking-[-0.02em] text-[var(--text-primary)] transition-colors hover:text-white"
-              >
-                (226) 753-1833
-              </a>
-              <a
-                href={`mailto:${SITE_EMAIL}`}
-                class="inline-flex min-h-11 items-center text-[15px] font-medium leading-6 text-[var(--text-secondary)] transition-colors hover:text-white"
-              >
-                contact@getaxiom.ca
-              </a>
+              <div class="space-y-2">
+                <a
+                  href={`tel:${SITE_TELEPHONE}`}
+                  class="inline-flex min-h-11 items-center font-display text-[clamp(2.25rem,4vw,2.625rem)] font-medium leading-none tracking-[-0.02em] text-[var(--text-primary)] transition-colors hover:text-[var(--text-primary)]"
+                >
+                  (226) 753-1833
+                </a>
+                <a
+                  href={`mailto:${SITE_EMAIL}`}
+                  class="inline-flex min-h-11 items-center text-[15px] font-medium leading-6 text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+                >
+                  contact@getaxiom.ca
+                </a>
+              </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </FadeIn>
 
-        <IntakeForm
-          kind="contact"
-          endpoint="/api/contact"
-          title="Send the note."
-          eyebrow="QUESTION FORM"
-          description="Use this for a quick question or a note about your site."
-          helper="A short note is enough. Tell us what you need help with."
-          submitLabel="Send message →"
-          successTitle="Received."
-          successText="Received. We will review and reply within one business day."
-          noteLinkHref="/start"
-          noteLinkLabel="project intake page"
-          noteText="Need website work? Use the"
-        />
+        <FadeIn client:load as="div">
+          <IntakeForm
+            kind="contact"
+            endpoint="/api/contact"
+            title="Send the note."
+            eyebrow="QUESTION FORM"
+            description="Use this for a quick question or a note about your site."
+            helper="A short note is enough. Tell us what you need help with."
+            submitLabel="Send message â†’"
+            successTitle="Received."
+            successText="Received. We will review and reply within one business day."
+            noteLinkHref="/start"
+            noteLinkLabel="project intake page"
+            noteText="Need website work? Use the"
+          />
+        </FadeIn>
       </div>
     </section>
   </main>
