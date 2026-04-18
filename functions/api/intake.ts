@@ -34,7 +34,7 @@ const RETRY_AFTER_SECONDS = 600;
 const inMemoryRateLimit = new Map<string, { count: number; windowStart: number }>();
 
 const IntakePayloadSchema = z.object({
-    name: z.string().trim().min(2, 'Name is required').max(80),
+    name: z.string().trim().min(1, 'Name is required').max(100),
     email: z.string().trim().email('Valid email is required').max(160),
     business_name: z.string().trim().max(120).optional(),
     businessName: z.string().trim().max(120).optional(),
@@ -386,7 +386,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             return jsonResponse(request, env, { ok: false, error: 'Invalid Content-Type' }, 400);
         }
 
-        const rawBody = await request.clone().json().catch(() => null);
+        const rawBody = await request.json().catch(() => null);
         if (!rawBody || typeof rawBody !== 'object') {
             console.warn('[INTAKE] invalid_body', rawBody);
             return jsonResponse(request, env, { ok: false, error: 'Malformed JSON or empty body' }, 400);
@@ -394,14 +394,21 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
         const parsed = IntakePayloadSchema.safeParse(rawBody);
         if (!parsed.success) {
+            const bodyKeys = Object.keys(rawBody || {});
+            const nameVal = typeof (rawBody as any)?.name;
+            const nameLength = String((rawBody as any)?.name || '').length;
+
             console.warn('[INTAKE] validation_failed', {
                 errors: parsed.error.issues,
-                body: rawBody
+                bodyKeys,
+                nameType: nameVal,
+                nameLen: nameLength
             });
+
             return jsonResponse(request, env, {
                 ok: false,
                 error: 'Validation failed',
-                details: parsed.error.issues[0]?.message || 'Invalid payload'
+                details: `${parsed.error.issues[0]?.message || 'Invalid payload'} (Context: Found ${bodyKeys.length} fields, Name is ${nameVal} len ${nameLength})`
             }, 400);
         }
 

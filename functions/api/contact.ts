@@ -5,7 +5,7 @@ import {
 } from './intake';
 
 const ContactPayloadSchema = z.object({
-    name: z.string().trim().min(2, 'Name is required').max(80),
+    name: z.string().trim().min(1, 'Name is required').max(100),
     email: z.string().trim().email('Valid email is required').max(160),
     business_name: z.string().trim().max(120).optional(),
     details: z.string().trim().min(10, 'Please provide more details.').max(4000).optional(),
@@ -28,7 +28,7 @@ export const onRequestPost: PagesFunction = async (context) => {
         });
     }
 
-    const rawBody = await request.clone().json().catch(() => null);
+    const rawBody = await request.json().catch(() => null);
     console.log('[CONTACT_PROXY] raw_body', rawBody);
 
     if (!rawBody || typeof rawBody !== 'object') {
@@ -61,9 +61,15 @@ export const onRequestPost: PagesFunction = async (context) => {
         company_fax: parsed.data.company_fax || ''
     };
 
+    // Strip headers that interfere with the new body or origin
+    const proxiedHeaders = new Headers(request.headers);
+    proxiedHeaders.delete('content-length');
+    proxiedHeaders.delete('content-encoding');
+    proxiedHeaders.delete('host');
+
     const proxiedRequest = new Request(new URL('/api/intake', request.url), {
         method: 'POST',
-        headers: request.headers,
+        headers: proxiedHeaders,
         body: JSON.stringify(payload)
     });
 
