@@ -28,14 +28,14 @@ const whatTheWorkDoes = [
 const team = [
   {
     name: 'Aidan',
-    initials: 'A',
+    monogram: 'aidan',
     roles: ['STRATEGY', 'SYSTEMS', 'CLIENT WORK'],
     description:
       'Keeps the work tied to the business goal, the scope, and the next step. Handles strategy and communication from first call to launch.',
   },
   {
     name: 'Riley',
-    initials: 'R',
+    monogram: 'riley',
     roles: ['DESIGN', 'BUILD', 'DELIVERY'],
     description:
       'Turns the strategy into the site itself. Handles design, build quality, and delivery so the result stays fast, stable, and clean.',
@@ -73,7 +73,7 @@ const principles = [
         </FadeIn>
         <FadeIn client:load delay={100}>
           <h1 class="mt-4 max-w-4xl">
-            We build sites that earn attention before anyone explains them.
+            We build sites that earn attention without explanation.
           </h1>
         </FadeIn>
         <FadeIn client:load delay={200}>
@@ -127,7 +127,12 @@ const principles = [
             <Eyebrow>THE TEAM</Eyebrow>
           </FadeIn>
           <FadeIn client:load delay={100}>
-          <h2 class="section-heading mt-4">Built by two operators who take this seriously.</h2>
+            <h2 class="section-heading mt-4">Built by two operators who take this seriously.</h2>
+          </FadeIn>
+          <FadeIn client:load delay={200}>
+            <p class="section-copy mt-3 md:text-[17px]">
+              Two operators. Kitchener-Waterloo. Working globally.
+            </p>
           </FadeIn>
         </div>
 
@@ -139,9 +144,27 @@ const principles = [
                   <div class="flex items-start gap-4">
                     <div
                       aria-hidden="true"
-                      class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--accent-solid)] text-[14px] font-semibold text-white"
+                      class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--surface-overlay)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(0,0,0,0.14)]"
                     >
-                      {member.initials}
+                      {member.monogram === 'aidan' ? (
+                        <svg
+                          viewBox="0 0 48 48"
+                          class="h-12 w-12 text-[var(--accent-solid)]"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M24 8L9 38h7l3.1-6h9.8l3.1 6h7L24 8zm-3 17 3-6 3 6h-6z" />
+                        </svg>
+                      ) : (
+                        <svg
+                          viewBox="0 0 48 48"
+                          class="h-12 w-12 text-[var(--accent-solid)]"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M13 38V10h14.2c6.8 0 10.8 3.3 10.8 8.6 0 4.2-2.4 7-6.3 8.1l7.1 11.3h-7.8l-6-10H20v10h-7zm7-15h6.7c3.1 0 4.7-1.2 4.7-3.8s-1.6-3.9-4.7-3.9H20V23z" />
+                        </svg>
+                      )}
                     </div>
 
                     <div class="min-w-0">
@@ -165,11 +188,6 @@ const principles = [
           ))}
         </div>
 
-        <FadeIn client:load delay={200}>
-          <p class="section-copy mt-6 md:text-[17px]">
-            Based in Kitchener-Waterloo. Serving businesses globally. No templates, no outsourcing, no projects we cannot do well.
-          </p>
-        </FadeIn>
       </div>
     </section>
 
@@ -209,10 +227,10 @@ const principles = [
           <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
             <div class="max-w-3xl">
                 <h2 class="section-heading">
-                  Not sure where to begin?
+                  Seen enough?
                 </h2>
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Start a project and we&apos;ll tell you what should change first. One business day, no pressure.
+                  Tell us what the business needs. One business day, no pressure.
                 </p>
             </div>
 
