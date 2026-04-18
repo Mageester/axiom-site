@@ -66,7 +66,7 @@ const launchChecklist = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 xl:items-start">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 xl:items-start">
           {processSteps.map((step, index) => (
             <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
               <div

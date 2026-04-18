@@ -167,9 +167,14 @@ const faqItems = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="grid gap-5 lg:grid-cols-3">
+        <div class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:pb-0">
           {pricingTiers.map((tier, index) => (
-            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+            <FadeIn
+              client:load
+              delay={Math.min(index * 100, 400)}
+              as="div"
+              className="h-full shrink-0 basis-[84%] snap-start sm:basis-[68%] md:basis-[56%] lg:basis-auto lg:shrink"
+            >
               <Card
                 padding="none"
                 hoverLift
