@@ -6,6 +6,7 @@ type Props = {
   description?: string;
   canonicalPath?: string;
   image?: string;
+  ogImageAlt?: string;
   noIndex?: boolean;
   schema?: Record<string, unknown>;
   hidePrimaryCta?: boolean;
@@ -17,6 +18,7 @@ const {
   description,
   canonicalPath,
   image,
+  ogImageAlt,
   noIndex = false,
   schema,
   hidePrimaryCta = false,
@@ -29,6 +31,7 @@ const {
   description={description}
   canonicalPath={canonicalPath}
   image={image}
+  ogImageAlt={ogImageAlt}
   noIndex={noIndex}
   schema={schema}
   hidePrimaryCta={hidePrimaryCta}

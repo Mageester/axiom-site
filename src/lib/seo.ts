@@ -46,7 +46,75 @@ export const WEBSITE_SCHEMA = {
 
 export const HOME_JSON_LD = {
   '@context': 'https://schema.org',
-  '@graph': [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA],
+  '@type': 'LocalBusiness',
+  additionalType: 'https://schema.org/ProfessionalService',
+  name: SITE_NAME,
+  url: 'https://getaxiom.ca/',
+  image: 'https://getaxiom.ca/og-image.png',
+  description: 'Custom web development, AI-enabled digital systems, and digital infrastructure for established businesses across Kitchener-Waterloo, Cambridge, and Guelph.',
+  email: SITE_EMAIL,
+  telephone: '+1-226-753-1833',
+  foundingDate: '2025',
+  numberOfEmployees: {
+    '@type': 'QuantitativeValue',
+    value: 2,
+  },
+  areaServed: [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Waterloo Region, Ontario',
+    },
+    {
+      '@type': 'City',
+      name: 'Guelph',
+    },
+  ],
+  serviceType: [
+    'Custom web development',
+    'AI-enabled web systems',
+    'Digital infrastructure',
+  ],
+  knowsAbout: [
+    'Custom websites',
+    'AI-enabled web systems',
+    'Business process automation',
+    'Digital infrastructure',
+    'Web design',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    telephone: '+1-226-753-1833',
+    email: SITE_EMAIL,
+    availableLanguage: ['en'],
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Axiom Infrastructure Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Custom Web Development',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI-Enabled Web Systems',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Digital Infrastructure',
+        },
+      },
+    ],
+  },
 } as const;
 
 export const PRICING_JSON_LD = {
@@ -84,8 +152,8 @@ export const ABOUT_JSON_LD = {
 
 export const SEO_ROUTES = {
   home: {
-    title: 'Premium Web Design That Converts',
-    description: SITE_TAGLINE,
+    title: 'Custom Web Development | Kitchener-Waterloo | Axiom Infrastructure',
+    description: 'Axiom Infrastructure designs custom websites and AI-enabled digital systems for established businesses across Kitchener-Waterloo, Cambridge, and Guelph.',
     canonicalPath: '/',
   },
   work: {

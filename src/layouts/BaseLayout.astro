@@ -16,6 +16,7 @@ type Props = {
   description?: string;
   canonicalPath?: string;
   image?: string;
+  ogImageAlt?: string;
   noIndex?: boolean;
   schema?: Record<string, unknown>;
   hidePrimaryCta?: boolean;
@@ -28,6 +29,7 @@ const {
   description,
   canonicalPath,
   image,
+  ogImageAlt,
   noIndex = false,
   schema,
   hidePrimaryCta = false,
@@ -76,10 +78,12 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
     <link rel="canonical" href={resolvedCanonical} />
 
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_CA" />
     <meta property="og:url" content={resolvedCanonical} />
     <meta property="og:title" content={resolvedTitle} />
     <meta property="og:description" content={resolvedDescription} />
     <meta property="og:image" content={resolvedImageUrl} />
+    {ogImageAlt ? <meta property="og:image:alt" content={ogImageAlt} /> : null}
     <meta property="og:site_name" content={SITE_NAME} />
 
     <meta name="twitter:card" content="summary_large_image" />

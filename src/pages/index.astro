@@ -1,7 +1,7 @@
 ---
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { HOME_JSON_LD, SITE_TAGLINE } from '../lib/seo';
+import { HOME_JSON_LD } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 import { FadeIn } from '../components/ui/FadeIn';
 import { HomepageStats } from '../components/site/HomepageStats';
@@ -139,9 +139,10 @@ const services = [
 ---
 
 <SiteLayout
-  title="Websites that do the selling for you"
-  description={SITE_TAGLINE}
+  title="Custom Web Development | Kitchener-Waterloo | Axiom Infrastructure"
+  description="Axiom Infrastructure designs custom websites and AI-enabled digital systems for established businesses across Kitchener-Waterloo, Cambridge, and Guelph."
   canonicalPath="/"
+  ogImageAlt="Axiom Infrastructure homepage — custom web development in Kitchener-Waterloo."
   schema={HOME_JSON_LD}
 >
   <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32">
