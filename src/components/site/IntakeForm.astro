@@ -642,10 +642,10 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
           return;
         }
 
-        setBusy(true);
-
         const formData = new FormData(form);
         const payload = Object.fromEntries(formData.entries());
+
+        setBusy(true);
 
         const body = form.dataset.intakeKind === 'project'
           ? {
