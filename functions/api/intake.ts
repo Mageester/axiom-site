@@ -63,7 +63,7 @@ const IntakePayloadSchema = z.object({
     companyFax: z.string().trim().max(120).optional(),
     turnstile_token: z.string().trim().max(2048).optional(),
     cf_turnstile_response: z.string().trim().max(2048).optional()
-}).strict();
+}).passthrough();
 
 function splitCsv(value: string) {
     return value
@@ -386,16 +386,17 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             return jsonResponse(request, env, { ok: false, error: 'Invalid Content-Type' }, 400);
         }
 
-        const rawBody = await request.json().catch(() => null);
+        const rawBody = await request.clone().json().catch(() => null);
         if (!rawBody || typeof rawBody !== 'object') {
-            return jsonResponse(request, env, { ok: false, error: 'Malformed JSON' }, 400);
+            console.warn('[INTAKE] invalid_body', rawBody);
+            return jsonResponse(request, env, { ok: false, error: 'Malformed JSON or empty body' }, 400);
         }
 
         const parsed = IntakePayloadSchema.safeParse(rawBody);
         if (!parsed.success) {
             console.warn('[INTAKE] validation_failed', {
-                errors: parsed.error.issues.map(i => ({ path: i.path, message: i.message })),
-                body_keys: Object.keys(rawBody || {})
+                errors: parsed.error.issues,
+                body: rawBody
             });
             return jsonResponse(request, env, {
                 ok: false,
