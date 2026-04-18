@@ -1,8 +1,7 @@
 ---
-import '../index.css';
 import '../styles/globals.css';
 import { Footer } from '../components/layout/Footer';
-import { Nav } from '../components/layout/Nav';
+import NavBar from '../components/layout/NavBar.astro';
 import {
   DEFAULT_OG_IMAGE,
   DEFAULT_SEO_DESCRIPTION,
@@ -49,7 +48,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0A0A0C" />
+    <meta name="theme-color" content="#0a0a0c" />
     <meta name="generator" content="Astro" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
@@ -57,15 +56,13 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
     <link rel="icon" type="image/png" href="/favicon.png" />
 
     <link rel="preconnect" href="https://assets.vercel.com" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
       as="font"
       type="font/woff2"
-      crossorigin
-      href="https://cdn.jsdelivr.net/gh/vercel/geist-font@1.4.2/packages/next/dist/fonts/geist-sans/GeistVF.woff2"
+      href="/fonts/geist/Geist-Variable.woff2"
     />
     <link
       rel="preload"
@@ -137,7 +134,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    {showNav ? <Nav client:load pathname={Astro.url.pathname} hidePrimaryCta={hidePrimaryCta} /> : null}
+    {showNav ? <NavBar hidePrimaryCta={hidePrimaryCta} /> : null}
 
     <div class={`relative z-10 ${shellPaddingClass}`}>
       <slot />

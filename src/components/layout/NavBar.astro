@@ -1,0 +1,242 @@
+---
+import { CTA_PATHS } from '../../lib/cta';
+
+interface Props {
+  hidePrimaryCta?: boolean;
+}
+
+const { hidePrimaryCta = false } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const LINKS = [
+  { label: 'Work', href: '/work' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+] as const;
+
+const MOBILE_LINKS = [
+  { label: 'Home', href: '/' },
+  { label: 'Work', href: '/work' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Process', href: '/process' },
+] as const;
+
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+
+// Button classes assembled here to keep template readable
+const ctaClasses =
+  'inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-normal border border-transparent whitespace-nowrap transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 active:scale-[0.98] shadow-[var(--shadow-button-primary)] hover:brightness-110 min-h-11 px-5 text-[14px]';
+---
+
+<header id="site-header" class="fixed inset-x-0 top-6 z-50 px-3 sm:px-6">
+  <div
+    id="nav-shell"
+    class="axiom-container flex items-center justify-between rounded-full border border-[color:var(--hairline)] px-4 py-3.5 backdrop-blur-[20px] transition-[padding,border-color,background-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]"
+    style="background-color: var(--nav-shell-bg); box-shadow: var(--shadow-nav-rest);"
+  >
+    <a href="/" class="flex items-center" aria-label="Axiom Infrastructure home">
+      <img
+        src="/axiomtransparentlogo.webp"
+        alt="Axiom"
+        width="240"
+        height="63"
+        class="block h-9 w-auto select-none object-contain sm:h-10"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
+      {LINKS.map((link) => (
+        <a
+          href={link.href}
+          aria-current={isActive(link.href) ? 'page' : undefined}
+          class={`text-[14px] font-medium transition-[color,opacity] duration-200 hover:text-[var(--text-primary)] ${
+            isActive(link.href) ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'
+          }`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      {!hidePrimaryCta && (
+        <a
+          href={CTA_PATHS.startProject}
+          class={`hidden md:inline-flex ${ctaClasses}`}
+          style="background: var(--accent); color: var(--text-on-accent);"
+        >
+          Start a project
+        </a>
+      )}
+
+      <button
+        id="nav-toggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="mobile-nav-panel"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] transition-[border-color,background-color] duration-200 hover:border-[color:var(--hairline-strong)] hover:bg-[color:var(--surface-overlay-press)] md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
+      >
+        <span class="relative block h-4 w-5" aria-hidden="true">
+          <span class="bar bar-top absolute left-0 top-0 h-px w-5 bg-current"></span>
+          <span class="bar bar-mid absolute left-0 top-[7px] h-px w-5 bg-current"></span>
+          <span class="bar bar-bot absolute left-0 top-[14px] h-px w-5 bg-current"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile nav panel — starts closed; JS toggles .nav-open -->
+<div
+  id="mobile-nav-panel"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site navigation"
+  aria-hidden="true"
+  class="fixed inset-0 z-40 px-6 py-8 backdrop-blur-[24px] md:hidden"
+  style="background-color: var(--nav-panel-bg);"
+>
+  <div class="mx-auto flex h-full max-w-5xl flex-col justify-between pt-20">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center" aria-label="Axiom Infrastructure home">
+        <img
+          src="/axiomtransparentlogo.webp"
+          alt="Axiom"
+          width="240"
+          height="63"
+          class="block h-9 w-auto select-none object-contain sm:h-10"
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+      <button
+        id="nav-close"
+        type="button"
+        aria-label="Close navigation"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
+      >
+        <span aria-hidden="true" class="text-xl leading-none">&times;</span>
+      </button>
+    </div>
+
+    <nav class="flex flex-col gap-4" aria-label="Mobile navigation">
+      {MOBILE_LINKS.map((link, index) => (
+        <a
+          href={link.href}
+          aria-current={isActive(link.href) ? 'page' : undefined}
+          data-nav-close
+          class={`block text-[clamp(2.5rem,8vw,4.75rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-[var(--text-primary)] transition-opacity duration-200${index === 0 ? ' mt-2' : ''}`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    {!hidePrimaryCta && (
+      <div class="border-t border-[color:var(--hairline)] pt-6">
+        <a
+          href={CTA_PATHS.startProject}
+          data-nav-close
+          class={`w-full justify-center sm:w-auto ${ctaClasses}`}
+          style="background: var(--accent); color: var(--text-on-accent);"
+        >
+          Start a project
+        </a>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  /* Panel visibility — toggled by JS adding/removing .nav-open */
+  #mobile-nav-panel {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease, visibility 200ms ease;
+  }
+
+  #mobile-nav-panel.nav-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Hamburger → X animation driven by aria-expanded */
+  .bar {
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+
+  #nav-toggle[aria-expanded="true"] .bar-top {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  #nav-toggle[aria-expanded="true"] .bar-mid {
+    opacity: 0;
+  }
+
+  #nav-toggle[aria-expanded="true"] .bar-bot {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Scrolled shell state */
+  #nav-shell[data-scrolled] {
+    padding-block: 0.625rem; /* py-2.5 */
+    border-color: var(--hairline-strong);
+    background-color: var(--nav-shell-bg-scrolled) !important;
+    box-shadow: var(--shadow-nav-scrolled) !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
+    const panel = document.getElementById('mobile-nav-panel') as HTMLElement | null;
+    const shell = document.getElementById('nav-shell') as HTMLElement | null;
+
+    function openMenu() {
+      if (!panel || !toggle) return;
+      panel.classList.add('nav-open');
+      panel.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close navigation');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      if (!panel || !toggle) return;
+      panel.classList.remove('nav-open');
+      panel.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation');
+      document.body.style.overflow = '';
+    }
+
+    toggle?.addEventListener('click', () => {
+      toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
+    });
+
+    document.getElementById('nav-close')?.addEventListener('click', closeMenu);
+
+    panel?.querySelectorAll('[data-nav-close]').forEach((el) => {
+      el.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    // Scroll-aware shell
+    function onScroll() {
+      shell?.toggleAttribute('data-scrolled', window.scrollY > 100);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  });
+</script>
