@@ -57,12 +57,20 @@ export const PRICING_JSON_LD = {
   offers: [
     {
       '@type': 'Offer',
-      name: 'Starter',
+      name: 'Growth',
+      price: '2200',
       priceCurrency: 'CAD',
     },
     {
       '@type': 'Offer',
-      name: 'Growth',
+      name: 'Signature',
+      price: '3500',
+      priceCurrency: 'CAD',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Rebuild',
+      price: '6500',
       priceCurrency: 'CAD',
     },
   ],

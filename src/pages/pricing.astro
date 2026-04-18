@@ -9,15 +9,6 @@ import { Eyebrow } from '../components/ui/Eyebrow';
 
 const pricingTiers = [
   {
-    key: 'starter',
-    name: 'Starter',
-    price: '$1,200',
-    features: ['3 pages', 'Mobile-ready', 'Contact form', 'Live in 14 days'],
-    cta: 'Start a project',
-    href: CTA_PATHS.startProject,
-    variant: 'secondary',
-  },
-  {
     key: 'growth',
     name: 'Growth',
     price: '$2,200',
@@ -28,10 +19,19 @@ const pricingTiers = [
     highlighted: true,
   },
   {
-    key: 'custom',
-    name: 'Custom',
+    key: 'signature',
+    name: 'Signature',
     price: 'From $3,500',
-    features: ['Unlimited pages', 'Integrations & automations', 'Ongoing support', 'Timeline scoped on intake'],
+    features: ['Unlimited pages', 'Integrations & automations', 'Post-launch support', 'Timeline scoped on intake'],
+    cta: 'Start a project',
+    href: CTA_PATHS.startProject,
+    variant: 'secondary',
+  },
+  {
+    key: 'rebuild',
+    name: 'Rebuild',
+    price: 'From $6,500',
+    features: ['Full site migration', 'Integrations & automations', 'SEO preservation', 'Support through launch'],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
     variant: 'secondary',
@@ -41,63 +41,63 @@ const pricingTiers = [
 const comparisonRows = [
   {
     label: 'Pages included',
-    starter: '3 pages',
     growth: '5 pages',
-    custom: 'Unlimited pages',
+    signature: 'Unlimited pages',
+    rebuild: 'Full migration scope',
   },
   {
     label: 'Revision rounds',
-    starter: '2 rounds',
     growth: '3 rounds',
-    custom: 'Scoped with the project',
+    signature: 'Scoped with the project',
+    rebuild: 'Scoped with the project',
   },
   {
     label: 'Turnaround',
-    starter: '14 days',
     growth: '21 days',
-    custom: 'Scoped on intake',
+    signature: 'Scoped on intake',
+    rebuild: 'Scoped on intake',
   },
   {
     label: 'SEO setup',
-    starter: 'Basic on-page setup',
     growth: 'SEO foundation',
-    custom: 'Custom strategy',
+    signature: 'Custom strategy',
+    rebuild: 'SEO preservation',
   },
   {
     label: 'Google Business setup',
-    starter: 'Guidance only',
     growth: 'Included',
-    custom: 'Included if needed',
+    signature: 'Included if needed',
+    rebuild: 'Included if needed',
   },
   {
     label: 'Hosting guidance',
-    starter: 'Included',
     growth: 'Included',
-    custom: 'Included',
+    signature: 'Included',
+    rebuild: 'Included',
   },
   {
     label: 'Editing workflow',
-    starter: 'Light content updates',
     growth: 'Editable content flow',
-    custom: 'Custom setup',
+    signature: 'Custom setup',
+    rebuild: 'Custom setup',
   },
   {
     label: 'Post-launch support',
-    starter: 'Launch support',
     growth: 'Post-launch support',
-    custom: 'Scoped support',
+    signature: 'Scoped support',
+    rebuild: 'Support through launch',
   },
   {
     label: 'Ownership',
-    starter: 'Full ownership',
     growth: 'Full ownership',
-    custom: 'Full ownership',
+    signature: 'Full ownership',
+    rebuild: 'Full ownership',
   },
   {
     label: 'Recurring fees',
-    starter: 'None',
     growth: 'None',
-    custom: 'None',
+    signature: 'None',
+    rebuild: 'None',
   },
 ] as const;
 
@@ -160,7 +160,7 @@ const faqItems = [
         <Eyebrow>PRICING</Eyebrow>
         <h1 class="mt-4">One investment. Full ownership.</h1>
         <p class="section-copy mt-5 md:text-[17px]">
-          No monthly fees. No recurring charges. You own everything we build. Three tiers based on what the business actually needs.
+          No monthly fees. No lock-in. You own the site, the code, and the domain.
         </p>
       </FadeIn>
     </section>
@@ -269,26 +269,29 @@ const faqItems = [
                 <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   Feature
                 </th>
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  Starter
+                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)] bg-[linear-gradient(180deg,rgba(232,162,123,0.04),transparent)]">
+                  <div class="flex flex-col gap-1">
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-solid)]">Most Chosen</span>
+                    <span>Growth</span>
+                  </div>
                 </th>
                 <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  Growth
+                  Signature
                 </th>
                 <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  Custom
+                  Rebuild
                 </th>
               </tr>
             </thead>
             <tbody>
               {comparisonRows.map((row) => (
-                <tr class="border-b border-[color:var(--hairline)] last:border-b-0">
+                <tr class="border-b border-[color:var(--hairline)] odd:bg-[rgba(255,255,255,0.02)] last:border-b-0">
                   <th scope="row" class="px-6 py-4 text-[15px] font-medium text-[var(--text-primary)]">
                     {row.label}
                   </th>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.starter}</td>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.growth}</td>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.custom}</td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60 bg-[linear-gradient(180deg,rgba(232,162,123,0.04),transparent)]">{row.growth}</td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.signature}</td>
+                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">{row.rebuild}</td>
                 </tr>
               ))}
             </tbody>
@@ -313,14 +316,15 @@ const faqItems = [
                     {item.question}
                   </span>
                   <span
-                    class="faq-toggle relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    class="faq-toggle relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] transition-transform duration-[200ms] ease-out"
                     aria-hidden="true"
                   >
-                    <span class="faq-toggle-line absolute h-px w-3.5 bg-current transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]" />
-                    <span class="faq-toggle-vertical absolute h-3.5 w-px bg-current transition-transform duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]" />
+                    <svg class="faq-toggle-chevron h-4 w-4 transition-transform duration-[200ms] ease-out" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path d="M5 8L10 13L15 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
                   </span>
                 </summary>
-                <div class="faq-panel grid grid-rows-[0fr] opacity-0 translate-y-1 transition-[opacity,transform] duration-[240ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
+                <div class="faq-panel max-h-0 overflow-hidden opacity-0 translate-y-1 transition-[max-height,opacity,transform] duration-[300ms] ease-out">
                   <div class="overflow-hidden">
                     <div class="px-6 pb-5 pt-1 md:pb-6">
                 <p class="section-copy md:text-[16px]">
@@ -362,17 +366,17 @@ const faqItems = [
 
   <style>
     details[data-faq][open] .faq-panel {
-      grid-template-rows: 1fr;
+      max-height: 24rem;
       opacity: 1;
       transform: translateY(0);
     }
 
-    details[data-faq][open] .faq-toggle-vertical {
-      transform: scaleY(0);
-    }
-
     details[data-faq][open] .faq-toggle {
       background: var(--surface-overlay-press);
+    }
+
+    details[data-faq][open] .faq-toggle-chevron {
+      transform: rotate(180deg);
     }
 
     details[data-faq] summary::-webkit-details-marker {
