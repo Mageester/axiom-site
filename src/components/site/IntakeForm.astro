@@ -120,6 +120,27 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
       aria-busy="false"
       noValidate
     >
+      <div class="space-y-2">
+        <div class="flex items-center justify-between gap-3">
+          <p class="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[var(--text-secondary)]">
+            Form progress
+          </p>
+          <p data-intake-progress-label class="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
+            0/3 complete
+          </p>
+        </div>
+        <div
+          class="h-1 w-full overflow-hidden rounded-full bg-white/10"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Form completion progress"
+        >
+          <div data-intake-progress-fill class="h-full w-0 rounded-full bg-[#c8956a]"></div>
+        </div>
+      </div>
+
       <div
         data-intake-alert
         class="hidden rounded-[var(--radius-card)] border border-[color:var(--error-border)] bg-[color:var(--error-surface)] px-4 py-3 text-[15px] text-[var(--error-text)] md:text-sm"
@@ -469,7 +490,38 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
       const successBox = form.closest('article')?.querySelector('[data-intake-success]');
       const resetButton = form.closest('article')?.querySelector('[data-intake-reset]');
       const submitButton = form.querySelector('button[type="submit"]');
+      const progressFill = form.querySelector('[data-intake-progress-fill]');
+      const progressLabel = form.querySelector('[data-intake-progress-label]');
       const fields = Array.from(form.querySelectorAll('[data-intake-field]'));
+      const requiredKeys = form.dataset.intakeKind === 'project'
+        ? ['name', 'email', 'details']
+        : ['name', 'email', 'message'];
+
+      const getFieldByKey = (key) => form.querySelector(`[data-intake-field-key="${key}"]`);
+
+      const updateProgress = () => {
+        const completed = requiredKeys.reduce((count, key) => {
+          const field = getFieldByKey(key);
+
+          if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement)) {
+            return count;
+          }
+
+          const hasValue = field.value.trim().length > 0;
+          return hasValue && field.validity.valid ? count + 1 : count;
+        }, 0);
+
+        const percent = Math.round((completed / requiredKeys.length) * 100);
+
+        if (progressFill instanceof HTMLElement) {
+          progressFill.style.width = `${percent}%`;
+          progressFill.setAttribute('aria-valuenow', String(percent));
+        }
+
+        if (progressLabel instanceof HTMLElement) {
+          progressLabel.textContent = `${completed}/${requiredKeys.length} complete`;
+        }
+      };
 
       const showAlert = (message) => {
         if (!(alertBox instanceof HTMLElement)) return;
@@ -497,6 +549,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
           }
         });
 
+        updateProgress();
         return { firstInvalidField, hasErrors };
       };
 

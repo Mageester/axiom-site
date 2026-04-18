@@ -10,7 +10,7 @@ import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
 
 <SiteLayout {...SEO_ROUTES.contact}>
   <main id="main-content" tabindex="-1" class="pb-24 md:pb-32">
-    <section class="axiom-container pt-12 md:pt-20">
+    <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="mx-auto max-w-3xl text-center">
         <Eyebrow>CONTACT</Eyebrow>
         <h1 class="mt-4">Just a question.</h1>
@@ -58,7 +58,7 @@ import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
             eyebrow="QUESTION FORM"
             description="Use this for a quick question or a note about your site."
             helper="A short note is enough. Tell us what you need help with."
-            submitLabel="Send message â†’"
+            submitLabel={`Send message \u2192`}
             successTitle="Received."
             successText="Received. We will review and reply within one business day."
             noteLinkHref="/start"

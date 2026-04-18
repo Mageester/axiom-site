@@ -45,7 +45,7 @@ const processSteps = [
 
 <SiteLayout title={SEO_ROUTES.process.title} description={SEO_ROUTES.process.description} canonicalPath="/process">
   <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
-    <section class="axiom-container pt-12 md:pt-20">
+    <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PROCESS</Eyebrow>
         <h1 class="mt-4">Four stages. From review to launch.</h1>
@@ -65,23 +65,23 @@ const processSteps = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 xl:items-stretch">
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 xl:items-start">
           {processSteps.map((step, index) => (
             <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
-              <Card className="h-full p-0">
-                <div class="flex h-full flex-col p-6 sm:p-7">
+              <Card className="p-0">
+                <div class="flex flex-col p-6 sm:p-7">
                   <p class="font-axiomMono text-[clamp(2.6rem,4vw,3.25rem)] leading-none tracking-[-0.06em] text-[var(--accent-solid)]">
                     {step.dayLabel}
                   </p>
-          <h2 class="section-heading mt-4 text-[18px] font-semibold text-[var(--text-primary)]">
-            {step.title}
-          </h2>
-          <p class="section-copy mt-3 text-[14px]">
-            {step.timelineDescription}
-          </p>
+                  <h2 class="section-heading mt-4 text-[18px] font-semibold text-[var(--text-primary)]">
+                    {step.title}
+                  </h2>
+                  <p class="section-copy mt-3 text-[14px]">
+                    {step.timelineDescription}
+                  </p>
 
                   {step.bullets.length > 0 ? (
-                    <div class="mt-5 flex flex-1 flex-col rounded-[calc(var(--radius-card)-0.35rem)] border border-[color:var(--hairline)] bg-[color:var(--surface-2)] p-4">
+                    <div class="mt-4 border-t border-[color:var(--hairline)] pt-4">
                       <p class="font-axiomMono text-[11px] uppercase tracking-[0.12em] text-[var(--text-muted)]">
                         Launch checklist
                       </p>
@@ -90,12 +90,12 @@ const processSteps = [
                           <li class="flex items-start gap-3">
                             <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-solid)]" />
                             <div>
-                      <p class="text-[14px] font-semibold leading-[1.45] text-white">
-                        {item.title}
-                      </p>
-                      <p class="mt-1 text-[13px] leading-[1.6] text-white/60">
-                        {item.detail}
-                      </p>
+                              <p class="text-[14px] font-semibold leading-[1.45] text-white">
+                                {item.title}
+                              </p>
+                              <p class="mt-1 text-[13px] leading-[1.6] text-white/60">
+                                {item.detail}
+                              </p>
                             </div>
                           </li>
                         ))}
@@ -124,7 +124,7 @@ const processSteps = [
                 <Button asChild>
                   <a href="/start">Start a project</a>
                 </Button>
-                <p class="axiom-metric text-[var(--text-muted)]">Review â†’ Scope â†’ Build â†’ Launch</p>
+                <p class="axiom-metric text-[var(--text-muted)]">Review &rarr; Scope &rarr; Build &rarr; Launch</p>
               </div>
             </div>
           </Card>

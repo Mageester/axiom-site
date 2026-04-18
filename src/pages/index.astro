@@ -29,8 +29,8 @@ const workCards = [
     metricLabel: 'LOAD TARGET',
     metricValue: '<1s',
     image: getWorkProofImage('demonstration-restaurant-reservation-site').source,
-    alt: getWorkProofImage('demonstration-restaurant-reservation-site').alt ?? 'Restaurant reservation site',
-    position: getWorkProofImage('demonstration-restaurant-reservation-site').position ?? 'center 24%',
+    alt: getWorkProofImage('demonstration-restaurant-reservation-site').alt || 'Restaurant reservation site',
+    position: getWorkProofImage('demonstration-restaurant-reservation-site').position || 'center 24%',
   },
   {
     eyebrow: 'LANDSCAPING & OUTDOOR SERVICES',
@@ -39,8 +39,8 @@ const workCards = [
     metricLabel: 'MOBILE TARGET',
     metricValue: '98+',
     image: getWorkProofImage('concept-landscaping-authority-site').source,
-    alt: getWorkProofImage('concept-landscaping-authority-site').alt ?? 'Landscaping authority site',
-    position: getWorkProofImage('concept-landscaping-authority-site').position ?? 'center 52%',
+    alt: getWorkProofImage('concept-landscaping-authority-site').alt || 'Landscaping authority site',
+    position: getWorkProofImage('concept-landscaping-authority-site').position || 'center 52%',
   },
   {
     eyebrow: 'ROOFING & EXTERIORS',
@@ -49,8 +49,8 @@ const workCards = [
     metricLabel: 'CALL PATH',
     metricValue: '1 TAP',
     image: getWorkProofImage('concept-roofing-conversion-site').source,
-    alt: getWorkProofImage('concept-roofing-conversion-site').alt ?? 'Roofing conversion site',
-    position: getWorkProofImage('concept-roofing-conversion-site').position ?? 'center 36%',
+    alt: getWorkProofImage('concept-roofing-conversion-site').alt || 'Roofing conversion site',
+    position: getWorkProofImage('concept-roofing-conversion-site').position || 'center 36%',
   },
 ] as const;
 
@@ -272,7 +272,7 @@ const services = [
                   {service.description}
                 </p>
                 <span class="mt-auto font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-opacity duration-200 group-hover:opacity-80">
-                  See examples â†’
+                  See examples &rarr;
                 </span>
               </a>
             </FadeIn>
@@ -343,7 +343,7 @@ const services = [
 
         <div class="mt-6">
           <Button asChild variant="ghost" className="px-0">
-            <a href="/process">See the full process â†’</a>
+            <a href="/process">See the full process &rarr;</a>
           </Button>
         </div>
       </div>
@@ -377,7 +377,7 @@ const services = [
               If the site isn't earning trust, it's costing you work.
             </h2>
             <p class="section-copy mt-4">
-              Send us your current site. We'll tell you exactly what's losing you leads - in one business day.
+                Send us your current site. We&apos;ll tell you exactly what&apos;s losing you leads &mdash; in one business day.
             </p>
           </FadeIn>
 
@@ -387,7 +387,7 @@ const services = [
                 <a href="/start">Start a project</a>
               </Button>
               <p class="axiom-metric text-[var(--text-muted)]">
-                Review â†’ Scope â†’ Build â†’ Launch
+                Review &rarr; Scope &rarr; Build &rarr; Launch
               </p>
             </div>
           </FadeIn>

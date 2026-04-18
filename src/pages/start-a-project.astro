@@ -10,7 +10,7 @@ import { Eyebrow } from '../components/ui/Eyebrow';
 
 <SiteLayout title={SEO_ROUTES.startProject.title} description={SEO_ROUTES.startProject.description} canonicalPath="/start-a-project">
   <main id="main-content" tabindex="-1" class="-mt-28 pb-24 md:-mt-32 md:pb-32">
-    <section class="axiom-container pt-12 md:pt-20">
+    <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>START A PROJECT</Eyebrow>
         <h1 class="mt-4 max-w-4xl">
@@ -22,7 +22,7 @@ import { Eyebrow } from '../components/ui/Eyebrow';
 
         <div class="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
           <span>ONE SHORT FORM</span>
-          <span aria-hidden="true" class="text-[var(--text-muted)]">Â·</span>
+          <span aria-hidden="true" class="text-[var(--text-muted)]">&rarr;</span>
           <span>REPLY WITHIN ONE BUSINESS DAY</span>
         </div>
 
@@ -44,7 +44,7 @@ import { Eyebrow } from '../components/ui/Eyebrow';
             eyebrow="PROJECT INTAKE"
             description="Tell us what the business does, what&apos;s broken about the current site, and when you want to move."
             helper="Three short lines is enough. What does the business do, what is wrong with the current site, and when do you want to move?"
-            submitLabel="Send it â†’"
+            submitLabel={`Send it \u2192`}
             successTitle="Received."
             successText="Received. We will review and reply within one business day."
             noteLinkHref="/contact"
@@ -65,7 +65,7 @@ import { Eyebrow } from '../components/ui/Eyebrow';
                   href="/contact"
                   class="inline-flex items-center text-[15px] font-medium text-[var(--text-primary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-[color,opacity] duration-200 hover:text-[var(--text-primary)]"
                 >
-                  Contact page â†’
+                  Contact page &rarr;
                 </a>
               </div>
             </div>
