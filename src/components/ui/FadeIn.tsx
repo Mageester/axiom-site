@@ -19,14 +19,16 @@ export const FadeIn: React.FC<FadeInProps> = ({
 }) => {
   const { ref, isVisible } = useFadeInOnScroll<HTMLElement>();
   const cappedDelay = Math.min(Math.max(delay, 0), 400);
-  const visibilityClass = isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4';
+  const visibilityClass = isVisible
+    ? 'opacity-100 translate-y-0 scale-100'
+    : 'opacity-0 translate-y-4 scale-[0.985]';
 
   return (
     <Component
       ref={ref as unknown as React.Ref<HTMLElement>}
       className={cn(
         visibilityClass,
-        'motion-safe:transition-[opacity,transform] motion-safe:duration-700 motion-safe:ease-out motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none',
+        'motion-safe:transition-[opacity,transform] motion-safe:duration-700 motion-safe:ease-out motion-safe:will-change-[opacity,transform] motion-safe:transform-gpu motion-reduce:opacity-100 motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:transition-none',
         className
       )}
       style={{ transitionDelay: `${cappedDelay}ms`, ...style }}
