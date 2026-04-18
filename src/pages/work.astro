@@ -45,33 +45,6 @@ const featuredBuilds = [
   },
 ] as const;
 
-const conceptProjects = [
-  {
-    eyebrow: 'HVAC PERFORMANCE',
-    subtitle: 'Apex Climate Systems',
-    title: 'Dispatch-first infrastructure for urgent HVAC demand.',
-    outcome: 'Designed to lift emergency dispatch rates during peak weather events.',
-    bullets: ['Emergency dispatch banner', 'Diagnostic intake routing', 'Dispatch qualification filter'],
-    href: 'https://hvac.getaxiom.ca',
-  },
-  {
-    eyebrow: 'ROOFING PERFORMANCE',
-    subtitle: 'Summit Roofing Co.',
-    title: 'Storm protocol conversion system for inspection demand.',
-    outcome: "Designed to capture storm-season leads while competitors' sites go down.",
-    bullets: ['Storm protocol timeline', 'Material selector', 'Inspection funnel'],
-    href: 'https://roofing.getaxiom.ca',
-  },
-  {
-    eyebrow: 'LANDSCAPING PERFORMANCE',
-    subtitle: 'Verdant Landscapes',
-    title: 'Portfolio-grade consultation system for premium outdoor projects.',
-    outcome: 'Designed to position premium design work with a portfolio that matches the craft.',
-    bullets: ['Featured project portfolio', 'Seasonal program flow', 'Design consultation funnel'],
-    href: 'https://landscaping.getaxiom.ca',
-  },
-] as const;
-
 const buildLinkClass =
   'group inline-flex items-center gap-2 text-[14px] font-medium text-white/50 transition-colors duration-200 hover:text-white';
 const buildArrowClass = 'inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1';
@@ -108,12 +81,16 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
               className="group overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] border-b border-white/5 bg-[var(--surface-1)] shadow-[var(--shadow-card)]"
             >
               <div class={`grid gap-0 lg:grid-cols-2 ${imageFirst ? '' : ''}`}>
-                <figure class={`relative overflow-hidden border-[color:var(--hairline)] bg-white/5 ${imageFirst ? 'lg:border-r' : 'lg:order-2 lg:border-l'}`}>
+                <figure
+                  class={`relative overflow-hidden border-[color:var(--hairline)] bg-white/5 ${imageFirst ? 'lg:border-r' : 'lg:order-2 lg:border-l'}`}
+                  style="box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);"
+                >
                   <ResponsivePicture
                     source={build.image}
                     alt={build.alt}
                     sizes="(min-width: 1280px) 50vw, 100vw"
                     class="aspect-[4/3] h-full w-full object-cover motion-safe:transform-gpu motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:scale-105"
+                    style="filter: contrast(1.05) saturate(0.9) brightness(0.95);"
                     loading={index === 0 ? 'eager' : 'lazy'}
                     fetchpriority={index === 0 ? 'high' : 'low'}
                     objectPosition={build.position}
@@ -122,7 +99,7 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
                 </figure>
 
                 <div class={`flex h-full flex-col p-6 sm:p-8 lg:p-10 ${imageFirst ? '' : 'lg:order-1'}`}>
-                  <Eyebrow>{build.eyebrow}</Eyebrow>
+                  <Eyebrow className="text-[13px] tracking-[0.15em]">{build.eyebrow}</Eyebrow>
                   <h2 class="section-heading mt-4 text-[clamp(32px,4vw,52px)] font-[500] text-[var(--text-primary)]">
                     {build.title}
                   </h2>
@@ -158,45 +135,15 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
 
     <section class="page-section">
       <div class="axiom-container">
-        <FadeIn client:load className="max-w-3xl">
-          <Eyebrow>CONCEPT LIBRARY</Eyebrow>
-          <h2 class="section-heading mt-4">More concepts. Same standard.</h2>
+        <FadeIn client:load as="div" className="flex flex-col items-center text-center">
+          <p class="font-axiomDisplay text-[clamp(1.5rem,2.2vw,2.3rem)] leading-[1.08] tracking-[-0.04em] text-[var(--text-primary)]">
+            More concepts available on request.
+          </p>
+          <a class="mt-5 inline-flex items-center gap-2 text-[14px] font-medium text-white/65 transition-colors duration-200 hover:text-white" href="/start">
+            <span>Start a project</span>
+            <span class={buildArrowClass}>→</span>
+          </a>
         </FadeIn>
-
-        <div class="mt-10 grid gap-5 lg:grid-cols-3">
-          {conceptProjects.map((project, index) => (
-            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
-              <Card className="group h-full p-0">
-                <div class="flex h-full flex-col p-6 sm:p-7">
-                  <Eyebrow>{project.eyebrow}</Eyebrow>
-                  <p class="mt-4 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]">
-                    {project.subtitle}
-                  </p>
-                  <h3 class="mt-3 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
-                    {project.title}
-                  </h3>
-                  <p class="section-copy mt-4">{project.outcome}</p>
-
-                  <ul class="mt-5 space-y-3">
-                    {project.bullets.map((bullet) => (
-                      <li class="flex items-start gap-2 text-[15px] leading-[1.65] text-white/60">
-                        <span class="mt-[0.55rem] h-1.5 w-1.5 rounded-full bg-[var(--accent-solid)]" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div class="mt-auto pt-6">
-                    <a class={buildLinkClass} href={project.href} target="_blank" rel="noopener noreferrer">
-                      <span>Open project</span>
-                      <span class={buildArrowClass}>→</span>
-                    </a>
-                  </div>
-                </div>
-              </Card>
-            </FadeIn>
-          ))}
-        </div>
       </div>
     </section>
 

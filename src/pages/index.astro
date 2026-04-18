@@ -17,6 +17,12 @@ const industries = [
   { label: 'LOCAL TRADES', icon: 'trades' },
 ] as const;
 
+const browserBars = [
+  { width: '92%', delay: 0 },
+  { width: '78%', delay: 0.4 },
+  { width: '64%', delay: 0.8 },
+] as const;
+
 const workCards = [
   {
     eyebrow: 'RESTAURANT & HOSPITALITY',
@@ -149,33 +155,58 @@ const services = [
         "
       />
       <div class="axiom-container relative">
-        <FadeIn client:load className="max-w-4xl">
-          <Eyebrow className="text-[11px] text-[var(--text-secondary)]">WEB DESIGN AGENCY</Eyebrow>
-          <h1 class="mt-6 max-w-4xl text-left">
-            Websites that do the selling for you.
-          </h1>
-          <p class="section-copy mt-6">
-            Axiom builds fast, clear, conversion-engineered websites for businesses that are done settling for mediocre
-            sites. Every build is owned outright - no subscriptions, no lock-ins.
-          </p>
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,27rem)] lg:items-center">
+          <FadeIn client:load className="max-w-3xl">
+            <Eyebrow className="text-[11px] text-[var(--text-secondary)]">WEB DESIGN AGENCY</Eyebrow>
+            <h1 class="mt-6 max-w-4xl text-left">
+              Websites that do the selling for you.
+            </h1>
+            <p class="section-copy mt-6 max-w-2xl">
+              Axiom builds fast, clear websites that turn visitors into calls. Every build is owned outright - no
+              subscriptions, no middlemen.
+            </p>
 
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href="/start">Start a project</a>
-            </Button>
-            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-              <a href="/work">See the work</a>
-            </Button>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Button asChild size="lg" className="w-full sm:w-auto">
+                <a href="/start">Start a project</a>
+              </Button>
+              <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
+                <a href="/work">See the work</a>
+              </Button>
+            </div>
+          </FadeIn>
+
+          <div class="hidden justify-self-end lg:block" aria-hidden="true">
+            <div class="hero-browser-shell">
+              <svg viewBox="0 0 520 340" class="block h-auto w-full" fill="none" role="presentation">
+                <rect x="0.75" y="0.75" width="518.5" height="338.5" rx="24" class="hero-browser-frame" />
+                <rect x="0.75" y="0.75" width="518.5" height="52" rx="24" class="hero-browser-chrome" />
+                <circle cx="36" cy="26" r="5.5" class="hero-browser-dot" />
+                <circle cx="54" cy="26" r="5.5" class="hero-browser-dot" />
+                <circle cx="72" cy="26" r="5.5" class="hero-browser-dot" />
+
+                {browserBars.map((bar, index) => (
+                  <rect
+                    key={index}
+                    x="42"
+                    y={86 + index * 46}
+                    width={bar.width}
+                    height="16"
+                    rx="8"
+                    class="hero-browser-bar"
+                    style={`--browser-delay: ${bar.delay}s;`}
+                  />
+                ))}
+              </svg>
+            </div>
           </div>
 
-          <div class="mt-8 flex flex-wrap items-center gap-3 text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
-            <span>14-DAY BUILD</span>
-            <span aria-hidden="true" class="h-4 w-px bg-[color:var(--hairline)]" />
-            <span>FULL CODE OWNERSHIP</span>
-            <span aria-hidden="true" class="h-4 w-px bg-[color:var(--hairline)]" />
-            <span>BUILT TO CONVERT</span>
+          <div class="flex justify-center lg:col-span-2">
+            <p class="text-center font-axiomDisplay text-[clamp(1.2rem,2vw,1.85rem)] leading-[1.08] tracking-[-0.04em] text-[var(--text-primary)]">
+              Fourteen days. <span class="text-[var(--accent-solid)]">Under one second.</span> Full ownership.
+            </p>
           </div>
-        </FadeIn>
+        </div>
       </div>
     </section>
 
@@ -454,4 +485,79 @@ const services = [
       </div>
     </section>
   </main>
+
+  <style>
+    .hero-browser-shell {
+      width: clamp(18rem, 28vw, 27rem);
+      opacity: 0.4;
+      transform: translate3d(1.75rem, -0.5rem, 0) rotate(2deg);
+      transform-origin: center;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+
+    .hero-browser-frame {
+      fill: rgba(255, 255, 255, 0.02);
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 1;
+    }
+
+    .hero-browser-chrome {
+      fill: rgba(255, 255, 255, 0.035);
+    }
+
+    .hero-browser-dot {
+      fill: rgba(255, 255, 255, 0.22);
+    }
+
+    .hero-browser-bar {
+      fill: var(--accent-solid);
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: left center;
+      animation:
+        browser-bar-reveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) var(--browser-delay, 0s) forwards,
+        browser-bar-pulse 8s ease-in-out calc(1.2s + var(--browser-delay, 0s)) infinite;
+      will-change: opacity, transform;
+    }
+
+    @keyframes browser-bar-reveal {
+      0% {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      100% {
+        opacity: 0.6;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes browser-bar-pulse {
+      0%,
+      18%,
+      100% {
+        opacity: 0.6;
+        transform: translateY(0);
+      }
+
+      48% {
+        opacity: 0.42;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-browser-shell {
+        opacity: 0.45;
+        transform: translate3d(1.75rem, -0.5rem, 0) rotate(2deg);
+      }
+
+      .hero-browser-bar {
+        animation: none !important;
+        opacity: 0.55;
+        transform: none;
+      }
+    }
+  </style>
 </SiteLayout>

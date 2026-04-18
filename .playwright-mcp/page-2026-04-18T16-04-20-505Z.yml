@@ -1,0 +1,224 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Axiom Infrastructure home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Axiom" [ref=e6]
+      - navigation "Primary" [ref=e7]:
+        - link "Work" [ref=e8] [cursor=pointer]:
+          - /url: /work
+        - link "About" [ref=e9] [cursor=pointer]:
+          - /url: /about
+        - link "Pricing" [ref=e10] [cursor=pointer]:
+          - /url: /pricing
+      - link "Start a project" [ref=e12] [cursor=pointer]:
+        - /url: /start-a-project
+  - main [ref=e14]:
+    - generic [ref=e19]:
+      - generic [ref=e20]: WEB DESIGN AGENCY
+      - heading "Websites that do the selling for you." [level=1] [ref=e21]
+      - paragraph [ref=e22]: Axiom builds fast, clear, conversion-engineered websites for businesses that are done settling for mediocre sites. Every build is owned outright - no subscriptions, no lock-ins.
+      - generic [ref=e23]:
+        - link "Start a project" [ref=e24] [cursor=pointer]:
+          - /url: /start
+        - link "See the work" [ref=e25] [cursor=pointer]:
+          - /url: /work
+      - generic [ref=e26]:
+        - generic [ref=e27]: 14-DAY BUILD
+        - generic [ref=e29]: FULL CODE OWNERSHIP
+        - generic [ref=e31]: BUILT TO CONVERT
+    - generic [ref=e33]:
+      - paragraph [ref=e34]: INDUSTRIES WE BUILD FOR
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - img [ref=e37]
+          - generic [ref=e40]: HVAC & CLIMATE
+        - generic [ref=e41]:
+          - img [ref=e42]
+          - generic [ref=e45]: LEGAL SERVICES
+        - generic [ref=e46]:
+          - img [ref=e47]
+          - generic [ref=e50]: LANDSCAPING & OUTDOOR
+        - generic [ref=e51]:
+          - img [ref=e52]
+          - generic [ref=e56]: ROOFING & EXTERIORS
+        - generic [ref=e57]:
+          - img [ref=e58]
+          - generic [ref=e60]: LOCAL TRADES
+    - generic [ref=e62]:
+      - generic [ref=e65]:
+        - generic [ref=e66]: SELECTED WORK
+        - heading "Built for businesses that measure results." [level=2] [ref=e67]
+      - generic [ref=e68]:
+        - generic [ref=e72]:
+          - figure [ref=e73]:
+            - img "Server presenting plated dishes in a warmly lit dining room" [ref=e75]
+          - generic [ref=e76]:
+            - generic [ref=e77]: RESTAURANT & HOSPITALITY
+            - heading "Restaurant reservation site" [level=3] [ref=e78]
+            - paragraph [ref=e79]: Reservation flow visible on every screen - zero missed bookings on mobile.
+            - generic [ref=e80]:
+              - generic [ref=e81]: LOAD TARGET
+              - generic [ref=e82]: <1s
+        - generic [ref=e86]:
+          - figure [ref=e87]:
+            - img "Premium residential exterior with strong curb appeal and outdoor project framing" [ref=e89]
+          - generic [ref=e90]:
+            - generic [ref=e91]: LANDSCAPING & OUTDOOR SERVICES
+            - heading "Landscaping authority site" [level=3] [ref=e92]
+            - paragraph [ref=e93]: Portfolio proof leads the page - quote requests stay one tap away.
+            - generic [ref=e94]:
+              - generic [ref=e95]: MOBILE TARGET
+              - generic [ref=e96]: 98+
+        - generic [ref=e100]:
+          - figure [ref=e101]:
+            - img "Roofing crew working on a residential roof during an active exterior project" [ref=e103]
+          - generic [ref=e104]:
+            - generic [ref=e105]: ROOFING & EXTERIORS
+            - heading "Roofing conversion site" [level=3] [ref=e106]
+            - paragraph [ref=e107]: Emergency inspection paths stay separate from planned estimates.
+            - generic [ref=e108]:
+              - generic [ref=e109]: CALL PATH
+              - generic [ref=e110]: 1 TAP
+    - generic [ref=e112]:
+      - generic [ref=e115]:
+        - generic [ref=e116]: WHAT WE BUILD
+        - heading "Three formats. One outcome." [level=2] [ref=e117]
+      - generic [ref=e118]:
+        - link "Conversion Site Designed to turn visitors into booked jobs. Clear offer, friction-free contact paths, and trust signals placed where they convert. See examples →" [ref=e122] [cursor=pointer]:
+          - /url: /work
+          - paragraph [ref=e123]: Conversion Site
+          - paragraph [ref=e124]: Designed to turn visitors into booked jobs. Clear offer, friction-free contact paths, and trust signals placed where they convert.
+          - generic [ref=e125]: See examples →
+        - link "Authority Site Establishes credibility in competitive markets. Portfolio, reviews, and credentials structured to hold the room. See examples →" [ref=e129] [cursor=pointer]:
+          - /url: /work
+          - paragraph [ref=e130]: Authority Site
+          - paragraph [ref=e131]: Establishes credibility in competitive markets. Portfolio, reviews, and credentials structured to hold the room.
+          - generic [ref=e132]: See examples →
+        - link "Rebuild & Migrate Your current site stripped and rebuilt correctly - same domain, zero downtime, measurably faster on day one. See examples →" [ref=e136] [cursor=pointer]:
+          - /url: /process
+          - paragraph [ref=e137]: Rebuild & Migrate
+          - paragraph [ref=e138]: Your current site stripped and rebuilt correctly - same domain, zero downtime, measurably faster on day one.
+          - generic [ref=e139]: See examples →
+    - generic [ref=e141]:
+      - generic [ref=e144]:
+        - generic [ref=e145]: WHY AXIOM
+        - heading "The difference is what we refuse to ship." [level=2] [ref=e146]
+      - generic [ref=e147]:
+        - generic [ref=e152]:
+          - generic [ref=e153]: "01"
+          - heading "Clarity over everything." [level=3] [ref=e154]
+          - paragraph [ref=e155]: If the offer isn't readable in three seconds, the site is already losing.
+        - generic [ref=e160]:
+          - generic [ref=e161]: "02"
+          - heading "Proof before polish." [level=3] [ref=e162]
+          - paragraph [ref=e163]: Real work, real reviews, real results - placed where they convert.
+        - generic [ref=e168]:
+          - generic [ref=e169]: "03"
+          - heading "Performance is non-negotiable." [level=3] [ref=e170]
+          - paragraph [ref=e171]: Sub-second loads or we fix it free. That is the floor.
+        - generic [ref=e176]:
+          - generic [ref=e177]: "04"
+          - heading "Full ownership, always." [level=3] [ref=e178]
+          - paragraph [ref=e179]: You get the code. No subscriptions, no hostage hosting.
+    - generic [ref=e181]:
+      - generic [ref=e184]:
+        - generic [ref=e185]: HOW WE BUILD
+        - heading "Four stages. Fourteen days. No drift." [level=2] [ref=e186]
+      - generic [ref=e187]:
+        - generic [ref=e192]:
+          - generic [ref=e193]: Day 1
+          - generic [ref=e194]:
+            - paragraph [ref=e195]: Review
+            - paragraph [ref=e196]: We audit the current site, the offer, and the gaps that are costing trust.
+        - generic [ref=e201]:
+          - generic [ref=e202]: Day 3
+          - generic [ref=e203]:
+            - paragraph [ref=e204]: Scope
+            - paragraph [ref=e205]: We lock the structure, the message, and the pages that actually matter.
+        - generic [ref=e210]:
+          - generic [ref=e211]: Day 7
+          - generic [ref=e212]:
+            - paragraph [ref=e213]: Build
+            - paragraph [ref=e214]: The design system, layout, and content come together in production.
+        - generic [ref=e219]:
+          - generic [ref=e220]: Day 14
+          - generic [ref=e221]:
+            - paragraph [ref=e222]: Launch
+            - paragraph [ref=e223]: We ship the site, verify the handoff, and make ownership complete.
+      - link "See the full process →" [ref=e225] [cursor=pointer]:
+        - /url: /process
+    - generic [ref=e232]:
+      - generic [ref=e233]: THE GUARANTEE
+      - heading "If your site loads in over one second, we fix it free." [level=2] [ref=e234]
+      - paragraph [ref=e235]: No asterisks. That is the floor we build to.
+    - generic [ref=e239]:
+      - generic [ref=e240]:
+        - definition [ref=e241]: "0"
+        - term [ref=e242]: DAYS
+        - paragraph [ref=e243]: Typical turnaround from kickoff to live.
+      - generic [ref=e244]:
+        - definition [ref=e245]: <1s
+        - term [ref=e246]: LOAD
+        - paragraph [ref=e247]: Performance floor, guaranteed in writing.
+      - generic [ref=e248]:
+        - definition [ref=e249]: "0"
+        - term [ref=e250]: OWNERSHIP
+        - paragraph [ref=e251]: Full code delivery. No subscriptions.
+    - generic [ref=e254]:
+      - generic [ref=e257]:
+        - heading "If the site isn't earning trust, it's costing you work." [level=2] [ref=e258]
+        - paragraph [ref=e259]: Send us your current site. We'll tell you exactly what's losing you leads — in one business day.
+      - generic [ref=e263]:
+        - link "Start a project" [ref=e264] [cursor=pointer]:
+          - /url: /start
+        - paragraph [ref=e265]: Review → Scope → Build → Launch
+  - contentinfo [ref=e266]:
+    - generic [ref=e267]:
+      - generic [ref=e268]:
+        - link "Axiom Infrastructure home" [ref=e269] [cursor=pointer]:
+          - /url: /
+          - img "Axiom Infrastructure" [ref=e270]
+        - paragraph [ref=e271]: Websites built to convert. Not to decorate.
+        - paragraph [ref=e272]: © 2026 Axiom Infrastructure.
+      - generic [ref=e273]:
+        - generic [ref=e274]: Pages
+        - list [ref=e275]:
+          - listitem [ref=e276]:
+            - link "Home" [ref=e277] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e278]:
+            - link "Work" [ref=e279] [cursor=pointer]:
+              - /url: /work
+          - listitem [ref=e280]:
+            - link "Process" [ref=e281] [cursor=pointer]:
+              - /url: /process
+          - listitem [ref=e282]:
+            - link "About" [ref=e283] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e284]:
+            - link "Pricing" [ref=e285] [cursor=pointer]:
+              - /url: /pricing
+      - generic [ref=e286]:
+        - generic [ref=e287]: Contact
+        - list [ref=e288]:
+          - listitem [ref=e289]:
+            - link "contact@getaxiom.ca" [ref=e290] [cursor=pointer]:
+              - /url: mailto:contact@getaxiom.ca
+          - listitem [ref=e291]:
+            - link "(226) 753-1833" [ref=e292] [cursor=pointer]:
+              - /url: tel:+12267531833
+          - listitem [ref=e293]:
+            - link "Start a project" [ref=e294] [cursor=pointer]:
+              - /url: /start-a-project
+      - generic [ref=e295]:
+        - generic [ref=e296]: Legal
+        - list [ref=e297]:
+          - listitem [ref=e298]:
+            - link "Privacy Policy" [ref=e299] [cursor=pointer]:
+              - /url: /privacy
+          - listitem [ref=e300]:
+            - link "Terms of Service" [ref=e301] [cursor=pointer]:
+              - /url: /terms
