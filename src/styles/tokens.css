@@ -29,20 +29,25 @@
   --error-border: rgba(231, 178, 168, 0.35);
   --error-text: #fbe4dd;
 
-  --accent: linear-gradient(135deg, #e8a27b 0%, #c97a4e 100%);
-  --accent-solid: #c97a4e;
-  --accent-glow: rgba(232, 162, 123, 0.25);
-  --accent-ring: rgba(232, 162, 123, 0.2);
-  --accent-ring-soft: rgba(232, 162, 123, 0.14);
-  --accent-border: rgba(232, 162, 123, 0.28);
-  --accent-border-strong: rgba(232, 162, 123, 0.35);
-  --accent-surface: rgba(232, 162, 123, 0.1);
-  --accent-surface-strong: rgba(232, 162, 123, 0.12);
-  --accent-surface-alt: rgba(232, 162, 123, 0.14);
-  --accent-surface-lift: rgba(232, 162, 123, 0.16);
-  --accent-shadow-soft: rgba(232, 162, 123, 0.06);
-  --accent-shadow-medium: rgba(232, 162, 123, 0.12);
-  --accent-shadow-strong: rgba(232, 162, 123, 0.2);
+  --accent-current: #c97a4e;
+  --accent-current-rgb: 201 122 78;
+  --accent-v2: #c9a368;
+  --accent-v2-rgb: 201 163 104;
+
+  --accent: var(--accent-v2, var(--accent-current));
+  --accent-solid: var(--accent-v2, var(--accent-current));
+  --accent-glow: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.25);
+  --accent-ring: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);
+  --accent-ring-soft: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.14);
+  --accent-border: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.28);
+  --accent-border-strong: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.35);
+  --accent-surface: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.1);
+  --accent-surface-strong: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
+  --accent-surface-alt: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.14);
+  --accent-surface-lift: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.16);
+  --accent-shadow-soft: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.06);
+  --accent-shadow-medium: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
+  --accent-shadow-strong: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);
 
   --content-width: 1240px;
   --gutter-mobile: 24px;
@@ -60,13 +65,13 @@
   --font-body: 'Geist Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  --body-hero-glow: radial-gradient(circle at top, rgba(232, 162, 123, 0.09), transparent 32%);
+  --body-hero-glow: radial-gradient(circle at top, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.09), transparent 32%);
   --body-hero-glow-2: radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.04), transparent 28%);
   --body-overlay-top: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 24%);
   --body-overlay-glow:
     radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.025), transparent 25%),
-    radial-gradient(circle at 80% 0%, rgba(232, 162, 123, 0.055), transparent 28%);
-  --selection-bg: rgba(232, 162, 123, 0.28);
+    radial-gradient(circle at 80% 0%, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.055), transparent 28%);
+  --selection-bg: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.28);
   --selection-fg: var(--text-primary);
   --skip-link-bg: rgba(10, 10, 12, 0.96);
   --skip-link-border: var(--hairline);
@@ -78,28 +83,28 @@
   --shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   --shadow-card-elevated: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 20px 56px rgba(0, 0, 0, 0.24);
   --shadow-card-hover: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 12px 24px rgba(0, 0, 0, 0.18);
-  --shadow-card-highlight: 0 0 0 1px rgba(232, 162, 123, 0.14), 0 24px 56px rgba(200, 122, 87, 0.12);
+  --shadow-card-highlight: 0 0 0 1px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.14), 0 24px 56px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
   --shadow-button-primary:
     inset 0 1px 0 rgba(255, 255, 255, 0.28),
     inset 0 -6px 4px rgba(0, 0, 0, 0.18),
     0 4px 6px rgba(0, 0, 0, 0.34),
-    0 4px 34px rgba(200, 122, 87, 0.12);
+    0 4px 34px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
   --shadow-button-primary-hover:
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -6px 4px rgba(0, 0, 0, 0.18),
     0 8px 16px rgba(0, 0, 0, 0.28),
-    0 14px 34px rgba(200, 122, 87, 0.08);
+    0 14px 34px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.08);
   --shadow-button-secondary: 0 6px 20px rgba(0, 0, 0, 0.16);
   --shadow-button-secondary-hover: 0 10px 24px rgba(0, 0, 0, 0.2);
-  --shadow-button-focus: 0 0 0 2px rgba(232, 162, 123, 0.2);
-  --shadow-button-focus-strong: 0 0 0 3px rgba(232, 162, 123, 0.2);
+  --shadow-button-focus: 0 0 0 2px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);
+  --shadow-button-focus-strong: 0 0 0 3px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);
   --shadow-field-base: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 1px 0 rgba(255, 255, 255, 0.01);
-  --shadow-field-focus: 0 0 0 2px rgba(232, 162, 123, 0.2);
+  --shadow-field-focus: 0 0 0 2px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);
   --shadow-field-focus-error: 0 0 0 3px rgba(212, 164, 142, 0.14);
   --shadow-field-autofill: 0 0 0px 1000px rgba(12, 17, 27, 0.98) inset;
   --shadow-field-submit-focus: 0 8px 24px rgba(0, 0, 0, 0.28);
-  --shadow-brand-ring: 0 0 0 5px rgba(232, 162, 123, 0.25);
-  --shadow-brand-ring-soft: 0 0 0 4px rgba(232, 162, 123, 0.14);
+  --shadow-brand-ring: 0 0 0 5px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.25);
+  --shadow-brand-ring-soft: 0 0 0 4px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.14);
   --shadow-faq-toggle: 0 0 0 1px rgba(255, 255, 255, 0.06);
   --shadow-faq-toggle-open: 0 0 0 1px rgba(255, 255, 255, 0.08);
 
@@ -111,9 +116,9 @@
   --axiom-text-main: var(--text-primary);
   --axiom-text-primary: var(--text-secondary);
   --axiom-text-mute: var(--text-muted);
-  --axiom-accent: var(--accent-solid);
-  --accent2: rgba(232, 162, 123, 0.85);
-  --accent-muted: rgba(232, 162, 123, 0.18);
+  --axiom-accent: var(--accent-v2, var(--accent-current));
+  --accent2: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.85);
+  --accent-muted: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.18);
   --bg-main: var(--bg-base);
   --bg-surface: var(--surface-1);
   --bg-inset: var(--surface-2);

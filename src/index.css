@@ -9,14 +9,18 @@
     --axiom-elevated: #11151A;
     --axiom-surface: #181E25;
     --axiom-border: #29313C;
-    --axiom-accent: #C87A57;
-    --accent: #C87A57;
-    --accent2: #D79A73;
-    --accent-muted: rgba(200, 122, 87, 0.18);
+    --accent-current: #C87A57;
+    --accent-current-rgb: 200 122 87;
+    --accent-v2: #C9A368;
+    --accent-v2-rgb: 201 163 104;
+    --axiom-accent: var(--accent-v2, var(--accent-current));
+    --accent: var(--accent-v2, var(--accent-current));
+    --accent2: var(--accent-v2, var(--accent-current));
+    --accent-muted: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.18);
     --axiom-text-main: #F3F6FA;
     --axiom-text-primary: #CFD7E3;
     --axiom-text-mute: #B0C0D0;
-    --axiom-amber: #C87A57;
+    --axiom-amber: var(--accent-v2, var(--accent-current));
     --axiom-gold: #CFA873;
     --axiom-navy: #1F2833;
     --radius-card: 1.5rem;
@@ -71,7 +75,7 @@
     pointer-events: none;
     background:
       radial-gradient(72% 100% at 50% 0%, rgba(112, 122, 136, 0.14) 0%, transparent 72%),
-      radial-gradient(56% 80% at 68% 8%, rgba(200, 122, 87, 0.11) 0%, transparent 74%);
+      radial-gradient(56% 80% at 68% 8%, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.11) 0%, transparent 74%);
     filter: blur(34px);
     opacity: 0.48;
     z-index: 1;
@@ -188,7 +192,7 @@
     pointer-events: none;
     background-image:
       radial-gradient(circle at top left, rgba(112, 122, 136, 0.05) 0%, transparent 58%),
-      radial-gradient(circle at bottom right, rgba(200, 122, 87, 0.03) 0%, transparent 58%);
+      radial-gradient(circle at bottom right, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.03) 0%, transparent 58%);
     filter: blur(96px);
     z-index: 1;
   }
@@ -366,7 +370,7 @@
       inset 0 1px 0 0 rgba(255, 255, 255, 0.28),
       inset 0 -6px 4px 0 rgba(0, 0, 0, 0.18),
       0 4px 6px 0 rgba(0, 0, 0, 0.34),
-      0 4px 34px 0 rgba(200, 122, 87, 0.12);
+      0 4px 34px 0 rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
     transform: translateZ(0);
     backface-visibility: hidden;
     transition:
@@ -448,7 +452,7 @@
     box-shadow:
       0 4px 20px rgba(0, 0, 0, 0.6),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
-      0 0 0 2px rgba(200, 122, 87, 0.32);
+      0 0 0 2px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.32);
   }
 
   .btn-attention {
@@ -583,7 +587,7 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-card);
     background:
-      radial-gradient(circle at 14% 0%, rgba(200, 122, 87, 0.12), transparent 28%),
+      radial-gradient(circle at 14% 0%, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12), transparent 28%),
       radial-gradient(circle at 84% 16%, rgba(75, 110, 175, 0.1), transparent 26%),
       linear-gradient(180deg, rgba(11, 16, 24, 0.98) 0%, rgba(8, 11, 16, 0.99) 100%);
     box-shadow:
