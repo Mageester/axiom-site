@@ -90,21 +90,25 @@ const processStages = [
     day: 'Day 1',
     title: 'Review',
     description: 'We audit the current site, the offer, and the gaps that are costing trust.',
+    icon: 'search',
   },
   {
     day: 'Day 3',
     title: 'Scope',
     description: 'We lock the structure, the message, and the pages that actually matter.',
+    icon: 'document',
   },
   {
     day: 'Day 7',
     title: 'Build',
     description: 'The design system, layout, and content come together in production.',
+    icon: 'code',
   },
   {
     day: 'Day 14',
     title: 'Launch',
     description: 'We ship the site, verify the handoff, and make ownership complete.',
+    icon: 'arrow-up',
   },
 ] as const;
 
@@ -435,9 +439,12 @@ const services = [
             <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
               <Card className="flex-1 min-w-[220px] p-0">
                 <div class="flex h-full flex-col gap-4 p-6 sm:p-7">
-                  <span class="font-mono text-[12px] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
-                    {stage.day}
-                  </span>
+                  <div class="flex items-center gap-2.5">
+                    <DrawIcon name={stage.icon} size={15} className="text-[var(--accent-solid)]" />
+                    <span class="font-mono text-[12px] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
+                      {stage.day}
+                    </span>
+                  </div>
                   <div>
                     <p class="text-[18px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
                       {stage.title}

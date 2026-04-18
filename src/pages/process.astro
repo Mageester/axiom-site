@@ -5,6 +5,7 @@ import { SEO_ROUTES } from '../lib/seo';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import DrawIcon from '../components/ui/DrawIcon.astro';
 
 const processSteps = [
   {
@@ -13,6 +14,7 @@ const processSteps = [
     timelineDescription:
       'We audit the current site, the offer, and the friction points that are costing trust. We also identify the pages and proof that should move first.',
     bullets: [] as const,
+    icon: 'search',
   },
   {
     dayLabel: 'Day 3',
@@ -20,6 +22,7 @@ const processSteps = [
     timelineDescription:
       'We lock the page structure, the call paths, and the content priorities before design starts. That keeps the build focused and the decisions early.',
     bullets: [] as const,
+    icon: 'document',
   },
   {
     dayLabel: 'Day 7',
@@ -27,12 +30,15 @@ const processSteps = [
     timelineDescription:
       'We write, design, and test the site in production conditions. The layout, hierarchy, and interactions stay simple enough to ship cleanly.',
     bullets: [] as const,
+    icon: 'code',
   },
   {
     dayLabel: 'Day 14',
     title: 'Launch',
     timelineDescription:
       'We run launch checks, connect the domain, and hand over the site with a clear technical finish. The result is predictable, not improvised.',
+    bullets: [] as const,
+    icon: 'arrow-up',
   },
 ] as const;
 
@@ -73,9 +79,12 @@ const launchChecklist = [
                 className="group h-full rounded-[var(--radius-card)] border border-transparent bg-[var(--surface-1)] shadow-[var(--shadow-card)] transition-[transform,border-color,box-shadow,background-color] duration-200 ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:border-[color:rgba(201,122,78,0.2)] motion-safe:hover:shadow-[0_18px_40px_rgba(201,122,78,0.08)] motion-safe:hover:bg-[var(--surface-2)]"
               >
                 <div class="flex flex-col p-6 sm:p-7">
-                  <p class="font-axiomMono text-[clamp(2.6rem,4vw,3.25rem)] leading-none tracking-[-0.06em] text-[var(--accent-solid)]">
-                    {step.dayLabel}
-                  </p>
+                  <div class="flex items-center gap-3">
+                    <DrawIcon name={step.icon} size={32} className="text-[var(--accent-solid)]" />
+                    <p class="font-axiomMono text-[clamp(2.6rem,4vw,3.25rem)] leading-none tracking-[-0.06em] text-[var(--accent-solid)]">
+                      {step.dayLabel}
+                    </p>
+                  </div>
                   <h2 class="section-heading mt-4 text-[18px] font-semibold text-[var(--text-primary)]">
                     {step.title}
                   </h2>
@@ -101,7 +110,8 @@ const launchChecklist = [
           {launchChecklist.map((item, index) => (
             <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
               <div class="h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
-                <p class="text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                <p class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                  <DrawIcon name="check" size={14} className="text-[#C9A96E]" />
                   {item.title}
                 </p>
                 <p class="section-copy mt-3 text-[14px]">
