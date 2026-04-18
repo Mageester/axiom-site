@@ -393,6 +393,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
         const parsed = IntakePayloadSchema.safeParse(rawBody);
         if (!parsed.success) {
+            console.warn('[INTAKE] validation_failed', {
+                errors: parsed.error.issues.map(i => ({ path: i.path, message: i.message })),
+                body_keys: Object.keys(rawBody || {})
+            });
             return jsonResponse(request, env, {
                 ok: false,
                 error: 'Validation failed',
@@ -442,6 +446,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
         const resendApiKey = String(env.RESEND_API_KEY || '').trim();
         if (!resendApiKey) {
+            console.error('[INTAKE] missing_resend_api_key');
             return jsonResponse(request, env, {
                 ok: false,
                 error: 'Intake is temporarily unavailable. Please email contact@getaxiom.ca.'
@@ -533,14 +538,22 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         const confirmationFailed = deliveryResults[1].status === 'rejected';
 
         if (internalFailed || confirmationFailed) {
+            const internalError = deliveryResults[0].status === 'rejected' ? deliveryResults[0].reason : null;
+            const confirmationError = deliveryResults[1].status === 'rejected' ? deliveryResults[1].reason : null;
+
             if (internalFailed) {
-                const reason = deliveryResults[0].status === 'rejected' ? deliveryResults[0].reason : null;
-                console.error('[INTAKE] internal_email_failed', reason instanceof Error ? reason.message : 'unknown');
+                console.error('[INTAKE] internal_email_failed', {
+                    message: internalError instanceof Error ? internalError.message : 'unknown',
+                    recipients
+                });
             }
             if (confirmationFailed) {
-                const reason = deliveryResults[1].status === 'rejected' ? deliveryResults[1].reason : null;
-                console.error('[INTAKE] confirmation_email_failed', reason instanceof Error ? reason.message : 'unknown');
+                console.error('[INTAKE] confirmation_email_failed', {
+                    message: confirmationError instanceof Error ? confirmationError.message : 'unknown',
+                    recipient: email
+                });
             }
+
             return jsonResponse(request, env, {
                 ok: false,
                 error: 'Submission could not be delivered. Please try again or email contact@getaxiom.ca.'

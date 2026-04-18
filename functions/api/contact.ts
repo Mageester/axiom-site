@@ -8,9 +8,14 @@ const ContactPayloadSchema = z.object({
     name: z.string().trim().min(2, 'Name is required').max(80),
     email: z.string().trim().email('Valid email is required').max(160),
     business_name: z.string().trim().max(120).optional(),
-    message: z.string().trim().min(10, 'Message must be at least 10 characters').max(4000),
-    source_path: z.string().trim().max(200).optional()
-}).strict();
+    details: z.string().trim().min(10, 'Message must be at least 10 characters').max(4000).optional(),
+    message: z.string().trim().min(10, 'Message must be at least 10 characters').max(4000).optional(),
+    source_path: z.string().trim().max(200).optional(),
+    company_fax: z.string().trim().max(120).optional()
+}).strict().refine(data => data.details || data.message, {
+    message: "Please provide a message or project details.",
+    path: ["details"]
+});
 
 export const onRequestPost: PagesFunction = async (context) => {
     const { request } = context;
@@ -46,9 +51,10 @@ export const onRequestPost: PagesFunction = async (context) => {
         name: parsed.data.name,
         email: parsed.data.email,
         business_name: parsed.data.business_name || '',
-        details: parsed.data.message,
+        details: parsed.data.details || parsed.data.message || '',
         primary_goal: 'not_sure',
-        source_path: parsed.data.source_path || '/contact'
+        source_path: parsed.data.source_path || '/contact',
+        company_fax: parsed.data.company_fax || ''
     };
 
     const proxiedRequest = new Request(new URL('/api/intake', request.url), {

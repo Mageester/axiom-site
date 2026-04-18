@@ -296,6 +296,18 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
           ></textarea>
           <p id={`${kind}-details-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
         </div>
+
+        <div class="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+          <label for={`${kind}-company-fax`}>Company Fax</label>
+          <input
+            id={`${kind}-company-fax`}
+            type="text"
+            name="company_fax"
+            tabindex="-1"
+            autocomplete="off"
+            class="data-intake-field"
+          />
+        </div>
       </fieldset>
 
       <input type="hidden" name="source_path" value={Astro.url.pathname + Astro.url.search} />
@@ -644,6 +656,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
               details: String(payload.details || '').trim(),
               primary_goal: 'new_site',
               source_path: String(payload.source_path || '').trim(),
+              company_fax: String(payload.company_fax || '').trim(),
             }
           : {
               name: String(payload.name || '').trim(),
@@ -651,6 +664,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
               business_name: String(payload.business_name || '').trim(),
               message: String(payload.message || '').trim(),
               source_path: String(payload.source_path || '').trim(),
+              company_fax: String(payload.company_fax || '').trim(),
             };
 
         try {

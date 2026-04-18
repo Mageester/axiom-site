@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { z } from 'zod';
 import useReveal from '../hooks/useReveal';
 
@@ -110,7 +110,9 @@ const IntakeTerminal: React.FC = () => {
           name: form.name,
           email: form.email,
           details: form.details,
+          business_name: form.business_name,
           company_fax: form.company_fax,
+          primary_goal: 'new_site',
           source_path: window.location.pathname,
         }),
         signal: controller.signal,

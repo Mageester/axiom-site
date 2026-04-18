@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone } from 'lucide-react';
 import Footer from '../components/Footer';
@@ -20,6 +20,7 @@ type IntakeFormState = {
     business_name: string;
     current_website: string;
     details: string;
+    company_fax: string;
 };
 
 const INITIAL_FORM: IntakeFormState = {
@@ -27,7 +28,8 @@ const INITIAL_FORM: IntakeFormState = {
     email: '',
     business_name: '',
     current_website: '',
-    details: ''
+    details: '',
+    company_fax: '',
 };
 
 const PROJECT_PATH = '/start-a-project';
@@ -38,6 +40,7 @@ const PROJECT_FIELD_IDS = {
     business_name: 'project-business-name',
     current_website: 'project-website-url',
     details: 'project-details',
+    company_fax: 'project-company-fax',
 } as const;
 
 const FALLBACK_SUBMIT_ERROR = 'Something went wrong. Email us directly at contact@getaxiom.ca';
@@ -91,6 +94,7 @@ type ContactFormState = {
     email: string;
     business_name: string;
     message: string;
+    company_fax: string;
 };
 
 const CONTACT_INITIAL_FORM: ContactFormState = {
@@ -98,13 +102,15 @@ const CONTACT_INITIAL_FORM: ContactFormState = {
     email: '',
     business_name: '',
     message: '',
+    company_fax: '',
 };
 
 const CONTACT_FIELD_IDS = {
     name: 'contact-name',
     email: 'contact-email',
     business_name: 'contact-business-name',
-    message: 'contact-message'
+    message: 'contact-message',
+    company_fax: 'contact-company-fax',
 } as const;
 
 type ContactFieldKey = keyof ContactFormState;
@@ -362,6 +368,7 @@ const GeneralContactForm: React.FC = () => {
                 details: form.message.trim(),
                 primary_goal: 'General inquiry',
                 source_path: window.location.pathname,
+                company_fax: form.company_fax.trim()
             };
             const res = await fetch('/api/contact', {
                 method: 'POST',
@@ -501,6 +508,19 @@ const GeneralContactForm: React.FC = () => {
                                             aria-describedby={errors.message ? `${CONTACT_FIELD_IDS.message}-helper ${CONTACT_FIELD_IDS.message}-error` : `${CONTACT_FIELD_IDS.message}-helper`}
                                         />
                                         {errors.message && <p id={`${CONTACT_FIELD_IDS.message}-error`} className="text-[15px] md:text-xs text-red-300">{errors.message}</p>}
+                                    </div>
+
+                                    <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                                        <label htmlFor={CONTACT_FIELD_IDS.company_fax}>Company Fax</label>
+                                        <input
+                                            id={CONTACT_FIELD_IDS.company_fax}
+                                            type="text"
+                                            name="company_fax"
+                                            tabIndex={-1}
+                                            autoComplete="off"
+                                            value={form.company_fax}
+                                            onChange={(event) => setField('company_fax', event.target.value)}
+                                        />
                                     </div>
 
                                     <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
@@ -669,7 +689,8 @@ const ProjectIntakeForm: React.FC = () => {
                 current_website: form.current_website.trim(),
                 details: form.details.trim(),
                 primary_goal: 'new_site',
-                source_path: window.location.pathname
+                source_path: window.location.pathname,
+                company_fax: form.company_fax.trim()
             };
             const res = await fetch('/api/intake', {
                 method: 'POST',
@@ -797,6 +818,19 @@ const ProjectIntakeForm: React.FC = () => {
                                                     <p id={`${PROJECT_FIELD_IDS.details}-helper`} className={FIELD_HELPER_CLASS}>Three short lines is enough.</p>
                                                     <textarea rows={3} id={PROJECT_FIELD_IDS.details} required minLength={10} value={form.details} onChange={(event) => setField('details', event.target.value)} placeholder="What does your business do, what’s wrong with your current site, and when do you want to move?" className={`${FIELD_INPUT_CLASS} resize-none`} aria-invalid={!!errors.details} aria-describedby={errors.details ? `${PROJECT_FIELD_IDS.details}-helper ${PROJECT_FIELD_IDS.details}-error` : `${PROJECT_FIELD_IDS.details}-helper`} />
                                                     {errors.details && <p id={`${PROJECT_FIELD_IDS.details}-error`} className="text-[15px] md:text-xs text-red-300">{errors.details}</p>}
+                                                </div>
+
+                                                <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                                                    <label htmlFor={PROJECT_FIELD_IDS.company_fax}>Company Fax</label>
+                                                    <input
+                                                        id={PROJECT_FIELD_IDS.company_fax}
+                                                        type="text"
+                                                        name="company_fax"
+                                                        tabIndex={-1}
+                                                        autoComplete="off"
+                                                        value={form.company_fax}
+                                                        onChange={(event) => setField('company_fax', event.target.value)}
+                                                    />
                                                 </div>
                                             </section>
 
