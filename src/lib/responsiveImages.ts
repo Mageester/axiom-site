@@ -18,8 +18,8 @@ export const responsiveImages = {
   },
   workSalon: {
     fallbackSrc: '/images/work-salon.png',
-    avifSrcSet: '/images/work-salon.png',
-    webpSrcSet: '/images/work-salon.png',
+    avifSrcSet: '/images/work-salon.avif',
+    webpSrcSet: '/images/work-salon.webp',
   },
   workRestaurant: {
     fallbackSrc: '/images/work-restaurant.jpg',
