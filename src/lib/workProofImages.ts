@@ -9,7 +9,7 @@ type ProofImageConfig = {
 const proofImagesBySlug: Record<string, ProofImageConfig> = {
   'concept-salon-demo': {
     source: responsiveImages.workSalon,
-    alt: 'Professional barber cutting hair in a modern salon',
+    alt: 'Premium nail studio interior with modern equipment and polished aesthetic',
     position: 'center 40%',
   },
   'demonstration-restaurant-reservation-site': {
