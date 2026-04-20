@@ -7,6 +7,11 @@ type ProofImageConfig = {
 };
 
 const proofImagesBySlug: Record<string, ProofImageConfig> = {
+  'concept-dental-demo': {
+    source: responsiveImages.workDental,
+    alt: 'Premium dental clinic interior with modern equipment and calm aesthetic',
+    position: 'center 40%',
+  },
   'concept-barber-demo': {
     source: responsiveImages.workBarber,
     alt: 'Professional barbershop interior with sharp branding and luxury feel',
