@@ -9,7 +9,7 @@ import {
     Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription,
 } from "@omni/components/ui/sheet";
 import {
-    Search, Phone, Mail, Download, Copy, Trash2, X, ListChecks,
+    Search, Phone, Mail, Download, Trash2, X, ListChecks,
     AlertTriangle,
 } from "lucide-react";
 

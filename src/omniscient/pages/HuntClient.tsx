@@ -1,28 +1,19 @@
 "use client"
-import { useState, useRef, useEffect, useCallback } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@omni/components/ui/card"
+import { useState, useEffect, useCallback } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@omni/components/ui/card"
 import { Label } from "@omni/components/ui/label"
 import { Input } from "@omni/components/ui/input"
 import { Button } from "@omni/components/ui/button"
-import { Badge } from "@omni/components/ui/badge"
 import { ToastProvider, useToast } from "@omni/components/ui/toast-provider"
 import {
     Target, Radar, MapPin, Layers, ArrowDown, Zap, Database, Mail, Clock,
-    Plus, Trash2, Play, RotateCcw, CheckCircle2, XCircle, AlertTriangle,
-    Shield, Globe, TrendingUp, SkipForward,
+    Plus, Trash2, Play, RotateCcw, CheckCircle2, XCircle, TrendingUp, SkipForward,
 } from "lucide-react"
 
 import { OpsHud } from "@omni/components/hunt/ops-hud"
-import { QueueSummary, type QueueItem } from "@omni/components/hunt/queue-summary"
+import { QueueSummary } from "@omni/components/hunt/queue-summary"
 import { IssuesPanel } from "@omni/components/hunt/issues-panel"
-import { TerminalPanel, type LogEntry } from "@omni/components/hunt/terminal-panel"
-import {
-    parseSSELine,
-} from "@omni/lib/hunt/sse-parser"
-import {
-    createInitialState, applyParseResult, resetCounters,
-    type HuntSessionState, type SessionStatus,
-} from "@omni/lib/hunt/hunt-session-store"
+import { TerminalPanel } from "@omni/components/hunt/terminal-panel"
 import { useHuntStore } from "@omni/lib/hunt/hunt-store"
 
 const NICHE_PRESETS = ["Roofers", "Concrete", "Med-Spas", "Landscaping", "Plumbing", "HVAC", "Electricians", "Auto Detailing", "Commercial Cleaning", "Custom Cabinetry"]
@@ -104,8 +95,6 @@ function HuntInner() {
 
     // ═══ DERIVED STATE ═══
     const pendingCount = store.queue.filter(q => q.status === "pending").length
-    const doneCount = store.queue.filter(q => q.status === "done").length
-    const failedCount = store.queue.filter(q => q.status === "failed").length
 
     // Compute avg job duration from done jobs roughly
     const avgJobDuration = 35; // placeholder or computed from logs

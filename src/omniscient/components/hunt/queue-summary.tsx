@@ -1,6 +1,5 @@
 "use client";
-import { cn } from "@omni/lib/utils";
-import { CheckCircle2, XCircle, Clock, Radar, SkipForward, Ban } from "lucide-react";
+import { CheckCircle2, XCircle, Clock, Radar, Ban } from "lucide-react";
 
 interface QueueItem {
     id: string;

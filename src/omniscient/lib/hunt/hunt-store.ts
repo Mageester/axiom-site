@@ -97,7 +97,7 @@ export const useHuntStore = create<HuntStore>((set, get) => ({
         }));
     },
 
-    processSSEMessage: (message, data) => {
+    processSSEMessage: (message) => {
         const parsed = parseSSELine(message);
         get().addLogEntry(message, parsed.level);
         set(state => ({ session: applyParseResult(state.session, parsed, message) }));

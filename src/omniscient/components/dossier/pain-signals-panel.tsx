@@ -1,7 +1,5 @@
 "use client";
-import { cn } from "@omni/lib/utils";
 import { SignalChip } from "@omni/components/ui/signal-chip";
-import { getSignalConfig } from "@omni/lib/ui/tokens";
 import { AlertTriangle, Zap } from "lucide-react";
 
 interface PainSignal {

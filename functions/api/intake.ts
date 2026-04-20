@@ -216,23 +216,6 @@ async function verifyTurnstile(secret: string, token: string, ip: string) {
     return Boolean(data?.success);
 }
 
-function parsePainPoints(raw: unknown) {
-    if (Array.isArray(raw)) {
-        return raw.map((item) => String(item || '').trim()).filter(Boolean);
-    }
-    if (typeof raw === 'string' && raw.trim()) {
-        return raw.split(',').map((item) => item.trim()).filter(Boolean);
-    }
-    return [] as string[];
-}
-
-function normalizeYesNo(value: unknown): '' | 'yes' | 'no' {
-    const normalized = String(value || '').trim().toLowerCase();
-    if (normalized === 'yes') return 'yes';
-    if (normalized === 'no') return 'no';
-    return '';
-}
-
 function sanitizeHeaderValue(value: unknown, max = 160) {
     return String(value ?? '')
         .replace(/[\r\n]+/g, ' ')

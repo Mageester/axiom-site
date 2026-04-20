@@ -1,6 +1,5 @@
 "use client";
 import { useCallback } from "react";
-import { cn } from "@omni/lib/utils";
 import { useToast } from "@omni/components/ui/toast-provider";
 import { Copy, PhoneCall, MessageCircle, Lightbulb, ArrowRight } from "lucide-react";
 

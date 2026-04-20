@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@omni/lib/utils";
-import { type TriageFilters, DEFAULT_FILTERS } from "@omni/lib/ui/triage-store";
-import { SlidersHorizontal, RotateCcw, HelpCircle, ListChecks, Globe, Mail, Phone, Star } from "lucide-react";
+import { type TriageFilters } from "@omni/lib/ui/triage-store";
+import { SlidersHorizontal, RotateCcw, HelpCircle, ListChecks, Globe, Mail, Phone } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@omni/components/ui/tooltip";
 
 interface TriageFilterBarProps {

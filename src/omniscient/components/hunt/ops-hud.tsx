@@ -4,7 +4,7 @@ import { type PipelineStage } from "@omni/lib/hunt/sse-parser";
 import { type HuntCounters, type SessionStatus, type CurrentJob } from "@omni/lib/hunt/hunt-session-store";
 import {
     Search, Filter, Cpu, ShieldCheck, Database, Check,
-    Pause, Play, X, HelpCircle, Radar,
+    Pause, Play, X,
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@omni/components/ui/tooltip";
 
@@ -116,7 +116,6 @@ export function OpsHud({
 }: OpsHudProps) {
     const isRunning = status === "running";
     const isPaused = status === "paused";
-    const isIdle = status === "idle";
     const isCompleted = status === "completed";
 
     const formatTime = (secs: number) => {

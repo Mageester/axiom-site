@@ -6,7 +6,7 @@
  */
 import {
     LayoutDashboard, Target, Database, Settings, Globe, Mail, Shield,
-    Download, Play, Search, Keyboard, Star, Filter, Zap, FileText,
+    Download, Play, Search, Keyboard, Star, Zap, FileText,
     type LucideIcon,
 } from "lucide-react";
 

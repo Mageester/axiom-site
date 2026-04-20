@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@omni/lib/utils";
-import { Gauge, AlertTriangle, Wrench } from "lucide-react";
+import { Gauge, Wrench } from "lucide-react";
 
 interface WebsiteAssessment {
     speedRisk: number;

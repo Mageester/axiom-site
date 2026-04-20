@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useCountUp } from '../../hooks/useCountUp';
 import { useFadeInOnScroll } from '../../hooks/useFadeInOnScroll';

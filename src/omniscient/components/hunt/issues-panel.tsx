@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
-import { cn } from "@omni/lib/utils";
 import { type HuntError } from "@omni/lib/hunt/hunt-session-store";
-import { AlertTriangle, Copy, Check, ChevronDown, ChevronRight, RotateCcw, X } from "lucide-react";
+import { AlertTriangle, Copy, ChevronDown, ChevronRight, RotateCcw, X } from "lucide-react";
 import { useToast } from "@omni/components/ui/toast-provider";
 
 interface IssuesPanelProps {

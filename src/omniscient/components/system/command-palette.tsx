@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { cn } from "@omni/lib/utils";
-import { COMMANDS, searchCommands, groupByCategory, type Command } from "@omni/lib/commands";
+import { searchCommands, groupByCategory, type Command } from "@omni/lib/commands";
 import { usePerformance } from "@omni/lib/ui/performance";
 import { Search, CornerDownLeft, ArrowUp, ArrowDown } from "lucide-react";
 

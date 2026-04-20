@@ -60,7 +60,7 @@ export function fuzzyBusinessKey(name?: string | null, address?: string | null) 
     return `${n}|${a}`;
 }
 
-function detectEmailInHtml(lower: string, original: string) {
+function detectEmailInHtml(original: string) {
     const mailtoMatch = original.match(/mailto:([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/i);
     if (mailtoMatch?.[1]) return mailtoMatch[1].toLowerCase();
     const textMatch = original.match(/\b([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})\b/i);
@@ -175,7 +175,7 @@ export async function auditLiteWebsite(rawUrl: string) {
         lower.includes('acuity') ||
         lower.includes('setmore')
     ) ? 1 : 0;
-    const detectedEmail = detectEmailInHtml(lower, html);
+    const detectedEmail = detectEmailInHtml(html);
 
     return {
         finalUrl,

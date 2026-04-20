@@ -229,8 +229,6 @@ export async function onRequestPost(context: any) {
                             let bookingPresent = 0;
                             let detectedEmail: string | null = b.email || null;
                             let finalUrl = resolvedWebsite;
-                            let httpsSupported = resolvedWebsite && String(resolvedWebsite).startsWith('https://') ? 1 : 0;
-
                             if (resolvedWebsite) {
                                 const lite = await auditLiteWebsite(String(resolvedWebsite));
                                 if (lite) {

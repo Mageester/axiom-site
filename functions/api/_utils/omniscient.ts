@@ -1,5 +1,5 @@
 import { hashToken } from './crypto';
-import { apiError, json } from './http';
+import { apiError } from './http';
 import { logEvent } from './log';
 
 export type OmniscientUser = {

@@ -13,11 +13,6 @@ export function HotkeyProvider({ children }: { children: React.ReactNode }) {
     const [paletteOpen, setPaletteOpen] = useState(false);
     const [shortcutsOpen, setShortcutsOpen] = useState(false);
 
-    const openPalette = useCallback(() => {
-        setShortcutsOpen(false);
-        setPaletteOpen(true);
-    }, []);
-
     const openShortcuts = useCallback(() => {
         setPaletteOpen(false);
         setShortcutsOpen(true);

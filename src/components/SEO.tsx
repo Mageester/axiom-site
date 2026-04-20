@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import {
   DEFAULT_OG_IMAGE,
   DEFAULT_SEO_DESCRIPTION,
-  SITE_NAME,
   SITE_URL,
   formatSeoTitle,
   toCanonicalUrl,

@@ -2,9 +2,6 @@ import { hashToken } from './_utils/crypto';
 import { apiError } from './_utils/http';
 import { logEvent } from './_utils/log';
 
-// Track bootstrap state for the process lifetime to avoid running on every request
-let bootstrapped = false;
-
 function constantTimeEqualString(a: string, b: string) {
     if (a.length !== b.length) return false;
     let diff = 0;

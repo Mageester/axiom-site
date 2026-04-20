@@ -1,6 +1,6 @@
 "use client"
 import * as React from "react"
-import { Target, Database, Settings, Zap, LayoutDashboard, Activity } from "lucide-react"
+import { Target, Database, Settings, Zap, LayoutDashboard } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 
 import {

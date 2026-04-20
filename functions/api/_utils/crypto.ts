@@ -80,7 +80,7 @@ async function timingSafeEqual(a: string, b: string): Promise<boolean> {
 }
 
 // Supports both legacy 2-part format (salt:hash) and new 3-part format (iters:salt:hash)
-export async function verifyPassword(password: string, storedHash: string, env?: any): Promise<boolean> {
+export async function verifyPassword(password: string, storedHash: string): Promise<boolean> {
     if (!storedHash) return false;
 
     const parts = storedHash.split(':');

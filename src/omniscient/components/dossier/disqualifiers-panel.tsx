@@ -1,5 +1,4 @@
 "use client";
-import { cn } from "@omni/lib/utils";
 import { AlertOctagon, XCircle } from "lucide-react";
 
 interface DisqualifiersPanelProps {

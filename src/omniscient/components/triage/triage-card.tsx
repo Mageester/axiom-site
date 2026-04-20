@@ -5,8 +5,8 @@ import { SignalChip } from "@omni/components/ui/signal-chip";
 import { CopyButton } from "@omni/components/ui/copy-button";
 import { getTierConfig } from "@omni/lib/ui/tokens";
 import {
-    Globe, Phone, Mail, PhoneCall, Copy, Clock, Archive,
-    MapPin, Gauge, Star,
+    Globe, Phone, Mail, PhoneCall, Clock, Archive,
+    MapPin, Star,
 } from "lucide-react";
 
 interface TriageLead {

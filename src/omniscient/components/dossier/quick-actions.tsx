@@ -4,7 +4,7 @@ import { cn } from "@omni/lib/utils";
 import { useToast } from "@omni/components/ui/toast-provider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@omni/components/ui/tooltip";
 import {
-    Copy, Phone, Mail, MapPin, PhoneCall, Archive, ArchiveRestore,
+    Copy, Mail, MapPin, PhoneCall, Archive, ArchiveRestore,
     ListPlus, ListMinus
 } from "lucide-react";
 

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useMemo, useCallback, useRef } from "react"
+import React, { useState, useMemo, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@omni/components/ui/table"
 import { Input } from "@omni/components/ui/input"
@@ -8,7 +8,7 @@ import { Label } from "@omni/components/ui/label"
 import {
     Search, Download, Trash2, ChevronDown, ChevronUp, ChevronLeft, ChevronRight,
     ArrowUpDown, ExternalLink, Phone, Mail, User, MapPin, Globe, Filter, X,
-    FileSpreadsheet, SlidersHorizontal, Star, MessageSquare, Building, Tag,
+    FileSpreadsheet, SlidersHorizontal, Star, MessageSquare, Tag,
     Calendar, CheckCircle2, XCircle, AtSign, Share2, FileText
 } from "lucide-react"
 
@@ -318,19 +318,6 @@ export default function VaultDataTable({ initialLeads }: { initialLeads: Lead[] 
 
     const selectAllExportCols = () => setExportColumns(Object.fromEntries(EXPORT_COLUMNS.map(c => [c.key, true])))
     const deselectAllExportCols = () => setExportColumns(Object.fromEntries(EXPORT_COLUMNS.map(c => [c.key, false])))
-
-    // Filter pill component
-    const FilterPill = ({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) => (
-        <button
-            onClick={onClick}
-            className={`text-[10px] px-2.5 py-1 rounded-full border transition-all duration-200 ${active
-                ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-300"
-                : "border-white/10 text-zinc-500 hover:border-white/20 hover:text-zinc-300"
-                }`}
-        >
-            {label}
-        </button>
-    )
 
     // Tri-state filter button
     const TriFilter = ({ label, icon: Icon, value, onChange }: { label: string; icon: any; value: string; onChange: (v: string) => void }) => (
