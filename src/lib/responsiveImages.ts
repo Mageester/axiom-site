@@ -17,9 +17,9 @@ export const responsiveImages = {
     ...fallbackResponsiveImage,
   },
   workSalon: {
-    fallbackSrc: '/images/work-salon.png',
-    avifSrcSet: '/images/work-salon.avif',
-    webpSrcSet: '/images/work-salon.webp',
+    fallbackSrc: '/images/work-nails-v2.png',
+    avifSrcSet: '/images/work-nails-v2.avif',
+    webpSrcSet: '/images/work-nails-v2.webp',
   },
   workRestaurant: {
     fallbackSrc: '/images/work-restaurant.jpg',
