@@ -16,6 +16,11 @@ export const responsiveImages = {
   workAether: {
     ...fallbackResponsiveImage,
   },
+  workLaw: {
+    fallbackSrc: '/images/work-law.png',
+    avifSrcSet: '/images/work-law.avif',
+    webpSrcSet: '/images/work-law.webp',
+  },
   workDental: {
     fallbackSrc: '/images/work-dental.png',
     avifSrcSet: '/images/work-dental.avif',
