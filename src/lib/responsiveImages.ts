@@ -17,9 +17,9 @@ export const responsiveImages = {
     ...fallbackResponsiveImage,
   },
   workLaw: {
-    fallbackSrc: '/images/work-law.png',
-    avifSrcSet: '/images/work-law.avif',
-    webpSrcSet: '/images/work-law.webp',
+    fallbackSrc: '/images/work-law-v2.png',
+    avifSrcSet: '/images/work-law-v2.avif',
+    webpSrcSet: '/images/work-law-v2.webp',
   },
   workDental: {
     fallbackSrc: '/images/work-dental.png',
