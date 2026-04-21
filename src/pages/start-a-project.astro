@@ -1,98 +1,82 @@
 ---
-import IntakeForm from '../components/site/IntakeForm.astro';
+import ProjectIntakeWizard from '../components/site/ProjectIntakeWizard';
 import { FadeIn } from '../components/ui/FadeIn';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
-import { Button } from '../components/ui/button';
-import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
+
+const sourcePath = Astro.url.pathname + Astro.url.search;
 ---
 
-<SiteLayout title={SEO_ROUTES.startProject.title} description={SEO_ROUTES.startProject.description} canonicalPath="/start-a-project">
+<SiteLayout
+  title={SEO_ROUTES.startProject.title}
+  description={SEO_ROUTES.startProject.description}
+  canonicalPath="/start-a-project"
+>
   <main id="main-content" tabindex="-1" class="-mt-28 pb-24 md:-mt-32 md:pb-32">
-    <section class="axiom-container pt-24 md:pt-32">
-      <FadeIn client:load className="max-w-3xl">
-        <Eyebrow>START A PROJECT</Eyebrow>
-        <h1 class="mt-4 max-w-4xl">
-          Tell us what the business needs.
-        </h1>
-        <p class="section-copy mt-5 md:text-[17px]">
-          Share the basics. The form takes a few minutes, and we reply within one business day with the next step.
-        </p>
+    <section class="axiom-container pt-16 md:pt-24">
+      <div class="mx-auto max-w-5xl">
+        <FadeIn client:load className="mx-auto max-w-3xl text-center">
+          <Eyebrow>START A PROJECT</Eyebrow>
+          <h1 class="mt-4">A calmer way to start the conversation.</h1>
+          <p class="section-copy mx-auto mt-5 max-w-2xl md:text-[17px]">
+            Share the essentials in one guided flow. It takes about 2 minutes, and we reply within one business day.
+          </p>
 
-        <div class="mt-8 flex flex-wrap items-center gap-3 text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
-          <span>ABOUT 2 MINUTES</span>
-          <span aria-hidden="true" class="text-[var(--text-muted)]">&rarr;</span>
-          <span>MONTHLY OR ONE-TIME</span>
-          <span aria-hidden="true" class="text-[var(--text-muted)]">&rarr;</span>
-          <span>REPLY WITHIN ONE BUSINESS DAY</span>
-        </div>
-
-        <div class="mt-7">
-          <Button asChild size="lg">
-            <a href="#project-intake">Submit project brief</a>
-          </Button>
-        </div>
-      </FadeIn>
-    </section>
-
-    <section class="page-section">
-      <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
-        <FadeIn client:load as="div" id="project-intake" className="scroll-mt-32">
-          <IntakeForm
-            kind="project"
-            endpoint="/api/intake"
-            title="Tell us what needs to change."
-            eyebrow="PROJECT INTAKE"
-            description="Tell us what the business does, what&apos;s broken about the current site, and which pricing path feels closest."
-            helper="Three short lines is enough. Monthly plan, one-time project, or not sure yet all work."
-            submitLabel={`Submit project brief \u2192`}
-            successTitle="Received."
-            successText="Received. We will review and reply within one business day."
-            noteLinkHref={CTA_PATHS.contact}
-            noteLinkLabel="contact page"
-            noteText="Need a quick question instead? Use the"
-          />
+          <div class="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
+            <span>ABOUT 2 MINUTES</span>
+            <span aria-hidden="true" class="text-[var(--text-muted)]">•</span>
+            <span>MONTHLY OR ONE-TIME</span>
+            <span aria-hidden="true" class="text-[var(--text-muted)]">•</span>
+            <span>REPLY WITHIN ONE BUSINESS DAY</span>
+          </div>
         </FadeIn>
 
-        <FadeIn client:load as="div">
-          <Card className="self-start p-0 xl:sticky xl:top-28">
-            <div class="p-6 sm:p-7">
-              <Eyebrow>WHAT TO EXPECT</Eyebrow>
-              <p class="section-copy mt-4">
-                Use this form when you are ready to scope a real project.
-              </p>
-              <div class="mt-6 space-y-4 border-t border-[color:var(--hairline)] pt-5">
-                <div>
-                  <p class="text-[12px] font-medium uppercase tracking-[0.16em] text-[var(--text-secondary)]">Who this is for</p>
-                  <p class="mt-2 text-[15px] leading-[1.7] text-white/65">Businesses ready to talk monthly or one-time website work.</p>
-                </div>
-                <div>
-                  <p class="text-[12px] font-medium uppercase tracking-[0.16em] text-[var(--text-secondary)]">Monthly vs one-time</p>
-                  <p class="mt-2 text-[15px] leading-[1.7] text-white/65">Monthly keeps the upfront cost lower. One-time gives you full ownership from launch.</p>
-                </div>
-                <div>
-                  <p class="text-[12px] font-medium uppercase tracking-[0.16em] text-[var(--text-secondary)]">Timeline</p>
-                  <p class="mt-2 text-[15px] leading-[1.7] text-white/65">We review the brief within one business day and outline the next step.</p>
-                </div>
-                <div>
-                  <p class="text-[12px] font-medium uppercase tracking-[0.16em] text-[var(--text-secondary)]">After submit</p>
-                  <p class="mt-2 text-[15px] leading-[1.7] text-white/65">We look at the scope, decide whether monthly or lump sum fits, and reply clearly.</p>
-                </div>
-              </div>
-              <div class="mt-6">
-                <a
-                  href={CTA_PATHS.contact}
-                  class="inline-flex items-center text-[15px] font-medium text-[var(--text-primary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-[color,opacity] duration-200 hover:text-[var(--text-primary)]"
-                >
-                  Need a quick question? Use Contact &rarr;
-                </a>
-              </div>
-            </div>
-          </Card>
-        </FadeIn>
+        <div class="mt-10 md:mt-12">
+          <ProjectIntakeWizard client:load sourcePath={sourcePath} />
+        </div>
       </div>
     </section>
   </main>
+
+  <style is:global>
+    .project-intake-wizard [data-step-panel] {
+      animation: wizard-step-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+      transform-origin: top center;
+    }
+
+    .project-intake-wizard [data-step-panel].wizard-step-panel-backward {
+      animation-name: wizard-step-in-backward;
+    }
+
+    @keyframes wizard-step-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes wizard-step-in-backward {
+      from {
+        opacity: 0;
+        transform: translate3d(0, -8px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .project-intake-wizard [data-step-panel] {
+        animation: none;
+      }
+    }
+  </style>
 </SiteLayout>
