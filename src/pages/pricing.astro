@@ -13,9 +13,23 @@ const isCheckmark = (val: string) =>
 
 const pricingTiers = [
   {
+    key: 'monthly',
+    name: 'MONTHLY',
+    price: 'From $150/mo',
+    subtext: '$0 down. No lock-in after 6 months. Hosting included.',
+    supportNote: 'Most clients recover the monthly cost within the first booked call the site generates.',
+    features: ['Up to 5 pages', 'Hosting included', 'Unlimited edits', '6-month minimum', 'Full ownership after 12 months'],
+    cta: 'Start a project',
+    href: '/start',
+    variant: 'secondary',
+    eyebrow: 'MOST ACCESSIBLE',
+  },
+  {
     key: 'growth',
     name: 'Growth',
     price: '$2,200',
+    subtext: '',
+    supportNote: '',
     features: ['5 pages', 'SEO foundation', 'Google Business setup', 'Live in 21 days'],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
@@ -26,6 +40,8 @@ const pricingTiers = [
     key: 'signature',
     name: 'Signature',
     price: 'From $3,500',
+    subtext: '',
+    supportNote: '',
     features: ['Unlimited pages', 'Integrations & automations', 'Post-launch support', 'Timeline scoped on intake'],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
@@ -35,6 +51,8 @@ const pricingTiers = [
     key: 'rebuild',
     name: 'Rebuild',
     price: 'From $6,500',
+    subtext: '',
+    supportNote: '',
     features: ['Full site migration', 'Integrations & automations', 'SEO preservation', 'Support through launch'],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
@@ -50,16 +68,16 @@ const comparisonRows = [
     rebuild: 'Full migration scope',
   },
   {
-    label: 'Revision rounds',
-    growth: '3 rounds',
-    signature: 'Scoped with the project',
-    rebuild: 'Scoped with the project',
-  },
-  {
     label: 'Turnaround',
     growth: '21 days',
     signature: 'Scoped on intake',
     rebuild: 'Scoped on intake',
+  },
+  {
+    label: 'Revision rounds',
+    growth: '3 rounds',
+    signature: 'Scoped with the project',
+    rebuild: 'Scoped with the project',
   },
   {
     label: 'SEO setup',
@@ -105,7 +123,9 @@ const comparisonRows = [
   },
 ] as const;
 
-const mobileComparisonTiers = pricingTiers.map((tier) => ({
+const mobileComparisonTiers = pricingTiers
+  .filter((tier) => tier.key !== 'monthly')
+  .map((tier) => ({
   ...tier,
   rows: comparisonRows.map((row) => ({
     label: row.label,
@@ -142,7 +162,7 @@ const faqItems = [
   {
     question: "What's the payment schedule?",
     answer:
-      'Projects usually start with a deposit and finish by milestone or before launch. If the scope needs a custom schedule, we will spell it out first.',
+      "Projects start with a deposit before any work begins. The remainder is due at launch, or split across milestones on larger builds. We don't start work without payment in place — that keeps the timeline clean for both sides.",
   },
   {
     question: 'Do you work with businesses outside your area?',
@@ -162,22 +182,22 @@ const faqItems = [
     <section class="axiom-container pt-12 md:pt-20">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PRICING</Eyebrow>
-        <h1 class="mt-4">One investment. Full ownership.</h1>
+        <h1 class="mt-4">Flexible structure. Full ownership.</h1>
         <p class="section-copy mt-5 md:text-[17px]">
-          No monthly fees. No lock-in. You own the site, the code, and the domain.
+          One investment. No lock-in. You own the site, the code, and the domain. Monthly plans also available.
         </p>
       </FadeIn>
     </section>
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:pb-0">
+        <div class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:pb-0">
           {pricingTiers.map((tier, index) => (
             <FadeIn
               client:load
               delay={Math.min(index * 100, 400)}
               as="div"
-              className="h-full shrink-0 basis-[84%] snap-start sm:basis-[68%] md:basis-[56%] lg:basis-auto lg:shrink"
+              className="flex h-full shrink-0 basis-[84%] snap-start flex-col sm:basis-[68%] md:basis-[56%] lg:basis-auto lg:shrink"
             >
               <Card
                 padding="none"
@@ -197,13 +217,15 @@ const faqItems = [
                 ) : null}
 
                 <div class="relative flex h-full flex-col p-6 sm:p-7">
-                  {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
+                  {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.eyebrow ?? tier.name}</Eyebrow>}
 
                   {!tier.highlighted ? <p class="mt-2 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{tier.name}</p> : null}
 
                   <p class="mt-5 text-[56px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)]">
                     {tier.price}
                   </p>
+
+                  {tier.subtext ? <p class="mt-3 text-[15px] leading-[1.65] text-white/60">{tier.subtext}</p> : null}
 
                   <ul class="mt-6 space-y-3">
                     {tier.features.map((feature) => (
@@ -223,6 +245,12 @@ const faqItems = [
                   </div>
                 </div>
               </Card>
+
+              {tier.supportNote ? (
+                <p class="mt-3 px-3 text-center text-[13px] font-normal leading-[1.6] text-[rgba(255,255,255,0.45)]">
+                  {tier.supportNote}
+                </p>
+              ) : null}
             </FadeIn>
           ))}
         </div>

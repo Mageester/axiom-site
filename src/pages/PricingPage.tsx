@@ -28,10 +28,29 @@ type PricingTier = {
   features: string[];
   cta: string;
   href: string;
+  label?: string;
+  supportNote?: string;
   recommended?: boolean;
 };
 
 const pricingTiers: readonly (PricingTier & { icon: React.ElementType })[] = [
+  {
+    name: 'MONTHLY',
+    label: 'MOST ACCESSIBLE',
+    price: 'From $150/mo',
+    description: '$0 down. No lock-in after 6 months. Hosting included.',
+    supportNote: 'Most clients recover the monthly cost within the first booked call the site generates.',
+    features: [
+      'Up to 5 pages',
+      'Hosting included',
+      'Unlimited edits',
+      '6-month minimum',
+      'Full ownership after 12 months'
+    ],
+    cta: 'Start a project',
+    href: '/start',
+    icon: CreditCard,
+  },
   {
     name: 'Starter',
     price: '$1,200',
@@ -162,23 +181,23 @@ const PricingPage: React.FC = () => {
         <p className="section-eyebrow">PRICING</p>
         <div>
           <h1 className="text-[clamp(2.45rem,5.8vw,4rem)] font-axiomSans font-semibold leading-[1.06] tracking-[-0.02em] text-[#F2F4F7]">
-            One investment. Full ownership.
+            Flexible structure. Full ownership.
           </h1>
           <h2 className="mt-2 text-[clamp(1.45rem,2.8vw,2rem)] font-axiomSans font-medium tracking-tight text-slate-300">
-            No monthly fees. No recurring charges. You own everything we build.
+            Choose a monthly starting point or a one-time project scope. You still own everything we build.
           </h2>
         </div>
         <p className="mx-auto max-w-[760px] text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
-          No monthly platform fees. No recurring charges for things you should already own. Three tiers based on what your business actually needs.
+          Four options based on how you want to start: a lower-friction monthly plan or a scoped build with full ownership.
         </p>
       </section>
 
       {/* SECTION 2: PRICING CARDS */}
       <section className="mb-12 sm:mb-24">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-4 md:gap-6">
           {pricingTiers.map((tier) => (
+            <div key={tier.name} className="flex h-full flex-col">
             <article
-              key={tier.name}
               className={`machined-card flex h-full flex-col gap-6 rounded-[var(--radius-card)] border bg-[#10141c]/40 p-6 sm:p-8 transition-colors ${
                 tier.recommended
                   ? 'border-t-2 border-t-axiom-accent border-white/10 shadow-[0_12px_44px_rgba(200,122,87,0.12)]'
@@ -187,9 +206,16 @@ const PricingPage: React.FC = () => {
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <h3 className="font-axiomMono text-xs uppercase tracking-wide text-[#A7B3BC]">
-                    {tier.name}
-                  </h3>
+                  <div>
+                    <p className={`font-axiomMono text-xs uppercase tracking-wide ${tier.recommended ? 'text-axiom-accent' : 'text-[#A7B3BC]'}`}>
+                      {tier.label ?? tier.name}
+                    </p>
+                    {tier.label ? (
+                      <h3 className="mt-2 font-axiomMono text-xs uppercase tracking-[0.08em] text-[#A7B3BC]">
+                        {tier.name}
+                      </h3>
+                    ) : null}
+                  </div>
                   <tier.icon className={`h-5 w-5 ${tier.recommended ? 'text-axiom-accent' : 'text-slate-500/50'}`} strokeWidth={1.5} />
                 </div>
                 <p className="mt-6 font-axiomDisplay text-[40px] leading-none tracking-[-0.04em] text-[#F2F4F7]">
@@ -213,6 +239,12 @@ const PricingPage: React.FC = () => {
                 {tier.cta}
               </Link>
             </article>
+            {tier.supportNote ? (
+              <p className="mt-3 px-3 text-center text-[13px] font-normal leading-[1.6] text-[rgba(255,255,255,0.45)]">
+                {tier.supportNote}
+              </p>
+            ) : null}
+            </div>
           ))}
         </div>
       </section>
