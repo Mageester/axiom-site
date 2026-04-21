@@ -126,7 +126,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
             Form progress
           </p>
           <p data-intake-progress-label class="font-axiomMono text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
-            0/3 complete
+            0/5 COMPLETE
           </p>
         </div>
         <div
@@ -137,7 +137,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
           aria-valuenow="0"
           aria-label="Form completion progress"
         >
-          <div data-intake-progress-fill class="h-full w-0 rounded-full bg-[#c8956a]"></div>
+          <div data-intake-progress-fill class="h-full w-0 rounded-full bg-[#b89a5e]"></div>
         </div>
       </div>
 
@@ -505,6 +505,10 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
       const progressFill = form.querySelector('[data-intake-progress-fill]');
       const progressLabel = form.querySelector('[data-intake-progress-label]');
       const fields = Array.from(form.querySelectorAll('[data-intake-field]'));
+      const progressKeys = form.dataset.intakeKind === 'project'
+        ? ['name', 'email', 'business_name', 'current_website', 'details']
+        : ['name', 'email', 'business_name', 'current_website', 'message'];
+      const totalProgressFields = progressKeys.length;
       const requiredKeys = form.dataset.intakeKind === 'project'
         ? ['name', 'email', 'details']
         : ['name', 'email', 'message'];
@@ -512,18 +516,17 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
       const getFieldByKey = (key) => form.querySelector(`[data-intake-field-key="${key}"]`);
 
       const updateProgress = () => {
-        const completed = requiredKeys.reduce((count, key) => {
+        const completed = progressKeys.reduce((count, key) => {
           const field = getFieldByKey(key);
 
           if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement)) {
             return count;
           }
 
-          const hasValue = field.value.trim().length > 0;
-          return hasValue && field.validity.valid ? count + 1 : count;
+          return field.value.trim().length > 0 ? count + 1 : count;
         }, 0);
 
-        const percent = Math.round((completed / requiredKeys.length) * 100);
+        const percent = Math.round((completed / totalProgressFields) * 100);
 
         if (progressFill instanceof HTMLElement) {
           progressFill.style.width = `${percent}%`;
@@ -531,7 +534,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
         }
 
         if (progressLabel instanceof HTMLElement) {
-          progressLabel.textContent = `${completed}/${requiredKeys.length} complete`;
+          progressLabel.textContent = `${completed}/${totalProgressFields} COMPLETE`;
         }
       };
 
@@ -605,6 +608,7 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
         if (submitButton instanceof HTMLButtonElement) {
           submitButton.disabled = false;
         }
+        updateProgress();
       };
 
       if (resetButton instanceof HTMLButtonElement) {
@@ -620,11 +624,14 @@ const fieldErrorClass = 'min-h-[1.1em] text-[13px] leading-5 text-[var(--text-er
         });
 
         field.addEventListener('input', () => {
+          updateProgress();
           if (field.dataset.touched === 'true' || form.dataset.validationAttempted === 'true') {
             updateFieldState(form, field);
           }
         });
       });
+
+      updateProgress();
 
       form.addEventListener('submit', async (event) => {
         event.preventDefault();

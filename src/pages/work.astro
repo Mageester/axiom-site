@@ -12,6 +12,7 @@ const featuredBuilds = [
   {
     eyebrow: 'BUILD CONCEPT \u00b7 LEGAL SERVICES',
     title: 'Harrow & Calloway',
+    category: 'legal',
     originalWeakness: 'Legal websites are often text-heavy and fail to establish immediate trust and clarity for potential clients.',
     axiomChanged: 'Created a calm, professional environment with strong typography and a clear path to consultation.',
     whyItWorks: 'A premium law firm demo built around trust, modern aesthetic, calm presentation, and a professional consultation path.',
@@ -23,6 +24,7 @@ const featuredBuilds = [
   {
     eyebrow: 'BUILD CONCEPT \u00b7 HEALTHCARE & MEDICAL',
     title: 'Aurelia Dental Studio',
+    category: 'other',
     originalWeakness: 'Dental sites often feel clinical, cold, and have confusing booking paths that increase patient anxiety.',
     axiomChanged: 'A calm, trust-focused presentation paired with a polished, high-speed booking experience.',
     whyItWorks: 'A premium dental clinic demo built around trust, modern care, calm presentation, and a polished booking experience.',
@@ -34,6 +36,7 @@ const featuredBuilds = [
   {
     eyebrow: 'BUILD CONCEPT \u00b7 PERSONAL SERVICES & GROOMING',
     title: 'Blackline Barber Co.',
+    category: 'sales-beauty',
     originalWeakness: 'Traditional barbershop sites often lack a modern, editorial aesthetic and have high-friction booking paths.',
     axiomChanged: 'Implemented sharp editorial branding and a frictionless, high-speed booking flow.',
     whyItWorks: 'A premium barbershop demo built around sharp branding, strong booking flow, and an editorial luxury feel.',
@@ -45,6 +48,7 @@ const featuredBuilds = [
   {
     eyebrow: 'BUILD CONCEPT \u00b7 SALON & BEAUTY',
     title: 'Nails Studio Demo',
+    category: 'sales-beauty',
     originalWeakness: 'Standard salon sites often bury the booking button and lack a premium, luxury aesthetic.',
     axiomChanged: 'The booking flow is clean and direct, paired with modern trust cues.',
     whyItWorks: 'A premium salon demo focused on clean booking flow, modern trust cues, and a polished luxury feel for beauty brands.',
@@ -56,6 +60,7 @@ const featuredBuilds = [
   {
     eyebrow: 'BUILD CONCEPT \u00b7 RESTAURANT & HOSPITALITY',
     title: 'A reservation site that does not hide the booking.',
+    category: 'food-hospitality',
     originalWeakness: 'Guests had to hunt for the booking link, and the menu was hard to read on phones.',
     axiomChanged: 'The reservation path stays visible and the menu reads cleanly on mobile.',
     whyItWorks:
@@ -68,6 +73,7 @@ const featuredBuilds = [
   {
     eyebrow: 'BUILD CONCEPT \u00b7 LANDSCAPING & OUTDOOR SERVICES',
     title: 'A landscaping site that puts the work in front.',
+    category: 'home-services',
     originalWeakness: 'Past work was buried, and quote requests took too many clicks.',
     axiomChanged: 'Project photos come forward and the quote path is shorter.',
     whyItWorks: 'Buyers can judge the quality first and request a quote without digging through pages.',
@@ -79,6 +85,7 @@ const featuredBuilds = [
   {
     eyebrow: 'BUILD CONCEPT \u00b7 ROOFING & EXTERIORS',
     title: 'A roofing site that separates urgent from planned.',
+    category: 'home-services',
     originalWeakness: 'Storm traffic needs a fast path to inspection and estimate requests.',
     axiomChanged: 'Urgent calls and planned estimates have separate paths.',
     whyItWorks: 'Different visitors need different actions, so the page removes friction instead of making everyone read the same route.',
@@ -87,6 +94,15 @@ const featuredBuilds = [
     position: 'center 36%',
     href: 'https://roofing.getaxiom.ca',
   },
+] as const;
+
+const workFilters = [
+  { label: 'All', value: 'all' },
+  { label: 'Sales & Beauty', value: 'sales-beauty' },
+  { label: 'Legal', value: 'legal' },
+  { label: 'Food & Hospitality', value: 'food-hospitality' },
+  { label: 'Home Services', value: 'home-services' },
+  { label: 'Other', value: 'other' },
 ] as const;
 
 const buildLinkClass =
@@ -113,15 +129,28 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
     </section>
 
     <section class="page-section">
-      <div class="axiom-container space-y-8 md:space-y-10">
-        {featuredBuilds.map((build, index) => {
-          const imageFirst = index % 2 === 0;
+      <div class="axiom-container">
+        <div data-work-filter-row class="mb-8 flex flex-wrap items-center gap-x-6 gap-y-3 md:mb-10">
+          {workFilters.map((filter) => (
+            <button
+              type="button"
+              data-work-filter={filter.value}
+              aria-pressed={filter.value === 'all' ? 'true' : 'false'}
+              class="axiom-eyebrow border-b border-transparent pb-1 text-[11px] font-medium uppercase tracking-[0.2em] text-white/40 transition-colors duration-150 hover:text-white/70 focus-visible:outline-none"
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+
+        <div class="space-y-8 md:space-y-10">
+          {featuredBuilds.map((build, index) => {
+            const imageFirst = index % 2 === 0;
 
             return (
-              <FadeIn
-                client:load
-                as="article"
-                delay={Math.min(index * 100, 400)}
+              <article
+                data-work-card
+                data-category={build.category}
                 className="group overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] border-b border-white/5 bg-[var(--surface-1)] shadow-[var(--shadow-card)]"
               >
                 <div class="grid gap-0 lg:grid-cols-2">
@@ -153,37 +182,38 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
                   </figure>
 
                   <div class={`flex h-full flex-col justify-center p-6 sm:p-8 lg:p-10 ${imageFirst ? '' : 'lg:order-1'}`}>
-                  <Eyebrow className="text-[13px] tracking-[0.15em]">{build.eyebrow}</Eyebrow>
-                  <h2 class="section-heading mt-4 text-[clamp(32px,4vw,52px)] font-[500] text-[var(--text-primary)]">
-                    {build.title}
-                  </h2>
+                    <Eyebrow className="text-[13px] tracking-[0.15em]">{build.eyebrow}</Eyebrow>
+                    <h2 class="section-heading mt-4 text-[clamp(32px,4vw,52px)] font-[500] text-[var(--text-primary)]">
+                      {build.title}
+                    </h2>
 
-                  <dl class="mt-8 space-y-5">
-                    <div class="space-y-2">
-                      <dt class="axiom-metric text-[var(--text-muted)]">ORIGINAL WEAKNESS</dt>
-                      <dd class="section-copy">{build.originalWeakness}</dd>
-                    </div>
-                    <div class="space-y-2 border-t border-[color:var(--hairline)] pt-5">
-                      <dt class="axiom-metric text-[var(--text-muted)]">AXIOM CHANGED</dt>
-                      <dd class="section-copy">{build.axiomChanged}</dd>
-                    </div>
-                    <div class="space-y-2 border-t border-[color:var(--hairline)] pt-5">
-                      <dt class="axiom-metric text-[var(--text-muted)]">WHY IT WORKS</dt>
-                      <dd class="section-copy">{build.whyItWorks}</dd>
-                    </div>
-                  </dl>
+                    <dl class="mt-8 space-y-5">
+                      <div class="space-y-2">
+                        <dt class="axiom-metric text-[var(--text-muted)]">ORIGINAL WEAKNESS</dt>
+                        <dd class="section-copy">{build.originalWeakness}</dd>
+                      </div>
+                      <div class="space-y-2 border-t border-[color:var(--hairline)] pt-5">
+                        <dt class="axiom-metric text-[var(--text-muted)]">AXIOM CHANGED</dt>
+                        <dd class="section-copy">{build.axiomChanged}</dd>
+                      </div>
+                      <div class="space-y-2 border-t border-[color:var(--hairline)] pt-5">
+                        <dt class="axiom-metric text-[var(--text-muted)]">WHY IT WORKS</dt>
+                        <dd class="section-copy">{build.whyItWorks}</dd>
+                      </div>
+                    </dl>
 
-                  <div class="mt-8">
-                    <a class={buildLinkClass} href={build.href} target="_blank" rel="noopener noreferrer">
-                      <span>View the build</span>
-                      <span class={buildArrowClass}>→</span>
-                    </a>
+                    <div class="mt-8">
+                      <a class={buildLinkClass} href={build.href} target="_blank" rel="noopener noreferrer">
+                        <span>View the build</span>
+                        <span class={buildArrowClass}>→</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </FadeIn>
-          );
-        })}
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
 
@@ -224,3 +254,52 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
     </section>
   </main>
 </SiteLayout>
+
+<script>
+  const initWorkFilters = () => {
+    const filterRow = document.querySelector('[data-work-filter-row]');
+
+    if (!filterRow || filterRow.getAttribute('data-work-filters-ready') === 'true') {
+      return;
+    }
+
+    filterRow.setAttribute('data-work-filters-ready', 'true');
+
+    const buttons = Array.from(filterRow.querySelectorAll('[data-work-filter]'));
+    const cards = Array.from(document.querySelectorAll('[data-work-card]'));
+
+    const applyFilter = (filter) => {
+      buttons.forEach((button) => {
+        const isActive = button.dataset.workFilter === filter;
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+
+      cards.forEach((card) => {
+        const matches = filter === 'all' || card.dataset.category === filter;
+        card.style.display = matches ? '' : 'none';
+        card.setAttribute('aria-hidden', String(!matches));
+      });
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        applyFilter(button.dataset.workFilter ?? 'all');
+      });
+    });
+
+    applyFilter('all');
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWorkFilters, { once: true });
+  } else {
+    initWorkFilters();
+  }
+</script>
+
+<style>
+  [data-work-filter-row] [data-work-filter][aria-pressed='true'] {
+    color: #b89a5e;
+    border-bottom-color: #b89a5e;
+  }
+</style>
