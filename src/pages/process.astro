@@ -12,7 +12,7 @@ const processSteps = [
     dayLabel: 'Day 1',
     title: 'Review',
     timelineDescription:
-      'We audit the current site, the offer, and the friction points that are costing trust. We also identify the pages and proof that should move first.',
+      'We audit the current site, the offer, and the friction points that are costing trust. Then we decide what needs to change first.',
     bullets: [] as const,
     icon: 'search',
   },
@@ -36,7 +36,7 @@ const processSteps = [
     dayLabel: 'Day 14',
     title: 'Launch',
     timelineDescription:
-      'We run launch checks, connect the domain, and hand over the site with a clear technical finish. The result is predictable, not improvised.',
+      'We run launch checks, connect the domain, and hand over the site with a clear technical finish. Monthly clients stay supported after launch.',
     bullets: [] as const,
     icon: 'arrow-up',
   },
@@ -55,9 +55,10 @@ const launchChecklist = [
     <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PROCESS</Eyebrow>
-        <h1 class="mt-4">Four stages. From review to launch.</h1>
+        <h1 class="mt-4">Four stages. Then ongoing support.</h1>
         <p class="section-copy mt-5 md:text-[17px]">
-          Every stage keeps the work clear, the decisions early, and the launch predictable.
+          Every stage keeps the work clear, the decisions early, and the launch predictable. Monthly clients stay
+          supported after the site goes live.
         </p>
         <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button asChild size="lg" className="w-full sm:w-auto">
@@ -88,7 +89,7 @@ const launchChecklist = [
                   <h2 class="section-heading mt-4 text-[18px] font-semibold text-[var(--text-primary)]">
                     {step.title}
                   </h2>
-                  <p class="section-copy mt-3 text-[14px]">
+                  <p class="section-copy mt-3 text-[15px]">
                     {step.timelineDescription}
                   </p>
                 </div>
@@ -102,8 +103,8 @@ const launchChecklist = [
     <section class="page-section">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
-          <Eyebrow>LAUNCH CHECKLIST</Eyebrow>
-          <h2 class="section-heading mt-4">What launch day actually looks like.</h2>
+          <Eyebrow>WHAT WE NEED FROM YOU</Eyebrow>
+          <h2 class="section-heading mt-4">A few inputs so the work starts cleanly.</h2>
         </FadeIn>
 
         <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -114,7 +115,7 @@ const launchChecklist = [
                   <DrawIcon name="check" size={14} className="text-[#C9A96E]" />
                   {item.title}
                 </p>
-                <p class="section-copy mt-3 text-[14px]">
+                <p class="section-copy mt-3 text-[15px]">
                   {item.detail}
                 </p>
               </div>
@@ -125,10 +126,23 @@ const launchChecklist = [
     </section>
 
     <section class="page-section">
-      <div class="axiom-container">
+      <div class="axiom-container grid gap-6 lg:grid-cols-2">
         <FadeIn client:load as="div">
-          <Card className="mx-auto max-w-5xl p-0">
-            <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+          <Card className="h-full p-0">
+            <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+              <Eyebrow>AFTER LAUNCH</Eyebrow>
+              <h2 class="section-heading mt-4">Subscription clients stay supported.</h2>
+              <p class="section-copy mt-4">
+                Once the site is live, monthly clients keep the work moving with edits, refinements, and support.
+                One-time ownership clients get a clean handoff and a separate support path if needed.
+              </p>
+            </div>
+          </Card>
+        </FadeIn>
+
+        <FadeIn client:load as="div">
+          <Card className="h-full p-0">
+            <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>THE GUARANTEE</Eyebrow>
               <h2 class="section-heading mt-4">Ready to stop losing jobs to a weaker site?</h2>
               <p class="section-copy mt-4">

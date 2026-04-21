@@ -101,7 +101,7 @@ const SocialProof: React.FC<SocialProofProps> = ({
           <h2 id={headingId} className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
             What clients say
           </h2>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-[15px]">
+          <p className="mt-4 max-w-3xl text-[15px] leading-[1.7] text-slate-300 md:text-[16px]">
             Verifiable reviews from named clients, shared with permission.
           </p>
         </div>
@@ -111,7 +111,7 @@ const SocialProof: React.FC<SocialProofProps> = ({
           <h2 id={headingId} className="mt-3 text-3xl font-bold tracking-tight text-[#F2F4F7] md:text-5xl">
             No fluff. Just reasons buyers can verify.
           </h2>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300 md:text-[15px]">
+          <p className="mt-4 max-w-3xl text-[15px] leading-[1.7] text-slate-300 md:text-[16px]">
             When there is no review to show yet, lead with the parts of the offer that are already clear.
           </p>
         </div>
@@ -126,7 +126,7 @@ const SocialProof: React.FC<SocialProofProps> = ({
             >
               <div className="space-y-4">
                 <p className="section-eyebrow">{testimonial.industryTag}</p>
-                <blockquote className="max-w-3xl text-[clamp(1.3rem,2vw,1.8rem)] font-medium leading-[1.45] tracking-[-0.03em] text-[#F2F4F7]">
+                <blockquote className="max-w-3xl text-[clamp(1.3rem,2vw,1.8rem)] font-medium leading-[1.55] tracking-[-0.03em] text-[#F2F4F7]">
                   {testimonial.quote}
                 </blockquote>
               </div>
@@ -134,8 +134,8 @@ const SocialProof: React.FC<SocialProofProps> = ({
               <div className="mt-auto border-t border-white/10 pt-5">
                 {typeof testimonial.rating === 'number' ? <StarRating rating={testimonial.rating} /> : null}
                 <div className="mt-3">
-                  <p className="text-[15px] font-semibold text-[#F2F4F7] md:text-base">{testimonial.clientName}</p>
-                  <p className="text-[15px] text-slate-400 md:text-sm">{testimonial.businessName}</p>
+                  <p className="text-[16px] font-semibold text-[#F2F4F7] md:text-[17px]">{testimonial.clientName}</p>
+                  <p className="text-[15px] text-slate-400 md:text-[16px]">{testimonial.businessName}</p>
                 </div>
               </div>
             </article>
@@ -147,12 +147,12 @@ const SocialProof: React.FC<SocialProofProps> = ({
             <article key={item.title} className="machined-card flex h-full min-h-[14rem] flex-col gap-5 p-6 md:p-8">
               <div className="space-y-4">
                 <p className="section-eyebrow">{item.eyebrow}</p>
-                <h3 className="max-w-xl text-[clamp(1.4rem,2vw,1.9rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-[#F2F4F7]">
+                <h3 className="max-w-xl text-[clamp(1.4rem,2vw,1.9rem)] font-semibold leading-[1.2] tracking-[-0.03em] text-[#F2F4F7]">
                   {item.title}
                 </h3>
               </div>
 
-              <p className="mt-auto max-w-xl text-[15px] leading-relaxed text-slate-300 md:text-[16px]">
+              <p className="mt-auto max-w-xl text-[16px] leading-[1.7] text-slate-300 md:text-[17px]">
                 {item.description}
               </p>
             </article>

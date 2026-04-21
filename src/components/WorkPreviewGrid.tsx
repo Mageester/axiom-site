@@ -75,11 +75,11 @@ const WorkPreviewCard: React.FC<{ preview: WorkPreview; index: number }> = ({ pr
       <div className="flex flex-1 flex-col p-5 md:p-6">
         <div>
           <h3 className="text-[1.1rem] font-semibold tracking-tight text-[#F2F4F7]">{preview.name}</h3>
-          <p className="mt-2 text-[15px] md:text-sm leading-6 text-slate-300">{preview.description}</p>
+          <p className="mt-2 text-[16px] md:text-[15px] leading-[1.7] text-slate-300">{preview.description}</p>
         </div>
 
         <div className="mt-5">
-          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[15px] md:text-xs uppercase tracking-[0.16em] text-white/65">
+          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[12px] md:text-[12px] uppercase tracking-[0.16em] text-white/65">
             {preview.industryTag}
           </span>
         </div>

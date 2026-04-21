@@ -30,7 +30,7 @@ const { title, updated, sections } = Astro.props as Props;
         <h1 class="mt-4 max-w-[760px]">{title}</h1>
       </FadeIn>
       <FadeIn client:load delay={200}>
-        <p class="section-copy mt-4 max-w-[760px] text-sm">
+        <p class="section-copy mt-4 max-w-[760px] text-[15px] leading-[1.78] md:text-[16px]">
           Last updated: {updated}
         </p>
       </FadeIn>
@@ -50,10 +50,10 @@ const { title, updated, sections } = Astro.props as Props;
                 data-legal-nav-active={index === 0 ? 'true' : 'false'}
                 class="group flex items-start gap-3 rounded-[12px] border border-transparent px-3 py-2 transition-[background-color,border-color,color] duration-200 ease-out hover:border-[color:var(--hairline)] hover:bg-[color:var(--surface-overlay)]"
               >
-                <span class="font-axiomMono text-[11px] font-medium leading-none tracking-[0.08em] text-[var(--text-secondary)] transition-colors duration-200 ease-out" data-legal-nav-number>
+                <span class="font-axiomMono text-[12px] font-medium leading-none tracking-[0.08em] text-[var(--text-secondary)] transition-colors duration-200 ease-out" data-legal-nav-number>
                   {section.number}
                 </span>
-                <span class="text-[13px] leading-[1.45] text-[var(--text-secondary)] transition-colors duration-200 ease-out group-hover:text-[var(--text-primary)]" data-legal-nav-title>
+                <span class="text-[14px] leading-[1.6] text-[var(--text-secondary)] transition-colors duration-200 ease-out group-hover:text-[var(--text-primary)]" data-legal-nav-title>
                   {section.title}
                 </span>
               </a>
@@ -94,7 +94,7 @@ const { title, updated, sections } = Astro.props as Props;
                     {section.bullets && section.bullets.length > 0 && (
                       <ul class="space-y-3 pt-1">
                         {section.bullets.map((bullet) => (
-                          <li class="flex gap-3 text-[15px] leading-[1.7] text-white/60">
+                          <li class="flex gap-3 text-[16px] leading-[1.75] text-white/65">
                             <span
                               aria-hidden="true"
                               class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[var(--accent-solid)]"

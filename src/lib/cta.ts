@@ -2,7 +2,7 @@ export const CTA_PATHS = {
     startProject: '/start-a-project',
     work: '/work',
     process: '/process',
-    contact: '/start-a-project?type=question'
+    contact: '/contact'
 } as const;
 
 export const CTA_LABELS = {

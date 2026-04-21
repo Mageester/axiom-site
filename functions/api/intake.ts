@@ -42,6 +42,8 @@ const IntakePayloadSchema = z.object({
     current_website: z.string().trim().max(500).optional(),
     websiteUrl: z.string().trim().max(500).optional(),
     website: z.string().trim().max(500).optional(),
+    pricing_path: z.string().trim().max(120).optional(),
+    pricingPath: z.string().trim().max(120).optional(),
     project_scale: z.string().trim().max(120).optional(),
     projectScale: z.string().trim().max(120).optional(),
     pain_points: z.union([z.string().trim().max(2000), z.array(z.string().trim().max(120)).max(20)]).optional(),
@@ -259,6 +261,15 @@ function normalizePrimaryGoal(value: string) {
     return 'not_sure';
 }
 
+function formatPricingPath(value: string) {
+    const raw = value.trim().toLowerCase();
+    if (!raw) return '';
+    if (raw === 'monthly') return 'Monthly plan';
+    if (raw === 'one_time' || raw === 'one-time') return 'One-time project';
+    if (raw === 'not_sure' || raw === 'not sure yet') return 'Not sure yet';
+    return value.trim();
+}
+
 type ResendEmailPayload = {
     from: string;
     to: string[];
@@ -293,6 +304,7 @@ function buildInternalEmail(params: {
     email: string;
     businessName: string;
     website: string;
+    pricingPath: string;
     projectScale: string;
     primaryGoal: string;
     details: string;
@@ -305,6 +317,7 @@ function buildInternalEmail(params: {
                 <tr><td style="padding:6px 0;width:180px;"><strong>Name</strong></td><td>${escapeHtml(params.name)}</td></tr>
                 <tr><td style="padding:6px 0;"><strong>Email</strong></td><td><a href="mailto:${escapeHtml(params.email)}">${escapeHtml(params.email)}</a></td></tr>
                 <tr><td style="padding:6px 0;"><strong>Business</strong></td><td>${escapeHtml(params.businessName || 'Not provided')}</td></tr>
+                <tr><td style="padding:6px 0;"><strong>Preferred Path</strong></td><td>${escapeHtml(params.pricingPath || 'Not provided')}</td></tr>
                 <tr><td style="padding:6px 0;"><strong>Website</strong></td><td>${params.website ? `<a href="${escapeHtml(params.website)}">${escapeHtml(params.website)}</a>` : 'Not provided'}</td></tr>
                 <tr><td style="padding:6px 0;"><strong>Scale / Goal</strong></td><td>${escapeHtml(params.projectScale || params.primaryGoal || 'Not provided')}</td></tr>
                 <tr><td style="padding:6px 0;"><strong>Source Path</strong></td><td>${escapeHtml(params.sourcePath || 'Not provided')}</td></tr>
@@ -320,6 +333,7 @@ function buildInternalEmail(params: {
         `Name: ${params.name}`,
         `Email: ${params.email}`,
         `Business: ${params.businessName || 'Not provided'}`,
+        `Preferred Path: ${params.pricingPath || 'Not provided'}`,
         `Website: ${params.website || 'Not provided'}`,
         `Scale / Goal: ${params.projectScale || params.primaryGoal || 'Not provided'}`,
         `Source Path: ${params.sourcePath || 'Not provided'}`,
@@ -450,6 +464,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         const phone = (body.phone || '').trim();
         const currentWebsite = (body.current_website || body.websiteUrl || body.website || '').trim();
         const normalizedWebsite = normalizeHttpUrl(currentWebsite);
+        const pricingPathInput = (body.pricing_path || body.pricingPath || '').trim();
+        const pricingPath = formatPricingPath(pricingPathInput);
         const projectScale = (body.project_scale || body.projectScale || '').trim();
         const primaryGoalInput = (body.primary_goal || body.primaryGoal || '').trim();
         const primaryGoal = normalizePrimaryGoal(primaryGoalInput || projectScale);
@@ -490,7 +506,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         const fromEmail = String(env.INTAKE_FROM_EMAIL || DEFAULT_FROM_EMAIL).trim() || DEFAULT_FROM_EMAIL;
         const confirmationFrom = String(env.INTAKE_CONFIRMATION_FROM_EMAIL || DEFAULT_CONFIRMATION_FROM_EMAIL).trim() || DEFAULT_CONFIRMATION_FROM_EMAIL;
 
-        const scaleForSubject = sanitizeHeaderValue(projectScale || primaryGoalInput || primaryGoal || 'Submission', 80);
+        const scaleForSubject = sanitizeHeaderValue(pricingPath || projectScale || primaryGoalInput || primaryGoal || 'Submission', 80);
         const originForSubject = sanitizeHeaderValue(businessName || normalizedWebsite || name, 120);
         const internalSubject = `[Axiom] New Submission - ${scaleForSubject} - ${originForSubject}`;
 
@@ -499,6 +515,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             email,
             businessName,
             website: normalizedWebsite,
+            pricingPath,
             projectScale,
             primaryGoal: primaryGoalInput || primaryGoal,
             details,

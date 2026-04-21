@@ -18,8 +18,8 @@
     --accent2: var(--accent-v2, var(--accent-current));
     --accent-muted: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.18);
     --axiom-text-main: #F3F6FA;
-    --axiom-text-primary: #CFD7E3;
-    --axiom-text-mute: #B0C0D0;
+    --axiom-text-primary: #C2C2C8;
+    --axiom-text-mute: #6B6B74;
     --axiom-amber: var(--accent-v2, var(--accent-current));
     --axiom-gold: #CFA873;
     --axiom-navy: #1F2833;
@@ -53,7 +53,7 @@
   }
 
   body {
-    @apply font-body leading-[1.65];
+    @apply font-body leading-[1.7];
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
@@ -61,6 +61,7 @@
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     color: var(--text-secondary);
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -109,8 +110,8 @@
   }
 
   p {
-    @apply leading-relaxed;
-    color: #D1D9E4;
+    @apply leading-[1.7];
+    color: #D7DDE8;
   }
 
   main[id],
@@ -296,9 +297,9 @@
 
   .section-eyebrow {
     @apply font-axiomMono uppercase;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 11px;
-    line-height: 1;
+    color: rgba(255, 255, 255, 0.46);
+    font-size: 12px;
+    line-height: 1.1;
     font-weight: 500;
     letter-spacing: 0.2em;
   }
@@ -311,9 +312,9 @@
 
   .section-copy {
     max-width: 32rem;
-    font-size: 1rem;
-    line-height: 1.75;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.03rem;
+    line-height: 1.82;
+    color: rgba(255, 255, 255, 0.68);
   }
 
 .axiom-container {

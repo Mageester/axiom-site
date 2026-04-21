@@ -47,7 +47,7 @@ export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHead
 }
 
 export function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn('text-[13px] leading-[1.55] text-[var(--text-secondary)]', className)} {...props} />;
+  return <p className={cn('text-[14px] leading-[1.65] text-[var(--text-secondary)]', className)} {...props} />;
 }
 
 export const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

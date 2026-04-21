@@ -8,21 +8,21 @@ import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 
-const whatTheWorkDoes = [
+const whyAxiom = [
   {
     number: '01',
     title: 'What you do, who you serve, and why you are the right call.',
-    description: 'Readable before they scroll. Not buried.',
+    description: 'Visitors understand the offer before they have to hunt for it.',
   },
   {
     number: '02',
     title: 'Reviews, past work, and results front and center.',
-    description: 'Doubt does not get a chance.',
+    description: 'Proof shows up early, before doubt has time to build.',
   },
   {
     number: '03',
-    title: 'One path forward.',
-    description: 'Call, book, or request a quote. No hunting, no dead ends.',
+    title: 'One path forward, with support after launch.',
+    description: 'Monthly clients stay supported instead of being handed off and forgotten.',
   },
 ] as const;
 
@@ -30,16 +30,16 @@ const team = [
   {
     name: 'Aidan',
     monogram: 'aidan',
-    roles: ['STRATEGY', 'SYSTEMS', 'CLIENT WORK'],
+    roles: ['STRATEGY', 'SCOPE', 'CLIENT SUPPORT'],
     description:
-      'Keeps the work tied to the business goal, the scope, and the next step. Handles strategy and communication from first call to launch.',
+      'Keeps the work tied to the business goal, the scope, and the next step. Handles strategy and communication from first call through ongoing support.',
   },
   {
     name: 'Riley',
     monogram: 'riley',
-    roles: ['DESIGN', 'BUILD', 'DELIVERY'],
+    roles: ['DESIGN', 'BUILD', 'QA'],
     description:
-      'Turns the strategy into the site itself. Handles design, build quality, and delivery so the result stays fast, stable, and clean.',
+      'Turns the strategy into the site itself. Handles design, build quality, and launch checks so the result stays fast, stable, and clean.',
   },
 ] as const;
 
@@ -82,8 +82,9 @@ const principles = [
         </FadeIn>
         <FadeIn client:load delay={200}>
           <p class="section-copy mt-5 md:text-[17px]">
-            You do not need more pages, better fonts, or a redesign for its own sake. You need a site that lands the
-            offer instantly and routes the right people to the right action. That is the only problem we solve.
+            Axiom serves established businesses that need a clearer first impression, a lower-friction way to start,
+            and a partner who stays involved after launch. We make the offer obvious, the next step clear, and the
+            support ongoing.
           </p>
         </FadeIn>
         <FadeIn client:load delay={300} className="mt-7">
@@ -97,11 +98,11 @@ const principles = [
     <section class="page-section">
       <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)] xl:items-start xl:gap-8">
         <FadeIn client:load as="div" className="space-y-5">
-          <Eyebrow>WHAT THE WORK DOES</Eyebrow>
-          <h2 class="section-heading">The work is done when the site does not need explaining.</h2>
+          <Eyebrow>WHY AXIOM</Eyebrow>
+          <h2 class="section-heading">The work is done when the site keeps helping after launch.</h2>
           <p class="section-copy md:text-[17px]">
             Most sites do not need more pages or more effects. They need the offer to read clearly, proof to appear
-            early, and the next step to stay obvious.
+            early, and support that does not stop at the handoff.
           </p>
           <Button asChild variant="ghost" className="px-0">
             <a href="/work">See the work</a>
@@ -110,12 +111,12 @@ const principles = [
 
         <Card className="p-0">
           <div class="p-6 sm:p-7">
-            {whatTheWorkDoes.map((item, index) => (
+            {whyAxiom.map((item, index) => (
               <FadeIn client:load as="div" delay={Math.min(index * 100, 400)} className={`grid gap-4 py-5 first:pt-0 last:pb-0 sm:grid-cols-[4rem_minmax(0,1fr)] ${index > 0 ? 'border-t border-[color:var(--hairline)]' : ''}`}>
                 <div class="axiom-metric text-[var(--text-muted)] sm:pt-1">{item.number}</div>
                 <div>
                   <p class="text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">{item.title}</p>
-                      <p class="section-copy mt-2">{item.description}</p>
+                  <p class="section-copy mt-2">{item.description}</p>
                 </div>
               </FadeIn>
             ))}
@@ -131,11 +132,11 @@ const principles = [
             <Eyebrow>THE TEAM</Eyebrow>
           </FadeIn>
           <FadeIn client:load delay={100}>
-            <h2 class="section-heading mt-4">Built by two operators who take this seriously.</h2>
+            <h2 class="section-heading mt-4">Built by two operators with clear roles and ongoing support.</h2>
           </FadeIn>
           <FadeIn client:load delay={200}>
             <p class="section-copy mt-3 md:text-[17px]">
-              Two operators. Kitchener-Waterloo. Working globally.
+              Two operators. Kitchener-Waterloo. Working globally. The relationship does not end at launch.
             </p>
           </FadeIn>
         </div>
@@ -175,7 +176,7 @@ const principles = [
                       <h3 class="text-xl font-semibold text-white">{member.name}</h3>
                       <div class="mt-3 flex flex-wrap gap-1">
                         {member.roles.map((role) => (
-                          <span class="rounded-full bg-white/10 px-2 py-0.5 text-[10px] uppercase tracking-widest text-white/70">
+                          <span class="rounded-full bg-white/10 px-2 py-0.5 text-[12px] uppercase tracking-widest text-white/72">
                             {role}
                           </span>
                         ))}
@@ -183,7 +184,7 @@ const principles = [
                     </div>
                   </div>
 
-                  <p class="mt-6 text-sm leading-relaxed text-white/60">
+                  <p class="mt-6 text-[15px] leading-[1.7] text-white/65">
                     {member.description}
                   </p>
                 </div>
@@ -230,12 +231,12 @@ const principles = [
         <FadeIn client:load>
           <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
           <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
-            <div class="max-w-3xl">
+              <div class="max-w-3xl">
                 <h2 class="section-heading">
                   Seen enough?
                 </h2>
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Tell us what the business needs. One business day, no pressure.
+                  Tell us what the business needs. Monthly or one-time, we’ll point you to the right path in one business day.
                 </p>
             </div>
 

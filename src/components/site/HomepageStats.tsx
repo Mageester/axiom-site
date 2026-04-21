@@ -54,7 +54,7 @@ function AnimatedStat({ description, duration, target, unit }: AnimatedStatProps
       </dd>
       <dt
         className={[
-          'font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--accent-solid)] opacity-0 motion-safe:transition-opacity motion-safe:duration-300 motion-reduce:opacity-100',
+          'font-mono text-[12px] uppercase tracking-[0.14em] text-[var(--accent-solid)] opacity-0 motion-safe:transition-opacity motion-safe:duration-300 motion-reduce:opacity-100',
           showUnit && 'opacity-100',
         ]
           .filter(Boolean)
@@ -62,7 +62,7 @@ function AnimatedStat({ description, duration, target, unit }: AnimatedStatProps
       >
         {unit}
       </dt>
-      <p className="mt-2 text-[14px] leading-[1.6] text-[var(--text-secondary)]">{description}</p>
+      <p className="mt-2 text-[15px] leading-[1.7] text-[var(--text-secondary)]">{description}</p>
     </div>
   );
 }
@@ -104,7 +104,7 @@ function StaticStat({ description, unit, value }: StaticStatProps) {
       </dd>
       <dt
         className={[
-          'font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--accent-solid)] opacity-0 motion-safe:transition-opacity motion-safe:duration-300 motion-reduce:opacity-100',
+          'font-mono text-[12px] uppercase tracking-[0.14em] text-[var(--accent-solid)] opacity-0 motion-safe:transition-opacity motion-safe:duration-300 motion-reduce:opacity-100',
           showUnit && 'opacity-100',
         ]
           .filter(Boolean)
@@ -112,7 +112,7 @@ function StaticStat({ description, unit, value }: StaticStatProps) {
       >
         {unit}
       </dt>
-      <p className="mt-2 text-[14px] leading-[1.6] text-[var(--text-secondary)]">{description}</p>
+      <p className="mt-2 text-[15px] leading-[1.7] text-[var(--text-secondary)]">{description}</p>
     </div>
   );
 }
@@ -123,8 +123,12 @@ export function HomepageStats() {
       <div className="axiom-container py-10 md:py-14">
         <dl className="grid grid-cols-1 gap-10 sm:grid-cols-3">
           <AnimatedStat description="Typical turnaround from kickoff to live." duration={1000} target={14} unit="DAYS" />
-          <StaticStat description="Performance floor, guaranteed in writing." unit="LOAD" value="<1s" />
-          <AnimatedStat description="Full code delivery. No subscriptions." duration={1200} target={100} unit="OWNERSHIP" />
+          <StaticStat description="Performance floor, guaranteed in writing." unit="LOAD TIME" value="<1s" />
+          <StaticStat
+            description="Most clients start here for lower upfront cost and ongoing support."
+            unit="PRIMARY PATH"
+            value="MONTHLY"
+          />
         </dl>
       </div>
     </section>

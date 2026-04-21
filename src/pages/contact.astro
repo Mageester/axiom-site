@@ -5,6 +5,7 @@ import IntakeForm from '../components/site/IntakeForm.astro';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
 ---
 
@@ -13,9 +14,9 @@ import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
     <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="mx-auto max-w-3xl text-center">
         <Eyebrow>CONTACT</Eyebrow>
-        <h1 class="mt-4">Just a question.</h1>
+        <h1 class="mt-4">Quick question.</h1>
         <p class="section-copy mx-auto mt-5 text-center md:text-[17px]">
-          For quick questions and short notes. For projects, use the intake page.
+          For quick questions, follow-ups, or a short note. For project work, use Start Project.
         </p>
       </FadeIn>
     </section>
@@ -64,14 +65,14 @@ import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
           <IntakeForm
             kind="contact"
             endpoint="/api/contact"
-            title="Send the note."
-            eyebrow="QUESTION FORM"
-            description="Use this for a quick question or a note about your site."
-            helper="A short note is enough. Tell us what you need help with."
-            submitLabel={`Send the note \u2192`}
+            title="Send a quick note."
+            eyebrow="QUICK NOTE"
+            description="Use this for a short question or follow-up. If you&apos;re planning website work, use Start Project."
+            helper="A sentence or two is enough. Tell us what you need."
+            submitLabel={`Send note \u2192`}
             successTitle="Received."
             successText="Received. We will review and reply within one business day."
-            noteLinkHref="/start"
+            noteLinkHref={CTA_PATHS.startProject}
             noteLinkLabel="project intake page"
             noteText="Need website work? Use the"
           />

@@ -24,7 +24,7 @@ const isActive = (pathname: string, href: string) => pathname === href || pathna
 
 export const Footer: React.FC<FooterProps> = ({ pathname }) => {
   const year = new Date().getFullYear();
-  const footerLinkClass = 'motion-link-accent text-[15px] text-white/40 transition-colors duration-200 hover:text-white/80';
+  const footerLinkClass = 'motion-link-accent text-[16px] leading-[1.7] text-white/50 transition-colors duration-200 hover:text-white/85';
 
   return (
     <footer className="border-t border-[color:var(--hairline)] px-6 py-20 md:px-12">
@@ -42,10 +42,10 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
               fetchPriority="high"
             />
           </a>
-          <p className="max-w-sm text-sm italic leading-relaxed text-white/40">
+          <p className="max-w-sm text-[15px] italic leading-[1.7] text-white/50">
             Websites built to convert. Not to decorate.
           </p>
-          <p className="text-[13px] leading-[1.55] text-[var(--text-muted)]">© {year} Axiom Infrastructure.</p>
+          <p className="text-[14px] leading-[1.6] text-[var(--text-muted)]">© {year} Axiom Infrastructure.</p>
         </div>
 
         <div className="space-y-4">

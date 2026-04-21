@@ -20,10 +20,10 @@
   --hairline-strong: rgba(255, 255, 255, 0.1);
   --hairline-hover: rgba(255, 255, 255, 0.12);
   --text-primary: #f5f5f7;
-  --text-secondary: #b8b8be;
-  --text-muted: #5a5a62;
+  --text-secondary: #c2c2c8;
+  --text-muted: #6b6b74;
   --text-error: #e7b2a8;
-  --text-placeholder: rgba(184, 184, 190, 0.78);
+  --text-placeholder: rgba(194, 194, 200, 0.8);
   --text-on-accent: #0a0a0c;
   --error-surface: rgba(231, 178, 168, 0.1);
   --error-border: rgba(231, 178, 168, 0.35);

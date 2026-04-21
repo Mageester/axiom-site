@@ -8,189 +8,159 @@ import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 
-const isCheckmark = (val: string) => 
-  ['Included', '✓'].some((k) => val.toLowerCase() === k.toLowerCase());
+const isCheckmark = (val: string) => ['Included', '✓'].some((k) => val.toLowerCase() === k.toLowerCase());
 
 const pricingTiers = [
   {
-    key: 'growth',
-    name: 'Growth',
-    price: '$2,200',
-    subtext: '',
-    supportNote: '',
-    features: ['5 pages', 'SEO foundation', 'Google Business setup', 'Live in 21 days'],
-    cta: 'Start a project',
-    href: CTA_PATHS.startProject,
-    variant: 'secondary',
-  },
-  {
     key: 'monthly',
-    name: 'MONTHLY',
-    price: 'From $150/mo',
-    subtext: '$0 down. No lock-in after 6 months. Hosting included.',
-    supportNote: 'Most clients recover the monthly cost within the first booked call the site generates.',
-    features: ['Up to 5 pages', 'Hosting included', 'Unlimited edits', '6-month minimum — protects your timeline', 'Full code ownership at month 12'],
-    cta: 'Start a project',
+    name: 'Subscription',
+    price: '$0 down',
+    subtext: 'From $150-$200/mo. Hosting included. Best when you want to start with less friction.',
+    supportNote: 'Ongoing edits and support are included. Full ownership transfers at month 12.',
+    features: ['Up to 5 pages', 'Hosting included', 'Ongoing edits and support', '6-month minimum', 'Full ownership available at month 12'],
+    cta: 'Start monthly',
     href: '/start',
     variant: 'primary',
     highlighted: true,
-    eyebrow: 'PREFERRED MODEL',
+    eyebrow: 'PREFERRED PATH',
+    bestFor: 'Best for starting quickly with a lower upfront cost.',
   },
   {
-    key: 'signature',
-    name: 'Signature',
+    key: 'ownership',
+    name: 'One-time ownership',
     price: 'From $3,500',
-    subtext: '',
-    supportNote: '',
-    features: ['Unlimited pages', 'Integrations & automations', 'Post-launch support', 'Timeline scoped on intake'],
+    subtext: 'For a standard 5-page build. Full handoff at launch. Hosting can be scoped separately.',
+    supportNote: 'Best for buyers who want to own the site outright from day one.',
+    features: ['Up to 5 pages', 'Full code ownership at launch', 'Launch support included', 'Hosting scoped separately', 'SEO foundation'],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
     variant: 'secondary',
+    bestFor: 'Best for teams that prefer a single upfront payment.',
   },
   {
-    key: 'rebuild',
-    name: 'Rebuild',
-    price: 'From $6,500',
-    subtext: '',
-    supportNote: '',
-    features: ['Full site migration', 'Integrations & automations', 'SEO preservation', 'Support through launch'],
+    key: 'ecommerce',
+    name: 'E-commerce / rebuilds',
+    price: 'Custom lump sum',
+    subtext: 'Sized to the store, migration, or rebuild scope. E-commerce stays lump sum only.',
+    supportNote: 'Best for larger builds that need tighter scoping from the start.',
+    features: ['Store setup or rebuild', 'Migration support', 'Integrations as needed', 'Launch support included', 'Scoped pricing'],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
     variant: 'secondary',
+    bestFor: 'Best for stores and larger rebuilds that should be scoped once.',
   },
 ] as const;
 
 const comparisonRows = [
   {
-    label: 'Pages included',
-    monthly: 'Up to 5 pages',
-    growth: '5 pages',
-    signature: 'Unlimited pages',
-    rebuild: 'Full migration scope',
+    label: 'Best for',
+    monthly: 'Starting with less friction',
+    ownership: 'Owning outright from day one',
+    ecommerce: 'Stores and larger rebuilds',
   },
   {
-    label: 'Turnaround',
-    monthly: '21 days',
-    growth: '21 days',
-    signature: 'Scoped on intake',
-    rebuild: 'Scoped on intake',
+    label: 'Upfront cost',
+    monthly: '$0 down',
+    ownership: 'One-time payment',
+    ecommerce: 'One-time payment',
   },
   {
-    label: 'Revision rounds',
-    monthly: '3 rounds',
-    growth: '3 rounds',
-    signature: 'Scoped with the project',
-    rebuild: 'Scoped with the project',
+    label: 'Starting price',
+    monthly: 'From $150-$200/mo',
+    ownership: 'From $3,500',
+    ecommerce: 'Custom lump sum',
   },
   {
-    label: 'SEO setup',
-    monthly: 'SEO foundation',
-    growth: 'SEO foundation',
-    signature: 'Custom strategy',
-    rebuild: 'SEO preservation',
-  },
-  {
-    label: 'Google Business setup',
-    monthly: '✓',
-    growth: 'Included',
-    signature: 'Included if needed',
-    rebuild: 'Included if needed',
-  },
-  {
-    label: 'Hosting guidance',
+    label: 'Hosting',
     monthly: 'Included',
-    growth: 'Included',
-    signature: 'Included',
-    rebuild: 'Included',
+    ownership: 'Scoped separately if needed',
+    ecommerce: 'Scoped as needed',
   },
   {
-    label: 'Editing workflow',
-    monthly: 'Editable content flow',
-    growth: 'Editable content flow',
-    signature: 'Custom setup',
-    rebuild: 'Custom setup',
-  },
-  {
-    label: 'Post-launch support',
-    monthly: 'Ongoing support',
-    growth: 'Post-launch support',
-    signature: 'Scoped support',
-    rebuild: 'Support through launch',
+    label: 'Support',
+    monthly: 'Ongoing edits and support',
+    ownership: 'Launch support included',
+    ecommerce: 'Launch support included',
   },
   {
     label: 'Ownership',
-    monthly: 'Full ownership at month 12',
-    growth: 'Full ownership',
-    signature: 'Full ownership',
-    rebuild: 'Full ownership',
+    monthly: 'Available at month 12',
+    ownership: 'Full ownership at launch',
+    ecommerce: 'Full ownership at launch',
   },
   {
-    label: 'Recurring fees',
-    monthly: '$150/mo · 6-month minimum',
-    growth: 'None',
-    signature: 'None',
-    rebuild: 'None',
+    label: 'Pages / scope',
+    monthly: 'Up to 5 pages',
+    ownership: 'Up to 5 pages',
+    ecommerce: 'Scoped to the build',
+  },
+  {
+    label: 'Turnaround',
+    monthly: 'About 21 days',
+    ownership: 'Scoped on intake',
+    ecommerce: 'Scoped on intake',
+  },
+  {
+    label: 'Revisions',
+    monthly: '3 rounds',
+    ownership: '3 rounds',
+    ecommerce: 'Scoped with the project',
   },
 ] as const;
 
-const comparisonTierOrder = ['monthly', 'growth', 'signature', 'rebuild'] as const;
+const comparisonTierOrder = ['monthly', 'ownership', 'ecommerce'] as const;
 
 const mobileComparisonTiers = comparisonTierOrder
   .map((key) => pricingTiers.find((tier) => tier.key === key))
   .filter(Boolean)
   .map((tier) => ({
-  ...tier,
-  rows: comparisonRows.map((row) => ({
-    label: row.label,
-    value: row[tier!.key as keyof typeof row],
-  })),
-}));
+    ...tier,
+    rows: comparisonRows.map((row) => ({
+      label: row.label,
+      value: row[tier!.key as keyof typeof row],
+    })),
+  }));
 
 const faqItems = [
   {
-    question: 'Do I own the code?',
+    question: 'Why lead with monthly pricing?',
     answer:
-      'Yes. You own the site, the source files, and the final handoff. There are no lease-style terms or hidden licensing fees.',
+      'It lowers the barrier to start. You get a serious site, hosting, and ongoing support without a large upfront spend, which is often the easiest way for the right project to begin.',
   },
   {
-    question: 'How does the monthly plan work?',
+    question: 'What is included in the monthly plan?',
     answer:
-      'You pay nothing upfront. We build the site, handle hosting, and stay available for edits throughout the month. The minimum commitment is 6 months — that keeps the project moving and gives the site time to actually perform. After 12 months, full code ownership transfers to you. Cancel after the minimum with 30 days notice.',
+      'A complete site build, hosting, launch support, and ongoing edits while the plan is active. The structure is meant to feel like a working relationship, not a handoff and goodbye.',
+  },
+  {
+    question: 'What if I want ownership instead?',
+    answer:
+      'That is available as a secondary path. We scope a one-time build, hand off the code at launch, and separate hosting if needed.',
+  },
+  {
+    question: 'How does hosting work?',
+    answer:
+      'Monthly includes hosting. One-time ownership can use separate hosting, and we make that structure clear before the project starts.',
+  },
+  {
+    question: 'What about e-commerce?',
+    answer:
+      'E-commerce stays lump sum only. Stores and larger rebuilds need tighter scope, so they are priced as one-time projects.',
+  },
+  {
+    question: 'How are revisions handled?',
+    answer:
+      'Each project includes a set number of revision rounds. Feedback is collected in batches so the work stays focused and the timeline stays clean.',
   },
   {
     question: 'Can I edit the site myself?',
     answer:
-      'If self-editing matters, we set up a simple workflow and show you how to use it. If you want us to handle updates instead, we can do that too.',
-  },
-  {
-    question: 'What if I need changes after launch?',
-    answer:
-      'Small launch fixes are included after go-live. Larger changes or new pages are scoped clearly before any work starts.',
-  },
-  {
-    question: 'Is hosting included?',
-    answer:
-      'We handle the deployment setup and tell you exactly what the site needs. If a separate hosting account is required, we make that clear before launch.',
-  },
-  {
-    question: 'How do revisions work?',
-    answer:
-      'Each package includes a set number of revision rounds. We collect feedback in batches so the project keeps moving instead of stalling.',
-  },
-  {
-    question: "What's the payment schedule?",
-    answer:
-      "Projects start with a deposit before any work begins. The remainder is due at launch, or split across milestones on larger builds. We don't start work without payment in place — that keeps the timeline clean for both sides.",
-  },
-  {
-    question: 'Do you work with businesses outside your area?',
-    answer:
-      'Yes. We work with the right fit wherever the project makes sense, as long as the scope matches our approach.',
+      'Yes. If self-editing matters, we set up a simple workflow and walk you through it. If you prefer us to handle updates, we can keep that relationship in place.',
   },
   {
     question: 'What makes Axiom different?',
     answer:
-      'The process is built around clarity, speed, and ownership. You get a site that is easy to understand, fast to load, and built to turn visitors into calls.',
+      'The focus is clarity, speed, and support. You get a site that is easy to understand, fast to load, and built to keep helping after launch.',
   },
 ] as const;
 ---
@@ -200,22 +170,25 @@ const faqItems = [
     <section class="axiom-container pt-12 md:pt-20">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PRICING</Eyebrow>
-        <h1 class="mt-4">Flexible structure. Full ownership.</h1>
+        <h1 class="mt-4">Monthly-first pricing for serious websites.</h1>
         <p class="section-copy mt-5 md:text-[17px]">
-          One investment. No lock-in. You own the site, the code, and the domain. Monthly plans also available.
+          Axiom starts with a lower-friction monthly path for established businesses that want a better site without a heavy upfront spend. Hosting and ongoing support are included. A one-time ownership option stays available when that is the better fit.
+        </p>
+        <p class="mt-4 text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
+          Subscription is the default path. One-time ownership and e-commerce stay available when they fit better.
         </p>
       </FadeIn>
     </section>
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:pb-0">
+        <div class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:pb-0">
           {pricingTiers.map((tier, index) => (
             <FadeIn
               client:load
               delay={Math.min(index * 100, 400)}
               as="div"
-              id={tier.key === 'monthly' ? 'monthly-tier' : tier.key === 'growth' ? 'growth-tier' : undefined}
+              id={tier.key === 'monthly' ? 'monthly-tier' : tier.key === 'ownership' ? 'ownership-tier' : tier.key === 'ecommerce' ? 'ecommerce-tier' : undefined}
               className="flex h-full shrink-0 basis-[84%] snap-start flex-col sm:basis-[68%] md:basis-[56%] lg:basis-auto lg:shrink"
             >
               <Card
@@ -236,25 +209,25 @@ const faqItems = [
                 ) : null}
 
                 <div class="relative flex h-full flex-col p-6 sm:p-7">
-                  {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.eyebrow ?? tier.name}</Eyebrow>}
+                  <Eyebrow className={tier.highlighted ? 'text-[var(--accent-solid)]' : undefined}>{tier.eyebrow ?? tier.name}</Eyebrow>
 
-                  {!tier.highlighted ? <p class="mt-2 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{tier.name}</p> : null}
+                  <p class="mt-2 text-[15px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">
+                    {tier.name}
+                  </p>
 
-                  <p class="mt-5 text-[56px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)]">
+                  <p class="mt-2 text-[14px] leading-[1.65] text-[var(--text-secondary)]">
+                    {tier.bestFor}
+                  </p>
+
+                  <p class="mt-5 text-[42px] font-[600] leading-[1.05] tracking-[-0.04em] text-[var(--text-primary)] sm:text-[48px]">
                     {tier.price}
                   </p>
 
-                  {tier.key === 'monthly' ? (
-                    <p class="mt-2 text-[56px] font-[600] leading-none tracking-[-0.04em] text-[#b89a5e]">
-                      $0 to start.
-                    </p>
-                  ) : null}
-
-                  {tier.subtext ? <p class="mt-3 text-[15px] leading-[1.65] text-white/60">{tier.subtext}</p> : null}
+                  {tier.subtext ? <p class="mt-3 text-[16px] leading-[1.7] text-white/65">{tier.subtext}</p> : null}
 
                   <ul class="mt-6 space-y-3">
                     {tier.features.map((feature) => (
-                        <li class="flex items-start gap-3 text-[15px] leading-[1.65] text-white/60">
+                      <li class="flex items-start gap-3 text-[16px] leading-[1.7] text-white/65">
                         <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-panel-strong)]">
                           <DrawIcon name="check" size={12} className="text-[#C9A96E]" />
                         </span>
@@ -272,7 +245,7 @@ const faqItems = [
               </Card>
 
               {tier.supportNote ? (
-                <p class="mt-3 px-3 text-center text-[13px] font-normal leading-[1.6] text-[rgba(255,255,255,0.45)]">
+                <p class="mt-3 px-3 text-center text-[14px] font-normal leading-[1.65] text-[rgba(255,255,255,0.5)]">
                   {tier.supportNote}
                 </p>
               ) : null}
@@ -285,10 +258,10 @@ const faqItems = [
     <section class="page-section">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
-          <Eyebrow>COMPARE THE TIERS</Eyebrow>
-          <h2 class="section-heading mt-4">What each package includes.</h2>
+          <Eyebrow>COMPARE THE PATHS</Eyebrow>
+          <h2 class="section-heading mt-4">What each option includes.</h2>
           <p class="section-copy mt-4 md:text-[17px]">
-            Use this to compare the structure, support, and ownership before you book a call.
+            Monthly is the easiest place to start. Ownership and e-commerce stay available when they fit better.
           </p>
         </FadeIn>
 
@@ -300,9 +273,12 @@ const faqItems = [
                 className={`overflow-hidden ${tier.highlighted ? 'border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[0_0_0_1px_var(--accent-shadow-medium)]' : 'bg-[var(--surface-1)]'}`}
               >
                 <div class="p-6">
-                  {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">MOST CHOSEN</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
+                  {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">PREFERRED PATH</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
                   <div class="mt-4 flex items-end justify-between gap-4">
-                    <p class="text-[2.75rem] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)]">{tier.price}</p>
+                    <div class="min-w-0">
+                      <p class="text-[2.35rem] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] sm:text-[2.75rem]">{tier.price}</p>
+                      <p class="mt-2 text-[14px] leading-[1.65] text-[var(--text-secondary)]">{tier.bestFor}</p>
+                    </div>
                     <Button asChild variant={tier.variant} size="sm">
                       <a href={tier.href}>{tier.cta}</a>
                     </Button>
@@ -311,8 +287,8 @@ const faqItems = [
                   <div class="mt-6 space-y-3 border-t border-[color:var(--hairline)] pt-5">
                     {tier.rows.map((row) => (
                       <div class="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
-                        <p class="text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{row.label}</p>
-                        <div class="text-[15px] leading-[1.65] text-white/60">
+                        <p class="text-[14px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{row.label}</p>
+                        <div class="text-[16px] leading-[1.7] text-white/65">
                           {isCheckmark(row.value) ? (
                             <span class="inline-flex items-center text-[#C9A96E]">
                               <DrawIcon name="check" size={16} className="is-active" />
@@ -335,33 +311,30 @@ const faqItems = [
           <table class="min-w-full border-collapse text-left">
             <thead class="bg-[color:var(--nav-panel-bg)]">
               <tr class="border-b border-[color:var(--hairline)]">
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   Feature
                 </th>
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  MONTHLY
+                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                  SUBSCRIPTION
                 </th>
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)] bg-[linear-gradient(180deg,rgba(232,162,123,0.04),transparent)]">
+                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)] bg-[linear-gradient(180deg,rgba(232,162,123,0.04),transparent)]">
                   <div class="flex flex-col gap-1">
-                    <span class="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-solid)]">Most Chosen</span>
-                    <span>Growth</span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-solid)]">One-time</span>
+                    <span>Ownership</span>
                   </div>
                 </th>
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  Signature
-                </th>
-                <th scope="col" class="px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  Rebuild
+                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                  E-COMMERCE
                 </th>
               </tr>
             </thead>
             <tbody>
               {comparisonRows.map((row) => (
                 <tr class="border-b border-[rgba(255,255,255,0.06)] odd:bg-[#0f0f0f] even:bg-[#111111] last:border-b-0">
-                  <th scope="row" class="px-6 py-4 text-[15px] font-medium text-[var(--text-primary)]">
+                  <th scope="row" class="px-6 py-4 text-[16px] font-medium text-[var(--text-primary)]">
                     {row.label}
                   </th>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">
+                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-white/65">
                     {isCheckmark(row.monthly) ? (
                       <span class="inline-flex items-center text-[#C9A96E]">
                         <DrawIcon name="check" size={18} className="is-active" />
@@ -369,35 +342,35 @@ const faqItems = [
                       </span>
                     ) : row.monthly}
                   </td>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60 bg-[linear-gradient(180deg,rgba(232,162,123,0.02),transparent)]">
-                    {isCheckmark(row.growth) ? (
+                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-white/65 bg-[linear-gradient(180deg,rgba(232,162,123,0.02),transparent)]">
+                    {isCheckmark(row.ownership) ? (
                       <span class="inline-flex items-center text-[#C9A96E]">
                         <DrawIcon name="check" size={18} className="is-active" />
-                        <span class="sr-only">{row.growth}</span>
+                        <span class="sr-only">{row.ownership}</span>
                       </span>
-                    ) : row.growth}
+                    ) : row.ownership}
                   </td>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">
-                    {isCheckmark(row.signature) ? (
+                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-white/65">
+                    {isCheckmark(row.ecommerce) ? (
                       <span class="inline-flex items-center text-[#C9A96E]">
                         <DrawIcon name="check" size={18} className="is-active" />
-                        <span class="sr-only">{row.signature}</span>
+                        <span class="sr-only">{row.ecommerce}</span>
                       </span>
-                    ) : row.signature}
-                  </td>
-                  <td class="px-6 py-4 text-[15px] leading-[1.65] text-white/60">
-                    {isCheckmark(row.rebuild) ? (
-                      <span class="inline-flex items-center text-[#C9A96E]">
-                        <DrawIcon name="check" size={18} className="is-active" />
-                        <span class="sr-only">{row.rebuild}</span>
-                      </span>
-                    ) : row.rebuild}
+                    ) : row.ecommerce}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
+        <FadeIn client:load as="div" className="mt-6">
+          <Card className="border-[color:var(--hairline)] bg-[var(--surface-2)]">
+            <p class="section-copy md:text-[16px]">
+              Monthly includes hosting, ongoing support, and edits. One-time ownership includes launch support, with hosting scoped separately if needed. E-commerce stays lump sum only.
+            </p>
+          </Card>
+        </FadeIn>
       </div>
     </section>
 
@@ -452,10 +425,10 @@ const faqItems = [
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
-                  You want to start without a large upfront cost.
+                  You want the easiest way to start.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  The monthly plan puts a complete site live for $0 down. Hosting, edits, and support are included. You own the code at month 12.
+                  Monthly pricing puts a complete site live for $0 down. Hosting and ongoing support are included, and ownership can transfer later.
                 </p>
                 <a href="#monthly-tier" class="mt-6 text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-white/70">
                   See monthly pricing ↑
@@ -468,13 +441,13 @@ const faqItems = [
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
-                  You want to own the asset outright from day one.
+                  You want full ownership from day one.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  A one-time investment with full code handoff at launch. No monthly fees beyond $25/mo hosting.
+                  A one-time build with full code handoff at launch. Hosting can be scoped separately if you want it managed outside the project.
                 </p>
-                <a href="#growth-tier" class="mt-6 text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-white/70">
-                  See ownership tiers ↑
+                <a href="#ownership-tier" class="mt-6 text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-white/70">
+                  See ownership pricing ↑
                 </a>
               </div>
             </Card>
@@ -493,7 +466,7 @@ const faqItems = [
                   Not sure which tier fits?
                 </h2>
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Start a project and we&apos;ll tell you exactly what the business needs. One business day, no pressure.
+                  Start a project and we&apos;ll tell you whether monthly, ownership, or a lump-sum rebuild makes the most sense. One business day, no pressure.
                 </p>
               </div>
 

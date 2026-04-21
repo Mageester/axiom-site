@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { CTA } from '../lib/cta';
 
 const contactLinkClass =
-  'inline-flex min-h-11 items-center py-1 font-axiomMono text-[15px] md:text-sm leading-6 text-[#A7B3BC] transition-colors hover:text-[#F2F4F7]';
+  'inline-flex min-h-11 items-center py-1 font-axiomMono text-[16px] md:text-[15px] leading-[1.7] text-[#A7B3BC] transition-colors hover:text-[#F2F4F7]';
 
 const routeLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `motion-link-accent flex w-fit min-h-11 items-center py-1 text-[15px] md:text-sm leading-6 ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
+  `motion-link-accent flex w-fit min-h-11 items-center py-1 text-[16px] md:text-[15px] leading-[1.7] ${isActive ? 'text-[#B05D41]' : 'text-[#F2F4F7] hover:text-[#B05D41]'}`;
 
 const Footer: React.FC = () => {
   return (
@@ -23,10 +23,10 @@ const Footer: React.FC = () => {
               loading="lazy"
               decoding="async"
             />
-            <p className="mt-3 max-w-md text-[15px] md:text-sm leading-6 text-slate-300">
+            <p className="mt-3 max-w-md text-[16px] md:text-[15px] leading-[1.7] text-slate-300">
               Built for businesses that are serious about growth.
             </p>
-            <p className="mt-6 text-[15px] md:text-xs uppercase tracking-[0.12em] text-slate-400">
+            <p className="mt-6 text-[14px] md:text-[13px] uppercase tracking-[0.12em] text-slate-400">
               © 2026 Axiom Infrastructure. All rights reserved.
             </p>
           </div>

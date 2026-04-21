@@ -125,20 +125,23 @@ export const PRICING_JSON_LD = {
   offers: [
     {
       '@type': 'Offer',
-      name: 'Growth',
-      price: '2200',
+      name: 'Subscription',
+      description: '$0 down + from $150-$200/mo',
+      price: '150',
       priceCurrency: 'CAD',
     },
     {
       '@type': 'Offer',
-      name: 'Signature',
+      name: 'One-time ownership',
       price: '3500',
+      description: 'Full handoff at launch',
       priceCurrency: 'CAD',
     },
     {
       '@type': 'Offer',
-      name: 'Rebuild',
+      name: 'E-commerce / rebuilds',
       price: '6500',
+      description: 'Lump sum only',
       priceCurrency: 'CAD',
     },
   ],
@@ -158,7 +161,7 @@ export const SEO_ROUTES = {
   },
   work: {
     title: 'Selected Work',
-    description: 'Axiom builds focused, conversion-led websites for businesses that need a clearer first impression.',
+    description: 'Concept builds showing how Axiom structures clearer first impressions, faster decisions, and ongoing support.',
     canonicalPath: '/work',
   },
   concepts: {
@@ -168,7 +171,7 @@ export const SEO_ROUTES = {
   },
   pricing: {
     title: 'Pricing',
-    description: 'Direct pricing for businesses that want a premium web partner and a clear scope.',
+    description: 'Subscription-first pricing for businesses that want a premium web partner, a low-friction start, and a clear ownership path.',
     canonicalPath: '/pricing',
   },
   services: {
@@ -178,7 +181,7 @@ export const SEO_ROUTES = {
   },
   about: {
     title: 'About',
-    description: 'Axiom Infrastructure is a selective web design studio built around precision and trust.',
+    description: 'Axiom Infrastructure serves established businesses that want a clearer first impression and ongoing support after launch.',
     canonicalPath: '/about',
   },
   approach: {
@@ -188,17 +191,17 @@ export const SEO_ROUTES = {
   },
   process: {
     title: 'Process',
-    description: 'A simple sequence from discovery to launch.',
+    description: 'A subscription-first process from discovery to launch, with support that continues after the site goes live.',
     canonicalPath: '/process',
   },
   start: {
     title: 'Start a Project',
-    description: 'Share the basics. We reply within one business day with the next step.',
+    description: 'Share a project brief for monthly or one-time website work. We reply within one business day.',
     canonicalPath: '/start',
   },
   startProject: {
     title: 'Start a Project',
-    description: 'Share your scope and move the work forward.',
+    description: 'Submit a project brief for a monthly or one-time website build. We reply within one business day.',
     canonicalPath: '/start-a-project',
   },
   audit: {
@@ -219,7 +222,7 @@ export const SEO_ROUTES = {
   },
   contact: {
     title: 'Contact',
-    description: 'Use this form for a quick question or a note about your site. Need website work? Use the project intake page.',
+    description: 'Use this form for a quick question or short note. For project work, use the project intake page.',
     canonicalPath: '/contact',
   },
   notFound: {
