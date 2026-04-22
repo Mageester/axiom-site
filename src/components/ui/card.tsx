@@ -11,9 +11,9 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const variantClasses: Record<CardVariant, string> = {
-  default: 'bg-[var(--surface-1)]',
+  default: 'glass-card',
   inset: 'bg-[var(--bg-base)]',
-  elevated: 'bg-[var(--surface-2)]',
+  elevated: 'glass-card',
 };
 
 const paddingClasses: Record<CardPadding, string> = {
@@ -27,7 +27,7 @@ export function Card({ className, variant = 'default', padding = 'md', hoverLift
   return (
     <div
       className={cn(
-        'rounded-[var(--radius-card)] border border-[color:var(--hairline)] shadow-[var(--shadow-card)] motion-safe:transition-[transform,background-color,border-color,box-shadow] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:scale-[1.02] motion-safe:hover:border-[color:var(--hairline-strong)] motion-safe:hover:shadow-[var(--shadow-card-hover)]',
+        'rounded-[var(--radius-card)] border border-[color:var(--hairline)] shadow-[var(--shadow-card)] glass-card-hover motion-safe:hover:border-[color:var(--accent-border)]',
         variantClasses[variant],
         paddingClasses[padding],
         hoverLift && 'motion-safe:hover:bg-[var(--surface-2)]',
@@ -43,7 +43,7 @@ export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDiv
 }
 
 export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn('text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]', className)} {...props} />;
+  return <h3 className={cn('text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]', className)} {...props} />;
 }
 
 export function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {

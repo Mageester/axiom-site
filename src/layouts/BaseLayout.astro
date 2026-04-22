@@ -1,6 +1,7 @@
 ---
 import '../styles/globals.css';
 import { Footer } from '../components/layout/Footer';
+import { ScrollProgressBar } from '../components/layout/ScrollProgressBar';
 import NavBar from '../components/layout/NavBar.astro';
 import {
   DEFAULT_OG_IMAGE,
@@ -50,8 +51,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>html, body { background-color: #0a0a0a; }</style>
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#000000" />
     <meta name="generator" content="Astro" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
@@ -62,7 +62,12 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link
+      rel="stylesheet"
+      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700,800&display=swap"
     />
 
     <title>{resolvedTitle}</title>
@@ -298,6 +303,8 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <ScrollProgressBar client:load />
 
     {showNav ? <NavBar hidePrimaryCta={hidePrimaryCta} /> : null}
 

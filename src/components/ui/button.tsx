@@ -15,7 +15,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     'border border-transparent bg-[color:var(--accent)] text-[color:var(--text-on-accent)] shadow-[var(--shadow-button-primary)] hover:bg-[color:var(--accent-hover)] motion-safe:hover:scale-[1.03] motion-safe:hover:shadow-[var(--shadow-button-primary-hover)]',
   secondary:
-    'border border-[color:var(--hairline)] bg-[color:var(--surface-panel)] text-[var(--text-primary)] hover:border-[color:var(--hairline-strong)] hover:bg-[color:var(--surface-overlay)] hover:brightness-105',
+    'border border-[color:var(--hairline)] bg-[color:var(--surface-panel)] text-[var(--text-primary)] hover:border-[color:var(--accent-border)] hover:bg-[color:var(--surface-overlay)] hover:brightness-105',
   ghost:
     'border border-transparent bg-transparent text-[var(--text-primary)] underline decoration-transparent decoration-1 underline-offset-4 hover:decoration-current hover:brightness-110',
 };
