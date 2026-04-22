@@ -7,6 +7,8 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
+import { MotionHeading } from '../components/motion/MotionHeading';
+import { SectionDivider } from '../components/motion/SectionDivider';
 
 const isCheckmark = (val: string) => ['Included', String.fromCharCode(10003)].some((k) => val.toLowerCase() === k.toLowerCase());
 
@@ -170,7 +172,8 @@ const faqItems = [
     <section class="axiom-container pt-12 md:pt-20">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PRICING</Eyebrow>
-        <h1 class="mt-4">Real pricing. No sales call required.</h1>
+        <SectionDivider className="mt-6" />
+        <MotionHeading as="h1" text="Real pricing. No sales call required." className="mt-4" />
         <p class="section-copy mt-5 md:text-[17px]">
           Most clients start monthly - $0 down, hosting and support included. If you'd rather own the site outright,
           that option is $3,500 and up. Stores and large rebuilds get scoped separately.
@@ -195,7 +198,7 @@ const faqItems = [
               <Card
                 padding="none"
                 hoverLift
-                className={`relative overflow-hidden ${tier.highlighted ? 'border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[var(--shadow-card-highlight)]' : 'bg-[var(--surface-1)]'}`}
+                className={`relative overflow-hidden ${tier.highlighted ? 'pricing-highlight-card border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[var(--shadow-card-highlight)]' : 'bg-[var(--surface-1)]'}`}
               >
                 {tier.highlighted ? (
                   <div
@@ -260,7 +263,8 @@ const faqItems = [
       <div class="axiom-container">
           <FadeIn client:load className="max-w-3xl">
           <Eyebrow>COMPARE THE PATHS</Eyebrow>
-          <h2 class="section-heading mt-4">What each option includes.</h2>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="What each option includes." className="section-heading mt-4" />
           <p class="section-copy mt-4 md:text-[17px]">
             Same quality on every path. The differences are cost shape, ownership, and scope.
           </p>
@@ -331,7 +335,7 @@ const faqItems = [
             </thead>
             <tbody>
               {comparisonRows.map((row) => (
-                <tr class="border-b border-[color:var(--hairline)] odd:bg-[#0a0a0a] even:bg-[var(--surface-1)] last:border-b-0">
+                <tr class="pricing-table-row border-b border-[color:var(--hairline)] odd:bg-[#0a0a0a] even:bg-[var(--surface-1)] last:border-b-0">
                   <th scope="row" class="px-6 py-4 text-[16px] font-medium text-[var(--text-primary)]">
                     {row.label}
                   </th>
@@ -379,7 +383,8 @@ const faqItems = [
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>FAQ</Eyebrow>
-          <h2 class="section-heading mt-4">Answers before the call.</h2>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="Answers before the call." className="section-heading mt-4" />
         </FadeIn>
 
         <FadeIn client:load className="mt-8">
@@ -461,9 +466,8 @@ const faqItems = [
           <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
             <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
               <div class="max-w-3xl">
-                <h2 class="section-heading">
-                  Not sure which tier fits?
-                </h2>
+                <SectionDivider className="mb-6" />
+                <MotionHeading as="h2" text="Not sure which tier fits?" className="section-heading" />
                 <p class="section-copy mt-4 md:text-[17px]">
                   Tell us what the business needs. We'll tell you which path fits - monthly, ownership, or lump sum.
                   One business day. No pressure, no pitch deck.
@@ -481,6 +485,14 @@ const faqItems = [
   </main>
 
   <style>
+    .pricing-highlight-card {
+      animation: pricing-glow 1.5s ease-out 1;
+    }
+
+    .pricing-table-row {
+      animation: pricing-row-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
     details[data-faq][open] .faq-panel {
       max-height: 24rem;
       opacity: 1;
@@ -498,5 +510,41 @@ const faqItems = [
     details[data-faq] summary::-webkit-details-marker {
       display: none;
     }
+
+    @keyframes pricing-glow {
+      0% {
+        box-shadow: 0 0 0 1px rgba(212, 175, 55, 0);
+      }
+
+      50% {
+        box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.18), 0 0 38px rgba(212, 175, 55, 0.12);
+      }
+
+      100% {
+        box-shadow: 0 0 0 1px rgba(212, 175, 55, 0);
+      }
+    }
+
+    @keyframes pricing-row-in {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .pricing-table-row:nth-child(1) { animation-delay: 0.04s; }
+    .pricing-table-row:nth-child(2) { animation-delay: 0.1s; }
+    .pricing-table-row:nth-child(3) { animation-delay: 0.16s; }
+    .pricing-table-row:nth-child(4) { animation-delay: 0.22s; }
+    .pricing-table-row:nth-child(5) { animation-delay: 0.28s; }
+    .pricing-table-row:nth-child(6) { animation-delay: 0.34s; }
+    .pricing-table-row:nth-child(7) { animation-delay: 0.4s; }
+    .pricing-table-row:nth-child(8) { animation-delay: 0.46s; }
+    .pricing-table-row:nth-child(9) { animation-delay: 0.52s; }
   </style>
 </SiteLayout>

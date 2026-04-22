@@ -7,6 +7,9 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
+import { MotionHeading } from '../components/motion/MotionHeading';
+import { SectionDivider } from '../components/motion/SectionDivider';
+import { Timeline } from '../components/motion/Timeline';
 
 const processSteps = [
   {
@@ -43,6 +46,12 @@ const processSteps = [
   },
 ] as const;
 
+const timelineSteps = processSteps.map((step) => ({
+  kicker: step.dayLabel,
+  title: step.title,
+  description: step.timelineDescription,
+}));
+
 const launchChecklist = [
   { title: 'Pages to build', detail: 'Which pages matter most right now.' },
   { title: 'Proof to surface', detail: 'Reviews, photos, and past work worth showing early.' },
@@ -56,7 +65,8 @@ const launchChecklist = [
     <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PROCESS</Eyebrow>
-        <h1 class="mt-4">Four stages. Then ongoing support.</h1>
+        <SectionDivider className="mt-6" />
+        <MotionHeading as="h1" text="Four stages. Then ongoing support." className="mt-4" />
         <p class="section-copy mt-5 md:text-[17px]">
           Fourteen days from first call to launch. No drift, no surprises, no 60-day Slack silences. Monthly clients
           keep support after the site goes live.
@@ -74,30 +84,7 @@ const launchChecklist = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 xl:items-start">
-          {processSteps.map((step, index) => (
-            <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
-              <div
-                className="group h-full rounded-[var(--radius-card)] border border-transparent bg-[var(--surface-1)] shadow-[var(--shadow-card)] transition-[transform,border-color,box-shadow,background-color] duration-200 ease-in-out motion-safe:hover:-translate-y-1 motion-safe:hover:border-[color:var(--accent-border)] motion-safe:hover:shadow-[0_18px_40px_var(--accent-shadow-soft)] motion-safe:hover:bg-[var(--surface-2)]"
-              >
-                <div class="flex flex-col p-6 sm:p-7">
-                  <div class="flex items-center gap-3">
-                    <DrawIcon name={step.icon} size={32} className="text-[var(--accent-solid)]" />
-                    <p class="font-axiomMono text-[clamp(2.6rem,4vw,3.25rem)] leading-none tracking-[-0.06em] text-[var(--accent-solid)]">
-                      {step.dayLabel}
-                    </p>
-                  </div>
-                  <h2 class="section-heading mt-4 text-[18px] font-semibold text-[var(--text-primary)]">
-                    {step.title}
-                  </h2>
-                  <p class="section-copy mt-3 text-[15px]">
-                    {step.timelineDescription}
-                  </p>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+        <Timeline steps={timelineSteps} />
       </div>
     </section>
 
@@ -105,7 +92,8 @@ const launchChecklist = [
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>WHAT WE NEED FROM YOU</Eyebrow>
-          <h2 class="section-heading mt-4">Four things from you. That's it.</h2>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="Four things from you. That's it." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -128,11 +116,12 @@ const launchChecklist = [
 
     <section class="page-section">
       <div class="axiom-container grid gap-6 lg:grid-cols-2">
-        <FadeIn client:load as="div">
+        <FadeIn client:load as="div" direction="left">
           <Card className="h-full p-0">
             <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>AFTER LAUNCH</Eyebrow>
-              <h2 class="section-heading mt-4">Subscription clients stay supported.</h2>
+              <SectionDivider className="mt-6" />
+              <MotionHeading as="h2" text="Subscription clients stay supported." className="section-heading mt-4" />
               <p class="section-copy mt-4">
                 Once live, monthly clients keep edits, refinements, and priority support every month. Ownership clients
                 get a clean handoff - and a separate support path if they want one.
@@ -141,11 +130,12 @@ const launchChecklist = [
           </Card>
         </FadeIn>
 
-        <FadeIn client:load as="div">
+        <FadeIn client:load as="div" direction="right">
           <Card className="h-full p-0">
             <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>THE GUARANTEE</Eyebrow>
-              <h2 class="section-heading mt-4">Ready to stop losing jobs to a weaker site?</h2>
+              <SectionDivider className="mt-6" />
+              <MotionHeading as="h2" text="Ready to stop losing jobs to a weaker site?" className="section-heading mt-4" />
               <p class="section-copy mt-4">
                 No asterisks. That is the floor we build to.
               </p>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { CSSProperties, FormEvent } from 'react';
+import { m } from 'framer-motion';
 import { Button } from '../ui/button';
 import { Eyebrow } from '../ui/Eyebrow';
 import { cn } from '../../lib/utils';
@@ -446,14 +447,26 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
                   <li
                     key={step.id}
                     aria-current={isActive ? 'step' : undefined}
-                    className={cn(
-                      'text-[12px] font-medium uppercase tracking-[0.16em] transition-colors duration-200',
-                      isActive && 'text-[var(--text-primary)]',
-                      isComplete && 'text-[var(--accent-solid)]',
-                      !isActive && !isComplete && 'text-[var(--text-muted)]'
-                    )}
+                    className="relative"
                   >
-                    {step.label}
+                    <button
+                      type="button"
+                      onClick={() => jumpToStep(step.id)}
+                      className={cn(
+                        'relative min-h-10 w-full text-[12px] font-medium uppercase tracking-[0.16em] transition-colors duration-200',
+                        isActive && 'text-[var(--text-primary)]',
+                        isComplete && 'text-[var(--accent-solid)]',
+                        !isActive && !isComplete && 'text-[var(--text-muted)]'
+                      )}
+                    >
+                      {step.label}
+                      {isActive ? (
+                        <m.span
+                          layoutId="wizard-step-underline"
+                          className="absolute inset-x-0 -bottom-2 h-px bg-[color:var(--accent-solid)]"
+                        />
+                      ) : null}
+                    </button>
                   </li>
                 );
               })}
@@ -539,12 +552,12 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
                         />
                         <span
                           className={cn(
-                            'flex min-h-[10.5rem] flex-col justify-between rounded-[22px] border px-4 py-4 transition-[border-color,background-color,transform,box-shadow] duration-200 ease-out sm:px-5 sm:py-5',
+                            'relative flex min-h-[10.5rem] flex-col justify-between rounded-[22px] border px-4 py-4 transition-[border-color,background-color,transform,box-shadow] duration-200 ease-out sm:px-5 sm:py-5',
                             'border-[color:var(--hairline)] bg-[color:var(--surface-panel)] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]',
                             'group-hover:border-[color:var(--hairline-strong)] group-hover:bg-[color:var(--surface-overlay)]',
                             'group-focus-within:border-[color:var(--accent-border)] group-focus-within:ring-2 group-focus-within:ring-[color:var(--accent-ring)]',
                             checked &&
-                              'border-[color:var(--accent-border)] bg-[linear-gradient(180deg,rgba(201,163,104,0.14),rgba(201,163,104,0.06))] shadow-[0_0_0_1px_rgba(201,163,104,0.12)]'
+                              'border-[color:var(--accent-border)] bg-[linear-gradient(180deg,rgba(212,175,55,0.14),rgba(212,175,55,0.06))] shadow-[0_0_0_1px_rgba(212,175,55,0.14)] scale-[1.02]'
                           )}
                         >
                           <span className="space-y-3">
@@ -558,10 +571,10 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
                           <span
                             aria-hidden="true"
                             className={cn(
-                              'mt-5 inline-flex h-5 w-5 items-center justify-center rounded-full border transition-colors duration-200',
+                              'absolute right-4 top-4 inline-flex h-5 w-5 items-center justify-center rounded-full border transition-[opacity,transform,border-color,background-color] duration-200',
                               checked
-                                ? 'border-[color:var(--accent-border-strong)] bg-[color:var(--accent-solid)] text-[var(--text-on-accent)]'
-                                : 'border-[color:var(--hairline-strong)] bg-transparent text-transparent'
+                                ? 'border-[color:var(--accent-border-strong)] bg-[color:var(--accent-solid)] text-[var(--text-on-accent)] opacity-100'
+                                : 'border-[color:var(--hairline-strong)] bg-transparent text-transparent opacity-0'
                             )}
                           >
                             <span className="text-[11px] font-bold">&#10003;</span>
@@ -813,12 +826,20 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
           </div>
 
           <div className="order-1 sm:order-2">
-            <Button type="submit" size="lg" className="w-full rounded-full sm:w-auto" disabled={isSubmitting}>
-              {activeStep === STEPS.length
-                ? isSubmitting
-                  ? 'Sending...'
-                  : 'Submit project brief'
-                : 'Continue'}
+            <Button
+              type="submit"
+              size="lg"
+              className="group w-full rounded-full transition-transform duration-150 active:scale-[0.98] sm:w-auto"
+              disabled={isSubmitting}
+            >
+              {activeStep === STEPS.length ? (
+                isSubmitting ? 'Sending...' : 'Submit project brief'
+              ) : (
+                <span className="inline-flex items-center gap-2">
+                  Continue
+                  <span className="transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
+                </span>
+              )}
             </Button>
           </div>
         </div>

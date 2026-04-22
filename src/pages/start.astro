@@ -5,6 +5,8 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import { MotionHeading } from '../components/motion/MotionHeading';
+import { SectionDivider } from '../components/motion/SectionDivider';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 ---
@@ -14,9 +16,8 @@ import { SEO_ROUTES } from '../lib/seo';
     <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>START A PROJECT</Eyebrow>
-        <h1 class="mt-4 max-w-4xl">
-          Tell us about the site. We'll handle the rest.
-        </h1>
+        <SectionDivider className="mt-6" />
+        <MotionHeading as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4 max-w-4xl" />
         <p class="section-copy mt-5 md:text-[17px]">
           Five short steps, about two minutes. You'll get a reply within one business day - from a real person, not
           a chatbot.
