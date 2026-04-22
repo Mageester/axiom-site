@@ -23,31 +23,31 @@ const pricingTiers = [
     variant: 'primary',
     highlighted: true,
     eyebrow: 'PREFERRED PATH',
-    bestFor: 'Best for starting quickly with a lower upfront cost.',
+    bestFor: 'The easiest way to start. Low upfront cost, full support built in.',
   },
   {
     key: 'ownership',
     name: 'One-time ownership',
     price: 'From $3,500',
     subtext: 'For a standard 5-page build. Full handoff at launch. Hosting can be scoped separately.',
-    supportNote: 'Best for buyers who want to own the site outright from day one.',
+    supportNote: 'For buyers who want the code, the site, and the keys at launch.',
     features: ['Up to 5 pages', 'Full code ownership at launch', 'Launch support included', 'Hosting scoped separately', 'SEO foundation'],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
     variant: 'secondary',
-    bestFor: 'Best for teams that prefer a single upfront payment.',
+    bestFor: 'One payment. Full ownership at launch.',
   },
   {
     key: 'ecommerce',
     name: 'E-commerce / rebuilds',
     price: 'Custom lump sum',
     subtext: 'Sized to the store, migration, or rebuild scope. E-commerce stays lump sum only.',
-    supportNote: 'Best for larger builds that need tighter scoping from the start.',
+    supportNote: 'For projects that need tighter scoping up front.',
     features: ['Store setup or rebuild', 'Migration support', 'Integrations as needed', 'Launch support included', 'Scoped pricing'],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
     variant: 'secondary',
-    bestFor: 'Best for stores and larger rebuilds that should be scoped once.',
+    bestFor: 'For stores and larger rebuilds. Scoped once, priced once.',
   },
 ] as const;
 
@@ -125,42 +125,42 @@ const faqItems = [
   {
     question: 'Why lead with monthly pricing?',
     answer:
-      'It lowers the barrier to start. You get a serious site, hosting, and ongoing support without a large upfront spend, which is often the easiest way for the right project to begin.',
+      'Most businesses do not want a $5K+ hit before they see results. Monthly lets you start for $0 down, get the site live, and pay as it earns.',
   },
   {
     question: 'What is included in the monthly plan?',
     answer:
-      'A complete site build, hosting, launch support, and ongoing edits while the plan is active. The structure is meant to feel like a working relationship, not a handoff and goodbye.',
+      'Up to 5 pages, hosting, ongoing edits, and priority support. Full ownership transfers at month 12 if you want it.',
   },
   {
     question: 'What if I want ownership instead?',
     answer:
-      'That is available as a secondary path. We scope a one-time build, hand off the code at launch, and separate hosting if needed.',
+      'Pick the one-time ownership path. One payment from $3,500, full code handoff at launch, hosting scoped separately if you need it.',
   },
   {
     question: 'How does hosting work?',
     answer:
-      'Monthly includes hosting. One-time ownership can use separate hosting, and we make that structure clear before the project starts.',
+      'Monthly plans include hosting. Ownership clients can let us host it or move it to their own provider - either works.',
   },
   {
     question: 'What about e-commerce?',
     answer:
-      'E-commerce stays lump sum only. Stores and larger rebuilds need tighter scope, so they are priced as one-time projects.',
+      'Stores and large rebuilds get a custom quote. Scope covers setup, migration, and integrations. One lump sum, no monthly.',
   },
   {
     question: 'How are revisions handled?',
     answer:
-      'Each project includes a set number of revision rounds. Feedback is collected in batches so the work stays focused and the timeline stays clean.',
+      'Three rounds per build. Most projects do not use all three. Monthly clients get ongoing edits after launch.',
   },
   {
     question: 'Can I edit the site myself?',
     answer:
-      'Yes. If self-editing matters, we set up a simple workflow and walk you through it. If you prefer us to handle updates, we can keep that relationship in place.',
+      'Yes. We build so basic text, photo, and page edits are easy to do without breaking anything.',
   },
   {
     question: 'What makes Axiom different?',
     answer:
-      'The focus is clarity, speed, and support. You get a site that is easy to understand, fast to load, and built to keep helping after launch.',
+      'Fast sites, real pricing, and support that does not stop at launch. 14 days to live. No 60-day Slack silences.',
   },
 ] as const;
 ---
@@ -170,12 +170,13 @@ const faqItems = [
     <section class="axiom-container pt-12 md:pt-20">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PRICING</Eyebrow>
-        <h1 class="mt-4">Monthly-first pricing for serious websites.</h1>
+        <h1 class="mt-4">Real pricing. No sales call required.</h1>
         <p class="section-copy mt-5 md:text-[17px]">
-          Axiom starts with a lower-friction monthly path for established businesses that want a better site without a heavy upfront spend. Hosting and ongoing support are included. A one-time ownership option stays available when that is the better fit.
+          Most clients start monthly - $0 down, hosting and support included. If you'd rather own the site outright,
+          that option is $3,500 and up. Stores and large rebuilds get scoped separately.
         </p>
         <p class="mt-4 text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
-          Subscription is the default path. One-time ownership and e-commerce stay available when they fit better.
+          Monthly is the default. Ownership and e-commerce stay available when they're the better fit.
         </p>
       </FadeIn>
     </section>
@@ -257,11 +258,11 @@ const faqItems = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <FadeIn client:load className="max-w-3xl">
+          <FadeIn client:load className="max-w-3xl">
           <Eyebrow>COMPARE THE PATHS</Eyebrow>
           <h2 class="section-heading mt-4">What each option includes.</h2>
           <p class="section-copy mt-4 md:text-[17px]">
-            Monthly is the easiest place to start. Ownership and e-commerce stay available when they fit better.
+            Same quality on every path. The differences are cost shape, ownership, and scope.
           </p>
         </FadeIn>
 
@@ -366,7 +367,7 @@ const faqItems = [
 
         <FadeIn client:load as="div" className="mt-6">
           <Card className="border-[color:var(--hairline)] bg-[var(--surface-2)]">
-            <p class="section-copy md:text-[16px]">
+            <p class="section-copy mx-auto max-w-4xl text-center md:text-[16px]">
               Monthly includes hosting, ongoing support, and edits. One-time ownership includes launch support, with hosting scoped separately if needed. E-commerce stays lump sum only.
             </p>
           </Card>
@@ -428,10 +429,10 @@ const faqItems = [
                   You want the easiest way to start.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  Monthly pricing puts a complete site live for $0 down. Hosting and ongoing support are included, and ownership can transfer later.
+                  $0 down. Hosting and support included. You can transfer ownership later if you want it.
                 </p>
                 <a href="#monthly-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-                  See monthly pricing &uarr;</a>
+                  See what monthly costs &uarr;</a>
               </div>
             </Card>
           </FadeIn>
@@ -443,10 +444,10 @@ const faqItems = [
                   You want full ownership from day one.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  A one-time build with full code handoff at launch. Hosting can be scoped separately if you want it managed outside the project.
+                  One payment from $3,500. Full code handoff at launch. Host it with us or on your own stack.
                 </p>
                 <a href="#ownership-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-                  See ownership pricing &uarr;</a>
+                  See what ownership costs &uarr;</a>
               </div>
             </Card>
           </FadeIn>
@@ -464,7 +465,8 @@ const faqItems = [
                   Not sure which tier fits?
                 </h2>
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Start a project and we&apos;ll tell you whether monthly, ownership, or a lump-sum rebuild makes the most sense. One business day, no pressure.
+                  Tell us what the business needs. We'll tell you which path fits - monthly, ownership, or lump sum.
+                  One business day. No pressure, no pitch deck.
                 </p>
               </div>
 
