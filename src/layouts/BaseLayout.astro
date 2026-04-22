@@ -258,6 +258,54 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
               });
             }
 
+            const cursorAccent = document.querySelector('[data-cursor-accent]');
+            const isTouchDevice =
+              window.matchMedia('(hover: none), (pointer: coarse)').matches ||
+              navigator.maxTouchPoints > 0 ||
+              'ontouchstart' in window;
+
+            if (cursorAccent instanceof HTMLElement && isTouchDevice) {
+              cursorAccent.remove();
+            } else if (cursorAccent instanceof HTMLElement) {
+              let currentX = window.innerWidth / 2;
+              let currentY = window.innerHeight / 2;
+              let targetX = currentX;
+              let targetY = currentY;
+              let currentScale = 1;
+              let targetScale = 1;
+              let visible = false;
+
+              const interactiveSelector = 'a[href], button, [role="button"], input, select, textarea, label, summary, .card, .glass-card, .glass-card-hover';
+
+              const updateScale = (event) => {
+                if (!(event.target instanceof Element)) return;
+                targetScale = event.target.closest(interactiveSelector) ? 2 : 1;
+              };
+
+              document.addEventListener('pointermove', (event) => {
+                if (!(event instanceof PointerEvent) || event.pointerType === 'touch') return;
+                targetX = event.clientX;
+                targetY = event.clientY;
+                if (!visible) {
+                  cursorAccent.style.opacity = '1';
+                  visible = true;
+                }
+              });
+
+              document.addEventListener('pointerover', updateScale, true);
+              document.addEventListener('pointerout', updateScale, true);
+
+              const animateCursor = () => {
+                currentX += (targetX - currentX) * 0.15;
+                currentY += (targetY - currentY) * 0.15;
+                currentScale += (targetScale - currentScale) * 0.15;
+                cursorAccent.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(${currentScale})`;
+                window.requestAnimationFrame(animateCursor);
+              };
+
+              window.requestAnimationFrame(animateCursor);
+            }
+
             const clearLeaving = () => {
               delete html.dataset.motionLeaving;
             };
@@ -303,6 +351,11 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     <ScrollProgressBar client:load />
+    <div
+      aria-hidden="true"
+      data-cursor-accent
+      class="pointer-events-none fixed left-0 top-0 z-[70] block h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[color:rgba(212,175,55,0.55)] opacity-0 mix-blend-screen"
+    />
 
     {showNav ? <NavBar hidePrimaryCta={hidePrimaryCta} /> : null}
 

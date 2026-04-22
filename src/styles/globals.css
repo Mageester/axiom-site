@@ -98,6 +98,19 @@ body > * {
   z-index: 1;
 }
 
+[data-cursor-accent] {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.18);
+  transition: opacity 150ms ease;
+}
+
+@media (hover: none), (pointer: coarse) {
+  [data-cursor-accent] {
+    display: none !important;
+  }
+}
+
 /* Astro hydration islands must never form a stacking context or they land at
    z-1 (body > * rule above) while the content wrapper is z-10, causing the
    page content to capture taps meant for the fixed nav on mobile. */
@@ -390,8 +403,29 @@ h4 {
   transform: none !important;
 }
 
+.about-principle-line {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+[data-motion-visible='true'] .about-principle-line {
+  transform: scaleY(1);
+}
+
 .section-divider[data-motion-visible='true'] {
   transform: scaleX(1) !important;
+}
+
+[data-cursor-accent] {
+  will-change: transform, opacity;
+}
+
+@media (hover: none), (pointer: coarse) {
+  [data-cursor-accent] {
+    display: none !important;
+  }
 }
 
 .motion-link-accent {
