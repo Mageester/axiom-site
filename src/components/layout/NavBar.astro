@@ -25,9 +25,8 @@ const MOBILE_LINKS = [
 const isActive = (href: string) =>
   href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
-// Button classes assembled here to keep template readable
 const ctaClasses =
-  'inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-normal border border-transparent whitespace-nowrap transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 active:scale-[0.98] shadow-[var(--shadow-button-primary)] hover:brightness-110 min-h-11 px-5 text-[14px]';
+  'inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-transparent bg-[color:var(--accent)] px-5 text-[14px] font-medium tracking-normal text-[color:var(--text-on-accent)] shadow-[var(--shadow-button-primary)] transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 active:scale-[0.98] hover:bg-[color:var(--accent-hover)]';
 ---
 
 <header id="site-header" class="fixed inset-x-0 top-0 z-50 px-3 sm:px-6">
@@ -39,7 +38,7 @@ const ctaClasses =
     <a href="/" class="site-logo flex items-center" aria-label="Axiom Infrastructure home">
       <img
         src="/axiomtransparentlogo.webp"
-        alt="Axiom"
+        alt=""
         width="240"
         height="63"
         class="block h-9 w-auto select-none object-contain sm:h-10"
@@ -54,8 +53,10 @@ const ctaClasses =
         <a
           href={link.href}
           aria-current={isActive(link.href) ? 'page' : undefined}
-          class={`motion-link-accent text-[14px] font-medium transition-[color,opacity] duration-200 hover:text-[var(--text-primary)] ${
-            isActive(link.href) ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'
+          class={`motion-link-accent min-h-11 border-b border-transparent py-2 text-[14px] font-medium transition-[color,opacity,border-color] duration-200 hover:border-[color:var(--accent-border)] hover:text-[var(--text-primary)] ${
+            isActive(link.href)
+              ? 'border-[color:var(--accent-solid)] text-[var(--text-primary)]'
+              : 'text-[var(--text-secondary)]'
           }`}
         >
           {link.label}
@@ -65,11 +66,7 @@ const ctaClasses =
 
     <div class="flex items-center gap-3">
       {!hidePrimaryCta && (
-        <a
-          href={CTA_PATHS.startProject}
-          class={`hidden md:inline-flex ${ctaClasses}`}
-          style="background: var(--accent); color: var(--text-on-accent);"
-        >
+        <a href={CTA_PATHS.startProject} class={`hidden md:inline-flex ${ctaClasses}`}>
           Start a project
         </a>
       )}
@@ -92,7 +89,6 @@ const ctaClasses =
   </div>
 </header>
 
-<!-- Mobile nav panel - starts closed; JS toggles .nav-open -->
 <div
   id="mobile-nav-panel"
   role="dialog"
@@ -108,7 +104,7 @@ const ctaClasses =
       <a href="/" class="flex items-center" aria-label="Axiom Infrastructure home">
         <img
           src="/axiomtransparentlogo.webp"
-          alt="Axiom"
+          alt=""
           width="240"
           height="63"
           class="block h-9 w-auto select-none object-contain sm:h-10"
@@ -132,7 +128,7 @@ const ctaClasses =
           href={link.href}
           aria-current={isActive(link.href) ? 'page' : undefined}
           data-nav-close
-          class={`block text-[clamp(2.5rem,8vw,4.75rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-[var(--text-primary)] transition-opacity duration-200${index === 0 ? ' mt-2' : ''}`}
+          class={`block min-h-11 text-[clamp(2.5rem,8vw,4.75rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-[var(--text-primary)] transition-opacity duration-200${index === 0 ? ' mt-2' : ''}`}
         >
           {link.label}
         </a>
@@ -141,12 +137,7 @@ const ctaClasses =
 
     {!hidePrimaryCta && (
       <div class="border-t border-[color:var(--hairline)] pt-6">
-        <a
-          href={CTA_PATHS.startProject}
-          data-nav-close
-          class={`w-full justify-center sm:w-auto ${ctaClasses}`}
-          style="background: var(--accent); color: var(--text-on-accent);"
-        >
+        <a href={CTA_PATHS.startProject} data-nav-close class={`w-full justify-center sm:w-auto ${ctaClasses}`}>
           Start a project
         </a>
       </div>
@@ -155,13 +146,11 @@ const ctaClasses =
 </div>
 
 <style>
-  /* Eliminate 300ms iOS tap delay on nav buttons */
   #nav-toggle,
   #nav-close {
     touch-action: manipulation;
   }
 
-  /* Panel visibility - toggled by JS adding/removing .nav-open */
   #mobile-nav-panel {
     visibility: hidden;
     opacity: 0;
@@ -175,7 +164,6 @@ const ctaClasses =
     pointer-events: auto;
   }
 
-  /* Hamburger -> X animation driven by aria-expanded */
   .bar {
     transition: transform 200ms ease, opacity 200ms ease;
   }
@@ -192,7 +180,6 @@ const ctaClasses =
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  /* Scrolled shell state */
   #nav-shell[data-scrolled] {
     border-color: var(--hairline-strong);
     background-color: var(--nav-shell-bg-scrolled) !important;
@@ -207,6 +194,8 @@ const ctaClasses =
     const toggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
     const panel = document.getElementById('mobile-nav-panel') as HTMLElement | null;
     const shell = document.getElementById('nav-shell') as HTMLElement | null;
+    const closeButton = document.getElementById('nav-close') as HTMLButtonElement | null;
+    let lastFocused: HTMLElement | null = null;
 
     if (!toggle || !panel) return;
     if (toggle.dataset.navBound === 'true') return;
@@ -214,12 +203,16 @@ const ctaClasses =
     toggle.dataset.navBound = 'true';
 
     function openMenu() {
+      lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       panel.removeAttribute('inert');
       panel.classList.add('nav-open');
       panel.setAttribute('aria-hidden', 'false');
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Close navigation');
       document.body.style.overflow = 'hidden';
+      window.requestAnimationFrame(() => {
+        closeButton?.focus();
+      });
     }
 
     function closeMenu() {
@@ -228,15 +221,17 @@ const ctaClasses =
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', 'Open navigation');
       document.body.style.overflow = '';
-      // Restore inert after transition so backdrop-blur doesn't block iOS touches
       panel.addEventListener('transitionend', () => panel.setAttribute('inert', ''), { once: true });
+      window.requestAnimationFrame(() => {
+        lastFocused?.focus();
+      });
     }
 
     toggle.addEventListener('click', () => {
       toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
     });
 
-    document.getElementById('nav-close')?.addEventListener('click', closeMenu);
+    closeButton?.addEventListener('click', closeMenu);
 
     panel.querySelectorAll('[data-nav-close]').forEach((el) => {
       el.addEventListener('click', closeMenu);
@@ -244,12 +239,30 @@ const ctaClasses =
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMenu();
+      if (e.key !== 'Tab' || toggle.getAttribute('aria-expanded') !== 'true') return;
+
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+      );
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     });
 
-    // Scroll-aware shell
     function onScroll() {
       shell?.toggleAttribute('data-scrolled', window.scrollY > 100);
     }
+
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   });

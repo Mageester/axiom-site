@@ -1,19 +1,21 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import type { RefObject } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 type FadeInResult<T extends HTMLElement> = {
   isVisible: boolean;
-  ref: RefObject<T>;
+  ref: (node: T | null) => void;
 };
 
 export function useFadeInOnScroll<T extends HTMLElement>(): FadeInResult<T> {
-  const ref = useRef<T | null>(null);
+  const elementRef = useRef<T | null>(null);
   const [isVisible, setIsVisible] = useState(true);
+  const ref = useCallback((node: T | null) => {
+    elementRef.current = node;
+  }, []);
 
   const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
   useIsomorphicLayoutEffect(() => {
-    const element = ref.current;
+    const element = elementRef.current;
     if (!element) return;
 
     if (

@@ -1,19 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
-import type { RefObject } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type CountUpResult<T extends HTMLElement> = {
-  ref: RefObject<T>;
+  ref: (node: T | null) => void;
   value: number;
   isDone: boolean;
 };
 
 export function useCountUp<T extends HTMLElement>(target: number, duration: number): CountUpResult<T> {
-  const ref = useRef<T | null>(null);
+  const elementRef = useRef<T | null>(null);
   const [value, setValue] = useState(0);
   const [isDone, setIsDone] = useState(false);
+  const ref = useCallback((node: T | null) => {
+    elementRef.current = node;
+  }, []);
 
   useEffect(() => {
-    const element = ref.current;
+    const element = elementRef.current;
     if (!element) return;
 
     const prefersReducedMotion =

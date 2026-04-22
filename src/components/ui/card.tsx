@@ -27,7 +27,7 @@ export function Card({ className, variant = 'default', padding = 'md', hoverLift
   return (
     <div
       className={cn(
-        'rounded-[var(--radius-card)] border border-white/10 shadow-[var(--shadow-card)] motion-safe:transition-[transform,background-color,border-color,box-shadow] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:scale-[1.02] motion-safe:hover:border-white/20 motion-safe:hover:shadow-[var(--shadow-card-hover)]',
+        'rounded-[var(--radius-card)] border border-[color:var(--hairline)] shadow-[var(--shadow-card)] motion-safe:transition-[transform,background-color,border-color,box-shadow] motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:scale-[1.02] motion-safe:hover:border-[color:var(--hairline-strong)] motion-safe:hover:shadow-[var(--shadow-card-hover)]',
         variantClasses[variant],
         paddingClasses[padding],
         hoverLift && 'motion-safe:hover:bg-[var(--surface-2)]',

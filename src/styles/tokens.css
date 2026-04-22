@@ -1,12 +1,10 @@
-/* Accent option chosen: OPTION A - Refined Copper */
-
 :root {
-  --bg-base: #0d0d0d;
-  --surface-1: #101014;
-  --surface-2: #16161c;
-  --surface-input: #16161c;
-  --surface-input-hover: #1a1a20;
-  --surface-input-focus: #1d1d24;
+  --bg-base: #0a0a0a;
+  --surface-1: #111111;
+  --surface-2: #141414;
+  --surface-input: #141414;
+  --surface-input-hover: #181818;
+  --surface-input-focus: #1b1b1b;
   --surface-panel: rgba(255, 255, 255, 0.015);
   --surface-panel-strong: rgba(255, 255, 255, 0.02);
   --surface-overlay: rgba(255, 255, 255, 0.03);
@@ -19,22 +17,23 @@
   --hairline: rgba(255, 255, 255, 0.06);
   --hairline-strong: rgba(255, 255, 255, 0.1);
   --hairline-hover: rgba(255, 255, 255, 0.12);
-  --text-primary: #f5f5f7;
-  --text-secondary: #c2c2c8;
-  --text-muted: #6b6b74;
-  --text-error: #e7b2a8;
-  --text-placeholder: rgba(194, 194, 200, 0.8);
-  --text-on-accent: #0a0a0c;
+  --text-primary: #f5f5f5;
+  --text-secondary: #bbb3a3;
+  --text-muted: #888888;
+  --text-error: #dec2a0;
+  --text-placeholder: rgba(187, 179, 163, 0.76);
+  --text-on-accent: #0a0a0a;
   --error-surface: rgba(231, 178, 168, 0.1);
   --error-border: rgba(231, 178, 168, 0.35);
   --error-text: #fbe4dd;
 
-  --accent-current: #c97a4e;
-  --accent-current-rgb: 201 122 78;
-  --accent-v2: #c9a368;
-  --accent-v2-rgb: 201 163 104;
+  --accent-current: #b89a5e;
+  --accent-current-rgb: 184 154 94;
+  --accent-v2: #b89a5e;
+  --accent-v2-rgb: 184 154 94;
 
   --accent: var(--accent-v2, var(--accent-current));
+  --accent-hover: #cdb07a;
   --accent-solid: var(--accent-v2, var(--accent-current));
   --accent-glow: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.25);
   --accent-ring: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);
@@ -55,14 +54,15 @@
   --section-space-mobile: 96px;
   --section-space-desktop: 128px;
   --radius-card: 16px;
+  --radius-component: 16px;
 
   --transition-standard: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --reveal-duration: 600ms;
   --reveal-distance: 20px;
   --reveal-stagger: 80ms;
 
-  --font-display: 'Geist Sans', system-ui, sans-serif;
-  --font-body: 'Geist Sans', system-ui, sans-serif;
+  --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --body-hero-glow: radial-gradient(circle at top, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.09), transparent 32%);
@@ -75,6 +75,7 @@
   --selection-fg: var(--text-primary);
   --skip-link-bg: rgba(10, 10, 12, 0.96);
   --skip-link-border: var(--hairline);
+  --border-strong: var(--hairline-strong);
   --nav-shell-bg: rgba(10, 10, 12, 0.7);
   --nav-shell-bg-scrolled: rgba(10, 10, 12, 0.82);
   --nav-panel-bg: rgba(10, 10, 12, 0.96);
@@ -93,7 +94,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -6px 4px rgba(0, 0, 0, 0.18),
     0 8px 16px rgba(0, 0, 0, 0.28),
-    0 14px 34px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.08);
+    0 14px 34px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
   --shadow-button-secondary: 0 6px 20px rgba(0, 0, 0, 0.16);
   --shadow-button-secondary-hover: 0 10px 24px rgba(0, 0, 0, 0.2);
   --shadow-button-focus: 0 0 0 2px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);

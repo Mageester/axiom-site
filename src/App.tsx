@@ -1,29 +1,29 @@
 import React, { Suspense, lazy, useLayoutEffect } from 'react';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './react-pages/Home';
 import ProtectedRoute from './components/ProtectedRoute';
-import About from './pages/About';
-import AuditPage from './pages/AuditPage';
-import ContactPage from './pages/ContactPage';
-import Deployments from './pages/Deployments';
-import Infrastructure from './pages/Infrastructure';
-import NotFoundPage from './pages/NotFoundPage';
-import PricingPage from './pages/PricingPage';
-import PrivacyPage from './pages/PrivacyPage';
-import TermsPage from './pages/TermsPage';
+import About from './react-pages/About';
+import AuditPage from './react-pages/AuditPage';
+import ContactPage from './react-pages/ContactPage';
+import Deployments from './react-pages/Deployments';
+import Infrastructure from './react-pages/Infrastructure';
+import NotFoundPage from './react-pages/NotFoundPage';
+import PricingPage from './react-pages/PricingPage';
+import PrivacyPage from './react-pages/PrivacyPage';
+import TermsPage from './react-pages/TermsPage';
 
 const BUILD_REV = '2026-04-13-origin-cache-refresh';
-const Login = lazy(() => import('./pages/admin/Login'));
-const Account = lazy(() => import('./pages/admin/Account'));
-const Jobs = lazy(() => import('./pages/admin/Jobs'));
-const Inquiries = lazy(() => import('./pages/admin/Inquiries'));
-const InquiryDetail = lazy(() => import('./pages/admin/InquiryDetail'));
-const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
-const Hunt = lazy(() => import('./pages/admin/Hunt'));
-const Vault = lazy(() => import('./pages/admin/Vault'));
-const Triage = lazy(() => import('./pages/admin/Triage'));
-const OmniscientLeadDetail = lazy(() => import('./pages/admin/OmniscientLeadDetail'));
-const OmniscientSettings = lazy(() => import('./pages/admin/OmniscientSettings'));
+const Login = lazy(() => import('./react-pages/admin/Login'));
+const Account = lazy(() => import('./react-pages/admin/Account'));
+const Jobs = lazy(() => import('./react-pages/admin/Jobs'));
+const Inquiries = lazy(() => import('./react-pages/admin/Inquiries'));
+const InquiryDetail = lazy(() => import('./react-pages/admin/InquiryDetail'));
+const Dashboard = lazy(() => import('./react-pages/admin/Dashboard'));
+const Hunt = lazy(() => import('./react-pages/admin/Hunt'));
+const Vault = lazy(() => import('./react-pages/admin/Vault'));
+const Triage = lazy(() => import('./react-pages/admin/Triage'));
+const OmniscientLeadDetail = lazy(() => import('./react-pages/admin/OmniscientLeadDetail'));
+const OmniscientSettings = lazy(() => import('./react-pages/admin/OmniscientSettings'));
 
 const RouteFallback: React.FC = () => (
   <div className="flex min-h-screen items-center justify-center bg-[var(--axiom-base)] px-6">

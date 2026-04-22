@@ -79,7 +79,7 @@ const WorkPreviewCard: React.FC<{ preview: WorkPreview; index: number }> = ({ pr
         </div>
 
         <div className="mt-5">
-          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[12px] md:text-[12px] uppercase tracking-[0.16em] text-white/65">
+          <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-axiomMono text-[12px] uppercase tracking-[0.16em] text-[var(--text-secondary)]">
             {preview.industryTag}
           </span>
         </div>

@@ -1,6 +1,7 @@
 ---
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 import { FadeIn } from '../components/ui/FadeIn';
@@ -106,7 +107,7 @@ const workFilters = [
 ] as const;
 
 const buildLinkClass =
-  'group inline-flex items-center gap-2 text-[14px] font-medium text-white/50 transition-colors duration-200 hover:text-white';
+  'group inline-flex min-h-11 items-center gap-2 text-[14px] font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]';
 const buildArrowClass = 'inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1';
 ---
 
@@ -122,7 +123,7 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
         </p>
         <div class="mt-7">
           <Button asChild size="lg">
-            <a href="/start">Start a project</a>
+            <a href={CTA_PATHS.startProject}>Start a project</a>
           </Button>
         </div>
       </FadeIn>
@@ -136,7 +137,7 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
               type="button"
               data-work-filter={filter.value}
               aria-pressed={filter.value === 'all' ? 'true' : 'false'}
-              class="axiom-eyebrow border-b border-transparent pb-1 text-[11px] font-medium uppercase tracking-[0.2em] text-white/40 transition-colors duration-150 hover:text-white/70 focus-visible:outline-none"
+              class="axiom-eyebrow min-h-11 border-b border-transparent px-2 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors duration-150 hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
             >
               {filter.label}
             </button>
@@ -151,18 +152,18 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
               <article
                 data-work-card
                 data-category={build.category}
-                className="group overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] border-b border-white/5 bg-[var(--surface-1)] shadow-[var(--shadow-card)]"
+                className="group overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[var(--shadow-card)]"
               >
                 <div class="grid gap-0 lg:grid-cols-2">
                   <figure
-                    class={`relative flex flex-col bg-[#141414] ${imageFirst ? 'lg:border-r' : 'lg:order-2 lg:border-l'} border-[color:var(--hairline)] transform-gpu transition-shadow duration-500 group-hover:shadow-[0_0_40px_rgba(201,169,110,0.06)]`}
+                    class={`relative flex flex-col bg-[var(--surface-2)] ${imageFirst ? 'lg:border-r' : 'lg:order-2 lg:border-l'} border-[color:var(--hairline)] transform-gpu transition-shadow duration-500 ease-in-out group-hover:shadow-[0_0_40px_var(--accent-shadow-soft)]`}
                   >
                     {/* Browser Header */}
-                    <div class="flex items-center gap-1.5 px-4 h-9 border-b border-white/5 bg-[#1a1a1a]/50">
+                    <div class="flex h-9 items-center gap-1.5 border-b border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-4">
                       <div class="flex gap-1.5">
-                        <div class="w-2.5 h-2.5 rounded-full bg-white/10"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-white/10"></div>
-                        <div class="w-2.5 h-2.5 rounded-full bg-white/10"></div>
+                        <div class="h-2.5 w-2.5 rounded-full bg-[color:var(--surface-overlay-press)]"></div>
+                        <div class="h-2.5 w-2.5 rounded-full bg-[color:var(--surface-overlay-press)]"></div>
+                        <div class="h-2.5 w-2.5 rounded-full bg-[color:var(--surface-overlay-press)]"></div>
                       </div>
                     </div>
 
@@ -173,8 +174,8 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
                         sizes="(min-width: 1280px) 50vw, 100vw"
                         class="h-full w-full motion-safe:transform-gpu motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out motion-safe:group-hover:scale-[1.03]"
                         style="filter: contrast(1.02) saturate(0.95) brightness(1.02);"
-                        loading="eager"
-                        fetchpriority="high"
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        fetchpriority={index === 0 ? 'high' : 'low'}
                         objectPosition={build.position}
                       />
                       <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60" />
@@ -223,7 +224,7 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
           <p class="font-axiomDisplay text-[clamp(1.5rem,2.2vw,2.3rem)] leading-[1.08] tracking-[-0.04em] text-[var(--text-primary)]">
             More concepts available on request.
           </p>
-          <a class="mt-5 inline-flex items-center gap-2 text-[14px] font-medium text-white/65 transition-colors duration-200 hover:text-white" href="/start">
+          <a class="mt-5 inline-flex min-h-11 items-center gap-2 text-[14px] font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]" href={CTA_PATHS.startProject}>
             <span>Start a project</span>
             <span class={buildArrowClass}>→</span>
           </a>
@@ -243,7 +244,7 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
               </p>
               <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <Button asChild>
-                  <a href="/start">Start a project</a>
+                  <a href={CTA_PATHS.startProject}>Start a project</a>
                 </Button>
                 <p class="axiom-metric text-[var(--text-muted)]">Review &rarr; Scope &rarr; Build &rarr; Launch</p>
               </div>

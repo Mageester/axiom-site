@@ -16,8 +16,8 @@ type StaticStatProps = {
 };
 
 function AnimatedStat({ description, duration, target, unit }: AnimatedStatProps) {
-  const { ref: blockRef, isVisible } = useFadeInOnScroll<HTMLElement>();
-  const { ref: countRef, value, isDone } = useCountUp<HTMLDListElement>(target, duration);
+  const { ref: blockRef, isVisible } = useFadeInOnScroll<HTMLDivElement>();
+  const { ref: countRef, value, isDone } = useCountUp<HTMLElement>(target, duration);
   const [showUnit, setShowUnit] = useState(false);
   const visibilityClass = isVisible
     ? 'opacity-100 translate-y-0'
@@ -68,7 +68,7 @@ function AnimatedStat({ description, duration, target, unit }: AnimatedStatProps
 }
 
 function StaticStat({ description, unit, value }: StaticStatProps) {
-  const { ref: blockRef, isVisible } = useFadeInOnScroll<HTMLElement>();
+  const { ref: blockRef, isVisible } = useFadeInOnScroll<HTMLDivElement>();
   const [showUnit, setShowUnit] = useState(false);
   const visibilityClass = isVisible
     ? 'opacity-100 translate-y-0 scale-100'

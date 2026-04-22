@@ -8,7 +8,7 @@ import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 
-const isCheckmark = (val: string) => ['Included', '✓'].some((k) => val.toLowerCase() === k.toLowerCase());
+const isCheckmark = (val: string) => ['Included', String.fromCharCode(10003)].some((k) => val.toLowerCase() === k.toLowerCase());
 
 const pricingTiers = [
   {
@@ -19,7 +19,7 @@ const pricingTiers = [
     supportNote: 'Ongoing edits and support are included. Full ownership transfers at month 12.',
     features: ['Up to 5 pages', 'Hosting included', 'Ongoing edits and support', '6-month minimum', 'Full ownership available at month 12'],
     cta: 'Start monthly',
-    href: '/start',
+    href: CTA_PATHS.startProject,
     variant: 'primary',
     highlighted: true,
     eyebrow: 'PREFERRED PATH',
@@ -223,13 +223,13 @@ const faqItems = [
                     {tier.price}
                   </p>
 
-                  {tier.subtext ? <p class="mt-3 text-[16px] leading-[1.7] text-white/65">{tier.subtext}</p> : null}
+                  {tier.subtext ? <p class="mt-3 text-[16px] leading-[1.7] text-[var(--text-secondary)]">{tier.subtext}</p> : null}
 
                   <ul class="mt-6 space-y-3">
                     {tier.features.map((feature) => (
-                      <li class="flex items-start gap-3 text-[16px] leading-[1.7] text-white/65">
+                      <li class="flex items-start gap-3 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
                         <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-panel-strong)]">
-                          <DrawIcon name="check" size={12} className="text-[#C9A96E]" />
+                          <DrawIcon name="check" size={12} className="text-[var(--accent-solid)]" />
                         </span>
                         <span>{feature}</span>
                       </li>
@@ -245,7 +245,7 @@ const faqItems = [
               </Card>
 
               {tier.supportNote ? (
-                <p class="mt-3 px-3 text-center text-[14px] font-normal leading-[1.65] text-[rgba(255,255,255,0.5)]">
+                <p class="mt-3 px-3 text-center text-[14px] font-normal leading-[1.65] text-[var(--text-muted)]">
                   {tier.supportNote}
                 </p>
               ) : null}
@@ -288,9 +288,9 @@ const faqItems = [
                     {tier.rows.map((row) => (
                       <div class="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
                         <p class="text-[14px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{row.label}</p>
-                        <div class="text-[16px] leading-[1.7] text-white/65">
+                        <div class="text-[16px] leading-[1.7] text-[var(--text-secondary)]">
                           {isCheckmark(row.value) ? (
-                            <span class="inline-flex items-center text-[#C9A96E]">
+                            <span class="inline-flex items-center text-[var(--accent-solid)]">
                               <DrawIcon name="check" size={16} className="is-active" />
                               <span class="sr-only">{row.value}</span>
                             </span>
@@ -317,7 +317,7 @@ const faqItems = [
                 <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   SUBSCRIPTION
                 </th>
-                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)] bg-[linear-gradient(180deg,rgba(232,162,123,0.04),transparent)]">
+                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
                   <div class="flex flex-col gap-1">
                     <span class="text-[12px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-solid)]">One-time</span>
                     <span>Ownership</span>
@@ -330,29 +330,29 @@ const faqItems = [
             </thead>
             <tbody>
               {comparisonRows.map((row) => (
-                <tr class="border-b border-[rgba(255,255,255,0.06)] odd:bg-[#0f0f0f] even:bg-[#111111] last:border-b-0">
+                <tr class="border-b border-[color:var(--hairline)] odd:bg-[#0a0a0a] even:bg-[var(--surface-1)] last:border-b-0">
                   <th scope="row" class="px-6 py-4 text-[16px] font-medium text-[var(--text-primary)]">
                     {row.label}
                   </th>
-                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-white/65">
+                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
                     {isCheckmark(row.monthly) ? (
-                      <span class="inline-flex items-center text-[#C9A96E]">
+                      <span class="inline-flex items-center text-[var(--accent-solid)]">
                         <DrawIcon name="check" size={18} className="is-active" />
                         <span class="sr-only">{row.monthly}</span>
                       </span>
                     ) : row.monthly}
                   </td>
-                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-white/65 bg-[linear-gradient(180deg,rgba(232,162,123,0.02),transparent)]">
+                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
                     {isCheckmark(row.ownership) ? (
-                      <span class="inline-flex items-center text-[#C9A96E]">
+                      <span class="inline-flex items-center text-[var(--accent-solid)]">
                         <DrawIcon name="check" size={18} className="is-active" />
                         <span class="sr-only">{row.ownership}</span>
                       </span>
                     ) : row.ownership}
                   </td>
-                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-white/65">
+                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
                     {isCheckmark(row.ecommerce) ? (
-                      <span class="inline-flex items-center text-[#C9A96E]">
+                      <span class="inline-flex items-center text-[var(--accent-solid)]">
                         <DrawIcon name="check" size={18} className="is-active" />
                         <span class="sr-only">{row.ecommerce}</span>
                       </span>
@@ -430,9 +430,8 @@ const faqItems = [
                 <p class="section-copy mt-4 md:text-[16px]">
                   Monthly pricing puts a complete site live for $0 down. Hosting and ongoing support are included, and ownership can transfer later.
                 </p>
-                <a href="#monthly-tier" class="mt-6 text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-white/70">
-                  See monthly pricing ↑
-                </a>
+                <a href="#monthly-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
+                  See monthly pricing &uarr;</a>
               </div>
             </Card>
           </FadeIn>
@@ -446,9 +445,8 @@ const faqItems = [
                 <p class="section-copy mt-4 md:text-[16px]">
                   A one-time build with full code handoff at launch. Hosting can be scoped separately if you want it managed outside the project.
                 </p>
-                <a href="#ownership-tier" class="mt-6 text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-white/70">
-                  See ownership pricing ↑
-                </a>
+                <a href="#ownership-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
+                  See ownership pricing &uarr;</a>
               </div>
             </Card>
           </FadeIn>

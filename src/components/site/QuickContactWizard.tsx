@@ -603,7 +603,7 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
             {activeStep === 2 ? (
               <div className="grid gap-5 md:grid-cols-2 md:gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="contact-name" className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                  <label htmlFor="contact-name" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                     Name
                   </label>
                   <input
@@ -629,7 +629,7 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="contact-email" className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                  <label htmlFor="contact-email" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                     Email
                   </label>
                   <input
@@ -659,7 +659,7 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
             {activeStep === 3 ? (
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <label htmlFor="contact-message" className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                  <label htmlFor="contact-message" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                     Message
                   </label>
                   <textarea
@@ -700,7 +700,7 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
 
                 {showWebsiteField ? (
                   <div className="max-w-lg space-y-2">
-                    <label htmlFor="contact-website" className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                    <label htmlFor="contact-website" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                       Website URL
                     </label>
                     <input
@@ -767,7 +767,7 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
                         index !== 0 && 'border-t border-[color:var(--hairline)]'
                       )}
                     >
-                      <p className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                      <p className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                         {item.label}
                       </p>
                       <p className="whitespace-pre-line text-[15px] leading-[1.75] text-[var(--text-secondary)]">

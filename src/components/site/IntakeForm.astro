@@ -34,8 +34,8 @@ const {
   noteText,
 } = Astro.props as Props;
 
-const fieldLabelClass = 'axiom-eyebrow text-[12px] font-medium uppercase tracking-[0.2em] text-white/46';
-const fieldHelpClass = 'text-[14px] leading-[1.65] text-white/65 md:text-[13px]';
+const fieldLabelClass = 'axiom-eyebrow text-[12px] font-medium uppercase tracking-[0.2em] text-[var(--text-muted)]';
+const fieldHelpClass = 'text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[13px]';
 const fieldErrorClass = 'min-h-[1.1em] text-[14px] leading-[1.65] text-[var(--text-error)] md:text-[13px]';
 const pricingPathOptions = [
   { value: 'monthly', label: 'Monthly plan' },
@@ -79,7 +79,7 @@ const pricingPathOptions = [
           </div>
           <div class="min-w-0">
             <p class="font-medium text-[var(--text-primary)]">We review your submission</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-white/65">Checked internally and marked complete.</p>
+            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">Checked internally and marked complete.</p>
           </div>
         </li>
         <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
@@ -88,7 +88,7 @@ const pricingPathOptions = [
           </div>
           <div class="min-w-0">
             <p class="font-medium text-[var(--text-primary)]">You get a reply within 1 business day with our initial assessment</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-white/65">We&apos;ll review the scope, the site, and the fastest path forward.</p>
+            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">We&apos;ll review the scope, the site, and the fastest path forward.</p>
           </div>
         </li>
         <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
@@ -97,7 +97,7 @@ const pricingPathOptions = [
           </div>
           <div class="min-w-0">
             <p class="font-medium text-[var(--text-primary)]">If there&apos;s a fit, we scope and quote - no commitment</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-white/65">You&apos;ll know the next step before making any decision.</p>
+            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">You&apos;ll know the next step before making any decision.</p>
           </div>
         </li>
       </ol>
@@ -303,7 +303,7 @@ const pricingPathOptions = [
         </Button>
         <p class="text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
           {noteText}{' '}
-          <a href={noteLinkHref} class="underline decoration-[color:var(--border-strong)] underline-offset-2 transition-colors hover:text-[var(--text-primary)]">
+          <a href={noteLinkHref} class="underline decoration-[color:var(--border-strong)] underline-offset-2 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
             {noteLinkLabel}
           </a>
           .
@@ -733,7 +733,7 @@ const pricingPathOptions = [
         </Button>
         <p class="text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
           {noteText}{' '}
-          <a href={noteLinkHref} class="underline decoration-[color:var(--border-strong)] underline-offset-2 transition-colors hover:text-[var(--text-primary)]">
+          <a href={noteLinkHref} class="underline decoration-[color:var(--border-strong)] underline-offset-2 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
             {noteLinkLabel}
           </a>
           .

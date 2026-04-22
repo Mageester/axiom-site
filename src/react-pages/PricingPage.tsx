@@ -15,7 +15,7 @@ import {
   Search, 
   MapPin, 
   Server, 
-  Layout, 
+  Layout as LayoutIcon, 
   MessageSquare, 
   UserCheck, 
   CreditCard 
@@ -48,7 +48,7 @@ const pricingTiers: readonly (PricingTier & { icon: React.ElementType })[] = [
       'Full ownership after 12 months'
     ],
     cta: 'Start a project',
-    href: '/start',
+    href: CTA_PATHS.startProject,
     icon: CreditCard,
   },
   {
@@ -61,7 +61,7 @@ const pricingTiers: readonly (PricingTier & { icon: React.ElementType })[] = [
       'Contact form',
       'Live in 14 days'
     ],
-    cta: 'Start a project →',
+    cta: 'Start a project',
     href: CTA_PATHS.startProject,
     icon: Zap,
   },
@@ -75,7 +75,7 @@ const pricingTiers: readonly (PricingTier & { icon: React.ElementType })[] = [
       'Google Business profile setup',
       'Live in 21 days'
     ],
-    cta: 'Start a project →',
+    cta: 'Start a project',
     href: CTA_PATHS.startProject,
     recommended: true,
     icon: TrendingUp,
@@ -90,7 +90,7 @@ const pricingTiers: readonly (PricingTier & { icon: React.ElementType })[] = [
       'Ongoing support available',
       'Timeline scoped on intake'
     ],
-    cta: "Let's talk →",
+    cta: "Let's talk",
     href: CTA_PATHS.startProject,
     icon: Cpu,
   },
@@ -141,7 +141,7 @@ const comparisonRows = [
   },
   {
     label: 'CMS / editing capability',
-    icon: Layout,
+    icon: LayoutIcon,
     starter: 'Light updates',
     growth: 'Editable workflow',
     custom: 'Custom setup',
@@ -229,7 +229,7 @@ const PricingPage: React.FC = () => {
               <ul className="mb-2 mt-auto flex flex-col gap-3">
                 {tier.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-sm md:text-[15px] leading-relaxed text-slate-300">
-                    <span className="text-slate-500">·</span>
+                    <span className="text-slate-500">Ã‚·</span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -362,8 +362,7 @@ const PricingPage: React.FC = () => {
             Start a project and we will tell you exactly what your business needs. One business day response, no pressure.
           </p>
           <Link to={CTA_PATHS.startProject} className="btn-primary btn-lg inline-flex">
-            Start a project →
-          </Link>
+            Start a project</Link>
         </div>
       </section>
         </main>

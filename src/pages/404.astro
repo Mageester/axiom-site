@@ -4,6 +4,7 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 ---
 
@@ -19,7 +20,7 @@ import { SEO_ROUTES } from '../lib/seo';
                 This page doesn't exist yet.
               </h1>
               <p class="section-copy mt-4">
-                Looks like this one got away. The work is still happening — just not here.
+                Looks like this one got away. The work is still happening, just not here.
               </p>
 
               <div class="mt-10 grid grid-cols-2 gap-3">
@@ -30,7 +31,7 @@ import { SEO_ROUTES } from '../lib/seo';
                   <a href="/work">See the work</a>
                 </Button>
                 <Button asChild variant="ghost" size="lg" className="w-full col-span-2">
-                  <a href="/start">Start a project →</a>
+                  <a href={CTA_PATHS.startProject}>Start a project</a>
                 </Button>
               </div>
             </div>

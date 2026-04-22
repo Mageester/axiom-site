@@ -94,7 +94,7 @@ const { title, updated, sections } = Astro.props as Props;
                     {section.bullets && section.bullets.length > 0 && (
                       <ul class="space-y-3 pt-1">
                         {section.bullets.map((bullet) => (
-                          <li class="flex gap-3 text-[16px] leading-[1.75] text-white/65">
+                          <li class="flex gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)]">
                             <span
                               aria-hidden="true"
                               class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[var(--accent-solid)]"
@@ -116,11 +116,10 @@ const { title, updated, sections } = Astro.props as Props;
             Questions? Email
             <a
               href={`mailto:${SITE_EMAIL}`}
-              class="text-[var(--text-primary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-colors hover:text-[var(--text-primary)]"
+              class="text-[var(--text-primary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
             >
               {SITE_EMAIL}
-            </a>
-            — we reply within one business day.
+            </a> - we reply within one business day.
           </p>
         </FadeIn>
       </div>

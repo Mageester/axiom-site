@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { CTA_PATHS } from '../lib/cta';
 import { FadeIn } from '../components/ui/FadeIn';
 import { SEO_ROUTES } from '../lib/seo';
 import { Button } from '../components/ui/button';
@@ -62,7 +63,7 @@ const launchChecklist = [
         </p>
         <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button asChild size="lg" className="w-full sm:w-auto">
-            <a href="/start">Start a project</a>
+            <a href={CTA_PATHS.startProject}>Start a project</a>
           </Button>
           <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
             <a href="/work">See the work</a>
@@ -77,7 +78,7 @@ const launchChecklist = [
           {processSteps.map((step, index) => (
             <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
               <div
-                className="group h-full rounded-[var(--radius-card)] border border-transparent bg-[var(--surface-1)] shadow-[var(--shadow-card)] transition-[transform,border-color,box-shadow,background-color] duration-200 ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:border-[color:rgba(201,122,78,0.2)] motion-safe:hover:shadow-[0_18px_40px_rgba(201,122,78,0.08)] motion-safe:hover:bg-[var(--surface-2)]"
+                className="group h-full rounded-[var(--radius-card)] border border-transparent bg-[var(--surface-1)] shadow-[var(--shadow-card)] transition-[transform,border-color,box-shadow,background-color] duration-200 ease-in-out motion-safe:hover:-translate-y-1 motion-safe:hover:border-[color:var(--accent-border)] motion-safe:hover:shadow-[0_18px_40px_var(--accent-shadow-soft)] motion-safe:hover:bg-[var(--surface-2)]"
               >
                 <div class="flex flex-col p-6 sm:p-7">
                   <div class="flex items-center gap-3">
@@ -112,7 +113,7 @@ const launchChecklist = [
             <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
               <div class="h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
                 <p class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
-                  <DrawIcon name="check" size={14} className="text-[#C9A96E]" />
+                  <DrawIcon name="check" size={14} className="text-[var(--accent-solid)]" />
                   {item.title}
                 </p>
                 <p class="section-copy mt-3 text-[15px]">
@@ -150,7 +151,7 @@ const launchChecklist = [
               </p>
               <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <Button asChild>
-                  <a href="/start">Start a project</a>
+                  <a href={CTA_PATHS.startProject}>Start a project</a>
                 </Button>
                 <p class="axiom-metric text-[var(--text-muted)]">Review &rarr; Scope &rarr; Build &rarr; Launch</p>
               </div>

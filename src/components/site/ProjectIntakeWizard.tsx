@@ -564,7 +564,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
                                 : 'border-[color:var(--hairline-strong)] bg-transparent text-transparent'
                             )}
                           >
-                            <span className="text-[11px] font-bold">✓</span>
+                            <span className="text-[11px] font-bold">&#10003;</span>
                           </span>
                         </span>
                       </label>
@@ -582,7 +582,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
             {activeStep === 2 ? (
               <div className="grid gap-5 md:grid-cols-2 md:gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="project-name" className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                  <label htmlFor="project-name" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                     Name
                   </label>
                   <input
@@ -608,7 +608,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="project-email" className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                  <label htmlFor="project-email" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                     Email
                   </label>
                   <input
@@ -638,7 +638,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
             {activeStep === 3 ? (
               <div className="grid gap-5 md:grid-cols-2 md:gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="project-business" className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                  <label htmlFor="project-business" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                     Business name
                   </label>
                   <input
@@ -664,7 +664,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="project-website" className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                  <label htmlFor="project-website" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                     Website URL
                   </label>
                   <input
@@ -696,7 +696,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
 
             {activeStep === 4 ? (
               <div className="space-y-2">
-                <label htmlFor="project-details" className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                <label htmlFor="project-details" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                   Project brief
                 </label>
                 <textarea
@@ -758,7 +758,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
                         index !== 0 && 'border-t border-[color:var(--hairline)]'
                       )}
                     >
-                      <p className="text-[12px] font-medium uppercase tracking-[0.18em] text-white/46">
+                      <p className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
                         {item.label}
                       </p>
                       <p className="whitespace-pre-line text-[15px] leading-[1.75] text-[var(--text-secondary)]">

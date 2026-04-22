@@ -24,7 +24,8 @@ const isActive = (pathname: string, href: string) => pathname === href || pathna
 
 export const Footer: React.FC<FooterProps> = ({ pathname }) => {
   const year = new Date().getFullYear();
-  const footerLinkClass = 'motion-link-accent text-[16px] leading-[1.7] text-white/50 transition-colors duration-200 hover:text-white/85';
+  const footerLinkClass =
+    'motion-link-accent min-h-11 text-[16px] leading-[1.7] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]';
 
   return (
     <footer className="border-t border-[color:var(--hairline)] px-6 py-20 md:px-12">
@@ -33,19 +34,18 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
           <a href="/" className="inline-flex items-center" aria-label="Axiom Infrastructure home">
             <img
               src="/axiomtransparentlogo.webp"
-              alt="Axiom Infrastructure"
+              alt=""
               width={240}
               height={63}
               className="block h-10 w-auto select-none object-contain"
-              loading="eager"
+              loading="lazy"
               decoding="async"
-              fetchPriority="high"
             />
           </a>
-          <p className="max-w-sm text-[15px] italic leading-[1.7] text-white/50">
+          <p className="max-w-sm text-[15px] italic leading-[1.7] text-[var(--text-secondary)]">
             Websites built to convert. Not to decorate.
           </p>
-          <p className="text-[14px] leading-[1.6] text-[var(--text-muted)]">© {year} Axiom Infrastructure.</p>
+          <p className="text-[14px] leading-[1.6] text-[var(--text-muted)]">&copy; {year} Axiom Infrastructure.</p>
         </div>
 
         <div className="space-y-4">
@@ -57,7 +57,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
                   href={link.href}
                   className={cn(
                     footerLinkClass,
-                    isActive(pathname, link.href) && 'text-white/80'
+                    isActive(pathname, link.href) && 'text-[var(--accent-solid)]'
                   )}
                 >
                   {link.label}
@@ -97,7 +97,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
                   href={link.href}
                   className={cn(
                     footerLinkClass,
-                    isActive(pathname, link.href) && 'text-white/80'
+                    isActive(pathname, link.href) && 'text-[var(--accent-solid)]'
                   )}
                 >
                   {link.label}
