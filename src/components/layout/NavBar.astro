@@ -26,7 +26,7 @@ const isActive = (href: string) =>
   href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
 const ctaClasses =
-  'inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-transparent bg-[color:var(--accent)] px-5 text-[14px] font-medium tracking-normal text-[color:var(--text-on-accent)] shadow-[var(--shadow-button-primary)] transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 active:scale-[0.98] hover:bg-[color:var(--accent-hover)]';
+  'inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-transparent bg-[color:var(--accent)] px-5 text-[14px] font-semibold tracking-normal text-[#050505] shadow-[var(--shadow-button-primary)] transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 active:scale-[0.98] hover:bg-[color:var(--accent-hover)]';
 ---
 
 <header id="site-header" class="fixed inset-x-0 top-0 z-50 px-3 sm:px-6">
