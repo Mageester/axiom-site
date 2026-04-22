@@ -1,5 +1,4 @@
 ---
-import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
@@ -8,10 +7,13 @@ import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import { MotionHeading } from '../components/motion/MotionHeading';
+import { SectionDivider } from '../components/motion/SectionDivider';
+import { WorkShowcase } from '../components/motion/WorkShowcase';
 
 const featuredBuilds = [
   {
-    eyebrow: 'CONCEPT BUILD \u00b7 LEGAL SERVICES',
+    eyebrow: 'CONCEPT BUILD · LEGAL SERVICES',
     title: 'Harrow & Calloway',
     category: 'legal',
     originalWeakness: 'Most law firm sites are walls of text. Visitors bounce before they find the offer.',
@@ -23,7 +25,7 @@ const featuredBuilds = [
     href: 'https://law.getaxiom.ca',
   },
   {
-    eyebrow: 'CONCEPT BUILD \u00b7 HEALTHCARE & MEDICAL',
+    eyebrow: 'CONCEPT BUILD · HEALTHCARE & MEDICAL',
     title: 'Aurelia Dental Studio',
     category: 'other',
     originalWeakness: 'Most medical sites feel cold and clinical - and make booking harder than it should be.',
@@ -35,7 +37,7 @@ const featuredBuilds = [
     href: 'https://dental.getaxiom.ca',
   },
   {
-    eyebrow: 'CONCEPT BUILD \u00b7 PERSONAL SERVICES & GROOMING',
+    eyebrow: 'CONCEPT BUILD · PERSONAL SERVICES & GROOMING',
     title: 'Blackline Barber Co.',
     category: 'sales-beauty',
     originalWeakness: 'Most barbershop sites look dated and bury the booking link.',
@@ -47,7 +49,7 @@ const featuredBuilds = [
     href: 'https://barber.getaxiom.ca',
   },
   {
-    eyebrow: 'CONCEPT BUILD \u00b7 SALON & BEAUTY',
+    eyebrow: 'CONCEPT BUILD · SALON & BEAUTY',
     title: 'Nails Studio Demo',
     category: 'sales-beauty',
     originalWeakness: 'Most salon sites hide the booking button and undersell the service.',
@@ -59,7 +61,7 @@ const featuredBuilds = [
     href: 'https://nails.getaxiom.ca',
   },
   {
-    eyebrow: 'CONCEPT BUILD \u00b7 RESTAURANT & HOSPITALITY',
+    eyebrow: 'CONCEPT BUILD · RESTAURANT & HOSPITALITY',
     title: 'Restaurant reservation concept.',
     category: 'food-hospitality',
     originalWeakness: 'Guests had to hunt for the reservation link, and the menu was hard to read on a phone.',
@@ -71,7 +73,7 @@ const featuredBuilds = [
     href: 'https://restaurant.getaxiom.ca',
   },
   {
-    eyebrow: 'CONCEPT BUILD \u00b7 LANDSCAPING & OUTDOOR SERVICES',
+    eyebrow: 'CONCEPT BUILD · LANDSCAPING & OUTDOOR SERVICES',
     title: 'Landscaping concept.',
     category: 'home-services',
     originalWeakness: 'Past work was buried, and the quote form took too many clicks.',
@@ -83,7 +85,7 @@ const featuredBuilds = [
     href: 'https://landscaping.getaxiom.ca',
   },
   {
-    eyebrow: 'CONCEPT BUILD \u00b7 ROOFING & EXTERIORS',
+    eyebrow: 'CONCEPT BUILD · ROOFING & EXTERIORS',
     title: 'Roofing concept.',
     category: 'home-services',
     originalWeakness: 'Storm traffic needs a fast path to inspection and estimate - most sites make them dig.',
@@ -104,10 +106,6 @@ const workFilters = [
   { label: 'Home Services', value: 'home-services' },
   { label: 'Other', value: 'other' },
 ] as const;
-
-const buildLinkClass =
-  'group inline-flex min-h-11 items-center gap-2 text-[14px] font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]';
-const buildArrowClass = 'inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1';
 ---
 
 <SiteLayout title={SEO_ROUTES.work.title} description={SEO_ROUTES.work.description} canonicalPath="/work">
@@ -115,7 +113,8 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
     <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>WORK</Eyebrow>
-        <h1 class="mt-4">Concept builds. Same standard. Every sector.</h1>
+        <SectionDivider className="mt-6" />
+        <MotionHeading as="h1" text="Concept builds. Same standard. Every sector." className="mt-4" />
         <p class="section-copy mt-5 md:text-[17px]">
           These are concept builds, not live client work. Each one shows how we'd rebuild a typical site in that
           industry - cleaner offer, faster load, and a path to booking that actually converts.
@@ -130,102 +129,19 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
 
     <section class="page-section">
       <div class="axiom-container">
-        <div data-work-filter-row class="mb-8 flex flex-wrap items-center gap-x-6 gap-y-3 md:mb-10">
-          {workFilters.map((filter) => (
-            <button
-              type="button"
-              data-work-filter={filter.value}
-              aria-pressed={filter.value === 'all' ? 'true' : 'false'}
-              class="axiom-eyebrow min-h-11 border-b border-transparent px-2 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors duration-150 hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
-            >
-              {filter.label}
-            </button>
-          ))}
-        </div>
-
-        <div class="space-y-8 md:space-y-10">
-          {featuredBuilds.map((build, index) => {
-            const imageFirst = index % 2 === 0;
-
-            return (
-              <article
-                data-work-card
-                data-category={build.category}
-                className="group overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[var(--shadow-card)]"
-              >
-                <div class="grid gap-0 lg:grid-cols-2">
-                  <figure
-                    class={`relative flex flex-col bg-[var(--surface-2)] ${imageFirst ? 'lg:border-r' : 'lg:order-2 lg:border-l'} border-[color:var(--hairline)] transform-gpu transition-shadow duration-500 ease-in-out group-hover:shadow-[0_0_40px_var(--accent-shadow-soft)]`}
-                  >
-                    {/* Browser Header */}
-                    <div class="flex h-9 items-center gap-1.5 border-b border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-4">
-                      <div class="flex gap-1.5">
-                        <div class="h-2.5 w-2.5 rounded-full bg-[color:var(--surface-overlay-press)]"></div>
-                        <div class="h-2.5 w-2.5 rounded-full bg-[color:var(--surface-overlay-press)]"></div>
-                        <div class="h-2.5 w-2.5 rounded-full bg-[color:var(--surface-overlay-press)]"></div>
-                      </div>
-                    </div>
-
-                    <div class="relative aspect-[4/3] overflow-hidden">
-                      <ResponsivePicture
-                        source={build.image}
-                        alt={build.alt}
-                        sizes="(min-width: 1280px) 50vw, 100vw"
-                        class="h-full w-full motion-safe:transform-gpu motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out motion-safe:group-hover:scale-[1.03]"
-                        style="filter: contrast(1.02) saturate(0.95) brightness(1.02);"
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                        fetchpriority={index === 0 ? 'high' : 'low'}
-                        objectPosition={build.position}
-                      />
-                      <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60" />
-                    </div>
-                  </figure>
-
-                  <div class={`flex h-full flex-col justify-center p-6 sm:p-8 lg:p-10 ${imageFirst ? '' : 'lg:order-1'}`}>
-                    <Eyebrow className="text-[13px] tracking-[0.15em]">{build.eyebrow}</Eyebrow>
-                    <h2 class="section-heading mt-4 text-[clamp(32px,4vw,52px)] font-[500] text-[var(--text-primary)]">
-                      {build.title}
-                    </h2>
-
-                    <dl class="mt-8 space-y-5">
-                      <div class="space-y-2">
-                        <dt class="axiom-metric text-[var(--text-muted)]">ORIGINAL WEAKNESS</dt>
-                        <dd class="section-copy">{build.originalWeakness}</dd>
-                      </div>
-                      <div class="space-y-2 border-t border-[color:var(--hairline)] pt-5">
-                        <dt class="axiom-metric text-[var(--text-muted)]">AXIOM CHANGED</dt>
-                        <dd class="section-copy">{build.axiomChanged}</dd>
-                      </div>
-                      <div class="space-y-2 border-t border-[color:var(--hairline)] pt-5">
-                        <dt class="axiom-metric text-[var(--text-muted)]">WHY IT WORKS</dt>
-                        <dd class="section-copy">{build.whyItWorks}</dd>
-                      </div>
-                    </dl>
-
-                    <div class="mt-8">
-                      <a class={buildLinkClass} href={build.href} target="_blank" rel="noopener noreferrer">
-                        <span>View concept</span>
-                        <span class={buildArrowClass}>→</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <WorkShowcase builds={featuredBuilds} filters={workFilters} />
       </div>
     </section>
 
     <section class="page-section">
       <div class="axiom-container">
         <FadeIn client:load as="div" className="flex flex-col items-center text-center">
-          <p class="font-axiomDisplay text-[clamp(1.5rem,2.2vw,2.3rem)] leading-[1.08] tracking-[-0.04em] text-[var(--text-primary)]">
+          <p class="font-accent text-[clamp(1.5rem,2.2vw,2.3rem)] leading-[1.08] tracking-[-0.04em] text-[var(--text-primary)]">
             More concepts available on request.
           </p>
-          <a class="mt-5 inline-flex min-h-11 items-center gap-2 text-[14px] font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]" href={CTA_PATHS.startProject}>
+          <a class="group mt-5 inline-flex min-h-11 items-center gap-2 text-[14px] font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]" href={CTA_PATHS.startProject}>
             <span>Start a project</span>
-            <span class={buildArrowClass}>→</span>
+            <span class="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
           </a>
         </FadeIn>
       </div>
@@ -237,7 +153,8 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
           <Card className="mx-auto max-w-5xl p-0">
             <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>THE GUARANTEE</Eyebrow>
-              <h2 class="section-heading mt-4">Ready to stop losing jobs to a weaker site?</h2>
+              <SectionDivider className="mt-6" />
+              <MotionHeading as="h2" text="Ready to stop losing jobs to a weaker site?" className="section-heading mt-4" />
               <p class="section-copy mt-4">
                 No asterisks. That is the floor we build to.
               </p>
@@ -254,52 +171,3 @@ const buildArrowClass = 'inline-block transition-transform duration-200 motion-s
     </section>
   </main>
 </SiteLayout>
-
-<script>
-  const initWorkFilters = () => {
-    const filterRow = document.querySelector('[data-work-filter-row]');
-
-    if (!filterRow || filterRow.getAttribute('data-work-filters-ready') === 'true') {
-      return;
-    }
-
-    filterRow.setAttribute('data-work-filters-ready', 'true');
-
-    const buttons = Array.from(filterRow.querySelectorAll('[data-work-filter]'));
-    const cards = Array.from(document.querySelectorAll('[data-work-card]'));
-
-    const applyFilter = (filter) => {
-      buttons.forEach((button) => {
-        const isActive = button.dataset.workFilter === filter;
-        button.setAttribute('aria-pressed', String(isActive));
-      });
-
-      cards.forEach((card) => {
-        const matches = filter === 'all' || card.dataset.category === filter;
-        card.style.display = matches ? '' : 'none';
-        card.setAttribute('aria-hidden', String(!matches));
-      });
-    };
-
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        applyFilter(button.dataset.workFilter ?? 'all');
-      });
-    });
-
-    applyFilter('all');
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initWorkFilters, { once: true });
-  } else {
-    initWorkFilters();
-  }
-</script>
-
-<style>
-  [data-work-filter-row] [data-work-filter][aria-pressed='true'] {
-    color: #b89a5e;
-    border-bottom-color: #b89a5e;
-  }
-</style>
