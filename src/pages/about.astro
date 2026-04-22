@@ -11,18 +11,18 @@ import DrawIcon from '../components/ui/DrawIcon.astro';
 const whyAxiom = [
   {
     number: '01',
-    title: 'What you do, who you serve, and why you are the right call.',
-    description: 'Visitors understand the offer before they have to hunt for it.',
+    title: 'The offer is obvious in three seconds.',
+    description: "Visitors shouldn't have to hunt for what you do or why to pick you.",
   },
   {
     number: '02',
     title: 'Reviews, past work, and results front and center.',
-    description: 'Proof shows up early, before doubt has time to build.',
+    description: 'Proof shows up early - before doubt has time to build.',
   },
   {
     number: '03',
-    title: 'One path forward, with support after launch.',
-    description: 'Monthly clients stay supported instead of being handed off and forgotten.',
+    title: 'One clear next step. And support after launch.',
+    description: 'Monthly clients stay supported. Nothing gets handed off and forgotten.',
   },
 ] as const;
 
@@ -32,38 +32,38 @@ const team = [
     monogram: 'aidan',
     roles: ['STRATEGY', 'SCOPE', 'CLIENT SUPPORT'],
     description:
-      'Keeps the work tied to the business goal, the scope, and the next step. Handles strategy and communication from first call through ongoing support.',
+      'Strategy, scope, and client support. Keeps the work tied to the business goal from first call through launch and beyond.',
   },
   {
     name: 'Riley',
     monogram: 'riley',
     roles: ['DESIGN', 'BUILD', 'QA'],
     description:
-      'Turns the strategy into the site itself. Handles design, build quality, and launch checks so the result stays fast, stable, and clean.',
+      'Design, build, and QA. Turns the strategy into a site that loads fast, works clean, and holds up under traffic.',
   },
 ] as const;
 
 const principles = [
   {
     number: '01',
-    title: 'Clarity over everything',
+    title: 'Clarity first.',
     icon: 'eye',
     description:
-      'If the offer is not readable in a few seconds, the site is already losing. Clarity comes before polish.',
+      "If the offer isn't readable in three seconds, the site is already losing. Polish comes after.",
   },
   {
     number: '02',
-    title: 'Proof closes deals',
+    title: 'Proof moves buyers.',
     icon: 'shield-check',
     description:
-      'Real work, real reviews, and real results should show up early. That is what moves a visitor toward a call.',
+      'Real reviews, real past jobs, real results - all above the fold, not hidden in a footer.',
   },
   {
     number: '03',
-    title: 'Slow sites lose jobs',
+    title: 'Speed books work.',
     icon: 'bolt',
     description:
-      'Most people are on a phone. If the site drags, they leave. We build for speed and verify it before launch.',
+      "Most visitors are on a phone. If it drags, they're gone. We test load times before launch - every time.",
   },
 ] as const;
 ---
@@ -77,14 +77,14 @@ const principles = [
         </FadeIn>
         <FadeIn client:load delay={100}>
           <h1 class="mt-4 max-w-4xl">
-            We build sites that earn attention without explanation.
+            We build sites that do the selling for you.
           </h1>
         </FadeIn>
         <FadeIn client:load delay={200}>
           <p class="section-copy mt-5 md:text-[17px]">
-            Axiom serves established businesses that need a clearer first impression, a lower-friction way to start,
-            and a partner who stays involved after launch. We make the offer obvious, the next step clear, and the
-            support ongoing.
+            Axiom builds for established businesses across every sector - trades, medical, legal, food, retail,
+            professional services. One thing in common: they want a site that books work, not one that just looks
+            nice.
           </p>
         </FadeIn>
         <FadeIn client:load delay={300} className="mt-7">
@@ -99,13 +99,13 @@ const principles = [
       <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)] xl:items-start xl:gap-8">
         <FadeIn client:load as="div" className="space-y-5">
           <Eyebrow>WHY AXIOM</Eyebrow>
-          <h2 class="section-heading">The work is done when the site keeps helping after launch.</h2>
+          <h2 class="section-heading">Launch isn't the finish line.</h2>
           <p class="section-copy md:text-[17px]">
-            Most sites do not need more pages or more effects. They need the offer to read clearly, proof to appear
-            early, and support that does not stop at the handoff.
+            Most sites don't need more pages or more animations. They need a clear offer, proof up front, and
+            support that keeps the site earning long after launch.
           </p>
           <Button asChild variant="ghost" className="px-0">
-            <a href="/work">See the work</a>
+            <a href="/work">See real builds</a>
           </Button>
         </FadeIn>
 
@@ -132,11 +132,12 @@ const principles = [
             <Eyebrow>THE TEAM</Eyebrow>
           </FadeIn>
           <FadeIn client:load delay={100}>
-            <h2 class="section-heading mt-4">Built by two operators with clear roles and ongoing support.</h2>
+            <h2 class="section-heading mt-4">Two operators. Clear roles. Short chain of command.</h2>
           </FadeIn>
           <FadeIn client:load delay={200}>
             <p class="section-copy mt-3 md:text-[17px]">
-              Two operators. Kitchener-Waterloo. Working globally. The relationship does not end at launch.
+              Based in Kitchener-Waterloo. Working with clients across Canada and beyond. The relationship doesn't end
+              at launch.
             </p>
           </FadeIn>
         </div>
@@ -203,7 +204,7 @@ const principles = [
             <Eyebrow>OUR APPROACH</Eyebrow>
           </FadeIn>
           <FadeIn client:load delay={100}>
-          <h2 class="section-heading mt-4">Three principles that shape every build.</h2>
+            <h2 class="section-heading mt-4">Three rules. Every build.</h2>
           </FadeIn>
         </div>
 
@@ -236,7 +237,8 @@ const principles = [
                   Seen enough?
                 </h2>
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Tell us what the business needs. Monthly or one-time, we'll point you to the right path in one business day.
+                  Tell us what the business needs. Monthly or one-time, we'll point you to the right path - one
+                  business day, no pitch.
                 </p>
             </div>
 
