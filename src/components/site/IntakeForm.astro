@@ -65,7 +65,7 @@ const pricingPathOptions = [
         </div>
         <div class="min-w-0 text-left">
           <Eyebrow className="text-[var(--accent-solid)]">{successTitle}</Eyebrow>
-          <h3 class="mt-2 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[var(--text-primary)]">Here&apos;s what happens next</h3>
+          <h3 class="mt-2 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[var(--text-primary)]">What happens next</h3>
           <p class="section-copy mt-2">{successText}</p>
         </div>
       </div>
@@ -78,8 +78,8 @@ const pricingPathOptions = [
             </svg>
           </div>
           <div class="min-w-0">
-            <p class="font-medium text-[var(--text-primary)]">We review your submission</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">Checked internally and marked complete.</p>
+            <p class="font-medium text-[var(--text-primary)]">We review your brief</p>
+            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">Checked and queued.</p>
           </div>
         </li>
         <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
@@ -87,7 +87,7 @@ const pricingPathOptions = [
             <span class="font-display text-[1rem] leading-none">2</span>
           </div>
           <div class="min-w-0">
-            <p class="font-medium text-[var(--text-primary)]">You get a reply within 1 business day with our initial assessment</p>
+            <p class="font-medium text-[var(--text-primary)]">You get a reply within 1 business day with the next step</p>
             <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">We&apos;ll review the scope, the site, and the fastest path forward.</p>
           </div>
         </li>
@@ -104,7 +104,7 @@ const pricingPathOptions = [
 
       <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
         <Button asChild variant="secondary" size="md" className="w-full sm:w-auto">
-          <a href="/work">While you wait, see our work →</a>
+          <a href="/work">While you wait, see real builds →</a>
         </Button>
         <Button
           type="button"
@@ -268,7 +268,7 @@ const pricingPathOptions = [
             rows="5"
             required
             minLength="10"
-            placeholder={kind === 'project' ? 'What does your business do, what is wrong with the current site, and when do you want to move?' : 'Tell us what you need help with.'}
+            placeholder={kind === 'project' ? "What does the business do, what&apos;s broken on the current site, and when do you want to move?" : 'Tell us what you need help with.'}
             enterkeyhint="send"
             class="data-intake-field data-intake-textarea"
             data-intake-field

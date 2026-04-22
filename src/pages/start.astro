@@ -15,16 +15,17 @@ import { SEO_ROUTES } from '../lib/seo';
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>START A PROJECT</Eyebrow>
         <h1 class="mt-4 max-w-4xl">
-          Tell us what the business needs.
+          Tell us about the site. We'll handle the rest.
         </h1>
         <p class="section-copy mt-5 md:text-[17px]">
-          Share the basics. The form takes a few minutes, and we reply within one business day with the next step.
+          Five short steps, about two minutes. You'll get a reply within one business day - from a real person, not
+          a chatbot.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
           <span>ABOUT 2 MINUTES</span>
           <span aria-hidden="true" class="text-[var(--text-muted)]">&rarr;</span>
-          <span>MONTHLY OR ONE-TIME</span>
+          <span>MONTHLY OR OWNERSHIP</span>
           <span aria-hidden="true" class="text-[var(--text-muted)]">&rarr;</span>
           <span>REPLY WITHIN ONE BUSINESS DAY</span>
         </div>
@@ -45,11 +46,11 @@ import { SEO_ROUTES } from '../lib/seo';
             endpoint="/api/intake"
             title="Tell us what needs to change."
             eyebrow="PROJECT INTAKE"
-            description="Tell us what the business does, what&apos;s broken about the current site, and which pricing path feels closest."
-            helper="Three short lines is enough. Monthly plan, one-time project, or not sure yet all work."
+            description="Tell us what the business does, what&apos;s broken on the current site, and which path feels closest."
+            helper="Three short lines is enough. Monthly, one-time, or not sure yet all work."
             submitLabel={`Submit project brief \u2192`}
             successTitle="Received."
-            successText="Received. We will review and reply within one business day."
+            successText="We&apos;ll review and reply within one business day."
             noteLinkHref={CTA_PATHS.contact}
             noteLinkLabel="contact page"
             noteText="Need a quick question instead? Use the"
@@ -61,7 +62,7 @@ import { SEO_ROUTES } from '../lib/seo';
             <div class="p-6 sm:p-7">
               <Eyebrow>WHAT TO EXPECT</Eyebrow>
               <p class="section-copy mt-4">
-                Use this form when you are ready to scope a real project.
+                Use this form when you want to scope a real project.
               </p>
               <div class="mt-6 space-y-4 border-t border-[color:var(--hairline)] pt-5">
                 <div>
@@ -78,7 +79,7 @@ import { SEO_ROUTES } from '../lib/seo';
                 </div>
                 <div>
                   <p class="text-[12px] font-medium uppercase tracking-[0.16em] text-[var(--text-secondary)]">After submit</p>
-                  <p class="mt-2 text-[15px] leading-[1.7] text-[var(--text-secondary)]">We look at the scope, decide whether monthly or lump sum fits, and reply clearly.</p>
+                  <p class="mt-2 text-[15px] leading-[1.7] text-[var(--text-secondary)]">We look at the scope, decide which path fits, and reply clearly.</p>
                 </div>
               </div>
               <div class="mt-6">
