@@ -174,7 +174,7 @@ const services = [
         <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,27rem)] lg:items-center">
           <FadeIn client:load className="max-w-3xl">
             <Eyebrow>WEB DESIGN AGENCY</Eyebrow>
-            <MotionHeading as="h1" text="Websites that turn visitors into booked calls." className="mt-6 max-w-4xl text-left" />
+            <MotionHeading client:load as="h1" text="Websites that turn visitors into booked calls." className="mt-6 max-w-4xl text-left" />
             <p class="section-copy mt-6 max-w-2xl">
               Fast websites. Clear offers. More booked jobs.
               We build in 14 days, start at $0 down, and keep supporting the site after launch. It keeps earning long
@@ -221,7 +221,7 @@ const services = [
           </div>
 
           <div class="flex justify-center lg:col-span-2">
-            <MotionQuote
+            <MotionQuote client:load
               className="text-center"
               phrases={['Fourteen days.', 'Under one second.', 'Ongoing support included.']}
             />
@@ -230,14 +230,14 @@ const services = [
       </div>
     </section>
 
-    <ProofBar />
+    <ProofBar client:load />
 
     <section class="page-section">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>SELECTED WORK</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Real builds. Real outcomes." className="section-heading mt-4" />
+          <SectionDivider client:load className="mt-6" />
+          <MotionHeading client:load as="h2" text="Real builds. Real outcomes." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -286,8 +286,8 @@ const services = [
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>WHAT WE BUILD</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Three formats. One outcome." className="section-heading mt-4" />
+          <SectionDivider client:load className="mt-6" />
+          <MotionHeading client:load as="h2" text="Three formats. One outcome." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-5 md:grid-cols-3">
@@ -318,8 +318,8 @@ const services = [
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>WHY AXIOM</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="What we won't ship." className="section-heading mt-4" />
+          <SectionDivider client:load className="mt-6" />
+          <MotionHeading client:load as="h2" text="What we won't ship." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-5 md:grid-cols-2">
@@ -347,12 +347,12 @@ const services = [
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>HOW WE BUILD</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Four stages. Fourteen days. No drift." className="section-heading mt-4" />
+          <SectionDivider client:load className="mt-6" />
+          <MotionHeading client:load as="h2" text="Four stages. Fourteen days. No drift." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10">
-          <Timeline steps={timelineSteps} />
+          <Timeline client:load steps={timelineSteps} />
         </div>
 
         <div class="mt-6">
@@ -371,8 +371,8 @@ const services = [
               <div aria-hidden="true" class="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgb(var(--accent-v2-rgb,var(--accent-current-rgb))_/_0.12),transparent_45%)] blur-[100px]" />
               <div class="relative">
                 <Eyebrow className="justify-center">THE GUARANTEE</Eyebrow>
-                <SectionDivider className="mt-6" />
-                <MotionHeading as="h2" text="If your site loads in over one second, we fix it free." className="section-heading mx-auto mt-4" />
+                <SectionDivider client:load className="mt-6" />
+                <MotionHeading client:load as="h2" text="If your site loads in over one second, we fix it free." className="section-heading mx-auto mt-4" />
           <p class="section-copy mx-auto mt-4">
                 No asterisks. Monthly-first support stays with you after launch.
               </p>
@@ -387,8 +387,8 @@ const services = [
       <div class="axiom-container py-12 md:py-16">
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.75fr)] lg:items-end">
           <FadeIn client:load as="div" className="max-w-3xl">
-            <SectionDivider className="mb-6" />
-            <MotionHeading as="h2" text="A slow site is a silent bill. We fix that." className="section-heading text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
+            <SectionDivider client:load className="mb-6" />
+            <MotionHeading client:load as="h2" text="A slow site is a silent bill. We fix that." className="section-heading text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
             <p class="section-copy mt-4">
               Start monthly at $0 down, or buy it outright from $3,500.
               Either way, you get a site that actually books work.

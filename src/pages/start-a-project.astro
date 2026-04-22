@@ -20,8 +20,8 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
       <div class="mx-auto max-w-5xl">
         <FadeIn client:load className="mx-auto max-w-3xl text-center">
           <Eyebrow>START A PROJECT</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4" />
+          <SectionDivider client:load className="mt-6" />
+          <MotionHeading client:load as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4" />
           <p class="section-copy mx-auto mt-5 max-w-2xl md:text-[17px]">
             Five short steps, about two minutes. You'll get a reply within one business day - from a real person, not
             a chatbot.

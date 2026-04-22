@@ -65,8 +65,8 @@ const launchChecklist = [
     <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PROCESS</Eyebrow>
-        <SectionDivider className="mt-6" />
-        <MotionHeading as="h1" text="Four stages. Then ongoing support." className="mt-4" />
+        <SectionDivider client:load className="mt-6" />
+        <MotionHeading client:load as="h1" text="Four stages. Then ongoing support." className="mt-4" />
         <p class="section-copy mt-5 md:text-[17px]">
           Fourteen days from first call to launch. No drift, no surprises, no 60-day Slack silences. Monthly clients
           keep support after the site goes live.
@@ -84,7 +84,7 @@ const launchChecklist = [
 
     <section class="page-section">
       <div class="axiom-container">
-        <Timeline steps={timelineSteps} />
+        <Timeline client:load steps={timelineSteps} />
       </div>
     </section>
 
@@ -92,8 +92,8 @@ const launchChecklist = [
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>WHAT WE NEED FROM YOU</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Four things from you. That's it." className="section-heading mt-4" />
+          <SectionDivider client:load className="mt-6" />
+          <MotionHeading client:load as="h2" text="Four things from you. That's it." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -120,8 +120,8 @@ const launchChecklist = [
           <Card className="h-full p-0">
             <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>AFTER LAUNCH</Eyebrow>
-              <SectionDivider className="mt-6" />
-              <MotionHeading as="h2" text="Subscription clients stay supported." className="section-heading mt-4" />
+              <SectionDivider client:load className="mt-6" />
+              <MotionHeading client:load as="h2" text="Subscription clients stay supported." className="section-heading mt-4" />
               <p class="section-copy mt-4">
                 Once live, monthly clients keep edits, refinements, and priority support every month. Ownership clients
                 get a clean handoff - and a separate support path if they want one.
@@ -134,8 +134,8 @@ const launchChecklist = [
           <Card className="h-full p-0">
             <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>THE GUARANTEE</Eyebrow>
-              <SectionDivider className="mt-6" />
-              <MotionHeading as="h2" text="Ready to stop losing jobs to a weaker site?" className="section-heading mt-4" />
+              <SectionDivider client:load className="mt-6" />
+              <MotionHeading client:load as="h2" text="Ready to stop losing jobs to a weaker site?" className="section-heading mt-4" />
               <p class="section-copy mt-4">
                 No asterisks. That is the floor we build to.
               </p>

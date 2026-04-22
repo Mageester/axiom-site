@@ -76,10 +76,10 @@ const principles = [
       <div class="max-w-3xl">
         <FadeIn client:load>
           <Eyebrow>ABOUT</Eyebrow>
-          <SectionDivider className="mt-6" />
+          <SectionDivider client:load className="mt-6" />
         </FadeIn>
         <FadeIn client:load delay={100}>
-          <MotionHeading as="h1" text="We build sites that do the selling for you." className="mt-4 max-w-4xl" />
+          <MotionHeading client:load as="h1" text="We build sites that do the selling for you." className="mt-4 max-w-4xl" />
         </FadeIn>
         <FadeIn client:load delay={200}>
           <p class="section-copy mt-5 md:text-[17px]">
@@ -100,8 +100,8 @@ const principles = [
       <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)] xl:items-start xl:gap-8">
         <FadeIn client:load as="div" className="space-y-5">
           <Eyebrow>WHY AXIOM</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Launch isn't the finish line." className="section-heading mt-4" />
+          <SectionDivider client:load className="mt-6" />
+          <MotionHeading client:load as="h2" text="Launch isn't the finish line." className="section-heading mt-4" />
           <p class="section-copy md:text-[17px]">
             Most sites don't need more pages or more animations. They need a clear offer, proof up front, and
             support that keeps the site earning long after launch.
@@ -140,8 +140,8 @@ const principles = [
             <Eyebrow>THE TEAM</Eyebrow>
           </FadeIn>
           <FadeIn client:load delay={100}>
-            <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="Two operators. Clear roles. Short chain of command." className="section-heading mt-4" />
+            <SectionDivider client:load className="mt-6" />
+            <MotionHeading client:load as="h2" text="Two operators. Clear roles. Short chain of command." className="section-heading mt-4" />
           </FadeIn>
           <FadeIn client:load delay={200}>
             <p class="section-copy mt-3 md:text-[17px]">
@@ -243,8 +243,8 @@ const principles = [
           <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
             <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
               <div class="max-w-3xl">
-                <SectionDivider className="mb-6" />
-                <MotionHeading as="h2" text="Seen enough?" className="section-heading" />
+                <SectionDivider client:load className="mb-6" />
+                <MotionHeading client:load as="h2" text="Seen enough?" className="section-heading" />
                 <p class="section-copy mt-4 md:text-[17px]">
                   Tell us what the business needs. Monthly or one-time, we'll point you to the right path - one
                   business day, no pitch.

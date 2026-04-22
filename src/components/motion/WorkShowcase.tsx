@@ -68,7 +68,7 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
               styleType === 'b' ? 'aspect-[4/5]' : 'aspect-[4/3]'
             )}
             loading={index === 0 ? 'eager' : 'lazy'}
-            fetchPriority={index === 0 ? 'high' : 'low'}
+            fetchpriority={index === 0 ? 'high' : 'low'}
             decoding="async"
             style={{ objectPosition: build.position }}
           />
@@ -121,7 +121,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
         viewport={viewportOnce}
         variants={staggerChildren}
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false}>
           {visibleBuilds.map((build, index) => {
             const styleType = index % 3 === 0 ? 'a' : index % 3 === 1 ? 'b' : 'c';
             const imageFirst = index % 2 === 0;
