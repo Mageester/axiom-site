@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260301.1",
+    "@playwright/test": "^1.59.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
