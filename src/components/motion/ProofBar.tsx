@@ -3,8 +3,26 @@ import { m } from 'framer-motion';
 import useAnimatedReveal from '../../hooks/useAnimatedReveal';
 import { staggerChildren, fadeUpVariants } from './variants';
 import { cn } from '../../lib/utils';
+import { NumberCount } from './NumberCount';
 
-const stats = ['14 DAYS', '$0 DOWN', '<1s LOAD', 'NO ASTERISKS'] as const;
+const stats = [
+  {
+    key: 'days',
+    node: <NumberCount end={14} suffix=" DAYS" />,
+  },
+  {
+    key: 'down',
+    node: '$0 DOWN',
+  },
+  {
+    key: 'load',
+    node: '<1s LOAD',
+  },
+  {
+    key: 'asterisks',
+    node: 'NO ASTERISKS',
+  },
+] as const;
 
 export function ProofBar({ className }: { className?: string }) {
   const reveal = useAnimatedReveal();
@@ -21,7 +39,7 @@ export function ProofBar({ className }: { className?: string }) {
         >
           {stats.map((stat, index) => (
             <m.div
-              key={stat}
+              key={stat.key}
               className={cn(
                 'motion-surface flex items-center justify-center text-center font-mono text-[0.875rem] uppercase tracking-[0.1em] text-[var(--accent-solid)]',
                 index !== stats.length - 1 && 'lg:border-r lg:border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.4)]'
@@ -29,7 +47,11 @@ export function ProofBar({ className }: { className?: string }) {
               data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
               variants={fadeUpVariants}
             >
-              {stat}
+              {stat.key === 'days' ? (
+                <NumberCount end={14} suffix=" DAYS" />
+              ) : (
+                stat.node
+              )}
             </m.div>
           ))}
         </m.div>

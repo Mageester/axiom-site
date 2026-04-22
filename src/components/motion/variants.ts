@@ -70,3 +70,8 @@ export const underlineDrawVariants = {
     },
   },
 } as const;
+
+export const numberCount = {
+  duration: 1.2,
+  ease: motionEase,
+} as const;

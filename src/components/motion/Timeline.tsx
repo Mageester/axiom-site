@@ -36,7 +36,16 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
           data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
           initial="hidden"
           animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
-          variants={underlineDrawVariants}
+          variants={{
+            hidden: { scaleY: 0 },
+            visible: {
+              scaleY: 1,
+              transition: {
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
         />
       ) : null}
 
