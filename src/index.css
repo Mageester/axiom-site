@@ -5,20 +5,20 @@
 @layer base {
   :root {
     --axiom-build-rev: '2026-04-04-motion-polish';
-    --axiom-base: #0d0d0d;
-    --axiom-elevated: #11151A;
-    --axiom-surface: #181E25;
-    --axiom-border: #29313C;
-    --accent-current: #C87A57;
-    --accent-current-rgb: 200 122 87;
-    --accent-v2: #C9A368;
-    --accent-v2-rgb: 201 163 104;
+    --axiom-base: #000000;
+    --axiom-elevated: rgba(255, 255, 255, 0.02);
+    --axiom-surface: rgba(255, 255, 255, 0.035);
+    --axiom-border: rgba(255, 255, 255, 0.06);
+    --accent-current: #d4af37;
+    --accent-current-rgb: 212 175 55;
+    --accent-v2: #d4af37;
+    --accent-v2-rgb: 212 175 55;
     --axiom-accent: var(--accent-v2, var(--accent-current));
     --accent: var(--accent-v2, var(--accent-current));
     --accent2: var(--accent-v2, var(--accent-current));
     --accent-muted: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.18);
     --axiom-text-main: #F3F6FA;
-    --axiom-text-primary: #C2C2C8;
+    --axiom-text-primary: #c9c2b6;
     --axiom-text-mute: #6B6B74;
     --axiom-amber: var(--accent-v2, var(--accent-current));
     --axiom-gold: #CFA873;
@@ -29,7 +29,7 @@
     --bg-surface: var(--axiom-elevated);
     --bg-inset: #0D1118;
     --border-panel: var(--axiom-border);
-    --border-subtle: rgba(143, 155, 171, 0.24);
+    --border-subtle: rgba(255, 255, 255, 0.08);
     --text-primary: var(--axiom-text-main);
     --text-secondary: var(--axiom-text-primary);
     --text-heading: var(--axiom-text-main);
@@ -49,7 +49,7 @@
     scroll-behavior: smooth;
     scroll-padding-top: 7rem;
     overflow-x: hidden;
-    background-color: #0d0d0d;
+    background: radial-gradient(ellipse at top, #0a0a0a 0%, #000 60%);
   }
 
   body {
@@ -57,7 +57,9 @@
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    background-color: #0d0d0d;
+    background:
+      radial-gradient(ellipse at top, #0a0a0a 0%, #000 60%),
+      radial-gradient(circle at top left, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.09), transparent 34%);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     color: var(--text-secondary);
@@ -69,18 +71,13 @@
   body::before {
     content: '';
     position: fixed;
-    top: -90px;
-    left: 0;
-    right: 0;
-    height: 230px;
+    inset: 0;
     pointer-events: none;
-    background:
-      radial-gradient(72% 100% at 50% 0%, rgba(112, 122, 136, 0.14) 0%, transparent 72%),
-      radial-gradient(56% 80% at 68% 8%, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.11) 0%, transparent 74%);
-    filter: blur(34px);
-    opacity: 0.48;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    opacity: 0.02;
     z-index: 1;
-    animation: ambient-pan 24s ease-in-out infinite;
   }
 
   #root {
@@ -97,14 +94,16 @@
   }
 
   h1 {
-    font-size: clamp(2.5rem, 6vw + 1rem, 5rem);
+    font-size: clamp(2.75rem, 5.5vw, 5.5rem);
     font-weight: 600;
-    line-height: 1.02;
-    letter-spacing: -0.035em;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
     font-family: var(--font-display);
   }
 
   h2 {
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.025em;
   }
@@ -297,11 +296,11 @@
 
   .section-eyebrow {
     @apply font-axiomMono uppercase;
-    color: rgba(255, 255, 255, 0.46);
-    font-size: 12px;
+    color: var(--accent-solid);
+    font-size: 0.75rem;
     line-height: 1.1;
-    font-weight: 500;
-    letter-spacing: 0.2em;
+    font-weight: 600;
+    letter-spacing: 0.08em;
   }
 
   .section-heading {

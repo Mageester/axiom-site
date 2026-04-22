@@ -15,24 +15,24 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--bg-base);
+  background: var(--body-base-gradient);
 }
 
-  body {
-    margin: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-    background-color: var(--bg-base);
-  background-image:
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    var(--body-base-gradient),
     var(--body-hero-glow),
     var(--body-hero-glow-2);
-    color: var(--text-secondary);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.7;
-    opacity: 1;
-    transition: opacity 300ms ease;
-  }
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
 
 body,
 button,
@@ -75,10 +75,21 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
+  background-image: var(--noise-svg);
+  background-size: 220px 220px;
+  opacity: 0.02;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
   background:
     var(--body-overlay-top),
     var(--body-overlay-glow);
-  opacity: 0.7;
+  opacity: 0.78;
   z-index: 0;
 }
 
@@ -142,18 +153,18 @@ textarea {
 h1 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw + 1rem, 5rem);
+  font-size: clamp(2.75rem, 5.5vw, 5.5rem);
   font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   font-feature-settings: 'ss01';
 }
 
 h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 500;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.025em;
   font-feature-settings: 'ss01';
@@ -161,11 +172,11 @@ h2 {
 
 h3 {
   margin: 0;
-  font-family: var(--font-body);
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 h4 {
@@ -199,11 +210,11 @@ h4 {
   align-items: center;
   gap: 0.5ch;
   font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.46);
+  color: var(--accent-solid);
 }
 
 .section-heading {
@@ -236,12 +247,41 @@ h4 {
 
 .axiom-metric {
   font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 0.75rem;
+  font-weight: 500;
   line-height: 1.3;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-secondary);
+}
+
+.section-divider {
+  width: 80px;
+  height: 1px;
+  background: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.4);
+  transform-origin: left center;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.glass-card-hover {
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    background-color 240ms ease;
+}
+
+.glass-card-hover:hover,
+.glass-card-hover:focus-within {
+  transform: translateY(-2px);
+  border-color: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28), 0 0 0 1px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.16), 0 0 24px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
 }
 
 .axiom-container {
