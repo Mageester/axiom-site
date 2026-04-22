@@ -149,6 +149,15 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                         <p className="mt-2 max-w-xl text-[1rem] leading-[1.6] text-[var(--text-secondary)]">
                           {build.axiomChanged}
                         </p>
+                        <a
+                          href={build.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group mt-4 inline-flex min-h-9 items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+                        >
+                          <span>View Demo</span>
+                          <span className="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -206,6 +215,15 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                         <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.whyItWorks}</p>
                       </div>
                     </div>
+                    <a
+                      href={build.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group mt-6 inline-flex min-h-9 items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+                    >
+                      <span>View Demo</span>
+                      <span className="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
+                    </a>
                   </div>
                 </m.article>
               );
@@ -244,6 +262,15 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                         <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.whyItWorks}</dd>
                       </div>
                     </dl>
+                    <a
+                      href={build.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group mt-6 inline-flex min-h-9 items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+                    >
+                      <span>View Demo</span>
+                      <span className="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
+                    </a>
                   </div>
                 </div>
               </m.article>
