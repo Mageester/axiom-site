@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { AnimatePresence, m, useScroll, useTransform } from 'framer-motion';
+import useAnimatedReveal from '../../hooks/useAnimatedReveal';
 import { cn } from '../../lib/utils';
-import { fadeUpVariants, staggerChildren, viewportOnce } from './variants';
+import { fadeUpVariants, staggerChildren } from './variants';
 import type { ResponsiveSource } from '../../lib/responsiveImages';
 
 type Build = {
@@ -83,6 +84,7 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
 }
 
 export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
+  const reveal = useAnimatedReveal();
   const [activeFilter, setActiveFilter] = React.useState('all');
 
   const visibleBuilds = activeFilter === 'all' ? builds : builds.filter((build) => build.category === activeFilter);
@@ -115,10 +117,10 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
       </div>
 
       <m.div
-        className="grid gap-8 md:gap-10"
+        className="motion-surface grid gap-8 md:gap-10"
+        data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
         initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
+        animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
         variants={staggerChildren}
       >
         <AnimatePresence initial={false}>
@@ -130,7 +132,8 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
               return (
                 <m.article
                   key={build.title}
-                  className="group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
+                  className="motion-surface group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
+                  data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
                   variants={fadeUpVariants}
                 >
                   <div className="relative">
@@ -176,7 +179,8 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
               return (
                 <m.article
                   key={build.title}
-                  className="group grid gap-0 overflow-visible rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
+                  className="motion-surface group grid gap-0 overflow-visible rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
+                  data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
                   variants={fadeUpVariants}
                 >
                   <div className={`${imageFirst ? '' : 'lg:order-2'}`}>
@@ -210,7 +214,8 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
             return (
               <m.article
                 key={build.title}
-                className="group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
+                className="motion-surface group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
+                data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
                 variants={fadeUpVariants}
               >
                 <div className={`grid gap-0 lg:grid-cols-2`}>

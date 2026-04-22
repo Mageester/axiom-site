@@ -349,6 +349,24 @@ h4 {
   transform: translateY(0);
 }
 
+.motion-surface[data-motion-visible='true'] {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.motion-heading[data-motion-visible='true'] {
+  clip-path: inset(0) !important;
+}
+
+.motion-quote[data-motion-visible='true'] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.section-divider[data-motion-visible='true'] {
+  transform: scaleX(1) !important;
+}
+
 .motion-link-accent {
   position: relative;
   display: inline-flex;

@@ -91,7 +91,6 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
 
     {schema ? <script type="application/ld+json" set:html={JSON.stringify(schema)} /> : null}
     <script is:inline>
-      {`
         (() => {
           const html = document.documentElement;
           const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -159,7 +158,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
               return () => observer.disconnect();
             };
 
-            observeReveal('[data-reveal], .section-block, main h1, main h2');
+          observeReveal('[data-reveal], .section-block, .motion-surface, .motion-heading, .motion-quote, .section-divider, main h1, main h2');
 
             const observeIcons = () => {
               const icons = document.querySelectorAll('[data-draw-icon]');
@@ -196,7 +195,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
 
               element.dataset.motionAnimated = 'true';
               element.dataset.motionVisible = 'true';
-              element.textContent = \`\${prefix}\${formatter.format(0)}\${suffix}\`;
+              element.textContent = `${prefix}${formatter.format(0)}${suffix}`;
 
               const duration = 1200;
               const start = performance.now();
@@ -206,7 +205,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
                 const eased = 1 - Math.pow(1 - progress, 3);
                 const value = finalValue * eased;
                 const rounded = decimals > 0 ? Number(value.toFixed(decimals)) : Math.round(value);
-                element.textContent = \`\${prefix}\${formatter.format(rounded)}\${suffix}\`;
+                element.textContent = `${prefix}${formatter.format(rounded)}${suffix}`;
 
                 if (progress < 1) {
                   window.requestAnimationFrame(tick);
@@ -246,8 +245,8 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
                 const updateGlow = (event) => {
                   if (!(event instanceof PointerEvent) || event.pointerType === 'touch') return;
                   const rect = button.getBoundingClientRect();
-                  button.style.setProperty('--btn-glow-x', \`\${event.clientX - rect.left}px\`);
-                  button.style.setProperty('--btn-glow-y', \`\${event.clientY - rect.top}px\`);
+                  button.style.setProperty('--btn-glow-x', `${event.clientX - rect.left}px`);
+                  button.style.setProperty('--btn-glow-y', `${event.clientY - rect.top}px`);
                   button.style.setProperty('--btn-glow-opacity', '1');
                 };
 
@@ -298,7 +297,6 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
             boot();
           }
         })();
-      `}
     </script>
   </head>
   <body>

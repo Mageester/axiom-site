@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { m } from 'framer-motion';
+import useAnimatedReveal from '../../hooks/useAnimatedReveal';
 import { cn } from '../../lib/utils';
-import { lineRevealVariants, viewportOnce, wordRevealVariants } from './variants';
+import { lineRevealVariants, wordRevealVariants } from './variants';
 
 type HeadingTag = 'h1' | 'h2' | 'h3';
 
@@ -18,15 +19,16 @@ export interface MotionHeadingProps extends React.HTMLAttributes<HTMLHeadingElem
 }
 
 export function MotionHeading({ as = 'h2', text, align = 'left', className, ...props }: MotionHeadingProps) {
+  const reveal = useAnimatedReveal();
   const Heading = HeadingByTag[as];
   const words = text.trim().split(/\s+/);
 
   return (
     <Heading
       className={cn('motion-heading', align === 'center' && 'mx-auto text-center', className)}
+      data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
       initial="hidden"
-      whileInView="visible"
-      viewport={viewportOnce}
+      animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
       variants={lineRevealVariants}
       aria-label={text}
       {...props}

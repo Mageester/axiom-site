@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { m } from 'framer-motion';
+import useAnimatedReveal from '../../hooks/useAnimatedReveal';
 import { cn } from '../../lib/utils';
-import { fadeUpVariants, staggerChildren, underlineDrawVariants, viewportOnce } from './variants';
+import { fadeUpVariants, staggerChildren, underlineDrawVariants } from './variants';
 
 export type TimelineStep = {
   kicker: string;
@@ -16,38 +17,41 @@ export interface TimelineProps {
 }
 
 export function Timeline({ steps, className, mobileVertical = true }: TimelineProps) {
+  const reveal = useAnimatedReveal();
+
   return (
     <div className={cn('relative', className)}>
       <m.div
         aria-hidden="true"
-        className="absolute left-0 top-6 hidden h-px w-full origin-left bg-[color:var(--accent-solid)]/40 md:block"
+        className="motion-surface absolute left-0 top-6 hidden h-px w-full origin-left bg-[color:var(--accent-solid)]/40 md:block"
+        data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
         initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
+        animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
         variants={underlineDrawVariants}
       />
       {mobileVertical ? (
         <m.div
           aria-hidden="true"
-          className="absolute left-6 top-0 h-full w-px origin-top bg-[color:var(--accent-solid)]/40 md:hidden"
+          className="motion-surface absolute left-6 top-0 h-full w-px origin-top bg-[color:var(--accent-solid)]/40 md:hidden"
+          data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
           initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
+          animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
           variants={underlineDrawVariants}
         />
       ) : null}
 
       <m.div
-        className="relative grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-6"
+        className="motion-surface relative grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-6"
+        data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
         initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
+        animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
         variants={staggerChildren}
       >
         {steps.map((step, index) => (
           <m.article
             key={`${step.kicker}-${index}`}
-            className="relative rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 shadow-[var(--shadow-card)] backdrop-blur-[8px]"
+            className="motion-surface relative rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 shadow-[var(--shadow-card)] backdrop-blur-[8px]"
+            data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
             variants={fadeUpVariants}
           >
             <div className="flex items-center gap-3">

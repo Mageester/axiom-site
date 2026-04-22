@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { m } from 'framer-motion';
 import { cn } from '../../lib/utils';
-import { fadeUpVariants, viewportOnce } from '../motion/variants';
+import useAnimatedReveal from '../../hooks/useAnimatedReveal';
+import { fadeUpVariants } from '../motion/variants';
 
 type FadeInTag = 'div' | 'section' | 'article' | 'header' | 'figure' | 'li' | 'aside' | 'nav' | 'main';
 type FadeDirection = 'up' | 'down' | 'left' | 'right';
@@ -42,6 +43,7 @@ export const FadeIn: React.FC<FadeInProps> = ({
   children,
   ...props
 }) => {
+  const reveal = useAnimatedReveal<HTMLElement>();
   const MotionComponent = MotionTag[Component];
   const cappedDelay = Math.min(Math.max(delay, 0), 500);
   const transform = directionTransforms[direction];
@@ -50,9 +52,9 @@ export const FadeIn: React.FC<FadeInProps> = ({
     <MotionComponent
       {...props}
       className={cn('motion-surface', className)}
+      data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
       initial="hidden"
-      whileInView="visible"
-      viewport={viewportOnce}
+      animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
       variants={{
         hidden: {
           opacity: 0,
