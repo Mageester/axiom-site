@@ -53,7 +53,7 @@ const principles = [
   {
     number: '01',
     title: 'No unclear offer.',
-    description: "If the business isn't readable in three seconds, the build isn't ready.",
+    description: "If a visitor can't tell what you do in three seconds, we haven't finished.",
     icon: 'eye',
   },
   {
@@ -71,7 +71,7 @@ const principles = [
   {
     number: '04',
     title: 'No dead-end handoff.',
-    description: 'Monthly support stays available. One-time ownership stays clean.',
+    description: "Monthly clients keep support. Ownership clients get a clean exit. Either way, the site doesn't rot.",
     icon: 'key',
   },
 ] as const;
@@ -107,21 +107,21 @@ const services = [
   {
     label: 'Monthly growth site',
     description:
-      'Best for businesses that want lower upfront cost, ongoing support, and a site that keeps improving after launch.',
+      'Low upfront cost. Ongoing edits and support. Best when you want the site to keep getting better after launch.',
     href: '/work',
     icon: 'target',
   },
   {
     label: 'Ownership build',
     description:
-      'Best for teams that prefer to buy outright and own the code from day one.',
+      'One payment. Full code handoff at launch. Best when you want to own the site outright from day one.',
     href: '/work',
     icon: 'crown',
   },
   {
     label: 'Rebuild & Migrate',
     description:
-      'Best for replacing an underperforming site without downtime or a messy handoff.',
+      'Replace a slow or outdated site without downtime. We migrate, relaunch, and make sure nothing breaks.',
     href: '/process',
     icon: 'refresh',
   },
@@ -167,9 +167,9 @@ const services = [
               Websites that turn visitors into booked calls.
             </h1>
             <p class="section-copy mt-6 max-w-2xl">
-              Axiom builds fast, clear websites for established local businesses that need more calls and less friction.
-              Most clients start monthly for lower upfront cost and ongoing support; a one-time ownership path is
-              available when it fits better.
+              Fast websites. Clear offers. More booked jobs.
+              We build in 14 days, start at $0 down, and keep supporting the site after launch. It keeps earning long
+              after it goes live.
             </p>
 
             <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -177,12 +177,12 @@ const services = [
                 <a href={CTA_PATHS.startProject}>Start a project</a>
               </Button>
               <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-                <a href="/work">See the work</a>
+                <a href="/work">See real builds</a>
               </Button>
             </div>
 
             <p class="mt-3 text-[13px] uppercase tracking-[0.08em] text-[var(--text-muted)]">
-              Monthly plans include ongoing support. One-time ownership is available when you want it.
+              MONTHLY FROM $150. ONE-TIME OWNERSHIP FROM $3,500. NO ASTERISKS.
             </p>
           </FadeIn>
 
@@ -225,7 +225,7 @@ const services = [
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>SELECTED WORK</Eyebrow>
           <h2 class="section-heading mt-4">
-            Built for businesses that measure results.
+            Real builds. Real outcomes.
           </h2>
         </FadeIn>
 
@@ -395,11 +395,11 @@ const services = [
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.75fr)] lg:items-end">
           <FadeIn client:load as="div" className="max-w-3xl">
             <h2 class="section-heading text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]">
-              If the site isn't earning trust, it's costing you work.
+              A slow site is a silent bill. We fix that.
             </h2>
             <p class="section-copy mt-4">
-                Start monthly for lower upfront cost and ongoing support. If buying outright makes more sense, we&apos;ll
-                scope that too.
+              Start monthly at $0 down, or buy it outright from $3,500.
+              Either way, you get a site that actually books work.
             </p>
           </FadeIn>
 
