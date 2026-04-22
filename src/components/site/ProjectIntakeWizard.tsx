@@ -27,11 +27,11 @@ type ProjectIntakeWizardProps = {
 };
 
 const STEPS = [
-  { id: 1, label: 'Path', title: 'Choose the path that feels closest.' },
+  { id: 1, label: 'Path', title: 'Pick the path closest to what you need.' },
   { id: 2, label: 'Contact', title: 'Where should we reply?' },
-  { id: 3, label: 'Business', title: 'A little business context.' },
-  { id: 4, label: 'Brief', title: 'What should we know before we reply?' },
-  { id: 5, label: 'Review', title: 'Review your brief before sending.' },
+  { id: 3, label: 'Business', title: 'A few business details.' },
+  { id: 4, label: 'Brief', title: 'What should we know?' },
+  { id: 5, label: 'Review', title: 'Review before sending.' },
 ] as const;
 
 const STEP_FIELDS: Record<number, FieldKey[]> = {
@@ -389,7 +389,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
           Project brief received.
         </h2>
         <p className="mt-4 max-w-2xl text-[15px] leading-[1.75] text-[var(--text-secondary)] sm:text-[16px]">
-          We&apos;ll review the brief and reply within one business day. A few strong signals are usually enough for us to outline the next step clearly.
+          We'll review the brief and reply within one business day. A few strong signals are enough for us to outline the next step.
         </p>
         <div className="mt-8 flex flex-col gap-3 border-t border-[color:var(--hairline)] pt-5 sm:flex-row sm:items-center sm:justify-between">
           <button
@@ -403,7 +403,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
             href="/work"
             className="inline-flex min-h-10 items-center text-[14px] font-medium text-[var(--text-secondary)] underline decoration-[color:var(--hairline-strong)] underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--text-primary)]"
           >
-            See our work
+            See real builds
           </a>
         </div>
       </section>
@@ -426,7 +426,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
               </p>
             </div>
             <p className="max-w-md text-[14px] leading-[1.65] text-[var(--text-secondary)]">
-              One clear step at a time. A few short lines is enough.
+              One step at a time. Short answers work.
             </p>
           </div>
 
@@ -489,19 +489,19 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
 
             {activeStep === 1 ? (
               <p className="mt-3 max-w-xl text-[15px] leading-[1.75] text-[var(--text-secondary)] sm:text-[16px]">
-                This helps us frame the reply. If you&apos;re still deciding, choose the closest option and keep moving.
+                This helps us frame the reply. If you're unsure, pick the closest one - we'll sort it on the call.
               </p>
             ) : null}
 
             {activeStep === 2 ? (
               <p className="mt-3 max-w-xl text-[15px] leading-[1.75] text-[var(--text-secondary)] sm:text-[16px]">
-                Keep this step simple. We only need the best name and email for the reply.
+                We only need the best name and email for the reply.
               </p>
             ) : null}
 
             {activeStep === 3 ? (
               <p className="mt-3 max-w-xl text-[15px] leading-[1.75] text-[var(--text-secondary)] sm:text-[16px]">
-                If there&apos;s an existing site, include it. If not, leave it blank.
+                If there's already a site, include it. If not, leave it blank.
               </p>
             ) : null}
 
