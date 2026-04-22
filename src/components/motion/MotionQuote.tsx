@@ -2,7 +2,7 @@ import * as React from 'react';
 import { m } from 'framer-motion';
 import useAnimatedReveal from '../../hooks/useAnimatedReveal';
 import { cn } from '../../lib/utils';
-import { staggerChildren, wordRevealVariants } from './variants';
+import { fadeUpVariants } from './variants';
 
 export interface MotionQuoteProps extends React.HTMLAttributes<HTMLParagraphElement> {
   phrases: [string, string, string];
@@ -17,24 +17,22 @@ export function MotionQuote({ phrases, className, ...props }: MotionQuoteProps) 
       data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
       initial="hidden"
       animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
-      variants={staggerChildren}
+      variants={fadeUpVariants}
       {...props}
     >
       {phrases.map((phrase, index) => (
-        <m.span key={phrase} className="mr-2 inline-block" variants={wordRevealVariants}>
-          <span className={cn(index === 1 && 'relative inline-block text-[var(--accent-solid)]')}>
+        <span
+          key={phrase}
+          className={cn('quote-phrase mr-2 inline-block', index === 1 && 'relative inline-block text-[var(--accent-solid)]')}
+          style={{ '--word-delay': `${index * 0.3}s` } as React.CSSProperties}
+        >
+          <span>
             {phrase}
             {index === 1 ? (
-            <m.span
-              aria-hidden="true"
-              className="absolute left-0 right-0 -bottom-1 h-px origin-left bg-[color:var(--accent-solid)]"
-              initial={{ scaleX: 0 }}
-              animate={reveal.shouldAnimate ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            />
+              <span aria-hidden="true" className="quote-underline absolute left-0 right-0 -bottom-1 h-px origin-left bg-[color:var(--accent-solid)]" />
             ) : null}
           </span>
-        </m.span>
+        </span>
       ))}
     </m.p>
   );

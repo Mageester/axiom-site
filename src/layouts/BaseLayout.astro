@@ -158,7 +158,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
               return () => observer.disconnect();
             };
 
-          observeReveal('[data-reveal], .section-block, .motion-surface, .motion-heading, .motion-quote, .section-divider, main h1, main h2');
+          observeReveal('[data-reveal], .section-block');
 
             const observeIcons = () => {
               const icons = document.querySelectorAll('[data-draw-icon]');

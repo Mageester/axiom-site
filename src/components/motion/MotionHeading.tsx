@@ -2,7 +2,7 @@ import * as React from 'react';
 import { m } from 'framer-motion';
 import useAnimatedReveal from '../../hooks/useAnimatedReveal';
 import { cn } from '../../lib/utils';
-import { lineRevealVariants, wordRevealVariants } from './variants';
+import { lineRevealVariants } from './variants';
 
 type HeadingTag = 'h1' | 'h2' | 'h3';
 
@@ -35,14 +35,18 @@ export function MotionHeading({ as = 'h2', text, align = 'left', className, ...p
     >
       <span aria-hidden="true" className="split-line block">
         {words.map((word, index) => (
-          <m.span
+          <span
             key={`${word}-${index}`}
             className="split-char inline-block"
-            variants={wordRevealVariants}
-            style={{ marginRight: index === words.length - 1 ? 0 : '0.22em' }}
+            style={
+              {
+                marginRight: index === words.length - 1 ? 0 : '0.22em',
+                '--word-delay': `${index * 0.05}s`,
+              } as React.CSSProperties
+            }
           >
             {word}
-          </m.span>
+          </span>
         ))}
       </span>
     </Heading>
