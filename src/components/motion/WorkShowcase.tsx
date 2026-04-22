@@ -146,18 +146,6 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                         <h3 className="mt-3 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
                           {build.title}
                         </h3>
-                        <p className="mt-2 max-w-xl text-[1rem] leading-[1.6] text-[var(--text-secondary)]">
-                          {build.axiomChanged}
-                        </p>
-                        <a
-                          href={build.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group mt-4 inline-flex min-h-9 items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
-                        >
-                          <span>View Demo</span>
-                          <span className="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
-                        </a>
                       </div>
                     </div>
                   </div>
@@ -179,6 +167,17 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                         </div>
                       ))}
                     </dl>
+                  </div>
+                  <div className="border-t border-[color:var(--hairline)] px-5 py-5 sm:px-6">
+                    <a
+                      href={build.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex min-h-9 items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+                    >
+                      <span>View Demo</span>
+                      <span className="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
+                    </a>
                   </div>
                 </m.article>
               );
@@ -202,19 +201,20 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
                       {build.title}
                     </h3>
-                    <p className="mt-3 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">
-                      {build.originalWeakness}
-                    </p>
-                    <div className="mt-6 space-y-4 border-t border-[color:var(--hairline)] pt-5">
-                      <div>
-                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Axiom changed</p>
-                        <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.axiomChanged}</p>
+                    <dl className="mt-6 space-y-5">
+                      <div className="space-y-2">
+                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Original weakness</dt>
+                        <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.originalWeakness}</dd>
                       </div>
-                      <div>
-                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Why it works</p>
-                        <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.whyItWorks}</p>
+                      <div className="space-y-2 border-t border-[color:var(--hairline)] pt-5">
+                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Axiom changed</dt>
+                        <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.axiomChanged}</dd>
                       </div>
-                    </div>
+                      <div className="space-y-2 border-t border-[color:var(--hairline)] pt-5">
+                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Why it works</dt>
+                        <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.whyItWorks}</dd>
+                      </div>
+                    </dl>
                     <a
                       href={build.href}
                       target="_blank"
