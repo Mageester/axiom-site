@@ -21,18 +21,23 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
 
   return (
     <div className={cn('relative', className)}>
+      {/* ── Desktop: horizontal connecting line ────────────────────────── */}
       <m.div
         aria-hidden="true"
-        className="motion-surface absolute left-0 top-6 hidden h-px w-full origin-left bg-[color:var(--accent-solid)]/40 md:block"
+        className="motion-surface pointer-events-none absolute left-0 top-[19px] hidden h-px w-full origin-left md:block"
+        style={{ background: 'rgba(212,175,55,0.28)' }}
         data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
         initial="hidden"
         animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
         variants={underlineDrawVariants}
       />
+
+      {/* ── Mobile: vertical connecting line ───────────────────────────── */}
       {mobileVertical ? (
         <m.div
           aria-hidden="true"
-          className="motion-surface absolute left-6 top-0 h-full w-px origin-top bg-[color:var(--accent-solid)]/40 md:hidden"
+          className="motion-surface pointer-events-none absolute left-[19px] top-0 h-full w-px origin-top md:hidden"
+          style={{ background: 'rgba(212,175,55,0.28)' }}
           data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
           initial="hidden"
           animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
@@ -40,17 +45,15 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
             hidden: { scaleY: 0 },
             visible: {
               scaleY: 1,
-              transition: {
-                duration: 1.2,
-                ease: [0.22, 1, 0.36, 1],
-              },
+              transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
             },
           }}
         />
       ) : null}
 
+      {/* ── Stage grid ─────────────────────────────────────────────────── */}
       <m.div
-        className="motion-surface relative grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-6"
+        className="motion-surface relative grid gap-x-6 gap-y-10 md:grid-cols-4"
         data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
         initial="hidden"
         animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
@@ -59,22 +62,62 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
         {steps.map((step, index) => (
           <m.article
             key={`${step.kicker}-${index}`}
-            className="motion-surface relative rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 shadow-[var(--shadow-card)] backdrop-blur-[8px]"
+            className="motion-surface relative flex gap-5 md:flex-col md:gap-0"
             data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
             variants={fadeUpVariants}
           >
-            <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3)] bg-[color:rgba(255,255,255,0.03)] font-mono text-[0.75rem] font-medium uppercase tracking-[0.08em] text-[var(--accent-solid)]">
-                {step.kicker}
-              </span>
-              <div className="h-px flex-1 bg-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.35)] md:hidden" />
+            {/* Node + kicker label */}
+            <div className="flex flex-shrink-0 flex-col items-center md:flex-row md:items-start">
+              {/* Gold numbered node */}
+              <div
+                className="relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border"
+                style={{
+                  background: 'rgba(212,175,55,0.08)',
+                  borderColor: 'rgba(212,175,55,0.35)',
+                }}
+              >
+                <span
+                  className="font-mono text-[0.8rem] font-semibold tabular-nums"
+                  style={{ color: 'var(--accent-solid)' }}
+                >
+                  {index + 1}
+                </span>
+              </div>
+
+              {/* Mobile-only: vertical connector spur between node and content */}
+              <div
+                className="mt-1 h-4 w-px flex-shrink-0 md:hidden"
+                aria-hidden="true"
+                style={{ background: 'rgba(212,175,55,0.2)' }}
+              />
             </div>
-            <h3 className="mt-5 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
-              {step.title}
-            </h3>
-            <p className="mt-3 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">
-              {step.description}
-            </p>
+
+            {/* Content */}
+            <div className="md:mt-7">
+              {/* Day kicker */}
+              <p
+                className="font-mono text-[0.7rem] uppercase tracking-[0.14em]"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                {step.kicker}
+              </p>
+
+              {/* Stage title */}
+              <h3
+                className="mt-2 text-[clamp(1.1rem,1.4vw,1.25rem)] font-medium tracking-[-0.02em]"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                {step.title}
+              </h3>
+
+              {/* Description */}
+              <p
+                className="mt-2 max-w-[22ch] text-[0.875rem] leading-[1.65]"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                {step.description}
+              </p>
+            </div>
           </m.article>
         ))}
       </m.div>
