@@ -1,0 +1,200 @@
+[
+  {
+    "mode": "desktop",
+    "slug": "home",
+    "title": "Custom Web Development | Kitchener-Waterloo | Axiom Infrastructure",
+    "h1": "Websitesthatturnvisitorsintobookedcalls.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "about",
+    "title": "About | Axiom Infrastructure",
+    "h1": "Webuildsitesthatdothesellingforyou.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "contact",
+    "title": "Contact | Axiom Infrastructure",
+    "h1": "Send a quick note.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "pricing",
+    "title": "Pricing | Axiom Infrastructure",
+    "h1": "Realpricing.Nosalescallrequired.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "privacy",
+    "title": "Privacy Policy | Axiom Infrastructure",
+    "h1": "Privacy Policy",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "process",
+    "title": "Process | Axiom Infrastructure",
+    "h1": "Fourstages.Thenongoingsupport.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "start",
+    "title": "Start a Project | Axiom Infrastructure",
+    "h1": "Tellusaboutthesite.We'llhandletherest.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "start-a-project",
+    "title": "Start a Project | Axiom Infrastructure",
+    "h1": "Tellusaboutthesite.We'llhandletherest.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "terms",
+    "title": "Terms of Service | Axiom Infrastructure",
+    "h1": "Terms of Service",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "work",
+    "title": "Selected Work | Axiom Infrastructure",
+    "h1": "Conceptbuilds.Samestandard.Everysector.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "desktop",
+    "slug": "404",
+    "title": "Page not found | Axiom Infrastructure",
+    "h1": "This page doesn't exist yet.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "home",
+    "title": "Custom Web Development | Kitchener-Waterloo | Axiom Infrastructure",
+    "h1": "Websitesthatturnvisitorsintobookedcalls.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "about",
+    "title": "About | Axiom Infrastructure",
+    "h1": "Webuildsitesthatdothesellingforyou.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "contact",
+    "title": "Contact | Axiom Infrastructure",
+    "h1": "Send a quick note.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "pricing",
+    "title": "Pricing | Axiom Infrastructure",
+    "h1": "Realpricing.Nosalescallrequired.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "privacy",
+    "title": "Privacy Policy | Axiom Infrastructure",
+    "h1": "Privacy Policy",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "process",
+    "title": "Process | Axiom Infrastructure",
+    "h1": "Fourstages.Thenongoingsupport.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "start",
+    "title": "Start a Project | Axiom Infrastructure",
+    "h1": "Tellusaboutthesite.We'llhandletherest.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "start-a-project",
+    "title": "Start a Project | Axiom Infrastructure",
+    "h1": "Tellusaboutthesite.We'llhandletherest.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "terms",
+    "title": "Terms of Service | Axiom Infrastructure",
+    "h1": "Terms of Service",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "work",
+    "title": "Selected Work | Axiom Infrastructure",
+    "h1": "Conceptbuilds.Samestandard.Everysector.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  },
+  {
+    "mode": "mobile",
+    "slug": "404",
+    "title": "Page not found | Axiom Infrastructure",
+    "h1": "This page doesn't exist yet.",
+    "consoleErrors": [],
+    "networkErrors": [],
+    "mobileMenuButton": 1
+  }
+]
