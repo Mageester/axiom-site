@@ -1,0 +1,26 @@
+{
+  "auditedAt": "2026-04-23T19:17:57.180Z",
+  "scope": "Phase 1 foundation scope",
+  "tokenLayerFiles": [
+    "src/design/tokens.ts",
+    "src/styles/tokens.css"
+  ],
+  "excludedPaths": [
+    "src/omniscient/",
+    "src/components/admin/",
+    "src/react-pages/",
+    "src/App.tsx",
+    "src/index.css",
+    "src/components/FloatingAffordances.tsx",
+    "src/components/Footer.tsx",
+    "src/components/Layout.tsx",
+    "src/components/PartnerMarquee.tsx",
+    "src/components/ProtectedRoute.tsx",
+    "src/components/WorkPreviewGrid.tsx",
+    "src/components/layout/",
+    "src/components/motion/",
+    "src/components/site/",
+    "src/pages/"
+  ],
+  "results": []
+}
