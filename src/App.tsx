@@ -1,16 +1,7 @@
 import React, { Suspense, lazy, useLayoutEffect } from 'react';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import Home from './react-pages/Home';
 import ProtectedRoute from './components/ProtectedRoute';
-import About from './react-pages/About';
 import AuditPage from './react-pages/AuditPage';
-import ContactPage from './react-pages/ContactPage';
-import Deployments from './react-pages/Deployments';
-import Infrastructure from './react-pages/Infrastructure';
-import NotFoundPage from './react-pages/NotFoundPage';
-import PricingPage from './react-pages/PricingPage';
-import PrivacyPage from './react-pages/PrivacyPage';
-import TermsPage from './react-pages/TermsPage';
 
 const BUILD_REV = '2026-04-13-origin-cache-refresh';
 const Login = lazy(() => import('./react-pages/admin/Login'));
@@ -44,13 +35,6 @@ const RouteFallback: React.FC = () => (
   </div>
 );
 
-const OpsAwareHome: React.FC = () => {
-  if (typeof window !== 'undefined' && /^ops\./i.test(window.location.hostname)) {
-    return <Navigate to="/dashboard" replace />;
-  }
-  return <Home />;
-};
-
 const LegacyLeadRedirect: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   return <Navigate to={id ? `/lead/${id}` : '/vault'} replace />;
@@ -68,28 +52,7 @@ const App: React.FC = () => {
     <div className="min-h-screen overflow-x-hidden">
       <Suspense fallback={<RouteFallback />}>
         <Routes location={location}>
-          <Route path="/" element={<OpsAwareHome />} />
-          <Route path="/work" element={<Deployments />} />
-          <Route path="/works" element={<Navigate to="/work" replace />} />
-          <Route path="/works/:slug" element={<Navigate to="/work" replace />} />
-          <Route path="/deployments" element={<Navigate to="/work" replace />} />
-          <Route path="/concepts" element={<Navigate to="/work" replace />} />
-          <Route path="/process" element={<Infrastructure />} />
-          <Route path="/method" element={<Navigate to="/process" replace />} />
-          <Route path="/infrastructure" element={<Navigate to="/process" replace />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/services" element={<Navigate to="/pricing" replace />} />
-          <Route path="/approach" element={<Navigate to="/about" replace />} />
-          <Route path="/our-approach" element={<Navigate to="/about" replace />} />
-          <Route path="/manifesto" element={<Navigate to="/about" replace />} />
-          <Route path="/start-a-project" element={<ContactPage />} />
-          <Route path="/apply" element={<Navigate to="/start-a-project" replace />} />
-          <Route path="/contact" element={<Navigate to="/start-a-project?type=question" replace />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/architects" element={<Navigate to="/about" replace />} />
-          <Route path="/404" element={<NotFoundPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/" element={<Navigate to="/admin/login" replace />} />
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin/audit" element={<ProtectedRoute><AuditPage /></ProtectedRoute>} />
           <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
@@ -105,7 +68,7 @@ const App: React.FC = () => {
           <Route path="/jobs" element={<ProtectedRoute><Jobs /></ProtectedRoute>} />
           <Route path="/admin/inquiries" element={<ProtectedRoute><Inquiries /></ProtectedRoute>} />
           <Route path="/admin/inquiries/:id" element={<ProtectedRoute><InquiryDetail /></ProtectedRoute>} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to="/admin/login" replace />} />
         </Routes>
       </Suspense>
     </div>
