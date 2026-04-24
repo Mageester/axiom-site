@@ -1,5 +1,7 @@
 ---
 import '../styles/globals.css';
+import interDisplay700Url from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import inter400Url from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 import { Footer } from '../components/layout/Footer';
 import { ScrollProgressBar } from '../components/layout/ScrollProgressBar';
 import NavBar from '../components/layout/NavBar.astro';
@@ -57,6 +59,8 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preload" href={interDisplay700Url} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={inter400Url} as="font" type="font/woff2" crossorigin />
 
     <title>{resolvedTitle}</title>
     <meta name="description" content={resolvedDescription} />

@@ -6,7 +6,7 @@ Source: Phase 0 inventory, Lighthouse, axe, build/test baseline
 ## Phase 1 - Design System Foundation
 
 1. Replace current token sprawl with `src/design/tokens.ts` and Tailwind alignment.
-2. Replace Inter/Fraunces/General Sans/Google Fonts/Fontshare with self-hosted Cormorant Garamond + Archivo.
+2. Keep public-page typography on the self-hosted Inter + Inter Display system, with JetBrains Mono for technical UI.
 3. Remove public hardcoded colors, arbitrary pixel spacing, pill radii, glow-heavy shadows, and component-level font families.
 4. Build the planned primitives under `src/components/primitives/`.
 5. Document WCAG AA token pairings and primitive usage.

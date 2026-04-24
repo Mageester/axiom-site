@@ -11,7 +11,7 @@ Branch: `phase/1-design-system`
 - Removed or softened unverified proof claims across public source and legacy source before deletion.
 - Deleted the approved dead legacy SPA pages while keeping `src/react-pages/AuditPage.tsx` and `src/react-pages/admin/*`.
 - Isolated `src/App.tsx` to the retained admin runtime.
-- Added `src/design/tokens.ts`, aligned CSS/Tailwind token vocabulary, removed third-party font hosts, and self-hosted Archivo + Cormorant Garamond through Fontsource.
+- Added `src/design/tokens.ts`, aligned CSS/Tailwind token vocabulary, removed third-party font hosts, and self-hosted Inter, Inter Display, and JetBrains Mono through Fontsource.
 - Added Astro primitives in `src/components/primitives/`.
 - Documented token pairings and primitive usage in `docs/design-system.md`.
 

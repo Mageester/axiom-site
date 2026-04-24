@@ -60,7 +60,7 @@ Existing token files:
 Key gaps:
 
 - No `src/design/tokens.ts` source of truth.
-- Current fonts are Inter, Inter Display, General Sans, Fraunces, and JetBrains Mono, not the decided Cormorant Garamond + Archivo pair.
+- Current fonts are aligned to the Inter + Inter Display system, with JetBrains Mono reserved for technical UI.
 - Token values include pure black `#000000`, yellow-gold `#d4af37`, 16px card radii, pill/rounded-full patterns, glow shadows, and many rgba one-offs.
 - Tailwind still defines `borderRadius.pill = 999px` and `borderRadius.card = 16px`, both outside the v2 standard.
 - Public pages contain many inline Tailwind arbitrary values such as `text-[...]`, `rounded-[...]`, `bg-[...]`, and custom shadows.

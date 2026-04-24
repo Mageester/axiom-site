@@ -18,9 +18,9 @@ export const designTokens = {
     dangerText: '#fbe4dd',
   },
   typography: {
-    display: '"Cormorant Garamond", Georgia, serif',
-    body: '"Archivo Variable", Archivo, system-ui, sans-serif',
-    mono: '"Archivo Variable", Archivo, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+    display: '"Inter Display", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    body: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    mono: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
   },
   radius: {
     sm: '8px',
