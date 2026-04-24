@@ -143,7 +143,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                         <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                           {build.eyebrow}
                         </p>
-                        <h3 className="mt-3 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
+                        <h3 className="mt-3 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
                           {build.title}
                         </h3>
                       </div>
@@ -198,7 +198,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                       {build.eyebrow}
                     </p>
-                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
+                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
                       {build.title}
                     </h3>
                     <dl className="mt-6 space-y-5">
@@ -244,7 +244,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                       {build.eyebrow}
                     </p>
-                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
+                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
                       {build.title}
                     </h3>
 

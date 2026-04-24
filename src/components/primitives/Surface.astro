@@ -1,0 +1,21 @@
+---
+type Tone = 'quiet' | 'raised' | 'accent';
+
+type Props = {
+  as?: keyof HTMLElementTagNameMap;
+  tone?: Tone;
+  class?: string;
+};
+
+const { as: Tag = 'article', tone = 'quiet', class: className } = Astro.props as Props;
+
+const toneClass: Record<Tone, string> = {
+  quiet: 'border-[color:var(--hairline)] bg-[color:var(--surface-panel)] shadow-[var(--shadow-card)]',
+  raised: 'border-[color:var(--hairline-strong)] bg-[color:var(--surface-panel-strong)] shadow-[var(--shadow-card-elevated)]',
+  accent: 'border-[color:var(--accent-border)] bg-[color:var(--accent-surface)] shadow-[var(--shadow-card-highlight)]',
+};
+---
+
+<Tag class:list={['relative overflow-hidden rounded-[var(--radius-card)] border', toneClass[tone], className]}>
+  <slot />
+</Tag>

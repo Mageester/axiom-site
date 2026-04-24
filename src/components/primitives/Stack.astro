@@ -1,0 +1,23 @@
+---
+type Gap = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+type Props = {
+  as?: keyof HTMLElementTagNameMap;
+  gap?: Gap;
+  class?: string;
+};
+
+const { as: Tag = 'div', gap = 'md', class: className } = Astro.props as Props;
+
+const gapClass: Record<Gap, string> = {
+  xs: 'gap-2',
+  sm: 'gap-3',
+  md: 'gap-5',
+  lg: 'gap-8',
+  xl: 'gap-12',
+};
+---
+
+<Tag class:list={['flex flex-col', gapClass[gap], className]}>
+  <slot />
+</Tag>

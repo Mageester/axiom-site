@@ -104,7 +104,7 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
 
               {/* Stage title */}
               <h3
-                className="mt-2 text-[clamp(1.1rem,1.4vw,1.25rem)] font-medium tracking-[-0.02em]"
+                className="mt-2 text-[clamp(1.1rem,1.4vw,1.25rem)] font-medium tracking-normal"
                 style={{ color: 'var(--text-primary)' }}
               >
                 {step.title}

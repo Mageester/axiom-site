@@ -100,7 +100,7 @@ const launchChecklist = [
           {launchChecklist.map((item, index) => (
             <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
               <div class="h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
-                <p class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                <p class="flex items-center gap-2 text-[15px] font-semibold tracking-normal text-[var(--text-primary)]">
                   <DrawIcon name="check" size={14} className="text-[var(--accent-solid)]" />
                   {item.title}
                 </p>

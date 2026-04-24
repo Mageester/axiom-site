@@ -223,7 +223,7 @@ const faqItems = [
                     {tier.bestFor}
                   </p>
 
-                  <p class="mt-5 text-[42px] font-[600] leading-[1.05] tracking-[-0.04em] text-[var(--text-primary)] sm:text-[48px]">
+                  <p class="mt-5 text-[42px] font-[600] leading-[1.05] tracking-normal text-[var(--text-primary)] sm:text-[48px]">
                     {tier.price}
                   </p>
 
@@ -281,7 +281,7 @@ const faqItems = [
                   {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">PREFERRED PATH</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
                   <div class="mt-4 flex items-end justify-between gap-4">
                     <div class="min-w-0">
-                      <p class="text-[2.35rem] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] sm:text-[2.75rem]">{tier.price}</p>
+                      <p class="text-[2.35rem] font-[600] leading-none tracking-normal text-[var(--text-primary)] sm:text-[2.75rem]">{tier.price}</p>
                       <p class="mt-2 text-[14px] leading-[1.65] text-[var(--text-secondary)]">{tier.bestFor}</p>
                     </div>
                     <Button asChild variant={tier.variant} size="sm">
@@ -392,7 +392,7 @@ const faqItems = [
             {faqItems.map((item, index) => (
               <details class="group" data-faq>
                 <summary class={`flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left ${index === 0 ? '' : 'border-t border-[color:var(--hairline)]'}`}>
-                  <span class="text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)] md:text-[18px]">
+                  <span class="text-[15px] font-semibold tracking-normal text-[var(--text-primary)] md:text-[18px]">
                     {item.question}
                   </span>
                   <span
@@ -430,7 +430,7 @@ const faqItems = [
           <FadeIn client:load as="div">
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
-                <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
+                <h3 class="text-[24px] font-[600] leading-[1.15] tracking-normal text-[var(--text-primary)]">
                   You want the easiest way to start.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
@@ -445,7 +445,7 @@ const faqItems = [
           <FadeIn client:load delay={100} as="div">
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
-                <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
+                <h3 class="text-[24px] font-[600] leading-[1.15] tracking-normal text-[var(--text-primary)]">
                   You want full ownership from day one.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">

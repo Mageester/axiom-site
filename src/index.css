@@ -1,3 +1,8 @@
+@import '@fontsource-variable/archivo/wght.css';
+@import '@fontsource/cormorant-garamond/latin-400.css';
+@import '@fontsource/cormorant-garamond/latin-600.css';
+@import '@fontsource/cormorant-garamond/latin-700.css';
+@import '@fontsource/cormorant-garamond/latin-400-italic.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,10 +10,10 @@
 @layer base {
   :root {
     --axiom-build-rev: '2026-04-04-motion-polish';
-    --axiom-base: #000000;
-    --axiom-elevated: rgba(255, 255, 255, 0.02);
-    --axiom-surface: rgba(255, 255, 255, 0.035);
-    --axiom-border: rgba(255, 255, 255, 0.06);
+    --axiom-base: #050505;
+    --axiom-elevated: rgba(255, 255, 255, 0.025);
+    --axiom-surface: rgba(255, 255, 255, 0.04);
+    --axiom-border: rgba(255, 255, 255, 0.08);
     --accent-current: #d4af37;
     --accent-current-rgb: 212 175 55;
     --accent-v2: #d4af37;
@@ -17,17 +22,20 @@
     --accent: var(--accent-v2, var(--accent-current));
     --accent2: var(--accent-v2, var(--accent-current));
     --accent-muted: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.18);
-    --axiom-text-main: #F3F6FA;
+    --axiom-text-main: #f4f1ea;
     --axiom-text-primary: #c9c2b6;
     --axiom-text-mute: #6B6B74;
     --axiom-amber: var(--accent-v2, var(--accent-current));
     --axiom-gold: #CFA873;
     --axiom-navy: #1F2833;
-    --radius-card: 1.5rem;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Archivo Variable', Archivo, system-ui, sans-serif;
+    --font-mono: 'Archivo Variable', Archivo, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --radius-card: 1rem;
     --radius-component: 0.75rem;
     --bg-main: var(--axiom-base);
     --bg-surface: var(--axiom-elevated);
-    --bg-inset: #0D1118;
+    --bg-inset: #0d1118;
     --border-panel: var(--axiom-border);
     --border-subtle: rgba(255, 255, 255, 0.08);
     --text-primary: var(--axiom-text-main);
@@ -49,7 +57,7 @@
     scroll-behavior: smooth;
     scroll-padding-top: 7rem;
     overflow-x: hidden;
-    background: radial-gradient(ellipse at top, #0a0a0a 0%, #000 60%);
+    background: radial-gradient(ellipse at top, #101010 0%, #050505 64%);
   }
 
   body {
@@ -58,7 +66,7 @@
     overflow-x: hidden;
     position: relative;
     background:
-      radial-gradient(ellipse at top, #0a0a0a 0%, #000 60%),
+      radial-gradient(ellipse at top, #101010 0%, #050505 64%),
       radial-gradient(circle at top left, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.09), transparent 34%);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -852,7 +860,7 @@
     border-radius: 9999px;
     background: rgba(255, 255, 255, 0.035);
     color: rgba(242, 244, 247, 0.72);
-    font-family: 'Space Grotesk', Inter, sans-serif;
+    font-family: var(--font-mono);
     font-size: 0.625rem;
     font-weight: 600;
     letter-spacing: 0.18em;

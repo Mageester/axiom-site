@@ -1,0 +1,21 @@
+---
+type Spacing = 'standard' | 'tight' | 'none';
+
+type Props = {
+  as?: keyof HTMLElementTagNameMap;
+  spacing?: Spacing;
+  class?: string;
+};
+
+const { as: Tag = 'section', spacing = 'standard', class: className } = Astro.props as Props;
+
+const spacingClass: Record<Spacing, string> = {
+  none: '',
+  tight: 'py-[calc(var(--section-space-mobile)*0.75)] lg:py-[calc(var(--section-space-desktop)*0.75)]',
+  standard: 'py-[var(--section-space-mobile)] lg:py-[var(--section-space-desktop)]',
+};
+---
+
+<Tag class:list={['relative isolate', spacingClass[spacing], className]}>
+  <slot />
+</Tag>

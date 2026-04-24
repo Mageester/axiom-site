@@ -1,0 +1,21 @@
+---
+type Width = 'standard' | 'wide' | 'narrow';
+
+type Props = {
+  as?: keyof HTMLElementTagNameMap;
+  width?: Width;
+  class?: string;
+};
+
+const { as: Tag = 'div', width = 'standard', class: className } = Astro.props as Props;
+
+const widthClass: Record<Width, string> = {
+  narrow: 'max-w-[760px]',
+  standard: 'max-w-[var(--content-width)]',
+  wide: 'max-w-[min(1440px,calc(100vw-var(--gutter-mobile)*2))]',
+};
+---
+
+<Tag class:list={['mx-auto w-[min(100%,calc(100vw-var(--gutter-mobile)*2))] lg:w-[min(100%,calc(100vw-var(--gutter-desktop)*2))]', widthClass[width], className]}>
+  <slot />
+</Tag>

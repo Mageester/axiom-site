@@ -1,0 +1,37 @@
+---
+type Variant = 'primary' | 'secondary' | 'ghost';
+type Size = 'sm' | 'md' | 'lg';
+
+type Props = {
+  href: string;
+  variant?: Variant;
+  size?: Size;
+  class?: string;
+};
+
+const { href, variant = 'primary', size = 'md', class: className } = Astro.props as Props;
+
+const variantClass: Record<Variant, string> = {
+  primary: 'border-transparent bg-[color:var(--accent)] text-[color:var(--text-on-accent)] shadow-[var(--shadow-button-primary)] hover:bg-[color:var(--accent-hover)]',
+  secondary: 'border-[color:var(--hairline)] bg-[color:var(--surface-panel)] text-[var(--text-primary)] hover:border-[color:var(--accent-border)] hover:bg-[color:var(--surface-overlay)]',
+  ghost: 'border-transparent bg-transparent text-[var(--text-primary)] underline decoration-transparent underline-offset-4 hover:decoration-current',
+};
+
+const sizeClass: Record<Size, string> = {
+  sm: 'min-h-10 px-4 text-[14px]',
+  md: 'min-h-11 px-5 text-[15px]',
+  lg: 'min-h-12 px-6 text-[16px]',
+};
+---
+
+<a
+  href={href}
+  class:list={[
+    'inline-flex items-center justify-center gap-2 rounded-[var(--radius-component)] border font-medium transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] active:scale-[0.98]',
+    variantClass[variant],
+    sizeClass[size],
+    className,
+  ]}
+>
+  <slot />
+</a>

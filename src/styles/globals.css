@@ -1,3 +1,8 @@
+@import '@fontsource-variable/archivo/wght.css';
+@import '@fontsource/cormorant-garamond/latin-400.css';
+@import '@fontsource/cormorant-garamond/latin-600.css';
+@import '@fontsource/cormorant-garamond/latin-700.css';
+@import '@fontsource/cormorant-garamond/latin-400-italic.css';
 @import './tokens.css';
 @tailwind base;
 @tailwind components;
@@ -169,7 +174,7 @@ h1 {
   font-size: clamp(2.75rem, 5.5vw, 5.5rem);
   font-weight: 600;
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   font-feature-settings: 'ss01';
 }
 
@@ -179,7 +184,7 @@ h2 {
   font-size: clamp(2rem, 3.5vw, 3.5rem);
   font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   font-feature-settings: 'ss01';
 }
 
@@ -189,7 +194,7 @@ h3 {
   font-size: clamp(1.25rem, 1.5vw, 1.5rem);
   font-weight: 500;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 h4 {
@@ -233,7 +238,7 @@ h4 {
 .section-heading {
   max-width: 34rem;
   line-height: 1.1;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
 .section-copy {

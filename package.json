@@ -17,6 +17,8 @@
   "dependencies": {
     "@astrojs/react": "^5.0.3",
     "@cloudflare/playwright": "^1.1.2",
+    "@fontsource-variable/archivo": "^5.2.8",
+    "@fontsource/cormorant-garamond": "^5.2.11",
     "@google/generative-ai": "^0.24.1",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",

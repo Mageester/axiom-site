@@ -407,7 +407,7 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
         <h2
           ref={successHeadingRef}
           tabIndex={-1}
-          className="mt-3 text-[clamp(1.8rem,4vw,2.3rem)] font-[600] leading-[1.08] tracking-[-0.04em] text-[var(--text-primary)] outline-none"
+          className="mt-3 text-[clamp(1.8rem,4vw,2.3rem)] font-[600] leading-[1.08] tracking-normal text-[var(--text-primary)] outline-none"
         >
           Note received.
         </h2>
@@ -509,7 +509,7 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
             <h2
               ref={headingRef}
               tabIndex={-1}
-              className="text-[clamp(1.7rem,4vw,2.2rem)] font-[600] leading-[1.08] tracking-[-0.04em] text-[var(--text-primary)] outline-none"
+              className="text-[clamp(1.7rem,4vw,2.2rem)] font-[600] leading-[1.08] tracking-normal text-[var(--text-primary)] outline-none"
             >
               {currentStepConfig.title}
             </h2>
@@ -569,7 +569,7 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
                           )}
                         >
                           <span className="space-y-3">
-                            <span className="block text-[17px] font-[600] tracking-[-0.02em] text-[var(--text-primary)]">
+                            <span className="block text-[17px] font-[600] tracking-normal text-[var(--text-primary)]">
                               {option.label}
                             </span>
                             <span className="block text-[14px] leading-[1.7] text-[var(--text-secondary)]">

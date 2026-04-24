@@ -22,7 +22,7 @@ const FounderAvatar: React.FC<FounderAvatarProps> = ({ alt, initials, source, na
   if (!source) {
     return (
       <div className={shellClass} aria-label={name}>
-        <div className="flex h-full w-full items-center justify-center text-[1.55rem] font-semibold tracking-[-0.05em] text-[#d4a48e]">
+        <div className="flex h-full w-full items-center justify-center text-[1.55rem] font-semibold tracking-normal text-[#d4a48e]">
           {initials}
         </div>
       </div>

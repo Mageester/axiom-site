@@ -126,7 +126,7 @@ const SocialProof: React.FC<SocialProofProps> = ({
             >
               <div className="space-y-4">
                 <p className="section-eyebrow">{testimonial.industryTag}</p>
-                <blockquote className="max-w-3xl text-[clamp(1.3rem,2vw,1.8rem)] font-medium leading-[1.55] tracking-[-0.03em] text-[#F2F4F7]">
+                <blockquote className="max-w-3xl text-[clamp(1.3rem,2vw,1.8rem)] font-medium leading-[1.55] tracking-normal text-[#F2F4F7]">
                   {testimonial.quote}
                 </blockquote>
               </div>
@@ -147,7 +147,7 @@ const SocialProof: React.FC<SocialProofProps> = ({
             <article key={item.title} className="machined-card flex h-full min-h-[14rem] flex-col gap-5 p-6 md:p-8">
               <div className="space-y-4">
                 <p className="section-eyebrow">{item.eyebrow}</p>
-                <h3 className="max-w-xl text-[clamp(1.4rem,2vw,1.9rem)] font-semibold leading-[1.2] tracking-[-0.03em] text-[#F2F4F7]">
+                <h3 className="max-w-xl text-[clamp(1.4rem,2vw,1.9rem)] font-semibold leading-[1.2] tracking-normal text-[#F2F4F7]">
                   {item.title}
                 </h3>
               </div>

@@ -13,7 +13,7 @@ export function MotionQuote({ phrases, className, ...props }: MotionQuoteProps) 
 
   return (
     <m.p
-      className={cn('motion-quote font-accent text-[clamp(1.2rem,2vw,1.85rem)] leading-[1.08] tracking-[-0.04em] text-[var(--text-primary)]', className)}
+      className={cn('motion-quote font-accent text-[clamp(1.2rem,2vw,1.85rem)] leading-[1.08] tracking-normal text-[var(--text-primary)]', className)}
       data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
       initial="hidden"
       animate={reveal.shouldAnimate ? 'visible' : 'hidden'}

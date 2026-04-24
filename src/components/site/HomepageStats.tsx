@@ -49,7 +49,7 @@ function AnimatedStat({ description, duration, target, unit }: AnimatedStatProps
         .filter(Boolean)
         .join(' ')}
     >
-      <dd ref={countRef} className="text-[52px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] md:text-[64px]">
+      <dd ref={countRef} className="text-[52px] font-[600] leading-none tracking-normal text-[var(--text-primary)] md:text-[64px]">
         {value}
       </dd>
       <dt
@@ -99,7 +99,7 @@ function StaticStat({ description, unit, value }: StaticStatProps) {
         .filter(Boolean)
         .join(' ')}
     >
-      <dd className="text-[52px] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] md:text-[64px]">
+      <dd className="text-[52px] font-[600] leading-none tracking-normal text-[var(--text-primary)] md:text-[64px]">
         {value}
       </dd>
       <dt
