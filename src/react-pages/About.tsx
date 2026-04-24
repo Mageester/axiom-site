@@ -25,7 +25,7 @@ const aboutPrinciples = [
     number: '03',
     title: 'Slow sites lose jobs.',
     description:
-      'Most people find you on their phone. If your site takes more than two seconds, they’ve already moved on. Every build we ship loads fast — tested, not assumed.',
+      'Most people find you on their phone. If your site feels slow, they move on. Every build is engineered for Core Web Vitals from the start.',
   },
 ] as const;
 

@@ -3,20 +3,19 @@ import { m } from 'framer-motion';
 import useAnimatedReveal from '../../hooks/useAnimatedReveal';
 import { staggerChildren, fadeUpVariants } from './variants';
 import { cn } from '../../lib/utils';
-import { NumberCount } from './NumberCount';
 
 const stats = [
   {
-    key: 'days',
-    node: <NumberCount end={14} suffix=" DAYS" />,
+    key: 'launch',
+    node: '2-4 WEEK LAUNCH',
   },
   {
-    key: 'down',
-    node: '$0 DOWN',
+    key: 'vitals',
+    node: 'CORE WEB VITALS',
   },
   {
-    key: 'load',
-    node: '<1s LOAD',
+    key: 'support',
+    node: 'DIRECT SUPPORT',
   },
   {
     key: 'asterisks',
@@ -47,11 +46,7 @@ export function ProofBar({ className }: { className?: string }) {
               data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
               variants={fadeUpVariants}
             >
-              {stat.key === 'days' ? (
-                <NumberCount end={14} suffix=" DAYS" />
-              ) : (
-                stat.node
-              )}
+              {stat.node}
             </m.div>
           ))}
         </m.div>

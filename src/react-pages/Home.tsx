@@ -29,8 +29,8 @@ type LighthouseCard = {
 
 const lighthouseCards: readonly LighthouseCard[] = [
   {
-    title: 'Typical local business site: 35/100',
-    score: '35/100',
+    title: 'Typical local business site',
+    score: 'Needs work',
     screenshot: '/images/lighthouse-before.png',
     screenshotAlt: 'Lighthouse performance report for a typical local business site',
     description: 'Slow, unclear, and full of unnecessary friction before a visitor can even decide to call.',
@@ -38,8 +38,8 @@ const lighthouseCards: readonly LighthouseCard[] = [
     scoreClass: 'text-[#f29e5d]',
   },
   {
-    title: 'Axiom build: 98/100',
-    score: '98/100',
+    title: 'Axiom build',
+    score: 'Improved',
     screenshot: '/images/lighthouse-after.png',
     screenshotAlt: 'Lighthouse performance report for an Axiom build',
     description: 'Lean structure, fast load, and a clear next step without the usual performance drag.',
@@ -69,15 +69,15 @@ const Home: React.FC = () => {
                 className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 section-eyebrow"
                 aria-label="Axiom performance highlights"
               >
-                <span>12+ builds shipped</span>
+                <span>Clear service-business positioning</span>
                 <span aria-hidden="true" className="text-white/30">
                   ·
                 </span>
-                <span>Sub-1s load times</span>
+                <span>Engineered for Core Web Vitals</span>
                 <span aria-hidden="true" className="text-white/30">
                   ·
                 </span>
-                <span>Reply in 24hrs</span>
+                <span>Responsive communication</span>
               </div>
               <div data-startup-actions className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                 <Link to={CTA.primary.to} className="btn-primary btn-lg w-full whitespace-nowrap sm:w-auto">
@@ -155,12 +155,12 @@ const Home: React.FC = () => {
             <article className="w-full overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[linear-gradient(180deg,rgba(15,19,28,0.96)_0%,rgba(9,11,16,0.99)_100%)] shadow-[0_18px_44px_rgba(0,0,0,0.22)]">
               <div className="border-l-4 border-[#B05D41] px-5 py-8 md:px-7 md:py-10">
                 <div className="max-w-4xl">
-                  <p className="section-eyebrow">Speed guarantee</p>
+                  <p className="section-eyebrow">Performance standard</p>
                   <h2 id="speed-guarantee-heading" className="mt-3 text-[clamp(1.75rem,3vw,2.65rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                    If your site loads in over one second, we fix it free.
+                    Engineered for Core Web Vitals from the start.
                   </h2>
                   <p className="mt-3 max-w-2xl text-sm md:text-[15px] leading-relaxed text-slate-400">
-                    No asterisks. That is the standard we build to.
+                    Performance is part of the delivery process.
                   </p>
                 </div>
               </div>

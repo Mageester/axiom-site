@@ -122,8 +122,8 @@ export function HomepageStats() {
     <section className="border-t border-[color:var(--hairline)]">
       <div className="axiom-container py-10 md:py-14">
         <dl className="grid grid-cols-1 gap-10 sm:grid-cols-3">
-          <AnimatedStat description="Typical turnaround from kickoff to live." duration={1000} target={14} unit="DAYS" />
-          <StaticStat description="Performance floor, guaranteed in writing." unit="LOAD TIME" value="<1s" />
+          <StaticStat description="Typical launch window, depending on scope." unit="LAUNCH WINDOW" value="2-4 WEEKS" />
+          <StaticStat description="Engineered for Core Web Vitals from the start." unit="PERFORMANCE" value="VITALS" />
           <StaticStat
             description="Most clients start here for lower upfront cost and ongoing support."
             unit="PRIMARY PATH"

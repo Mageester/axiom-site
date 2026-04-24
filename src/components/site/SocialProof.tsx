@@ -23,9 +23,9 @@ type SocialProofProps = {
 
 const defaultCredibilityItems: readonly CredibilityItem[] = [
   {
-    eyebrow: 'Speed guarantee',
-    title: 'If your site loads in over one second, we fix it free.',
-    description: 'Fast load times are part of the offer, not a premium add-on.',
+    eyebrow: 'Performance standard',
+    title: 'Engineered for Core Web Vitals from the first build.',
+    description: 'Performance is part of the delivery process, not a premium add-on.',
   },
   {
     eyebrow: 'Full ownership',

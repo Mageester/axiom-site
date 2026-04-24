@@ -739,12 +739,12 @@ const ProjectIntakeForm: React.FC = () => {
                                 Tell us what the business needs.
                             </h1>
                             <p data-startup-copy className="mt-4 max-w-2xl text-[15px] md:text-sm text-slate-300 md:text-base">
-                                Share the basics and we’ll reply within one business day with the next step.
+                                Share the basics and we’ll reply with the next step.
                             </p>
                             <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 section-eyebrow text-[#d4a48e]">
                                 <span>One short form</span>
                                 <span aria-hidden="true" className="text-white/25">·</span>
-                                <span>Reply within one business day</span>
+                                <span>Clear next step</span>
                             </div>
                             <div className="mt-5">
                                 <IntakeToggle mode={mode} />
@@ -771,7 +771,7 @@ const ProjectIntakeForm: React.FC = () => {
                                                 <p className="section-eyebrow">Project intake</p>
                                                 <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#F2F4F7]">Let’s get to work.</h2>
                                             </div>
-                                            <p className="text-[15px] md:text-sm text-slate-400">Tell us what your business does, what’s broken about your current site, and when you want to move. We’ll reply within one business day.</p>
+                                            <p className="text-[15px] md:text-sm text-slate-400">Tell us what your business does, what’s broken about your current site, and when you want to move. We’ll reply with the next step.</p>
                                         </div>
                                     </div>
 
@@ -838,7 +838,7 @@ const ProjectIntakeForm: React.FC = () => {
                                                 <button type="submit" disabled={status === 'loading'} className="btn-primary btn-lg w-full disabled:cursor-not-allowed disabled:opacity-70">
                                                     {status === 'loading' ? 'Sending...' : 'Send it →'}
                                                 </button>
-                                                <p className="text-[15px] md:text-sm text-slate-400">We’ll reply within one business day with next steps.</p>
+                                                <p className="text-[15px] md:text-sm text-slate-400">We’ll reply with clear next steps.</p>
                                             </div>
                                         </fieldset>
                                     </form>

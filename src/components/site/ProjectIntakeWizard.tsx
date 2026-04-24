@@ -390,7 +390,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
           Project brief received.
         </h2>
         <p className="mt-4 max-w-2xl text-[15px] leading-[1.75] text-[var(--text-secondary)] sm:text-[16px]">
-          We'll review the brief and reply within one business day. A few strong signals are enough for us to outline the next step.
+          We'll review the brief and reply with the next step. A few strong signals are enough for us to outline the path forward.
         </p>
         <div className="mt-8 flex flex-col gap-3 border-t border-[color:var(--hairline)] pt-5 sm:flex-row sm:items-center sm:justify-between">
           <button

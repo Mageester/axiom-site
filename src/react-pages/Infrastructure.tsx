@@ -9,7 +9,7 @@ import { SEO_ROUTES } from '../lib/seo';
 
 type ProcessStep = {
   id: string;
-  dayLabel: string;
+  stageLabel: string;
   title: string;
   timelineDescription: string;
   summary: string;
@@ -24,7 +24,7 @@ type ChecklistItem = {
 const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     id: 'review',
-    dayLabel: 'Day 1',
+    stageLabel: 'Review',
     title: 'Review',
     timelineDescription: 'We audit the current site and identify the friction that costs trust and leads.',
     summary: 'We look at the current site, what needs to change, and what people should find first.',
@@ -35,7 +35,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   },
   {
     id: 'scope',
-    dayLabel: 'Day 3',
+    stageLabel: 'Scope',
     title: 'Scope',
     timelineDescription: 'We lock the page structure, proof blocks, and call paths before design starts.',
     summary: 'We settle the main pages, the proof to show, and where calls or forms should go.',
@@ -46,7 +46,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   },
   {
     id: 'build',
-    dayLabel: 'Day 7',
+    stageLabel: 'Build',
     title: 'Build',
     timelineDescription: 'We write, design, and test the build so service, proof, and contact stay clear.',
     summary: 'We write the copy, shape the pages, and check how they hold up on phones and desktop.',
@@ -57,7 +57,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   },
   {
     id: 'launch',
-    dayLabel: 'Day 14-21',
+    stageLabel: 'Launch',
     title: 'Launch',
     timelineDescription: 'We run launch checks, connect the domain, and ship with clear next steps.',
     summary: 'We test the forms, connect the domain, and make sure the site is ready to go live.',
@@ -118,7 +118,7 @@ const ProcessTimeline: React.FC = () => (
               <div className="absolute left-[0.6rem] top-[3.1rem] bottom-[-1.4rem] w-[2px] bg-white/10 lg:hidden" aria-hidden="true" />
             ) : null}
             <span className="absolute left-0 top-[0.95rem] h-3 w-3 rounded-full border border-white/20 bg-[#0f1524] lg:hidden" aria-hidden="true" />
-            <p className="font-axiomDisplay text-[clamp(1.6rem,3vw,2.2rem)] leading-none text-accent">{step.dayLabel}</p>
+            <p className="font-axiomDisplay text-[clamp(1.6rem,3vw,2.2rem)] leading-none text-accent">{step.stageLabel}</p>
             <h3 className="mt-3 text-lg font-semibold text-white">{step.title}</h3>
             <p className="mt-2 text-sm leading-6 text-[#A7B3BC]">{step.timelineDescription}</p>
           </RevealBlock>
@@ -188,7 +188,7 @@ const Infrastructure: React.FC = () => {
                   Before we build
                 </p>
                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#F2F4F7] md:text-[2.1rem]">
-                  What we need before Day 7.
+                  What we need before the build.
                 </h2>
                 <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-300">
                   This keeps the work moving and cuts down on back-and-forth later.

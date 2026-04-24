@@ -126,15 +126,13 @@ export const PRICING_JSON_LD = {
     {
       '@type': 'Offer',
       name: 'Subscription',
-      description: '$0 down + from $150-$200/mo',
-      price: '150',
+      description: 'Starts at a monthly investment with hosting and support included',
       priceCurrency: 'CAD',
     },
     {
       '@type': 'Offer',
       name: 'One-time ownership',
-      price: '3500',
-      description: 'Full handoff at launch',
+      description: 'Starts at a scoped ownership investment with full handoff at launch',
       priceCurrency: 'CAD',
     },
     {
@@ -196,12 +194,12 @@ export const SEO_ROUTES = {
   },
   start: {
     title: 'Start a Project',
-    description: 'Share a project brief for monthly or one-time website work. We reply within one business day.',
+    description: 'Share a project brief for monthly or one-time website work. We reply with a clear next step.',
     canonicalPath: '/start',
   },
   startProject: {
     title: 'Start a Project',
-    description: 'Submit a project brief for a monthly or one-time website build. We reply within one business day.',
+    description: 'Submit a project brief for a monthly or one-time website build. We reply with a clear next step.',
     canonicalPath: '/start-a-project',
   },
   audit: {

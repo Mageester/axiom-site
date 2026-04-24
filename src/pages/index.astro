@@ -26,8 +26,8 @@ const workCards = [
     eyebrow: 'SALON & BEAUTY',
     title: 'Nails Studio Demo',
     outcome: 'Clean booking flow paired with modern trust cues and a polished luxury feel.',
-    metricLabel: 'LOAD TARGET',
-    metricValue: '<1s',
+    metricLabel: 'PERFORMANCE',
+    metricValue: 'VITALS',
     image: getWorkProofImage('concept-salon-demo').source,
     alt: getWorkProofImage('concept-salon-demo').alt || 'Nails Studio Demo',
     position: getWorkProofImage('concept-salon-demo').position || 'center 40%',
@@ -37,7 +37,7 @@ const workCards = [
     title: 'Blackline Barber Co.',
     outcome: 'Sharp branding, fast booking, and a cleaner first impression.',
     metricLabel: 'BOOKING PATH',
-    metricValue: '1 TAP',
+    metricValue: 'CLEAR CTA',
     image: getWorkProofImage('concept-barber-demo').source,
     alt: getWorkProofImage('concept-barber-demo').alt || 'Blackline Barber Co.',
     position: getWorkProofImage('concept-barber-demo').position || 'center 40%',
@@ -46,8 +46,8 @@ const workCards = [
     eyebrow: 'HEALTHCARE & MEDICAL',
     title: 'Aurelia Dental Studio',
     outcome: 'Calm, trust-focused presentation paired with a polished booking experience.',
-    metricLabel: 'MOBILE TARGET',
-    metricValue: '98+',
+    metricLabel: 'MOBILE EXPERIENCE',
+    metricValue: 'RESPONSIVE',
     image: getWorkProofImage('concept-dental-demo').source,
     alt: getWorkProofImage('concept-dental-demo').alt || 'Aurelia Dental Studio',
     position: getWorkProofImage('concept-dental-demo').position || 'center 40%',
@@ -58,7 +58,7 @@ const principles = [
   {
     number: '01',
     title: 'No unclear offer.',
-    description: "If a visitor can't tell what you do in three seconds, we haven't finished.",
+    description: "If a visitor can't tell what you do at a glance, we haven't finished.",
     icon: 'eye',
   },
   {
@@ -70,7 +70,7 @@ const principles = [
   {
     number: '03',
     title: 'No slow first load.',
-    description: 'Sub-second loads are the floor. If it drags, we fix it.',
+    description: 'We engineer for Core Web Vitals from the first build, not after launch.',
     icon: 'bolt',
   },
   {
@@ -83,25 +83,25 @@ const principles = [
 
 const processStages = [
   {
-    day: 'Day 1',
+    stage: 'Review',
     title: 'Review',
     description: 'We audit the current site, the offer, and the gaps that are costing trust.',
     icon: 'search',
   },
   {
-    day: 'Day 3',
+    stage: 'Scope',
     title: 'Scope',
     description: 'We lock the structure, the message, and the pages that actually matter.',
     icon: 'document',
   },
   {
-    day: 'Day 7',
+    stage: 'Build',
     title: 'Build',
     description: 'The design system, layout, and content come together in production.',
     icon: 'code',
   },
   {
-    day: 'Day 14',
+    stage: 'Launch',
     title: 'Launch',
     description: 'We ship the site, verify the handoff, and make ownership complete.',
     icon: 'arrow-up',
@@ -109,7 +109,7 @@ const processStages = [
 ] as const;
 
 const timelineSteps = processStages.map((stage) => ({
-  kicker: stage.day,
+  kicker: stage.stage,
   title: stage.title,
   description: stage.description,
 }));
@@ -177,8 +177,7 @@ const services = [
             <MotionHeading client:load as="h1" text="Websites that turn visitors into booked calls." className="mt-6 max-w-4xl text-left" />
             <p class="section-copy mt-6 max-w-2xl">
               Fast websites. Clear offers. More booked jobs.
-              We build in 14 days, start at $0 down, and keep supporting the site after launch. It keeps earning long
-              after it goes live.
+              Typical launch is 2-4 weeks, depending on scope, with support that stays active after the site goes live.
             </p>
 
             <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -191,7 +190,7 @@ const services = [
             </div>
 
             <p class="mt-3 text-[13px] uppercase tracking-[0.08em] text-[var(--text-muted)]">
-              MONTHLY FROM $150. ONE-TIME OWNERSHIP FROM $3,500. NO ASTERISKS.
+              MONTHLY AND OWNERSHIP PATHS. SCOPED BEFORE BUILD.
             </p>
           </FadeIn>
 
@@ -223,7 +222,7 @@ const services = [
           <div class="flex justify-center lg:col-span-2">
             <MotionQuote client:load
               className="text-center"
-              phrases={['Fourteen days.', 'Under one second.', 'Ongoing support included.']}
+              phrases={['Typical 2-4 week launch.', 'Core Web Vitals engineered in.', 'Ongoing support included.']}
             />
           </div>
         </div>
@@ -348,7 +347,7 @@ const services = [
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>HOW WE BUILD</Eyebrow>
           <SectionDivider client:load className="mt-6" />
-          <MotionHeading client:load as="h2" text="Four stages. Fourteen days. No drift." className="section-heading mt-4" />
+          <MotionHeading client:load as="h2" text="Four stages. Scoped before build." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10">
@@ -372,9 +371,9 @@ const services = [
               <div class="relative">
                 <Eyebrow className="justify-center">THE GUARANTEE</Eyebrow>
                 <SectionDivider client:load className="mt-6" />
-                <MotionHeading client:load as="h2" text="If your site loads in over one second, we fix it free." className="section-heading mx-auto mt-4" />
+                <MotionHeading client:load as="h2" text="Engineered for Core Web Vitals from the start." className="section-heading mx-auto mt-4" />
           <p class="section-copy mx-auto mt-4">
-                No asterisks. Monthly-first support stays with you after launch.
+                Performance is part of the process. Monthly-first support stays with you after launch.
               </p>
               </div>
             </div>
@@ -390,8 +389,7 @@ const services = [
             <SectionDivider client:load className="mb-6" />
             <MotionHeading client:load as="h2" text="A slow site is a silent bill. We fix that." className="section-heading text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
             <p class="section-copy mt-4">
-              Start monthly at $0 down, or buy it outright from $3,500.
-              Either way, you get a site that actually books work.
+              Choose monthly support or an ownership build after scope is clear. Either way, you get a site that actually books work.
             </p>
           </FadeIn>
 

@@ -412,7 +412,7 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
           Note received.
         </h2>
         <p className="mt-4 max-w-xl text-[15px] leading-[1.75] text-[var(--text-secondary)] sm:text-[16px]">
-          We&apos;ll review it and reply within one business day.
+          We&apos;ll review it and reply with the next step.
         </p>
         <div className="mt-7 flex flex-col gap-3 border-t border-[color:var(--hairline)] pt-5 sm:flex-row sm:items-center sm:justify-between">
           <button

@@ -59,7 +59,7 @@ const proofBlocks: readonly ProofBlockData[] = [
   {
     id: 'concept-landscaping-authority-site',
     title: 'Landscaping site',
-    summary: 'A landscaping site that leads with past work and makes it easy to request a quote in under 30 seconds.',
+    summary: 'A landscaping site that leads with past work and keeps quote requests easy to complete.',
     businessType: 'Landscaping and outdoor services',
     badgeLabel: 'Demonstration',
     statusLabel: 'Build example',
@@ -125,7 +125,7 @@ const conceptProjects: readonly ConceptProjectData[] = [
     title: 'Landscaping Performance',
     subtitle: 'Verdant Landscapes',
     positioning: 'Portfolio-grade consultation system for premium outdoor projects.',
-    desc: "You're bidding on $50K hardscape projects against companies with $200 websites. This fixes the gap between the quality of your work and the quality of your online presence.",
+    desc: 'Your online presence should match the quality of the work buyers see on-site. This closes that gap with stronger proof, clearer structure, and a better consultation path.',
     roi: 'Designed to position premium design work with a portfolio that matches your craft.',
     url: 'https://landscaping.getaxiom.ca',
     capabilities: ['Featured project portfolio', 'Seasonal program flow', 'Design consultation funnel'],

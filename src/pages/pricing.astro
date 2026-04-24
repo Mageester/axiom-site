@@ -16,10 +16,10 @@ const pricingTiers = [
   {
     key: 'monthly',
     name: 'Subscription',
-    price: '$0 down',
-    subtext: 'From $150-$200/mo. Hosting included. Best when you want to start with less friction.',
+    price: 'Starts at $150/mo',
+    subtext: 'Monthly investment with hosting included. Best when you want ongoing support after launch.',
     supportNote: 'Ongoing edits and support are included. Full ownership transfers at month 12.',
-    features: ['Up to 5 pages', 'Hosting included', 'Ongoing edits and support', '6-month minimum', 'Full ownership available at month 12'],
+    features: ['Up to 5 pages', 'Hosting included', 'Ongoing edits and support', 'Month-to-month after launch', 'Full ownership available at month 12'],
     cta: 'Start monthly',
     href: CTA_PATHS.startProject,
     variant: 'primary',
@@ -30,7 +30,7 @@ const pricingTiers = [
   {
     key: 'ownership',
     name: 'One-time ownership',
-    price: 'From $3,500',
+    price: 'Starts at $3,500',
     subtext: 'For a standard 5-page build. Full handoff at launch. Hosting can be scoped separately.',
     supportNote: 'For buyers who want the code, the site, and the keys at launch.',
     features: ['Up to 5 pages', 'Full code ownership at launch', 'Launch support included', 'Hosting scoped separately', 'SEO foundation'],
@@ -62,14 +62,14 @@ const comparisonRows = [
   },
   {
     label: 'Upfront cost',
-    monthly: '$0 down',
+    monthly: 'Lower upfront investment',
     ownership: 'One-time payment',
     ecommerce: 'One-time payment',
   },
   {
     label: 'Starting price',
-    monthly: 'From $150-$200/mo',
-    ownership: 'From $3,500',
+    monthly: 'Starts at $150/mo',
+    ownership: 'Starts at $3,500',
     ecommerce: 'Custom lump sum',
   },
   {
@@ -98,7 +98,7 @@ const comparisonRows = [
   },
   {
     label: 'Turnaround',
-    monthly: 'About 21 days',
+    monthly: 'Typical 2-4 weeks',
     ownership: 'Scoped on intake',
     ecommerce: 'Scoped on intake',
   },
@@ -127,7 +127,7 @@ const faqItems = [
   {
     question: 'Why lead with monthly pricing?',
     answer:
-      'Most businesses do not want a $5K+ hit before they see results. Monthly lets you start for $0 down, get the site live, and pay as it earns.',
+      'Monthly keeps the upfront commitment lower while including hosting and support after launch.',
   },
   {
     question: 'What is included in the monthly plan?',
@@ -137,7 +137,7 @@ const faqItems = [
   {
     question: 'What if I want ownership instead?',
     answer:
-      'Pick the one-time ownership path. One payment from $3,500, full code handoff at launch, hosting scoped separately if you need it.',
+      'Pick the one-time ownership path. It starts at $3,500, includes full code handoff at launch, and scopes hosting separately if you need it.',
   },
   {
     question: 'How does hosting work?',
@@ -162,7 +162,7 @@ const faqItems = [
   {
     question: 'What makes Axiom different?',
     answer:
-      'Fast sites, real pricing, and support that does not stop at launch. 14 days to live. No 60-day Slack silences.',
+      'Clear pricing, engineered performance, and support that does not stop at launch. Typical launch is 2-4 weeks, depending on scope, with direct access to your team throughout the engagement.',
   },
 ] as const;
 ---
@@ -175,8 +175,8 @@ const faqItems = [
         <SectionDivider client:load className="mt-6" />
         <MotionHeading client:load as="h1" text="Real pricing. No sales call required." className="mt-4" />
         <p class="section-copy mt-5 md:text-[17px]">
-          Most clients start monthly - $0 down, hosting and support included. If you'd rather own the site outright,
-          that option is $3,500 and up. Stores and large rebuilds get scoped separately.
+          Most clients start monthly, with hosting and support included. If you'd rather own the site outright,
+          ownership builds start at $3,500. Stores and large rebuilds get scoped separately.
         </p>
         <p class="mt-4 text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
           Monthly is the default. Ownership and e-commerce stay available when they're the better fit.
@@ -434,7 +434,7 @@ const faqItems = [
                   You want the easiest way to start.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  $0 down. Hosting and support included. You can transfer ownership later if you want it.
+                  Lower upfront investment. Hosting and support included. You can transfer ownership later if you want it.
                 </p>
                 <a href="#monthly-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
                   See what monthly costs &uarr;</a>
@@ -449,7 +449,7 @@ const faqItems = [
                   You want full ownership from day one.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  One payment from $3,500. Full code handoff at launch. Host it with us or on your own stack.
+                  Starts at $3,500. Full code handoff at launch. Host it with us or on your own stack.
                 </p>
                 <a href="#ownership-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
                   See what ownership costs &uarr;</a>

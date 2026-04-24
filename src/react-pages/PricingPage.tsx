@@ -37,14 +37,14 @@ const pricingTiers: readonly (PricingTier & { icon: React.ElementType })[] = [
   {
     name: 'MONTHLY',
     label: 'MOST ACCESSIBLE',
-    price: 'From $150/mo',
-    description: '$0 down. No lock-in after 6 months. Hosting included.',
+    price: 'Starts at $150/mo',
+    description: 'Lower upfront investment. Month-to-month after launch. Hosting included.',
     supportNote: 'Most clients recover the monthly cost within the first booked call the site generates.',
     features: [
       'Up to 5 pages',
       'Hosting included',
       'Unlimited edits',
-      '6-month minimum',
+      'Month-to-month after launch',
       'Full ownership after 12 months'
     ],
     cta: 'Start a project',
@@ -53,13 +53,13 @@ const pricingTiers: readonly (PricingTier & { icon: React.ElementType })[] = [
   },
   {
     name: 'Starter',
-    price: '$1,200',
+    price: 'Starts at $1,200',
     description: 'For local businesses that need a site that actually converts visitors into calls.',
     features: [
       '3 pages',
       'Mobile-ready',
       'Contact form',
-      'Live in 14 days'
+      'Typical 2-4 week launch'
     ],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
@@ -67,13 +67,13 @@ const pricingTiers: readonly (PricingTier & { icon: React.ElementType })[] = [
   },
   {
     name: 'Growth',
-    price: '$2,200',
+    price: 'Starts at $2,200',
     description: 'For businesses ready to dominate local search and stop losing jobs to competitors.',
     features: [
       '5 pages',
       'SEO foundation',
       'Google Business profile setup',
-      'Live in 21 days'
+      'Typical 2-4 week launch'
     ],
     cta: 'Start a project',
     href: CTA_PATHS.startProject,
@@ -82,7 +82,7 @@ const pricingTiers: readonly (PricingTier & { icon: React.ElementType })[] = [
   },
   {
     name: 'Custom',
-    price: 'From $3,500',
+    price: 'Starts at $3,500',
     description: 'Larger scope, deeper build. Scoped per project.',
     features: [
       'Unlimited pages',
@@ -114,8 +114,8 @@ const comparisonRows = [
   {
     label: 'Turnaround',
     icon: Clock,
-    starter: '14 days',
-    growth: '21 days',
+    starter: 'Typical 2-4 weeks',
+    growth: 'Typical 2-4 weeks',
     custom: 'Project scope',
   },
   {
@@ -342,10 +342,10 @@ const PricingPage: React.FC = () => {
           <div className="border-l-4 border-[#B05D41] px-5 py-8 md:px-8 md:py-12 lg:px-10">
             <div className="max-w-4xl">
               <h2 className="text-[clamp(2rem,4vw,3.35rem)] font-bold tracking-[-0.04em] text-[#F2F4F7]">
-                If your site loads in over one second, we fix it free.
+                Engineered for Core Web Vitals from the start.
               </h2>
               <p className="mt-4 text-[16px] leading-relaxed text-slate-400 sm:text-[18px]">
-                No asterisks. That is the standard we build to.
+                Performance is part of the delivery process.
               </p>
             </div>
           </div>

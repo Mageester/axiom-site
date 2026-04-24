@@ -82,24 +82,6 @@ const photoJobs = [
     widths: [160, 192, 256],
     fallback: { path: fromRoot('public', 'photos', 'riley-headshot.jpg'), width: 256, quality: 74 },
   },
-  {
-    input: fromRoot('public', 'images', 'avatar-daniel.jpg'),
-    baseName: fromRoot('public', 'images', 'avatar-daniel'),
-    widths: [320, 480, 768],
-    fallback: { path: fromRoot('public', 'images', 'avatar-daniel.jpg'), width: 768, quality: 72 },
-  },
-  {
-    input: fromRoot('public', 'images', 'avatar-sarah.jpg'),
-    baseName: fromRoot('public', 'images', 'avatar-sarah'),
-    widths: [320, 480, 768],
-    fallback: { path: fromRoot('public', 'images', 'avatar-sarah.jpg'), width: 768, quality: 72 },
-  },
-  {
-    input: fromRoot('public', 'images', 'avatar-jake.jpg'),
-    baseName: fromRoot('public', 'images', 'avatar-jake'),
-    widths: [320, 480, 768],
-    fallback: { path: fromRoot('public', 'images', 'avatar-jake.jpg'), width: 768, quality: 72 },
-  },
 ];
 
 const transparentJobs = [
