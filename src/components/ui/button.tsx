@@ -13,7 +13,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'border border-transparent bg-[color:var(--accent)] text-[color:var(--text-on-accent)] shadow-[var(--shadow-button-primary)] hover:bg-[color:var(--accent-hover)] motion-safe:hover:scale-[1.03] motion-safe:hover:shadow-[var(--shadow-button-primary-hover)]',
+    'border border-transparent bg-white text-[#0A0A0A] font-semibold uppercase tracking-widest shadow-[var(--shadow-button-primary)] transition-colors duration-200 hover:bg-[#E5E5E5] motion-safe:hover:scale-[1.03] motion-safe:hover:shadow-[var(--shadow-button-primary-hover)]',
   secondary:
     'border border-[color:var(--hairline)] bg-[color:var(--surface-panel)] text-[var(--text-primary)] hover:border-[color:var(--accent-border)] hover:bg-[color:var(--surface-overlay)] hover:brightness-105',
   ghost:

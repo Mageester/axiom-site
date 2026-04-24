@@ -12,7 +12,7 @@ type Props = {
 const { href, variant = 'primary', size = 'md', class: className } = Astro.props as Props;
 
 const variantClass: Record<Variant, string> = {
-  primary: 'border-transparent bg-[color:var(--accent)] text-[color:var(--text-on-accent)] shadow-[var(--shadow-button-primary)] hover:bg-[color:var(--accent-hover)]',
+  primary: 'border-transparent bg-white text-[#0A0A0A] font-semibold uppercase tracking-widest shadow-[var(--shadow-button-primary)] transition-colors duration-200 hover:bg-[#E5E5E5]',
   secondary: 'border-[color:var(--hairline)] bg-[color:var(--surface-panel)] text-[var(--text-primary)] hover:border-[color:var(--accent-border)] hover:bg-[color:var(--surface-overlay)]',
   ghost: 'border-transparent bg-transparent text-[var(--text-primary)] underline decoration-transparent underline-offset-4 hover:decoration-current',
 };
