@@ -20,7 +20,9 @@ const DEFAULT_ALLOWED_ORIGINS = [
     'https://roofing.getaxiom.ca',
     'https://landscaping.getaxiom.ca',
     'http://localhost:5173',
-    'http://127.0.0.1:5173'
+    'http://127.0.0.1:5173',
+    'http://localhost:10000',
+    'http://127.0.0.1:10000'
 ];
 
 const DEFAULT_INTERNAL_RECIPIENTS = ['contact@getaxiom.ca'];
