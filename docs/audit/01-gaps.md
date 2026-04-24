@@ -19,6 +19,35 @@ Branch: `phase/0-audit`
 - Home/legacy React copy includes proof-like claims such as `12+ builds shipped` and `Sub-1s load times`; these need owner verification before they remain public.
 - Terms copy explicitly reserves the right to deploy with "functional placeholders." That is legal copy, not page placeholder content, but it conflicts tonally with the new no-placeholder operating standard and should be reviewed.
 
+### BLOCKING: Testimonial Avatar Owner Verification
+
+These image assets are BLOCKING for Phase 3 Home and About page rebuilds until the owner confirms each person, image license/permission, and the testimonial copy attached to the asset. Current source search found no page or testimonial component that attaches these avatar files to testimonial copy; they are only listed in the image optimizer.
+
+| Asset | Current source attachment | Testimonial copy currently attached | Phase blocker |
+| --- | --- | --- | --- |
+| `public/images/avatar-daniel.jpg` | `scripts/optimize-images.mjs:86-89` | None found in tracked page/component source. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `public/images/avatar-jake.jpg` | `scripts/optimize-images.mjs:98-101` | None found in tracked page/component source. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `public/images/avatar-sarah.jpg` | `scripts/optimize-images.mjs:92-95` | None found in tracked page/component source. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+
+### BLOCKING: Proof Claim Owner Verification
+
+The following public or legacy-public claims are BLOCKING until the owner verifies the evidence, approves the exact language, or removes the claim. Phase 3 cannot preserve these claims on Home/About without verification.
+
+| Claim | Location | Notes | Phase blocker |
+| --- | --- | --- | --- |
+| `14 DAYS` / 14-day turnaround | `src/components/motion/ProofBar.tsx:11`, `src/components/motion/ProofBar.tsx:51`, `src/components/site/HomepageStats.tsx:125`, `src/pages/index.astro:180`, `src/pages/index.astro:226`, `src/pages/pricing.astro:165` | Delivery-speed proof/offer claim. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `Day 1`, `Day 3`, `Day 7`, `Day 14`, `Day 14-21` schedule claims | `src/pages/index.astro:86`, `src/pages/index.astro:92`, `src/pages/index.astro:98`, `src/pages/index.astro:104`, `src/react-pages/Infrastructure.tsx:27`, `src/react-pages/Infrastructure.tsx:38`, `src/react-pages/Infrastructure.tsx:49`, `src/react-pages/Infrastructure.tsx:60`, `src/react-pages/Infrastructure.tsx:191` | Process timeline claims; must match actual delivery capacity. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `$0 DOWN` / `$0 down` | `src/components/motion/ProofBar.tsx:15`, `src/pages/index.astro:180`, `src/pages/index.astro:393`, `src/pages/pricing.astro:19`, `src/pages/pricing.astro:65`, `src/pages/pricing.astro:130`, `src/pages/pricing.astro:178`, `src/pages/pricing.astro:437` | Pricing/investment proof claim; must match real offer terms. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `<1s LOAD`, `<1s`, `Sub-second`, `over one second`, `Under one second`, `Sub-1s load times` | `src/components/motion/ProofBar.tsx:19`, `src/components/site/HomepageStats.tsx:126`, `src/components/site/SocialProof.tsx:27`, `src/pages/index.astro:30`, `src/pages/index.astro:73`, `src/pages/index.astro:226`, `src/pages/index.astro:375`, `src/react-pages/Home.tsx:76`, `src/react-pages/Home.tsx:160` | Performance guarantee/proof claim; Phase 6 acceptance also needs CI Lighthouse evidence. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `1 TAP` booking path | `src/pages/index.astro:40` | Conversion-path metric-like claim on a concept work card. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `98+` mobile target | `src/pages/index.astro:50` | Metric-like proof claim for concept work card. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `$150-$200/mo`, `From $150/mo`, `$3,500`, `$1,200`, `$2,200` pricing claims | `src/pages/index.astro:194`, `src/pages/index.astro:393`, `src/pages/pricing.astro:20`, `src/pages/pricing.astro:33`, `src/pages/pricing.astro:71`, `src/pages/pricing.astro:72`, `src/pages/pricing.astro:140`, `src/pages/pricing.astro:179`, `src/pages/pricing.astro:452`, `src/react-pages/PricingPage.tsx:40`, `src/react-pages/PricingPage.tsx:56`, `src/react-pages/PricingPage.tsx:70`, `src/react-pages/PricingPage.tsx:85` | Pricing claims; must match approved current offer. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `$5K+` upfront-hit comparison | `src/pages/pricing.astro:130` | Market/pricing comparison claim; should be owner-approved or softened. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `No 60-day Slack silences`, `No lock-in after 6 months` | `src/pages/pricing.astro:165`, `src/react-pages/PricingPage.tsx:41` | Competitive/support-term claims; must match owner-approved terms. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `$50K hardscape projects` / `$200 websites` | `src/react-pages/Deployments.tsx:128` | Legacy public comparison claim. | BLOCKING Phase 3 Home and About rebuilds pending owner verification if reused publicly. |
+| `12+ builds shipped` | `src/react-pages/Home.tsx:72` | Legacy public SPA proof claim. | BLOCKING Phase 3 Home and About rebuilds pending owner verification. |
+| `within 24 hours` audit turnaround | `src/react-pages/AuditPage.tsx:146`, `src/react-pages/AuditPage.tsx:174` | Admin-linked legacy audit page offer claim. | BLOCKING Phase 3 Home and About rebuilds pending owner verification if reused publicly. |
+
 ## SEO And Discoverability Gaps
 
 - `public/sitemap.xml` is stale and hand-authored.

@@ -81,6 +81,7 @@ Source: Phase 0 inventory, Lighthouse, axe, build/test baseline
 2. Add Vitest and React Testing Library coverage where appropriate.
 3. Add Playwright route smoke, critical path, axe, mobile, and reduced-motion tests.
 4. Ensure CI runs build and intake tests sequentially to avoid `dist` write races.
+5. Add a CI-based Lighthouse harness as a required deliverable, using GitHub Actions plus Lighthouse CI or an equivalent controlled browser runner. Local Windows Lighthouse output is not sufficient for Phase 6 acceptance; CI must run mobile and desktop budgets against the built preview, upload reports, and fail when Phase 6 thresholds are missed.
 
 ## Phase 11 - Documentation
 
