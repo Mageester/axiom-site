@@ -11,6 +11,7 @@ export function SectionDivider({ className, ...props }: SectionDividerProps) {
 
   return (
     <m.div
+      ref={reveal.ref}
       aria-hidden="true"
       className={cn('section-divider mx-auto', className)}
       data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}

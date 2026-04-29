@@ -20,10 +20,10 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
   const reveal = useAnimatedReveal();
 
   return (
-    <div className={cn('relative', className)}>
+    <div ref={reveal.ref} className={cn('relative', className)}>
       <m.div
         aria-hidden="true"
-        className="motion-surface absolute left-0 top-6 hidden h-px w-full origin-left bg-[color:var(--accent-solid)]/40 md:block"
+        className="motion-surface absolute left-0 top-6 hidden h-px w-full origin-left bg-[linear-gradient(90deg,rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.12),rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.58),rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.12))] md:block"
         data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
         initial="hidden"
         animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
@@ -59,12 +59,12 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
         {steps.map((step, index) => (
           <m.article
             key={`${step.kicker}-${index}`}
-            className="motion-surface relative rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 shadow-[var(--shadow-card)] backdrop-blur-[8px]"
+          className="motion-surface premium-card group relative rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 shadow-[var(--shadow-card)] backdrop-blur-[8px]"
             data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
             variants={fadeUpVariants}
           >
             <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3)] bg-[color:rgba(255,255,255,0.03)] font-mono text-[0.75rem] font-medium uppercase tracking-[0.08em] text-[var(--accent-solid)]">
+              <span className="flex h-11 min-w-[3.25rem] items-center justify-center rounded-full border border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3)] bg-[color:rgba(255,255,255,0.03)] px-2 font-mono text-[0.68rem] font-medium uppercase tracking-[0.06em] text-[var(--accent-solid)] transition-[background-color,border-color,box-shadow] duration-[var(--duration-medium)] ease-[var(--ease-premium)] group-hover:border-[color:var(--accent-border-strong)] group-hover:bg-[color:var(--accent-surface)] group-hover:shadow-[0_0_0_5px_var(--accent-ring-soft)]">
                 {step.kicker}
               </span>
               <div className="h-px flex-1 bg-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.35)] md:hidden" />

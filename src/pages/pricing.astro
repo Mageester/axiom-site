@@ -169,7 +169,7 @@ const faqItems = [
 
 <SiteLayout title={SEO_ROUTES.pricing.title} description={SEO_ROUTES.pricing.description} canonicalPath="/pricing" schema={PRICING_JSON_LD}>
   <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32 pb-24 md:pb-32">
-    <section class="axiom-container pt-12 md:pt-20">
+    <section class="pricing-hero axiom-container pt-12 md:pt-20">
       <FadeIn client:load className="max-w-3xl">
         <Eyebrow>PRICING</Eyebrow>
         <SectionDivider client:load className="mt-6" />
@@ -184,7 +184,7 @@ const faqItems = [
       </FadeIn>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <div class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:pb-0">
           {pricingTiers.map((tier, index) => (
@@ -198,7 +198,7 @@ const faqItems = [
               <Card
                 padding="none"
                 hoverLift
-                className={`relative overflow-hidden ${tier.highlighted ? 'pricing-highlight-card border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[var(--shadow-card-highlight)]' : 'bg-[var(--surface-1)]'}`}
+                className={`pricing-tier-card relative overflow-hidden ${tier.highlighted ? 'pricing-highlight-card border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[var(--shadow-card-highlight)]' : 'bg-[var(--surface-1)]'}`}
               >
                 {tier.highlighted ? (
                   <div
@@ -259,7 +259,7 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
           <FadeIn client:load className="max-w-3xl">
           <Eyebrow>COMPARE THE PATHS</Eyebrow>
@@ -312,7 +312,7 @@ const faqItems = [
           ))}
         </div>
 
-        <FadeIn client:load as="div" className="mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
+        <FadeIn client:load as="div" className="pricing-table-shell mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
           <table class="min-w-full border-collapse text-left">
             <thead class="bg-[color:var(--nav-panel-bg)]">
               <tr class="border-b border-[color:var(--hairline)]">
@@ -379,7 +379,7 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>FAQ</Eyebrow>
@@ -391,7 +391,7 @@ const faqItems = [
           <div class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)]">
             {faqItems.map((item, index) => (
               <details class="group" data-faq>
-                <summary class={`flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left ${index === 0 ? '' : 'border-t border-[color:var(--hairline)]'}`}>
+                <summary class={`flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left transition-[background-color] duration-[var(--duration-fast)] hover:bg-[color:var(--surface-overlay)] ${index === 0 ? '' : 'border-t border-[color:var(--hairline)]'}`}>
                   <span class="text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)] md:text-[18px]">
                     {item.question}
                   </span>
@@ -404,7 +404,7 @@ const faqItems = [
                     </svg>
                   </span>
                 </summary>
-                <div class="faq-panel max-h-0 overflow-hidden opacity-0 translate-y-1 transition-[max-height,opacity,transform] duration-[300ms] ease-out">
+                <div class="faq-panel max-h-0 overflow-hidden opacity-0 translate-y-1 transition-[max-height,opacity,transform] duration-[var(--duration-medium)] ease-[var(--ease-premium)]">
                   <div class="overflow-hidden">
                     <div class="px-6 pb-5 pt-1 md:pb-6">
                 <p class="section-copy md:text-[16px]">
@@ -420,7 +420,7 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>QUICK GUIDE</Eyebrow>
@@ -460,7 +460,7 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <FadeIn client:load as="div">
           <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
@@ -485,12 +485,52 @@ const faqItems = [
   </main>
 
   <style>
+    .pricing-hero {
+      position: relative;
+    }
+
+    .pricing-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: min(28rem, 70vw);
+      height: 18rem;
+      pointer-events: none;
+      background: radial-gradient(circle at 20% 20%, var(--accent-surface), transparent 62%);
+      opacity: 0.78;
+      filter: blur(24px);
+      transform: translate3d(-16%, -18%, 0);
+    }
+
+    .pricing-tier-card {
+      min-height: 100%;
+    }
+
+    .pricing-tier-card::after {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      height: 1px;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+      opacity: 0.7;
+    }
+
+    .pricing-table-shell {
+      box-shadow: var(--shadow-card);
+    }
+
     .pricing-highlight-card {
       animation: pricing-glow 1.5s ease-out 1;
     }
 
     .pricing-table-row {
       animation: pricing-row-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      transition: background-color var(--duration-fast) ease;
+    }
+
+    .pricing-table-row:hover {
+      background: rgba(255,255,255,0.035);
     }
 
     details[data-faq][open] .faq-panel {
@@ -501,6 +541,7 @@ const faqItems = [
 
     details[data-faq][open] .faq-toggle {
       background: var(--surface-overlay-press);
+      border-color: var(--accent-border);
     }
 
     details[data-faq][open] .faq-toggle-chevron {
@@ -509,6 +550,13 @@ const faqItems = [
 
     details[data-faq] summary::-webkit-details-marker {
       display: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pricing-highlight-card,
+      .pricing-table-row {
+        animation: none !important;
+      }
     }
 
     @keyframes pricing-glow {

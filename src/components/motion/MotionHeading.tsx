@@ -25,6 +25,7 @@ export function MotionHeading({ as = 'h2', text, align = 'left', className, ...p
 
   return (
     <Heading
+      ref={reveal.ref}
       className={cn('motion-heading', align === 'center' && 'mx-auto text-center', className)}
       data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
       initial="hidden"
