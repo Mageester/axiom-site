@@ -26,8 +26,8 @@ const workCards = [
     eyebrow: 'SALON & BEAUTY',
     title: 'Nails Studio Demo',
     outcome: 'Clean booking flow paired with modern trust cues and a polished luxury feel.',
-    metricLabel: 'PERFORMANCE',
-    metricValue: 'VITALS',
+    metricLabel: 'LOAD TARGET',
+    metricValue: '<1s',
     image: getWorkProofImage('concept-salon-demo').source,
     alt: getWorkProofImage('concept-salon-demo').alt || 'Nails Studio Demo',
     position: getWorkProofImage('concept-salon-demo').position || 'center 40%',
@@ -37,7 +37,7 @@ const workCards = [
     title: 'Blackline Barber Co.',
     outcome: 'Sharp branding, fast booking, and a cleaner first impression.',
     metricLabel: 'BOOKING PATH',
-    metricValue: 'CLEAR CTA',
+    metricValue: '1 TAP',
     image: getWorkProofImage('concept-barber-demo').source,
     alt: getWorkProofImage('concept-barber-demo').alt || 'Blackline Barber Co.',
     position: getWorkProofImage('concept-barber-demo').position || 'center 40%',
@@ -46,8 +46,8 @@ const workCards = [
     eyebrow: 'HEALTHCARE & MEDICAL',
     title: 'Aurelia Dental Studio',
     outcome: 'Calm, trust-focused presentation paired with a polished booking experience.',
-    metricLabel: 'MOBILE EXPERIENCE',
-    metricValue: 'RESPONSIVE',
+    metricLabel: 'MOBILE TARGET',
+    metricValue: '98+',
     image: getWorkProofImage('concept-dental-demo').source,
     alt: getWorkProofImage('concept-dental-demo').alt || 'Aurelia Dental Studio',
     position: getWorkProofImage('concept-dental-demo').position || 'center 40%',
@@ -58,7 +58,7 @@ const principles = [
   {
     number: '01',
     title: 'No unclear offer.',
-    description: "If a visitor can't tell what you do at a glance, we haven't finished.",
+    description: "If a visitor can't tell what you do in three seconds, we haven't finished.",
     icon: 'eye',
   },
   {
@@ -70,7 +70,7 @@ const principles = [
   {
     number: '03',
     title: 'No slow first load.',
-    description: 'We engineer for Core Web Vitals from the first build, not after launch.',
+    description: 'Sub-second loads are the floor. If it drags, we fix it.',
     icon: 'bolt',
   },
   {
@@ -83,25 +83,25 @@ const principles = [
 
 const processStages = [
   {
-    stage: 'Review',
+    day: 'Day 1',
     title: 'Review',
     description: 'We audit the current site, the offer, and the gaps that are costing trust.',
     icon: 'search',
   },
   {
-    stage: 'Scope',
+    day: 'Day 3',
     title: 'Scope',
     description: 'We lock the structure, the message, and the pages that actually matter.',
     icon: 'document',
   },
   {
-    stage: 'Build',
+    day: 'Day 7',
     title: 'Build',
     description: 'The design system, layout, and content come together in production.',
     icon: 'code',
   },
   {
-    stage: 'Launch',
+    day: 'Day 14',
     title: 'Launch',
     description: 'We ship the site, verify the handoff, and make ownership complete.',
     icon: 'arrow-up',
@@ -109,7 +109,7 @@ const processStages = [
 ] as const;
 
 const timelineSteps = processStages.map((stage) => ({
-  kicker: stage.stage,
+  kicker: stage.day,
   title: stage.title,
   description: stage.description,
 }));
@@ -148,7 +148,7 @@ const services = [
   schema={HOME_JSON_LD}
 >
   <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32">
-    <section class="hero-shell relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-36">
+    <section class="hero-shell relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-40">
       <div
         aria-hidden="true"
         class="pointer-events-none absolute inset-0 hero-aurora"
@@ -160,7 +160,7 @@ const services = [
       />
       <div
         aria-hidden="true"
-        class="pointer-events-none absolute inset-0 opacity-[0.03]"
+        class="pointer-events-none absolute inset-0 hero-noise opacity-[0.04]"
         style="
           background-image:
             radial-gradient(circle at 20% 20%, var(--hero-noise-dot) 0.6px, transparent 0.6px),
@@ -170,32 +170,42 @@ const services = [
           mix-blend-mode: overlay;
         "
       />
+      <div aria-hidden="true" class="hero-grid pointer-events-none absolute inset-0" />
       <div class="axiom-container relative">
-        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,27rem)] lg:items-center">
-          <FadeIn client:load className="max-w-3xl">
-            <Eyebrow>WEB DESIGN AGENCY</Eyebrow>
-            <MotionHeading client:load as="h1" text="Websites that turn visitors into booked calls." className="mt-6 max-w-4xl text-left" />
-            <p class="section-copy mt-6 max-w-2xl">
+        <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,30rem)] lg:items-center">
+          <div class="max-w-3xl">
+            <FadeIn client:load delay={80}>
+              <Eyebrow>WEB DESIGN AGENCY</Eyebrow>
+            </FadeIn>
+            <FadeIn client:load delay={180}>
+              <MotionHeading client:load as="h1" text="Websites that turn visitors into booked calls." className="mt-6 max-w-4xl text-left" />
+            </FadeIn>
+            <FadeIn client:load delay={320}>
+              <p class="section-copy mt-6 max-w-2xl md:text-[1.1rem]">
               Fast websites. Clear offers. More booked jobs.
-              Typical launch is 2-4 weeks, depending on scope, with support that stays active after the site goes live.
-            </p>
+              We build in 14 days, start at $0 down, and keep supporting the site after launch. It keeps earning long
+              after it goes live.
+              </p>
+            </FadeIn>
 
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button asChild size="lg" className="w-full sm:w-auto">
-                <a href={CTA_PATHS.startProject}>Start a project</a>
-              </Button>
-              <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-                <a href="/work">See real builds</a>
-              </Button>
-            </div>
+            <FadeIn client:load delay={440}>
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Button asChild size="lg" className="w-full sm:w-auto">
+                  <a href={CTA_PATHS.startProject}>Start a project</a>
+                </Button>
+                <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
+                  <a href="/work">See real builds</a>
+                </Button>
+              </div>
 
-            <p class="mt-3 text-[13px] uppercase tracking-[0.08em] text-[var(--text-muted)]">
-              MONTHLY AND OWNERSHIP PATHS. SCOPED BEFORE BUILD.
-            </p>
-          </FadeIn>
+              <p class="mt-3 text-[13px] uppercase tracking-[0.08em] text-[var(--text-muted)]">
+                MONTHLY FROM $150. ONE-TIME OWNERSHIP FROM $3,500. NO ASTERISKS.
+              </p>
+            </FadeIn>
+          </div>
 
-          <div class="hidden justify-self-end lg:block" aria-hidden="true">
-            <div class="hero-browser-shell">
+          <FadeIn client:load delay={560} as="div" className="hidden justify-self-end lg:block" aria-hidden="true">
+            <div class="hero-browser-shell hero-visual">
               <svg viewBox="0 0 520 340" class="block h-auto w-full" fill="none" role="presentation">
                 <rect x="0.75" y="0.75" width="518.5" height="338.5" rx="24" class="hero-browser-frame" />
                 <rect x="0.75" y="0.75" width="518.5" height="52" rx="24" class="hero-browser-chrome" />
@@ -215,14 +225,22 @@ const services = [
                     style={`--browser-delay: ${bar.delay}s;`}
                   />
                 ))}
+                <rect x="42" y="250" width="182" height="34" rx="17" class="hero-browser-chip" />
+                <rect x="248" y="250" width="108" height="34" rx="17" class="hero-browser-chip hero-browser-chip-soft" />
+                <path d="M405 116C431 142 444 170 444 200C444 230 428 255 396 276" class="hero-browser-arc" />
+                <path d="M386 104C407 132 416 161 413 191C410 222 392 246 358 263" class="hero-browser-arc hero-browser-arc-muted" />
               </svg>
+              <div class="hero-status-panel">
+                <span>CORE WEB VITALS</span>
+                <strong>Verified before launch</strong>
+              </div>
             </div>
-          </div>
+          </FadeIn>
 
           <div class="flex justify-center lg:col-span-2">
             <MotionQuote client:load
               className="text-center"
-              phrases={['Typical 2-4 week launch.', 'Core Web Vitals engineered in.', 'Ongoing support included.']}
+              phrases={['Fourteen days.', 'Under one second.', 'Ongoing support included.']}
             />
           </div>
         </div>
@@ -231,7 +249,7 @@ const services = [
 
     <ProofBar client:load />
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>SELECTED WORK</Eyebrow>
@@ -243,14 +261,14 @@ const services = [
           {workCards.map((card, index) => (
             <FadeIn client:load delay={Math.min(index * 100, 400)}>
               <Card
-                className="group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)]"
+                className="group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[var(--ease-premium)] hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)]"
               >
                 <figure class="relative overflow-hidden border-b border-[color:var(--hairline)] bg-white/5">
                   <ResponsivePicture
                     source={card.image}
                     alt={card.alt}
                     sizes="(min-width: 1280px) 32vw, (min-width: 768px) 45vw, 100vw"
-                    class="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-[1.03]"
+                    class="media-zoom aspect-[4/3] h-full w-full object-cover"
                     loading="lazy"
                     fetchpriority="low"
                     objectPosition={card.position}
@@ -260,7 +278,7 @@ const services = [
 
                 <div class="flex h-full flex-col p-6 sm:p-7">
                   <Eyebrow>{card.eyebrow}</Eyebrow>
-                  <h3 class="mt-4 text-[22px] font-semibold tracking-normal text-[var(--text-primary)]">
+                  <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
                     {card.title}
                   </h3>
                   <p class="section-copy mt-3">
@@ -281,7 +299,7 @@ const services = [
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>WHAT WE BUILD</Eyebrow>
@@ -294,10 +312,10 @@ const services = [
             <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
               <a
                 href={service.href}
-                class="group flex h-full flex-col gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-[color:var(--accent-border)] hover:bg-[rgba(255,255,255,0.03)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.28),0_0_0_1px_rgb(var(--accent-v2-rgb,var(--accent-current-rgb))_/_0.14)] sm:p-7"
+                class="premium-card group flex h-full flex-col gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:border-[color:var(--accent-border)] hover:bg-[rgba(255,255,255,0.03)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.28),0_0_0_1px_rgb(var(--accent-v2-rgb,var(--accent-current-rgb))_/_0.14)] sm:p-7"
               >
                 <DrawIcon name={service.icon} className="transition-transform duration-300 group-hover:rotate-90 group-hover:text-[var(--accent-solid)]" />
-                  <p class="text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
+                  <p class="text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
                     {service.label}
                   </p>
                 <p class="section-copy">
@@ -313,7 +331,7 @@ const services = [
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>WHY AXIOM</Eyebrow>
@@ -326,9 +344,11 @@ const services = [
             <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
               <Card className="h-full p-0">
                 <div class="flex h-full flex-col p-6 sm:p-7">
-                  <DrawIcon name={principle.icon} className="mb-4" />
-                  <p class="font-mono text-[0.75rem] font-medium uppercase tracking-[0.08em] text-[var(--accent-solid)]">{principle.number}</p>
-                  <h3 class="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
+                  <div class="mb-5 flex items-center justify-between gap-4">
+                    <DrawIcon name={principle.icon} />
+                    <p class="font-mono text-[0.75rem] font-medium uppercase tracking-[0.08em] text-[var(--accent-solid)]">{principle.number}</p>
+                  </div>
+                  <h3 class="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
                     {principle.title}
                   </h3>
                   <p class="section-copy mt-3">
@@ -342,12 +362,12 @@ const services = [
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>HOW WE BUILD</Eyebrow>
           <SectionDivider client:load className="mt-6" />
-          <MotionHeading client:load as="h2" text="Four stages. Scoped before build." className="section-heading mt-4" />
+          <MotionHeading client:load as="h2" text="Four stages. Fourteen days. No drift." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10">
@@ -371,9 +391,9 @@ const services = [
               <div class="relative">
                 <Eyebrow className="justify-center">THE GUARANTEE</Eyebrow>
                 <SectionDivider client:load className="mt-6" />
-                <MotionHeading client:load as="h2" text="Engineered for Core Web Vitals from the start." className="section-heading mx-auto mt-4" />
+                <MotionHeading client:load as="h2" text="If your site loads in over one second, we fix it free." className="section-heading mx-auto mt-4" />
           <p class="section-copy mx-auto mt-4">
-                Performance is part of the process. Monthly-first support stays with you after launch.
+                No asterisks. Monthly-first support stays with you after launch.
               </p>
               </div>
             </div>
@@ -382,14 +402,15 @@ const services = [
       </div>
     </section>
 
-    <section class="border-t border-[color:var(--hairline)] bg-[var(--surface-2)]">
+    <section class="final-cta-panel">
       <div class="axiom-container py-12 md:py-16">
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.75fr)] lg:items-end">
           <FadeIn client:load as="div" className="max-w-3xl">
             <SectionDivider client:load className="mb-6" />
             <MotionHeading client:load as="h2" text="A slow site is a silent bill. We fix that." className="section-heading text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
             <p class="section-copy mt-4">
-              Choose monthly support or an ownership build after scope is clear. Either way, you get a site that actually books work.
+              Start monthly at $0 down, or buy it outright from $3,500.
+              Either way, you get a site that actually books work.
             </p>
           </FadeIn>
 
@@ -413,24 +434,47 @@ const services = [
       isolation: isolate;
     }
 
+    .hero-shell::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--hairline-strong), transparent);
+      opacity: 0.8;
+    }
+
     .hero-aurora {
       animation: hero-aurora-drift 30s ease-in-out infinite;
       transform-origin: center;
       will-change: transform, opacity;
     }
 
+    .hero-grid {
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+      background-size: 92px 92px;
+      opacity: 0.18;
+      mask-image: radial-gradient(circle at 78% 24%, black, transparent 62%);
+    }
+
     .hero-browser-shell {
-      width: clamp(18rem, 28vw, 27rem);
-      opacity: 0.4;
-      transform: translate3d(1.75rem, -0.5rem, 0) rotate(2deg);
+      position: relative;
+      width: clamp(22rem, 32vw, 30rem);
+      opacity: 0.78;
+      transform: translate3d(0.75rem, -0.5rem, 0) rotate(1.6deg);
       transform-origin: center;
       pointer-events: none;
       will-change: transform, opacity;
     }
 
+    .hero-visual {
+      animation: hero-visual-float 8s var(--ease-premium-soft) infinite;
+    }
+
     .hero-browser-frame {
-      fill: rgba(255, 255, 255, 0.02);
-      stroke: rgba(255, 255, 255, 0.1);
+      fill: rgba(255, 255, 255, 0.026);
+      stroke: rgba(255, 255, 255, 0.13);
       stroke-width: 1;
     }
 
@@ -451,6 +495,68 @@ const services = [
         browser-bar-reveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) var(--browser-delay, 0s) forwards,
         browser-bar-pulse 8s ease-in-out calc(1.2s + var(--browser-delay, 0s)) infinite;
       will-change: opacity, transform;
+    }
+
+    .hero-browser-chip {
+      fill: rgba(255, 255, 255, 0.075);
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 1;
+    }
+
+    .hero-browser-chip-soft {
+      fill: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.14);
+      stroke: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.22);
+    }
+
+    .hero-browser-arc {
+      stroke: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.5);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-dasharray: 220;
+      stroke-dashoffset: 220;
+      animation: hero-arc-draw 1.2s var(--ease-premium) 0.75s forwards;
+    }
+
+    .hero-browser-arc-muted {
+      stroke: rgba(255,255,255,0.22);
+      animation-delay: 0.95s;
+    }
+
+    .hero-status-panel {
+      position: absolute;
+      right: -0.85rem;
+      bottom: 2.25rem;
+      width: min(16rem, 62%);
+      border: 1px solid var(--hairline-strong);
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.72);
+      box-shadow: var(--shadow-card-elevated);
+      padding: 1rem 1.05rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: hero-panel-in 0.72s var(--ease-premium) 0.9s both;
+    }
+
+    .hero-status-panel span,
+    .hero-status-panel strong {
+      display: block;
+    }
+
+    .hero-status-panel span {
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      line-height: 1.2;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-solid);
+    }
+
+    .hero-status-panel strong {
+      margin-top: 0.35rem;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      line-height: 1.35;
+      font-weight: 600;
     }
 
     @keyframes browser-bar-reveal {
@@ -486,13 +592,23 @@ const services = [
 
       .hero-browser-shell {
         opacity: 0.45;
-        transform: translate3d(1.75rem, -0.5rem, 0) rotate(2deg);
+        transform: translate3d(0.75rem, -0.5rem, 0) rotate(1.6deg);
       }
 
       .hero-browser-bar {
         animation: none !important;
         opacity: 0.55;
         transform: none;
+      }
+
+      .hero-visual,
+      .hero-browser-arc,
+      .hero-status-panel {
+        animation: none !important;
+      }
+
+      .hero-browser-arc {
+        stroke-dashoffset: 0;
       }
     }
 
@@ -504,6 +620,35 @@ const services = [
 
       50% {
         transform: translate3d(1.5%, 0.75%, 0);
+      }
+    }
+
+    @keyframes hero-visual-float {
+      0%,
+      100% {
+        transform: translate3d(0.75rem, -0.5rem, 0) rotate(1.6deg);
+      }
+
+      50% {
+        transform: translate3d(0.25rem, -1.15rem, 0) rotate(1deg);
+      }
+    }
+
+    @keyframes hero-arc-draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes hero-panel-in {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
       }
     }
   </style>

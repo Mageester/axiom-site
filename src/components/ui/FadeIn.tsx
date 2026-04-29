@@ -50,6 +50,7 @@ export const FadeIn: React.FC<FadeInProps> = ({
 
   return (
     <MotionComponent
+      ref={reveal.ref}
       {...props}
       className={cn('motion-surface', className)}
       data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}

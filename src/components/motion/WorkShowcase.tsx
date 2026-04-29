@@ -90,7 +90,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
   const visibleBuilds = activeFilter === 'all' ? builds : builds.filter((build) => build.category === activeFilter);
 
   return (
-    <div className="space-y-8 md:space-y-10">
+    <div ref={reveal.ref} className="space-y-8 md:space-y-10">
       <div className="relative mb-8 flex flex-wrap items-center gap-x-6 gap-y-3 md:mb-10">
         {filters.map((filter) => {
           const isActive = filter.value === activeFilter;
@@ -101,7 +101,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
               type="button"
               onClick={() => setActiveFilter(filter.value)}
               aria-pressed={isActive}
-              className="relative min-h-11 border-b border-transparent px-2 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors duration-150 hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
+            className="relative min-h-11 rounded-full border border-transparent px-3 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-[var(--text-muted)] transition-[color,border-color,background-color] duration-[var(--duration-fast)] ease-[var(--ease-premium)] hover:border-[color:var(--hairline)] hover:bg-[color:var(--surface-overlay)] hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
             >
               {isActive ? (
                 <m.span
@@ -132,7 +132,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
               return (
                 <m.article
                   key={build.title}
-                  className="motion-surface group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
+                  className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
                   data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
                   variants={fadeUpVariants}
                 >
@@ -143,9 +143,20 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                         <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                           {build.eyebrow}
                         </p>
-                        <h3 className="mt-3 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
+                        <h3 className="mt-3 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
                           {build.title}
                         </h3>
+                        <p className="mt-2 max-w-xl text-[1rem] leading-[1.6] text-[var(--text-secondary)]">
+                          {build.axiomChanged}
+                        </p>
+                        <a
+                          href={build.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-4 inline-flex min-h-11 items-center text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
+                        >
+                          View demo
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -168,17 +179,6 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                       ))}
                     </dl>
                   </div>
-                  <div className="border-t border-[color:var(--hairline)] px-5 py-5 sm:px-6">
-                    <a
-                      href={build.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group inline-flex min-h-9 items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
-                    >
-                      <span>View Demo</span>
-                      <span className="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
-                    </a>
-                  </div>
                 </m.article>
               );
             }
@@ -187,7 +187,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
               return (
                 <m.article
                   key={build.title}
-                  className="motion-surface group grid gap-0 overflow-visible rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
+                  className="motion-surface premium-card group grid gap-0 overflow-visible rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
                   data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
                   variants={fadeUpVariants}
                 >
@@ -198,31 +198,29 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                       {build.eyebrow}
                     </p>
-                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
+                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
                       {build.title}
                     </h3>
-                    <dl className="mt-6 space-y-5">
-                      <div className="space-y-2">
-                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Original weakness</dt>
-                        <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.originalWeakness}</dd>
+                    <p className="mt-3 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">
+                      {build.originalWeakness}
+                    </p>
+                    <div className="mt-6 space-y-4 border-t border-[color:var(--hairline)] pt-5">
+                      <div>
+                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Axiom changed</p>
+                        <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.axiomChanged}</p>
                       </div>
-                      <div className="space-y-2 border-t border-[color:var(--hairline)] pt-5">
-                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Axiom changed</dt>
-                        <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.axiomChanged}</dd>
+                      <div>
+                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Why it works</p>
+                        <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.whyItWorks}</p>
                       </div>
-                      <div className="space-y-2 border-t border-[color:var(--hairline)] pt-5">
-                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Why it works</dt>
-                        <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.whyItWorks}</dd>
-                      </div>
-                    </dl>
+                    </div>
                     <a
                       href={build.href}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className="group mt-6 inline-flex min-h-9 items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+                      rel="noreferrer"
+                      className="mt-6 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
                     >
-                      <span>View Demo</span>
-                      <span className="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
+                      View demo
                     </a>
                   </div>
                 </m.article>
@@ -232,7 +230,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
             return (
               <m.article
                 key={build.title}
-                className="motion-surface group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
+                className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
                 data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
                 variants={fadeUpVariants}
               >
@@ -244,7 +242,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                       {build.eyebrow}
                     </p>
-                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
+                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
                       {build.title}
                     </h3>
 
@@ -265,11 +263,10 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <a
                       href={build.href}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className="group mt-6 inline-flex min-h-9 items-center gap-2 font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+                      rel="noreferrer"
+                      className="mt-7 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
                     >
-                      <span>View Demo</span>
-                      <span className="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">→</span>
+                      View demo
                     </a>
                   </div>
                 </div>

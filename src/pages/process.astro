@@ -13,7 +13,7 @@ import { Timeline } from '../components/motion/Timeline';
 
 const processSteps = [
   {
-    stageLabel: 'Review',
+    dayLabel: 'Day 1',
     title: 'Review',
     timelineDescription:
       "We audit the current site, the offer, and the points where you're losing trust. Then we decide what has to change first.",
@@ -21,7 +21,7 @@ const processSteps = [
     icon: 'search',
   },
   {
-    stageLabel: 'Scope',
+    dayLabel: 'Day 3',
     title: 'Scope',
     timelineDescription:
       'We lock the pages, the call paths, and the priorities before design starts. Decisions happen here, not mid-build.',
@@ -29,7 +29,7 @@ const processSteps = [
     icon: 'document',
   },
   {
-    stageLabel: 'Build',
+    dayLabel: 'Day 7',
     title: 'Build',
     timelineDescription:
       'We design, write, and test the full site. Layout and flow stay simple enough to ship clean.',
@@ -37,7 +37,7 @@ const processSteps = [
     icon: 'code',
   },
   {
-    stageLabel: 'Launch',
+    dayLabel: 'Day 14',
     title: 'Launch',
     timelineDescription:
       'We run launch checks, connect the domain, and hand over a live site. Monthly clients keep support from here on.',
@@ -47,7 +47,7 @@ const processSteps = [
 ] as const;
 
 const timelineSteps = processSteps.map((step) => ({
-  kicker: step.stageLabel,
+  kicker: step.dayLabel,
   title: step.title,
   description: step.timelineDescription,
 }));
@@ -68,8 +68,8 @@ const launchChecklist = [
         <SectionDivider client:load className="mt-6" />
         <MotionHeading client:load as="h1" text="Four stages. Then ongoing support." className="mt-4" />
         <p class="section-copy mt-5 md:text-[17px]">
-          Typical launch is 2-4 weeks, depending on scope. Direct access to your team keeps decisions moving, and
-          monthly clients keep support after the site goes live.
+          Fourteen days from first call to launch. No drift, no surprises, no 60-day Slack silences. Monthly clients
+          keep support after the site goes live.
         </p>
         <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button asChild size="lg" className="w-full sm:w-auto">
@@ -82,13 +82,13 @@ const launchChecklist = [
       </FadeIn>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <Timeline client:load steps={timelineSteps} />
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container">
         <FadeIn client:load className="max-w-3xl">
           <Eyebrow>WHAT WE NEED FROM YOU</Eyebrow>
@@ -99,8 +99,8 @@ const launchChecklist = [
         <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {launchChecklist.map((item, index) => (
             <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
-              <div class="h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
-                <p class="flex items-center gap-2 text-[15px] font-semibold tracking-normal text-[var(--text-primary)]">
+              <div class="premium-card h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
+                <p class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
                   <DrawIcon name="check" size={14} className="text-[var(--accent-solid)]" />
                   {item.title}
                 </p>
@@ -114,7 +114,7 @@ const launchChecklist = [
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="page-section section-shell">
       <div class="axiom-container grid gap-6 lg:grid-cols-2">
         <FadeIn client:load as="div" direction="left">
           <Card className="h-full p-0">

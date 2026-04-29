@@ -13,11 +13,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'border border-transparent bg-white text-[#0A0A0A] font-semibold uppercase tracking-widest shadow-[var(--shadow-button-primary)] transition-colors duration-200 hover:bg-[#E5E5E5] motion-safe:hover:scale-[1.03] motion-safe:hover:shadow-[var(--shadow-button-primary-hover)]',
+    'btn-cta border border-transparent bg-[color:var(--accent)] text-[color:var(--text-on-accent)] shadow-[var(--shadow-button-primary)] hover:bg-[color:var(--accent-hover)] motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-[var(--shadow-button-primary-hover)]',
   secondary:
-    'border border-[color:var(--hairline)] bg-[color:var(--surface-panel)] text-[var(--text-primary)] hover:border-[color:var(--accent-border)] hover:bg-[color:var(--surface-overlay)] hover:brightness-105',
+    'border border-[color:var(--hairline)] bg-[color:var(--surface-panel)] text-[var(--text-primary)] shadow-[var(--shadow-button-secondary)] hover:border-[color:var(--accent-border)] hover:bg-[color:var(--surface-overlay)] hover:brightness-105 motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-[var(--shadow-button-secondary-hover)]',
   ghost:
-    'border border-transparent bg-transparent text-[var(--text-primary)] underline decoration-transparent decoration-1 underline-offset-4 hover:decoration-current hover:brightness-110',
+    'border border-transparent bg-transparent text-[var(--text-primary)] underline decoration-transparent decoration-1 underline-offset-4 hover:decoration-current hover:brightness-110 motion-safe:hover:-translate-y-0.5',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -27,7 +27,7 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 const baseClasses =
-  'inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-medium tracking-normal motion-safe:transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] motion-safe:duration-200 motion-safe:ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 motion-safe:active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60';
+  'inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-semibold tracking-normal motion-safe:transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] motion-safe:duration-[var(--duration-fast)] motion-safe:ease-[var(--ease-premium)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60';
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', asChild = false, type = 'button', children, style, ...props }, ref) => {

@@ -100,6 +100,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
               if (link.classList.contains('btn-primary') || link.classList.contains('btn-secondary') || link.classList.contains('btn-ghost') || link.classList.contains('skip-link')) {
                 return;
               }
+              if (link.getAttribute('href') === '/start-a-project' || link.getAttribute('href') === '/start') return;
               if (link.closest('.site-logo')) return;
               if (link.querySelector('img, svg')) return;
               link.classList.add('motion-link-accent');

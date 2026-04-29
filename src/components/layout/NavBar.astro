@@ -26,7 +26,7 @@ const isActive = (href: string) =>
   href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
 const ctaClasses =
-  'inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-transparent bg-white px-5 text-[14px] font-semibold uppercase tracking-widest text-[#0A0A0A] shadow-[var(--shadow-button-primary)] transition-colors duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 active:scale-[0.98] hover:bg-[#E5E5E5]';
+  'btn-cta inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-transparent bg-[color:var(--accent)] px-5 text-[14px] font-semibold tracking-normal text-[#050505] shadow-[var(--shadow-button-primary)] transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-premium)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 active:scale-[0.98] hover:-translate-y-0.5 hover:bg-[color:var(--accent-hover)] hover:shadow-[var(--shadow-button-primary-hover)]';
 ---
 
 <header id="site-header" class="fixed inset-x-0 top-0 z-50 px-3 sm:px-6">
@@ -53,9 +53,9 @@ const ctaClasses =
         <a
           href={link.href}
           aria-current={isActive(link.href) ? 'page' : undefined}
-          class={`motion-link-accent min-h-11 border-b border-transparent py-2 text-[14px] font-medium transition-[color,opacity,border-color] duration-200 hover:border-[color:var(--accent-border)] hover:text-[var(--text-primary)] ${
+          class={`motion-link-accent min-h-11 py-2 text-[14px] font-medium transition-[color,opacity,border-color] duration-200 hover:text-[var(--text-primary)] ${
             isActive(link.href)
-              ? 'border-[color:var(--accent-solid)] text-[var(--text-primary)]'
+              ? 'text-[var(--text-primary)]'
               : 'text-[var(--text-secondary)]'
           }`}
         >
@@ -128,7 +128,8 @@ const ctaClasses =
           href={link.href}
           aria-current={isActive(link.href) ? 'page' : undefined}
           data-nav-close
-          class={`block min-h-11 text-[clamp(2.5rem,8vw,4.75rem)] font-semibold leading-[0.92] tracking-normal text-[var(--text-primary)] transition-opacity duration-200${index === 0 ? ' mt-2' : ''}`}
+          class={`mobile-nav-link block min-h-11 text-[clamp(2.5rem,8vw,4.75rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-[var(--text-primary)] transition-opacity duration-200${index === 0 ? ' mt-2' : ''}`}
+          style={`--nav-item-delay: ${index * 55}ms;`}
         >
           {link.label}
         </a>
@@ -154,14 +155,32 @@ const ctaClasses =
   #mobile-nav-panel {
     visibility: hidden;
     opacity: 0;
+    transform: translate3d(0, -8px, 0);
     pointer-events: none;
-    transition: opacity 200ms ease, visibility 200ms ease;
+    transition:
+      opacity var(--duration-medium) var(--ease-premium),
+      transform var(--duration-medium) var(--ease-premium),
+      visibility var(--duration-medium) var(--ease-premium);
   }
 
   #mobile-nav-panel.nav-open {
     visibility: visible;
     opacity: 1;
+    transform: translate3d(0, 0, 0);
     pointer-events: auto;
+  }
+
+  .mobile-nav-link {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+
+  #mobile-nav-panel.nav-open .mobile-nav-link {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition:
+      opacity 420ms var(--ease-premium) var(--nav-item-delay, 0ms),
+      transform 420ms var(--ease-premium) var(--nav-item-delay, 0ms);
   }
 
   .bar {
@@ -184,6 +203,21 @@ const ctaClasses =
     border-color: var(--hairline-strong);
     background-color: var(--nav-shell-bg-scrolled) !important;
     box-shadow: var(--shadow-nav-scrolled) !important;
+    transform: translate3d(0, 4px, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-nav-panel,
+    .mobile-nav-link,
+    #mobile-nav-panel.nav-open .mobile-nav-link,
+    #nav-shell[data-scrolled] {
+      transition: none !important;
+      transform: none !important;
+    }
+
+    .mobile-nav-link {
+      opacity: 1;
+    }
   }
 </style>
 

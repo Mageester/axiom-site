@@ -27,7 +27,7 @@ export function ProofBar({ className }: { className?: string }) {
   const reveal = useAnimatedReveal();
 
   return (
-    <section className={cn('border-y border-[color:rgba(255,255,255,0.05)]', className)}>
+    <section ref={reveal.ref} className={cn('border-y border-[color:rgba(255,255,255,0.05)]', className)}>
       <div className="axiom-container">
         <m.div
           className="motion-surface grid gap-4 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0"
