@@ -1,4 +1,4 @@
-export const motionEase = [0.22, 1, 0.36, 1] as const;
+export const motionEase = [0.33, 1, 0.68, 1] as const;
 
 export const viewportOnce = {
   once: true,
@@ -6,7 +6,7 @@ export const viewportOnce = {
 } as const;
 
 export const fadeUpVariants = {
-  hidden: (distance = 20) => ({
+  hidden: (distance = 10) => ({
     opacity: 0,
     y: distance,
   }),
@@ -14,7 +14,7 @@ export const fadeUpVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: motionEase,
     },
   },
@@ -24,7 +24,7 @@ export const staggerChildren = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.055,
     },
   },
 } as const;
@@ -36,9 +36,9 @@ export const lineRevealVariants = {
   visible: {
     clipPath: 'inset(0 0 0 0)',
     transition: {
-      duration: 0.7,
+      duration: 0.48,
       ease: motionEase,
-      staggerChildren: 0.05,
+      staggerChildren: 0.035,
     },
   },
 } as const;
@@ -52,7 +52,7 @@ export const wordRevealVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.45,
+      duration: 0.36,
       ease: motionEase,
     },
   },
@@ -65,13 +65,13 @@ export const underlineDrawVariants = {
   visible: {
     scaleX: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.38,
       ease: motionEase,
     },
   },
 } as const;
 
 export const numberCount = {
-  duration: 1.2,
+  duration: 0.9,
   ease: motionEase,
 } as const;

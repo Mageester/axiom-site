@@ -358,20 +358,29 @@ h4 {
 }
 
 [data-reveal],
-.section-block {
-  opacity: 0;
-  transform: translateY(var(--reveal-distance));
+.section-block,
+.motion-surface,
+.motion-heading,
+.motion-quote {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
   transition:
-    opacity var(--reveal-duration) ease-out,
+    opacity var(--reveal-duration) ease,
     transform var(--reveal-duration) var(--ease-premium);
   will-change: opacity, transform;
   transition-delay: var(--reveal-delay, 0ms);
 }
 
+html[data-motion-active='true'] [data-reveal]:not([data-reveal-state='visible']),
+html[data-motion-active='true'] .section-block:not([data-motion-visible='true']) {
+  opacity: 0;
+  transform: translate3d(var(--reveal-x, 0px), var(--reveal-y, var(--reveal-distance)), 0);
+}
+
 [data-reveal][data-reveal-state='visible'],
 .section-block[data-motion-visible='true'] {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 [data-reveal-item] {
@@ -399,34 +408,57 @@ h4 {
   transform: translateY(0) !important;
 }
 
+.motion-heading {
+  overflow: visible;
+  padding-bottom: 0.06em;
+}
+
 .motion-heading[data-motion-visible='true'] {
   clip-path: inset(0) !important;
 }
 
+.motion-heading .split-line {
+  line-height: inherit;
+  overflow: visible;
+}
+
 .motion-heading .split-char,
 .motion-quote .quote-phrase {
-  opacity: 0;
-  transform: translateY(0.35em);
+  opacity: 1;
+  transform: translateY(0);
   transition:
-    opacity 450ms var(--ease-premium),
-    transform 450ms var(--ease-premium);
+    opacity 360ms var(--ease-premium),
+    transform 360ms var(--ease-premium);
   transition-delay: var(--word-delay, 0ms);
   will-change: opacity, transform;
 }
 
+html[data-motion-active='true'] .motion-heading:not([data-reveal-state='visible']) .split-char,
+html[data-motion-active='true'] .motion-quote:not([data-reveal-state='visible']) .quote-phrase {
+  opacity: 0;
+  transform: translateY(0.28em);
+}
+
 .motion-heading[data-motion-visible='true'] .split-char,
-.motion-quote[data-motion-visible='true'] .quote-phrase {
+.motion-heading[data-reveal-state='visible'] .split-char,
+.motion-quote[data-motion-visible='true'] .quote-phrase,
+.motion-quote[data-reveal-state='visible'] .quote-phrase {
   opacity: 1;
   transform: translateY(0);
 }
 
 .motion-quote .quote-underline {
-  transform: scaleX(0);
-  transition: transform 500ms var(--ease-premium);
-  transition-delay: 150ms;
+  transform: scaleX(1);
+  transition: transform 360ms var(--ease-premium);
+  transition-delay: 80ms;
 }
 
-.motion-quote[data-motion-visible='true'] .quote-underline {
+html[data-motion-active='true'] .motion-quote:not([data-reveal-state='visible']) .quote-underline {
+  transform: scaleX(0);
+}
+
+.motion-quote[data-motion-visible='true'] .quote-underline,
+.motion-quote[data-reveal-state='visible'] .quote-underline {
   transform: scaleX(1);
 }
 
@@ -448,6 +480,41 @@ h4 {
 
 .section-divider[data-motion-visible='true'] {
   transform: scaleX(1) !important;
+}
+
+.section-divider,
+.timeline-rail {
+  transform: scaleX(1);
+  transition: transform var(--reveal-duration) var(--ease-premium);
+}
+
+.timeline-rail {
+  transform-origin: left center;
+}
+
+.timeline-rail-vertical {
+  transform-origin: top center;
+}
+
+html[data-motion-active='true'] .section-divider:not([data-reveal-state='visible']) {
+  transform: scaleX(0);
+}
+
+html[data-motion-active='true'] .timeline-rail:not([data-reveal-state='visible']) {
+  transform: scaleX(0);
+}
+
+html[data-motion-active='true'] .timeline-rail-vertical:not([data-reveal-state='visible']) {
+  transform: scaleY(0);
+}
+
+[data-reveal-state='visible'].section-divider,
+[data-reveal-state='visible'].timeline-rail {
+  transform: scaleX(1);
+}
+
+[data-reveal-state='visible'].timeline-rail-vertical {
+  transform: scaleY(1);
 }
 
 [data-cursor-accent] {
@@ -709,11 +776,6 @@ a[href="/start"]:not(.hidden):focus-visible::after {
   background-size: 88px 88px;
   mask-image: radial-gradient(circle at 72% 22%, black, transparent 64%);
   opacity: 0.18;
-}
-
-html[data-motion-loading='true'] body,
-html[data-motion-leaving='true'] body {
-  opacity: 0;
 }
 
 html[data-motion-reduced='true'] body {

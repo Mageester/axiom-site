@@ -52,21 +52,21 @@
   --content-width: 1240px;
   --gutter-mobile: 24px;
   --gutter-desktop: 48px;
-  --section-space-mobile: 96px;
-  --section-space-desktop: 128px;
+  --section-space-mobile: 84px;
+  --section-space-desktop: 118px;
   --radius-card: 16px;
   --radius-component: 12px;
   --radius-pill: 999px;
 
-  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-premium-soft: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-fast: 180ms;
-  --duration-medium: 320ms;
-  --duration-slow: 680ms;
+  --ease-premium: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-premium-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 160ms;
+  --duration-medium: 280ms;
+  --duration-slow: 420ms;
   --transition-standard: var(--duration-fast) var(--ease-premium);
-  --reveal-duration: var(--duration-slow);
-  --reveal-distance: 18px;
-  --reveal-stagger: 80ms;
+  --reveal-duration: 360ms;
+  --reveal-distance: 8px;
+  --reveal-stagger: 64ms;
 
   --font-display: 'Inter Display', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

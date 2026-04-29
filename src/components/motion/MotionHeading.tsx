@@ -1,15 +1,12 @@
 import * as React from 'react';
-import { m } from 'framer-motion';
-import useAnimatedReveal from '../../hooks/useAnimatedReveal';
 import { cn } from '../../lib/utils';
-import { lineRevealVariants } from './variants';
 
 type HeadingTag = 'h1' | 'h2' | 'h3';
 
 const HeadingByTag = {
-  h1: m.h1,
-  h2: m.h2,
-  h3: m.h3,
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
 } as const;
 
 export interface MotionHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
@@ -19,18 +16,14 @@ export interface MotionHeadingProps extends React.HTMLAttributes<HTMLHeadingElem
 }
 
 export function MotionHeading({ as = 'h2', text, align = 'left', className, ...props }: MotionHeadingProps) {
-  const reveal = useAnimatedReveal();
   const Heading = HeadingByTag[as];
   const words = text.trim().split(/\s+/);
 
   return (
     <Heading
-      ref={reveal.ref}
       className={cn('motion-heading', align === 'center' && 'mx-auto text-center', className)}
-      data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
-      initial="hidden"
-      animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
-      variants={lineRevealVariants}
+      data-reveal
+      suppressHydrationWarning
       aria-label={text}
       {...props}
     >
@@ -42,7 +35,7 @@ export function MotionHeading({ as = 'h2', text, align = 'left', className, ...p
             style={
               {
                 marginRight: index === words.length - 1 ? 0 : '0.22em',
-                '--word-delay': `${index * 0.05}s`,
+                '--word-delay': `${index * 0.028}s`,
               } as React.CSSProperties
             }
           >

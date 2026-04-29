@@ -1,7 +1,5 @@
 ---
 import '../styles/globals.css';
-import interDisplay700Url from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
-import inter400Url from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 import { Footer } from '../components/layout/Footer';
 import { ScrollProgressBar } from '../components/layout/ScrollProgressBar';
 import NavBar from '../components/layout/NavBar.astro';
@@ -59,8 +57,6 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="preload" href={interDisplay700Url} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={inter400Url} as="font" type="font/woff2" crossorigin />
 
     <title>{resolvedTitle}</title>
     <meta name="description" content={resolvedDescription} />
@@ -91,7 +87,6 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
             html.dataset.motionReduced = 'true';
           } else {
             html.dataset.motionActive = 'true';
-            html.dataset.motionLoading = 'true';
           }
 
           const boot = () => {
@@ -101,12 +96,17 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
                 return;
               }
               if (link.getAttribute('href') === '/start-a-project' || link.getAttribute('href') === '/start') return;
+              if (link.closest('astro-island')) return;
               if (link.closest('.site-logo')) return;
               if (link.querySelector('img, svg')) return;
               link.classList.add('motion-link-accent');
             };
 
-            Array.from(document.querySelectorAll('a[href]')).forEach(markLink);
+            try {
+              Array.from(document.querySelectorAll('a[href]')).forEach(markLink);
+            } catch {
+              // Link accents are decorative; never block content reveal.
+            }
 
             const observeReveal = (selector, options = {}) => {
               const targets = Array.from(document.querySelectorAll(selector)).filter((el) => {
@@ -117,6 +117,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
 
               if (!targets.length) return () => undefined;
 
+              html.dataset.motionReady = 'true';
               const show = (el) => {
                 if (el.hasAttribute('data-reveal')) {
                   el.setAttribute('data-reveal-state', 'visible');
@@ -141,14 +142,37 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
                   });
                 },
                 {
-                  threshold: 0.15,
-                  rootMargin: '-30% 0px -60% 0px',
+                  threshold: 0.08,
+                  rootMargin: '0px 0px -12% 0px',
                   ...options,
                 }
               );
 
               targets.forEach((el) => observer.observe(el));
-              return () => observer.disconnect();
+              window.requestAnimationFrame(() => {
+                targets.forEach((el) => {
+                  if (!(el instanceof HTMLElement) || el.getAttribute('data-motion-visible') === 'true') return;
+                  const rect = el.getBoundingClientRect();
+                  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                  if (rect.top < viewportHeight * 0.92 && rect.bottom > viewportHeight * 0.02) {
+                    show(el);
+                    observer.unobserve(el);
+                  }
+                });
+              });
+              const fallback = window.setTimeout(() => {
+                targets.forEach((el) => {
+                  if (el instanceof HTMLElement && el.getAttribute('data-motion-visible') !== 'true') {
+                    show(el);
+                  }
+                });
+                observer.disconnect();
+              }, 1800);
+
+              return () => {
+                window.clearTimeout(fallback);
+                observer.disconnect();
+              };
             };
 
           observeReveal('[data-reveal], .section-block');
@@ -299,36 +323,8 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
               window.requestAnimationFrame(animateCursor);
             }
 
-            const clearLeaving = () => {
-              delete html.dataset.motionLeaving;
-            };
-
-            window.addEventListener('pageshow', clearLeaving);
-            window.addEventListener('pagehide', clearLeaving);
-
-            document.addEventListener('click', (event) => {
-              if (reduced || !(event.target instanceof Element)) return;
-              if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-              const link = event.target.closest('a[href]');
-              if (!(link instanceof HTMLAnchorElement)) return;
-              if (link.target || link.hasAttribute('download')) return;
-
-              const url = new URL(link.href, window.location.href);
-              if (url.origin !== window.location.origin) return;
-              if (url.pathname === window.location.pathname && url.hash) return;
-
-              event.preventDefault();
-              html.dataset.motionLeaving = 'true';
-              window.setTimeout(() => {
-                window.location.href = link.href;
-              }, 300);
-            });
-
             window.requestAnimationFrame(() => {
-              if (!reduced) {
-                delete html.dataset.motionLoading;
-              }
+              html.dataset.motionBooted = 'true';
             });
           };
 

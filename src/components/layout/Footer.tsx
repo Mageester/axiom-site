@@ -28,10 +28,10 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
     'motion-link-accent min-h-11 text-[16px] leading-[1.7] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]';
 
   return (
-    <footer className="relative overflow-hidden border-t border-[color:var(--hairline)] px-6 py-20 md:px-12">
+    <footer className="site-footer relative overflow-hidden border-t border-[color:var(--hairline)] px-6 py-20 md:px-12">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,var(--accent-surface),transparent_34%)] opacity-70" />
       <div className="axiom-container grid gap-12 md:grid-cols-2 xl:grid-cols-4">
-        <div className="space-y-6" data-reveal style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
+        <div className="footer-column space-y-6" style={{ '--footer-delay': '0ms' } as React.CSSProperties}>
           <a href="/" className="inline-flex items-center" aria-label="Axiom Infrastructure home">
             <img
               src="/axiomtransparentlogo.webp"
@@ -49,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
           <p className="text-[14px] leading-[1.6] text-[var(--text-muted)]">Copyright {year} Axiom Infrastructure.</p>
         </div>
 
-        <div className="space-y-4" data-reveal style={{ '--reveal-delay': '80ms' } as React.CSSProperties}>
+        <div className="footer-column space-y-4" style={{ '--footer-delay': '60ms' } as React.CSSProperties}>
           <Eyebrow>Pages</Eyebrow>
           <ul className="space-y-3">
             {PAGES.map((link) => (
@@ -68,7 +68,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
           </ul>
         </div>
 
-        <div className="space-y-4" data-reveal style={{ '--reveal-delay': '160ms' } as React.CSSProperties}>
+        <div className="footer-column space-y-4" style={{ '--footer-delay': '120ms' } as React.CSSProperties}>
           <Eyebrow>Contact</Eyebrow>
           <ul className="space-y-3">
             <li>
@@ -89,7 +89,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
           </ul>
         </div>
 
-        <div className="space-y-4" data-reveal style={{ '--reveal-delay': '240ms' } as React.CSSProperties}>
+        <div className="footer-column space-y-4" style={{ '--footer-delay': '180ms' } as React.CSSProperties}>
           <Eyebrow>Legal</Eyebrow>
           <ul className="space-y-3">
             {LEGAL.map((link) => (

@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { AnimatePresence, m, useScroll, useTransform } from 'framer-motion';
-import useAnimatedReveal from '../../hooks/useAnimatedReveal';
+import { AnimatePresence, m } from 'framer-motion';
 import { cn } from '../../lib/utils';
-import { fadeUpVariants, staggerChildren } from './variants';
 import type { ResponsiveSource } from '../../lib/responsiveImages';
 
 type Build = {
@@ -29,13 +27,6 @@ export interface WorkShowcaseProps {
 }
 
 function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' | 'b' | 'c'; index: number }) {
-  const mediaRef = React.useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: mediaRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ['5%', '-5%']);
   const motionWrapClass =
     styleType === 'b'
       ? 'relative overflow-hidden rounded-[24px]'
@@ -44,7 +35,7 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
         : 'relative overflow-hidden rounded-[24px]';
 
   return (
-    <div ref={mediaRef} className={motionWrapClass}>
+    <div className={motionWrapClass}>
       {styleType === 'c' ? (
         <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-[24px] border border-[color:var(--accent-border)] bg-[rgba(255,255,255,0.02)]" aria-hidden="true" />
       ) : null}
@@ -54,9 +45,8 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
           'relative transform-gpu overflow-hidden rounded-[24px]',
           styleType === 'c' && 'border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-2'
         )}
-        style={styleType === 'b' ? { y: parallaxY } : undefined}
         whileHover={{ scale: 1.04 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.42, ease: [0.33, 1, 0.68, 1] }}
       >
         <picture className="block h-full w-full overflow-hidden rounded-[20px]">
           <source type="image/avif" srcSet={build.image.avifSrcSet} />
@@ -84,14 +74,13 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
 }
 
 export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
-  const reveal = useAnimatedReveal();
   const [activeFilter, setActiveFilter] = React.useState('all');
 
   const visibleBuilds = activeFilter === 'all' ? builds : builds.filter((build) => build.category === activeFilter);
 
   return (
-    <div ref={reveal.ref} className="space-y-8 md:space-y-10">
-      <div className="relative mb-8 flex flex-wrap items-center gap-x-6 gap-y-3 md:mb-10">
+    <div className="space-y-8 md:space-y-10">
+      <div className="relative mb-8 flex flex-wrap items-center gap-x-6 gap-y-3 md:mb-10" data-reveal suppressHydrationWarning>
         {filters.map((filter) => {
           const isActive = filter.value === activeFilter;
 
@@ -116,13 +105,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
         })}
       </div>
 
-      <m.div
-        className="motion-surface grid gap-8 md:gap-10"
-        data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
-        initial="hidden"
-        animate={reveal.shouldAnimate ? 'visible' : 'hidden'}
-        variants={staggerChildren}
-      >
+      <div className="grid gap-8 md:gap-10">
         <AnimatePresence initial={false}>
           {visibleBuilds.map((build, index) => {
             const styleType = index % 3 === 0 ? 'a' : index % 3 === 1 ? 'b' : 'c';
@@ -133,8 +116,8 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                 <m.article
                   key={build.title}
                   className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
-                  data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
-                  variants={fadeUpVariants}
+                  layout
+                  transition={{ duration: 0.28, ease: [0.33, 1, 0.68, 1] }}
                 >
                   <div className="relative">
                     <WorkImage build={build} styleType={styleType} index={index} />
@@ -153,7 +136,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                           href={build.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="mt-4 inline-flex min-h-11 items-center text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
+                          className="motion-link-accent mt-4 inline-flex min-h-11 items-center text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
                         >
                           View demo
                         </a>
@@ -188,8 +171,8 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                 <m.article
                   key={build.title}
                   className="motion-surface premium-card group grid gap-0 overflow-visible rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
-                  data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
-                  variants={fadeUpVariants}
+                  layout
+                  transition={{ duration: 0.28, ease: [0.33, 1, 0.68, 1] }}
                 >
                   <div className={`${imageFirst ? '' : 'lg:order-2'}`}>
                     <WorkImage build={build} styleType={styleType} index={index} />
@@ -218,7 +201,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                       href={build.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-6 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
+                      className="motion-link-accent mt-6 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
                     >
                       View demo
                     </a>
@@ -231,8 +214,8 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
               <m.article
                 key={build.title}
                 className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
-                data-motion-visible={reveal.shouldAnimate ? 'true' : undefined}
-                variants={fadeUpVariants}
+                layout
+                transition={{ duration: 0.28, ease: [0.33, 1, 0.68, 1] }}
               >
                 <div className={`grid gap-0 lg:grid-cols-2`}>
                   <div className={`${imageFirst ? '' : 'lg:order-2'}`}>
@@ -264,7 +247,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                       href={build.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-7 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
+                      className="motion-link-accent mt-7 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
                     >
                       View demo
                     </a>
@@ -274,7 +257,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
             );
           })}
         </AnimatePresence>
-      </m.div>
+      </div>
     </div>
   );
 }
