@@ -2,7 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { FadeIn } from '../components/ui/FadeIn';
-import { SEO_ROUTES } from '../lib/seo';
+import { SEO_ROUTES, PROCESS_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
@@ -60,7 +60,12 @@ const launchChecklist = [
 ] as const;
 ---
 
-<SiteLayout title={SEO_ROUTES.process.title} description={SEO_ROUTES.process.description} canonicalPath="/process">
+<SiteLayout
+  title={SEO_ROUTES.process.title}
+  description={SEO_ROUTES.process.description}
+  canonicalPath="/process"
+  schema={[PROCESS_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Process', url: `${SITE_URL}/process` }])]}
+>
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
     <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="max-w-3xl">

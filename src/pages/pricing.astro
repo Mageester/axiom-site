@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { SEO_ROUTES, PRICING_JSON_LD } from '../lib/seo';
+import { SEO_ROUTES, PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
 import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -167,7 +167,12 @@ const faqItems = [
 ] as const;
 ---
 
-<SiteLayout title={SEO_ROUTES.pricing.title} description={SEO_ROUTES.pricing.description} canonicalPath="/pricing" schema={PRICING_JSON_LD}>
+<SiteLayout
+  title={SEO_ROUTES.pricing.title}
+  description={SEO_ROUTES.pricing.description}
+  canonicalPath="/pricing"
+  schema={[PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Pricing', url: `${SITE_URL}/pricing` }])]}
+>
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
     <section class="pricing-hero axiom-container pt-28 md:pt-36">
       <FadeIn client:load className="max-w-3xl">

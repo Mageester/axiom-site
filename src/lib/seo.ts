@@ -25,14 +25,32 @@ export const toCanonicalUrl = (canonicalPath?: string) => {
   return new URL(canonicalPath, SITE_URL).toString();
 };
 
+export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    item: item.url,
+  })),
+});
+
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: SITE_NAME,
   url: SITE_URL,
+  logo: `${SITE_URL}/axiomtransparentlogo.webp`,
   email: SITE_EMAIL,
   telephone: '(226) 753-1833',
   description: SITE_TAGLINE,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Kitchener',
+    addressRegion: 'ON',
+    addressCountry: 'CA',
+  },
 } as const;
 
 export const LOCAL_BUSINESS_SCHEMA = ORGANIZATION_SCHEMA;
@@ -42,6 +60,7 @@ export const WEBSITE_SCHEMA = {
   '@type': 'WebSite',
   name: SITE_NAME,
   url: SITE_URL,
+  description: SITE_TAGLINE,
 } as const;
 
 export const HOME_JSON_LD = {
@@ -50,11 +69,20 @@ export const HOME_JSON_LD = {
   additionalType: 'https://schema.org/ProfessionalService',
   name: SITE_NAME,
   url: 'https://getaxiom.ca/',
+  logo: 'https://getaxiom.ca/axiomtransparentlogo.webp',
   image: 'https://getaxiom.ca/og-image.png',
-  description: 'Custom web development, AI-enabled digital systems, and digital infrastructure for established businesses across Kitchener-Waterloo, Cambridge, and Guelph.',
+  description:
+    'Custom web development and conversion-focused websites for established businesses across Kitchener-Waterloo, Cambridge, and Guelph. Sites built in 14 days, starting at $0 down.',
   email: SITE_EMAIL,
   telephone: '+1-226-753-1833',
+  priceRange: '$$',
   foundingDate: '2025',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Kitchener',
+    addressRegion: 'ON',
+    addressCountry: 'CA',
+  },
   numberOfEmployees: {
     '@type': 'QuantitativeValue',
     value: 2,
@@ -71,15 +99,18 @@ export const HOME_JSON_LD = {
   ],
   serviceType: [
     'Custom web development',
-    'AI-enabled web systems',
-    'Digital infrastructure',
+    'Conversion-focused web design',
+    'Business website design',
+    'Website redesign',
+    'Monthly website subscription',
+    'Website performance optimization',
   ],
   knowsAbout: [
     'Custom websites',
-    'AI-enabled web systems',
-    'Business process automation',
-    'Digital infrastructure',
-    'Web design',
+    'Core Web Vitals optimization',
+    'Conversion-focused web design',
+    'Business website design',
+    'Web design Kitchener-Waterloo',
   ],
   contactPoint: {
     '@type': 'ContactPoint',
@@ -96,22 +127,36 @@ export const HOME_JSON_LD = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Custom Web Development',
+          name: 'Monthly Website Subscription',
+          description: 'Custom website with hosting, ongoing edits, and support. From $150/mo.',
+        },
+        price: '150',
+        priceCurrency: 'CAD',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: '150',
+          priceCurrency: 'CAD',
+          billingDuration: 'P1M',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'AI-Enabled Web Systems',
+          name: 'One-Time Website Ownership',
+          description: 'Full custom website with complete code handoff at launch. From $3,500.',
         },
+        price: '3500',
+        priceCurrency: 'CAD',
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Digital Infrastructure',
+          name: 'E-commerce & Website Rebuilds',
+          description: 'Custom scoped pricing for online stores and larger rebuilds.',
         },
+        priceCurrency: 'CAD',
       },
     ],
   },
@@ -120,27 +165,108 @@ export const HOME_JSON_LD = {
 export const PRICING_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Web Design',
+  name: 'Custom Web Design & Development',
   provider: ORGANIZATION_SCHEMA,
+  url: 'https://getaxiom.ca/pricing',
+  areaServed: 'Waterloo Region, Ontario',
   offers: [
     {
       '@type': 'Offer',
-      name: 'Subscription',
-      description: 'Starts at a monthly investment with hosting and support included',
+      name: 'Monthly Website Subscription',
+      description:
+        'Custom website with hosting, ongoing edits, and support included. Full ownership available at month 12.',
       priceCurrency: 'CAD',
+      price: '150',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: '150',
+        priceCurrency: 'CAD',
+        billingDuration: 'P1M',
+      },
     },
     {
       '@type': 'Offer',
-      name: 'One-time ownership',
-      description: 'Starts at a scoped ownership investment with full handoff at launch',
+      name: 'One-Time Website Ownership',
+      description: 'Full custom website with complete code handoff at launch. Hosting scoped separately.',
       priceCurrency: 'CAD',
+      price: '3500',
     },
     {
       '@type': 'Offer',
-      name: 'E-commerce / rebuilds',
-      price: '6500',
-      description: 'Lump sum only',
+      name: 'E-commerce & Website Rebuilds',
+      description: 'Custom scoped pricing for online stores and larger rebuilds.',
       priceCurrency: 'CAD',
+    },
+  ],
+} as const;
+
+export const PRICING_FAQ_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Why lead with monthly pricing?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most businesses do not want a $5K+ hit before they see results. Monthly lets you start for $0 down, get the site live, and pay as it earns.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is included in the monthly plan?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Up to 5 pages, hosting, ongoing edits, and priority support. Full ownership transfers at month 12 if you want it.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What if I want ownership instead?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Pick the one-time ownership path. One payment from $3,500, full code handoff at launch, hosting scoped separately if you need it.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does hosting work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Monthly plans include hosting. Ownership clients can let us host it or move it to their own provider - either works.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What about e-commerce?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Stores and large rebuilds get a custom quote. Scope covers setup, migration, and integrations. One lump sum, no monthly.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How are revisions handled?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Three rounds per build. Most projects do not use all three. Monthly clients get ongoing edits after launch.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I edit the site myself?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. We build so basic text, photo, and page edits are easy to do without breaking anything.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What makes Axiom different?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Fast sites, real pricing, and support that does not stop at launch. 14 days to live. No 60-day Slack silences.',
+      },
     },
   ],
 } as const;
@@ -148,84 +274,144 @@ export const PRICING_JSON_LD = {
 export const ABOUT_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
+  url: 'https://getaxiom.ca/about',
+  name: 'About Axiom Infrastructure',
+  description:
+    'Two operators. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
   mainEntity: ORGANIZATION_SCHEMA,
+} as const;
+
+export const PROCESS_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How Axiom Builds a Website',
+  description: 'Fourteen days from first call to launch. Four stages: Review, Scope, Build, and Launch. Monthly clients keep support after the site goes live.',
+  totalTime: 'P14D',
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Day 1 – Review',
+      text: 'We audit the current site, the offer, and the points where you are losing trust. Then we decide what has to change first.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Day 3 – Scope',
+      text: 'We lock the pages, the call paths, and the priorities before design starts. Decisions happen here, not mid-build.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Day 7 – Build',
+      text: 'We design, write, and test the full site. Layout and flow stay simple enough to ship clean.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Day 14 – Launch',
+      text: 'We run launch checks, connect the domain, and hand over a live site. Monthly clients keep support from here on.',
+    },
+  ],
+} as const;
+
+export const WORK_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Axiom Infrastructure – Web Design Portfolio',
+  url: 'https://getaxiom.ca/work',
+  description:
+    'Concept builds across legal, medical, trades, food service, and retail. Each one shows how a typical business site should be structured to convert visitors to booked calls.',
+  provider: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+  },
 } as const;
 
 export const SEO_ROUTES = {
   home: {
-    title: 'Custom Web Development | Kitchener-Waterloo | Axiom Infrastructure',
-    description: 'Axiom Infrastructure designs custom websites and AI-enabled digital systems for established businesses across Kitchener-Waterloo, Cambridge, and Guelph.',
+    title: 'Custom Web Development | KW Region | Axiom Infrastructure',
+    description:
+      'Axiom builds custom websites for businesses in Kitchener-Waterloo and across Canada. Sites launch in 14 days, start at $0 down, and are verified against Core Web Vitals.',
     canonicalPath: '/',
   },
   work: {
-    title: 'Selected Work',
-    description: 'Concept builds showing how Axiom structures clearer first impressions, faster decisions, and ongoing support.',
+    title: 'Web Design Portfolio – Concept Builds | Axiom Infrastructure',
+    description:
+      'Concept builds across legal, medical, trades, and retail. See how Axiom structures sites that load fast and convert visitors to booked calls.',
     canonicalPath: '/work',
   },
   concepts: {
-    title: 'Concept Projects',
+    title: 'Concept Projects | Axiom Infrastructure',
     description: 'Concept work exploring structure, hierarchy, and conversion for future builds.',
     canonicalPath: '/work',
   },
   pricing: {
-    title: 'Pricing',
-    description: 'Subscription-first pricing for businesses that want a premium web partner, a low-friction start, and a clear ownership path.',
+    title: 'Website Pricing | Monthly & One-Time | Axiom Infrastructure',
+    description:
+      'Custom website pricing with no surprises. Monthly from $150 with hosting and support included. One-time ownership from $3,500. No sales call required.',
     canonicalPath: '/pricing',
   },
   services: {
-    title: 'Services',
-    description: 'Web design and development services designed around clarity, trust, and conversion.',
+    title: 'Web Design Services | Axiom Infrastructure',
+    description:
+      'Custom web design and development services built around clarity, trust, and conversion. Monthly or one-time ownership.',
     canonicalPath: '/pricing',
   },
   about: {
-    title: 'About',
-    description: 'Axiom Infrastructure serves established businesses that want a clearer first impression and ongoing support after launch.',
+    title: 'About Axiom Infrastructure | Custom Web Design Studio',
+    description:
+      'Two operators. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
     canonicalPath: '/about',
   },
   approach: {
-    title: 'Approach',
+    title: 'Our Approach | Axiom Infrastructure',
     description: 'A clear process. Tight hierarchy. Fewer decisions. Better outcomes.',
     canonicalPath: '/about',
   },
   process: {
-    title: 'Process',
-    description: 'A subscription-first process from discovery to launch, with support that continues after the site goes live.',
+    title: 'Our Web Design Process | 14 Days to Launch | Axiom Infrastructure',
+    description:
+      'Four stages. Fourteen days from first call to launch. Monthly clients keep support after the site goes live. No drift, no surprises.',
     canonicalPath: '/process',
   },
   start: {
-    title: 'Start a Project',
-    description: 'Share a project brief for monthly or one-time website work. We reply with a clear next step.',
+    title: 'Start a Project | Axiom Infrastructure',
+    description:
+      'Share a project brief for monthly or one-time website work. We reply with a clear next step within one business day.',
     canonicalPath: '/start',
   },
   startProject: {
-    title: 'Start a Project',
-    description: 'Submit a project brief for a monthly or one-time website build. We reply with a clear next step.',
+    title: 'Start a Project | Axiom Infrastructure',
+    description:
+      'Submit a project brief for a monthly or one-time website build. We reply with a clear next step within one business day.',
     canonicalPath: '/start-a-project',
   },
   audit: {
-    title: 'Website Audit',
+    title: 'Website Audit | Axiom Infrastructure',
     description: 'A focused review of clarity, structure, and conversion opportunities.',
     canonicalPath: '/admin/audit',
     noIndex: true,
   },
   privacy: {
-    title: 'Privacy Policy',
+    title: 'Privacy Policy | Axiom Infrastructure',
     description: 'Privacy policy for the Axiom website and contact forms.',
     canonicalPath: '/privacy',
   },
   terms: {
-    title: 'Terms of Service',
+    title: 'Terms of Service | Axiom Infrastructure',
     description: 'Terms for using the Axiom website and services.',
     canonicalPath: '/terms',
   },
   contact: {
-    title: 'Contact',
-    description: 'Use this form for a quick question or short note. For project work, use the project intake page.',
+    title: 'Contact | Axiom Infrastructure',
+    description: 'Send a quick question or short note. For project work, use the project intake page.',
     canonicalPath: '/contact',
   },
   notFound: {
-    title: 'Page not found',
-    description: "Use the main links to continue, or head back home.",
+    title: 'Page Not Found | Axiom Infrastructure',
+    description: 'Use the main links to continue, or head back home.',
     canonicalPath: '/404',
     noIndex: true,
   },

@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { SEO_ROUTES } from '../lib/seo';
+import { SEO_ROUTES, WORK_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
@@ -108,7 +108,12 @@ const workFilters = [
 ] as const;
 ---
 
-<SiteLayout title={SEO_ROUTES.work.title} description={SEO_ROUTES.work.description} canonicalPath="/work">
+<SiteLayout
+  title={SEO_ROUTES.work.title}
+  description={SEO_ROUTES.work.description}
+  canonicalPath="/work"
+  schema={[WORK_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Work', url: `${SITE_URL}/work` }])]}
+>
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
     <section class="axiom-container pt-24 md:pt-32">
       <FadeIn client:load className="max-w-3xl">

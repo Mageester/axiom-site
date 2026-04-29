@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { SEO_ROUTES, ABOUT_JSON_LD } from '../lib/seo';
+import { SEO_ROUTES, ABOUT_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
 import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -70,7 +70,12 @@ const principles = [
 ] as const;
 ---
 
-<SiteLayout title={SEO_ROUTES.about.title} description={SEO_ROUTES.about.description} canonicalPath="/about" schema={ABOUT_JSON_LD}>
+<SiteLayout
+  title={SEO_ROUTES.about.title}
+  description={SEO_ROUTES.about.description}
+  canonicalPath="/about"
+  schema={[ABOUT_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'About', url: `${SITE_URL}/about` }])]}
+>
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
     <section class="axiom-container pt-24 md:pt-32">
       <div class="max-w-3xl">

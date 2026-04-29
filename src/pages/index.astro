@@ -2,7 +2,7 @@
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { HOME_JSON_LD } from '../lib/seo';
+import { HOME_JSON_LD, WEBSITE_SCHEMA, SEO_ROUTES, breadcrumbSchema } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
@@ -141,11 +141,11 @@ const services = [
 ---
 
 <SiteLayout
-  title="Custom Web Development | Kitchener-Waterloo | Axiom Infrastructure"
-  description="Axiom Infrastructure designs custom websites and AI-enabled digital systems for established businesses across Kitchener-Waterloo, Cambridge, and Guelph."
+  title={SEO_ROUTES.home.title}
+  description={SEO_ROUTES.home.description}
   canonicalPath="/"
-  ogImageAlt="Axiom Infrastructure homepage - custom web development in Kitchener-Waterloo."
-  schema={HOME_JSON_LD}
+  ogImageAlt="Axiom Infrastructure homepage – custom web development in Kitchener-Waterloo."
+  schema={[HOME_JSON_LD, WEBSITE_SCHEMA]}
 >
   <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32">
     <section class="hero-shell relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-40">
