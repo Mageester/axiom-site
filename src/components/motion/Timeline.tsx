@@ -15,11 +15,12 @@ export interface TimelineProps {
 
 export function Timeline({ steps, className, mobileVertical = true }: TimelineProps) {
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn('relative overflow-visible pt-3 md:pt-5', className)}>
       <div
         aria-hidden="true"
         className="timeline-rail absolute left-0 top-6 hidden h-px w-full origin-left bg-[linear-gradient(90deg,rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.12),rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.58),rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.12))] md:block"
         data-reveal
+        data-motion="timeline"
         suppressHydrationWarning
       />
       {mobileVertical ? (
@@ -27,6 +28,7 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
           aria-hidden="true"
           className="timeline-rail timeline-rail-vertical absolute left-6 top-0 h-full w-px origin-top bg-[color:var(--accent-solid)]/40 md:hidden"
           data-reveal
+          data-motion="timeline"
           suppressHydrationWarning
         />
       ) : null}
@@ -37,8 +39,14 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
             key={`${step.kicker}-${index}`}
             className="motion-surface premium-card group relative rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 shadow-[var(--shadow-card)] backdrop-blur-[8px]"
             data-reveal
+            data-motion="timeline"
             suppressHydrationWarning
-            style={{ '--reveal-delay': `${Math.min(index * 65, 260)}ms` } as React.CSSProperties}
+            style={
+              {
+                '--reveal-delay': `${Math.min(index * 85, 340)}ms`,
+                '--reveal-x': index % 2 === 0 ? '-8px' : '8px',
+              } as React.CSSProperties
+            }
           >
             <div className="flex items-center gap-3">
               <span className="flex h-11 min-w-[3.25rem] items-center justify-center rounded-full border border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3)] bg-[color:rgba(255,255,255,0.03)] px-2 font-mono text-[0.68rem] font-medium uppercase tracking-[0.06em] text-[var(--accent-solid)] transition-[background-color,border-color,box-shadow] duration-[var(--duration-medium)] ease-[var(--ease-premium)] group-hover:border-[color:var(--accent-border-strong)] group-hover:bg-[color:var(--accent-surface)] group-hover:shadow-[0_0_0_5px_var(--accent-ring-soft)]">

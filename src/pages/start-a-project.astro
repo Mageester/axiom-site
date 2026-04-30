@@ -18,7 +18,7 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
   <main id="main-content" tabindex="-1" class="-mt-28 pb-24 md:-mt-32 md:pb-32">
     <section class="axiom-container pt-16 md:pt-24">
       <div class="mx-auto max-w-5xl">
-        <FadeIn client:load className="mx-auto max-w-3xl text-center">
+        <FadeIn client:load motion="cinematic" className="mx-auto max-w-3xl text-center">
           <Eyebrow>START A PROJECT</Eyebrow>
           <SectionDivider client:load className="mt-6" />
           <MotionHeading client:load as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4" />
@@ -36,7 +36,9 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
         </FadeIn>
 
         <div class="mt-10 md:mt-12">
-          <ProjectIntakeWizard client:load sourcePath={sourcePath} />
+          <div class="form-cinematic-shell mx-auto w-full max-w-3xl" data-reveal data-motion="depth" style="--reveal-delay: 180ms;">
+            <ProjectIntakeWizard client:load sourcePath={sourcePath} />
+          </div>
         </div>
       </div>
     </section>

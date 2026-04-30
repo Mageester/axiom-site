@@ -23,6 +23,8 @@ export function MotionHeading({ as = 'h2', text, align = 'left', className, ...p
     <Heading
       className={cn('motion-heading', align === 'center' && 'mx-auto text-center', className)}
       data-reveal
+      data-motion="heading"
+      data-heading-level={as}
       suppressHydrationWarning
       aria-label={text}
       {...props}
@@ -35,7 +37,7 @@ export function MotionHeading({ as = 'h2', text, align = 'left', className, ...p
             style={
               {
                 marginRight: index === words.length - 1 ? 0 : '0.22em',
-                '--word-delay': `${index * 0.028}s`,
+                '--word-delay': `${index * (as === 'h1' ? 0.045 : 0.032)}s`,
               } as React.CSSProperties
             }
           >

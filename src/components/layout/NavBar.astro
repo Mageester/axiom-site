@@ -152,6 +152,25 @@ const ctaClasses =
     touch-action: manipulation;
   }
 
+  html[data-motion-active='true'] #site-header {
+    animation: nav-settle 720ms var(--ease-cinematic) 120ms both;
+  }
+
+  #nav-shell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #nav-shell::after {
+    content: '';
+    position: absolute;
+    inset: 0 18px auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+    opacity: 0.85;
+    pointer-events: none;
+  }
+
   #mobile-nav-panel {
     visibility: hidden;
     opacity: 0;
@@ -210,13 +229,27 @@ const ctaClasses =
     #mobile-nav-panel,
     .mobile-nav-link,
     #mobile-nav-panel.nav-open .mobile-nav-link,
+    #site-header,
     #nav-shell[data-scrolled] {
+      animation: none !important;
       transition: none !important;
       transform: none !important;
     }
 
     .mobile-nav-link {
       opacity: 1;
+    }
+  }
+
+  @keyframes nav-settle {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -10px, 0) scale(0.992);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
     }
   }
 </style>

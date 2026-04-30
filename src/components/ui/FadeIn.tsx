@@ -3,12 +3,14 @@ import { cn } from '../../lib/utils';
 
 type FadeInTag = 'div' | 'section' | 'article' | 'header' | 'figure' | 'li' | 'aside' | 'nav' | 'main';
 type FadeDirection = 'up' | 'down' | 'left' | 'right';
+type MotionRole = 'cinematic' | 'editorial' | 'depth' | 'system' | 'timeline' | 'cta' | 'legal';
 
 export interface FadeInProps extends React.HTMLAttributes<HTMLElement> {
   as?: FadeInTag;
   delay?: number;
   distance?: number;
   direction?: FadeDirection;
+  motion?: MotionRole;
 }
 
 const directionTransforms: Record<FadeDirection, { x?: number; y?: number }> = {
@@ -24,6 +26,7 @@ export const FadeIn: React.FC<FadeInProps> = ({
   delay = 0,
   distance = 12,
   direction = 'up',
+  motion = 'editorial',
   style,
   children,
   ...props
@@ -43,6 +46,7 @@ export const FadeIn: React.FC<FadeInProps> = ({
       ...props,
       className: cn('motion-surface', className),
       'data-reveal': true,
+      'data-motion': motion,
       suppressHydrationWarning: true,
       style: revealStyle,
     },

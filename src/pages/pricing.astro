@@ -175,7 +175,7 @@ const faqItems = [
 >
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
     <section class="pricing-hero axiom-container pt-28 md:pt-36">
-      <FadeIn client:load className="max-w-3xl">
+      <FadeIn client:load motion="cinematic" className="max-w-3xl">
         <Eyebrow>PRICING</Eyebrow>
         <SectionDivider client:load className="mt-6" />
         <MotionHeading client:load as="h1" text="Real pricing. No sales call required." className="mt-4" />
@@ -195,7 +195,8 @@ const faqItems = [
           {pricingTiers.map((tier, index) => (
             <FadeIn
               client:load
-              delay={Math.min(index * 100, 400)}
+              motion="system"
+              delay={Math.min(index * 80, 320)}
               as="div"
               id={tier.key === 'monthly' ? 'monthly-tier' : tier.key === 'ownership' ? 'ownership-tier' : tier.key === 'ecommerce' ? 'ecommerce-tier' : undefined}
               className="flex h-full shrink-0 basis-[84%] snap-start flex-col sm:basis-[68%] md:basis-[56%] lg:basis-auto lg:shrink"
@@ -266,7 +267,7 @@ const faqItems = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-          <FadeIn client:load className="max-w-3xl">
+          <FadeIn client:load motion="editorial" className="max-w-3xl">
           <Eyebrow>COMPARE THE PATHS</Eyebrow>
           <SectionDivider client:load className="mt-6" />
           <MotionHeading client:load as="h2" text="What each option includes." className="section-heading mt-4" />
@@ -277,7 +278,7 @@ const faqItems = [
 
         <div class="mt-8 grid gap-4 md:hidden">
           {mobileComparisonTiers.map((tier, index) => (
-            <FadeIn client:load delay={Math.min(index * 100, 400)} as="div">
+            <FadeIn client:load motion="system" delay={Math.min(index * 80, 320)} as="div">
               <Card
                 padding="none"
                 className={`overflow-hidden ${tier.highlighted ? 'border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[0_0_0_1px_var(--accent-shadow-medium)]' : 'bg-[var(--surface-1)]'}`}
@@ -317,7 +318,7 @@ const faqItems = [
           ))}
         </div>
 
-        <FadeIn client:load as="div" className="pricing-table-shell mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
+        <FadeIn client:load as="div" motion="system" className="pricing-table-shell mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
           <table class="min-w-full border-collapse text-left">
             <thead class="bg-[color:var(--nav-panel-bg)]">
               <tr class="border-b border-[color:var(--hairline)]">
@@ -374,7 +375,7 @@ const faqItems = [
           </table>
         </div>
 
-        <FadeIn client:load as="div" className="mt-6">
+        <FadeIn client:load as="div" motion="editorial" className="mt-6">
           <Card className="border-[color:var(--hairline)] bg-[var(--surface-2)]">
             <p class="section-copy mx-auto max-w-4xl text-center md:text-[16px]">
               Monthly includes hosting, ongoing support, and edits. One-time ownership includes launch support, with hosting scoped separately if needed. E-commerce stays lump sum only.
@@ -386,13 +387,13 @@ const faqItems = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn client:load className="max-w-3xl">
+        <FadeIn client:load motion="editorial" className="max-w-3xl">
           <Eyebrow>FAQ</Eyebrow>
           <SectionDivider client:load className="mt-6" />
           <MotionHeading client:load as="h2" text="Answers before the call." className="section-heading mt-4" />
         </FadeIn>
 
-        <FadeIn client:load className="mt-8">
+        <FadeIn client:load motion="system" className="mt-8">
           <div class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)]">
             {faqItems.map((item, index) => (
               <details class="group" data-faq>
@@ -427,12 +428,12 @@ const faqItems = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn client:load className="max-w-3xl">
+        <FadeIn client:load motion="editorial" className="max-w-3xl">
           <Eyebrow>QUICK GUIDE</Eyebrow>
         </FadeIn>
 
         <div class="mt-8 grid gap-4 lg:grid-cols-2">
-          <FadeIn client:load as="div">
+          <FadeIn client:load motion="system" as="div">
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
@@ -447,7 +448,7 @@ const faqItems = [
             </Card>
           </FadeIn>
 
-          <FadeIn client:load delay={100} as="div">
+          <FadeIn client:load motion="system" delay={100} as="div">
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
@@ -467,7 +468,7 @@ const faqItems = [
 
     <section class="page-section-tight section-shell">
       <div class="axiom-container">
-        <FadeIn client:load as="div">
+        <FadeIn client:load as="div" motion="cta">
           <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
             <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
               <div class="max-w-3xl">

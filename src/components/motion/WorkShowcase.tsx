@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 import type { ResponsiveSource } from '../../lib/responsiveImages';
 
@@ -75,8 +75,27 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
 
 export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
   const [activeFilter, setActiveFilter] = React.useState('all');
+  const reducedMotion = useReducedMotion();
 
   const visibleBuilds = activeFilter === 'all' ? builds : builds.filter((build) => build.category === activeFilter);
+  const getArticleMotion = (styleType: 'a' | 'b' | 'c', index: number) => {
+    if (reducedMotion) return {};
+
+    const baseDelay = Math.min(index * 0.045, 0.24);
+    const initial =
+      styleType === 'b'
+        ? { opacity: 0, y: 18, scale: 0.988, filter: 'saturate(0.92)' }
+        : styleType === 'c'
+          ? { opacity: 0, x: index % 2 === 0 ? -18 : 18, scale: 0.992 }
+          : { opacity: 0, y: 16, scale: 0.985 };
+
+    return {
+      initial,
+      whileInView: { opacity: 1, x: 0, y: 0, scale: 1, filter: 'saturate(1)' },
+      viewport: { once: true, amount: 0.18, margin: '0px 0px -12% 0px' },
+      transition: { duration: styleType === 'b' ? 0.86 : 0.72, delay: baseDelay, ease: [0.16, 1, 0.3, 1] },
+    };
+  };
 
   return (
     <div className="space-y-8 md:space-y-10">
@@ -117,7 +136,10 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                   key={build.title}
                   className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
                   layout
-                  transition={{ duration: 0.28, ease: [0.33, 1, 0.68, 1] }}
+                  data-reveal
+                  data-motion="depth"
+                  suppressHydrationWarning
+                  {...getArticleMotion(styleType, index)}
                 >
                   <div className="relative">
                     <WorkImage build={build} styleType={styleType} index={index} />
@@ -172,7 +194,10 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                   key={build.title}
                   className="motion-surface premium-card group grid gap-0 overflow-visible rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
                   layout
-                  transition={{ duration: 0.28, ease: [0.33, 1, 0.68, 1] }}
+                  data-reveal
+                  data-motion="depth"
+                  suppressHydrationWarning
+                  {...getArticleMotion(styleType, index)}
                 >
                   <div className={`${imageFirst ? '' : 'lg:order-2'}`}>
                     <WorkImage build={build} styleType={styleType} index={index} />
@@ -215,7 +240,10 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                 key={build.title}
                 className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
                 layout
-                transition={{ duration: 0.28, ease: [0.33, 1, 0.68, 1] }}
+                data-reveal
+                data-motion="depth"
+                suppressHydrationWarning
+                {...getArticleMotion(styleType, index)}
               >
                 <div className={`grid gap-0 lg:grid-cols-2`}>
                   <div className={`${imageFirst ? '' : 'lg:order-2'}`}>

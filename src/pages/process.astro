@@ -68,7 +68,7 @@ const launchChecklist = [
 >
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
     <section class="axiom-container pt-24 md:pt-32">
-      <FadeIn client:load className="max-w-3xl">
+      <FadeIn client:load motion="cinematic" className="max-w-3xl">
         <Eyebrow>PROCESS</Eyebrow>
         <SectionDivider client:load className="mt-6" />
         <MotionHeading client:load as="h1" text="Four stages. Then ongoing support." className="mt-4" />
@@ -95,7 +95,7 @@ const launchChecklist = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn client:load className="max-w-3xl">
+        <FadeIn client:load motion="editorial" className="max-w-3xl">
           <Eyebrow>WHAT WE NEED FROM YOU</Eyebrow>
           <SectionDivider client:load className="mt-6" />
           <MotionHeading client:load as="h2" text="Four things from you. That's it." className="section-heading mt-4" />
@@ -103,7 +103,7 @@ const launchChecklist = [
 
         <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {launchChecklist.map((item, index) => (
-            <FadeIn client:load delay={index * 100} distance={20} style={{ transitionDuration: '600ms' }} as="div">
+            <FadeIn client:load motion="system" delay={index * 85} distance={16} style={{ transitionDuration: '600ms' }} as="div">
               <div class="premium-card h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
                 <p class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
                   <DrawIcon name="check" size={14} className="text-[var(--accent-solid)]" />
@@ -121,7 +121,7 @@ const launchChecklist = [
 
     <section class="page-section-tight section-shell">
       <div class="axiom-container grid gap-6 lg:grid-cols-2">
-        <FadeIn client:load as="div" direction="left">
+        <FadeIn client:load as="div" motion="cta" direction="left">
           <Card className="h-full p-0">
             <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>AFTER LAUNCH</Eyebrow>
@@ -135,7 +135,7 @@ const launchChecklist = [
           </Card>
         </FadeIn>
 
-        <FadeIn client:load as="div" direction="right">
+        <FadeIn client:load as="div" motion="cta" direction="right">
           <Card className="h-full p-0">
             <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>THE GUARANTEE</Eyebrow>
