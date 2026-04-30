@@ -169,12 +169,15 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
               });
               const fallback = window.setTimeout(() => {
                 targets.forEach((el) => {
-                  if (el instanceof HTMLElement && el.getAttribute('data-motion-visible') !== 'true') {
+                  if (!(el instanceof HTMLElement) || el.getAttribute('data-motion-visible') === 'true') return;
+                  const rect = el.getBoundingClientRect();
+                  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                  if (rect.top < viewportHeight * 1.1 && rect.bottom > viewportHeight * -0.1) {
                     show(el);
+                    observer.unobserve(el);
                   }
                 });
-                observer.disconnect();
-              }, 1800);
+              }, 2400);
 
               return () => {
                 window.clearTimeout(fallback);

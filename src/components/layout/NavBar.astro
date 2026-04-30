@@ -153,7 +153,7 @@ const ctaClasses =
   }
 
   html[data-motion-active='true'] #site-header {
-    animation: nav-settle 720ms var(--ease-cinematic) 120ms both;
+    animation: nav-settle 920ms var(--ease-cinematic) 140ms both;
   }
 
   #nav-shell {
@@ -198,12 +198,12 @@ const ctaClasses =
     opacity: 1;
     transform: translate3d(0, 0, 0);
     transition:
-      opacity 420ms var(--ease-premium) var(--nav-item-delay, 0ms),
-      transform 420ms var(--ease-premium) var(--nav-item-delay, 0ms);
+      opacity 520ms var(--ease-cinematic) var(--nav-item-delay, 0ms),
+      transform 520ms var(--ease-cinematic) var(--nav-item-delay, 0ms);
   }
 
   .bar {
-    transition: transform 200ms ease, opacity 200ms ease;
+    transition: transform 260ms var(--ease-premium-soft), opacity 220ms var(--ease-premium-soft);
   }
 
   #nav-toggle[aria-expanded="true"] .bar-top {

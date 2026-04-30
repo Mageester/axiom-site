@@ -116,20 +116,28 @@ const workFilters = [
 >
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
     <section class="axiom-container pt-24 md:pt-32">
-      <FadeIn client:load motion="cinematic" className="max-w-3xl">
-        <Eyebrow>WORK</Eyebrow>
-        <SectionDivider client:load className="mt-6" />
-        <MotionHeading client:load as="h1" text="Concept builds. Same standard. Every sector." className="mt-4" />
-        <p class="section-copy mt-5 md:text-[17px]">
-          These are concept builds, not live client work. Each one shows how we'd rebuild a typical site in that
-          industry - cleaner offer, faster load, and a path to booking that actually converts.
-        </p>
-        <div class="mt-7">
-          <Button asChild size="lg">
-            <a href={CTA_PATHS.startProject}>Start a project</a>
-          </Button>
-        </div>
-      </FadeIn>
+      <div class="max-w-3xl">
+        <FadeIn client:load motion="eyebrow">
+          <Eyebrow>WORK</Eyebrow>
+          <SectionDivider client:load className="mt-6" />
+        </FadeIn>
+        <FadeIn client:load motion="cinematic" delay={160}>
+          <MotionHeading client:load as="h1" text="Concept builds. Same standard. Every sector." className="mt-4" />
+        </FadeIn>
+        <FadeIn client:load motion="editorial" delay={420}>
+          <p class="section-copy mt-5 md:text-[17px]">
+            These are concept builds, not live client work. Each one shows how we'd rebuild a typical site in that
+            industry - cleaner offer, faster load, and a path to booking that actually converts.
+          </p>
+        </FadeIn>
+        <FadeIn client:load motion="cta" delay={640}>
+          <div class="mt-7">
+            <Button asChild size="lg">
+              <a href={CTA_PATHS.startProject}>Start a project</a>
+            </Button>
+          </div>
+        </FadeIn>
+      </div>
     </section>
 
     <section class="page-section section-shell">

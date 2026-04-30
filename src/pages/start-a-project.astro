@@ -18,25 +18,33 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
   <main id="main-content" tabindex="-1" class="-mt-28 pb-24 md:-mt-32 md:pb-32">
     <section class="axiom-container pt-16 md:pt-24">
       <div class="mx-auto max-w-5xl">
-        <FadeIn client:load motion="cinematic" className="mx-auto max-w-3xl text-center">
-          <Eyebrow>START A PROJECT</Eyebrow>
-          <SectionDivider client:load className="mt-6" />
-          <MotionHeading client:load as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4" />
-          <p class="section-copy mx-auto mt-5 max-w-2xl md:text-[17px]">
-            Five short steps. You'll get a clear reply from a real person, not a chatbot.
-          </p>
+        <div class="mx-auto max-w-3xl text-center">
+          <FadeIn client:load motion="eyebrow">
+            <Eyebrow>START A PROJECT</Eyebrow>
+            <SectionDivider client:load className="mt-6" />
+          </FadeIn>
+          <FadeIn client:load motion="cinematic" delay={160}>
+            <MotionHeading client:load as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4" />
+          </FadeIn>
+          <FadeIn client:load motion="editorial" delay={420}>
+            <p class="section-copy mx-auto mt-5 max-w-2xl md:text-[17px]">
+              Five short steps. You'll get a clear reply from a real person, not a chatbot.
+            </p>
+          </FadeIn>
 
-          <div class="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
-            <span>ABOUT 2 MINUTES</span>
-            <span aria-hidden="true" class="text-[var(--text-muted)]">&bull;</span>
-            <span>MONTHLY OR OWNERSHIP</span>
-            <span aria-hidden="true" class="text-[var(--text-muted)]">&bull;</span>
-            <span>REPLY WITHIN ONE BUSINESS DAY</span>
-          </div>
-        </FadeIn>
+          <FadeIn client:load motion="system" delay={600}>
+            <div class="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
+              <span>ABOUT 2 MINUTES</span>
+              <span aria-hidden="true" class="text-[var(--text-muted)]">&bull;</span>
+              <span>MONTHLY OR OWNERSHIP</span>
+              <span aria-hidden="true" class="text-[var(--text-muted)]">&bull;</span>
+              <span>REPLY WITHIN ONE BUSINESS DAY</span>
+            </div>
+          </FadeIn>
+        </div>
 
         <div class="mt-10 md:mt-12">
-          <div class="form-cinematic-shell mx-auto w-full max-w-3xl" data-reveal data-motion="depth" style="--reveal-delay: 180ms;">
+          <div class="form-cinematic-shell mx-auto w-full max-w-3xl" data-reveal data-motion="depth" style="--reveal-delay: 760ms;">
             <ProjectIntakeWizard client:load sourcePath={sourcePath} />
           </div>
         </div>
@@ -46,7 +54,7 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
 
   <style is:global>
     .project-intake-wizard [data-step-panel] {
-      animation: wizard-step-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+      animation: wizard-step-in 360ms var(--ease-premium-soft);
       transform-origin: top center;
     }
 

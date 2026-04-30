@@ -43,7 +43,7 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
             suppressHydrationWarning
             style={
               {
-                '--reveal-delay': `${Math.min(index * 85, 340)}ms`,
+                '--reveal-delay': `${Math.min(index * 140, 560)}ms`,
                 '--reveal-x': index % 2 === 0 ? '-8px' : '8px',
               } as React.CSSProperties
             }

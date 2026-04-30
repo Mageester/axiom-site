@@ -17,7 +17,7 @@ export function MotionQuote({ phrases, className, ...props }: MotionQuoteProps) 
         <span
           key={phrase}
           className={cn('quote-phrase mr-2 inline-block', index === 1 && 'relative inline-block text-[var(--accent-solid)]')}
-          style={{ '--word-delay': `${index * 0.08}s` } as React.CSSProperties}
+          style={{ '--word-delay': `${index * 0.14}s` } as React.CSSProperties}
         >
           <span>
             {phrase}

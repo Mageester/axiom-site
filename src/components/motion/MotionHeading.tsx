@@ -37,7 +37,7 @@ export function MotionHeading({ as = 'h2', text, align = 'left', className, ...p
             style={
               {
                 marginRight: index === words.length - 1 ? 0 : '0.22em',
-                '--word-delay': `${index * (as === 'h1' ? 0.045 : 0.032)}s`,
+                '--word-delay': `${index * (as === 'h1' ? 0.062 : 0.044)}s`,
               } as React.CSSProperties
             }
           >

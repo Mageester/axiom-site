@@ -79,21 +79,21 @@ const principles = [
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
     <section class="axiom-container pt-24 md:pt-32">
       <div class="max-w-3xl">
-        <FadeIn client:load motion="cinematic">
+        <FadeIn client:load motion="eyebrow">
           <Eyebrow>ABOUT</Eyebrow>
           <SectionDivider client:load className="mt-6" />
         </FadeIn>
-        <FadeIn client:load motion="cinematic" delay={120}>
+        <FadeIn client:load motion="cinematic" delay={160}>
           <MotionHeading client:load as="h1" text="We build sites that do the selling for you." className="mt-4 max-w-4xl" />
         </FadeIn>
-        <FadeIn client:load motion="editorial" delay={240}>
+        <FadeIn client:load motion="editorial" delay={420}>
           <p class="section-copy mt-5 md:text-[17px]">
             Axiom builds for established businesses across every sector - trades, medical, legal, food, retail,
             professional services. One thing in common: they want a site that books work, not one that just looks
             nice.
           </p>
         </FadeIn>
-        <FadeIn client:load motion="cta" delay={360} className="mt-7">
+        <FadeIn client:load motion="cta" delay={640} className="mt-7">
           <Button asChild size="lg">
             <a href={CTA_PATHS.startProject}>Start a project</a>
           </Button>
@@ -119,7 +119,7 @@ const principles = [
         <Card className="p-0">
           <div class="p-6 sm:p-7">
             {whyAxiom.map((item, index) => (
-              <FadeIn client:load as="div" motion="timeline" delay={Math.min(index * 90, 360)} className={`grid gap-4 py-5 first:pt-0 last:pb-0 sm:grid-cols-[4rem_minmax(0,1fr)] ${index > 0 ? 'border-t border-[color:var(--hairline)]' : ''}`}>
+              <FadeIn client:load as="div" motion="timeline" delay={Math.min(index * 140, 560)} className={`grid gap-4 py-5 first:pt-0 last:pb-0 sm:grid-cols-[4rem_minmax(0,1fr)] ${index > 0 ? 'border-t border-[color:var(--hairline)]' : ''}`}>
                 <div class="relative sm:pt-1">
                   <span
                     aria-hidden="true"
@@ -158,7 +158,7 @@ const principles = [
 
         <div class="mt-10 grid gap-5 lg:grid-cols-2">
           {team.map((member, index) => (
-            <FadeIn client:load motion="depth" delay={Math.min(index * 100, 400)}>
+            <FadeIn client:load motion="depth" delay={Math.min(index * 140, 560)}>
               <Card className="group rounded-2xl border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-8 transition-all duration-300 hover:border-[color:var(--hairline-strong)] hover:bg-[color:var(--surface-overlay-press)]">
                 <div class="flex h-full flex-col">
                   <div class="flex items-start gap-4">
@@ -225,7 +225,7 @@ const principles = [
 
         <div class="mt-10 grid gap-5 md:grid-cols-3">
           {principles.map((principle, index) => (
-            <FadeIn client:load motion="system" delay={Math.min(index * 85, 340)}>
+            <FadeIn client:load motion="system" delay={Math.min(index * 130, 520)}>
               <Card className="h-full p-0">
                 <div class="flex h-full flex-col p-6 sm:p-7">
                   <DrawIcon name={principle.icon} className="mb-4" />

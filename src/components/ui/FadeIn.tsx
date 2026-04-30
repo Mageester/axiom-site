@@ -3,7 +3,7 @@ import { cn } from '../../lib/utils';
 
 type FadeInTag = 'div' | 'section' | 'article' | 'header' | 'figure' | 'li' | 'aside' | 'nav' | 'main';
 type FadeDirection = 'up' | 'down' | 'left' | 'right';
-type MotionRole = 'cinematic' | 'editorial' | 'depth' | 'system' | 'timeline' | 'cta' | 'legal';
+type MotionRole = 'eyebrow' | 'cinematic' | 'editorial' | 'depth' | 'system' | 'timeline' | 'cta' | 'legal';
 
 export interface FadeInProps extends React.HTMLAttributes<HTMLElement> {
   as?: FadeInTag;
@@ -31,7 +31,7 @@ export const FadeIn: React.FC<FadeInProps> = ({
   children,
   ...props
 }) => {
-  const cappedDelay = Math.min(Math.max(delay, 0), 500);
+  const cappedDelay = Math.min(Math.max(delay, 0), 900);
   const transform = directionTransforms[direction];
   const revealStyle = {
     '--reveal-delay': `${cappedDelay}ms`,

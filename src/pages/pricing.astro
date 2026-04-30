@@ -175,18 +175,26 @@ const faqItems = [
 >
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
     <section class="pricing-hero axiom-container pt-28 md:pt-36">
-      <FadeIn client:load motion="cinematic" className="max-w-3xl">
-        <Eyebrow>PRICING</Eyebrow>
-        <SectionDivider client:load className="mt-6" />
-        <MotionHeading client:load as="h1" text="Real pricing. No sales call required." className="mt-4" />
-        <p class="section-copy mt-5 md:text-[17px]">
-          Most clients start monthly - $0 down, hosting and support included. If you'd rather own the site outright,
-          that option is $3,500 and up. Stores and large rebuilds get scoped separately.
-        </p>
-        <p class="mt-4 text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
-          Monthly is the default. Ownership and e-commerce stay available when they're the better fit.
-        </p>
-      </FadeIn>
+      <div class="max-w-3xl">
+        <FadeIn client:load motion="eyebrow">
+          <Eyebrow>PRICING</Eyebrow>
+          <SectionDivider client:load className="mt-6" />
+        </FadeIn>
+        <FadeIn client:load motion="cinematic" delay={160}>
+          <MotionHeading client:load as="h1" text="Real pricing. No sales call required." className="mt-4" />
+        </FadeIn>
+        <FadeIn client:load motion="editorial" delay={420}>
+          <p class="section-copy mt-5 md:text-[17px]">
+            Most clients start monthly - $0 down, hosting and support included. If you'd rather own the site outright,
+            that option is $3,500 and up. Stores and large rebuilds get scoped separately.
+          </p>
+        </FadeIn>
+        <FadeIn client:load motion="editorial" delay={560}>
+          <p class="mt-4 text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
+            Monthly is the default. Ownership and e-commerce stay available when they're the better fit.
+          </p>
+        </FadeIn>
+      </div>
     </section>
 
     <section class="page-section-tight section-shell">
@@ -196,7 +204,7 @@ const faqItems = [
             <FadeIn
               client:load
               motion="system"
-              delay={Math.min(index * 80, 320)}
+              delay={Math.min(index * 130, 520)}
               as="div"
               id={tier.key === 'monthly' ? 'monthly-tier' : tier.key === 'ownership' ? 'ownership-tier' : tier.key === 'ecommerce' ? 'ecommerce-tier' : undefined}
               className="flex h-full shrink-0 basis-[84%] snap-start flex-col sm:basis-[68%] md:basis-[56%] lg:basis-auto lg:shrink"
@@ -278,7 +286,7 @@ const faqItems = [
 
         <div class="mt-8 grid gap-4 md:hidden">
           {mobileComparisonTiers.map((tier, index) => (
-            <FadeIn client:load motion="system" delay={Math.min(index * 80, 320)} as="div">
+            <FadeIn client:load motion="system" delay={Math.min(index * 130, 520)} as="div">
               <Card
                 padding="none"
                 className={`overflow-hidden ${tier.highlighted ? 'border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[0_0_0_1px_var(--accent-shadow-medium)]' : 'bg-[var(--surface-1)]'}`}
@@ -527,12 +535,12 @@ const faqItems = [
     }
 
     .pricing-highlight-card {
-      animation: pricing-glow 1.5s ease-out 1;
+      animation: pricing-glow 2.1s var(--ease-cinematic) 1;
     }
 
     .pricing-table-row {
-      animation: pricing-row-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-      transition: background-color var(--duration-fast) ease;
+      animation: pricing-row-in 0.78s var(--ease-cinematic) both;
+      transition: background-color var(--duration-fast) var(--ease-premium-soft);
     }
 
     .pricing-table-row:hover {
@@ -591,14 +599,14 @@ const faqItems = [
       }
     }
 
-    .pricing-table-row:nth-child(1) { animation-delay: 0.04s; }
-    .pricing-table-row:nth-child(2) { animation-delay: 0.1s; }
-    .pricing-table-row:nth-child(3) { animation-delay: 0.16s; }
-    .pricing-table-row:nth-child(4) { animation-delay: 0.22s; }
-    .pricing-table-row:nth-child(5) { animation-delay: 0.28s; }
-    .pricing-table-row:nth-child(6) { animation-delay: 0.34s; }
-    .pricing-table-row:nth-child(7) { animation-delay: 0.4s; }
-    .pricing-table-row:nth-child(8) { animation-delay: 0.46s; }
-    .pricing-table-row:nth-child(9) { animation-delay: 0.52s; }
+    .pricing-table-row:nth-child(1) { animation-delay: 0.08s; }
+    .pricing-table-row:nth-child(2) { animation-delay: 0.2s; }
+    .pricing-table-row:nth-child(3) { animation-delay: 0.32s; }
+    .pricing-table-row:nth-child(4) { animation-delay: 0.44s; }
+    .pricing-table-row:nth-child(5) { animation-delay: 0.56s; }
+    .pricing-table-row:nth-child(6) { animation-delay: 0.68s; }
+    .pricing-table-row:nth-child(7) { animation-delay: 0.8s; }
+    .pricing-table-row:nth-child(8) { animation-delay: 0.92s; }
+    .pricing-table-row:nth-child(9) { animation-delay: 1.04s; }
   </style>
 </SiteLayout>

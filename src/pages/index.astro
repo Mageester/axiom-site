@@ -174,13 +174,13 @@ const services = [
       <div class="axiom-container relative">
         <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,30rem)] lg:items-center">
           <div class="max-w-3xl">
-            <FadeIn client:load delay={80} motion="cinematic">
+            <FadeIn client:load delay={0} motion="eyebrow">
               <Eyebrow>DIGITAL INFRASTRUCTURE</Eyebrow>
             </FadeIn>
-            <FadeIn client:load delay={180} motion="cinematic">
+            <FadeIn client:load delay={160} motion="cinematic">
               <MotionHeading client:load as="h1" text="Websites that turn visitors into booked calls." className="mt-6 max-w-4xl text-left" />
             </FadeIn>
-            <FadeIn client:load delay={340} motion="editorial">
+            <FadeIn client:load delay={420} motion="editorial">
               <p class="section-copy mt-6 max-w-2xl md:text-[1.1rem]">
               Fast websites. Clear offers. More booked jobs.
               We build in 14 days, start at $0 down, and keep supporting the site after launch. It keeps earning long
@@ -188,7 +188,7 @@ const services = [
               </p>
             </FadeIn>
 
-            <FadeIn client:load delay={500} motion="cta">
+            <FadeIn client:load delay={640} motion="cta">
               <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Button asChild size="lg" className="w-full sm:w-auto">
                   <a href={CTA_PATHS.startProject}>Start a project</a>
@@ -204,7 +204,7 @@ const services = [
             </FadeIn>
           </div>
 
-          <FadeIn client:load delay={620} as="div" motion="depth" className="hidden justify-self-end lg:block" aria-hidden="true">
+          <FadeIn client:load delay={820} as="div" motion="depth" className="hidden justify-self-end lg:block" aria-hidden="true">
             <div class="hero-browser-shell hero-visual">
               <svg viewBox="0 0 520 340" class="block h-auto w-full" fill="none" role="presentation">
                 <rect x="0.75" y="0.75" width="518.5" height="338.5" rx="24" class="hero-browser-frame" />
@@ -259,7 +259,7 @@ const services = [
 
         <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {workCards.map((card, index) => (
-            <FadeIn client:load motion="depth" delay={Math.min(index * 90, 360)}>
+            <FadeIn client:load motion="depth" delay={Math.min(index * 130, 520)}>
               <Card
                 className="group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[var(--ease-premium)] hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)]"
               >
@@ -309,7 +309,7 @@ const services = [
 
         <div class="mt-10 grid gap-5 md:grid-cols-3">
           {services.map((service, index) => (
-            <FadeIn client:load motion="system" delay={Math.min(index * 80, 320)} as="div">
+            <FadeIn client:load motion="system" delay={Math.min(index * 120, 480)} as="div">
               <a
                 href={service.href}
                 class="premium-card group flex h-full flex-col gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:border-[color:var(--accent-border)] hover:bg-[rgba(255,255,255,0.03)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.28),0_0_0_1px_rgb(var(--accent-v2-rgb,var(--accent-current-rgb))_/_0.14)] sm:p-7"
@@ -341,7 +341,7 @@ const services = [
 
         <div class="mt-10 grid gap-5 md:grid-cols-2">
           {principles.map((principle, index) => (
-            <FadeIn client:load motion="system" delay={Math.min(index * 85, 340)} as="div">
+            <FadeIn client:load motion="system" delay={Math.min(index * 130, 520)} as="div">
               <Card className="h-full p-0">
                 <div class="flex h-full flex-col p-6 sm:p-7">
                   <div class="mb-5 flex items-center justify-between gap-4">
@@ -414,7 +414,7 @@ const services = [
             </p>
           </FadeIn>
 
-          <FadeIn client:load delay={140} motion="cta" as="div">
+          <FadeIn client:load delay={200} motion="cta" as="div">
             <div class="flex flex-col gap-4 lg:items-end">
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <a href={CTA_PATHS.startProject}>Start a project</a>
@@ -492,7 +492,7 @@ const services = [
       transform-box: fill-box;
       transform-origin: left center;
       animation:
-        browser-bar-reveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) var(--browser-delay, 0s) forwards,
+        browser-bar-reveal 1.45s var(--ease-cinematic) var(--browser-delay, 0s) forwards,
         browser-bar-pulse 8s ease-in-out calc(1.2s + var(--browser-delay, 0s)) infinite;
       will-change: opacity, transform;
     }
@@ -514,12 +514,12 @@ const services = [
       stroke-linecap: round;
       stroke-dasharray: 220;
       stroke-dashoffset: 220;
-      animation: hero-arc-draw 1.2s var(--ease-premium) 0.75s forwards;
+      animation: hero-arc-draw 1.45s var(--ease-cinematic) 0.9s forwards;
     }
 
     .hero-browser-arc-muted {
       stroke: rgba(255,255,255,0.22);
-      animation-delay: 0.95s;
+      animation-delay: 1.08s;
     }
 
     .hero-status-panel {
@@ -534,7 +534,7 @@ const services = [
       padding: 1rem 1.05rem;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      animation: hero-panel-in 0.72s var(--ease-premium) 0.9s both;
+      animation: hero-panel-in 0.96s var(--ease-cinematic) 1.08s both;
     }
 
     .hero-status-panel span,
