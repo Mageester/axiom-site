@@ -15,24 +15,24 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
   description={SEO_ROUTES.startProject.description}
   canonicalPath="/start-a-project"
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-24 md:-mt-32 md:pb-32">
-    <section class="axiom-container pt-16 md:pt-24">
+  <main id="main-content" tabindex="-1" class="-mt-28 pb-20 md:-mt-32 md:pb-24">
+    <section class="axiom-container pt-14 md:pt-20">
       <div class="mx-auto max-w-5xl">
         <div class="mx-auto max-w-3xl text-center">
-          <FadeIn client:load motion="eyebrow">
+          <FadeIn motion="eyebrow">
             <Eyebrow>START A PROJECT</Eyebrow>
-            <SectionDivider client:load className="mt-6" />
+            <SectionDivider className="mx-auto mt-6" />
           </FadeIn>
-          <FadeIn client:load motion="cinematic" delay={160}>
-            <MotionHeading client:load as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4" />
+          <FadeIn motion="sceneOpen" delay={180}>
+            <MotionHeading as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4" />
           </FadeIn>
-          <FadeIn client:load motion="editorial" delay={420}>
+          <FadeIn motion="editorialMaskReveal" delay={460}>
             <p class="section-copy mx-auto mt-5 max-w-2xl md:text-[17px]">
               Five short steps. You'll get a clear reply from a real person, not a chatbot.
             </p>
           </FadeIn>
 
-          <FadeIn client:load motion="system" delay={600}>
+          <FadeIn motion="formFocusMotion" delay={580}>
             <div class="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
               <span>ABOUT 2 MINUTES</span>
               <span aria-hidden="true" class="text-[var(--text-muted)]">&bull;</span>
@@ -43,11 +43,22 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
           </FadeIn>
         </div>
 
-        <div class="mt-10 md:mt-12">
-          <div class="form-cinematic-shell mx-auto w-full max-w-3xl" data-reveal data-motion="depth" style="--reveal-delay: 760ms;">
-            <ProjectIntakeWizard client:load sourcePath={sourcePath} />
+        <div class="mt-8 md:mt-10">
+          <div class="form-cinematic-shell mx-auto w-full max-w-3xl" data-reveal data-motion="formFocusMotion" style="--reveal-delay: 740ms;">
+            <ProjectIntakeWizard client:visible sourcePath={sourcePath} />
           </div>
         </div>
+
+        <FadeIn as="div" motion="formFocusMotion" className="mx-auto mt-5 max-w-3xl">
+          <div class="grid gap-3 rounded-[22px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.018)] p-5 text-left sm:grid-cols-3">
+            {['We review the brief', 'You get a reply within one business day', 'If there is a fit, we scope the path'].map((item, index) => (
+              <p class="flex gap-3 text-[14px] leading-[1.6] text-[var(--text-secondary)]">
+                <span class="font-mono text-[12px] text-[var(--accent-solid)]">0{index + 1}</span>
+                <span>{item}</span>
+              </p>
+            ))}
+          </div>
+        </FadeIn>
       </div>
     </section>
   </main>

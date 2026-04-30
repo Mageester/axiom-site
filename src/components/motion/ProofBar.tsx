@@ -33,9 +33,9 @@ export function ProofBar({ className }: { className?: string }) {
                 index !== stats.length - 1 && 'lg:border-r lg:border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.4)]'
               )}
               data-reveal
-              data-motion="system"
+              data-motion="sceneOpen"
               suppressHydrationWarning
-              style={{ '--reveal-delay': `${Math.min(index * 110, 440)}ms` } as React.CSSProperties}
+              style={{ '--reveal-delay': `${Math.min(920 + index * 120, 1400)}ms` } as React.CSSProperties}
             >
               {stat.node}
             </div>

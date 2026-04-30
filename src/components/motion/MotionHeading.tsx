@@ -23,7 +23,7 @@ export function MotionHeading({ as = 'h2', text, align = 'left', className, ...p
     <Heading
       className={cn('motion-heading', align === 'center' && 'mx-auto text-center', className)}
       data-reveal
-      data-motion="heading"
+      data-motion="editorialMaskReveal"
       data-heading-level={as}
       suppressHydrationWarning
       aria-label={text}
@@ -31,18 +31,19 @@ export function MotionHeading({ as = 'h2', text, align = 'left', className, ...p
     >
       <span aria-hidden="true" className="split-line block">
         {words.map((word, index) => (
-          <span
-            key={`${word}-${index}`}
-            className="split-char inline-block"
-            style={
-              {
-                marginRight: index === words.length - 1 ? 0 : '0.22em',
-                '--word-delay': `${index * (as === 'h1' ? 0.062 : 0.044)}s`,
-              } as React.CSSProperties
-            }
-          >
-            {word}
-          </span>
+          <React.Fragment key={`${word}-${index}`}>
+            <span
+              className="split-char inline-block"
+              style={
+                {
+                  '--word-delay': `${index * (as === 'h1' ? 0.062 : 0.044)}s`,
+                } as React.CSSProperties
+              }
+            >
+              {word}
+            </span>
+            {index === words.length - 1 ? null : ' '}
+          </React.Fragment>
         ))}
       </span>
     </Heading>

@@ -3,7 +3,22 @@ import { cn } from '../../lib/utils';
 
 type FadeInTag = 'div' | 'section' | 'article' | 'header' | 'figure' | 'li' | 'aside' | 'nav' | 'main';
 type FadeDirection = 'up' | 'down' | 'left' | 'right';
-type MotionRole = 'eyebrow' | 'cinematic' | 'editorial' | 'depth' | 'system' | 'timeline' | 'cta' | 'legal';
+type MotionRole =
+  | 'eyebrow'
+  | 'cinematic'
+  | 'editorial'
+  | 'depth'
+  | 'system'
+  | 'timeline'
+  | 'cta'
+  | 'legal'
+  | 'sceneOpen'
+  | 'editorialMaskReveal'
+  | 'depthCardReveal'
+  | 'timelineSequence'
+  | 'precisionPricingReveal'
+  | 'formFocusMotion'
+  | 'finalFrameFooter';
 
 export interface FadeInProps extends React.HTMLAttributes<HTMLElement> {
   as?: FadeInTag;

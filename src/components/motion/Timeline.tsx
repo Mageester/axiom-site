@@ -20,7 +20,7 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
         aria-hidden="true"
         className="timeline-rail absolute left-0 top-6 hidden h-px w-full origin-left bg-[linear-gradient(90deg,rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.12),rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.58),rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.12))] md:block"
         data-reveal
-        data-motion="timeline"
+        data-motion="timelineSequence"
         suppressHydrationWarning
       />
       {mobileVertical ? (
@@ -28,7 +28,7 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
           aria-hidden="true"
           className="timeline-rail timeline-rail-vertical absolute left-6 top-0 h-full w-px origin-top bg-[color:var(--accent-solid)]/40 md:hidden"
           data-reveal
-          data-motion="timeline"
+          data-motion="timelineSequence"
           suppressHydrationWarning
         />
       ) : null}
@@ -39,17 +39,17 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
             key={`${step.kicker}-${index}`}
             className="motion-surface premium-card group relative rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 shadow-[var(--shadow-card)] backdrop-blur-[8px]"
             data-reveal
-            data-motion="timeline"
+            data-motion="timelineSequence"
             suppressHydrationWarning
             style={
               {
-                '--reveal-delay': `${Math.min(index * 140, 560)}ms`,
+                '--reveal-delay': `${Math.min(index * 150, 600)}ms`,
                 '--reveal-x': index % 2 === 0 ? '-8px' : '8px',
               } as React.CSSProperties
             }
           >
             <div className="flex items-center gap-3">
-              <span className="flex h-11 min-w-[3.25rem] items-center justify-center rounded-full border border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3)] bg-[color:rgba(255,255,255,0.03)] px-2 font-mono text-[0.68rem] font-medium uppercase tracking-[0.06em] text-[var(--accent-solid)] transition-[background-color,border-color,box-shadow] duration-[var(--duration-medium)] ease-[var(--ease-premium)] group-hover:border-[color:var(--accent-border-strong)] group-hover:bg-[color:var(--accent-surface)] group-hover:shadow-[0_0_0_5px_var(--accent-ring-soft)]">
+              <span className="timeline-step-number flex h-11 min-w-[3.25rem] items-center justify-center rounded-full border border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3)] bg-[color:rgba(255,255,255,0.03)] px-2 font-mono text-[0.68rem] font-medium uppercase tracking-[0.06em] text-[var(--accent-solid)] transition-[background-color,border-color,box-shadow,transform] duration-[var(--motion-hover-settle)] ease-[var(--ease-cinematic)] group-hover:border-[color:var(--accent-border-strong)] group-hover:bg-[color:var(--accent-surface)] group-hover:shadow-[0_0_0_5px_var(--accent-ring-soft)]">
                 {step.kicker}
               </span>
               <div className="h-px flex-1 bg-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.35)] md:hidden" />

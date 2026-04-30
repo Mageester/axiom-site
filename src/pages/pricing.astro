@@ -16,6 +16,7 @@ const pricingTiers = [
   {
     key: 'monthly',
     name: 'Subscription',
+    costShape: 'Monthly',
     price: '$0 down',
     subtext: 'From $150-$200/mo. Hosting included. Best when you want to start with less friction.',
     supportNote: 'Ongoing edits and support are included. Full ownership transfers at month 12.',
@@ -30,6 +31,7 @@ const pricingTiers = [
   {
     key: 'ownership',
     name: 'One-time ownership',
+    costShape: 'One-time',
     price: 'From $3,500',
     subtext: 'For a standard 5-page build. Full handoff at launch. Hosting can be scoped separately.',
     supportNote: 'For buyers who want the code, the site, and the keys at launch.',
@@ -42,6 +44,7 @@ const pricingTiers = [
   {
     key: 'ecommerce',
     name: 'E-commerce / rebuilds',
+    costShape: 'Scoped',
     price: 'Custom lump sum',
     subtext: 'Sized to the store, migration, or rebuild scope. E-commerce stays lump sum only.',
     supportNote: 'For projects that need tighter scoping up front.',
@@ -162,7 +165,7 @@ const faqItems = [
   {
     question: 'What makes Axiom different?',
     answer:
-      'Fast sites, real pricing, and support that does not stop at launch. 14 days to live. No 60-day Slack silences.',
+      'Fast sites, real pricing, and support that does not stop at launch. Most standard builds go live in 2-4 weeks.',
   },
 ] as const;
 ---
@@ -174,22 +177,22 @@ const faqItems = [
   schema={[PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Pricing', url: `${SITE_URL}/pricing` }])]}
 >
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
-    <section class="pricing-hero axiom-container pt-28 md:pt-36">
+    <section class="pricing-hero axiom-container pt-[5.5rem] md:pt-[7.5rem]">
       <div class="max-w-3xl">
-        <FadeIn client:load motion="eyebrow">
+        <FadeIn motion="eyebrow">
           <Eyebrow>PRICING</Eyebrow>
-          <SectionDivider client:load className="mt-6" />
+          <SectionDivider className="mt-6" />
         </FadeIn>
-        <FadeIn client:load motion="cinematic" delay={160}>
-          <MotionHeading client:load as="h1" text="Real pricing. No sales call required." className="mt-4" />
+        <FadeIn motion="sceneOpen" delay={180}>
+          <MotionHeading as="h1" text="Real pricing. No sales call required." className="mt-4" />
         </FadeIn>
-        <FadeIn client:load motion="editorial" delay={420}>
+        <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
             Most clients start monthly - $0 down, hosting and support included. If you'd rather own the site outright,
             that option is $3,500 and up. Stores and large rebuilds get scoped separately.
           </p>
         </FadeIn>
-        <FadeIn client:load motion="editorial" delay={560}>
+        <FadeIn motion="editorialMaskReveal" delay={660}>
           <p class="mt-4 text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
             Monthly is the default. Ownership and e-commerce stay available when they're the better fit.
           </p>
@@ -202,9 +205,8 @@ const faqItems = [
         <div class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:pb-0">
           {pricingTiers.map((tier, index) => (
             <FadeIn
-              client:load
-              motion="system"
-              delay={Math.min(index * 130, 520)}
+              motion="precisionPricingReveal"
+              delay={Math.min(index * 150, 600)}
               as="div"
               id={tier.key === 'monthly' ? 'monthly-tier' : tier.key === 'ownership' ? 'ownership-tier' : tier.key === 'ecommerce' ? 'ecommerce-tier' : undefined}
               className="flex h-full shrink-0 basis-[84%] snap-start flex-col sm:basis-[68%] md:basis-[56%] lg:basis-auto lg:shrink"
@@ -227,9 +229,14 @@ const faqItems = [
                 ) : null}
 
                 <div class="relative flex h-full flex-col p-6 sm:p-7">
-                  <Eyebrow className={tier.highlighted ? 'text-[var(--accent-solid)]' : undefined}>{tier.eyebrow ?? tier.name}</Eyebrow>
+                  <div class="flex flex-wrap items-center justify-between gap-3">
+                    <Eyebrow className={tier.highlighted ? 'text-[var(--accent-solid)]' : undefined}>{tier.eyebrow ?? tier.name}</Eyebrow>
+                    <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
+                      {tier.costShape}
+                    </span>
+                  </div>
 
-                  <p class="mt-2 text-[15px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">
+                  <p class="mt-4 text-[15px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">
                     {tier.name}
                   </p>
 
@@ -275,10 +282,10 @@ const faqItems = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-          <FadeIn client:load motion="editorial" className="max-w-3xl">
+          <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>COMPARE THE PATHS</Eyebrow>
-          <SectionDivider client:load className="mt-6" />
-          <MotionHeading client:load as="h2" text="What each option includes." className="section-heading mt-4" />
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="What each option includes." className="section-heading mt-4" />
           <p class="section-copy mt-4 md:text-[17px]">
             Same quality on every path. The differences are cost shape, ownership, and scope.
           </p>
@@ -286,21 +293,18 @@ const faqItems = [
 
         <div class="mt-8 grid gap-4 md:hidden">
           {mobileComparisonTiers.map((tier, index) => (
-            <FadeIn client:load motion="system" delay={Math.min(index * 130, 520)} as="div">
+            <FadeIn motion="precisionPricingReveal" delay={Math.min(index * 140, 560)} as="div">
               <Card
                 padding="none"
                 className={`overflow-hidden ${tier.highlighted ? 'border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[0_0_0_1px_var(--accent-shadow-medium)]' : 'bg-[var(--surface-1)]'}`}
               >
                 <div class="p-6">
                   {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">PREFERRED PATH</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
-                  <div class="mt-4 flex items-end justify-between gap-4">
+                  <div class="mt-4">
                     <div class="min-w-0">
                       <p class="text-[2.35rem] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] sm:text-[2.75rem]">{tier.price}</p>
                       <p class="mt-2 text-[14px] leading-[1.65] text-[var(--text-secondary)]">{tier.bestFor}</p>
                     </div>
-                    <Button asChild variant={tier.variant} size="sm">
-                      <a href={tier.href}>{tier.cta}</a>
-                    </Button>
                   </div>
 
                   <div class="mt-6 space-y-3 border-t border-[color:var(--hairline)] pt-5">
@@ -326,21 +330,21 @@ const faqItems = [
           ))}
         </div>
 
-        <FadeIn client:load as="div" motion="system" className="pricing-table-shell mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
+        <FadeIn as="div" motion="precisionPricingReveal" className="pricing-table-shell mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
           <table class="min-w-full border-collapse text-left">
             <thead class="bg-[color:var(--nav-panel-bg)]">
               <tr class="border-b border-[color:var(--hairline)]">
                 <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   Feature
                 </th>
-                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  SUBSCRIPTION
-                </th>
                 <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
                   <div class="flex flex-col gap-1">
-                    <span class="text-[12px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-solid)]">One-time</span>
-                    <span>Ownership</span>
+                    <span class="text-[12px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-solid)]">Preferred</span>
+                    <span>Subscription</span>
                   </div>
+                </th>
+                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                  OWNERSHIP
                 </th>
                 <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
                   E-COMMERCE
@@ -353,7 +357,7 @@ const faqItems = [
                   <th scope="row" class="px-6 py-4 text-[16px] font-medium text-[var(--text-primary)]">
                     {row.label}
                   </th>
-                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
+                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
                     {isCheckmark(row.monthly) ? (
                       <span class="inline-flex items-center text-[var(--accent-solid)]">
                         <DrawIcon name="check" size={18} className="is-active" />
@@ -361,7 +365,7 @@ const faqItems = [
                       </span>
                     ) : row.monthly}
                   </td>
-                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
+                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
                     {isCheckmark(row.ownership) ? (
                       <span class="inline-flex items-center text-[var(--accent-solid)]">
                         <DrawIcon name="check" size={18} className="is-active" />
@@ -383,7 +387,7 @@ const faqItems = [
           </table>
         </div>
 
-        <FadeIn client:load as="div" motion="editorial" className="mt-6">
+        <FadeIn as="div" motion="precisionPricingReveal" className="mt-6">
           <Card className="border-[color:var(--hairline)] bg-[var(--surface-2)]">
             <p class="section-copy mx-auto max-w-4xl text-center md:text-[16px]">
               Monthly includes hosting, ongoing support, and edits. One-time ownership includes launch support, with hosting scoped separately if needed. E-commerce stays lump sum only.
@@ -395,13 +399,13 @@ const faqItems = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn client:load motion="editorial" className="max-w-3xl">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>FAQ</Eyebrow>
-          <SectionDivider client:load className="mt-6" />
-          <MotionHeading client:load as="h2" text="Answers before the call." className="section-heading mt-4" />
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="Answers before the call." className="section-heading mt-4" />
         </FadeIn>
 
-        <FadeIn client:load motion="system" className="mt-8">
+        <FadeIn motion="precisionPricingReveal" className="mt-8">
           <div class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)]">
             {faqItems.map((item, index) => (
               <details class="group" data-faq>
@@ -436,12 +440,12 @@ const faqItems = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn client:load motion="editorial" className="max-w-3xl">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>QUICK GUIDE</Eyebrow>
         </FadeIn>
 
         <div class="mt-8 grid gap-4 lg:grid-cols-2">
-          <FadeIn client:load motion="system" as="div">
+          <FadeIn motion="precisionPricingReveal" as="div">
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
@@ -456,7 +460,7 @@ const faqItems = [
             </Card>
           </FadeIn>
 
-          <FadeIn client:load motion="system" delay={100} as="div">
+          <FadeIn motion="precisionPricingReveal" delay={140} as="div">
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
@@ -476,12 +480,12 @@ const faqItems = [
 
     <section class="page-section-tight section-shell">
       <div class="axiom-container">
-        <FadeIn client:load as="div" motion="cta">
+        <FadeIn as="div" motion="finalFrameFooter">
           <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
             <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
               <div class="max-w-3xl">
-                <SectionDivider client:load className="mb-6" />
-                <MotionHeading client:load as="h2" text="Not sure which tier fits?" className="section-heading" />
+                <SectionDivider className="mb-6" />
+                <MotionHeading as="h2" text="Not sure which tier fits?" className="section-heading" />
                 <p class="section-copy mt-4 md:text-[17px]">
                   Tell us what the business needs. We'll tell you which path fits - monthly, ownership, or lump sum.
                   One business day. No pressure, no pitch deck.
@@ -534,13 +538,13 @@ const faqItems = [
       box-shadow: var(--shadow-card);
     }
 
-    .pricing-highlight-card {
+    [data-motion='precisionPricingReveal'][data-reveal-state='visible'] .pricing-highlight-card {
       animation: pricing-glow 2.1s var(--ease-cinematic) 1;
     }
 
     .pricing-table-row {
       animation: pricing-row-in 0.78s var(--ease-cinematic) both;
-      transition: background-color var(--duration-fast) var(--ease-premium-soft);
+      transition: background-color var(--motion-micro-hover) var(--ease-premium-soft);
     }
 
     .pricing-table-row:hover {
@@ -567,7 +571,7 @@ const faqItems = [
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .pricing-highlight-card,
+      [data-motion='precisionPricingReveal'][data-reveal-state='visible'] .pricing-highlight-card,
       .pricing-table-row {
         animation: none !important;
       }

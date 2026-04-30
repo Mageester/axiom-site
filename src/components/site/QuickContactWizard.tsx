@@ -791,9 +791,9 @@ export function QuickContactWizard({ sourcePath }: QuickContactWizardProps) {
         <input type="hidden" name="source_path" value={sourcePath} />
 
         <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
-          <label htmlFor="contact-company-fax">Company Fax</label>
+          <label htmlFor="contact-blank-field">Leave this field blank</label>
           <input
-            id="contact-company-fax"
+            id="contact-blank-field"
             name="company_fax"
             type="text"
             tabIndex={-1}

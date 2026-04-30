@@ -11,7 +11,7 @@ import { SEO_ROUTES } from '../lib/seo';
 <SiteLayout title={SEO_ROUTES.notFound.title} description={SEO_ROUTES.notFound.description} canonicalPath="/404" noIndex={true}>
   <main id="main-content" tabindex="-1" class="axiom-container flex min-h-[calc(100svh-6rem)] items-center py-24 md:py-32">
     <section class="w-full">
-      <FadeIn client:load as="div">
+      <FadeIn as="div" motion="sceneOpen">
         <Card padding="none" className="mx-auto w-full max-w-[640px]">
           <div class="p-8 sm:p-12">
             <div class="max-w-xl">

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { cn } from '../../lib/utils';
 import type { ResponsiveSource } from '../../lib/responsiveImages';
 
@@ -27,7 +27,6 @@ export interface WorkShowcaseProps {
 }
 
 function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' | 'b' | 'c'; index: number }) {
-  const reducedMotion = useReducedMotion();
   const motionWrapClass =
     styleType === 'b'
       ? 'relative overflow-hidden rounded-[24px]'
@@ -46,13 +45,10 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
           'relative transform-gpu overflow-hidden rounded-[24px]',
           styleType === 'c' && 'border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-2'
         )}
-        whileHover={{ scale: 1.04 }}
-        initial={reducedMotion ? false : { clipPath: 'inset(9% 0 10% 0 round 20px)', scale: 1.015 }}
-        whileInView={reducedMotion ? undefined : { clipPath: 'inset(0% 0% 0% 0% round 20px)', scale: 1 }}
-        viewport={{ once: true, amount: 0.24, margin: '0px 0px -12% 0px' }}
+        whileHover={{ scale: 1.018 }}
+        initial={false}
         transition={{
-          clipPath: { duration: 0.92, delay: Math.min(index * 0.06, 0.28), ease: [0.16, 1, 0.3, 1] },
-          scale: { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
+          scale: { duration: 0.42, ease: [0.16, 1, 0.3, 1] },
         }}
       >
         <picture className="block h-full w-full overflow-hidden rounded-[20px]">
@@ -68,6 +64,8 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
             loading={index === 0 ? 'eager' : 'lazy'}
             fetchpriority={index === 0 ? 'high' : 'low'}
             decoding="async"
+            width={1200}
+            height={styleType === 'b' ? 1500 : 900}
             style={{ objectPosition: build.position }}
           />
         </picture>
@@ -82,36 +80,8 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
 
 export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
   const [activeFilter, setActiveFilter] = React.useState('all');
-  const reducedMotion = useReducedMotion();
 
   const visibleBuilds = activeFilter === 'all' ? builds : builds.filter((build) => build.category === activeFilter);
-  const getArticleMotion = (styleType: 'a' | 'b' | 'c', index: number) => {
-    if (reducedMotion) return {};
-
-    const baseDelay = Math.min(index * 0.13, 0.52);
-    const initial =
-      styleType === 'b'
-        ? { opacity: 0, y: 18, scale: 0.988, filter: 'saturate(0.92)' }
-        : styleType === 'c'
-          ? { opacity: 0, x: index % 2 === 0 ? -18 : 18, scale: 0.992 }
-          : { opacity: 0, y: 16, scale: 0.985 };
-
-    return {
-      initial,
-      whileInView: { opacity: 1, x: 0, y: 0, scale: 1, filter: 'saturate(1)' },
-      viewport: { once: true, amount: 0.18, margin: '0px 0px -12% 0px' },
-      transition: { duration: styleType === 'b' ? 1.08 : 0.92, delay: baseDelay, ease: [0.16, 1, 0.3, 1] },
-    };
-  };
-  const getContentMotion = (delay = 0.12) =>
-    reducedMotion
-      ? {}
-      : {
-          initial: { opacity: 0, y: 12 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.32, margin: '0px 0px -12% 0px' },
-          transition: { duration: 0.76, delay, ease: [0.22, 1, 0.36, 1] },
-        };
 
   return (
     <div className="space-y-8 md:space-y-10">
@@ -141,7 +111,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
       </div>
 
       <div className="grid gap-8 md:gap-10">
-        <AnimatePresence initial={false}>
+        <>
           {visibleBuilds.map((build, index) => {
             const styleType = index % 3 === 0 ? 'a' : index % 3 === 1 ? 'b' : 'c';
             const imageFirst = index % 2 === 0;
@@ -151,16 +121,14 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                 <m.article
                   key={build.title}
                   className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
-                  layout
                   data-reveal
-                  data-motion="depth"
+                  data-motion="depthCardReveal"
                   suppressHydrationWarning
-                  {...getArticleMotion(styleType, index)}
                 >
                   <div className="relative">
                     <WorkImage build={build} styleType={styleType} index={index} />
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-                      <m.div className="max-w-2xl rounded-[22px] border border-[color:rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.16)] bg-[linear-gradient(180deg,rgba(0,0,0,0.3),rgba(0,0,0,0.72))] p-5 backdrop-blur-[10px]" {...getContentMotion(0.2)}>
+                      <div className="max-w-2xl rounded-[22px] border border-[color:rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.16)] bg-[linear-gradient(180deg,rgba(0,0,0,0.3),rgba(0,0,0,0.72))] p-5 backdrop-blur-[10px]">
                         <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                           {build.eyebrow}
                         </p>
@@ -178,7 +146,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                         >
                           View demo
                         </a>
-                      </m.div>
+                      </div>
                     </div>
                   </div>
                   <div className="grid gap-0 md:grid-cols-3">
@@ -209,16 +177,14 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                 <m.article
                   key={build.title}
                   className="motion-surface premium-card group grid gap-0 overflow-visible rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
-                  layout
                   data-reveal
-                  data-motion="depth"
+                  data-motion="depthCardReveal"
                   suppressHydrationWarning
-                  {...getArticleMotion(styleType, index)}
                 >
                   <div className={`${imageFirst ? '' : 'lg:order-2'}`}>
                     <WorkImage build={build} styleType={styleType} index={index} />
                   </div>
-                  <m.div className={`flex h-full flex-col justify-center p-6 sm:p-8 ${imageFirst ? '' : 'lg:order-1'}`} {...getContentMotion(0.18)}>
+                  <div className={`flex h-full flex-col justify-center p-6 sm:p-8 ${imageFirst ? '' : 'lg:order-1'}`}>
                     <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                       {build.eyebrow}
                     </p>
@@ -246,7 +212,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     >
                       View demo
                     </a>
-                  </m.div>
+                  </div>
                 </m.article>
               );
             }
@@ -255,17 +221,15 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
               <m.article
                 key={build.title}
                 className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
-                layout
                 data-reveal
-                data-motion="depth"
+                data-motion="depthCardReveal"
                 suppressHydrationWarning
-                {...getArticleMotion(styleType, index)}
               >
                 <div className={`grid gap-0 lg:grid-cols-2`}>
                   <div className={`${imageFirst ? '' : 'lg:order-2'}`}>
                     <WorkImage build={build} styleType={styleType} index={index} />
                   </div>
-                  <m.div className={`flex h-full flex-col justify-center p-6 sm:p-8 lg:p-10 ${imageFirst ? '' : 'lg:order-1'}`} {...getContentMotion(0.18)}>
+                  <div className={`flex h-full flex-col justify-center p-6 sm:p-8 lg:p-10 ${imageFirst ? '' : 'lg:order-1'}`}>
                     <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
                       {build.eyebrow}
                     </p>
@@ -295,12 +259,12 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     >
                       View demo
                     </a>
-                  </m.div>
+                  </div>
                 </div>
               </m.article>
             );
           })}
-        </AnimatePresence>
+        </>
       </div>
     </div>
   );

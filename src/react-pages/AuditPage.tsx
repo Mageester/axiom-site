@@ -26,7 +26,7 @@ const AUDIT_FIELD_IDS = {
     name: 'audit-name',
     email: 'audit-email',
     website: 'audit-website',
-    company_fax: 'audit-company-fax'
+    company_fax: 'audit-blank-field'
 } as const;
 
 const AuditPage: React.FC = () => {
@@ -150,7 +150,7 @@ const AuditPage: React.FC = () => {
                     <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
 
                     <div className="absolute left-[-10000px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
-                        <label htmlFor={AUDIT_FIELD_IDS.company_fax}>Company Fax</label>
+                        <label htmlFor={AUDIT_FIELD_IDS.company_fax}>Leave this field blank</label>
                         <input
                             id={AUDIT_FIELD_IDS.company_fax}
                             type="text"

@@ -1,3 +1,4 @@
+/start /start-a-project 301
 /admin/* /admin-shell 200
 /dashboard /admin-shell 200
 /vault /admin-shell 200

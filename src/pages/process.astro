@@ -13,7 +13,7 @@ import { Timeline } from '../components/motion/Timeline';
 
 const processSteps = [
   {
-    dayLabel: 'Day 1',
+    dayLabel: 'Week 1',
     title: 'Review',
     timelineDescription:
       "We audit the current site, the offer, and the points where you're losing trust. Then we decide what has to change first.",
@@ -21,7 +21,7 @@ const processSteps = [
     icon: 'search',
   },
   {
-    dayLabel: 'Day 3',
+    dayLabel: 'Week 1',
     title: 'Scope',
     timelineDescription:
       'We lock the pages, the call paths, and the priorities before design starts. Decisions happen here, not mid-build.',
@@ -29,7 +29,7 @@ const processSteps = [
     icon: 'document',
   },
   {
-    dayLabel: 'Day 7',
+    dayLabel: 'Weeks 2-3',
     title: 'Build',
     timelineDescription:
       'We design, write, and test the full site. Layout and flow stay simple enough to ship clean.',
@@ -37,7 +37,7 @@ const processSteps = [
     icon: 'code',
   },
   {
-    dayLabel: 'Day 14',
+    dayLabel: 'Weeks 3-4',
     title: 'Launch',
     timelineDescription:
       'We run launch checks, connect the domain, and hand over a live site. Monthly clients keep support from here on.',
@@ -67,22 +67,22 @@ const launchChecklist = [
   schema={[PROCESS_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Process', url: `${SITE_URL}/process` }])]}
 >
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
-    <section class="axiom-container pt-24 md:pt-32">
+    <section class="axiom-container pt-20 md:pt-28">
       <div class="max-w-3xl">
-        <FadeIn client:load motion="eyebrow">
+        <FadeIn motion="eyebrow">
           <Eyebrow>PROCESS</Eyebrow>
-          <SectionDivider client:load className="mt-6" />
+          <SectionDivider className="mt-6" />
         </FadeIn>
-        <FadeIn client:load motion="cinematic" delay={160}>
-          <MotionHeading client:load as="h1" text="Four stages. Then ongoing support." className="mt-4" />
+        <FadeIn motion="sceneOpen" delay={180}>
+          <MotionHeading as="h1" text="Four stages. Then ongoing support." className="mt-4" />
         </FadeIn>
-        <FadeIn client:load motion="editorial" delay={420}>
+        <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
-            Fourteen days from first call to launch. No drift, no surprises, no 60-day Slack silences. Monthly clients
+            Two to four weeks from first call to launch. No drift, no surprises. Monthly clients
             keep support after the site goes live.
           </p>
         </FadeIn>
-        <FadeIn client:load motion="cta" delay={640}>
+        <FadeIn motion="sceneOpen" delay={720}>
           <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button asChild size="lg" className="w-full sm:w-auto">
               <a href={CTA_PATHS.startProject}>Start a project</a>
@@ -97,21 +97,21 @@ const launchChecklist = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <Timeline client:load steps={timelineSteps} />
+        <Timeline steps={timelineSteps} />
       </div>
     </section>
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn client:load motion="editorial" className="max-w-3xl">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>WHAT WE NEED FROM YOU</Eyebrow>
-          <SectionDivider client:load className="mt-6" />
-          <MotionHeading client:load as="h2" text="Four things from you. That's it." className="section-heading mt-4" />
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="Four things from you. That's it." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {launchChecklist.map((item, index) => (
-            <FadeIn client:load motion="system" delay={index * 130} distance={16} as="div">
+            <FadeIn motion="timelineSequence" delay={index * 150} distance={16} as="div">
               <div class="premium-card h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
                 <p class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
                   <DrawIcon name="check" size={14} className="text-[var(--accent-solid)]" />
@@ -129,12 +129,12 @@ const launchChecklist = [
 
     <section class="page-section-tight section-shell">
       <div class="axiom-container grid gap-6 lg:grid-cols-2">
-        <FadeIn client:load as="div" motion="cta" direction="left">
+        <FadeIn as="div" motion="finalFrameFooter" direction="left">
           <Card className="h-full p-0">
             <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>AFTER LAUNCH</Eyebrow>
-              <SectionDivider client:load className="mt-6" />
-              <MotionHeading client:load as="h2" text="Subscription clients stay supported." className="section-heading mt-4" />
+              <SectionDivider className="mt-6" />
+              <MotionHeading as="h2" text="Subscription clients stay supported." className="section-heading mt-4" />
               <p class="section-copy mt-4">
                 Once live, monthly clients keep edits, refinements, and priority support every month. Ownership clients
                 get a clean handoff - and a separate support path if they want one.
@@ -143,12 +143,12 @@ const launchChecklist = [
           </Card>
         </FadeIn>
 
-        <FadeIn client:load as="div" motion="cta" direction="right">
+        <FadeIn as="div" motion="finalFrameFooter" direction="right">
           <Card className="h-full p-0">
             <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>THE GUARANTEE</Eyebrow>
-              <SectionDivider client:load className="mt-6" />
-              <MotionHeading client:load as="h2" text="Ready to stop losing jobs to a weaker site?" className="section-heading mt-4" />
+              <SectionDivider className="mt-6" />
+              <MotionHeading as="h2" text="Ready to stop losing jobs to a weaker site?" className="section-heading mt-4" />
               <p class="section-copy mt-4">
                 No asterisks. That is the floor we build to.
               </p>

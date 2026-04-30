@@ -23,13 +23,13 @@ const { title, updated, sections } = Astro.props as Props;
 <main id="main-content" tabindex="-1" class="pb-24 md:pb-32">
   <section class="page-section pt-24 md:pt-32">
     <div class="axiom-container max-w-[760px]">
-      <FadeIn client:load motion="legal">
+      <FadeIn motion="legal">
         <Eyebrow>LEGAL</Eyebrow>
       </FadeIn>
-      <FadeIn client:load motion="cinematic" delay={100}>
+      <FadeIn motion="legal" delay={120}>
         <h1 class="mt-4 max-w-[760px]">{title}</h1>
       </FadeIn>
-      <FadeIn client:load motion="legal" delay={200}>
+      <FadeIn motion="legal" delay={200}>
         <p class="section-copy mt-4 max-w-[760px] text-[15px] leading-[1.78] md:text-[16px]">
           Last updated: {updated}
         </p>
@@ -39,7 +39,7 @@ const { title, updated, sections } = Astro.props as Props;
 
   <section class="page-section-tight">
     <div class="axiom-container xl:grid xl:grid-cols-[11rem_minmax(0,760px)] xl:justify-center xl:gap-8">
-      <FadeIn client:load as="aside" motion="legal" className="hidden self-start xl:sticky xl:top-32 xl:block">
+      <FadeIn as="aside" motion="legal" className="hidden self-start xl:sticky xl:top-32 xl:block">
         <div class="rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[var(--shadow-card)]">
           <p class="axiom-eyebrow">On this page</p>
           <nav class="mt-4 space-y-1.5" aria-label="Table of contents">
@@ -68,13 +68,12 @@ const { title, updated, sections } = Astro.props as Props;
             <div class="space-y-8">
               {sections.map((section, index) => (
                 <FadeIn
-                  client:load
                   as="section"
                   id={section.id}
                   data-legal-section
                   class={`scroll-mt-28 ${index === 0 ? '' : 'border-t border-[color:var(--hairline)] pt-8'}`}
                   motion="legal"
-                  delay={Math.min(index * 100, 400)}
+                  delay={Math.min(index * 90, 360)}
                 >
                   <div class="flex items-start gap-4">
                     <span class="shrink-0 font-axiomMono text-[20px] font-medium leading-none tracking-normal text-[var(--accent-solid)]">
@@ -112,7 +111,7 @@ const { title, updated, sections } = Astro.props as Props;
           </div>
         </article>
 
-        <FadeIn client:load as="article" motion="legal" className="w-full max-w-[760px] rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] px-5 py-4 shadow-[var(--shadow-card)] sm:px-6" delay={200}>
+        <FadeIn as="article" motion="legal" className="w-full max-w-[760px] rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] px-5 py-4 shadow-[var(--shadow-card)] sm:px-6" delay={200}>
           <p class="section-copy">
             Questions? Email
             <a

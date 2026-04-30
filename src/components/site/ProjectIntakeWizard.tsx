@@ -30,7 +30,7 @@ type ProjectIntakeWizardProps = {
 const STEPS = [
   { id: 1, label: 'Path', title: 'Pick the path closest to what you need.' },
   { id: 2, label: 'Contact', title: 'Where should we reply?' },
-  { id: 3, label: 'Business', title: 'A few business details.' },
+  { id: 3, label: 'Business', title: 'The business context.' },
   { id: 4, label: 'Brief', title: 'What should we know?' },
   { id: 5, label: 'Review', title: 'Review before sending.' },
 ] as const;
@@ -38,7 +38,7 @@ const STEPS = [
 const STEP_FIELDS: Record<number, FieldKey[]> = {
   1: ['pricing_path'],
   2: ['name', 'email'],
-  3: ['business_name', 'current_website'],
+  3: ['current_website'],
   4: ['details'],
   5: ['pricing_path', 'name', 'email', 'business_name', 'current_website', 'details'],
 };
@@ -121,7 +121,7 @@ function getFieldError(field: FieldKey, state: FormState) {
       return isValidEmail(email) ? '' : 'Please enter a valid email address.';
     }
     case 'business_name':
-      return state.business_name.trim().length >= 2 ? '' : 'Please enter the business name.';
+      return state.business_name.trim().length === 0 || state.business_name.trim().length >= 2 ? '' : 'Please use at least 2 characters.';
     case 'current_website':
       return isValidWebsite(state.current_website) ? '' : 'Please enter a valid website URL.';
     case 'details':
@@ -514,7 +514,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
 
             {activeStep === 3 ? (
               <p className="mt-3 max-w-xl text-[15px] leading-[1.75] text-[var(--text-secondary)] sm:text-[16px]">
-                If there's already a site, include it. If not, leave it blank.
+                Add the business name if useful. If there's already a site, include it. Otherwise, leave either field blank.
               </p>
             ) : null}
 
@@ -652,7 +652,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
               <div className="grid gap-5 md:grid-cols-2 md:gap-6">
                 <div className="space-y-2">
                   <label htmlFor="project-business" className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)]">
-                    Business name
+                    Business name <span className="normal-case tracking-normal text-[var(--text-secondary)]">(optional)</span>
                   </label>
                   <input
                     ref={setFieldRef('business_name') as React.Ref<HTMLInputElement>}
@@ -795,9 +795,9 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
         <input type="hidden" name="source_path" value={sourcePath} />
 
         <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
-          <label htmlFor="company-fax">Company Fax</label>
+          <label htmlFor="project-blank-field">Leave this field blank</label>
           <input
-            id="company-fax"
+            id="project-blank-field"
             name="company_fax"
             type="text"
             tabIndex={-1}

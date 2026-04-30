@@ -72,7 +72,7 @@ export const HOME_JSON_LD = {
   logo: 'https://getaxiom.ca/axiomtransparentlogo.webp',
   image: 'https://getaxiom.ca/og-image.png',
   description:
-    'Custom web development and conversion-focused websites for established businesses across Kitchener-Waterloo, Cambridge, and Guelph. Sites built in 14 days, starting at $0 down.',
+    'Custom web development and conversion-focused websites for established businesses across Kitchener-Waterloo, Cambridge, and Guelph. Sites built in 2-4 weeks, starting at $0 down.',
   email: SITE_EMAIL,
   telephone: '+1-226-753-1833',
   priceRange: '$$',
@@ -128,7 +128,7 @@ export const HOME_JSON_LD = {
         itemOffered: {
           '@type': 'Service',
           name: 'Monthly Website Subscription',
-          description: 'Custom website with hosting, ongoing edits, and support. From $150/mo.',
+          description: 'Custom website with $0 down, hosting, ongoing edits, and support. From $150/mo.',
         },
         price: '150',
         priceCurrency: 'CAD',
@@ -174,7 +174,7 @@ export const PRICING_JSON_LD = {
       '@type': 'Offer',
       name: 'Monthly Website Subscription',
       description:
-        'Custom website with hosting, ongoing edits, and support included. Full ownership available at month 12.',
+        'Custom website with $0 down, hosting, ongoing edits, and support included. Full ownership available at month 12.',
       priceCurrency: 'CAD',
       price: '150',
       priceSpecification: {
@@ -265,7 +265,7 @@ export const PRICING_FAQ_JSON_LD = {
       name: 'What makes Axiom different?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Fast sites, real pricing, and support that does not stop at launch. 14 days to live. No 60-day Slack silences.',
+        text: 'Fast sites, real pricing, and support that does not stop at launch. Most standard builds go live in 2-4 weeks.',
       },
     },
   ],
@@ -285,31 +285,30 @@ export const PROCESS_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
   name: 'How Axiom Builds a Website',
-  description: 'Fourteen days from first call to launch. Four stages: Review, Scope, Build, and Launch. Monthly clients keep support after the site goes live.',
-  totalTime: 'P14D',
+  description: 'Two to four weeks from first call to launch. Four stages: Review, Scope, Build, and Launch. Monthly clients keep support after the site goes live.',
   step: [
     {
       '@type': 'HowToStep',
       position: 1,
-      name: 'Day 1 – Review',
+      name: 'Week 1 – Review',
       text: 'We audit the current site, the offer, and the points where you are losing trust. Then we decide what has to change first.',
     },
     {
       '@type': 'HowToStep',
       position: 2,
-      name: 'Day 3 – Scope',
+      name: 'Week 1 – Scope',
       text: 'We lock the pages, the call paths, and the priorities before design starts. Decisions happen here, not mid-build.',
     },
     {
       '@type': 'HowToStep',
       position: 3,
-      name: 'Day 7 – Build',
+      name: 'Weeks 2-3 – Build',
       text: 'We design, write, and test the full site. Layout and flow stay simple enough to ship clean.',
     },
     {
       '@type': 'HowToStep',
       position: 4,
-      name: 'Day 14 – Launch',
+      name: 'Weeks 3-4 – Launch',
       text: 'We run launch checks, connect the domain, and hand over a live site. Monthly clients keep support from here on.',
     },
   ],
@@ -333,7 +332,7 @@ export const SEO_ROUTES = {
   home: {
     title: 'Custom Web Development | KW Region | Axiom Infrastructure',
     description:
-      'Axiom builds custom websites for businesses in Kitchener-Waterloo and across Canada. Sites launch in 14 days, start at $0 down, and are verified against Core Web Vitals.',
+      'Axiom builds custom websites for businesses in Kitchener-Waterloo and across Canada. Sites launch in 2-4 weeks, start at $0 down, and are verified against Core Web Vitals.',
     canonicalPath: '/',
   },
   work: {
@@ -371,16 +370,17 @@ export const SEO_ROUTES = {
     canonicalPath: '/about',
   },
   process: {
-    title: 'Our Web Design Process | 14 Days to Launch | Axiom Infrastructure',
+    title: 'Our Web Design Process | 2-4 Weeks to Launch | Axiom Infrastructure',
     description:
-      'Four stages. Fourteen days from first call to launch. Monthly clients keep support after the site goes live. No drift, no surprises.',
+      'Four stages. Two to four weeks from first call to launch. Monthly clients keep support after the site goes live. No drift, no surprises.',
     canonicalPath: '/process',
   },
   start: {
     title: 'Start a Project | Axiom Infrastructure',
     description:
       'Share a project brief for monthly or one-time website work. We reply with a clear next step within one business day.',
-    canonicalPath: '/start',
+    canonicalPath: '/start-a-project',
+    noIndex: true,
   },
   startProject: {
     title: 'Start a Project | Axiom Infrastructure',

@@ -11,13 +11,13 @@ import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
 ---
 
-<SiteLayout title={SEO_ROUTES.start.title} description={SEO_ROUTES.start.description} canonicalPath={SEO_ROUTES.start.canonicalPath}>
+<SiteLayout title={SEO_ROUTES.start.title} description={SEO_ROUTES.start.description} canonicalPath={SEO_ROUTES.start.canonicalPath} noIndex={SEO_ROUTES.start.noIndex}>
   <main id="main-content" tabindex="-1" class="-mt-28 pb-24 md:-mt-32 md:pb-32">
     <section class="axiom-container pt-24 md:pt-32">
-      <FadeIn client:load className="max-w-3xl">
+      <FadeIn motion="sceneOpen" className="max-w-3xl">
         <Eyebrow>START A PROJECT</Eyebrow>
-        <SectionDivider client:load className="mt-6" />
-        <MotionHeading client:load as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4 max-w-4xl" />
+        <SectionDivider className="mt-6" />
+        <MotionHeading as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4 max-w-4xl" />
         <p class="section-copy mt-5 md:text-[17px]">
           Five short steps. You'll get a clear reply from a real person, not a chatbot.
         </p>
@@ -40,7 +40,7 @@ import { SEO_ROUTES } from '../lib/seo';
 
     <section class="page-section">
       <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.72fr)] xl:items-start">
-        <FadeIn client:load as="div" id="project-intake" className="scroll-mt-32">
+        <FadeIn as="div" motion="formFocusMotion" id="project-intake" className="scroll-mt-32">
           <IntakeForm
             kind="project"
             endpoint="/api/intake"
@@ -57,7 +57,7 @@ import { SEO_ROUTES } from '../lib/seo';
           />
         </FadeIn>
 
-        <FadeIn client:load as="div">
+        <FadeIn as="div" motion="formFocusMotion" delay={140}>
           <Card className="self-start p-0 xl:sticky xl:top-28">
             <div class="p-6 sm:p-7">
               <Eyebrow>WHAT TO EXPECT</Eyebrow>

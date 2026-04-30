@@ -115,22 +115,22 @@ const workFilters = [
   schema={[WORK_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Work', url: `${SITE_URL}/work` }])]}
 >
   <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
-    <section class="axiom-container pt-24 md:pt-32">
+    <section class="axiom-container pt-20 md:pt-28">
       <div class="max-w-3xl">
-        <FadeIn client:load motion="eyebrow">
+        <FadeIn motion="eyebrow">
           <Eyebrow>WORK</Eyebrow>
-          <SectionDivider client:load className="mt-6" />
+          <SectionDivider className="mt-6" />
         </FadeIn>
-        <FadeIn client:load motion="cinematic" delay={160}>
-          <MotionHeading client:load as="h1" text="Concept builds. Same standard. Every sector." className="mt-4" />
+        <FadeIn motion="sceneOpen" delay={180}>
+          <MotionHeading as="h1" text="Concept builds. Same standard. Every sector." className="mt-4" />
         </FadeIn>
-        <FadeIn client:load motion="editorial" delay={420}>
+        <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
             These are concept builds, not live client work. Each one shows how we'd rebuild a typical site in that
             industry - cleaner offer, faster load, and a path to booking that actually converts.
           </p>
         </FadeIn>
-        <FadeIn client:load motion="cta" delay={640}>
+        <FadeIn motion="sceneOpen" delay={720}>
           <div class="mt-7">
             <Button asChild size="lg">
               <a href={CTA_PATHS.startProject}>Start a project</a>
@@ -140,34 +140,33 @@ const workFilters = [
       </div>
     </section>
 
-    <section class="page-section section-shell">
+    <section class="py-10 md:py-12 section-shell">
       <div class="axiom-container">
-        <WorkShowcase client:load builds={featuredBuilds} filters={workFilters} />
+        <WorkShowcase client:visible builds={featuredBuilds} filters={workFilters} />
       </div>
     </section>
 
-    <section class="page-section">
+    <section class="py-10 md:py-12">
       <div class="axiom-container">
-        <FadeIn client:load as="div" motion="editorial" className="flex flex-col items-center text-center">
-          <p class="font-accent text-[clamp(1.5rem,2.2vw,2.3rem)] leading-[1.08] tracking-[-0.04em] text-[var(--text-primary)]">
-            More concepts available on request.
+        <FadeIn as="div" motion="editorialMaskReveal" className="mx-auto grid max-w-5xl gap-5 border-y border-[color:var(--hairline)] py-8 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:items-center">
+          <p class="font-accent text-[clamp(1.35rem,2vw,2rem)] leading-[1.14] text-[var(--text-primary)]">
+            Concepts are evidence of approach, not borrowed proof.
           </p>
-          <a class="group mt-5 inline-flex min-h-11 items-center gap-2 text-[14px] font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]" href={CTA_PATHS.startProject}>
-            <span>Start a project</span>
-            <span class="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-1">&rarr;</span>
-          </a>
+          <p class="section-copy md:justify-self-end">
+            Each build shows the same operating pattern: sharper hierarchy, faster decisions, and one clear path to action without inventing results.
+          </p>
         </FadeIn>
       </div>
     </section>
 
     <section class="page-section-tight section-shell">
       <div class="axiom-container">
-        <FadeIn client:load as="div" motion="cta">
+        <FadeIn as="div" motion="finalFrameFooter">
           <Card className="mx-auto max-w-5xl p-0">
             <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
               <Eyebrow>THE GUARANTEE</Eyebrow>
-              <SectionDivider client:load className="mt-6" />
-              <MotionHeading client:load as="h2" text="Ready to stop losing jobs to a weaker site?" className="section-heading mt-4" />
+              <SectionDivider className="mt-6" />
+              <MotionHeading as="h2" text="Ready to stop losing jobs to a weaker site?" className="section-heading mt-4" />
               <p class="section-copy mt-4">
                 No asterisks. That is the floor we build to.
               </p>

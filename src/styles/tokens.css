@@ -52,8 +52,8 @@
   --content-width: 1240px;
   --gutter-mobile: 24px;
   --gutter-desktop: 48px;
-  --section-space-mobile: 84px;
-  --section-space-desktop: 118px;
+  --section-space-mobile: 72px;
+  --section-space-desktop: 96px;
   --radius-card: 16px;
   --radius-component: 12px;
   --radius-pill: 999px;
@@ -62,6 +62,13 @@
   --ease-premium-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-precision: cubic-bezier(0.2, 0.78, 0.18, 1);
+  --motion-micro-hover: 220ms;
+  --motion-hover-settle: 360ms;
+  --motion-small-reveal: 560ms;
+  --motion-content-reveal: 840ms;
+  --motion-major-reveal: 1040ms;
+  --motion-hero-opener: 1480ms;
+  --motion-stagger: 120ms;
   --duration-fast: 220ms;
   --duration-medium: 360ms;
   --duration-slow: 640ms;

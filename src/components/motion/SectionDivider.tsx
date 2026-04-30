@@ -7,7 +7,7 @@ export function SectionDivider({ className, ...props }: SectionDividerProps) {
   return (
     <div
       aria-hidden="true"
-      className={cn('section-divider mx-auto', className)}
+      className={cn('section-divider', className)}
       data-reveal
       suppressHydrationWarning
       {...props}
