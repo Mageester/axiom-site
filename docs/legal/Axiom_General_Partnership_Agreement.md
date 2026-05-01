@@ -19,7 +19,7 @@ B. This Agreement sets out the terms and conditions that govern the Partners wit
 **IN CONSIDERATION OF** and as a condition of the Partners entering into this Agreement and other valuable consideration, the receipt and sufficiency of which is hereby acknowledged, the Partners agree as follows:
 
 ### 1. FORMATION & NAME
-By this Agreement the Partners enter into a general partnership (the "Partnership") in accordance with the laws of the Province of Ontario. The Partnership will operate under the name: **Axiom Infrastructure**.
+By this Agreement the Partners enter into a general partnership (the "Partnership") in accordance with the laws of the Province of Ontario. The Partnership will operate under the name: **Axiom International**.
 
 ### 2. OWNERSHIP & CAPITAL CONTRIBUTIONS
 - **2.1 Equity Split:** The Partners will each have a 50% ownership interest in the Partnership.

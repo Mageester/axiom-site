@@ -27,7 +27,7 @@ const DEFAULT_ALLOWED_ORIGINS = [
 
 const DEFAULT_INTERNAL_RECIPIENTS = ['contact@getaxiom.ca'];
 const DEFAULT_FROM_EMAIL = 'Axiom Intake <engine@getaxiom.ca>';
-const DEFAULT_CONFIRMATION_FROM_EMAIL = 'Axiom Infrastructure <engine@getaxiom.ca>';
+const DEFAULT_CONFIRMATION_FROM_EMAIL = 'Axiom Web <engine@getaxiom.ca>';
 
 const INTAKE_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const INTAKE_RATE_LIMIT_MAX = 5;
@@ -352,9 +352,9 @@ function buildConfirmationEmail(params: { name: string }) {
         <div style="font-family:Arial,sans-serif;color:#1a1a1a;max-width:560px;margin:0 auto;">
             <h1 style="font-size:22px;line-height:1.3;margin:0 0 16px 0;color:#0d1323;">Transmission received</h1>
             <p style="margin:0 0 14px 0;line-height:1.6;">Hi ${escapeHtml(params.name)},</p>
-            <p style="margin:0 0 14px 0;line-height:1.6;">Your request has been received by Axiom Infrastructure.</p>
+            <p style="margin:0 0 14px 0;line-height:1.6;">Your request has been received by Axiom Web.</p>
             <p style="margin:0 0 20px 0;line-height:1.6;">A partner will review your submission and reply from <strong>contact@getaxiom.ca</strong> within one business day.</p>
-            <p style="margin:0;color:#6b7280;font-size:12px;">Axiom Infrastructure</p>
+            <p style="margin:0;color:#6b7280;font-size:12px;">Axiom Web</p>
         </div>
     `;
 
@@ -362,10 +362,10 @@ function buildConfirmationEmail(params: { name: string }) {
         'Transmission received',
         '',
         `Hi ${params.name},`,
-        'Your request has been received by Axiom Infrastructure.',
+        'Your request has been received by Axiom Web.',
         'A partner will review your submission and reply from contact@getaxiom.ca within one business day.',
         '',
-        'Axiom Infrastructure'
+        'Axiom Web'
     ].join('\n');
 
     return { html, text };

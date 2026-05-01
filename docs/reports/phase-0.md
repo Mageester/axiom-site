@@ -33,7 +33,7 @@ Branch: `phase/0-audit`
 ## Decisions Needing Owner Sign-Off
 
 - Verify whether proof claims such as shipped-build counts, load-time claims, and any testimonials/avatar assets are real and approved.
-- Confirm whether the public brand should remain "Axiom Infrastructure" everywhere or shorten to "Axiom" in public copy.
+- Confirmed founder brand policy: use "Axiom Web" in public copy and reserve "Axiom International" for parent-company/legal context.
 - Provide external legacy URLs for the Phase 2 redirect map.
 - Confirm whether any legacy React/Vite/Next files are still needed for demos or admin support before later removal.
 

@@ -281,7 +281,7 @@ app.post('/api/intake', async (req, res) => {
 
         const htmlBody = `
             <div style="font-family: Arial, sans-serif; color: #1a1a1a; max-width: 600px;">
-                <h2 style="color: #0B0B0C; border-bottom: 2px solid #5a729b; padding-bottom: 8px;">Axiom Infrastructure Request</h2>
+                <h2 style="color: #0B0B0C; border-bottom: 2px solid #5a729b; padding-bottom: 8px;">Axiom Web Request</h2>
                 
                 <h3 style="margin-top: 24px;">Lead Information</h3>
                 <table style="width: 100%; border-collapse: collapse;">

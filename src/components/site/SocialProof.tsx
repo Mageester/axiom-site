@@ -50,7 +50,7 @@ const testimonialSchema = (testimonials: readonly Testimonial[]) => ({
     },
     itemReviewed: {
       '@type': 'LocalBusiness',
-      name: 'Axiom Infrastructure',
+      name: 'Axiom Web',
       url: 'https://getaxiom.ca',
     },
     ...(testimonial.rating

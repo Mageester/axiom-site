@@ -16,7 +16,7 @@ const stats = [
   },
   {
     key: 'asterisks',
-    node: 'NO ASTERISKS',
+    node: 'OWNERSHIP OPTIONAL',
   },
 ] as const;
 

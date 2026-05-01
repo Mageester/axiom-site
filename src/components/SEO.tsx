@@ -115,7 +115,7 @@ export const SEO: React.FC<SEOProps> = ({ title, description, canonicalPath, ima
       'og:image': fullImageUrl,
       'og:type': 'website',
       'og:url': pageUrl,
-      'og:site_name': 'Axiom Infrastructure',
+      'og:site_name': 'Axiom Web',
       'og:locale': 'en_CA',
       'twitter:card': 'summary_large_image',
       'twitter:title': resolvedTitle,

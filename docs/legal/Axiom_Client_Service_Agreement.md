@@ -4,7 +4,7 @@
 This Agreement is made effective as of the signed date of the initial deposit.
 
 **BETWEEN:**
-**Axiom Infrastructure** ("the Agency")
+**Axiom International** ("the Agency")
 AND
 **[Client Legal Name]** ("the Client")
 

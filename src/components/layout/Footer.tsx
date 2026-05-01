@@ -31,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,var(--accent-surface),transparent_34%)] opacity-70" />
       <div className="axiom-container grid gap-12 md:grid-cols-2 xl:grid-cols-4">
         <div className="footer-column space-y-6" data-reveal data-motion="finalFrameFooter" suppressHydrationWarning style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
-          <a href="/" className="inline-flex min-h-11 items-center" aria-label="Axiom Infrastructure home">
+          <a href="/" className="inline-flex min-h-11 items-center" aria-label="Axiom Web home">
             <img
               src="/axiomtransparentlogo.webp"
               alt=""
@@ -45,7 +45,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
           <p className="max-w-sm text-[15px] italic leading-[1.7] text-[var(--text-secondary)]">
             Websites built to convert. Not to decorate.
           </p>
-          <p className="text-[14px] leading-[1.6] text-[var(--text-muted)]">Copyright {year} Axiom Infrastructure.</p>
+          <p className="text-[14px] leading-[1.6] text-[var(--text-muted)]">Copyright {year} Axiom Web.</p>
         </div>
 
         <div className="footer-column space-y-4" data-reveal data-motion="finalFrameFooter" suppressHydrationWarning style={{ '--reveal-delay': '120ms' } as React.CSSProperties}>

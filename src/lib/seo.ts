@@ -1,4 +1,4 @@
-export const SITE_NAME = 'Axiom Infrastructure';
+export const SITE_NAME = 'Axiom Web';
 export const SITE_TAGLINE = 'Websites built to convert. Not to decorate.';
 export const SITE_URL = 'https://getaxiom.ca';
 export const DEFAULT_OG_IMAGE = '/og-image.png';
@@ -121,7 +121,7 @@ export const HOME_JSON_LD = {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Axiom Infrastructure Services',
+    name: 'Axiom Web Services',
     itemListElement: [
       {
         '@type': 'Offer',
@@ -217,7 +217,7 @@ export const PRICING_FAQ_JSON_LD = {
       name: 'What is included in the monthly plan?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Up to 5 pages, hosting, ongoing edits, and priority support. Full ownership transfers at month 12 if you want it.',
+        text: 'Up to 5 pages, hosting, ongoing edits, and priority support. Full ownership transfers at month 12 if you want it. Most clients stay monthly because the support keeps the site improving.',
       },
     },
     {
@@ -275,7 +275,7 @@ export const ABOUT_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
   url: 'https://getaxiom.ca/about',
-  name: 'About Axiom Infrastructure',
+  name: 'About Axiom Web',
   description:
     'Two operators. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
   mainEntity: ORGANIZATION_SCHEMA,
@@ -317,7 +317,7 @@ export const PROCESS_JSON_LD = {
 export const WORK_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  name: 'Axiom Infrastructure – Web Design Portfolio',
+  name: 'Axiom Web – Web Design Portfolio',
   url: 'https://getaxiom.ca/work',
   description:
     'Concept builds across legal, medical, trades, food service, and retail. Each one shows how a typical business site should be structured to convert visitors to booked calls.',
@@ -330,87 +330,87 @@ export const WORK_JSON_LD = {
 
 export const SEO_ROUTES = {
   home: {
-    title: 'Custom Web Development | KW Region | Axiom Infrastructure',
+    title: 'Custom Web Development | KW Region | Axiom Web',
     description:
       'Axiom builds custom websites for businesses in Kitchener-Waterloo and across Canada. Sites launch in 2-4 weeks, start at $0 down, and are verified against Core Web Vitals.',
     canonicalPath: '/',
   },
   work: {
-    title: 'Web Design Portfolio – Concept Builds | Axiom Infrastructure',
+    title: 'Web Design Portfolio – Concept Builds | Axiom Web',
     description:
       'Concept builds across legal, medical, trades, and retail. See how Axiom structures sites that load fast and convert visitors to booked calls.',
     canonicalPath: '/work',
   },
   concepts: {
-    title: 'Concept Projects | Axiom Infrastructure',
+    title: 'Concept Projects | Axiom Web',
     description: 'Concept work exploring structure, hierarchy, and conversion for future builds.',
     canonicalPath: '/work',
   },
   pricing: {
-    title: 'Website Pricing | Monthly & One-Time | Axiom Infrastructure',
+    title: 'Website Pricing | Monthly & One-Time | Axiom Web',
     description:
       'Custom website pricing with no surprises. Monthly from $150 with hosting and support included. One-time ownership from $3,500. No sales call required.',
     canonicalPath: '/pricing',
   },
   services: {
-    title: 'Web Design Services | Axiom Infrastructure',
+    title: 'Web Design Services | Axiom Web',
     description:
       'Custom web design and development services built around clarity, trust, and conversion. Monthly or one-time ownership.',
     canonicalPath: '/pricing',
   },
   about: {
-    title: 'About Axiom Infrastructure | Custom Web Design Studio',
+    title: 'About Axiom Web | Custom Web Design Studio',
     description:
       'Two operators. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
     canonicalPath: '/about',
   },
   approach: {
-    title: 'Our Approach | Axiom Infrastructure',
+    title: 'Our Approach | Axiom Web',
     description: 'A clear process. Tight hierarchy. Fewer decisions. Better outcomes.',
     canonicalPath: '/about',
   },
   process: {
-    title: 'Our Web Design Process | 2-4 Weeks to Launch | Axiom Infrastructure',
+    title: 'Our Web Design Process | 2-4 Weeks to Launch | Axiom Web',
     description:
       'Four stages. Two to four weeks from first call to launch. Monthly clients keep support after the site goes live. No drift, no surprises.',
     canonicalPath: '/process',
   },
   start: {
-    title: 'Start a Project | Axiom Infrastructure',
+    title: 'Start a Project | Axiom Web',
     description:
       'Share a project brief for monthly or one-time website work. We reply with a clear next step within one business day.',
     canonicalPath: '/start-a-project',
     noIndex: true,
   },
   startProject: {
-    title: 'Start a Project | Axiom Infrastructure',
+    title: 'Start a Project | Axiom Web',
     description:
       'Submit a project brief for a monthly or one-time website build. We reply with a clear next step within one business day.',
     canonicalPath: '/start-a-project',
   },
   audit: {
-    title: 'Website Audit | Axiom Infrastructure',
+    title: 'Website Audit | Axiom Web',
     description: 'A focused review of clarity, structure, and conversion opportunities.',
     canonicalPath: '/admin/audit',
     noIndex: true,
   },
   privacy: {
-    title: 'Privacy Policy | Axiom Infrastructure',
+    title: 'Privacy Policy | Axiom Web',
     description: 'Privacy policy for the Axiom website and contact forms.',
     canonicalPath: '/privacy',
   },
   terms: {
-    title: 'Terms of Service | Axiom Infrastructure',
+    title: 'Terms of Service | Axiom Web',
     description: 'Terms for using the Axiom website and services.',
     canonicalPath: '/terms',
   },
   contact: {
-    title: 'Contact | Axiom Infrastructure',
+    title: 'Contact | Axiom Web',
     description: 'Send a quick question or short note. For project work, use the project intake page.',
     canonicalPath: '/contact',
   },
   notFound: {
-    title: 'Page Not Found | Axiom Infrastructure',
+    title: 'Page Not Found | Axiom Web',
     description: 'Use the main links to continue, or head back home.',
     canonicalPath: '/404',
     noIndex: true,

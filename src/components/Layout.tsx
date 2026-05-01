@@ -261,7 +261,7 @@ const Layout: React.FC<LayoutProps> = ({
               >
                 <img
                   src="/axiomtransparentlogo.webp"
-                  alt="Axiom Infrastructure"
+                  alt="Axiom Web"
                   width={240}
                   height={63}
                   loading="eager"

@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
           <div className="max-w-md">
             <img
               src="/axiomtransparentlogo.webp"
-              alt="Axiom Infrastructure"
+              alt="Axiom Web"
               width={240}
               height={63}
               className="block h-10 w-auto select-none object-contain"
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
               Built for businesses that are serious about growth.
             </p>
             <p className="mt-6 text-[14px] md:text-[13px] uppercase tracking-[0.12em] text-slate-400">
-              © 2026 Axiom Infrastructure. All rights reserved.
+              © 2026 Axiom Web. All rights reserved.
             </p>
           </div>
 
