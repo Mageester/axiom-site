@@ -33,6 +33,7 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
       : styleType === 'c'
         ? 'relative overflow-visible'
         : 'relative overflow-hidden rounded-[24px]';
+  const frameClass = styleType === 'b' ? 'aspect-[16/9] md:aspect-[2.05/1]' : 'aspect-[16/10]';
 
   return (
     <div className={motionWrapClass}>
@@ -43,6 +44,7 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
       <m.div
         className={cn(
           'relative transform-gpu overflow-hidden rounded-[24px]',
+          frameClass,
           styleType === 'c' && 'border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-2'
         )}
         whileHover={{ scale: 1.018 }}
@@ -57,15 +59,12 @@ function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' |
           <img
             src={build.image.fallbackSrc}
             alt={build.alt}
-            className={cn(
-              'block h-full w-full object-cover',
-              styleType === 'b' ? 'aspect-[4/5]' : 'aspect-[4/3]'
-            )}
+            className="block h-full w-full object-cover"
             loading={index === 0 ? 'eager' : 'lazy'}
             fetchpriority={index === 0 ? 'high' : 'low'}
             decoding="async"
             width={1200}
-            height={styleType === 'b' ? 1500 : 900}
+            height={styleType === 'b' ? 585 : 750}
             style={{ objectPosition: build.position }}
           />
         </picture>
