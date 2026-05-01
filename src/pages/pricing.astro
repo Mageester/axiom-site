@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { CTA_PATHS } from '../lib/cta';
+import { createStartProjectHref } from '../lib/cta';
 import { SEO_ROUTES, PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
 import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
@@ -22,7 +22,7 @@ const pricingTiers = [
     supportNote: 'Ongoing edits and support are included. Full ownership transfers at month 12.',
     features: ['Up to 5 pages', 'Hosting included', 'Ongoing edits and support', '6-month minimum', 'Full ownership available at month 12'],
     cta: 'Start monthly',
-    href: CTA_PATHS.startProject,
+    href: createStartProjectHref('monthly'),
     variant: 'primary',
     highlighted: true,
     eyebrow: 'PREFERRED PATH',
@@ -37,7 +37,7 @@ const pricingTiers = [
     supportNote: 'For buyers who want the code, the site, and the keys at launch.',
     features: ['Up to 5 pages', 'Full code ownership at launch', 'Launch support included', 'Hosting scoped separately', 'SEO foundation'],
     cta: 'Buy outright',
-    href: CTA_PATHS.startProject,
+    href: createStartProjectHref('ownership'),
     variant: 'secondary',
     bestFor: 'One payment. Full ownership at launch.',
   },
@@ -50,7 +50,7 @@ const pricingTiers = [
     supportNote: 'For projects that need tighter scoping up front.',
     features: ['Store setup or rebuild', 'Migration support', 'Integrations as needed', 'Launch support included', 'Scoped pricing'],
     cta: 'Get a custom quote',
-    href: CTA_PATHS.startProject,
+    href: createStartProjectHref('custom'),
     variant: 'secondary',
     bestFor: 'For stores and larger rebuilds. Scoped once, priced once.',
   },
@@ -195,6 +195,10 @@ const faqItems = [
         <FadeIn motion="editorialMaskReveal" delay={660}>
           <p class="mt-4 text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
             Monthly is the default. Ownership and e-commerce stay available when they're the better fit.
+          </p>
+          <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-muted)] md:text-[15px]">
+            Typical pages include Home, Services, About, Work, and Contact. Extra pages can be scoped separately.
+            The final monthly price depends on page count, integrations, and support needs.
           </p>
         </FadeIn>
       </div>
@@ -493,7 +497,7 @@ const faqItems = [
               </div>
 
               <Button asChild size="lg" className="w-full lg:w-auto">
-                <a href={CTA_PATHS.startProject}>Start a project</a>
+                <a href={createStartProjectHref('custom')}>Start a project</a>
               </Button>
             </div>
           </Card>

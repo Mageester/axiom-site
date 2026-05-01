@@ -82,7 +82,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
             </li>
             <li>
               <a href="/start-a-project" className={footerLinkClass}>
-                Project intake
+                Start a project
               </a>
             </li>
           </ul>

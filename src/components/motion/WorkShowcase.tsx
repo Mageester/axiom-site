@@ -140,7 +140,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                         <a
                           href={build.href}
                           target="_blank"
-                          rel="noreferrer"
+                          rel="noopener noreferrer"
                           className="motion-link-accent mt-4 inline-flex min-h-11 items-center text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
                         >
                           View demo
@@ -152,8 +152,8 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <div className="md:col-span-1" />
                     <dl className="grid gap-0 md:col-span-2 md:grid-cols-3">
                       {[
-                        ['Original weakness', build.originalWeakness],
-                        ['Axiom changed', build.axiomChanged],
+                        ['The problem', build.originalWeakness],
+                        ['What changed', build.axiomChanged],
                         ['Why it works', build.whyItWorks],
                       ].map(([label, value]) => (
                         <div key={label} className="border-t border-[color:var(--hairline)] p-5 sm:p-6">
@@ -190,12 +190,13 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
                       {build.title}
                     </h3>
-                    <p className="mt-3 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">
-                      {build.originalWeakness}
-                    </p>
                     <div className="mt-6 space-y-4 border-t border-[color:var(--hairline)] pt-5">
                       <div>
-                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Axiom changed</p>
+                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">The problem</p>
+                        <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.originalWeakness}</p>
+                      </div>
+                      <div>
+                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">What changed</p>
                         <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.axiomChanged}</p>
                       </div>
                       <div>
@@ -206,7 +207,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <a
                       href={build.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="motion-link-accent mt-6 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
                     >
                       View demo
@@ -238,11 +239,11 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
 
                     <dl className="mt-8 space-y-5">
                       <div className="space-y-2">
-                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Original weakness</dt>
+                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">The problem</dt>
                         <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.originalWeakness}</dd>
                       </div>
                       <div className="space-y-2 border-t border-[color:var(--hairline)] pt-5">
-                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Axiom changed</dt>
+                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">What changed</dt>
                         <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.axiomChanged}</dd>
                       </div>
                       <div className="space-y-2 border-t border-[color:var(--hairline)] pt-5">
@@ -253,7 +254,7 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
                     <a
                       href={build.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="motion-link-accent mt-7 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
                     >
                       View demo

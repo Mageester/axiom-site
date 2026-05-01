@@ -38,7 +38,7 @@ export const CTA = {
     }
 } as const;
 
-export const createStartProjectHref = (packageParam?: string) => {
-    if (!packageParam) return CTA_PATHS.startProject;
-    return `${CTA_PATHS.startProject}?package=${encodeURIComponent(packageParam)}`;
+export const createStartProjectHref = (pathIntent?: string) => {
+    if (!pathIntent) return CTA_PATHS.startProject;
+    return `${CTA_PATHS.startProject}?path=${encodeURIComponent(pathIntent)}`;
 };

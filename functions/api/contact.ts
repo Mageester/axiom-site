@@ -40,7 +40,6 @@ export const onRequestPost: PagesFunction = async (context) => {
     }
 
     const rawBody = await request.json().catch(() => null);
-    console.log('[CONTACT_PROXY] raw_body', rawBody);
 
     if (!rawBody || typeof rawBody !== 'object') {
         return new Response(JSON.stringify({ ok: false, error: 'Malformed JSON or empty body' }), {

@@ -21,7 +21,7 @@ const processSteps = [
     icon: 'search',
   },
   {
-    dayLabel: 'Week 1',
+    dayLabel: 'Scope',
     title: 'Scope',
     timelineDescription:
       'We lock the pages, the call paths, and the priorities before design starts. Decisions happen here, not mid-build.',
@@ -88,7 +88,7 @@ const launchChecklist = [
               <a href={CTA_PATHS.startProject}>Start a project</a>
             </Button>
             <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-              <a href="/work">See real builds</a>
+              <a href="/work">See concept builds</a>
             </Button>
           </div>
         </FadeIn>
@@ -97,6 +97,7 @@ const launchChecklist = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
+        <h2 class="sr-only">Process timeline</h2>
         <Timeline steps={timelineSteps} />
       </div>
     </section>
@@ -136,8 +137,8 @@ const launchChecklist = [
               <SectionDivider className="mt-6" />
               <MotionHeading as="h2" text="Subscription clients stay supported." className="section-heading mt-4" />
               <p class="section-copy mt-4">
-                Once live, monthly clients keep edits, refinements, and priority support every month. Ownership clients
-                get a clean handoff - and a separate support path if they want one.
+                Monthly clients keep edits, refinements, bug fixes, and priority support. Ownership clients get a clean
+                handoff and can add ongoing support separately.
               </p>
             </div>
           </Card>

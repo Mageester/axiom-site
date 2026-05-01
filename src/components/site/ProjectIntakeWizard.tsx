@@ -59,17 +59,17 @@ const PATH_OPTIONS: Array<{
 }> = [
   {
     value: 'monthly',
-    label: 'Monthly plan',
+    label: 'Monthly',
     description: 'Lower upfront cost. Ongoing support stays built in.',
   },
   {
     value: 'one_time',
-    label: 'One-time project',
+    label: 'One-time / ownership',
     description: 'A single scoped build with ownership from launch.',
   },
   {
     value: 'not_sure',
-    label: 'Not sure yet',
+    label: 'Not sure / custom',
     description: 'We can help decide which path fits once we review the brief.',
   },
 ];
@@ -103,10 +103,21 @@ function isValidWebsite(value: string) {
 }
 
 function formatPathLabel(value: PricingPath | '') {
-  if (value === 'monthly') return 'Monthly plan';
-  if (value === 'one_time') return 'One-time project';
-  if (value === 'not_sure') return 'Not sure yet';
+  if (value === 'monthly') return 'Monthly';
+  if (value === 'one_time') return 'One-time / ownership';
+  if (value === 'not_sure') return 'Not sure / custom';
   return 'Not selected';
+}
+
+function getInitialPricingPath(sourcePath: string): PricingPath | '' {
+  const search = sourcePath.includes('?') ? sourcePath.slice(sourcePath.indexOf('?')) : '';
+  const params = new URLSearchParams(search || (typeof window !== 'undefined' ? window.location.search : ''));
+  const pathIntent = params.get('path');
+
+  if (pathIntent === 'monthly') return 'monthly';
+  if (pathIntent === 'ownership') return 'one_time';
+  if (pathIntent === 'custom') return 'not_sure';
+  return '';
 }
 
 function getFieldError(field: FieldKey, state: FormState) {
@@ -163,6 +174,19 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
 
   const currentStepConfig = STEPS[activeStep - 1];
   const progressWidth = `${(activeStep / STEPS.length) * 100}%`;
+
+  React.useEffect(() => {
+    const initialPricingPath = getInitialPricingPath(sourcePath);
+    if (!initialPricingPath) return;
+
+    setFormState((current) => {
+      if (current.pricing_path) return current;
+      return {
+        ...current,
+        pricing_path: initialPricingPath,
+      };
+    });
+  }, [sourcePath]);
 
   const setFieldRef = React.useCallback(
     (field: FieldKey) => (element: HTMLElement | null) => {
@@ -404,7 +428,7 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
             href="/work"
             className="inline-flex min-h-10 items-center text-[14px] font-medium text-[var(--text-secondary)] underline decoration-[color:var(--hairline-strong)] underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--text-primary)]"
           >
-            See real builds
+            See concept builds
           </a>
         </div>
       </section>
@@ -843,6 +867,10 @@ export function ProjectIntakeWizard({ sourcePath }: ProjectIntakeWizardProps) {
             </Button>
           </div>
         </div>
+
+        <p className="mt-4 text-[13px] leading-[1.6] text-[var(--text-muted)]">
+          By submitting this form, you agree to be contacted about your project. Your information is only used to review and respond to your request.
+        </p>
       </form>
     </section>
   );

@@ -387,7 +387,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
         const rawBody = await request.json().catch(() => null);
         if (!rawBody || typeof rawBody !== 'object') {
-            console.warn('[INTAKE] invalid_body', rawBody);
+            console.warn('[INTAKE] invalid_body', {
+                bodyType: rawBody === null ? 'null' : Array.isArray(rawBody) ? 'array' : typeof rawBody
+            });
             return jsonResponse(request, env, { ok: false, error: 'Malformed JSON or empty body' }, 400);
         }
 
@@ -538,7 +540,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
                 from: confirmationFrom,
                 to: [email],
                 reply_to: 'contact@getaxiom.ca',
-                subject: 'Axiom received your request',
+                subject: 'Axiom Web received your request',
                 html: confirmationEmail.html,
                 text: confirmationEmail.text
             })
@@ -560,7 +562,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             if (confirmationFailed) {
                 console.error('[INTAKE] confirmation_email_failed', {
                     message: confirmationError instanceof Error ? confirmationError.message : 'unknown',
-                    recipient: email
+                    recipientProvided: Boolean(email)
                 });
             }
 
