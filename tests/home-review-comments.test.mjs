@@ -14,6 +14,8 @@ test('home review comments stay addressed', () => {
   assert.match(proofBar, /Custom design and development/);
   assert.match(proofBar, /2-4 week standard build window/);
   assert.match(proofBar, /Axiom Web, a division of Axiom International/);
+  assert.match(homePage, /We build the site your business actually deserves\./);
+  assert.doesNotMatch(homePage, /Sites for companies past the template stage\./);
   assert.doesNotMatch(homePage, /MotionQuote/);
   assert.doesNotMatch(homePage, /Custom build\./);
   assert.doesNotMatch(homePage, /card\.metricLabel/);
