@@ -16,6 +16,11 @@ test('home review comments stay addressed', () => {
   assert.match(proofBar, /Axiom Web, a division of Axiom International/);
   assert.match(homePage, /We build the site your business actually deserves\./);
   assert.doesNotMatch(homePage, /Sites for companies past the template stage\./);
+  assert.doesNotMatch(homePage, /WEB DESIGN — KITCHENER-WATERLOO/);
+  assert.match(homePage, /data-work-demo-toggle/);
+  assert.match(homePage, /aria-controls="selected-work-demos"/);
+  assert.match(homePage, /id="selected-work-demos"/);
+  assert.match(homePage, /data-work-demo-list/);
   assert.doesNotMatch(homePage, /MotionQuote/);
   assert.doesNotMatch(homePage, /Custom build\./);
   assert.doesNotMatch(homePage, /card\.metricLabel/);

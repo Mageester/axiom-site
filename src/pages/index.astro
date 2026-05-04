@@ -176,11 +176,8 @@ const services = [
       <div class="axiom-container relative">
         <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,30rem)] lg:items-center">
           <div class="max-w-3xl">
-            <FadeIn delay={0} motion="eyebrow">
-              <Eyebrow>WEB DESIGN — KITCHENER-WATERLOO</Eyebrow>
-            </FadeIn>
             <FadeIn delay={180} motion="sceneOpen">
-              <MotionHeading as="h1" text="We build the site your business actually deserves." className="mt-6 max-w-4xl text-left" />
+              <MotionHeading as="h1" text="We build the site your business actually deserves." className="max-w-4xl text-left" />
             </FadeIn>
             <FadeIn delay={520} motion="editorialMaskReveal">
               <p class="section-copy mt-6 max-w-2xl md:text-[1.1rem]">
@@ -240,16 +237,35 @@ const services = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>SELECTED WORK</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Concept studies." className="section-heading mt-4" />
-          <p class="section-copy mt-4 md:text-[17px]">
-            Internal explorations of how Axiom approaches different categories. Client work in production.
-          </p>
-        </FadeIn>
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
+            <Eyebrow>SELECTED WORK</Eyebrow>
+            <SectionDivider className="mt-6" />
+            <MotionHeading as="h2" text="Concept studies." className="section-heading mt-4" />
+            <p class="section-copy mt-4 md:text-[17px]">
+              Internal explorations of how Axiom approaches different categories. Client work in production.
+            </p>
+          </FadeIn>
 
-        <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <FadeIn delay={180} motion="sceneOpen" className="lg:pb-1">
+            <button
+              type="button"
+              class="inline-flex min-h-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.03)] px-5 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-[border-color,background-color,color] duration-200 hover:border-[color:var(--accent-border)] hover:bg-[rgba(255,255,255,0.05)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-solid)]"
+              data-work-demo-toggle
+              aria-controls="selected-work-demos"
+              aria-expanded="true"
+            >
+              <span data-work-demo-label>Collapse demos</span>
+            </button>
+          </FadeIn>
+        </div>
+
+        <div
+          id="selected-work-demos"
+          class="mt-10 grid gap-6 overflow-hidden md:grid-cols-2 xl:grid-cols-3"
+          data-work-demo-list
+          data-state="expanded"
+        >
           {workCards.map((card, index) => (
             <FadeIn motion="depthCardReveal" delay={Math.min(index * 150, 600)}>
               <Card
@@ -333,6 +349,64 @@ const services = [
         </FadeIn>
       </div>
     </section>
+
+    <script is:inline>
+      (() => {
+        const button = document.querySelector('[data-work-demo-toggle]');
+        const label = document.querySelector('[data-work-demo-label]');
+        const demoList = document.querySelector('[data-work-demo-list]');
+
+        if (!(button instanceof HTMLButtonElement) || !(label instanceof HTMLElement) || !(demoList instanceof HTMLElement)) {
+          return;
+        }
+
+        const setExpanded = (expanded) => {
+          button.setAttribute('aria-expanded', String(expanded));
+          label.textContent = expanded ? 'Collapse demos' : 'Expand demos';
+          demoList.dataset.state = expanded ? 'expanded' : 'collapsed';
+          demoList.style.maxHeight = expanded ? `${demoList.scrollHeight}px` : '0px';
+        };
+
+        setExpanded(true);
+
+        window.addEventListener('resize', () => {
+          if (button.getAttribute('aria-expanded') === 'true') {
+            demoList.style.maxHeight = `${demoList.scrollHeight}px`;
+          }
+        });
+
+        button.addEventListener('click', () => {
+          setExpanded(button.getAttribute('aria-expanded') !== 'true');
+        });
+      })();
+    </script>
+
+    <style>
+      [data-work-demo-list] {
+        transition:
+          max-height 560ms var(--ease-premium),
+          opacity 320ms var(--ease-premium),
+          transform 420ms var(--ease-premium);
+        will-change: max-height, opacity, transform;
+      }
+
+      [data-work-demo-list][data-state='collapsed'] {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-0.5rem);
+      }
+
+      [data-work-demo-list][data-state='expanded'] {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        [data-work-demo-list] {
+          transition: none;
+        }
+      }
+    </style>
 
     <section class="page-section section-shell">
       <div class="axiom-container">
