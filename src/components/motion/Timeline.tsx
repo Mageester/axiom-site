@@ -49,7 +49,7 @@ export function Timeline({ steps, className, mobileVertical = true }: TimelinePr
             }
           >
             <div className="flex items-center gap-3">
-              <span className="timeline-step-number flex h-11 min-w-[3.25rem] items-center justify-center rounded-full border border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3)] bg-[color:rgba(255,255,255,0.03)] px-2 font-mono text-[0.68rem] font-medium uppercase tracking-[0.06em] text-[var(--accent-solid)] transition-[background-color,border-color,box-shadow,transform] duration-[var(--motion-hover-settle)] ease-[var(--ease-cinematic)] group-hover:border-[color:var(--accent-border-strong)] group-hover:bg-[color:var(--accent-surface)] group-hover:shadow-[0_0_0_5px_var(--accent-ring-soft)]">
+              <span className="timeline-step-number flex h-10 min-w-[4.75rem] items-center justify-center rounded-[10px] border border-[color:var(--hairline-strong)] bg-[color:rgba(255,255,255,0.025)] px-3 font-display text-[0.72rem] font-medium uppercase tracking-[0.035em] text-[var(--accent-solid)] transition-[background-color,border-color] duration-[var(--motion-hover-settle)] ease-[var(--ease-cinematic)] group-hover:border-[color:var(--accent-border)] group-hover:bg-[color:rgba(255,255,255,0.04)]">
                 {step.kicker}
               </span>
               <div className="h-px flex-1 bg-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.35)] md:hidden" />

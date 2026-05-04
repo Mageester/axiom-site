@@ -4,32 +4,32 @@ import { cn } from '../../lib/utils';
 const stats = [
   {
     key: 'performance',
-    node: 'PERFORMANCE VERIFIED BEFORE LAUNCH',
+    node: 'Performance verified before launch',
   },
   {
     key: 'custom',
-    node: 'CUSTOM DESIGN AND DEVELOPMENT',
+    node: 'Custom design and development',
   },
   {
     key: 'window',
-    node: '2-4 WEEK STANDARD BUILD WINDOW',
+    node: '2-4 week standard build window',
   },
   {
     key: 'axiom-international',
-    node: 'BUILT BY AXIOM WEB, A DIVISION OF AXIOM INTERNATIONAL',
+    node: 'Axiom Web, a division of Axiom International',
   },
 ] as const;
 
 export function ProofBar({ className }: { className?: string }) {
   return (
-    <section className={cn('border-y border-[color:rgba(255,255,255,0.05)]', className)}>
+    <section className={cn('home-proof-band border-y border-[color:rgba(255,255,255,0.05)]', className)}>
       <div className="axiom-container">
         <div className="grid gap-4 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
           {stats.map((stat, index) => (
             <div
               key={stat.key}
               className={cn(
-                'motion-surface flex items-center justify-center text-center font-mono text-[0.875rem] uppercase tracking-[0.1em] text-[var(--accent-solid)]',
+                'motion-surface flex items-center justify-center px-4 text-center font-display text-[0.96rem] font-medium leading-[1.45] tracking-[0.01em] text-[var(--text-secondary)]',
                 index !== stats.length - 1 && 'lg:border-r lg:border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.4)]'
               )}
               data-reveal
