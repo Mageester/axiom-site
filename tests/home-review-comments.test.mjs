@@ -10,8 +10,18 @@ const proofBar = readFileSync(new URL('../src/components/motion/ProofBar.tsx', i
 test('home review comments stay addressed', () => {
   assert.match(proofBar, /home-proof-band/);
   assert.doesNotMatch(proofBar, /font-mono/);
+  assert.match(proofBar, /Performance verified before launch/);
+  assert.match(proofBar, /Custom design and development/);
+  assert.match(proofBar, /2-4 week standard build window/);
+  assert.match(proofBar, /Axiom Web, a division of Axiom International/);
+  assert.doesNotMatch(homePage, /MotionQuote/);
+  assert.doesNotMatch(homePage, /Custom build\./);
+  assert.doesNotMatch(homePage, /card\.metricLabel/);
+  assert.doesNotMatch(homePage, /card\.metricValue/);
+  assert.match(homePage, /day: 'Week 2',\s*title: 'Scope'/);
   assert.doesNotMatch(homePage, /Fit\s*&rarr;\s*Scope\s*&rarr;\s*Launch/i);
-  assert.match(footer, /Axiom Web is a division of Axiom International/i);
+  assert.match(footer, /Axiom Web\. Kitchener-Waterloo\./);
+  assert.doesNotMatch(footer, /division of Axiom International/i);
   assert.match(timeline, /timeline-step-number flex h-10 min-w-\[4\.75rem\]/);
   assert.doesNotMatch(timeline, /timeline-step-number[^"]*rounded-full/);
 });
