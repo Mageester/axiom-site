@@ -1,5 +1,5 @@
 export const SITE_NAME = 'Axiom Web';
-export const SITE_TAGLINE = 'Websites built to convert. Not to decorate.';
+export const SITE_TAGLINE = 'Custom web design and development for companies past the template stage.';
 export const SITE_URL = 'https://getaxiom.ca';
 export const DEFAULT_OG_IMAGE = '/og-image.png';
 export const DEFAULT_SEO_DESCRIPTION = SITE_TAGLINE;
@@ -72,7 +72,7 @@ export const HOME_JSON_LD = {
   logo: 'https://getaxiom.ca/axiomtransparentlogo.webp',
   image: 'https://getaxiom.ca/og-image.png',
   description:
-    'Custom web development and conversion-focused websites for established businesses across Kitchener-Waterloo, Cambridge, and Guelph. Sites built in 2-4 weeks, starting at $0 down.',
+    'Custom web design and development for established businesses across Kitchener-Waterloo, Cambridge, and Guelph. Standard builds launch in 2-4 weeks and are checked against Core Web Vitals before release.',
   email: SITE_EMAIL,
   telephone: '+1-226-753-1833',
   priceRange: '$$',
@@ -128,13 +128,13 @@ export const HOME_JSON_LD = {
         itemOffered: {
           '@type': 'Service',
           name: 'Monthly Website Subscription',
-          description: 'Custom website with $0 down, hosting, ongoing edits, and support. From $150/mo.',
+          description: 'Custom website engagement with hosting, ongoing edits, and support. From $200/mo.',
         },
-        price: '150',
+        price: '200',
         priceCurrency: 'CAD',
         priceSpecification: {
           '@type': 'UnitPriceSpecification',
-          price: '150',
+          price: '200',
           priceCurrency: 'CAD',
           billingDuration: 'P1M',
         },
@@ -332,7 +332,7 @@ export const SEO_ROUTES = {
   home: {
     title: 'Custom Web Development | KW Region | Axiom Web',
     description:
-      'Axiom builds custom websites for businesses in Kitchener-Waterloo and across Canada. Sites launch in 2-4 weeks, start at $0 down, and are verified against Core Web Vitals.',
+      'Custom web design and development for businesses in Kitchener-Waterloo and across Canada. Standard builds launch in 2-4 weeks and are verified against Core Web Vitals.',
     canonicalPath: '/',
   },
   work: {

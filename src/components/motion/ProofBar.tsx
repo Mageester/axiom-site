@@ -3,20 +3,20 @@ import { cn } from '../../lib/utils';
 
 const stats = [
   {
-    key: 'launch',
-    node: '2-4 WEEK LAUNCH',
+    key: 'performance',
+    node: 'PERFORMANCE VERIFIED BEFORE LAUNCH',
   },
   {
-    key: 'vitals',
-    node: 'CORE WEB VITALS',
+    key: 'custom',
+    node: 'CUSTOM DESIGN AND DEVELOPMENT',
   },
   {
-    key: 'support',
-    node: 'DIRECT SUPPORT',
+    key: 'window',
+    node: '2-4 WEEK STANDARD BUILD WINDOW',
   },
   {
-    key: 'asterisks',
-    node: 'OWNERSHIP OPTIONAL',
+    key: 'axiom-international',
+    node: 'BUILT BY AXIOM WEB, A DIVISION OF AXIOM INTERNATIONAL',
   },
 ] as const;
 

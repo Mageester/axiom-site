@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
             />
           </a>
           <p className="max-w-sm text-[15px] italic leading-[1.7] text-[var(--text-secondary)]">
-            Websites built to convert. Not to decorate.
+            Axiom Web. Kitchener-Waterloo.
           </p>
           <p className="text-[14px] leading-[1.6] text-[var(--text-muted)]">Copyright {year} Axiom Web.</p>
         </div>
