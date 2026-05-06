@@ -45,6 +45,9 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
           <p className="max-w-sm text-[15px] italic leading-[1.7] text-[var(--text-secondary)]">
             Custom websites for businesses that need more than a template. Based in Kitchener-Waterloo.
           </p>
+          <p className="max-w-sm text-[14px] leading-[1.7] text-[var(--text-muted)]">
+            A subsidiary of Axiom International.
+          </p>
           <p className="text-[14px] leading-[1.6] text-[var(--text-muted)]">Copyright {year} Axiom Web.</p>
         </div>
 
