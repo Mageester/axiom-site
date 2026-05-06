@@ -247,24 +247,31 @@ const services = [
             </p>
           </FadeIn>
 
-          <FadeIn delay={180} motion="sceneOpen" className="lg:pb-1">
+          <FadeIn delay={180} motion="sceneOpen" className="flex flex-wrap items-center gap-3 lg:justify-end lg:pb-1">
+            <a
+              href="/work"
+              class="inline-flex min-h-11 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[rgba(214,173,66,0.08)] px-5 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-[border-color,background-color,color] duration-200 hover:border-[color:var(--accent-solid)] hover:bg-[rgba(214,173,66,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-solid)]"
+            >
+              View all work
+            </a>
             <button
               type="button"
               class="inline-flex min-h-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.03)] px-5 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-[border-color,background-color,color] duration-200 hover:border-[color:var(--accent-border)] hover:bg-[rgba(255,255,255,0.05)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-solid)]"
               data-work-demo-toggle
               aria-controls="selected-work-demos"
-              aria-expanded="true"
+              aria-expanded="false"
             >
-              <span data-work-demo-label>Collapse demos</span>
+              <span data-work-demo-label>View demos</span>
             </button>
           </FadeIn>
         </div>
 
         <div
           id="selected-work-demos"
-          class="mt-10 grid gap-6 overflow-hidden md:grid-cols-2 xl:grid-cols-3"
+          class="grid gap-6 overflow-hidden md:grid-cols-2 xl:grid-cols-3"
           data-work-demo-list
-          data-state="expanded"
+          data-state="collapsed"
+          style="max-height: 0px;"
         >
           {workCards.map((card, index) => (
             <FadeIn motion="depthCardReveal" delay={Math.min(index * 150, 600)}>
@@ -362,12 +369,12 @@ const services = [
 
         const setExpanded = (expanded) => {
           button.setAttribute('aria-expanded', String(expanded));
-          label.textContent = expanded ? 'Collapse demos' : 'Expand demos';
+          label.textContent = expanded ? 'Hide demos' : 'View demos';
           demoList.dataset.state = expanded ? 'expanded' : 'collapsed';
           demoList.style.maxHeight = expanded ? `${demoList.scrollHeight}px` : '0px';
         };
 
-        setExpanded(true);
+        setExpanded(false);
 
         window.addEventListener('resize', () => {
           if (button.getAttribute('aria-expanded') === 'true') {
@@ -383,14 +390,17 @@ const services = [
 
     <style>
       [data-work-demo-list] {
+        margin-top: 2.5rem;
         transition:
+          margin-top 420ms var(--ease-premium),
           max-height 560ms var(--ease-premium),
           opacity 320ms var(--ease-premium),
           transform 420ms var(--ease-premium);
-        will-change: max-height, opacity, transform;
+        will-change: margin-top, max-height, opacity, transform;
       }
 
       [data-work-demo-list][data-state='collapsed'] {
+        margin-top: 0;
         opacity: 0;
         pointer-events: none;
         transform: translateY(-0.5rem);
