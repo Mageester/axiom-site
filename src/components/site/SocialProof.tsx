@@ -112,7 +112,7 @@ const SocialProof: React.FC<SocialProofProps> = ({
             No fluff. Just reasons buyers can verify.
           </h2>
           <p className="mt-4 max-w-3xl text-[15px] leading-[1.7] text-slate-300 md:text-[16px]">
-            When there is no review to show yet, lead with the parts of the offer that are already clear.
+            What to expect before, during, and after the build.
           </p>
         </div>
       )}

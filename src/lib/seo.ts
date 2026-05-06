@@ -265,7 +265,7 @@ export const PRICING_FAQ_JSON_LD = {
       name: 'What makes Axiom different?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Fast sites, real pricing, and support that does not stop at launch. Most standard builds go live in 2-4 weeks.',
+        text: 'You deal with the same two people from first call to launch — no account managers, no handoffs to a junior team. Pricing is posted publicly. Builds go live in 2-4 weeks. Monthly clients keep ongoing support after launch, not just a one-time delivery.',
       },
     },
   ],
@@ -277,7 +277,7 @@ export const ABOUT_JSON_LD = {
   url: 'https://getaxiom.ca/about',
   name: 'About Axiom Web',
   description:
-    'Two operators. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
+    'Two people. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
   mainEntity: ORGANIZATION_SCHEMA,
 } as const;
 
@@ -296,7 +296,7 @@ export const PROCESS_JSON_LD = {
     {
       '@type': 'HowToStep',
       position: 2,
-      name: 'Week 1 – Scope',
+      name: 'Week 2 – Scope',
       text: 'We lock the pages, the call paths, and the priorities before design starts. Decisions happen here, not mid-build.',
     },
     {
@@ -361,7 +361,7 @@ export const SEO_ROUTES = {
   about: {
     title: 'About Axiom Web | Custom Web Design Studio',
     description:
-      'Two operators. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
+      'Two people. Clear roles. We build fast websites for established businesses in Kitchener-Waterloo and across Canada. You always know who to call.',
     canonicalPath: '/about',
   },
   approach: {

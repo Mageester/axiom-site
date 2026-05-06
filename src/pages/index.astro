@@ -59,26 +59,26 @@ const workCards = [
 const principles = [
   {
     number: '01',
-    title: 'Clear commercial position',
-    description: 'The offer, audience, and next action are sharpened before the interface gets dressed.',
+    title: 'Your offer reads clearly from the start.',
+    description: 'Before design starts, we make sure visitors understand what you do and how to reach you — no hunting required.',
     icon: 'eye',
   },
   {
     number: '02',
-    title: 'Proof in the buyer path',
-    description: 'Credibility sits where decisions happen, not hidden at the bottom of the page.',
+    title: 'Reviews and past work where buyers look.',
+    description: 'Testimonials, past jobs, and credentials sit high on the page, not buried in the footer.',
     icon: 'shield-check',
   },
   {
     number: '03',
-    title: 'Performance as baseline',
-    description: 'Core Web Vitals, load speed, accessibility, and mobile behavior are treated as launch requirements.',
+    title: 'Fast on every device, verified before launch.',
+    description: 'Load speed, mobile layout, and accessibility are checked on every build before it goes live.',
     icon: 'bolt',
   },
   {
     number: '04',
-    title: 'Support without dependency',
-    description: 'Monthly support is available. Ownership remains clean. The site is never built to trap the client.',
+    title: 'Support after launch, not just delivery.',
+    description: 'Monthly clients keep edits, fixes, and updates. The site is never handed off and forgotten.',
     icon: 'key',
   },
 ] as const;
@@ -118,23 +118,23 @@ const timelineSteps = processStages.map((stage) => ({
 
 const services = [
   {
-    label: 'Growth Retainer',
+    label: 'Monthly Plan',
     description:
-      'Launch with lower upfront friction, then keep design, content, performance, and support moving after release.',
-    href: '/work',
+      '$0 down to start. We build the site, include hosting, and keep it updated month to month.',
+    href: '/pricing',
     icon: 'target',
   },
   {
-    label: 'Ownership Build',
+    label: 'One-Time Build',
     description:
-      'A scoped custom site with full code handoff, launch support, and clean ownership from day one.',
-    href: '/work',
+      'One payment. Full code ownership at launch. No ongoing fees unless you want them.',
+    href: '/pricing',
     icon: 'crown',
   },
   {
     label: 'Rebuild & Migrate',
     description:
-      'Replace a dated or underperforming site without losing momentum, structure, or search visibility.',
+      'Replace a dated or underperforming site without losing your search ranking, content, or domain history.',
     href: '/process',
     icon: 'refresh',
   },
@@ -181,7 +181,7 @@ const services = [
             </FadeIn>
             <FadeIn delay={520} motion="editorialMaskReveal">
               <p class="section-copy mt-6 max-w-2xl md:text-[1.1rem]">
-              Custom web design and development for teams that need sharper positioning, faster performance, and a more serious path from first impression to booked conversation.
+              Custom web design and development for established businesses that need a faster site, cleaner message, and a better path from first visit to booked call.
               </p>
             </FadeIn>
 
@@ -335,7 +335,7 @@ const services = [
                   {service.description}
                 </p>
                 <span class="mt-auto font-mono text-[12px] uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-opacity duration-200 group-hover:opacity-80">
-                  {service.href === '/process' ? 'See how it works' : 'View concept work'}
+                  {service.href === '/process' ? 'See how it works' : 'See pricing'}
                 </span>
               </a>
             </FadeIn>
@@ -351,7 +351,7 @@ const services = [
           <SectionDivider className="mt-6" />
           <MotionHeading as="h2" text="Built for companies with something to protect." className="section-heading mt-4" />
           <p class="section-copy mt-4 md:text-[17px]">
-            Established offers. Growing teams. Higher-value sales conversations. Brands where the site has to signal judgment before it asks for action.
+            Established offers. Growing teams. Higher-value sales conversations. Businesses where the site needs to look credible and load fast before it asks for a call.
           </p>
         </FadeIn>
       </div>
