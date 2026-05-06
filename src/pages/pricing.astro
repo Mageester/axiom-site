@@ -36,7 +36,7 @@ const pricingTiers = [
     subtext: 'For a standard 5-page build. Full handoff at launch. Hosting can be scoped separately.',
     supportNote: 'For buyers who want the code, the site, and the keys at launch.',
     features: ['Up to 5 pages', 'Full code ownership at launch', 'Launch support included', 'Hosting scoped separately', 'SEO foundation'],
-    cta: 'Buy outright',
+    cta: 'Pay once, own it',
     href: createStartProjectHref('ownership'),
     variant: 'secondary',
     bestFor: 'One payment. Full ownership at launch.',
@@ -165,7 +165,7 @@ const faqItems = [
   {
     question: 'What makes Axiom different?',
     answer:
-      'Fast sites, real pricing, and support that does not stop at launch. Most standard builds go live in 2-4 weeks.',
+      'You deal with the same two people from first call to launch — no account managers, no handoffs to a junior team. Pricing is posted publicly. Builds go live in 2-4 weeks. Monthly clients keep ongoing support after launch, not just a one-time delivery.',
   },
 ] as const;
 ---
@@ -193,9 +193,6 @@ const faqItems = [
           </p>
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={660}>
-          <p class="mt-4 text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
-            Monthly is the default. Ownership and e-commerce stay available when they're the better fit.
-          </p>
           <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-muted)] md:text-[15px]">
             Typical pages include Home, Services, About, Work, and Contact. Extra pages can be scoped separately.
             The final monthly price depends on page count, integrations, and support needs.
@@ -489,7 +486,7 @@ const faqItems = [
             <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
               <div class="max-w-3xl">
                 <SectionDivider className="mb-6" />
-                <MotionHeading as="h2" text="Not sure which tier fits?" className="section-heading" />
+                <MotionHeading as="h2" text="Not sure which option is right?" className="section-heading" />
                 <p class="section-copy mt-4 md:text-[17px]">
                   Tell us what the business needs. We'll tell you which path fits - monthly, ownership, or lump sum.
                   One business day. No pressure, no pitch deck.

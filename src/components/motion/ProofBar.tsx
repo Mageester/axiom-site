@@ -15,8 +15,8 @@ const stats = [
     node: '2-4 week standard build window',
   },
   {
-    key: 'axiom-international',
-    node: 'Axiom Web, a division of Axiom International',
+    key: 'canada',
+    node: 'Serving clients across Canada',
   },
 ] as const;
 

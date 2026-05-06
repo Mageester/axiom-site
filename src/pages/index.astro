@@ -317,7 +317,7 @@ const services = [
         <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>ENGAGEMENTS</Eyebrow>
           <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Three ways to commission the work." className="section-heading mt-4" />
+          <MotionHeading as="h2" text="Three ways to work with us." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-5 md:grid-cols-3">
@@ -335,7 +335,7 @@ const services = [
                   {service.description}
                 </p>
                 <span class="mt-auto font-mono text-[12px] uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-opacity duration-200 group-hover:opacity-80">
-                  View concept work
+                  {service.href === '/process' ? 'See how it works' : 'View concept work'}
                 </span>
               </a>
             </FadeIn>
@@ -423,7 +423,7 @@ const services = [
         <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>WHY AXIOM</Eyebrow>
           <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="The standard is visible before the call." className="section-heading mt-4" />
+          <MotionHeading as="h2" text="You can judge the work before reaching out." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-5 md:grid-cols-2">
