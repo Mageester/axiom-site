@@ -729,6 +729,15 @@ html[data-motion-active='true'] .timeline-rail-vertical:not([data-reveal-state='
   text-decoration: none;
 }
 
+.work-filter-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.work-filter-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 .site-logo {
   text-decoration: none;
 }

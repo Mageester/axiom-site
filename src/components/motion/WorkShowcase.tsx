@@ -26,54 +26,141 @@ export interface WorkShowcaseProps {
   filters: Filter[];
 }
 
-function WorkImage({ build, styleType, index }: { build: Build; styleType: 'a' | 'b' | 'c'; index: number }) {
-  const motionWrapClass =
-    styleType === 'b'
-      ? 'relative overflow-hidden rounded-[24px]'
-      : styleType === 'c'
-        ? 'relative overflow-visible'
-        : 'relative overflow-hidden rounded-[24px]';
-  const frameClass = styleType === 'b' ? 'aspect-[16/9] md:aspect-[2.05/1]' : 'aspect-[16/10]';
+function WorkImage({
+  build,
+  index,
+  featured = false,
+}: {
+  build: Build;
+  index: number;
+  featured?: boolean;
+}) {
+  return (
+    <m.div
+      className={cn(
+        'relative transform-gpu overflow-hidden rounded-[22px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.03)]',
+        featured ? 'aspect-[16/11] lg:aspect-[1.18/1]' : 'aspect-[16/10] lg:aspect-[1.35/1]'
+      )}
+      whileHover={{ scale: 1.016 }}
+      initial={false}
+      transition={{
+        scale: { duration: 0.42, ease: [0.16, 1, 0.3, 1] },
+      }}
+    >
+      <picture className="block h-full w-full">
+        <source type="image/avif" srcSet={build.image.avifSrcSet} />
+        <source type="image/webp" srcSet={build.image.webpSrcSet} />
+        <img
+          src={build.image.fallbackSrc}
+          alt={build.alt}
+          className="block h-full w-full object-cover"
+          loading={index === 0 ? 'eager' : 'lazy'}
+          fetchpriority={index === 0 ? 'high' : 'low'}
+          decoding="async"
+          width={1200}
+          height={featured ? 1017 : 889}
+          style={{ objectPosition: build.position }}
+        />
+      </picture>
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_58%,rgba(0,0,0,0.34)_100%)]" />
+    </m.div>
+  );
+}
+
+function CaseNotes({ build, compact = false }: { build: Build; compact?: boolean }) {
+  return (
+    <dl className={cn('grid gap-3', compact ? 'max-w-2xl' : 'sm:grid-cols-3 lg:grid-cols-1')}>
+      {[
+        ['Problem', build.originalWeakness],
+        ['Changed', build.axiomChanged],
+        ['Effect', build.whyItWorks],
+      ].map(([label, value]) => (
+        <div
+          key={label}
+          className={cn(
+            'border-t border-[color:var(--hairline)] pt-4',
+            !compact && 'sm:border-l sm:border-t-0 sm:pl-4 sm:pt-0',
+            !compact && 'lg:border-l-0 lg:border-t lg:pl-0 lg:pt-4'
+          )}
+        >
+          <dt className="font-mono text-[0.68rem] uppercase tracking-[0.12em] text-[var(--text-muted)]">{label}</dt>
+          <dd className="mt-2 text-[0.95rem] leading-[1.62] text-[var(--text-secondary)]">{value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function CaseCard({
+  build,
+  index,
+  featured = false,
+}: {
+  build: Build;
+  index: number;
+  featured?: boolean;
+}) {
+  const imageFirst = featured || index % 2 === 0;
 
   return (
-    <div className={motionWrapClass}>
-      {styleType === 'c' ? (
-        <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-[24px] border border-[color:var(--accent-border)] bg-[rgba(255,255,255,0.02)]" aria-hidden="true" />
-      ) : null}
+    <m.article
+      className={cn(
+        'motion-surface premium-card group overflow-hidden rounded-[24px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]',
+        featured
+          ? 'grid gap-0 lg:grid-cols-[minmax(0,1.08fr)_minmax(22rem,0.92fr)]'
+          : 'grid gap-0 lg:grid-cols-[minmax(20rem,0.82fr)_minmax(0,1.18fr)]'
+      )}
+      data-reveal
+      data-motion="depthCardReveal"
+      suppressHydrationWarning
+    >
+      <div className={cn('p-3 sm:p-4', !imageFirst && 'lg:order-2')}>
+        <WorkImage build={build} index={index} featured={featured} />
+      </div>
 
-      <m.div
-        className={cn(
-          'relative transform-gpu overflow-hidden rounded-[24px]',
-          frameClass,
-          styleType === 'c' && 'border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-2'
-        )}
-        whileHover={{ scale: 1.018 }}
-        initial={false}
-        transition={{
-          scale: { duration: 0.42, ease: [0.16, 1, 0.3, 1] },
-        }}
-      >
-        <picture className="block h-full w-full overflow-hidden rounded-[20px]">
-          <source type="image/avif" srcSet={build.image.avifSrcSet} />
-          <source type="image/webp" srcSet={build.image.webpSrcSet} />
-          <img
-            src={build.image.fallbackSrc}
-            alt={build.alt}
-            className="block h-full w-full object-cover"
-            loading={index === 0 ? 'eager' : 'lazy'}
-            fetchpriority={index === 0 ? 'high' : 'low'}
-            decoding="async"
-            width={1200}
-            height={styleType === 'b' ? 585 : 750}
-            style={{ objectPosition: build.position }}
-          />
-        </picture>
+      <div className={cn('flex min-w-0 flex-col p-6 sm:p-7 lg:p-8', !imageFirst && 'lg:order-1')}>
+        <div className="flex items-start justify-between gap-5">
+          <div>
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-[var(--accent-solid)]">
+              {build.eyebrow}
+            </p>
+            <h3
+              className={cn(
+                'mt-4 font-medium tracking-[-0.01em] text-[var(--text-primary)]',
+                featured ? 'text-[clamp(1.55rem,2.35vw,2.4rem)] leading-[1.12]' : 'text-[clamp(1.2rem,1.45vw,1.55rem)]'
+              )}
+            >
+              {build.title}
+            </h3>
+          </div>
+          <span className="hidden shrink-0 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-[var(--text-muted)] sm:inline">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+        </div>
 
-        {styleType === 'b' ? (
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_28%,rgba(0,0,0,0.62)_100%)]" />
-        ) : null}
-      </m.div>
-    </div>
+        <p
+          className={cn(
+            'mt-5 max-w-2xl text-[1rem] leading-[1.72] text-[var(--text-secondary)]',
+            featured && 'text-[1.05rem] lg:max-w-xl'
+          )}
+        >
+          {build.axiomChanged}
+        </p>
+
+        <div className={cn('mt-7', featured ? 'lg:mt-auto lg:pt-8' : 'lg:mt-8')}>
+          <CaseNotes build={build} compact={!featured} />
+        </div>
+
+        <a
+          href={build.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="motion-link-accent mt-7 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
+        >
+          View demo
+        </a>
+      </div>
+    </m.article>
   );
 }
 
@@ -81,191 +168,46 @@ export function WorkShowcase({ builds, filters }: WorkShowcaseProps) {
   const [activeFilter, setActiveFilter] = React.useState('all');
 
   const visibleBuilds = activeFilter === 'all' ? builds : builds.filter((build) => build.category === activeFilter);
+  const [featuredBuild, ...supportingBuilds] = visibleBuilds;
 
   return (
-    <div className="space-y-8 md:space-y-10">
-      <div className="relative mb-8 flex flex-wrap items-center gap-x-6 gap-y-3 md:mb-10" data-reveal suppressHydrationWarning>
-        {filters.map((filter) => {
-          const isActive = filter.value === activeFilter;
-
-          return (
-            <button
-              key={filter.value}
-              type="button"
-              onClick={() => setActiveFilter(filter.value)}
-              aria-pressed={isActive}
-            className="relative min-h-11 rounded-full border border-transparent px-3 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-[var(--text-muted)] transition-[color,border-color,background-color] duration-[var(--duration-fast)] ease-[var(--ease-premium)] hover:border-[color:var(--hairline)] hover:bg-[color:var(--surface-overlay)] hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
-            >
-              {isActive ? (
-                <m.span
-                  layoutId="work-filter-underline"
-                  className="absolute inset-x-0 -bottom-px h-px bg-[color:var(--accent-solid)]"
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                />
-              ) : null}
-              <span className={cn(isActive && 'text-[var(--accent-solid)]')}>{filter.label}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="grid gap-8 md:gap-10">
-        <>
-          {visibleBuilds.map((build, index) => {
-            const styleType = index % 3 === 0 ? 'a' : index % 3 === 1 ? 'b' : 'c';
-            const imageFirst = index % 2 === 0;
-
-            if (styleType === 'b') {
-              return (
-                <m.article
-                  key={build.title}
-                  className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
-                  data-reveal
-                  data-motion="depthCardReveal"
-                  suppressHydrationWarning
-                >
-                  <div className="relative">
-                    <WorkImage build={build} styleType={styleType} index={index} />
-                    <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-                      <div className="max-w-2xl rounded-[22px] border border-[color:rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.16)] bg-[linear-gradient(180deg,rgba(0,0,0,0.3),rgba(0,0,0,0.72))] p-5 backdrop-blur-[10px]">
-                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
-                          {build.eyebrow}
-                        </p>
-                        <h3 className="mt-3 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
-                          {build.title}
-                        </h3>
-                        <p className="mt-2 max-w-xl text-[1rem] leading-[1.6] text-[var(--text-secondary)]">
-                          {build.axiomChanged}
-                        </p>
-                        <a
-                          href={build.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="motion-link-accent mt-4 inline-flex min-h-11 items-center text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
-                        >
-                          View demo
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="grid gap-0 md:grid-cols-3">
-                    <div className="md:col-span-1" />
-                    <dl className="grid gap-0 md:col-span-2 md:grid-cols-3">
-                      {[
-                        ['The problem', build.originalWeakness],
-                        ['What changed', build.axiomChanged],
-                        ['Why it works', build.whyItWorks],
-                      ].map(([label, value]) => (
-                        <div key={label} className="border-t border-[color:var(--hairline)] p-5 sm:p-6">
-                          <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">
-                            {label}
-                          </dt>
-                          <dd className="mt-2 text-[1rem] leading-[1.65] text-[var(--text-secondary)]">
-                            {value}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
-                </m.article>
-              );
-            }
-
-            if (styleType === 'c') {
-              return (
-                <m.article
-                  key={build.title}
-                  className="motion-surface premium-card group grid gap-0 overflow-visible rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
-                  data-reveal
-                  data-motion="depthCardReveal"
-                  suppressHydrationWarning
-                >
-                  <div className={`${imageFirst ? '' : 'lg:order-2'}`}>
-                    <WorkImage build={build} styleType={styleType} index={index} />
-                  </div>
-                  <div className={`flex h-full flex-col justify-center p-6 sm:p-8 ${imageFirst ? '' : 'lg:order-1'}`}>
-                    <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
-                      {build.eyebrow}
-                    </p>
-                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
-                      {build.title}
-                    </h3>
-                    <div className="mt-6 space-y-4 border-t border-[color:var(--hairline)] pt-5">
-                      <div>
-                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">The problem</p>
-                        <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.originalWeakness}</p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">What changed</p>
-                        <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.axiomChanged}</p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Why it works</p>
-                        <p className="mt-2 text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.whyItWorks}</p>
-                      </div>
-                    </div>
-                    <a
-                      href={build.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="motion-link-accent mt-6 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
-                    >
-                      View demo
-                    </a>
-                  </div>
-                </m.article>
-              );
-            }
+    <div className="space-y-7 md:space-y-9">
+      <div className="work-filter-scroll relative -mx-4 overflow-x-auto px-4 pb-2 md:mx-0 md:overflow-visible md:px-0" data-reveal suppressHydrationWarning>
+        <div className="inline-flex min-w-max items-center gap-1 rounded-full border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.025)] p-1">
+          {filters.map((filter) => {
+            const isActive = filter.value === activeFilter;
 
             return (
-              <m.article
-                key={build.title}
-                className="motion-surface premium-card group overflow-hidden rounded-[28px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] shadow-[var(--shadow-card)]"
-                data-reveal
-                data-motion="depthCardReveal"
-                suppressHydrationWarning
+              <button
+                key={filter.value}
+                type="button"
+                onClick={() => setActiveFilter(filter.value)}
+                aria-pressed={isActive}
+                className="relative min-h-10 rounded-full px-4 py-2 text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)] transition-[color,background-color] duration-[var(--duration-fast)] ease-[var(--ease-premium)] hover:bg-[color:var(--surface-overlay)] hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
               >
-                <div className={`grid gap-0 lg:grid-cols-2`}>
-                  <div className={`${imageFirst ? '' : 'lg:order-2'}`}>
-                    <WorkImage build={build} styleType={styleType} index={index} />
-                  </div>
-                  <div className={`flex h-full flex-col justify-center p-6 sm:p-8 lg:p-10 ${imageFirst ? '' : 'lg:order-1'}`}>
-                    <p className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--accent-solid)]">
-                      {build.eyebrow}
-                    </p>
-                    <h3 className="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
-                      {build.title}
-                    </h3>
-
-                    <dl className="mt-8 space-y-5">
-                      <div className="space-y-2">
-                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">The problem</dt>
-                        <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.originalWeakness}</dd>
-                      </div>
-                      <div className="space-y-2 border-t border-[color:var(--hairline)] pt-5">
-                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">What changed</dt>
-                        <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.axiomChanged}</dd>
-                      </div>
-                      <div className="space-y-2 border-t border-[color:var(--hairline)] pt-5">
-                        <dt className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-[var(--text-muted)]">Why it works</dt>
-                        <dd className="text-[1rem] leading-[1.6] text-[var(--text-secondary)]">{build.whyItWorks}</dd>
-                      </div>
-                    </dl>
-                    <a
-                      href={build.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="motion-link-accent mt-7 inline-flex min-h-11 items-center self-start text-[14px] font-semibold text-[var(--text-primary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
-                    >
-                      View demo
-                    </a>
-                  </div>
-                </div>
-              </m.article>
+                {isActive ? (
+                  <m.span
+                    layoutId="work-filter-pill"
+                    className="absolute inset-0 rounded-full border border-[color:var(--accent-border)] bg-[color:var(--accent-surface)]"
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                ) : null}
+                <span className={cn('relative z-10', isActive && 'text-[var(--accent-solid)]')}>{filter.label}</span>
+              </button>
             );
           })}
-        </>
+        </div>
       </div>
+
+      {featuredBuild ? <CaseCard build={featuredBuild} index={0} featured /> : null}
+
+      {supportingBuilds.length ? (
+        <div className="grid gap-5 md:gap-6">
+          {supportingBuilds.map((build, index) => (
+            <CaseCard key={build.title} build={build} index={index + 1} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
