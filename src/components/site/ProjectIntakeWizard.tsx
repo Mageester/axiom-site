@@ -65,7 +65,7 @@ const PATH_OPTIONS: Array<{
   {
     value: 'one_time',
     label: 'One-time / ownership',
-    description: 'A single scoped build with ownership from launch.',
+    description: 'One payment. Full code ownership at launch. No ongoing fees unless you want them.',
   },
   {
     value: 'not_sure',
