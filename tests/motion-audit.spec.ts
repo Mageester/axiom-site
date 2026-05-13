@@ -30,7 +30,7 @@ const mobileViewport = { width: 375, height: 667, isMobile: true, hasTouch: true
 const pages = [
   { page: 'home', url: '/' },
   { page: 'work', url: '/work' },
-  { page: 'process', url: '/process' },
+  { page: 'approach', url: '/approach' },
   { page: 'pricing', url: '/pricing' },
   { page: 'about', url: '/about' },
   { page: 'start-a-project', url: '/start-a-project' },

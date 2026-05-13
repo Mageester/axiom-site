@@ -1,0 +1,120 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { Button } from '../../components/ui/button';
+import { Card } from '../../components/ui/card';
+import { Eyebrow } from '../../components/ui/Eyebrow';
+import DrawIcon from '../../components/ui/DrawIcon.astro';
+import { FadeIn } from '../../components/ui/FadeIn';
+import { MotionHeading } from '../../components/motion/MotionHeading';
+import { SectionDivider } from '../../components/motion/SectionDivider';
+import { services } from '../../content/services';
+import { createStartProjectHref } from '../../lib/cta';
+import { SITE_NAME, SITE_URL, breadcrumbSchema, serviceJsonLd } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const title = `${service.shortTitle} | ${SITE_NAME}`;
+const description = service.summary;
+const canonicalPath = `/services/${service.slug}`;
+---
+
+<SiteLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  schema={[
+    serviceJsonLd(service),
+    breadcrumbSchema([
+      { name: 'Home', url: SITE_URL },
+      { name: 'Services', url: `${SITE_URL}/services` },
+      { name: service.shortTitle, url: `${SITE_URL}${canonicalPath}` },
+    ]),
+  ]}
+>
+  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+    <section class="axiom-container pt-20 md:pt-28">
+      <div class="max-w-3xl">
+        <FadeIn motion="eyebrow">
+          <Eyebrow>{service.eyebrow}</Eyebrow>
+          <SectionDivider className="mt-6" />
+        </FadeIn>
+        <FadeIn motion="sceneOpen" delay={180}>
+          <MotionHeading as="h1" text={service.title} className="mt-4" />
+        </FadeIn>
+        <FadeIn motion="editorialMaskReveal" delay={500}>
+          <p class="section-copy mt-5 md:text-[17px]">
+            {service.description}
+          </p>
+        </FadeIn>
+        <FadeIn motion="sceneOpen" delay={720}>
+          <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <a href={createStartProjectHref(service.pathIntent)}>Start this path</a>
+            </Button>
+            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
+              <a href="/services">All services</a>
+            </Button>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="axiom-container grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <FadeIn as="div" motion="depthCardReveal" direction="left">
+          <Card className="h-full p-0">
+            <div class="p-6 sm:p-7 md:p-8">
+              <Eyebrow>BEST FOR</Eyebrow>
+              <SectionDivider className="mt-6" />
+              <h2 class="mt-5 text-[clamp(1.6rem,2.2vw,2.4rem)] font-semibold leading-[1.15] tracking-normal text-[var(--text-primary)]">
+                {service.bestFor}
+              </h2>
+            </div>
+          </Card>
+        </FadeIn>
+
+        <FadeIn as="div" motion="depthCardReveal" direction="right">
+          <Card className="h-full p-0">
+            <div class="p-6 sm:p-7 md:p-8">
+              <Eyebrow>OUTCOMES</Eyebrow>
+              <ul class="mt-6 space-y-4">
+                {service.outcomes.map((item) => (
+                  <li class="flex gap-3 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
+                    <DrawIcon name="check" size={15} className="mt-1 shrink-0 text-[var(--accent-solid)]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Card>
+        </FadeIn>
+      </div>
+    </section>
+
+    <section class="page-section-tight section-shell">
+      <div class="axiom-container">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
+          <Eyebrow>WHAT IS INCLUDED</Eyebrow>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="A focused scope with launch discipline." className="section-heading mt-4" />
+        </FadeIn>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {service.includes.map((item, index) => (
+            <FadeIn motion="timelineSequence" delay={Math.min(index * 120, 480)} as="div">
+              <div class="premium-card h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
+                <p class="font-semibold text-[var(--text-primary)]">{item}</p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</SiteLayout>

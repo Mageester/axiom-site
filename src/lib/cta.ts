@@ -1,14 +1,17 @@
 export const CTA_PATHS = {
     startProject: '/start-a-project',
     work: '/work',
-    process: '/process',
-    contact: '/contact'
+    services: '/services',
+    approach: '/approach',
+    process: '/approach',
+    contact: '/start-a-project'
 } as const;
 
 export const CTA_LABELS = {
     primary: 'Start a project',
     work: 'See the Work',
-    process: 'See the process',
+    services: 'See services',
+    process: 'See the approach',
     contact: 'Contact',
     review: 'Request review',
     demo: 'Open build',
@@ -23,6 +26,10 @@ export const CTA = {
     work: {
         label: CTA_LABELS.work,
         to: CTA_PATHS.work
+    },
+    services: {
+        label: CTA_LABELS.services,
+        to: CTA_PATHS.services
     },
     process: {
         label: CTA_LABELS.process,

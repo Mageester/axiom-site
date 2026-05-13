@@ -1,0 +1,161 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { Button } from '../components/ui/button';
+import { Card } from '../components/ui/card';
+import { Eyebrow } from '../components/ui/Eyebrow';
+import DrawIcon from '../components/ui/DrawIcon.astro';
+import { FadeIn } from '../components/ui/FadeIn';
+import { MotionHeading } from '../components/motion/MotionHeading';
+import { SectionDivider } from '../components/motion/SectionDivider';
+import { Timeline } from '../components/motion/Timeline';
+import { CTA_PATHS } from '../lib/cta';
+import { APPROACH_JSON_LD, SEO_ROUTES, SITE_URL, breadcrumbSchema } from '../lib/seo';
+
+const timelineSteps = [
+  {
+    kicker: 'Review',
+    title: 'Understand the business before the interface.',
+    description:
+      'We look at the offer, audience, current site, proof, search surface, and contact paths before design starts.',
+  },
+  {
+    kicker: 'Structure',
+    title: 'Make the decision path obvious.',
+    description:
+      'We define the page set, message hierarchy, proof placement, and primary conversion route so the build has a clear spine.',
+  },
+  {
+    kicker: 'Build',
+    title: 'Design and development move together.',
+    description:
+      'Copy, layout, responsive behavior, performance, accessibility, and transitions are assembled as one system.',
+  },
+  {
+    kicker: 'Launch',
+    title: 'Ship only after the fundamentals hold.',
+    description:
+      'We check mobile quality, forms, metadata, redirects, analytics readiness, speed, and support expectations before release.',
+  },
+] as const;
+
+const standards = [
+  {
+    title: 'Buyer-language first',
+    detail: 'The site should sound like it understands the customer, not like it is explaining technical decisions.',
+    icon: 'eye',
+  },
+  {
+    title: 'Proof without invention',
+    detail: 'Concepts are labeled as concepts. Client outcomes are only used when they are real, approved, and supportable.',
+    icon: 'shield-check',
+  },
+  {
+    title: 'Motion with purpose',
+    detail: 'Transitions stay cinematic and restrained. Reduced-motion settings are respected without flattening the whole experience.',
+    icon: 'bolt',
+  },
+  {
+    title: 'One conversion path',
+    detail: 'The site should guide serious project interest into one intake flow, with direct email and phone still available.',
+    icon: 'target',
+  },
+] as const;
+---
+
+<SiteLayout
+  title={SEO_ROUTES.approach.title}
+  description={SEO_ROUTES.approach.description}
+  canonicalPath="/approach"
+  schema={[APPROACH_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Approach', url: `${SITE_URL}/approach` }])]}
+>
+  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+    <section class="axiom-container pt-20 md:pt-28">
+      <div class="max-w-3xl">
+        <FadeIn motion="eyebrow">
+          <Eyebrow>APPROACH</Eyebrow>
+          <SectionDivider className="mt-6" />
+        </FadeIn>
+        <FadeIn motion="sceneOpen" delay={180}>
+          <MotionHeading as="h1" text="A calmer way to build a sharper site." className="mt-4" />
+        </FadeIn>
+        <FadeIn motion="editorialMaskReveal" delay={500}>
+          <p class="section-copy mt-5 md:text-[17px]">
+            The work is strategy, structure, writing, design, development, launch discipline, and support. The point is not more pages. The point is a site buyers can trust faster.
+          </p>
+        </FadeIn>
+        <FadeIn motion="sceneOpen" delay={720}>
+          <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <a href={CTA_PATHS.startProject}>Start a project</a>
+            </Button>
+            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
+              <a href="/services">See services</a>
+            </Button>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="axiom-container">
+        <h2 class="sr-only">Approach timeline</h2>
+        <Timeline steps={timelineSteps} />
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="axiom-container">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
+          <Eyebrow>OPERATING STANDARD</Eyebrow>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="Premium is a set of decisions." className="section-heading mt-4" />
+        </FadeIn>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {standards.map((standard, index) => (
+            <FadeIn motion="timelineSequence" delay={Math.min(index * 140, 560)} as="div">
+              <Card className="h-full p-0">
+                <div class="flex h-full flex-col p-6 sm:p-7">
+                  <div class="mb-5 flex items-center justify-between gap-4">
+                    <DrawIcon name={standard.icon} className="text-[var(--accent-solid)]" />
+                    <p class="font-mono text-[0.75rem] font-medium uppercase tracking-[0.08em] text-[var(--accent-solid)]">
+                      0{index + 1}
+                    </p>
+                  </div>
+                  <h3 class="text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
+                    {standard.title}
+                  </h3>
+                  <p class="section-copy mt-3">
+                    {standard.detail}
+                  </p>
+                </div>
+              </Card>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section-tight section-shell">
+      <div class="axiom-container">
+        <FadeIn as="div" motion="finalFrameFooter">
+          <Card className="mx-auto max-w-5xl overflow-hidden p-0 text-center">
+            <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+              <Eyebrow className="justify-center">BEFORE LAUNCH</Eyebrow>
+              <SectionDivider className="mx-auto mt-6" />
+              <MotionHeading as="h2" text="If it weakens trust, it does not ship." className="section-heading mx-auto mt-4" />
+              <p class="section-copy mx-auto mt-4 max-w-3xl">
+                We check clarity, mobile behavior, forms, metadata, redirects, accessibility, and performance before release. The transitions stay impressive, but the fundamentals carry the sale.
+              </p>
+              <div class="mt-7">
+                <Button asChild size="lg">
+                  <a href={CTA_PATHS.startProject}>Start a project</a>
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </FadeIn>
+      </div>
+    </section>
+  </main>
+</SiteLayout>

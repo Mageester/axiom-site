@@ -21,15 +21,26 @@
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
-/process
+/services
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
-/start
+/services/*
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
+
+/approach
+  X-Robots-Tag: index, follow, max-image-preview:large
+  Speculation-Rules: "/speculation-rules.json"
+  Content-Type: text/html; charset=utf-8
+
+/process
+  X-Robots-Tag: noindex, follow
+
+/start
+  X-Robots-Tag: noindex, follow
 
 /start-a-project
   X-Robots-Tag: index, follow, max-image-preview:large

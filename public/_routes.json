@@ -6,9 +6,11 @@
   "exclude": [
     "/",
     "/work",
+    "/services",
+    "/services/*",
+    "/approach",
     "/pricing",
     "/about",
-    "/process",
     "/start-a-project",
     "/assets/*",
     "/images/*",

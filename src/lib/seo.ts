@@ -1,5 +1,5 @@
 export const SITE_NAME = 'Axiom Web';
-export const SITE_TAGLINE = 'Custom web design and development for companies past the template stage.';
+export const SITE_TAGLINE = 'Digital credibility and lead-flow systems for serious local businesses.';
 export const SITE_URL = 'https://getaxiom.ca';
 export const DEFAULT_OG_IMAGE = '/og-image.png';
 export const DEFAULT_SEO_DESCRIPTION = SITE_TAGLINE;
@@ -63,6 +63,49 @@ export const WEBSITE_SCHEMA = {
   description: SITE_TAGLINE,
 } as const;
 
+export const SERVICES_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Axiom Web Services',
+  url: `${SITE_URL}/services`,
+  itemListElement: [
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Conversion Sites',
+        description: 'Focused sites structured around clearer offers, trust signals, and inquiry paths.',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Website Rebuilds',
+        description: 'Rebuilds for existing sites that need stronger structure, messaging, and launch foundations.',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Local Business Websites',
+        description: 'High-trust local business sites built for clarity, proof, and fast contact.',
+      },
+    },
+  ],
+} as const;
+
+export const serviceJsonLd = (service: { shortTitle: string; summary: string; slug: string }) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.shortTitle,
+  description: service.summary,
+  provider: ORGANIZATION_SCHEMA,
+  areaServed: 'Canada',
+  url: `${SITE_URL}/services/${service.slug}`,
+});
+
 export const HOME_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
@@ -72,7 +115,7 @@ export const HOME_JSON_LD = {
   logo: 'https://getaxiom.ca/axiomtransparentlogo.webp',
   image: 'https://getaxiom.ca/og-image.png',
   description:
-    'Custom web design and development for established businesses across Kitchener-Waterloo, Cambridge, and Guelph. Standard builds launch in 2-4 weeks and are checked against Core Web Vitals before release.',
+    'Digital credibility and lead-flow systems for established businesses across Kitchener-Waterloo, Cambridge, Guelph, and Canada.',
   email: SITE_EMAIL,
   telephone: '+1-226-753-1833',
   priceRange: '$$',
@@ -209,7 +252,7 @@ export const PRICING_FAQ_JSON_LD = {
       name: 'Why lead with monthly pricing?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most businesses do not want a $5K+ hit before they see results. Monthly lets you start for $0 down, get the site live, and pay as it earns.',
+        text: 'Monthly lowers the upfront lift while keeping hosting, edits, and support in one clear path. It is built for teams that want momentum without a heavy kickoff bill.',
       },
     },
     {
@@ -265,7 +308,7 @@ export const PRICING_FAQ_JSON_LD = {
       name: 'What makes Axiom different?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You deal with the same two people from first call to launch — no account managers, no handoffs to a junior team. Pricing is posted publicly. Builds go live in 2-4 weeks. Monthly clients keep ongoing support after launch, not just a one-time delivery.',
+        text: 'You deal with the same two people from first call to launch. Pricing is posted publicly. The launch path is defined up front, and monthly clients keep ongoing support after release.',
       },
     },
   ],
@@ -314,6 +357,16 @@ export const PROCESS_JSON_LD = {
   ],
 } as const;
 
+export const APPROACH_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'Axiom Web Approach',
+  url: `${SITE_URL}/approach`,
+  description:
+    'Axiom Web approach to strategy, structure, design, development, launch checks, and ongoing support.',
+  mainEntity: ORGANIZATION_SCHEMA,
+} as const;
+
 export const WORK_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -330,9 +383,9 @@ export const WORK_JSON_LD = {
 
 export const SEO_ROUTES = {
   home: {
-    title: 'Custom Web Development | KW Region | Axiom Web',
+    title: 'Digital Credibility for Local Businesses | Axiom Web',
     description:
-      'Custom web design and development for businesses in Kitchener-Waterloo and across Canada. Standard builds launch in 2-4 weeks and are verified against Core Web Vitals.',
+      'High-trust websites for established businesses in Kitchener-Waterloo and across Canada. Clearer offers, stronger proof, faster paths to inquiry.',
     canonicalPath: '/',
   },
   work: {
@@ -347,16 +400,16 @@ export const SEO_ROUTES = {
     canonicalPath: '/work',
   },
   pricing: {
-    title: 'Website Pricing | Monthly & One-Time | Axiom Web',
+    title: 'Website Investment | Monthly & One-Time | Axiom Web',
     description:
       'Custom website pricing with no surprises. Monthly from $150 with hosting and support included. One-time ownership from $3,500. No sales call required.',
     canonicalPath: '/pricing',
   },
   services: {
-    title: 'Web Design Services | Axiom Web',
+    title: 'Services | Axiom Web',
     description:
-      'Custom web design and development services built around clarity, trust, and conversion. Monthly or one-time ownership.',
-    canonicalPath: '/pricing',
+      'Services for serious local businesses that need clearer offers, stronger proof, better lead flow, and a calmer launch path.',
+    canonicalPath: '/services',
   },
   about: {
     title: 'About Axiom Web | Custom Web Design Studio',
@@ -366,8 +419,8 @@ export const SEO_ROUTES = {
   },
   approach: {
     title: 'Our Approach | Axiom Web',
-    description: 'A clear process. Tight hierarchy. Fewer decisions. Better outcomes.',
-    canonicalPath: '/about',
+    description: 'A clear operating system for strategy, structure, build quality, launch checks, and support.',
+    canonicalPath: '/approach',
   },
   process: {
     title: 'Our Web Design Process | 2-4 Weeks to Launch | Axiom Web',
@@ -406,7 +459,7 @@ export const SEO_ROUTES = {
   },
   contact: {
     title: 'Contact | Axiom Web',
-    description: 'Send a quick question or short note. For project work, use the project intake page.',
+    description: 'Start project work through one intake path, or use direct email and phone for short notes.',
     canonicalPath: '/contact',
   },
   notFound: {

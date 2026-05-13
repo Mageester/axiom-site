@@ -1,127 +1,74 @@
 ---
-import QuickContactWizard from '../components/site/QuickContactWizard';
 import { FadeIn } from '../components/ui/FadeIn';
+import { Button } from '../components/ui/button';
+import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE } from '../lib/seo';
-
-const sourcePath = Astro.url.pathname + Astro.url.search;
 ---
 
 <SiteLayout {...SEO_ROUTES.contact}>
-  <main id="main-content" tabindex="-1" class="-mt-24 pb-20 md:-mt-28 md:pb-24">
-    <section class="axiom-container pt-16 md:pt-24">
-      <div class="mx-auto max-w-4xl">
-        <div class="mx-auto max-w-2xl text-center">
-          <FadeIn motion="eyebrow">
-            <Eyebrow>CONTACT</Eyebrow>
-            <SectionDivider className="mx-auto mt-6" />
-          </FadeIn>
-          <FadeIn motion="sceneOpen" delay={180}>
-            <MotionHeading as="h1" align="center" text="Send a quick note." className="mt-4" />
-          </FadeIn>
-          <FadeIn motion="editorialMaskReveal" delay={460}>
-            <p class="section-copy mx-auto mt-5 max-w-xl md:text-[17px]">
-              For questions, follow-ups, and short notes. If you&apos;re planning project work, use the project intake instead.
-            </p>
-          </FadeIn>
+  <main id="main-content" tabindex="-1" class="-mt-28 pb-20 md:-mt-32 md:pb-24">
+    <section class="axiom-container pt-20 md:pt-28">
+      <div class="mx-auto max-w-4xl text-center">
+        <FadeIn motion="eyebrow">
+          <Eyebrow>CONTACT</Eyebrow>
+          <SectionDivider className="mx-auto mt-6" />
+        </FadeIn>
+        <FadeIn motion="sceneOpen" delay={180}>
+          <MotionHeading as="h1" align="center" text="One clean path for serious project conversations." className="mt-4" />
+        </FadeIn>
+        <FadeIn motion="editorialMaskReveal" delay={460}>
+          <p class="section-copy mx-auto mt-5 max-w-2xl md:text-[17px]">
+            Project work starts with the intake so we can understand the business, the site, and the right next step. Email and phone stay open for direct notes.
+          </p>
+        </FadeIn>
 
-          <FadeIn motion="formFocusMotion" delay={560}>
-            <div class="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
-              <span>UNDER 1 MINUTE</span>
-              <span aria-hidden="true" class="text-[var(--text-muted)]">&bull;</span>
-              <span>REPLY WITHIN ONE BUSINESS DAY</span>
-            </div>
-          </FadeIn>
-
-          <FadeIn motion="formFocusMotion" delay={680}>
-            <p class="mt-5 text-[14px] leading-[1.7] text-[var(--text-secondary)]">
-              Serious project inquiry?
-              <a
-                href={CTA_PATHS.startProject}
-                class="ml-2 font-medium text-[var(--text-primary)] underline decoration-[color:var(--hairline-strong)] underline-offset-4 transition-[color,text-decoration-color] duration-[var(--duration-fast)] hover:text-[var(--accent-solid)] hover:decoration-current"
-              >
-                Start a project
-              </a>
-            </p>
-          </FadeIn>
-        </div>
-
-        <div class="mt-8 flex justify-center md:mt-10">
-          <div class="form-cinematic-shell w-full max-w-2xl" data-reveal data-motion="formFocusMotion" style="--reveal-delay: 760ms;">
-            <QuickContactWizard client:visible sourcePath={sourcePath} />
+        <FadeIn motion="sceneOpen" delay={680}>
+          <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <a href={CTA_PATHS.startProject}>Start a project</a>
+            </Button>
+            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
+              <a href="/services">See services</a>
+            </Button>
           </div>
-        </div>
+        </FadeIn>
+      </div>
+    </section>
 
-        <FadeIn as="div" motion="formFocusMotion" className="mx-auto mt-5 max-w-2xl">
-          <div class="rounded-[22px] border border-[color:var(--hairline)] bg-[linear-gradient(180deg,rgba(255,255,255,0.022),rgba(255,255,255,0.008))] px-5 py-5 shadow-[0_18px_48px_rgba(0,0,0,0.18)] sm:px-6">
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <p class="text-[12px] font-medium uppercase tracking-[0.16em] text-[var(--text-secondary)]">
-                Prefer direct contact
-              </p>
-
-              <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+    <section class="page-section-tight section-shell">
+      <div class="axiom-container">
+        <FadeIn as="div" motion="formFocusMotion">
+          <Card className="mx-auto max-w-4xl p-0">
+            <div class="grid gap-6 p-6 text-left sm:p-7 md:grid-cols-2 md:p-8">
+              <div>
+                <Eyebrow>DIRECT</Eyebrow>
+                <p class="section-copy mt-4">
+                  For a quick note, partnership question, or follow-up that does not need the project intake.
+                </p>
+              </div>
+              <div class="space-y-3 md:justify-self-end md:text-right">
                 <a
                   href={`mailto:${SITE_EMAIL}`}
-                  class="inline-flex min-h-10 items-center text-[15px] font-medium text-[var(--text-primary)] underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current"
+                  class="block min-h-11 text-[18px] font-medium text-[var(--text-primary)] underline decoration-[color:var(--hairline-strong)] underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current"
                 >
                   {SITE_EMAIL}
                 </a>
                 <a
                   href={`tel:${SITE_TELEPHONE}`}
-                  class="inline-flex min-h-10 items-center text-[15px] font-medium text-[var(--text-primary)] underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current"
+                  class="block min-h-11 text-[18px] font-medium text-[var(--text-primary)] underline decoration-[color:var(--hairline-strong)] underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current"
                 >
                   (226) 753-1833
                 </a>
               </div>
             </div>
-          </div>
+          </Card>
         </FadeIn>
       </div>
     </section>
   </main>
-
-  <style is:global>
-    .quick-contact-wizard [data-step-panel] {
-      animation: quick-contact-step-in 360ms var(--ease-premium-soft);
-      transform-origin: top center;
-    }
-
-    .quick-contact-wizard [data-step-panel].quick-contact-step-panel-backward {
-      animation-name: quick-contact-step-in-backward;
-    }
-
-    @keyframes quick-contact-step-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 8px, 0);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    @keyframes quick-contact-step-in-backward {
-      from {
-        opacity: 0;
-        transform: translate3d(0, -6px, 0);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .quick-contact-wizard [data-step-panel] {
-        animation: none;
-      }
-    }
-  </style>
 </SiteLayout>

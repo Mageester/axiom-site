@@ -1,0 +1,100 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { Button } from '../components/ui/button';
+import { Card } from '../components/ui/card';
+import { Eyebrow } from '../components/ui/Eyebrow';
+import DrawIcon from '../components/ui/DrawIcon.astro';
+import { FadeIn } from '../components/ui/FadeIn';
+import { MotionHeading } from '../components/motion/MotionHeading';
+import { SectionDivider } from '../components/motion/SectionDivider';
+import { services } from '../content/services';
+import { createStartProjectHref } from '../lib/cta';
+import { SEO_ROUTES, SERVICES_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
+---
+
+<SiteLayout
+  title={SEO_ROUTES.services.title}
+  description={SEO_ROUTES.services.description}
+  canonicalPath="/services"
+  schema={[SERVICES_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Services', url: `${SITE_URL}/services` }])]}
+>
+  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+    <section class="axiom-container pt-20 md:pt-28">
+      <div class="max-w-3xl">
+        <FadeIn motion="eyebrow">
+          <Eyebrow>SERVICES</Eyebrow>
+          <SectionDivider className="mt-6" />
+        </FadeIn>
+        <FadeIn motion="sceneOpen" delay={180}>
+          <MotionHeading as="h1" text="Digital credibility, built around the way buyers decide." className="mt-4" />
+        </FadeIn>
+        <FadeIn motion="editorialMaskReveal" delay={500}>
+          <p class="section-copy mt-5 md:text-[17px]">
+            Axiom builds focused, high-trust sites for companies that need a clearer offer, cleaner proof, and a faster path from attention to inquiry.
+          </p>
+        </FadeIn>
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="axiom-container">
+        <div class="grid gap-5 lg:grid-cols-3">
+          {services.map((service, index) => (
+            <FadeIn motion="depthCardReveal" delay={Math.min(index * 140, 560)} as="div">
+              <Card className="group flex h-full flex-col p-0">
+                <div class="flex h-full flex-col p-6 sm:p-7">
+                  <div class="flex items-center justify-between gap-4">
+                    <Eyebrow>{service.eyebrow}</Eyebrow>
+                    <DrawIcon name={index === 0 ? 'target' : index === 1 ? 'refresh' : 'shield-check'} className="text-[var(--accent-solid)] transition-transform duration-300 group-hover:rotate-90" />
+                  </div>
+                  <h2 class="mt-5 text-[clamp(1.5rem,2vw,2rem)] font-semibold leading-[1.15] tracking-normal text-[var(--text-primary)]">
+                    {service.shortTitle}
+                  </h2>
+                  <p class="section-copy mt-4">
+                    {service.summary}
+                  </p>
+                  <p class="mt-5 text-[14px] leading-[1.7] text-[var(--text-muted)]">
+                    {service.bestFor}
+                  </p>
+                  <div class="mt-7 flex flex-col gap-3 sm:flex-row lg:mt-auto lg:flex-col">
+                    <Button asChild className="w-full justify-center">
+                      <a href={`/services/${service.slug}`}>View service</a>
+                    </Button>
+                    <Button asChild variant="ghost" className="w-full justify-center px-0">
+                      <a href={createStartProjectHref(service.pathIntent)}>Start this path</a>
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section-tight section-shell">
+      <div class="axiom-container">
+        <FadeIn as="div" motion="finalFrameFooter">
+          <Card className="mx-auto max-w-5xl overflow-hidden p-0 text-center">
+            <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+              <Eyebrow className="justify-center">HOW WE WORK</Eyebrow>
+              <SectionDivider className="mx-auto mt-6" />
+              <MotionHeading as="h2" text="One operating standard. Different project shapes." className="section-heading mx-auto mt-4" />
+              <p class="section-copy mx-auto mt-4 max-w-3xl">
+                The scope can be monthly, ownership, or custom. The standard stays the same: clear messaging, strong mobile experience, careful launch checks, and no invented proof.
+              </p>
+              <div class="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+                <Button asChild size="lg">
+                  <a href="/approach">See the approach</a>
+                </Button>
+                <Button asChild variant="ghost" size="lg" className="px-0">
+                  <a href="/work">View concept work</a>
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </FadeIn>
+      </div>
+    </section>
+  </main>
+</SiteLayout>

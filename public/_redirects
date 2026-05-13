@@ -1,4 +1,9 @@
 /start /start-a-project 301
+/process /approach 301
+/process/ /approach 301
+/services/custom-web-development /services/conversion-sites 301
+/services/ai-integration /services/rebuilds 301
+/services/digital-infrastructure /services/local-business-websites 301
 /admin/* /admin-shell 200
 /dashboard /admin-shell 200
 /vault /admin-shell 200

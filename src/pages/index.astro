@@ -25,9 +25,7 @@ const workCards = [
     tag: 'CONCEPT',
     eyebrow: 'SALON & BEAUTY',
     title: 'Nails Studio Demo',
-    outcome: 'Booking front and center. Clear service descriptions, clean photos, and one tap to confirm an appointment.',
-    metricLabel: 'STUDY',
-    metricValue: 'SERVICE',
+    outcome: 'Booking is visible early, services are easy to compare, and the brand reads as calm and polished.',
     image: getWorkProofImage('concept-salon-demo').source,
     alt: getWorkProofImage('concept-salon-demo').alt || 'Nails Studio Demo',
     position: getWorkProofImage('concept-salon-demo').position || 'center 40%',
@@ -37,8 +35,6 @@ const workCards = [
     eyebrow: 'PERSONAL SERVICES & GROOMING',
     title: 'Blackline Barber Co.',
     outcome: 'Fast, sharp, and direct. Clients get to the booking button in seconds — no hunting required.',
-    metricLabel: 'STUDY',
-    metricValue: 'GROOMING',
     image: getWorkProofImage('concept-barber-demo').source,
     alt: getWorkProofImage('concept-barber-demo').alt || 'Blackline Barber Co.',
     position: getWorkProofImage('concept-barber-demo').position || 'center 40%',
@@ -48,8 +44,6 @@ const workCards = [
     eyebrow: 'HEALTHCARE & MEDICAL',
     title: 'Aurelia Dental Studio',
     outcome: 'Clear, warm, and easy to navigate. New patients find what they need and book without second-guessing.',
-    metricLabel: 'STUDY',
-    metricValue: 'HEALTHCARE',
     image: getWorkProofImage('concept-dental-demo').source,
     alt: getWorkProofImage('concept-dental-demo').alt || 'Aurelia Dental Studio',
     position: getWorkProofImage('concept-dental-demo').position || 'center 40%',
@@ -59,14 +53,14 @@ const workCards = [
 const principles = [
   {
     number: '01',
-    title: 'Your offer reads clearly from the start.',
+    title: 'The offer is understandable fast.',
     description: 'Before design starts, we make sure visitors understand what you do and how to reach you — no hunting required.',
     icon: 'eye',
   },
   {
     number: '02',
-    title: 'Reviews and past work where buyers look.',
-    description: 'Testimonials, past jobs, and credentials sit high on the page, not buried in the footer.',
+    title: 'Proof is used carefully.',
+    description: 'Reviews, past work, credentials, and concept labels sit where buyers look. No invented outcomes.',
     icon: 'shield-check',
   },
   {
@@ -77,8 +71,8 @@ const principles = [
   },
   {
     number: '04',
-    title: 'Support after launch, not just delivery.',
-    description: 'Monthly clients keep edits, fixes, and updates. The site is never handed off and forgotten.',
+    title: 'Support terms are clear.',
+    description: 'Monthly clients keep ongoing support. Ownership clients get a clean handoff and optional support.',
     icon: 'key',
   },
 ] as const;
@@ -118,24 +112,24 @@ const timelineSteps = processStages.map((stage) => ({
 
 const services = [
   {
-    label: 'Monthly Plan',
+    label: 'Conversion Sites',
     description:
-      '$0 down to start. We build the site, include hosting, and keep it updated month to month.',
-    href: '/pricing',
+      'For service businesses that need a clearer offer, stronger trust signals, and fewer steps from visit to inquiry.',
+    href: '/services/conversion-sites',
     icon: 'target',
   },
   {
-    label: 'One-Time Build',
+    label: 'Local Business Websites',
     description:
-      'One payment. Full code ownership at launch. No ongoing fees unless you want them.',
-    href: '/pricing',
+      'For companies whose reputation, service quality, and contact path need to be obvious on every device.',
+    href: '/services/local-business-websites',
     icon: 'crown',
   },
   {
-    label: 'Rebuild & Migrate',
+    label: 'Rebuilds',
     description:
-      'Replace a dated or underperforming site without losing your search ranking, content, or domain history.',
-    href: '/process',
+      'Replace a dated or confusing site while protecting useful content, redirects, domains, and buyer trust.',
+    href: '/services/rebuilds',
     icon: 'refresh',
   },
 ] as const;
@@ -177,11 +171,11 @@ const services = [
         <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,30rem)] lg:items-center">
           <div class="max-w-3xl">
             <FadeIn delay={180} motion="sceneOpen">
-              <MotionHeading as="h1" text="We build the site your business actually deserves." className="max-w-4xl text-left" />
+              <MotionHeading as="h1" text="A sharper digital front door for serious local businesses." className="max-w-4xl text-left" />
             </FadeIn>
             <FadeIn delay={520} motion="editorialMaskReveal">
               <p class="section-copy mt-6 max-w-2xl md:text-[1.1rem]">
-              We build custom websites for established businesses. Fast to load, easy to read, and set up to turn visitors into calls.
+              Axiom builds high-trust websites for established companies that need clearer offers, stronger proof, and a faster path from visit to inquiry.
               </p>
             </FadeIn>
 
@@ -191,7 +185,7 @@ const services = [
                   <a href={CTA_PATHS.startProject}>Start a project</a>
                 </Button>
                 <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-                  <a href="/work">View concept work</a>
+                  <a href="/services">See services</a>
                 </Button>
               </div>
             </FadeIn>
@@ -241,7 +235,7 @@ const services = [
           <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
             <Eyebrow>SELECTED WORK</Eyebrow>
             <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="How we'd build it." className="section-heading mt-4" />
+            <MotionHeading as="h2" text="Concept studies, labeled clearly." className="section-heading mt-4" />
             <p class="section-copy mt-4 md:text-[17px]">
               Each one shows how we'd approach a real business in that industry. Real client projects are in progress — these show the standard we build to.
             </p>
@@ -317,7 +311,7 @@ const services = [
         <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>SERVICES</Eyebrow>
           <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Three ways to work with us." className="section-heading mt-4" />
+            <MotionHeading as="h2" text="Three ways to strengthen the site." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-5 md:grid-cols-3">
@@ -335,7 +329,7 @@ const services = [
                   {service.description}
                 </p>
                 <span class="mt-auto font-mono text-[12px] uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-opacity duration-200 group-hover:opacity-80">
-                  {service.href === '/process' ? 'See how it works' : 'See pricing'}
+                  View service
                 </span>
               </a>
             </FadeIn>
@@ -349,7 +343,7 @@ const services = [
         <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>FIT</Eyebrow>
           <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Built for companies with something to protect." className="section-heading mt-4" />
+          <MotionHeading as="h2" text="Built for companies with trust to protect." className="section-heading mt-4" />
           <p class="section-copy mt-4 md:text-[17px]">
             Established businesses. Growing teams. Higher-ticket services. If the site needs to look credible before a new client picks up the phone, this is built for you.
           </p>
@@ -454,7 +448,7 @@ const services = [
         <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>PROCESS</Eyebrow>
           <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Same two people. Every project. Start to finish." className="section-heading mt-4" />
+          <MotionHeading as="h2" text="A clear operating system, start to finish." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10">
@@ -463,7 +457,7 @@ const services = [
 
         <div class="mt-6">
           <Button asChild variant="ghost" className="px-0">
-            <a href="/process">See the full process</a>
+            <a href="/approach">See the full approach</a>
           </Button>
         </div>
       </div>
@@ -494,9 +488,9 @@ const services = [
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.75fr)] lg:items-end">
           <FadeIn as="div" motion="finalFrameFooter" className="max-w-3xl">
             <SectionDivider className="mb-6" />
-            <MotionHeading as="h2" text="Simple pricing. No surprises." className="section-heading text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
+            <MotionHeading as="h2" text="Clear investment paths. No surprises." className="section-heading text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
             <p class="section-copy mt-4">
-              Monthly starts at $200/mo with hosting included. One-time ownership starts at $3,500. Larger builds get a custom quote. We'll tell you which one fits on the first call.
+              Monthly, ownership, and custom scopes are framed plainly. We'll tell you which path fits before the work starts.
             </p>
           </FadeIn>
 

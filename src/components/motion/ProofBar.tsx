@@ -8,11 +8,11 @@ const stats = [
   },
   {
     key: 'custom',
-    node: 'Custom design and development',
+    node: 'Strategy, design, and development',
   },
   {
     key: 'window',
-    node: '2-4 week standard build window',
+    node: 'Defined launch path and support',
   },
   {
     key: 'canada',

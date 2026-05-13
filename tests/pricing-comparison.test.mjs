@@ -70,14 +70,14 @@ test('desktop pricing comparison keeps first rows visible and inline checks rend
     try {
       const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } });
       await page.goto(`${baseUrl}/pricing`, { waitUntil: 'networkidle' });
-      await page.locator('text=COMPARE THE TIERS').scrollIntoViewIfNeeded();
+      await page.locator('text=COMPARE THE PATHS').scrollIntoViewIfNeeded();
       await page.waitForTimeout(600);
 
       const diagnostics = await page.evaluate(() => {
         const table = document.querySelector('table');
         const thead = table?.querySelector('thead');
         const firstRow = table?.querySelector('tbody tr');
-        const checkPath = table?.querySelector('tbody tr:nth-child(5) td svg path');
+        const checkPath = table?.querySelector('tbody tr:nth-child(4) td svg path');
 
         if (!table || !thead || !firstRow || !checkPath) {
           return null;

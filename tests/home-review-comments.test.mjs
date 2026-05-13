@@ -11,10 +11,10 @@ test('home review comments stay addressed', () => {
   assert.match(proofBar, /home-proof-band/);
   assert.doesNotMatch(proofBar, /font-mono/);
   assert.match(proofBar, /Performance verified before launch/);
-  assert.match(proofBar, /Custom design and development/);
-  assert.match(proofBar, /2-4 week standard build window/);
-  assert.match(proofBar, /Axiom Web, a division of Axiom International/);
-  assert.match(homePage, /We build the site your business actually deserves\./);
+  assert.match(proofBar, /Strategy, design, and development/);
+  assert.match(proofBar, /Defined launch path and support/);
+  assert.match(proofBar, /Serving clients across Canada/);
+  assert.match(homePage, /A sharper digital front door for serious local businesses\./);
   assert.doesNotMatch(homePage, /Sites for companies past the template stage\./);
   assert.doesNotMatch(homePage, /WEB DESIGN — KITCHENER-WATERLOO/);
   assert.match(homePage, /data-work-demo-toggle/);
@@ -27,7 +27,7 @@ test('home review comments stay addressed', () => {
   assert.doesNotMatch(homePage, /card\.metricValue/);
   assert.match(homePage, /day: 'Week 2',\s*title: 'Scope'/);
   assert.doesNotMatch(homePage, /Fit\s*&rarr;\s*Scope\s*&rarr;\s*Launch/i);
-  assert.match(footer, /Axiom Web\. Kitchener-Waterloo\./);
+  assert.match(footer, /Based in Kitchener-Waterloo/);
   assert.doesNotMatch(footer, /division of Axiom International/i);
   assert.match(timeline, /timeline-step-number flex h-10 min-w-\[4\.75rem\]/);
   assert.doesNotMatch(timeline, /timeline-step-number[^"]*rounded-full/);

@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /admin-shell
 Disallow: /admin-shell/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /functions/
 
 Sitemap: https://getaxiom.ca/sitemap-index.xml

@@ -8,8 +8,9 @@ export interface FooterProps {
 
 const PAGES = [
   { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
-  { label: 'Process', href: '/process' },
+  { label: 'Approach', href: '/approach' },
   { label: 'About', href: '/about' },
   { label: 'Pricing', href: '/pricing' },
 ];
@@ -43,7 +44,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
             />
           </a>
           <p className="max-w-sm text-[15px] italic leading-[1.7] text-[var(--text-secondary)]">
-            Custom websites for businesses that need more than a template. Based in Kitchener-Waterloo.
+            Digital credibility for serious local businesses. Based in Kitchener-Waterloo.
           </p>
           <p className="max-w-sm text-[14px] leading-[1.7] text-[var(--text-muted)]">
             A subsidiary of Axiom International.
