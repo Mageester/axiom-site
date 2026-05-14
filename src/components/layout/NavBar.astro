@@ -11,7 +11,7 @@ const pathname = Astro.url.pathname;
 const LINKS = [
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
-  { label: 'Approach', href: '/approach' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
 ] as const;
 
@@ -19,9 +19,9 @@ const MOBILE_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
-  { label: 'Approach', href: '/approach' },
-  { label: 'About', href: '/about' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ] as const;
 
 const isActive = (href: string) =>

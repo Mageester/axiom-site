@@ -367,6 +367,34 @@ export const APPROACH_JSON_LD = {
   mainEntity: ORGANIZATION_SCHEMA,
 } as const;
 
+export const CONTACT_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Axiom Web',
+  url: `${SITE_URL}/contact`,
+  description: 'Start a web design project or reach Axiom Web by email or phone.',
+  mainEntity: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+    email: SITE_EMAIL,
+    telephone: '(226) 753-1833',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Kitchener',
+      addressRegion: 'ON',
+      addressCountry: 'CA',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      telephone: '+1-226-753-1833',
+      email: SITE_EMAIL,
+      availableLanguage: ['en'],
+    },
+  },
+} as const;
+
 export const WORK_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -383,15 +411,15 @@ export const WORK_JSON_LD = {
 
 export const SEO_ROUTES = {
   home: {
-    title: 'Digital Credibility for Local Businesses | Axiom Web',
+    title: 'Web Design Kitchener-Waterloo | High-Trust Websites | Axiom Web',
     description:
-      'High-trust websites for established businesses in Kitchener-Waterloo and across Canada. Clearer offers, stronger proof, faster paths to inquiry.',
+      'High-trust websites for established businesses in Kitchener-Waterloo and across Canada. Clearer offers, stronger proof, faster paths to inquiry. From $0 down.',
     canonicalPath: '/',
   },
   work: {
-    title: 'Web Design Portfolio – Concept Builds | Axiom Web',
+    title: 'Web Design Portfolio | Concept Builds Across Industries | Axiom Web',
     description:
-      'Concept builds across legal, medical, trades, and retail. See how Axiom structures sites that load fast and convert visitors to booked calls.',
+      'Concept builds across legal, medical, trades, and retail. See how Axiom structures websites that load fast and convert visitors to booked calls in Kitchener-Waterloo.',
     canonicalPath: '/work',
   },
   concepts: {
@@ -400,21 +428,21 @@ export const SEO_ROUTES = {
     canonicalPath: '/work',
   },
   pricing: {
-    title: 'Website Investment | Monthly & One-Time | Axiom Web',
+    title: 'Web Design Pricing | $0 Down Monthly or One-Time | Axiom Web',
     description:
-      'Custom website pricing with no surprises. Monthly from $150 with hosting and support included. One-time ownership from $3,500. No sales call required.',
+      'Transparent web design pricing. Monthly subscription from $150/mo with $0 down, hosting and support included. One-time ownership from $3,500. No sales call required.',
     canonicalPath: '/pricing',
   },
   services: {
-    title: 'Services | Axiom Web',
+    title: 'Web Design Services | Conversion Sites & Rebuilds | Axiom Web',
     description:
-      'Services for serious local businesses that need clearer offers, stronger proof, better lead flow, and a calmer launch path.',
+      'Web design services for serious local businesses. Conversion-focused sites, local business websites, and rebuilds — clearer offers, stronger proof, and a faster path to inquiry.',
     canonicalPath: '/services',
   },
   about: {
-    title: 'About Axiom Web | Custom Web Design Studio',
+    title: 'About Us | Web Design Studio in Kitchener-Waterloo | Axiom Web',
     description:
-      'Two people. Clear roles. We build fast websites for established businesses in Kitchener-Waterloo and across Canada. You always know who to call.',
+      'Two people. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada. You always know who to call.',
     canonicalPath: '/about',
   },
   approach: {
@@ -458,8 +486,8 @@ export const SEO_ROUTES = {
     canonicalPath: '/terms',
   },
   contact: {
-    title: 'Contact | Axiom Web',
-    description: 'Start project work through one intake path, or use direct email and phone for short notes.',
+    title: 'Contact Us | Web Design Inquiry | Axiom Web',
+    description: 'Start a web design project through our intake form, or reach us by email or phone. Based in Kitchener-Waterloo, serving businesses across Canada. Reply within one business day.',
     canonicalPath: '/contact',
   },
   notFound: {

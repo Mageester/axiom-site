@@ -9,8 +9,7 @@ export default defineConfig({
       filter: (page) =>
         !page.includes('/admin-shell') &&
         !page.includes('/404') &&
-        new URL(page).pathname !== '/start/' &&
-        new URL(page).pathname !== '/process/',
+        new URL(page).pathname !== '/start/',
       changefreq: 'monthly',
       lastmod: new Date(),
       serialize(item) {

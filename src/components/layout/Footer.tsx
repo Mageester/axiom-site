@@ -10,9 +10,9 @@ const PAGES = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
-  { label: 'Approach', href: '/approach' },
-  { label: 'About', href: '/about' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const LEGAL = [

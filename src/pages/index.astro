@@ -248,24 +248,12 @@ const services = [
             >
               View all work
             </a>
-            <button
-              type="button"
-              class="inline-flex min-h-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.03)] px-5 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-[border-color,background-color,color] duration-200 hover:border-[color:var(--accent-border)] hover:bg-[rgba(255,255,255,0.05)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-solid)]"
-              data-work-demo-toggle
-              aria-controls="selected-work-demos"
-              aria-expanded="false"
-            >
-              <span data-work-demo-label>View demos</span>
-            </button>
           </FadeIn>
         </div>
 
         <div
           id="selected-work-demos"
-          class="grid gap-6 overflow-hidden md:grid-cols-2 xl:grid-cols-3"
-          data-work-demo-list
-          data-state="collapsed"
-          style="max-height: 0px;"
+          class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
         >
           {workCards.map((card, index) => (
             <FadeIn motion="depthCardReveal" delay={Math.min(index * 150, 600)}>
@@ -341,83 +329,12 @@ const services = [
     <section class="page-section section-shell">
       <div class="axiom-container">
         <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>FIT</Eyebrow>
+          <Eyebrow>WHY AXIOM</Eyebrow>
           <SectionDivider className="mt-6" />
           <MotionHeading as="h2" text="Built for companies with trust to protect." className="section-heading mt-4" />
           <p class="section-copy mt-4 md:text-[17px]">
-            Established businesses. Growing teams. Higher-ticket services. If the site needs to look credible before a new client picks up the phone, this is built for you.
+            Established businesses. Higher-ticket services. If the site needs to look credible before a new client picks up the phone, this is built for you.
           </p>
-        </FadeIn>
-      </div>
-    </section>
-
-    <script is:inline>
-      (() => {
-        const button = document.querySelector('[data-work-demo-toggle]');
-        const label = document.querySelector('[data-work-demo-label]');
-        const demoList = document.querySelector('[data-work-demo-list]');
-
-        if (!(button instanceof HTMLButtonElement) || !(label instanceof HTMLElement) || !(demoList instanceof HTMLElement)) {
-          return;
-        }
-
-        const setExpanded = (expanded) => {
-          button.setAttribute('aria-expanded', String(expanded));
-          label.textContent = expanded ? 'Hide demos' : 'View demos';
-          demoList.dataset.state = expanded ? 'expanded' : 'collapsed';
-          demoList.style.maxHeight = expanded ? `${demoList.scrollHeight}px` : '0px';
-        };
-
-        setExpanded(false);
-
-        window.addEventListener('resize', () => {
-          if (button.getAttribute('aria-expanded') === 'true') {
-            demoList.style.maxHeight = `${demoList.scrollHeight}px`;
-          }
-        });
-
-        button.addEventListener('click', () => {
-          setExpanded(button.getAttribute('aria-expanded') !== 'true');
-        });
-      })();
-    </script>
-
-    <style>
-      [data-work-demo-list] {
-        margin-top: 2.5rem;
-        transition:
-          margin-top 420ms var(--ease-premium),
-          max-height 560ms var(--ease-premium),
-          opacity 320ms var(--ease-premium),
-          transform 420ms var(--ease-premium);
-        will-change: margin-top, max-height, opacity, transform;
-      }
-
-      [data-work-demo-list][data-state='collapsed'] {
-        margin-top: 0;
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-0.5rem);
-      }
-
-      [data-work-demo-list][data-state='expanded'] {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        [data-work-demo-list] {
-          transition: none;
-        }
-      }
-    </style>
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>WHY AXIOM</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="You can judge the work before reaching out." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10 grid gap-5 md:grid-cols-2">
@@ -457,72 +374,31 @@ const services = [
 
         <div class="mt-6">
           <Button asChild variant="ghost" className="px-0">
-            <a href="/approach">See the full approach</a>
+            <a href="/process">See the full process</a>
           </Button>
         </div>
       </div>
     </section>
 
-    <section class="py-16 md:py-20">
-      <div class="axiom-container">
-        <FadeIn as="div" motion="finalFrameFooter">
-          <Card className="mx-auto max-w-5xl overflow-hidden p-0 text-center">
-            <div class="relative px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
-              <div aria-hidden="true" class="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgb(var(--accent-v2-rgb,var(--accent-current-rgb))_/_0.12),transparent_45%)] blur-[100px]" />
-              <div class="relative">
-                <Eyebrow className="justify-center">PERFORMANCE STANDARD</Eyebrow>
-                <SectionDivider className="mx-auto mt-6" />
-                <MotionHeading as="h2" text="Speed is part of the brief." className="section-heading mx-auto mt-4" />
-          <p class="section-copy mx-auto mt-4">
-                Performance is not an add-on. Every build is tested for speed, mobile layout, and usability before it goes live. Slow or broken on a phone — it doesn't ship.
-              </p>
-              </div>
-            </div>
-          </Card>
-        </FadeIn>
-      </div>
-    </section>
-
     <section class="final-cta-panel">
-      <div class="axiom-container py-12 md:py-16">
-        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.75fr)] lg:items-end">
-          <FadeIn as="div" motion="finalFrameFooter" className="max-w-3xl">
-            <SectionDivider className="mb-6" />
-            <MotionHeading as="h2" text="Clear investment paths. No surprises." className="section-heading text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
-            <p class="section-copy mt-4">
-              Monthly, ownership, and custom scopes are framed plainly. We'll tell you which path fits before the work starts.
+      <div class="axiom-container py-16 md:py-20">
+        <div class="mx-auto max-w-4xl text-center">
+          <FadeIn as="div" motion="finalFrameFooter">
+            <SectionDivider className="mx-auto mb-6" />
+            <MotionHeading as="h2" text="Make the site easier to believe." className="section-heading mx-auto text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
+            <p class="section-copy mx-auto mt-5 md:text-[17px]">
+              Monthly, ownership, or custom scope. Pricing is public, the launch path is defined, and every build is checked for speed and mobile quality before it ships.
             </p>
-          </FadeIn>
-
-          <FadeIn delay={240} motion="finalFrameFooter" as="div">
-            <div class="flex flex-col gap-4 lg:items-end">
+            <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <a href={CTA_PATHS.startProject}>Start a project</a>
+              </Button>
+              <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
+                <a href="/pricing">See pricing</a>
               </Button>
             </div>
           </FadeIn>
         </div>
-      </div>
-    </section>
-
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn as="div" motion="finalFrameFooter">
-          <Card className="mx-auto max-w-5xl overflow-hidden p-0 text-center">
-            <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
-              <SectionDivider className="mx-auto mb-6" />
-              <MotionHeading as="h2" text="Make the site easier to believe." className="section-heading mx-auto" />
-              <p class="section-copy mx-auto mt-4 max-w-3xl">
-                A better first impression. A faster path from visit to call. Built to hold up as the business grows.
-              </p>
-              <div class="mt-7">
-                <Button asChild size="lg">
-                  <a href={CTA_PATHS.startProject}>Start a project</a>
-                </Button>
-              </div>
-            </div>
-          </Card>
-        </FadeIn>
       </div>
     </section>
   </main>

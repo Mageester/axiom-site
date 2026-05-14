@@ -4,19 +4,19 @@ import { cn } from '../../lib/utils';
 const stats = [
   {
     key: 'performance',
-    node: 'Performance verified before launch',
+    node: 'Core Web Vitals checked every build',
   },
   {
     key: 'custom',
-    node: 'Strategy, design, and development',
+    node: '2–4 week launch window',
   },
   {
     key: 'window',
-    node: 'Defined launch path and support',
+    node: 'From $0 down or $3,500 one-time',
   },
   {
     key: 'canada',
-    node: 'Serving clients across Canada',
+    node: 'Based in KW, serving all of Canada',
   },
 ] as const;
 
