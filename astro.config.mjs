@@ -13,13 +13,23 @@ export default defineConfig({
       changefreq: 'monthly',
       lastmod: new Date(),
       serialize(item) {
-        if (item.url === 'https://getaxiom.ca/') {
+        const path = new URL(item.url).pathname;
+        if (path === '/') {
           return { ...item, changefreq: 'weekly', priority: 1.0 };
         }
-        if (item.url.includes('/pricing') || item.url.includes('/start-a-project')) {
+        if (path === '/pricing' || path === '/start-a-project') {
           return { ...item, priority: 0.9 };
         }
-        return { ...item, priority: 0.8 };
+        if (path === '/services' || path === '/work' || path === '/contact') {
+          return { ...item, priority: 0.85 };
+        }
+        if (path.startsWith('/services/')) {
+          return { ...item, priority: 0.8 };
+        }
+        if (path === '/about' || path === '/process' || path === '/approach') {
+          return { ...item, priority: 0.7 };
+        }
+        return { ...item, priority: 0.5 };
       },
     }),
   ],

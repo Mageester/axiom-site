@@ -401,7 +401,7 @@ export const WORK_JSON_LD = {
   name: 'Axiom Web – Web Design Portfolio',
   url: 'https://getaxiom.ca/work',
   description:
-    'Concept builds across legal, medical, trades, food service, and retail. Each one shows how a typical business site should be structured to convert visitors to booked calls.',
+    'Concept builds across legal, medical, trades, and retail. Each shows how a business site should be structured to convert visitors to booked calls.',
   provider: {
     '@type': 'Organization',
     name: SITE_NAME,
@@ -419,7 +419,7 @@ export const SEO_ROUTES = {
   work: {
     title: 'Web Design Portfolio | Concept Builds Across Industries | Axiom Web',
     description:
-      'Concept builds across legal, medical, trades, and retail. See how Axiom structures websites that load fast and convert visitors to booked calls in Kitchener-Waterloo.',
+      'Concept builds across legal, medical, trades, and retail. See how Axiom structures sites that convert visitors to booked calls.',
     canonicalPath: '/work',
   },
   concepts: {
@@ -430,19 +430,19 @@ export const SEO_ROUTES = {
   pricing: {
     title: 'Web Design Pricing | $0 Down Monthly or One-Time | Axiom Web',
     description:
-      'Transparent web design pricing. Monthly subscription from $200/mo with $0 down, hosting and support included. One-time ownership from $3,500. No sales call required.',
+      'Transparent web design pricing. Monthly from $200/mo with $0 down, hosting included. One-time ownership from $3,500. No sales call required.',
     canonicalPath: '/pricing',
   },
   services: {
     title: 'Web Design Services | Conversion Sites & Rebuilds | Axiom Web',
     description:
-      'Web design services for serious local businesses. Conversion-focused sites, local business websites, and rebuilds — clearer offers, stronger proof, and a faster path to inquiry.',
+      'Web design for serious local businesses. Conversion sites, local business websites, and rebuilds — clearer offers, stronger proof, faster inquiries.',
     canonicalPath: '/services',
   },
   about: {
     title: 'About Us | Web Design Studio in Kitchener-Waterloo | Axiom Web',
     description:
-      'Two people. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada. You always know who to call.',
+      'Two people. Clear roles. We build conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
     canonicalPath: '/about',
   },
   approach: {
@@ -487,7 +487,7 @@ export const SEO_ROUTES = {
   },
   contact: {
     title: 'Contact Us | Web Design Inquiry | Axiom Web',
-    description: 'Start a web design project through our intake form, or reach us by email or phone. Based in Kitchener-Waterloo, serving businesses across Canada. Reply within one business day.',
+    description: 'Start a project through our intake form, or reach us by email or phone. Based in Kitchener-Waterloo, serving Canada. Reply within one business day.',
     canonicalPath: '/contact',
   },
   notFound: {

@@ -11,6 +11,8 @@ import {
   toCanonicalUrl,
 } from '../lib/seo';
 
+import interLatinWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+
 type Props = {
   title?: string;
   description?: string;
@@ -50,8 +52,14 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="color-scheme" content="dark" />
     <meta name="generator" content="Astro" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="preload" as="font" type="font/woff2" href={interLatinWoff2} crossorigin />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -78,6 +86,8 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
     <meta name="twitter:title" content={resolvedTitle} />
     <meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={resolvedImageUrl} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     {schema && (
       Array.isArray(schema)

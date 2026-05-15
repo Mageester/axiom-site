@@ -5,5 +5,14 @@ Disallow: /admin-shell/
 Disallow: /admin/
 Disallow: /api/
 Disallow: /functions/
+Disallow: /dashboard
+Disallow: /hunt
+Disallow: /vault
+Disallow: /triage
+Disallow: /settings
+Disallow: /lead/
+Disallow: /jobs
+Disallow: /campaigns
+Disallow: /leads
 
 Sitemap: https://getaxiom.ca/sitemap-index.xml

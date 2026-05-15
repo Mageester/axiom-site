@@ -102,6 +102,7 @@ body::before {
   background-size: 220px 220px;
   opacity: 0.02;
   z-index: 0;
+  contain: strict;
 }
 
 body::after {
@@ -118,7 +119,8 @@ body::after {
 
 html[data-motion-active='true'] body::after {
   animation: ambient-pan 34s var(--ease-premium-soft) infinite;
-  will-change: transform, opacity;
+  will-change: transform;
+  contain: strict;
 }
 
 body > * {
@@ -552,6 +554,9 @@ html[data-motion-active='true'] [data-motion='finalFrameFooter']:not([data-revea
   transition:
     opacity var(--reveal-duration) var(--ease-cinematic),
     transform var(--reveal-duration) var(--ease-cinematic);
+}
+
+html[data-motion-active='true'] .counter:not([data-motion-visible='true']) {
   will-change: opacity, transform;
 }
 
@@ -652,7 +657,6 @@ html[data-motion-active='true'] .motion-quote:not([data-reveal-state='visible'])
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 760ms var(--ease-cinematic);
-  will-change: transform;
 }
 
 [data-motion-visible='true'] .about-principle-line {
@@ -1027,7 +1031,7 @@ html[data-motion-reduced='true'] body {
 [data-marquee-track] {
   display: flex;
   width: max-content;
-  will-change: transform;
+  contain: layout style;
   animation: axiom-marquee var(--marquee-duration, 24s) linear infinite;
 }
 
