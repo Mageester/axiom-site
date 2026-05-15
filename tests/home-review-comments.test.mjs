@@ -10,17 +10,14 @@ const proofBar = readFileSync(new URL('../src/components/motion/ProofBar.tsx', i
 test('home review comments stay addressed', () => {
   assert.match(proofBar, /home-proof-band/);
   assert.doesNotMatch(proofBar, /font-mono/);
-  assert.match(proofBar, /Performance verified before launch/);
-  assert.match(proofBar, /Strategy, design, and development/);
-  assert.match(proofBar, /Defined launch path and support/);
-  assert.match(proofBar, /Serving clients across Canada/);
+  assert.match(proofBar, /Core Web Vitals checked every build/);
+  assert.match(proofBar, /2–4 week launch window/);
+  assert.match(proofBar, /From \$0 down or \$3,500 one-time/);
+  assert.match(proofBar, /Based in KW, serving all of Canada/);
   assert.match(homePage, /A sharper digital front door for serious local businesses\./);
   assert.doesNotMatch(homePage, /Sites for companies past the template stage\./);
   assert.doesNotMatch(homePage, /WEB DESIGN — KITCHENER-WATERLOO/);
-  assert.match(homePage, /data-work-demo-toggle/);
-  assert.match(homePage, /aria-controls="selected-work-demos"/);
   assert.match(homePage, /id="selected-work-demos"/);
-  assert.match(homePage, /data-work-demo-list/);
   assert.doesNotMatch(homePage, /MotionQuote/);
   assert.doesNotMatch(homePage, /Custom build\./);
   assert.doesNotMatch(homePage, /card\.metricLabel/);

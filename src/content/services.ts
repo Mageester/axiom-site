@@ -8,6 +8,8 @@ export type Service = {
   summary: string;
   description: string;
   bestFor: string;
+  bestIf: string;
+  startsAt: string;
   outcomes: string[];
   includes: string[];
   pathIntent: string;
@@ -24,6 +26,8 @@ export const services: Service[] = [
     description:
       'We structure the page hierarchy, calls to action, service copy, and mobile flow around how buyers actually decide. The result is a site that feels easier to trust and easier to act on.',
     bestFor: 'High-intent local services, professional firms, clinics, contractors, and owner-led teams.',
+    bestIf: 'You have a clear offer but the current site buries it.',
+    startsAt: '$200/mo or $3,500 one-time.',
     outcomes: [
       'Offer and service hierarchy clarified before design starts',
       'Primary call, quote, booking, or intake path visible on every key page',
@@ -39,30 +43,6 @@ export const services: Service[] = [
     pathIntent: 'conversion-site',
   },
   {
-    slug: 'rebuilds',
-    eyebrow: 'REBUILDS',
-    title: 'Replace the weak parts without losing the ground you have.',
-    shortTitle: 'Rebuilds',
-    summary:
-      'For businesses with an existing site that no longer matches the quality of the company behind it.',
-    description:
-      'A rebuild is not a cosmetic reset. We preserve what matters, remove what creates friction, and relaunch with cleaner structure, stronger messaging, and safer technical foundations.',
-    bestFor: 'Teams with dated sites, unclear navigation, slow mobile pages, or a brand that has outgrown the current site.',
-    outcomes: [
-      'Current site, domain, content, and redirect risks reviewed first',
-      'Priority pages rebuilt around credibility and lead flow',
-      'Existing search value protected with launch planning',
-      'Old contact paths consolidated into one serious intake route',
-    ],
-    includes: [
-      'Site audit and migration map',
-      'Information architecture reset',
-      'Redirect and domain launch support',
-      'Post-launch support path',
-    ],
-    pathIntent: 'rebuild',
-  },
-  {
     slug: 'local-business-websites',
     eyebrow: 'LOCAL BUSINESS SITES',
     title: 'A stronger digital front door for serious local companies.',
@@ -72,6 +52,8 @@ export const services: Service[] = [
     description:
       'We build local business sites that make the company easier to understand, easier to believe, and easier to contact. The emphasis is clarity, proof, speed, and calm commercial polish.',
     bestFor: 'Trades, clinics, hospitality, beauty, professional services, and service-area businesses.',
+    bestIf: 'Most of your new clients find you locally and decide in under a minute.',
+    startsAt: '$200/mo or $3,500 one-time.',
     outcomes: [
       'Services, geography, and buyer fit made clear quickly',
       'Reviews, credentials, photos, and examples placed where buyers look',
@@ -85,6 +67,32 @@ export const services: Service[] = [
       'Technical SEO foundation',
     ],
     pathIntent: 'local-business',
+  },
+  {
+    slug: 'rebuilds',
+    eyebrow: 'REBUILDS',
+    title: 'Replace the weak parts without losing the ground you have.',
+    shortTitle: 'Rebuilds',
+    summary:
+      'For businesses with an existing site that no longer matches the quality of the company behind it.',
+    description:
+      'A rebuild is not a cosmetic reset. We preserve what matters, remove what creates friction, and relaunch with cleaner structure, stronger messaging, and safer technical foundations.',
+    bestFor: 'Teams with dated sites, unclear navigation, slow mobile pages, or a brand that has outgrown the current site.',
+    bestIf: 'You have a real site already but it no longer matches the company behind it.',
+    startsAt: 'Scoped on intake.',
+    outcomes: [
+      'Current site, domain, content, and redirect risks reviewed first',
+      'Priority pages rebuilt around credibility and lead flow',
+      'Existing search value protected with launch planning',
+      'Old contact paths consolidated into one serious intake route',
+    ],
+    includes: [
+      'Site audit and migration map',
+      'Information architecture reset',
+      'Redirect and domain launch support',
+      'Post-launch support path',
+    ],
+    pathIntent: 'rebuild',
   },
 ];
 

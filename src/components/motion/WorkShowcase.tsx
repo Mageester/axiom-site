@@ -55,7 +55,7 @@ function WorkImage({
           alt={build.alt}
           className="block h-full w-full object-cover"
           loading={index === 0 ? 'eager' : 'lazy'}
-          fetchpriority={index === 0 ? 'high' : 'low'}
+          fetchPriority={index === 0 ? 'high' : 'low'}
           decoding="async"
           width={1200}
           height={featured ? 1017 : 889}
@@ -71,9 +71,9 @@ function CaseNotes({ build, compact = false }: { build: Build; compact?: boolean
   return (
     <dl className={cn('grid gap-3', compact ? 'max-w-2xl' : 'sm:grid-cols-3 lg:grid-cols-1')}>
       {[
-        ['Problem', build.originalWeakness],
-        ['Changed', build.axiomChanged],
-        ['Effect', build.whyItWorks],
+        ['ORIGINAL WEAKNESS', build.originalWeakness],
+        ['AXIOM CHANGED', build.axiomChanged],
+        ['WHY IT WORKS', build.whyItWorks],
       ].map(([label, value]) => (
         <div
           key={label}
@@ -137,15 +137,6 @@ function CaseCard({
             {String(index + 1).padStart(2, '0')}
           </span>
         </div>
-
-        <p
-          className={cn(
-            'mt-5 max-w-2xl text-[1rem] leading-[1.72] text-[var(--text-secondary)]',
-            featured && 'text-[1.05rem] lg:max-w-xl'
-          )}
-        >
-          {build.axiomChanged}
-        </p>
 
         <div className={cn('mt-7', featured ? 'lg:mt-auto lg:pt-8' : 'lg:mt-8')}>
           <CaseNotes build={build} compact={!featured} />

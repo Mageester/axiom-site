@@ -23,7 +23,16 @@ const browserBars = [
 const workCards = [
   {
     tag: 'CONCEPT',
-    eyebrow: 'SALON & BEAUTY',
+    eyebrow: 'CONVERSION STRATEGY',
+    title: 'Aurelia Dental Studio',
+    outcome: 'Clear, warm, and easy to navigate. New patients find what they need and book without second-guessing.',
+    image: getWorkProofImage('concept-dental-demo').source,
+    alt: getWorkProofImage('concept-dental-demo').alt || 'Aurelia Dental Studio',
+    position: getWorkProofImage('concept-dental-demo').position || 'center 40%',
+  },
+  {
+    tag: 'CONCEPT',
+    eyebrow: 'LOCAL BUSINESS',
     title: 'Nails Studio Demo',
     outcome: 'Booking is visible early, services are easy to compare, and the brand reads as calm and polished.',
     image: getWorkProofImage('concept-salon-demo').source,
@@ -32,47 +41,38 @@ const workCards = [
   },
   {
     tag: 'CONCEPT',
-    eyebrow: 'PERSONAL SERVICES & GROOMING',
+    eyebrow: 'REBUILD',
     title: 'Blackline Barber Co.',
-    outcome: 'Fast, sharp, and direct. Clients get to the booking button in seconds — no hunting required.',
+    outcome: 'Fast, sharp, and direct. Clients get to the booking button in seconds - no hunting required.',
     image: getWorkProofImage('concept-barber-demo').source,
     alt: getWorkProofImage('concept-barber-demo').alt || 'Blackline Barber Co.',
     position: getWorkProofImage('concept-barber-demo').position || 'center 40%',
-  },
-  {
-    tag: 'CONCEPT',
-    eyebrow: 'HEALTHCARE & MEDICAL',
-    title: 'Aurelia Dental Studio',
-    outcome: 'Clear, warm, and easy to navigate. New patients find what they need and book without second-guessing.',
-    image: getWorkProofImage('concept-dental-demo').source,
-    alt: getWorkProofImage('concept-dental-demo').alt || 'Aurelia Dental Studio',
-    position: getWorkProofImage('concept-dental-demo').position || 'center 40%',
   },
 ] as const;
 
 const principles = [
   {
     number: '01',
-    title: 'The offer is understandable fast.',
-    description: 'Before design starts, we make sure visitors understand what you do and how to reach you — no hunting required.',
+    title: 'Your offer is clear from the first scroll.',
+    description: 'Before design starts, we make sure visitors understand what you do and how to reach you. No hunting.',
     icon: 'eye',
   },
   {
     number: '02',
-    title: 'Proof is used carefully.',
-    description: 'Reviews, past work, credentials, and concept labels sit where buyers look. No invented outcomes.',
+    title: 'Your proof appears where buyers decide.',
+    description: 'Reviews, past work, and credentials sit where buyers look. We never invent outcomes.',
     icon: 'shield-check',
   },
   {
     number: '03',
-    title: 'Fast on every device, verified before launch.',
-    description: 'Load speed, mobile layout, and accessibility are checked on every build before it goes live.',
+    title: 'Your site is fast and mobile-correct.',
+    description: 'Load speed, mobile layout, and accessibility are verified on every build before launch.',
     icon: 'bolt',
   },
   {
     number: '04',
-    title: 'Support terms are clear.',
-    description: 'Monthly clients keep ongoing support. Ownership clients get a clean handoff and optional support.',
+    title: 'Your support path is clear after launch.',
+    description: 'Monthly clients keep ongoing support. Ownership clients get a clean handoff with optional support.',
     icon: 'key',
   },
 ] as const;
@@ -170,7 +170,7 @@ const services = [
       <div class="axiom-container relative">
         <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,30rem)] lg:items-center">
           <div class="max-w-3xl">
-            <FadeIn delay={180} motion="sceneOpen">
+            <FadeIn motion="sceneOpen" className="hero-copy-primary">
               <MotionHeading as="h1" text="A sharper digital front door for serious local businesses." className="max-w-4xl text-left" />
             </FadeIn>
             <FadeIn delay={520} motion="editorialMaskReveal">

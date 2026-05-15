@@ -219,10 +219,10 @@ export const PRICING_JSON_LD = {
       description:
         'Custom website with $0 down, hosting, ongoing edits, and support included. Full ownership available at month 12.',
       priceCurrency: 'CAD',
-      price: '150',
+      price: '200',
       priceSpecification: {
         '@type': 'UnitPriceSpecification',
-        price: '150',
+        price: '200',
         priceCurrency: 'CAD',
         billingDuration: 'P1M',
       },
@@ -252,7 +252,7 @@ export const PRICING_FAQ_JSON_LD = {
       name: 'Why lead with monthly pricing?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Monthly lowers the upfront lift while keeping hosting, edits, and support in one clear path. It is built for teams that want momentum without a heavy kickoff bill.',
+        text: "Most businesses don't want a $5K+ hit before they see results. Monthly lets you start for $0 down, get the site live, and pay as it earns. Full ownership transfers at month 12 if you want it.",
       },
     },
     {
@@ -430,7 +430,7 @@ export const SEO_ROUTES = {
   pricing: {
     title: 'Web Design Pricing | $0 Down Monthly or One-Time | Axiom Web',
     description:
-      'Transparent web design pricing. Monthly subscription from $150/mo with $0 down, hosting and support included. One-time ownership from $3,500. No sales call required.',
+      'Transparent web design pricing. Monthly subscription from $200/mo with $0 down, hosting and support included. One-time ownership from $3,500. No sales call required.',
     canonicalPath: '/pricing',
   },
   services: {

@@ -8,8 +8,11 @@ import test from 'node:test';
 import { chromium } from 'playwright';
 
 const repoRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const port = 4325;
+const port = 4326;
 const baseUrl = `http://127.0.0.1:${port}`;
+
+const routes = ['/', '/services', '/work', '/pricing', '/about', '/contact', '/start-a-project'];
+const expectedDesktopNav = ['Services', 'Work', 'Pricing', 'About'];
 
 function spawnCommand(args, options = {}) {
   if (process.platform === 'win32') {
@@ -60,51 +63,46 @@ function stopProcess(child) {
   child.kill('SIGTERM');
 }
 
-test('desktop pricing comparison keeps first rows visible and inline checks rendered', async () => {
+test('public pages keep site-wide consistency and reduced-motion boot state', async () => {
   const devServer = spawnCommand(['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port), '--strictPort']);
 
   try {
-    await waitForServer(`${baseUrl}/pricing`);
+    await waitForServer(`${baseUrl}/`);
 
     const browser = await chromium.launch({ headless: true });
     try {
-      const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } });
-      await page.goto(`${baseUrl}/pricing`, { waitUntil: 'networkidle' });
-      await page.locator('text=COMPARE THE PATHS').scrollIntoViewIfNeeded();
-      await page.waitForTimeout(600);
+      const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
 
-      const diagnostics = await page.evaluate(() => {
-        const table = document.querySelector('table');
-        const thead = table?.querySelector('thead');
-        const firstRow = table?.querySelector('tbody tr');
-        const checkPath = table?.querySelector('tbody td svg path');
+      for (const route of routes) {
+        await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle' });
 
-        if (!table || !thead || !firstRow || !checkPath) {
-          return null;
-        }
+        assert.match(await page.title(), /Axiom Web/, `${route} title should contain Axiom Web`);
+        await assert.doesNotReject(
+          page.getByText('Websites built to convert. Not to decorate.').waitFor({ state: 'visible', timeout: 5000 }),
+          `${route} should render the standard footer tagline`
+        );
 
-        const theadRect = thead.getBoundingClientRect();
-        const firstRowRect = firstRow.getBoundingClientRect();
-        const checkPathStyles = getComputedStyle(checkPath);
+        const navLabels = await page.locator('nav[aria-label="Primary"] a').evaluateAll((links) =>
+          links.map((link) => link.textContent?.trim()).filter(Boolean)
+        );
+        assert.deepEqual(navLabels, expectedDesktopNav, `${route} desktop nav order should stay consistent`);
+      }
 
-        return {
-          headerBottom: theadRect.bottom,
-          firstRowTop: firstRowRect.top,
-          checkDashOffset: checkPathStyles.strokeDashoffset,
-          checkOpacity: checkPathStyles.opacity,
-        };
+      const context = await browser.newContext({
+        viewport: { width: 1440, height: 1000 },
+        reducedMotion: 'reduce',
       });
+      const reducedPage = await context.newPage();
+      await reducedPage.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
 
-      assert.ok(diagnostics, 'pricing comparison table should render on desktop');
-      assert.ok(
-        diagnostics.firstRowTop >= diagnostics.headerBottom,
-        `expected first row to start below the header, got rowTop=${diagnostics.firstRowTop} headerBottom=${diagnostics.headerBottom}`
-      );
-      assert.equal(
-        diagnostics.checkDashOffset,
-        '0px',
-        `expected inline comparison check icons to be visible, got strokeDashoffset=${diagnostics.checkDashOffset}`
-      );
+      const motionState = await reducedPage.evaluate(() => ({
+        reduced: document.documentElement.dataset.motionReduced,
+        active: document.documentElement.dataset.motionActive,
+      }));
+
+      assert.equal(motionState.reduced, 'true');
+      assert.notEqual(motionState.active, 'true');
+      await context.close();
     } finally {
       await browser.close();
     }

@@ -586,6 +586,18 @@ html[data-motion-active='true'] [data-motion='finalFrameFooter']:not([data-revea
   --heading-word-duration: 1040ms;
 }
 
+@media (max-width: 767px) {
+  .hero-copy-primary,
+  .hero-copy-primary .motion-heading[data-heading-level='h1'] {
+    --reveal-duration: 320ms;
+    --heading-word-duration: 220ms;
+  }
+
+  .hero-copy-primary .motion-heading .split-char {
+    transition-delay: 0ms;
+  }
+}
+
 .motion-heading[data-motion-visible='true'] {
   clip-path: inset(0) !important;
 }
