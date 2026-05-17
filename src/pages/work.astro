@@ -27,7 +27,7 @@ const featuredBuilds = [
   {
     eyebrow: 'CONCEPT BUILD / HEALTHCARE & MEDICAL',
     title: 'Aurelia Dental Studio',
-    category: 'other',
+    category: 'health-wellness',
     originalWeakness: 'Most medical sites feel cold and clinical - and make booking harder than it should be.',
     axiomChanged: 'Warmer feel, prominent booking paths, and simple navigation anyone can use.',
     whyItWorks: 'New patients book without second-guessing. Returning patients find what they need in seconds.',
@@ -35,6 +35,18 @@ const featuredBuilds = [
     alt: getWorkProofImage('concept-dental-demo').alt || 'Aurelia Dental Studio',
     position: 'center 40%',
     href: 'https://dental.getaxiom.ca',
+  },
+  {
+    eyebrow: 'CONCEPT BUILD / PHYSIOTHERAPY & REHAB',
+    title: 'Physio clinic concept.',
+    category: 'health-wellness',
+    originalWeakness: 'Many clinic sites make patients choose between vague services, buried credentials, and a booking path that feels secondary.',
+    axiomChanged: 'Treatment areas, practitioner trust, and appointment booking are brought into one clear first-screen flow.',
+    whyItWorks: 'Patients can match their concern to the right care path, understand the clinic standard, and book without calling first.',
+    image: getWorkProofImage('concept-physio-demo').source,
+    alt: getWorkProofImage('concept-physio-demo').alt || 'Physiotherapy clinic concept site',
+    position: 'center top',
+    href: 'https://physio.getaxiom.ca',
   },
   {
     eyebrow: 'CONCEPT BUILD / PERSONAL SERVICES & GROOMING',
@@ -101,10 +113,10 @@ const featuredBuilds = [
 const workFilters = [
   { label: 'All', value: 'all' },
   { label: 'Beauty & Grooming', value: 'sales-beauty' },
+  { label: 'Health & Wellness', value: 'health-wellness' },
   { label: 'Legal', value: 'legal' },
   { label: 'Food & Hospitality', value: 'food-hospitality' },
   { label: 'Home Services', value: 'home-services' },
-  { label: 'Other', value: 'other' },
 ] as const;
 ---
 

@@ -26,6 +26,13 @@ export const responsiveImages = {
     avifSrcSet: '/images/work-dental.avif',
     webpSrcSet: '/images/work-dental.webp',
   },
+  workPhysio: {
+    fallbackSrc: '/images/work-physio.jpg',
+    avifSrcSet:
+      '/images/work-physio-640.avif 640w, /images/work-physio-960.avif 960w, /images/work-physio-1200.avif 1200w',
+    webpSrcSet:
+      '/images/work-physio-640.webp 640w, /images/work-physio-960.webp 960w, /images/work-physio-1200.webp 1200w',
+  },
   workBarber: {
     fallbackSrc: '/images/work-barber.png',
     avifSrcSet: '/images/work-barber.avif',
