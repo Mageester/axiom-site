@@ -17,7 +17,43 @@ export interface MotionHeadingProps extends React.HTMLAttributes<HTMLHeadingElem
 
 export function MotionHeading({ as = 'h2', text, align = 'left', className, ...props }: MotionHeadingProps) {
   const Heading = HeadingByTag[as];
-  const words = text.trim().split(/\s+/);
+
+  // Parse markdown-style asterisks: e.g. "A sharper *digital front door* for businesses."
+  const tokens: { text: string; isSerif: boolean }[] = [];
+  const regex = /\*(.+?)\*/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      tokens.push({
+        text: text.slice(lastIndex, match.index),
+        isSerif: false,
+      });
+    }
+    tokens.push({
+      text: match[1],
+      isSerif: true,
+    });
+    lastIndex = regex.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    tokens.push({
+      text: text.slice(lastIndex),
+      isSerif: false,
+    });
+  }
+
+  const words: { word: string; isSerif: boolean }[] = [];
+  tokens.forEach((token) => {
+    const splitWords = token.text.split(/\s+/).filter(Boolean);
+    splitWords.forEach((sw) => {
+      words.push({
+        word: sw,
+        isSerif: token.isSerif,
+      });
+    });
+  });
 
   return (
     <Heading
@@ -26,21 +62,24 @@ export function MotionHeading({ as = 'h2', text, align = 'left', className, ...p
       data-motion="editorialMaskReveal"
       data-heading-level={as}
       suppressHydrationWarning
-      aria-label={text}
+      aria-label={text.replace(/\*/g, '')}
       {...props}
     >
       <span aria-hidden="true" className="split-line block">
-        {words.map((word, index) => (
-          <React.Fragment key={`${word}-${index}`}>
+        {words.map((item, index) => (
+          <React.Fragment key={`${item.word}-${index}`}>
             <span
-              className="split-char inline-block"
+              className={cn(
+                'split-char inline-block',
+                item.isSerif && 'font-editorial italic font-light tracking-normal text-[var(--accent-solid)]'
+              )}
               style={
                 {
                   '--word-delay': `${index * (as === 'h1' ? 0.062 : 0.044)}s`,
                 } as React.CSSProperties
               }
             >
-              {word}
+              {item.word}
             </span>
             {index === words.length - 1 ? null : ' '}
           </React.Fragment>

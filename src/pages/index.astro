@@ -167,11 +167,12 @@ const services = [
         "
       />
       <div aria-hidden="true" class="hero-grid pointer-events-none absolute inset-0" />
+      <div aria-hidden="true" class="hero-cursor-glow" />
       <div class="axiom-container relative">
         <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,30rem)] lg:items-center">
           <div class="max-w-3xl">
             <FadeIn motion="sceneOpen" className="hero-copy-primary">
-              <MotionHeading as="h1" text="A sharper digital front door for serious local businesses." className="max-w-4xl text-left" />
+              <MotionHeading as="h1" text="A sharper *digital front door* for serious local businesses." className="max-w-4xl text-left" />
             </FadeIn>
             <FadeIn delay={520} motion="editorialMaskReveal">
               <p class="section-copy mt-6 max-w-2xl md:text-[1.1rem]">
@@ -235,7 +236,7 @@ const services = [
           <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
             <Eyebrow>SELECTED WORK</Eyebrow>
             <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="Concept studies, labeled clearly." className="section-heading mt-4" />
+            <MotionHeading as="h2" text="Concept studies, *labeled clearly*." className="section-heading mt-4" />
             <p class="section-copy mt-4 md:text-[17px]">
               Each one shows how we'd approach a real business in that industry. Real client projects are in progress — these show the standard we build to.
             </p>
@@ -253,43 +254,145 @@ const services = [
 
         <div
           id="selected-work-demos"
-          class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+          class="mt-10 grid gap-6 grid-cols-1 md:grid-cols-3"
         >
-          {workCards.map((card, index) => (
-            <FadeIn motion="depthCardReveal" delay={Math.min(index * 150, 600)}>
-              <Card
-                className="group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[var(--ease-premium)] hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)]"
-              >
-                <figure class="relative overflow-hidden border-b border-[color:var(--hairline)] bg-white/5">
-                  <ResponsivePicture
-                    source={card.image}
-                    alt={card.alt}
-                    sizes="(min-width: 1280px) 32vw, (min-width: 768px) 45vw, 100vw"
-                    class="media-zoom aspect-[4/3] h-full w-full object-cover"
-                    loading="lazy"
-                    fetchpriority="low"
-                    objectPosition={card.position}
-                  />
-                  <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--overlay-black-soft),transparent)]" />
-                </figure>
+          <!-- Card 1: Aurelia Dental Studio (Landscape, col-span-2) -->
+          <FadeIn motion="depthCardReveal" delay={0} className="md:col-span-2" as="div">
+            <Card
+              className="premium-card group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[var(--ease-premium)] hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)] h-full flex flex-col md:flex-row"
+            >
+              <figure class="relative overflow-hidden border-b md:border-b-0 md:border-r border-[color:var(--hairline)] bg-white/5 md:w-3/5 h-full min-h-[240px]">
+                <ResponsivePicture
+                  source={workCards[0].image}
+                  alt={workCards[0].alt}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  class="media-zoom absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                  fetchpriority="low"
+                  objectPosition={workCards[0].position}
+                />
+                <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--overlay-black-soft),transparent)]" />
+              </figure>
 
-                <div class="flex h-full flex-col p-6 sm:p-7">
-                  <div class="flex flex-wrap items-center gap-3">
-                    <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
-                      {card.tag}
-                    </span>
-                    <Eyebrow>{card.eyebrow}</Eyebrow>
-                  </div>
-                  <h3 class="mt-4 text-[22px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
-                    {card.title}
-                  </h3>
-                  <p class="section-copy mt-3">
-                    {card.outcome}
-                  </p>
+              <div class="flex flex-col justify-center p-6 sm:p-8 md:w-2/5">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
+                    {workCards[0].tag}
+                  </span>
+                  <Eyebrow>{workCards[0].eyebrow}</Eyebrow>
                 </div>
-              </Card>
-            </FadeIn>
-          ))}
+                <h3 class="mt-4 text-[clamp(1.25rem,2.2vw,1.75rem)] font-semibold tracking-tight text-[var(--text-primary)]">
+                  {workCards[0].title}
+                </h3>
+                <p class="section-copy mt-3 text-[14px] leading-relaxed">
+                  {workCards[0].outcome}
+                </p>
+              </div>
+            </Card>
+          </FadeIn>
+
+          <!-- Card 2: Nails Studio Demo (Portrait, col-span-1) -->
+          <FadeIn motion="depthCardReveal" delay={150} className="md:col-span-1" as="div">
+            <Card
+              className="premium-card group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[var(--ease-premium)] hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)] h-full flex flex-col"
+            >
+              <figure class="relative overflow-hidden border-b border-[color:var(--hairline)] bg-white/5 aspect-[4/3] w-full">
+                <ResponsivePicture
+                  source={workCards[1].image}
+                  alt={workCards[1].alt}
+                  sizes="(min-width: 1024px) 25vw, 100vw"
+                  class="media-zoom absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                  fetchpriority="low"
+                  objectPosition={workCards[1].position}
+                />
+                <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--overlay-black-soft),transparent)]" />
+              </figure>
+
+              <div class="flex flex-col p-6 sm:p-7 flex-grow">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
+                    {workCards[1].tag}
+                  </span>
+                  <Eyebrow>{workCards[1].eyebrow}</Eyebrow>
+                </div>
+                <h3 class="mt-4 text-xl font-semibold tracking-tight text-[var(--text-primary)]">
+                  {workCards[1].title}
+                </h3>
+                <p class="section-copy mt-3 text-[14px] leading-relaxed">
+                  {workCards[1].outcome}
+                </p>
+              </div>
+            </Card>
+          </FadeIn>
+
+          <!-- Card 3: Blackline Barber Co. (Portrait, col-span-1) -->
+          <FadeIn motion="depthCardReveal" delay={300} className="md:col-span-1" as="div">
+            <Card
+              className="premium-card group overflow-hidden p-0 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[var(--ease-premium)] hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)] h-full flex flex-col"
+            >
+              <figure class="relative overflow-hidden border-b border-[color:var(--hairline)] bg-white/5 aspect-[4/3] w-full">
+                <ResponsivePicture
+                  source={workCards[2].image}
+                  alt={workCards[2].alt}
+                  sizes="(min-width: 1024px) 25vw, 100vw"
+                  class="media-zoom absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                  fetchpriority="low"
+                  objectPosition={workCards[2].position}
+                />
+                <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--overlay-black-soft),transparent)]" />
+              </figure>
+
+              <div class="flex flex-col p-6 sm:p-7 flex-grow">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
+                    {workCards[2].tag}
+                  </span>
+                  <Eyebrow>{workCards[2].eyebrow}</Eyebrow>
+                </div>
+                <h3 class="mt-4 text-xl font-semibold tracking-tight text-[var(--text-primary)]">
+                  {workCards[2].title}
+                </h3>
+                <p class="section-copy mt-3 text-[14px] leading-relaxed">
+                  {workCards[2].outcome}
+                </p>
+              </div>
+            </Card>
+          </FadeIn>
+
+          <!-- Card 4: Technical Specifications Bento Block (Landscape, col-span-2) -->
+          <FadeIn motion="depthCardReveal" delay={450} className="md:col-span-2" as="div">
+            <Card
+              className="premium-card group overflow-hidden p-6 sm:p-8 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[var(--ease-premium)] hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)] h-full flex flex-col justify-between"
+            >
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
+                    SPECIFICATIONS
+                  </span>
+                  <span class="font-mono text-[11px] tracking-[0.16em] text-[var(--text-muted)]">SYSTEM V3.0</span>
+                </div>
+                <h3 class="mt-4 text-2xl font-semibold tracking-tight text-[var(--text-primary)]">
+                  Performance-first build quality.
+                </h3>
+                <p class="section-copy mt-2 text-[14px] leading-relaxed max-w-xl">
+                  We verify core metrics on every deployment. Our sites load in under a second, use semantic layouts for optimal search indexing, and offer clear code ownership without SaaS lock-in.
+                </p>
+              </div>
+
+              <div class="mt-8 grid grid-cols-2 gap-4 border-t border-[color:var(--hairline)] pt-6">
+                <div>
+                  <span class="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">LOAD SPEED TARGET</span>
+                  <span class="text-2xl font-bold tracking-tight text-[var(--accent-solid)]">100/100</span>
+                </div>
+                <div>
+                  <span class="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">CODE STRUCTURE</span>
+                  <span class="text-2xl font-bold tracking-tight text-[var(--text-primary)]">Semantic HTML5</span>
+                </div>
+              </div>
+            </Card>
+          </FadeIn>
         </div>
       </div>
     </section>
@@ -299,27 +402,39 @@ const services = [
         <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>SERVICES</Eyebrow>
           <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="Three ways to strengthen the site." className="section-heading mt-4" />
+            <MotionHeading as="h2" text="Three ways to *strengthen* the site." className="section-heading mt-4" />
         </FadeIn>
 
-        <div class="mt-10 grid gap-5 md:grid-cols-3">
+        <div class="mt-12 flex flex-col border-t border-[color:var(--hairline)]">
           {services.map((service, index) => (
-            <FadeIn motion="depthCardReveal" delay={Math.min(index * 120, 480)} as="div">
-              <a
-                href={service.href}
-                class="premium-card group flex h-full flex-col gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.02)] p-6 transition-[border-color,background-color,box-shadow,transform] duration-200 hover:border-[color:var(--accent-border)] hover:bg-[rgba(255,255,255,0.03)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.28),0_0_0_1px_rgb(var(--accent-v2-rgb,var(--accent-current-rgb))_/_0.14)] sm:p-7"
-              >
-                <DrawIcon name={service.icon} className="transition-transform duration-300 group-hover:rotate-90 group-hover:text-[var(--accent-solid)]" />
-                  <p class="text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
-                    {service.label}
-                  </p>
-                <p class="section-copy">
-                  {service.description}
-                </p>
-                <span class="mt-auto font-mono text-[12px] uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-opacity duration-200 group-hover:opacity-80">
-                  View service
-                </span>
-              </a>
+            <FadeIn motion="timelineSequence" delay={Math.min(index * 120, 480)} as="div">
+              <div class="border-b border-[color:var(--hairline)]">
+                <a
+                  href={service.href}
+                  class="group flex flex-col md:flex-row md:items-center justify-between py-8 px-6 transition-all duration-300 hover:bg-white/[0.01]"
+                >
+                  <div class="flex items-start md:items-center gap-6">
+                    <span class="font-mono text-[14px] font-semibold text-[var(--accent-solid)] pt-1 md:pt-0">
+                      0{index + 1}
+                    </span>
+                    <div class="flex items-center gap-4">
+                      <DrawIcon name={service.icon} className="transition-transform duration-300 group-hover:rotate-90 group-hover:text-[var(--accent-solid)] text-[var(--text-muted)]" />
+                      <div class="flex flex-col gap-1">
+                        <h3 class="text-xl md:text-2xl font-medium tracking-tight text-[var(--text-primary)]">
+                          {service.label}
+                        </h3>
+                        <p class="section-copy max-w-2xl text-[14px] md:text-[15px] mt-0.5">
+                          {service.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-6 md:mt-0 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)] group-hover:text-[var(--accent-solid)] transition-colors duration-300">
+                    Explore Service
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </div>
+                </a>
+              </div>
             </FadeIn>
           ))}
         </div>
@@ -331,7 +446,7 @@ const services = [
         <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>WHY AXIOM</Eyebrow>
           <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Built for companies with trust to protect." className="section-heading mt-4" />
+          <MotionHeading as="h2" text="Built for companies with *trust to protect*." className="section-heading mt-4" />
           <p class="section-copy mt-4 md:text-[17px]">
             Established businesses. Higher-ticket services. If the site needs to look credible before a new client picks up the phone, this is built for you.
           </p>
@@ -365,11 +480,11 @@ const services = [
         <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
           <Eyebrow>PROCESS</Eyebrow>
           <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="A clear operating system, start to finish." className="section-heading mt-4" />
+          <MotionHeading as="h2" text="A clear *operating system*, start to finish." className="section-heading mt-4" />
         </FadeIn>
 
         <div class="mt-10">
-          <Timeline steps={timelineSteps} />
+          <Timeline client:visible steps={timelineSteps} />
         </div>
 
         <div class="mt-6">
@@ -385,7 +500,7 @@ const services = [
         <div class="mx-auto max-w-4xl text-center">
           <FadeIn as="div" motion="finalFrameFooter">
             <SectionDivider className="mx-auto mb-6" />
-            <MotionHeading as="h2" text="Make the site easier to believe." className="section-heading mx-auto text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
+            <MotionHeading as="h2" text="Make the site *easier to believe*." className="section-heading mx-auto text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
             <p class="section-copy mx-auto mt-5 md:text-[17px]">
               Monthly, ownership, or custom scope. Pricing is public, the launch path is defined, and every build is checked for speed and mobile quality before it ships.
             </p>

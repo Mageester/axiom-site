@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
 export type TimelineStep = {
@@ -14,22 +15,37 @@ export interface TimelineProps {
 }
 
 export function Timeline({ steps, className, mobileVertical = true }: TimelineProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end center'],
+  });
+
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
-    <div className={cn('relative overflow-visible pt-3 md:pt-5', className)}>
-      <div
+    <div ref={containerRef} className={cn('relative overflow-visible pt-3 md:pt-5', className)}>
+      <motion.div
         aria-hidden="true"
         className="timeline-rail absolute left-0 top-6 hidden h-px w-full origin-left bg-[linear-gradient(90deg,rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.12),rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.58),rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/_0.12))] md:block"
-        data-reveal
-        data-motion="timelineSequence"
-        suppressHydrationWarning
+        style={{ scaleX }}
       />
       {mobileVertical ? (
-        <div
+        <motion.div
           aria-hidden="true"
           className="timeline-rail timeline-rail-vertical absolute left-6 top-0 h-full w-px origin-top bg-[color:var(--accent-solid)]/40 md:hidden"
-          data-reveal
-          data-motion="timelineSequence"
-          suppressHydrationWarning
+          style={{ scaleY }}
         />
       ) : null}
 

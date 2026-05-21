@@ -10,6 +10,7 @@ import {
   formatSeoTitle,
   toCanonicalUrl,
 } from '../lib/seo';
+import { ClientRouter } from 'astro:transitions';
 
 import interLatinWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 
@@ -88,6 +89,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
     <meta name="twitter:image" content={resolvedImageUrl} />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <ClientRouter />
 
     {schema && (
       Array.isArray(schema)
@@ -272,16 +274,98 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
               counterTargets.forEach((el) => counterObserver.observe(el));
             }
 
+            // Track cursor coordinates globally (throttled for performance)
+            if (!window.__axiomCursorTrackerBound) {
+              window.__axiomCursorTrackerBound = true;
+              
+              let rafActive = false;
+              let latestEvent = null;
+
+              const onMouseMove = (e) => {
+                latestEvent = e;
+                if (rafActive) return;
+                rafActive = true;
+
+                window.requestAnimationFrame(() => {
+                  if (latestEvent) {
+                    // Update root coordinates for ambient glows
+                    document.documentElement.style.setProperty('--cursor-x', `${latestEvent.pageX}px`);
+                    document.documentElement.style.setProperty('--cursor-y', `${latestEvent.pageY}px`);
+
+                    // Update card-specific spotlight mouse coordinates
+                    const target = latestEvent.target;
+                    if (target instanceof HTMLElement) {
+                      const card = target.closest('.premium-card, .glass-card, .spotlight-card');
+                      if (card instanceof HTMLElement) {
+                        const rect = card.getBoundingClientRect();
+                        card.style.setProperty('--mouse-x', `${latestEvent.clientX - rect.left}px`);
+                        card.style.setProperty('--mouse-y', `${latestEvent.clientY - rect.top}px`);
+                      }
+                    }
+                  }
+                  rafActive = false;
+                });
+              };
+
+              document.addEventListener('mousemove', onMouseMove, { passive: true });
+            }
+
+            // Initialize Native Magnetic CTA buttons
+            const initMagneticCTAs = () => {
+              const elements = document.querySelectorAll('.btn-cta, .btn-primary, [data-magnetic]');
+              elements.forEach((el) => {
+                if (!(el instanceof HTMLElement) || el.dataset.magneticBound === 'true') return;
+                el.dataset.magneticBound = 'true';
+
+                el.classList.add('magnetic-btn');
+
+                const handleMove = (e) => {
+                  const rect = el.getBoundingClientRect();
+                  const cx = rect.left + rect.width / 2;
+                  const cy = rect.top + rect.height / 2;
+                  const dx = e.clientX - cx;
+                  const dy = e.clientY - cy;
+                  const distance = Math.hypot(dx, dy);
+                  const radius = 64; // Interaction radius
+
+                  if (distance < radius) {
+                    const strength = 18; // Pull strength
+                    const force = ((radius - distance) / radius) * strength;
+                    const mx = distance > 0 ? (dx / distance) * force : 0;
+                    const my = distance > 0 ? (dy / distance) * force : 0;
+
+                    el.style.setProperty('--mx', `${mx.toFixed(2)}px`);
+                    el.style.setProperty('--my', `${my.toFixed(2)}px`);
+                    el.style.setProperty('--ms', '1.04');
+                    el.classList.add('is-magnetic-active');
+                  } else {
+                    el.style.setProperty('--mx', '0px');
+                    el.style.setProperty('--my', '0px');
+                    el.style.setProperty('--ms', '1');
+                    el.classList.remove('is-magnetic-active');
+                  }
+                };
+
+                const handleLeave = () => {
+                  el.style.setProperty('--mx', '0px');
+                  el.style.setProperty('--my', '0px');
+                  el.style.setProperty('--ms', '1');
+                  el.classList.remove('is-magnetic-active');
+                };
+
+                el.addEventListener('mousemove', handleMove, { passive: true });
+                el.addEventListener('mouseleave', handleLeave);
+              });
+            };
+            initMagneticCTAs();
+
             window.requestAnimationFrame(() => {
               html.dataset.motionBooted = 'true';
             });
           };
 
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', boot, { once: true });
-          } else {
-            boot();
-          }
+          // Use View Transitions lifecycle event (astro:page-load)
+          document.addEventListener('astro:page-load', boot);
         })();
     </script>
   </head>

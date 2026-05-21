@@ -29,6 +29,7 @@ export default {
       },
       fontFamily: {
         display: ['var(--font-display)'],
+        editorial: ['var(--font-editorial)'],
         sans: ['var(--font-body)'],
         body: ['var(--font-body)'],
         mono: ['var(--font-mono)'],

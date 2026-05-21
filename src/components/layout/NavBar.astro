@@ -31,7 +31,7 @@ const ctaClasses =
   'btn-cta inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-transparent bg-[color:var(--accent)] px-5 text-[14px] font-semibold tracking-normal text-[#050505] shadow-[var(--shadow-button-primary)] transition-[filter,background-color,border-color,color,opacity,transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-premium)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 active:scale-[0.98] hover:-translate-y-0.5 hover:bg-[color:var(--accent-hover)] hover:shadow-[var(--shadow-button-primary-hover)]';
 ---
 
-<header id="site-header" class="fixed inset-x-0 top-0 z-50 px-3 sm:px-6">
+<header id="site-header" class="fixed inset-x-0 top-0 z-50 px-3 sm:px-6" transition:persist>
   <div
     id="nav-shell"
     class="axiom-container flex items-center justify-between rounded-full border border-[color:var(--hairline)] px-4 py-3.5 backdrop-blur-[20px] transition-[border-color,background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]"
@@ -161,6 +161,13 @@ const ctaClasses =
   #nav-shell {
     position: relative;
     overflow: hidden;
+    transform: translate3d(0, 8px, 0);
+    transition:
+      transform 360ms var(--ease-premium),
+      padding 360ms var(--ease-premium),
+      border-color 360ms var(--ease-premium),
+      background-color 360ms var(--ease-premium),
+      box-shadow 360ms var(--ease-premium);
   }
 
   #nav-shell::after {
@@ -221,10 +228,17 @@ const ctaClasses =
   }
 
   #nav-shell[data-scrolled] {
-    border-color: var(--hairline-strong);
-    background-color: var(--nav-shell-bg-scrolled) !important;
-    box-shadow: var(--shadow-nav-scrolled) !important;
-    transform: translate3d(0, 4px, 0);
+    border-color: rgba(212, 175, 55, 0.2);
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(212, 175, 55, 0.08),
+      inset 0 -1px 0 rgba(212, 175, 55, 0.15) !important;
+    transform: translate3d(0, 12px, 0) scale(0.97);
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    backdrop-filter: blur(28px) !important;
+    -webkit-backdrop-filter: blur(28px) !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -257,18 +271,34 @@ const ctaClasses =
 </style>
 
 <script>
-  import { whenDocumentReady } from '../../lib/domReady.js';
-
-  whenDocumentReady(document, () => {
+  document.addEventListener('astro:page-load', () => {
     const toggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
     const panel = document.getElementById('mobile-nav-panel') as HTMLElement | null;
     const shell = document.getElementById('nav-shell') as HTMLElement | null;
     const closeButton = document.getElementById('nav-close') as HTMLButtonElement | null;
     let lastFocused: HTMLElement | null = null;
 
+    // Update active state of navigation links dynamically on page load/transition
+    const currentPath = window.location.pathname;
+    const links = document.querySelectorAll('#nav-shell nav a, #mobile-nav-panel nav a');
+    links.forEach((link) => {
+      if (!(link instanceof HTMLAnchorElement)) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+      const isActive = href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
+      if (isActive) {
+        link.setAttribute('aria-current', 'page');
+        link.classList.add('text-[var(--text-primary)]');
+        link.classList.remove('text-[var(--text-secondary)]');
+      } else {
+        link.removeAttribute('aria-current');
+        link.classList.remove('text-[var(--text-primary)]');
+        link.classList.add('text-[var(--text-secondary)]');
+      }
+    });
+
     if (!toggle || !panel) return;
     if (toggle.dataset.navBound === 'true') return;
-
     toggle.dataset.navBound = 'true';
 
     function openMenu() {
@@ -331,12 +361,19 @@ const ctaClasses =
         first.focus();
       }
     });
-
-    function onScroll() {
-      shell?.toggleAttribute('data-scrolled', window.scrollY > 100);
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
   });
+
+  // Global window scroll observer (bound once)
+  if (typeof window !== 'undefined' && !window.__axiomScrollBound) {
+    window.__axiomScrollBound = true;
+    const onScroll = () => {
+      const shell = document.getElementById('nav-shell');
+      if (shell) {
+        shell.toggleAttribute('data-scrolled', window.scrollY > 100);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Initial check
+    document.addEventListener('astro:page-load', onScroll);
+  }
 </script>

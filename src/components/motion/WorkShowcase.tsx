@@ -55,7 +55,7 @@ function WorkImage({
           alt={build.alt}
           className="block h-full w-full object-cover"
           loading={index === 0 ? 'eager' : 'lazy'}
-          fetchPriority={index === 0 ? 'high' : 'low'}
+          fetchpriority={index === 0 ? 'high' : 'low'}
           decoding="async"
           width={1200}
           height={featured ? 1017 : 889}
