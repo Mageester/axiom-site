@@ -20,6 +20,14 @@ const LEGAL = [
   { label: 'Terms of Service', href: '/terms' },
 ];
 
+const SERVICE_AREAS = [
+  { label: 'Kitchener', href: '/web-design/kitchener' },
+  { label: 'Waterloo', href: '/web-design/waterloo' },
+  { label: 'Cambridge', href: '/web-design/cambridge' },
+  { label: 'Guelph', href: '/web-design/guelph' },
+  { label: 'Hamilton', href: '/web-design/hamilton' },
+];
+
 const isActive = (pathname: string, href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
 export const Footer: React.FC<FooterProps> = ({ pathname }) => {
@@ -30,7 +38,7 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
   return (
     <footer className="site-footer relative overflow-hidden border-t border-[color:var(--hairline)] px-6 py-14 md:px-12 md:py-16" data-reveal data-motion="finalFrameFooter" suppressHydrationWarning>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,var(--accent-surface),transparent_34%)] opacity-70" />
-      <div className="axiom-container grid gap-12 md:grid-cols-2 xl:grid-cols-4">
+      <div className="axiom-container grid gap-12 md:grid-cols-2 xl:grid-cols-5">
         <div className="footer-column space-y-6" data-reveal data-motion="finalFrameFooter" suppressHydrationWarning style={{ '--reveal-delay': '0ms' } as React.CSSProperties}>
           <a href="/" className="inline-flex min-h-11 items-center" aria-label="Axiom Web home">
             <img
@@ -92,7 +100,26 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
           </ul>
         </div>
 
-        <div className="footer-column space-y-4" data-reveal data-motion="finalFrameFooter" suppressHydrationWarning style={{ '--reveal-delay': '360ms' } as React.CSSProperties}>
+        <div className="footer-column space-y-4" data-reveal data-motion="finalFrameFooter" suppressHydrationWarning style={{ '--reveal-delay': '320ms' } as React.CSSProperties}>
+          <Eyebrow>Service Areas</Eyebrow>
+          <ul className="space-y-3">
+            {SERVICE_AREAS.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={cn(
+                    footerLinkClass,
+                    isActive(pathname, link.href) && 'text-[var(--accent-solid)]'
+                  )}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="footer-column space-y-4" data-reveal data-motion="finalFrameFooter" suppressHydrationWarning style={{ '--reveal-delay': '420ms' } as React.CSSProperties}>
           <Eyebrow>Legal</Eyebrow>
           <ul className="space-y-3">
             {LEGAL.map((link) => (

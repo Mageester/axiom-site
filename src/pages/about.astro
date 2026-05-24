@@ -13,18 +13,18 @@ import DrawIcon from '../components/ui/DrawIcon.astro';
 const whyAxiom = [
   {
     number: '01',
-    title: 'The offer is obvious at a glance.',
-    description: "Visitors shouldn't have to hunt for what you do or why to pick you.",
+    title: 'Booking is the product.',
+    description: "If the booking button is buried, the site is leaking revenue. We treat it as the most important pixel.",
   },
   {
     number: '02',
-    title: 'Reviews, past work, and results front and center.',
-    description: 'Proof shows up early - before doubt has time to build.',
+    title: 'Proof sits next to the decision.',
+    description: 'Reviews, credentials, and photos go where buyers actually look — beside the price, the service, the call button.',
   },
   {
     number: '03',
-    title: 'One clear next step. And support after launch.',
-    description: 'Monthly clients stay supported. Nothing gets handed off and forgotten.',
+    title: 'One support path. Two people who answer.',
+    description: 'No agency phone tree. Reply within one business day from the same two people who built the site.',
   },
 ] as const;
 
@@ -48,24 +48,24 @@ const team = [
 const principles = [
   {
     number: '01',
-    title: 'Clarity first.',
+    title: 'Five-second offer.',
     icon: 'eye',
     description:
-      "If the offer is hard to read, the site is already losing. Polish comes after.",
+      "What you do, who you serve, how to book — readable before the first scroll. No hunting through menus.",
   },
   {
     number: '02',
-    title: 'Proof moves buyers.',
+    title: 'Proof beside the decision.',
     icon: 'shield-check',
     description:
-      'Real reviews, real past jobs, real results - all above the fold, not hidden in a footer.',
+      'Reviews, credentials, and real photos placed next to the booking button — not buried in a carousel.',
   },
   {
     number: '03',
-    title: 'Speed books work.',
+    title: 'Mobile is the site.',
     icon: 'bolt',
     description:
-      "Most visitors are on a phone. If it drags, they're gone. We test load times before launch - every time.",
+      "Most appointment bookings start on a phone. Tap targets, load speed, and form quality are tested on real devices before launch.",
   },
 ] as const;
 ---
@@ -84,13 +84,13 @@ const principles = [
           <SectionDivider className="mt-6" />
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={180}>
-          <MotionHeading as="h1" text="Small team. Senior attention. No invented proof." className="mt-4 max-w-4xl" />
+          <MotionHeading as="h1" text="Two people. Built for businesses that *live or die by bookings*." className="mt-4 max-w-4xl" />
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
-            Axiom builds for established businesses across trades, medical, legal, food, retail, and professional
-            services. The common thread is trust: the site needs to make the business easier to understand, believe,
-            and contact.
+            Axiom builds high-trust websites for local appointment-based businesses — dental, beauty, fitness,
+            clinics, studios, trades. Based in Kitchener-Waterloo, serving Canada. No account managers, no offshore
+            handoffs. You talk to the people doing the work.
           </p>
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720} className="mt-7">
@@ -108,8 +108,8 @@ const principles = [
           <SectionDivider className="mt-6" />
           <MotionHeading as="h2" text="Launch isn't the finish line." className="section-heading mt-4" />
           <p class="section-copy md:text-[17px]">
-            Most sites don't need more pages or more animations. They need a clear offer, proof up front, and
-            support that keeps the site earning long after launch.
+            If the booking button isn't winning, more pages and more animations won't fix it. We focus on what makes
+            a buyer pick up the phone or hit "book now" — and keep the site supported after launch so it stays sharp.
           </p>
           <Button asChild variant="ghost" className="px-0">
             <a href="/work">See concept builds</a>

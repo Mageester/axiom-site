@@ -1,0 +1,274 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { FadeIn } from '../../components/ui/FadeIn';
+import { Button } from '../../components/ui/button';
+import { Card } from '../../components/ui/card';
+import { Eyebrow } from '../../components/ui/Eyebrow';
+import DrawIcon from '../../components/ui/DrawIcon.astro';
+import { MotionHeading } from '../../components/motion/MotionHeading';
+import { SectionDivider } from '../../components/motion/SectionDivider';
+import { cities } from '../../content/cities';
+import { createStartProjectHref } from '../../lib/cta';
+import { SITE_NAME, SITE_URL, ORGANIZATION_SCHEMA, breadcrumbSchema } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return cities.map((city) => ({
+    params: { city: city.slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props;
+
+const title = `Web Design ${city.name} | Local Appointment Sites | ${SITE_NAME}`;
+const description = `Web design for ${city.name} appointment-based businesses. Booking-led sites — clearer offer, visible booking, mobile-correct. Based in Kitchener-Waterloo, reply within one business day.`;
+const canonicalPath = `/web-design/${city.slug}`;
+const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: `${SITE_NAME} — Web Design ${city.name}`,
+  url: canonicalUrl,
+  description,
+  image: `${SITE_URL}/og-image.png`,
+  telephone: '+1-226-753-1833',
+  email: 'contact@getaxiom.ca',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Kitchener',
+    addressRegion: 'ON',
+    addressCountry: 'CA',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: city.name,
+  },
+};
+
+const servicesTrio = [
+  {
+    label: 'Booking-led Conversion Sites',
+    description: `For ${city.name} appointment businesses where the booking button is the product. Offer up top, proof beside the price, one tap to book on mobile.`,
+    href: '/services/conversion-sites',
+    icon: 'target',
+  },
+  {
+    label: 'Local Business Websites',
+    description: `For ${city.name} practices, studios, and shops whose reputation and service area need to be obvious in the first scroll.`,
+    href: '/services/local-business-websites',
+    icon: 'crown',
+  },
+  {
+    label: 'Rebuilds',
+    description: `Replace a dated ${city.name} site without losing rankings, content, or domain trust. Same URL, faster load, cleaner path to inquiry.`,
+    href: '/services/rebuilds',
+    icon: 'refresh',
+  },
+] as const;
+
+const faqs = [
+  {
+    q: `Do you only work with ${city.name} businesses?`,
+    a: `No. We are based in Kitchener-Waterloo and work with clients across Canada. ${city.name} is a primary service area — calls, on-site visits, and faster turnaround are easier here.`,
+  },
+  {
+    q: 'How long until launch?',
+    a: 'Two to four weeks from kickoff. Dates are locked in scope, not aspirational.',
+  },
+  {
+    q: 'What does it cost?',
+    a: 'Monthly from $200/mo with $0 down, hosting included. Or one-time ownership from $3,500. E-commerce and rebuilds are scoped separately.',
+  },
+  {
+    q: 'Will I own the site?',
+    a: 'Yes. Code, content, and domain are yours. Monthly clients can transfer full code ownership at month 12.',
+  },
+] as const;
+---
+
+<SiteLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  schema={[
+    localBusinessSchema,
+    breadcrumbSchema([
+      { name: 'Home', url: SITE_URL },
+      { name: 'Web Design', url: `${SITE_URL}/services` },
+      { name: city.name, url: canonicalUrl },
+    ]),
+  ]}
+>
+  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+    <section class="axiom-container pt-20 md:pt-28">
+      <div class="max-w-3xl">
+        <FadeIn motion="eyebrow">
+          <Eyebrow>WEB DESIGN {city.name.toUpperCase()}</Eyebrow>
+          <SectionDivider className="mt-6" />
+        </FadeIn>
+        <FadeIn motion="sceneOpen" delay={180}>
+          <MotionHeading
+            as="h1"
+            text={`Web design in *${city.name}* for businesses that book by appointment.`}
+            className="mt-4 max-w-4xl"
+          />
+        </FadeIn>
+        <FadeIn motion="editorialMaskReveal" delay={500}>
+          <p class="section-copy mt-5 md:text-[17px]">{city.intro}</p>
+        </FadeIn>
+        <FadeIn motion="editorialMaskReveal" delay={620}>
+          <p class="section-copy mt-3 md:text-[17px]">{city.localContext}</p>
+        </FadeIn>
+
+        <FadeIn delay={780} motion="sceneOpen">
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <a href={createStartProjectHref('teardown')}>Get a free site teardown</a>
+            </Button>
+            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
+              <a href="tel:+12267531833">(226) 753-1833</a>
+            </Button>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={920} motion="editorialMaskReveal">
+          <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
+            <span>From $200/mo, $0 down</span>
+            <span aria-hidden="true">&bull;</span>
+            <span>Reply within one business day</span>
+            <span aria-hidden="true">&bull;</span>
+            <span>{city.region}</span>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="axiom-container">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
+          <Eyebrow>SERVICES</Eyebrow>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text={`What we build for ${city.name} businesses.`} className="section-heading mt-4" />
+        </FadeIn>
+
+        <div class="mt-10 flex flex-col border-t border-[color:var(--hairline)]">
+          {servicesTrio.map((service, index) => (
+            <FadeIn motion="timelineSequence" delay={Math.min(index * 120, 480)} as="div">
+              <div class="border-b border-[color:var(--hairline)]">
+                <a
+                  href={service.href}
+                  class="group flex flex-col md:flex-row md:items-center justify-between py-8 px-6 transition-all duration-300 hover:bg-white/[0.01]"
+                >
+                  <div class="flex items-start md:items-center gap-6">
+                    <span class="font-mono text-[14px] font-semibold text-[var(--accent-solid)] pt-1 md:pt-0">
+                      0{index + 1}
+                    </span>
+                    <div class="flex items-center gap-4">
+                      <DrawIcon name={service.icon} className="transition-transform duration-300 group-hover:rotate-90 group-hover:text-[var(--accent-solid)] text-[var(--text-muted)]" />
+                      <div class="flex flex-col gap-1">
+                        <h3 class="text-xl md:text-2xl font-medium tracking-tight text-[var(--text-primary)]">
+                          {service.label}
+                        </h3>
+                        <p class="section-copy max-w-2xl text-[14px] md:text-[15px] mt-0.5">
+                          {service.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-6 md:mt-0 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)] group-hover:text-[var(--accent-solid)] transition-colors duration-300">
+                    Explore Service
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </div>
+                </a>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="axiom-container">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
+          <Eyebrow>AREAS WE SERVE</Eyebrow>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text={`Across ${city.name}.`} className="section-heading mt-4" />
+          <p class="section-copy mt-4 md:text-[17px]">
+            We work with appointment-based businesses across {city.name} and the surrounding {city.region}.
+          </p>
+        </FadeIn>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          {city.neighborhoods.map((n) => (
+            <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-4 py-2 font-mono text-[12px] uppercase tracking-[0.12em] text-[var(--text-secondary)]">
+              {n}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="axiom-container">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
+          <Eyebrow>FAQ</Eyebrow>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text={`${city.name} questions, answered first.`} className="section-heading mt-4" />
+        </FadeIn>
+
+        <div class="mt-10 grid gap-px overflow-hidden rounded-[22px] border border-[color:var(--hairline)] bg-[color:var(--hairline)] md:grid-cols-2">
+          {faqs.map((faq, index) => (
+            <FadeIn motion="timelineSequence" delay={Math.min(index * 90, 540)} as="div">
+              <details class="group h-full bg-[var(--surface-1)] p-6 sm:p-7 transition-colors duration-200 hover:bg-[var(--surface-2)]">
+                <summary class="flex cursor-pointer items-start justify-between gap-4 text-left">
+                  <span class="text-[clamp(1.05rem,1.4vw,1.2rem)] font-medium tracking-tight text-[var(--text-primary)]">
+                    {faq.q}
+                  </span>
+                  <span class="mt-1 flex h-7 w-7 flex-none items-center justify-center rounded-full border border-[color:var(--hairline)] font-mono text-[14px] text-[var(--accent-solid)] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <p class="section-copy mt-4 text-[14px] leading-relaxed">{faq.a}</p>
+              </details>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section-tight section-shell">
+      <div class="axiom-container">
+        <FadeIn as="div" motion="finalFrameFooter">
+          <Card className="mx-auto max-w-5xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
+            <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
+              <div class="max-w-3xl">
+                <SectionDivider className="mb-6" />
+                <MotionHeading as="h2" text={`Get a free teardown of your ${city.name} site.`} className="section-heading" />
+                <p class="section-copy mt-4 md:text-[17px]">
+                  Send us the URL. We reply within one business day with a short teardown — what's working, what's
+                  leaking bookings, and what we'd change first.
+                </p>
+              </div>
+
+              <Button asChild size="lg" className="w-full lg:w-auto">
+                <a href={createStartProjectHref('teardown')}>Get a free site teardown</a>
+              </Button>
+            </div>
+          </Card>
+        </FadeIn>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    details > summary {
+      list-style: none;
+    }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+    details:not([open]) > *:not(summary) {
+      display: none;
+    }
+  </style>
+</SiteLayout>
