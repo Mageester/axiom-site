@@ -8,6 +8,14 @@ import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
 
 const sourcePath = Astro.url.pathname + Astro.url.search;
+
+const heroCopy = {
+  eyebrow: 'START A PROJECT',
+  heading: "Tell us about the site. We'll handle the rest.",
+  sub: "Five short steps. You'll get a clear reply from a real person, not a chatbot.",
+};
+
+const followupSteps = ['We review the brief', 'You get a reply within one business day', 'If there is a fit, we scope the path'];
 ---
 
 <SiteLayout
@@ -20,15 +28,15 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
       <div class="mx-auto max-w-5xl">
         <div class="mx-auto max-w-3xl text-center">
           <FadeIn motion="eyebrow">
-            <Eyebrow>START A PROJECT</Eyebrow>
+            <div data-teardown-target="eyebrow"><Eyebrow>{heroCopy.eyebrow}</Eyebrow></div>
             <SectionDivider className="mx-auto mt-6" />
           </FadeIn>
           <FadeIn motion="sceneOpen" delay={180}>
-            <MotionHeading as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4" />
+            <div data-teardown-target="heading"><MotionHeading as="h1" text={heroCopy.heading} className="mt-4" /></div>
           </FadeIn>
           <FadeIn motion="editorialMaskReveal" delay={460}>
-            <p class="section-copy mx-auto mt-5 max-w-2xl md:text-[17px]">
-              Five short steps. You'll get a clear reply from a real person, not a chatbot.
+            <p class="section-copy mx-auto mt-5 max-w-2xl md:text-[17px]" data-teardown-target="sub">
+              {heroCopy.sub}
             </p>
           </FadeIn>
 
@@ -51,10 +59,10 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
 
         <FadeIn as="div" motion="formFocusMotion" className="mx-auto mt-5 max-w-3xl">
           <div class="grid gap-3 rounded-[22px] border border-[color:var(--hairline)] bg-[rgba(255,255,255,0.018)] p-5 text-left sm:grid-cols-3">
-            {['We review the brief', 'You get a reply within one business day', 'If there is a fit, we scope the path'].map((item, index) => (
+            {followupSteps.map((item, index) => (
               <p class="flex gap-3 text-[14px] leading-[1.6] text-[var(--text-secondary)]">
                 <span class="font-mono text-[12px] text-[var(--accent-solid)]">0{index + 1}</span>
-                <span>{item}</span>
+                <span data-teardown-target={`step${index + 1}`}>{item}</span>
               </p>
             ))}
           </div>
@@ -62,6 +70,29 @@ const sourcePath = Astro.url.pathname + Astro.url.search;
       </div>
     </section>
   </main>
+
+  <script is:inline>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('path') !== 'teardown') return;
+        var swaps = {
+          eyebrow: 'FREE SITE TEARDOWN',
+          heading: "Send the URL. We'll send the teardown.",
+          sub: "Tell us your site, your business, and what you'd like more bookings of. We reply within one business day with a short teardown — what's working, what's leaking, what we'd change first. No sales call, no obligation.",
+          step1: 'We review your site',
+          step2: 'You get a teardown within one business day',
+          step3: 'If you want help, we scope the path'
+        };
+        document.title = 'Free Site Teardown | Axiom Web';
+        Object.keys(swaps).forEach(function (key) {
+          var el = document.querySelector('[data-teardown-target="' + key + '"]');
+          if (!el) return;
+          el.textContent = swaps[key];
+        });
+      } catch (e) { /* noop */ }
+    })();
+  </script>
 
   <style is:global>
     .project-intake-wizard [data-step-panel] {
