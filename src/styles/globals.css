@@ -929,6 +929,32 @@ html[data-motion-active='true'] .timeline-rail-vertical:not([data-reveal-state='
     opacity var(--duration-medium) var(--ease-premium-soft);
 }
 
+/* ---- AxiomMetalButton: dark graphite button used as the MetalFx child ---- */
+
+.axiom-metal-button {
+  border-radius: 4px;
+  background: linear-gradient(180deg, #1a1d24 0%, #0a0c10 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 10px 24px rgba(0, 0, 0, 0.45);
+  color: #f4f6f8;
+}
+
+.axiom-metal-button:hover,
+.axiom-metal-button:focus-visible {
+  border-color: rgba(255, 255, 255, 0.26);
+  background: linear-gradient(180deg, #20242c 0%, #0d1015 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .axiom-metal-button:hover,
+  .axiom-metal-button:focus-visible {
+    transform: translate3d(0, -1px, 0);
+  }
+}
+
 /* ---- AxiomButton: graphite/metal CSS-only premium button ---- */
 
 .axiom-btn-primary,

@@ -6,6 +6,7 @@ import { FadeIn } from '../components/ui/FadeIn';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { AxiomButton } from '../components/ui/AxiomButton';
+import { MetalButton } from '../components/ui/MetalButton';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
@@ -245,10 +246,10 @@ const faqItems = [
 
                   <div class="mt-auto pt-8">
                     {tier.highlighted ? (
-                      <AxiomButton as="a" href={tier.href} variant="primary" size="lg" fullWidth>
+                      <MetalButton client:visible as="a" href={tier.href} size="lg" fullWidth>
                         <span>{tier.cta}</span>
                         <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-                      </AxiomButton>
+                      </MetalButton>
                     ) : (
                       <AxiomButton as="a" href={tier.href} variant="secondary" size="md" fullWidth>
                         <span>{tier.cta}</span>
@@ -482,10 +483,10 @@ const faqItems = [
                 </p>
               </div>
 
-              <AxiomButton as="a" href={createStartProjectHref('custom')} size="lg" className="w-full lg:w-auto">
+              <MetalButton client:visible as="a" href={createStartProjectHref('custom')} size="lg" className="w-full lg:w-auto">
                 <span>Start a project</span>
                 <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-              </AxiomButton>
+              </MetalButton>
             </div>
           </Card>
         </FadeIn>

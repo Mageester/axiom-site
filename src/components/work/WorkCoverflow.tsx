@@ -4,6 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import type { ResponsiveSource } from '../../lib/responsiveImages';
 import { AxiomButton } from '../ui/AxiomButton';
+import { MetalButton } from '../ui/MetalButton';
 
 export type CoverflowProject = {
   id: string;
@@ -352,10 +353,10 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
                   aria-hidden
                 />
               </a>
-              <AxiomButton as="a" href={ctaHref} variant="primary">
+              <MetalButton as="a" href={ctaHref}>
                 <span>Start a project</span>
                 <ArrowUpRightIcon className="h-4 w-4" aria-hidden style={{ color: LIME }} />
-              </AxiomButton>
+              </MetalButton>
             </div>
           </motion.div>
         </div>
