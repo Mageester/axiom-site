@@ -30,6 +30,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.577.0",
+    "metal-fx": "^1.0.4",
     "playwright": "^1.58.2",
     "radix-ui": "^1.4.3",
     "react": "^18.2.0",

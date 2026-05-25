@@ -6,6 +6,8 @@ import { FadeIn } from '../components/ui/FadeIn';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import { MetalButton } from '../components/ui/MetalButton';
+import { MetalChip } from '../components/ui/MetalChip';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
@@ -15,107 +17,82 @@ const isCheckmark = (val: string) => ['Included', String.fromCharCode(10003)].so
 const pricingTiers = [
   {
     key: 'monthly',
-    name: 'Subscription',
+    name: 'Managed Partnership',
     costShape: 'Monthly',
     price: '$200/mo',
-    subtext: '$0 down. Hosting included. Best when you want to start with less friction.',
-    supportNote: 'Ongoing edits and support are included. Full ownership transfers at month 12.',
-    features: ['Up to 5 pages', 'Hosting included', 'Ongoing edits and support', '6-month minimum', 'Full ownership available at month 12'],
-    cta: 'Start monthly',
+    subtext: '$0 down. Comprehensive hosting, security, and ongoing updates included.',
+    supportNote: 'Includes priority updates and active maintenance. Full IP transfer automatically at month 12.',
+    features: ['Custom page layouts (up to 5)', 'Fully managed enterprise hosting', 'Active content & design updates', '6-month minimum commitment', 'Automatic IP transfer at month 12'],
+    cta: 'Start partnership',
     href: createStartProjectHref('monthly'),
     variant: 'primary',
     highlighted: true,
     eyebrow: 'PREFERRED PATH',
-    bestFor: 'The easiest way to start. Low upfront cost, full support built in.',
+    bestFor: 'For established firms seeking continuous optimization and active management with low upfront capital allocation.',
   },
   {
     key: 'ownership',
-    name: 'One-time ownership',
-    costShape: 'One-time',
+    name: 'Direct Acquisition',
+    costShape: 'Upfront',
     price: 'From $3,500',
-    subtext: 'For a standard 5-page build. Full handoff at launch. Hosting can be scoped separately.',
-    supportNote: 'For buyers who want the code, the site, and the keys at launch.',
-    features: ['Up to 5 pages', 'Full code ownership at launch', 'Launch support included', 'Hosting scoped separately', 'SEO foundation'],
-    cta: 'Pay once, own it',
+    subtext: 'Custom 5-page platform deployment. Complete codebase handoff at launch.',
+    supportNote: 'Includes 30 days of launch support. Managed hosting can be configured separately.',
+    features: ['Custom page layouts (up to 5)', 'Immediate codebase ownership', '30 days post-launch support', 'Configured to your choice of host', 'SEO & speed optimization foundation'],
+    cta: 'Acquire platform',
     href: createStartProjectHref('ownership'),
     variant: 'secondary',
-    bestFor: 'One payment. Full ownership at launch.',
+    bestFor: 'For buyers who prefer a single capital expenditure and want immediate, direct custody of their codebase.',
   },
   {
     key: 'ecommerce',
-    name: 'E-commerce / rebuilds',
-    costShape: 'Scoped',
-    price: 'Custom lump sum',
-    subtext: 'Sized to the store, migration, or rebuild scope. E-commerce stays lump sum only.',
-    supportNote: 'For projects that need tighter scoping up front.',
-    features: ['Store setup or rebuild', 'Migration support', 'Integrations as needed', 'Launch support included', 'Scoped pricing'],
-    cta: 'Get a custom quote',
+    name: 'Enterprise Custom Scope',
+    costShape: 'Fixed Bid',
+    price: 'Custom quote',
+    subtext: 'Tailored to specific architectural needs, e-commerce, or large-scale migrations.',
+    supportNote: 'Milestone-based delivery. Project pricing is fully locked in advance.',
+    features: ['Custom page counts and flows', 'E-commerce & database integration', 'Third-party API integrations', 'Post-launch monitoring included', 'Fully audited custom scope'],
+    cta: 'Request custom scope',
     href: createStartProjectHref('custom'),
     variant: 'secondary',
-    bestFor: 'For stores and larger rebuilds. Scoped once, priced once.',
+    bestFor: 'For legacy migrations, e-commerce stores, or complex integrations requiring a custom scope.',
   },
 ] as const;
 
 const comparisonRows = [
   {
-    label: 'Best for',
-    monthly: 'Starting with less friction',
-    ownership: 'Owning outright from day one',
-    ecommerce: 'Stores and larger rebuilds',
-  },
-  {
-    label: 'Upfront cost',
+    key: 'monthly',
+    label: 'Capital Structure',
     monthly: '$0 down',
-    ownership: 'One-time payment',
-    ecommerce: 'One-time payment',
-  },
-  {
-    label: 'Starting price',
-    monthly: 'From $200/mo',
     ownership: 'From $3,500',
-    ecommerce: 'Custom lump sum',
+    ecommerce: 'Custom scope',
   },
   {
-    label: '6-month minimum',
-    monthly: 'Required (6 months)',
-    ownership: 'Not required',
-    ecommerce: 'Scoped with the project',
+    key: 'ownership',
+    label: 'Structural Scale',
+    monthly: 'Up to 5 page layouts',
+    ownership: 'Up to 5 page layouts',
+    ecommerce: 'Fully custom',
   },
   {
-    label: 'Hosting',
-    monthly: 'Included',
-    ownership: 'Scoped separately if needed',
-    ecommerce: 'Scoped as needed',
+    key: 'ecommerce',
+    label: 'Cloud Infrastructure',
+    monthly: 'Fully managed & included',
+    ownership: 'Configured separately',
+    ecommerce: 'Configured separately',
   },
   {
-    label: 'Support',
-    monthly: 'Ongoing edits and support',
-    ownership: 'Launch support included',
-    ecommerce: 'Launch support included',
+    key: 'active-maintenance',
+    label: 'Active Maintenance',
+    monthly: 'Ongoing updates & support',
+    ownership: '30 days post-launch',
+    ecommerce: '30 days post-launch',
   },
   {
-    label: 'Ownership',
-    monthly: 'Available at month 12',
-    ownership: 'Full ownership at launch',
-    ecommerce: 'Full ownership at launch',
-  },
-  {
-    label: 'Pages / scope',
-    monthly: 'Up to 5 pages',
-    ownership: 'Up to 5 pages',
-    ecommerce: 'Scoped to the build',
-  },
-  {
-    label: 'Turnaround',
-    monthly: 'About 21 days',
-    ownership: 'Scoped on intake',
-    ecommerce: 'Scoped on intake',
-  },
-  {
-    label: 'Revisions',
-    monthly: '3 rounds',
-    ownership: '3 rounds',
-    ecommerce: 'Scoped with the project',
+    key: 'ip-ownership',
+    label: 'IP Custody',
+    monthly: 'Transfers at month 12',
+    ownership: 'Immediate handoff',
+    ecommerce: 'Immediate handoff',
   },
 ] as const;
 
@@ -134,44 +111,44 @@ const mobileComparisonTiers = comparisonTierOrder
 
 const faqItems = [
   {
-    question: 'Why offer a monthly investment structure?',
+    question: 'Why structure this as a Managed Partnership?',
     answer:
-      'We lower the barrier to entry by removing large, upfront capital commitments. Our monthly structure provides premium design and development with zero initial cost down, allowing you to deploy the platform and scale payments as the site delivers value. Full code ownership automatically transfers after twelve months.',
+      'We align with your commercial needs by removing large upfront capital commitments. Under our partnership model, we deploy your custom platform for $0 down, providing premium hosting, security, and continuous updates. To guarantee your security, full intellectual property ownership transfers automatically after twelve months.',
   },
   {
-    question: 'What is included in the monthly plan?',
+    question: 'What is included in the Managed Partnership model?',
     answer:
-      'The monthly plan covers comprehensive web presence management: up to five custom pages, cloud hosting, ongoing content updates, and priority technical support. Full code ownership transfers automatically at month twelve, though many clients prefer to maintain the service tier for continuous site optimization.',
+      'The partnership covers everything required to run and maintain your digital presence: custom layout design (up to 5 pages), secure cloud hosting, active content and design updates, and direct partner support. Intellectual property rights transfer automatically at month twelve, after which you can choose to take custody of the code or maintain our managed tier for continuous optimization.',
   },
   {
-    question: 'What if I prefer upfront ownership instead?',
+    question: 'What is the Direct Acquisition path?',
     answer:
-      'For organizations preferring capital expenditure, we offer direct project acquisition. Pricing starts at $3,500, with a complete code handoff upon launch and cloud deployment configured to your preferred infrastructure.',
+      'For firms that prefer a single capital expenditure, you can acquire the platform outright. Starting at $3,500, we design, build, and deploy the site directly to your preferred hosting environment, transferring complete codebase custody to your team at launch.',
   },
   {
-    question: 'How is cloud hosting managed?',
+    question: 'How is cloud infrastructure managed?',
     answer:
-      'Hosting is fully managed and included under the monthly service tier. For upfront acquisition builds, you can choose to leverage our managed hosting environment or deploy to your own servers.',
+      'Under the Managed Partnership, secure hosting is fully managed and included. For Direct Acquisition projects, we configure the platform to your choice of cloud hosting (such as Netlify, Vercel, or AWS) and provide 30 days of launch monitoring.',
   },
   {
-    question: 'Do you build custom e-commerce applications?',
+    question: 'How are custom enterprise scopes handled?',
     answer:
-      'Custom application requirements, e-commerce stores, and complex legacy migrations are scoped and priced individually. These projects are structured under a standard milestone contract rather than a monthly subscription model.',
+      'Custom e-commerce platforms, database-driven applications, and large-scale legacy migrations are scoped on a fixed-bid basis. These projects are structured under milestone-based agreements rather than our monthly partnership model.',
   },
   {
-    question: 'How are design revisions handled?',
+    question: 'What is your project revision protocol?',
     answer:
-      'Each project includes three structured revision phases to refine design and layout. For monthly clients, ongoing updates and refinements continue post-launch as part of the monthly management service.',
+      'Every project includes structured design and copywriting review phases before engineering begins to ensure complete alignment. For Managed Partnership clients, further design refinements and updates are covered under your monthly agreement.',
   },
   {
-    question: 'Can our internal team edit the content?',
+    question: 'Can we edit content internally?',
     answer:
-      'Yes. We configure content management controls so your team can make updates to text, imagery, and documents without risking layout regressions or technical errors.',
+      'Yes. We integrate lightweight, secure content management controls. This allows your team to easily update text, project portfolios, and documents without risking layout regressions or breaking code.',
   },
   {
-    question: 'What separates Axiom from traditional agencies?',
+    question: 'What separates Axiom from a traditional digital agency?',
     answer:
-      'We provide a direct, consultative partnership with the engineers building your site. With fully transparent pricing, a clearly defined path to launch, and ongoing support, we eliminate the friction, communication gaps, and overhead of traditional agencies.',
+      'We operate with zero layers of administrative overhead. You work directly with the partners executing your strategy and code. There are no account managers, no hidden billing hours, and no communication lag.',
   },
 ] as const;
 ---
@@ -200,7 +177,7 @@ const faqItems = [
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={660}>
           <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-muted)] md:text-[15px]">
-            Typical pages include Home, Services, About, Work, and Contact. Extra pages can be scoped separately.
+            Typical builds include Home, Services, Work, Pricing, and Contact. Additional pages can be scoped separately.
             The final monthly price depends on page count, integrations, and support needs.
           </p>
         </FadeIn>
@@ -238,9 +215,15 @@ const faqItems = [
                 <div class="relative flex h-full flex-col p-6 sm:p-7">
                   <div class="flex flex-wrap items-center justify-between gap-3">
                     <Eyebrow className={tier.highlighted ? 'text-[var(--accent-solid)]' : undefined}>{tier.eyebrow ?? tier.name}</Eyebrow>
-                    <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
-                      {tier.costShape}
-                    </span>
+                    {tier.highlighted ? (
+                      <MetalChip client:visible>
+                        {tier.costShape}
+                      </MetalChip>
+                    ) : (
+                      <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
+                        {tier.costShape}
+                      </span>
+                    )}
                   </div>
 
                   <p class="mt-4 text-[15px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">
@@ -269,9 +252,16 @@ const faqItems = [
                   </ul>
 
                   <div class="mt-auto pt-8">
-                    <Button asChild variant={tier.variant} className="w-full">
-                      <a href={tier.href}>{tier.cta}</a>
-                    </Button>
+                    {tier.highlighted ? (
+                      <MetalButton client:visible as="a" href={tier.href} strength={0.7} className="w-full">
+                        <span>{tier.cta}</span>
+                        <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
+                      </MetalButton>
+                    ) : (
+                      <Button asChild variant={tier.variant} className="w-full">
+                        <a href={tier.href}>{tier.cta}</a>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </Card>
@@ -347,14 +337,14 @@ const faqItems = [
                 <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
                   <div class="flex flex-col gap-1">
                     <span class="text-[12px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-solid)]">Preferred</span>
-                    <span>Subscription</span>
+                    <span>Partnership</span>
                   </div>
                 </th>
                 <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  OWNERSHIP
+                  ACQUISITION
                 </th>
                 <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  E-COMMERCE
+                  ENTERPRISE SCOPE
                 </th>
               </tr>
             </thead>
@@ -397,7 +387,7 @@ const faqItems = [
         <FadeIn as="div" motion="precisionPricingReveal" className="mt-6">
           <Card className="border-[color:var(--hairline)] bg-[var(--surface-2)]">
             <p class="section-copy mx-auto max-w-4xl text-center md:text-[16px]">
-              Monthly includes hosting, ongoing support, and edits. One-time ownership includes launch support, with hosting scoped separately if needed. E-commerce stays lump sum only.
+              Managed Partnership includes cloud hosting and active maintenance. Direct Acquisition includes complete codebase handoff at launch. Enterprise Custom Scope is priced by project requirements.
             </p>
           </Card>
         </FadeIn>
@@ -456,13 +446,13 @@ const faqItems = [
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
-                  You want the easiest way to start.
+                  You prioritize operational flexibility.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  $0 down. Hosting and support included. You can transfer ownership later if you want it.
+                  $0 down. Hosting, technical maintenance, and ongoing updates are fully managed. Transfer IP ownership at month 12.
                 </p>
                 <a href="#monthly-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-                  See what monthly costs &uarr;</a>
+                  See partnership details &uarr;</a>
               </div>
             </Card>
           </FadeIn>
@@ -471,13 +461,13 @@ const faqItems = [
             <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
-                  You want full ownership from day one.
+                  You prefer direct intellectual property acquisition.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  One payment from $3,500. Full code handoff at launch. Host it with us or on your own stack.
+                  A single capital expenditure starting at $3,500. Immediate codebase ownership and flexible hosting deployment at launch.
                 </p>
                 <a href="#ownership-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-                  See what ownership costs &uarr;</a>
+                  See direct acquisition details &uarr;</a>
               </div>
             </Card>
           </FadeIn>
@@ -499,9 +489,10 @@ const faqItems = [
                 </p>
               </div>
 
-              <Button asChild size="lg" className="w-full lg:w-auto">
-                <a href={createStartProjectHref('custom')}>Start a project</a>
-              </Button>
+              <MetalButton client:visible as="a" href={createStartProjectHref('custom')} className="w-full lg:w-auto">
+                <span>Start a project</span>
+                <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
+              </MetalButton>
             </div>
           </Card>
         </FadeIn>
@@ -586,15 +577,15 @@ const faqItems = [
 
     @keyframes pricing-glow {
       0% {
-        box-shadow: 0 0 0 1px rgba(212, 175, 55, 0);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0);
       }
 
       50% {
-        box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.18), 0 0 38px rgba(212, 175, 55, 0.12);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16), 0 0 32px rgba(0, 0, 0, 0.45);
       }
 
       100% {
-        box-shadow: 0 0 0 1px rgba(212, 175, 55, 0);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0);
       }
     }
 

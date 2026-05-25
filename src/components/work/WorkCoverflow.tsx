@@ -3,6 +3,8 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import type { ResponsiveSource } from '../../lib/responsiveImages';
+import { MetalButton } from '../ui/MetalButton';
+import { MetalIconButton } from '../ui/MetalIconButton';
 
 export type CoverflowProject = {
   id: string;
@@ -263,28 +265,24 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
         <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-24 bg-gradient-to-r from-[#04060a] to-transparent md:block" />
         <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-24 bg-gradient-to-l from-[#04060a] to-transparent md:block" />
 
-        <button
-          type="button"
-          onClick={prev}
-          aria-label="Previous project"
-          className="absolute left-2 top-1/2 z-30 hidden h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/15 bg-black/40 text-white/80 backdrop-blur-md transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] md:flex"
-          style={{ borderRadius: 4 }}
-        >
-          <ArrowLeftIcon className="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          onClick={next}
-          aria-label="Next project"
-          className="absolute right-2 top-1/2 z-30 hidden h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/15 bg-black/40 text-white/80 backdrop-blur-md transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)] md:flex"
-          style={{ borderRadius: 4 }}
-        >
-          <ArrowRightIcon className="h-4 w-4" />
-        </button>
+        <div className="absolute left-2 top-1/2 z-30 hidden -translate-y-1/2 md:block">
+          <MetalIconButton onClick={prev} ariaLabel="Previous project" size={42}>
+            <ArrowLeftIcon className="h-4 w-4" />
+          </MetalIconButton>
+        </div>
+        <div className="absolute right-2 top-1/2 z-30 hidden -translate-y-1/2 md:block">
+          <MetalIconButton onClick={next} ariaLabel="Next project" size={42}>
+            <ArrowRightIcon className="h-4 w-4" />
+          </MetalIconButton>
+        </div>
       </div>
 
-      <div className="mt-8 flex flex-col items-center gap-5">
-        <div className="flex items-center gap-2" role="tablist" aria-label="Project selector">
+      <div className="mt-5 flex flex-col items-center gap-3">
+        <div
+          className="relative flex h-4 items-center gap-[3px]"
+          role="tablist"
+          aria-label="Project selector"
+        >
           {projects.map((p, idx) => {
             const isActive = idx === activeIndex;
             return (
@@ -295,13 +293,14 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
                 aria-selected={isActive}
                 aria-label={`Go to ${p.title}`}
                 onClick={() => goTo(idx)}
-                className="group/dot flex h-6 items-center"
+                className="group/seg flex h-4 items-center px-[2px]"
               >
                 <span
-                  className="block h-[2px] transition-[width,background-color] duration-300 ease-out"
+                  className="block transition-[height,background-color] duration-300 ease-out"
                   style={{
-                    width: isActive ? 28 : 12,
-                    backgroundColor: isActive ? LIME : 'rgba(255,255,255,0.22)',
+                    width: 18,
+                    height: isActive ? 10 : 2,
+                    backgroundColor: isActive ? LIME : 'rgba(255,255,255,0.18)',
                   }}
                 />
               </button>
@@ -309,41 +308,42 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
           })}
         </div>
 
-        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-          {String(activeIndex + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+        <div className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/40">
+          {String(activeIndex + 1).padStart(2, '0')}
+          <span className="px-2 text-white/20">/</span>
+          {String(projects.length).padStart(2, '0')}
         </div>
       </div>
 
       {active ? (
-        <div className="mx-auto mt-12 max-w-3xl text-center">
+        <div className="mx-auto mt-6 max-w-3xl text-center md:mt-8">
           <motion.div
             key={active.id}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={reduceMotion ? { duration: 0 } : { duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
+            <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-[0.18em]">
               <span style={{ color: LIME }}>{active.niche}</span>
               {active.meta?.map((m) => (
                 <React.Fragment key={m}>
-                  <span aria-hidden className="text-white/25">/</span>
-                  <span>{m}</span>
+                  <span aria-hidden className="text-white/20">/</span>
+                  <span className="text-white/55">{m}</span>
                 </React.Fragment>
               ))}
             </div>
-            <h3 className="mt-4 font-display text-[clamp(1.6rem,2.6vw,2.4rem)] font-medium leading-[1.08] tracking-[-0.01em] text-white">
+            <h3 className="mt-3 font-display text-[clamp(1.5rem,2.4vw,2.2rem)] font-medium leading-[1.08] tracking-[-0.01em] text-white">
               {active.title}
             </h3>
-            <p className="mt-4 text-[0.98rem] leading-[1.65] text-white/65">
+            <p className="mx-auto mt-3 max-w-2xl text-[0.96rem] leading-[1.65] text-white/60">
               {active.outcome}
             </p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
               <a
                 href={active.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/cta relative inline-flex min-h-11 items-center gap-2 px-1 pb-2 pt-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:text-[color:var(--lime)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)]"
-                style={{ ['--lime' as never]: LIME }}
+                className="group/cta relative inline-flex min-h-11 items-center gap-2 px-1 pb-2 pt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-ring)]"
               >
                 {active.ctaLabel ?? 'Open demo'}
                 <ArrowUpRightIcon className="h-4 w-4" aria-hidden />
@@ -353,13 +353,10 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
                   aria-hidden
                 />
               </a>
-              <a
-                href={ctaHref}
-                className="inline-flex min-h-11 items-center gap-2 px-1 pb-2 pt-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white"
-              >
-                Start a project
-                <ArrowUpRightIcon className="h-4 w-4" aria-hidden />
-              </a>
+              <MetalButton as="a" href={ctaHref}>
+                <span>Start a project</span>
+                <ArrowUpRightIcon className="h-4 w-4" aria-hidden style={{ color: LIME }} />
+              </MetalButton>
             </div>
           </motion.div>
         </div>

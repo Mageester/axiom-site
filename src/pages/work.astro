@@ -4,11 +4,11 @@ import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, WORK_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 import { FadeIn } from '../components/ui/FadeIn';
-import { Button } from '../components/ui/button';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
 import { WorkCoverflow } from '../components/work/WorkCoverflow';
+import { MetalButton } from '../components/ui/MetalButton';
 
 const projects = [
   {
@@ -137,9 +137,10 @@ const projects = [
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720}>
           <div class="mt-6">
-            <Button asChild size="lg">
-              <a href={CTA_PATHS.startProject}>Start a project</a>
-            </Button>
+            <MetalButton client:visible as="a" href={CTA_PATHS.startProject}>
+              <span>Start a project</span>
+              <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
+            </MetalButton>
           </div>
         </FadeIn>
       </div>
@@ -169,9 +170,10 @@ const projects = [
               </p>
             </div>
             <div class="flex flex-col items-start gap-3 md:items-end">
-              <Button asChild size="lg">
-                <a href={CTA_PATHS.startProject}>Start a project</a>
-              </Button>
+              <MetalButton client:visible as="a" href={CTA_PATHS.startProject}>
+                <span>Start a project</span>
+                <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
+              </MetalButton>
               <p class="axiom-metric text-[var(--text-muted)]">Review &rarr; Scope &rarr; Build &rarr; Launch</p>
             </div>
           </div>
