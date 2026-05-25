@@ -8,7 +8,7 @@ import { Eyebrow } from '../components/ui/Eyebrow';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
 import { WorkCoverflow } from '../components/work/WorkCoverflow';
-import { MetalButton } from '../components/ui/MetalButton';
+import { AxiomButton } from '../components/ui/AxiomButton';
 
 const projects = [
   {
@@ -137,10 +137,10 @@ const projects = [
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720}>
           <div class="mt-6">
-            <MetalButton client:visible as="a" href={CTA_PATHS.startProject}>
+            <AxiomButton as="a" href={CTA_PATHS.startProject} size="lg">
               <span>Start a project</span>
               <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-            </MetalButton>
+            </AxiomButton>
           </div>
         </FadeIn>
       </div>
@@ -170,10 +170,10 @@ const projects = [
               </p>
             </div>
             <div class="flex flex-col items-start gap-3 md:items-end">
-              <MetalButton client:visible as="a" href={CTA_PATHS.startProject}>
+              <AxiomButton as="a" href={CTA_PATHS.startProject} size="lg">
                 <span>Start a project</span>
                 <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-              </MetalButton>
+              </AxiomButton>
               <p class="axiom-metric text-[var(--text-muted)]">Review &rarr; Scope &rarr; Build &rarr; Launch</p>
             </div>
           </div>

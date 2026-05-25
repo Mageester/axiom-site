@@ -3,8 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import type { ResponsiveSource } from '../../lib/responsiveImages';
-import { MetalButton } from '../ui/MetalButton';
-import { MetalIconButton } from '../ui/MetalIconButton';
+import { AxiomButton } from '../ui/AxiomButton';
 
 export type CoverflowProject = {
   id: string;
@@ -266,20 +265,20 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
         <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-24 bg-gradient-to-l from-[#04060a] to-transparent md:block" />
 
         <div className="absolute left-2 top-1/2 z-30 hidden -translate-y-1/2 md:block">
-          <MetalIconButton onClick={prev} ariaLabel="Previous project" size={42}>
+          <AxiomButton variant="icon" onClick={prev} ariaLabel="Previous project">
             <ArrowLeftIcon className="h-4 w-4" />
-          </MetalIconButton>
+          </AxiomButton>
         </div>
         <div className="absolute right-2 top-1/2 z-30 hidden -translate-y-1/2 md:block">
-          <MetalIconButton onClick={next} ariaLabel="Next project" size={42}>
+          <AxiomButton variant="icon" onClick={next} ariaLabel="Next project">
             <ArrowRightIcon className="h-4 w-4" />
-          </MetalIconButton>
+          </AxiomButton>
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col items-center gap-3">
+      <div className="mt-6 flex items-center justify-center gap-4">
         <div
-          className="relative flex h-4 items-center gap-[3px]"
+          className="flex items-center gap-[6px]"
           role="tablist"
           aria-label="Project selector"
         >
@@ -293,13 +292,13 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
                 aria-selected={isActive}
                 aria-label={`Go to ${p.title}`}
                 onClick={() => goTo(idx)}
-                className="group/seg flex h-4 items-center px-[2px]"
+                className="group/seg flex h-5 items-center"
               >
                 <span
-                  className="block transition-[height,background-color] duration-300 ease-out"
+                  className="block transition-[width,background-color] duration-300 ease-out"
                   style={{
-                    width: 18,
-                    height: isActive ? 10 : 2,
+                    width: isActive ? 24 : 14,
+                    height: 1,
                     backgroundColor: isActive ? LIME : 'rgba(255,255,255,0.18)',
                   }}
                 />
@@ -310,7 +309,7 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
 
         <div className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/40">
           {String(activeIndex + 1).padStart(2, '0')}
-          <span className="px-2 text-white/20">/</span>
+          <span className="px-1.5 text-white/20">/</span>
           {String(projects.length).padStart(2, '0')}
         </div>
       </div>
@@ -353,10 +352,10 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
                   aria-hidden
                 />
               </a>
-              <MetalButton as="a" href={ctaHref}>
+              <AxiomButton as="a" href={ctaHref} variant="primary">
                 <span>Start a project</span>
                 <ArrowUpRightIcon className="h-4 w-4" aria-hidden style={{ color: LIME }} />
-              </MetalButton>
+              </AxiomButton>
             </div>
           </motion.div>
         </div>

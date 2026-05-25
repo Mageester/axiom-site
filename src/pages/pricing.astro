@@ -3,11 +3,9 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { createStartProjectHref } from '../lib/cta';
 import { SEO_ROUTES, PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
 import { FadeIn } from '../components/ui/FadeIn';
-import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
-import { MetalButton } from '../components/ui/MetalButton';
-import { MetalChip } from '../components/ui/MetalChip';
+import { AxiomButton } from '../components/ui/AxiomButton';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
@@ -215,15 +213,9 @@ const faqItems = [
                 <div class="relative flex h-full flex-col p-6 sm:p-7">
                   <div class="flex flex-wrap items-center justify-between gap-3">
                     <Eyebrow className={tier.highlighted ? 'text-[var(--accent-solid)]' : undefined}>{tier.eyebrow ?? tier.name}</Eyebrow>
-                    {tier.highlighted ? (
-                      <MetalChip client:visible>
-                        {tier.costShape}
-                      </MetalChip>
-                    ) : (
-                      <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
-                        {tier.costShape}
-                      </span>
-                    )}
+                    <span class={`rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] ${tier.highlighted ? 'border-white/20 bg-white/[0.04] text-white' : 'border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-secondary)]'}`}>
+                      {tier.costShape}
+                    </span>
                   </div>
 
                   <p class="mt-4 text-[15px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">
@@ -253,14 +245,15 @@ const faqItems = [
 
                   <div class="mt-auto pt-8">
                     {tier.highlighted ? (
-                      <MetalButton client:visible as="a" href={tier.href} strength={0.7} className="w-full">
+                      <AxiomButton as="a" href={tier.href} variant="primary" size="lg" fullWidth>
                         <span>{tier.cta}</span>
                         <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-                      </MetalButton>
+                      </AxiomButton>
                     ) : (
-                      <Button asChild variant={tier.variant} className="w-full">
-                        <a href={tier.href}>{tier.cta}</a>
-                      </Button>
+                      <AxiomButton as="a" href={tier.href} variant="secondary" size="md" fullWidth>
+                        <span>{tier.cta}</span>
+                        <span class="text-white/60" aria-hidden="true">&#8599;</span>
+                      </AxiomButton>
                     )}
                   </div>
                 </div>
@@ -489,10 +482,10 @@ const faqItems = [
                 </p>
               </div>
 
-              <MetalButton client:visible as="a" href={createStartProjectHref('custom')} className="w-full lg:w-auto">
+              <AxiomButton as="a" href={createStartProjectHref('custom')} size="lg" className="w-full lg:w-auto">
                 <span>Start a project</span>
                 <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-              </MetalButton>
+              </AxiomButton>
             </div>
           </Card>
         </FadeIn>
