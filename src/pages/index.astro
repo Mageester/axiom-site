@@ -1,10 +1,11 @@
 ---
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { CTA_PATHS, createStartProjectHref } from '../lib/cta';
+import { CTA_PATHS } from '../lib/cta';
 import { HOME_JSON_LD, WEBSITE_SCHEMA, SEO_ROUTES, breadcrumbSchema } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 import { FadeIn } from '../components/ui/FadeIn';
+import { FeatureCarousel } from '../components/ui/FeatureCarousel';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
@@ -12,7 +13,6 @@ import DrawIcon from '../components/ui/DrawIcon.astro';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { ProofBar } from '../components/motion/ProofBar';
 import { SectionDivider } from '../components/motion/SectionDivider';
-import { Timeline } from '../components/motion/Timeline';
 
 const browserBars = [
   { width: '92%', delay: 0 },
@@ -22,7 +22,7 @@ const browserBars = [
 
 const workCards = [
   {
-    tag: 'STUDY',
+    tag: 'CONCEPT',
     eyebrow: 'CONVERSION STRATEGY',
     title: 'Aurelia Dental Studio',
     outcome: 'Clear, warm, and easy to navigate. New patients find what they need and book without second-guessing.',
@@ -31,7 +31,7 @@ const workCards = [
     position: getWorkProofImage('concept-dental-demo').position || 'center 40%',
   },
   {
-    tag: 'STUDY',
+    tag: 'CONCEPT',
     eyebrow: 'LOCAL BUSINESS',
     title: 'Nails Studio Demo',
     outcome: 'Booking is visible early, services are easy to compare, and the brand reads as calm and polished.',
@@ -40,7 +40,7 @@ const workCards = [
     position: getWorkProofImage('concept-salon-demo').position || 'center 40%',
   },
   {
-    tag: 'STUDY',
+    tag: 'CONCEPT',
     eyebrow: 'REBUILD',
     title: 'Blackline Barber Co.',
     outcome: 'Fast, sharp, and direct. Clients get to the booking button in seconds - no hunting required.',
@@ -53,111 +53,68 @@ const workCards = [
 const principles = [
   {
     number: '01',
-    title: 'Your offer reads in five seconds.',
-    description: 'Visitors learn what you do, who you serve, and how to book before they scroll. No hunting through nav menus.',
+    title: 'Absolute commercial alignment',
+    description: 'We ensure visitors immediately comprehend your exact offer, target market, and the primary path to engagement. Zero ambiguity.',
     icon: 'eye',
   },
   {
     number: '02',
-    title: 'Your booking button is the loudest thing on the page.',
-    description: 'Phone, online booking, or contact form — never more than one tap away on mobile, never buried below the fold.',
-    icon: 'bolt',
-  },
-  {
-    number: '03',
-    title: 'Reviews and credentials sit where buyers decide.',
-    description: 'Proof goes next to the price, the service, and the booking button — not hidden in a footer carousel.',
+    title: 'Evidence-based authority',
+    description: 'We place case outcomes, industry credentials, and verified testimonials exactly where buyers make critical evaluation decisions. We never fabricate metrics.',
     icon: 'shield-check',
   },
   {
+    number: '03',
+    title: 'Uncompromised performance',
+    description: 'Every platform loads in under one second. We audit semantic HTML, responsive grids, and Core Web Vitals on every release to ensure flawless rendering.',
+    icon: 'bolt',
+  },
+  {
     number: '04',
-    title: 'Mobile-first, verified before launch.',
-    description: 'Core Web Vitals, tap targets, and form quality are tested on real devices — not just a desktop preview.',
+    title: 'Active platform guardianship',
+    description: 'We handle hosting security, performance audits, and content updates. You retain direct partner support post-launch without agency ticketing queues.',
     icon: 'key',
   },
 ] as const;
 
-const processStages = [
-  {
-    day: 'Week 1',
-    title: 'Review',
-    description: 'Current site, offer, audience, conversion path, and technical constraints are assessed first.',
-    icon: 'search',
-  },
-  {
-    day: 'Week 2',
-    title: 'Scope',
-    description: 'The page set, message hierarchy, visual direction, and launch requirements are locked before production.',
-    icon: 'document',
-  },
-  {
-    day: 'Weeks 2-3',
-    title: 'Build',
-    description: 'Design, development, content structure, responsiveness, and performance are assembled together.',
-    icon: 'code',
-  },
-  {
-    day: 'Weeks 3-4',
-    title: 'Launch',
-    description: 'QA, Core Web Vitals checks, analytics, handoff, and support path are completed before release.',
-    icon: 'arrow-up',
-  },
-] as const;
 
-const timelineSteps = processStages.map((stage) => ({
-  kicker: stage.day,
-  title: stage.title,
-  description: stage.description,
-}));
-
-const faqs = [
-  {
-    q: 'Who owns the site?',
-    a: 'You do. Code, content, domain, and analytics transfer on day one. No platform lock-in, no proprietary builder you can\'t leave.',
-  },
-  {
-    q: 'What stack do you use?',
-    a: 'Astro, React, Tailwind — static-fast, framework-portable, hostable anywhere. No SaaS page-builder dependency.',
-  },
-  {
-    q: 'What if I want to leave later?',
-    a: 'Take the code, content, and domain with you. Monthly clients can cancel with 30 days\' notice. No exit fees, no held-hostage assets.',
-  },
-  {
-    q: 'How long until launch?',
-    a: 'Two to four weeks from kickoff. Dates are locked in scope, not aspirational. Delays on our side mean a discount, in writing.',
-  },
-  {
-    q: 'Do you handle ongoing changes?',
-    a: 'Monthly clients get scheduled updates included. Ownership clients book changes by the hour or in retainer blocks — your call.',
-  },
-  {
-    q: 'Why no client list yet?',
-    a: 'We\'re new. The studies above show the standard we build to. In exchange for that gap: fixed scope, transparent pricing, and a free teardown of your current site before you decide anything.',
-  },
-] as const;
 
 const services = [
   {
-    label: 'Booking-led Conversion Sites',
+    label: 'Conversion Sites',
     description:
-      'For appointment-based businesses where the booking button is the product. Clear offer up top, proof beside the price, one tap to book on mobile.',
-    href: '/services/conversion-sites',
+      'For service businesses that need a clearer offer, stronger trust signals, and fewer steps from visit to inquiry.',
+    href: '/services#conversion-sites',
     icon: 'target',
   },
   {
     label: 'Local Business Websites',
     description:
-      'For practices, studios, and shops whose reputation and service area need to be obvious in the first scroll — with Google Business, reviews, and contact path wired in.',
-    href: '/services/local-business-websites',
+      'For companies whose reputation, service quality, and contact path need to be obvious on every device.',
+    href: '/services#local-business-websites',
     icon: 'crown',
   },
   {
     label: 'Rebuilds',
     description:
-      'Replace a dated or template-heavy site without losing rankings, content, or domain trust. Same URL, faster load, cleaner path to inquiry.',
-    href: '/services/rebuilds',
+      'Replace a dated or confusing site while protecting useful content, redirects, domains, and buyer trust.',
+    href: '/services#rebuilds',
     icon: 'refresh',
+  },
+] as const;
+
+const team = [
+  {
+    name: 'Aidan',
+    monogram: 'aidan',
+    roles: ['Client Strategy & Scope'],
+    description: 'Architects the commercial message and content hierarchy. Ensures the site structure maps directly to how buyers evaluate your services.',
+  },
+  {
+    name: 'Riley',
+    monogram: 'riley',
+    roles: ['Platform Architecture & Engineering'],
+    description: 'Engineers the codebase and manages platform delivery. Focuses on rendering speeds, responsive integrity, and clean codebase handoffs.',
   },
 ] as const;
 
@@ -199,36 +156,23 @@ const services = [
         <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,30rem)] lg:items-center">
           <div class="max-w-3xl">
             <FadeIn motion="sceneOpen" className="hero-copy-primary">
-              <MotionHeading as="h1" text="A website your *next booking* actually comes from." className="max-w-4xl text-left" />
+              <MotionHeading as="h1" text="Websites built for companies with *reputations to protect*." className="max-w-4xl text-left" />
             </FadeIn>
             <FadeIn delay={520} motion="editorialMaskReveal">
               <p class="section-copy mt-6 max-w-2xl md:text-[1.1rem]">
-                Axiom builds high-trust websites for local appointment-based businesses — dental, beauty, fitness, clinics, studios. Clearer offer, visible booking, mobile-correct, fast. Based in Kitchener-Waterloo, serving Canada.
+                We deploy high-performance web platforms for firms that cannot afford to look second-rate. Sub-second load speeds, conversion-guided layout design, and direct partner execution from review to launch.
               </p>
             </FadeIn>
 
             <FadeIn delay={780} motion="sceneOpen">
               <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Button asChild size="lg" className="w-full sm:w-auto">
-                  <a href={createStartProjectHref('teardown')}>Get a free site teardown</a>
+                  <a href={CTA_PATHS.startProject}>Start a project</a>
                 </Button>
                 <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-                  <a href="/work">See the work</a>
+                  <a href="/services">See services</a>
                 </Button>
               </div>
-            </FadeIn>
-
-            <FadeIn delay={920} motion="editorialMaskReveal">
-              <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
-                <span>From $200/mo, $0 down</span>
-                <span aria-hidden="true">&bull;</span>
-                <span>Reply within one business day</span>
-                <span aria-hidden="true">&bull;</span>
-                <span>No sales call required</span>
-              </div>
-              <p class="mt-3 text-[13px] leading-[1.6] text-[var(--text-muted)]">
-                Or own it outright from $3,500. <a href="/pricing" class="text-[var(--accent-solid)] underline-offset-4 hover:underline">See full pricing</a>.
-              </p>
             </FadeIn>
           </div>
 
@@ -276,9 +220,9 @@ const services = [
           <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
             <Eyebrow>SELECTED WORK</Eyebrow>
             <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="Studies built to *our standard*." className="section-heading mt-4" />
+            <MotionHeading as="h2" text="Structural demonstrations of *our standard*." className="section-heading mt-4" />
             <p class="section-copy mt-4 md:text-[17px]">
-              Each study shows how we'd approach a real business in its industry — booking visible, proof close to the decision, mobile-correct. Client projects are in progress; these set the bar.
+              A curated portfolio of sector-specific platforms engineered to our exact performance and message standards. We build and label these interactive models to demonstrate structural quality without compromising client privacy.
             </p>
           </FadeIn>
 
@@ -401,7 +345,7 @@ const services = [
             </Card>
           </FadeIn>
 
-          <!-- Card 4: Founder block (Landscape, col-span-2) -->
+          <!-- Card 4: Technical Specifications Bento Block (Landscape, col-span-2) -->
           <FadeIn motion="depthCardReveal" delay={450} className="md:col-span-2" as="div">
             <Card
               className="premium-card group overflow-hidden p-6 sm:p-8 transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[var(--ease-premium)] hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)] h-full flex flex-col justify-between"
@@ -409,26 +353,26 @@ const services = [
               <div class="flex flex-col gap-2">
                 <div class="flex items-center justify-between">
                   <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
-                    WHO BUILDS THIS
+                    SPECIFICATIONS
                   </span>
-                  <span class="font-mono text-[11px] tracking-[0.16em] text-[var(--text-muted)]">KITCHENER-WATERLOO</span>
+                  <span class="font-mono text-[11px] tracking-[0.16em] text-[var(--text-muted)]">SYSTEM V3.0</span>
                 </div>
                 <h3 class="mt-4 text-2xl font-semibold tracking-tight text-[var(--text-primary)]">
-                  Two people. Not a vendor.
+                  Performance-first build quality.
                 </h3>
                 <p class="section-copy mt-2 text-[14px] leading-relaxed max-w-xl">
-                  Axiom is Aidan and Riley. No account managers, no offshore handoffs. You talk to the people doing the work, every step. One business day to reply, one point of contact through launch.
+                  We verify core metrics on every deployment. Our sites load in under a second, use semantic layouts for optimal search indexing, and offer clear code ownership without SaaS lock-in.
                 </p>
               </div>
 
               <div class="mt-8 grid grid-cols-2 gap-4 border-t border-[color:var(--hairline)] pt-6">
                 <div>
-                  <span class="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">AIDAN</span>
-                  <span class="text-[15px] font-medium tracking-tight text-[var(--text-primary)]">Strategy, scope, client support</span>
+                  <span class="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">LOAD SPEED TARGET</span>
+                  <span class="text-2xl font-bold tracking-tight text-[var(--accent-solid)]">100/100</span>
                 </div>
                 <div>
-                  <span class="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">RILEY</span>
-                  <span class="text-[15px] font-medium tracking-tight text-[var(--text-primary)]">Design, build, QA</span>
+                  <span class="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">CODE STRUCTURE</span>
+                  <span class="text-2xl font-bold tracking-tight text-[var(--text-primary)]">Semantic HTML5</span>
                 </div>
               </div>
             </Card>
@@ -483,85 +427,157 @@ const services = [
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>WHY AXIOM</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Built for businesses that *live or die by bookings*." className="section-heading mt-4" />
-          <p class="section-copy mt-4 md:text-[17px]">
-            Dental clinics. Salons and studios. Med-spas and fitness. Trades booked by appointment. If your next client decides whether to call from their phone, the site has to do four things right.
-          </p>
-        </FadeIn>
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-start lg:gap-16">
+          <FadeIn motion="editorialMaskReveal" className="space-y-4 lg:sticky lg:top-32">
+            <Eyebrow>WHY AXIOM</Eyebrow>
+            <SectionDivider className="mt-6" />
+            <MotionHeading as="h2" text="Where reputation dictates *execution*." className="section-heading mt-4" />
+            <p class="section-copy mt-4 md:text-[17px]">
+              Established businesses. Higher-ticket services. If the site needs to look credible before a new client picks up the phone, this is built for you.
+            </p>
+          </FadeIn>
 
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
-          {principles.map((principle, index) => (
-            <FadeIn motion="timelineSequence" delay={Math.min(index * 140, 560)} as="div">
-              <Card className="h-full p-0">
-                <div class="flex h-full flex-col p-6 sm:p-7">
-                  <div class="mb-5 flex items-center justify-between gap-4">
-                    <DrawIcon name={principle.icon} />
-                    <p class="font-mono text-[0.75rem] font-medium uppercase tracking-[0.08em] text-[var(--accent-solid)]">{principle.number}</p>
+          <div class="flex flex-col border-t border-[color:var(--hairline)]">
+            {principles.map((principle, index) => (
+              <FadeIn motion="timelineSequence" delay={Math.min(index * 120, 480)} as="div">
+                <div class="grid gap-4 py-8 border-b border-[color:var(--hairline)] sm:grid-cols-[3.5rem_minmax(0,1fr)]">
+                  <div class="font-mono text-3xl font-light text-[var(--accent-solid)] leading-none pt-0.5">
+                    {principle.number}
                   </div>
-                  <h3 class="mt-4 text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-[-0.02em] text-[var(--text-primary)]">
-                    {principle.title}
-                  </h3>
-                  <p class="section-copy mt-3">
-                    {principle.description}
-                  </p>
+                  <div class="flex flex-col gap-2">
+                    <div class="flex items-center gap-3">
+                      <DrawIcon name={principle.icon} className="text-[var(--accent-solid)] w-5 h-5 shrink-0" />
+                      <h3 class="text-[clamp(1.15rem,1.4vw,1.35rem)] font-semibold tracking-tight text-[var(--text-primary)]">
+                        {principle.title}
+                      </h3>
+                    </div>
+                    <p class="section-copy text-[14px] leading-relaxed mt-1">
+                      {principle.description}
+                    </p>
+                  </div>
                 </div>
-              </Card>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </div>
     </section>
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>PROCESS</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="A clear *operating system*, start to finish." className="section-heading mt-4" />
-        </FadeIn>
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-start lg:gap-16">
+          <FadeIn motion="editorialMaskReveal" className="space-y-4 lg:sticky lg:top-32">
+            <Eyebrow>PROCESS</Eyebrow>
+            <SectionDivider className="mt-6" />
+            <MotionHeading as="h2" text="A disciplined, *30-day* delivery." className="section-heading mt-4" />
+            <p class="section-copy mt-4 md:text-[17px]">
+              We run a strict, four-stage deployment process that removes the overhead, scope drift, and communication lag of traditional agency models.
+            </p>
+            <div class="pt-2">
+              <Button asChild variant="ghost" className="px-0 text-[var(--accent-solid)]">
+                <a href="/services#timeline" class="inline-flex items-center gap-2">
+                  Explore our operating timeline
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </Button>
+            </div>
+          </FadeIn>
 
-        <div class="mt-10">
-          <Timeline client:visible steps={timelineSteps} />
-        </div>
-
-        <div class="mt-6">
-          <Button asChild variant="ghost" className="px-0">
-            <a href="/process">See the full process</a>
-          </Button>
+          <FadeIn motion="precisionPricingReveal" as="div">
+            <FeatureCarousel
+              client:visible
+              steps={[
+                { id: '01', name: 'Stage 01', title: 'Diagnostics', description: 'We audit your current brand assets, copywriting, and user drop-off points to define the strategic blueprint.' },
+                { id: '02', name: 'Stage 02', title: 'Blueprinting', description: 'We design the page hierarchy, layout flow, and exact copywriting draft. The entire architecture is approved before writing code.' },
+                { id: '03', name: 'Stage 03', title: 'Custom Engineering', description: 'We develop the platform using lightweight, custom code. No templates, no bloated plugins, and zero performance compromises.' },
+                { id: '04', name: 'Stage 04', title: 'Release & Handoff', description: 'We execute comprehensive DNS, speed, and responsive audits before release, handing over a clean repository with managed hosting options.' },
+              ]}
+              image={{
+                step1light1: '/images/lighthouse-before.png',
+                step1light2: '/images/case-study-1-960.webp',
+                step2light1: '/images/case-study-2-960.webp',
+                step2light2: '/images/case-study-3-800.webp',
+                step3light: '/images/work-hvac-1200.webp',
+                step4light: '/images/lighthouse-after.png',
+                alt: 'Axiom delivery process showcase',
+              }}
+              step1img1Class="pointer-events-none w-[55%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-all duration-500 max-md:scale-[150%] max-md:rounded-xl left-[8%] top-[58%] md:left-[3%] md:top-[38%] md:group-hover:translate-y-2"
+              step1img2Class="pointer-events-none w-[55%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] overflow-hidden transition-all duration-500 max-md:scale-[150%] left-[55%] top-[42%] md:left-[48%] md:top-[28%] md:group-hover:-translate-y-4"
+              step2img1Class="pointer-events-none w-[50%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] overflow-hidden transition-all duration-500 max-md:scale-[150%] left-[8%] top-[60%] md:left-[3%] md:top-[36%] md:group-hover:translate-y-2"
+              step2img2Class="pointer-events-none w-[45%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] overflow-hidden transition-all duration-500 max-md:scale-[140%] left-[60%] top-[42%] md:left-[52%] md:top-[26%] md:group-hover:-translate-y-4"
+              step3imgClass="pointer-events-none w-[90%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] overflow-hidden transition-all duration-500 left-[5%] top-[42%] md:left-[5%] md:top-[30%]"
+              step4imgClass="pointer-events-none w-[90%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] overflow-hidden transition-all duration-500 left-[5%] top-[42%] md:left-[5%] md:top-[30%]"
+              bgClass="bg-gradient-to-b from-[var(--surface-1)] to-[var(--surface-2)]"
+            />
+          </FadeIn>
         </div>
       </div>
     </section>
 
     <section class="page-section section-shell">
       <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>FAQ</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Common questions, *answered first*." className="section-heading mt-4" />
-          <p class="section-copy mt-4 md:text-[17px]">
-            The questions every buyer asks before they hit send. Answered here so you don't have to schedule a call to find out.
-          </p>
-        </FadeIn>
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-start lg:gap-16">
+          <FadeIn motion="editorialMaskReveal" className="space-y-4 lg:sticky lg:top-32">
+            <Eyebrow>DIRECT PARTNERSHIP</Eyebrow>
+            <SectionDivider className="mt-6" />
+            <MotionHeading as="h2" text="Direct partnership. *Direct execution.*" className="section-heading mt-4" />
+            <p class="section-copy mt-4 md:text-[17px]">
+              Axiom is run by two partners. You work directly with the strategists and engineers executing the scope. No account managers, no layers of overhead, and a direct line to updates.
+            </p>
+          </FadeIn>
 
-        <div class="mt-10 grid gap-px overflow-hidden rounded-[22px] border border-[color:var(--hairline)] bg-[color:var(--hairline)] md:grid-cols-2">
-          {faqs.map((faq, index) => (
-            <FadeIn motion="timelineSequence" delay={Math.min(index * 90, 540)} as="div">
-              <details class="group h-full bg-[var(--surface-1)] p-6 sm:p-7 transition-colors duration-200 hover:bg-[var(--surface-2)]">
-                <summary class="flex cursor-pointer items-start justify-between gap-4 text-left">
-                  <span class="text-[clamp(1.05rem,1.4vw,1.2rem)] font-medium tracking-tight text-[var(--text-primary)]">
-                    {faq.q}
-                  </span>
-                  <span class="mt-1 flex h-7 w-7 flex-none items-center justify-center rounded-full border border-[color:var(--hairline)] font-mono text-[14px] text-[var(--accent-solid)] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
-                </summary>
-                <p class="section-copy mt-4 text-[14px] leading-relaxed">
-                  {faq.a}
-                </p>
-              </details>
-            </FadeIn>
-          ))}
+          <div class="grid gap-5 md:grid-cols-2 lg:mt-0">
+            {team.map((member, index) => (
+              <FadeIn motion="depthCardReveal" delay={Math.min(index * 160, 640)} as="div" className="h-full">
+                <Card className="group rounded-2xl border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-8 transition-all duration-300 hover:border-[color:var(--hairline-strong)] hover:bg-[color:var(--surface-overlay-press)] h-full flex flex-col justify-between">
+                  <div class="flex h-full flex-col">
+                    <div class="flex items-start gap-4">
+                      <div
+                        aria-hidden="true"
+                        class="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--surface-overlay)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(0,0,0,0.14)]"
+                      >
+                        <span aria-hidden="true" class="animate-ring-pulse absolute inset-0 rounded-full border border-[color:var(--accent-solid)]/40 opacity-0 transition-all duration-700 group-hover:scale-[1.2] group-hover:opacity-0 motion-safe:animate-none"></span>
+                        {member.monogram === 'aidan' ? (
+                          <svg
+                            viewBox="0 0 48 48"
+                            class="h-12 w-12 text-[var(--accent-solid)]"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M24 8L9 38h7l3.1-6h9.8l3.1 6h7L24 8zm-3 17 3-6 3 6h-6z" />
+                          </svg>
+                        ) : (
+                          <svg
+                            viewBox="0 0 48 48"
+                            class="h-12 w-12 text-[var(--accent-solid)]"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path d="M13 38V10h14.2c6.8 0 10.8 3.3 10.8 8.6 0 4.2-2.4 7-6.3 8.1l7.1 11.3h-7.8l-6-10H20v10h-7zm7-15h6.7c3.1 0 4.7-1.2 4.7-3.8s-1.6-3.9-4.7-3.9H20V23z" />
+                          </svg>
+                        )}
+                      </div>
+
+                      <div class="min-w-0">
+                        <h3 class="text-xl font-semibold text-[var(--text-primary)]">{member.name}</h3>
+                        <div class="mt-3 flex flex-wrap gap-1">
+                          {member.roles.map((role) => (
+                            <span class="rounded-full bg-[color:var(--surface-overlay-press)] px-2 py-0.5 text-[12px] uppercase tracking-widest text-[var(--text-secondary)]">
+                              {role}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <p class="mt-6 text-[15px] leading-[1.7] text-[var(--text-secondary)]">
+                      {member.description}
+                    </p>
+                  </div>
+                </Card>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -571,13 +587,13 @@ const services = [
         <div class="mx-auto max-w-4xl text-center">
           <FadeIn as="div" motion="finalFrameFooter">
             <SectionDivider className="mx-auto mb-6" />
-            <MotionHeading as="h2" text="See what your site is *costing you* — free." className="section-heading mx-auto text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
+            <MotionHeading as="h2" text="Make the site *easier to believe*." className="section-heading mx-auto text-[clamp(32px,4vw,52px)] font-[600] text-[var(--text-primary)]" />
             <p class="section-copy mx-auto mt-5 md:text-[17px]">
-              Send us your URL. We reply within one business day with a short teardown: what's working, what's leaking bookings, and what we'd change first. No sales call, no obligation.
+              Monthly, ownership, or custom scope. Pricing is public, the launch path is defined, and every build is checked for speed and mobile quality before it ships.
             </p>
             <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
               <Button asChild size="lg" className="w-full sm:w-auto">
-                <a href={createStartProjectHref('teardown')}>Get a free site teardown</a>
+                <a href={CTA_PATHS.startProject}>Start a project</a>
               </Button>
               <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
                 <a href="/pricing">See pricing</a>
@@ -590,16 +606,6 @@ const services = [
   </main>
 
   <style>
-    details > summary {
-      list-style: none;
-    }
-    details > summary::-webkit-details-marker {
-      display: none;
-    }
-    details:not([open]) > *:not(summary) {
-      display: none;
-    }
-
     .hero-shell {
       isolation: isolate;
     }
@@ -819,6 +825,22 @@ const services = [
       100% {
         opacity: 1;
         transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .group:hover [aria-hidden='true'].animate-ring-pulse {
+      animation: ring-pulse 0.8s ease-out 1;
+    }
+
+    @keyframes ring-pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.45;
+      }
+
+      100% {
+        transform: scale(1.35);
+        opacity: 0;
       }
     }
   </style>

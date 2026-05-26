@@ -1,5 +1,6 @@
 ---
 import { CTA_PATHS } from '../../lib/cta';
+import { BorderBeamButton } from '../ui/BorderBeamButton';
 
 interface Props {
   hidePrimaryCta?: boolean;
@@ -74,10 +75,12 @@ const ctaClasses =
         (226) 753-1833
       </a>
       {!hidePrimaryCta && (
-        <a href={CTA_PATHS.startProject} class={`hidden md:inline-flex ${ctaClasses}`}>
-          <span>Start a project</span>
-          <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-        </a>
+        <div class="hidden md:inline-flex">
+          <BorderBeamButton client:visible as="a" href={CTA_PATHS.startProject} colorVariant="colorful">
+            <span>Start a project</span>
+            <span class="text-[var(--accent-solid)]" aria-hidden="true">&#8599;</span>
+          </BorderBeamButton>
+        </div>
       )}
 
       <button
@@ -156,10 +159,12 @@ const ctaClasses =
         (226) 753-1833
       </a>
       {!hidePrimaryCta && (
-        <a href={CTA_PATHS.startProject} data-nav-close class={`w-full justify-center sm:w-auto ${ctaClasses}`}>
-          <span>Start a project</span>
-          <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-        </a>
+        <div class="w-full sm:w-auto">
+          <BorderBeamButton client:visible as="a" href={CTA_PATHS.startProject} fullWidth colorVariant="colorful">
+            <span>Start a project</span>
+            <span class="text-[var(--accent-solid)]" aria-hidden="true">&#8599;</span>
+          </BorderBeamButton>
+        </div>
       )}
     </div>
   </div>

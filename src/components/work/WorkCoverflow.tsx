@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import type { ResponsiveSource } from '../../lib/responsiveImages';
 import { AxiomButton } from '../ui/AxiomButton';
-import { MetalButton } from '../ui/MetalButton';
+import { BorderBeamButton } from '../ui/BorderBeamButton';
 
 export type CoverflowProject = {
   id: string;
@@ -24,7 +24,7 @@ export interface WorkCoverflowProps {
   ctaHref?: string;
 }
 
-const LIME = '#c8ff00';
+const LIME = 'var(--accent-solid)';
 
 function useViewportTier() {
   const [tier, setTier] = React.useState<'mobile' | 'tablet' | 'desktop'>('desktop');
@@ -353,10 +353,10 @@ export function WorkCoverflow({ projects, ctaHref = '/contact' }: WorkCoverflowP
                   aria-hidden
                 />
               </a>
-              <MetalButton as="a" href={ctaHref}>
+              <BorderBeamButton as="a" href={ctaHref} colorVariant="colorful">
                 <span>Start a project</span>
                 <ArrowUpRightIcon className="h-4 w-4" aria-hidden style={{ color: LIME }} />
-              </MetalButton>
+              </BorderBeamButton>
             </div>
           </motion.div>
         </div>

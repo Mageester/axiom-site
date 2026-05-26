@@ -6,7 +6,7 @@ import { FadeIn } from '../components/ui/FadeIn';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { AxiomButton } from '../components/ui/AxiomButton';
-import { MetalButton } from '../components/ui/MetalButton';
+import { BorderBeamButton } from '../components/ui/BorderBeamButton';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
@@ -197,20 +197,8 @@ const faqItems = [
               <Card
                 padding="none"
                 hoverLift
-                className={`pricing-tier-card relative overflow-hidden ${tier.highlighted ? 'pricing-highlight-card border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[var(--shadow-card-highlight)]' : 'bg-[var(--surface-1)]'}`}
+                className={`pricing-tier-card relative overflow-hidden ${tier.highlighted ? 'border-[color:var(--hairline)] bg-[var(--surface-1)]' : 'bg-[var(--surface-1)]'}`}
               >
-                {tier.highlighted ? (
-                  <div
-                    aria-hidden="true"
-                    class="pointer-events-none absolute inset-0"
-                    style="
-                      background:
-                        radial-gradient(circle at top, var(--accent-surface-strong) 0%, transparent 42%),
-                        linear-gradient(180deg, var(--surface-overlay-strong) 0%, transparent 24%);
-                    "
-                  />
-                ) : null}
-
                 <div class="relative flex h-full flex-col p-6 sm:p-7">
                   <div class="flex flex-wrap items-center justify-between gap-3">
                     <Eyebrow className={tier.highlighted ? 'text-[var(--accent-solid)]' : undefined}>{tier.eyebrow ?? tier.name}</Eyebrow>
@@ -246,10 +234,10 @@ const faqItems = [
 
                   <div class="mt-auto pt-8">
                     {tier.highlighted ? (
-                      <MetalButton client:visible as="a" href={tier.href} size="lg" fullWidth>
+                      <BorderBeamButton client:visible as="a" href={tier.href} size="lg" fullWidth colorVariant="colorful">
                         <span>{tier.cta}</span>
-                        <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-                      </MetalButton>
+                        <span class="text-[var(--accent-solid)]" aria-hidden="true">&#8599;</span>
+                      </BorderBeamButton>
                     ) : (
                       <AxiomButton as="a" href={tier.href} variant="secondary" size="md" fullWidth>
                         <span>{tier.cta}</span>
@@ -483,10 +471,10 @@ const faqItems = [
                 </p>
               </div>
 
-              <MetalButton client:visible as="a" href={createStartProjectHref('custom')} size="lg" className="w-full lg:w-auto">
+              <BorderBeamButton client:visible as="a" href={createStartProjectHref('custom')} size="lg" className="w-full lg:w-auto" colorVariant="colorful">
                 <span>Start a project</span>
-                <span class="text-[#c8ff00]" aria-hidden="true">&#8599;</span>
-              </MetalButton>
+                <span class="text-[var(--accent-solid)]" aria-hidden="true">&#8599;</span>
+              </BorderBeamButton>
             </div>
           </Card>
         </FadeIn>

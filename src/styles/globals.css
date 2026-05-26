@@ -1349,3 +1349,37 @@ html[data-motion-active='true'] .hero-cursor-glow {
   opacity: 1;
 }
 
+/* ---- FeatureCarousel: cursor-tracking gradient halo on the card frame ---- */
+.axiom-feature-card {
+  position: relative;
+}
+
+.axiom-feature-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 320ms var(--ease-premium);
+  background: radial-gradient(
+    600px circle at var(--x, 50%) var(--y, 50%),
+    rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.35) 0%,
+    rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12) 22%,
+    transparent 60%
+  );
+}
+
+@media (hover: hover) {
+  .axiom-feature-card:hover::before {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .axiom-feature-card::before {
+    transition: none;
+  }
+}
+
