@@ -1349,6 +1349,41 @@ html[data-motion-active='true'] .hero-cursor-glow {
   opacity: 1;
 }
 
+/* ── Section transition glow ── */
+.section-glow {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  width: min(50vw, 640px);
+  height: 1px;
+  pointer-events: none;
+  background: radial-gradient(50% 1px, rgb(var(--accent-v2-rgb, 212 175 55) / 0.35), transparent 70%);
+}
+
+.section-glow-offset-top {
+  top: -1px;
+}
+
+.section-glow-offset-bottom {
+  bottom: -1px;
+}
+
+/* ── Refined section ambient overlay ── */
+.section-shell {
+  position: relative;
+}
+
+.section-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--accent-surface), transparent 60%),
+    linear-gradient(180deg, transparent, rgba(255,255,255,0.012) 46%, transparent);
+  opacity: 0.5;
+}
+
 /* ---- FeatureCarousel: cursor-tracking gradient halo on the card frame ---- */
 .axiom-feature-card {
   position: relative;

@@ -22,15 +22,19 @@ const stats = [
 
 export function ProofBar({ className }: { className?: string }) {
   return (
-    <section className={cn('home-proof-band border-y border-[color:rgba(255,255,255,0.05)]', className)}>
+    <section className={cn('relative overflow-hidden border-y border-[color:rgba(255,255,255,0.04)]', className)}>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/0.3)] to-transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/0.04),transparent_50%)]" />
       <div className="axiom-container">
-        <div className="grid gap-4 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+        <div className="grid gap-0 py-10 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => (
             <div
               key={stat.key}
               className={cn(
-                'motion-surface flex items-center justify-center px-4 text-center font-display text-[0.96rem] font-medium leading-[1.45] tracking-[0.01em] text-[var(--text-secondary)]',
-                index !== stats.length - 1 && 'lg:border-r lg:border-[color:rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.4)]'
+                'flex items-center justify-center px-6 py-5 text-center',
+                'text-[0.95rem] font-medium leading-[1.5] tracking-[0.01em] text-[var(--text-secondary)]',
+                index !== stats.length - 1 && 'border-b border-[color:var(--hairline)] lg:border-b-0 lg:border-r lg:border-[color:rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/0.25)]',
+                index === stats.length - 1 && 'border-none'
               )}
               data-reveal
               data-motion="sceneOpen"

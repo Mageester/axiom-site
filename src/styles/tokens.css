@@ -1,33 +1,38 @@
 :root {
   /* Source of truth: src/design/tokens.ts */
-  --bg-base: #050505;
-  --surface-1: rgba(255, 255, 255, 0.025);
-  --surface-2: rgba(255, 255, 255, 0.04);
-  --surface-input: rgba(255, 255, 255, 0.02);
-  --surface-input-hover: rgba(255, 255, 255, 0.03);
-  --surface-input-focus: rgba(255, 255, 255, 0.04);
-  --surface-panel: rgba(255, 255, 255, 0.025);
-  --surface-panel-strong: rgba(255, 255, 255, 0.04);
-  --surface-overlay: rgba(255, 255, 255, 0.04);
-  --surface-overlay-strong: rgba(255, 255, 255, 0.052);
-  --surface-overlay-press: rgba(255, 255, 255, 0.06);
-  --hero-noise-dot: rgba(255, 255, 255, 0.9);
-  --hero-noise-dot-alt: rgba(255, 255, 255, 0.85);
-  --overlay-black-soft: rgba(0, 0, 0, 0.18);
-  --overlay-black-strong: rgba(0, 0, 0, 0.2);
-  --hairline: rgba(255, 255, 255, 0.08);
-  --hairline-strong: rgba(255, 255, 255, 0.14);
-  --hairline-hover: rgba(255, 255, 255, 0.12);
-  --text-primary: #f4f1ea;
+
+  /* ── Base palette ── */
+  --bg-base: #000000;
+  --surface-1: rgba(255, 255, 255, 0.018);
+  --surface-2: rgba(255, 255, 255, 0.035);
+  --surface-input: rgba(255, 255, 255, 0.015);
+  --surface-input-hover: rgba(255, 255, 255, 0.025);
+  --surface-input-focus: rgba(255, 255, 255, 0.035);
+  --surface-panel: rgba(255, 255, 255, 0.02);
+  --surface-panel-strong: rgba(255, 255, 255, 0.035);
+  --surface-overlay: rgba(255, 255, 255, 0.035);
+  --surface-overlay-strong: rgba(255, 255, 255, 0.048);
+  --surface-overlay-press: rgba(255, 255, 255, 0.055);
+  --hero-noise-dot: rgba(255, 255, 255, 0.85);
+  --hero-noise-dot-alt: rgba(255, 255, 255, 0.8);
+  --overlay-black-soft: rgba(0, 0, 0, 0.22);
+  --overlay-black-strong: rgba(0, 0, 0, 0.26);
+  --hairline: rgba(255, 255, 255, 0.07);
+  --hairline-strong: rgba(255, 255, 255, 0.12);
+  --hairline-hover: rgba(255, 255, 255, 0.1);
+
+  /* ── Text ── */
+  --text-primary: #f7f5f0;
   --text-secondary: #c9c2b6;
   --text-muted: #8b867d;
   --text-error: #dec2a0;
-  --text-placeholder: rgba(187, 179, 163, 0.76);
+  --text-placeholder: rgba(187, 179, 163, 0.72);
   --text-on-accent: #0a0a0a;
-  --error-surface: rgba(231, 178, 168, 0.1);
-  --error-border: rgba(231, 178, 168, 0.35);
+  --error-surface: rgba(231, 178, 168, 0.08);
+  --error-border: rgba(231, 178, 168, 0.3);
   --error-text: #fbe4dd;
 
+  /* ── Gold accent (bolder, warmer) ── */
   --accent-current: #d4af37;
   --accent-current-rgb: 212 175 55;
   --accent-v2: #d4af37;
@@ -36,38 +41,43 @@
   --accent: var(--accent-v2, var(--accent-current));
   --accent-hover: #e0c15e;
   --accent-solid: var(--accent-v2, var(--accent-current));
-  --accent-glow: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.25);
-  --accent-ring: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);
-  --accent-ring-soft: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.14);
-  --accent-border: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.28);
-  --accent-border-strong: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.35);
-  --accent-surface: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.1);
-  --accent-surface-strong: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
-  --accent-surface-alt: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.14);
-  --accent-surface-lift: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.16);
-  --accent-shadow-soft: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.06);
-  --accent-shadow-medium: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
-  --accent-shadow-strong: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);
+  --accent-glow: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3);
+  --accent-ring: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.24);
+  --accent-ring-soft: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.16);
+  --accent-border: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3);
+  --accent-border-strong: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.38);
+  --accent-surface: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
+  --accent-surface-strong: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.15);
+  --accent-surface-alt: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.16);
+  --accent-surface-lift: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.18);
+  --accent-shadow-soft: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.08);
+  --accent-shadow-medium: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.14);
+  --accent-shadow-strong: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.24);
 
-  --content-width: 1240px;
+  /* ── Layout ── */
+  --content-width: 1280px;
   --gutter-mobile: 24px;
   --gutter-desktop: 48px;
-  --section-space-mobile: 72px;
-  --section-space-desktop: 96px;
-  --radius-card: 16px;
-  --radius-component: 12px;
+  --section-space-mobile: 96px;
+  --section-space-desktop: 144px;
+  --section-glow-spread: min(50vw, 640px);
+  --radius-card: 20px;
+  --radius-component: 14px;
   --radius-pill: 999px;
 
+  /* ── Motion curves ── */
   --ease-premium: cubic-bezier(0.33, 1, 0.68, 1);
   --ease-premium-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-precision: cubic-bezier(0.2, 0.78, 0.18, 1);
+
+  /* ── Motion durations ── */
   --motion-micro-hover: 220ms;
   --motion-hover-settle: 360ms;
   --motion-small-reveal: 560ms;
   --motion-content-reveal: 840ms;
   --motion-major-reveal: 1040ms;
-  --motion-hero-opener: 1480ms;
+  --motion-hero-opener: 1600ms;
   --motion-stagger: 120ms;
   --duration-fast: 220ms;
   --duration-medium: 360ms;
@@ -78,51 +88,50 @@
   --duration-system: 760ms;
   --duration-section: 1040ms;
   --duration-timeline: 1120ms;
-  --duration-cinematic: 1480ms;
+  --duration-cinematic: 1600ms;
   --transition-standard: var(--duration-fast) var(--ease-premium);
   --reveal-duration: var(--duration-editorial);
   --reveal-distance: 12px;
   --reveal-stagger: 120ms;
 
+  /* ── Typography ── */
   --font-display: 'Inter Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-editorial: 'Fraunces', Georgia, serif;
   --font-body: 'Inter Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-accent: var(--font-display);
 
-  --body-base-gradient: radial-gradient(ellipse at top, #101010 0%, #050505 64%);
-  --body-hero-glow: radial-gradient(circle at top left, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12), transparent 34%);
-  --body-hero-glow-2: radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.045), transparent 28%);
-  --body-overlay-top: linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 24%);
+  /* ── Background gradients (dramatic) ── */
+  --body-base-gradient: radial-gradient(ellipse at top, #0d0d0b 0%, #000000 64%);
+  --body-hero-glow: radial-gradient(circle at 68% 8%, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.18), transparent 38%);
+  --body-hero-glow-2: radial-gradient(circle at 24% 76%, rgba(255, 255, 255, 0.03), transparent 32%);
+  --body-overlay-top: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 20%);
   --body-overlay-glow:
-    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.02), transparent 25%),
-    radial-gradient(circle at 80% 0%, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.06), transparent 28%);
+    radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.018), transparent 28%),
+    radial-gradient(circle at 78% 4%, rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.08), transparent 30%);
   --noise-svg:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  --selection-bg: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.28);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  --selection-bg: rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.3);
   --selection-fg: var(--text-primary);
   --skip-link-bg: rgba(10, 10, 12, 0.96);
   --skip-link-border: var(--hairline);
   --border-strong: var(--hairline-strong);
-  --nav-shell-bg: rgba(0, 0, 0, 0.66);
-  --nav-shell-bg-scrolled: rgba(0, 0, 0, 0.8);
-  --nav-panel-bg: rgba(0, 0, 0, 0.95);
-  --shadow-nav-rest: 0 16px 30px rgba(0, 0, 0, 0.16);
-  --shadow-nav-scrolled: 0 20px 40px rgba(0, 0, 0, 0.24);
-  --shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 16px 40px rgba(0, 0, 0, 0.2);
-  --shadow-card-elevated: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 24px 64px rgba(0, 0, 0, 0.34);
-  --shadow-card-hover: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 36px rgba(0, 0, 0, 0.22), 0 0 0 1px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.16);
-  --shadow-card-highlight: 0 0 0 1px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.18), 0 28px 60px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
+
+  /* ── Shadows (amplified) ── */
+  --shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 20px 50px rgba(0, 0, 0, 0.28);
+  --shadow-card-elevated: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 28px 72px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 22px 44px rgba(0, 0, 0, 0.3), 0 0 0 1px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.18);
+  --shadow-card-highlight: 0 0 0 1px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2), 0 32px 70px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.14);
   --shadow-button-primary:
     inset 0 1px 0 rgba(255, 255, 255, 0.28),
     inset 0 -6px 4px rgba(0, 0, 0, 0.18),
     0 4px 6px rgba(0, 0, 0, 0.34),
-    0 4px 34px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
+    0 4px 34px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.15);
   --shadow-button-primary-hover:
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -6px 4px rgba(0, 0, 0, 0.18),
     0 8px 16px rgba(0, 0, 0, 0.28),
-    0 14px 34px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.12);
+    0 14px 40px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.15);
   --shadow-button-secondary: 0 6px 20px rgba(0, 0, 0, 0.16);
   --shadow-button-secondary-hover: 0 10px 24px rgba(0, 0, 0, 0.2);
   --shadow-button-focus: 0 0 0 2px rgb(var(--accent-v2-rgb, var(--accent-current-rgb)) / 0.2);
@@ -138,6 +147,11 @@
   --shadow-faq-toggle-open: 0 0 0 1px rgba(255, 255, 255, 0.08);
 
   /* Legacy aliases kept for existing components and pages. */
+  --nav-shell-bg: rgba(0, 0, 0, 0.66);
+  --nav-shell-bg-scrolled: rgba(0, 0, 0, 0.8);
+  --nav-panel-bg: rgba(0, 0, 0, 0.95);
+  --shadow-nav-rest: 0 16px 30px rgba(0, 0, 0, 0.16);
+  --shadow-nav-scrolled: 0 20px 40px rgba(0, 0, 0, 0.24);
   --axiom-base: var(--bg-base);
   --axiom-elevated: var(--surface-1);
   --axiom-surface: var(--surface-2);
