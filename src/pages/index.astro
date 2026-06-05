@@ -370,7 +370,7 @@ const heroLines = ['Websites that get', 'local businesses'] as const;
   .ax-mega {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(2.9rem, 9vw, 9rem);
+    font-size: clamp(2.15rem, 8.4vw, 9rem);
     line-height: 0.95;
     letter-spacing: -0.04em;
     color: var(--text-primary);
@@ -525,6 +525,17 @@ const heroLines = ['Websites that get', 'local businesses'] as const;
   .ax-scroll-cue:hover { color: var(--accent); }
   .ax-scroll-line { position: relative; display: block; width: 1px; height: 2.4rem; background: var(--hairline-strong); overflow: hidden; }
   .ax-scroll-line span { position: absolute; inset: 0; background: var(--accent); transform: translateY(-100%); animation: ax-scroll 2.2s var(--ease-cinematic) infinite; }
+
+  /* ── Mobile hero refinement ───────────────────────── */
+  @media (max-width: 767px) {
+    .ax-hero { min-height: auto; padding-top: 1.25rem; padding-bottom: 2.75rem; }
+    .ax-masthead { font-size: 0.62rem; letter-spacing: 0.12em; gap: 0.4rem 0.6rem; margin-bottom: 1.5rem; padding-bottom: 1rem; }
+    .ax-avail { margin-left: 0; flex-basis: 100%; margin-top: 0.25rem; }
+    .ax-hero-foot { margin-top: 1.75rem; gap: 1.5rem; }
+    .ax-scroll-cue { display: none; }
+    .ax-hero-actions { gap: 1rem; }
+    .ax-hero-actions .ax-cta { flex: 1 1 auto; justify-content: center; }
+  }
 
   /* ── Buttons / links ──────────────────────────────── */
   .ax-cta {
@@ -754,21 +765,28 @@ const heroLines = ['Websites that get', 'local businesses'] as const;
   // off-screen or hidden. Falls back silently to the CSS backdrop on any failure.
   document.addEventListener('astro:page-load', () => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    // Keep phones light — the CSS backdrop carries the hero on small/touch screens.
-    if (window.matchMedia('(max-width: 767px)').matches) return;
 
     const hero = document.getElementById('ax-hero');
     const canvas = document.getElementById('ax-hero-canvas') as HTMLCanvasElement | null;
     if (!hero || !canvas) return;
 
+    // Phones still get the living hero — just rendered cheaper (lower internal
+    // resolution + 30fps cap) so it stays smooth and easy on the battery.
+    const coarse = window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(max-width: 767px)').matches;
+
     const gl = (canvas.getContext('webgl', { antialias: false, alpha: true, premultipliedAlpha: false }) ||
       canvas.getContext('experimental-webgl')) as WebGLRenderingContext | null;
     if (!gl) return; // CSS fallback remains
 
+    // Drive the shader colour from the live accent token so it always matches the theme.
+    const accentRaw = getComputedStyle(document.documentElement).getPropertyValue('--accent-v2-rgb').trim();
+    const accent = accentRaw.split(/[\s,]+/).map(Number).filter((n) => !Number.isNaN(n));
+    const aR = (accent[0] ?? 212) / 255, aG = (accent[1] ?? 175) / 255, aB = (accent[2] ?? 55) / 255;
+
     const VERT = `attribute vec2 a; void main(){ gl_Position = vec4(a, 0.0, 1.0); }`;
     const FRAG = `
       precision highp float;
-      uniform float u_time; uniform vec2 u_res; uniform vec2 u_mouse;
+      uniform float u_time; uniform vec2 u_res; uniform vec2 u_mouse; uniform vec3 u_accent;
       vec2 hash22(vec2 p){ p = vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3))); return fract(sin(p)*43758.5453)*2.0-1.0; }
       float noise(vec2 p){ vec2 i=floor(p); vec2 f=fract(p); vec2 u=f*f*(3.0-2.0*f);
         return mix(mix(dot(hash22(i+vec2(0.0,0.0)),f-vec2(0.0,0.0)), dot(hash22(i+vec2(1.0,0.0)),f-vec2(1.0,0.0)),u.x),
@@ -783,14 +801,14 @@ const heroLines = ['Websites that get', 'local businesses'] as const;
         float f = fbm(p+2.0*r);
         vec2 m = u_mouse; m.x *= u_res.x/u_res.y;
         float md = 1.0 - smoothstep(0.0, 0.7, distance(p, m));
-        f += md*0.28;
+        f += md*0.30;
         vec3 base = vec3(0.039,0.039,0.039);
-        vec3 accent = vec3(1.0,0.36,0.21);
+        vec3 accent = u_accent;
         float band = smoothstep(0.12, 0.72, f);
-        vec3 col = mix(base, accent, band*0.6);
-        col += accent * pow(band, 3.0) * 0.28;     // bright filament cores
+        vec3 col = mix(base, accent, band*0.62);
+        col += accent * pow(band, 3.0) * 0.32;     // bright filament cores
         float vgrad = smoothstep(1.0,0.1,uv.y);
-        col += accent*0.07*vgrad*md;
+        col += accent*0.08*vgrad*(0.4 + md);
         float vig = smoothstep(1.2,0.2,distance(uv,vec2(0.5,0.42)));
         col *= mix(0.5,1.0,vig);
         gl_FragColor = vec4(col, 1.0);
@@ -820,11 +838,14 @@ const heroLines = ['Websites that get', 'local businesses'] as const;
     const uTime = gl.getUniformLocation(prog, 'u_time');
     const uRes = gl.getUniformLocation(prog, 'u_res');
     const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+    const uAccent = gl.getUniformLocation(prog, 'u_accent');
+    gl.uniform3f(uAccent, aR, aG, aB);
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    // Lower internal resolution on phones — the soft plasma upscales cleanly.
+    const pxScale = Math.min(window.devicePixelRatio || 1, coarse ? 1 : 1.5) * (coarse ? 0.6 : 1);
     const resize = () => {
-      const w = Math.floor(canvas.clientWidth * dpr);
-      const h = Math.floor(canvas.clientHeight * dpr);
+      const w = Math.max(1, Math.floor(canvas.clientWidth * pxScale));
+      const h = Math.max(1, Math.floor(canvas.clientHeight * pxScale));
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w; canvas.height = h;
         gl.viewport(0, 0, w, h);
@@ -833,19 +854,36 @@ const heroLines = ['Websites that get', 'local businesses'] as const;
     };
 
     let mx = 0.5, my = 0.6, tmx = 0.5, tmy = 0.6;
-    window.addEventListener('mousemove', (e) => {
+    let lastInput = -9999;
+    const setFocus = (clientX: number, clientY: number, now: number) => {
       const rect = hero.getBoundingClientRect();
-      tmx = (e.clientX - rect.left) / rect.width;
-      tmy = 1.0 - (e.clientY - rect.top) / rect.height;
-    }, { passive: true });
+      tmx = (clientX - rect.left) / rect.width;
+      tmy = 1.0 - (clientY - rect.top) / rect.height;
+      lastInput = now;
+    };
+    window.addEventListener('mousemove', (e) => setFocus(e.clientX, e.clientY, performance.now()), { passive: true });
+    // Touch reactivity — the plasma follows your finger on mobile.
+    const onTouch = (e: TouchEvent) => { const t = e.touches[0]; if (t) setFocus(t.clientX, t.clientY, performance.now()); };
+    hero.addEventListener('touchstart', onTouch, { passive: true });
+    hero.addEventListener('touchmove', onTouch, { passive: true });
 
     let running = true;
     let raf = 0;
+    let lastFrame = 0;
+    const minDelta = coarse ? 1000 / 30 : 0; // cap to ~30fps on phones
     const startT = performance.now();
     const render = (now: number) => {
       raf = requestAnimationFrame(render);
       if (!running) return;
+      if (now - lastFrame < minDelta) return;
+      lastFrame = now;
       resize();
+      // When idle, let the focus drift slowly so the hero always feels alive.
+      if (now - lastInput > 2200) {
+        const tt = now / 1000;
+        tmx = 0.5 + Math.cos(tt * 0.18) * 0.28;
+        tmy = 0.62 + Math.sin(tt * 0.23) * 0.18;
+      }
       mx += (tmx - mx) * 0.06; my += (tmy - my) * 0.06;
       gl.uniform1f(uTime, (now - startT) / 1000);
       gl.uniform2f(uMouse, mx, my);
