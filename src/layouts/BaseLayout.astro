@@ -1,5 +1,6 @@
 ---
 import '../styles/globals.css';
+import CinematicLayer from '../components/site/CinematicLayer.astro';
 import { Footer } from '../components/layout/Footer';
 import NavBar from '../components/layout/NavBar.astro';
 import {
@@ -107,13 +108,24 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
             html.dataset.motionActive = 'true';
           }
 
+          // Cinematic layer gating: only show the intro loader when JS is live
+          // and it hasn't already played this session (prevents replay/flash).
+          html.classList.add('ax-js');
+          try {
+            if (sessionStorage.getItem('axiomIntroSeen') === '1') {
+              html.dataset.introSeen = 'true';
+            }
+          } catch (e) {
+            /* sessionStorage may be unavailable; loader simply plays. */
+          }
+
           const boot = () => {
             const markLink = (link) => {
               if (!(link instanceof HTMLElement)) return;
               if (link.classList.contains('btn-primary') || link.classList.contains('btn-secondary') || link.classList.contains('btn-ghost') || link.classList.contains('skip-link')) {
                 return;
               }
-              if (link.getAttribute('href') === '/start-a-project' || link.getAttribute('href') === '/start') return;
+              if (link.getAttribute('href') === '/contact') return;
               if (link.closest('astro-island')) return;
               if (link.closest('.site-logo')) return;
               if (link.querySelector('img, svg')) return;
@@ -370,6 +382,7 @@ const shellPaddingClass = showNav ? 'pt-28 md:pt-32' : 'pt-0';
     </script>
   </head>
   <body>
+    <CinematicLayer />
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     {showNav ? <NavBar hidePrimaryCta={hidePrimaryCta} /> : null}

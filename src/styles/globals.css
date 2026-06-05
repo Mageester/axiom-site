@@ -1418,3 +1418,434 @@ html[data-motion-active='true'] .hero-cursor-glow {
   }
 }
 
+
+/* ── Electric identity: gradient headline emphasis + hero aura ───────── */
+@layer components {
+  .heading-gradient {
+    background: var(--accent-gradient, linear-gradient(110deg, #9d86ff 0%, #7c5cff 40%, #2fe6ff 100%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-style: italic;
+    text-shadow: 0 0 42px rgb(var(--accent-v2-rgb, 124 92 255) / 0.28);
+    padding-right: 0.06em;
+  }
+
+  /* Brighter, cooler hero aurora driven by the violet→cyan signature. */
+  .hero-aurora {
+    background:
+      radial-gradient(closest-side at 84% 0%, rgb(var(--accent-v2-rgb, 124 92 255) / 0.24), transparent 64%),
+      radial-gradient(closest-side at 10% 98%, rgb(var(--accent-cyan-rgb, 47 230 255) / 0.09), transparent 70%) !important;
+    filter: blur(12px);
+    opacity: 0.7;
+  }
+
+  /* Availability pill above the hero headline. */
+  .hero-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border: 1px solid rgb(var(--accent-v2-rgb, 124 92 255) / 0.32);
+    background: rgb(var(--accent-v2-rgb, 124 92 255) / 0.08);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem 0.4rem 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .hero-status-pill .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--accent-cyan, #2fe6ff);
+    box-shadow: 0 0 0 3px rgb(var(--accent-cyan-rgb, 47 230 255) / 0.18), 0 0 12px rgb(var(--accent-cyan-rgb, 47 230 255) / 0.8);
+  }
+}
+
+/* ── Canonical CTA link styles (Astro-safe, no React Slot dependency) ── */
+@layer components {
+  .btn-primary,
+  a.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding-inline: 1.6rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: var(--text-on-accent, #fff);
+    background-image: var(--accent-gradient, linear-gradient(110deg, #9d86ff, #7c5cff 40%, #2fe6ff));
+    background-size: 170% 170%;
+    background-position: 0% 50%;
+    box-shadow: 0 10px 28px -8px rgb(var(--accent-v2-rgb, 124 92 255) / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.22);
+    transition:
+      background-position var(--duration-medium, 360ms) var(--ease-premium, ease),
+      transform var(--duration-fast, 220ms) var(--ease-premium, ease),
+      box-shadow var(--duration-medium, 360ms) var(--ease-premium, ease),
+      filter var(--duration-fast, 220ms) ease;
+  }
+
+  .btn-primary:hover,
+  a.btn-primary:hover {
+    background-position: 100% 50%;
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -8px rgb(var(--accent-v2-rgb, 124 92 255) / 0.75), inset 0 1px 0 rgb(255 255 255 / 0.28);
+  }
+
+  .btn-primary:active,
+  a.btn-primary:active { transform: translateY(0) scale(0.985); }
+
+  .btn-ghost-link,
+  a.btn-ghost-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding-inline: 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    color: var(--text-primary);
+    border: 1px solid var(--hairline-strong);
+    background: rgb(255 255 255 / 0.02);
+    transition: border-color var(--duration-fast,220ms) ease, background-color var(--duration-fast,220ms) ease, transform var(--duration-fast,220ms) ease, color var(--duration-fast,220ms) ease;
+  }
+
+  .btn-ghost-link:hover,
+  a.btn-ghost-link:hover {
+    border-color: rgb(var(--accent-v2-rgb, 124 92 255) / 0.6);
+    color: var(--text-primary);
+    background: rgb(var(--accent-v2-rgb, 124 92 255) / 0.08);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary, a.btn-primary, .btn-ghost-link, a.btn-ghost-link { transition: none; }
+  .btn-primary:hover, a.btn-primary:hover, .btn-ghost-link:hover, a.btn-ghost-link:hover { transform: none; }
+}
+
+/* ── Hero website preview (shows the product, not jargon) ────────────── */
+@layer components {
+  .hero-preview {
+    width: clamp(21rem, 27vw, 26rem);
+    border: 1px solid var(--hairline-strong);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0d0c14;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 40px 90px -34px rgb(0 0 0 / 0.85);
+  }
+
+  .hero-preview-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 0.85rem;
+    background: rgb(255 255 255 / 0.04);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .hero-preview-bar .hp-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.18);
+  }
+
+  .hero-preview-url {
+    margin-left: 0.5rem;
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    background: rgb(255 255 255 / 0.03);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .hero-preview-body {
+    background: #fbfaf7;
+  }
+
+  .hero-preview-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+  }
+
+  .hero-preview-brand {
+    font-family: var(--font-editorial), Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #16151c;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-preview-book {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: #16151c;
+    border-radius: 999px;
+    padding: 0.32rem 0.8rem;
+  }
+
+  .hero-preview-shot {
+    position: relative;
+    height: 11rem;
+    margin: 0 0.7rem;
+    border-radius: 12px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-preview-shot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.66), rgb(0 0 0 / 0.05) 60%);
+    z-index: 1;
+  }
+
+  .hero-preview-shot figcaption {
+    position: absolute;
+    z-index: 2;
+    left: 0.9rem;
+    right: 0.9rem;
+    bottom: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    align-items: flex-start;
+  }
+
+  .hero-preview-headline {
+    font-family: var(--font-editorial), Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.15;
+    font-weight: 600;
+    color: #fff;
+    max-width: 11rem;
+    text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
+  }
+
+  .hero-preview-pill {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #16151c;
+    background: #fff;
+    border-radius: 999px;
+    padding: 0.38rem 0.8rem;
+  }
+
+  .hero-preview-trust {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1rem 1rem;
+    font-size: 0.72rem;
+    color: #57606a;
+    font-weight: 500;
+  }
+
+  .hero-preview-stars {
+    color: #f5a623;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   CINEMATIC LAYER — intro loader, smooth scroll, custom cursor
+   Site-wide premium experience (lusion-inspired, performance-safe)
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Lenis smooth scroll (recommended base CSS) ─────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ── Intro loader ───────────────────────────────────────────── */
+#ax-loader {
+  display: none; /* only shown when JS is active and intro not yet seen */
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-base);
+  /* Failsafe: vanish even if the loader script never runs. */
+  animation: ax-loader-failsafe 0s linear 4.5s forwards;
+}
+
+/* Show the loader only when JS booted and the intro hasn't played this session. */
+html.ax-js:not([data-intro-seen]) #ax-loader {
+  display: flex;
+}
+
+#ax-loader[data-done='true'] {
+  pointer-events: none;
+}
+
+.ax-loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: ax-loader-in 0.8s var(--ease-cinematic) 0.05s forwards;
+}
+
+.ax-loader-mark {
+  height: 2.6rem;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.5));
+}
+
+.ax-loader-bar {
+  position: relative;
+  width: clamp(180px, 32vw, 320px);
+  height: 1px;
+  background: var(--hairline-strong);
+  overflow: hidden;
+}
+.ax-loader-bar span {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform: scaleX(var(--ax-progress, 0));
+  background: var(--accent);
+  box-shadow: 0 0 12px rgb(var(--accent-v2-rgb) / 0.7);
+  transition: transform 0.2s linear;
+}
+
+.ax-loader-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: clamp(180px, 32vw, 320px);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.ax-loader-count {
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Curtain wipe on completion */
+#ax-loader[data-done='true'] {
+  animation: ax-loader-out 0.9s var(--ease-cinematic) forwards;
+}
+#ax-loader[data-done='true'] .ax-loader-inner {
+  animation: ax-loader-content-out 0.5s var(--ease-premium) forwards;
+}
+
+@keyframes ax-loader-in {
+  to { opacity: 1; transform: none; }
+}
+@keyframes ax-loader-content-out {
+  to { opacity: 0; transform: translateY(-10px); }
+}
+@keyframes ax-loader-out {
+  to { clip-path: inset(0 0 100% 0); transform: translateY(-2%); }
+}
+@keyframes ax-loader-failsafe {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+/* ── Custom cursor ──────────────────────────────────────────── */
+#ax-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  pointer-events: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--accent-v2-rgb) / 0.9);
+  background: rgb(var(--accent-v2-rgb) / 0.12);
+  will-change: transform;
+  transition: width 0.28s var(--ease-premium), height 0.28s var(--ease-premium),
+    background-color 0.28s var(--ease-premium), border-color 0.28s var(--ease-premium),
+    opacity 0.28s var(--ease-premium);
+}
+
+/* Only enable on fine pointers when motion is allowed; JS adds the flag. */
+html.ax-cursor-on #ax-cursor {
+  display: flex;
+}
+html.ax-cursor-on.ax-cursor-active * {
+  cursor: none !important;
+}
+
+#ax-cursor.is-hover {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background: rgb(var(--accent-v2-rgb) / 0.1);
+  border-color: rgb(var(--accent-v2-rgb) / 0.45);
+}
+#ax-cursor.is-down {
+  transform: scale(0.85);
+}
+#ax-cursor.is-hidden {
+  opacity: 0;
+}
+
+.ax-cursor-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.25s var(--ease-premium), transform 0.25s var(--ease-premium);
+  white-space: nowrap;
+}
+#ax-cursor.has-label .ax-cursor-label {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ax-loader { display: none !important; }
+  #ax-cursor { display: none !important; }
+}

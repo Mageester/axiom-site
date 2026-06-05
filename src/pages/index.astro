@@ -4,640 +4,870 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { HOME_JSON_LD, WEBSITE_SCHEMA, SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
-import { FadeIn } from '../components/ui/FadeIn';
-import { FeatureCarousel } from '../components/ui/FeatureCarousel';
-import { Button } from '../components/ui/button';
-import { Card } from '../components/ui/card';
-import { Eyebrow } from '../components/ui/Eyebrow';
-import DrawIcon from '../components/ui/DrawIcon.astro';
-import { MotionHeading } from '../components/motion/MotionHeading';
-import { ProofBar } from '../components/motion/ProofBar';
-import { SectionDivider } from '../components/motion/SectionDivider';
 
-const workCards = [
+const work = [
   {
-    tag: 'CONCEPT',
-    eyebrow: 'CONVERSION STRATEGY',
+    sector: 'Dental',
     title: 'Aurelia Dental Studio',
     outcome: 'Clear, warm, and easy to navigate. New patients find what they need and book without second-guessing.',
-    image: getWorkProofImage('concept-dental-demo').source,
-    alt: getWorkProofImage('concept-dental-demo').alt || 'Aurelia Dental Studio',
-    position: getWorkProofImage('concept-dental-demo').position || 'center 30%',
+    img: getWorkProofImage('concept-dental-demo'),
   },
   {
-    tag: 'CONCEPT',
-    eyebrow: 'LOCAL BUSINESS',
-    title: 'Nails Studio Demo',
-    outcome: 'Booking is visible early, services are easy to compare, and the brand reads as calm and polished.',
-    image: getWorkProofImage('concept-salon-demo').source,
-    alt: getWorkProofImage('concept-salon-demo').alt || 'Nails Studio Demo',
-    position: getWorkProofImage('concept-salon-demo').position || 'center 30%',
+    sector: 'Beauty',
+    title: 'Nails Studio',
+    outcome: 'Booking is visible early, services are easy to compare, and the brand reads calm and polished.',
+    img: getWorkProofImage('concept-salon-demo'),
   },
   {
-    tag: 'CONCEPT',
-    eyebrow: 'REBUILD',
+    sector: 'Grooming',
     title: 'Blackline Barber Co.',
     outcome: 'Fast, sharp, and direct. Clients get to the booking button in seconds — no hunting required.',
-    image: getWorkProofImage('concept-barber-demo').source,
-    alt: getWorkProofImage('concept-barber-demo').alt || 'Blackline Barber Co.',
-    position: getWorkProofImage('concept-barber-demo').position || 'center 30%',
-  },
-] as const;
-
-const principles = [
-  {
-    number: '01',
-    title: 'Absolute commercial alignment',
-    description: 'We ensure visitors immediately comprehend your exact offer, target market, and the primary path to engagement. Zero ambiguity.',
-    icon: 'eye',
-  },
-  {
-    number: '02',
-    title: 'Evidence-based authority',
-    description: 'We place case outcomes, industry credentials, and verified testimonials exactly where buyers make critical evaluation decisions. We never fabricate metrics.',
-    icon: 'shield-check',
-  },
-  {
-    number: '03',
-    title: 'Uncompromised performance',
-    description: 'Every platform loads in under one second. We audit semantic HTML, responsive grids, and Core Web Vitals on every release to ensure flawless rendering.',
-    icon: 'bolt',
-  },
-  {
-    number: '04',
-    title: 'Active platform guardianship',
-    description: 'We handle hosting security, performance audits, and content updates. You retain direct partner support post-launch without agency ticketing queues.',
-    icon: 'key',
+    img: getWorkProofImage('concept-barber-demo'),
   },
 ] as const;
 
 const services = [
   {
+    num: '01',
     label: 'Conversion Sites',
-    description:
-      'For service businesses that need a clearer offer, stronger trust signals, and fewer steps from visit to inquiry.',
+    description: 'For service businesses that need a clearer offer, stronger trust signals, and fewer steps from visit to inquiry.',
     href: '/services#conversion-sites',
-    icon: 'target',
-    metric: '2–3 week build',
   },
   {
+    num: '02',
     label: 'Local Business Websites',
-    description:
-      'For companies whose reputation, service quality, and contact path need to be obvious on every device.',
+    description: 'For companies whose reputation, service quality, and contact path need to be obvious on every device.',
     href: '/services#local-business-websites',
-    icon: 'crown',
-    metric: '3–4 week build',
   },
   {
+    num: '03',
     label: 'Rebuilds',
-    description:
-      'Replace a dated or confusing site while protecting useful content, redirects, domains, and buyer trust.',
+    description: 'Replace a dated or confusing site while protecting useful content, redirects, domains, and buyer trust.',
     href: '/services#rebuilds',
-    icon: 'refresh',
-    metric: 'From $3,500',
   },
 ] as const;
 
-const team = [
-  {
-    name: 'Aidan',
-    monogram: 'aidan',
-    roles: ['Client Strategy & Scope'],
-    description: 'Architects the commercial message and content hierarchy. Ensures the site structure maps directly to how buyers evaluate your services.',
-  },
-  {
-    name: 'Riley',
-    monogram: 'riley',
-    roles: ['Platform Architecture & Engineering'],
-    description: 'Engineers the codebase and manages platform delivery. Focuses on rendering speeds, responsive integrity, and clean codebase handoffs.',
-  },
+// Honest capability band — what we actually deliver, not fabricated client logos.
+const marquee = [
+  'Custom code — never templates',
+  'Sub-one-second load',
+  'Mobile-first by default',
+  'Built to get you booked',
+  'Managed hosting & security',
+  'Direct line to the makers',
+  'Clean, maintainable builds',
+  '30-day delivery',
 ] as const;
+
+const solution = [
+  { title: 'Understood in seconds', description: 'What you do, who you help, and how to book — clear the moment someone lands. No scrolling to figure you out.' },
+  { title: 'Trusted where it counts', description: 'Real reviews, credentials, and proof placed exactly where a visitor decides whether to call you.' },
+  { title: 'Fast enough to convert', description: 'Sub-second loads on the phones your customers actually use, so nobody bounces before they reach the button.' },
+] as const;
+
+const principles = [
+  { num: '01', title: 'Visitors get it in seconds', description: 'People should understand what you do, who you help, and how to book the moment they land — no scrolling around, no guessing.' },
+  { num: '02', title: 'Built to earn trust', description: 'Real reviews, credentials, and proof go exactly where people decide whether to call you. We never make up numbers or fake testimonials.' },
+  { num: '03', title: 'Fast on every phone', description: 'Most of your visitors are on their phone. Your site loads in under a second and looks sharp on every screen — so nobody bounces.' },
+  { num: '04', title: 'Looked after, even after launch', description: "We handle the hosting, the security, and the small updates. When something's needed, you message the two people who built it — not a ticket queue." },
+] as const;
+
+const figures = [
+  { value: 'Under 1s', label: 'Load time, every build' },
+  { value: 'Two', label: 'Partners, zero middlemen' },
+  { value: '~30 days', label: 'From kickoff to launch' },
+  { value: '$0', label: 'Down to get started' },
+] as const;
+
+const process = [
+  { num: '01', title: 'Diagnostics', description: 'We audit your brand, copy, and where visitors drop off — and define exactly what the site needs to do.' },
+  { num: '02', title: 'Blueprint', description: 'We map every page, the flow, and the exact words. The whole plan is approved before a line of code is written.' },
+  { num: '03', title: 'Build', description: 'Custom, lightweight code. No templates, no bloated plugins, no performance compromises.' },
+  { num: '04', title: 'Launch & handoff', description: 'Speed, mobile, and DNS checks, then a clean handoff — with managed hosting if you want it.' },
+] as const;
+
+const team = [
+  { name: 'Aidan', role: 'Strategy & scope', description: 'Shapes the message and the structure so the site maps to exactly how your customers decide.' },
+  { name: 'Riley', role: 'Engineering & delivery', description: 'Builds the site itself — obsessed with speed, clean code, and how it feels on a phone.' },
+] as const;
+
+// Headline split into lines for the masked, staggered reveal.
+const heroLines = ['Websites that get', 'local businesses'] as const;
 ---
 
 <SiteLayout
   title={SEO_ROUTES.home.title}
   description={SEO_ROUTES.home.description}
   canonicalPath="/"
-  ogImageAlt="Axiom Web homepage – custom web development in Kitchener-Waterloo."
+  ogImageAlt="Axiom — web design studio in Kitchener-Waterloo."
   schema={[HOME_JSON_LD, WEBSITE_SCHEMA]}
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 md:-mt-32">
-
-    <!-- ═══════════════════ HERO — ═══════════════════ -->
-    <section class="axiom-hero relative min-h-[90vh] overflow-hidden pb-24 pt-40 md:pb-32 md:pt-48">
-      <!-- Dramatic light architecture -->
-      <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_0%,rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/0.15),transparent_48%)]" />
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,rgba(255,255,255,0.04),transparent_40%)]" />
-        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(0,0,0,0) 60%, #000 100%);" />
+  <main id="main-content" tabindex="-1" class="ax-root">
+    <!-- ░░ CINEMATIC HERO ░░ -->
+    <section class="ax-hero" id="ax-hero">
+      <div class="ax-hero-bg" aria-hidden="true">
+        <canvas id="ax-hero-canvas" class="ax-hero-canvas"></canvas>
+        <div class="ax-hero-grid" data-parallax="0.04"></div>
+        <div class="ax-hero-glow" data-parallax="0.12"></div>
+        <div class="ax-hero-aurora" data-parallax="0.08"></div>
+        <div class="ax-hero-vignette"></div>
       </div>
 
-      <!-- Fine architectural grid -->
-      <div aria-hidden="true" class="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style="background-image:
-          linear-gradient(to right, rgba(212,175,55,0.4) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(212,175,55,0.3) 1px, transparent 1px);
-        background-size: 64px 64px;"
-      />
-
-      <div class="axiom-container relative">
-        <div class="max-w-5xl">
-          <!-- Eyebrow -->
-          <FadeIn motion="eyebrow" delay={0}>
-            <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-[color:var(--accent-border)] bg-[rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/0.06)] px-4 py-1.5">
-              <span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--accent-solid)]" />
-              <span class="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-[var(--accent-solid)]">Premium Web Development</span>
-            </div>
-          </FadeIn>
-
-          <!-- Primary headline — editorial scale -->
-          <FadeIn motion="sceneOpen" className="hero-copy-primary">
-            <MotionHeading
-              as="h1"
-              text="Websites built for companies with *reputations to protect*."
-              className="text-balance"
-            />
-          </FadeIn>
-
-          <!-- Supporting copy -->
-          <FadeIn delay={520} motion="editorialMaskReveal">
-            <p class="mt-8 max-w-2xl text-[1.15rem] leading-[1.7] text-[var(--text-secondary)] md:text-[1.2rem]">
-              We deploy high-performance web platforms for firms that cannot afford to look second-rate. Sub-second load speeds, conversion-guided layout design, and direct partner execution from review to launch.
-            </p>
-          </FadeIn>
-
-          <!-- CTAs -->
-          <FadeIn delay={780} motion="sceneOpen">
-            <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Button asChild size="lg" className="w-full sm:w-auto">
-                <a href={CTA_PATHS.startProject}>Start a project</a>
-              </Button>
-              <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-                <a href="/services">See services &rarr;</a>
-              </Button>
-            </div>
-          </FadeIn>
+      <div class="ax-container ax-hero-inner">
+        <div class="ax-masthead ax-load" style="--i: 0">
+          <span>Web Design Studio</span>
+          <span class="ax-sep">/</span>
+          <span>Kitchener · Waterloo, ON</span>
+          <span class="ax-sep">/</span>
+          <span>Est. 2024</span>
+          <span class="ax-avail"><i></i>Now booking — 2 slots</span>
         </div>
 
-        <!-- Bottom-right architectural accent -->
-        <FadeIn delay={1200} as="div" motion="editorial" className="absolute -bottom-6 right-0 hidden lg:block">
-          <div class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
-            <span class="inline-block h-px w-12 bg-[var(--accent-border)]" />
-            <span>Sub-second load speeds</span>
-            <span class="inline-block h-px w-12 bg-[var(--accent-border)]" />
-            <span>Semantic HTML5</span>
+        <h1 class="ax-mega ax-hero-title">
+          {heroLines.map((line, i) => (
+            <span class="ax-line"><span class="ax-line-inner ax-mask" style={`--i: ${i + 1}`}>{line}</span></span>
+          ))}
+          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 3"><em>booked.</em></span></span>
+        </h1>
+
+        <div class="ax-hero-foot">
+          <div class="ax-hero-actions ax-load" style="--i: 5">
+            <a href={CTA_PATHS.startProject} class="ax-cta" data-magnetic>Start a project <span aria-hidden="true">→</span></a>
+            <a href="/work" class="ax-textlink">See the work</a>
           </div>
-        </FadeIn>
-      </div>
-    </section>
-
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <!-- ═══════════════════ PROOF BAR ═══════════════════ -->
-    <div class="relative"><ProofBar /></div>
-
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <!-- ═══════════════════ SELECTED WORK ═══════════════════ -->
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-            <Eyebrow>SELECTED WORK</Eyebrow>
-            <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="Structural demonstrations of *our standard*." class="section-heading mt-4" />
-            <p class="section-copy mt-4 md:text-[17px]">
-              A curated portfolio of sector-specific platforms engineered to our exact performance and message standards. We build and label these interactive models to demonstrate structural quality without compromising client privacy.
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={180} motion="sceneOpen" className="flex flex-wrap items-center gap-3 lg:justify-end lg:pb-1">
-            <a
-              href="/work"
-              class="inline-flex min-h-11 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[rgba(214,173,66,0.08)] px-5 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--accent-solid)] transition-[border-color,background-color,color] duration-200 hover:border-[color:var(--accent-solid)] hover:bg-[rgba(214,173,66,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-solid)]"
-            >
-              View all work
-            </a>
-          </FadeIn>
-        </div>
-
-        <!-- Work grid — larger, more editorial imagery -->
-        <div id="selected-work-demos" class="mt-12 grid gap-6 grid-cols-1 md:grid-cols-12 md:auto-rows-[320px]">
-          <!-- Card 1: Aurelia Dental Studio (hero image span) -->
-          <FadeIn motion="depthCardReveal" delay={0} className="md:col-span-7 md:row-span-2 md:auto-rows-auto" as="div">
-            <Card className="group overflow-hidden p-0 transition-all duration-300 hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)] h-full flex flex-col md:flex-row">
-              <figure class="relative overflow-hidden border-b md:border-b-0 md:border-r border-[color:var(--hairline)] bg-white/5 md:w-3/5 h-full min-h-[280px] md:min-h-[320px]">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10 pointer-events-none" />
-                <ResponsivePicture
-                  source={workCards[0].image}
-                  alt={workCards[0].alt}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  class="media-zoom absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy"
-                  fetchpriority="low"
-                  objectPosition={workCards[0].position}
-                />
-              </figure>
-              <div class="flex flex-col justify-center p-7 sm:p-10 md:w-2/5">
-                <div class="flex flex-wrap items-center gap-3">
-                  <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
-                    {workCards[0].tag}
-                  </span>
-                  <Eyebrow>{workCards[0].eyebrow}</Eyebrow>
-                </div>
-                <h3 class="mt-5 text-[clamp(1.35rem,2.4vw,1.85rem)] font-semibold tracking-tight text-[var(--text-primary)]">
-                  {workCards[0].title}
-                </h3>
-                <p class="section-copy mt-3 text-[14.5px] leading-relaxed">
-                  {workCards[0].outcome}
-                </p>
-              </div>
-            </Card>
-          </FadeIn>
-
-          <!-- Card 2: Nails Studio Demo -->
-          <FadeIn motion="depthCardReveal" delay={150} className="md:col-span-5 md:row-span-1" as="div">
-            <Card className="group overflow-hidden p-0 transition-all duration-300 hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)] h-full flex flex-col">
-              <figure class="relative overflow-hidden border-b border-[color:var(--hairline)] bg-white/5 aspect-[16/9] md:aspect-[4/3] w-full">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
-                <ResponsivePicture
-                  source={workCards[1].image}
-                  alt={workCards[1].alt}
-                  sizes="(min-width: 1024px) 30vw, 100vw"
-                  class="media-zoom absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy"
-                  fetchpriority="low"
-                  objectPosition={workCards[1].position}
-                />
-              </figure>
-              <div class="flex flex-col p-6 sm:p-7 flex-grow">
-                <div class="flex flex-wrap items-center gap-3">
-                  <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
-                    {workCards[1].tag}
-                  </span>
-                  <Eyebrow>{workCards[1].eyebrow}</Eyebrow>
-                </div>
-                <h3 class="mt-4 text-[1.3rem] font-semibold tracking-tight text-[var(--text-primary)]">
-                  {workCards[1].title}
-                </h3>
-                <p class="section-copy mt-2 text-[14px] leading-relaxed">
-                  {workCards[1].outcome}
-                </p>
-              </div>
-            </Card>
-          </FadeIn>
-
-          <!-- Card 3: Blackline Barber Co. -->
-          <FadeIn motion="depthCardReveal" delay={300} className="md:col-span-5 md:row-span-1" as="div">
-            <Card className="group overflow-hidden p-0 transition-all duration-300 hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)] h-full flex flex-col">
-              <figure class="relative overflow-hidden border-b border-[color:var(--hairline)] bg-white/5 aspect-[16/9] md:aspect-[4/3] w-full">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
-                <ResponsivePicture
-                  source={workCards[2].image}
-                  alt={workCards[2].alt}
-                  sizes="(min-width: 1024px) 30vw, 100vw"
-                  class="media-zoom absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy"
-                  fetchpriority="low"
-                  objectPosition={workCards[2].position}
-                />
-              </figure>
-              <div class="flex flex-col p-6 sm:p-7 flex-grow">
-                <div class="flex flex-wrap items-center gap-3">
-                  <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
-                    {workCards[2].tag}
-                  </span>
-                  <Eyebrow>{workCards[2].eyebrow}</Eyebrow>
-                </div>
-                <h3 class="mt-4 text-[1.3rem] font-semibold tracking-tight text-[var(--text-primary)]">
-                  {workCards[2].title}
-                </h3>
-                <p class="section-copy mt-2 text-[14px] leading-relaxed">
-                  {workCards[2].outcome}
-                </p>
-              </div>
-            </Card>
-          </FadeIn>
-
-          <!-- Card 4: Specifications Bento Block -->
-          <FadeIn motion="depthCardReveal" delay={450} className="md:col-span-7 md:row-span-1" as="div">
-            <Card className="group overflow-hidden p-8 sm:p-10 transition-all duration-300 hover:bg-[var(--surface-2)] hover:border-[color:var(--hairline-strong)] h-full flex flex-col justify-between">
-              <div class="flex flex-col gap-3">
-                <div class="flex items-center justify-between">
-                  <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-solid)]">
-                    SPECIFICATIONS
-                  </span>
-                  <span class="font-mono text-[11px] tracking-[0.16em] text-[var(--text-muted)]">SYSTEM V3.0</span>
-                </div>
-                <h3 class="mt-4 text-2xl font-semibold tracking-tight text-[var(--text-primary)]">
-                  Performance-first build quality.
-                </h3>
-                <p class="section-copy mt-2 text-[14.5px] leading-relaxed max-w-xl">
-                  We verify core metrics on every deployment. Our sites load in under a second, use semantic layouts for optimal search indexing, and offer clear code ownership without SaaS lock-in.
-                </p>
-              </div>
-              <div class="mt-10 grid grid-cols-2 gap-6 border-t border-[color:var(--hairline)] pt-7">
-                <div>
-                  <span class="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">LOAD SPEED TARGET</span>
-                  <span class="text-[clamp(2rem,3vw,2.5rem)] font-bold tracking-tight text-[var(--accent-solid)]">100/100</span>
-                </div>
-                <div>
-                  <span class="block font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">CODE STRUCTURE</span>
-                  <span class="text-[clamp(1.25rem,1.8vw,1.5rem)] font-bold tracking-tight text-[var(--text-primary)]">Semantic HTML5</span>
-                </div>
-              </div>
-            </Card>
-          </FadeIn>
+          <p class="ax-lead ax-load" style="--i: 6">
+            Custom websites for established local businesses — built to look the part on every phone, load in under a second, and turn visitors into booked clients. You work directly with the two people who design and build it.
+          </p>
         </div>
       </div>
+
+      <a href="#ax-statement" class="ax-scroll-cue ax-load" style="--i: 7" aria-label="Scroll to content">
+        <span class="ax-scroll-line"><span></span></span>
+        <span class="ax-scroll-label">Scroll</span>
+      </a>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <!-- ═══════════════════ SERVICES ═══════════════════ -->
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>SERVICES</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Three ways to *strengthen* the site." class="section-heading mt-4" />
-        </FadeIn>
-
-        <!-- Service cards — visual, card-based -->
-        <div class="mt-12 grid gap-6 md:grid-cols-3">
-          {services.map((service, index) => (
-            <FadeIn motion="depthCardReveal" delay={Math.min(index * 150, 450)} as="div" className="h-full">
-              <a
-                href={service.href}
-                class="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-8 transition-all duration-300 hover:border-[color:var(--accent-border)] hover:bg-[var(--surface-2)] hover:shadow-[var(--shadow-card-hover)]"
-              >
-                <!-- Number accent -->
-                <div class="mb-6 flex items-center justify-between">
-                  <span class="font-mono text-[clamp(2.5rem,4vw,3.5rem)] font-bold leading-none text-[rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/0.2)] transition-colors duration-300 group-hover:text-[rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/0.35)]">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <DrawIcon name={service.icon} className="text-[var(--text-muted)] transition-all duration-300 group-hover:rotate-6 group-hover:text-[var(--accent-solid)]" size={26} />
-                </div>
-
-                <h3 class="text-[1.35rem] font-semibold tracking-tight text-[var(--text-primary)]">
-                  {service.label}
-                </h3>
-                <p class="section-copy mt-3 text-[14px] leading-relaxed flex-grow">
-                  {service.description}
-                </p>
-
-                <!-- Bottom accent -->
-                <div class="mt-6 flex items-center gap-3 border-t border-[color:var(--hairline)] pt-5">
-                  <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors duration-300 group-hover:text-[var(--accent-solid)]">
-                    {service.metric}
-                  </span>
-                  <span class="ml-auto inline-flex h-7 w-7 items-center justify-center rounded-full border border-[color:var(--hairline)] text-[11px] text-[var(--text-muted)] transition-all duration-300 group-hover:translate-x-1 group-hover:border-[var(--accent-border)] group-hover:text-[var(--accent-solid)]">
-                    &rarr;
-                  </span>
-                </div>
-              </a>
-            </FadeIn>
+    <!-- ░░ CAPABILITY MARQUEE BAND ░░ -->
+    <section class="ax-marquee-band" aria-label="What every Axiom build includes">
+      <div class="ax-marquee" aria-hidden="true">
+        <div class="ax-marquee-track">
+          {[...marquee, ...marquee].map((item) => (
+            <span class="ax-marquee-item"><i class="ax-marquee-dot"></i>{item}</span>
           ))}
         </div>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <!-- ═══════════════════ WHY AXIOM ═══════════════════ -->
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-start lg:gap-16">
-          <FadeIn motion="editorialMaskReveal" className="space-y-4 lg:sticky lg:top-32">
-            <Eyebrow>WHY AXIOM</Eyebrow>
-            <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="Where reputation dictates *execution*." class="section-heading mt-4" />
-            <p class="section-copy mt-4 md:text-[17px]">
-              Established businesses. Higher-ticket services. If the site needs to look credible before a new client picks up the phone, this is built for you.
-            </p>
-          </FadeIn>
-
-          <div class="flex flex-col border-t border-[color:var(--hairline)]">
-            {principles.map((principle, index) => (
-              <FadeIn motion="timelineSequence" delay={Math.min(index * 120, 480)} as="div">
-                <div class="grid gap-4 py-9 border-b border-[color:var(--hairline)] sm:grid-cols-[4rem_minmax(0,1fr)]">
-                  <div class="font-mono text-[clamp(2rem,3vw,2.5rem)] font-light text-[rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/0.5)] leading-none pt-0.5">
-                    {principle.number}
-                  </div>
-                  <div class="flex flex-col gap-2">
-                    <div class="flex items-center gap-4">
-                      <DrawIcon name={principle.icon} className="text-[var(--accent-solid)] w-6 h-6 shrink-0" />
-                      <h3 class="text-[clamp(1.15rem,1.4vw,1.35rem)] font-semibold tracking-tight text-[var(--text-primary)]">
-                        {principle.title}
-                      </h3>
-                    </div>
-                    <p class="section-copy text-[14.5px] leading-relaxed mt-1 ml-10">
-                      {principle.description}
-                    </p>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
+    <!-- ░░ PROBLEM ░░ -->
+    <section class="ax-statement" id="ax-statement">
+      <div class="ax-container">
+        <span class="ax-index" data-reveal data-motion="eyebrow">№ 01 — The problem</span>
+        <p class="ax-big" data-reveal data-motion="editorialMaskReveal">
+          Most local businesses lose customers to a website that looks like an afterthought.
+          <em>We make yours the reason they call.</em>
+        </p>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
+    <!-- ░░ SOLUTION ░░ -->
+    <section class="ax-section">
+      <div class="ax-container">
+        <header class="ax-head">
+          <span class="ax-label" data-reveal data-motion="eyebrow">№ 02 — The fix</span>
+          <h2 class="ax-h2" data-reveal data-motion="editorial">A site that does the <em>quiet, important work</em></h2>
+          <p class="ax-head-note" data-reveal data-motion="editorial" style="--reveal-delay: 80ms">
+            We rebuild the version of your business that earns the click — composed, credible, and fast enough that the decision to call feels obvious.
+          </p>
+        </header>
 
-    <!-- ═══════════════════ PROCESS ═══════════════════ -->
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-start lg:gap-16">
-          <FadeIn motion="editorialMaskReveal" className="space-y-4 lg:sticky lg:top-32">
-            <Eyebrow>PROCESS</Eyebrow>
-            <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="A disciplined, *30-day* delivery." class="section-heading mt-4" />
-            <p class="section-copy mt-4 md:text-[17px]">
-              We run a strict, four-stage deployment process that removes the overhead, scope drift, and communication lag of traditional agency models.
-            </p>
-            <div class="pt-2">
-              <Button asChild variant="ghost" className="px-0 text-[var(--accent-solid)]">
-                <a href="/services#timeline" class="inline-flex items-center gap-2">
-                  Explore our operating timeline &rarr;
-                </a>
-              </Button>
+        <div class="ax-solution">
+          {solution.map((s, i) => (
+            <div class="ax-solution-item" data-reveal data-motion="depth" style={`--reveal-delay: ${i * 110}ms`}>
+              <span class="ax-solution-num">0{i + 1}</span>
+              <h3 class="ax-solution-title">{s.title}</h3>
+              <p class="ax-solution-desc">{s.description}</p>
             </div>
-          </FadeIn>
-
-          <FadeIn motion="precisionPricingReveal" as="div">
-            <FeatureCarousel
-              client:visible
-              steps={[
-                { id: '01', name: 'Stage 01', title: 'Diagnostics', description: 'We audit your current brand assets, copywriting, and user drop-off points to define the strategic blueprint.' },
-                { id: '02', name: 'Stage 02', title: 'Blueprinting', description: 'We design the page hierarchy, layout flow, and exact copywriting draft. The entire architecture is approved before writing code.' },
-                { id: '03', name: 'Stage 03', title: 'Custom Engineering', description: 'We develop the platform using lightweight, custom code. No templates, no bloated plugins, and zero performance compromises.' },
-                { id: '04', name: 'Stage 04', title: 'Release & Handoff', description: 'We execute comprehensive DNS, speed, and responsive audits before release, handing over a clean repository with managed hosting options.' },
-              ]}
-              image={{
-                step1light1: '/images/process-diagnostics-analytics.png',
-                step1light2: '/images/process-diagnostics-brand-audit.png',
-                step2light1: '/images/process-blueprint-sitemap.png',
-                step2light2: '/images/process-blueprint-copy.png',
-                step3light: '/images/process-engineering-code.png',
-                step4light: '/images/process-release-lighthouse.png',
-                alt: 'Axiom delivery process showcase',
-              }}
-              step1img1Class="pointer-events-none w-[62%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] overflow-hidden transition-all duration-500 max-md:rounded-xl left-[2%] top-[44%] md:left-[2%] md:top-[36%] md:group-hover:translate-y-2"
-              step1img2Class="pointer-events-none w-[55%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] overflow-hidden transition-all duration-500 left-[44%] top-[30%] md:left-[44%] md:top-[24%] md:group-hover:-translate-y-4"
-              step2img1Class="pointer-events-none w-[60%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] overflow-hidden transition-all duration-500 left-[2%] top-[44%] md:left-[2%] md:top-[36%] md:group-hover:translate-y-2"
-              step2img2Class="pointer-events-none w-[52%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] overflow-hidden transition-all duration-500 left-[46%] top-[30%] md:left-[46%] md:top-[24%] md:group-hover:-translate-y-4"
-              step3imgClass="pointer-events-none w-[94%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] overflow-hidden transition-all duration-500 left-[3%] top-[36%] md:left-[3%] md:top-[30%]"
-              step4imgClass="pointer-events-none w-[94%] rounded-2xl border border-[color:var(--hairline)] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] overflow-hidden transition-all duration-500 left-[3%] top-[36%] md:left-[3%] md:top-[30%]"
-              bgClass="bg-gradient-to-b from-[var(--surface-1)] to-[var(--surface-2)]"
-            />
-          </FadeIn>
+          ))}
         </div>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
+    <!-- ░░ WORK ░░ -->
+    <section class="ax-section">
+      <div class="ax-container">
+        <header class="ax-head">
+          <span class="ax-label" data-reveal data-motion="eyebrow">Selected work · 2024–25</span>
+          <h2 class="ax-h2" data-reveal data-motion="editorial">The kind of site <em>you'll get</em></h2>
+          <p class="ax-head-note" data-reveal data-motion="editorial" style="--reveal-delay: 80ms">Concept builds for local businesses like yours — clean, fast, and built to make booking the obvious next step.</p>
+        </header>
 
-    <!-- ═══════════════════ TEAM ═══════════════════ -->
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-start lg:gap-16">
-          <FadeIn motion="editorialMaskReveal" className="space-y-4 lg:sticky lg:top-32">
-            <Eyebrow>DIRECT PARTNERSHIP</Eyebrow>
-            <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="Direct partnership. *Direct execution.*" class="section-heading mt-4" />
-            <p class="section-copy mt-4 md:text-[17px]">
-              Axiom is run by two partners. You work directly with the strategists and engineers executing the scope. No account managers, no layers of overhead, and a direct line to updates.
-            </p>
-          </FadeIn>
-
-          <div class="grid gap-6 md:grid-cols-2 lg:mt-0">
-            {team.map((member, index) => (
-              <FadeIn motion="depthCardReveal" delay={Math.min(index * 160, 640)} as="div" className="h-full">
-                <Card className="group rounded-2xl border-[color:var(--hairline)] bg-[var(--surface-overlay)] p-8 transition-all duration-300 hover:border-[color:var(--hairline-strong)] hover:bg-[var(--surface-overlay-press)] h-full flex flex-col justify-between">
-                  <div class="flex h-full flex-col">
-                    <div class="flex items-start gap-5">
-                      <!-- Avatar with headshot-based placeholder -->
-                      <div class="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--surface-overlay)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(0,0,0,0.14)] overflow-hidden">
-                        {member.monogram === 'aidan' ? (
-                          <img src="/photos/aidan-headshot.jpg" alt="Aidan" class="h-full w-full object-cover" loading="lazy" />
-                        ) : (
-                          <img src="/photos/riley-headshot.jpg" alt="Riley" class="h-full w-full object-cover" loading="lazy" />
-                        )}
-                        <div class="pointer-events-none absolute inset-0 rounded-full ring-1 ring-inset ring-white/10" />
-                      </div>
-
-                      <div class="min-w-0">
-                        <h3 class="text-[1.25rem] font-semibold text-[var(--text-primary)]">{member.name}</h3>
-                        <div class="mt-2 flex flex-wrap gap-1.5">
-                          {member.roles.map((role) => (
-                            <span class="rounded-full bg-[color:var(--surface-overlay-press)] px-2.5 py-0.5 text-[11px] uppercase tracking-widest text-[var(--text-secondary)]">
-                              {role}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <p class="mt-6 text-[15px] leading-[1.7] text-[var(--text-secondary)]">
-                      {member.description}
-                    </p>
-                  </div>
-                </Card>
-              </FadeIn>
-            ))}
-          </div>
+        <div class="ax-work">
+          {work.map((w, i) => (
+            <a href="/work" class="ax-work-item" data-cursor-label="View" data-reveal data-motion="depthCardReveal" style={`--reveal-delay: ${i * 120}ms`}>
+              <div class="ax-work-top">
+                <span class="ax-work-num">0{i + 1}</span>
+                <span class="ax-label">{w.sector}</span>
+              </div>
+              <figure class="ax-work-shot">
+                <ResponsivePicture
+                  source={w.img.source}
+                  alt={w.img.alt || w.title}
+                  sizes="(min-width: 900px) 28vw, 90vw"
+                  class="ax-work-img"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  objectPosition={w.img.position || 'center 40%'}
+                />
+                <span class="ax-work-cta" aria-hidden="true">View <span>→</span></span>
+              </figure>
+              <h3 class="ax-work-title">{w.title}</h3>
+              <p class="ax-work-outcome">{w.outcome}</p>
+            </a>
+          ))}
         </div>
+
+        <a href="/work" class="ax-more" data-reveal data-motion="eyebrow">All work <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
+    <!-- ░░ SERVICES ░░ -->
+    <section class="ax-section">
+      <div class="ax-container">
+        <header class="ax-head">
+          <span class="ax-label" data-reveal data-motion="eyebrow">Services</span>
+          <h2 class="ax-h2" data-reveal data-motion="editorial">Three ways we <em>strengthen the site</em></h2>
+        </header>
 
-    <!-- ═══════════════════ CTA ═══════════════════ -->
-    <section class="axiom-cta-panel relative overflow-hidden py-24 md:py-32">
-      <!-- Dramatic background -->
-      <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(var(--accent-v2-rgb,var(--accent-current-rgb))/0.12),transparent_50%)]" />
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(255,255,255,0.02),transparent_40%)]" />
-        <div class="absolute inset-0" style="background: linear-gradient(to top, #000, transparent 60%);" />
+        <ol class="ax-list">
+          {services.map((s, i) => (
+            <li data-reveal data-motion="system" style={`--reveal-delay: ${i * 90}ms`}>
+              <a href={s.href} class="ax-row">
+                <span class="ax-row-num">{s.num}</span>
+                <span class="ax-row-title">{s.label}</span>
+                <span class="ax-row-desc">{s.description}</span>
+                <span class="ax-row-arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ol>
       </div>
+    </section>
 
-      <!-- Grid pattern -->
-      <div aria-hidden="true" class="pointer-events-none absolute inset-0 opacity-[0.025]"
-        style="background-image:
-          linear-gradient(to right, rgba(212,175,55,0.5) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(212,175,55,0.4) 1px, transparent 1px);
-        background-size: 48px 48px;"
-      />
-
-      <div class="axiom-container relative">
-        <div class="mx-auto max-w-4xl text-center">
-          <FadeIn as="div" motion="finalFrameFooter">
-            <SectionDivider className="mx-auto mb-6" />
-
-            <!-- Bold headline -->
-            <MotionHeading
-              as="h2"
-              text="Make the site *easier to believe*."
-              class="mx-auto text-[clamp(2.5rem,5vw,4.5rem)] font-[600] text-[var(--text-primary)]"
-              align="center"
-            />
-
-            <p class="mx-auto mt-6 max-w-2xl text-[1.05rem] leading-[1.7] text-[var(--text-secondary)] md:text-[1.1rem]">
-              Monthly, ownership, or custom scope. Pricing is public, the launch path is defined, and every build is checked for speed and mobile quality before it ships.
-            </p>
-
-            <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row sm:items-center">
-              <Button asChild size="lg" className="w-full sm:w-auto min-h-[3.25rem] px-8 text-[1rem]">
-                <a href={CTA_PATHS.startProject}>Start a project</a>
-              </Button>
-              <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-                <a href="/pricing">See pricing &rarr;</a>
-              </Button>
+    <!-- ░░ WHY ░░ -->
+    <section class="ax-section">
+      <div class="ax-container ax-split">
+        <div class="ax-split-left">
+          <span class="ax-label" data-reveal data-motion="eyebrow">Why Axiom</span>
+          <h2 class="ax-h2" data-reveal data-motion="editorial">Made for businesses that <em>can't look cheap</em></h2>
+          <p class="ax-lead" data-reveal data-motion="editorial" style="--reveal-delay: 80ms">
+            Established local businesses with a reputation behind them. If a new customer judges you by your website before they ever call, this is built for you.
+          </p>
+        </div>
+        <div class="ax-split-right">
+          {principles.map((p, i) => (
+            <div class="ax-principle" data-reveal data-motion="depth" style={`--reveal-delay: ${i * 90}ms`}>
+              <span class="ax-row-num">{p.num}</span>
+              <div>
+                <h3 class="ax-principle-title">{p.title}</h3>
+                <p class="ax-principle-desc">{p.description}</p>
+              </div>
             </div>
-          </FadeIn>
+          ))}
         </div>
+      </div>
+    </section>
+
+    <!-- ░░ FIGURES ░░ -->
+    <section class="ax-section ax-section--tight">
+      <div class="ax-container">
+        <div class="ax-figures">
+          {figures.map((f, i) => (
+            <div class="ax-figure" data-reveal data-motion="system" style={`--reveal-delay: ${i * 90}ms`}>
+              <span class="ax-figure-num">{f.value}</span>
+              <span class="ax-figure-label">{f.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ PROCESS ░░ -->
+    <section class="ax-section">
+      <div class="ax-container">
+        <header class="ax-head">
+          <span class="ax-label" data-reveal data-motion="eyebrow">Process</span>
+          <h2 class="ax-h2" data-reveal data-motion="editorial">A disciplined, <em>30-day delivery</em></h2>
+        </header>
+
+        <ol class="ax-process">
+          {process.map((p, i) => (
+            <li class="ax-step" data-reveal data-motion="timelineSequence" style={`--reveal-delay: ${i * 110}ms`}>
+              <span class="ax-step-node" aria-hidden="true"></span>
+              <span class="ax-step-num">{p.num}</span>
+              <h3 class="ax-step-title">{p.title}</h3>
+              <p class="ax-step-desc">{p.description}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ░░ STUDIO ░░ -->
+    <section class="ax-section">
+      <div class="ax-container ax-split">
+        <div class="ax-split-left">
+          <span class="ax-label" data-reveal data-motion="eyebrow">The studio</span>
+          <h2 class="ax-h2" data-reveal data-motion="editorial">Two people. <em>Direct line.</em></h2>
+          <p class="ax-lead" data-reveal data-motion="editorial" style="--reveal-delay: 80ms">
+            Axiom is run by two partners. You work directly with the people designing and building your site — no account managers, no layers, no ticket queues.
+          </p>
+        </div>
+        <div class="ax-split-right">
+          {team.map((m, i) => (
+            <div class="ax-person" data-reveal data-motion="depth" style={`--reveal-delay: ${i * 110}ms`}>
+              <span class="ax-person-name">{m.name}</span>
+              <span class="ax-person-role">{m.role}</span>
+              <p class="ax-person-desc">{m.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ FINAL CTA ░░ -->
+    <section class="ax-final">
+      <div class="ax-final-bg" aria-hidden="true"></div>
+      <div class="ax-container">
+        <span class="ax-index" data-reveal data-motion="eyebrow">№ — Start here</span>
+        <h2 class="ax-mega ax-final-mega" data-reveal data-motion="cta">
+          Let's build the<br /><em>site you deserve.</em>
+        </h2>
+        <div class="ax-hero-actions" data-reveal data-motion="cta" style="--reveal-delay: 120ms">
+          <a href={CTA_PATHS.startProject} class="ax-cta" data-magnetic>Start a project <span aria-hidden="true">→</span></a>
+          <a href="/pricing" class="ax-textlink">See pricing</a>
+        </div>
+        <p class="ax-fineprint" data-reveal data-motion="editorial" style="--reveal-delay: 200ms">
+          Monthly or one-time from $3,500. Pricing is public, the launch path is defined, and every build is checked for speed and mobile quality before it ships.
+        </p>
       </div>
     </section>
   </main>
-
-  <style>
-    /* ═══ HERO - Dramatic full-viewport entrance ═══ */
-    .axiom-hero {
-      isolation: isolate;
-      position: relative;
-    }
-
-    .axiom-hero::after {
-      content: '';
-      position: absolute;
-      inset: auto 0 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent-border-strong), var(--accent-solid), var(--accent-border-strong), transparent);
-      opacity: 0.6;
-    }
-
-    /* ═══ CTA panel - Stopping power ═══ */
-    .axiom-cta-panel {
-      position: relative;
-      isolation: isolate;
-    }
-
-    .axiom-cta-panel::after {
-      content: '';
-      position: absolute;
-      inset: auto 0 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--hairline-strong), transparent);
-      opacity: 0.5;
-    }
-
-    /* Motion-safe overrides */
-    @media (prefers-reduced-motion: reduce) {
-      .axiom-hero,
-      .axiom-cta-panel {
-        animation: none !important;
-      }
-    }
-  </style>
 </SiteLayout>
+
+<style>
+  .ax-root {
+    --ax-gutter: clamp(1.25rem, 5vw, 4rem);
+    color: var(--text-primary);
+  }
+
+  .ax-container {
+    width: 100%;
+    max-width: 84rem;
+    margin-inline: auto;
+    padding-inline: var(--ax-gutter);
+  }
+
+  /* ── Type ─────────────────────────────────────────── */
+  .ax-mega {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.9rem, 9vw, 9rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  .ax-mega em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--accent);
+  }
+
+  .ax-h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  .ax-h2 em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .ax-label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+
+  .ax-lead {
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 42ch;
+    margin: 0;
+  }
+
+  /* ── Hero ─────────────────────────────────────────── */
+  .ax-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(620px, 92svh, 1000px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: clamp(2.5rem, 7vh, 5.5rem);
+    padding-bottom: clamp(4rem, 10vh, 7rem);
+    overflow: hidden;
+  }
+
+  .ax-hero-bg { position: absolute; inset: -10% -5% 0; z-index: -1; pointer-events: none; }
+  .ax-hero-bg > * { position: absolute; inset: 0; will-change: transform; }
+
+  .ax-hero-canvas { width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s var(--ease-cinematic); }
+  .ax-hero.has-webgl .ax-hero-canvas { opacity: 1; }
+  /* The shader carries the ambient glow once active — retire the CSS aurora to avoid muddiness. */
+  .ax-hero.has-webgl .ax-hero-aurora { display: none; }
+  .ax-hero.has-webgl .ax-hero-glow { opacity: 0.5; }
+
+  .ax-hero-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    background-size: clamp(48px, 7vw, 96px) clamp(48px, 7vw, 96px);
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 36%, #000 35%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 36%, #000 35%, transparent 78%);
+    opacity: 0.7;
+  }
+
+  .ax-hero-glow {
+    background:
+      radial-gradient(60% 50% at 50% -8%, rgb(var(--accent-v2-rgb) / 0.16), transparent 60%),
+      radial-gradient(40% 40% at 82% 8%, rgb(var(--accent-v2-rgb) / 0.06), transparent 60%);
+  }
+
+  .ax-hero-aurora {
+    background: conic-gradient(from 210deg at 30% 18%, transparent 0deg, rgb(var(--accent-v2-rgb) / 0.08) 60deg, transparent 160deg);
+    filter: blur(40px);
+    opacity: 0.7;
+  }
+
+  .ax-hero-vignette {
+    background: radial-gradient(120% 90% at 50% 30%, transparent 50%, rgba(0, 0, 0, 0.55) 100%);
+  }
+
+  html[data-motion-active='true'] .ax-hero-aurora {
+    animation: ax-aurora 26s var(--ease-premium-soft) infinite alternate;
+  }
+
+  .ax-hero-inner { position: relative; }
+
+  .ax-masthead {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .ax-masthead .ax-sep { color: rgba(245, 241, 233, 0.22); }
+  .ax-avail { margin-left: auto; display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); }
+  .ax-avail i {
+    width: 0.45rem; height: 0.45rem; border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgb(var(--accent-v2-rgb) / 0.9);
+    animation: ax-pulse 2.4s ease-in-out infinite;
+  }
+
+  /* Masked, staggered headline reveal */
+  .ax-hero-title { margin: 0; }
+  .ax-line { display: block; overflow: hidden; padding-bottom: 0.04em; }
+  .ax-line-inner { display: block; }
+  .ax-line-inner em { font-family: var(--font-editorial); font-style: italic; font-weight: 400; color: var(--accent); }
+
+  .ax-hero-foot { margin-top: clamp(2.25rem, 5vw, 3.75rem); display: grid; gap: 2rem; }
+  .ax-hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+
+  @media (min-width: 900px) {
+    .ax-hero-foot { grid-template-columns: auto 1fr; align-items: end; gap: 3.5rem; }
+    .ax-hero-foot .ax-lead { justify-self: end; }
+  }
+
+  .ax-scroll-cue {
+    position: absolute;
+    left: var(--ax-gutter);
+    bottom: clamp(1.5rem, 4vh, 2.75rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--text-muted);
+    transition: color 0.25s ease;
+  }
+  .ax-scroll-cue:hover { color: var(--accent); }
+  .ax-scroll-line { position: relative; display: block; width: 1px; height: 2.4rem; background: var(--hairline-strong); overflow: hidden; }
+  .ax-scroll-line span { position: absolute; inset: 0; background: var(--accent); transform: translateY(-100%); animation: ax-scroll 2.2s var(--ease-cinematic) infinite; }
+
+  /* ── Buttons / links ──────────────────────────────── */
+  .ax-cta {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--accent); color: var(--text-on-accent);
+    font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em;
+    padding: 0.95rem 1.5rem; border-radius: 5px;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 30px -12px rgb(var(--accent-v2-rgb) / 0.55);
+  }
+  .ax-cta span { transition: transform 0.25s var(--ease-premium, ease); }
+  .ax-cta:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 16px 40px -12px rgb(var(--accent-v2-rgb) / 0.7); }
+  .ax-cta:hover span { transform: translateX(4px); }
+
+  .ax-textlink {
+    color: var(--text-primary); font-weight: 500; font-size: 0.95rem;
+    text-decoration: underline; text-decoration-color: var(--text-muted); text-underline-offset: 5px;
+    transition: text-decoration-color 0.2s ease, color 0.2s ease;
+  }
+  .ax-textlink:hover { text-decoration-color: var(--accent); }
+
+  /* ── Marquee band ─────────────────────────────────── */
+  .ax-marquee-band { border-block: 1px solid var(--hairline); padding-block: clamp(1.1rem, 2.5vw, 1.6rem); overflow: hidden; }
+  .ax-marquee { position: relative; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .ax-marquee-track { display: flex; align-items: center; gap: clamp(2rem, 4vw, 3.5rem); width: max-content; animation: ax-marquee 42s linear infinite; }
+  .ax-marquee:hover .ax-marquee-track { animation-play-state: paused; }
+  .ax-marquee-item {
+    display: inline-flex; align-items: center; gap: 0.85rem; flex: none;
+    font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--text-secondary); white-space: nowrap;
+  }
+  .ax-marquee-dot { width: 0.34rem; height: 0.34rem; border-radius: 999px; background: var(--accent); flex: none; }
+
+  /* ── Section frame ────────────────────────────────── */
+  .ax-section { padding-block: clamp(4.5rem, 11vh, 8.5rem); border-top: 1px solid var(--hairline); }
+  .ax-section--tight { padding-block: clamp(3rem, 7vh, 5rem); }
+
+  .ax-head { display: grid; gap: 1.1rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); max-width: 42rem; }
+  .ax-head-note { color: var(--text-secondary); font-size: 1rem; line-height: 1.65; margin: 0; max-width: 48ch; }
+
+  /* ── Problem statement ────────────────────────────── */
+  .ax-statement { padding-block: clamp(4.5rem, 13vh, 9.5rem); }
+  .ax-index {
+    display: inline-block; font-family: var(--font-mono); font-size: 0.75rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.75rem;
+  }
+  .ax-big {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(1.75rem, 4.6vw, 3.6rem); line-height: 1.16; letter-spacing: -0.025em;
+    color: rgba(245, 241, 233, 0.5); max-width: 24ch; margin: 0;
+  }
+  .ax-big em { font-style: normal; color: var(--text-primary); }
+
+  /* ── Solution ─────────────────────────────────────── */
+  .ax-solution { display: grid; grid-template-columns: 1fr; gap: clamp(1.5rem, 3vw, 2rem); border-top: 1px solid var(--hairline); padding-top: clamp(2rem, 4vw, 3rem); }
+  @media (min-width: 760px) { .ax-solution { grid-template-columns: repeat(3, 1fr); gap: clamp(2rem, 3vw, 3rem); } }
+  .ax-solution-item { display: grid; gap: 0.75rem; align-content: start; }
+  .ax-solution-num { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 0.1em; }
+  .ax-solution-title { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; letter-spacing: -0.015em; color: var(--text-primary); margin: 0; }
+  .ax-solution-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 0; max-width: 38ch; }
+
+  /* ── Work ─────────────────────────────────────────── */
+  .ax-work { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 3vw, 2.75rem); }
+  @media (min-width: 760px) { .ax-work { grid-template-columns: repeat(3, 1fr); } }
+
+  .ax-work-item { display: block; }
+  .ax-work-top {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--hairline-strong);
+    padding-block: 0.85rem; margin-bottom: 1rem;
+  }
+  .ax-work-num { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); transition: color 0.25s ease; }
+
+  .ax-work-shot { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 6px; background: #131211; margin: 0; }
+  .ax-work-img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.7s var(--ease-premium, ease), filter 0.5s ease;
+    filter: grayscale(0.18) brightness(0.92);
+  }
+  .ax-work-item:hover .ax-work-img { transform: scale(1.05); filter: grayscale(0) brightness(1); }
+  .ax-work-item:hover .ax-work-num { color: var(--accent); }
+
+  .ax-work-cta {
+    position: absolute; left: 1rem; bottom: 1rem;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--text-primary);
+    background: rgba(10, 10, 10, 0.55); backdrop-filter: blur(8px);
+    border: 1px solid var(--hairline-strong); border-radius: 999px; padding: 0.4rem 0.8rem;
+    opacity: 0; transform: translateY(8px); transition: opacity 0.3s ease, transform 0.3s var(--ease-premium);
+  }
+  .ax-work-cta span { transition: transform 0.25s ease; }
+  .ax-work-item:hover .ax-work-cta { opacity: 1; transform: translateY(0); }
+  .ax-work-item:hover .ax-work-cta span { transform: translateX(3px); }
+
+  .ax-work-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.015em; color: var(--text-primary); margin: 1.1rem 0 0; }
+  .ax-work-outcome { color: var(--text-secondary); font-size: 0.93rem; line-height: 1.55; margin: 0.6rem 0 0; }
+
+  .ax-more {
+    display: inline-flex; align-items: center; gap: 0.55rem; margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--text-secondary); transition: color 0.2s ease, gap 0.2s ease;
+  }
+  .ax-more:hover { color: var(--accent); gap: 0.85rem; }
+
+  /* ── Index list (services) ────────────────────────── */
+  .ax-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hairline); }
+  .ax-row {
+    display: grid; grid-template-columns: 3rem 1fr; grid-template-areas: 'num title' 'num desc';
+    gap: 0.5rem 1.25rem; align-items: start;
+    padding-block: clamp(1.6rem, 3vw, 2.4rem); border-bottom: 1px solid var(--hairline);
+    transition: background-color 0.25s ease;
+  }
+  @media (min-width: 860px) {
+    .ax-row { grid-template-columns: 4rem minmax(12rem, 18rem) 1fr auto; grid-template-areas: 'num title desc arrow'; align-items: center; gap: 2rem; }
+  }
+  .ax-row-num { grid-area: num; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); padding-top: 0.2rem; transition: color 0.25s ease; }
+  .ax-row-title { grid-area: title; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.05; transition: color 0.25s ease; }
+  .ax-row-desc { grid-area: desc; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.55; max-width: 40ch; margin: 0; }
+  .ax-row-arrow { grid-area: arrow; color: var(--text-muted); font-size: 1.4rem; transition: transform 0.25s ease, color 0.25s ease; justify-self: end; }
+  a.ax-row:hover { background: rgba(255, 255, 255, 0.018); }
+  a.ax-row:hover .ax-row-num { color: var(--accent); }
+  a.ax-row:hover .ax-row-arrow { color: var(--accent); transform: translateX(6px); }
+
+  /* ── Split ────────────────────────────────────────── */
+  .ax-split { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 5vw, 4rem); }
+  @media (min-width: 980px) {
+    .ax-split { grid-template-columns: 0.82fr 1.18fr; gap: clamp(3rem, 6vw, 6rem); }
+    .ax-split-left { position: sticky; top: 7.5rem; align-self: start; }
+  }
+  .ax-split-left .ax-h2 { margin-block: 1rem 1.25rem; }
+
+  .ax-principle { display: grid; grid-template-columns: 3rem 1fr; gap: 1.25rem; padding-block: clamp(1.5rem, 3vw, 2.1rem); border-top: 1px solid var(--hairline); }
+  .ax-principle:first-child { border-top: 0; padding-top: 0; }
+  .ax-principle-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin: 0; letter-spacing: -0.01em; }
+  .ax-principle-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 0.6rem 0 0; }
+
+  /* ── Figures ──────────────────────────────────────── */
+  .ax-figures { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(2rem, 4vw, 3rem); }
+  @media (min-width: 760px) { .ax-figures { grid-template-columns: repeat(4, 1fr); } }
+  .ax-figure { display: grid; gap: 0.65rem; border-top: 2px solid var(--accent); padding-top: 1.1rem; }
+  .ax-figure-num { font-family: var(--font-display); font-size: clamp(2.3rem, 4.5vw, 4rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1; color: var(--text-primary); }
+  .ax-figure-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── Process (rail) ───────────────────────────────── */
+  .ax-process { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 0; }
+  @media (min-width: 860px) { .ax-process { grid-template-columns: repeat(4, 1fr); } }
+  .ax-step { position: relative; padding-top: 2rem; padding-right: clamp(1rem, 2vw, 2rem); border-top: 1px solid var(--hairline-strong); }
+  @media (max-width: 859px) { .ax-step { padding-top: 1.6rem; padding-bottom: 1.6rem; } .ax-step + .ax-step { border-top: 1px solid var(--hairline); } }
+  .ax-step-node { position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 0 4px rgb(var(--accent-v2-rgb) / 0.14); }
+  .ax-step-num { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 0.1em; }
+  .ax-step-title { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary); margin: 0.5rem 0 0; }
+  .ax-step-desc { color: var(--text-secondary); font-size: 0.93rem; line-height: 1.6; margin: 0.7rem 0 0; max-width: 34ch; }
+
+  /* ── Studio ───────────────────────────────────────── */
+  .ax-person { padding-block: clamp(1.75rem, 3vw, 2.25rem); border-top: 1px solid var(--hairline); }
+  .ax-person:first-child { border-top: 0; padding-top: 0; }
+  .ax-person-name { display: block; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; letter-spacing: -0.03em; color: var(--text-primary); }
+  .ax-person-role { display: block; font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-top: 0.4rem; }
+  .ax-person-desc { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin: 1rem 0 0; max-width: 46ch; }
+
+  /* ── Final CTA ────────────────────────────────────── */
+  .ax-final { position: relative; isolation: isolate; padding-block: clamp(5rem, 16vh, 11rem); border-top: 1px solid var(--hairline); overflow: hidden; }
+  .ax-final-bg { position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 80% at 50% 120%, rgb(var(--accent-v2-rgb) / 0.14), transparent 62%); }
+  .ax-final .ax-index { margin-bottom: 1.5rem; }
+  .ax-final-mega { margin-block: 0 2.5rem; }
+  .ax-fineprint { margin-top: 2.25rem; color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; max-width: 48ch; }
+
+  /* ── Hero load sequence (CSS-only, no JS dependency) ── */
+  .ax-load { opacity: 0; animation: ax-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: calc(var(--i, 0) * 90ms); }
+  .ax-mask { transform: translateY(110%); animation: ax-unmask 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: calc(var(--i, 0) * 110ms); }
+
+  @keyframes ax-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes ax-unmask { from { transform: translateY(110%); } to { transform: translateY(0); } }
+  @keyframes ax-aurora { from { transform: translate3d(-2%, 0, 0) rotate(0deg); opacity: 0.5; } to { transform: translate3d(3%, 2%, 0) rotate(8deg); opacity: 0.85; } }
+  @keyframes ax-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @keyframes ax-scroll { 0% { transform: translateY(-100%); } 50% { transform: translateY(0); } 100% { transform: translateY(100%); } }
+  @keyframes ax-marquee { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ax-load, .ax-mask { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .ax-hero-aurora, .ax-avail i, .ax-scroll-line span { animation: none !important; }
+    .ax-marquee-track { animation: none !important; }
+    .ax-cta, .ax-work-img, .ax-row, .ax-row-arrow, .ax-more, .ax-work-cta { transition: none; }
+  }
+</style>
+
+<script>
+  // Subtle hero backdrop parallax — cheap, rAF-throttled, reduced-motion aware.
+  document.addEventListener('astro:page-load', () => {
+    const hero = document.getElementById('ax-hero');
+    if (!hero) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const layers = Array.from(hero.querySelectorAll<HTMLElement>('[data-parallax]'));
+    if (!layers.length) return;
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const rect = hero.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return; // off-screen: skip
+      const y = -rect.top; // px scrolled past hero top
+      for (const layer of layers) {
+        const speed = parseFloat(layer.dataset.parallax || '0');
+        layer.style.transform = `translate3d(0, ${(y * speed).toFixed(1)}px, 0)`;
+      }
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+
+    // Clean up on view-transition navigation away.
+    document.addEventListener('astro:before-swap', () => window.removeEventListener('scroll', onScroll), { once: true });
+  });
+</script>
+
+<script>
+  // Interactive WebGL hero — flowing domain-warped noise in the accent palette.
+  // Lightweight (raw WebGL, single fullscreen quad), mouse-reactive, paused when
+  // off-screen or hidden. Falls back silently to the CSS backdrop on any failure.
+  document.addEventListener('astro:page-load', () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Keep phones light — the CSS backdrop carries the hero on small/touch screens.
+    if (window.matchMedia('(max-width: 767px)').matches) return;
+
+    const hero = document.getElementById('ax-hero');
+    const canvas = document.getElementById('ax-hero-canvas') as HTMLCanvasElement | null;
+    if (!hero || !canvas) return;
+
+    const gl = (canvas.getContext('webgl', { antialias: false, alpha: true, premultipliedAlpha: false }) ||
+      canvas.getContext('experimental-webgl')) as WebGLRenderingContext | null;
+    if (!gl) return; // CSS fallback remains
+
+    const VERT = `attribute vec2 a; void main(){ gl_Position = vec4(a, 0.0, 1.0); }`;
+    const FRAG = `
+      precision highp float;
+      uniform float u_time; uniform vec2 u_res; uniform vec2 u_mouse;
+      vec2 hash22(vec2 p){ p = vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3))); return fract(sin(p)*43758.5453)*2.0-1.0; }
+      float noise(vec2 p){ vec2 i=floor(p); vec2 f=fract(p); vec2 u=f*f*(3.0-2.0*f);
+        return mix(mix(dot(hash22(i+vec2(0.0,0.0)),f-vec2(0.0,0.0)), dot(hash22(i+vec2(1.0,0.0)),f-vec2(1.0,0.0)),u.x),
+                   mix(dot(hash22(i+vec2(0.0,1.0)),f-vec2(0.0,1.0)), dot(hash22(i+vec2(1.0,1.0)),f-vec2(1.0,1.0)),u.x), u.y); }
+      float fbm(vec2 p){ float v=0.0; float a=0.5; for(int i=0;i<5;i++){ v+=a*noise(p); p*=2.0; a*=0.5; } return v; }
+      void main(){
+        vec2 uv = gl_FragCoord.xy / u_res.xy;
+        vec2 p = uv; p.x *= u_res.x/u_res.y;
+        float t = u_time*0.05;
+        vec2 q = vec2(fbm(p+vec2(0.0,t)), fbm(p+vec2(5.2,-t)));
+        vec2 r = vec2(fbm(p+2.0*q+vec2(1.7,9.2)+t*0.5), fbm(p+2.0*q+vec2(8.3,2.8)-t*0.5));
+        float f = fbm(p+2.0*r);
+        vec2 m = u_mouse; m.x *= u_res.x/u_res.y;
+        float md = 1.0 - smoothstep(0.0, 0.7, distance(p, m));
+        f += md*0.28;
+        vec3 base = vec3(0.039,0.039,0.039);
+        vec3 accent = vec3(1.0,0.36,0.21);
+        float band = smoothstep(0.12, 0.72, f);
+        vec3 col = mix(base, accent, band*0.6);
+        col += accent * pow(band, 3.0) * 0.28;     // bright filament cores
+        float vgrad = smoothstep(1.0,0.1,uv.y);
+        col += accent*0.07*vgrad*md;
+        float vig = smoothstep(1.2,0.2,distance(uv,vec2(0.5,0.42)));
+        col *= mix(0.5,1.0,vig);
+        gl_FragColor = vec4(col, 1.0);
+      }`;
+
+    const compile = (type: number, src: string) => {
+      const s = gl.createShader(type)!;
+      gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { gl.deleteShader(s); return null; }
+      return s;
+    };
+    const vs = compile(gl.VERTEX_SHADER, VERT);
+    const fs = compile(gl.FRAGMENT_SHADER, FRAG);
+    if (!vs || !fs) return;
+    const prog = gl.createProgram()!;
+    gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'a');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    const uTime = gl.getUniformLocation(prog, 'u_time');
+    const uRes = gl.getUniformLocation(prog, 'u_res');
+    const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const resize = () => {
+      const w = Math.floor(canvas.clientWidth * dpr);
+      const h = Math.floor(canvas.clientHeight * dpr);
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w; canvas.height = h;
+        gl.viewport(0, 0, w, h);
+      }
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    };
+
+    let mx = 0.5, my = 0.6, tmx = 0.5, tmy = 0.6;
+    window.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      tmx = (e.clientX - rect.left) / rect.width;
+      tmy = 1.0 - (e.clientY - rect.top) / rect.height;
+    }, { passive: true });
+
+    let running = true;
+    let raf = 0;
+    const startT = performance.now();
+    const render = (now: number) => {
+      raf = requestAnimationFrame(render);
+      if (!running) return;
+      resize();
+      mx += (tmx - mx) * 0.06; my += (tmy - my) * 0.06;
+      gl.uniform1f(uTime, (now - startT) / 1000);
+      gl.uniform2f(uMouse, mx, my);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    };
+    raf = requestAnimationFrame(render);
+    hero.classList.add('has-webgl');
+
+    // Pause when the hero scrolls out of view or the tab is hidden.
+    const io = new IntersectionObserver((entries) => {
+      running = entries[0].isIntersecting && !document.hidden;
+    }, { threshold: 0 });
+    io.observe(hero);
+    const onVis = () => { running = !document.hidden; };
+    document.addEventListener('visibilitychange', onVis);
+
+    document.addEventListener('astro:before-swap', () => {
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVis);
+      const lose = gl.getExtension('WEBGL_lose_context');
+      lose?.loseContext();
+    }, { once: true });
+  });
+</script>
