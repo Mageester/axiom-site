@@ -669,6 +669,11 @@ const heroLines = ['Websites that get', 'local businesses'] as const;
   .ax-split-left .ax-h2 { margin-block: 1rem 1.25rem; }
 
   .ax-principle { display: grid; grid-template-columns: 3rem 1fr; gap: 1.25rem; padding-block: clamp(1.5rem, 3vw, 2.1rem); border-top: 1px solid var(--hairline); }
+  /* .ax-row-num carries `grid-area: num` for the services list; that named area
+     doesn't exist here, which spawned phantom grid tracks and collapsed the text
+     column. Reset it so the number sits plainly in column 1. */
+  .ax-principle .ax-row-num { grid-area: auto; }
+  .ax-principle > div { min-width: 0; }
   .ax-principle:first-child { border-top: 0; padding-top: 0; }
   .ax-principle-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin: 0; letter-spacing: -0.01em; }
   .ax-principle-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 0.6rem 0 0; }

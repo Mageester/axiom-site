@@ -139,6 +139,22 @@
   document.addEventListener('astro:before-swap', destroyLenis);
   document.addEventListener('astro:page-load', () => { if (!lenis) initLenis(); });
 
+  /* ─────────────────────── Reveal failsafe ─────────────────────────
+     Reveals animate via a native-scroll IntersectionObserver. If that observer
+     is wedged on some browser (nothing ever gets marked visible), force content
+     visible so it can never stay hidden. When the observer works — the normal
+     case — we do nothing and animations play untouched. */
+  const revealFailsafe = () => {
+    window.setTimeout(() => {
+      const anyVisible = document.querySelector(
+        '[data-reveal][data-reveal-state="visible"], .section-block[data-motion-visible="true"]'
+      );
+      if (!anyVisible) document.documentElement.classList.add('ax-reveal-safe');
+    }, 3500);
+  };
+  revealFailsafe();
+  document.addEventListener('astro:page-load', revealFailsafe);
+
   /* ───────────────────────── Custom cursor ─────────────────────── */
   (function cursor() {
     if (reduced || !finePointer) return;

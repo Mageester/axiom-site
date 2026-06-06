@@ -1850,27 +1850,16 @@ html.ax-cursor-on.ax-cursor-active * {
   #ax-cursor { display: none !important; }
 }
 
-/* ── Touch-device safety net ─────────────────────────────────
-   Scroll-triggered reveals depend on JS + IntersectionObserver, which can
-   silently fail on mobile browsers (notably iOS Safari) and leave content
-   stuck at opacity 0. On coarse pointers, force everything visible so text
-   can NEVER scatter or disappear — the hero WebGL still carries the motion. */
-@media (pointer: coarse), (max-width: 767px) {
-  [data-reveal],
-  [data-reveal-item],
-  .section-block,
-  .motion-heading,
-  .motion-quote,
-  [data-motion] {
-    opacity: 1 !important;
-    transform: none !important;
-    clip-path: none !important;
-    filter: none !important;
-    transition: none !important;
-  }
-  .motion-heading .split-char,
-  .motion-quote .quote-phrase {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+/* ── Reveal failsafe ─────────────────────────────────────────
+   Scroll reveals run on a native-scroll IntersectionObserver (Lenis is off on
+   touch, so it fires reliably on iOS). As ultimate insurance against a wedged
+   observer, a script adds .ax-reveal-safe to <html> after a few seconds, which
+   forces any still-hidden content visible. Animations play normally before then. */
+html.ax-reveal-safe [data-reveal]:not([data-reveal-state='visible']),
+html.ax-reveal-safe .section-block:not([data-motion-visible='true']),
+html.ax-reveal-safe [data-motion]:not([data-reveal-state='visible']) {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+  filter: none !important;
 }
