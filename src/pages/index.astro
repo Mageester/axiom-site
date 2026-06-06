@@ -804,13 +804,14 @@ const heroLines = ['Websites that get', 'local businesses'] as const;
         f += md*0.30;
         vec3 base = vec3(0.039,0.039,0.039);
         vec3 accent = u_accent;
-        float band = smoothstep(0.12, 0.72, f);
-        vec3 col = mix(base, accent, band*0.62);
-        col += accent * pow(band, 3.0) * 0.32;     // bright filament cores
-        float vgrad = smoothstep(1.0,0.1,uv.y);
-        col += accent*0.08*vgrad*(0.4 + md);
-        float vig = smoothstep(1.2,0.2,distance(uv,vec2(0.5,0.42)));
-        col *= mix(0.5,1.0,vig);
+        vec3 hot = mix(accent, vec3(1.0), 0.35);   // brighter core toward white-gold
+        float band = smoothstep(0.08, 0.70, f);
+        vec3 col = mix(base, accent, band*0.78);
+        col += hot * pow(band, 2.4) * 0.5;          // vivid filament cores
+        float vgrad = smoothstep(1.0,0.05,uv.y);
+        col += accent*0.12*vgrad*(0.5 + md);
+        float vig = smoothstep(1.35,0.15,distance(uv,vec2(0.5,0.42)));
+        col *= mix(0.62,1.0,vig);
         gl_FragColor = vec4(col, 1.0);
       }`;
 

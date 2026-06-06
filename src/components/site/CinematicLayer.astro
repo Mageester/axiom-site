@@ -90,7 +90,10 @@
   let lenis: import('lenis').default | null = null;
 
   async function initLenis() {
-    if (reduced || lenis) return;
+    // Desktop only. Lenis smooth-scroll breaks IntersectionObserver reveals on
+    // iOS Safari (content stays hidden) — native touch scrolling is better there.
+    const coarse = window.matchMedia('(pointer: coarse)').matches;
+    if (reduced || coarse || lenis) return;
     const { default: Lenis } = await import('lenis');
     lenis = new Lenis({
       duration: 1.1,
