@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {
   DEFAULT_OG_IMAGE,
   DEFAULT_SEO_DESCRIPTION,
+  SITE_NAME,
   SITE_URL,
   formatSeoTitle,
   toCanonicalUrl,
@@ -13,7 +14,7 @@ interface SEOProps {
   canonicalPath?: string;
   image?: string;
   noIndex?: boolean;
-  schema?: Record<string, unknown>;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 const MANAGED_ATTR = 'data-axiom-seo';
 
@@ -84,19 +85,22 @@ const syncTitleTag = (value: string) => {
   document.title = value;
 };
 
-const syncSchema = (schema?: Record<string, unknown>) => {
-  const existing = Array.from(document.head.querySelectorAll('script[type="application/ld+json"]'));
+const syncSchema = (schema?: Record<string, unknown> | Record<string, unknown>[]) => {
+  const existing = Array.from(document.head.querySelectorAll(`script[type="application/ld+json"][${MANAGED_ATTR}="true"]`));
   existing.forEach((node) => node.remove());
 
   if (!schema) {
     return;
   }
 
-  const scriptTag = document.createElement('script');
-  scriptTag.setAttribute('type', 'application/ld+json');
-  scriptTag.dataset.axiomSeo = 'true';
-  scriptTag.textContent = JSON.stringify(schema);
-  document.head.appendChild(scriptTag);
+  const schemas = Array.isArray(schema) ? schema : [schema];
+  schemas.forEach((entry) => {
+    const scriptTag = document.createElement('script');
+    scriptTag.setAttribute('type', 'application/ld+json');
+    scriptTag.setAttribute(MANAGED_ATTR, 'true');
+    scriptTag.textContent = JSON.stringify(entry);
+    document.head.appendChild(scriptTag);
+  });
 };
 
 export const SEO: React.FC<SEOProps> = ({ title, description, canonicalPath, image, noIndex, schema }) => {
@@ -113,14 +117,16 @@ export const SEO: React.FC<SEOProps> = ({ title, description, canonicalPath, ima
       'og:title': resolvedTitle,
       'og:description': resolvedDescription,
       'og:image': fullImageUrl,
+      'og:image:secure_url': fullImageUrl,
       'og:type': 'website',
       'og:url': pageUrl,
-      'og:site_name': 'Axiom Web',
+      'og:site_name': SITE_NAME,
       'og:locale': 'en_CA',
       'twitter:card': 'summary_large_image',
       'twitter:title': resolvedTitle,
       'twitter:description': resolvedDescription,
       'twitter:image': fullImageUrl,
+      'twitter:image:alt': `${SITE_NAME} - custom web design and development in Kitchener-Waterloo`,
     };
 
     syncTitleTag(resolvedTitle);

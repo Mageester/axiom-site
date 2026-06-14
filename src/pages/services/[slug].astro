@@ -1,6 +1,5 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { Button } from '../../components/ui/button';
 import { Card } from '../../components/ui/card';
 import { Eyebrow } from '../../components/ui/Eyebrow';
 import DrawIcon from '../../components/ui/DrawIcon.astro';
@@ -37,7 +36,7 @@ const canonicalPath = `/services/${service.slug}`;
     ]),
   ]}
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+  <main id="main-content" tabindex="-1" class="pb-0">
     <section class="axiom-container pt-20 md:pt-28">
       <div class="max-w-3xl">
         <FadeIn motion="eyebrow">
@@ -53,13 +52,9 @@ const canonicalPath = `/services/${service.slug}`;
           </p>
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720}>
-          <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href={createStartProjectHref(service.pathIntent)}>Start this path</a>
-            </Button>
-            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-              <a href="/services">All services</a>
-            </Button>
+          <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a href={createStartProjectHref(service.pathIntent)} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Start this path</a>
+            <a href="/services" class="btn-ghost-link">All services</a>
           </div>
         </FadeIn>
       </div>
@@ -130,9 +125,7 @@ const canonicalPath = `/services/${service.slug}`;
                 </p>
               </div>
 
-              <Button asChild size="lg" className="w-full lg:w-auto">
-                <a href={createStartProjectHref(service.pathIntent)}>Start this path</a>
-              </Button>
+              <a href={createStartProjectHref(service.pathIntent)} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Start this path</a>
             </div>
           </Card>
         </FadeIn>

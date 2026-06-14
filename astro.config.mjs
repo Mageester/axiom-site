@@ -2,14 +2,34 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
+const sitemapExcludedPrefixes = [
+  '/admin',
+  '/admin-shell',
+  '/api',
+  '/campaigns',
+  '/dashboard',
+  '/functions',
+  '/hunt',
+  '/jobs',
+  '/lead',
+  '/leads',
+  '/settings',
+  '/triage',
+  '/vault',
+];
+
 export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) =>
-        !page.includes('/admin-shell') &&
-        !page.includes('/404') &&
-        new URL(page).pathname !== '/start/',
+      filter: (page) => {
+        const pathname = new URL(page).pathname.replace(/\/+$/, '') || '/';
+        return (
+          pathname !== '/404' &&
+          pathname !== '/start' &&
+          !sitemapExcludedPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))
+        );
+      },
       changefreq: 'monthly',
       lastmod: new Date(),
       serialize(item) {

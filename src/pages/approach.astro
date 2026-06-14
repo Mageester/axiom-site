@@ -1,13 +1,11 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 import { FadeIn } from '../components/ui/FadeIn';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
-import { Timeline } from '../components/motion/Timeline';
 import { CTA_PATHS } from '../lib/cta';
 import { APPROACH_JSON_LD, SEO_ROUTES, SITE_URL, breadcrumbSchema } from '../lib/seo';
 
@@ -68,7 +66,7 @@ const standards = [
   canonicalPath="/approach"
   schema={[APPROACH_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Approach', url: `${SITE_URL}/approach` }])]}
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+  <main id="main-content" tabindex="-1" class="pb-0">
     <section class="axiom-container pt-20 md:pt-28">
       <div class="max-w-3xl">
         <FadeIn motion="eyebrow">
@@ -84,13 +82,9 @@ const standards = [
           </p>
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720}>
-          <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href={CTA_PATHS.startProject}>Start a project</a>
-            </Button>
-            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-              <a href="/services">See services</a>
-            </Button>
+          <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Start a project</a>
+            <a href="/services" class="btn-ghost-link">See services</a>
           </div>
         </FadeIn>
       </div>
@@ -101,7 +95,16 @@ const standards = [
     <section class="page-section section-shell">
       <div class="axiom-container">
         <h2 class="sr-only">Approach timeline</h2>
-        <Timeline client:visible steps={timelineSteps} />
+        <ol class="approach-timeline">
+          {timelineSteps.map((step, index) => (
+            <li class="approach-step reveal" style={`--reveal-delay: ${index * 90}ms`}>
+              <span class="approach-step-num">{`0${index + 1}`}</span>
+              <span class="approach-step-kicker">{step.kicker}</span>
+              <h3 class="approach-step-title">{step.title}</h3>
+              <p class="approach-step-desc">{step.description}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
 
@@ -154,9 +157,7 @@ const standards = [
                 We check clarity, mobile behavior, forms, metadata, redirects, accessibility, and performance before release. The transitions stay impressive, but the fundamentals carry the sale.
               </p>
               <div class="mt-7">
-                <Button asChild size="lg">
-                  <a href={CTA_PATHS.startProject}>Start a project</a>
-                </Button>
+                <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg">Start a project</a>
               </div>
             </div>
           </Card>
@@ -165,3 +166,82 @@ const standards = [
     </section>
   </main>
 </SiteLayout>
+
+<style>
+  .approach-timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 860px) {
+    .approach-timeline {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .approach-step {
+    position: relative;
+    padding-top: 2rem;
+    padding-right: clamp(1rem, 2vw, 2rem);
+    border-top: 1px solid var(--hairline-strong);
+  }
+
+  .approach-step::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--text-primary);
+  }
+
+  @media (max-width: 859px) {
+    .approach-step {
+      padding-top: 1.6rem;
+      padding-bottom: 1.6rem;
+    }
+    .approach-step + .approach-step {
+      border-top: 1px solid var(--hairline);
+    }
+  }
+
+  .approach-step-num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .approach-step-kicker {
+    display: block;
+    margin-top: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-secondary);
+  }
+
+  .approach-step-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    margin: 0.5rem 0 0;
+  }
+
+  .approach-step-desc {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin: 0.7rem 0 0;
+    max-width: 34ch;
+  }
+</style>

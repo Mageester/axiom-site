@@ -1,6 +1,5 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
@@ -24,7 +23,7 @@ const serviceIcon = {
   canonicalPath="/services"
   schema={[SERVICES_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Services', url: `${SITE_URL}/services` }])]}
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+  <main id="main-content" tabindex="-1" class="pb-0">
     <section class="axiom-container pt-20 md:pt-28">
       <div class="max-w-3xl">
         <FadeIn motion="eyebrow">
@@ -73,12 +72,8 @@ const serviceIcon = {
                     </p>
                   </div>
                   <div class="mt-7 flex flex-col gap-3 sm:flex-row lg:mt-auto lg:flex-col">
-                    <Button asChild className="w-full justify-center">
-                      <a href={`/services/${service.slug}`}>View service</a>
-                    </Button>
-                    <Button asChild variant="ghost" className="w-full justify-center px-0">
-                      <a href={createStartProjectHref(service.pathIntent)}>Start this path</a>
-                    </Button>
+                    <a href={`/services/${service.slug}`} class="btn btn-primary w-full">View service</a>
+                    <a href={createStartProjectHref(service.pathIntent)} class="btn btn-secondary w-full">Start this path</a>
                   </div>
                 </div>
               </Card>
@@ -101,13 +96,9 @@ const serviceIcon = {
               <p class="section-copy mx-auto mt-4 max-w-3xl">
                 The scope can be monthly, ownership, or custom. The standard stays the same: clear messaging, strong mobile experience, careful launch checks, and no invented proof.
               </p>
-              <div class="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-                <Button asChild size="lg">
-                  <a href="/process">See the process</a>
-                </Button>
-                <Button asChild variant="ghost" size="lg" className="px-0">
-                  <a href="/work">View concept work</a>
-                </Button>
+              <div class="mt-7 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <a href="/process" class="btn btn-primary btn-lg">See the process</a>
+                <a href="/work" class="btn-ghost-link">View concept work</a>
               </div>
             </div>
           </Card>

@@ -1,6 +1,5 @@
 ---
 import { FadeIn } from '../components/ui/FadeIn';
-import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
@@ -33,7 +32,7 @@ const nextSteps = [
   {...SEO_ROUTES.contact}
   schema={[CONTACT_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Contact', url: `${SITE_URL}/contact` }])]}
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+  <main id="main-content" tabindex="-1" class="pb-0">
     <section class="axiom-container pt-20 md:pt-28">
       <div class="mx-auto max-w-4xl text-center">
         <FadeIn motion="eyebrow">
@@ -50,13 +49,9 @@ const nextSteps = [
         </FadeIn>
 
         <FadeIn motion="sceneOpen" delay={680}>
-          <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href={CTA_PATHS.startProject}>Start a project</a>
-            </Button>
-            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-              <a href="/services">See services</a>
-            </Button>
+          <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Start a project</a>
+            <a href="/services" class="btn-ghost-link">See services</a>
           </div>
         </FadeIn>
       </div>

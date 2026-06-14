@@ -1,6 +1,5 @@
 ---
 import { FadeIn } from '../components/ui/FadeIn';
-import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import SiteLayout from '../layouts/SiteLayout.astro';
@@ -24,15 +23,9 @@ import { SEO_ROUTES } from '../lib/seo';
               </p>
 
               <div class="mt-10 grid grid-cols-2 gap-3">
-                <Button asChild size="lg" className="w-full">
-                  <a href="/">Home</a>
-                </Button>
-                <Button asChild variant="ghost" size="lg" className="w-full">
-                  <a href="/work">See the work</a>
-                </Button>
-                <Button asChild size="lg" className="w-full col-span-2">
-                  <a href={CTA_PATHS.startProject}>Start a project</a>
-                </Button>
+                <a href="/" class="btn btn-secondary w-full">Home</a>
+                <a href="/work" class="btn btn-secondary w-full">See the work</a>
+                <a href={CTA_PATHS.startProject} class="btn btn-primary w-full col-span-2">Start a project</a>
               </div>
             </div>
           </div>

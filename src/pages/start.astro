@@ -2,7 +2,6 @@
 import IntakeForm from '../components/site/IntakeForm.astro';
 import { FadeIn } from '../components/ui/FadeIn';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { MotionHeading } from '../components/motion/MotionHeading';
@@ -12,7 +11,7 @@ import { SEO_ROUTES } from '../lib/seo';
 ---
 
 <SiteLayout title={SEO_ROUTES.start.title} description={SEO_ROUTES.start.description} canonicalPath={SEO_ROUTES.start.canonicalPath} noIndex={SEO_ROUTES.start.noIndex}>
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-24 md:-mt-32 md:pb-32">
+  <main id="main-content" tabindex="-1" class="pb-24 md:pb-32">
     <section class="axiom-container pt-24 md:pt-32">
       <FadeIn motion="sceneOpen" className="max-w-3xl">
         <Eyebrow>START A PROJECT</Eyebrow>
@@ -31,9 +30,7 @@ import { SEO_ROUTES } from '../lib/seo';
         </div>
 
         <div class="mt-7">
-          <Button asChild size="lg">
-            <a href="#project-intake">Submit project brief</a>
-          </Button>
+          <a href="#project-intake" class="btn btn-primary btn-lg">Submit project brief</a>
         </div>
       </FadeIn>
     </section>

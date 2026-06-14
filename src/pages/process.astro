@@ -3,13 +3,11 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { FadeIn } from '../components/ui/FadeIn';
 import { SEO_ROUTES, PROCESS_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
-import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
-import { Timeline } from '../components/motion/Timeline';
 
 const processSteps = [
   {
@@ -66,7 +64,7 @@ const launchChecklist = [
   canonicalPath="/process"
   schema={[PROCESS_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Process', url: `${SITE_URL}/process` }])]}
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+  <main id="main-content" tabindex="-1" class="pb-0">
     <section class="axiom-container pt-20 md:pt-28">
       <div class="max-w-3xl">
         <FadeIn motion="eyebrow">
@@ -83,13 +81,9 @@ const launchChecklist = [
           </p>
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720}>
-          <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href={CTA_PATHS.startProject}>Start a project</a>
-            </Button>
-            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-              <a href="/work">See concept builds</a>
-            </Button>
+          <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Start a project</a>
+            <a href="/work" class="btn-ghost-link">See concept builds</a>
           </div>
         </FadeIn>
       </div>
@@ -100,7 +94,16 @@ const launchChecklist = [
     <section class="page-section section-shell">
       <div class="axiom-container">
         <h2 class="sr-only">Process timeline</h2>
-        <Timeline client:visible steps={timelineSteps} />
+        <ol class="process-timeline">
+          {timelineSteps.map((step, index) => (
+            <li class="process-step reveal" style={`--reveal-delay: ${index * 90}ms`}>
+              <span class="process-step-num">{`0${index + 1}`}</span>
+              <span class="process-step-kicker">{step.kicker}</span>
+              <h3 class="process-step-title">{step.title}</h3>
+              <p class="process-step-desc">{step.description}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
 
@@ -160,9 +163,7 @@ const launchChecklist = [
                 Every build is checked for speed, mobile quality, and clear calls to action before it goes live. That's the baseline, not a bonus.
               </p>
               <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <Button asChild>
-                  <a href={CTA_PATHS.startProject}>Start a project</a>
-                </Button>
+                <a href={CTA_PATHS.startProject} class="btn btn-primary">Start a project</a>
                 <p class="axiom-metric text-[var(--text-muted)]">Review &rarr; Scope &rarr; Build &rarr; Launch</p>
               </div>
             </div>
@@ -172,3 +173,82 @@ const launchChecklist = [
     </section>
   </main>
 </SiteLayout>
+
+<style>
+  .process-timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 860px) {
+    .process-timeline {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .process-step {
+    position: relative;
+    padding-top: 2rem;
+    padding-right: clamp(1rem, 2vw, 2rem);
+    border-top: 1px solid var(--hairline-strong);
+  }
+
+  .process-step::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--text-primary);
+  }
+
+  @media (max-width: 859px) {
+    .process-step {
+      padding-top: 1.6rem;
+      padding-bottom: 1.6rem;
+    }
+    .process-step + .process-step {
+      border-top: 1px solid var(--hairline);
+    }
+  }
+
+  .process-step-num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .process-step-kicker {
+    display: block;
+    margin-top: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-secondary);
+  }
+
+  .process-step-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    margin: 0.5rem 0 0;
+  }
+
+  .process-step-desc {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin: 0.7rem 0 0;
+    max-width: 34ch;
+  }
+</style>

@@ -5,8 +5,6 @@ import { SEO_ROUTES, PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema, SIT
 import { FadeIn } from '../components/ui/FadeIn';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
-import { AxiomButton } from '../components/ui/AxiomButton';
-import { BorderBeamButton } from '../components/ui/BorderBeamButton';
 import DrawIcon from '../components/ui/DrawIcon.astro';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
@@ -158,7 +156,7 @@ const faqItems = [
   canonicalPath="/pricing"
   schema={[PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Pricing', url: `${SITE_URL}/pricing` }])]}
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+  <main id="main-content" tabindex="-1" class="pb-0">
     <section class="pricing-hero axiom-container pt-[5.5rem] md:pt-[7.5rem]">
       <div class="max-w-3xl">
         <FadeIn motion="eyebrow">
@@ -234,15 +232,9 @@ const faqItems = [
 
                   <div class="mt-auto pt-8">
                     {tier.highlighted ? (
-                      <BorderBeamButton client:visible as="a" href={tier.href} size="lg" fullWidth colorVariant="colorful">
-                        <span>{tier.cta}</span>
-                        <span class="text-[var(--accent-solid)]" aria-hidden="true">&#8599;</span>
-                      </BorderBeamButton>
+                      <a href={tier.href} class="btn btn-primary w-full">{tier.cta} <span aria-hidden="true">→</span></a>
                     ) : (
-                      <AxiomButton as="a" href={tier.href} variant="secondary" size="md" fullWidth>
-                        <span>{tier.cta}</span>
-                        <span class="text-white/60" aria-hidden="true">&#8599;</span>
-                      </AxiomButton>
+                      <a href={tier.href} class="btn btn-secondary w-full">{tier.cta} <span aria-hidden="true">→</span></a>
                     )}
                   </div>
                 </div>
@@ -479,10 +471,7 @@ const faqItems = [
                 </p>
               </div>
 
-              <BorderBeamButton client:visible as="a" href={createStartProjectHref('custom')} size="lg" className="w-full lg:w-auto" colorVariant="colorful">
-                <span>Start a project</span>
-                <span class="text-[var(--accent-solid)]" aria-hidden="true">&#8599;</span>
-              </BorderBeamButton>
+              <a href={createStartProjectHref('custom')} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Start a project <span aria-hidden="true">→</span></a>
             </div>
           </Card>
         </FadeIn>
@@ -493,19 +482,6 @@ const faqItems = [
   <style>
     .pricing-hero {
       position: relative;
-    }
-
-    .pricing-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: min(28rem, 70vw);
-      height: 18rem;
-      pointer-events: none;
-      background: radial-gradient(circle at 20% 20%, var(--accent-surface), transparent 62%);
-      opacity: 0.78;
-      filter: blur(24px);
-      transform: translate3d(-16%, -18%, 0);
     }
 
     .pricing-tier-card {

@@ -103,9 +103,7 @@ const pricingPathOptions = [
       </ol>
 
       <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <Button asChild variant="secondary" size="md" className="w-full sm:w-auto">
-          <a href="/work">While you wait, see real builds →</a>
-        </Button>
+        <a href="/work" class="btn btn-secondary w-full sm:w-auto">While you wait, see real builds →</a>
         <Button
           type="button"
           variant="ghost"
@@ -268,7 +266,7 @@ const pricingPathOptions = [
             rows="5"
             required
             minLength="10"
-            placeholder={kind === 'project' ? "What does the business do, what&apos;s broken on the current site, and when do you want to move?" : 'Tell us what you need help with.'}
+            placeholder={kind === 'project' ? "What does the business do, what's broken on the current site, and when do you want to move?" : 'Tell us what you need help with.'}
             enterkeyhint="send"
             class="data-intake-field data-intake-textarea"
             data-intake-field

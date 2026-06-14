@@ -1,7 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { FadeIn } from '../../components/ui/FadeIn';
-import { Button } from '../../components/ui/button';
 import { Card } from '../../components/ui/card';
 import { Eyebrow } from '../../components/ui/Eyebrow';
 import DrawIcon from '../../components/ui/DrawIcon.astro';
@@ -9,7 +8,7 @@ import { MotionHeading } from '../../components/motion/MotionHeading';
 import { SectionDivider } from '../../components/motion/SectionDivider';
 import { cities } from '../../content/cities';
 import { createStartProjectHref } from '../../lib/cta';
-import { SITE_NAME, SITE_URL, ORGANIZATION_SCHEMA, breadcrumbSchema } from '../../lib/seo';
+import { SITE_EMAIL, SITE_NAME, SITE_TELEPHONE, SITE_URL, breadcrumbSchema } from '../../lib/seo';
 
 export function getStaticPaths() {
   return cities.map((city) => ({
@@ -21,19 +20,20 @@ export function getStaticPaths() {
 const { city } = Astro.props;
 
 const title = `Web Design ${city.name} | Local Appointment Sites | ${SITE_NAME}`;
-const description = `Web design for ${city.name} appointment-based businesses. Booking-led sites — clearer offer, visible booking, mobile-correct. Based in Kitchener-Waterloo, reply within one business day.`;
+const description = `Web design for ${city.name} appointment-based businesses. Booking-led sites with a clearer offer, visible booking, and mobile-correct flow. Reply within one business day.`;
 const canonicalPath = `/web-design/${city.slug}`;
 const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: `${SITE_NAME} — Web Design ${city.name}`,
+  '@id': `${canonicalUrl}#local-business`,
+  name: `${SITE_NAME} - Web Design ${city.name}`,
   url: canonicalUrl,
   description,
   image: `${SITE_URL}/og-image.png`,
-  telephone: '+1-226-753-1833',
-  email: 'contact@getaxiom.ca',
+  telephone: SITE_TELEPHONE,
+  email: SITE_EMAIL,
   priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
@@ -71,7 +71,7 @@ const servicesTrio = [
 const faqs = [
   {
     q: `Do you only work with ${city.name} businesses?`,
-    a: `No. We are based in Kitchener-Waterloo and work with clients across Canada. ${city.name} is a primary service area — calls, on-site visits, and faster turnaround are easier here.`,
+    a: `No. We are based in Kitchener-Waterloo and work with clients across Canada. ${city.name} is a primary service area, so calls, on-site visits, and faster turnaround are easier here.`,
   },
   {
     q: 'How long until launch?',
@@ -86,6 +86,19 @@ const faqs = [
     a: 'Yes. Code, content, and domain are yours. Monthly clients can transfer full code ownership at month 12.',
   },
 ] as const;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
 ---
 
 <SiteLayout
@@ -94,6 +107,7 @@ const faqs = [
   canonicalPath={canonicalPath}
   schema={[
     localBusinessSchema,
+    faqSchema,
     breadcrumbSchema([
       { name: 'Home', url: SITE_URL },
       { name: 'Web Design', url: `${SITE_URL}/services` },
@@ -101,7 +115,7 @@ const faqs = [
     ]),
   ]}
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+  <main id="main-content" tabindex="-1" class="pb-0">
     <section class="axiom-container pt-20 md:pt-28">
       <div class="max-w-3xl">
         <FadeIn motion="eyebrow">
@@ -123,13 +137,9 @@ const faqs = [
         </FadeIn>
 
         <FadeIn delay={780} motion="sceneOpen">
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href={createStartProjectHref('teardown')}>Get a free site teardown</a>
-            </Button>
-            <Button asChild variant="ghost" size="lg" className="w-full px-0 sm:w-auto">
-              <a href="tel:+12267531833">(226) 753-1833</a>
-            </Button>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a href={createStartProjectHref('teardown')} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Get a free site teardown</a>
+            <a href="tel:+12267531833" class="btn-ghost-link">(226) 753-1833</a>
           </div>
         </FadeIn>
 
@@ -245,14 +255,12 @@ const faqs = [
                 <SectionDivider className="mb-6" />
                 <MotionHeading as="h2" text={`Get a free teardown of your ${city.name} site.`} className="section-heading" />
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Send us the URL. We reply within one business day with a short teardown — what's working, what's
+                  Send us the URL. We reply within one business day with a short teardown - what's working, what's
                   leaking bookings, and what we'd change first.
                 </p>
               </div>
 
-              <Button asChild size="lg" className="w-full lg:w-auto">
-                <a href={createStartProjectHref('teardown')}>Get a free site teardown</a>
-              </Button>
+              <a href={createStartProjectHref('teardown')} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Get a free site teardown</a>
             </div>
           </Card>
         </FadeIn>

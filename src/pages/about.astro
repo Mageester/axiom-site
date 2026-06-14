@@ -3,7 +3,6 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, ABOUT_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
 import { FadeIn } from '../components/ui/FadeIn';
-import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { MotionHeading } from '../components/motion/MotionHeading';
@@ -76,7 +75,7 @@ const principles = [
   canonicalPath="/about"
   schema={[ABOUT_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'About', url: `${SITE_URL}/about` }])]}
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-0 md:-mt-32">
+  <main id="main-content" tabindex="-1" class="pb-0">
     <section class="axiom-container pt-20 md:pt-28">
       <div class="max-w-3xl">
         <FadeIn motion="eyebrow">
@@ -94,9 +93,7 @@ const principles = [
           </p>
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720} className="mt-7">
-          <Button asChild variant="ghost" size="lg" className="px-0">
-            <a href="/process">See how we work</a>
-          </Button>
+          <a href="/process" class="btn-ghost-link">See how we work</a>
         </FadeIn>
       </div>
     </section>
@@ -113,9 +110,7 @@ const principles = [
             If the booking button isn't winning, more pages and more animations won't fix it. We focus on what makes
             a buyer pick up the phone or hit "book now" — and keep the site supported after launch so it stays sharp.
           </p>
-          <Button asChild variant="ghost" className="px-0">
-            <a href="/work">See concept builds</a>
-          </Button>
+          <a href="/work" class="btn-ghost-link">See concept builds</a>
         </FadeIn>
 
         <Card className="p-0">
@@ -265,9 +260,7 @@ const principles = [
                 </p>
               </div>
 
-              <Button asChild size="lg" className="w-full lg:w-auto">
-                <a href={CTA_PATHS.startProject}>Start a project</a>
-              </Button>
+              <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Start a project</a>
             </div>
           </Card>
         </FadeIn>

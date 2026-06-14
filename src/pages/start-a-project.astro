@@ -1,13 +1,12 @@
 ---
-import ProjectIntakeWizard from '../components/site/ProjectIntakeWizard';
+import IntakeForm from '../components/site/IntakeForm.astro';
 import { FadeIn } from '../components/ui/FadeIn';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { SEO_ROUTES } from '../lib/seo';
+import { CTA_PATHS } from '../lib/cta';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { MotionHeading } from '../components/motion/MotionHeading';
 import { SectionDivider } from '../components/motion/SectionDivider';
-
-const sourcePath = Astro.url.pathname + Astro.url.search;
 
 const heroCopy = {
   eyebrow: 'START A PROJECT',
@@ -23,7 +22,7 @@ const followupSteps = ['We review the brief', 'You get a reply within one busine
   description={SEO_ROUTES.startProject.description}
   canonicalPath="/start-a-project"
 >
-  <main id="main-content" tabindex="-1" class="-mt-28 pb-20 md:-mt-32 md:pb-24">
+  <main id="main-content" tabindex="-1" class="pb-20 md:pb-24">
     <section class="axiom-container pt-14 md:pt-20">
       <div class="mx-auto max-w-5xl">
         <div class="mx-auto max-w-3xl text-center">
@@ -52,8 +51,21 @@ const followupSteps = ['We review the brief', 'You get a reply within one busine
         </div>
 
         <div class="mt-8 md:mt-10">
-          <div class="form-cinematic-shell mx-auto w-full max-w-3xl" data-reveal data-motion="formFocusMotion" style="--reveal-delay: 740ms;">
-            <ProjectIntakeWizard client:visible sourcePath={sourcePath} />
+          <div class="mx-auto w-full max-w-3xl">
+            <IntakeForm
+              kind="project"
+              endpoint="/api/intake"
+              title="Tell us what needs to change."
+              eyebrow="PROJECT INTAKE"
+              description="Tell us what the business does, what&apos;s broken on the current site, and which path feels closest."
+              helper="Three short lines is enough. Monthly, ownership, or not sure yet all work."
+              submitLabel={`Submit project brief →`}
+              successTitle="Received."
+              successText="We&apos;ll review and reply with the next step."
+              noteLinkHref={CTA_PATHS.contact}
+              noteLinkLabel="contact page"
+              noteText="Need a quick question instead? Use the"
+            />
           </div>
         </div>
 

@@ -22,7 +22,13 @@ export const formatSeoTitle = (title?: string) => {
 
 export const toCanonicalUrl = (canonicalPath?: string) => {
   if (!canonicalPath) return SITE_URL;
-  return new URL(canonicalPath, SITE_URL).toString();
+  const url = new URL(canonicalPath, SITE_URL);
+  if (url.pathname !== '/') {
+    url.pathname = url.pathname.replace(/\/+$/, '');
+  }
+  url.search = '';
+  url.hash = '';
+  return url.toString();
 };
 
 export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) => ({
@@ -39,11 +45,13 @@ export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) =>
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': `${SITE_URL}/#organization`,
   name: SITE_NAME,
   url: SITE_URL,
   logo: `${SITE_URL}/axiomtransparentlogo.webp`,
+  image: `${SITE_URL}/og-image.png`,
   email: SITE_EMAIL,
-  telephone: '(226) 753-1833',
+  telephone: SITE_TELEPHONE,
   description: SITE_TAGLINE,
   address: {
     '@type': 'PostalAddress',
@@ -53,14 +61,46 @@ export const ORGANIZATION_SCHEMA = {
   },
 } as const;
 
-export const LOCAL_BUSINESS_SCHEMA = ORGANIZATION_SCHEMA;
+export const LOCAL_BUSINESS_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${SITE_URL}/#local-business`,
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/axiomtransparentlogo.webp`,
+  image: `${SITE_URL}/og-image.png`,
+  email: SITE_EMAIL,
+  telephone: SITE_TELEPHONE,
+  priceRange: '$$',
+  description: SITE_TAGLINE,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Kitchener',
+    addressRegion: 'ON',
+    addressCountry: 'CA',
+  },
+  areaServed: [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Waterloo Region, Ontario',
+    },
+    {
+      '@type': 'Country',
+      name: 'Canada',
+    },
+  ],
+} as const;
 
 export const WEBSITE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
   name: SITE_NAME,
   url: SITE_URL,
   description: SITE_TAGLINE,
+  publisher: {
+    '@id': `${SITE_URL}/#organization`,
+  },
 } as const;
 
 export const SERVICES_JSON_LD = {
@@ -196,7 +236,7 @@ export const HOME_JSON_LD = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'E-commerce & Website Rebuilds',
+          name: 'E-commerce and Website Rebuilds',
           description: 'Custom scoped pricing for online stores and larger rebuilds.',
         },
         priceCurrency: 'CAD',
@@ -236,7 +276,7 @@ export const PRICING_JSON_LD = {
     },
     {
       '@type': 'Offer',
-      name: 'E-commerce & Website Rebuilds',
+      name: 'E-commerce and Website Rebuilds',
       description: 'Custom scoped pricing for online stores and larger rebuilds.',
       priceCurrency: 'CAD',
     },
@@ -333,25 +373,25 @@ export const PROCESS_JSON_LD = {
     {
       '@type': 'HowToStep',
       position: 1,
-      name: 'Week 1 – Review',
+      name: 'Week 1 - Review',
       text: 'We audit the current site, the offer, and the points where you are losing trust. Then we decide what has to change first.',
     },
     {
       '@type': 'HowToStep',
       position: 2,
-      name: 'Week 2 – Scope',
+      name: 'Week 2 - Scope',
       text: 'We lock the pages, the call paths, and the priorities before design starts. Decisions happen here, not mid-build.',
     },
     {
       '@type': 'HowToStep',
       position: 3,
-      name: 'Weeks 2-3 – Build',
+      name: 'Weeks 2-3 - Build',
       text: 'We design, write, and test the full site. Layout and flow stay simple enough to ship clean.',
     },
     {
       '@type': 'HowToStep',
       position: 4,
-      name: 'Weeks 3-4 – Launch',
+      name: 'Weeks 3-4 - Launch',
       text: 'We run launch checks, connect the domain, and hand over a live site. Monthly clients keep support from here on.',
     },
   ],
@@ -398,7 +438,7 @@ export const CONTACT_JSON_LD = {
 export const WORK_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  name: 'Axiom Web – Web Design Portfolio',
+  name: 'Axiom Web - Web Design Portfolio',
   url: 'https://getaxiom.ca/work',
   description:
     'Concept builds across legal, medical, trades, and retail. Each shows how a business site should be structured to convert visitors to booked calls.',
@@ -417,7 +457,7 @@ export const SEO_ROUTES = {
     canonicalPath: '/',
   },
   work: {
-    title: 'Web Design Portfolio | Concept Builds Across Industries | Axiom Web',
+    title: 'Web Design Portfolio | Industry Concepts | Axiom Web',
     description:
       'Concept builds across legal, medical, trades, and retail. See how Axiom structures sites that convert visitors to booked calls.',
     canonicalPath: '/work',
@@ -436,7 +476,7 @@ export const SEO_ROUTES = {
   services: {
     title: 'Web Design Services | Conversion Sites & Rebuilds | Axiom Web',
     description:
-      'Web design for serious local businesses. Conversion sites, local business websites, and rebuilds — clearer offers, stronger proof, faster inquiries.',
+      'Web design for serious local businesses. Conversion sites, local business websites, and rebuilds - clearer offers, stronger proof, faster inquiries.',
     canonicalPath: '/services',
   },
   about: {

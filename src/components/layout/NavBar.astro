@@ -1,6 +1,5 @@
 ---
 import { CTA_PATHS } from '../../lib/cta';
-import { BorderBeamButton } from '../ui/BorderBeamButton';
 
 interface Props {
   hidePrimaryCta?: boolean;
@@ -13,6 +12,7 @@ const LINKS = [
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'About', href: '/about' },
 ] as const;
 
 const MOBILE_LINKS = [
@@ -20,83 +20,78 @@ const MOBILE_LINKS = [
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ] as const;
 
 const isActive = (href: string) =>
   href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
-const ctaClasses =
-  'nav-axiom-cta inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded px-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-white transition-[transform,border-color,background-color] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-0 active:scale-[0.98]';
+const navLinkClass =
+  'motion-link-accent min-h-11 py-2 text-[14px] font-medium transition-colors duration-200 hover:text-[var(--text-primary)]';
 ---
 
-<header id="site-header" class="fixed inset-x-0 top-0 z-50 px-3 sm:px-6" transition:persist>
+<header id="site-header" class="fixed inset-x-0 top-0 z-50" transition:persist>
   <div
     id="nav-shell"
-    class="axiom-container flex items-center justify-between rounded-full border border-[color:var(--hairline)] px-4 py-3.5 backdrop-blur-[20px] transition-[border-color,background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]"
-    style="background-color: var(--nav-shell-bg); box-shadow: var(--shadow-nav-rest);"
+    class="border-b border-[color:var(--hairline)] backdrop-blur-[16px] transition-[background-color,border-color] duration-200"
+    style="background-color: var(--nav-shell-bg);"
   >
-    <a href="/" class="site-logo flex min-h-11 items-center" aria-label="Axiom Web home">
-      <img
-        src="/axiomtransparentlogo.webp"
-        alt=""
-        width="240"
-        height="63"
-        class="block h-9 w-auto select-none object-contain sm:h-10"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
-      />
-    </a>
-
-    <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
-      {LINKS.map((link) => (
-        <a
-          href={link.href}
-          aria-current={isActive(link.href) ? 'page' : undefined}
-          class={`motion-link-accent min-h-11 py-2 text-[14px] font-medium transition-[color,opacity,border-color] duration-200 hover:text-[var(--text-primary)] ${
-            isActive(link.href)
-              ? 'text-[var(--text-primary)]'
-              : 'text-[var(--text-secondary)]'
-          }`}
-        >
-          {link.label}
-        </a>
-      ))}
-    </nav>
-
-    <div class="flex items-center gap-3">
-      <a
-        href="tel:+12267531833"
-        class="hidden lg:inline-flex min-h-11 items-center gap-2 font-mono text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] rounded"
-        aria-label="Call Axiom Web at 226-753-1833"
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        (226) 753-1833
+    <div class="axiom-container flex h-16 items-center justify-between gap-6">
+      <a href="/" class="site-logo flex min-h-11 items-center" aria-label="Axiom Web home">
+        <img
+          src="/axiomtransparentlogo.webp"
+          alt=""
+          width="240"
+          height="63"
+          class="block h-8 w-auto select-none object-contain"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
       </a>
-      {!hidePrimaryCta && (
-        <div class="hidden md:inline-flex">
-          <BorderBeamButton client:visible as="a" href={CTA_PATHS.startProject} colorVariant="colorful">
-            <span>Start a project</span>
-            <span class="text-[var(--accent-solid)]" aria-hidden="true">&#8599;</span>
-          </BorderBeamButton>
-        </div>
-      )}
 
-      <button
-        id="nav-toggle"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-        aria-controls="mobile-nav-panel"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] transition-[border-color,background-color] duration-200 hover:border-[color:var(--hairline-strong)] hover:bg-[color:var(--surface-overlay-press)] md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
-      >
-        <span class="relative block h-4 w-5" aria-hidden="true">
-          <span class="bar bar-top absolute left-0 top-0 h-px w-5 bg-current"></span>
-          <span class="bar bar-mid absolute left-0 top-[7px] h-px w-5 bg-current"></span>
-          <span class="bar bar-bot absolute left-0 top-[14px] h-px w-5 bg-current"></span>
-        </span>
-      </button>
+      <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
+        {LINKS.map((link) => (
+          <a
+            href={link.href}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+            class={`${navLinkClass} ${isActive(link.href) ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a
+          href="tel:+12267531833"
+          class="hidden min-h-11 items-center gap-2 font-mono text-[12px] uppercase tracking-[0.12em] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)] lg:inline-flex"
+          aria-label="Call Axiom Web at 226-753-1833"
+        >
+          (226) 753-1833
+        </a>
+        {!hidePrimaryCta && (
+          <a href={CTA_PATHS.startProject} class="btn btn-primary btn-sm hidden md:inline-flex">
+            Start a project
+          </a>
+        )}
+
+        <button
+          id="nav-toggle"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="mobile-nav-panel"
+          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] text-[var(--text-primary)] transition-[border-color] duration-200 hover:border-[color:var(--hairline-strong)] md:hidden"
+        >
+          <span class="relative block h-4 w-5" aria-hidden="true">
+            <span class="bar bar-top absolute left-0 top-0 h-px w-5 bg-current"></span>
+            <span class="bar bar-mid absolute left-0 top-[7px] h-px w-5 bg-current"></span>
+            <span class="bar bar-bot absolute left-0 top-[14px] h-px w-5 bg-current"></span>
+          </span>
+        </button>
+      </div>
     </div>
   </div>
 </header>
@@ -119,7 +114,7 @@ const ctaClasses =
           alt=""
           width="240"
           height="63"
-          class="block h-9 w-auto select-none object-contain sm:h-10"
+          class="block h-8 w-auto select-none object-contain"
           loading="eager"
           decoding="async"
         />
@@ -128,43 +123,38 @@ const ctaClasses =
         id="nav-close"
         type="button"
         aria-label="Close navigation"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--hairline)] text-[var(--text-primary)]"
       >
         <span aria-hidden="true" class="text-xl leading-none">&times;</span>
       </button>
     </div>
 
-    <nav class="flex flex-col gap-4" aria-label="Mobile navigation">
+    <nav class="flex flex-col gap-3" aria-label="Mobile navigation">
       {MOBILE_LINKS.map((link, index) => (
         <a
           href={link.href}
           aria-current={isActive(link.href) ? 'page' : undefined}
           data-nav-close
-          class={`mobile-nav-link block min-h-11 text-[clamp(2.5rem,8vw,4.75rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-[var(--text-primary)] transition-opacity duration-200${index === 0 ? ' mt-2' : ''}`}
-          style={`--nav-item-delay: ${index * 55}ms;`}
+          class={`mobile-nav-link block min-h-11 font-display text-[clamp(2.25rem,9vw,3.75rem)] font-medium leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)]${index === 0 ? ' mt-2' : ''}`}
         >
           {link.label}
         </a>
       ))}
     </nav>
 
-    <div class="border-t border-[color:var(--hairline)] pt-6 space-y-3">
+    <div class="space-y-4 border-t border-[color:var(--hairline)] pt-6">
       <a
         href="tel:+12267531833"
         data-nav-close
-        class="flex min-h-11 items-center gap-3 font-mono text-[13px] uppercase tracking-[0.12em] text-[var(--text-secondary)] hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)] rounded"
+        class="flex min-h-11 items-center gap-3 font-mono text-[13px] uppercase tracking-[0.12em] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
         aria-label="Call Axiom Web at 226-753-1833"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         (226) 753-1833
       </a>
       {!hidePrimaryCta && (
-        <div class="w-full sm:w-auto">
-          <BorderBeamButton client:visible as="a" href={CTA_PATHS.startProject} fullWidth colorVariant="colorful">
-            <span>Start a project</span>
-            <span class="text-[var(--accent-solid)]" aria-hidden="true">&#8599;</span>
-          </BorderBeamButton>
-        </div>
+        <a href={CTA_PATHS.startProject} data-nav-close class="btn btn-primary w-full">
+          Start a project
+        </a>
       )}
     </div>
   </div>
@@ -176,139 +166,45 @@ const ctaClasses =
     touch-action: manipulation;
   }
 
-  .nav-axiom-cta {
-    background: linear-gradient(180deg, #1a1d24 0%, #0a0c10 100%);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 4px 12px rgba(0, 0, 0, 0.35);
-  }
-
-  .nav-axiom-cta:hover,
-  .nav-axiom-cta:focus-visible {
-    border-color: rgba(255, 255, 255, 0.26);
-    background: linear-gradient(180deg, #20242c 0%, #0d1015 100%);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .nav-axiom-cta:hover,
-    .nav-axiom-cta:focus-visible {
-      transform: translate3d(0, -1px, 0);
-    }
-  }
-
-  html[data-motion-active='true'] #site-header {
-    animation: nav-settle 920ms var(--ease-cinematic) 140ms both;
-  }
-
-  #nav-shell {
-    position: relative;
-    overflow: hidden;
-    transform: translate3d(0, 8px, 0);
-    transition:
-      transform 360ms var(--ease-premium),
-      padding 360ms var(--ease-premium),
-      border-color 360ms var(--ease-premium),
-      background-color 360ms var(--ease-premium),
-      box-shadow 360ms var(--ease-premium);
-  }
-
-  #nav-shell::after {
-    content: '';
-    position: absolute;
-    inset: 0 18px auto;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
-    opacity: 0.85;
-    pointer-events: none;
+  #nav-shell[data-scrolled] {
+    background-color: var(--nav-shell-bg-scrolled) !important;
+    border-color: var(--hairline-strong);
   }
 
   #mobile-nav-panel {
     visibility: hidden;
     opacity: 0;
-    transform: translate3d(0, -8px, 0);
     pointer-events: none;
     transition:
       opacity var(--duration-medium) var(--ease-premium),
-      transform var(--duration-medium) var(--ease-premium),
       visibility var(--duration-medium) var(--ease-premium);
   }
 
   #mobile-nav-panel.nav-open {
     visibility: visible;
     opacity: 1;
-    transform: translate3d(0, 0, 0);
     pointer-events: auto;
   }
 
-  .mobile-nav-link {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-  }
-
-  #mobile-nav-panel.nav-open .mobile-nav-link {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    transition:
-      opacity 520ms var(--ease-cinematic) var(--nav-item-delay, 0ms),
-      transform 520ms var(--ease-cinematic) var(--nav-item-delay, 0ms);
-  }
-
   .bar {
-    transition: transform 260ms var(--ease-premium-soft), opacity 220ms var(--ease-premium-soft);
+    transition: transform 240ms var(--ease-premium), opacity 200ms var(--ease-premium);
   }
 
-  #nav-toggle[aria-expanded="true"] .bar-top {
+  #nav-toggle[aria-expanded='true'] .bar-top {
     transform: translateY(7px) rotate(45deg);
   }
 
-  #nav-toggle[aria-expanded="true"] .bar-mid {
+  #nav-toggle[aria-expanded='true'] .bar-mid {
     opacity: 0;
   }
 
-  #nav-toggle[aria-expanded="true"] .bar-bot {
+  #nav-toggle[aria-expanded='true'] .bar-bot {
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  #nav-shell[data-scrolled] {
-    border-color: rgba(212, 175, 55, 0.2);
-    background-color: rgba(0, 0, 0, 0.75) !important;
-    box-shadow: 
-      0 20px 40px rgba(0, 0, 0, 0.35),
-      0 0 0 1px rgba(212, 175, 55, 0.08),
-      inset 0 -1px 0 rgba(212, 175, 55, 0.15) !important;
-    transform: translate3d(0, 12px, 0) scale(0.97);
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
-    backdrop-filter: blur(28px) !important;
-    -webkit-backdrop-filter: blur(28px) !important;
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    #mobile-nav-panel,
-    .mobile-nav-link,
-    #mobile-nav-panel.nav-open .mobile-nav-link,
-    #site-header,
-    #nav-shell[data-scrolled] {
-      animation: none !important;
+    #mobile-nav-panel {
       transition: none !important;
-      transform: none !important;
-    }
-
-    .mobile-nav-link {
-      opacity: 1;
-    }
-  }
-
-  @keyframes nav-settle {
-    from {
-      opacity: 0;
-      transform: translate3d(0, -10px, 0) scale(0.992);
-    }
-
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0) scale(1);
     }
   }
 </style>
@@ -316,35 +212,16 @@ const ctaClasses =
 <script>
   document.addEventListener('astro:page-load', () => {
     const toggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
-    const panel = document.getElementById('mobile-nav-panel') as HTMLElement | null;
-    const shell = document.getElementById('nav-shell') as HTMLElement | null;
+    const panel = document.getElementById('mobile-nav-panel');
     const closeButton = document.getElementById('nav-close') as HTMLButtonElement | null;
     let lastFocused: HTMLElement | null = null;
-
-    // Update active state of navigation links dynamically on page load/transition
-    const currentPath = window.location.pathname;
-    const links = document.querySelectorAll('#nav-shell nav a, #mobile-nav-panel nav a');
-    links.forEach((link) => {
-      if (!(link instanceof HTMLAnchorElement)) return;
-      const href = link.getAttribute('href');
-      if (!href) return;
-      const isActive = href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
-      if (isActive) {
-        link.setAttribute('aria-current', 'page');
-        link.classList.add('text-[var(--text-primary)]');
-        link.classList.remove('text-[var(--text-secondary)]');
-      } else {
-        link.removeAttribute('aria-current');
-        link.classList.remove('text-[var(--text-primary)]');
-        link.classList.add('text-[var(--text-secondary)]');
-      }
-    });
 
     if (!toggle || !panel) return;
     if (toggle.dataset.navBound === 'true') return;
     toggle.dataset.navBound = 'true';
 
     function openMenu() {
+      if (!panel || !toggle) return;
       lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       panel.removeAttribute('inert');
       panel.classList.add('nav-open');
@@ -352,12 +229,11 @@ const ctaClasses =
       toggle.setAttribute('aria-expanded', 'true');
       toggle.setAttribute('aria-label', 'Close navigation');
       document.body.style.overflow = 'hidden';
-      window.requestAnimationFrame(() => {
-        closeButton?.focus();
-      });
+      window.requestAnimationFrame(() => closeButton?.focus());
     }
 
     function closeMenu() {
+      if (!panel || !toggle) return;
       panel.classList.remove('nav-open');
       panel.setAttribute('aria-hidden', 'true');
       toggle.setAttribute('aria-expanded', 'false');
@@ -368,34 +244,25 @@ const ctaClasses =
       } else {
         panel.addEventListener('transitionend', () => panel.setAttribute('inert', ''), { once: true });
       }
-      window.requestAnimationFrame(() => {
-        lastFocused?.focus();
-      });
+      window.requestAnimationFrame(() => lastFocused?.focus());
     }
 
     toggle.addEventListener('click', () => {
       toggle.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
     });
-
     closeButton?.addEventListener('click', closeMenu);
-
-    panel.querySelectorAll('[data-nav-close]').forEach((el) => {
-      el.addEventListener('click', closeMenu);
-    });
+    panel.querySelectorAll('[data-nav-close]').forEach((el) => el.addEventListener('click', closeMenu));
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMenu();
       if (e.key !== 'Tab' || toggle.getAttribute('aria-expanded') !== 'true') return;
-
       const focusable = Array.from(
         panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
       );
       if (!focusable.length) return;
-
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       const active = document.activeElement as HTMLElement | null;
-
       if (e.shiftKey && active === first) {
         e.preventDefault();
         last.focus();
@@ -406,17 +273,14 @@ const ctaClasses =
     });
   });
 
-  // Global window scroll observer (bound once)
-  if (typeof window !== 'undefined' && !window.__axiomScrollBound) {
-    window.__axiomScrollBound = true;
+  // Nav scrolled state (bound once).
+  if (typeof window !== 'undefined' && !(window as any).__axiomScrollBound) {
+    (window as any).__axiomScrollBound = true;
     const onScroll = () => {
       const shell = document.getElementById('nav-shell');
-      if (shell) {
-        shell.toggleAttribute('data-scrolled', window.scrollY > 100);
-      }
+      if (shell) shell.toggleAttribute('data-scrolled', window.scrollY > 24);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    // Initial check
     document.addEventListener('astro:page-load', onScroll);
   }
 </script>

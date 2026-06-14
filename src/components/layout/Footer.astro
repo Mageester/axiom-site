@@ -1,0 +1,106 @@
+---
+import { SITE_EMAIL } from '../../lib/seo';
+
+const pathname = Astro.url.pathname;
+const year = new Date().getFullYear();
+
+const PAGES = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Work', href: '/work' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const SERVICE_AREAS = [
+  { label: 'Kitchener', href: '/web-design/kitchener' },
+  { label: 'Waterloo', href: '/web-design/waterloo' },
+  { label: 'Cambridge', href: '/web-design/cambridge' },
+  { label: 'Guelph', href: '/web-design/guelph' },
+  { label: 'Hamilton', href: '/web-design/hamilton' },
+];
+
+const LEGAL = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms of Service', href: '/terms' },
+];
+
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+
+const linkClass = 'motion-link-accent inline-flex min-h-9 items-center text-[15px] leading-[1.7] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]';
+---
+
+<footer class="site-footer border-t border-[color:var(--hairline)] px-6 py-14 md:px-12 md:py-16">
+  <div class="axiom-container grid gap-12 md:grid-cols-2 xl:grid-cols-5">
+    <div class="space-y-5">
+      <a href="/" class="site-logo inline-flex min-h-9 items-center" aria-label="Axiom Web home">
+        <img
+          src="/axiomtransparentlogo.webp"
+          alt=""
+          width="240"
+          height="63"
+          class="block h-9 w-auto select-none object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <p class="max-w-sm font-display text-[18px] italic leading-[1.6] text-[var(--text-primary)]">
+        Websites built to convert. Not to decorate.
+      </p>
+      <p class="max-w-sm text-[14px] leading-[1.7] text-[var(--text-muted)]">
+        Based in Kitchener-Waterloo. A subsidiary of Axiom International.
+      </p>
+      <p class="text-[13px] leading-[1.6] text-[var(--text-muted)]">© {year} Axiom Web.</p>
+    </div>
+
+    <div class="space-y-4">
+      <span class="eyebrow">Pages</span>
+      <ul class="space-y-2.5">
+        {PAGES.map((link) => (
+          <li>
+            <a href={link.href} class={`${linkClass}${isActive(link.href) ? ' text-[var(--text-primary)]' : ''}`}>
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="space-y-4">
+      <span class="eyebrow">Contact</span>
+      <ul class="space-y-2.5">
+        <li><a href={`mailto:${SITE_EMAIL}`} class={linkClass}>{SITE_EMAIL}</a></li>
+        <li><a href="tel:+12267531833" class={linkClass}>(226) 753-1833</a></li>
+        <li><a href="/start-a-project" class={linkClass}>Start a project</a></li>
+      </ul>
+    </div>
+
+    <div class="space-y-4">
+      <span class="eyebrow">Service Areas</span>
+      <ul class="space-y-2.5">
+        {SERVICE_AREAS.map((link) => (
+          <li>
+            <a href={link.href} class={`${linkClass}${isActive(link.href) ? ' text-[var(--text-primary)]' : ''}`}>
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="space-y-4">
+      <span class="eyebrow">Legal</span>
+      <ul class="space-y-2.5">
+        {LEGAL.map((link) => (
+          <li>
+            <a href={link.href} class={`${linkClass}${isActive(link.href) ? ' text-[var(--text-primary)]' : ''}`}>
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</footer>
