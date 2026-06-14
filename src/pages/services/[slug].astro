@@ -51,6 +51,11 @@ const canonicalPath = `/services/${service.slug}`;
             {service.description}
           </p>
         </FadeIn>
+        <FadeIn motion="editorialMaskReveal" delay={620}>
+          <p class="section-copy mt-3 md:text-[17px]">
+            The goal is simple: make the business easier to understand, easier to trust, and easier to contact.
+          </p>
+        </FadeIn>
         <FadeIn motion="sceneOpen" delay={720}>
           <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
             <a href={createStartProjectHref(service.pathIntent)} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Start this path</a>
@@ -77,18 +82,47 @@ const canonicalPath = `/services/${service.slug}`;
         <FadeIn as="div" motion="depthCardReveal" direction="right">
           <Card className="h-full p-0">
             <div class="p-6 sm:p-7 md:p-8">
-              <Eyebrow>OUTCOMES</Eyebrow>
-              <ul class="mt-6 space-y-4">
-                {service.outcomes.map((item) => (
-                  <li class="flex gap-3 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
-                    <DrawIcon name="check" size={15} className="mt-1 shrink-0 text-[var(--accent-solid)]" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <Eyebrow>WHAT CHANGES</Eyebrow>
+              <div class="mt-6 space-y-5">
+                <div>
+                  <p class="text-[14px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">Before Axiom</p>
+                  <p class="section-copy mt-2 text-[15px]">{service.beforeAxiom}</p>
+                </div>
+                <div class="border-t border-[color:var(--hairline)] pt-5">
+                  <p class="text-[14px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">After Axiom</p>
+                  <p class="section-copy mt-2 text-[15px]">{service.afterAxiom}</p>
+                </div>
+                <div class="border-t border-[color:var(--hairline)] pt-5">
+                  <p class="text-[14px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">Typical path</p>
+                  <p class="section-copy mt-2 text-[15px]">{service.typicalPath}</p>
+                </div>
+              </div>
             </div>
           </Card>
         </FadeIn>
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="axiom-container">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
+          <Eyebrow>OUTCOMES</Eyebrow>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="What the buyer should notice." className="section-heading mt-4" />
+        </FadeIn>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          {service.outcomes.map((item, index) => (
+            <FadeIn motion="timelineSequence" delay={Math.min(index * 120, 480)} as="div">
+              <div class="premium-card h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
+                <div class="flex gap-3 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
+                  <DrawIcon name="check" size={15} className="mt-1 shrink-0 text-[var(--accent-solid)]" />
+                  <span>{item}</span>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -121,7 +155,7 @@ const canonicalPath = `/services/${service.slug}`;
                 <SectionDivider className="mb-6" />
                 <MotionHeading as="h2" text="This might be the right path." className="section-heading" />
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Tell us what the business needs. We'll confirm the fit and send a clear scope within one business day.
+                  Tell us what is unclear, what needs to convert, and which path feels closest. We will reply with the right next step within one business day.
                 </p>
               </div>
 

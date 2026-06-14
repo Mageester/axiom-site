@@ -15,6 +15,9 @@ const projects = [
     title: 'Nails Studio',
     niche: 'Salon & Beauty',
     outcome: 'Booking pulled above the fold so clients tap once instead of hunting through a menu.',
+    originalWeakness: 'Services and booking were treated like secondary details instead of the main reason people visit.',
+    axiomChanged: 'We moved service comparison, trust cues, and booking into the first decision path.',
+    whyItWorks: 'Beauty clients can confirm fit, see the standard, and book without opening extra pages.',
     meta: ['Website redesign', 'Local business', 'Conversion-focused'],
     image: getWorkProofImage('concept-salon-demo').source,
     alt: getWorkProofImage('concept-salon-demo').alt || 'Nails Studio concept site',
@@ -27,6 +30,9 @@ const projects = [
     title: 'Blackline Barber Co.',
     niche: 'Personal Services',
     outcome: 'Sharp brand, big photography, booking link locked into every screen.',
+    originalWeakness: 'The brand needed to feel sharper and make the next appointment easy from a phone.',
+    axiomChanged: 'We made photography the first signal and kept booking visible across the experience.',
+    whyItWorks: 'A visitor gets the vibe quickly, then has a low-friction path to choose a time.',
     meta: ['Website redesign', 'Local business'],
     image: getWorkProofImage('concept-barber-demo').source,
     alt: getWorkProofImage('concept-barber-demo').alt || 'Blackline Barber Co. concept site',
@@ -39,6 +45,9 @@ const projects = [
     title: 'Aurelia Dental Studio',
     niche: 'Healthcare',
     outcome: 'Warmer tone, fewer clicks to a booking — built for new patients who decide in seconds.',
+    originalWeakness: 'New patients needed reassurance before they were ready to request an appointment.',
+    axiomChanged: 'We placed care style, services, team cues, and booking closer together.',
+    whyItWorks: 'Healthcare buyers can understand the practice and feel safe taking the next step.',
     meta: ['Website redesign', 'Local business', 'Conversion-focused'],
     image: getWorkProofImage('concept-dental-demo').source,
     alt: getWorkProofImage('concept-dental-demo').alt || 'Aurelia Dental Studio concept site',
@@ -51,6 +60,9 @@ const projects = [
     title: 'Restaurant Reservation',
     niche: 'Food & Hospitality',
     outcome: 'Menu and reservation live above the fold. Mobile loads fast, decisions happen at the table.',
+    originalWeakness: 'Menu and reservation intent were split, forcing hungry visitors to search.',
+    axiomChanged: 'We brought menu preview and reservation action into the first mobile screen.',
+    whyItWorks: 'Guests can decide quickly and reserve before attention moves elsewhere.',
     meta: ['Website redesign', 'Hospitality'],
     image: getWorkProofImage('demonstration-restaurant-reservation-site').source,
     alt: getWorkProofImage('demonstration-restaurant-reservation-site').alt || 'Restaurant reservation concept site',
@@ -63,6 +75,9 @@ const projects = [
     title: 'Physio Clinic',
     niche: 'Health & Wellness',
     outcome: 'Treatment paths, practitioner trust and booking collapsed into one first-screen flow.',
+    originalWeakness: 'Treatment information, practitioner credibility, and booking were too separated.',
+    axiomChanged: 'We grouped symptoms, care paths, provider trust, and booking into one clear route.',
+    whyItWorks: 'Patients can recognize their problem and understand how to start care faster.',
     meta: ['Website redesign', 'Local business'],
     image: getWorkProofImage('concept-physio-demo').source,
     alt: getWorkProofImage('concept-physio-demo').alt || 'Physiotherapy clinic concept site',
@@ -75,6 +90,9 @@ const projects = [
     title: 'Harrow & Calloway',
     niche: 'Legal Services',
     outcome: 'Cleaner hierarchy, shorter copy, one obvious path to a consultation.',
+    originalWeakness: 'Legal copy can feel dense, cautious, and hard to act on.',
+    axiomChanged: 'We clarified practice areas, reduced copy weight, and made consultation the obvious path.',
+    whyItWorks: 'Prospects can identify the right service and contact the firm without decoding the site.',
     meta: ['Website redesign', 'Professional services'],
     image: getWorkProofImage('concept-law-demo').source,
     alt: getWorkProofImage('concept-law-demo').alt || 'Harrow & Calloway concept site',
@@ -87,6 +105,9 @@ const projects = [
     title: 'Landscaping Studio',
     niche: 'Home Services',
     outcome: 'Project photography forward, quote form down to two fields and a button.',
+    originalWeakness: 'Project quality was not visible soon enough and quote requests felt heavier than necessary.',
+    axiomChanged: 'We put finished work first and shortened the initial quote path.',
+    whyItWorks: 'Homeowners can judge taste and start a conversation before losing momentum.',
     meta: ['Website redesign', 'Local business'],
     image: getWorkProofImage('concept-landscaping-authority-site').source,
     alt: getWorkProofImage('concept-landscaping-authority-site').alt || 'Landscaping concept site',
@@ -99,6 +120,9 @@ const projects = [
     title: 'Roofing Conversion',
     niche: 'Home Services',
     outcome: 'Urgent calls and planned estimates split into separate, unmissable paths.',
+    originalWeakness: 'Emergency repairs and planned estimates were competing for the same generic CTA.',
+    axiomChanged: 'We separated urgent calls from planned quote requests and made both easy to find.',
+    whyItWorks: 'Different buyers can take different actions without reading the whole page first.',
     meta: ['Website redesign', 'Local business', 'Conversion-focused'],
     image: getWorkProofImage('concept-roofing-conversion-site').source,
     alt: getWorkProofImage('concept-roofing-conversion-site').alt || 'Roofing concept site',
@@ -125,13 +149,13 @@ const projects = [
         <FadeIn motion="sceneOpen" delay={180}>
           <MotionHeading
             as="h1"
-            text="Websites built to make local businesses *look unavoidable*."
+            text="Demonstration builds that show *how serious sites convert.*"
             className="mt-4"
           />
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
-            A working portfolio of sector-specific platforms. Each one is built to the same structural and performance standard we deploy for clients &mdash; designed to make a serious business look like one at a glance.
+            These are concept builds, not invented client case studies. Each one shows how we structure a local business site around clarity, proof, and the next action.
           </p>
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720}>
@@ -171,6 +195,14 @@ const projects = [
               </figure>
               <h3 class="work-card-title">{p.title}</h3>
               <p class="work-card-outcome">{p.outcome}</p>
+              <div class="work-card-proof">
+                <p class="work-card-kicker">Original weakness</p>
+                <p class="work-card-detail">{p.originalWeakness}</p>
+                <p class="work-card-kicker">Axiom changed</p>
+                <p class="work-card-detail">{p.axiomChanged}</p>
+                <p class="work-card-kicker">Why it works</p>
+                <p class="work-card-detail">{p.whyItWorks}</p>
+              </div>
               <span class="work-card-meta">
                 {p.meta.map((m) => <span>{m}</span>)}
               </span>
@@ -195,7 +227,7 @@ const projects = [
                 className="section-heading mt-4"
               />
               <p class="section-copy mt-4">
-                A high-performance digital presence is a structural asset, not an expense. We design and build platforms that command authority and convert commercial interest into qualified inquiries.
+                A stronger site should make the business easier to understand, easier to trust, and easier to contact. These concept builds show the structure we bring to that work.
               </p>
             </div>
             <div class="flex flex-col items-start gap-3 md:items-end">
@@ -281,6 +313,35 @@ const projects = [
     line-height: 1.65;
     margin: 0.6rem 0 0;
     max-width: 46ch;
+  }
+
+  .work-card-proof {
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 1.15rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .work-card-kicker {
+    margin-top: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .work-card-kicker:first-child {
+    margin-top: 0;
+  }
+
+  .work-card-detail {
+    max-width: 48ch;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.62;
+    margin: 0;
   }
 
   .work-card-meta {

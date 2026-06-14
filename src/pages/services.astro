@@ -31,11 +31,11 @@ const serviceIcon = {
           <SectionDivider className="mt-6" />
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={180}>
-          <MotionHeading as="h1" text="Digital credibility, built around the way buyers decide." className="mt-4" />
+          <MotionHeading as="h1" text="Choose the path that matches what the site needs to fix." className="mt-4" />
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
-            Axiom builds focused, high-trust sites for companies that need a clearer offer, cleaner proof, and a faster path from attention to inquiry.
+            Each path leads to the same standard: clearer message, stronger proof, faster mobile experience, and an easier route from visitor interest to inquiry.
           </p>
         </FadeIn>
       </div>
@@ -63,12 +63,18 @@ const serviceIcon = {
                   <p class="mt-5 text-[14px] leading-[1.7] text-[var(--text-muted)]">
                     {service.bestFor}
                   </p>
-                  <div class="mt-5 space-y-2 border-t border-[color:var(--hairline)] pt-5">
+                  <div class="mt-5 space-y-3 border-t border-[color:var(--hairline)] pt-5">
                     <p class="text-[14px] leading-[1.65] text-[var(--text-secondary)]">
                       <span class="font-medium text-[var(--text-primary)]">Best if...</span> {service.bestIf}
                     </p>
                     <p class="text-[14px] leading-[1.65] text-[var(--text-secondary)]">
-                      <span class="font-medium text-[var(--text-primary)]">Starts at...</span> {service.startsAt}
+                      <span class="font-medium text-[var(--text-primary)]">Before Axiom...</span> {service.beforeAxiom}
+                    </p>
+                    <p class="text-[14px] leading-[1.65] text-[var(--text-secondary)]">
+                      <span class="font-medium text-[var(--text-primary)]">After Axiom...</span> {service.afterAxiom}
+                    </p>
+                    <p class="text-[14px] leading-[1.65] text-[var(--text-secondary)]">
+                      <span class="font-medium text-[var(--text-primary)]">Typical path...</span> {service.typicalPath}
                     </p>
                   </div>
                   <div class="mt-7 flex flex-col gap-3 sm:flex-row lg:mt-auto lg:flex-col">
@@ -94,7 +100,7 @@ const serviceIcon = {
               <SectionDivider className="mx-auto mt-6" />
               <MotionHeading as="h2" text="One operating standard. Different project shapes." className="section-heading mx-auto mt-4" />
               <p class="section-copy mx-auto mt-4 max-w-3xl">
-                The scope can be monthly, ownership, or custom. The standard stays the same: clear messaging, strong mobile experience, careful launch checks, and no invented proof.
+                Monthly, ownership, or custom scope changes how the work is priced and supported. The standard stays the same: clear messaging, strong mobile experience, careful launch checks, and no invented proof.
               </p>
               <div class="mt-7 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <a href="/process" class="btn btn-primary btn-lg">See the process</a>

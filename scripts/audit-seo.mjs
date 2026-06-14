@@ -3,7 +3,7 @@ import { join, relative, sep } from 'node:path';
 
 const distDir = 'dist';
 const siteUrl = 'https://getaxiom.ca';
-const publicRoutePrefixes = ['/', '/about', '/approach', '/contact', '/pricing', '/process', '/services', '/web-design', '/work'];
+const publicRoutePrefixes = ['/', '/about', '/approach', '/contact', '/pricing', '/process', '/services', '/start-a-project', '/web-design', '/work'];
 const sitemapBlockedPrefixes = [
   '/404',
   '/admin',
@@ -133,7 +133,7 @@ if (!existsSync(sitemapPath)) {
     }
   }
 
-  for (const route of ['/', '/pricing', '/services', '/work', '/contact', '/web-design/kitchener']) {
+  for (const route of ['/', '/pricing', '/services', '/work', '/contact', '/start-a-project', '/web-design/kitchener']) {
     const expected = new URL(route, siteUrl).toString();
     if (!sitemapText.includes(expected)) fail('sitemap', `missing expected route: ${route}`);
   }

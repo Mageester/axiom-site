@@ -16,13 +16,13 @@ import { SEO_ROUTES } from '../lib/seo';
       <FadeIn motion="sceneOpen" className="max-w-3xl">
         <Eyebrow>START A PROJECT</Eyebrow>
         <SectionDivider className="mt-6" />
-        <MotionHeading as="h1" text="Tell us about the site. We'll handle the rest." className="mt-4 max-w-4xl" />
+        <MotionHeading as="h1" text="Tell us what the site needs to fix." className="mt-4 max-w-4xl" />
         <p class="section-copy mt-5 md:text-[17px]">
-          Five short steps. You'll get a clear reply from a real person, not a chatbot.
+          Five short steps. We review the business, the current site, and the right next step before we reply.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]">
-          <span>SHORT BRIEF</span>
+          <span>SHORT FORM</span>
           <span aria-hidden="true" class="text-[var(--text-muted)]">&rarr;</span>
           <span>MONTHLY OR OWNERSHIP</span>
           <span aria-hidden="true" class="text-[var(--text-muted)]">&rarr;</span>
@@ -30,7 +30,7 @@ import { SEO_ROUTES } from '../lib/seo';
         </div>
 
         <div class="mt-7">
-          <a href="#project-intake" class="btn btn-primary btn-lg">Submit project brief</a>
+          <a href="#project-intake" class="btn btn-primary btn-lg">Send project details</a>
         </div>
       </FadeIn>
     </section>
@@ -41,13 +41,13 @@ import { SEO_ROUTES } from '../lib/seo';
           <IntakeForm
             kind="project"
             endpoint="/api/intake"
-            title="Tell us what needs to change."
+            title="Start with the business and the site."
             eyebrow="PROJECT INTAKE"
-            description="Tell us what the business does, what&apos;s broken on the current site, and which path feels closest."
-            helper="Three short lines is enough. Monthly, ownership, or not sure yet all work."
-            submitLabel={`Submit project brief \u2192`}
-            successTitle="Received."
-            successText="We&apos;ll review and reply with the next step."
+            description="A few clear details are enough for us to recommend monthly, ownership, or a custom scope."
+            helper="Plain language is perfect. Tell us what is unclear, outdated, slow, or hard for buyers to do."
+            submitLabel={`Send project details \u2192`}
+            successTitle="Project details received."
+            successText="We will review the business, the current site, and the right next step before we reply."
             noteLinkHref={CTA_PATHS.contact}
             noteLinkLabel="contact page"
             noteText="Need a quick question instead? Use the"
@@ -64,7 +64,7 @@ import { SEO_ROUTES } from '../lib/seo';
               <div class="mt-6 space-y-4 border-t border-[color:var(--hairline)] pt-5">
                 <div>
                   <p class="text-[12px] font-medium uppercase tracking-[0.16em] text-[var(--text-secondary)]">Who this is for</p>
-                  <p class="mt-2 text-[15px] leading-[1.7] text-[var(--text-secondary)]">Businesses ready to talk monthly or ownership website work.</p>
+                  <p class="mt-2 text-[15px] leading-[1.7] text-[var(--text-secondary)]">Business owners ready to improve the site, launch a better one, or compare monthly versus ownership.</p>
                 </div>
                 <div>
                   <p class="text-[12px] font-medium uppercase tracking-[0.16em] text-[var(--text-secondary)]">Monthly vs ownership</p>
@@ -76,7 +76,7 @@ import { SEO_ROUTES } from '../lib/seo';
                 </div>
                 <div>
                   <p class="text-[12px] font-medium uppercase tracking-[0.16em] text-[var(--text-secondary)]">After submit</p>
-                  <p class="mt-2 text-[15px] leading-[1.7] text-[var(--text-secondary)]">We review the brief and reply with a clear next step — which option fits, what it costs, and how to move forward.</p>
+                  <p class="mt-2 text-[15px] leading-[1.7] text-[var(--text-secondary)]">We review the details and reply with the best option, what it costs, and how to move forward.</p>
                 </div>
               </div>
               <div class="mt-6">

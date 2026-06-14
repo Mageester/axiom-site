@@ -9,19 +9,19 @@ const work = [
   {
     sector: 'Dental',
     title: 'Aurelia Dental Studio',
-    outcome: 'Clear, warm, and easy to navigate. New patients find what they need and book without second-guessing.',
+    outcome: 'New patients can understand the practice, trust the offer, and book without digging through the site.',
     img: getWorkProofImage('concept-dental-demo'),
   },
   {
     sector: 'Beauty',
     title: 'Nails Studio',
-    outcome: 'Booking is visible early, services are easy to compare, and the brand reads calm and polished.',
+    outcome: 'Services are easier to compare, booking appears early, and the brand reads calm and premium.',
     img: getWorkProofImage('concept-salon-demo'),
   },
   {
     sector: 'Grooming',
     title: 'Blackline Barber Co.',
-    outcome: 'Fast, sharp, and direct. Clients get to the booking button in seconds — no hunting required.',
+    outcome: 'A sharper first impression with the booking path visible before a visitor starts hunting.',
     img: getWorkProofImage('concept-barber-demo'),
   },
 ] as const;
@@ -30,65 +30,65 @@ const services = [
   {
     num: '01',
     label: 'Conversion Sites',
-    description: 'For service businesses that need a clearer offer, stronger trust signals, and fewer steps from visit to inquiry.',
+    description: 'For businesses whose offer is good, but the current site makes visitors work too hard before they reach out.',
     href: '/services#conversion-sites',
   },
   {
     num: '02',
     label: 'Local Business Websites',
-    description: 'For companies whose reputation, service quality, and contact path need to be obvious on every device.',
+    description: 'For established local companies that need reputation, services, service area, and contact path clear on every device.',
     href: '/services#local-business-websites',
   },
   {
     num: '03',
     label: 'Rebuilds',
-    description: 'Replace a dated or confusing site while protecting useful content, redirects, domains, and buyer trust.',
+    description: 'For existing sites that no longer match the quality of the business, without losing useful content or search value.',
     href: '/services#rebuilds',
   },
 ] as const;
 
 // Honest capability band — what we actually deliver, not fabricated client logos.
 const marquee = [
-  'Custom code — never templates',
-  'Sub-one-second load',
-  'Mobile-first by default',
-  'Built to get you booked',
-  'Managed hosting & security',
+  'Clear offer in seconds',
+  'Proof beside the decision',
+  'Fast on every phone',
+  'Booking path made obvious',
+  'Managed hosting and support',
   'Direct line to the makers',
-  'Clean, maintainable builds',
-  '30-day delivery',
+  'Clean custom code',
+  'Defined launch path',
 ] as const;
 
 const solution = [
-  { title: 'Understood in seconds', description: 'What you do, who you help, and how to book — clear the moment someone lands. No scrolling to figure you out.' },
-  { title: 'Trusted where it counts', description: 'Real reviews, credentials, and proof placed exactly where a visitor decides whether to call you.' },
-  { title: 'Fast enough to convert', description: 'Sub-second loads on the phones your customers actually use, so nobody bounces before they reach the button.' },
+  { title: 'Clear offer, fast', description: 'Visitors should understand what you do, who you help, and how to take the next step before the page asks them to think.' },
+  { title: 'Proof beside action', description: 'Reviews, credentials, photos, and examples belong near the price, service, form, and call button - not buried later.' },
+  { title: 'Friction removed', description: 'Mobile layout, page speed, navigation, and forms are shaped around the way a real buyer decides to contact you.' },
 ] as const;
 
 const principles = [
-  { num: '01', title: 'Visitors get it in seconds', description: 'People should understand what you do, who you help, and how to book the moment they land — no scrolling around, no guessing.' },
-  { num: '02', title: 'Built to earn trust', description: 'Real reviews, credentials, and proof go exactly where people decide whether to call you. We never make up numbers or fake testimonials.' },
-  { num: '03', title: 'Fast on every phone', description: 'Most of your visitors are on their phone. Your site loads in under a second and looks sharp on every screen — so nobody bounces.' },
-  { num: '04', title: 'Looked after, even after launch', description: "We handle the hosting, the security, and the small updates. When something's needed, you message the two people who built it — not a ticket queue." },
+  { num: '01', title: 'No vague first impression', description: 'A serious business should not need paragraphs to explain itself. The offer, audience, and next action have to be obvious.' },
+  { num: '02', title: 'Only supportable proof', description: 'We use real assets, clearly labeled concept work, visible standards, and proof that can be backed up.' },
+  { num: '03', title: 'No mobile afterthought', description: 'Most buyers check you from a phone. Buttons, forms, copy, speed, and image crops are judged there first.' },
+  { num: '04', title: 'No account-manager fog', description: "You work directly with the people shaping the message and building the site, with a clear path after launch." },
 ] as const;
 
 const figures = [
   { value: 'Under 1s', label: 'Load time, every build' },
   { value: 'Two', label: 'Partners, zero middlemen' },
-  { value: '~30 days', label: 'From kickoff to launch' },
+  { value: '14-30', label: 'Day delivery band' },
   { value: '$0', label: 'Down to get started' },
 ] as const;
 
 const process = [
-  { num: '01', title: 'Diagnostics', description: 'We audit your brand, copy, and where visitors drop off — and define exactly what the site needs to do.' },
-  { num: '02', title: 'Blueprint', description: 'We map every page, the flow, and the exact words. The whole plan is approved before a line of code is written.' },
-  { num: '03', title: 'Build', description: 'Custom, lightweight code. No templates, no bloated plugins, no performance compromises.' },
-  { num: '04', title: 'Launch & handoff', description: 'Speed, mobile, and DNS checks, then a clean handoff — with managed hosting if you want it.' },
+  { num: '01', title: 'Review', description: 'We look at the current site, offer, proof, and buyer path before deciding what needs to change.' },
+  { num: '02', title: 'Scope', description: 'We define pages, calls to action, copy direction, pricing path, and launch requirements before build starts.' },
+  { num: '03', title: 'Build', description: 'We design and develop the site around clarity, mobile quality, speed, and a cleaner inquiry path.' },
+  { num: '04', title: 'Launch', description: 'We check performance, mobile flow, forms, SEO basics, and domain setup before the site goes live.' },
 ] as const;
 
 const team = [
-  { name: 'Aidan', role: 'Strategy & scope', description: 'Shapes the message and the structure so the site maps to exactly how your customers decide.' },
-  { name: 'Riley', role: 'Engineering & delivery', description: 'Builds the site itself — obsessed with speed, clean code, and how it feels on a phone.' },
+  { name: 'Aidan', role: 'Strategy & scope', description: 'Shapes the message, page structure, and buyer path so the site reflects how customers actually decide.' },
+  { name: 'Riley', role: 'Design & build', description: 'Builds the interface, performance foundation, and launch details so the site feels sharp on every screen.' },
 ] as const;
 ---
 
@@ -100,7 +100,7 @@ const team = [
   schema={[HOME_JSON_LD, WEBSITE_SCHEMA]}
 >
   <main id="main-content" tabindex="-1" class="ax-root">
-    <!-- ░░ HERO ░░ -->
+    <!-- HERO -->
     <section class="ax-hero">
       <div class="ax-container">
         <div class="ax-masthead ax-load" style="--i: 0">
@@ -113,9 +113,9 @@ const team = [
         </div>
 
         <h1 class="ax-mega ax-hero-title">
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 1">Websites that get</span></span>
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 2">local businesses</span></span>
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 3"><em>booked.</em></span></span>
+          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 1">A sharper digital</span></span>
+          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 2">presence for serious</span></span>
+          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 3"><em>local businesses.</em></span></span>
         </h1>
 
         <div class="ax-hero-foot">
@@ -124,13 +124,13 @@ const team = [
             <a href="/work" class="btn-ghost-link">See the work</a>
           </div>
           <p class="ax-lead ax-load" style="--i: 6">
-            Custom websites for established local businesses — built to look the part on every phone, load in under a second, and turn visitors into booked clients. You work directly with the two people who design and build it.
+            Axiom builds fast, high-trust sites that make the offer clear, place proof where buyers decide, and turn attention into qualified inquiries.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- ░░ CAPABILITY MARQUEE BAND ░░ -->
+    <!-- CAPABILITY MARQUEE BAND -->
     <section class="ax-marquee-band" aria-label="What every Axiom build includes">
       <div class="ax-marquee" data-marquee aria-hidden="true">
         <div class="ax-marquee-track" data-marquee-track>
@@ -141,25 +141,25 @@ const team = [
       </div>
     </section>
 
-    <!-- ░░ PROBLEM ░░ -->
+    <!-- PROBLEM -->
     <section class="ax-statement" id="ax-statement">
       <div class="ax-container">
         <span class="ax-index reveal">№ 01 — The problem</span>
         <p class="ax-big reveal" style="--reveal-delay: 80ms">
-          Most local businesses lose customers to a website that looks like an afterthought.
-          <em>We make yours the reason they call.</em>
+          Buyers judge the business before they ever call.
+          <em>Your site should make that judgment easy.</em>
         </p>
       </div>
     </section>
 
-    <!-- ░░ SOLUTION ░░ -->
+    <!-- SOLUTION -->
     <section class="ax-section">
       <div class="ax-container">
         <header class="ax-head">
           <span class="ax-label reveal">№ 02 — The fix</span>
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">A site that does the <em>quiet, important work</em></h2>
+          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Make the right action <em>feel obvious</em></h2>
           <p class="ax-head-note reveal" style="--reveal-delay: 120ms">
-            We rebuild the version of your business that earns the click — composed, credible, and fast enough that the decision to call feels obvious.
+            A professional site should not only look better. It should make the offer easier to understand, the business easier to trust, and the next step easier to take.
           </p>
         </header>
 
@@ -175,13 +175,13 @@ const team = [
       </div>
     </section>
 
-    <!-- ░░ WORK ░░ -->
+    <!-- WORK -->
     <section class="ax-section">
       <div class="ax-container">
         <header class="ax-head">
-          <span class="ax-label reveal">Selected work · 2024–25</span>
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">The kind of site <em>you'll get</em></h2>
-          <p class="ax-head-note reveal" style="--reveal-delay: 120ms">Concept builds for local businesses like yours — clean, fast, and built to make booking the obvious next step.</p>
+          <span class="ax-label reveal">Demonstration work · 2024–25</span>
+          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Concept builds that show <em>the standard</em></h2>
+          <p class="ax-head-note reveal" style="--reveal-delay: 120ms">These are demonstration builds, not invented client case studies. They show how we structure local business sites for clarity, trust, and action.</p>
         </header>
 
         <div class="ax-work">
@@ -211,12 +211,12 @@ const team = [
       </div>
     </section>
 
-    <!-- ░░ SERVICES ░░ -->
+    <!-- SERVICES -->
     <section class="ax-section">
       <div class="ax-container">
         <header class="ax-head">
           <span class="ax-label reveal">Services</span>
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Three ways we <em>strengthen the site</em></h2>
+          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Three focused paths, <em>one standard</em></h2>
         </header>
 
         <ol class="ax-list">
@@ -234,14 +234,14 @@ const team = [
       </div>
     </section>
 
-    <!-- ░░ WHY ░░ -->
+    <!-- WHY -->
     <section class="ax-section">
       <div class="ax-container ax-split">
         <div class="ax-split-left">
           <span class="ax-label reveal">Why Axiom</span>
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Made for businesses that <em>can't look cheap</em></h2>
+          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Built for businesses that <em>cannot look unclear</em></h2>
           <p class="ax-lead reveal" style="--reveal-delay: 120ms">
-            Established local businesses with a reputation behind them. If a new customer judges you by your website before they ever call, this is built for you.
+            If a new customer decides whether to trust you before they speak to you, the site has to do more than look acceptable.
           </p>
         </div>
         <div class="ax-split-right">
@@ -258,7 +258,7 @@ const team = [
       </div>
     </section>
 
-    <!-- ░░ FIGURES ░░ -->
+    <!-- FIGURES -->
     <section class="ax-section ax-section--tight">
       <div class="ax-container">
         <div class="ax-figures">
@@ -272,12 +272,12 @@ const team = [
       </div>
     </section>
 
-    <!-- ░░ PROCESS ░░ -->
+    <!-- PROCESS -->
     <section class="ax-section">
       <div class="ax-container">
         <header class="ax-head">
           <span class="ax-label reveal">Process</span>
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">A disciplined, <em>30-day delivery</em></h2>
+          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Review, scope, <em>build, launch</em></h2>
         </header>
 
         <ol class="ax-process">
@@ -293,14 +293,14 @@ const team = [
       </div>
     </section>
 
-    <!-- ░░ STUDIO ░░ -->
+    <!-- STUDIO -->
     <section class="ax-section">
       <div class="ax-container ax-split">
         <div class="ax-split-left">
           <span class="ax-label reveal">The studio</span>
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Two people. <em>Direct line.</em></h2>
+          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Two partners. <em>Direct accountability.</em></h2>
           <p class="ax-lead reveal" style="--reveal-delay: 120ms">
-            Axiom is run by two partners. You work directly with the people designing and building your site — no account managers, no layers, no ticket queues.
+            You work with the people shaping the strategy and building the site. No account layers, no handoff fog, no guessing who owns the outcome.
           </p>
         </div>
         <div class="ax-split-right">
@@ -315,19 +315,19 @@ const team = [
       </div>
     </section>
 
-    <!-- ░░ FINAL CTA ░░ -->
+    <!-- FINAL CTA -->
     <section class="ax-final">
       <div class="ax-container">
         <span class="ax-index reveal">Start here</span>
         <h2 class="ax-mega ax-final-mega reveal" style="--reveal-delay: 60ms">
-          Let's build the<br /><em>site you deserve.</em>
+          Start a serious<br /><em>project conversation.</em>
         </h2>
         <div class="ax-hero-actions reveal" style="--reveal-delay: 140ms">
           <a href={CTA_PATHS.startProject} class="btn btn-primary">Start a project <span aria-hidden="true">→</span></a>
           <a href="/pricing" class="btn-ghost-link">See pricing</a>
         </div>
         <p class="ax-fineprint reveal" style="--reveal-delay: 200ms">
-          Monthly or one-time from $3,500. Pricing is public, the launch path is defined, and every build is checked for speed and mobile quality before it ships.
+          Monthly or ownership build. Pricing is public, the launch path is defined, and every build is checked for speed, mobile quality, and clear inquiry flow before it ships.
         </p>
       </div>
     </section>

@@ -9,6 +9,9 @@ export type Service = {
   description: string;
   bestFor: string;
   bestIf: string;
+  beforeAxiom: string;
+  afterAxiom: string;
+  typicalPath: string;
   startsAt: string;
   outcomes: string[];
   includes: string[];
@@ -27,7 +30,10 @@ export const services: Service[] = [
       'We structure the page hierarchy, calls to action, service copy, and mobile flow around how buyers actually decide. The result is a site that feels easier to trust and easier to act on.',
     bestFor: 'High-intent local services, professional firms, clinics, contractors, and owner-led teams.',
     bestIf: 'You have a clear offer but the current site buries it.',
-    startsAt: '$200/mo or $3,500 one-time.',
+    beforeAxiom: 'Visitors have to piece together what you do, why it matters, and how to reach you.',
+    afterAxiom: 'The offer, proof, and primary contact path are visible before the buyer loses momentum.',
+    typicalPath: 'Usually fits monthly or ownership, depending on how much support you want after launch.',
+    startsAt: '$200/mo or $3,500 ownership build.',
     outcomes: [
       'Offer and service hierarchy clarified before design starts',
       'Primary call, quote, booking, or intake path visible on every key page',
@@ -53,7 +59,10 @@ export const services: Service[] = [
       'We build local business sites that make the company easier to understand, easier to believe, and easier to contact. The emphasis is clarity, proof, speed, and calm commercial polish.',
     bestFor: 'Trades, clinics, hospitality, beauty, professional services, and service-area businesses.',
     bestIf: 'Most of your new clients find you locally and decide in under a minute.',
-    startsAt: '$200/mo or $3,500 one-time.',
+    beforeAxiom: 'The business may be reputable offline, but the site does not make that reputation obvious fast enough.',
+    afterAxiom: 'Services, location, trust signals, and contact options are clear on desktop and mobile.',
+    typicalPath: 'Usually fits monthly when you want ongoing updates, or ownership when you want handoff at launch.',
+    startsAt: '$200/mo or $3,500 ownership build.',
     outcomes: [
       'Services, geography, and buyer fit made clear quickly',
       'Reviews, credentials, photos, and examples placed where buyers look',
@@ -79,6 +88,9 @@ export const services: Service[] = [
       'A rebuild is not a cosmetic reset. We preserve what matters, remove what creates friction, and relaunch with cleaner structure, stronger messaging, and safer technical foundations.',
     bestFor: 'Teams with dated sites, unclear navigation, slow mobile pages, or a brand that has outgrown the current site.',
     bestIf: 'You have a real site already but it no longer matches the company behind it.',
+    beforeAxiom: 'The current site carries old structure, unclear copy, slow pages, or a brand that no longer fits.',
+    afterAxiom: 'The useful equity is protected while the weak pages, contact paths, and message are rebuilt.',
+    typicalPath: 'Usually scoped after review because redirects, content, integrations, and page count matter.',
     startsAt: 'Scoped on intake.',
     outcomes: [
       'Current site, domain, content, and redirect risks reviewed first',

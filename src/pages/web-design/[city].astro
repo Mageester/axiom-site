@@ -19,8 +19,8 @@ export function getStaticPaths() {
 
 const { city } = Astro.props;
 
-const title = `Web Design ${city.name} | Local Appointment Sites | ${SITE_NAME}`;
-const description = `Web design for ${city.name} appointment-based businesses. Booking-led sites with a clearer offer, visible booking, and mobile-correct flow. Reply within one business day.`;
+const title = `Web Design ${city.name} | Local Business Sites | ${SITE_NAME}`;
+const description = `Web design for ${city.name} service businesses. Clearer offers, visible proof, fast mobile pages, and an easier path to inquiry.`;
 const canonicalPath = `/web-design/${city.slug}`;
 const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 
@@ -49,8 +49,8 @@ const localBusinessSchema = {
 
 const servicesTrio = [
   {
-    label: 'Booking-led Conversion Sites',
-    description: `For ${city.name} appointment businesses where the booking button is the product. Offer up top, proof beside the price, one tap to book on mobile.`,
+    label: 'High-Trust Conversion Sites',
+    description: `For ${city.name} service businesses where the site needs to turn interest into calls, bookings, or quote requests. Offer up top, proof near the action, simple mobile flow.`,
     href: '/services/conversion-sites',
     icon: 'target',
   },
@@ -79,7 +79,7 @@ const faqs = [
   },
   {
     q: 'What does it cost?',
-    a: 'Monthly from $200/mo with $0 down, hosting included. Or one-time ownership from $3,500. E-commerce and rebuilds are scoped separately.',
+    a: 'Monthly from $200/mo with $0 down, hosting included. Ownership builds start from $3,500. E-commerce and rebuilds are scoped separately.',
   },
   {
     q: 'Will I own the site?',
@@ -125,7 +125,7 @@ const faqSchema = {
         <FadeIn motion="sceneOpen" delay={180}>
           <MotionHeading
             as="h1"
-            text={`Web design in *${city.name}* for businesses that book by appointment.`}
+            text={`Web design in *${city.name}* for local businesses that need clearer inquiries.`}
             className="mt-4 max-w-4xl"
           />
         </FadeIn>
@@ -255,8 +255,8 @@ const faqSchema = {
                 <SectionDivider className="mb-6" />
                 <MotionHeading as="h2" text={`Get a free teardown of your ${city.name} site.`} className="section-heading" />
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Send us the URL. We reply within one business day with a short teardown - what's working, what's
-                  leaking bookings, and what we'd change first.
+                  Send us the URL. We reply within one business day with a short teardown - what's working, where
+                  buyers hesitate, and what we would change first.
                 </p>
               </div>
 

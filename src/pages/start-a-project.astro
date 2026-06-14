@@ -2,7 +2,7 @@
 import IntakeForm from '../components/site/IntakeForm.astro';
 import { FadeIn } from '../components/ui/FadeIn';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { SEO_ROUTES } from '../lib/seo';
+import { SEO_ROUTES, START_PROJECT_JSON_LD, SITE_URL, breadcrumbSchema } from '../lib/seo';
 import { CTA_PATHS } from '../lib/cta';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { MotionHeading } from '../components/motion/MotionHeading';
@@ -10,17 +10,18 @@ import { SectionDivider } from '../components/motion/SectionDivider';
 
 const heroCopy = {
   eyebrow: 'START A PROJECT',
-  heading: "Tell us about the site. We'll handle the rest.",
-  sub: "Five short steps. You'll get a clear reply from a real person, not a chatbot.",
+  heading: 'Tell us what the site needs to fix.',
+  sub: 'Five short steps. We review the business, the current site, and the right next step before we reply.',
 };
 
-const followupSteps = ['We review the brief', 'You get a reply within one business day', 'If there is a fit, we scope the path'];
+const followupSteps = ['We review the business and site', 'You get a reply within one business day', 'If there is a fit, you get a clear scope'];
 ---
 
 <SiteLayout
   title={SEO_ROUTES.startProject.title}
   description={SEO_ROUTES.startProject.description}
   canonicalPath="/start-a-project"
+  schema={[START_PROJECT_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Start a Project', url: `${SITE_URL}/start-a-project` }])]}
 >
   <main id="main-content" tabindex="-1" class="pb-20 md:pb-24">
     <section class="axiom-container pt-14 md:pt-20">
@@ -55,13 +56,13 @@ const followupSteps = ['We review the brief', 'You get a reply within one busine
             <IntakeForm
               kind="project"
               endpoint="/api/intake"
-              title="Tell us what needs to change."
+              title="Start with the business and the site."
               eyebrow="PROJECT INTAKE"
-              description="Tell us what the business does, what&apos;s broken on the current site, and which path feels closest."
-              helper="Three short lines is enough. Monthly, ownership, or not sure yet all work."
-              submitLabel={`Submit project brief →`}
-              successTitle="Received."
-              successText="We&apos;ll review and reply with the next step."
+              description="A few clear details are enough for us to recommend monthly, ownership, or a custom scope."
+              helper="Plain language is perfect. Tell us what is unclear, outdated, slow, or hard for buyers to do."
+              submitLabel={`Send project details \u2192`}
+              successTitle="Project details received."
+              successText="We will review the business, the current site, and the right next step before we reply."
               noteLinkHref={CTA_PATHS.contact}
               noteLinkLabel="contact page"
               noteText="Need a quick question instead? Use the"
@@ -91,10 +92,10 @@ const followupSteps = ['We review the brief', 'You get a reply within one busine
         var swaps = {
           eyebrow: 'FREE SITE TEARDOWN',
           heading: "Send the URL. We'll send the teardown.",
-          sub: "Tell us your site, your business, and what you'd like more bookings of. We reply within one business day with a short teardown — what's working, what's leaking, what we'd change first. No sales call, no obligation.",
+          sub: "Tell us your site, your business, and what you want more of. We reply within one business day with a short teardown: what's working, what's creating friction, and what we would change first. No sales call, no obligation.",
           step1: 'We review your site',
           step2: 'You get a teardown within one business day',
-          step3: 'If you want help, we scope the path'
+          step3: 'If you want help, we recommend the next step'
         };
         document.title = 'Free Site Teardown | Axiom Web';
         Object.keys(swaps).forEach(function (key) {

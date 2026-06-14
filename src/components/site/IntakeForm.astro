@@ -39,7 +39,7 @@ const fieldHelpClass = 'text-[14px] leading-[1.65] text-[var(--text-secondary)] 
 const fieldErrorClass = 'min-h-[1.1em] text-[14px] leading-[1.65] text-[var(--text-error)] md:text-[13px]';
 const pricingPathOptions = [
   { value: 'monthly', label: 'Monthly plan' },
-  { value: 'one_time', label: 'One-time ownership' },
+  { value: 'one_time', label: 'Ownership build' },
   { value: 'not_sure', label: 'Not sure yet' },
 ] as const;
 ---
@@ -78,8 +78,8 @@ const pricingPathOptions = [
             </svg>
           </div>
           <div class="min-w-0">
-            <p class="font-medium text-[var(--text-primary)]">We review your brief</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">Checked and queued.</p>
+            <p class="font-medium text-[var(--text-primary)]">We review the business and site</p>
+            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">We look at what you sent, the current site, and the clearest next move.</p>
           </div>
         </li>
         <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
@@ -87,8 +87,8 @@ const pricingPathOptions = [
             <span class="font-display text-[1rem] leading-none">2</span>
           </div>
           <div class="min-w-0">
-            <p class="font-medium text-[var(--text-primary)]">You get a reply within 1 business day with the next step</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">We&apos;ll review the scope, the site, and the fastest path forward.</p>
+            <p class="font-medium text-[var(--text-primary)]">You get a reply within one business day</p>
+            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">The reply explains the recommended path, what it includes, and what happens next.</p>
           </div>
         </li>
         <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
@@ -96,21 +96,21 @@ const pricingPathOptions = [
             <span class="font-display text-[1rem] leading-none">3</span>
           </div>
           <div class="min-w-0">
-            <p class="font-medium text-[var(--text-primary)]">If there&apos;s a fit, we scope and quote - no commitment</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">You&apos;ll know the next step before making any decision.</p>
+            <p class="font-medium text-[var(--text-primary)]">If there is a fit, you get a clear scope</p>
+            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">You will know the timeline, pricing path, and decision points before committing.</p>
           </div>
         </li>
       </ol>
 
       <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <a href="/work" class="btn btn-secondary w-full sm:w-auto">While you wait, see real builds →</a>
+        <a href="/work" class="btn btn-secondary w-full sm:w-auto">While you wait, see demonstration builds &rarr;</a>
         <Button
           type="button"
           variant="ghost"
           className="px-0 sm:w-auto"
           data-intake-reset
         >
-          {kind === 'project' ? 'Send another brief' : 'Send another note'}
+          {kind === 'project' ? 'Send another project' : 'Send another note'}
         </Button>
       </div>
     </div>
@@ -257,7 +257,7 @@ const pricingPathOptions = [
 
         <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
           <label for={`${kind}-details`} class={fieldLabelClass}>
-            {kind === 'project' ? 'Brief project description' : 'Message'}
+            {kind === 'project' ? 'Project details' : 'Message'}
           </label>
           <p id={`${kind}-details-helper`} class={fieldHelpClass}>{helper}</p>
           <textarea
@@ -526,7 +526,7 @@ const pricingPathOptions = [
         });
         if (submitButton instanceof HTMLButtonElement) {
           submitButton.disabled = busy;
-          submitButton.textContent = busy ? 'Sending...' : form.dataset.intakeKind === 'project' ? 'Submit project brief →' : 'Send note →';
+          submitButton.textContent = busy ? 'Sending...' : form.dataset.intakeKind === 'project' ? 'Send project details \u2192' : 'Send note \u2192';
         }
       };
 
@@ -631,8 +631,8 @@ const pricingPathOptions = [
           const result = await response.json().catch(() => null);
           if (!response.ok || !result?.ok) {
             const fallbackError = form.dataset.intakeKind === 'project'
-              ? 'We could not send your project brief. Please try again or email contact@getaxiom.ca.'
-              : 'We could not send your note. Please try again or email contact@getaxiom.ca.';
+              ? 'The project details did not send. Please try again or email contact@getaxiom.ca.'
+              : 'The note did not send. Please try again or email contact@getaxiom.ca.';
             throw new Error(result?.details || result?.error || fallbackError);
           }
 
@@ -644,7 +644,7 @@ const pricingPathOptions = [
 
           form.reset();
         } catch (error) {
-          const message = error instanceof Error && error.message ? error.message : 'Something went wrong.';
+          const message = error instanceof Error && error.message ? error.message : 'The form did not send. Please try again or email contact@getaxiom.ca.';
           showAlert(message);
         } finally {
           setBusy(false);
