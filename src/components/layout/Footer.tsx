@@ -83,8 +83,8 @@ export const Footer: React.FC<FooterProps> = ({ pathname }) => {
           <Eyebrow>Contact</Eyebrow>
           <ul className="space-y-3">
             <li>
-              <a href="mailto:contact@getaxiom.ca" className={footerLinkClass}>
-                contact@getaxiom.ca
+              <a href="mailto:aidanmageebusiness@gmail.com" className={footerLinkClass}>
+                aidanmageebusiness@gmail.com
               </a>
             </li>
             <li>

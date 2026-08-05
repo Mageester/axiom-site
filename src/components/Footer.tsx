@@ -48,8 +48,8 @@ const Footer: React.FC = () => {
             <div className="space-y-1.5">
               <NavLink to={CTA.contact.to} className={routeLinkClass}>Contact</NavLink>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                <a href="mailto:contact@getaxiom.ca" className={contactLinkClass}>
-                  contact@getaxiom.ca
+                <a href="mailto:aidanmageebusiness@gmail.com" className={contactLinkClass}>
+                  aidanmageebusiness@gmail.com
                 </a>
                 <a href="tel:+12267531833" className={contactLinkClass}>
                   (226) 753-1833

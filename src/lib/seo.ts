@@ -3,7 +3,7 @@ export const SITE_TAGLINE = 'High-trust websites for serious local businesses th
 export const SITE_URL = 'https://getaxiom.ca';
 export const DEFAULT_OG_IMAGE = '/og-image.png';
 export const DEFAULT_SEO_DESCRIPTION = SITE_TAGLINE;
-export const SITE_EMAIL = 'contact@getaxiom.ca';
+export const SITE_EMAIL = 'aidanmageebusiness@gmail.com';
 export const SITE_TELEPHONE = '+12267531833';
 
 export type SeoRouteMeta = {
