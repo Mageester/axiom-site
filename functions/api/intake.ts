@@ -549,27 +549,26 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         const internalFailed = deliveryResults[0].status === 'rejected';
         const confirmationFailed = deliveryResults[1].status === 'rejected';
 
-        if (internalFailed || confirmationFailed) {
+        if (internalFailed) {
             const internalError = deliveryResults[0].status === 'rejected' ? deliveryResults[0].reason : null;
-            const confirmationError = deliveryResults[1].status === 'rejected' ? deliveryResults[1].reason : null;
-
-            if (internalFailed) {
-                console.error('[INTAKE] internal_email_failed', {
-                    message: internalError instanceof Error ? internalError.message : 'unknown',
-                    recipients
-                });
-            }
-            if (confirmationFailed) {
-                console.error('[INTAKE] confirmation_email_failed', {
-                    message: confirmationError instanceof Error ? confirmationError.message : 'unknown',
-                    recipientProvided: Boolean(email)
-                });
-            }
-
+            console.error('[INTAKE] internal_email_failed', {
+                message: internalError instanceof Error ? internalError.message : 'unknown',
+                recipients
+            });
             return jsonResponse(request, env, {
                 ok: false,
                 error: 'Submission could not be delivered. Please try again or email aidanmageebusiness@gmail.com.'
             }, 502);
+        }
+
+        // The lead reached Axiom. The auto-reply to the submitter is best-effort:
+        // a failure there must not hide the success state or lose the lead.
+        if (confirmationFailed) {
+            const confirmationError = deliveryResults[1].status === 'rejected' ? deliveryResults[1].reason : null;
+            console.error('[INTAKE] confirmation_email_failed', {
+                message: confirmationError instanceof Error ? confirmationError.message : 'unknown',
+                recipientProvided: Boolean(email)
+            });
         }
 
         return jsonResponse(request, env, {

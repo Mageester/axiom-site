@@ -631,8 +631,8 @@ const pricingPathOptions = [
           const result = await response.json().catch(() => null);
           if (!response.ok || !result?.ok) {
             const fallbackError = form.dataset.intakeKind === 'project'
-              ? 'The project details did not send. Please try again or email contact@getaxiom.ca.'
-              : 'The note did not send. Please try again or email contact@getaxiom.ca.';
+              ? 'The project details did not send. Please try again or email aidanmageebusiness@gmail.com.'
+              : 'The note did not send. Please try again or email aidanmageebusiness@gmail.com.';
             throw new Error(result?.details || result?.error || fallbackError);
           }
 
@@ -644,7 +644,7 @@ const pricingPathOptions = [
 
           form.reset();
         } catch (error) {
-          const message = error instanceof Error && error.message ? error.message : 'The form did not send. Please try again or email contact@getaxiom.ca.';
+          const message = error instanceof Error && error.message ? error.message : 'The form did not send. Please try again or email aidanmageebusiness@gmail.com.';
           showAlert(message);
         } finally {
           setBusy(false);
