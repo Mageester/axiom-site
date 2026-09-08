@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "typecheck": "tsc --noEmit",
     "audit:seo": "node scripts/audit-seo.mjs",
     "preview": "astro preview",
     "optimize:images": "node scripts/optimize-images.mjs",
@@ -22,7 +23,6 @@
     "@cloudflare/playwright": "^1.1.2",
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource/fraunces": "^5.2.9",
-    "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@google/generative-ai": "^0.24.1",
     "@radix-ui/react-label": "^2.1.8",

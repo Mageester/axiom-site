@@ -1,6 +1,6 @@
 # TESTING.md
 
-This project is a Cloudflare Pages + Pages Functions + D1 app with a React admin UI.
+This project is a Cloudflare Pages + Pages Functions + D1 app: an Astro static marketing site plus a React admin UI.
 
 This checklist verifies the production-critical flow:
 
@@ -30,7 +30,7 @@ This checklist verifies the production-critical flow:
    - In a second terminal, build/watch frontend as needed (repo uses Vite):
    - `npm run build` (for `dist`) or your existing local Pages workflow
 
-Note: This repo currently has no committed `wrangler.toml`, so local D1 binding config must be provided via CLI/dashboard config.
+Note: `wrangler.toml` is committed and declares the Pages project shape (output dir, D1 binding, Browser binding). Local D1 database naming is still provided via CLI flags.
 
 ## Intake Reliability: Deterministic Local Workflow
 
@@ -338,7 +338,7 @@ Note: The app never logs the token value; only path/method are logged on denial.
 ## Website Intake Pipeline (Public)
 
 1. Apply latest migration including `0004_website_inquiries.sql`.
-2. Open `/apply` (or `/contact`, which redirects to `/apply`).
+2. Open `/start-a-project` (the intake form also links from `/contact`).
 3. Fill the website request form and submit.
 4. Verify browser Network:
    - `POST /api/intake` -> `200`
@@ -373,6 +373,8 @@ Note: The app never logs the token value; only path/method are logged on denial.
 
 ## Commands To Run Before Shipping
 
+- `npm run typecheck` (TypeScript, no emit)
 - `npm run build`
+- `npm run test:visual` (Playwright: visual regression, SEO meta, console-error and reduced-motion checks)
 
-This repo currently does not define `test` or `lint` scripts in `package.json`.
+There is no `lint` script; `eslint.config.mjs` is present for editor integration.

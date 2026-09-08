@@ -12,7 +12,7 @@ const port = 4326;
 const baseUrl = `http://127.0.0.1:${port}`;
 
 const routes = ['/', '/services', '/work', '/pricing', '/about', '/contact', '/start-a-project'];
-const expectedDesktopNav = ['Services', 'Work', 'Pricing', 'About'];
+const expectedDesktopNav = ['Services', 'Work', 'Pricing', 'About', 'Contact'];
 
 function spawnCommand(args, options = {}) {
   if (process.platform === 'win32') {

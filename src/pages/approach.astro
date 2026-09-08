@@ -11,29 +11,36 @@ import { APPROACH_JSON_LD, SEO_ROUTES, SITE_URL, breadcrumbSchema } from '../lib
 
 const timelineSteps = [
   {
-    kicker: 'Review',
+    kicker: 'Week 1 · Review',
     title: 'Understand the business before design starts.',
     description:
       'We look at the offer, audience, current site, proof, search surface, and contact paths before design starts.',
   },
   {
-    kicker: 'Structure',
+    kicker: 'Week 2 · Scope',
     title: 'Make the decision path obvious.',
     description:
-      'We define the pages, message order, proof placement, and primary contact route so the site has a clear plan.',
+      'We define the pages, message order, proof placement, and primary contact route so the site has a clear plan. Decisions happen here, not mid-build.',
   },
   {
-    kicker: 'Build',
+    kicker: 'Weeks 2-3 · Build',
     title: 'Design and development move together.',
     description:
-      'Copy, layout, mobile behavior, performance, accessibility, and motion are built as one system.',
+      'Copy, layout, mobile behavior, performance, accessibility, and motion are built as one system, simple enough to ship clean.',
   },
   {
-    kicker: 'Launch',
+    kicker: 'Weeks 3-4 · Launch',
     title: 'Ship only after the fundamentals hold.',
     description:
       'We check mobile quality, forms, metadata, redirects, analytics readiness, speed, and support expectations before release.',
   },
+] as const;
+
+const needsFromYou = [
+  { title: 'Pages to build', detail: 'Which pages matter most right now.' },
+  { title: 'Photos and reviews', detail: 'Past work, customer reviews, and anything worth showing early.' },
+  { title: 'Quote and contact paths', detail: 'Where each button and form should go.' },
+  { title: 'Domain and redirects', detail: 'Technical handoff so nothing breaks at launch.' },
 ] as const;
 
 const standards = [
@@ -78,7 +85,7 @@ const standards = [
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
-            The work is strategy, structure, writing, design, development, launch checks, and support. The point is not more pages. The point is a site buyers can understand and trust faster.
+            The work is strategy, structure, writing, design, development, launch checks, and support. Most standard builds move from first review to launch in two to four weeks - and the point is not more pages. It is a site buyers can understand and trust faster.
           </p>
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720}>
@@ -105,6 +112,34 @@ const standards = [
             </li>
           ))}
         </ol>
+      </div>
+    </section>
+
+    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
+
+    <section class="page-section section-shell">
+      <div class="axiom-container">
+        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
+          <Eyebrow>WHAT WE NEED FROM YOU</Eyebrow>
+          <SectionDivider className="mt-6" />
+          <MotionHeading as="h2" text="Four things from you. That's it." className="section-heading mt-4" />
+        </FadeIn>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {needsFromYou.map((item, index) => (
+            <FadeIn motion="timelineSequence" delay={index * 150} distance={16} as="div">
+              <div class="h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
+                <p class="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
+                  <DrawIcon name="check" size={14} className="text-[var(--accent-solid)]" />
+                  {item.title}
+                </p>
+                <p class="section-copy mt-3 text-[15px]">
+                  {item.detail}
+                </p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -146,18 +181,31 @@ const standards = [
     <div aria-hidden="true" class="section-glow section-glow-offset-top" />
 
     <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn as="div" motion="finalFrameFooter">
-          <Card className="mx-auto max-w-5xl overflow-hidden p-0 text-center">
-            <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
-              <Eyebrow className="justify-center">BEFORE LAUNCH</Eyebrow>
-              <SectionDivider className="mx-auto mt-6" />
-              <MotionHeading as="h2" text="If it weakens trust, it does not ship." className="section-heading mx-auto mt-4" />
-              <p class="section-copy mx-auto mt-4 max-w-3xl">
-                We check clarity, mobile behavior, forms, metadata, redirects, accessibility, and performance before release. The transitions stay impressive, but the fundamentals carry the sale.
+      <div class="axiom-container grid gap-6 lg:grid-cols-2">
+        <FadeIn as="div" motion="finalFrameFooter" direction="left">
+          <Card className="h-full p-0">
+            <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+              <Eyebrow>AFTER LAUNCH</Eyebrow>
+              <SectionDivider className="mt-6" />
+              <MotionHeading as="h2" text="Monthly clients stay supported." className="section-heading mt-4" />
+              <p class="section-copy mt-4">
+                Monthly clients keep edits, refinements, bug fixes, and priority support. Ownership clients get a clean handoff and can add ongoing support separately.
+              </p>
+            </div>
+          </Card>
+        </FadeIn>
+
+        <FadeIn as="div" motion="finalFrameFooter" direction="right">
+          <Card className="h-full p-0">
+            <div class="h-full px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
+              <Eyebrow>BEFORE WE SHIP</Eyebrow>
+              <SectionDivider className="mt-6" />
+              <MotionHeading as="h2" text="If it weakens trust, it does not ship." className="section-heading mt-4" />
+              <p class="section-copy mt-4">
+                Every build is checked for clarity, mobile behavior, forms, metadata, and speed before it goes live. The transitions stay impressive, but the fundamentals carry the sale.
               </p>
               <div class="mt-7">
-                <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg">Start a project</a>
+                <a href={CTA_PATHS.startProject} class="btn btn-primary">Start a project</a>
               </div>
             </div>
           </Card>

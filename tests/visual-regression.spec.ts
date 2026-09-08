@@ -6,7 +6,6 @@ const PUBLIC_PAGES = [
   { name: 'services', path: '/services' },
   { name: 'pricing', path: '/pricing' },
   { name: 'about', path: '/about' },
-  { name: 'process', path: '/process' },
   { name: 'approach', path: '/approach' },
   { name: 'contact', path: '/contact' },
 ] as const;

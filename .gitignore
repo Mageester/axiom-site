@@ -35,4 +35,14 @@ dist-ssr
 /axiom-hvac-demo
 /axiom-roofing-demo
 /axiom-landscaping-demo
-/__temp_*
+/axiom-restaurant-demo
+
+# Local working output
+/artifacts/
+/screenshots/
+/output/
+/.playwright-mcp/
+/.astro/
+/.codex-work*
+/test-results/
+/playwright-report/

@@ -364,39 +364,6 @@ export const ABOUT_JSON_LD = {
   mainEntity: ORGANIZATION_SCHEMA,
 } as const;
 
-export const PROCESS_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'How Axiom Builds a Website',
-  description: 'A clear website process from first review to launch: Review, Scope, Build, and Launch. Monthly clients keep support after the site goes live.',
-  step: [
-    {
-      '@type': 'HowToStep',
-      position: 1,
-      name: 'Week 1 - Review',
-      text: 'We review the current site, the offer, and the points where buyers may lose trust. Then we decide what needs to change first.',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 2,
-      name: 'Week 2 - Scope',
-      text: 'We confirm the pages, contact paths, and priorities before design starts. Decisions happen here, not mid-build.',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 3,
-      name: 'Weeks 2-3 - Build',
-      text: 'We design, write, and test the full site. Layout and flow stay simple enough to ship clean.',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 4,
-      name: 'Weeks 3-4 - Launch',
-      text: 'We run launch checks, connect the domain, and hand over a live site. Monthly clients keep support from here on.',
-    },
-  ],
-} as const;
-
 export const APPROACH_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
@@ -503,19 +470,6 @@ export const SEO_ROUTES = {
     title: 'Our Approach | Axiom Web',
     description: 'A clear website approach for strategy, structure, design, development, launch checks, and ongoing support after the site goes live.',
     canonicalPath: '/approach',
-  },
-  process: {
-    title: 'Our Web Design Process | 2-4 Weeks to Launch | Axiom Web',
-    description:
-      'A clear four-stage website process from first review to launch. Monthly clients keep support after the site goes live.',
-    canonicalPath: '/process',
-  },
-  start: {
-    title: 'Start a Project | Axiom Web',
-    description:
-      'Send project details for monthly, ownership, or custom website work. We reply with a clear next step within one business day.',
-    canonicalPath: '/start-a-project',
-    noIndex: true,
   },
   startProject: {
     title: 'Start a Project | Axiom Web',

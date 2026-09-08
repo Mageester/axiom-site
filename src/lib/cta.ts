@@ -3,7 +3,6 @@ export const CTA_PATHS = {
     work: '/work',
     services: '/services',
     approach: '/approach',
-    process: '/approach',
     contact: '/start-a-project'
 } as const;
 
@@ -33,7 +32,7 @@ export const CTA = {
     },
     process: {
         label: CTA_LABELS.process,
-        to: CTA_PATHS.process
+        to: CTA_PATHS.approach
     },
     contact: {
         label: CTA_LABELS.contact,
