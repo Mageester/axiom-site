@@ -105,6 +105,8 @@ const shellPaddingClass = showNav ? 'pt-16 md:pt-20' : 'pt-0';
         // every [.reveal] stays visible (no-JS / failure safe).
         html.classList.add('js');
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // Expose the motion mode for CSS hooks and test/diagnostic reads.
+        html.dataset.motionReduced = String(reduced);
 
         const reveal = () => {
           const targets = Array.from(document.querySelectorAll('.reveal:not(.is-in)'));

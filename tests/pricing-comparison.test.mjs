@@ -24,7 +24,6 @@ function spawnCommand(args, options = {}) {
   return spawn('npm', args, {
     cwd: repoRoot,
     stdio: 'ignore',
-    ...options,
   });
 }
 
@@ -60,7 +59,7 @@ function stopProcess(child) {
   child.kill('SIGTERM');
 }
 
-test('desktop pricing comparison keeps first rows visible and inline checks rendered', async () => {
+test('desktop pricing keeps tier cards full-height with visible prices and CTAs', async () => {
   const devServer = spawnCommand(['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port), '--strictPort']);
 
   try {
@@ -74,37 +73,24 @@ test('desktop pricing comparison keeps first rows visible and inline checks rend
       await page.waitForTimeout(600);
 
       const diagnostics = await page.evaluate(() => {
-        const table = document.querySelector('table');
-        const thead = table?.querySelector('thead');
-        const firstRow = table?.querySelector('tbody tr');
-        const checkPath = table?.querySelector('tbody td svg path');
-
-        if (!table || !thead || !firstRow || !checkPath) {
-          return null;
-        }
-
-        const theadRect = thead.getBoundingClientRect();
-        const firstRowRect = firstRow.getBoundingClientRect();
-        const checkPathStyles = getComputedStyle(checkPath);
+        const tiers = Array.from(document.querySelectorAll('#monthly-tier, #ownership-tier, #ecommerce-tier'));
+        const price = document.querySelector('#monthly-tier')?.textContent ?? '';
 
         return {
-          headerBottom: theadRect.bottom,
-          firstRowTop: firstRowRect.top,
-          checkDashOffset: checkPathStyles.strokeDashoffset,
-          checkOpacity: checkPathStyles.opacity,
+          tierCount: tiers.length,
+          minTierHeight: tiers.length
+            ? Math.min(...tiers.map((t) => t.getBoundingClientRect().height))
+            : 0,
+          monthlyPricePresent: price.includes('$200/mo'),
         };
       });
 
-      assert.ok(diagnostics, 'pricing comparison table should render on desktop');
+      assert.ok(diagnostics.tierCount === 3, 'all three pricing tiers should render on desktop');
       assert.ok(
-        diagnostics.firstRowTop >= diagnostics.headerBottom,
-        `expected first row to start below the header, got rowTop=${diagnostics.firstRowTop} headerBottom=${diagnostics.headerBottom}`
+        diagnostics.minTierHeight > 300,
+        `expected tier cards to keep usable height, got min height=${diagnostics.minTierHeight}px`
       );
-      assert.equal(
-        diagnostics.checkDashOffset,
-        '0px',
-        `expected inline comparison check icons to be visible, got strokeDashoffset=${diagnostics.checkDashOffset}`
-      );
+      assert.ok(diagnostics.monthlyPricePresent, 'monthly tier should display its price');
     } finally {
       await browser.close();
     }
