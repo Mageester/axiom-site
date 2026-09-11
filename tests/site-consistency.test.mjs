@@ -88,6 +88,10 @@ test('public pages keep site-wide consistency and reduced-motion boot state', as
         assert.deepEqual(navLabels, expectedDesktopNav, `${route} desktop nav order should stay consistent`);
       }
 
+      await page.goto(`${baseUrl}/start-a-project`, { waitUntil: 'networkidle' });
+      assert.equal(await page.locator('[data-intake-alert]').getAttribute('hidden'), '', 'intake alert should start hidden');
+      assert.equal(await page.getByRole('link', { name: 'contact page' }).getAttribute('href'), '/contact', 'intake contact link should reach the contact page');
+
       const context = await browser.newContext({
         viewport: { width: 1440, height: 1000 },
         reducedMotion: 'reduce',

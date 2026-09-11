@@ -182,8 +182,8 @@ const faqItems = [
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
-            Choose monthly if you want the site launched and looked after without a large upfront payment. Choose
-            ownership if you want to buy the site outright. Larger rebuilds and stores are scoped separately.
+            Choose a limited-time local launch site from $900, a managed site from $200/mo, or an ownership build from
+            $3,500. Larger rebuilds and stores are scoped separately.
           </p>
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={660}>
@@ -191,6 +191,37 @@ const faqItems = [
             Typical builds include Home, Services, Work, Pricing, and Contact. Extra pages, integrations, or migration
             work are priced before the project starts.
           </p>
+        </FadeIn>
+      </div>
+    </section>
+
+    <section class="page-section-tight section-shell pt-0" aria-labelledby="local-launch-offer-title" data-local-launch-offer>
+      <div class="axiom-container">
+        <FadeIn motion="precisionPricingReveal" as="div">
+          <div class="local-launch-offer-frame">
+            <Card className="local-launch-offer-card">
+              <div class="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+                <div class="max-w-3xl">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <span class="local-launch-offer-badge">Limited-time special</span>
+                    <span class="local-launch-offer-price-badge">From $900</span>
+                  </div>
+                  <h2 id="local-launch-offer-title" class="local-launch-offer-title mt-4 text-[28px] font-[600] leading-[1.15] tracking-[-0.02em] md:text-[34px]">
+                    Local business launch websites from $900.
+                  </h2>
+                  <p class="local-launch-offer-copy section-copy mt-4 md:text-[17px]">
+                    Straightforward websites for local businesses that need a credible launch without the full cost of an unrestricted ownership build. First-year hosting included, with the exact scope agreed before the project starts.
+                  </p>
+                  <p class="local-launch-offer-fineprint mt-3 text-[14px] leading-[1.65] md:text-[15px]">
+                    Available for a limited time. This is a scoped introductory offer; unrestricted ownership builds start at $3,500.
+                  </p>
+                </div>
+                <a href={createStartProjectHref('local-launch')} class="btn btn-primary local-launch-offer-cta w-full justify-center md:w-auto">
+                  Start with this special <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </Card>
+          </div>
         </FadeIn>
       </div>
     </section>
@@ -262,32 +293,6 @@ const faqItems = [
             </FadeIn>
           ))}
         </div>
-      </div>
-    </section>
-
-    <section class="page-section-tight section-shell" aria-labelledby="local-launch-offer-title" data-local-launch-offer>
-      <div class="axiom-container">
-        <FadeIn motion="precisionPricingReveal" as="div">
-          <Card className="border-[color:var(--accent-border)] bg-[var(--surface-2)]">
-            <div class="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
-              <div class="max-w-3xl">
-                <Eyebrow className="text-[var(--accent-solid)]">LOCAL LAUNCH OFFER</Eyebrow>
-                <h2 id="local-launch-offer-title" class="mt-4 text-[28px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)] md:text-[34px]">
-                  Local business launch websites from $900.
-                </h2>
-                <p class="section-copy mt-4 md:text-[17px]">
-                  Straightforward websites for a small number of early local projects. Clear scope, first-year hosting included, and no commitment before a consultation.
-                </p>
-                <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-muted)] md:text-[15px]">
-                  This is a scoped introductory offer, not the same unrestricted ownership build listed above, which starts at $3,500.
-                </p>
-              </div>
-              <a href={createStartProjectHref('local-launch')} class="btn btn-secondary w-full justify-center md:w-auto">
-                Discuss this offer <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </Card>
-        </FadeIn>
       </div>
     </section>
 
@@ -528,6 +533,101 @@ const faqItems = [
       min-height: 100%;
     }
 
+    .local-launch-offer-frame {
+      --launch-angle: 0deg;
+      position: relative;
+      isolation: isolate;
+      overflow: visible;
+      border-radius: calc(var(--radius-card) + 3px);
+      padding: 3px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.12), 0 22px 70px rgba(0, 0, 0, 0.48);
+    }
+
+    .local-launch-offer-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: conic-gradient(
+        from var(--launch-angle),
+        rgba(255,255,255,0.14) 0deg,
+        rgba(255,255,255,0.14) 284deg,
+        rgba(255,255,255,0.5) 307deg,
+        var(--accent-solid) 324deg,
+        rgba(255,255,255,1) 334deg,
+        rgba(255,255,255,0.34) 348deg,
+        rgba(255,255,255,0.14) 360deg
+      );
+      animation: local-launch-border 5.5s linear infinite;
+    }
+
+    .local-launch-offer-frame::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      z-index: 0;
+      border-radius: calc(var(--radius-card) + 8px);
+      pointer-events: none;
+      background: conic-gradient(
+        from var(--launch-angle),
+        transparent 0deg,
+        transparent 286deg,
+        rgba(255,255,255,0.28) 314deg,
+        rgba(255,255,255,0.78) 330deg,
+        transparent 352deg,
+        transparent 360deg
+      );
+      filter: blur(10px);
+      opacity: 0.42;
+      animation: local-launch-border 5.5s linear infinite;
+    }
+
+    :global(.local-launch-offer-card) {
+      position: relative;
+      z-index: 2;
+      border: 0 !important;
+      background: linear-gradient(118deg, #191919, #101010 48%, #161616) !important;
+      box-shadow: 0 0 24px rgba(0,0,0,0.32);
+    }
+
+    .local-launch-offer-badge,
+    .local-launch-offer-price-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .local-launch-offer-badge {
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      font-style: italic;
+      letter-spacing: -0.01em;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 0 18px rgba(255,255,255,0.14);
+      animation: limited-offer-pulse 4.8s var(--ease-premium) infinite;
+    }
+
+    .local-launch-offer-price-badge {
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .local-launch-offer-cta {
+      box-shadow: 0 0 22px rgba(255,255,255,0.12);
+    }
+
     .pricing-tier-card::after {
       content: '';
       position: absolute;
@@ -576,8 +676,33 @@ const faqItems = [
 
     @media (prefers-reduced-motion: reduce) {
       [data-motion='precisionPricingReveal'][data-reveal-state='visible'] .pricing-highlight-card,
-      .pricing-table-row {
+      .pricing-table-row,
+      .local-launch-offer-frame::before,
+      .local-launch-offer-frame::after,
+      .local-launch-offer-badge {
         animation: none !important;
+      }
+    }
+
+    @property --launch-angle {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0deg;
+    }
+
+    @keyframes local-launch-border {
+      to {
+        --launch-angle: 360deg;
+      }
+    }
+
+    @keyframes limited-offer-pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 0 14px rgba(255,255,255,0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.16), 0 0 24px rgba(255,255,255,0.22);
       }
     }
 

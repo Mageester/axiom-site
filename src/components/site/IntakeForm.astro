@@ -128,6 +128,7 @@ const pricingPathOptions = [
         class="hidden rounded-[var(--radius-card)] border border-[color:var(--error-border)] bg-[color:var(--error-surface)] px-4 py-3 text-[16px] text-[var(--error-text)] md:text-[15px]"
         role="alert"
         aria-live="assertive"
+        hidden
       ></div>
 
       <fieldset class="contents">
@@ -490,12 +491,14 @@ const pricingPathOptions = [
       const showAlert = (message) => {
         if (!(alertBox instanceof HTMLElement)) return;
         alertBox.textContent = message;
+        alertBox.hidden = false;
         alertBox.classList.remove('hidden');
       };
 
       const clearAlert = () => {
         if (!(alertBox instanceof HTMLElement)) return;
         alertBox.textContent = '';
+        alertBox.hidden = true;
         alertBox.classList.add('hidden');
       };
 

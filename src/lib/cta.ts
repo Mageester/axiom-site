@@ -4,7 +4,7 @@ export const CTA_PATHS = {
     services: '/services',
     approach: '/approach',
     process: '/approach',
-    contact: '/start-a-project'
+    contact: '/contact'
 } as const;
 
 export const CTA_LABELS = {

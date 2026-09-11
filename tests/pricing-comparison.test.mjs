@@ -73,10 +73,18 @@ test('desktop pricing keeps tier cards full-height with visible prices and the l
 
       const localLaunchOffer = page.locator('[data-local-launch-offer]');
       assert.equal(await localLaunchOffer.count(), 1, 'local launch offer should render once');
+      assert.match(await page.locator('.pricing-hero').innerText(), /limited-time local launch site from \$900/i, 'pricing hero should name the featured launch path');
       const localLaunchOfferText = await localLaunchOffer.innerText();
+      assert.match(localLaunchOfferText, /LIMITED-TIME SPECIAL/i);
       assert.match(localLaunchOfferText, /Local business launch websites from \$900\./);
       assert.match(localLaunchOfferText, /first-year hosting included/i);
-      assert.match(localLaunchOfferText, /not the same unrestricted ownership build.*\$3,500/i);
+      assert.match(localLaunchOfferText, /scoped introductory offer.*ownership builds start at \$3,500/i);
+
+      const offerPosition = await page.evaluate(() => ({
+        offerTop: document.querySelector('[data-local-launch-offer]')?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY,
+        pricingTiersTop: document.querySelector('#monthly-tier')?.getBoundingClientRect().top ?? Number.NEGATIVE_INFINITY,
+      }));
+      assert.ok(offerPosition.offerTop < offerPosition.pricingTiersTop, 'local launch offer should appear before standard pricing tiers');
 
       await page.locator('text=COMPARE THE PATHS').scrollIntoViewIfNeeded();
       await page.waitForTimeout(600);
