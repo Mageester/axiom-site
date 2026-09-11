@@ -7,6 +7,10 @@ This repository now serves two jobs from one Cloudflare deployment:
 
 The internal app is not a static mock. It runs through Cloudflare Pages Functions with D1-backed auth/session state and protected Omniscient APIs for scraping, analytics, triage, vault access, exports, and runtime status.
 
+## Chosen baseline
+
+Commit `5fb2e05` (`Decouple intake auto-reply from success; route all contact copy to Gmail`) is the intentional baseline for `main`. Newer history was intentionally excluded on 2026-09-11; future work should preserve this baseline unless it is deliberately superseded.
+
 ## Platform
 
 - Frontend: React 18 + Vite + React Router

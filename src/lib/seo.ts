@@ -236,6 +236,16 @@ export const HOME_JSON_LD = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
+          name: 'Local Launch Offer',
+          description: 'Scoped introductory websites for early local businesses with first-year hosting included. Consultation required before commitment.',
+        },
+        price: '900',
+        priceCurrency: 'CAD',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
           name: 'Custom Scope',
           description: 'Scoped pricing for larger rebuilds, ecommerce, migrations, and integrations.',
         },
@@ -273,6 +283,13 @@ export const PRICING_JSON_LD = {
       description: 'Custom website purchased outright with complete code handoff at launch. Hosting scoped separately.',
       priceCurrency: 'CAD',
       price: '3500',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Local Launch Offer',
+      description: 'Scoped introductory websites for early local businesses with first-year hosting included. Consultation required before commitment.',
+      priceCurrency: 'CAD',
+      price: '900',
     },
     {
       '@type': 'Offer',
@@ -484,7 +501,7 @@ export const SEO_ROUTES = {
   pricing: {
     title: 'Web Design Pricing | Monthly or Ownership | Axiom Web',
     description:
-      'Clear web design pricing. Monthly from $200/mo with $0 down, hosting included, or ownership builds from $3,500.',
+      'Clear web design pricing. Monthly from $200/mo with $0 down, ownership builds from $3,500, or scoped local launch offers from $900.',
     canonicalPath: '/pricing',
   },
   services: {

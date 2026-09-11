@@ -265,6 +265,32 @@ const faqItems = [
       </div>
     </section>
 
+    <section class="page-section-tight section-shell" aria-labelledby="local-launch-offer-title" data-local-launch-offer>
+      <div class="axiom-container">
+        <FadeIn motion="precisionPricingReveal" as="div">
+          <Card className="border-[color:var(--accent-border)] bg-[var(--surface-2)]">
+            <div class="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+              <div class="max-w-3xl">
+                <Eyebrow className="text-[var(--accent-solid)]">LOCAL LAUNCH OFFER</Eyebrow>
+                <h2 id="local-launch-offer-title" class="mt-4 text-[28px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)] md:text-[34px]">
+                  Local business launch websites from $900.
+                </h2>
+                <p class="section-copy mt-4 md:text-[17px]">
+                  Straightforward websites for a small number of early local projects. Clear scope, first-year hosting included, and no commitment before a consultation.
+                </p>
+                <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-muted)] md:text-[15px]">
+                  This is a scoped introductory offer, not the same unrestricted ownership build listed above, which starts at $3,500.
+                </p>
+              </div>
+              <a href={createStartProjectHref('local-launch')} class="btn btn-secondary w-full justify-center md:w-auto">
+                Discuss this offer <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </Card>
+        </FadeIn>
+      </div>
+    </section>
+
     <div aria-hidden="true" class="section-glow section-glow-offset-top" />
 
     <section class="page-section section-shell">
