@@ -175,9 +175,7 @@ const navLinkClass =
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
-    transition:
-      opacity var(--duration-medium) var(--ease-premium),
-      visibility var(--duration-medium) var(--ease-premium);
+    transition: opacity var(--duration-medium) var(--ease-premium);
   }
 
   #mobile-nav-panel.nav-open {
@@ -222,7 +220,9 @@ const navLinkClass =
 
     function openMenu() {
       if (!panel || !toggle) return;
-      lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      lastFocused = document.activeElement instanceof HTMLElement && document.activeElement !== document.body
+        ? document.activeElement
+        : toggle;
       panel.removeAttribute('inert');
       panel.classList.add('nav-open');
       panel.setAttribute('aria-hidden', 'false');
@@ -244,7 +244,7 @@ const navLinkClass =
       } else {
         panel.addEventListener('transitionend', () => panel.setAttribute('inert', ''), { once: true });
       }
-      window.requestAnimationFrame(() => lastFocused?.focus());
+      window.requestAnimationFrame(() => (lastFocused ?? toggle)?.focus({ preventScroll: true }));
     }
 
     toggle.addEventListener('click', () => {

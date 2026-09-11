@@ -191,16 +191,16 @@ const faqItems = [
           <Eyebrow>PRICING</Eyebrow>
           <SectionDivider className="mt-6" />
         </FadeIn>
-        <FadeIn motion="sceneOpen" delay={180}>
+        <FadeIn motion="sceneOpen" delay={0} className="pricing-hero-heading">
           <MotionHeading as="h1" text="Clear pricing, before the call." className="mt-4" />
         </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={500}>
+        <FadeIn motion="editorialMaskReveal" delay={160} className="pricing-hero-copy">
           <p class="section-copy mt-5 md:text-[17px]">
             Choose a Local Launch Special from CAD $900, a Local Business Website from CAD $1,200, an Expanded Website
             from CAD $1,500, or Custom for quoted scope.
           </p>
         </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={660}>
+        <FadeIn motion="editorialMaskReveal" delay={300} className="pricing-hero-copy">
           <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-muted)] md:text-[15px]">
             Standard packages include the core design, launch, and support work. E-commerce, databases, custom booking
             systems, customer accounts, substantial migrations, and unusual technical requirements are Custom.
@@ -621,6 +621,22 @@ const faqItems = [
         animation: pricing-footer-in 900ms var(--ease-cinematic) both;
         animation-delay: var(--reveal-delay, 0ms);
       }
+
+      .pricing-page .pricing-hero-heading {
+        animation: pricing-hero-heading-in 760ms var(--ease-cinematic) both;
+        animation-delay: 0ms;
+      }
+
+      .pricing-page .motion-heading {
+        animation: none;
+        clip-path: none;
+        transform: none;
+      }
+
+      .pricing-page .pricing-hero-copy {
+        animation: pricing-hero-copy-in 720ms var(--ease-premium) both;
+        animation-delay: var(--reveal-delay, 0ms);
+      }
     }
 
     .pricing-tier-card {
@@ -691,7 +707,6 @@ const faqItems = [
     }
 
     .local-launch-offer-frame {
-      --launch-angle: 0deg;
       position: relative;
       isolation: isolate;
       overflow: visible;
@@ -706,17 +721,7 @@ const faqItems = [
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background: conic-gradient(
-        from var(--launch-angle),
-        rgba(255,255,255,0.14) 0deg,
-        rgba(255,255,255,0.14) 284deg,
-        rgba(255,255,255,0.5) 307deg,
-        var(--accent-solid) 324deg,
-        rgba(255,255,255,1) 334deg,
-        rgba(255,255,255,0.34) 348deg,
-        rgba(255,255,255,0.14) 360deg
-      );
-      animation: local-launch-border 5.5s linear infinite;
+      background: linear-gradient(115deg, rgba(255,255,255,0.28), var(--accent-solid) 36%, rgba(255,255,255,0.1) 72%);
     }
 
     .local-launch-offer-frame::after {
@@ -726,18 +731,9 @@ const faqItems = [
       z-index: 0;
       border-radius: calc(var(--radius-card) + 8px);
       pointer-events: none;
-      background: conic-gradient(
-        from var(--launch-angle),
-        transparent 0deg,
-        transparent 286deg,
-        rgba(255,255,255,0.28) 314deg,
-        rgba(255,255,255,0.78) 330deg,
-        transparent 352deg,
-        transparent 360deg
-      );
-      filter: blur(10px);
-      opacity: 0.42;
-      animation: local-launch-border 5.5s linear infinite;
+      background: transparent;
+      filter: none;
+      opacity: 0;
     }
 
     :global(.local-launch-offer-card) {
@@ -767,8 +763,7 @@ const faqItems = [
       font-family: var(--font-display);
       font-style: italic;
       letter-spacing: -0.01em;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 0 18px rgba(255,255,255,0.14);
-      animation: limited-offer-pulse 4.8s var(--ease-premium) infinite;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
     }
 
     .local-launch-offer-price-badge {
@@ -877,42 +872,6 @@ const faqItems = [
       }
     }
 
-    @property --launch-angle {
-      syntax: '<angle>';
-      inherits: false;
-      initial-value: 0deg;
-    }
-
-    @keyframes local-launch-border {
-      to {
-        --launch-angle: 360deg;
-      }
-    }
-
-    @keyframes limited-offer-pulse {
-      0%, 100% {
-        box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 0 14px rgba(255,255,255,0.1);
-      }
-
-      50% {
-        box-shadow: 0 0 0 1px rgba(255,255,255,0.16), 0 0 24px rgba(255,255,255,0.22);
-      }
-    }
-
-    @keyframes pricing-glow {
-      0% {
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0);
-      }
-
-      50% {
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16), 0 0 32px rgba(0, 0, 0, 0.45);
-      }
-
-      100% {
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0);
-      }
-    }
-
     @keyframes pricing-eyebrow-in {
       from {
         opacity: 0;
@@ -922,6 +881,30 @@ const faqItems = [
       to {
         opacity: 1;
         transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes pricing-hero-heading-in {
+      from {
+        opacity: 0.45;
+        transform: translate3d(0, 10px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes pricing-hero-copy-in {
+      from {
+        opacity: 0.5;
+        transform: translate3d(0, 8px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
       }
     }
 

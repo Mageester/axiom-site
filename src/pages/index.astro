@@ -137,7 +137,7 @@ const team = [
 
         <div class="ax-solution">
           {solution.map((s, i) => (
-            <div class="ax-solution-item reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${180 + i * 260}ms`}>
+            <div class="ax-solution-item reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${120 + i * 140}ms`}>
               <h3 class="ax-solution-title">{s.title}</h3>
               <p class="ax-solution-desc">{s.description}</p>
             </div>
@@ -150,11 +150,11 @@ const team = [
     <section class="ax-section ax-scene ax-scene--feature" data-home-section="work" data-cinematic-scene="work" data-motion-role="feature">
       <div class="ax-container">
         <header class="ax-head">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Concept builds that show <em>the standard</em></h2>
-          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 420ms">These are demonstration builds, not invented client case studies. They show how we structure local business sites for clarity, trust, and action.</p>
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 120ms">Concept builds that show <em>the standard</em></h2>
+          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 220ms">These are demonstration builds, not invented client case studies. They show how we structure local business sites for clarity, trust, and action.</p>
         </header>
 
-        <div class="ax-work-explorer reveal ax-reveal--item" data-work-explorer style="--reveal-delay: 760ms">
+        <div class="ax-work-explorer reveal ax-reveal--item" data-work-explorer style="--reveal-delay: 360ms">
           <div class="ax-work-feature-frame" data-work-feature-frame>
             {work.map((w, i) => (
               <figure
@@ -235,7 +235,7 @@ const team = [
 
         <ol class="ax-list">
           {services.map((s, i) => (
-            <li class="reveal ax-reveal--row" data-scene-index={i} style={`--reveal-delay: ${260 + i * 300}ms`}>
+            <li class="reveal ax-reveal--row" data-scene-index={i} style={`--reveal-delay: ${160 + i * 120}ms`}>
               <a href={s.href} class="ax-row">
                 <span class="ax-row-title">{s.label}</span>
                 <span class="ax-row-desc">{s.description}</span>
@@ -251,14 +251,14 @@ const team = [
     <section class="ax-section ax-scene ax-scene--proof" data-home-section="why" data-cinematic-scene="why" data-motion-role="proof">
       <div class="ax-container ax-split">
         <div class="ax-split-left">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Built for businesses that <em>cannot look unclear</em></h2>
-          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 440ms">
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 120ms">Built for businesses that <em>cannot look unclear</em></h2>
+          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 220ms">
             If a new customer decides whether to trust you before they speak to you, the site has to do more than look acceptable.
           </p>
         </div>
         <div class="ax-split-right">
           {principles.map((p, i) => (
-            <div class="ax-principle reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${260 + i * 240}ms`}>
+            <div class="ax-principle reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${160 + i * 110}ms`}>
               <div>
                 <h3 class="ax-principle-title">{p.title}</h3>
                 <p class="ax-principle-desc">{p.description}</p>
@@ -274,7 +274,7 @@ const team = [
       <div class="ax-container">
         <div class="ax-figures">
           {figures.map((f, i) => (
-            <div class="ax-figure reveal ax-reveal--metric" data-scene-index={i} style={`--reveal-delay: ${360 + i * 320}ms; --scene-index: ${i}`}>
+            <div class="ax-figure reveal ax-reveal--metric" data-scene-index={i} style={`--reveal-delay: ${120 + i * 140}ms; --scene-index: ${i}`}>
               <span class="ax-figure-num">{f.value}</span>
               <span class="ax-figure-label">{f.label}</span>
             </div>
@@ -287,14 +287,14 @@ const team = [
     <section class="ax-section ax-scene ax-scene--process" data-home-section="process" data-cinematic-scene="process" data-motion-role="process">
       <div class="ax-container">
         <header class="ax-head">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Review, scope, <em>build, launch</em></h2>
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 120ms">Review, scope, <em>build, launch</em></h2>
         </header>
 
         <div class="ax-process-track" data-process-track>
           <span class="ax-process-line" aria-hidden="true"><span class="ax-process-line-fill" data-process-line-fill></span></span>
           <ol class="ax-process">
             {process.map((p, i) => (
-              <li class="ax-step reveal ax-reveal--step" data-process-step data-scene-index={i} style={`--reveal-delay: ${300 + i * 220}ms`}>
+              <li class="ax-step reveal ax-reveal--step" data-process-step data-scene-index={i} style={`--reveal-delay: ${160 + i * 110}ms`}>
                 <span class="ax-step-node" aria-hidden="true"></span>
                 <h3 class="ax-step-title">{p.title}</h3>
                 <p class="ax-step-desc">{p.description}</p>
@@ -309,14 +309,14 @@ const team = [
     <section class="ax-section ax-scene ax-scene--partners" data-home-section="studio" data-cinematic-scene="studio" data-motion-role="partners">
       <div class="ax-container ax-split">
         <div class="ax-split-left">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Two partners. <em>Direct accountability.</em></h2>
-          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 480ms">
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 120ms">Two partners. <em>Direct accountability.</em></h2>
+          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 220ms">
             You work with the people shaping the strategy and building the site. No account layers, no handoff fog, no guessing who owns the outcome.
           </p>
         </div>
         <div class="ax-split-right">
           {team.map((m, i) => (
-            <div class="ax-person reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${320 + i * 360}ms`}>
+            <div class="ax-person reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${180 + i * 140}ms`}>
               <span class="ax-person-name">{m.name}</span>
               <span class="ax-person-role">{m.role}</span>
               <p class="ax-person-desc">{m.description}</p>
@@ -329,15 +329,15 @@ const team = [
     <!-- FINAL CTA -->
     <section class="ax-final ax-scene ax-scene--resolution" data-home-section="final" data-cinematic-scene="final" data-motion-role="resolution">
       <div class="ax-container">
-        <div class="ax-final-rule reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 260ms"></div>
-        <h2 class="ax-mega ax-final-mega reveal ax-reveal--final" style="--reveal-delay: 620ms">
+        <div class="ax-final-rule reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 120ms"></div>
+        <h2 class="ax-mega ax-final-mega reveal ax-reveal--final" style="--reveal-delay: 240ms">
           Start a serious<br /><em>project conversation.</em>
         </h2>
-        <div class="ax-hero-actions reveal ax-reveal--final" style="--reveal-delay: 1080ms">
+        <div class="ax-hero-actions reveal ax-reveal--final" style="--reveal-delay: 360ms">
           <a href={CTA_PATHS.startProject} class="btn btn-primary">Start a project <span aria-hidden="true">→</span></a>
           <a href="/pricing" class="btn-ghost-link">See pricing</a>
         </div>
-        <p class="ax-fineprint reveal ax-reveal--final" style="--reveal-delay: 1400ms">
+        <p class="ax-fineprint reveal ax-reveal--final" style="--reveal-delay: 480ms">
           Four packages. Pricing is public, the launch path is defined, and every build is checked for speed, mobile quality, and clear inquiry flow before it ships.
         </p>
       </div>
@@ -1211,6 +1211,10 @@ const team = [
   }
 
   @media (max-width: 759px) {
+    .ax-mega {
+      font-size: clamp(2.3rem, 9.6vw, 4rem);
+      letter-spacing: -0.04em;
+    }
     .ax-scene::after,
     .ax-scene:not(.ax-scene--title-card)::before { right: var(--ax-gutter); left: var(--ax-gutter); }
     .ax-work-feature-frame::after { display: none; }
@@ -1249,6 +1253,136 @@ const team = [
     .ax-figure-label { animation: none !important; opacity: 1 !important; transform: none !important; }
     .ax-step-desc { opacity: 1 !important; transform: none !important; }
   }
+
+  /* ── Clean cinematic motion contract ─────────────────
+     One quiet axis for content, a little air for imagery, and no scroll-driven
+     lateral drift. This keeps the editorial pacing without letting text or
+     controls wander outside the viewport on narrow screens. */
+  .ax-root .ax-scene {
+    --scene-drift-left: 0px !important;
+    --scene-drift-right: 0px !important;
+    --scene-drift-up: 0px !important;
+    --scene-drift-down: 0px !important;
+    --scene-scale: 1 !important;
+  }
+
+  .ax-root .ax-scene--process .ax-step { --step-drift: 0px !important; }
+  :global(.site-footer[data-home-footer='true']) { --footer-drift: 0px !important; }
+
+  .ax-root .ax-reveal--title,
+  .ax-root .ax-reveal--statement,
+  .ax-root .ax-reveal--copy,
+  .ax-root .ax-reveal--item,
+  .ax-root .ax-reveal--row,
+  .ax-root .ax-reveal--metric,
+  .ax-root .ax-reveal--step,
+  .ax-root .ax-reveal--final {
+    transition-property: opacity, transform;
+    transition-duration: 1.2s;
+    transition-timing-function: var(--ease-cinematic);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .ax-root .ax-reveal--title { transition-duration: 1.3s; }
+  .ax-root .ax-reveal--statement { transition-duration: 1.35s; }
+  .ax-root .ax-reveal--final { transition-duration: 1.25s; }
+  .ax-root .ax-reveal--rule {
+    transition: opacity 1.2s var(--ease-premium), transform 1.2s var(--ease-cinematic);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) {
+      opacity: 0;
+      transform: translate3d(0, 1.1rem, 0) !important;
+      clip-path: none !important;
+    }
+
+    :global(html.js) .ax-root .ax-reveal--title.is-in { clip-path: none; }
+    :global(html.js) .ax-root .ax-reveal--statement:not(.is-in) { opacity: 0; transform: translate3d(0, 1.2rem, 0) !important; }
+    :global(html.js) .ax-root .ax-reveal--copy:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
+    :global(html.js) .ax-root .ax-reveal--item:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
+    :global(html.js) .ax-root .ax-reveal--row:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
+    :global(html.js) .ax-root .ax-reveal--metric:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
+    :global(html.js) .ax-root .ax-reveal--step:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
+    :global(html.js) .ax-root .ax-reveal--final:not(.is-in) { opacity: 0; transform: translate3d(0, 1.15rem, 0) !important; }
+
+    :global(html.js) .ax-mask {
+      animation: ax-title-card-reveal-clean 1.45s var(--ease-cinematic) both;
+      animation-delay: calc(120ms + (var(--i, 0) * 180ms));
+    }
+
+    :global(html.js) .ax-load {
+      animation: ax-hero-support-reveal-clean 1.05s var(--ease-cinematic) both;
+      animation-delay: calc(1.05s + (var(--i, 0) * 140ms));
+    }
+
+    :global(html.js) .ax-hero::before { animation: ax-line-in 1.5s var(--ease-cinematic) 140ms both; }
+  }
+
+  @keyframes ax-title-card-reveal-clean {
+    from { opacity: 0; transform: translate3d(0, 3rem, 0); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes ax-hero-support-reveal-clean {
+    from { opacity: 0; transform: translate3d(0, 0.9rem, 0); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .ax-root .ax-statement-line,
+  .ax-root .ax-solution-title,
+  .ax-root .ax-solution-desc,
+  .ax-root .ax-work-index,
+  .ax-root .ax-split-left,
+  .ax-root .ax-principle-title,
+  .ax-root .ax-principle-desc,
+  .ax-root .ax-step-title,
+  .ax-root .ax-step-desc,
+  .ax-root .ax-person-name,
+  .ax-root .ax-person-role,
+  .ax-root .ax-person-desc,
+  .ax-root .ax-final-mega,
+  .ax-root .ax-hero-actions,
+  .ax-root .ax-fineprint {
+    transform: none !important;
+  }
+
+  .ax-root .ax-step-desc { opacity: 1 !important; }
+  .ax-root .ax-work-feature { clip-path: inset(0) !important; }
+  .ax-root .ax-work-feature-img {
+    transform: scale(1.04) !important;
+    transition: transform 1.8s var(--ease-cinematic), filter 1.2s var(--ease-premium);
+  }
+  .ax-root .ax-work-feature.is-active .ax-work-feature-img { transform: scale(1) !important; }
+
+  .ax-root .ax-figure-num,
+  .ax-root .ax-figure-label { display: block; }
+  :global(html.js) .ax-root .ax-scene--metrics .ax-figure { animation: none; }
+  :global(html.js) .ax-root .ax-scene--metrics .ax-figure.is-in .ax-figure-num {
+    animation: ax-metric-settle-clean 1.35s var(--ease-cinematic) both;
+    animation-delay: calc(180ms + (var(--scene-index, 0) * 150ms));
+  }
+  :global(html.js) .ax-root .ax-scene--metrics .ax-figure.is-in .ax-figure-label {
+    animation: ax-metric-label-clean 1.05s var(--ease-premium) both;
+    animation-delay: calc(420ms + (var(--scene-index, 0) * 150ms));
+  }
+
+  @keyframes ax-metric-settle-clean {
+    from { opacity: 0; transform: translate3d(0, 0.8rem, 0); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes ax-metric-label-clean {
+    from { opacity: 0; transform: translate3d(0, 0.45rem, 0); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ax-root .ax-work-feature-img,
+    .ax-root .ax-figure-num,
+    .ax-root .ax-figure-label { animation: none !important; transform: none !important; }
+  }
 </style>
 
 <script>
@@ -1279,15 +1413,9 @@ const team = [
     const processTrack = root.querySelector<HTMLElement>('[data-process-track]');
     const processSteps = Array.from(root.querySelectorAll<HTMLElement>('[data-process-step]'));
     const homeFooter = document.querySelector<HTMLElement>('.site-footer');
-    const footerColumns = homeFooter
-      ? Array.from(homeFooter.querySelectorAll<HTMLElement>('.axiom-container > div'))
-      : [];
     let scrollFrame = 0;
 
     homeFooter?.setAttribute('data-home-footer', 'true');
-    footerColumns.forEach((column, index) => {
-      column.style.setProperty('--footer-delay', `${index * 120}ms`);
-    });
 
     const setPanelLinkState = (panel: HTMLElement, enabled: boolean) => {
       panel.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
@@ -1394,17 +1522,8 @@ const team = [
         const rect = scene.getBoundingClientRect();
         const sceneRange = Math.max(rect.height + viewportStart - viewportEnd, 1);
         const sceneProgress = clamp((viewportStart - rect.top) / sceneRange);
-        const sceneInverse = 1 - sceneProgress;
-        const horizontalDrift = Math.round(sceneInverse * 28);
-        const verticalDrift = Math.round(sceneInverse * 22);
 
         scene.style.setProperty('--scene-progress', String(sceneProgress));
-        scene.style.setProperty('--scene-inverse', String(sceneInverse));
-        scene.style.setProperty('--scene-drift-left', `${-horizontalDrift}px`);
-        scene.style.setProperty('--scene-drift-right', `${horizontalDrift}px`);
-        scene.style.setProperty('--scene-drift-up', `${-verticalDrift}px`);
-        scene.style.setProperty('--scene-drift-down', `${verticalDrift}px`);
-        scene.style.setProperty('--scene-scale', String(0.985 + sceneProgress * 0.015));
         scene.dataset.scenePhase = sceneProgress < 0.24 ? 'enter' : sceneProgress > 0.78 ? 'exit' : 'hold';
 
         const visibleTop = Math.max(rect.top, 0);
@@ -1429,7 +1548,6 @@ const team = [
         const footerRange = Math.max(footerRect.height + viewportHeight * 0.9 - viewportHeight * 0.2, 1);
         const footerProgress = clamp((viewportHeight * 0.9 - footerRect.top) / footerRange);
         homeFooter.style.setProperty('--footer-progress', String(footerProgress));
-        homeFooter.style.setProperty('--footer-drift', `${Math.round((1 - footerProgress) * 18)}px`);
         homeFooter.classList.toggle(
           'is-footer-active',
           footerRect.top <= viewportHeight * 0.78 && footerRect.bottom >= viewportHeight * 0.2
@@ -1455,7 +1573,6 @@ const team = [
           (processProgress - index / Math.max(processSteps.length, 1)) * Math.max(processSteps.length, 1)
         );
         step.style.setProperty('--step-progress', String(stepProgress));
-        step.style.setProperty('--step-drift', `${Math.round((1 - stepProgress) * 16)}px`);
       });
     };
 
@@ -1475,13 +1592,12 @@ const team = [
       scenes.forEach((scene) => {
         scene.classList.remove('is-scene-active');
         delete scene.dataset.scenePhase;
-        ['--scene-progress', '--scene-inverse', '--scene-drift-left', '--scene-drift-right', '--scene-drift-up', '--scene-drift-down', '--scene-scale'].forEach((property) => scene.style.removeProperty(property));
+        scene.style.removeProperty('--scene-progress');
       });
       homeFooter?.removeAttribute('data-home-footer');
       homeFooter?.classList.remove('is-footer-active');
       homeFooter?.style.removeProperty('--footer-progress');
       homeFooter?.style.removeProperty('--footer-drift');
-      footerColumns.forEach((column) => column.style.removeProperty('--footer-delay'));
       root.dataset.homeMotionReady = 'false';
     };
   };
