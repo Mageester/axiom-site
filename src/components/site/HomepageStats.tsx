@@ -125,9 +125,9 @@ export function HomepageStats() {
           <StaticStat description="Typical launch window, depending on scope." unit="LAUNCH WINDOW" value="2-4 WEEKS" />
           <StaticStat description="Engineered for Core Web Vitals from the start." unit="PERFORMANCE" value="VITALS" />
           <StaticStat
-            description="Most clients start here for lower upfront cost and ongoing support."
+            description="The recommended package for normal independent local businesses."
             unit="PRIMARY PATH"
-            value="MONTHLY"
+            value="LOCAL BUSINESS"
           />
         </dl>
       </div>

@@ -32,8 +32,8 @@ export const services: Service[] = [
     bestIf: 'You have a clear offer but the current site buries it.',
     beforeAxiom: 'Visitors have to piece together what you do, why it matters, and how to reach you.',
     afterAxiom: 'The offer, proof, and primary contact path are visible before the buyer loses momentum.',
-    typicalPath: 'Usually fits monthly or ownership, depending on how much support you want after launch.',
-    startsAt: '$200/mo or $3,500 ownership build.',
+    typicalPath: 'Usually fits the Local Business Website or Expanded Website packages, depending on how much content the business needs.',
+    startsAt: 'From CAD $1,200 for the Local Business Website; from CAD $1,500 for the Expanded Website.',
     outcomes: [
       'Offer and service hierarchy clarified before design starts',
       'Primary call, quote, booking, or intake path visible on every key page',
@@ -61,8 +61,8 @@ export const services: Service[] = [
     bestIf: 'Most of your new clients find you locally and decide in under a minute.',
     beforeAxiom: 'The business may be reputable offline, but the site does not make that reputation obvious fast enough.',
     afterAxiom: 'Services, location, trust signals, and contact options are clear on desktop and mobile.',
-    typicalPath: 'Usually fits monthly when you want ongoing updates, or ownership when you want handoff at launch.',
-    startsAt: '$200/mo or $3,500 ownership build.',
+    typicalPath: 'Usually fits the Local Business Website for a focused presence or the Expanded Website when the business needs more content.',
+    startsAt: 'From CAD $1,200 for the Local Business Website; from CAD $1,500 for the Expanded Website.',
     outcomes: [
       'Services, geography, and buyer fit made clear quickly',
       'Reviews, credentials, photos, and examples placed where buyers look',

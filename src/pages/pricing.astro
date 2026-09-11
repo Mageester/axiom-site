@@ -13,101 +13,115 @@ const isCheckmark = (val: string) => ['Included', String.fromCharCode(10003)].so
 
 const pricingTiers = [
   {
-    key: 'monthly',
-    name: 'Managed Site Partnership',
-    costShape: 'Monthly',
-    price: '$200/mo',
-    subtext: '$0 down. Hosting, support, and ongoing updates included.',
-    supportNote: 'Best when you want the site launched and looked after without a large upfront payment.',
-    features: ['Custom page layouts (up to 5)', 'Managed hosting included', 'Ongoing content and design updates', '6-month minimum commitment', 'Ownership transfer available at month 12'],
-    cta: 'Start monthly',
-    href: createStartProjectHref('monthly'),
+    key: 'localBusiness',
+    name: 'Local Business Website',
+    costShape: 'Recommended',
+    price: 'From CAD $1,200',
+    subtext: 'Up to 3 pages for a normal independent local business.',
+    supportNote: 'The main package for a clear Home, Services, and Contact path.',
+    features: ['Home, Services, and Contact structure', 'Gallery where it strengthens the decision', 'Phone, directions, inquiry, and booking paths', 'Straightforward scope agreed before work starts'],
+    cta: 'Choose local business',
+    href: createStartProjectHref('local-business'),
     variant: 'primary',
     highlighted: true,
     eyebrow: 'PREFERRED PATH',
-    bestFor: 'For businesses that want a serious site live quickly, with hosting and updates handled after launch.',
+    bestFor: 'For independent local businesses that need a credible, focused site with the important buyer paths in view.',
   },
   {
-    key: 'ownership',
-    name: 'Ownership Build',
+    key: 'expanded',
+    name: 'Expanded Website',
     costShape: 'Upfront',
-    price: 'From $3,500',
-    subtext: 'A custom site purchased outright, with code handoff at launch.',
-    supportNote: 'Includes 30 days of launch support. Managed hosting can be configured separately.',
-    features: ['Custom page layouts (up to 5)', 'Immediate codebase ownership', '30 days post-launch support', 'Configured to your choice of host', 'SEO & speed optimization foundation'],
-    cta: 'Start ownership build',
-    href: createStartProjectHref('ownership'),
+    price: 'From CAD $1,500',
+    subtext: 'Up to 5 pages for businesses with more to explain and show.',
+    supportNote: 'For straightforward builds that need more content, not more complex systems.',
+    features: ['About, Gallery, Services, and Contact options', 'Room for a broader service story', 'Clear inquiry, phone, directions, and booking paths', 'Straightforward scope agreed before work starts'],
+    cta: 'Choose expanded website',
+    href: createStartProjectHref('expanded'),
     variant: 'secondary',
-    bestFor: 'For businesses that want to buy the site outright and control the code from launch.',
+    bestFor: 'For businesses that need more content while keeping the structure, integrations, and launch path straightforward.',
   },
   {
-    key: 'ecommerce',
-    name: 'Custom Scope',
-    costShape: 'Fixed Bid',
-    price: 'Custom quote',
-    subtext: 'For larger rebuilds, ecommerce, integrations, or migration work.',
-    supportNote: 'Scoped up front so timeline, deliverables, and price are clear before work begins.',
-    features: ['Custom page counts and flows', 'E-commerce and database integration', 'Third-party API integrations', 'Migration and redirect planning', 'Scoped launch support'],
-    cta: 'Request custom scope',
+    key: 'custom',
+    name: 'Custom',
+    costShape: 'Quoted',
+    price: 'Custom quoted',
+    subtext: 'For requirements beyond the standard packages.',
+    supportNote: 'E-commerce, databases, custom booking systems, accounts, migrations, and unusual technical scope start here.',
+    features: ['Custom page counts and flows', 'E-commerce, database, or account functionality', 'Custom booking systems or software', 'Substantial migrations and redirect planning', 'Unusual or technically complex requirements'],
+    cta: 'Discuss custom scope',
     href: createStartProjectHref('custom'),
     variant: 'secondary',
-    bestFor: 'For larger rebuilds, stores, integrations, or sites with moving parts beyond a standard marketing build.',
+    bestFor: 'For projects that need systems, integrations, migrations, or other requirements beyond a straightforward website.',
   },
+] as const;
+
+const standardIncludes = [
+  'Custom responsive design and development',
+  'Mobile optimization',
+  'First year of basic hosting included',
+  'Domain connection',
+  'SEO basics: page titles and metadata',
+  'Existing booking-platform integration when applicable',
+  'Light editing of client-supplied text',
+  'Client-supplied logo and images',
+  'Launch testing',
+  'Two consolidated revision rounds',
+  'Thirty days of post-launch defect support',
 ] as const;
 
 const comparisonRows = [
   {
     key: 'starting-cost',
     label: 'Starting Cost',
-    monthly: '$0 down',
-    ownership: 'From $3,500',
-    ecommerce: 'Scoped quote',
+    localBusiness: 'From CAD $1,200',
+    expanded: 'From CAD $1,500',
+    custom: 'Custom quoted',
   },
   {
     key: 'best-fit',
     label: 'Best Fit',
-    monthly: 'Low upfront, ongoing support',
-    ownership: 'Buy outright at launch',
-    ecommerce: 'Larger or technical scope',
+    localBusiness: 'Normal independent local business',
+    expanded: 'More content, still straightforward',
+    custom: 'Complex or unusual requirements',
+  },
+  {
+    key: 'scope',
+    label: 'Scope',
+    localBusiness: 'Up to 3 pages',
+    expanded: 'Up to 5 pages',
+    custom: 'Defined in scope',
+  },
+  {
+    key: 'typical-structure',
+    label: 'Typical Structure',
+    localBusiness: 'Home, Services, Contact',
+    expanded: 'About, Gallery, Services, Contact, etc.',
+    custom: 'Custom pages and flows',
+  },
+  {
+    key: 'booking',
+    label: 'Booking Path',
+    localBusiness: 'Existing platform links where applicable',
+    expanded: 'Existing platform links where applicable',
+    custom: 'Custom systems quoted separately',
   },
   {
     key: 'hosting',
-    label: 'Hosting',
-    monthly: 'Managed and included',
-    ownership: 'Configured separately',
-    ecommerce: 'Scoped by project',
-  },
-  {
-    key: 'updates',
-    label: 'Updates',
-    monthly: 'Ongoing updates included',
-    ownership: '30 days post-launch',
-    ecommerce: 'Scoped by project',
-  },
-  {
-    key: 'ownership',
-    label: 'Ownership',
-    monthly: 'Transfers at month 12',
-    ownership: 'Immediate handoff',
-    ecommerce: 'Immediate handoff',
-  },
-  {
-    key: 'timeline',
-    label: 'Timeline',
-    monthly: 'Usually 2-4 weeks',
-    ownership: 'Usually 2-4 weeks',
-    ecommerce: 'Defined in scope',
+    label: 'Hosting After Year One',
+    localBusiness: 'From CAD $120/year',
+    expanded: 'From CAD $120/year',
+    custom: 'Defined in scope',
   },
   {
     key: 'support',
-    label: 'Support',
-    monthly: 'Included monthly',
-    ownership: '30 days included',
-    ecommerce: 'Scoped by project',
+    label: 'Revisions & Support',
+    localBusiness: '2 rounds + 30 days defect support',
+    expanded: '2 rounds + 30 days defect support',
+    custom: 'Defined in scope',
   },
 ] as const;
 
-const comparisonTierOrder = ['monthly', 'ownership', 'ecommerce'] as const;
+const comparisonTierOrder = ['localBusiness', 'expanded', 'custom'] as const;
 
 const mobileComparisonTiers = comparisonTierOrder
   .map((key) => pricingTiers.find((tier) => tier.key === key))
@@ -122,44 +136,44 @@ const mobileComparisonTiers = comparisonTierOrder
 
 const faqItems = [
   {
-    question: 'Why do most clients choose monthly?',
+    question: 'What is the Local Launch Special?',
     answer:
-      'It gets the site live without a large upfront payment. Hosting, updates, and support are included, so the site keeps improving after launch.',
+      'It is an introductory package from CAD $900 for very small local businesses that need a straightforward professional presence: one page with up to six sections. Existing third-party booking links can be connected.',
   },
   {
-    question: 'What is included in the monthly path?',
+    question: 'What is the Local Business Website?',
     answer:
-      'A custom site up to 5 page layouts, managed hosting, ongoing content and design updates, support, and an ownership transfer option at month 12.',
+      'It is the recommended package from CAD $1,200 for a normal independent local business. It includes up to three pages, typically Home, Services, and Contact, with a gallery and clear inquiry paths where appropriate.',
   },
   {
-    question: 'What is the ownership build?',
+    question: 'What is the Expanded Website?',
     answer:
-      'You pay for the site upfront, starting at $3,500. We build it, launch it, and hand over the codebase at release.',
+      'It is from CAD $1,500 for businesses that need more content but still have a straightforward website requirement. The scope is up to five pages and can include About, Gallery, Services, and Contact.',
   },
   {
-    question: 'Is hosting included?',
+    question: 'What does every standard package include?',
     answer:
-      'Hosting is included on the monthly path. Ownership builds can be hosted with us or configured on your preferred host.',
+      'Every standard package includes custom responsive design and development, mobile optimization, first-year basic hosting, domain connection, SEO basics, applicable existing booking-platform integration, light editing of client-supplied text, client-supplied logo and images, launch testing, two consolidated revision rounds, and thirty days of post-launch defect support.',
   },
   {
-    question: 'When is custom scope needed?',
+    question: 'Does the price include booking software?',
     answer:
-      'Use custom scope for ecommerce, larger rebuilds, migrations, third-party integrations, or anything that needs more than a standard marketing site.',
+      'An existing booking platform can be connected when applicable. Booksy and other booking platforms remain the client account and expense. Custom booking systems or software are quoted as Custom.',
   },
   {
-    question: 'How do revisions work?',
+    question: 'When is Custom needed?',
     answer:
-      'We review structure and copy before build, then refine the site during the project. Monthly clients also get ongoing updates after launch.',
+      'Custom is required for e-commerce, databases, custom booking systems or software, customer accounts, substantial migrations, or unusual and technically complex requirements.',
   },
   {
-    question: 'Can we edit the site ourselves?',
+    question: 'How are payments handled?',
     answer:
-      'Yes. We can set up a simple editing path for common content changes without exposing the parts of the site that should not be touched.',
+      'Fifty percent is due after the scope is approved and the agreement is signed. The remaining fifty percent is due after approval of the finished staging site and before public launch.',
   },
   {
-    question: 'What makes Axiom different?',
+    question: 'What happens after the first year?',
     answer:
-      'You work directly with the people shaping the site and building it. No account layers, no fake proof, no unclear handoff.',
+      'Basic hosting starts at CAD $120 per year after year one, unless a documented handoff is provided where appropriate. Domain registration renewal is client-owned and billed by the registrar at its actual price.',
   },
 ] as const;
 ---
@@ -170,7 +184,7 @@ const faqItems = [
   canonicalPath="/pricing"
   schema={[PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Pricing', url: `${SITE_URL}/pricing` }])]}
 >
-  <main id="main-content" tabindex="-1" class="pb-0">
+  <main id="main-content" tabindex="-1" class="pricing-page pb-0">
     <section class="pricing-hero axiom-container pt-[5.5rem] md:pt-[7.5rem]">
       <div class="max-w-3xl">
         <FadeIn motion="eyebrow">
@@ -182,14 +196,14 @@ const faqItems = [
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
-            Choose a limited-time local launch site from $900, a managed site from $200/mo, or an ownership build from
-            $3,500. Larger rebuilds and stores are scoped separately.
+            Choose a Local Launch Special from CAD $900, a Local Business Website from CAD $1,200, an Expanded Website
+            from CAD $1,500, or Custom for quoted scope.
           </p>
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={660}>
           <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-muted)] md:text-[15px]">
-            Typical builds include Home, Services, Work, Pricing, and Contact. Extra pages, integrations, or migration
-            work are priced before the project starts.
+            Standard packages include the core design, launch, and support work. E-commerce, databases, custom booking
+            systems, customer accounts, substantial migrations, and unusual technical requirements are Custom.
           </p>
         </FadeIn>
       </div>
@@ -197,27 +211,27 @@ const faqItems = [
 
     <section class="page-section-tight section-shell pt-0" aria-labelledby="local-launch-offer-title" data-local-launch-offer>
       <div class="axiom-container">
-        <FadeIn motion="precisionPricingReveal" as="div">
+        <FadeIn motion="sceneOpen" delay={80} as="div">
           <div class="local-launch-offer-frame">
             <Card className="local-launch-offer-card">
               <div class="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
                 <div class="max-w-3xl">
                   <div class="flex flex-wrap items-center gap-3">
-                    <span class="local-launch-offer-badge">Limited-time special</span>
-                    <span class="local-launch-offer-price-badge">From $900</span>
+                    <span class="local-launch-offer-badge">Introductory offer</span>
+                    <span class="local-launch-offer-price-badge">From CAD $900</span>
                   </div>
                   <h2 id="local-launch-offer-title" class="local-launch-offer-title mt-4 text-[28px] font-[600] leading-[1.15] tracking-[-0.02em] md:text-[34px]">
-                    Local business launch websites from $900.
+                    Local Launch Special from CAD $900.
                   </h2>
                   <p class="local-launch-offer-copy section-copy mt-4 md:text-[17px]">
-                    Straightforward websites for local businesses that need a credible launch without the full cost of an unrestricted ownership build. First-year hosting included, with the exact scope agreed before the project starts.
+                    For very small local businesses that need a straightforward professional presence: one page with up to six sections. Existing third-party booking links can be connected. First-year basic hosting is included, with the exact scope agreed before the project starts.
                   </p>
                   <p class="local-launch-offer-fineprint mt-3 text-[14px] leading-[1.65] md:text-[15px]">
-                    Available for a limited time. This is a scoped introductory offer; unrestricted ownership builds start at $3,500.
+                    Introductory, restricted scope for straightforward local projects. Projects needing more pages or custom functionality use another package.
                   </p>
                 </div>
                 <a href={createStartProjectHref('local-launch')} class="btn btn-primary local-launch-offer-cta w-full justify-center md:w-auto">
-                  Start with this special <span aria-hidden="true">→</span>
+                  Start with this special <span class="pricing-cta-arrow" aria-hidden="true">→</span>
                 </a>
               </div>
             </Card>
@@ -231,16 +245,16 @@ const faqItems = [
         <div class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:pb-0">
           {pricingTiers.map((tier, index) => (
             <FadeIn
-              motion="precisionPricingReveal"
+              motion="depthCardReveal"
               delay={Math.min(index * 150, 600)}
               as="div"
-              id={tier.key === 'monthly' ? 'monthly-tier' : tier.key === 'ownership' ? 'ownership-tier' : tier.key === 'ecommerce' ? 'ecommerce-tier' : undefined}
+              id={tier.key === 'localBusiness' ? 'local-business-tier' : tier.key === 'expanded' ? 'expanded-tier' : tier.key === 'custom' ? 'custom-tier' : undefined}
               className="flex h-full shrink-0 basis-[84%] snap-start flex-col sm:basis-[68%] md:basis-[56%] lg:basis-auto lg:shrink"
             >
               <Card
                 padding="none"
                 hoverLift
-                className={`pricing-tier-card relative overflow-hidden ${tier.highlighted ? 'border-[color:var(--hairline)] bg-[var(--surface-1)]' : 'bg-[var(--surface-1)]'}`}
+                className={`pricing-tier-card pricing-tier-card-surface relative overflow-hidden ${tier.highlighted ? 'pricing-highlight-card border-[color:var(--hairline)] bg-[var(--surface-1)]' : 'bg-[var(--surface-1)]'}`}
               >
                 <div class="relative flex h-full flex-col p-6 sm:p-7">
                   <div class="flex flex-wrap items-center justify-between gap-3">
@@ -277,9 +291,9 @@ const faqItems = [
 
                   <div class="mt-auto pt-8">
                     {tier.highlighted ? (
-                      <a href={tier.href} class="btn btn-primary w-full">{tier.cta} <span aria-hidden="true">→</span></a>
+                      <a href={tier.href} class="btn btn-primary w-full">{tier.cta} <span class="pricing-cta-arrow" aria-hidden="true">→</span></a>
                     ) : (
-                      <a href={tier.href} class="btn btn-secondary w-full">{tier.cta} <span aria-hidden="true">→</span></a>
+                      <a href={tier.href} class="btn btn-secondary w-full">{tier.cta} <span class="pricing-cta-arrow" aria-hidden="true">→</span></a>
                     )}
                   </div>
                 </div>
@@ -305,8 +319,32 @@ const faqItems = [
           <SectionDivider className="mt-6" />
           <MotionHeading as="h2" text="What each option includes." className="section-heading mt-4" />
           <p class="section-copy mt-4 md:text-[17px]">
-            Same quality on every path. The differences are cost shape, ownership, and scope.
+            The same delivery standard applies throughout. The differences are fit, page scope, and whether the project
+            needs custom systems or technical work.
           </p>
+        </FadeIn>
+
+        <FadeIn as="div" motion="precisionPricingReveal" className="mt-8">
+          <Card className="pricing-inclusions-card border-[color:var(--hairline)] bg-[var(--surface-2)]">
+            <div class="grid gap-6 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-10">
+              <div>
+                <Eyebrow>EVERY STANDARD PACKAGE</Eyebrow>
+                <h3 class="mt-3 text-[25px] font-[600] leading-[1.18] tracking-[-0.02em] text-[var(--text-primary)]">Included from scope to launch.</h3>
+                <p class="section-copy mt-3 md:text-[16px]">The package price covers the following delivery standard. The Local Launch Special follows it within its one-page, six-section scope. Client-owned accounts and assets stay client-owned.</p>
+              </div>
+              <ul class="grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                {standardIncludes.map((item) => (
+                  <li class="flex items-start gap-3 text-[15px] leading-[1.6] text-[var(--text-secondary)]">
+                    <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-panel-strong)]">
+                      <DrawIcon name="check" size={12} className="text-[var(--accent-solid)]" />
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p class="mt-6 border-t border-[color:var(--hairline)] pt-5 text-[14px] leading-[1.65] text-[var(--text-muted)]">Booksy and other booking platforms remain the client’s account and expense.</p>
+          </Card>
         </FadeIn>
 
         <div class="mt-8 grid gap-4 md:hidden">
@@ -314,7 +352,7 @@ const faqItems = [
             <FadeIn motion="precisionPricingReveal" delay={Math.min(index * 140, 560)} as="div">
               <Card
                 padding="none"
-                className={`overflow-hidden ${tier.highlighted ? 'border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[0_0_0_1px_var(--accent-shadow-medium)]' : 'bg-[var(--surface-1)]'}`}
+                className={`pricing-comparison-card overflow-hidden ${tier.highlighted ? 'pricing-highlight-card border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[0_0_0_1px_var(--accent-shadow-medium)]' : 'bg-[var(--surface-1)]'}`}
               >
                 <div class="p-6">
                   {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">PREFERRED PATH</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
@@ -358,15 +396,15 @@ const faqItems = [
                 <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
                   <div class="flex flex-col gap-1">
                     <span class="text-[12px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-solid)]">Preferred</span>
-                    <span>Monthly</span>
-                  </div>
-                </th>
-                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  OWNERSHIP
-                </th>
-                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  CUSTOM SCOPE
-                </th>
+                  <span>Local Business</span>
+                </div>
+              </th>
+              <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                EXPANDED WEBSITE
+              </th>
+              <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                CUSTOM
+              </th>
               </tr>
             </thead>
             <tbody>
@@ -376,28 +414,28 @@ const faqItems = [
                     {row.label}
                   </th>
                   <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
-                    {isCheckmark(row.monthly) ? (
+                    {isCheckmark(row.localBusiness) ? (
                       <span class="inline-flex items-center text-[var(--accent-solid)]">
                         <DrawIcon name="check" size={18} className="is-active" />
-                        <span class="sr-only">{row.monthly}</span>
+                        <span class="sr-only">{row.localBusiness}</span>
                       </span>
-                    ) : row.monthly}
+                    ) : row.localBusiness}
                   </td>
                   <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
-                    {isCheckmark(row.ownership) ? (
+                    {isCheckmark(row.expanded) ? (
                       <span class="inline-flex items-center text-[var(--accent-solid)]">
                         <DrawIcon name="check" size={18} className="is-active" />
-                        <span class="sr-only">{row.ownership}</span>
+                        <span class="sr-only">{row.expanded}</span>
                       </span>
-                    ) : row.ownership}
+                    ) : row.expanded}
                   </td>
                   <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
-                    {isCheckmark(row.ecommerce) ? (
+                    {isCheckmark(row.custom) ? (
                       <span class="inline-flex items-center text-[var(--accent-solid)]">
                         <DrawIcon name="check" size={18} className="is-active" />
-                        <span class="sr-only">{row.ecommerce}</span>
+                        <span class="sr-only">{row.custom}</span>
                       </span>
-                    ) : row.ecommerce}
+                    ) : row.custom}
                   </td>
                 </tr>
               ))}
@@ -408,7 +446,7 @@ const faqItems = [
         <FadeIn as="div" motion="precisionPricingReveal" className="mt-6">
           <Card className="border-[color:var(--hairline)] bg-[var(--surface-2)]">
             <p class="section-copy mx-auto max-w-4xl text-center md:text-[16px]">
-              Monthly includes hosting and ongoing support. Ownership includes codebase handoff at launch. Custom scope is priced around the work required.
+              The first 50% is due after approved scope and a signed agreement. The final 50% is due after approval of the finished staging site and before public launch. Basic hosting starts at CAD $120/year after year one unless a documented handoff is provided where appropriate.
             </p>
           </Card>
         </FadeIn>
@@ -425,11 +463,11 @@ const faqItems = [
           <MotionHeading as="h2" text="Answers before the call." className="section-heading mt-4" />
         </FadeIn>
 
-        <FadeIn motion="precisionPricingReveal" className="mt-8">
+        <FadeIn motion="precisionPricingReveal" className="pricing-faq-reveal mt-8">
           <div class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)]">
             {faqItems.map((item, index) => (
               <details class="group" data-faq>
-                <summary class={`flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left transition-[background-color] duration-[var(--duration-fast)] hover:bg-[color:var(--surface-overlay)] ${index === 0 ? '' : 'border-t border-[color:var(--hairline)]'}`}>
+                <summary class={`pricing-faq-summary flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left transition-[background-color,color] duration-[var(--duration-fast)] hover:bg-[color:var(--surface-overlay)] ${index === 0 ? '' : 'border-t border-[color:var(--hairline)]'}`}>
                   <span class="text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)] md:text-[18px]">
                     {item.question}
                   </span>
@@ -466,33 +504,48 @@ const faqItems = [
           <Eyebrow>QUICK GUIDE</Eyebrow>
         </FadeIn>
 
-        <div class="mt-8 grid gap-4 lg:grid-cols-2">
-          <FadeIn motion="precisionPricingReveal" as="div">
-            <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
+        <div class="mt-8 grid gap-4 lg:grid-cols-3">
+          <FadeIn motion="timelineSequence" delay={80} as="div">
+            <Card className="pricing-guide-card h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
-                  You want the site handled after launch.
+                  You run a normal local business.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  Start with $0 down. Hosting, support, and updates are included, with an ownership transfer option at month 12.
+                  The Local Business Website is the recommended path: up to three pages, a clear buyer path, and the standard delivery included from scope to launch.
                 </p>
-                <a href="#monthly-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-                  See monthly details &uarr;</a>
+                <a href="#local-business-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
+                  See local business details &uarr;</a>
               </div>
             </Card>
           </FadeIn>
 
-          <FadeIn motion="precisionPricingReveal" delay={140} as="div">
-            <Card className="h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
+          <FadeIn motion="timelineSequence" delay={220} as="div">
+            <Card className="pricing-guide-card h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
               <div class="flex h-full flex-col">
                 <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
-                  You want to own the site outright.
+                  You need more content, not more system.
                 </h3>
                 <p class="section-copy mt-4 md:text-[16px]">
-                  Start from $3,500. We launch the site and hand over the codebase, with hosting configured separately if needed.
+                  The Expanded Website supports up to five pages for a broader service story, About, Gallery, and other straightforward content.
                 </p>
-                <a href="#ownership-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-                  See ownership details &uarr;</a>
+                <a href="#expanded-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
+                  See expanded details &uarr;</a>
+              </div>
+            </Card>
+          </FadeIn>
+
+          <FadeIn motion="timelineSequence" delay={360} as="div">
+            <Card className="pricing-guide-card h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
+              <div class="flex h-full flex-col">
+                <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
+                  You need a system or unusual scope.
+                </h3>
+                <p class="section-copy mt-4 md:text-[16px]">
+                  Custom is the right starting point for e-commerce, databases, custom booking software, accounts, migrations, or technically complex requirements.
+                </p>
+                <a href="#custom-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
+                  See Custom details &uarr;</a>
               </div>
             </Card>
           </FadeIn>
@@ -511,12 +564,12 @@ const faqItems = [
                 <SectionDivider className="mb-6" />
                 <MotionHeading as="h2" text="Not sure which option is right?" className="section-heading" />
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Tell us what the business needs. We'll tell you which path fits - monthly, ownership, or custom scope.
+                  Tell us what the business needs. We’ll recommend the package that fits: Local Launch Special, Local Business Website, Expanded Website, or Custom.
                   One business day. No pressure, no pitch deck.
                 </p>
               </div>
 
-              <a href={createStartProjectHref('custom')} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Start a project <span aria-hidden="true">→</span></a>
+              <a href={createStartProjectHref('custom')} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Start a project <span class="pricing-cta-arrow" aria-hidden="true">→</span></a>
             </div>
           </Card>
         </FadeIn>
@@ -529,8 +582,112 @@ const faqItems = [
       position: relative;
     }
 
+    .pricing-cta-arrow {
+      display: inline-block;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .pricing-page [data-motion='eyebrow'] {
+        animation: pricing-eyebrow-in 680ms var(--ease-cinematic) both;
+        animation-delay: var(--reveal-delay, 0ms);
+      }
+
+      .pricing-page [data-motion='sceneOpen'] {
+        animation: pricing-scene-in 920ms var(--ease-cinematic) both;
+        animation-delay: var(--reveal-delay, 0ms);
+      }
+
+      .pricing-page [data-motion='editorialMaskReveal'] {
+        animation: pricing-editorial-in 760ms var(--ease-premium) both;
+        animation-delay: var(--reveal-delay, 0ms);
+      }
+
+      .pricing-page [data-motion='depthCardReveal'] {
+        animation: pricing-card-in 840ms var(--ease-cinematic) both;
+        animation-delay: var(--reveal-delay, 0ms);
+      }
+
+      .pricing-page [data-motion='precisionPricingReveal'] {
+        animation: pricing-precision-in 820ms var(--ease-premium) both;
+        animation-delay: var(--reveal-delay, 0ms);
+      }
+
+      .pricing-page [data-motion='timelineSequence'] {
+        animation: pricing-timeline-in 760ms var(--ease-cinematic) both;
+        animation-delay: var(--reveal-delay, 0ms);
+      }
+
+      .pricing-page [data-motion='finalFrameFooter'] {
+        animation: pricing-footer-in 900ms var(--ease-cinematic) both;
+        animation-delay: var(--reveal-delay, 0ms);
+      }
+    }
+
     .pricing-tier-card {
       min-height: 100%;
+    }
+
+    .pricing-tier-card-surface,
+    .pricing-guide-card,
+    .pricing-inclusions-card,
+    .pricing-comparison-card,
+    .pricing-table-shell,
+    .local-launch-offer-card {
+      transition:
+        transform 420ms var(--ease-premium),
+        border-color var(--motion-duration-fast) ease,
+        box-shadow 520ms var(--ease-premium),
+        background-color var(--motion-duration-fast) ease;
+    }
+
+    @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+      .pricing-tier-card-surface:hover,
+      .pricing-tier-card-surface:focus-within,
+      .pricing-guide-card:hover,
+      .pricing-guide-card:focus-within,
+      .pricing-inclusions-card:hover,
+      .pricing-inclusions-card:focus-within,
+      .pricing-comparison-card:hover,
+      .pricing-comparison-card:focus-within,
+      .pricing-table-shell:hover,
+      .pricing-table-shell:focus-within,
+      .local-launch-offer-card:hover,
+      .local-launch-offer-card:focus-within {
+        transform: translateY(-4px);
+        border-color: var(--hairline-strong) !important;
+        box-shadow: 0 18px 52px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(255,255,255,0.07);
+      }
+
+      .pricing-highlight-card:hover,
+      .pricing-highlight-card:focus-within {
+        border-color: var(--accent-border) !important;
+        box-shadow: 0 20px 58px rgba(0, 0, 0, 0.38), 0 0 0 1px var(--accent-shadow-medium), 0 0 32px rgba(255,255,255,0.08);
+      }
+    }
+
+    .pricing-tier-card-surface .btn,
+    .local-launch-offer-cta,
+    .pricing-guide-card a,
+    .pricing-cta-arrow {
+      transition:
+        transform var(--motion-duration-fast) var(--ease-premium-soft),
+        color var(--motion-duration-fast) ease,
+        box-shadow var(--motion-duration-fast) var(--ease-premium-soft);
+    }
+
+    .pricing-tier-card-surface:hover .pricing-cta-arrow,
+    .pricing-tier-card-surface:focus-within .pricing-cta-arrow,
+    .local-launch-offer-cta:hover .pricing-cta-arrow,
+    .local-launch-offer-cta:focus-visible .pricing-cta-arrow,
+    .pricing-guide-card a:hover .pricing-cta-arrow,
+    .pricing-guide-card a:focus-visible .pricing-cta-arrow {
+      transform: translateX(3px);
+    }
+
+    .local-launch-offer-cta:hover,
+    .local-launch-offer-cta:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(255,255,255,0.16), 0 0 22px rgba(255,255,255,0.14);
     }
 
     .local-launch-offer-frame {
@@ -642,8 +799,9 @@ const faqItems = [
       box-shadow: var(--shadow-card);
     }
 
-    [data-motion='precisionPricingReveal'][data-reveal-state='visible'] .pricing-highlight-card {
-      animation: pricing-glow 2.1s var(--ease-cinematic) 1;
+    [data-motion='depthCardReveal'] .pricing-highlight-card,
+    [data-motion='precisionPricingReveal'] .pricing-highlight-card {
+      animation: pricing-recommendation-in 1.1s var(--ease-cinematic) both;
     }
 
     .pricing-table-row {
@@ -653,6 +811,23 @@ const faqItems = [
 
     .pricing-table-row:hover {
       background: rgba(255,255,255,0.035);
+    }
+
+    .pricing-faq-summary:focus-visible {
+      position: relative;
+      z-index: 1;
+      outline: 2px solid var(--accent-ring);
+      outline-offset: -2px;
+    }
+
+    .pricing-faq-summary:hover .faq-toggle,
+    .pricing-faq-summary:focus-visible .faq-toggle {
+      border-color: var(--hairline-strong);
+      transform: scale(1.04);
+    }
+
+    .pricing-faq-reveal .faq-panel {
+      will-change: max-height, opacity, transform;
     }
 
     details[data-faq][open] .faq-panel {
@@ -675,12 +850,30 @@ const faqItems = [
     }
 
     @media (prefers-reduced-motion: reduce) {
-      [data-motion='precisionPricingReveal'][data-reveal-state='visible'] .pricing-highlight-card,
+      [data-motion='depthCardReveal'] .pricing-highlight-card,
+      [data-motion='precisionPricingReveal'] .pricing-highlight-card,
       .pricing-table-row,
       .local-launch-offer-frame::before,
       .local-launch-offer-frame::after,
-      .local-launch-offer-badge {
+      .local-launch-offer-badge,
+      .pricing-tier-card-surface,
+      .pricing-guide-card,
+      .pricing-inclusions-card,
+      .pricing-comparison-card,
+      .pricing-table-shell,
+      .local-launch-offer-card,
+      .pricing-tier-card-surface .btn,
+      .local-launch-offer-cta,
+      .pricing-guide-card a,
+      .pricing-cta-arrow,
+      .pricing-faq-summary,
+      .pricing-faq-reveal .faq-panel,
+      .pricing-faq-reveal .faq-toggle,
+      .pricing-faq-reveal .faq-toggle-chevron {
         animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        will-change: auto;
       }
     }
 
@@ -717,6 +910,113 @@ const faqItems = [
 
       100% {
         box-shadow: 0 0 0 1px rgba(255, 255, 255, 0);
+      }
+    }
+
+    @keyframes pricing-eyebrow-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 8px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes pricing-scene-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0) scale(0.985);
+        clip-path: inset(0 0 10% 0 round 0.2rem);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+        clip-path: inset(0 0 0 0 round 0.2rem);
+      }
+    }
+
+    @keyframes pricing-editorial-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+        clip-path: inset(0 0 100% 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    @keyframes pricing-card-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 22px, 0) scale(0.985);
+      }
+
+      70% {
+        opacity: 1;
+        transform: translate3d(0, -2px, 0) scale(1.002);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    @keyframes pricing-precision-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 16px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes pricing-timeline-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0) rotateX(2deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotateX(0);
+      }
+    }
+
+    @keyframes pricing-footer-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 26px, 0) scale(0.99);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    @keyframes pricing-recommendation-in {
+      0% {
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0);
+      }
+
+      58% {
+        box-shadow: 0 0 0 1px var(--accent-shadow-medium), 0 0 34px rgba(255,255,255,0.11);
+      }
+
+      100% {
+        box-shadow: 0 0 0 1px var(--accent-shadow-medium), 0 0 20px rgba(255,255,255,0.04);
       }
     }
 

@@ -185,7 +185,7 @@ export const HOME_JSON_LD = {
     'Conversion-focused websites',
     'Business website design',
     'Website redesign',
-    'Managed monthly websites',
+    'Local business websites',
     'Website performance optimization',
   ],
   knowsAbout: [
@@ -210,34 +210,28 @@ export const HOME_JSON_LD = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Managed Site Partnership',
-          description: 'Monthly website path with hosting, ongoing updates, and support included. From $200/mo.',
+          name: 'Local Business Website',
+          description: 'Recommended local business website package with up to three pages. From CAD $1,200.',
         },
-        price: '200',
-        priceCurrency: 'CAD',
-        priceSpecification: {
-          '@type': 'UnitPriceSpecification',
-          price: '200',
-          priceCurrency: 'CAD',
-          billingDuration: 'P1M',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Ownership Build',
-          description: 'Custom website purchased outright with code handoff at launch. From $3,500.',
-        },
-        price: '3500',
+        price: '1200',
         priceCurrency: 'CAD',
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Local Launch Offer',
-          description: 'Scoped introductory websites for early local businesses with first-year hosting included. Consultation required before commitment.',
+          name: 'Expanded Website',
+          description: 'Straightforward website package with up to five pages. From CAD $1,500.',
+        },
+        price: '1500',
+        priceCurrency: 'CAD',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Local Launch Special',
+          description: 'Introductory one-page websites with up to six sections for very small local businesses. From CAD $900.',
         },
         price: '900',
         priceCurrency: 'CAD',
@@ -246,8 +240,8 @@ export const HOME_JSON_LD = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Custom Scope',
-          description: 'Scoped pricing for larger rebuilds, ecommerce, migrations, and integrations.',
+          name: 'Custom',
+          description: 'Custom quoted work for e-commerce, databases, custom booking systems, customer accounts, migrations, and complex requirements.',
         },
         priceCurrency: 'CAD',
       },
@@ -265,36 +259,30 @@ export const PRICING_JSON_LD = {
   offers: [
     {
       '@type': 'Offer',
-      name: 'Managed Site Partnership',
+      name: 'Local Business Website',
       description:
-        'Monthly website path with $0 down, hosting, ongoing updates, and support included. Ownership transfer available at month 12.',
+        'Recommended local business website package with up to three pages. From CAD $1,200.',
       priceCurrency: 'CAD',
-      price: '200',
-      priceSpecification: {
-        '@type': 'UnitPriceSpecification',
-        price: '200',
-        priceCurrency: 'CAD',
-        billingDuration: 'P1M',
-      },
+      price: '1200',
     },
     {
       '@type': 'Offer',
-      name: 'Ownership Build',
-      description: 'Custom website purchased outright with complete code handoff at launch. Hosting scoped separately.',
+      name: 'Expanded Website',
+      description: 'Straightforward website package with up to five pages. From CAD $1,500.',
       priceCurrency: 'CAD',
-      price: '3500',
+      price: '1500',
     },
     {
       '@type': 'Offer',
-      name: 'Local Launch Offer',
-      description: 'Scoped introductory websites for early local businesses with first-year hosting included. Consultation required before commitment.',
+      name: 'Local Launch Special',
+      description: 'Introductory one-page websites with up to six sections for very small local businesses. From CAD $900.',
       priceCurrency: 'CAD',
       price: '900',
     },
     {
       '@type': 'Offer',
-      name: 'Custom Scope',
-      description: 'Scoped pricing for larger rebuilds, ecommerce, migrations, and integrations.',
+      name: 'Custom',
+      description: 'Custom quoted work for e-commerce, databases, custom booking systems, customer accounts, migrations, and complex requirements.',
       priceCurrency: 'CAD',
     },
   ],
@@ -306,50 +294,66 @@ export const PRICING_FAQ_JSON_LD = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Why do most clients choose monthly?',
+      name: 'What is the Local Launch Special?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Monthly gets the site live without a large upfront payment. Hosting, updates, and support are included, with an ownership transfer option at month 12.',
+        text: 'It is an introductory package from CAD $900 for very small local businesses that need a straightforward professional presence: one page with up to six sections. Existing third-party booking links can be connected.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What is included in the monthly path?',
+      name: 'What is the Local Business Website?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A custom site up to 5 page layouts, managed hosting, ongoing content and design updates, support, and an ownership transfer option at month 12.',
+        text: 'It is the recommended package from CAD $1,200 for a normal independent local business. It includes up to three pages, typically Home, Services, and Contact, with a gallery and clear inquiry paths where appropriate.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What is the ownership build?',
+      name: 'What is the Expanded Website?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You pay for the site upfront, starting at $3,500. Axiom builds it, launches it, and hands over the codebase at release.',
+        text: 'It is from CAD $1,500 for businesses that need more content but still have a straightforward website requirement. The scope is up to five pages and can include About, Gallery, Services, and Contact.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How does hosting work?',
+      name: 'What does every standard package include?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Hosting is included on the monthly path. Ownership builds can be hosted by Axiom or configured on the buyer preferred host.',
+        text: 'Every standard package includes custom responsive design and development, mobile optimization, first-year basic hosting, domain connection, SEO basics, applicable existing booking-platform integration, light editing of client-supplied text, client-supplied logo and images, launch testing, two consolidated revision rounds, and thirty days of post-launch defect support.',
       },
     },
     {
       '@type': 'Question',
-      name: 'When is custom scope needed?',
+      name: 'Does the price include booking software?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Custom scope fits ecommerce, larger rebuilds, migrations, third-party integrations, or anything beyond a standard marketing site.',
+        text: 'An existing booking platform can be connected when applicable. Booksy and other booking platforms remain the client account and expense. Custom booking systems or software are quoted as Custom.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How are revisions handled?',
+      name: 'When is Custom needed?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Axiom reviews structure and copy before build, then refines the site during the project. Monthly clients also get ongoing updates after launch.',
+        text: 'Custom is required for e-commerce, databases, custom booking systems or software, customer accounts, substantial migrations, or unusual and technically complex requirements.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How are payments handled?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Fifty percent is due after the scope is approved and the agreement is signed. The remaining fifty percent is due after approval of the finished staging site and before public launch.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What happens after the first year?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Basic hosting starts at CAD $120 per year after year one, unless a documented handoff is provided where appropriate. Domain registration renewal is client-owned and billed by the registrar at its actual price.',
       },
     },
     {
@@ -365,7 +369,7 @@ export const PRICING_FAQ_JSON_LD = {
       name: 'What makes Axiom different?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You deal with the same two people from first call to launch. Pricing is posted publicly. The launch path is defined up front, and monthly clients keep ongoing support after release.',
+        text: 'You deal with the same two people from first call to launch. Pricing is posted publicly, the package scope is defined up front, and the launch path is clear before work begins.',
       },
     },
   ],
@@ -385,7 +389,7 @@ export const PROCESS_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
   name: 'How Axiom Builds a Website',
-  description: 'A clear website process from first review to launch: Review, Scope, Build, and Launch. Monthly clients keep support after the site goes live.',
+  description: 'A clear website process from first review to launch: Review, Scope, Build, and Launch. Standard packages include launch testing and thirty days of post-launch defect support.',
   step: [
     {
       '@type': 'HowToStep',
@@ -409,7 +413,7 @@ export const PROCESS_JSON_LD = {
       '@type': 'HowToStep',
       position: 4,
       name: 'Weeks 3-4 - Launch',
-      text: 'We run launch checks, connect the domain, and hand over a live site. Monthly clients keep support from here on.',
+      text: 'We run launch checks, connect the domain, and hand over a live site. Standard packages include thirty days of post-launch defect support.',
     },
   ],
 } as const;
@@ -457,7 +461,7 @@ export const START_PROJECT_JSON_LD = {
   '@type': 'ContactPage',
   name: 'Start a Project with Axiom Web',
   url: `${SITE_URL}/start-a-project`,
-  description: 'Send project details for monthly, ownership, or custom website work. Axiom replies within one business day.',
+  description: 'Send project details for a Local Launch Special, Local Business Website, Expanded Website, or Custom project. Axiom replies within one business day.',
   mainEntity: ORGANIZATION_SCHEMA,
   potentialAction: {
     '@type': 'CommunicateAction',
@@ -499,9 +503,9 @@ export const SEO_ROUTES = {
     canonicalPath: '/work',
   },
   pricing: {
-    title: 'Web Design Pricing | Monthly or Ownership | Axiom Web',
+    title: 'Web Design Pricing | Local Packages | Axiom Web',
     description:
-      'Clear web design pricing. Monthly from $200/mo with $0 down, ownership builds from $3,500, or scoped local launch offers from $900.',
+      'Clear web design pricing for local businesses. Local Launch Special from CAD $900, Local Business Website from CAD $1,200, Expanded Website from CAD $1,500, or Custom.',
     canonicalPath: '/pricing',
   },
   services: {
@@ -524,20 +528,20 @@ export const SEO_ROUTES = {
   process: {
     title: 'Our Web Design Process | 2-4 Weeks to Launch | Axiom Web',
     description:
-      'A clear four-stage website process from first review to launch. Monthly clients keep support after the site goes live.',
+      'A clear four-stage website process from first review to launch. Standard packages include launch testing and thirty days of post-launch defect support.',
     canonicalPath: '/process',
   },
   start: {
     title: 'Start a Project | Axiom Web',
     description:
-      'Send project details for monthly, ownership, or custom website work. We reply with a clear next step within one business day.',
+      'Send project details for a Local Launch Special, Local Business Website, Expanded Website, or Custom project. We reply with a clear next step within one business day.',
     canonicalPath: '/start-a-project',
     noIndex: true,
   },
   startProject: {
     title: 'Start a Project | Axiom Web',
     description:
-      'Send project details for monthly, ownership, or custom website work. We reply with a clear next step within one business day.',
+      'Send project details for a Local Launch Special, Local Business Website, Expanded Website, or Custom project. We reply with a clear next step within one business day.',
     canonicalPath: '/start-a-project',
   },
   audit: {

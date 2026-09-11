@@ -28,14 +28,14 @@ const defaultCredibilityItems: readonly CredibilityItem[] = [
     description: 'Performance is part of the delivery process, not a premium add-on.',
   },
   {
-    eyebrow: 'Full ownership',
-    title: 'You own the site outright.',
-    description: 'No licensing trap, no holdback, no dependency on a monthly platform fee.',
+    eyebrow: 'Clear ownership terms',
+    title: 'The scope and handoff stay clear.',
+    description: 'Your domain, supplied assets, hosting arrangement, and any handoff are documented before the work begins.',
   },
   {
-    eyebrow: 'No recurring fees',
-    title: 'Pay for the build, not for permission.',
-    description: 'The work is scoped up front so the relationship does not turn into rent.',
+    eyebrow: 'Post-launch terms',
+    title: 'Know what happens after launch.',
+    description: 'Basic hosting is included for the first year, then starts at CAD $120 per year unless a documented handoff is provided where appropriate.',
   },
 ] as const;
 

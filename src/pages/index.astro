@@ -7,18 +7,27 @@ import { getWorkProofImage } from '../lib/workProofImages';
 
 const work = [
   {
+    id: 'dental-aurelia',
     title: 'Aurelia Dental Studio',
+    niche: 'Healthcare',
     outcome: 'New patients can understand the practice, trust the offer, and book without digging through the site.',
+    href: 'https://dental.getaxiom.ca',
     img: getWorkProofImage('concept-dental-demo'),
   },
   {
+    id: 'salon-nails',
     title: 'Nails Studio',
+    niche: 'Salon & Beauty',
     outcome: 'Services are easier to compare, booking appears early, and the brand reads calm and premium.',
+    href: 'https://nails.getaxiom.ca',
     img: getWorkProofImage('concept-salon-demo'),
   },
   {
+    id: 'barber-blackline',
     title: 'Blackline Barber Co.',
+    niche: 'Personal Services',
     outcome: 'A sharper first impression with the booking path visible before a visitor starts hunting.',
+    href: 'https://barber.getaxiom.ca',
     img: getWorkProofImage('concept-barber-demo'),
   },
 ] as const;
@@ -55,10 +64,9 @@ const principles = [
 ] as const;
 
 const figures = [
-  { value: 'Under 1s', label: 'Load time, every build' },
   { value: 'Two', label: 'Partners, zero middlemen' },
   { value: '14-30', label: 'Day delivery band' },
-  { value: '$0', label: 'Down to get started' },
+  { value: 'CAD $900', label: 'Introductory local start' },
 ] as const;
 
 const process = [
@@ -81,22 +89,26 @@ const team = [
   ogImageAlt="Axiom — web design studio in Kitchener-Waterloo."
   schema={[HOME_JSON_LD, WEBSITE_SCHEMA]}
 >
-  <main id="main-content" tabindex="-1" class="ax-root">
+  <main id="main-content" tabindex="-1" class="ax-root" data-homepage>
+    <div class="ax-continuity-rail" aria-hidden="true">
+      <span class="ax-continuity-rail-track"><span class="ax-continuity-rail-progress"></span></span>
+    </div>
+
     <!-- HERO -->
-    <section class="ax-hero">
+    <section class="ax-hero ax-scene ax-scene--title-card" data-home-section="hero" data-cinematic-scene="hero" data-motion-role="title-card">
       <div class="ax-container">
         <h1 class="ax-mega ax-hero-title">
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 1">A sharper digital</span></span>
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 2">presence for serious</span></span>
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 3"><em>local businesses.</em></span></span>
+          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 0">A sharper digital</span></span>
+          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 1">presence for serious</span></span>
+          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 2"><em>local businesses.</em></span></span>
         </h1>
 
         <div class="ax-hero-foot">
-          <div class="ax-hero-actions ax-load" style="--i: 5">
+          <div class="ax-hero-actions ax-load" style="--i: 1">
             <a href={CTA_PATHS.startProject} class="btn btn-primary">Start a project <span aria-hidden="true">→</span></a>
             <a href="/work" class="btn-ghost-link">See the work</a>
           </div>
-          <p class="ax-lead ax-load" style="--i: 6">
+          <p class="ax-lead ax-load" style="--i: 0">
             Axiom builds fast, high-trust sites that make the offer clear, place proof where buyers decide, and turn attention into qualified inquiries.
           </p>
         </div>
@@ -104,28 +116,28 @@ const team = [
     </section>
 
     <!-- PROBLEM -->
-    <section class="ax-statement" id="ax-statement">
+    <section class="ax-statement ax-scene ax-scene--statement" id="ax-statement" data-home-section="statement" data-cinematic-scene="statement" data-motion-role="statement">
       <div class="ax-container">
-        <p class="ax-big reveal" style="--reveal-delay: 80ms">
-          Buyers judge the business before they ever call.
-          <em>Your site should make that judgment easy.</em>
+        <p class="ax-big reveal ax-reveal--statement" style="--reveal-delay: 80ms">
+          <span class="ax-statement-line ax-statement-line--quiet">Buyers judge the business before they ever call.</span>
+          <span class="ax-statement-line ax-statement-line--resolve"><em>Your site should make that judgment easy.</em></span>
         </p>
       </div>
     </section>
 
     <!-- SOLUTION -->
-    <section class="ax-section">
+    <section class="ax-section ax-scene ax-scene--cascade" data-home-section="solution" data-cinematic-scene="solution" data-motion-role="cascade">
       <div class="ax-container">
         <header class="ax-head">
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Make the right action <em>feel obvious</em></h2>
-          <p class="ax-head-note reveal" style="--reveal-delay: 120ms">
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 60ms">Make the right action <em>feel obvious</em></h2>
+          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 120ms">
             A professional site should not only look better. It should make the offer easier to understand, the business easier to trust, and the next step easier to take.
           </p>
         </header>
 
         <div class="ax-solution">
           {solution.map((s, i) => (
-            <div class="ax-solution-item reveal" style={`--reveal-delay: ${i * 90}ms`}>
+            <div class="ax-solution-item reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${180 + i * 260}ms`}>
               <h3 class="ax-solution-title">{s.title}</h3>
               <p class="ax-solution-desc">{s.description}</p>
             </div>
@@ -135,46 +147,95 @@ const team = [
     </section>
 
     <!-- WORK -->
-    <section class="ax-section">
+    <section class="ax-section ax-scene ax-scene--feature" data-home-section="work" data-cinematic-scene="work" data-motion-role="feature">
       <div class="ax-container">
         <header class="ax-head">
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Concept builds that show <em>the standard</em></h2>
-          <p class="ax-head-note reveal" style="--reveal-delay: 120ms">These are demonstration builds, not invented client case studies. They show how we structure local business sites for clarity, trust, and action.</p>
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Concept builds that show <em>the standard</em></h2>
+          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 420ms">These are demonstration builds, not invented client case studies. They show how we structure local business sites for clarity, trust, and action.</p>
         </header>
 
-        <div class="ax-work">
-          {work.map((w, i) => (
-            <a href="/work" class="ax-work-item reveal" style={`--reveal-delay: ${i * 90}ms`}>
-              <figure class="ax-work-shot">
+        <div class="ax-work-explorer reveal ax-reveal--item" data-work-explorer style="--reveal-delay: 760ms">
+          <div class="ax-work-feature-frame" data-work-feature-frame>
+            {work.map((w, i) => (
+              <figure
+                class:list={['ax-work-feature', i === 0 && 'is-active']}
+                data-work-feature={w.id}
+                aria-hidden={i === 0 ? 'false' : 'true'}
+              >
                 <ResponsivePicture
                   source={w.img.source}
                   alt={w.img.alt || w.title}
-                  sizes="(min-width: 900px) 28vw, 90vw"
-                  class="ax-work-img"
+                  sizes="(min-width: 900px) 52vw, 100vw"
+                  class="ax-work-feature-img"
                   loading={i === 0 ? 'eager' : 'lazy'}
                   objectPosition={w.img.position || 'center 40%'}
                 />
+                <figcaption class="ax-work-feature-caption" aria-hidden="true">
+                  <span>{`0${i + 1}`} / 03</span>
+                  <span>{w.niche}</span>
+                </figcaption>
               </figure>
-              <h3 class="ax-work-title">{w.title}</h3>
-              <p class="ax-work-outcome">{w.outcome}</p>
-            </a>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <a href="/work" class="ax-more reveal">All work <span aria-hidden="true">→</span></a>
+          <div class="ax-work-index" data-work-index>
+            {work.map((w, i) => (
+              <article class:list={['ax-work-item', i === 0 && 'is-open']} data-work-item>
+                <button
+                  id={`homepage-work-trigger-${w.id}`}
+                  type="button"
+                  class="ax-work-trigger"
+                  aria-expanded={i === 0 ? 'true' : 'false'}
+                  aria-controls={`homepage-work-panel-${w.id}`}
+                  data-work-trigger={w.id}
+                >
+                  <span class="ax-work-num" aria-hidden="true">{`0${i + 1}`}</span>
+                  <span class="ax-work-name">{w.title}</span>
+                  <span class="ax-work-niche">{w.niche}</span>
+                  <span class="ax-work-indicator" aria-hidden="true">+</span>
+                </button>
+                <div
+                  id={`homepage-work-panel-${w.id}`}
+                  class:list={['ax-work-panel', i === 0 && 'is-open']}
+                  role="region"
+                  aria-labelledby={`homepage-work-trigger-${w.id}`}
+                  aria-hidden={i === 0 ? 'false' : 'true'}
+                  data-work-panel={w.id}
+                  hidden={i !== 0}
+                >
+                  <div class="ax-work-panel-inner">
+                    <p class="ax-work-outcome">{w.outcome}</p>
+                    <a
+                      href={w.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="ax-work-link"
+                      tabindex={i === 0 ? undefined : -1}
+                      aria-label={`Open ${w.title} demo in a new tab`}
+                    >
+                      Open demo <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+
+            <a href="/work" class="ax-more ax-work-all">All work <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- SERVICES -->
-    <section class="ax-section">
+    <section class="ax-section ax-scene ax-scene--index" data-home-section="services" data-cinematic-scene="services" data-motion-role="index">
       <div class="ax-container">
         <header class="ax-head">
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Three focused paths, <em>one standard</em></h2>
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Three focused paths, <em>one standard</em></h2>
         </header>
 
         <ol class="ax-list">
           {services.map((s, i) => (
-            <li class="reveal" style={`--reveal-delay: ${i * 70}ms`}>
+            <li class="reveal ax-reveal--row" data-scene-index={i} style={`--reveal-delay: ${260 + i * 300}ms`}>
               <a href={s.href} class="ax-row">
                 <span class="ax-row-title">{s.label}</span>
                 <span class="ax-row-desc">{s.description}</span>
@@ -187,17 +248,17 @@ const team = [
     </section>
 
     <!-- WHY -->
-    <section class="ax-section">
+    <section class="ax-section ax-scene ax-scene--proof" data-home-section="why" data-cinematic-scene="why" data-motion-role="proof">
       <div class="ax-container ax-split">
         <div class="ax-split-left">
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Built for businesses that <em>cannot look unclear</em></h2>
-          <p class="ax-lead reveal" style="--reveal-delay: 120ms">
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Built for businesses that <em>cannot look unclear</em></h2>
+          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 440ms">
             If a new customer decides whether to trust you before they speak to you, the site has to do more than look acceptable.
           </p>
         </div>
         <div class="ax-split-right">
           {principles.map((p, i) => (
-            <div class="ax-principle reveal" style={`--reveal-delay: ${i * 80}ms`}>
+            <div class="ax-principle reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${260 + i * 240}ms`}>
               <div>
                 <h3 class="ax-principle-title">{p.title}</h3>
                 <p class="ax-principle-desc">{p.description}</p>
@@ -209,11 +270,11 @@ const team = [
     </section>
 
     <!-- FIGURES -->
-    <section class="ax-section ax-section--tight">
+    <section class="ax-section ax-section--tight ax-scene ax-scene--metrics" data-home-section="figures" data-cinematic-scene="figures" data-motion-role="metrics">
       <div class="ax-container">
         <div class="ax-figures">
           {figures.map((f, i) => (
-            <div class="ax-figure reveal" style={`--reveal-delay: ${i * 70}ms`}>
+            <div class="ax-figure reveal ax-reveal--metric" data-scene-index={i} style={`--reveal-delay: ${360 + i * 320}ms; --scene-index: ${i}`}>
               <span class="ax-figure-num">{f.value}</span>
               <span class="ax-figure-label">{f.label}</span>
             </div>
@@ -223,36 +284,39 @@ const team = [
     </section>
 
     <!-- PROCESS -->
-    <section class="ax-section">
+    <section class="ax-section ax-scene ax-scene--process" data-home-section="process" data-cinematic-scene="process" data-motion-role="process">
       <div class="ax-container">
         <header class="ax-head">
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Review, scope, <em>build, launch</em></h2>
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Review, scope, <em>build, launch</em></h2>
         </header>
 
-        <ol class="ax-process">
-          {process.map((p, i) => (
-            <li class="ax-step reveal" style={`--reveal-delay: ${i * 80}ms`}>
-              <span class="ax-step-node" aria-hidden="true"></span>
-              <h3 class="ax-step-title">{p.title}</h3>
-              <p class="ax-step-desc">{p.description}</p>
-            </li>
-          ))}
-        </ol>
+        <div class="ax-process-track" data-process-track>
+          <span class="ax-process-line" aria-hidden="true"><span class="ax-process-line-fill" data-process-line-fill></span></span>
+          <ol class="ax-process">
+            {process.map((p, i) => (
+              <li class="ax-step reveal ax-reveal--step" data-process-step data-scene-index={i} style={`--reveal-delay: ${300 + i * 220}ms`}>
+                <span class="ax-step-node" aria-hidden="true"></span>
+                <h3 class="ax-step-title">{p.title}</h3>
+                <p class="ax-step-desc">{p.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
 
     <!-- STUDIO -->
-    <section class="ax-section">
+    <section class="ax-section ax-scene ax-scene--partners" data-home-section="studio" data-cinematic-scene="studio" data-motion-role="partners">
       <div class="ax-container ax-split">
         <div class="ax-split-left">
-          <h2 class="ax-h2 reveal" style="--reveal-delay: 60ms">Two partners. <em>Direct accountability.</em></h2>
-          <p class="ax-lead reveal" style="--reveal-delay: 120ms">
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Two partners. <em>Direct accountability.</em></h2>
+          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 480ms">
             You work with the people shaping the strategy and building the site. No account layers, no handoff fog, no guessing who owns the outcome.
           </p>
         </div>
         <div class="ax-split-right">
           {team.map((m, i) => (
-            <div class="ax-person reveal" style={`--reveal-delay: ${i * 90}ms`}>
+            <div class="ax-person reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${320 + i * 360}ms`}>
               <span class="ax-person-name">{m.name}</span>
               <span class="ax-person-role">{m.role}</span>
               <p class="ax-person-desc">{m.description}</p>
@@ -263,17 +327,18 @@ const team = [
     </section>
 
     <!-- FINAL CTA -->
-    <section class="ax-final">
+    <section class="ax-final ax-scene ax-scene--resolution" data-home-section="final" data-cinematic-scene="final" data-motion-role="resolution">
       <div class="ax-container">
-        <h2 class="ax-mega ax-final-mega reveal" style="--reveal-delay: 60ms">
+        <div class="ax-final-rule reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 260ms"></div>
+        <h2 class="ax-mega ax-final-mega reveal ax-reveal--final" style="--reveal-delay: 620ms">
           Start a serious<br /><em>project conversation.</em>
         </h2>
-        <div class="ax-hero-actions reveal" style="--reveal-delay: 140ms">
+        <div class="ax-hero-actions reveal ax-reveal--final" style="--reveal-delay: 1080ms">
           <a href={CTA_PATHS.startProject} class="btn btn-primary">Start a project <span aria-hidden="true">→</span></a>
           <a href="/pricing" class="btn-ghost-link">See pricing</a>
         </div>
-        <p class="ax-fineprint reveal" style="--reveal-delay: 200ms">
-          Monthly or ownership build. Pricing is public, the launch path is defined, and every build is checked for speed, mobile quality, and clear inquiry flow before it ships.
+        <p class="ax-fineprint reveal ax-reveal--final" style="--reveal-delay: 1400ms">
+          Four packages. Pricing is public, the launch path is defined, and every build is checked for speed, mobile quality, and clear inquiry flow before it ships.
         </p>
       </div>
     </section>
@@ -384,27 +449,285 @@ const team = [
   .ax-solution-title { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 500; letter-spacing: -0.015em; color: var(--text-primary); margin: 0; }
   .ax-solution-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin: 0; max-width: 38ch; }
 
-  /* ── Work ─────────────────────────────────────────── */
-  .ax-work { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 3vw, 2.75rem); }
-  @media (min-width: 760px) { .ax-work { grid-template-columns: repeat(3, 1fr); } }
-
-  .ax-work-item { display: block; }
-  .ax-work-shot { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 6px; background: var(--surface-1); margin: 0; }
-  :global(.ax-work-img) {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.7s var(--ease-premium), filter 0.5s ease;
-    filter: grayscale(1) brightness(0.85);
+  /* ── Persistent page motif ────────────────────────── */
+  .ax-continuity-rail {
+    position: fixed;
+    z-index: 4;
+    top: 22vh;
+    right: clamp(1rem, 2vw, 2rem);
+    width: 7px;
+    height: 56vh;
+    pointer-events: none;
+    opacity: 0.72;
   }
-  .ax-work-item:hover :global(.ax-work-img) { transform: scale(1.04); filter: grayscale(0.4) brightness(1); }
+  .ax-continuity-rail-track {
+    position: absolute;
+    inset: 0 auto 0 3px;
+    width: 1px;
+    background: var(--hairline);
+  }
+  .ax-continuity-rail-progress {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--text-primary);
+    transform: scaleY(var(--page-progress, 0));
+    transform-origin: top center;
+    transition: transform 180ms linear;
+  }
 
-  .ax-work-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; letter-spacing: -0.015em; color: var(--text-primary); margin: 1.1rem 0 0; }
-  .ax-work-outcome { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin: 0.6rem 0 0; }
+  /* ── Work explorer ────────────────────────────────── */
+  .ax-work-explorer {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+    gap: clamp(2rem, 6vw, 5.5rem);
+    align-items: start;
+  }
+
+  .ax-work-feature-frame {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    background: var(--surface-1);
+  }
+
+  .ax-work-feature {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.035);
+    transition:
+      opacity 600ms var(--ease-cinematic),
+      transform 900ms var(--ease-cinematic),
+      visibility 0s linear 600ms;
+  }
+
+  .ax-work-feature.is-active {
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transition-delay: 0s;
+  }
+
+  :global(.ax-work-feature-img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.04);
+    filter: grayscale(0.14) brightness(0.92);
+    transition: transform 1.3s var(--ease-cinematic), filter 700ms var(--ease-premium);
+  }
+
+  .ax-work-feature.is-active :global(.ax-work-feature-img) {
+    transform: scale(1);
+    filter: grayscale(0.04) brightness(1);
+  }
+
+  .ax-work-feature-caption {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.9rem;
+    left: 1rem;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: rgba(242, 240, 234, 0.78);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55);
+  }
+
+  .ax-work-index {
+    min-width: 0;
+    border-top: 1px solid var(--hairline-strong);
+  }
+
+  .ax-work-item {
+    min-width: 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .ax-work-trigger {
+    display: grid;
+    grid-template-columns: 2.1rem minmax(0, 1fr) auto 1.5rem;
+    gap: 0.75rem;
+    align-items: center;
+    width: 100%;
+    min-height: 4.3rem;
+    padding: 0.85rem 0;
+    border: 0;
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 240ms var(--ease-premium), color 240ms var(--ease-premium);
+  }
+
+  .ax-work-trigger:hover,
+  .ax-work-trigger:focus-visible,
+  .ax-work-item.is-open .ax-work-trigger {
+    color: var(--text-primary);
+  }
+
+  .ax-work-trigger:hover .ax-work-name,
+  .ax-work-trigger:focus-visible .ax-work-name,
+  .ax-work-item.is-open .ax-work-name {
+    transform: translateX(0.25rem);
+  }
+
+  .ax-work-num,
+  .ax-work-niche {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .ax-work-name {
+    min-width: 0;
+    color: inherit;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    transition: transform 360ms var(--ease-cinematic);
+  }
+
+  .ax-work-indicator {
+    display: inline-grid;
+    place-items: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    color: var(--text-muted);
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 360ms var(--ease-cinematic), color 240ms var(--ease-premium);
+  }
+
+  .ax-work-item.is-open .ax-work-indicator {
+    color: var(--text-primary);
+    transform: rotate(45deg);
+  }
+
+  .ax-work-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 420ms var(--ease-cinematic), opacity 300ms var(--ease-premium);
+  }
+
+  .ax-work-panel-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.25rem;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .ax-work-panel.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .ax-work-panel.is-open .ax-work-panel-inner {
+    padding-bottom: 1.35rem;
+  }
+
+  .ax-work-outcome {
+    max-width: 38ch;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ax-work-link {
+    display: inline-flex;
+    align-items: center;
+    align-self: end;
+    gap: 0.45rem;
+    min-height: 2.75rem;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: var(--hairline-strong);
+    text-underline-offset: 0.4em;
+    transition: gap 240ms var(--ease-premium), text-decoration-color 240ms var(--ease-premium);
+  }
+
+  .ax-work-link:hover {
+    gap: 0.75rem;
+    text-decoration-color: var(--text-primary);
+  }
+
+  .ax-work-all {
+    margin-top: 1.75rem;
+  }
+
+  @media (max-width: 1100px) {
+    .ax-continuity-rail { display: none; }
+  }
+
+  @media (max-width: 759px) {
+    .ax-work-explorer {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+    }
+
+    .ax-work-feature-frame { aspect-ratio: 4 / 3; }
+
+    .ax-work-trigger {
+      grid-template-columns: 2rem minmax(0, 1fr) auto 1.35rem;
+      gap: 0.55rem;
+      min-height: 4rem;
+    }
+
+    .ax-work-niche {
+      max-width: 6.5rem;
+      text-align: right;
+      line-height: 1.35;
+    }
+
+    .ax-work-panel-inner {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .ax-work-link { align-self: start; }
+  }
 
   .ax-more {
-    display: inline-flex; align-items: center; gap: 0.55rem; margin-top: clamp(2.5rem, 5vw, 3.5rem);
-    font-family: var(--font-mono); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.14em;
-    color: var(--text-secondary); transition: color 0.2s ease, gap 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-secondary);
+    transition: color 0.2s ease, gap 0.2s ease;
   }
+
   .ax-more:hover { color: var(--text-primary); gap: 0.85rem; }
 
   /* ── Index list (services) ────────────────────────── */
@@ -439,17 +762,29 @@ const team = [
 
   /* ── Figures ──────────────────────────────────────── */
   .ax-figures { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(2rem, 4vw, 3rem); }
-  @media (min-width: 760px) { .ax-figures { grid-template-columns: repeat(4, 1fr); } }
-  .ax-figure { display: grid; gap: 0.65rem; border-top: 1px solid var(--hairline-strong); padding-top: 1.1rem; }
+  @media (min-width: 760px) { .ax-figures { grid-template-columns: repeat(3, 1fr); } }
+  .ax-figure { position: relative; display: grid; gap: 0.65rem; border-top: 1px solid var(--hairline-strong); padding-top: 1.1rem; }
+  .ax-figure::before { content: ''; position: absolute; inset: -1px 0 auto; height: 1px; background: var(--text-primary); transform: scaleX(0); transform-origin: left center; transition: transform 700ms var(--ease-cinematic); }
+  .ax-figure.is-in::before { transform: scaleX(1); }
   .ax-figure-num { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); }
   .ax-figure-label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.5; }
 
   /* ── Process ──────────────────────────────────────── */
-  .ax-process { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 0; }
+  .ax-process-track { position: relative; --process-progress: 0; }
+  .ax-process-line { position: absolute; z-index: 0; inset: 0 0 auto; display: block; height: 1px; background: var(--hairline-strong); pointer-events: none; }
+  .ax-process-line-fill { display: block; width: 100%; height: 100%; background: var(--text-primary); transform: scaleX(var(--process-progress)); transform-origin: left center; transition: transform 180ms linear; }
+  .ax-process { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 0; }
   @media (min-width: 860px) { .ax-process { grid-template-columns: repeat(4, 1fr); } }
-  .ax-step { position: relative; padding-top: 2rem; padding-right: clamp(1rem, 2vw, 2rem); border-top: 1px solid var(--hairline-strong); }
-  @media (max-width: 859px) { .ax-step { padding-top: 1.6rem; padding-bottom: 1.6rem; } .ax-step + .ax-step { border-top: 1px solid var(--hairline); } }
-  .ax-step-node { position: absolute; top: -4px; left: 0; width: 7px; height: 7px; border-radius: 999px; background: var(--text-primary); }
+  .ax-step { position: relative; padding-top: 2rem; padding-right: clamp(1rem, 2vw, 2rem); border-top: 1px solid transparent; }
+  @media (max-width: 859px) {
+    .ax-process-track { padding-left: 1.15rem; }
+    .ax-process-line { inset: 0 auto 0 0; width: 1px; height: auto; }
+    .ax-process-line-fill { width: 100%; height: 100%; transform: scaleY(var(--process-progress)); transform-origin: top center; }
+    .ax-step { padding-top: 1.6rem; padding-bottom: 1.6rem; }
+    .ax-step + .ax-step { border-top: 1px solid var(--hairline); }
+  }
+  .ax-step-node { position: absolute; top: -4px; left: 0; width: 7px; height: 7px; border-radius: 999px; background: var(--text-muted); transform: scale(0.82); transition: background-color 240ms var(--ease-premium), transform 360ms var(--ease-cinematic); }
+  .ax-step.is-current .ax-step-node { background: var(--text-primary); transform: scale(1.35); }
   .ax-step-title { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 500; letter-spacing: -0.02em; color: var(--text-primary); margin: 0.5rem 0 0; }
   .ax-step-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin: 0.7rem 0 0; max-width: 34ch; }
 
@@ -461,18 +796,696 @@ const team = [
   .ax-person-desc { color: var(--text-secondary); font-size: 1rem; line-height: 1.65; margin: 1rem 0 0; max-width: 46ch; }
 
   /* ── Final CTA ────────────────────────────────────── */
-  .ax-final { position: relative; padding-block: clamp(5rem, 16vh, 10rem); border-top: 1px solid var(--hairline); }
+  .ax-final { position: relative; padding-block: clamp(5rem, 16vh, 10rem); border-top: 1px solid var(--hairline); overflow: hidden; }
+  .ax-final::after { content: ''; position: absolute; top: 0; right: 0; width: min(48vw, 42rem); height: 1px; background: linear-gradient(90deg, transparent, var(--hairline-strong)); pointer-events: none; }
+  .ax-final-rule { width: clamp(4rem, 10vw, 8rem); height: 1px; margin-bottom: clamp(2rem, 5vw, 3.5rem); background: var(--text-primary); transform-origin: left center; }
   .ax-final-mega { margin-block: 0 2.5rem; }
   .ax-fineprint { margin-top: 2.25rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; max-width: 48ch; }
 
-  /* ── Hero load sequence (CSS-only, calm) ──────────── */
-  .ax-load { opacity: 0; animation: ax-rise 0.8s var(--ease-cinematic) forwards; animation-delay: calc(var(--i, 0) * 80ms); }
-  .ax-mask { transform: translateY(110%); animation: ax-unmask 0.9s var(--ease-cinematic) forwards; animation-delay: calc(var(--i, 0) * 90ms); }
+  /* ── Choreographed reveals ────────────────────────── */
+  .ax-root .ax-reveal--title { transition: opacity 800ms var(--ease-cinematic), transform 800ms var(--ease-cinematic), clip-path 800ms var(--ease-cinematic); }
+  .ax-root .ax-reveal--item,
+  .ax-root .ax-reveal--copy,
+  .ax-root .ax-reveal--row,
+  .ax-root .ax-reveal--metric,
+  .ax-root .ax-reveal--step,
+  .ax-root .ax-reveal--final { transition: opacity 640ms var(--ease-cinematic), transform 640ms var(--ease-cinematic); }
+  .ax-root .ax-reveal--rule { transition: opacity 720ms var(--ease-cinematic), transform 720ms var(--ease-cinematic); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) { opacity: 0; transform: translateY(1.2rem); clip-path: inset(0 0 100% 0); }
+    :global(html.js) .ax-root .ax-reveal--title.is-in { clip-path: inset(0); }
+    :global(html.js) .ax-root .ax-reveal--statement:not(.is-in) { opacity: 0; transform: translateY(1.4rem); }
+    :global(html.js) .ax-root .ax-reveal--copy:not(.is-in) { opacity: 0; transform: translateY(1rem); }
+    :global(html.js) .ax-root .ax-reveal--item:not(.is-in) { opacity: 0; transform: translateY(1rem) scale(0.985); }
+    :global(html.js) .ax-root .ax-reveal--row:not(.is-in) { opacity: 0; transform: translateX(-1.1rem); }
+    :global(html.js) .ax-root .ax-reveal--metric:not(.is-in) { opacity: 0; transform: translateY(1rem); }
+    :global(html.js) .ax-root .ax-reveal--step:not(.is-in) { opacity: 0; transform: translateY(1.25rem); }
+    :global(html.js) .ax-root .ax-reveal--final:not(.is-in) { opacity: 0; transform: translateY(1.25rem) scale(0.985); }
+    :global(html.js) .ax-root .ax-reveal--rule:not(.is-in) { opacity: 0; transform: scaleX(0); }
+  }
+
+  /* ── Hero title-card pacing ───────────────────────── */
+  .ax-hero::before { content: ''; position: absolute; top: clamp(1.5rem, 8vh, 4rem); bottom: clamp(2rem, 8vh, 5rem); left: var(--ax-gutter); width: 1px; background: linear-gradient(var(--hairline-strong), transparent); opacity: 0.7; transform: scaleY(0); transform-origin: top center; }
+  .ax-load { opacity: 1; }
+  .ax-mask { transform: none; }
+  :global(html.js) .ax-load { opacity: 0; animation: ax-rise 0.8s var(--ease-cinematic) forwards; animation-delay: calc(var(--i, 0) * 80ms); }
+  :global(html.js) .ax-mask { transform: translateY(110%); animation: ax-unmask 0.9s var(--ease-cinematic) forwards; animation-delay: calc(var(--i, 0) * 90ms); }
+  :global(html.js) .ax-hero::before { animation: ax-line-in 1.1s var(--ease-cinematic) 320ms forwards; }
 
   @keyframes ax-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
   @keyframes ax-unmask { from { transform: translateY(110%); } to { transform: translateY(0); } }
+  @keyframes ax-line-in { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 
   @media (prefers-reduced-motion: reduce) {
-    .ax-load, .ax-mask { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .ax-load, .ax-mask, .ax-hero::before { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .ax-continuity-rail { display: none; }
+    .ax-work-feature,
+    .ax-work-panel,
+    .ax-work-panel-inner,
+    .ax-work-name,
+    .ax-work-indicator,
+    .ax-work-feature-img,
+    .ax-process-line-fill,
+    .ax-step-node,
+    .ax-figure::before { transition: none !important; }
+    .ax-work-feature { transform: none; }
+    .ax-work-feature.is-active { opacity: 1; }
+    .ax-root .ax-reveal--rule { opacity: 1 !important; transform: none !important; }
+  }
+
+  /* ── Full-page cinematic scene system ───────────────── */
+  :global(html) { overflow-x: clip; }
+
+  .ax-scene {
+    --scene-progress: 1;
+    --scene-inverse: 0;
+    --scene-drift-left: 0px;
+    --scene-drift-right: 0px;
+    --scene-drift-up: 0px;
+    --scene-drift-down: 0px;
+    --scene-scale: 1;
+    position: relative;
+    isolation: isolate;
+  }
+
+  .ax-scene::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    right: var(--ax-gutter);
+    bottom: 0;
+    left: var(--ax-gutter);
+    height: 1px;
+    background: var(--hairline-strong);
+    opacity: 0.72;
+    pointer-events: none;
+    transform: scaleX(var(--scene-progress));
+    transform-origin: left center;
+    transition: transform 1.35s var(--ease-cinematic), opacity 900ms var(--ease-premium);
+  }
+
+  .ax-scene:not(.ax-scene--title-card)::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: var(--ax-gutter);
+    left: var(--ax-gutter);
+    height: 1px;
+    background: linear-gradient(90deg, var(--text-primary), transparent 38%, transparent);
+    opacity: 0.22;
+    pointer-events: none;
+    transform: scaleX(var(--scene-progress));
+    transform-origin: left center;
+    transition: transform 1.5s var(--ease-cinematic), opacity 1s var(--ease-premium);
+  }
+
+  .ax-scene--resolution::after {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    width: min(48vw, 42rem);
+    background: linear-gradient(90deg, transparent, var(--hairline-strong));
+    transform-origin: right center;
+  }
+
+  .ax-scene > .ax-container,
+  .ax-scene > .ax-container > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* The opening is a title card: held, masked, then released in three beats. */
+  .ax-scene--title-card .ax-hero-title {
+    transition: transform 1.45s var(--ease-cinematic);
+  }
+
+  .ax-scene--title-card .ax-hero-foot {
+    transition: transform 1.25s var(--ease-cinematic);
+  }
+
+  :global(html.js) .ax-scene--title-card .ax-hero-title {
+    transform: translate3d(0, var(--scene-drift-up), 0) scale(var(--scene-scale));
+  }
+
+  :global(html.js) .ax-scene--title-card .ax-hero-foot {
+    transform: translate3d(var(--scene-drift-right), 0, 0);
+  }
+
+  :global(html.js) .ax-mask {
+    animation: ax-title-card-reveal 1.6s var(--ease-cinematic) both;
+    animation-delay: calc(260ms + (var(--i, 0) * 360ms));
+  }
+
+  :global(html.js) .ax-load {
+    animation: ax-hero-support-reveal 1.2s var(--ease-cinematic) both;
+    animation-delay: calc(1.85s + (var(--i, 0) * 360ms));
+  }
+
+  :global(html.js) .ax-hero::before {
+    animation: ax-line-in 1.8s var(--ease-cinematic) 180ms both;
+  }
+
+  @keyframes ax-title-card-reveal {
+    0% { opacity: 0; transform: translate3d(0, 120%, 0) scale(1.045); letter-spacing: 0.015em; }
+    58% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); letter-spacing: -0.025em; }
+    100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); letter-spacing: -0.025em; }
+  }
+
+  @keyframes ax-hero-support-reveal {
+    0% { opacity: 0; transform: translate3d(0, 1.25rem, 0); }
+    62% { opacity: 1; transform: translate3d(0, 0, 0); }
+    100% { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+
+  /* Editorial statement: two lines travel from opposite sides and settle. */
+  .ax-statement-line {
+    display: block;
+    transition: transform 1.45s var(--ease-cinematic), letter-spacing 1.45s var(--ease-cinematic);
+  }
+
+  :global(html.js) .ax-scene--statement .ax-statement-line--quiet {
+    transform: translate3d(var(--scene-drift-left), 0, 0);
+    letter-spacing: 0.012em;
+  }
+
+  :global(html.js) .ax-scene--statement .ax-statement-line--resolve {
+    transform: translate3d(var(--scene-drift-right), 0, 0);
+    letter-spacing: -0.02em;
+    transition-delay: 160ms;
+  }
+
+  /* Solution cascade: each proof beat has a different vector. */
+  .ax-solution-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    background: var(--text-primary);
+    opacity: 0.45;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 1.2s var(--ease-cinematic);
+  }
+
+  .ax-solution-item { position: relative; padding-left: clamp(0.85rem, 2vw, 1.4rem); }
+  .ax-solution-item.is-in::before { transform: scaleY(1); }
+  .ax-solution-title,
+  .ax-solution-desc { transition: transform 1.35s var(--ease-cinematic), opacity 1.1s var(--ease-premium); }
+
+  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(1) .ax-solution-title { transform: translate3d(var(--scene-drift-left), 0, 0); }
+  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(1) .ax-solution-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
+  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(2) .ax-solution-title { transform: translate3d(0, var(--scene-drift-up), 0); }
+  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(2) .ax-solution-desc { transform: translate3d(var(--scene-drift-right), 0, 0); }
+  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(3) .ax-solution-title { transform: translate3d(var(--scene-drift-right), 0, 0); }
+  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(3) .ax-solution-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
+
+  /* Work: the frame and index arrive on separate tracks; the image breathes slowly. */
+  .ax-work-feature-frame,
+  .ax-work-index { transition: transform 1.5s var(--ease-cinematic); }
+  :global(html.js) .ax-scene--feature .ax-work-feature-frame { transform: translate3d(0, var(--scene-drift-down), 0); }
+  :global(html.js) .ax-scene--feature .ax-work-index { transform: translate3d(var(--scene-drift-right), 0, 0); }
+
+  .ax-work-feature {
+    clip-path: inset(0 16% 0 0);
+    transition:
+      opacity 1.2s var(--ease-cinematic),
+      transform 1.8s var(--ease-cinematic),
+      clip-path 1.25s var(--ease-cinematic),
+      visibility 0s linear 1.2s;
+  }
+
+  .ax-work-feature.is-active {
+    clip-path: inset(0);
+    transition-delay: 0s;
+  }
+
+  :global(.ax-work-feature-img) {
+    transform: scale(1.1);
+    transition: transform 2.1s var(--ease-cinematic), filter 1.2s var(--ease-premium);
+  }
+
+  .ax-work-feature.is-active :global(.ax-work-feature-img) {
+    transform: scale(1);
+  }
+
+  .ax-work-feature-frame::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    background: rgba(242, 240, 234, 0.75);
+    pointer-events: none;
+    transform: translateX(calc(var(--scene-progress) * 100%));
+    opacity: 0.45;
+    transition: transform 1.65s var(--ease-cinematic), opacity 900ms var(--ease-premium);
+  }
+
+  /* Services: a line indicator draws before each row settles into the index. */
+  .ax-list > li { position: relative; overflow: hidden; }
+  .ax-list > li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--text-primary);
+    opacity: 0.7;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 1.25s var(--ease-cinematic);
+  }
+  .ax-list > li.is-in::before { transform: scaleY(1); }
+  .ax-row-title,
+  .ax-row-desc { transition: transform 1.35s var(--ease-cinematic), opacity 1.15s var(--ease-premium); }
+  :global(html.js) .ax-scene--index .ax-list > li:nth-child(1) .ax-row-title { transform: translate3d(var(--scene-drift-left), 0, 0); }
+  :global(html.js) .ax-scene--index .ax-list > li:nth-child(1) .ax-row-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
+  :global(html.js) .ax-scene--index .ax-list > li:nth-child(2) .ax-row-title { transform: translate3d(0, var(--scene-drift-up), 0); }
+  :global(html.js) .ax-scene--index .ax-list > li:nth-child(2) .ax-row-desc { transform: translate3d(var(--scene-drift-right), 0, 0); }
+  :global(html.js) .ax-scene--index .ax-list > li:nth-child(3) .ax-row-title { transform: translate3d(var(--scene-drift-left), 0, 0); }
+  :global(html.js) .ax-scene--index .ax-list > li:nth-child(3) .ax-row-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
+
+  /* Trust/proof: the left statement holds while proof lines disclose progressively. */
+  .ax-scene--proof .ax-split-left { transition: transform 1.45s var(--ease-cinematic); }
+  :global(html.js) .ax-scene--proof .ax-split-left { transform: translate3d(0, var(--scene-drift-up), 0); }
+  .ax-principle { position: relative; }
+  .ax-principle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    background: var(--text-primary);
+    opacity: 0.55;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 1.3s var(--ease-cinematic);
+  }
+  .ax-principle.is-in::after { transform: scaleY(1); }
+  .ax-principle-title,
+  .ax-principle-desc { transition: transform 1.35s var(--ease-cinematic), opacity 1.15s var(--ease-premium); }
+  :global(html.js) .ax-scene--proof .ax-principle-title { transform: translate3d(var(--scene-drift-right), 0, 0); }
+  :global(html.js) .ax-scene--proof .ax-principle-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
+
+  /* Metrics are a separate beat: line, number, then label. */
+  .ax-figure::before { transition: transform 1.25s var(--ease-cinematic); }
+  .ax-figure-num,
+  .ax-figure-label { display: block; }
+  :global(html.js) .ax-scene--metrics .ax-figure-num { animation: none; }
+  :global(html.js) .ax-scene--metrics .ax-figure.is-in .ax-figure-num {
+    animation: ax-metric-beat 1.55s var(--ease-cinematic) both;
+    animation-delay: calc(420ms + (var(--scene-index, 0) * 320ms));
+  }
+  :global(html.js) .ax-scene--metrics .ax-figure.is-in .ax-figure-label {
+    animation: ax-metric-label 1s var(--ease-premium) both;
+    animation-delay: calc(820ms + (var(--scene-index, 0) * 320ms));
+  }
+  @keyframes ax-metric-beat {
+    0% { opacity: 0; transform: translate3d(0, 1.4rem, 0) scale(0.92); }
+    58% { opacity: 1; transform: translate3d(0, 0, 0) scale(1.035); }
+    100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes ax-metric-label {
+    from { opacity: 0; transform: translate3d(0, 0.6rem, 0); letter-spacing: 0.22em; }
+    to { opacity: 1; transform: none; letter-spacing: 0.1em; }
+  }
+
+  /* Process: the drawn line leads; each step settles as its local progress arrives. */
+  .ax-process-line-fill { transition: transform 320ms linear; }
+  .ax-step { --step-progress: 1; --step-drift: 0px; }
+  .ax-step-node { transition: background-color 700ms var(--ease-premium), transform 800ms var(--ease-cinematic), box-shadow 800ms var(--ease-cinematic); }
+  .ax-step.is-current .ax-step-node { box-shadow: 0 0 0 5px rgba(242, 240, 234, 0.08); }
+  .ax-step-title,
+  .ax-step-desc { transition: transform 1s var(--ease-cinematic), opacity 900ms var(--ease-premium), color 700ms var(--ease-premium); }
+  :global(html.js) .ax-scene--process .ax-step-title { transform: translate3d(0, var(--step-drift), 0); }
+  :global(html.js) .ax-scene--process .ax-step-desc { opacity: calc(0.42 + (var(--step-progress) * 0.58)); transform: translate3d(0, var(--step-drift), 0); }
+  .ax-step.is-current .ax-step-title { color: var(--text-primary); }
+
+  /* Partners use a quiet lateral entrance rather than another stacked fade. */
+  .ax-scene--partners .ax-split-left { transition: transform 1.5s var(--ease-cinematic); }
+  :global(html.js) .ax-scene--partners .ax-split-left { transform: translate3d(var(--scene-drift-left), 0, 0); }
+  .ax-person { position: relative; overflow: hidden; }
+  .ax-person::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3rem;
+    height: 1px;
+    background: var(--text-primary);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.2s var(--ease-cinematic);
+  }
+  .ax-person.is-in::after { transform: scaleX(1); }
+  .ax-person-name { transition: transform 1.4s var(--ease-cinematic), opacity 1.1s var(--ease-premium); }
+  .ax-person-role,
+  .ax-person-desc { transition: transform 1.25s var(--ease-cinematic), opacity 1s var(--ease-premium); }
+  :global(html.js) .ax-scene--partners .ax-person-name { transform: translate3d(var(--scene-drift-right), 0, 0); }
+  :global(html.js) .ax-scene--partners .ax-person-role { transform: translate3d(var(--scene-drift-left), 0, 0); }
+  :global(html.js) .ax-scene--partners .ax-person-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
+
+  /* Closing resolution: rule, message, action, then the quiet footnote. */
+  .ax-final-rule { transition: opacity 1.3s var(--ease-premium), transform 1.45s var(--ease-cinematic); }
+  .ax-final-mega { transition: transform 1.5s var(--ease-cinematic), opacity 1.25s var(--ease-premium); }
+  :global(html.js) .ax-scene--resolution .ax-final-mega { transform: translate3d(0, var(--scene-drift-up), 0) scale(var(--scene-scale)); }
+  :global(html.js) .ax-scene--resolution .ax-hero-actions { transform: translate3d(var(--scene-drift-right), 0, 0); transition: transform 1.2s var(--ease-cinematic); }
+  :global(html.js) .ax-scene--resolution .ax-fineprint { transform: translate3d(0, var(--scene-drift-down), 0); transition: transform 1.1s var(--ease-cinematic), opacity 1s var(--ease-premium); }
+
+  /* Homepage-only footer coda. The footer stays readable while its columns settle. */
+  :global(.site-footer[data-home-footer='true']) { position: relative; overflow: hidden; }
+  :global(.site-footer[data-home-footer='true']::before) {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: min(32vw, 22rem);
+    height: 1px;
+    background: var(--text-primary);
+    opacity: 0.6;
+    transform: scaleX(var(--footer-progress, 0));
+    transform-origin: left center;
+    transition: transform 1.4s var(--ease-cinematic);
+  }
+  :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div) {
+    transition: transform 1.25s var(--ease-cinematic), opacity 1s var(--ease-premium);
+  }
+  :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div:nth-child(odd)) {
+    transform: translate3d(0, var(--footer-drift, 0px), 0);
+  }
+  :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div:nth-child(even)) {
+    transform: translate3d(0, calc(var(--footer-drift, 0px) * -1), 0);
+  }
+
+  /* Long, deliberate scene holds. Every variant remains visible without JS. */
+  .ax-root .ax-reveal--title { transition: opacity 1.35s var(--ease-cinematic), transform 1.35s var(--ease-cinematic), clip-path 1.35s var(--ease-cinematic); }
+  .ax-root .ax-reveal--statement { transition: opacity 1.5s var(--ease-cinematic), transform 1.5s var(--ease-cinematic); }
+  .ax-root .ax-reveal--copy { transition: opacity 1.15s var(--ease-cinematic), transform 1.15s var(--ease-cinematic); }
+  .ax-root .ax-reveal--item { transition: opacity 1.25s var(--ease-cinematic), transform 1.25s var(--ease-cinematic); }
+  .ax-root .ax-reveal--row { transition: opacity 1.35s var(--ease-cinematic), transform 1.35s var(--ease-cinematic); }
+  .ax-root .ax-reveal--metric { transition: opacity 1.3s var(--ease-cinematic), transform 1.3s var(--ease-cinematic); }
+  .ax-root .ax-reveal--step { transition: opacity 1.2s var(--ease-cinematic), transform 1.2s var(--ease-cinematic); }
+  .ax-root .ax-reveal--final { transition: opacity 1.45s var(--ease-cinematic), transform 1.45s var(--ease-cinematic); }
+  .ax-root .ax-reveal--rule { transition: opacity 1.4s var(--ease-cinematic), transform 1.4s var(--ease-cinematic); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) { opacity: 0; transform: translate3d(0, 2rem, 0) scale(0.985); clip-path: inset(0 0 100% 0); }
+    :global(html.js) .ax-root .ax-reveal--title.is-in { clip-path: inset(0); }
+    :global(html.js) .ax-root .ax-reveal--statement:not(.is-in) { opacity: 0; transform: translate3d(0, 2.2rem, 0); }
+    :global(html.js) .ax-root .ax-reveal--copy:not(.is-in) { opacity: 0; transform: translate3d(var(--scene-drift-left), 1.4rem, 0); }
+    :global(html.js) .ax-root .ax-reveal--item:not(.is-in) { opacity: 0; transform: translate3d(0, 1.8rem, 0) scale(0.98); }
+    :global(html.js) .ax-root .ax-reveal--row:not(.is-in) { opacity: 0; transform: translate3d(-2.25rem, 0, 0); }
+    :global(html.js) .ax-root .ax-reveal--metric:not(.is-in) { opacity: 0; transform: translate3d(0, 2rem, 0) scale(0.96); }
+    :global(html.js) .ax-root .ax-reveal--step:not(.is-in) { opacity: 0; transform: translate3d(0, 1.8rem, 0); }
+    :global(html.js) .ax-root .ax-reveal--final:not(.is-in) { opacity: 0; transform: translate3d(0, 2rem, 0) scale(0.965); }
+    :global(html.js) .ax-root .ax-reveal--rule:not(.is-in) { opacity: 0; transform: scaleX(0); }
+  }
+
+  @media (max-width: 759px) {
+    .ax-scene::after,
+    .ax-scene:not(.ax-scene--title-card)::before { right: var(--ax-gutter); left: var(--ax-gutter); }
+    .ax-work-feature-frame::after { display: none; }
+    .ax-solution-item { padding-left: 0.9rem; }
+    :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div:nth-child(even)) { transform: translate3d(0, var(--footer-drift, 0px), 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ax-scene::before,
+    .ax-scene::after,
+    .ax-scene--resolution::after,
+    .ax-work-feature-frame::after,
+    .ax-solution-item::before,
+    .ax-list > li::before,
+    .ax-principle::after,
+    .ax-person::after,
+    :global(.site-footer[data-home-footer='true']::before) { transition: none !important; transform: none !important; }
+    .ax-scene--title-card .ax-hero-title,
+    .ax-scene--title-card .ax-hero-foot,
+    .ax-scene--proof .ax-split-left,
+    .ax-scene--partners .ax-split-left,
+    .ax-work-feature-frame,
+    .ax-work-index,
+    .ax-solution-title,
+    .ax-solution-desc,
+    .ax-row-title,
+    .ax-row-desc,
+    .ax-principle-title,
+    .ax-principle-desc,
+    .ax-person-name,
+    .ax-person-role,
+    .ax-person-desc,
+    .ax-final-mega,
+    :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div) { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .ax-figure-num,
+    .ax-figure-label { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .ax-step-desc { opacity: 1 !important; transform: none !important; }
   }
 </style>
+
+<script>
+  type HomeWindow = Window & { __axiomHomeCleanup?: () => void };
+
+  const initAxiomHomepage = () => {
+    const root = document.querySelector<HTMLElement>('[data-homepage]');
+    const homeWindow = window as HomeWindow;
+
+    if (!root) {
+      homeWindow.__axiomHomeCleanup?.();
+      homeWindow.__axiomHomeCleanup = undefined;
+      return;
+    }
+
+    if (root.dataset.homeMotionReady === 'true') return;
+
+    homeWindow.__axiomHomeCleanup?.();
+    root.dataset.homeMotionReady = 'true';
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const triggers = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-work-trigger]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-work-panel]'));
+    const features = Array.from(root.querySelectorAll<HTMLElement>('[data-work-feature]'));
+    const items = Array.from(root.querySelectorAll<HTMLElement>('[data-work-item]'));
+    const scenes = Array.from(root.querySelectorAll<HTMLElement>('[data-cinematic-scene]'));
+    const panelTimers = new WeakMap<HTMLElement, number>();
+    const processTrack = root.querySelector<HTMLElement>('[data-process-track]');
+    const processSteps = Array.from(root.querySelectorAll<HTMLElement>('[data-process-step]'));
+    const homeFooter = document.querySelector<HTMLElement>('.site-footer');
+    const footerColumns = homeFooter
+      ? Array.from(homeFooter.querySelectorAll<HTMLElement>('.axiom-container > div'))
+      : [];
+    let scrollFrame = 0;
+
+    homeFooter?.setAttribute('data-home-footer', 'true');
+    footerColumns.forEach((column, index) => {
+      column.style.setProperty('--footer-delay', `${index * 120}ms`);
+    });
+
+    const setPanelLinkState = (panel: HTMLElement, enabled: boolean) => {
+      panel.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
+        if (enabled) link.removeAttribute('tabindex');
+        else link.tabIndex = -1;
+      });
+    };
+
+    const cancelPanelTimer = (panel: HTMLElement) => {
+      const timer = panelTimers.get(panel);
+      if (timer !== undefined) {
+        window.clearTimeout(timer);
+        panelTimers.delete(panel);
+      }
+    };
+
+    const setPanelOpen = (panel: HTMLElement, open: boolean) => {
+      cancelPanelTimer(panel);
+
+      if (open) {
+        panel.hidden = false;
+        panel.setAttribute('aria-hidden', 'false');
+        setPanelLinkState(panel, true);
+        if (reducedMotion) {
+          panel.classList.add('is-open');
+        } else {
+          window.requestAnimationFrame(() => panel.classList.add('is-open'));
+        }
+        return;
+      }
+
+      panel.classList.remove('is-open');
+      panel.setAttribute('aria-hidden', 'true');
+      setPanelLinkState(panel, false);
+
+      if (reducedMotion) {
+        panel.hidden = true;
+        return;
+      }
+
+      const timer = window.setTimeout(() => {
+        if (!panel.classList.contains('is-open')) panel.hidden = true;
+        panelTimers.delete(panel);
+      }, 440);
+      panelTimers.set(panel, timer);
+    };
+
+    const setWorkActive = (activeId: string) => {
+      triggers.forEach((trigger) => {
+        const isActive = trigger.dataset.workTrigger === activeId;
+        trigger.setAttribute('aria-expanded', String(isActive));
+      });
+
+      items.forEach((item) => {
+        const trigger = item.querySelector<HTMLButtonElement>('[data-work-trigger]');
+        item.classList.toggle('is-open', trigger?.dataset.workTrigger === activeId);
+      });
+
+      panels.forEach((panel) => {
+        setPanelOpen(panel, panel.dataset.workPanel === activeId);
+      });
+
+      features.forEach((feature) => {
+        const isActive = feature.dataset.workFeature === activeId;
+        feature.classList.toggle('is-active', isActive);
+        feature.setAttribute('aria-hidden', String(!isActive));
+      });
+
+      root.dataset.activeWork = activeId;
+    };
+
+    triggers.forEach((trigger, index) => {
+      trigger.addEventListener('click', () => {
+        const activeId = trigger.dataset.workTrigger;
+        if (activeId && activeId !== root.dataset.activeWork) setWorkActive(activeId);
+      });
+
+      trigger.addEventListener('keydown', (event) => {
+        let nextIndex = index;
+        if (event.key === 'ArrowDown') nextIndex = (index + 1) % triggers.length;
+        if (event.key === 'ArrowUp') nextIndex = (index - 1 + triggers.length) % triggers.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = triggers.length - 1;
+        if (nextIndex === index) return;
+        event.preventDefault();
+        triggers[nextIndex]?.focus();
+      });
+    });
+
+    const clamp = (value: number) => Math.min(Math.max(value, 0), 1);
+
+    const updateScrollState = () => {
+      scrollFrame = 0;
+      const documentRange = document.documentElement.scrollHeight - window.innerHeight;
+      root.style.setProperty('--page-progress', String(documentRange > 0 ? clamp(window.scrollY / documentRange) : 0));
+
+      const viewportHeight = Math.max(window.innerHeight, 1);
+      const viewportStart = viewportHeight * 0.86;
+      const viewportEnd = viewportHeight * 0.22;
+      let activeScene = '';
+      let activeScore = Number.NEGATIVE_INFINITY;
+
+      scenes.forEach((scene) => {
+        const rect = scene.getBoundingClientRect();
+        const sceneRange = Math.max(rect.height + viewportStart - viewportEnd, 1);
+        const sceneProgress = clamp((viewportStart - rect.top) / sceneRange);
+        const sceneInverse = 1 - sceneProgress;
+        const horizontalDrift = Math.round(sceneInverse * 28);
+        const verticalDrift = Math.round(sceneInverse * 22);
+
+        scene.style.setProperty('--scene-progress', String(sceneProgress));
+        scene.style.setProperty('--scene-inverse', String(sceneInverse));
+        scene.style.setProperty('--scene-drift-left', `${-horizontalDrift}px`);
+        scene.style.setProperty('--scene-drift-right', `${horizontalDrift}px`);
+        scene.style.setProperty('--scene-drift-up', `${-verticalDrift}px`);
+        scene.style.setProperty('--scene-drift-down', `${verticalDrift}px`);
+        scene.style.setProperty('--scene-scale', String(0.985 + sceneProgress * 0.015));
+        scene.dataset.scenePhase = sceneProgress < 0.24 ? 'enter' : sceneProgress > 0.78 ? 'exit' : 'hold';
+
+        const visibleTop = Math.max(rect.top, 0);
+        const visibleBottom = Math.min(rect.bottom, viewportHeight);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        const isInScene = rect.top <= viewportHeight * 0.62 && rect.bottom >= viewportHeight * 0.28;
+        const centerDistance = Math.abs((rect.top + rect.bottom) / 2 - viewportHeight * 0.48);
+        const score = visibleHeight - centerDistance * 0.02;
+        if (isInScene && score > activeScore) {
+          activeScore = score;
+          activeScene = scene.dataset.cinematicScene || '';
+        }
+      });
+
+      scenes.forEach((scene) => {
+        scene.classList.toggle('is-scene-active', scene.dataset.cinematicScene === activeScene);
+      });
+      if (activeScene) root.dataset.activeScene = activeScene;
+
+      if (homeFooter) {
+        const footerRect = homeFooter.getBoundingClientRect();
+        const footerRange = Math.max(footerRect.height + viewportHeight * 0.9 - viewportHeight * 0.2, 1);
+        const footerProgress = clamp((viewportHeight * 0.9 - footerRect.top) / footerRange);
+        homeFooter.style.setProperty('--footer-progress', String(footerProgress));
+        homeFooter.style.setProperty('--footer-drift', `${Math.round((1 - footerProgress) * 18)}px`);
+        homeFooter.classList.toggle(
+          'is-footer-active',
+          footerRect.top <= viewportHeight * 0.78 && footerRect.bottom >= viewportHeight * 0.2
+        );
+      }
+
+      if (!processTrack) return;
+
+      const trackRect = processTrack.getBoundingClientRect();
+      const processViewportStart = viewportHeight * 0.8;
+      const processViewportEnd = viewportHeight * 0.22;
+      const trackRange = Math.max(trackRect.height + processViewportStart - processViewportEnd, 1);
+      const processProgress = clamp((processViewportStart - trackRect.top) / trackRange);
+      processTrack.style.setProperty('--process-progress', String(processProgress));
+
+      const activeStepIndex = Math.min(
+        processSteps.length - 1,
+        Math.floor(processProgress * processSteps.length)
+      );
+      processSteps.forEach((step, index) => {
+        step.classList.toggle('is-current', index <= activeStepIndex);
+        const stepProgress = clamp(
+          (processProgress - index / Math.max(processSteps.length, 1)) * Math.max(processSteps.length, 1)
+        );
+        step.style.setProperty('--step-progress', String(stepProgress));
+        step.style.setProperty('--step-drift', `${Math.round((1 - stepProgress) * 16)}px`);
+      });
+    };
+
+    const requestScrollState = () => {
+      if (scrollFrame) return;
+      scrollFrame = window.requestAnimationFrame(updateScrollState);
+    };
+
+    window.addEventListener('scroll', requestScrollState, { passive: true });
+    window.addEventListener('resize', requestScrollState, { passive: true });
+    updateScrollState();
+
+    homeWindow.__axiomHomeCleanup = () => {
+      window.removeEventListener('scroll', requestScrollState);
+      window.removeEventListener('resize', requestScrollState);
+      if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
+      scenes.forEach((scene) => {
+        scene.classList.remove('is-scene-active');
+        delete scene.dataset.scenePhase;
+        ['--scene-progress', '--scene-inverse', '--scene-drift-left', '--scene-drift-right', '--scene-drift-up', '--scene-drift-down', '--scene-scale'].forEach((property) => scene.style.removeProperty(property));
+      });
+      homeFooter?.removeAttribute('data-home-footer');
+      homeFooter?.classList.remove('is-footer-active');
+      homeFooter?.style.removeProperty('--footer-progress');
+      homeFooter?.style.removeProperty('--footer-drift');
+      footerColumns.forEach((column) => column.style.removeProperty('--footer-delay'));
+      root.dataset.homeMotionReady = 'false';
+    };
+  };
+
+  document.addEventListener('astro:page-load', initAxiomHomepage);
+  if (document.readyState !== 'loading') initAxiomHomepage();
+</script>

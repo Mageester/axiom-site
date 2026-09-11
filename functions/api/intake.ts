@@ -266,8 +266,10 @@ function normalizePrimaryGoal(value: string) {
 function formatPricingPath(value: string) {
     const raw = value.trim().toLowerCase();
     if (!raw) return '';
-    if (raw === 'monthly') return 'Monthly plan';
-    if (raw === 'one_time' || raw === 'one-time') return 'One-time project';
+    if (raw === 'local_launch' || raw === 'local launch special') return 'Local Launch Special';
+    if (raw === 'local_business' || raw === 'local business website') return 'Local Business Website';
+    if (raw === 'expanded' || raw === 'expanded website') return 'Expanded Website';
+    if (raw === 'custom') return 'Custom';
     if (raw === 'not_sure' || raw === 'not sure yet') return 'Not sure yet';
     return value.trim();
 }

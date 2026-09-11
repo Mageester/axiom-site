@@ -73,16 +73,16 @@ test('desktop pricing keeps tier cards full-height with visible prices and the l
 
       const localLaunchOffer = page.locator('[data-local-launch-offer]');
       assert.equal(await localLaunchOffer.count(), 1, 'local launch offer should render once');
-      assert.match(await page.locator('.pricing-hero').innerText(), /limited-time local launch site from \$900/i, 'pricing hero should name the featured launch path');
+      assert.match(await page.locator('.pricing-hero').innerText(), /Local Launch Special from CAD \$900/i, 'pricing hero should name the featured launch path');
       const localLaunchOfferText = await localLaunchOffer.innerText();
-      assert.match(localLaunchOfferText, /LIMITED-TIME SPECIAL/i);
-      assert.match(localLaunchOfferText, /Local business launch websites from \$900\./);
-      assert.match(localLaunchOfferText, /first-year hosting included/i);
-      assert.match(localLaunchOfferText, /scoped introductory offer.*ownership builds start at \$3,500/i);
+      assert.match(localLaunchOfferText, /INTRODUCTORY OFFER/i);
+      assert.match(localLaunchOfferText, /Local Launch Special from CAD \$900\./);
+      assert.match(localLaunchOfferText, /first-year basic hosting is included/i);
+      assert.match(localLaunchOfferText, /Introductory, restricted scope.*custom functionality/i);
 
       const offerPosition = await page.evaluate(() => ({
         offerTop: document.querySelector('[data-local-launch-offer]')?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY,
-        pricingTiersTop: document.querySelector('#monthly-tier')?.getBoundingClientRect().top ?? Number.NEGATIVE_INFINITY,
+        pricingTiersTop: document.querySelector('#local-business-tier')?.getBoundingClientRect().top ?? Number.NEGATIVE_INFINITY,
       }));
       assert.ok(offerPosition.offerTop < offerPosition.pricingTiersTop, 'local launch offer should appear before standard pricing tiers');
 
@@ -90,24 +90,24 @@ test('desktop pricing keeps tier cards full-height with visible prices and the l
       await page.waitForTimeout(600);
 
       const diagnostics = await page.evaluate(() => {
-        const tiers = Array.from(document.querySelectorAll('#monthly-tier, #ownership-tier, #ecommerce-tier'));
-        const price = document.querySelector('#monthly-tier')?.textContent ?? '';
+        const tiers = Array.from(document.querySelectorAll('#local-business-tier, #expanded-tier, #custom-tier'));
+        const price = document.querySelector('#local-business-tier')?.textContent ?? '';
 
         return {
           tierCount: tiers.length,
           minTierHeight: tiers.length
             ? Math.min(...tiers.map((tier) => tier.getBoundingClientRect().height))
             : 0,
-          monthlyPricePresent: price.includes('$200/mo'),
+          localBusinessPricePresent: price.includes('From CAD $1,200'),
         };
       });
 
-      assert.ok(diagnostics.tierCount === 3, 'all three pricing tiers should render on desktop');
+      assert.ok(diagnostics.tierCount === 3, 'all three standard pricing tiers should render on desktop');
       assert.ok(
         diagnostics.minTierHeight > 300,
         `expected tier cards to keep usable height, got min height=${diagnostics.minTierHeight}px`
       );
-      assert.ok(diagnostics.monthlyPricePresent, 'monthly tier should display its price');
+      assert.ok(diagnostics.localBusinessPricePresent, 'Local Business tier should display its price');
     } finally {
       await browser.close();
     }

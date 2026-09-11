@@ -38,8 +38,10 @@ const fieldLabelClass = 'axiom-eyebrow text-[12px] font-medium uppercase trackin
 const fieldHelpClass = 'text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[13px]';
 const fieldErrorClass = 'min-h-[1.1em] text-[14px] leading-[1.65] text-[var(--text-error)] md:text-[13px]';
 const pricingPathOptions = [
-  { value: 'monthly', label: 'Monthly plan' },
-  { value: 'one_time', label: 'Ownership build' },
+  { value: 'local_launch', label: 'Local Launch Special' },
+  { value: 'local_business', label: 'Local Business Website' },
+  { value: 'expanded', label: 'Expanded Website' },
+  { value: 'custom', label: 'Custom' },
   { value: 'not_sure', label: 'Not sure yet' },
 ] as const;
 ---
@@ -235,7 +237,7 @@ const pricingPathOptions = [
           <div class="flex flex-col gap-2" data-intake-field-group>
             <label class={fieldLabelClass}>Preferred pricing path</label>
             <p class={fieldHelpClass}>Optional. Helps us answer with the right starting point.</p>
-            <div class="grid gap-2 sm:grid-cols-3">
+            <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
               {pricingPathOptions.map((option, index) => (
                 <label class="group relative cursor-pointer">
                   <input
@@ -245,7 +247,7 @@ const pricingPathOptions = [
                     class="peer sr-only"
                     data-intake-field
                     data-intake-field-key="pricing_path"
-                    checked={index === 2}
+                    checked={index === pricingPathOptions.length - 1}
                   />
                   <span class="flex min-h-11 items-center justify-center rounded-[12px] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 text-center text-[14px] font-medium leading-[1.45] text-[var(--text-secondary)] transition-[border-color,background-color,color,box-shadow] duration-200 ease-out peer-checked:border-[color:var(--accent-border)] peer-checked:bg-[color:var(--accent-surface)] peer-checked:text-[var(--text-primary)] peer-focus-visible:border-[color:var(--accent-border)] peer-focus-visible:ring-2 peer-focus-visible:ring-[color:var(--accent-ring)] peer-focus-visible:ring-offset-0">
                     {option.label}
