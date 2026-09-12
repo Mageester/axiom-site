@@ -193,6 +193,33 @@ const navLinkClass =
 
   .nav-desktop-cta {
     display: none;
+    border-color: var(--signal);
+    background: transparent;
+    color: var(--signal);
+    border-radius: 2px;
+    box-shadow: none;
+  }
+
+  .nav-desktop-cta:hover,
+  .nav-desktop-cta:focus-visible {
+    border-color: var(--signal-hover);
+    background: var(--signal-soft);
+    color: var(--signal-hover);
+  }
+
+  #mobile-nav-panel .btn-primary {
+    border-color: var(--signal);
+    background: var(--signal);
+    color: var(--signal-ink);
+    border-radius: 2px;
+    box-shadow: 0 10px 28px var(--signal-soft);
+  }
+
+  #mobile-nav-panel .btn-primary:hover,
+  #mobile-nav-panel .btn-primary:focus-visible {
+    border-color: var(--signal-hover);
+    background: var(--signal-hover);
+    color: var(--signal-ink);
   }
 
   .mobile-nav-link {
