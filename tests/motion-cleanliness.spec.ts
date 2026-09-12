@@ -82,7 +82,7 @@ test.describe('cinematic motion stays clean on mobile', () => {
     expect(panelBackground).toBe('rgb(10, 10, 10)');
   });
 
-  test('uses distinct visual beats for the key contrast sections', async ({ page }) => {
+  test('uses distinct tonal beats without arbitrary light panels', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' });
 
     const beats = await page.evaluate(() => {
@@ -94,7 +94,9 @@ test.describe('cinematic motion stays clean on mobile', () => {
     });
 
     expect(new Set(beats.backgrounds).size).toBeGreaterThanOrEqual(3);
-    expect(beats.serviceHeading).toBe('rgb(10, 10, 10)');
+    expect(beats.backgrounds).not.toContain('rgb(242, 240, 234)');
+    expect(beats.backgrounds).not.toContain('rgb(255, 255, 255)');
+    expect(beats.serviceHeading).toBe('rgb(242, 240, 234)');
   });
 
   test('keeps the pricing offer emphasis restrained instead of continuously flashing', async ({ page }) => {

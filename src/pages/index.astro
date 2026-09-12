@@ -512,19 +512,16 @@ const team = [
   .ax-statement {
     padding-block: clamp(4.5rem, 13vh, 9rem);
     border-top: 1px solid var(--hairline);
-    background: #e6e3dc;
-    color: var(--bg-base);
+    background: #111111;
+    color: var(--text-primary);
     scroll-margin-top: 5rem;
   }
-  .ax-statement .ax-section-index,
-  .ax-statement .ax-section-index-name { color: rgba(10, 10, 10, 0.62); }
-  .ax-statement .ax-section-index::after { background: rgba(10, 10, 10, 0.62); }
   .ax-big {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(1.7rem, 4.4vw, 3.4rem); line-height: 1.18; letter-spacing: -0.02em;
     color: var(--text-muted); max-width: 22ch; margin: 0;
   }
-  .ax-big em { font-style: normal; color: var(--bg-base); }
+  .ax-big em { font-style: normal; color: var(--text-primary); }
 
   /* ── Solution ─────────────────────────────────────── */
   .ax-scene--cascade { background: #0e0e0e; }
@@ -827,16 +824,11 @@ const team = [
 
   /* ── Index list (services) ────────────────────────── */
   .ax-scene--index {
-    background: #dedbd4;
-    color: var(--bg-base);
+    background: #121212;
+    color: var(--text-primary);
   }
-  .ax-scene--index::before { background: linear-gradient(90deg, rgba(10, 10, 10, 0.7), transparent 38%, transparent); }
-  .ax-scene--index::after { background: rgba(10, 10, 10, 0.28); }
-  .ax-scene--index .ax-section-index,
-  .ax-scene--index .ax-section-index-name { color: rgba(10, 10, 10, 0.62); }
-  .ax-scene--index .ax-section-index::after { background: rgba(10, 10, 10, 0.62); }
-  .ax-scene--index .ax-h2 { color: var(--bg-base); }
-  .ax-scene--index .ax-head-note { color: rgba(10, 10, 10, 0.62); }
+  .ax-scene--index::before { background: linear-gradient(90deg, var(--text-primary), transparent 38%, transparent); }
+  .ax-scene--index::after { background: var(--hairline-strong); }
   .ax-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hairline); }
   .ax-row {
     display: grid; grid-template-columns: 2rem 1fr auto; grid-template-areas: 'num title arrow' 'num desc arrow';
@@ -851,18 +843,14 @@ const team = [
   .ax-row-title { grid-area: title; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.3rem); font-weight: 500; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.05; }
   .ax-row-desc { grid-area: desc; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; max-width: 40ch; margin: 0; }
   .ax-row-arrow { grid-area: arrow; color: var(--text-muted); font-size: 1.3rem; transition: transform 0.25s ease, color 0.25s ease; justify-self: end; }
-  .ax-scene--index .ax-list { border-color: rgba(10, 10, 10, 0.18); }
-  .ax-scene--index .ax-row { border-color: rgba(10, 10, 10, 0.18); }
-  .ax-scene--index .ax-row-title { color: var(--bg-base); }
-  .ax-scene--index .ax-row-desc { color: rgba(10, 10, 10, 0.62); }
-  .ax-scene--index .ax-row-num,
-  .ax-scene--index .ax-row-arrow { color: rgba(10, 10, 10, 0.58); }
+  .ax-scene--index .ax-list { border-color: var(--hairline); }
+  .ax-scene--index .ax-row { border-color: var(--hairline); }
   .ax-scene--index .ax-list > li.is-in .ax-row-num,
-  .ax-scene--index .ax-list > li.is-in .ax-row-arrow { color: var(--bg-base); }
-  .ax-scene--index .ax-list > li::before { background: var(--bg-base); }
+  .ax-scene--index .ax-list > li.is-in .ax-row-arrow { color: var(--text-primary); }
+  .ax-scene--index .ax-list > li::before { background: var(--text-primary); }
   .ax-scene--index a.ax-row:hover,
-  .ax-scene--index a.ax-row:focus-visible { background: rgba(10, 10, 10, 0.06); padding-left: 0.75rem; }
-  .ax-scene--index a.ax-row:hover .ax-row-arrow { color: var(--bg-base); transform: translateX(6px); }
+  .ax-scene--index a.ax-row:focus-visible { background: var(--surface-1); padding-left: 0.75rem; }
+  .ax-scene--index a.ax-row:hover .ax-row-arrow { color: var(--text-primary); transform: translateX(6px); }
 
   /* ── Split ────────────────────────────────────────── */
   .ax-split { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 5vw, 4rem); }
@@ -879,17 +867,14 @@ const team = [
   .ax-principle-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin: 0.6rem 0 0; }
 
   /* ── Figures ──────────────────────────────────────── */
-  .ax-scene--metrics { background: var(--text-primary); color: var(--bg-base); }
-  .ax-scene--metrics .ax-section-index,
-  .ax-scene--metrics .ax-section-index-name { color: rgba(10, 10, 10, 0.62); }
-  .ax-scene--metrics .ax-section-index::after { background: rgba(10, 10, 10, 0.62); }
+  .ax-scene--metrics { background: #151515; color: var(--text-primary); }
   .ax-figures { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(2rem, 4vw, 3rem); }
   @media (min-width: 760px) { .ax-figures { grid-template-columns: repeat(3, 1fr); } }
-  .ax-figure { position: relative; display: grid; gap: 0.65rem; border-top: 1px solid rgba(10, 10, 10, 0.25); padding-top: 1.1rem; }
-  .ax-figure::before { content: ''; position: absolute; inset: -1px 0 auto; height: 1px; background: var(--bg-base); transform: scaleX(0); transform-origin: left center; transition: transform 700ms var(--ease-cinematic); }
+  .ax-figure { position: relative; display: grid; gap: 0.65rem; border-top: 1px solid var(--hairline-strong); padding-top: 1.1rem; }
+  .ax-figure::before { content: ''; position: absolute; inset: -1px 0 auto; height: 1px; background: var(--text-primary); transform: scaleX(0); transform-origin: left center; transition: transform 700ms var(--ease-cinematic); }
   .ax-figure.is-in::before { transform: scaleX(1); }
-  .ax-figure-num { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: var(--bg-base); }
-  .ax-figure-label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(10, 10, 10, 0.62); line-height: 1.5; }
+  .ax-figure-num { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); }
+  .ax-figure-label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.5; }
 
   /* ── Process ──────────────────────────────────────── */
   .ax-scene--process { background: #0d0d0d; }
@@ -1454,9 +1439,9 @@ const team = [
     100% { opacity: 1; transform: none; }
   }
 
-  /* The statement is the first contrast change after the opening frame. */
+  /* The statement is the first tonal change after the opening frame. */
   .ax-root .ax-statement::before,
-  .ax-root .ax-statement::after { background: rgba(10, 10, 10, 0.34); }
+  .ax-root .ax-statement::after { background: rgba(242, 240, 234, 0.28); }
   .ax-root .ax-statement-line--resolve { position: relative; }
   .ax-root .ax-statement-line--resolve::after {
     content: '';
@@ -1465,7 +1450,7 @@ const team = [
     bottom: 0.04em;
     left: 0;
     height: 0.06em;
-    background: rgba(10, 10, 10, 0.68);
+    background: rgba(242, 240, 234, 0.68);
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform 1.2s var(--ease-cinematic);
@@ -1513,15 +1498,15 @@ const team = [
   .ax-root .ax-list > li.is-in .ax-row-num { color: var(--text-primary); transform: translateX(0.2rem); }
   .ax-root .ax-list > li.is-in .ax-row-arrow { color: var(--text-primary); }
   .ax-root .ax-scene--index .ax-list > li.is-in .ax-row-num,
-  .ax-root .ax-scene--index .ax-list > li.is-in .ax-row-arrow { color: var(--bg-base); }
+  .ax-root .ax-scene--index .ax-list > li.is-in .ax-row-arrow { color: var(--text-primary); }
 
   /* Principle numbers make the split section scan instead of stack. */
   .ax-root .ax-principle-num { transition: color 700ms var(--ease-premium), transform 700ms var(--ease-cinematic); }
   .ax-root .ax-principle.is-in .ax-principle-num { color: var(--text-primary); transform: translateX(0.2rem); }
 
-  /* The metric strip is the second contrast change: a quiet paper-white beat. */
+  /* The metric strip is a raised graphite beat. */
   .ax-root .ax-scene--metrics::before,
-  .ax-root .ax-scene--metrics::after { background: rgba(10, 10, 10, 0.28); }
+  .ax-root .ax-scene--metrics::after { background: rgba(242, 240, 234, 0.28); }
   .ax-root .ax-scene--metrics .ax-figure-num,
   .ax-root .ax-scene--metrics .ax-figure-label { display: block; }
   :global(html.js) .ax-root .ax-scene--metrics .ax-figure { animation: none; }
