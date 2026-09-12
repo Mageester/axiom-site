@@ -96,6 +96,13 @@ const team = [
 
     <!-- HERO -->
     <section class="ax-hero ax-scene ax-scene--title-card" data-home-section="hero" data-cinematic-scene="hero" data-motion-role="title-card">
+      <div class="ax-hero-art" aria-hidden="true">
+        <img src="/images/axiom-hero-architecture.webp" alt="" width="1672" height="941" loading="eager" decoding="async" />
+      </div>
+      <div class="ax-hero-signal" aria-hidden="true">
+        <span class="ax-hero-signal-line"><span class="ax-hero-signal-progress"></span></span>
+        <span class="ax-hero-signal-point"></span>
+      </div>
       <div class="ax-container">
         <h1 class="ax-mega ax-hero-title">
           <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 0">A sharper digital</span></span>
@@ -301,7 +308,7 @@ const team = [
         </div>
         <div class="ax-figures">
           {figures.map((f, i) => (
-            <div class="ax-figure reveal ax-reveal--metric" data-scene-index={i} style={`--reveal-delay: ${120 + i * 140}ms; --scene-index: ${i}`}>
+            <div class:list={['ax-figure', 'reveal', 'ax-reveal--metric', i === 0 && 'ax-figure--lead']} data-scene-index={i} style={`--reveal-delay: ${120 + i * 140}ms; --scene-index: ${i}`}>
               <span class="ax-figure-num">{f.value}</span>
               <span class="ax-figure-label">{f.label}</span>
             </div>
@@ -363,6 +370,9 @@ const team = [
 
     <!-- FINAL CTA -->
     <section class="ax-final ax-scene ax-scene--resolution" data-home-section="final" data-cinematic-scene="final" data-motion-role="resolution">
+      <div class="ax-final-art" aria-hidden="true">
+        <img src="/images/axiom-hero-architecture.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" />
+      </div>
       <div class="ax-container">
         <div class="ax-final-rule reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 120ms"></div>
         <h2 class="ax-mega ax-final-mega reveal ax-reveal--final" style="--reveal-delay: 240ms">
@@ -1321,7 +1331,7 @@ const team = [
 
   @media (max-width: 759px) {
     .ax-mega {
-      font-size: clamp(2.3rem, 9.6vw, 4rem);
+      font-size: clamp(2.2rem, 9vw, 4rem);
       letter-spacing: -0.04em;
     }
     .ax-scene::after,
@@ -1568,6 +1578,305 @@ const team = [
     .ax-root .ax-figure-label { transform: none !important; clip-path: none !important; opacity: 1 !important; }
     .ax-root .ax-statement-line--resolve::after { transform: scaleX(1); transition: none; }
   }
+
+  /* ── Signal direction ──────────────────────────────────────────
+     The page uses one visual language: architecture in the distance,
+     copper only where the eye should move, and type that resolves into
+     a clear next action. The sections stay dark; the composition changes. */
+  .ax-root .ax-hero {
+    overflow: clip;
+    background: #0a0a0a;
+  }
+
+  .ax-root .ax-hero-art,
+  .ax-root .ax-final-art {
+    position: absolute;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .ax-root .ax-hero-art {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 31%;
+    opacity: 0.72;
+    transform: translate3d(var(--scene-drift-left), 0, 0) scale(1.055);
+    transform-origin: 72% center;
+    transition: transform 1.35s var(--ease-cinematic), opacity 900ms var(--ease-premium);
+  }
+
+  .ax-root .ax-hero-art::after,
+  .ax-root .ax-final-art::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, #0a0a0a 0%, rgba(10, 10, 10, 0.92) 18%, rgba(10, 10, 10, 0.28) 66%, rgba(10, 10, 10, 0.5) 100%),
+      linear-gradient(180deg, rgba(10, 10, 10, 0.22), transparent 38%, rgba(10, 10, 10, 0.82) 100%);
+  }
+
+  .ax-root .ax-hero-art img,
+  .ax-root .ax-final-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+    filter: brightness(0.72) saturate(0.72) contrast(1.08);
+  }
+
+  .ax-root .ax-hero-signal {
+    position: absolute;
+    z-index: 2;
+    right: var(--ax-gutter);
+    bottom: clamp(1.4rem, 5vh, 3.5rem);
+    left: var(--ax-gutter);
+    height: 1rem;
+    pointer-events: none;
+  }
+
+  .ax-root .ax-hero-signal-line {
+    position: absolute;
+    top: 50%;
+    right: 12%;
+    left: 0;
+    height: 1px;
+    overflow: hidden;
+    background: var(--hairline-strong);
+    transform: translateY(-50%);
+  }
+
+  .ax-root .ax-hero-signal-progress {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--signal), var(--signal-line));
+    box-shadow: 0 0 12px var(--signal-soft);
+    transform: scaleX(var(--scene-progress));
+    transform-origin: left center;
+    transition: transform 700ms var(--ease-cinematic);
+  }
+
+  .ax-root .ax-hero-signal-point {
+    position: absolute;
+    top: 50%;
+    right: calc(12% - 0.25rem);
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid var(--signal);
+    border-radius: 50%;
+    background: var(--bg-base);
+    box-shadow: 0 0 0 0.35rem var(--signal-soft), 0 0 1.25rem var(--signal-soft);
+    transform: translateY(-50%);
+  }
+
+  .ax-root .ax-hero-title { position: relative; z-index: 1; max-width: min(72rem, 82vw); }
+  .ax-root .ax-hero-title em,
+  .ax-root .ax-statement .ax-big em,
+  .ax-root .ax-final-mega em { color: var(--signal); }
+
+  .ax-root .ax-hero .btn-primary,
+  .ax-root .ax-final .btn-primary {
+    border-radius: 2px;
+    border-color: var(--signal);
+    background: var(--signal);
+    color: var(--signal-ink);
+    box-shadow: 0 12px 34px var(--signal-soft);
+  }
+
+  .ax-root .ax-hero .btn-primary:hover,
+  .ax-root .ax-final .btn-primary:hover {
+    border-color: var(--signal-hover);
+    background: var(--signal-hover);
+    color: var(--signal-ink);
+  }
+
+  .ax-root .ax-hero .btn-primary span,
+  .ax-root .ax-final .btn-primary span {
+    transition: transform 500ms var(--ease-cinematic);
+  }
+
+  .ax-root .ax-hero .btn-primary:hover span,
+  .ax-root .ax-final .btn-primary:hover span { transform: translateX(0.35rem); }
+
+  /* The statement resolves with signal colour instead of another pale panel. */
+  .ax-root .ax-statement::before { background: linear-gradient(90deg, var(--signal), transparent 38%, transparent); }
+  .ax-root .ax-statement::after { background: var(--hairline-strong); }
+  .ax-root .ax-statement-line--resolve::after { background: var(--signal); box-shadow: 0 0 0.8rem var(--signal-soft); }
+
+  /* The solution is a cascade: each proof beat lands lower than the last. */
+  @media (min-width: 760px) {
+    .ax-root .ax-scene--cascade .ax-head {
+      grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.58fr);
+      align-items: end;
+      max-width: none;
+    }
+
+    .ax-root .ax-scene--cascade .ax-head-note { justify-self: end; }
+    .ax-root .ax-scene--cascade .ax-solution-item:nth-child(2) { margin-top: clamp(2rem, 5vw, 4.25rem); }
+    .ax-root .ax-scene--cascade .ax-solution-item:nth-child(3) { margin-top: clamp(4rem, 10vw, 8rem); }
+  }
+
+  .ax-root .ax-solution-item::before,
+  .ax-root .ax-solution-item::after { background: var(--signal); }
+  .ax-root .ax-solution-item::after { opacity: 0.28; }
+  .ax-root .ax-solution-item.is-in::after { opacity: 0.72; }
+
+  /* Work becomes an exhibition index: image, active rule, then decision. */
+  .ax-root .ax-work-feature-frame { border-radius: 2px; border-color: var(--hairline-strong); }
+  .ax-root .ax-work-feature-frame::after { background: var(--signal); box-shadow: 0 0 1rem var(--signal-soft); }
+  .ax-root .ax-work-item { position: relative; overflow: hidden; }
+  .ax-root .ax-work-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--signal);
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 900ms var(--ease-cinematic);
+  }
+  .ax-root .ax-work-item.is-open { background: var(--signal-soft); }
+  .ax-root .ax-work-item.is-open::before { transform: scaleY(1); }
+  .ax-root .ax-work-item.is-open .ax-work-num,
+  .ax-root .ax-work-item.is-open .ax-work-indicator { color: var(--signal); }
+  .ax-root .ax-work-feature-img { filter: grayscale(0.2) brightness(0.78) saturate(0.84); }
+  .ax-root .ax-work-feature.is-active .ax-work-feature-img { filter: grayscale(0.04) brightness(0.9) saturate(0.96); }
+  .ax-root .ax-work-feature-caption span:first-child { color: var(--signal); }
+
+  /* Services get a single orbital gesture so the list is not another flat wall. */
+  .ax-root .ax-scene--index { overflow: hidden; }
+  .ax-root .ax-scene--index::before { background: linear-gradient(90deg, var(--signal), transparent 38%, transparent); }
+  .ax-root .ax-scene--index .ax-container::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 4%;
+    right: -25%;
+    width: min(58vw, 48rem);
+    height: 74%;
+    border: 1px solid var(--signal-line);
+    border-radius: 50%;
+    opacity: 0.2;
+    transform: rotate(-23deg) translate3d(var(--scene-drift-left), 0, 0);
+    transition: transform 1.4s var(--ease-cinematic), opacity 900ms var(--ease-premium);
+    pointer-events: none;
+  }
+  .ax-root .ax-scene--index .ax-list > li::before { background: var(--signal); }
+  .ax-root .ax-scene--index .ax-list > li.is-in .ax-row-num,
+  .ax-root .ax-scene--index .ax-list > li.is-in .ax-row-arrow { color: var(--signal); }
+  .ax-root .ax-scene--index a.ax-row:hover,
+  .ax-root .ax-scene--index a.ax-row:focus-visible { background: var(--signal-soft); }
+
+  /* Figures: one lead signal, two supporting facts. */
+  .ax-root .ax-scene--metrics { overflow: hidden; }
+  .ax-root .ax-scene--metrics::before { background: linear-gradient(90deg, var(--signal), transparent 38%, transparent); }
+  .ax-root .ax-figures { align-items: stretch; }
+  .ax-root .ax-figure { min-height: clamp(11rem, 18vw, 17rem); align-content: end; padding-bottom: clamp(1.25rem, 3vw, 2rem); }
+  .ax-root .ax-figure--lead {
+    min-height: clamp(15rem, 25vw, 23rem);
+    background: linear-gradient(135deg, var(--signal-soft), transparent 58%);
+  }
+  .ax-root .ax-figure--lead .ax-figure-num { color: var(--signal); font-size: clamp(3.5rem, 7vw, 6.5rem); }
+  .ax-root .ax-figure:not(.ax-figure--lead) .ax-figure-num { font-size: clamp(2rem, 4vw, 3.4rem); }
+  .ax-root .ax-figure::before { background: var(--signal); }
+  .ax-root .ax-figure-label { max-width: 18ch; }
+
+  /* Process is the signature motion: copper line, live node, completed trail. */
+  .ax-root .ax-scene--process::before { background: linear-gradient(90deg, var(--signal), transparent 38%, transparent); }
+  .ax-root .ax-process-line { background: var(--hairline-strong); }
+  .ax-root .ax-process-line-fill {
+    position: relative;
+    background: var(--signal);
+    box-shadow: 0 0 1rem var(--signal-soft);
+  }
+  .ax-root .ax-process-line-fill::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -0.25rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid var(--signal);
+    border-radius: 50%;
+    background: var(--bg-base);
+    box-shadow: 0 0 0 0.3rem var(--signal-soft);
+    transform: translateY(-50%);
+  }
+  .ax-root .ax-step-node { border: 1px solid var(--hairline-strong); }
+  .ax-root .ax-step.is-current .ax-step-node,
+  .ax-root .ax-step.is-complete .ax-step-node { background: var(--signal); border-color: var(--signal); }
+  .ax-root .ax-step.is-current .ax-step-title { color: var(--signal); }
+
+  @keyframes ax-signal-pulse {
+    0%, 100% { box-shadow: 0 0 0 0.28rem var(--signal-soft), 0 0 0.8rem var(--signal-soft); }
+    50% { box-shadow: 0 0 0 0.62rem rgba(194, 106, 58, 0.03), 0 0 1.4rem var(--signal-soft); }
+  }
+  .ax-root .ax-step.is-current .ax-step-node { animation: ax-signal-pulse 2.8s ease-in-out infinite; }
+
+  /* Studio and resolution share the same architectural return. */
+  .ax-root .ax-scene--partners .ax-container::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: -12%;
+    right: 10%;
+    bottom: -12%;
+    width: min(28vw, 21rem);
+    border-left: 1px solid var(--signal-line);
+    opacity: 0.18;
+    transform: skewX(-16deg) translate3d(var(--scene-drift-left), 0, 0);
+    transition: transform 1.4s var(--ease-cinematic);
+    pointer-events: none;
+  }
+  .ax-root .ax-person::after { background: var(--signal); }
+  .ax-root .ax-final { background: #0a0a0a; }
+  .ax-root .ax-final-art {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 37%;
+    opacity: 0.5;
+    transform: translate3d(var(--scene-drift-right), 0, 0) scale(1.04);
+    transition: transform 1.4s var(--ease-cinematic), opacity 900ms var(--ease-premium);
+  }
+  .ax-root .ax-final-art::after {
+    background:
+      linear-gradient(90deg, #0a0a0a 0%, rgba(10, 10, 10, 0.96) 16%, rgba(10, 10, 10, 0.3) 72%, rgba(10, 10, 10, 0.55) 100%),
+      linear-gradient(180deg, rgba(10, 10, 10, 0.35), transparent 44%, rgba(10, 10, 10, 0.8));
+  }
+  .ax-root .ax-final-rule { background: var(--signal); box-shadow: 0 0 1rem var(--signal-soft); }
+  .ax-root .ax-continuity-rail-progress { background: var(--signal); box-shadow: 0 0 1rem var(--signal-soft); }
+
+  @media (max-width: 759px) {
+    .ax-root .ax-hero-art { top: 24%; left: -42%; opacity: 0.52; transform: translate3d(var(--scene-drift-left), 0, 0) scale(1.12); }
+    .ax-root .ax-hero-art::after { background: linear-gradient(90deg, #0a0a0a 0%, rgba(10, 10, 10, 0.75) 45%, rgba(10, 10, 10, 0.4) 100%), linear-gradient(180deg, rgba(10, 10, 10, 0.18), transparent 42%, #0a0a0a 96%); }
+    .ax-root .ax-hero-signal-line { right: 7%; }
+    .ax-root .ax-hero-signal-point { right: calc(7% - 0.25rem); }
+    .ax-root .ax-scene--cascade .ax-solution-item { margin-top: 0; }
+    .ax-root .ax-scene--index .ax-container::before { top: 18%; right: -72%; width: 125vw; height: 46%; opacity: 0.14; }
+    .ax-root .ax-figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ax-root .ax-figure--lead { grid-column: 1 / -1; min-height: 12rem; }
+    .ax-root .ax-figure:not(.ax-figure--lead) { min-height: 9.5rem; }
+    .ax-root .ax-final-art { top: 34%; left: -28%; opacity: 0.32; }
+    .ax-root .ax-scene--partners .ax-container::before { right: 6%; width: 42vw; }
+    .ax-root .ax-process-line-fill::after { top: auto; right: auto; bottom: -0.25rem; left: 50%; transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ax-root .ax-hero-art,
+    .ax-root .ax-final-art,
+    .ax-root .ax-scene--index .ax-container::before,
+    .ax-root .ax-scene--partners .ax-container::before,
+    .ax-root .ax-hero-signal-progress,
+    .ax-root .ax-step.is-current .ax-step-node { animation: none !important; transition: none !important; }
+    .ax-root .ax-hero-art,
+    .ax-root .ax-final-art { transform: none !important; }
+  }
 </style>
 
 <script>
@@ -1707,8 +2016,16 @@ const team = [
         const rect = scene.getBoundingClientRect();
         const sceneRange = Math.max(rect.height + viewportStart - viewportEnd, 1);
         const sceneProgress = clamp((viewportStart - rect.top) / sceneRange);
+        const sceneOffset = sceneProgress - 0.5;
+        const driftLimit = window.innerWidth < 760 ? 18 : 30;
+        const sceneDrift = sceneOffset * driftLimit;
 
         scene.style.setProperty('--scene-progress', String(sceneProgress));
+        scene.style.setProperty('--scene-drift-left', `${-sceneDrift}px`);
+        scene.style.setProperty('--scene-drift-right', `${sceneDrift}px`);
+        scene.style.setProperty('--scene-drift-up', `${sceneDrift * -0.6}px`);
+        scene.style.setProperty('--scene-drift-down', `${sceneDrift * 0.75}px`);
+        scene.style.setProperty('--scene-scale', (0.985 + sceneProgress * 0.03).toFixed(3));
         scene.dataset.scenePhase = sceneProgress < 0.24 ? 'enter' : sceneProgress > 0.78 ? 'exit' : 'hold';
 
         const visibleTop = Math.max(rect.top, 0);
@@ -1779,6 +2096,11 @@ const team = [
         scene.classList.remove('is-scene-active');
         delete scene.dataset.scenePhase;
         scene.style.removeProperty('--scene-progress');
+        scene.style.removeProperty('--scene-drift-left');
+        scene.style.removeProperty('--scene-drift-right');
+        scene.style.removeProperty('--scene-drift-up');
+        scene.style.removeProperty('--scene-drift-down');
+        scene.style.removeProperty('--scene-scale');
       });
       processSteps.forEach((step) => step.classList.remove('is-current', 'is-complete'));
       homeFooter?.removeAttribute('data-home-footer');

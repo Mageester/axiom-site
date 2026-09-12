@@ -505,7 +505,7 @@ export const SEO_ROUTES = {
   pricing: {
     title: 'Web Design Pricing | Local Packages | Axiom Web',
     description:
-      'Clear web design pricing for local businesses. Local Launch Special from CAD $900, Local Business Website from CAD $1,200, Expanded Website from CAD $1,500, or Custom.',
+      'Web design pricing for local businesses: Local Launch from CAD $900, Local Business Website from $1,200, Expanded Website from $1,500, or Custom.',
     canonicalPath: '/pricing',
   },
   services: {

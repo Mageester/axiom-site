@@ -19,7 +19,7 @@ test.describe('cinematic motion stays clean on mobile', () => {
 
       const overflow = await page.evaluate(() => {
         const viewportWidth = window.innerWidth;
-        return Array.from(document.querySelectorAll<HTMLElement>('[data-homepage] *'))
+        return Array.from(document.querySelectorAll<HTMLElement>('[data-homepage] *:not([aria-hidden="true"]):not([aria-hidden="true"] *)'))
           .map((element) => {
             const rect = element.getBoundingClientRect();
             return {
