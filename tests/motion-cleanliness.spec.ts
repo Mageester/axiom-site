@@ -61,6 +61,42 @@ test.describe('cinematic motion stays clean on mobile', () => {
     expect(lineRects, 'hero copy should not wrap inside an authored line').toEqual([1, 1, 1]);
   });
 
+  test('gives the iPhone-sized opening frame room to breathe', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+
+    const hero = await page.locator('.ax-hero').evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      return { height: rect.height, viewportHeight: window.innerHeight };
+    });
+
+    expect(hero.height).toBeGreaterThanOrEqual(hero.viewportHeight - 70);
+  });
+
+  test('keeps the mobile header focused on the menu control', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+
+    await expect(page.locator('.nav-desktop-cta')).toBeHidden();
+    await page.locator('#nav-toggle').click();
+
+    const panelBackground = await page.locator('#mobile-nav-panel').evaluate((element) => getComputedStyle(element).backgroundColor);
+    expect(panelBackground).toBe('rgb(10, 10, 10)');
+  });
+
+  test('uses distinct visual beats for the key contrast sections', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+
+    const beats = await page.evaluate(() => {
+      const backgrounds = ['.ax-scene--statement', '.ax-scene--cascade', '.ax-scene--index', '.ax-scene--metrics'].map(
+        (selector) => getComputedStyle(document.querySelector(selector)!).backgroundColor,
+      );
+      const serviceHeading = getComputedStyle(document.querySelector('.ax-scene--index .ax-h2')!).color;
+      return { backgrounds, serviceHeading };
+    });
+
+    expect(new Set(beats.backgrounds).size).toBeGreaterThanOrEqual(3);
+    expect(beats.serviceHeading).toBe('rgb(10, 10, 10)');
+  });
+
   test('keeps the pricing offer emphasis restrained instead of continuously flashing', async ({ page }) => {
     await page.goto('/pricing/', { waitUntil: 'networkidle' });
 

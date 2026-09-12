@@ -72,7 +72,7 @@ const navLinkClass =
           (226) 753-1833
         </a>
         {!hidePrimaryCta && (
-          <a href={CTA_PATHS.startProject} class="btn btn-primary btn-sm hidden md:inline-flex">
+          <a href={CTA_PATHS.startProject} class="btn btn-primary btn-sm nav-desktop-cta">
             Start a project
           </a>
         )}
@@ -104,7 +104,7 @@ const navLinkClass =
   aria-hidden="true"
   inert
   class="fixed inset-0 z-[60] px-6 py-8 backdrop-blur-[24px] md:hidden"
-  style="background-color: var(--nav-panel-bg);"
+  style="background-color: var(--bg-base);"
 >
   <div class="mx-auto flex h-full max-w-5xl flex-col justify-between pt-20">
     <div class="flex items-center justify-between">
@@ -136,6 +136,7 @@ const navLinkClass =
           aria-current={isActive(link.href) ? 'page' : undefined}
           data-nav-close
           class={`mobile-nav-link block min-h-11 font-display text-[clamp(2.25rem,9vw,3.75rem)] font-medium leading-[1.05] tracking-[-0.02em] text-[var(--text-primary)]${index === 0 ? ' mt-2' : ''}`}
+          style={`--nav-index: ${index}`}
         >
           {link.label}
         </a>
@@ -166,6 +167,12 @@ const navLinkClass =
     touch-action: manipulation;
   }
 
+  #nav-toggle:focus-visible,
+  #nav-close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--bg-base), 0 0 0 2px var(--text-primary);
+  }
+
   #nav-shell[data-scrolled] {
     background-color: var(--nav-shell-bg-scrolled) !important;
     border-color: var(--hairline-strong);
@@ -182,6 +189,28 @@ const navLinkClass =
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
+  }
+
+  .nav-desktop-cta {
+    display: none;
+  }
+
+  .mobile-nav-link {
+    opacity: 0;
+    transform: translate3d(0, 0.7rem, 0);
+    transition: opacity 460ms var(--ease-premium), transform 620ms var(--ease-cinematic);
+  }
+
+  #mobile-nav-panel.nav-open .mobile-nav-link {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(100ms + (var(--nav-index, 0) * 55ms));
+  }
+
+  @media (min-width: 768px) {
+    .nav-desktop-cta {
+      display: inline-flex;
+    }
   }
 
   .bar {
@@ -201,8 +230,11 @@ const navLinkClass =
   }
 
   @media (prefers-reduced-motion: reduce) {
-    #mobile-nav-panel {
+    #mobile-nav-panel,
+    .mobile-nav-link {
       transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 </style>
