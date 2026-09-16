@@ -53,6 +53,14 @@ export const ORGANIZATION_SCHEMA = {
   email: SITE_EMAIL,
   telephone: SITE_TELEPHONE,
   description: SITE_TAGLINE,
+  founder: [
+    { '@type': 'Person', name: 'Aidan Magee' },
+    { '@type': 'Person', name: 'Riley Hinsperger' },
+  ],
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'Axiom International',
+  },
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Kitchener',
@@ -73,6 +81,14 @@ export const LOCAL_BUSINESS_SCHEMA = {
   telephone: SITE_TELEPHONE,
   priceRange: '$$',
   description: SITE_TAGLINE,
+  founder: [
+    { '@type': 'Person', name: 'Aidan Magee' },
+    { '@type': 'Person', name: 'Riley Hinsperger' },
+  ],
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'Axiom International',
+  },
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Kitchener',
@@ -169,6 +185,14 @@ export const HOME_JSON_LD = {
   numberOfEmployees: {
     '@type': 'QuantitativeValue',
     value: 2,
+  },
+  founder: [
+    { '@type': 'Person', name: 'Aidan Magee' },
+    { '@type': 'Person', name: 'Riley Hinsperger' },
+  ],
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'Axiom International',
   },
   areaServed: [
     {
@@ -381,7 +405,7 @@ export const ABOUT_JSON_LD = {
   url: 'https://getaxiom.ca/about',
   name: 'About Axiom Web',
   description:
-    'Two people. Clear roles. We build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
+    'Aidan Magee and Riley Hinsperger are the co-founders of Axiom International and Axiom Web, its web-focused subsidiary. Together, they build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
   mainEntity: ORGANIZATION_SCHEMA,
 } as const;
 

@@ -81,6 +81,10 @@ test('public pages keep site-wide consistency and reduced-motion boot state', as
           page.getByText('Websites built to convert. Not to decorate.').waitFor({ state: 'visible', timeout: 5000 }),
           `${route} should render the standard footer tagline`
         );
+        await assert.doesNotReject(
+          page.getByText('Co-founded by Aidan Magee and Riley Hinsperger. Axiom Web is the web-focused subsidiary of Axiom International.').waitFor({ state: 'visible', timeout: 5000 }),
+          `${route} should identify the founders and parent company in the footer`
+        );
 
         const navLabels = await page.locator('nav[aria-label="Primary"] a').evaluateAll((links) =>
           links.map((link) => link.textContent?.trim()).filter(Boolean)
@@ -91,6 +95,18 @@ test('public pages keep site-wide consistency and reduced-motion boot state', as
       await page.goto(`${baseUrl}/start-a-project`, { waitUntil: 'networkidle' });
       assert.equal(await page.locator('[data-intake-alert]').getAttribute('hidden'), '', 'intake alert should start hidden');
       assert.equal(await page.getByRole('link', { name: 'contact page' }).getAttribute('href'), '/contact', 'intake contact link should reach the contact page');
+
+      await page.goto(`${baseUrl}/about`, { waitUntil: 'networkidle' });
+      await assert.doesNotReject(
+        page.getByText('We are Aidan Magee and Riley Hinsperger, co-founders of Axiom International and Axiom Web, its web-focused subsidiary.').waitFor({ state: 'visible', timeout: 5000 }),
+        'About should identify the founders and parent-company relationship'
+      );
+
+      await page.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
+      await assert.doesNotReject(
+        page.getByRole('heading', { name: 'Two co-founders. Direct accountability.' }).waitFor({ state: 'visible', timeout: 5000 }),
+        'Homepage should identify the studio as founder-led'
+      );
 
       const context = await browser.newContext({
         viewport: { width: 1440, height: 1000 },
