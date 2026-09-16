@@ -1,9 +1,10 @@
 :root {
   /* ───────────────────────────────────────────────────────────
-     Axiom — dark editorial system.
+     Axiom — dark-minimal, near-monochrome editorial system.
      One base, one ink, hairlines, and the Fraunces serif for
-     emphasis. One copper signal is reserved for moments that move
-     the eye. Legacy variable names remain for existing routes.
+     emphasis. No colour accent, no glows. Legacy variable names
+     are kept (remapped to monochrome) so every component renders
+     correctly; they are pruned as markup is rebuilt.
      ─────────────────────────────────────────────────────────── */
 
   /* ── Base surfaces ── */
@@ -38,14 +39,9 @@
   --error-border: rgba(230, 201, 192, 0.28);
   --error-text: #f3ded7;
 
-  /* ── Signal ── */
-  --signal: #c26a3a;
-  --signal-hover: #d67a45;
-  --signal-soft: rgba(194, 106, 58, 0.14);
-  --signal-line: rgba(194, 106, 58, 0.78);
-  --signal-ink: #120c09;
-
-  /* ── Legacy accent aliases ── */
+  /* ── "Accent" → neutral. The single emphasis device is the
+        Fraunces italic, not colour. The primary CTA is near-white
+        ink on the dark base. ── */
   --accent: #f2f0ea;
   --accent-hover: #ffffff;
   --accent-solid: #f2f0ea;
@@ -144,8 +140,8 @@
   --shadow-faq-toggle-open: 0 0 0 1px var(--hairline-strong);
 
   /* ── Navigation ── */
-  --nav-shell-bg: rgba(10, 10, 10, 0.96);
-  --nav-shell-bg-scrolled: rgba(10, 10, 10, 0.98);
+  --nav-shell-bg: rgba(10, 10, 10, 0.7);
+  --nav-shell-bg-scrolled: rgba(10, 10, 10, 0.86);
   --nav-panel-bg: rgba(10, 10, 10, 0.98);
   --shadow-nav-rest: none;
   --shadow-nav-scrolled: 0 1px 0 var(--hairline);

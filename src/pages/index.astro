@@ -96,13 +96,6 @@ const team = [
 
     <!-- HERO -->
     <section class="ax-hero ax-scene ax-scene--title-card" data-home-section="hero" data-cinematic-scene="hero" data-motion-role="title-card">
-      <div class="ax-hero-art" aria-hidden="true">
-        <img src="/images/axiom-hero-architecture.webp" alt="" width="1672" height="941" loading="eager" decoding="async" />
-      </div>
-      <div class="ax-hero-signal" aria-hidden="true">
-        <span class="ax-hero-signal-line"><span class="ax-hero-signal-progress"></span></span>
-        <span class="ax-hero-signal-point"></span>
-      </div>
       <div class="ax-container">
         <h1 class="ax-mega ax-hero-title">
           <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 0">A sharper digital</span></span>
@@ -125,10 +118,6 @@ const team = [
     <!-- PROBLEM -->
     <section class="ax-statement ax-scene ax-scene--statement" id="ax-statement" data-home-section="statement" data-cinematic-scene="statement" data-motion-role="statement">
       <div class="ax-container">
-        <div class="ax-section-index reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 40ms">
-          <span>01</span>
-          <span class="ax-section-index-name">The first decision</span>
-        </div>
         <p class="ax-big reveal ax-reveal--statement" style="--reveal-delay: 80ms">
           <span class="ax-statement-line ax-statement-line--quiet">Buyers judge the business before they ever call.</span>
           <span class="ax-statement-line ax-statement-line--resolve"><em>Your site should make that judgment easy.</em></span>
@@ -139,10 +128,6 @@ const team = [
     <!-- SOLUTION -->
     <section class="ax-section ax-scene ax-scene--cascade" data-home-section="solution" data-cinematic-scene="solution" data-motion-role="cascade">
       <div class="ax-container">
-        <div class="ax-section-index reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 40ms">
-          <span>02</span>
-          <span class="ax-section-index-name">The standard</span>
-        </div>
         <header class="ax-head">
           <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 60ms">Make the right action <em>feel obvious</em></h2>
           <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 120ms">
@@ -152,8 +137,7 @@ const team = [
 
         <div class="ax-solution">
           {solution.map((s, i) => (
-            <div class="ax-solution-item reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${120 + i * 140}ms`}>
-              <span class="ax-item-index" aria-hidden="true">{`0${i + 1}`}</span>
+            <div class="ax-solution-item reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${180 + i * 260}ms`}>
               <h3 class="ax-solution-title">{s.title}</h3>
               <p class="ax-solution-desc">{s.description}</p>
             </div>
@@ -165,16 +149,12 @@ const team = [
     <!-- WORK -->
     <section class="ax-section ax-scene ax-scene--feature" data-home-section="work" data-cinematic-scene="work" data-motion-role="feature">
       <div class="ax-container">
-        <div class="ax-section-index reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 40ms">
-          <span>03</span>
-          <span class="ax-section-index-name">Selected work</span>
-        </div>
         <header class="ax-head">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 120ms">Concept builds that show <em>the standard</em></h2>
-          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 220ms">These are demonstration builds, not invented client case studies. They show how we structure local business sites for clarity, trust, and action.</p>
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Concept builds that show <em>the standard</em></h2>
+          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 420ms">These are demonstration builds, not invented client case studies. They show how we structure local business sites for clarity, trust, and action.</p>
         </header>
 
-        <div class="ax-work-explorer reveal ax-reveal--item" data-work-explorer style="--reveal-delay: 360ms">
+        <div class="ax-work-explorer reveal ax-reveal--item" data-work-explorer style="--reveal-delay: 760ms">
           <div class="ax-work-feature-frame" data-work-feature-frame>
             {work.map((w, i) => (
               <figure
@@ -249,19 +229,14 @@ const team = [
     <!-- SERVICES -->
     <section class="ax-section ax-scene ax-scene--index" data-home-section="services" data-cinematic-scene="services" data-motion-role="index">
       <div class="ax-container">
-        <div class="ax-section-index reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 40ms">
-          <span>04</span>
-          <span class="ax-section-index-name">Where we help</span>
-        </div>
         <header class="ax-head">
           <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Three focused paths, <em>one standard</em></h2>
         </header>
 
         <ol class="ax-list">
           {services.map((s, i) => (
-            <li class="reveal ax-reveal--row" data-scene-index={i} style={`--reveal-delay: ${160 + i * 120}ms`}>
+            <li class="reveal ax-reveal--row" data-scene-index={i} style={`--reveal-delay: ${260 + i * 300}ms`}>
               <a href={s.href} class="ax-row">
-                <span class="ax-row-num" aria-hidden="true">{`0${i + 1}`}</span>
                 <span class="ax-row-title">{s.label}</span>
                 <span class="ax-row-desc">{s.description}</span>
                 <span class="ax-row-arrow" aria-hidden="true">→</span>
@@ -276,19 +251,14 @@ const team = [
     <section class="ax-section ax-scene ax-scene--proof" data-home-section="why" data-cinematic-scene="why" data-motion-role="proof">
       <div class="ax-container ax-split">
         <div class="ax-split-left">
-          <div class="ax-section-index reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 40ms">
-            <span>05</span>
-            <span class="ax-section-index-name">The operating principle</span>
-          </div>
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 120ms">Built for businesses that <em>cannot look unclear</em></h2>
-          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 220ms">
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Built for businesses that <em>cannot look unclear</em></h2>
+          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 440ms">
             If a new customer decides whether to trust you before they speak to you, the site has to do more than look acceptable.
           </p>
         </div>
         <div class="ax-split-right">
           {principles.map((p, i) => (
-            <div class="ax-principle reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${160 + i * 110}ms`}>
-              <span class="ax-principle-num" aria-hidden="true">{`0${i + 1}`}</span>
+            <div class="ax-principle reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${260 + i * 240}ms`}>
               <div>
                 <h3 class="ax-principle-title">{p.title}</h3>
                 <p class="ax-principle-desc">{p.description}</p>
@@ -302,13 +272,9 @@ const team = [
     <!-- FIGURES -->
     <section class="ax-section ax-section--tight ax-scene ax-scene--metrics" data-home-section="figures" data-cinematic-scene="figures" data-motion-role="metrics">
       <div class="ax-container">
-        <div class="ax-section-index reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 40ms">
-          <span>06</span>
-          <span class="ax-section-index-name">The delivery signal</span>
-        </div>
         <div class="ax-figures">
           {figures.map((f, i) => (
-            <div class:list={['ax-figure', 'reveal', 'ax-reveal--metric', i === 0 && 'ax-figure--lead']} data-scene-index={i} style={`--reveal-delay: ${120 + i * 140}ms; --scene-index: ${i}`}>
+            <div class="ax-figure reveal ax-reveal--metric" data-scene-index={i} style={`--reveal-delay: ${360 + i * 320}ms; --scene-index: ${i}`}>
               <span class="ax-figure-num">{f.value}</span>
               <span class="ax-figure-label">{f.label}</span>
             </div>
@@ -320,19 +286,15 @@ const team = [
     <!-- PROCESS -->
     <section class="ax-section ax-scene ax-scene--process" data-home-section="process" data-cinematic-scene="process" data-motion-role="process">
       <div class="ax-container">
-        <div class="ax-section-index reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 40ms">
-          <span>07</span>
-          <span class="ax-section-index-name">The sequence</span>
-        </div>
         <header class="ax-head">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 120ms">Review, scope, <em>build, launch</em></h2>
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Review, scope, <em>build, launch</em></h2>
         </header>
 
         <div class="ax-process-track" data-process-track>
           <span class="ax-process-line" aria-hidden="true"><span class="ax-process-line-fill" data-process-line-fill></span></span>
           <ol class="ax-process">
             {process.map((p, i) => (
-              <li class="ax-step reveal ax-reveal--step" data-process-step data-scene-index={i} style={`--reveal-delay: ${160 + i * 110}ms`}>
+              <li class="ax-step reveal ax-reveal--step" data-process-step data-scene-index={i} style={`--reveal-delay: ${300 + i * 220}ms`}>
                 <span class="ax-step-node" aria-hidden="true"></span>
                 <h3 class="ax-step-title">{p.title}</h3>
                 <p class="ax-step-desc">{p.description}</p>
@@ -347,18 +309,14 @@ const team = [
     <section class="ax-section ax-scene ax-scene--partners" data-home-section="studio" data-cinematic-scene="studio" data-motion-role="partners">
       <div class="ax-container ax-split">
         <div class="ax-split-left">
-          <div class="ax-section-index reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 40ms">
-            <span>08</span>
-            <span class="ax-section-index-name">The studio</span>
-          </div>
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 120ms">Two co-founders. <em>Direct accountability.</em></h2>
-          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 220ms">
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Two co-founders. <em>Direct accountability.</em></h2>
+          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 480ms">
             Aidan Magee and Riley Hinsperger are co-founders of Axiom International and Axiom Web, its web-focused subsidiary. You work directly with the people shaping the strategy and building the site—no account layers, no handoff fog, no guessing who owns the outcome.
           </p>
         </div>
         <div class="ax-split-right">
           {team.map((m, i) => (
-            <div class="ax-person reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${180 + i * 140}ms`}>
+            <div class="ax-person reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${320 + i * 360}ms`}>
               <span class="ax-person-name">{m.name}</span>
               <span class="ax-person-role">{m.role}</span>
               <p class="ax-person-desc">{m.description}</p>
@@ -370,19 +328,16 @@ const team = [
 
     <!-- FINAL CTA -->
     <section class="ax-final ax-scene ax-scene--resolution" data-home-section="final" data-cinematic-scene="final" data-motion-role="resolution">
-      <div class="ax-final-art" aria-hidden="true">
-        <img src="/images/axiom-hero-architecture.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" />
-      </div>
       <div class="ax-container">
-        <div class="ax-final-rule reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 120ms"></div>
-        <h2 class="ax-mega ax-final-mega reveal ax-reveal--final" style="--reveal-delay: 240ms">
+        <div class="ax-final-rule reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 260ms"></div>
+        <h2 class="ax-mega ax-final-mega reveal ax-reveal--final" style="--reveal-delay: 620ms">
           Start a serious<br /><em>project conversation.</em>
         </h2>
-        <div class="ax-hero-actions reveal ax-reveal--final" style="--reveal-delay: 360ms">
+        <div class="ax-hero-actions reveal ax-reveal--final" style="--reveal-delay: 1080ms">
           <a href={CTA_PATHS.startProject} class="btn btn-primary">Start a project <span aria-hidden="true">→</span></a>
           <a href="/pricing" class="btn-ghost-link">See pricing</a>
         </div>
-        <p class="ax-fineprint reveal ax-reveal--final" style="--reveal-delay: 480ms">
+        <p class="ax-fineprint reveal ax-reveal--final" style="--reveal-delay: 1400ms">
           Four packages. Pricing is public, the launch path is defined, and every build is checked for speed, mobile quality, and clear inquiry flow before it ships.
         </p>
       </div>
@@ -465,67 +420,21 @@ const team = [
 
   /* ── Mobile hero ──────────────────────────────────── */
   @media (max-width: 767px) {
-    .ax-hero { min-height: calc(100svh - 4rem); padding-top: 1.25rem; padding-bottom: 2.75rem; }
+    .ax-hero { min-height: auto; padding-top: 1.25rem; padding-bottom: 2.75rem; }
     .ax-hero-foot { margin-top: 1.75rem; gap: 1.5rem; }
     .ax-hero-actions { gap: 1rem; }
     .ax-hero-actions .btn-primary { flex: 1 1 auto; justify-content: center; }
   }
 
   /* ── Section frame ────────────────────────────────── */
-  .ax-section { padding-block: clamp(4.5rem, 11vh, 8rem); border-top: 1px solid var(--hairline); scroll-margin-top: 5rem; }
+  .ax-section { padding-block: clamp(4.5rem, 11vh, 8rem); border-top: 1px solid var(--hairline); }
   .ax-section--tight { padding-block: clamp(3rem, 7vh, 5rem); }
-
-  .ax-section-index {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    line-height: 1;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
-  .ax-section-index::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    flex: 0 0 auto;
-    border-radius: 999px;
-    background: currentColor;
-    opacity: 0.6;
-    transform: scale(0.65);
-    transition: transform 700ms var(--ease-cinematic), opacity 500ms var(--ease-premium);
-  }
-
-  .ax-section-index::after {
-    content: '';
-    width: clamp(3rem, 9vw, 7rem);
-    height: 1px;
-    background: currentColor;
-    opacity: 0.28;
-    transform: scaleX(0.28);
-    transform-origin: left center;
-    transition: transform 900ms var(--ease-cinematic), opacity 500ms var(--ease-premium);
-  }
-
-  .ax-section-index.is-in::before { opacity: 1; transform: scale(1); }
-  .ax-section-index.is-in::after { opacity: 0.72; transform: scaleX(1); }
-  .ax-section-index-name { color: var(--text-muted); }
 
   .ax-head { display: grid; gap: 1.1rem; margin-bottom: clamp(2.5rem, 5vw, 3.75rem); max-width: 42rem; }
   .ax-head-note { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; margin: 0; max-width: 48ch; }
 
   /* ── Problem statement ────────────────────────────── */
-  .ax-statement {
-    padding-block: clamp(4.5rem, 13vh, 9rem);
-    border-top: 1px solid var(--hairline);
-    background: #111111;
-    color: var(--text-primary);
-    scroll-margin-top: 5rem;
-  }
+  .ax-statement { padding-block: clamp(4.5rem, 13vh, 9rem); border-top: 1px solid var(--hairline); }
   .ax-big {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(1.7rem, 4.4vw, 3.4rem); line-height: 1.18; letter-spacing: -0.02em;
@@ -534,16 +443,9 @@ const team = [
   .ax-big em { font-style: normal; color: var(--text-primary); }
 
   /* ── Solution ─────────────────────────────────────── */
-  .ax-scene--cascade { background: #0e0e0e; }
   .ax-solution { display: grid; grid-template-columns: 1fr; gap: clamp(1.5rem, 3vw, 2rem); border-top: 1px solid var(--hairline); padding-top: clamp(2rem, 4vw, 3rem); }
   @media (min-width: 760px) { .ax-solution { grid-template-columns: repeat(3, 1fr); gap: clamp(2rem, 3vw, 3rem); } }
   .ax-solution-item { display: grid; gap: 0.75rem; align-content: start; }
-  .ax-item-index {
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.14em;
-  }
   .ax-solution-title { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 500; letter-spacing: -0.015em; color: var(--text-primary); margin: 0; }
   .ax-solution-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin: 0; max-width: 38ch; }
 
@@ -589,7 +491,6 @@ const team = [
     border: 1px solid var(--hairline);
     border-radius: 8px;
     background: var(--surface-1);
-    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.2);
   }
 
   .ax-work-feature {
@@ -656,10 +557,7 @@ const team = [
   .ax-work-item {
     min-width: 0;
     border-bottom: 1px solid var(--hairline);
-    transition: background-color 360ms var(--ease-premium), border-color 360ms var(--ease-premium);
   }
-
-  .ax-work-item.is-open { background: rgba(255, 255, 255, 0.035); }
 
   .ax-work-trigger {
     display: grid;
@@ -833,34 +731,21 @@ const team = [
   .ax-more:hover { color: var(--text-primary); gap: 0.85rem; }
 
   /* ── Index list (services) ────────────────────────── */
-  .ax-scene--index {
-    background: #121212;
-    color: var(--text-primary);
-  }
-  .ax-scene--index::before { background: linear-gradient(90deg, var(--text-primary), transparent 38%, transparent); }
-  .ax-scene--index::after { background: var(--hairline-strong); }
   .ax-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hairline); }
   .ax-row {
-    display: grid; grid-template-columns: 2rem 1fr auto; grid-template-areas: 'num title arrow' 'num desc arrow';
+    display: grid; grid-template-columns: 1fr; grid-template-areas: 'title' 'desc';
     gap: 0.5rem; align-items: start;
     padding-block: clamp(1.6rem, 3vw, 2.4rem); border-bottom: 1px solid var(--hairline);
-    transition: background-color 360ms var(--ease-premium), padding-left 420ms var(--ease-cinematic);
+    transition: background-color 0.25s ease;
   }
   @media (min-width: 860px) {
-    .ax-row { grid-template-columns: 2.5rem minmax(12rem, 18rem) 1fr auto; grid-template-areas: 'num title desc arrow'; align-items: center; gap: 2rem; }
+    .ax-row { grid-template-columns: minmax(12rem, 18rem) 1fr auto; grid-template-areas: 'title desc arrow'; align-items: center; gap: 2rem; }
   }
-  .ax-row-num { grid-area: num; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.14em; padding-top: 0.35rem; }
   .ax-row-title { grid-area: title; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.3rem); font-weight: 500; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.05; }
   .ax-row-desc { grid-area: desc; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; max-width: 40ch; margin: 0; }
   .ax-row-arrow { grid-area: arrow; color: var(--text-muted); font-size: 1.3rem; transition: transform 0.25s ease, color 0.25s ease; justify-self: end; }
-  .ax-scene--index .ax-list { border-color: var(--hairline); }
-  .ax-scene--index .ax-row { border-color: var(--hairline); }
-  .ax-scene--index .ax-list > li.is-in .ax-row-num,
-  .ax-scene--index .ax-list > li.is-in .ax-row-arrow { color: var(--text-primary); }
-  .ax-scene--index .ax-list > li::before { background: var(--text-primary); }
-  .ax-scene--index a.ax-row:hover,
-  .ax-scene--index a.ax-row:focus-visible { background: var(--surface-1); padding-left: 0.75rem; }
-  .ax-scene--index a.ax-row:hover .ax-row-arrow { color: var(--text-primary); transform: translateX(6px); }
+  a.ax-row:hover { background: var(--surface-1); }
+  a.ax-row:hover .ax-row-arrow { color: var(--text-primary); transform: translateX(6px); }
 
   /* ── Split ────────────────────────────────────────── */
   .ax-split { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 5vw, 4rem); }
@@ -870,14 +755,12 @@ const team = [
   }
   .ax-split-left .ax-h2 { margin-block: 1rem 1.25rem; }
 
-  .ax-principle { display: grid; grid-template-columns: 2rem 1fr; gap: 1.25rem; padding-block: clamp(1.5rem, 3vw, 2.1rem); border-top: 1px solid var(--hairline); }
+  .ax-principle { display: grid; grid-template-columns: 1fr; gap: 1.25rem; padding-block: clamp(1.5rem, 3vw, 2.1rem); border-top: 1px solid var(--hairline); }
   .ax-principle:first-child { border-top: 0; padding-top: 0; }
-  .ax-principle-num { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.14em; padding-top: 0.2rem; }
   .ax-principle-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; color: var(--text-primary); margin: 0; letter-spacing: -0.01em; }
   .ax-principle-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin: 0.6rem 0 0; }
 
   /* ── Figures ──────────────────────────────────────── */
-  .ax-scene--metrics { background: #151515; color: var(--text-primary); }
   .ax-figures { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(2rem, 4vw, 3rem); }
   @media (min-width: 760px) { .ax-figures { grid-template-columns: repeat(3, 1fr); } }
   .ax-figure { position: relative; display: grid; gap: 0.65rem; border-top: 1px solid var(--hairline-strong); padding-top: 1.1rem; }
@@ -887,7 +770,6 @@ const team = [
   .ax-figure-label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.5; }
 
   /* ── Process ──────────────────────────────────────── */
-  .ax-scene--process { background: #0d0d0d; }
   .ax-process-track { position: relative; --process-progress: 0; }
   .ax-process-line { position: absolute; z-index: 0; inset: 0 0 auto; display: block; height: 1px; background: var(--hairline-strong); pointer-events: none; }
   .ax-process-line-fill { display: block; width: 100%; height: 100%; background: var(--text-primary); transform: scaleX(var(--process-progress)); transform-origin: left center; transition: transform 180ms linear; }
@@ -907,7 +789,6 @@ const team = [
   .ax-step-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin: 0.7rem 0 0; max-width: 34ch; }
 
   /* ── Studio ───────────────────────────────────────── */
-  .ax-scene--partners { background: #0d0d0d; }
   .ax-person { padding-block: clamp(1.75rem, 3vw, 2.25rem); border-top: 1px solid var(--hairline); }
   .ax-person:first-child { border-top: 0; padding-top: 0; }
   .ax-person-name { display: block; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; letter-spacing: -0.03em; color: var(--text-primary); }
@@ -915,7 +796,7 @@ const team = [
   .ax-person-desc { color: var(--text-secondary); font-size: 1rem; line-height: 1.65; margin: 1rem 0 0; max-width: 46ch; }
 
   /* ── Final CTA ────────────────────────────────────── */
-  .ax-final { position: relative; padding-block: clamp(5rem, 16vh, 10rem); border-top: 1px solid var(--hairline); overflow: hidden; scroll-margin-top: 5rem; }
+  .ax-final { position: relative; padding-block: clamp(5rem, 16vh, 10rem); border-top: 1px solid var(--hairline); overflow: hidden; }
   .ax-final::after { content: ''; position: absolute; top: 0; right: 0; width: min(48vw, 42rem); height: 1px; background: linear-gradient(90deg, transparent, var(--hairline-strong)); pointer-events: none; }
   .ax-final-rule { width: clamp(4rem, 10vw, 8rem); height: 1px; margin-bottom: clamp(2rem, 5vw, 3.5rem); background: var(--text-primary); transform-origin: left center; }
   .ax-final-mega { margin-block: 0 2.5rem; }
@@ -1330,10 +1211,6 @@ const team = [
   }
 
   @media (max-width: 759px) {
-    .ax-mega {
-      font-size: clamp(2.2rem, 9vw, 4rem);
-      letter-spacing: -0.04em;
-    }
     .ax-scene::after,
     .ax-scene:not(.ax-scene--title-card)::before { right: var(--ax-gutter); left: var(--ax-gutter); }
     .ax-work-feature-frame::after { display: none; }
@@ -1372,511 +1249,6 @@ const team = [
     .ax-figure-label { animation: none !important; opacity: 1 !important; transform: none !important; }
     .ax-step-desc { opacity: 1 !important; transform: none !important; }
   }
-
-  /* ── Editorial motion system ─────────────────────────
-     Every scene has one clear visual lead: type for the opening, an inverted
-     statement, image for work, the line for process, and the CTA at the end.
-     Content moves on one axis only; emphasis comes from timing and contrast. */
-  .ax-root .ax-scene {
-    --scene-drift-left: 0px;
-    --scene-drift-right: 0px;
-    --scene-drift-up: 0px;
-    --scene-drift-down: 0px;
-    --scene-scale: 1;
-  }
-
-  .ax-root .ax-scene--process .ax-step { --step-drift: 0px; }
-  :global(.site-footer[data-home-footer='true']) { --footer-drift: 0px; }
-
-  .ax-root .ax-reveal--title,
-  .ax-root .ax-reveal--statement,
-  .ax-root .ax-reveal--copy,
-  .ax-root .ax-reveal--item,
-  .ax-root .ax-reveal--row,
-  .ax-root .ax-reveal--metric,
-  .ax-root .ax-reveal--step,
-  .ax-root .ax-reveal--final {
-    transition-property: opacity, transform;
-    transition-duration: 1.2s;
-    transition-timing-function: var(--ease-cinematic);
-    transition-delay: var(--reveal-delay, 0ms);
-  }
-
-  .ax-root .ax-reveal--title { transition-duration: 1.45s; }
-  .ax-root .ax-reveal--statement { transition-duration: 1.5s; }
-  .ax-root .ax-reveal--final { transition-duration: 1.35s; }
-  .ax-root .ax-reveal--rule {
-    transition: opacity 900ms var(--ease-premium), transform 1.15s var(--ease-cinematic);
-    transition-delay: var(--reveal-delay, 0ms);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) { opacity: 0; transform: translate3d(0, 1.1rem, 0) !important; clip-path: none !important; }
-    :global(html.js) .ax-root .ax-reveal--statement:not(.is-in) { opacity: 0; transform: translate3d(0, 1.2rem, 0) !important; }
-    :global(html.js) .ax-root .ax-reveal--copy:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
-    :global(html.js) .ax-root .ax-reveal--item:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
-    :global(html.js) .ax-root .ax-reveal--row:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
-    :global(html.js) .ax-root .ax-reveal--metric:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
-    :global(html.js) .ax-root .ax-reveal--step:not(.is-in) { opacity: 0; transform: translate3d(0, 1rem, 0) !important; }
-    :global(html.js) .ax-root .ax-reveal--final:not(.is-in) { opacity: 0; transform: translate3d(0, 1.15rem, 0) !important; }
-    :global(html.js) .ax-root .ax-reveal--rule:not(.is-in) { opacity: 0; transform: scaleX(0.28); transform-origin: left center; }
-
-    :global(html.js) .ax-root .ax-hero-title .ax-mask {
-      animation: ax-title-card-reveal-pro 1.55s var(--ease-cinematic) both;
-      animation-delay: calc(140ms + (var(--i, 0) * 190ms));
-    }
-
-    :global(html.js) .ax-root .ax-hero-actions.ax-load {
-      animation: ax-hero-support-reveal-pro 900ms var(--ease-cinematic) 820ms both;
-    }
-
-    :global(html.js) .ax-root .ax-hero-foot > .ax-lead.ax-load {
-      animation: ax-hero-support-reveal-pro 900ms var(--ease-cinematic) 980ms both;
-    }
-
-    :global(html.js) .ax-root .ax-hero::before { animation: ax-line-in 1.6s var(--ease-cinematic) 220ms both; }
-  }
-
-  @keyframes ax-title-card-reveal-pro {
-    0% { opacity: 0; transform: translate3d(0, 1.15em, 0); filter: blur(6px); }
-    55% { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
-    100% { opacity: 1; transform: none; filter: blur(0); }
-  }
-
-  @keyframes ax-hero-support-reveal-pro {
-    0% { opacity: 0; transform: translate3d(0, 0.8rem, 0); }
-    68% { opacity: 1; transform: translate3d(0, 0, 0); }
-    100% { opacity: 1; transform: none; }
-  }
-
-  /* The statement is the first tonal change after the opening frame. */
-  .ax-root .ax-statement::before,
-  .ax-root .ax-statement::after { background: rgba(242, 240, 234, 0.28); }
-  .ax-root .ax-statement-line--resolve { position: relative; }
-  .ax-root .ax-statement-line--resolve::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 0.04em;
-    left: 0;
-    height: 0.06em;
-    background: rgba(242, 240, 234, 0.68);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 1.2s var(--ease-cinematic);
-  }
-  .ax-root .ax-big.is-in .ax-statement-line--resolve::after { transform: scaleX(1); }
-
-  /* The three standards disclose like an editorial index, not a card grid. */
-  .ax-root .ax-solution-item::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    background: linear-gradient(90deg, var(--text-primary), transparent 78%);
-    opacity: 0.34;
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 1.25s var(--ease-cinematic), opacity 700ms var(--ease-premium);
-  }
-  .ax-root .ax-solution-item.is-in::after { opacity: 0.72; transform: scaleX(1); }
-  .ax-root .ax-item-index { transition: color 700ms var(--ease-premium), letter-spacing 900ms var(--ease-cinematic); }
-  .ax-root .ax-solution-item.is-in .ax-item-index { color: var(--text-primary); letter-spacing: 0.22em; }
-
-  /* Work is the visual anchor: reveal the frame, then let the photograph settle. */
-  .ax-root .ax-work-feature { clip-path: inset(0 0 12% 0) !important; }
-  .ax-root .ax-work-feature.is-active { clip-path: inset(0) !important; }
-  .ax-root .ax-work-feature-img {
-    transform: scale(1.09) !important;
-    filter: grayscale(0.16) brightness(0.9);
-    transition: transform 1.9s var(--ease-cinematic), filter 1.15s var(--ease-premium);
-  }
-  .ax-root .ax-work-feature.is-active .ax-work-feature-img { transform: scale(1) !important; filter: grayscale(0) brightness(1); }
-  .ax-root .ax-work-feature-frame::before {
-    content: '';
-    position: absolute;
-    z-index: 2;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(180deg, transparent 58%, rgba(0, 0, 0, 0.28));
-  }
-
-  /* Index rows gain a readable active edge and a controlled arrow lift. */
-  .ax-root .ax-row-num { transition: color 700ms var(--ease-premium), transform 700ms var(--ease-cinematic); }
-  .ax-root .ax-list > li.is-in .ax-row-num { color: var(--text-primary); transform: translateX(0.2rem); }
-  .ax-root .ax-list > li.is-in .ax-row-arrow { color: var(--text-primary); }
-  .ax-root .ax-scene--index .ax-list > li.is-in .ax-row-num,
-  .ax-root .ax-scene--index .ax-list > li.is-in .ax-row-arrow { color: var(--text-primary); }
-
-  /* Principle numbers make the split section scan instead of stack. */
-  .ax-root .ax-principle-num { transition: color 700ms var(--ease-premium), transform 700ms var(--ease-cinematic); }
-  .ax-root .ax-principle.is-in .ax-principle-num { color: var(--text-primary); transform: translateX(0.2rem); }
-
-  /* The metric strip is a raised graphite beat. */
-  .ax-root .ax-scene--metrics::before,
-  .ax-root .ax-scene--metrics::after { background: rgba(242, 240, 234, 0.28); }
-  .ax-root .ax-scene--metrics .ax-figure-num,
-  .ax-root .ax-scene--metrics .ax-figure-label { display: block; }
-  :global(html.js) .ax-root .ax-scene--metrics .ax-figure { animation: none; }
-  :global(html.js) .ax-root .ax-scene--metrics .ax-figure.is-in .ax-figure-num {
-    animation: ax-metric-settle-pro 1.45s var(--ease-cinematic) both;
-    animation-delay: calc(180ms + (var(--scene-index, 0) * 170ms));
-  }
-  :global(html.js) .ax-root .ax-scene--metrics .ax-figure.is-in .ax-figure-label {
-    animation: ax-metric-label-pro 1.05s var(--ease-premium) both;
-    animation-delay: calc(420ms + (var(--scene-index, 0) * 170ms));
-  }
-
-  @keyframes ax-metric-settle-pro {
-    0% { opacity: 0; transform: translate3d(0, 1rem, 0) scale(0.94); }
-    62% { opacity: 1; transform: translate3d(0, 0, 0) scale(1.035); }
-    100% { opacity: 1; transform: none; }
-  }
-
-  @keyframes ax-metric-label-pro {
-    from { opacity: 0; transform: translate3d(0, 0.5rem, 0); letter-spacing: 0.2em; }
-    to { opacity: 1; transform: none; letter-spacing: 0.1em; }
-  }
-
-  /* Process is the only looping accent: one live node tells the eye where to look. */
-  .ax-root .ax-step.is-current .ax-step-node {
-    animation: ax-node-pulse 2.8s ease-in-out infinite;
-  }
-
-  .ax-root .ax-step.is-complete .ax-step-node { background: var(--text-primary); transform: scale(1); }
-
-  @keyframes ax-node-pulse {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(10, 10, 10, 0.06); }
-    50% { box-shadow: 0 0 0 8px rgba(10, 10, 10, 0.14); }
-  }
-
-  /* The final frame earns its emphasis from scale and timing, not decoration. */
-  .ax-root .ax-final-mega { letter-spacing: -0.035em; }
-  .ax-root .ax-final .btn-primary { box-shadow: 0 10px 30px rgba(242, 240, 234, 0.08); }
-
-  @media (max-width: 759px) {
-    .ax-root .ax-hero { min-height: calc(100svh - 4rem); }
-    .ax-root .ax-section-index { margin-bottom: 2.25rem; }
-    .ax-root .ax-scene--metrics .ax-figures { gap: 1.75rem 1.25rem; }
-    .ax-root .ax-work-feature-frame::before { background: linear-gradient(180deg, transparent 46%, rgba(0, 0, 0, 0.32)); }
-    .ax-root .ax-work-feature-frame::after { display: none; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ax-root .ax-hero-title .ax-mask,
-    .ax-root .ax-hero-actions.ax-load,
-    .ax-root .ax-hero-foot > .ax-lead.ax-load,
-    .ax-root .ax-work-feature-img,
-    .ax-root .ax-figure-num,
-    .ax-root .ax-figure-label,
-    .ax-root .ax-step.is-current .ax-step-node { animation: none !important; }
-    .ax-root .ax-work-feature,
-    .ax-root .ax-work-feature.is-active,
-    .ax-root .ax-figure-num,
-    .ax-root .ax-figure-label { transform: none !important; clip-path: none !important; opacity: 1 !important; }
-    .ax-root .ax-statement-line--resolve::after { transform: scaleX(1); transition: none; }
-  }
-
-  /* ── Signal direction ──────────────────────────────────────────
-     The page uses one visual language: architecture in the distance,
-     copper only where the eye should move, and type that resolves into
-     a clear next action. The sections stay dark; the composition changes. */
-  .ax-root .ax-hero {
-    overflow: clip;
-    background: #0a0a0a;
-  }
-
-  .ax-root .ax-hero-art,
-  .ax-root .ax-final-art {
-    position: absolute;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .ax-root .ax-hero-art {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 31%;
-    opacity: 0.72;
-    transform: translate3d(var(--scene-drift-left), 0, 0) scale(1.055);
-    transform-origin: 72% center;
-    transition: transform 1.35s var(--ease-cinematic), opacity 900ms var(--ease-premium);
-  }
-
-  .ax-root .ax-hero-art::after,
-  .ax-root .ax-final-art::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(90deg, #0a0a0a 0%, rgba(10, 10, 10, 0.92) 18%, rgba(10, 10, 10, 0.28) 66%, rgba(10, 10, 10, 0.5) 100%),
-      linear-gradient(180deg, rgba(10, 10, 10, 0.22), transparent 38%, rgba(10, 10, 10, 0.82) 100%);
-  }
-
-  .ax-root .ax-hero-art img,
-  .ax-root .ax-final-art img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 70% center;
-    filter: brightness(0.72) saturate(0.72) contrast(1.08);
-  }
-
-  .ax-root .ax-hero-signal {
-    position: absolute;
-    z-index: 2;
-    right: var(--ax-gutter);
-    bottom: clamp(1.4rem, 5vh, 3.5rem);
-    left: var(--ax-gutter);
-    height: 1rem;
-    pointer-events: none;
-  }
-
-  .ax-root .ax-hero-signal-line {
-    position: absolute;
-    top: 50%;
-    right: 12%;
-    left: 0;
-    height: 1px;
-    overflow: hidden;
-    background: var(--hairline-strong);
-    transform: translateY(-50%);
-  }
-
-  .ax-root .ax-hero-signal-progress {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--signal), var(--signal-line));
-    box-shadow: 0 0 12px var(--signal-soft);
-    transform: scaleX(var(--scene-progress));
-    transform-origin: left center;
-    transition: transform 700ms var(--ease-cinematic);
-  }
-
-  .ax-root .ax-hero-signal-point {
-    position: absolute;
-    top: 50%;
-    right: calc(12% - 0.25rem);
-    width: 0.5rem;
-    height: 0.5rem;
-    border: 1px solid var(--signal);
-    border-radius: 50%;
-    background: var(--bg-base);
-    box-shadow: 0 0 0 0.35rem var(--signal-soft), 0 0 1.25rem var(--signal-soft);
-    transform: translateY(-50%);
-  }
-
-  .ax-root .ax-hero-title { position: relative; z-index: 1; max-width: min(72rem, 82vw); }
-  .ax-root .ax-hero-title em,
-  .ax-root .ax-statement .ax-big em,
-  .ax-root .ax-final-mega em { color: var(--signal); }
-
-  .ax-root .ax-hero .btn-primary,
-  .ax-root .ax-final .btn-primary {
-    border-radius: 2px;
-    border-color: var(--signal);
-    background: var(--signal);
-    color: var(--signal-ink);
-    box-shadow: 0 12px 34px var(--signal-soft);
-  }
-
-  .ax-root .ax-hero .btn-primary:hover,
-  .ax-root .ax-final .btn-primary:hover {
-    border-color: var(--signal-hover);
-    background: var(--signal-hover);
-    color: var(--signal-ink);
-  }
-
-  .ax-root .ax-hero .btn-primary span,
-  .ax-root .ax-final .btn-primary span {
-    transition: transform 500ms var(--ease-cinematic);
-  }
-
-  .ax-root .ax-hero .btn-primary:hover span,
-  .ax-root .ax-final .btn-primary:hover span { transform: translateX(0.35rem); }
-
-  /* The statement resolves with signal colour instead of another pale panel. */
-  .ax-root .ax-statement::before { background: linear-gradient(90deg, var(--signal), transparent 38%, transparent); }
-  .ax-root .ax-statement::after { background: var(--hairline-strong); }
-  .ax-root .ax-statement-line--resolve::after { background: var(--signal); box-shadow: 0 0 0.8rem var(--signal-soft); }
-
-  /* The solution is a cascade: each proof beat lands lower than the last. */
-  @media (min-width: 760px) {
-    .ax-root .ax-scene--cascade .ax-head {
-      grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.58fr);
-      align-items: end;
-      max-width: none;
-    }
-
-    .ax-root .ax-scene--cascade .ax-head-note { justify-self: end; }
-    .ax-root .ax-scene--cascade .ax-solution-item:nth-child(2) { margin-top: clamp(2rem, 5vw, 4.25rem); }
-    .ax-root .ax-scene--cascade .ax-solution-item:nth-child(3) { margin-top: clamp(4rem, 10vw, 8rem); }
-  }
-
-  .ax-root .ax-solution-item::before,
-  .ax-root .ax-solution-item::after { background: var(--signal); }
-  .ax-root .ax-solution-item::after { opacity: 0.28; }
-  .ax-root .ax-solution-item.is-in::after { opacity: 0.72; }
-
-  /* Work becomes an exhibition index: image, active rule, then decision. */
-  .ax-root .ax-work-feature-frame { border-radius: 2px; border-color: var(--hairline-strong); }
-  .ax-root .ax-work-feature-frame::after { background: var(--signal); box-shadow: 0 0 1rem var(--signal-soft); }
-  .ax-root .ax-work-item { position: relative; overflow: hidden; }
-  .ax-root .ax-work-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 2px;
-    background: var(--signal);
-    transform: scaleY(0);
-    transform-origin: top center;
-    transition: transform 900ms var(--ease-cinematic);
-  }
-  .ax-root .ax-work-item.is-open { background: var(--signal-soft); }
-  .ax-root .ax-work-item.is-open::before { transform: scaleY(1); }
-  .ax-root .ax-work-item.is-open .ax-work-num,
-  .ax-root .ax-work-item.is-open .ax-work-indicator { color: var(--signal); }
-  .ax-root .ax-work-feature-img { filter: grayscale(0.2) brightness(0.78) saturate(0.84); }
-  .ax-root .ax-work-feature.is-active .ax-work-feature-img { filter: grayscale(0.04) brightness(0.9) saturate(0.96); }
-  .ax-root .ax-work-feature-caption span:first-child { color: var(--signal); }
-
-  /* Services get a single orbital gesture so the list is not another flat wall. */
-  .ax-root .ax-scene--index { overflow: hidden; }
-  .ax-root .ax-scene--index::before { background: linear-gradient(90deg, var(--signal), transparent 38%, transparent); }
-  .ax-root .ax-scene--index .ax-container::before {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: 4%;
-    right: -25%;
-    width: min(58vw, 48rem);
-    height: 74%;
-    border: 1px solid var(--signal-line);
-    border-radius: 50%;
-    opacity: 0.2;
-    transform: rotate(-23deg) translate3d(var(--scene-drift-left), 0, 0);
-    transition: transform 1.4s var(--ease-cinematic), opacity 900ms var(--ease-premium);
-    pointer-events: none;
-  }
-  .ax-root .ax-scene--index .ax-list > li::before { background: var(--signal); }
-  .ax-root .ax-scene--index .ax-list > li.is-in .ax-row-num,
-  .ax-root .ax-scene--index .ax-list > li.is-in .ax-row-arrow { color: var(--signal); }
-  .ax-root .ax-scene--index a.ax-row:hover,
-  .ax-root .ax-scene--index a.ax-row:focus-visible { background: var(--signal-soft); }
-
-  /* Figures: one lead signal, two supporting facts. */
-  .ax-root .ax-scene--metrics { overflow: hidden; }
-  .ax-root .ax-scene--metrics::before { background: linear-gradient(90deg, var(--signal), transparent 38%, transparent); }
-  .ax-root .ax-figures { align-items: stretch; }
-  .ax-root .ax-figure { min-height: clamp(11rem, 18vw, 17rem); align-content: end; padding-bottom: clamp(1.25rem, 3vw, 2rem); }
-  .ax-root .ax-figure--lead {
-    min-height: clamp(15rem, 25vw, 23rem);
-    background: linear-gradient(135deg, var(--signal-soft), transparent 58%);
-  }
-  .ax-root .ax-figure--lead .ax-figure-num { color: var(--signal); font-size: clamp(3.5rem, 7vw, 6.5rem); }
-  .ax-root .ax-figure:not(.ax-figure--lead) .ax-figure-num { font-size: clamp(2rem, 4vw, 3.4rem); }
-  .ax-root .ax-figure::before { background: var(--signal); }
-  .ax-root .ax-figure-label { max-width: 18ch; }
-
-  /* Process is the signature motion: copper line, live node, completed trail. */
-  .ax-root .ax-scene--process::before { background: linear-gradient(90deg, var(--signal), transparent 38%, transparent); }
-  .ax-root .ax-process-line { background: var(--hairline-strong); }
-  .ax-root .ax-process-line-fill {
-    position: relative;
-    background: var(--signal);
-    box-shadow: 0 0 1rem var(--signal-soft);
-  }
-  .ax-root .ax-process-line-fill::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -0.25rem;
-    width: 0.5rem;
-    height: 0.5rem;
-    border: 1px solid var(--signal);
-    border-radius: 50%;
-    background: var(--bg-base);
-    box-shadow: 0 0 0 0.3rem var(--signal-soft);
-    transform: translateY(-50%);
-  }
-  .ax-root .ax-step-node { border: 1px solid var(--hairline-strong); }
-  .ax-root .ax-step.is-current .ax-step-node,
-  .ax-root .ax-step.is-complete .ax-step-node { background: var(--signal); border-color: var(--signal); }
-  .ax-root .ax-step.is-current .ax-step-title { color: var(--signal); }
-
-  @keyframes ax-signal-pulse {
-    0%, 100% { box-shadow: 0 0 0 0.28rem var(--signal-soft), 0 0 0.8rem var(--signal-soft); }
-    50% { box-shadow: 0 0 0 0.62rem rgba(194, 106, 58, 0.03), 0 0 1.4rem var(--signal-soft); }
-  }
-  .ax-root .ax-step.is-current .ax-step-node { animation: ax-signal-pulse 2.8s ease-in-out infinite; }
-
-  /* Studio and resolution share the same architectural return. */
-  .ax-root .ax-scene--partners .ax-container::before {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: -12%;
-    right: 10%;
-    bottom: -12%;
-    width: min(28vw, 21rem);
-    border-left: 1px solid var(--signal-line);
-    opacity: 0.18;
-    transform: skewX(-16deg) translate3d(var(--scene-drift-left), 0, 0);
-    transition: transform 1.4s var(--ease-cinematic);
-    pointer-events: none;
-  }
-  .ax-root .ax-person::after { background: var(--signal); }
-  .ax-root .ax-final { background: #0a0a0a; }
-  .ax-root .ax-final-art {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 37%;
-    opacity: 0.5;
-    transform: translate3d(var(--scene-drift-right), 0, 0) scale(1.04);
-    transition: transform 1.4s var(--ease-cinematic), opacity 900ms var(--ease-premium);
-  }
-  .ax-root .ax-final-art::after {
-    background:
-      linear-gradient(90deg, #0a0a0a 0%, rgba(10, 10, 10, 0.96) 16%, rgba(10, 10, 10, 0.3) 72%, rgba(10, 10, 10, 0.55) 100%),
-      linear-gradient(180deg, rgba(10, 10, 10, 0.35), transparent 44%, rgba(10, 10, 10, 0.8));
-  }
-  .ax-root .ax-final-rule { background: var(--signal); box-shadow: 0 0 1rem var(--signal-soft); }
-  .ax-root .ax-continuity-rail-progress { background: var(--signal); box-shadow: 0 0 1rem var(--signal-soft); }
-
-  @media (max-width: 759px) {
-    .ax-root .ax-hero-art { top: 24%; left: -42%; opacity: 0.52; transform: translate3d(var(--scene-drift-left), 0, 0) scale(1.12); }
-    .ax-root .ax-hero-art::after { background: linear-gradient(90deg, #0a0a0a 0%, rgba(10, 10, 10, 0.75) 45%, rgba(10, 10, 10, 0.4) 100%), linear-gradient(180deg, rgba(10, 10, 10, 0.18), transparent 42%, #0a0a0a 96%); }
-    .ax-root .ax-hero-signal-line { right: 7%; }
-    .ax-root .ax-hero-signal-point { right: calc(7% - 0.25rem); }
-    .ax-root .ax-scene--cascade .ax-solution-item { margin-top: 0; }
-    .ax-root .ax-scene--index .ax-container::before { top: 18%; right: -72%; width: 125vw; height: 46%; opacity: 0.14; }
-    .ax-root .ax-figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .ax-root .ax-figure--lead { grid-column: 1 / -1; min-height: 12rem; }
-    .ax-root .ax-figure:not(.ax-figure--lead) { min-height: 9.5rem; }
-    .ax-root .ax-final-art { top: 34%; left: -28%; opacity: 0.32; }
-    .ax-root .ax-scene--partners .ax-container::before { right: 6%; width: 42vw; }
-    .ax-root .ax-process-line-fill::after { top: auto; right: auto; bottom: -0.25rem; left: 50%; transform: translateX(-50%); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ax-root .ax-hero-art,
-    .ax-root .ax-final-art,
-    .ax-root .ax-scene--index .ax-container::before,
-    .ax-root .ax-scene--partners .ax-container::before,
-    .ax-root .ax-hero-signal-progress,
-    .ax-root .ax-step.is-current .ax-step-node { animation: none !important; transition: none !important; }
-    .ax-root .ax-hero-art,
-    .ax-root .ax-final-art { transform: none !important; }
-  }
 </style>
 
 <script>
@@ -1907,9 +1279,15 @@ const team = [
     const processTrack = root.querySelector<HTMLElement>('[data-process-track]');
     const processSteps = Array.from(root.querySelectorAll<HTMLElement>('[data-process-step]'));
     const homeFooter = document.querySelector<HTMLElement>('.site-footer');
+    const footerColumns = homeFooter
+      ? Array.from(homeFooter.querySelectorAll<HTMLElement>('.axiom-container > div'))
+      : [];
     let scrollFrame = 0;
 
     homeFooter?.setAttribute('data-home-footer', 'true');
+    footerColumns.forEach((column, index) => {
+      column.style.setProperty('--footer-delay', `${index * 120}ms`);
+    });
 
     const setPanelLinkState = (panel: HTMLElement, enabled: boolean) => {
       panel.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
@@ -2016,16 +1394,17 @@ const team = [
         const rect = scene.getBoundingClientRect();
         const sceneRange = Math.max(rect.height + viewportStart - viewportEnd, 1);
         const sceneProgress = clamp((viewportStart - rect.top) / sceneRange);
-        const sceneOffset = sceneProgress - 0.5;
-        const driftLimit = window.innerWidth < 760 ? 18 : 30;
-        const sceneDrift = sceneOffset * driftLimit;
+        const sceneInverse = 1 - sceneProgress;
+        const horizontalDrift = Math.round(sceneInverse * 28);
+        const verticalDrift = Math.round(sceneInverse * 22);
 
         scene.style.setProperty('--scene-progress', String(sceneProgress));
-        scene.style.setProperty('--scene-drift-left', `${-sceneDrift}px`);
-        scene.style.setProperty('--scene-drift-right', `${sceneDrift}px`);
-        scene.style.setProperty('--scene-drift-up', `${sceneDrift * -0.6}px`);
-        scene.style.setProperty('--scene-drift-down', `${sceneDrift * 0.75}px`);
-        scene.style.setProperty('--scene-scale', (0.985 + sceneProgress * 0.03).toFixed(3));
+        scene.style.setProperty('--scene-inverse', String(sceneInverse));
+        scene.style.setProperty('--scene-drift-left', `${-horizontalDrift}px`);
+        scene.style.setProperty('--scene-drift-right', `${horizontalDrift}px`);
+        scene.style.setProperty('--scene-drift-up', `${-verticalDrift}px`);
+        scene.style.setProperty('--scene-drift-down', `${verticalDrift}px`);
+        scene.style.setProperty('--scene-scale', String(0.985 + sceneProgress * 0.015));
         scene.dataset.scenePhase = sceneProgress < 0.24 ? 'enter' : sceneProgress > 0.78 ? 'exit' : 'hold';
 
         const visibleTop = Math.max(rect.top, 0);
@@ -2050,6 +1429,7 @@ const team = [
         const footerRange = Math.max(footerRect.height + viewportHeight * 0.9 - viewportHeight * 0.2, 1);
         const footerProgress = clamp((viewportHeight * 0.9 - footerRect.top) / footerRange);
         homeFooter.style.setProperty('--footer-progress', String(footerProgress));
+        homeFooter.style.setProperty('--footer-drift', `${Math.round((1 - footerProgress) * 18)}px`);
         homeFooter.classList.toggle(
           'is-footer-active',
           footerRect.top <= viewportHeight * 0.78 && footerRect.bottom >= viewportHeight * 0.2
@@ -2070,12 +1450,12 @@ const team = [
         Math.floor(processProgress * processSteps.length)
       );
       processSteps.forEach((step, index) => {
-        step.classList.toggle('is-current', index === activeStepIndex);
-        step.classList.toggle('is-complete', index < activeStepIndex);
+        step.classList.toggle('is-current', index <= activeStepIndex);
         const stepProgress = clamp(
           (processProgress - index / Math.max(processSteps.length, 1)) * Math.max(processSteps.length, 1)
         );
         step.style.setProperty('--step-progress', String(stepProgress));
+        step.style.setProperty('--step-drift', `${Math.round((1 - stepProgress) * 16)}px`);
       });
     };
 
@@ -2095,18 +1475,13 @@ const team = [
       scenes.forEach((scene) => {
         scene.classList.remove('is-scene-active');
         delete scene.dataset.scenePhase;
-        scene.style.removeProperty('--scene-progress');
-        scene.style.removeProperty('--scene-drift-left');
-        scene.style.removeProperty('--scene-drift-right');
-        scene.style.removeProperty('--scene-drift-up');
-        scene.style.removeProperty('--scene-drift-down');
-        scene.style.removeProperty('--scene-scale');
+        ['--scene-progress', '--scene-inverse', '--scene-drift-left', '--scene-drift-right', '--scene-drift-up', '--scene-drift-down', '--scene-scale'].forEach((property) => scene.style.removeProperty(property));
       });
-      processSteps.forEach((step) => step.classList.remove('is-current', 'is-complete'));
       homeFooter?.removeAttribute('data-home-footer');
       homeFooter?.classList.remove('is-footer-active');
       homeFooter?.style.removeProperty('--footer-progress');
       homeFooter?.style.removeProperty('--footer-drift');
+      footerColumns.forEach((column) => column.style.removeProperty('--footer-delay'));
       root.dataset.homeMotionReady = 'false';
     };
   };

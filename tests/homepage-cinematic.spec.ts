@@ -70,7 +70,6 @@ test('homepage uses distinct, deliberately paced motion choreography across ever
   ]);
 
   await page.locator('[data-home-section="figures"]').scrollIntoViewIfNeeded();
-  await expect(page.locator('.ax-figure--lead')).toHaveClass(/is-in/, { timeout: 2_000 });
   await page.waitForTimeout(80);
 
   const timings = await page.evaluate(() => {
@@ -134,42 +133,6 @@ test('homepage marks the active cinematic scene while native scrolling continues
   expect(sceneState.progress).toBeGreaterThan(0);
   expect(sceneState.progress).toBeLessThan(1);
   await expect(page.locator('[data-home-footer]')).toBeAttached();
-});
-
-test('homepage anchors the cinematic direction to a loaded hero and live scene depth', async ({ page }) => {
-  await page.goto('/', { waitUntil: 'networkidle' });
-
-  const visualAnchors = await page.evaluate(() => {
-    const heroImage = document.querySelector<HTMLImageElement>('.ax-hero-art img');
-    const heroSignal = document.querySelector<HTMLElement>('.ax-hero-signal-point');
-    const leadFigure = document.querySelector<HTMLElement>('.ax-figure--lead');
-    const railProgress = document.querySelector<HTMLElement>('.ax-continuity-rail-progress');
-    if (!heroImage || !heroSignal || !leadFigure || !railProgress) throw new Error('Missing cinematic anchor');
-
-    return {
-      heroLoaded: heroImage.complete && heroImage.naturalWidth > 0,
-      signalColor: getComputedStyle(heroSignal).borderColor,
-      leadFigureCount: document.querySelectorAll('.ax-figure--lead').length,
-      railColor: getComputedStyle(railProgress).backgroundColor,
-    };
-  });
-
-  expect(visualAnchors.heroLoaded).toBe(true);
-  expect(visualAnchors.signalColor).toBe('rgb(194, 106, 58)');
-  expect(visualAnchors.leadFigureCount).toBe(1);
-  expect(visualAnchors.railColor).toBe('rgb(194, 106, 58)');
-
-  const servicesY = await page.locator('.ax-scene--index').evaluate((element) =>
-    element.getBoundingClientRect().top + window.scrollY + element.clientHeight * 0.5,
-  );
-  await page.evaluate((y) => window.scrollTo(0, y), servicesY);
-  await page.waitForTimeout(120);
-
-  const drift = await page.locator('.ax-scene--index').evaluate((element) => ({
-    left: element.style.getPropertyValue('--scene-drift-left'),
-    right: element.style.getPropertyValue('--scene-drift-right'),
-  }));
-  expect(drift.left === '0px' && drift.right === '0px').toBe(false);
 });
 
 test.describe('homepage reduced motion', () => {
