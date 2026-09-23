@@ -94,6 +94,13 @@ for (const file of walkHtml(distDir)) {
   }
   if (!robots.includes('noindex') && h1Count !== 1) fail(route, `expected exactly one h1, found ${h1Count}`);
 
+  for (const match of html.matchAll(/<a\s+[^>]*href=["'](\/[^"'?#]*)(?:[?#][^"']*)?["'][^>]*>/gi)) {
+    const target = match[1];
+    if (target !== '/' && !target.endsWith('/') && !/\.[a-z0-9]+$/i.test(target)) {
+      fail(route, `internal link is not canonical: ${target}`);
+    }
+  }
+
   for (const tag of ['og:title', 'og:description', 'og:url', 'og:image', 'twitter:card', 'twitter:title', 'twitter:description', 'twitter:image']) {
     if (!contentFor(html, tag)) fail(route, `missing ${tag}`);
   }
