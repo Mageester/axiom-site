@@ -2,7 +2,7 @@
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { HOME_JSON_LD, WEBSITE_SCHEMA, SEO_ROUTES, SITE_URL } from '../lib/seo';
+import { HOME_JSON_LD, HOME_PAGE_SCHEMA, WEBSITE_SCHEMA, SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 
 const work = [
@@ -87,7 +87,7 @@ const team = [
   description={SEO_ROUTES.home.description}
   canonicalPath="/"
   ogImageAlt="Axiom — web design studio in Kitchener-Waterloo."
-  schema={[HOME_JSON_LD, WEBSITE_SCHEMA]}
+  schema={[HOME_JSON_LD, WEBSITE_SCHEMA, HOME_PAGE_SCHEMA]}
 >
   <main id="main-content" tabindex="-1" class="ax-root" data-homepage>
     <div class="ax-continuity-rail" aria-hidden="true">
