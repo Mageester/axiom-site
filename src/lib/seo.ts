@@ -575,12 +575,12 @@ export const SEO_ROUTES = {
   },
   privacy: {
     title: 'Privacy Policy | Axiom Web',
-    description: 'Privacy policy for the Axiom website and contact forms.',
+    description: 'Read how Axiom Web handles information submitted through getaxiom.ca, project intake forms, contact requests, analytics, and related website services.',
     canonicalPath: '/privacy',
   },
   terms: {
     title: 'Terms of Service | Axiom Web',
-    description: 'Terms for using the Axiom website and services.',
+    description: 'Read the terms governing use of getaxiom.ca and Axiom Web services, including project timelines, payment terms, intellectual property, and Ontario law.',
     canonicalPath: '/terms',
   },
   contact: {
