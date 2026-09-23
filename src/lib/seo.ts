@@ -124,6 +124,32 @@ export const WEBSITE_SCHEMA = {
   },
 } as const;
 
+export const HOME_PAGE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${SITE_URL}/#webpage`,
+  url: toCanonicalUrl('/'),
+  name: 'Axiom Web | Web Design in Kitchener-Waterloo',
+  description:
+    'Axiom Web is a Kitchener-Waterloo web design studio building fast, high-trust websites for local businesses across Waterloo Region and Canada.',
+  isPartOf: {
+    '@id': `${SITE_URL}/#website`,
+  },
+  about: {
+    '@id': `${SITE_URL}/#organization`,
+  },
+  publisher: {
+    '@id': `${SITE_URL}/#organization`,
+  },
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: `${SITE_URL}/og-image.png`,
+    width: 1200,
+    height: 630,
+  },
+  inLanguage: 'en-CA',
+} as const;
+
 export const SERVICES_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'OfferCatalog',
