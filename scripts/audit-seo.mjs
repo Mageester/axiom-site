@@ -3,7 +3,7 @@ import { join, relative, sep } from 'node:path';
 
 const distDir = 'dist';
 const siteUrl = 'https://getaxiom.ca';
-const publicRoutePrefixes = ['/', '/about', '/approach', '/contact', '/pricing', '/process', '/services', '/start-a-project', '/web-design', '/work'];
+const publicRoutePrefixes = ['/', '/about', '/approach', '/contact', '/pricing', '/privacy', '/services', '/start-a-project', '/terms', '/web-design', '/work'];
 const sitemapBlockedPrefixes = [
   '/404',
   '/admin',
@@ -14,6 +14,7 @@ const sitemapBlockedPrefixes = [
   '/functions',
   '/hunt',
   '/jobs',
+  '/process',
   '/lead',
   '/leads',
   '/settings',
@@ -76,7 +77,7 @@ for (const file of walkHtml(distDir)) {
   const description = contentFor(html, 'description');
   const robots = contentFor(html, 'robots');
   const canonical = linkHref(html, 'canonical');
-  const expectedCanonical = new URL(route === '/' ? '/' : route, siteUrl).toString();
+  const expectedCanonical = new URL(route === '/' ? '/' : `${route.replace(/\/+$/, '')}/`, siteUrl).toString();
   const h1Count = (html.match(/<h1\b/gi) ?? []).length;
 
   if (!title) fail(route, 'missing title');
@@ -94,6 +95,9 @@ for (const file of walkHtml(distDir)) {
 
   for (const tag of ['og:title', 'og:description', 'og:url', 'og:image', 'twitter:card', 'twitter:title', 'twitter:description', 'twitter:image']) {
     if (!contentFor(html, tag)) fail(route, `missing ${tag}`);
+  }
+  if (!robots.includes('noindex') && contentFor(html, 'og:url') !== expectedCanonical) {
+    fail(route, `og:url mismatch (${contentFor(html, 'og:url') || 'missing'} !== ${expectedCanonical})`);
   }
 
   const jsonLdBlocks = Array.from(html.matchAll(/<script\s+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi));
@@ -133,9 +137,23 @@ if (!existsSync(sitemapPath)) {
     }
   }
 
-  for (const route of ['/', '/pricing', '/services', '/work', '/contact', '/start-a-project', '/web-design/kitchener']) {
-    const expected = new URL(route, siteUrl).toString();
+  for (const route of ['/', '/about', '/approach', '/contact', '/pricing', '/privacy', '/services', '/start-a-project', '/terms', '/web-design/kitchener', '/work']) {
+    const expected = new URL(route === '/' ? '/' : `${route.replace(/\/+$/, '')}/`, siteUrl).toString();
     if (!sitemapText.includes(expected)) fail('sitemap', `missing expected route: ${route}`);
+  }
+
+  for (const path of indexedPaths) {
+    if (path !== '/' && !path.endsWith('/')) fail('sitemap', `non-canonical URL shape: ${path}`);
+  }
+}
+
+const robotsPath = join(distDir, 'robots.txt');
+if (!existsSync(robotsPath)) {
+  fail('robots', 'missing robots.txt');
+} else {
+  const robots = readFileSync(robotsPath, 'utf8');
+  if (!robots.includes('Sitemap: https://getaxiom.ca/sitemap-index.xml')) {
+    fail('robots', 'missing canonical sitemap declaration');
   }
 }
 
