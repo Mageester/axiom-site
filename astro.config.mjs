@@ -35,7 +35,7 @@ export default defineConfig({
       changefreq: 'monthly',
       lastmod: new Date(),
       serialize(item) {
-        const path = new URL(item.url).pathname;
+        const path = new URL(item.url).pathname.replace(/\/+$/, '') || '/';
         if (path === '/') {
           return { ...item, changefreq: 'weekly', priority: 1.0 };
         }
