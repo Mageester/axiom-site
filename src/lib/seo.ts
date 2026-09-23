@@ -21,7 +21,7 @@ export const formatSeoTitle = (title?: string) => {
 };
 
 export const toCanonicalUrl = (canonicalPath?: string) => {
-  if (!canonicalPath) return SITE_URL;
+  if (!canonicalPath) return `${SITE_URL}/`;
   const url = new URL(canonicalPath, SITE_URL);
   if (url.pathname !== '/') {
     url.pathname = `${url.pathname.replace(/\/+$/, '')}/`;
