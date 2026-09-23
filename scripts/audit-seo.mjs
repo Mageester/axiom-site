@@ -143,7 +143,7 @@ if (!existsSync(sitemapPath)) {
   }
 
   for (const path of indexedPaths) {
-    if (path !== '/' && !path.endsWith('/')) fail('sitemap', `non-canonical URL shape: ${path}`);
+    if (path !== '/' && !path.endsWith('/') && !path.endsWith('.xml')) fail('sitemap', `non-canonical URL shape: ${path}`);
   }
 }
 
