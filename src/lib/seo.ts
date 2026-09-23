@@ -180,7 +180,6 @@ export const HOME_JSON_LD = {
     'High-trust websites for established local businesses across Kitchener-Waterloo, Cambridge, Guelph, Hamilton, and Canada.',
   email: SITE_EMAIL,
   telephone: '+1-226-753-1833',
-  priceRange: '$$',
   foundingDate: '2025',
   address: {
     '@type': 'PostalAddress',
