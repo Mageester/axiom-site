@@ -6,22 +6,22 @@
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
-/about
+/about/
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
-/pricing
+/pricing/
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
-/work
+/work/
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
-/services
+/services/
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
@@ -31,7 +31,7 @@
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
-/approach
+/approach/
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
@@ -42,12 +42,12 @@
 /start
   X-Robots-Tag: noindex, follow
 
-/start-a-project
+/start-a-project/
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
-/contact
+/contact/
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
@@ -58,11 +58,11 @@
 /admin/*
   X-Robots-Tag: noindex, nofollow
 
-/privacy
+/privacy/
   X-Robots-Tag: index, follow, max-image-preview:large
   Content-Type: text/html; charset=utf-8
 
-/terms
+/terms/
   X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
