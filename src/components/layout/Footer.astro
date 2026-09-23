@@ -6,28 +6,31 @@ const year = new Date().getFullYear();
 
 const PAGES = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'Work', href: '/work' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Services', href: '/services/' },
+  { label: 'Work', href: '/work/' },
+  { label: 'Pricing', href: '/pricing/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
 ];
 
 const SERVICE_AREAS = [
-  { label: 'Kitchener', href: '/web-design/kitchener' },
-  { label: 'Waterloo', href: '/web-design/waterloo' },
-  { label: 'Cambridge', href: '/web-design/cambridge' },
-  { label: 'Guelph', href: '/web-design/guelph' },
-  { label: 'Hamilton', href: '/web-design/hamilton' },
+  { label: 'Kitchener', href: '/web-design/kitchener/' },
+  { label: 'Waterloo', href: '/web-design/waterloo/' },
+  { label: 'Cambridge', href: '/web-design/cambridge/' },
+  { label: 'Guelph', href: '/web-design/guelph/' },
+  { label: 'Hamilton', href: '/web-design/hamilton/' },
 ];
 
 const LEGAL = [
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms of Service', href: '/terms' },
+  { label: 'Privacy Policy', href: '/privacy/' },
+  { label: 'Terms of Service', href: '/terms/' },
 ];
 
-const isActive = (href: string) =>
-  href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+const isActive = (href: string) => {
+  const current = pathname.replace(/\/+$/, '') || '/';
+  const target = href.replace(/\/+$/, '') || '/';
+  return target === '/' ? current === '/' : current === target || current.startsWith(`${target}/`);
+};
 
 const linkClass = 'motion-link-accent inline-flex min-h-9 items-center text-[15px] leading-[1.7] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]';
 ---
@@ -73,7 +76,7 @@ const linkClass = 'motion-link-accent inline-flex min-h-9 items-center text-[15p
       <ul class="space-y-2.5">
         <li><a href={`mailto:${SITE_EMAIL}`} class={linkClass}>{SITE_EMAIL}</a></li>
         <li><a href="tel:+12267531833" class={linkClass}>(226) 753-1833</a></li>
-        <li><a href="/start-a-project" class={linkClass}>Start a project</a></li>
+        <li><a href="/start-a-project/" class={linkClass}>Start a project</a></li>
       </ul>
     </div>
 

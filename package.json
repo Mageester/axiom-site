@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/audit-seo.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
     "preview": "astro preview",
     "optimize:images": "node scripts/optimize-images.mjs",

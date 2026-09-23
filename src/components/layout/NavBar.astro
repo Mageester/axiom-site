@@ -9,23 +9,26 @@ const { hidePrimaryCta = false } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const LINKS = [
-  { label: 'Services', href: '/services' },
-  { label: 'Work', href: '/work' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services/' },
+  { label: 'Work', href: '/work/' },
+  { label: 'Pricing', href: '/pricing/' },
+  { label: 'About', href: '/about/' },
 ] as const;
 
 const MOBILE_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'Work', href: '/work' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Services', href: '/services/' },
+  { label: 'Work', href: '/work/' },
+  { label: 'Pricing', href: '/pricing/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
 ] as const;
 
-const isActive = (href: string) =>
-  href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+const isActive = (href: string) => {
+  const current = pathname.replace(/\/+$/, '') || '/';
+  const target = href.replace(/\/+$/, '') || '/';
+  return target === '/' ? current === '/' : current === target || current.startsWith(`${target}/`);
+};
 
 const navLinkClass =
   'motion-link-accent min-h-11 py-2 text-[14px] font-medium transition-colors duration-200 hover:text-[var(--text-primary)]';

@@ -8,7 +8,7 @@ import { MotionHeading } from '../../components/motion/MotionHeading';
 import { SectionDivider } from '../../components/motion/SectionDivider';
 import { cities } from '../../content/cities';
 import { createStartProjectHref } from '../../lib/cta';
-import { SITE_EMAIL, SITE_NAME, SITE_TELEPHONE, SITE_URL, breadcrumbSchema } from '../../lib/seo';
+import { ORGANIZATION_SCHEMA, SITE_NAME, SITE_URL, breadcrumbSchema, toCanonicalUrl } from '../../lib/seo';
 
 export function getStaticPaths() {
   return cities.map((city) => ({
@@ -22,24 +22,18 @@ const { city } = Astro.props;
 const title = `Web Design ${city.name} | Local Business Sites | ${SITE_NAME}`;
 const description = `Web design for ${city.name} service businesses. Clearer offers, visible proof, fast mobile pages, and an easier path to inquiry.`;
 const canonicalPath = `/web-design/${city.slug}`;
-const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+const canonicalUrl = toCanonicalUrl(canonicalPath);
 
-const localBusinessSchema = {
+const localServiceSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': `${canonicalUrl}#local-business`,
-  name: `${SITE_NAME} - Web Design ${city.name}`,
+  '@type': 'Service',
+  '@id': `${canonicalUrl}#service`,
+  name: `Web Design in ${city.name}`,
   url: canonicalUrl,
   description,
-  image: `${SITE_URL}/og-image.png`,
-  telephone: SITE_TELEPHONE,
-  email: SITE_EMAIL,
-  priceRange: '$$',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Kitchener',
-    addressRegion: 'ON',
-    addressCountry: 'CA',
+  serviceType: 'Web design',
+  provider: {
+    '@id': `${SITE_URL}/#organization`,
   },
   areaServed: {
     '@type': 'City',
@@ -51,19 +45,19 @@ const servicesTrio = [
   {
     label: 'High-Trust Conversion Sites',
     description: `For ${city.name} service businesses where the site needs to turn interest into calls, bookings, or quote requests. Offer up top, proof near the action, simple mobile flow.`,
-    href: '/services/conversion-sites',
+    href: '/services/conversion-sites/',
     icon: 'target',
   },
   {
     label: 'Local Business Websites',
     description: `For ${city.name} practices, studios, and shops whose reputation and service area need to be obvious in the first scroll.`,
-    href: '/services/local-business-websites',
+    href: '/services/local-business-websites/',
     icon: 'crown',
   },
   {
     label: 'Rebuilds',
     description: `Replace a dated ${city.name} site without losing rankings, content, or domain trust. Same URL, faster load, cleaner path to inquiry.`,
-    href: '/services/rebuilds',
+    href: '/services/rebuilds/',
     icon: 'refresh',
   },
 ] as const;
@@ -106,7 +100,8 @@ const faqSchema = {
   description={description}
   canonicalPath={canonicalPath}
   schema={[
-    localBusinessSchema,
+    ORGANIZATION_SCHEMA,
+    localServiceSchema,
     faqSchema,
     breadcrumbSchema([
       { name: 'Home', url: SITE_URL },

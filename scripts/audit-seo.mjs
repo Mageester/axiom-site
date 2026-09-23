@@ -3,7 +3,7 @@ import { join, relative, sep } from 'node:path';
 
 const distDir = 'dist';
 const siteUrl = 'https://getaxiom.ca';
-const publicRoutePrefixes = ['/', '/about', '/approach', '/contact', '/pricing', '/process', '/services', '/start-a-project', '/web-design', '/work'];
+const publicRoutePrefixes = ['/', '/about', '/approach', '/contact', '/pricing', '/privacy', '/services', '/start-a-project', '/terms', '/web-design', '/work'];
 const sitemapBlockedPrefixes = [
   '/404',
   '/admin',
@@ -14,6 +14,7 @@ const sitemapBlockedPrefixes = [
   '/functions',
   '/hunt',
   '/jobs',
+  '/process',
   '/lead',
   '/leads',
   '/settings',
@@ -22,6 +23,7 @@ const sitemapBlockedPrefixes = [
   '/vault',
 ];
 
+const schemaOptionalRoutes = new Set(['/privacy', '/terms']);
 const failures = [];
 
 const fail = (file, message) => {
@@ -76,7 +78,7 @@ for (const file of walkHtml(distDir)) {
   const description = contentFor(html, 'description');
   const robots = contentFor(html, 'robots');
   const canonical = linkHref(html, 'canonical');
-  const expectedCanonical = new URL(route === '/' ? '/' : route, siteUrl).toString();
+  const expectedCanonical = new URL(route === '/' ? '/' : `${route.replace(/\/+$/, '')}/`, siteUrl).toString();
   const h1Count = (html.match(/<h1\b/gi) ?? []).length;
 
   if (!title) fail(route, 'missing title');
@@ -92,12 +94,22 @@ for (const file of walkHtml(distDir)) {
   }
   if (!robots.includes('noindex') && h1Count !== 1) fail(route, `expected exactly one h1, found ${h1Count}`);
 
+  for (const match of html.matchAll(/<a\s+[^>]*href=["'](\/[^"'?#]*)(?:[?#][^"']*)?["'][^>]*>/gi)) {
+    const target = match[1];
+    if (target !== '/' && !target.endsWith('/') && !/\.[a-z0-9]+$/i.test(target)) {
+      fail(route, `internal link is not canonical: ${target}`);
+    }
+  }
+
   for (const tag of ['og:title', 'og:description', 'og:url', 'og:image', 'twitter:card', 'twitter:title', 'twitter:description', 'twitter:image']) {
     if (!contentFor(html, tag)) fail(route, `missing ${tag}`);
   }
+  if (!robots.includes('noindex') && contentFor(html, 'og:url') !== expectedCanonical) {
+    fail(route, `og:url mismatch (${contentFor(html, 'og:url') || 'missing'} !== ${expectedCanonical})`);
+  }
 
   const jsonLdBlocks = Array.from(html.matchAll(/<script\s+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi));
-  if (!robots.includes('noindex') && jsonLdBlocks.length === 0) fail(route, 'missing JSON-LD');
+  if (!robots.includes('noindex') && !schemaOptionalRoutes.has(route) && jsonLdBlocks.length === 0) fail(route, 'missing JSON-LD');
   for (const [, rawJson] of jsonLdBlocks) {
     try {
       JSON.parse(rawJson);
@@ -121,7 +133,7 @@ if (!existsSync(sitemapPath)) {
   const sitemapText = [sitemapIndex, ...sitemapBodies].join('\n');
   const indexedPaths = Array.from(sitemapText.matchAll(/<loc>(.*?)<\/loc>/g), (match) => {
     try {
-      return new URL(match[1]).pathname.replace(/\/+$/, '') || '/';
+      return new URL(match[1]).pathname || '/';
     } catch {
       return '';
     }
@@ -133,9 +145,23 @@ if (!existsSync(sitemapPath)) {
     }
   }
 
-  for (const route of ['/', '/pricing', '/services', '/work', '/contact', '/start-a-project', '/web-design/kitchener']) {
-    const expected = new URL(route, siteUrl).toString();
+  for (const route of ['/', '/about', '/approach', '/contact', '/pricing', '/privacy', '/services', '/start-a-project', '/terms', '/web-design/kitchener', '/work']) {
+    const expected = new URL(route === '/' ? '/' : `${route.replace(/\/+$/, '')}/`, siteUrl).toString();
     if (!sitemapText.includes(expected)) fail('sitemap', `missing expected route: ${route}`);
+  }
+
+  for (const path of indexedPaths) {
+    if (path !== '/' && !path.endsWith('/') && !path.endsWith('.xml')) fail('sitemap', `non-canonical URL shape: ${path}`);
+  }
+}
+
+const robotsPath = join(distDir, 'robots.txt');
+if (!existsSync(robotsPath)) {
+  fail('robots', 'missing robots.txt');
+} else {
+  const robots = readFileSync(robotsPath, 'utf8');
+  if (!robots.includes('Sitemap: https://getaxiom.ca/sitemap-index.xml')) {
+    fail('robots', 'missing canonical sitemap declaration');
   }
 }
 
