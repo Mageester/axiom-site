@@ -1,10 +1,10 @@
 export const CTA_PATHS = {
-    startProject: '/start-a-project',
-    work: '/work',
-    services: '/services',
-    approach: '/approach',
-    process: '/approach',
-    contact: '/contact'
+    startProject: '/start-a-project/',
+    work: '/work/',
+    services: '/services/',
+    approach: '/approach/',
+    process: '/approach/',
+    contact: '/contact/'
 } as const;
 
 export const CTA_LABELS = {
