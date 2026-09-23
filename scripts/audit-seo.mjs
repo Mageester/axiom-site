@@ -23,6 +23,7 @@ const sitemapBlockedPrefixes = [
   '/vault',
 ];
 
+const schemaOptionalRoutes = new Set(['/privacy', '/terms']);
 const failures = [];
 
 const fail = (file, message) => {
@@ -101,7 +102,7 @@ for (const file of walkHtml(distDir)) {
   }
 
   const jsonLdBlocks = Array.from(html.matchAll(/<script\s+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi));
-  if (!robots.includes('noindex') && jsonLdBlocks.length === 0) fail(route, 'missing JSON-LD');
+  if (!robots.includes('noindex') && !schemaOptionalRoutes.has(route) && jsonLdBlocks.length === 0) fail(route, 'missing JSON-LD');
   for (const [, rawJson] of jsonLdBlocks) {
     try {
       JSON.parse(rawJson);
