@@ -47,6 +47,7 @@ export const ORGANIZATION_SCHEMA = {
   '@type': 'Organization',
   '@id': `${SITE_URL}/#organization`,
   name: SITE_NAME,
+  alternateName: ['Get Axiom', 'getaxiom.ca'],
   url: toCanonicalUrl('/'),
   logo: `${SITE_URL}/axiomtransparentlogo.webp`,
   image: `${SITE_URL}/og-image.png`,
@@ -115,11 +116,38 @@ export const WEBSITE_SCHEMA = {
   '@type': 'WebSite',
   '@id': `${SITE_URL}/#website`,
   name: SITE_NAME,
+  alternateName: ['Get Axiom', 'getaxiom.ca'],
   url: toCanonicalUrl('/'),
   description: SITE_TAGLINE,
   publisher: {
     '@id': `${SITE_URL}/#organization`,
   },
+} as const;
+
+export const HOME_PAGE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${SITE_URL}/#webpage`,
+  url: toCanonicalUrl('/'),
+  name: 'Axiom Web | Web Design in Kitchener-Waterloo',
+  description:
+    'Axiom Web is a Kitchener-Waterloo web design studio building fast, high-trust websites for local businesses across Waterloo Region and Canada.',
+  isPartOf: {
+    '@id': `${SITE_URL}/#website`,
+  },
+  about: {
+    '@id': `${SITE_URL}/#organization`,
+  },
+  publisher: {
+    '@id': `${SITE_URL}/#organization`,
+  },
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: `${SITE_URL}/og-image.png`,
+    width: 1200,
+    height: 630,
+  },
+  inLanguage: 'en-CA',
 } as const;
 
 export const SERVICES_JSON_LD = {
@@ -173,6 +201,7 @@ export const HOME_JSON_LD = {
   '@id': `${SITE_URL}/#organization`,
   additionalType: 'https://schema.org/ProfessionalService',
   name: SITE_NAME,
+  alternateName: ['Get Axiom', 'getaxiom.ca'],
   url: toCanonicalUrl('/'),
   logo: 'https://getaxiom.ca/axiomtransparentlogo.webp',
   image: 'https://getaxiom.ca/og-image.png',
@@ -509,9 +538,9 @@ export const WORK_JSON_LD = {
 
 export const SEO_ROUTES = {
   home: {
-    title: 'Web Design Kitchener-Waterloo | High-Trust Sites | Axiom Web',
+    title: 'Axiom Web | Web Design in Kitchener-Waterloo',
     description:
-      'High-trust web design for established local businesses in Kitchener-Waterloo and across Canada. Clearer offers, stronger proof, faster inquiries.',
+      'Axiom Web is a Kitchener-Waterloo web design studio building fast, high-trust websites for local businesses across Waterloo Region and Canada.',
     canonicalPath: '/',
   },
   work: {
@@ -538,9 +567,9 @@ export const SEO_ROUTES = {
     canonicalPath: '/services',
   },
   about: {
-    title: 'About Us | Web Design Studio in Kitchener-Waterloo | Axiom Web',
+    title: 'About Axiom Web | Kitchener-Waterloo Web Design',
     description:
-      'Two people, clear roles, direct accountability. Axiom builds high-trust websites for established local businesses in Kitchener-Waterloo and Canada.',
+      'Meet Axiom Web, the Kitchener-Waterloo web design studio founded by Aidan Magee and Riley Hinsperger and operated as part of Axiom International.',
     canonicalPath: '/about',
   },
   approach: {
