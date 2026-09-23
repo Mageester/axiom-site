@@ -33,7 +33,6 @@ export default defineConfig({
         );
       },
       changefreq: 'monthly',
-      lastmod: new Date(),
       serialize(item) {
         const path = new URL(item.url).pathname.replace(/\/+$/, '') || '/';
         if (path === '/') {
