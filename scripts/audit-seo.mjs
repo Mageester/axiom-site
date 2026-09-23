@@ -125,7 +125,7 @@ if (!existsSync(sitemapPath)) {
   const sitemapText = [sitemapIndex, ...sitemapBodies].join('\n');
   const indexedPaths = Array.from(sitemapText.matchAll(/<loc>(.*?)<\/loc>/g), (match) => {
     try {
-      return new URL(match[1]).pathname.replace(/\/+$/, '') || '/';
+      return new URL(match[1]).pathname || '/';
     } catch {
       return '';
     }
