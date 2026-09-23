@@ -11,6 +11,7 @@ const sitemapExcludedPrefixes = [
   '/functions',
   '/hunt',
   '/jobs',
+  '/process',
   '/lead',
   '/leads',
   '/settings',
@@ -19,6 +20,7 @@ const sitemapExcludedPrefixes = [
 ];
 
 export default defineConfig({
+  trailingSlash: 'always',
   integrations: [
     react(),
     sitemap({
@@ -46,7 +48,7 @@ export default defineConfig({
         if (path.startsWith('/services/')) {
           return { ...item, priority: 0.8 };
         }
-        if (path === '/about' || path === '/process' || path === '/approach') {
+        if (path === '/about' || path === '/approach') {
           return { ...item, priority: 0.7 };
         }
         return { ...item, priority: 0.5 };
