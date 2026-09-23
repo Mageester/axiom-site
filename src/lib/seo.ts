@@ -24,7 +24,7 @@ export const toCanonicalUrl = (canonicalPath?: string) => {
   if (!canonicalPath) return SITE_URL;
   const url = new URL(canonicalPath, SITE_URL);
   if (url.pathname !== '/') {
-    url.pathname = url.pathname.replace(/\/+$/, '');
+    url.pathname = `${url.pathname.replace(/\/+$/, '')}/`;
   }
   url.search = '';
   url.hash = '';
@@ -38,7 +38,7 @@ export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) =>
     '@type': 'ListItem',
     position: i + 1,
     name: item.name,
-    item: item.url,
+    item: toCanonicalUrl(item.url),
   })),
 });
 
@@ -47,7 +47,7 @@ export const ORGANIZATION_SCHEMA = {
   '@type': 'Organization',
   '@id': `${SITE_URL}/#organization`,
   name: SITE_NAME,
-  url: SITE_URL,
+  url: toCanonicalUrl('/'),
   logo: `${SITE_URL}/axiomtransparentlogo.webp`,
   image: `${SITE_URL}/og-image.png`,
   email: SITE_EMAIL,
@@ -59,7 +59,9 @@ export const ORGANIZATION_SCHEMA = {
   ],
   parentOrganization: {
     '@type': 'Organization',
+    '@id': 'https://axiominternational.ca/#organization',
     name: 'Axiom International',
+    url: 'https://axiominternational.ca/',
   },
   address: {
     '@type': 'PostalAddress',
@@ -74,12 +76,11 @@ export const LOCAL_BUSINESS_SCHEMA = {
   '@type': 'LocalBusiness',
   '@id': `${SITE_URL}/#local-business`,
   name: SITE_NAME,
-  url: SITE_URL,
+  url: toCanonicalUrl('/'),
   logo: `${SITE_URL}/axiomtransparentlogo.webp`,
   image: `${SITE_URL}/og-image.png`,
   email: SITE_EMAIL,
   telephone: SITE_TELEPHONE,
-  priceRange: '$$',
   description: SITE_TAGLINE,
   founder: [
     { '@type': 'Person', name: 'Aidan Magee' },
@@ -87,7 +88,9 @@ export const LOCAL_BUSINESS_SCHEMA = {
   ],
   parentOrganization: {
     '@type': 'Organization',
+    '@id': 'https://axiominternational.ca/#organization',
     name: 'Axiom International',
+    url: 'https://axiominternational.ca/',
   },
   address: {
     '@type': 'PostalAddress',
@@ -112,7 +115,7 @@ export const WEBSITE_SCHEMA = {
   '@type': 'WebSite',
   '@id': `${SITE_URL}/#website`,
   name: SITE_NAME,
-  url: SITE_URL,
+  url: toCanonicalUrl('/'),
   description: SITE_TAGLINE,
   publisher: {
     '@id': `${SITE_URL}/#organization`,
@@ -123,7 +126,7 @@ export const SERVICES_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'OfferCatalog',
   name: 'Axiom Web Services',
-  url: `${SITE_URL}/services`,
+  url: toCanonicalUrl('/services'),
   itemListElement: [
     {
       '@type': 'Offer',
@@ -157,17 +160,20 @@ export const serviceJsonLd = (service: { shortTitle: string; summary: string; sl
   '@type': 'Service',
   name: service.shortTitle,
   description: service.summary,
-  provider: ORGANIZATION_SCHEMA,
+  provider: {
+    '@id': `${SITE_URL}/#organization`,
+  },
   areaServed: 'Canada',
-  url: `${SITE_URL}/services/${service.slug}`,
+  url: toCanonicalUrl(`/services/${service.slug}`),
 });
 
 export const HOME_JSON_LD = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': 'Organization',
+  '@id': `${SITE_URL}/#organization`,
   additionalType: 'https://schema.org/ProfessionalService',
   name: SITE_NAME,
-  url: 'https://getaxiom.ca/',
+  url: toCanonicalUrl('/'),
   logo: 'https://getaxiom.ca/axiomtransparentlogo.webp',
   image: 'https://getaxiom.ca/og-image.png',
   description:
@@ -192,7 +198,9 @@ export const HOME_JSON_LD = {
   ],
   parentOrganization: {
     '@type': 'Organization',
+    '@id': 'https://axiominternational.ca/#organization',
     name: 'Axiom International',
+    url: 'https://axiominternational.ca/',
   },
   areaServed: [
     {
@@ -203,14 +211,6 @@ export const HOME_JSON_LD = {
       '@type': 'City',
       name: 'Guelph',
     },
-  ],
-  serviceType: [
-    'Custom web design',
-    'Conversion-focused websites',
-    'Business website design',
-    'Website redesign',
-    'Local business websites',
-    'Website performance optimization',
   ],
   knowsAbout: [
     'Custom websites',
@@ -278,7 +278,7 @@ export const PRICING_JSON_LD = {
   '@type': 'Service',
   name: 'Custom Web Design & Development',
   provider: ORGANIZATION_SCHEMA,
-  url: 'https://getaxiom.ca/pricing',
+  url: toCanonicalUrl('/pricing'),
   areaServed: 'Waterloo Region, Ontario',
   offers: [
     {
@@ -402,7 +402,7 @@ export const PRICING_FAQ_JSON_LD = {
 export const ABOUT_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  url: 'https://getaxiom.ca/about',
+  url: toCanonicalUrl('/about'),
   name: 'About Axiom Web',
   description:
     'Aidan Magee and Riley Hinsperger are the co-founders of Axiom International and Axiom Web, its web-focused subsidiary. Together, they build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
@@ -446,7 +446,7 @@ export const APPROACH_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
   name: 'Axiom Web Approach',
-  url: `${SITE_URL}/approach`,
+  url: toCanonicalUrl('/approach'),
   description:
     'A plain-language website approach covering strategy, structure, design, development, launch checks, and ongoing support.',
   mainEntity: ORGANIZATION_SCHEMA,
@@ -456,12 +456,12 @@ export const CONTACT_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
   name: 'Contact Axiom Web',
-  url: `${SITE_URL}/contact`,
+  url: toCanonicalUrl('/contact'),
   description: 'Start a web design project, send project details, or reach Axiom Web by email or phone.',
   mainEntity: {
     '@type': 'Organization',
     name: SITE_NAME,
-    url: SITE_URL,
+    url: toCanonicalUrl('/'),
     email: SITE_EMAIL,
     telephone: '(226) 753-1833',
     address: {
@@ -484,13 +484,13 @@ export const START_PROJECT_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
   name: 'Start a Project with Axiom Web',
-  url: `${SITE_URL}/start-a-project`,
+  url: toCanonicalUrl('/start-a-project'),
   description: 'Send project details for a Local Launch Special, Local Business Website, Expanded Website, or Custom project. Axiom replies within one business day.',
   mainEntity: ORGANIZATION_SCHEMA,
   potentialAction: {
     '@type': 'CommunicateAction',
     name: 'Send project details',
-    target: `${SITE_URL}/start-a-project`,
+    target: toCanonicalUrl('/start-a-project'),
   },
 } as const;
 
@@ -498,13 +498,13 @@ export const WORK_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   name: 'Axiom Web - Web Design Portfolio',
-  url: 'https://getaxiom.ca/work',
+  url: toCanonicalUrl('/work'),
   description:
     'Demonstration builds across legal, medical, trades, and retail showing how serious business sites can guide visitors toward inquiries.',
   provider: {
     '@type': 'Organization',
     name: SITE_NAME,
-    url: SITE_URL,
+    url: toCanonicalUrl('/'),
   },
 } as const;
 
