@@ -1,18 +1,8 @@
 User-agent: *
 Allow: /
-Disallow: /admin-shell
-Disallow: /admin-shell/
-Disallow: /admin/
+# Private pages return noindex in both HTML and HTTP headers.
+# Leave them crawlable so search engines can see the directive.
 Disallow: /api/
 Disallow: /functions/
-Disallow: /dashboard
-Disallow: /hunt
-Disallow: /vault
-Disallow: /triage
-Disallow: /settings
-Disallow: /lead/
-Disallow: /jobs
-Disallow: /campaigns
-Disallow: /leads
 
 Sitemap: https://getaxiom.ca/sitemap-index.xml

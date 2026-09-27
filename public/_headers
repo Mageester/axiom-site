@@ -117,8 +117,11 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Cache-Control: no-store, no-cache, must-revalidate
 
-/assets/*
+/_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=2592000
 
 /images/*
   Cache-Control: public, max-age=2592000
@@ -144,3 +147,30 @@
 /speculation-rules.json
   Content-Type: application/speculationrules+json
   Cache-Control: public, max-age=3600
+
+/web-design/*
+  Speculation-Rules: "/speculation-rules.json"
+
+/admin-shell
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
+/admin-shell/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
+/404.html
+  X-Robots-Tag: noindex, nofollow
+
+/404/
+  X-Robots-Tag: noindex, nofollow
+
+/site.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=86400
+
+/axiomtransparentlogo.webp
+  Cache-Control: public, max-age=2592000
+
+/og-image.png
+  Cache-Control: public, max-age=604800

@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { createStartProjectHref } from '../lib/cta';
-import { SEO_ROUTES, PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
+import { SEO_ROUTES, PRICING_JSON_LD, faqJsonLd, breadcrumbSchema, SITE_URL } from '../lib/seo';
 import { FadeIn } from '../components/ui/FadeIn';
 import { Card } from '../components/ui/card';
 import { Eyebrow } from '../components/ui/Eyebrow';
@@ -182,7 +182,7 @@ const faqItems = [
   title={SEO_ROUTES.pricing.title}
   description={SEO_ROUTES.pricing.description}
   canonicalPath="/pricing"
-  schema={[PRICING_JSON_LD, PRICING_FAQ_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Pricing', url: `${SITE_URL}/pricing` }])]}
+  schema={[PRICING_JSON_LD, faqJsonLd(faqItems), breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Pricing', url: `${SITE_URL}/pricing` }])]}
 >
   <main id="main-content" tabindex="-1" class="pricing-page pb-0">
     <section class="pricing-hero axiom-container pt-[5.5rem] md:pt-[7.5rem]">

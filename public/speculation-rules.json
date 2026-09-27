@@ -4,30 +4,45 @@
       "source": "document",
       "where": {
         "and": [
-          { "href_matches": "/*" },
-          { "not": { "href_matches": "/admin/*" } },
-          { "not": { "href_matches": "/api/*" } },
-          { "not": { "href_matches": "/start-a-project/" } }
+          {
+            "or": [
+              {
+                "href_matches": "/"
+              },
+              {
+                "href_matches": "/about/"
+              },
+              {
+                "href_matches": "/approach/"
+              },
+              {
+                "href_matches": "/services/"
+              },
+              {
+                "href_matches": "/services/*"
+              },
+              {
+                "href_matches": "/web-design/"
+              },
+              {
+                "href_matches": "/web-design/*"
+              },
+              {
+                "href_matches": "/pricing/"
+              },
+              {
+                "href_matches": "/work/"
+              }
+            ]
+          },
+          {
+            "not": {
+              "selector_matches": "[download], [data-no-prefetch]"
+            }
+          }
         ]
       },
-      "eagerness": "moderate"
-    }
-  ],
-  "prerender": [
-    {
-      "source": "document",
-      "where": {
-        "or": [
-          { "href_matches": "/" },
-          { "href_matches": "/work/" },
-          { "href_matches": "/pricing/" },
-          { "href_matches": "/services/" },
-          { "href_matches": "/about/" },
-          { "href_matches": "/approach/" },
-          { "href_matches": "/contact/" }
-        ]
-      },
-      "eagerness": "moderate"
+      "eagerness": "conservative"
     }
   ]
 }

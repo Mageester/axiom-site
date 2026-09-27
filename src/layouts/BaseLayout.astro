@@ -3,6 +3,9 @@ import '../styles/globals.css';
 import Footer from '../components/layout/Footer.astro';
 import NavBar from '../components/layout/NavBar.astro';
 import {
+  breadcrumbSchema,
+  ORGANIZATION_SCHEMA,
+  WEBSITE_SCHEMA,
   DEFAULT_OG_IMAGE,
   DEFAULT_SEO_DESCRIPTION,
   SITE_NAME,
@@ -45,6 +48,14 @@ const resolvedDescription = description?.trim() || DEFAULT_SEO_DESCRIPTION;
 const resolvedCanonical = toCanonicalUrl(canonicalPath || Astro.url.pathname);
 const resolvedImage = image || DEFAULT_OG_IMAGE;
 const resolvedImageUrl = resolvedImage.startsWith('http') ? resolvedImage : `${SITE_URL}${resolvedImage}`;
+const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+if (!noIndex && Astro.url.pathname !== '/' && !pageSchemas.some(s => s['@type'] === 'BreadcrumbList')) {
+  pageSchemas.push(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: resolvedTitle.split(' | ')[0], url: resolvedCanonical }]));
+}
+const schemas = noIndex ? [] : [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, ...pageSchemas.filter(s =>
+  s['@id'] !== ORGANIZATION_SCHEMA['@id'] && s['@id'] !== WEBSITE_SCHEMA['@id']
+)];
+const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c');
 const shellPaddingClass = showNav ? 'pt-16 md:pt-20' : 'pt-0';
 ---
 
@@ -91,14 +102,12 @@ const shellPaddingClass = showNav ? 'pt-16 md:pt-20' : 'pt-0';
     <meta name="twitter:image" content={resolvedImageUrl} />
     <meta name="twitter:image:alt" content={ogImageAlt || `${SITE_NAME} - custom web design and development in Kitchener-Waterloo`} />
 
+    <link rel="manifest" href="/site.webmanifest" />
+    {Astro.url.pathname === '/' && <link rel="preload" as="image" href="/film/axiom-film-poster.webp" fetchpriority="high" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <ClientRouter />
 
-    {schema && (
-      Array.isArray(schema)
-        ? schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)
-        : <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-    )}
+    {schemas.map(s => <script type="application/ld+json" set:html={jsonLd(s)} />)}
     <script is:inline>
       (() => {
         const html = document.documentElement;

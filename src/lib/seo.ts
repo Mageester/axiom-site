@@ -42,74 +42,43 @@ export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) =>
   })),
 });
 
+// A single entity describes the studio; service areas are not branch offices.
+export const SERVICE_AREAS = ['Kitchener', 'Waterloo', 'Cambridge', 'Guelph', 'Hamilton'].map(name => ({
+  '@type': 'City', name, containedInPlace: { '@type': 'AdministrativeArea', name: 'Ontario, Canada' },
+}));
+
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  '@id': `${SITE_URL}/#organization`,
+  '@type': ['Organization', 'ProfessionalService'],
+  '@id': SITE_URL + '/#organization',
   name: SITE_NAME,
   alternateName: ['Get Axiom', 'getaxiom.ca'],
   url: toCanonicalUrl('/'),
-  logo: `${SITE_URL}/axiomtransparentlogo.webp`,
-  image: `${SITE_URL}/og-image.png`,
+  logo: SITE_URL + '/axiomtransparentlogo.webp',
+  image: SITE_URL + '/og-image.png',
   email: SITE_EMAIL,
   telephone: SITE_TELEPHONE,
   description: SITE_TAGLINE,
   founder: [
-    { '@type': 'Person', name: 'Aidan Magee' },
-    { '@type': 'Person', name: 'Riley Hinsperger' },
+    { '@type': 'Person', '@id': SITE_URL + '/about/#aidan-magee', name: 'Aidan Magee' },
+    { '@type': 'Person', '@id': SITE_URL + '/about/#riley-hinsperger', name: 'Riley Hinsperger' },
   ],
   parentOrganization: {
-    '@type': 'Organization',
-    '@id': 'https://axiominternational.ca/#organization',
-    name: 'Axiom International',
-    url: 'https://axiominternational.ca/',
+    '@type': 'Organization', '@id': 'https://axiominternational.ca/#organization',
+    name: 'Axiom International', url: 'https://axiominternational.ca/',
   },
   address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Kitchener',
-    addressRegion: 'ON',
-    addressCountry: 'CA',
+    '@type': 'PostalAddress', addressLocality: 'Kitchener', addressRegion: 'ON', addressCountry: 'CA',
+  },
+  areaServed: SERVICE_AREAS,
+  contactPoint: {
+    '@type': 'ContactPoint', contactType: 'sales', telephone: SITE_TELEPHONE,
+    email: SITE_EMAIL, availableLanguage: ['en'],
   },
 } as const;
 
-export const LOCAL_BUSINESS_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': `${SITE_URL}/#local-business`,
-  name: SITE_NAME,
-  url: toCanonicalUrl('/'),
-  logo: `${SITE_URL}/axiomtransparentlogo.webp`,
-  image: `${SITE_URL}/og-image.png`,
-  email: SITE_EMAIL,
-  telephone: SITE_TELEPHONE,
-  description: SITE_TAGLINE,
-  founder: [
-    { '@type': 'Person', name: 'Aidan Magee' },
-    { '@type': 'Person', name: 'Riley Hinsperger' },
-  ],
-  parentOrganization: {
-    '@type': 'Organization',
-    '@id': 'https://axiominternational.ca/#organization',
-    name: 'Axiom International',
-    url: 'https://axiominternational.ca/',
-  },
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Kitchener',
-    addressRegion: 'ON',
-    addressCountry: 'CA',
-  },
-  areaServed: [
-    {
-      '@type': 'AdministrativeArea',
-      name: 'Waterloo Region, Ontario',
-    },
-    {
-      '@type': 'Country',
-      name: 'Canada',
-    },
-  ],
-} as const;
+// ProfessionalService is a LocalBusiness subtype; use the same identity everywhere.
+export const LOCAL_BUSINESS_SCHEMA = ORGANIZATION_SCHEMA;
 
 export const WEBSITE_SCHEMA = {
   '@context': 'https://schema.org',
@@ -186,120 +155,36 @@ export const SERVICES_JSON_LD = {
 export const serviceJsonLd = (service: { shortTitle: string; summary: string; slug: string }) => ({
   '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': toCanonicalUrl('/services/' + service.slug) + '#service',
   name: service.shortTitle,
+  serviceType: 'Web design and development',
   description: service.summary,
   provider: {
     '@id': `${SITE_URL}/#organization`,
   },
-  areaServed: 'Canada',
+  areaServed: SERVICE_AREAS,
   url: toCanonicalUrl(`/services/${service.slug}`),
 });
 
-export const HOME_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  '@id': `${SITE_URL}/#organization`,
-  additionalType: 'https://schema.org/ProfessionalService',
-  name: SITE_NAME,
-  alternateName: ['Get Axiom', 'getaxiom.ca'],
-  url: toCanonicalUrl('/'),
-  logo: 'https://getaxiom.ca/axiomtransparentlogo.webp',
-  image: 'https://getaxiom.ca/og-image.png',
-  description:
-    'High-trust websites for established local businesses across Kitchener-Waterloo, Cambridge, Guelph, Hamilton, and Canada.',
-  email: SITE_EMAIL,
-  telephone: '+1-226-753-1833',
-  foundingDate: '2025',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Kitchener',
-    addressRegion: 'ON',
-    addressCountry: 'CA',
-  },
-  numberOfEmployees: {
-    '@type': 'QuantitativeValue',
-    value: 2,
-  },
-  founder: [
-    { '@type': 'Person', name: 'Aidan Magee' },
-    { '@type': 'Person', name: 'Riley Hinsperger' },
-  ],
-  parentOrganization: {
-    '@type': 'Organization',
-    '@id': 'https://axiominternational.ca/#organization',
-    name: 'Axiom International',
-    url: 'https://axiominternational.ca/',
-  },
-  areaServed: [
-    {
-      '@type': 'AdministrativeArea',
-      name: 'Waterloo Region, Ontario',
-    },
-    {
-      '@type': 'City',
-      name: 'Guelph',
-    },
-  ],
-  knowsAbout: [
-    'Custom websites',
-    'Core Web Vitals optimization',
-    'Conversion-focused web design',
-    'Business website design',
-    'Web design Kitchener-Waterloo',
-  ],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'sales',
-    telephone: '+1-226-753-1833',
-    email: SITE_EMAIL,
-    availableLanguage: ['en'],
-  },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Axiom Web Services',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Local Business Website',
-          description: 'Recommended local business website package with up to three pages. From CAD $1,200.',
-        },
-        price: '1200',
-        priceCurrency: 'CAD',
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Expanded Website',
-          description: 'Straightforward website package with up to five pages. From CAD $1,500.',
-        },
-        price: '1500',
-        priceCurrency: 'CAD',
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Local Launch Special',
-          description: 'Introductory one-page websites with up to six sections for very small local businesses. From CAD $900.',
-        },
-        price: '900',
-        priceCurrency: 'CAD',
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Custom',
-          description: 'Custom quoted work for e-commerce, databases, custom booking systems, customer accounts, migrations, and complex requirements.',
-        },
-        priceCurrency: 'CAD',
-      },
-    ],
-  },
-} as const;
+export const HOME_JSON_LD = ORGANIZATION_SCHEMA;
+
+export const FILM_JSON_LD = {
+  '@context': 'https://schema.org', '@type': 'VideoObject',
+  '@id': SITE_URL + '/#film', name: 'Built to the pixel.',
+  description: 'A 32-second Axiom Web studio film introducing our approach to considered web design.',
+  thumbnailUrl: SITE_URL + '/film/axiom-film-poster.webp',
+  contentUrl: SITE_URL + '/film/axiom-built-to-the-pixel-1080.mp4',
+  uploadDate: '2026-09-27', duration: 'PT32S', inLanguage: 'en',
+  publisher: { '@id': SITE_URL + '/#organization' },
+};
+
+export const faqJsonLd = (items: Array<{ question: string; answer: string }>) => ({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: items.map(item => ({
+    '@type': 'Question', name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+});
 
 export const PRICING_JSON_LD = {
   '@context': 'https://schema.org',
@@ -336,93 +221,6 @@ export const PRICING_JSON_LD = {
       name: 'Custom',
       description: 'Custom quoted work for e-commerce, databases, custom booking systems, customer accounts, migrations, and complex requirements.',
       priceCurrency: 'CAD',
-    },
-  ],
-} as const;
-
-export const PRICING_FAQ_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What is the Local Launch Special?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'It is an introductory package from CAD $900 for very small local businesses that need a straightforward professional presence: one page with up to six sections. Existing third-party booking links can be connected.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What is the Local Business Website?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'It is the recommended package from CAD $1,200 for a normal independent local business. It includes up to three pages, typically Home, Services, and Contact, with a gallery and clear inquiry paths where appropriate.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What is the Expanded Website?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'It is from CAD $1,500 for businesses that need more content but still have a straightforward website requirement. The scope is up to five pages and can include About, Gallery, Services, and Contact.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What does every standard package include?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Every standard package includes custom responsive design and development, mobile optimization, first-year basic hosting, domain connection, SEO basics, applicable existing booking-platform integration, light editing of client-supplied text, client-supplied logo and images, launch testing, two consolidated revision rounds, and thirty days of post-launch defect support.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Does the price include booking software?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'An existing booking platform can be connected when applicable. Booksy and other booking platforms remain the client account and expense. Custom booking systems or software are quoted as Custom.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'When is Custom needed?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Custom is required for e-commerce, databases, custom booking systems or software, customer accounts, substantial migrations, or unusual and technically complex requirements.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How are payments handled?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Fifty percent is due after the scope is approved and the agreement is signed. The remaining fifty percent is due after approval of the finished staging site and before public launch.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What happens after the first year?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Basic hosting starts at CAD $120 per year after year one, unless a documented handoff is provided where appropriate. Domain registration renewal is client-owned and billed by the registrar at its actual price.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can I edit the site myself?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. We build so basic text, photo, and page edits are easy to do without breaking anything.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What makes Axiom different?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'You deal with the same two people from first call to launch. Pricing is posted publicly, the package scope is defined up front, and the launch path is clear before work begins.',
-      },
     },
   ],
 } as const;
@@ -486,26 +284,7 @@ export const CONTACT_JSON_LD = {
   name: 'Contact Axiom Web',
   url: toCanonicalUrl('/contact'),
   description: 'Start a web design project, send project details, or reach Axiom Web by email or phone.',
-  mainEntity: {
-    '@type': 'Organization',
-    name: SITE_NAME,
-    url: toCanonicalUrl('/'),
-    email: SITE_EMAIL,
-    telephone: '(226) 753-1833',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Kitchener',
-      addressRegion: 'ON',
-      addressCountry: 'CA',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'sales',
-      telephone: '+1-226-753-1833',
-      email: SITE_EMAIL,
-      availableLanguage: ['en'],
-    },
-  },
+  mainEntity: ORGANIZATION_SCHEMA,
 } as const;
 
 export const START_PROJECT_JSON_LD = {
@@ -573,7 +352,7 @@ export const SEO_ROUTES = {
     canonicalPath: '/about',
   },
   approach: {
-    title: 'Our Approach | Axiom Web',
+    title: 'Our Web Design Process | Axiom Web',
     description: 'A clear website approach for strategy, structure, design, development, launch checks, and ongoing support after the site goes live.',
     canonicalPath: '/approach',
   },

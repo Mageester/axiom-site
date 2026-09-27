@@ -22,6 +22,8 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       <source type="image/webp" srcSet={imageSource.webpSrcSet} sizes={sizes} />
       <img
         src={imageSource.fallbackSrc}
+        width={imageSource.width}
+        height={imageSource.height}
         loading={loading}
         decoding={decoding}
         {...imgProps}

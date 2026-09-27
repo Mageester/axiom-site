@@ -1,11 +1,15 @@
 export type ResponsiveSource = {
   fallbackSrc: string;
+  width: number;
+  height: number;
   avifSrcSet: string;
   webpSrcSet: string;
 };
 
 export const fallbackResponsiveImage: ResponsiveSource = {
   fallbackSrc: '/images/work-aether.jpg',
+    width: 1280,
+    height: 1920,
   avifSrcSet:
     '/images/work-aether-640.avif 640w, /images/work-aether-960.avif 960w, /images/work-aether-1280.avif 1280w',
   webpSrcSet:
@@ -18,16 +22,22 @@ export const responsiveImages = {
   },
   workLaw: {
     fallbackSrc: '/images/work-law-v2.png',
+    width: 1430,
+    height: 1073,
     avifSrcSet: '/images/work-law-v2.avif',
     webpSrcSet: '/images/work-law-v2.webp',
   },
   workDental: {
     fallbackSrc: '/images/work-dental.png',
+    width: 1200,
+    height: 896,
     avifSrcSet: '/images/work-dental.avif',
     webpSrcSet: '/images/work-dental.webp',
   },
   workPhysio: {
     fallbackSrc: '/images/work-physio.jpg',
+    width: 1200,
+    height: 800,
     avifSrcSet:
       '/images/work-physio-640.avif 640w, /images/work-physio-960.avif 960w, /images/work-physio-1200.avif 1200w',
     webpSrcSet:
@@ -35,16 +45,22 @@ export const responsiveImages = {
   },
   workBarber: {
     fallbackSrc: '/images/work-barber.png',
+    width: 2400,
+    height: 1792,
     avifSrcSet: '/images/work-barber.avif',
     webpSrcSet: '/images/work-barber.webp',
   },
   workSalon: {
     fallbackSrc: '/images/work-nails-v2.png',
+    width: 1200,
+    height: 896,
     avifSrcSet: '/images/work-nails-v2.avif',
     webpSrcSet: '/images/work-nails-v2.webp',
   },
   workRestaurant: {
     fallbackSrc: '/images/work-restaurant.jpg',
+    width: 1280,
+    height: 853,
     avifSrcSet:
       '/images/work-restaurant-640.avif 640w, /images/work-restaurant-960.avif 960w, /images/work-restaurant-1280.avif 1280w',
     webpSrcSet:
@@ -52,6 +68,8 @@ export const responsiveImages = {
   },
   workLandscaping: {
     fallbackSrc: '/images/work-landscaping.jpg',
+    width: 1200,
+    height: 796,
     avifSrcSet:
       '/images/work-landscaping-640.avif 640w, /images/work-landscaping-960.avif 960w, /images/work-landscaping-1200.avif 1200w',
     webpSrcSet:
@@ -59,6 +77,8 @@ export const responsiveImages = {
   },
   workRoofing: {
     fallbackSrc: '/images/work-roofing.jpg',
+    width: 1200,
+    height: 800,
     avifSrcSet:
       '/images/work-roofing-640.avif 640w, /images/work-roofing-960.avif 960w, /images/work-roofing-1200.avif 1200w',
     webpSrcSet:
@@ -66,6 +86,8 @@ export const responsiveImages = {
   },
   workHvac: {
     fallbackSrc: '/images/work-hvac.jpg',
+    width: 1200,
+    height: 800,
     avifSrcSet:
       '/images/work-hvac-640.avif 640w, /images/work-hvac-960.avif 960w, /images/work-hvac-1200.avif 1200w',
     webpSrcSet:
@@ -73,6 +95,8 @@ export const responsiveImages = {
   },
   caseStudy1: {
     fallbackSrc: '/images/case-study-1.jpg',
+    width: 1280,
+    height: 1707,
     avifSrcSet:
       '/images/case-study-1-640.avif 640w, /images/case-study-1-960.avif 960w, /images/case-study-1-1280.avif 1280w',
     webpSrcSet:
@@ -80,6 +104,8 @@ export const responsiveImages = {
   },
   caseStudy2: {
     fallbackSrc: '/images/case-study-2.jpg',
+    width: 1280,
+    height: 1920,
     avifSrcSet:
       '/images/case-study-2-640.avif 640w, /images/case-study-2-960.avif 960w, /images/case-study-2-1280.avif 1280w',
     webpSrcSet:
@@ -87,6 +113,8 @@ export const responsiveImages = {
   },
   caseStudy3: {
     fallbackSrc: '/images/case-study-3.jpg',
+    width: 1120,
+    height: 1493,
     avifSrcSet:
       '/images/case-study-3-480.avif 480w, /images/case-study-3-800.avif 800w, /images/case-study-3-1120.avif 1120w',
     webpSrcSet:
@@ -94,6 +122,8 @@ export const responsiveImages = {
   },
   caseStudy4: {
     fallbackSrc: '/images/case-study-4.jpg',
+    width: 1120,
+    height: 742,
     avifSrcSet:
       '/images/case-study-4-480.avif 480w, /images/case-study-4-800.avif 800w, /images/case-study-4-1120.avif 1120w',
     webpSrcSet:
@@ -101,16 +131,22 @@ export const responsiveImages = {
   },
   logoClear: {
     fallbackSrc: '/photos/logoclear.png',
+    width: 515,
+    height: 163,
     avifSrcSet: '/photos/logoclear-320.avif 320w, /photos/logoclear-512.avif 512w, /photos/logoclear-768.avif 768w',
     webpSrcSet: '/photos/logoclear-320.webp 320w, /photos/logoclear-512.webp 512w, /photos/logoclear-768.webp 768w',
   },
   founderAidan: {
     fallbackSrc: '/images/team-mark.jpg',
+    width: 1024,
+    height: 1024,
     avifSrcSet: '/images/team-mark.jpg',
     webpSrcSet: '/images/team-mark.jpg',
   },
   founderRiley: {
     fallbackSrc: '/images/team-mark.jpg',
+    width: 1024,
+    height: 1024,
     avifSrcSet: '/images/team-mark.jpg',
     webpSrcSet: '/images/team-mark.jpg',
   },

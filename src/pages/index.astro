@@ -2,7 +2,7 @@
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { HOME_JSON_LD, HOME_PAGE_SCHEMA, WEBSITE_SCHEMA, SEO_ROUTES } from '../lib/seo';
+import { FILM_JSON_LD, HOME_JSON_LD, HOME_PAGE_SCHEMA, WEBSITE_SCHEMA, SEO_ROUTES } from '../lib/seo';
 import { getWorkProofImage } from '../lib/workProofImages';
 
 const work = [
@@ -36,17 +36,17 @@ const services = [
   {
     label: 'Conversion Sites',
     description: 'For businesses whose offer is good, but the current site makes visitors work too hard before they reach out.',
-    href: '/services/#conversion-sites',
+    href: '/services/conversion-sites/',
   },
   {
     label: 'Local Business Websites',
     description: 'For established local companies that need reputation, services, service area, and contact path clear on every device.',
-    href: '/services/#local-business-websites',
+    href: '/services/local-business-websites/',
   },
   {
     label: 'Rebuilds',
     description: 'For existing sites that no longer match the quality of the business, without losing useful content or search value.',
-    href: '/services/#rebuilds',
+    href: '/services/rebuilds/',
   },
 ] as const;
 
@@ -87,7 +87,7 @@ const team = [
   description={SEO_ROUTES.home.description}
   canonicalPath="/"
   ogImageAlt="Axiom — web design studio in Kitchener-Waterloo."
-  schema={[HOME_JSON_LD, WEBSITE_SCHEMA, HOME_PAGE_SCHEMA]}
+  schema={[HOME_JSON_LD, WEBSITE_SCHEMA, HOME_PAGE_SCHEMA, FILM_JSON_LD]}
 >
   <main id="main-content" tabindex="-1" class="ax-root" data-homepage>
     <div class="ax-continuity-rail" aria-hidden="true">
@@ -98,8 +98,8 @@ const team = [
     <section class="ax-hero ax-scene ax-scene--title-card" data-home-section="hero" data-cinematic-scene="hero" data-motion-role="title-card">
       <div class="ax-container">
         <h1 class="ax-mega ax-hero-title">
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 0">A sharper digital</span></span>
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 1">presence for serious</span></span>
+          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 0">Considered web design</span></span>
+          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 1">for serious</span></span>
           <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 2"><em>local businesses.</em></span></span>
         </h1>
 
@@ -135,7 +135,7 @@ const team = [
             <source src="/film/axiom-built-to-the-pixel-1080.mp4" type="video/mp4" />
             <track kind="captions" src="/film/axiom-built-to-the-pixel.en.vtt" srclang="en" label="English" />
           </video>
-          <button type="button" class="ax-film-play" data-film-play aria-label="Play the Axiom Web film, 32 seconds, with sound">
+          <button type="button" class="ax-film-play" data-film-play aria-label="Play film: Axiom Web, 32 seconds, with sound">
             <span class="ax-film-play-icon" aria-hidden="true"></span>
             <span class="ax-film-play-label">Play film</span>
           </button>

@@ -3,6 +3,7 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
 const sitemapExcludedPrefixes = [
+  '/account',
   '/admin',
   '/admin-shell',
   '/api',
@@ -31,26 +32,6 @@ export default defineConfig({
           pathname !== '/start' &&
           !sitemapExcludedPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))
         );
-      },
-      changefreq: 'monthly',
-      serialize(item) {
-        const path = new URL(item.url).pathname.replace(/\/+$/, '') || '/';
-        if (path === '/') {
-          return { ...item, changefreq: 'weekly', priority: 1.0 };
-        }
-        if (path === '/pricing' || path === '/start-a-project') {
-          return { ...item, priority: 0.9 };
-        }
-        if (path === '/services' || path === '/work' || path === '/contact') {
-          return { ...item, priority: 0.85 };
-        }
-        if (path.startsWith('/services/')) {
-          return { ...item, priority: 0.8 };
-        }
-        if (path === '/about' || path === '/approach') {
-          return { ...item, priority: 0.7 };
-        }
-        return { ...item, priority: 0.5 };
       },
     }),
   ],

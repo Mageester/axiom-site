@@ -58,10 +58,10 @@ const launchChecklist = [
 ] as const;
 ---
 
-<SiteLayout
+<SiteLayout noIndex={true}
   title={SEO_ROUTES.process.title}
   description={SEO_ROUTES.process.description}
-  canonicalPath="/process"
+  canonicalPath="/approach"
   schema={[PROCESS_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Process', url: `${SITE_URL}/process` }])]}
 >
   <main id="main-content" tabindex="-1" class="pb-0">
