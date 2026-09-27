@@ -1,6 +1,14 @@
 # Cloudflare Pages _headers
 # Applied to all routes. https://developers.cloudflare.com/pages/configuration/headers/
 
+# Keep Cloudflare's default and preview hosts out of search; custom domains
+# retain their route-specific indexing policy.
+https://axiom-site.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.axiom-site.pages.dev/*
+  X-Robots-Tag: noindex
+
 /
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8

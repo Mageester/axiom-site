@@ -171,6 +171,9 @@ else {
 const headers = readFileSync(join(dist, '_headers'), 'utf8').replaceAll('\r\n', '\n');
 if (!headers.includes('/_astro/*\n  Cache-Control: public, max-age=31536000, immutable')) fail('headers', 'hashed Astro assets need immutable cache');
 for (const route of ['/admin-shell', '/admin-shell/*', '/404.html', '/api/*']) if (!headers.includes(`${route}\n  X-Robots-Tag: noindex`)) fail('headers', `missing noindex for ${route}`);
+for (const host of ['axiom-site.pages.dev', ':version.axiom-site.pages.dev']) {
+  if (!headers.includes(`https://${host}/*\n  X-Robots-Tag: noindex`)) fail('headers', `missing duplicate-host noindex for ${host}`);
+}
 const redirects = readFileSync(join(dist, '_redirects'), 'utf8');
 if (!redirects.includes('/sitemap.xml /sitemap-index.xml 301')) fail('redirects', 'legacy submitted sitemap must redirect to the current index');
 const functionRoutes = JSON.parse(readFileSync(join(dist, '_routes.json'), 'utf8'));
@@ -179,6 +182,43 @@ for (const kind of ['include', 'exclude']) for (const route of functionRoutes[ki
 }
 for (const [old,target] of [['/method','/approach/'],['/works','/work/'],['/infrastructure','/services/'],['/start','/start-a-project/'],['/process','/approach/'],['/services/custom-web-development','/services/conversion-sites/'],['/services/ai-integration','/services/rebuilds/'],['/services/digital-infrastructure','/services/local-business-websites/']]) {
   for (const suffix of ['', '/']) if (!redirects.includes(`${old}${suffix} ${target} 301`)) fail('redirects', `missing permanent alias ${old}${suffix}`);
+}
+// Opt in after deployment: hosting rules cannot be verified from Astro's output.
+// Keep the production build deterministic and independent of network availability.
+if (process.argv.includes('--live')) {
+  const query = '?utm_source=seo-audit&value=a%20b';
+  for (const route of indexable) {
+    for (const protocol of ['http:', 'https:']) {
+      const url = `${protocol}//www.getaxiom.ca${route}${query}`;
+      try {
+        const response = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
+        const target = `${origin}${route}${query}`;
+        if (response.status !== 301 || response.headers.get('location') !== target) {
+          fail(url, `expected direct 301 to ${target}; got ${response.status} / ${response.headers.get('location')}`);
+        }
+        await response.body?.cancel();
+      } catch (error) { fail(url, `live redirect check failed: ${error.message}`); }
+    }
+    try {
+      const url = origin + route;
+      const response = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
+      const $ = load(await response.text());
+      if (response.status !== 200) fail(url, `canonical page returned ${response.status}`);
+      if ($('link[rel="canonical"]').attr('href') !== url) fail(url, 'live canonical differs from deployed route');
+      if (/noindex/i.test(response.headers.get('x-robots-tag') || '') || /noindex/i.test(meta($, 'robots'))) {
+        fail(url, 'production page is noindex');
+      }
+    } catch (error) { fail(route, `live canonical check failed: ${error.message}`); }
+  }
+  console.log(`Live checks completed: ${indexable.size} canonical pages and ${indexable.size * 2} www redirects, including query preservation.`);
+  for (const path of ['/', '/web-design/kitchener/', '/api/auth/me']) {
+    const url = 'https://axiom-site.pages.dev' + path;
+    try {
+      const response = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
+      if (!/noindex/i.test(response.headers.get('x-robots-tag') || '')) fail(url, 'duplicate Pages host missing HTTP noindex');
+      await response.body?.cancel();
+    } catch (error) { fail(url, `live duplicate-host check failed: ${error.message}`); }
+  }
 }
 if (failures.length) {
   console.error(`SEO audit failed with ${failures.length} issue(s):\n${failures.map(f => '- ' + f).join('\n')}`);

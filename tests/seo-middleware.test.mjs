@@ -23,3 +23,12 @@ test('marketing responses pass through; ops host stays private', async () => {
   const ops = await onRequest({ request: new Request('https://ops.getaxiom.ca/'), next: async () => new Response('ops') });
   assert.equal(ops.headers.get('X-Robots-Tag'), 'noindex, nofollow');
 });
+
+test('default and preview Pages Function responses cannot be indexed', async () => {
+  for (const host of ['axiom-site.pages.dev', 'preview.axiom-site.pages.dev', 'a1b2c3.axiom-site.pages.dev']) {
+    const response = await onRequest({ request: new Request(`https://${host}/`), next: async () => new Response('preview') });
+    assert.equal(response.headers.get('X-Robots-Tag'), 'noindex, nofollow');
+    assert.equal(response.headers.get('Cache-Control'), 'no-store');
+    assert.equal(await response.text(), 'preview');
+  }
+});
