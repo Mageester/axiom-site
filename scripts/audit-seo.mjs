@@ -171,7 +171,7 @@ else {
 const headers = readFileSync(join(dist, '_headers'), 'utf8').replaceAll('\r\n', '\n');
 if (!headers.includes('/_astro/*\n  Cache-Control: public, max-age=31536000, immutable')) fail('headers', 'hashed Astro assets need immutable cache');
 for (const route of ['/admin-shell', '/admin-shell/*', '/404.html', '/api/*']) if (!headers.includes(`${route}\n  X-Robots-Tag: noindex`)) fail('headers', `missing noindex for ${route}`);
-for (const host of ['axiom-site.pages.dev', ':version.axiom-site.pages.dev']) {
+for (const host of ['axiom-site-f3f.pages.dev', ':version.axiom-site-f3f.pages.dev']) {
   if (!headers.includes(`https://${host}/*\n  X-Robots-Tag: noindex`)) fail('headers', `missing duplicate-host noindex for ${host}`);
 }
 const redirects = readFileSync(join(dist, '_redirects'), 'utf8');
@@ -212,7 +212,7 @@ if (process.argv.includes('--live')) {
   }
   console.log(`Live checks completed: ${indexable.size} canonical pages and ${indexable.size * 2} www redirects, including query preservation.`);
   for (const path of ['/', '/web-design/kitchener/', '/api/auth/me']) {
-    const url = 'https://axiom-site.pages.dev' + path;
+    const url = 'https://axiom-site-f3f.pages.dev' + path;
     try {
       const response = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
       if (!/noindex/i.test(response.headers.get('x-robots-tag') || '')) fail(url, 'duplicate Pages host missing HTTP noindex');

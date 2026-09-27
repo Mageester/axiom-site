@@ -4,7 +4,7 @@ const privatePath = /^\/(?:admin(?:-shell)?|account|dashboard|hunt|vault|triage|
 export async function onRequest(context: { request: Request; next: () => Promise<Response> }) {
   const response = await context.next();
   const url = new URL(context.request.url);
-  const pagesHost = url.hostname === 'axiom-site.pages.dev' || url.hostname.endsWith('.axiom-site.pages.dev');
+  const pagesHost = url.hostname === 'axiom-site-f3f.pages.dev' || url.hostname.endsWith('.axiom-site-f3f.pages.dev');
   if (!privatePath.test(url.pathname) && !url.hostname.startsWith('ops.') && !pagesHost) return response;
   const headers = new Headers(response.headers);
   headers.set('X-Robots-Tag', 'noindex, nofollow');

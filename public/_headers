@@ -3,10 +3,10 @@
 
 # Keep Cloudflare's default and preview hosts out of search; custom domains
 # retain their route-specific indexing policy.
-https://axiom-site.pages.dev/*
+https://axiom-site-f3f.pages.dev/*
   X-Robots-Tag: noindex
 
-https://:version.axiom-site.pages.dev/*
+https://:version.axiom-site-f3f.pages.dev/*
   X-Robots-Tag: noindex
 
 /

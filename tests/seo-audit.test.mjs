@@ -26,7 +26,7 @@ test('audit accepts the complete build and rejects meaningful SEO regressions', 
     ['about/index.html', s => s.replace('"item":"https://getaxiom.ca/"', '"item":"invalid-url"'), 'invalid breadcrumb URL'],
     ['index.html', s => s.replace('"thumbnailUrl":"https://getaxiom.ca/film/axiom-film-poster.webp"', '"thumbnailUrl":"https://getaxiom.ca/axiomtransparentlogo.webp"'), 'thumbnail differs'],
     ['robots.txt', s => s + '\nDisallow: /api/\n', 'discovery of private-page noindex'],
-    ['_headers', s => s.replace('https://axiom-site.pages.dev/*', 'https://wrong-project.pages.dev/*'), 'duplicate-host noindex'],
+    ['_headers', s => s.replace('https://axiom-site-f3f.pages.dev/*', 'https://wrong-project.pages.dev/*'), 'duplicate-host noindex'],
   ];
   for (const [file, mutate, expected] of cases) {
     const path = join(fixture, file); const original = readFileSync(path, 'utf8');
