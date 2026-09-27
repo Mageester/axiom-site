@@ -2,37 +2,30 @@
 # Applied to all routes. https://developers.cloudflare.com/pages/configuration/headers/
 
 /
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
 /about/
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
 /pricing/
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
 /work/
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
 /services/
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
 /services/*
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
 /approach/
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
@@ -43,12 +36,10 @@
   X-Robots-Tag: noindex, follow
 
 /start-a-project/
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
 /contact/
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
@@ -59,11 +50,9 @@
   X-Robots-Tag: noindex, nofollow
 
 /privacy/
-  X-Robots-Tag: index, follow, max-image-preview:large
   Content-Type: text/html; charset=utf-8
 
 /terms/
-  X-Robots-Tag: index, follow, max-image-preview:large
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
@@ -173,4 +162,7 @@
   Cache-Control: public, max-age=2592000
 
 /og-image.png
+  Cache-Control: public, max-age=604800
+
+/social/*
   Cache-Control: public, max-age=604800

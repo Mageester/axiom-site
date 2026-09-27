@@ -2,7 +2,5 @@ User-agent: *
 Allow: /
 # Private pages return noindex in both HTML and HTTP headers.
 # Leave them crawlable so search engines can see the directive.
-Disallow: /api/
-Disallow: /functions/
 
 Sitemap: https://getaxiom.ca/sitemap-index.xml

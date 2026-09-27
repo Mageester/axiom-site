@@ -1,5 +1,5 @@
 // Static _headers rules do not apply to Pages Function responses.
-const privatePath = /^\/(?:admin(?:-shell)?|account|dashboard|hunt|vault|triage|settings|lead|leads|jobs|campaigns|api)(?:\/|$)/;
+const privatePath = /^\/(?:admin(?:-shell)?|account|dashboard|hunt|vault|triage|settings|lead|leads|jobs|campaigns|api|functions)(?:\/|$)/;
 
 export async function onRequest(context: { request: Request; next: () => Promise<Response> }) {
   const response = await context.next();

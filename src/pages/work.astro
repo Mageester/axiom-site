@@ -314,6 +314,9 @@ const projects = [
     margin: 0.6rem 0 0;
     max-width: 46ch;
   }
+  /* Keep readable contrast while cards enter the viewport. */
+  .work-card.reveal { opacity: 1; transition-property: transform; }
+  :global(html.js) .work-card.reveal:not(.is-in) { opacity: 1; }
 
   .work-card-proof {
     display: grid;

@@ -16,6 +16,9 @@ import {
 import { ClientRouter } from 'astro:transitions';
 
 import interLatinWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import frauncesHeadingWoff2 from '@fontsource/fraunces/files/fraunces-latin-500-normal.woff2?url';
+import frauncesItalicWoff2 from '@fontsource/fraunces/files/fraunces-latin-300-italic.woff2?url';
+import frauncesHomeItalicWoff2 from '@fontsource/fraunces/files/fraunces-latin-400-italic.woff2?url';
 
 type Props = {
   title?: string;
@@ -46,7 +49,8 @@ const {
 const resolvedTitle = formatSeoTitle(title);
 const resolvedDescription = description?.trim() || DEFAULT_SEO_DESCRIPTION;
 const resolvedCanonical = toCanonicalUrl(canonicalPath || Astro.url.pathname);
-const resolvedImage = image || DEFAULT_OG_IMAGE;
+const socialSlug = Astro.url.pathname.replace(/^\/+|\/+$/g, '').replaceAll('/', '-') || 'home';
+const resolvedImage = image || (noIndex ? DEFAULT_OG_IMAGE : `/social/${socialSlug}.png`);
 const resolvedImageUrl = resolvedImage.startsWith('http') ? resolvedImage : `${SITE_URL}${resolvedImage}`;
 const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 if (!noIndex && Astro.url.pathname !== '/' && !pageSchemas.some(s => s['@type'] === 'BreadcrumbList')) {
@@ -73,6 +77,9 @@ const shellPaddingClass = showNav ? 'pt-16 md:pt-20' : 'pt-0';
     <meta name="application-name" content={SITE_NAME} />
 
     <link rel="preload" as="font" type="font/woff2" href={interLatinWoff2} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={frauncesHeadingWoff2} crossorigin />
+    {['/', '/web-design/'].some(path => Astro.url.pathname === path) || Astro.url.pathname.startsWith('/web-design/')
+      ? <link rel="preload" as="font" type="font/woff2" href={Astro.url.pathname === '/' ? frauncesHomeItalicWoff2 : frauncesItalicWoff2} crossorigin /> : null}
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -103,7 +110,9 @@ const shellPaddingClass = showNav ? 'pt-16 md:pt-20' : 'pt-0';
     <meta name="twitter:image:alt" content={ogImageAlt || `${SITE_NAME} - custom web design and development in Kitchener-Waterloo`} />
 
     <link rel="manifest" href="/site.webmanifest" />
-    {Astro.url.pathname === '/' && <link rel="preload" as="image" href="/film/axiom-film-poster.webp" fetchpriority="high" />}
+    {Astro.url.pathname === '/' && <link rel="preload" as="image" type="image/avif" href="/film/axiom-film-poster-1600.avif"
+      imagesrcset="/film/axiom-film-poster-800.avif 800w, /film/axiom-film-poster-1600.avif 1600w"
+      imagesizes="(min-width: 1280px) 1200px, 92vw" fetchpriority="high" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <ClientRouter />
 

@@ -58,6 +58,7 @@ test('homepage uses distinct, deliberately paced motion choreography across ever
   );
   expect(sceneRoles).toEqual([
     'title-card',
+    'feature', // The film remains immediately after the hero.
     'statement',
     'cascade',
     'feature',
@@ -98,7 +99,8 @@ test('homepage uses distinct, deliberately paced motion choreography across ever
   });
 
   const firstDuration = (value: string) => Number.parseFloat(value.split(',')[0]);
-  expect(firstDuration(timings.hero.animationDuration)).toBeGreaterThanOrEqual(1.4);
+  // Above-the-fold text must settle promptly; later scenes retain their pacing.
+  expect(firstDuration(timings.hero.animationDuration)).toBeLessThanOrEqual(0.7);
   expect(firstDuration(timings.statement.transitionDuration)).toBeGreaterThanOrEqual(1.1);
   expect(firstDuration(timings.solution.transitionDuration)).toBeGreaterThanOrEqual(1.1);
   expect(firstDuration(timings.work.transitionDuration)).toBeGreaterThanOrEqual(1.1);

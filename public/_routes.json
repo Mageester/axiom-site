@@ -35,13 +35,11 @@
     "/pricing/",
     "/privacy",
     "/privacy/",
-    "/services/",
     "/start-a-project/",
     "/terms",
     "/terms/",
     "/work/",
     "/web-design",
-    "/web-design/",
     "/web-design/*",
     "/_astro/*",
     "/film/*",
@@ -49,6 +47,7 @@
     "/sitemap-0.xml",
     "/site.webmanifest",
     "/speculation-rules.json",
-    "/axiomtransparentlogo.webp"
+    "/axiomtransparentlogo.webp",
+    "/social/*"
   ]
 }

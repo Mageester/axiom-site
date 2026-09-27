@@ -1,7 +1,7 @@
 export const SITE_NAME = 'Axiom Web';
 export const SITE_TAGLINE = 'High-trust websites for serious local businesses that need clearer offers, stronger proof, and easier inquiries.';
 export const SITE_URL = 'https://getaxiom.ca';
-export const DEFAULT_OG_IMAGE = '/og-image.png';
+export const DEFAULT_OG_IMAGE = '/social/home.png';
 export const DEFAULT_SEO_DESCRIPTION = SITE_TAGLINE;
 export const SITE_EMAIL = 'aidanmageebusiness@gmail.com';
 export const SITE_TELEPHONE = '+12267531833';
@@ -49,13 +49,13 @@ export const SERVICE_AREAS = ['Kitchener', 'Waterloo', 'Cambridge', 'Guelph', 'H
 
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
-  '@type': ['Organization', 'ProfessionalService'],
+  '@type': ['Organization', 'LocalBusiness'],
   '@id': SITE_URL + '/#organization',
   name: SITE_NAME,
   alternateName: ['Get Axiom', 'getaxiom.ca'],
   url: toCanonicalUrl('/'),
   logo: SITE_URL + '/axiomtransparentlogo.webp',
-  image: SITE_URL + '/og-image.png',
+  image: SITE_URL + '/social/home.png',
   email: SITE_EMAIL,
   telephone: SITE_TELEPHONE,
   description: SITE_TAGLINE,
@@ -77,7 +77,7 @@ export const ORGANIZATION_SCHEMA = {
   },
 } as const;
 
-// ProfessionalService is a LocalBusiness subtype; use the same identity everywhere.
+// ProfessionalService is deprecated by Schema.org; use one LocalBusiness identity.
 export const LOCAL_BUSINESS_SCHEMA = ORGANIZATION_SCHEMA;
 
 export const WEBSITE_SCHEMA = {
@@ -112,7 +112,7 @@ export const HOME_PAGE_SCHEMA = {
   },
   primaryImageOfPage: {
     '@type': 'ImageObject',
-    url: `${SITE_URL}/og-image.png`,
+    url: `${SITE_URL}/social/home.png`,
     width: 1200,
     height: 630,
   },

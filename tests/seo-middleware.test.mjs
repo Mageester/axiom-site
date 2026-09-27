@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { onRequest } from '../functions/_middleware.ts';
 
 test('all private responses, including slash variants and redirects, are noindex and uncacheable', async () => {
-  for (const path of ['/admin/login', '/admin/', '/admin-shell/', '/account/', '/dashboard', '/lead/42/', '/leads/', '/campaigns', '/api/auth/me']) {
+  for (const path of ['/admin/login', '/admin/', '/admin-shell/', '/account/', '/dashboard', '/lead/42/', '/leads/', '/campaigns', '/hunt/', '/vault/', '/triage/', '/settings/', '/jobs/', '/api', '/api/auth/me', '/functions/', '/functions/private']) {
     for (const status of [200, 302, 401, 403, 500]) {
       const result = await onRequest({ request: new Request('https://getaxiom.ca' + path), next: async () => new Response('private', { status, headers: { Location: '/admin/login' } }) });
       assert.equal(result.headers.get('X-Robots-Tag'), 'noindex, nofollow');

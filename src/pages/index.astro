@@ -59,7 +59,7 @@ const solution = [
 const principles = [
   { title: 'No vague first impression', description: 'A serious business should not need paragraphs to explain itself. The offer, audience, and next action have to be obvious.' },
   { title: 'Only supportable proof', description: 'We use real assets, clearly labeled concept work, visible standards, and proof that can be backed up.' },
-  { title: 'No mobile afterthought', description: 'Most buyers check you from a phone. Buttons, forms, copy, speed, and image crops are judged there first.' },
+  { title: 'No mobile afterthought', description: 'Buyers should be able to decide from a phone. Buttons, forms, copy, speed, and image crops are judged there first.' },
   { title: 'No account-manager fog', description: "You work directly with the people shaping the message and building the site, with a clear path after launch." },
 ] as const;
 
@@ -118,17 +118,23 @@ const team = [
     <!-- FILM -->
     <section class="ax-film ax-scene ax-scene--film" data-home-section="film" data-cinematic-scene="film" data-motion-role="feature" aria-labelledby="ax-film-title">
       <div class="ax-container">
-        <div class="ax-film-head reveal ax-reveal--copy" style="--reveal-delay: 80ms">
+        <div class="ax-film-head" style="--reveal-delay: 80ms">
           <h2 id="ax-film-title" class="ax-film-title">Built to the pixel.</h2>
           <span class="ax-film-meta">Film · 0:32 · Sound on</span>
         </div>
-        <div class="ax-film-frame reveal ax-reveal--item" data-film style="--reveal-delay: 220ms">
+        <div class="ax-film-frame" data-film style="--reveal-delay: 220ms">
+          <picture class="ax-film-poster">
+            <source type="image/avif" srcset="/film/axiom-film-poster-800.avif 800w, /film/axiom-film-poster-1600.avif 1600w" sizes="(min-width: 1280px) 1200px, 92vw" />
+            <img src="/film/axiom-film-poster.webp"
+            srcset="/film/axiom-film-poster-800.webp 800w, /film/axiom-film-poster.webp 1600w"
+            sizes="(min-width: 1280px) 1200px, 92vw" width="1600" height="900"
+            alt="" loading="eager" fetchpriority="high" decoding="async" />
+          </picture>
           <video
             class="ax-film-video"
             data-film-video
             preload="none"
             playsinline
-            poster="/film/axiom-film-poster.webp"
             width="1920"
             height="1080"
           >
@@ -195,7 +201,8 @@ const team = [
                   alt={w.img.alt || w.title}
                   sizes="(min-width: 900px) 52vw, 100vw"
                   class="ax-work-feature-img"
-                  loading={i === 0 ? 'eager' : 'lazy'}
+                  loading="lazy"
+                  fetchpriority="low"
                   objectPosition={w.img.position || 'center 40%'}
                 />
                 <figcaption class="ax-work-feature-caption" aria-hidden="true">
@@ -507,6 +514,9 @@ const team = [
     cursor: pointer;
     transition: opacity 420ms var(--ease-premium), visibility 0s linear 0s;
   }
+  .ax-film-poster { position: absolute; inset: 0; }
+  .ax-film-poster img { width: 100%; height: 100%; object-fit: cover; }
+  .ax-film-frame[data-state='playing'] .ax-film-poster { visibility: hidden; }
   .ax-film-play-icon {
     position: relative;
     width: clamp(3.75rem, 7vw, 5rem);
@@ -1064,13 +1074,13 @@ const team = [
   }
 
   :global(html.js) .ax-mask {
-    animation: ax-title-card-reveal 1.6s var(--ease-cinematic) both;
-    animation-delay: calc(260ms + (var(--i, 0) * 360ms));
+    animation: ax-title-card-reveal 0.6s var(--ease-cinematic) both;
+    animation-delay: calc(var(--i, 0) * 80ms);
   }
 
   :global(html.js) .ax-load {
-    animation: ax-hero-support-reveal 1.2s var(--ease-cinematic) both;
-    animation-delay: calc(1.85s + (var(--i, 0) * 360ms));
+    animation: ax-hero-support-reveal 0.5s var(--ease-cinematic) both;
+    animation-delay: calc(100ms + (var(--i, 0) * 80ms));
   }
 
   :global(html.js) .ax-hero::before {

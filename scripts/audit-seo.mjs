@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { load } from 'cheerio';
+import sharp from 'sharp';
 
 // Inspect every rendered page, including new routes; an allowlist hides regressions.
 const dist = process.env.SEO_DIST_DIR || 'dist';
@@ -53,6 +54,11 @@ for (const [route, { $ }] of documents) {
     const url = meta($, name);
     if (!url.startsWith(origin + '/') || !existsSync(localFile(url))) fail(route, `${name} must resolve to a local public image`);
   }
+  const socialImage = meta($, 'og:image');
+  if (socialImage.startsWith(origin + '/') && existsSync(localFile(socialImage))) {
+    const image = await sharp(localFile(socialImage)).metadata();
+    if (image.width !== Number(meta($, 'og:image:width')) || image.height !== Number(meta($, 'og:image:height'))) fail(route, 'declared social image dimensions differ from image');
+  }
   let level = 0;
   $('main h1,main h2,main h3,main h4,main h5,main h6').each((_, el) => {
     const next = Number(el.tagName.slice(1));
@@ -91,9 +97,23 @@ for (const [route, { $ }] of documents) {
   });
   const ofType = type => schemas.filter(s => [s['@type']].flat().includes(type));
   if (!ofType('Organization').length || !ofType('WebSite').length) fail(route, 'missing shared business / website identity');
+  const businesses = ofType('LocalBusiness');
+  if (!businesses.length) fail(route, 'missing LocalBusiness identity');
+  if (ofType('ProfessionalService').length) fail(route, 'deprecated ProfessionalService type');
+  for (const business of businesses) {
+    if (business['@id'] !== origin + '/#organization' || business.url !== origin + '/' ||
+      business.name !== 'Axiom Web' || business.telephone !== '+12267531833' || business.email !== 'aidanmageebusiness@gmail.com' ||
+      business.address?.addressLocality !== 'Kitchener' || business.address?.addressRegion !== 'ON' || business.address?.addressCountry !== 'CA' ||
+      business.contactPoint?.telephone !== business.telephone || business.contactPoint?.email !== business.email) fail(route, 'inconsistent LocalBusiness NAP');
+    if (business.founder?.map(f => f.name).sort().join('|') !== 'Aidan Magee|Riley Hinsperger' ||
+      business.areaServed?.map(a => a.name).sort().join('|') !== 'Cambridge|Guelph|Hamilton|Kitchener|Waterloo') fail(route, 'inconsistent founders or service areas');
+    for (const field of ['logo', 'image']) if (!business[field]?.startsWith(origin + '/') || !existsSync(localFile(business[field]))) fail(route, `missing business ${field}`);
+  }
+  $('a[href^="tel:"]').each((_, el) => { if ($(el).attr('href').replace(/[^\d+]/g, '') !== '+12267531833') fail(route, 'visible telephone differs from business identity'); });
+  $('a[href^="mailto:"]').each((_, el) => { if ($(el).attr('href').slice(7).split('?')[0] !== 'aidanmageebusiness@gmail.com') fail(route, 'visible email differs from business identity'); });
   if (route !== '/' && !ofType('BreadcrumbList').length) fail(route, 'missing breadcrumb schema');
   for (const s of schemas) {
-    if (['AggregateRating','Review'].includes(s['@type'])) fail(route, 'unsupported review/rating schema');
+    if ([s['@type']].flat().some(type => ['AggregateRating','Review'].includes(type))) fail(route, 'unsupported review/rating schema');
     if (s['@id'] === origin + '/#organization' && s.name && (s.name !== 'Axiom Web' || s.telephone !== '+12267531833' || s.email !== 'aidanmageebusiness@gmail.com')) fail(route, 'inconsistent business identity');
   }
   const visible = normalize($('main').text());
@@ -103,11 +123,17 @@ for (const [route, { $ }] of documents) {
   for (const b of ofType('BreadcrumbList')) {
     const items = b.itemListElement || [];
     if (items.at(-1)?.item !== canonical) fail(route, 'breadcrumb must end at canonical page');
-    items.forEach((item,i) => { if (item.position !== i+1 || !documents.has(new URL(item.item).pathname)) fail(route, 'invalid breadcrumb sequence or destination'); });
+    items.forEach((item,i) => {
+      try {
+        const destination = new URL(item.item);
+        if (item.position !== i+1 || !item.name || destination.origin !== origin || !documents.has(destination.pathname)) fail(route, 'invalid breadcrumb sequence or destination');
+      } catch { fail(route, 'invalid breadcrumb URL'); }
+    });
   }
   for (const video of ofType('VideoObject')) {
     if (!$('video').length || !$('video source').toArray().some(e => origin + $(e).attr('src') === video.contentUrl)) fail(route, 'video schema does not match visible video');
     if (!existsSync(localFile(video.thumbnailUrl)) || !video.uploadDate || !/^PT\d+S$/.test(video.duration)) fail(route, 'incomplete video metadata');
+    if (!$('video[poster], .ax-film-poster img').toArray().some(e => origin + ($(e).attr('poster') || $(e).attr('src')) === video.thumbnailUrl)) fail(route, 'video thumbnail differs from visible poster');
   }
   if (route === '/' && ($('video[preload="none"]').length !== 1 || !ofType('VideoObject').length)) fail(route, 'homepage film or video schema missing');
 }
@@ -135,7 +161,7 @@ for (const route of indexable) if (!reachable.has(route)) fail(route, 'orphan: n
 const robotsFile = join(dist, 'robots.txt');
 const robots = existsSync(robotsFile) ? readFileSync(robotsFile, 'utf8') : '';
 if (!robots.includes(`Sitemap: ${origin}/sitemap-index.xml`)) fail('robots', 'missing sitemap');
-for (const line of robots.split('\n')) if (/^Disallow:\s*\/(?:\s*$|web-design|services|admin|account|dashboard|hunt|vault|triage|settings|lead|jobs|campaigns)/.test(line)) fail('robots', 'blocks public content or discovery of private-page noindex');
+for (const line of robots.split('\n')) if (/^Disallow:\s*\/(?:\s*$|web-design|services|admin|account|dashboard|hunt|vault|triage|settings|lead|jobs|campaigns|api|functions)/.test(line)) fail('robots', 'blocks public content or discovery of private-page noindex');
 const manifestFile = join(dist, 'site.webmanifest');
 if (!existsSync(manifestFile)) fail('manifest', 'missing manifest');
 else {
@@ -144,8 +170,12 @@ else {
 }
 const headers = readFileSync(join(dist, '_headers'), 'utf8').replaceAll('\r\n', '\n');
 if (!headers.includes('/_astro/*\n  Cache-Control: public, max-age=31536000, immutable')) fail('headers', 'hashed Astro assets need immutable cache');
-for (const route of ['/admin-shell', '/admin-shell/*', '/404.html']) if (!headers.includes(`${route}\n  X-Robots-Tag: noindex`)) fail('headers', `missing noindex for ${route}`);
+for (const route of ['/admin-shell', '/admin-shell/*', '/404.html', '/api/*']) if (!headers.includes(`${route}\n  X-Robots-Tag: noindex`)) fail('headers', `missing noindex for ${route}`);
 const redirects = readFileSync(join(dist, '_redirects'), 'utf8');
+const functionRoutes = JSON.parse(readFileSync(join(dist, '_routes.json'), 'utf8'));
+for (const kind of ['include', 'exclude']) for (const route of functionRoutes[kind]) {
+  if (functionRoutes[kind].some(other => other !== route && other.endsWith('*') && route.startsWith(other.slice(0, -1)))) fail('routes', `overlapping ${kind} rule: ${route}`);
+}
 for (const [old,target] of [['/start','/start-a-project/'],['/process','/approach/'],['/services/custom-web-development','/services/conversion-sites/'],['/services/ai-integration','/services/rebuilds/'],['/services/digital-infrastructure','/services/local-business-websites/']]) {
   for (const suffix of ['', '/']) if (!redirects.includes(`${old}${suffix} ${target} 301`)) fail('redirects', `missing permanent alias ${old}${suffix}`);
 }
