@@ -172,6 +172,7 @@ const headers = readFileSync(join(dist, '_headers'), 'utf8').replaceAll('\r\n', 
 if (!headers.includes('/_astro/*\n  Cache-Control: public, max-age=31536000, immutable')) fail('headers', 'hashed Astro assets need immutable cache');
 for (const route of ['/admin-shell', '/admin-shell/*', '/404.html', '/api/*']) if (!headers.includes(`${route}\n  X-Robots-Tag: noindex`)) fail('headers', `missing noindex for ${route}`);
 const redirects = readFileSync(join(dist, '_redirects'), 'utf8');
+if (!redirects.includes('/sitemap.xml /sitemap-index.xml 301')) fail('redirects', 'legacy submitted sitemap must redirect to the current index');
 const functionRoutes = JSON.parse(readFileSync(join(dist, '_routes.json'), 'utf8'));
 for (const kind of ['include', 'exclude']) for (const route of functionRoutes[kind]) {
   if (functionRoutes[kind].some(other => other !== route && other.endsWith('*') && route.startsWith(other.slice(0, -1)))) fail('routes', `overlapping ${kind} rule: ${route}`);

@@ -4,7 +4,7 @@ Audit date: **September 27, 2026**. Branch: **`seo/max-pass`**. Production: **ht
 
 ## Scope and release status
 
-Local branch work only. Nothing was pushed, merged or deployed. No accounts were accessed, forms submitted, sitemaps submitted or business settings changed. The homepage film and its click-to-play behaviour remain. Concept projects remain explicitly labelled.
+The original audit was completed as local branch work, with no deployment or account actions. The user subsequently authorized pushing the branch, releasing it to the live site and managing Search Console under `aidanmageebusiness@gmail.com`. The release follow-up below records that later work. The homepage film and its click-to-play behaviour remain. Concept projects remain explicitly labelled.
 
 The finished site has **19 indexable HTML pages**, including a new `/web-design/` hub, and four noindex pages (`/404/`, `/admin-shell/`, `/process/`, `/start/`). Private Function routes also receive HTTP noindex. All public pages are reachable from the homepage and appear exactly once in the sitemap.
 
@@ -225,3 +225,11 @@ Each implementation commit followed a successful `npm run build` with exit 0:
 3. `c35ea7f` — `perf(seo): stabilize rendering and optimize media and social cards`
 
 This report, the compact measurement evidence and completed plan are committed separately as `docs(seo): record Brave audit results and owner actions`, also after a passing production build. Nothing under `output/` and no source 4K MP4 is included. Pre-existing unrelated working-tree changes are preserved.
+
+## Authorized release follow-up — September 27, 2026
+
+- The user authorized production release and Search Console work after reviewing the audit. The four reviewed commits were pushed to `main` by fast-forward, at `0b9de081ea19f31da625088e69b6693192d92159`, triggering Cloudflare Pages.
+- Before release, `npm run build` and the three focused SEO regression tests passed again.
+- Brave confirmed the signed-in account is `aidanmageebusiness@gmail.com` and the existing domain property is `sc-domain:getaxiom.ca`; no new account, ownership grant or property was required.
+- Search Console showed the current sitemap index as Success, plus an old `/sitemap.xml` submission marked Couldn't fetch. Added a permanent legacy sitemap redirect and a production-audit assertion so old references resolve to the current sitemap index.
+- Initial property overview: 18 search clicks, 35 indexed and 64 non-indexed historical URLs; 13 HTTPS / 0 non-HTTPS URLs, 9 valid / 0 invalid breadcrumbs, and no field Core Web Vitals data. These are historical Search Console observations, not immediate results from this release. The report also flagged two unused ownership tokens; they were left unchanged because this SEO task does not require changing access.
