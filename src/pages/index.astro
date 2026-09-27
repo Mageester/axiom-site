@@ -943,8 +943,7 @@ const team = [
   .ax-root .ax-reveal--rule { transition: opacity 720ms var(--ease-cinematic), transform 720ms var(--ease-cinematic); }
 
   @media (prefers-reduced-motion: no-preference) {
-    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) { opacity: 0; transform: translateY(1.2rem); clip-path: inset(0 0 100% 0); }
-    :global(html.js) .ax-root .ax-reveal--title.is-in { clip-path: inset(0); }
+    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) { opacity: 0; transform: translateY(1.2rem); }
     :global(html.js) .ax-root .ax-reveal--statement:not(.is-in) { opacity: 0; transform: translateY(1.4rem); }
     :global(html.js) .ax-root .ax-reveal--copy:not(.is-in) { opacity: 0; transform: translateY(1rem); }
     :global(html.js) .ax-root .ax-reveal--item:not(.is-in) { opacity: 0; transform: translateY(1rem) scale(0.985); }
@@ -1180,6 +1179,7 @@ const team = [
 
   /* Services: a line indicator draws before each row settles into the index. */
   .ax-list > li { position: relative; overflow: hidden; }
+  .ax-list .ax-row { padding-left: clamp(1rem, 2vw, 1.5rem); padding-right: 0.5rem; }
   .ax-list > li::before {
     content: '';
     position: absolute;
@@ -1206,7 +1206,7 @@ const team = [
   /* Trust/proof: the left statement holds while proof lines disclose progressively. */
   .ax-scene--proof .ax-split-left { transition: transform 1.45s var(--ease-cinematic); }
   :global(html.js) .ax-scene--proof .ax-split-left { transform: translate3d(0, var(--scene-drift-up), 0); }
-  .ax-principle { position: relative; }
+  .ax-principle { position: relative; padding-left: clamp(0.85rem, 2vw, 1.4rem); }
   .ax-principle::after {
     content: '';
     position: absolute;
@@ -1328,8 +1328,7 @@ const team = [
   .ax-root .ax-reveal--rule { transition: opacity 1.4s var(--ease-cinematic), transform 1.4s var(--ease-cinematic); }
 
   @media (prefers-reduced-motion: no-preference) {
-    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) { opacity: 0; transform: translate3d(0, 2rem, 0) scale(0.985); clip-path: inset(0 0 100% 0); }
-    :global(html.js) .ax-root .ax-reveal--title.is-in { clip-path: inset(0); }
+    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) { opacity: 0; transform: translate3d(0, 1.4rem, 0); }
     :global(html.js) .ax-root .ax-reveal--statement:not(.is-in) { opacity: 0; transform: translate3d(0, 2.2rem, 0); }
     :global(html.js) .ax-root .ax-reveal--copy:not(.is-in) { opacity: 0; transform: translate3d(var(--scene-drift-left), 1.4rem, 0); }
     :global(html.js) .ax-root .ax-reveal--item:not(.is-in) { opacity: 0; transform: translate3d(0, 1.8rem, 0) scale(0.98); }
@@ -1525,8 +1524,10 @@ const team = [
         const sceneRange = Math.max(rect.height + viewportStart - viewportEnd, 1);
         const sceneProgress = clamp((viewportStart - rect.top) / sceneRange);
         const sceneInverse = 1 - sceneProgress;
-        const horizontalDrift = Math.round(sceneInverse * 28);
-        const verticalDrift = Math.round(sceneInverse * 22);
+        // Text stays on its grid while it is being read: no scroll-coupled drift.
+        // Sections still reveal, and their rule lines still draw with progress.
+        const horizontalDrift = 0;
+        const verticalDrift = 0;
 
         scene.style.setProperty('--scene-progress', String(sceneProgress));
         scene.style.setProperty('--scene-inverse', String(sceneInverse));
@@ -1534,7 +1535,7 @@ const team = [
         scene.style.setProperty('--scene-drift-right', `${horizontalDrift}px`);
         scene.style.setProperty('--scene-drift-up', `${-verticalDrift}px`);
         scene.style.setProperty('--scene-drift-down', `${verticalDrift}px`);
-        scene.style.setProperty('--scene-scale', String(0.985 + sceneProgress * 0.015));
+        scene.style.setProperty('--scene-scale', '1');
         scene.dataset.scenePhase = sceneProgress < 0.24 ? 'enter' : sceneProgress > 0.78 ? 'exit' : 'hold';
 
         const visibleTop = Math.max(rect.top, 0);
