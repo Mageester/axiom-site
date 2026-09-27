@@ -7,12 +7,12 @@
 
 ## Tasks
 
-- [ ] Capture live Brave render/search checks and mobile/desktop Lighthouse for every sitemap page. Save raw evidence under output/seo-max-pass.
-- [ ] Technical: consolidate src/lib/seo.ts identity; validate FAQ/video/breadcrumb schemas; complete robots, redirects, headers, manifest and private Function noindex. Extend scripts/audit-seo.mjs with build-output invariants and verify failure detection.
-- [ ] Content: improve src/content/cities.ts and city template with useful distinct buyer guidance; add a service-area hub, contextual links and visible breadcrumbs. Preserve design patterns and honest concept descriptions.
-- [ ] Performance/accessibility: use measured Lighthouse failures to fix critical rendering, image sizing, fonts, contrast and motion delays with minimal visual change.
-- [ ] Build, audit, run Brave local checks and every-page mobile/desktop Lighthouse; review diffs and document evidence, limitations and owner checklist in docs/SEO-MAX-PASS.md.
-- [ ] Commit logical groups, each after a successful npm run build.
+- [x] Capture live Brave render/search checks and mobile/desktop Lighthouse for every sitemap page. Save raw evidence under output/seo-max-pass.
+- [x] Technical: consolidate src/lib/seo.ts identity; validate FAQ/video/breadcrumb schemas; complete robots, redirects, headers, manifest and private Function noindex. Extend scripts/audit-seo.mjs with build-output invariants and verify failure detection.
+- [x] Content: improve src/content/cities.ts and city template with useful distinct buyer guidance; add a service-area hub, contextual links and visible breadcrumbs. Preserve design patterns and honest concept descriptions.
+- [x] Performance/accessibility: use measured Lighthouse failures to fix critical rendering, image sizing, fonts, contrast and motion delays with minimal visual change.
+- [x] Build, audit, run Brave local checks and every-page mobile/desktop Lighthouse; review diffs and document evidence, limitations and owner checklist in docs/SEO-MAX-PASS.md.
+- [x] Commit logical groups, each after a successful npm run build.
 
 ## Review focus
 
