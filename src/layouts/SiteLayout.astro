@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/site/Breadcrumbs.astro';
 
 type Props = {
   title?: string;
@@ -24,6 +25,11 @@ const {
   hidePrimaryCta = false,
   showFooter = true,
 } = Astro.props as Props;
+const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const breadcrumb = schemaList.find(item => item['@type'] === 'BreadcrumbList');
+const items = breadcrumb
+  ? (breadcrumb.itemListElement as Array<{ name: string; item: string }>).map(item => ({ name: item.name, url: new URL(item.item).pathname }))
+  : [{ name: 'Home', url: '/' }, { name: (title || 'Axiom Web').split(' | ')[0], url: Astro.url.pathname }];
 ---
 
 <BaseLayout
@@ -37,5 +43,6 @@ const {
   hidePrimaryCta={hidePrimaryCta}
   showFooter={showFooter}
 >
+  {!noIndex && Astro.url.pathname !== '/' && <Breadcrumbs items={items} />}
   <slot />
 </BaseLayout>

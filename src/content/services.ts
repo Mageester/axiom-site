@@ -22,8 +22,8 @@ export const services: Service[] = [
   {
     slug: 'conversion-sites',
     eyebrow: 'CONVERSION SITES',
-    title: 'A clearer path from visit to call.',
-    shortTitle: 'Conversion Sites',
+    title: 'Conversion-focused website design.',
+    shortTitle: 'Conversion-Focused Web Design',
     summary:
       'For established service businesses that need the site to make the offer obvious and make contact easy.',
     description:
@@ -51,7 +51,7 @@ export const services: Service[] = [
   {
     slug: 'local-business-websites',
     eyebrow: 'LOCAL BUSINESS SITES',
-    title: 'A stronger digital front door for serious local companies.',
+    title: 'Websites for established local businesses.',
     shortTitle: 'Local Business Websites',
     summary:
       'For businesses that rely on trust, reputation, and fast decision-making before a buyer reaches out.',
@@ -80,8 +80,8 @@ export const services: Service[] = [
   {
     slug: 'rebuilds',
     eyebrow: 'REBUILDS',
-    title: 'Replace the weak parts without losing the ground you have.',
-    shortTitle: 'Rebuilds',
+    title: 'Website redesigns and rebuilds.',
+    shortTitle: 'Website Redesigns & Rebuilds',
     summary:
       'For businesses with an existing site that no longer matches the quality of the company behind it.',
     description:
@@ -89,13 +89,13 @@ export const services: Service[] = [
     bestFor: 'Teams with dated sites, unclear navigation, slow mobile pages, or a brand that has outgrown the current site.',
     bestIf: 'You have a real site already but it no longer matches the company behind it.',
     beforeAxiom: 'The current site carries old structure, unclear copy, slow pages, or a brand that no longer fits.',
-    afterAxiom: 'The useful equity is protected while the weak pages, contact paths, and message are rebuilt.',
+    afterAxiom: 'Useful pages and search paths inform the new structure, contact flow and launch plan.',
     typicalPath: 'Usually scoped after review because redirects, content, integrations, and page count matter.',
     startsAt: 'Scoped on intake.',
     outcomes: [
       'Current site, domain, content, and redirect risks reviewed first',
       'Priority pages rebuilt around credibility and lead flow',
-      'Existing search value protected with launch planning',
+      'Existing URLs reviewed and redirects planned before launch',
       'Old contact paths consolidated into one serious intake route',
     ],
     includes: [

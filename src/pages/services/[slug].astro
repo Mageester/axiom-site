@@ -165,5 +165,11 @@ const canonicalPath = `/services/${service.slug}`;
         </FadeIn>
       </div>
     </section>
+    <nav aria-label="Related services" class="axiom-container pb-12">
+      <p class="section-copy">Compare <a class="underline" href="/pricing/">pricing and project scope</a>, explore our <a class="underline" href="/web-design/">local service areas</a>, or read about <a class="underline" href="/approach/">the design and launch process</a>.</p>
+      <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-3">
+        {services.filter(item => item.slug !== service.slug).map(item => <li><a class="underline" href={`/services/${item.slug}/`}>{item.shortTitle}</a></li>)}
+      </ul>
+    </nav>
   </main>
 </SiteLayout>

@@ -19,8 +19,8 @@ export function getStaticPaths() {
 
 const { city } = Astro.props;
 
-const title = `Web Design ${city.name} | Local Business Sites | ${SITE_NAME}`;
-const description = `Web design for ${city.name} service businesses. Clearer offers, visible proof, fast mobile pages, and an easier path to inquiry.`;
+const title = `Web Design ${city.name}, Ontario | ${SITE_NAME}`;
+const description = city.description;
 const canonicalPath = `/web-design/${city.slug}`;
 const canonicalUrl = toCanonicalUrl(canonicalPath);
 
@@ -38,6 +38,7 @@ const localServiceSchema = {
   areaServed: {
     '@type': 'City',
     name: city.name,
+    containedInPlace: { '@type': 'AdministrativeArea', name: 'Ontario, Canada' },
   },
 };
 
@@ -56,29 +57,16 @@ const servicesTrio = [
   },
   {
     label: 'Rebuilds',
-    description: `Replace a dated ${city.name} site without losing rankings, content, or domain trust. Same URL, faster load, cleaner path to inquiry.`,
+    description: `Review the existing site, retain useful content and plan redirects before replacing pages. Search positions cannot be guaranteed.`,
     href: '/services/rebuilds/',
     icon: 'refresh',
   },
 ] as const;
 
 const faqs = [
-  {
-    q: `Do you only work with ${city.name} businesses?`,
-    a: `No. We are based in Kitchener-Waterloo and work with clients across Canada. ${city.name} is a primary service area, so calls, on-site visits, and faster turnaround are easier here.`,
-  },
-  {
-    q: 'How long until launch?',
-    a: 'Two to four weeks from kickoff. Dates are locked in scope, not aspirational.',
-  },
-  {
-    q: 'What does it cost?',
-    a: 'The Local Launch Special starts at CAD $900 for a one-page site with up to six sections. The Local Business Website starts at CAD $1,200, the Expanded Website at CAD $1,500, and e-commerce, custom booking, databases, accounts, migrations, and complex requirements are Custom.',
-  },
-  {
-    q: 'Will I own the site?',
-    a: 'Your domain and client-supplied content remain yours. The project scope, hosting arrangement, and any handoff are documented before work begins.',
-  },
+  ...city.questions,
+  { q: 'What should we budget?', a: 'The Local Launch Special starts at CAD $900 for one page with up to six sections. The Local Business Website starts at CAD $1,200 for up to three pages; the Expanded Website starts at CAD $1,500 for up to five. Custom functionality and substantial migrations are quoted separately.' },
+  { q: 'How are launch dates and ownership handled?', a: 'The project scope confirms timing, content responsibilities, hosting and any handoff before work begins. Your domain and client-supplied content remain yours. Standard packages include two consolidated revision rounds and thirty days of post-launch defect support.' },
 ] as const;
 
 const faqSchema = {
@@ -105,7 +93,7 @@ const faqSchema = {
     faqSchema,
     breadcrumbSchema([
       { name: 'Home', url: SITE_URL },
-      { name: 'Web Design', url: `${SITE_URL}/services` },
+      { name: 'Web design service areas', url: `${SITE_URL}/web-design/` },
       { name: city.name, url: canonicalUrl },
     ]),
   ]}
@@ -120,7 +108,7 @@ const faqSchema = {
         <FadeIn motion="sceneOpen" delay={180}>
           <MotionHeading
             as="h1"
-            text={`Web design in *${city.name}* for local businesses that need clearer inquiries.`}
+            text={`Web design in *${city.name}*.`}
             className="mt-4 max-w-4xl"
           />
         </FadeIn>
@@ -133,7 +121,7 @@ const faqSchema = {
 
         <FadeIn delay={780} motion="sceneOpen">
           <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <a href={createStartProjectHref('teardown')} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Get a free site teardown</a>
+            <a href={createStartProjectHref('local-business')} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Discuss your project</a>
             <a href="tel:+12267531833" class="btn-ghost-link">(226) 753-1833</a>
           </div>
         </FadeIn>
@@ -147,6 +135,19 @@ const faqSchema = {
             <span>{city.region}</span>
           </div>
         </FadeIn>
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="axiom-container">
+        <h2 class="section-heading max-w-3xl">{city.focus}</h2>
+        <div class="mt-10 space-y-8 max-w-3xl">
+          {city.planning.map(item => <article>
+            <h3 class="text-xl font-medium text-[var(--text-primary)]">{item.title}</h3>
+            <p class="section-copy mt-3">{item.text}</p>
+          </article>)}
+        </div>
+        <p class="section-copy mt-8 max-w-3xl">Compare <a href="/pricing/" class="underline">website packages and scope</a>, review our <a href="/work/" class="underline">concept builds</a>, or meet <a href="/about/" class="underline">the two founders</a> before deciding.</p>
       </div>
     </section>
 
@@ -201,7 +202,7 @@ const faqSchema = {
           <SectionDivider className="mt-6" />
           <MotionHeading as="h2" text={`Across ${city.name}.`} className="section-heading mt-4" />
           <p class="section-copy mt-4 md:text-[17px]">
-            We work with appointment-based businesses across {city.name} and the surrounding {city.region}.
+            Tell us where your customers are in {city.name}, whether they visit you or you travel to them, and which areas you can reliably serve.
           </p>
         </FadeIn>
 
@@ -248,19 +249,24 @@ const faqSchema = {
             <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
               <div class="max-w-3xl">
                 <SectionDivider className="mb-6" />
-                <MotionHeading as="h2" text={`Get a free teardown of your ${city.name} site.`} className="section-heading" />
+                <MotionHeading as="h2" text={`Plan your ${city.name} website.`} className="section-heading" />
                 <p class="section-copy mt-4 md:text-[17px]">
-                  Send us the URL. We reply within one business day with a short teardown - what's working, where
-                  buyers hesitate, and what we would change first.
+                  Share your services, current site and priorities. We will reply within one business day with a clear next step.
                 </p>
               </div>
 
-              <a href={createStartProjectHref('teardown')} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Get a free site teardown</a>
+              <a href={createStartProjectHref('local-business')} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Get a free site teardown</a>
             </div>
           </Card>
         </FadeIn>
       </div>
     </section>
+    <nav aria-label="Nearby service areas" class="axiom-container pb-12 text-[14px]">
+      <a href="/web-design/" class="underline">All web design service areas</a>
+      <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-3">
+        {cities.filter(area => area.slug !== city.slug).map(area => <li><a class="underline" href={`/web-design/${area.slug}/`}>Web design in {area.name}</a></li>)}
+      </ul>
+    </nav>
   </main>
 
   <style>

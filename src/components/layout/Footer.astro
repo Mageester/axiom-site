@@ -6,6 +6,7 @@ const year = new Date().getFullYear();
 
 const PAGES = [
   { label: 'Home', href: '/' },
+  { label: 'Our approach', href: '/approach/' },
   { label: 'Services', href: '/services/' },
   { label: 'Work', href: '/work/' },
   { label: 'Pricing', href: '/pricing/' },
@@ -74,6 +75,7 @@ const linkClass = 'motion-link-accent inline-flex min-h-9 items-center text-[15p
     <div class="space-y-4">
       <span class="eyebrow">Contact</span>
       <ul class="space-y-2.5">
+        <li class="text-[14px] text-[var(--text-secondary)]">Kitchener-Waterloo, Ontario</li>
         <li><a href={`mailto:${SITE_EMAIL}`} class={linkClass}>{SITE_EMAIL}</a></li>
         <li><a href="tel:+12267531833" class={linkClass}>(226) 753-1833</a></li>
         <li><a href="/start-a-project/" class={linkClass}>Start a project</a></li>
@@ -81,7 +83,7 @@ const linkClass = 'motion-link-accent inline-flex min-h-9 items-center text-[15p
     </div>
 
     <div class="space-y-4">
-      <span class="eyebrow">Service Areas</span>
+      <a href="/web-design/" class="eyebrow inline-flex min-h-9 items-center">Service Areas</a>
       <ul class="space-y-2.5">
         {SERVICE_AREAS.map((link) => (
           <li>
