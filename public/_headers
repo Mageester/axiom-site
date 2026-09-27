@@ -126,6 +126,9 @@
 /photos/*
   Cache-Control: public, max-age=2592000
 
+/film/*
+  Cache-Control: public, max-age=2592000
+
 /favicon.png
   Cache-Control: public, max-age=604800
 

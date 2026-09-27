@@ -115,6 +115,34 @@ const team = [
       </div>
     </section>
 
+    <!-- FILM -->
+    <section class="ax-film ax-scene ax-scene--film" data-home-section="film" data-cinematic-scene="film" data-motion-role="feature" aria-labelledby="ax-film-title">
+      <div class="ax-container">
+        <div class="ax-film-head reveal ax-reveal--copy" style="--reveal-delay: 80ms">
+          <h2 id="ax-film-title" class="ax-film-title">Built to the pixel.</h2>
+          <span class="ax-film-meta">Film · 0:32 · Sound on</span>
+        </div>
+        <div class="ax-film-frame reveal ax-reveal--item" data-film style="--reveal-delay: 220ms">
+          <video
+            class="ax-film-video"
+            data-film-video
+            preload="none"
+            playsinline
+            poster="/film/axiom-film-poster.webp"
+            width="1920"
+            height="1080"
+          >
+            <source src="/film/axiom-built-to-the-pixel-1080.mp4" type="video/mp4" />
+            <track kind="captions" src="/film/axiom-built-to-the-pixel.en.vtt" srclang="en" label="English" />
+          </video>
+          <button type="button" class="ax-film-play" data-film-play aria-label="Play the Axiom Web film, 32 seconds, with sound">
+            <span class="ax-film-play-icon" aria-hidden="true"></span>
+            <span class="ax-film-play-label">Play film</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- PROBLEM -->
     <section class="ax-statement ax-scene ax-scene--statement" id="ax-statement" data-home-section="statement" data-cinematic-scene="statement" data-motion-role="statement">
       <div class="ax-container">
@@ -424,6 +452,108 @@ const team = [
     .ax-hero-foot { margin-top: 1.75rem; gap: 1.5rem; }
     .ax-hero-actions { gap: 1rem; }
     .ax-hero-actions .btn-primary { flex: 1 1 auto; justify-content: center; }
+  }
+
+  /* ── Film ─────────────────────────────────────────── */
+  .ax-film { padding-block: clamp(1rem, 4vh, 2.5rem) clamp(4.5rem, 11vh, 8rem); }
+  .ax-film-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: clamp(1rem, 2vw, 1.4rem);
+  }
+  .ax-film-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  .ax-film-meta {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .ax-film-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    background: #000;
+  }
+  .ax-film-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #000;
+  }
+  .ax-film-play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 1rem;
+    border: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.45));
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: opacity 420ms var(--ease-premium), visibility 0s linear 0s;
+  }
+  .ax-film-play-icon {
+    position: relative;
+    width: clamp(3.75rem, 7vw, 5rem);
+    aspect-ratio: 1;
+    border: 1px solid rgba(242, 240, 234, 0.55);
+    border-radius: 999px;
+    background: rgba(10, 10, 10, 0.35);
+    backdrop-filter: blur(6px);
+    transition: transform 480ms var(--ease-cinematic), border-color 240ms var(--ease-premium), background-color 240ms var(--ease-premium);
+  }
+  .ax-film-play-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 53%;
+    border-style: solid;
+    border-width: 0.55rem 0 0.55rem 0.9rem;
+    border-color: transparent transparent transparent var(--text-primary);
+    transform: translate(-50%, -50%);
+  }
+  .ax-film-play-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(242, 240, 234, 0.82);
+  }
+  .ax-film-play:hover .ax-film-play-icon,
+  .ax-film-play:focus-visible .ax-film-play-icon {
+    transform: scale(1.06);
+    border-color: var(--text-primary);
+    background: rgba(242, 240, 234, 0.08);
+  }
+  .ax-film-play:focus-visible { outline: 1px solid var(--text-primary); outline-offset: -6px; }
+  .ax-film-frame[data-state='playing'] .ax-film-play {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 420ms var(--ease-premium), visibility 0s linear 420ms;
+  }
+
+  @media (max-width: 759px) {
+    .ax-film-head { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+    .ax-film-frame { border-radius: 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ax-film-play, .ax-film-play-icon { transition: none !important; }
   }
 
   /* ── Section frame ────────────────────────────────── */
@@ -1488,4 +1618,49 @@ const team = [
 
   document.addEventListener('astro:page-load', initAxiomHomepage);
   if (document.readyState !== 'loading') initAxiomHomepage();
+</script>
+
+<script>
+  // Homepage film: poster until the visitor chooses to play (sound on), then native controls.
+  // Pauses itself when scrolled out of view.
+  const initAxiomFilm = () => {
+    const frame = document.querySelector<HTMLElement>('[data-film]');
+    if (!frame || frame.dataset.filmReady === 'true') return;
+    const video = frame.querySelector<HTMLVideoElement>('[data-film-video]');
+    const play = frame.querySelector<HTMLButtonElement>('[data-film-play]');
+    if (!video || !play) return;
+    frame.dataset.filmReady = 'true';
+
+    const setPlaying = (playing: boolean) => {
+      frame.dataset.state = playing ? 'playing' : 'idle';
+      play.tabIndex = playing ? -1 : 0;
+    };
+
+    play.addEventListener('click', () => {
+      video.controls = true;
+      video.muted = false;
+      setPlaying(true);
+      video.play().catch(() => setPlaying(false));
+    });
+    video.addEventListener('play', () => setPlaying(true));
+    video.addEventListener('ended', () => {
+      video.controls = false;
+      video.currentTime = 0;
+      video.load();
+      setPlaying(false);
+    });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting && !video.paused) video.pause();
+        },
+        { threshold: 0.2 },
+      );
+      observer.observe(frame);
+    }
+  };
+
+  document.addEventListener('astro:page-load', initAxiomFilm);
+  if (document.readyState !== 'loading') initAxiomFilm();
 </script>
