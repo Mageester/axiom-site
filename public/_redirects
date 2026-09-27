@@ -1,4 +1,10 @@
 /sitemap.xml /sitemap-index.xml 301
+/method /approach/ 301
+/method/ /approach/ 301
+/works /work/ 301
+/works/ /work/ 301
+/infrastructure /services/ 301
+/infrastructure/ /services/ 301
 /start /start-a-project/ 301
 /start/ /start-a-project/ 301
 /process /approach/ 301

@@ -4,6 +4,12 @@
     "/*"
   ],
   "exclude": [
+    "/method",
+    "/method/",
+    "/works",
+    "/works/",
+    "/infrastructure",
+    "/infrastructure/",
     "/",
     "/work",
     "/services",

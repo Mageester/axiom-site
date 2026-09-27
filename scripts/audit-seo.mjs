@@ -177,7 +177,7 @@ const functionRoutes = JSON.parse(readFileSync(join(dist, '_routes.json'), 'utf8
 for (const kind of ['include', 'exclude']) for (const route of functionRoutes[kind]) {
   if (functionRoutes[kind].some(other => other !== route && other.endsWith('*') && route.startsWith(other.slice(0, -1)))) fail('routes', `overlapping ${kind} rule: ${route}`);
 }
-for (const [old,target] of [['/start','/start-a-project/'],['/process','/approach/'],['/services/custom-web-development','/services/conversion-sites/'],['/services/ai-integration','/services/rebuilds/'],['/services/digital-infrastructure','/services/local-business-websites/']]) {
+for (const [old,target] of [['/method','/approach/'],['/works','/work/'],['/infrastructure','/services/'],['/start','/start-a-project/'],['/process','/approach/'],['/services/custom-web-development','/services/conversion-sites/'],['/services/ai-integration','/services/rebuilds/'],['/services/digital-infrastructure','/services/local-business-websites/']]) {
   for (const suffix of ['', '/']) if (!redirects.includes(`${old}${suffix} ${target} 301`)) fail('redirects', `missing permanent alias ${old}${suffix}`);
 }
 if (failures.length) {
