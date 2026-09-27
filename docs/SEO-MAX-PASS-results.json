@@ -6531,5 +6531,505 @@
         }
       }
     }
-  ]
+  ],
+  "productionRelease": {
+    "date": "2026-09-27",
+    "codeCommit": "e0d82ad",
+    "checks": {
+      "checkedAt": "2026-09-27T19:24:39.276Z",
+      "results": [
+        {
+          "url": "https://getaxiom.ca/",
+          "status": 200,
+          "title": "Axiom Web | Web Design in Kitchener-Waterloo",
+          "canonical": "https://getaxiom.ca/",
+          "h1": "Web design for serious local businesses.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "WebPage",
+            "VideoObject"
+          ],
+          "ogImage": "https://getaxiom.ca/social/home.png"
+        },
+        {
+          "url": "https://getaxiom.ca/about/",
+          "status": 200,
+          "title": "About Axiom Web | Kitchener-Waterloo Web Design",
+          "canonical": "https://getaxiom.ca/about/",
+          "h1": "Two co-founders responsible for the strategy, build, and support.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "AboutPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/about.png"
+        },
+        {
+          "url": "https://getaxiom.ca/approach/",
+          "status": 200,
+          "title": "Our Web Design Process | Axiom Web",
+          "canonical": "https://getaxiom.ca/approach/",
+          "h1": "A calmer way to get a sharper site.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "AboutPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/approach.png"
+        },
+        {
+          "url": "https://getaxiom.ca/contact/",
+          "status": 200,
+          "title": "Contact Axiom Web | Web Design Inquiry",
+          "canonical": "https://getaxiom.ca/contact/",
+          "h1": "Start with the site problem. We will point you to the right next step.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "ContactPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/contact.png"
+        },
+        {
+          "url": "https://getaxiom.ca/pricing/",
+          "status": 200,
+          "title": "Web Design Pricing | Local Packages | Axiom Web",
+          "canonical": "https://getaxiom.ca/pricing/",
+          "h1": "Clear pricing, before the call.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "Service",
+            "FAQPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/pricing.png"
+        },
+        {
+          "url": "https://getaxiom.ca/privacy/",
+          "status": 200,
+          "title": "Privacy Policy | Axiom Web",
+          "canonical": "https://getaxiom.ca/privacy/",
+          "h1": "Privacy Policy",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/privacy.png"
+        },
+        {
+          "url": "https://getaxiom.ca/services/",
+          "status": 200,
+          "title": "Web Design Services | Conversion Sites & Rebuilds | Axiom Web",
+          "canonical": "https://getaxiom.ca/services/",
+          "h1": "Choose the path that matches what the site needs to fix.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "OfferCatalog",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/services.png"
+        },
+        {
+          "url": "https://getaxiom.ca/services/conversion-sites/",
+          "status": 200,
+          "title": "Conversion-Focused Web Design | Axiom Web",
+          "canonical": "https://getaxiom.ca/services/conversion-sites/",
+          "h1": "Conversion-focused website design.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "Service",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/services-conversion-sites.png"
+        },
+        {
+          "url": "https://getaxiom.ca/services/local-business-websites/",
+          "status": 200,
+          "title": "Local Business Websites | Axiom Web",
+          "canonical": "https://getaxiom.ca/services/local-business-websites/",
+          "h1": "Websites for established local businesses.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "Service",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/services-local-business-websites.png"
+        },
+        {
+          "url": "https://getaxiom.ca/services/rebuilds/",
+          "status": 200,
+          "title": "Website Redesigns & Rebuilds | Axiom Web",
+          "canonical": "https://getaxiom.ca/services/rebuilds/",
+          "h1": "Website redesigns and rebuilds.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "Service",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/services-rebuilds.png"
+        },
+        {
+          "url": "https://getaxiom.ca/start-a-project/",
+          "status": 200,
+          "title": "Start a Project | Axiom Web",
+          "canonical": "https://getaxiom.ca/start-a-project/",
+          "h1": "Tell us what the site needs to fix.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "ContactPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/start-a-project.png"
+        },
+        {
+          "url": "https://getaxiom.ca/terms/",
+          "status": 200,
+          "title": "Terms of Service | Axiom Web",
+          "canonical": "https://getaxiom.ca/terms/",
+          "h1": "Terms of Service",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/terms.png"
+        },
+        {
+          "url": "https://getaxiom.ca/web-design/",
+          "status": 200,
+          "title": "Web Design Service Areas in Ontario | Axiom Web",
+          "canonical": "https://getaxiom.ca/web-design/",
+          "h1": "Web design from Kitchener-Waterloo.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/web-design.png"
+        },
+        {
+          "url": "https://getaxiom.ca/web-design/cambridge/",
+          "status": 200,
+          "title": "Web Design Cambridge, Ontario | Axiom Web",
+          "canonical": "https://getaxiom.ca/web-design/cambridge/",
+          "h1": "Web design in Cambridge .",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "Service",
+            "FAQPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/web-design-cambridge.png"
+        },
+        {
+          "url": "https://getaxiom.ca/web-design/guelph/",
+          "status": 200,
+          "title": "Web Design Guelph, Ontario | Axiom Web",
+          "canonical": "https://getaxiom.ca/web-design/guelph/",
+          "h1": "Web design in Guelph .",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "Service",
+            "FAQPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/web-design-guelph.png"
+        },
+        {
+          "url": "https://getaxiom.ca/web-design/hamilton/",
+          "status": 200,
+          "title": "Web Design Hamilton, Ontario | Axiom Web",
+          "canonical": "https://getaxiom.ca/web-design/hamilton/",
+          "h1": "Web design in Hamilton .",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "Service",
+            "FAQPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/web-design-hamilton.png"
+        },
+        {
+          "url": "https://getaxiom.ca/web-design/kitchener/",
+          "status": 200,
+          "title": "Web Design Kitchener, Ontario | Axiom Web",
+          "canonical": "https://getaxiom.ca/web-design/kitchener/",
+          "h1": "Web design in Kitchener .",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "Service",
+            "FAQPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/web-design-kitchener.png"
+        },
+        {
+          "url": "https://getaxiom.ca/web-design/waterloo/",
+          "status": 200,
+          "title": "Web Design Waterloo, Ontario | Axiom Web",
+          "canonical": "https://getaxiom.ca/web-design/waterloo/",
+          "h1": "Web design in Waterloo .",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "Service",
+            "FAQPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/web-design-waterloo.png"
+        },
+        {
+          "url": "https://getaxiom.ca/work/",
+          "status": 200,
+          "title": "Web Design Portfolio | Demonstration Builds | Axiom Web",
+          "canonical": "https://getaxiom.ca/work/",
+          "h1": "Demonstration builds that show how serious sites convert.",
+          "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+          "schemaTypes": [
+            [
+              "Organization",
+              "LocalBusiness"
+            ],
+            "WebSite",
+            "CollectionPage",
+            "BreadcrumbList"
+          ],
+          "ogImage": "https://getaxiom.ca/social/work.png"
+        },
+        {
+          "url": "https://getaxiom.ca/sitemap.xml",
+          "status": 301,
+          "location": "/sitemap-index.xml"
+        },
+        {
+          "url": "https://getaxiom.ca/method",
+          "status": 301,
+          "location": "/approach/"
+        },
+        {
+          "url": "https://getaxiom.ca/method/",
+          "status": 301,
+          "location": "/approach/"
+        },
+        {
+          "url": "https://getaxiom.ca/works",
+          "status": 301,
+          "location": "/work/"
+        },
+        {
+          "url": "https://getaxiom.ca/works/",
+          "status": 301,
+          "location": "/work/"
+        },
+        {
+          "url": "https://getaxiom.ca/infrastructure",
+          "status": 301,
+          "location": "/services/"
+        },
+        {
+          "url": "https://getaxiom.ca/infrastructure/",
+          "status": 301,
+          "location": "/services/"
+        },
+        {
+          "url": "https://getaxiom.ca/start/",
+          "status": 301,
+          "location": "/start-a-project/"
+        },
+        {
+          "url": "https://getaxiom.ca/process/",
+          "status": 301,
+          "location": "/approach/"
+        },
+        {
+          "url": "https://getaxiom.ca/api/auth/me",
+          "status": 401,
+          "xRobotsTag": "noindex, nofollow"
+        },
+        {
+          "url": "https://getaxiom.ca/admin-shell/",
+          "status": 200,
+          "xRobotsTag": "noindex, nofollow",
+          "htmlRobots": "noindex,nofollow"
+        },
+        {
+          "url": "https://getaxiom.ca/seo-release-missing-20260927/",
+          "status": 404,
+          "xRobotsTag": null,
+          "htmlRobots": "noindex,nofollow"
+        }
+      ]
+    },
+    "acceptedIndexingRequests": [
+      {
+        "url": "https://getaxiom.ca/web-design/",
+        "googleIndex": "Unknown before submission",
+        "liveTest": "Successful; canonical matches; crawl and indexing allowed",
+        "request": "Indexing requested"
+      },
+      {
+        "url": "https://getaxiom.ca/",
+        "googleIndex": "Indexed; Google-selected canonical is inspected URL",
+        "request": "Indexing requested"
+      },
+      {
+        "url": "https://getaxiom.ca/web-design/kitchener/",
+        "googleIndex": "Indexed; valid breadcrumb",
+        "request": "Indexing requested"
+      },
+      {
+        "url": "https://getaxiom.ca/web-design/waterloo/",
+        "googleIndex": "Indexed; valid breadcrumb",
+        "request": "Indexing requested"
+      },
+      {
+        "url": "https://getaxiom.ca/web-design/cambridge/",
+        "googleIndex": "Discovered, currently not indexed",
+        "request": "Indexing requested"
+      },
+      {
+        "url": "https://getaxiom.ca/web-design/guelph/",
+        "googleIndex": "Indexed; valid breadcrumb",
+        "request": "Indexing requested"
+      },
+      {
+        "url": "https://getaxiom.ca/web-design/hamilton/",
+        "googleIndex": "Indexed; valid breadcrumb",
+        "request": "Indexing requested"
+      },
+      {
+        "url": "https://getaxiom.ca/services/conversion-sites/",
+        "googleIndex": "Discovered, currently not indexed",
+        "request": "Indexing requested"
+      },
+      {
+        "url": "https://getaxiom.ca/services/local-business-websites/",
+        "googleIndex": "Indexed; historical HTTPS warning; current HTTP 301 and HTTPS 200 confirmed",
+        "request": "Indexing requested"
+      },
+      {
+        "url": "https://getaxiom.ca/services/rebuilds/",
+        "googleIndex": "Indexed; valid breadcrumb",
+        "request": "Indexing requested"
+      }
+    ],
+    "sitemapIndex": "Success; 19 discovered pages",
+    "legacySitemap": "Success after redirect repair",
+    "http403Validation": "Started 2026-09-27",
+    "homepage": [
+      {
+        "mode": "mobile",
+        "fetchTime": "2026-09-27T19:26:28.641Z",
+        "scores": {
+          "performance": 92,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 2816.678,
+        "cls": 0,
+        "tbtMs": 61
+      },
+      {
+        "mode": "desktop",
+        "fetchTime": "2026-09-27T19:26:39.195Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 505.9073000000002,
+        "cls": 0,
+        "tbtMs": 0
+      }
+    ]
+  }
 }
