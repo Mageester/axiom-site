@@ -7031,5 +7031,243 @@
         "tbtMs": 0
       }
     ]
+  },
+  "cloudflareFollowup": {
+    "date": "2026-09-27T20:26:46.943Z",
+    "redirect": {
+      "name": "Axiom www to canonical apex",
+      "id": "09bdd21988bb43368c84cc4fa7d675bb",
+      "active": true,
+      "status": 301,
+      "preservePath": true,
+      "preserveQuery": true,
+      "verifiedRedirects": 38,
+      "verifiedCanonicalPages": 19
+    },
+    "rocketLoader": {
+      "final": "enabled",
+      "experimentRuleId": "4194b58063764311b250da08c0e2c1b7",
+      "experimentRuleActive": false
+    },
+    "runs": [
+      {
+        "label": "cf-before",
+        "device": "mobile",
+        "rocketLoader": true,
+        "fetchTime": "2026-09-27T20:16:06.254Z",
+        "scores": {
+          "performance": 85,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 3441.7201276550295,
+        "cls": 0,
+        "tbtMs": 17
+      },
+      {
+        "label": "cf-before",
+        "device": "desktop",
+        "rocketLoader": true,
+        "fetchTime": "2026-09-27T20:16:16.645Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 622.7976999999998,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      {
+        "label": "cf-restored-2",
+        "device": "mobile",
+        "rocketLoader": true,
+        "fetchTime": "2026-09-27T20:22:36.171Z",
+        "scores": {
+          "performance": 92,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 2810.5234999999993,
+        "cls": 0,
+        "tbtMs": 20
+      },
+      {
+        "label": "cf-restored-2",
+        "device": "desktop",
+        "rocketLoader": true,
+        "fetchTime": "2026-09-27T20:22:46.336Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 508.8952000000001,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      {
+        "label": "cf-restored-3",
+        "device": "mobile",
+        "rocketLoader": true,
+        "fetchTime": "2026-09-27T20:23:08.780Z",
+        "scores": {
+          "performance": 91,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 3176.1679999999997,
+        "cls": 0,
+        "tbtMs": 19.5
+      },
+      {
+        "label": "cf-restored-3",
+        "device": "desktop",
+        "rocketLoader": true,
+        "fetchTime": "2026-09-27T20:23:17.000Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 573.1986999999999,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      {
+        "label": "cf-rocket-off",
+        "device": "mobile",
+        "rocketLoader": false,
+        "fetchTime": "2026-09-27T20:20:13.194Z",
+        "scores": {
+          "performance": 86,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 3399.2440299999994,
+        "cls": 0,
+        "tbtMs": 7
+      },
+      {
+        "label": "cf-rocket-off",
+        "device": "desktop",
+        "rocketLoader": false,
+        "fetchTime": "2026-09-27T20:20:22.820Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 77,
+          "seo": 100
+        },
+        "lcpMs": 646.38255,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      {
+        "label": "cf-rocket-off-2",
+        "device": "mobile",
+        "rocketLoader": false,
+        "fetchTime": "2026-09-27T20:20:50.770Z",
+        "scores": {
+          "performance": 88,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 3443.45325,
+        "cls": 0,
+        "tbtMs": 12
+      },
+      {
+        "label": "cf-rocket-off-2",
+        "device": "desktop",
+        "rocketLoader": false,
+        "fetchTime": "2026-09-27T20:20:59.492Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 803.9379249999997,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      {
+        "label": "cf-rocket-off-3",
+        "device": "mobile",
+        "rocketLoader": false,
+        "fetchTime": "2026-09-27T20:24:00.215Z",
+        "scores": {
+          "performance": 85,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 3593.5964999999987,
+        "cls": 0,
+        "tbtMs": 11
+      },
+      {
+        "label": "cf-rocket-off-3",
+        "device": "desktop",
+        "rocketLoader": false,
+        "fetchTime": "2026-09-27T20:24:09.797Z",
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 81,
+          "seo": 100
+        },
+        "lcpMs": 665.1541,
+        "cls": 0,
+        "tbtMs": 0
+      }
+    ],
+    "pagesHost": "axiom-site-f3f.pages.dev",
+    "pagesHostChecks": [
+      {
+        "path": "/",
+        "status": 200,
+        "xRobotsTag": "noindex"
+      },
+      {
+        "path": "/web-design/kitchener/",
+        "status": 200,
+        "xRobotsTag": "noindex"
+      },
+      {
+        "path": "/api/auth/me",
+        "status": 401,
+        "xRobotsTag": "noindex, nofollow"
+      }
+    ],
+    "schemaValidation": {
+      "method": "Schema.org code snippet, exact JSON-LD fetched from production; URL fetch failed",
+      "pages": [
+        "/",
+        "/web-design/kitchener/",
+        "/services/rebuilds/",
+        "/pricing/"
+      ],
+      "errors": 0,
+      "warnings": 0
+    },
+    "verification": {
+      "braveTrialPageViewportChecks": 38,
+      "braveRestoredPageViewportChecks": 10,
+      "focusedTests": 4,
+      "buildMutationCases": 13,
+      "liveAudit": "passed",
+      "releaseAudit": "passed",
+      "codeCommit": "5814ede"
+    }
   }
 }

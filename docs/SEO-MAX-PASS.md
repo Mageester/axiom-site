@@ -199,14 +199,14 @@ These are observations of their public pages, not endorsements or verified claim
 - [ ] Confirm whether a public customer-facing address and regular hours exist. For a service-area business, follow Google's eligibility and address rules; do not list a virtual office or expose a private home merely for schema.
 - [ ] Supply only real official profile URLs for `sameAs`, with consistent Axiom Web branding, contact details and a backlink to the canonical site.
 - [ ] Review the slow-network font fallback and the shortened initial reveal in Brave. Review the page-specific social cards.
-- [ ] Assess Cloudflare Rocket Loader and speculative/automatic optimizations on a preview. Disable or exclude only if a controlled test shows improvement and normal navigation, film playback, analytics and forms still work. Keep verified search crawlers accessible.
-- [ ] **Fix the verified www duplicate:** configure a permanent Cloudflare host redirect from `www.getaxiom.ca` to `https://getaxiom.ca`, preserving path and query. Brave currently gets 200 on www. Verify HTTP variants too; the browser observed HTTPS upgrades, not proof of a server-side permanent redirect.
-- [ ] Ensure preview `pages.dev` deployments and any other duplicate hosts are not independently indexed. Do not apply noindex to production.
+- [x] Assess Cloudflare Rocket Loader and speculative/automatic optimizations. The authorized live comparison below found no benefit from disabling Rocket Loader; the original setting was restored. Security protections and analytics remain enabled.
+- [x] **Fix the verified www duplicate:** a Cloudflare 301 now sends HTTP and HTTPS `www.getaxiom.ca` requests directly to `https://getaxiom.ca`, preserving path and query. All 38 combinations of the 19 indexable paths and both protocols passed.
+- [x] Apply hostname-specific noindex to this project's default and preview `pages.dev` hosts. Verified default-host HTML and Function headers; all 19 production canonical pages remain indexable. Any separately hosted legacy copies require their own inventory.
 
 ### Search Console and ongoing work
 
 - [x] Use the existing verified domain property and submit `https://getaxiom.ca/sitemap-index.xml`. Inspect the homepage, hub, five city pages and three services; request fresh crawls. Google accepted all ten requests. The hub passed Google's live fetch/indexability/canonical check; the full release record is below.
-- [ ] Use Rich Results Test / Schema Markup Validator on deployed pages; resolve factual issues without inventing fields. Check video resource/thumbnail access, robots directives and the custom 404 from the public host.
+- [x] Validate representative deployed markup externally: homepage, Kitchener, rebuild service and pricing JSON-LD all returned zero errors/warnings in Schema.org's code validator. URL-fetch mode failed; the exact public markup was fetched separately and submitted as code. Google rich-result eligibility remains a separate question. Video behaviour, robots directives and real 404 responses were also checked.
 - [ ] Inspect the production redirect chains, `_astro` caching and Function noindex headers. Confirm Cloudflare transforms do not rewrite or defer essential scripts incorrectly.
 - [ ] Monitor CWV over the field-data window, segmented by mobile and page group. Target LCP <2 s, CLS <0.05 and good INP; Lighthouse TBT alone is not an INP measurement.
 - [ ] Establish a query/page baseline for “Axiom Web” and the five city intents: impressions, clicks, CTR, selected landing page and qualified inquiries. Compare like periods and watch cannibalisation between homepage and city pages.
@@ -244,3 +244,45 @@ This report, the compact measurement evidence and completed plan are committed s
 - Recorded the June 26–September 25 performance baseline locally: 18 clicks, 5.34K impressions, 0.3% CTR and average position 53.5. The visible query table includes branded and city searches. These are historical aggregate metrics, not proof of improvement from this release. A CSV export did not produce a retrievable download in browser automation; the visible report was saved as text instead.
 - A fresh **production** Brave Lighthouse homepage run scored **92/100/81/100 mobile** and **100/100/81/100 desktop** (P/A/BP/SEO); LCP **2.82 s / 0.51 s**, CLS **0 / 0**. The production-only Best Practices issue remains associated with Cloudflare-injected scripts. These observations are separate from the complete local-build matrix above; the strict mobile LCP target remains unmet.
 - Screenshots, accepted-request records, performance-baseline text, production HTTP checks and live Lighthouse reports are in uncommitted `output/seo-max-pass/`. The live homepage and Search Console sitemap report are left open in Brave. No account permissions, verification tokens, security protections or Google Business settings were changed.
+
+## Authorized Cloudflare follow-up — September 27, 2026
+
+The user subsequently authorized fixing the www redirect and testing Cloudflare performance settings. These dashboard changes are separate from Git deployments.
+
+### Canonical hostname — completed
+
+- Active Single Redirect: **Axiom www to canonical apex**, rule `09bdd21988bb43368c84cc4fa7d675bb`.
+- Filter: `(http.host eq "www.getaxiom.ca")`. Dynamic target: `concat("https://getaxiom.ca", http.request.uri.path)`. Status **301**, **Preserve query string enabled**. The exact hostname filter covers HTTP and HTTPS without matching the apex or other subdomains.
+- Verified all 19 canonical pages still return 200 with their correct canonical and no noindex. Verified all 38 www route/protocol combinations redirect directly to the expected HTTPS apex URL, including multiple query parameters and an encoded space. Example: `http://www.getaxiom.ca/web-design/kitchener/?utm_source=seo-audit&value=a%20b` → `https://getaxiom.ca/web-design/kitchener/?utm_source=seo-audit&value=a%20b`.
+- Added optional deployed-host checks to the existing audit: **`node scripts/audit-seo.mjs --live`**. Ordinary `npm run build` remains an offline build audit; it does not depend on Cloudflare availability or require a deployment first.
+- Rollback, if ever needed: disable this named Single Redirect in Cloudflare Rules. No DNS change was required. Configuration follows [Cloudflare's redirect guidance](https://developers.cloudflare.com/rules/url-forwarding/examples/redirect-www-to-root/), with the exact-host filter extending coverage to HTTP too.
+
+### Cloudflare performance — measured; unsuccessful experiment reverted
+
+Initial settings: Rocket Loader, Speed Brain, Early Hints, HTTP/2, HTTP/3, HTTP/2 to origin, 0-RTT, Always Use HTTPS and TLS 1.3 enabled; Cloudflare Fonts disabled. Existing font files are self-hosted. Paid image/protocol upgrades were not purchased.
+
+Created **Axiom Astro native script loading**, configuration rule `4194b58063764311b250da08c0e2c1b7`, matching only `(http.host eq "getaxiom.ca")` and setting Rocket Loader off. The live HTML confirmed the loader injection disappeared during the trial. Compared three homepage runs per setting, each with mobile and desktop Brave Lighthouse, on the same deployed code. Measurements ran sequentially without concurrent browser QA. Run order: enabled 1, disabled 1–2, enabled 2–3, disabled 3. These samples help choose a setting but are not a statistically controlled field experiment.
+
+| Rocket Loader | Run | Mobile P/A/BP/SEO | Mobile LCP | Desktop P/A/BP/SEO | Desktop LCP |
+| --- | --- | --- | --- | --- | --- |
+| Enabled | 1 | 85/100/81/100 | 3.44 s | 100/100/81/100 | 0.62 s |
+| Enabled | 2 | 92/100/81/100 | 2.81 s | 100/100/81/100 | 0.51 s |
+| Enabled | 3 | 91/100/81/100 | 3.18 s | 100/100/81/100 | 0.57 s |
+| Disabled | 1 | 86/100/81/100 | 3.40 s | 100/100/77/100 | 0.65 s |
+| Disabled | 2 | 88/100/81/100 | 3.44 s | 100/100/81/100 | 0.80 s |
+| Disabled | 3 | 85/100/81/100 | 3.59 s | 100/100/81/100 | 0.67 s |
+
+- Enabled median mobile performance **91**, LCP **3.18 s**; disabled median **86**, LCP **3.44 s**. Desktop median performance **100** in both states, LCP **0.57 s enabled / 0.67 s disabled**. Every run had CLS **0**.
+- **Final state: Rocket Loader remains enabled.** The override rule is retained **Disabled** for traceability and has no effect. Reverting the experiment was preferable to retaining a measured regression. This follow-up does not claim a performance improvement or achievement of mobile LCP <2 s.
+- The 81 Best Practices score still comes from deprecated APIs in Cloudflare's challenge script. One disabled desktop run also reported CSP inspector issues. Security/challenge protections were not weakened to remove Lighthouse warnings.
+- Speed Brain remains enabled: it uses conservative prefetching and does not improve the first page load; Cloudflare documents that speculative requests only use its cache and do not invoke Workers or reach origins. It therefore was not treated as a remedy for initial homepage LCP. See [Speed Brain behaviour and safeguards](https://developers.cloudflare.com/speed/optimization/content/speed-brain/). Early Hints and the already-enabled protocol features were retained. No unsupported optimization toggles were added.
+- With Rocket Loader excluded, all **38 production page/viewport checks** passed at 390 and 1440 pixels, plus menu navigation, FAQ expansion, concept-work selection, film click-to-play, no pre-click MP4 transfer and no-JavaScript readability. After restoring it, targeted production checks repeated on the homepage, about, Kitchener, inquiry and contact pages at both viewports. These were read-only checks; no inquiries were submitted.
+- The remaining homepage bottleneck is not established as a single Cloudflare setting. The first current report measured a 2.04 s poster render delay despite an approximately 81 ms poster download, and still flagged render-blocking CSS. Further work should isolate the critical CSS/render path and validate against production latency; the earlier full-CSS inlining experiment regressed and should not be repeated blindly.
+- The initial default-host lookup used the project name and was incorrect: `axiom-site.pages.dev` is not this Astro deployment. Cloudflare's deployment list established the assigned hostname as **`axiom-site-f3f.pages.dev`**. The first hostname-specific patch did not affect the actual default host; live verification caught this and a follow-up commit corrected the binding. No settings or content on the unrelated host were changed.
+- Added `_headers` noindex rules for `https://axiom-site-f3f.pages.dev/*` and `https://:version.axiom-site-f3f.pages.dev/*`, plus matching Function middleware for default/preview hosts. After deployment, default-host `/` and `/web-design/kitchener/` return **200 + HTTP noindex**, and `/api/auth/me` returns **401 + noindex, nofollow**. All 19 `getaxiom.ca` canonical pages still pass indexability checks. Static rule syntax follows [Cloudflare's documented host-specific noindex pattern](https://developers.cloudflare.com/pages/configuration/headers/#prevent-your-workersdev-urls-showing-in-search-results). The observed immutable deployment URL returned Cloudflare's Deployment Not Found page; preview handling is covered by the static rule/build audit and middleware regression, not claimed as a successful live preview fetch.
+- Added a build-audit assertion and mutation test for duplicate-host headers, and middleware tests for the default/preview hosts. The final production build passed, as did all four focused tests (including 13 broken-build cases) and `node scripts/audit-seo.mjs --live`. The production release script also passed all 19 public pages, nine retired redirects and private/error noindex checks.
+- External Schema.org validation used exact JSON-LD fetched from the live homepage, Kitchener, rebuild service and pricing pages. All four code-snippet tests returned **0 errors / 0 warnings**, covering Organization/LocalBusiness, WebSite, WebPage, Service, Offer data, FAQPage, BreadcrumbList and VideoObject, including referenced nested entities. The validator's direct URL fetch reported URL not found despite our public 200 checks, so this proves vocabulary validation of submitted live markup, not successful fetching by that validator or Google rich-result approval.
+
+Follow-up code commits: `38f71bc` (duplicate-host protection and optional live audit) and `5814ede` (correct assigned hostname), each built successfully before commit and deployed successfully from `main`. Documentation and compact measurement records are committed separately after the final build gate.
+
+Evidence: `output/seo-max-pass/cloudflare-www-redirect.png`, `cloudflare-experiment-restored.png`, `cf-before/`, `cf-restored-2/`, `cf-restored-3/`, `cf-rocket-off/`, `cf-rocket-off-2/`, `cf-rocket-off-3/`, `cf-qa/` and `cf-final-qa/`. Compact run results are preserved in `SEO-MAX-PASS-results.json`; raw output remains uncommitted.
