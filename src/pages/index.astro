@@ -7,6 +7,15 @@ import { getWorkProofImage } from '../lib/workProofImages';
 
 const work = [
   {
+    id: 'reids-home-and-yard',
+    title: 'Reid’s Home & Yard',
+    niche: 'Home Services',
+    outcome: 'Published website. Walkway services and direct contact for Ottawa homeowners.',
+    href: 'https://reidshomeandyard.getaxiom.ca/',
+    ctaLabel: 'Visit website',
+    img: getWorkProofImage('reids-home-and-yard'),
+  },
+  {
     id: 'dental-aurelia',
     title: 'Aurelia Dental Studio',
     niche: 'Healthcare',
@@ -184,8 +193,8 @@ const team = [
     <section class="ax-section ax-scene ax-scene--feature" data-home-section="work" data-cinematic-scene="work" data-motion-role="feature">
       <div class="ax-container">
         <header class="ax-head">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Concept builds that show <em>the standard</em></h2>
-          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 420ms">These are demonstration builds, not invented client case studies. They show how we structure local business sites for clarity, trust, and action.</p>
+          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Selected work that shows <em>the standard</em></h2>
+          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 420ms">Published websites and clearly labelled concept builds. They show how we structure local business sites for clarity, trust, and action.</p>
         </header>
 
         <div class="ax-work-explorer reveal ax-reveal--item" data-work-explorer style="--reveal-delay: 760ms">
@@ -206,7 +215,7 @@ const team = [
                   objectPosition={w.img.position || 'center 40%'}
                 />
                 <figcaption class="ax-work-feature-caption" aria-hidden="true">
-                  <span>{`0${i + 1}`} / 03</span>
+                  <span>{`0${i + 1}`} / {String(work.length).padStart(2, '0')}</span>
                   <span>{w.niche}</span>
                 </figcaption>
               </figure>
@@ -246,9 +255,9 @@ const team = [
                       rel="noopener noreferrer"
                       class="ax-work-link"
                       tabindex={i === 0 ? undefined : -1}
-                      aria-label={`Open ${w.title} demo in a new tab`}
+                      aria-label={`Open ${w.title} ${w.id === 'reids-home-and-yard' ? 'website' : 'demo'} in a new tab`}
                     >
-                      Open demo <span aria-hidden="true">↗</span>
+                      {w.id === 'reids-home-and-yard' ? 'Visit website' : 'Open demo'} <span aria-hidden="true">↗</span>
                     </a>
                   </div>
                 </div>

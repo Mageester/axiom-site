@@ -307,7 +307,7 @@ export const WORK_JSON_LD = {
   name: 'Axiom Web - Web Design Portfolio',
   url: toCanonicalUrl('/work'),
   description:
-    'Demonstration builds across legal, medical, trades, and retail showing how serious business sites can guide visitors toward inquiries.',
+      'Published websites and clearly labelled concept builds across home services, legal, medical, trades, and retail.',
   provider: {
     '@type': 'Organization',
     name: SITE_NAME,
@@ -323,9 +323,9 @@ export const SEO_ROUTES = {
     canonicalPath: '/',
   },
   work: {
-    title: 'Web Design Portfolio | Demonstration Builds | Axiom Web',
+      title: 'Web Design Portfolio | Published Sites & Concepts | Axiom Web',
     description:
-      'Demonstration builds across legal, medical, trades, and retail. See how Axiom structures sites so buyers understand, trust, and inquire.',
+        'Published websites and clearly labelled concept builds across home services, legal, medical, and retail. Explore Axiom Web’s selected work.',
     canonicalPath: '/work',
   },
   concepts: {

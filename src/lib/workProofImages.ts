@@ -7,6 +7,11 @@ type ProofImageConfig = {
 };
 
 const proofImagesBySlug: Record<string, ProofImageConfig> = {
+  'reids-home-and-yard': {
+    source: responsiveImages.workReids,
+    alt: 'Reid’s Home & Yard website with an evergreen headline and a cleared snowy walkway in Ottawa',
+    position: 'center top',
+  },
   'concept-law-demo': {
     source: responsiveImages.workLaw,
     alt: 'Premium law firm office interior with modern aesthetic and professional atmosphere',

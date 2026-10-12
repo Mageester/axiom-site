@@ -11,6 +11,25 @@ import { SectionDivider } from '../components/motion/SectionDivider';
 
 const projects = [
   {
+    id: 'reids-home-and-yard',
+    title: 'Reid’s Home & Yard',
+    niche: 'Home Services',
+    kindLabel: 'Published website',
+    outcome: 'Ottawa walkway services, seasonal plans and direct contact in one calm, focused page.',
+    originalWeaknessLabel: 'The brief',
+    originalWeakness: 'Introduce walkway snow clearing, salting and de-icing, while keeping future lawn care clearly separate.',
+    axiomChangedLabel: 'What we built',
+    axiomChanged: 'An evergreen visual identity, winter imagery, cinematic transitions and direct phone and email links.',
+    whyItWorksLabel: 'Visitor experience',
+    whyItWorks: 'Homeowners can understand the current services and reach the business without a booking account or extra steps.',
+    meta: ['Published website', 'Ottawa', 'Home services'],
+    image: getWorkProofImage('reids-home-and-yard').source,
+    alt: getWorkProofImage('reids-home-and-yard').alt || 'Reid’s Home & Yard website',
+    position: 'center top',
+    href: 'https://reidshomeandyard.getaxiom.ca/',
+    ctaLabel: 'Visit website',
+  },
+  {
     id: 'salon-nails',
     title: 'Nails Studio',
     niche: 'Salon & Beauty',
@@ -149,13 +168,13 @@ const projects = [
         <FadeIn motion="sceneOpen" delay={180}>
           <MotionHeading
             as="h1"
-            text="Demonstration builds that show *how serious sites convert.*"
+            text="Selected websites that show *how serious businesses present themselves.*"
             className="mt-4"
           />
         </FadeIn>
         <FadeIn motion="editorialMaskReveal" delay={500}>
           <p class="section-copy mt-5 md:text-[17px]">
-            These are concept builds, not invented client case studies. Each one shows how we structure a local business site around clarity, proof, and the next action.
+            Published websites and clearly labelled concept builds. Each one shows how we structure a local business site around clarity and the next action.
           </p>
         </FadeIn>
         <FadeIn motion="sceneOpen" delay={720}>
@@ -182,7 +201,7 @@ const projects = [
             >
               <div class="work-card-top">
                 <span class="work-card-num">{`0${i + 1}`}</span>
-                <span class="work-card-niche">{p.niche}</span>
+                <span class="work-card-niche">{p.niche} · {p.kindLabel || 'Concept build'}</span>
               </div>
               <figure class="work-card-shot">
                 <ResponsivePicture
@@ -196,11 +215,11 @@ const projects = [
               <h3 class="work-card-title">{p.title}</h3>
               <p class="work-card-outcome">{p.outcome}</p>
               <div class="work-card-proof">
-                <p class="work-card-kicker">Original weakness</p>
+                <p class="work-card-kicker">{p.originalWeaknessLabel || 'Original weakness'}</p>
                 <p class="work-card-detail">{p.originalWeakness}</p>
-                <p class="work-card-kicker">Axiom changed</p>
+                <p class="work-card-kicker">{p.axiomChangedLabel || 'Axiom changed'}</p>
                 <p class="work-card-detail">{p.axiomChanged}</p>
-                <p class="work-card-kicker">Why it works</p>
+                <p class="work-card-kicker">{p.whyItWorksLabel || 'Why it works'}</p>
                 <p class="work-card-detail">{p.whyItWorks}</p>
               </div>
               <span class="work-card-meta">
@@ -227,7 +246,7 @@ const projects = [
                 className="section-heading mt-4"
               />
               <p class="section-copy mt-4">
-                A stronger site should make the business easier to understand, easier to trust, and easier to contact. These concept builds show the structure we bring to that work.
+                A stronger site should make the business easier to understand, easier to trust, and easier to contact. This selected work shows the structure we bring to that work.
               </p>
             </div>
             <div class="flex flex-col items-start gap-3 md:items-end">

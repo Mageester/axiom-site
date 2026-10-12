@@ -17,6 +17,13 @@ export const fallbackResponsiveImage: ResponsiveSource = {
 };
 
 export const responsiveImages = {
+  workReids: {
+    fallbackSrc: '/images/work-reids-1200.webp',
+    width: 1200,
+    height: 800,
+    avifSrcSet: '/images/work-reids-640.avif 640w, /images/work-reids-960.avif 960w, /images/work-reids-1200.avif 1200w',
+    webpSrcSet: '/images/work-reids-640.webp 640w, /images/work-reids-960.webp 960w, /images/work-reids-1200.webp 1200w',
+  },
   workAether: {
     ...fallbackResponsiveImage,
   },
