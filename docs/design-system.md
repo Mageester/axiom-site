@@ -1,48 +1,57 @@
-# Axiom Design System
+# Axiom Web — Public Site Design System
 
-Phase 1 establishes the shared token and primitive layer used by public Astro pages and the retained admin shell.
+The public marketing site (everything except the private admin shell) uses one small, dependency-free design system. Pages are static Astro components with no client framework; the only JavaScript is the mobile menu, the intake form and the studio film player.
 
-## Token Source
+## Principles
 
-- TypeScript source: `src/design/tokens.ts`
-- CSS custom properties: `src/styles/tokens.css`
-- Tailwind alignment: `tailwind.config.js`
+- **Clarity over effect.** Content is always visible on load. No scroll-reveal hiding, no parallax, no motion that delays reading.
+- **One typeface, one accent.** Inter (self-hosted variable font) for everything; Axiom blue for actions and emphasis.
+- **Honest proof.** The live client site is labelled “Client site · Live”; every demonstration is labelled “Concept build”. No invented testimonials, ratings or metrics (see `AGENTS.md`).
+- **Phone first.** Every layout is checked at 375–390px with no horizontal scroll.
 
-CSS remains the runtime delivery layer, while `tokens.ts` gives future components and tests a typed source for the same palette, radius, spacing, motion, and typography decisions.
+## Where things live
 
-## Typography
+| Concern | Location |
+| --- | --- |
+| Tokens, base elements, buttons, cards, forms, lists | `src/styles/site.css` |
+| Page shell (head, metadata, JSON-LD, header, footer) | `src/layouts/BaseLayout.astro` |
+| Shared components | `src/components/site/` |
+| Icons (inline SVG paths) | `src/lib/icons.ts` + `src/components/site/Icon.astro` |
+| Logo mark (vector) | `src/lib/brand.ts` + `src/components/site/Logo.astro` |
+| Content (single source of truth) | `src/content/*.ts` |
+| SEO metadata and structured data | `src/lib/seo.ts` |
+| Favicons and app icons | `node scripts/generate-brand-assets.mjs` |
+| Social share cards | `src/pages/social/[slug].png.ts` (built per page) |
 
-- Display: Inter Display for hero, display, and section-title treatments at 32px and above. It is self-hosted through `@fontsource-variable/inter` and uses the variable face for the display token.
-- Body/UI: Inter for paragraphs, labels, buttons, navigation, and forms. It is self-hosted through `@fontsource/inter`.
-- Mono/technical UI: JetBrains Mono, self-hosted through `@fontsource/jetbrains-mono`, for code, technical UI, and field hints when needed.
-- Fallback stack: `'Inter Display', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`.
+The private admin shell keeps its own dark Tailwind theme (`src/styles/globals.css`, `src/layouts/AdminLayout.astro`) and does not load `site.css`.
 
-Display tokens use restrained negative tracking: `display-xl` is 700 / `-0.035em` / `1.0`, `display-lg` is 700 / `-0.03em` / `1.05`, `display-md` is 600 / `-0.025em` / `1.1`, and `h1`-`h2` are 600 / `-0.02em` / `1.15`. Smaller headings use Inter 600 with `-0.01em` tracking and `1.25` line height. Body copy remains Inter 400 with open line heights for readability.
+## Tokens
 
-External Google Fonts and Fontshare links are not used.
+| Token | Value | Use |
+| --- | --- | --- |
+| `--ink` | `#0b1324` | Headings, strong text |
+| `--text` | `#3b4658` | Body copy (9.5:1 on white) |
+| `--text-muted` | `#5f6b7d` | Meta and supporting copy (5.4:1 on white) |
+| `--brand` | `#2453d6` | Primary buttons, links, eyebrows (6.4:1 on white) |
+| `--brand-soft` | `#edf2fe` | Icon tiles, highlighted rows |
+| `--bg-soft` | `#f7f9fc` | Alternating sections |
+| `--night` | `#0a1122` | Footer and CTA band |
+| `--night-accent` | `#9db5ff` | Accent on dark surfaces |
 
-## WCAG AA Pairings
+Type scale is fluid (`--fs-display`, `--fs-h1`, `--fs-h2`, `--fs-h3`, `--fs-lead`, `--fs-body`). Radii: 8 / 12 / 18 / 24px. Section rhythm: `--section`.
 
-The typography swap keeps the same approved color pairings. Inter's body metrics improve small-text clarity, while Inter Display keeps large headings compact without reducing contrast.
+## Building blocks
 
-| Pairing | Ratio | Usage |
-| --- | ---: | --- |
-| `--text-primary` on `--bg-base` | 18.4:1 | Primary headings and navigation on the site canvas. |
-| `--text-secondary` on `--bg-base` | 10.4:1 | Body copy and secondary calls to action. |
-| `--text-on-accent` on `--accent` | 8.5:1 | Primary button text on the gold accent. |
-| `--error-text` on `--error-surface` | 9.2:1 | Form validation copy on error surfaces. |
+- **Layout:** `.container`, `.container-narrow`, `.section`, `.section-sm`, `.section-soft`, `.grid` + `.grid-2/3/4`.
+- **Section heading:** `.section-head` (eyebrow, `h2`, lead) and `.section-head-row` (heading with a right-aligned link).
+- **Buttons:** `.btn` (primary), `.btn-secondary`, `.btn-light` / `.btn-outline-light` (dark surfaces), sizes `.btn-sm` / `.btn-lg`, `.btn-block`; `.arrow-link` for tertiary links.
+- **Cards:** `.card`, `.card-link` + `.stretched` for whole-card links without nested interactive elements.
+- **Lists:** `.check-list` (`.cols-2`), `.dash-list`.
+- **Components:** `PageHero` (breadcrumbs, title, lead, actions, optional aside), `CtaBand`, `FaqList` (native `<details>`), `PricingCards`, `ProcessSteps` (compact or detailed timeline), `WorkCard`, `LinkCard`, `IndustryGrid`, `FounderCards`, `FactsBar`, `BrowserFrame`, `Film`, `IntakeForm`, `LegalPage`.
 
-These are the approved minimum pairings for public-page composition. Decorative text can use lower emphasis only when it is not needed to complete a task.
+## Adding a page
 
-## Primitives
-
-Primitives live in `src/components/primitives/`:
-
-- `Container.astro`: constrained width and responsive gutters.
-- `Section.astro`: standard/tight/none vertical rhythm.
-- `Surface.astro`: quiet, raised, and accent panel surfaces.
-- `Stack.astro`: vertical spacing without ad hoc gap values.
-- `Kicker.astro`: restrained uppercase label treatment.
-- `ButtonLink.astro`: token-backed link button for static Astro pages.
-
-Use primitives for new public page work before adding local layout classes. Existing page-specific components can migrate gradually during page rebuild phases.
+1. Add copy to the relevant `src/content/*.ts` file (or a route entry in `SEO_ROUTES`).
+2. Render it inside `BaseLayout` with `title`, `description`, `crumbs` and any page-specific `schema`.
+3. Start with `PageHero`, alternate `.section` / `.section-soft`, and finish with `CtaBand`.
+4. Link it from the footer or a hub page, then run `npm run build` — the SEO audit fails on orphan pages, missing metadata, heading skips, broken links or schema that doesn't match visible content.

@@ -141,11 +141,31 @@ https://:version.axiom-site-f3f.pages.dev/*
 /apple-touch-icon.png
   Cache-Control: public, max-age=604800
 
+/favicon.svg
+  Cache-Control: public, max-age=604800
+
+/icon-192.png
+  Cache-Control: public, max-age=604800
+
+/icon-512.png
+  Cache-Control: public, max-age=604800
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400
+
 /speculation-rules.json
   Content-Type: application/speculationrules+json
   Cache-Control: public, max-age=3600
 
 /web-design/*
+  Speculation-Rules: "/speculation-rules.json"
+
+/industries/
+  Speculation-Rules: "/speculation-rules.json"
+  Content-Type: text/html; charset=utf-8
+
+/industries/*
   Speculation-Rules: "/speculation-rules.json"
 
 /admin-shell

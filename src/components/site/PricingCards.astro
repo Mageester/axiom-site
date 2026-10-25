@@ -1,0 +1,126 @@
+---
+import type { Package } from '../../content/pricing';
+import Icon from './Icon.astro';
+
+type Props = {
+  packages: Package[];
+  /** Compact cards drop the feature list for previews. */
+  compact?: boolean;
+};
+
+const { packages, compact = false } = Astro.props;
+---
+
+<div class:list={['pricing-grid', { compact }]}>
+  {packages.map((pkg) => (
+    <article id={pkg.key} class:list={['card', 'price-card', { featured: pkg.featured }]} data-package={pkg.key}>
+      <div class="price-badge-row">
+        {pkg.badge && <span class:list={['badge', pkg.featured ? 'badge-brand' : '']}>{pkg.badge}</span>}
+      </div>
+      <h3>{pkg.name}</h3>
+      <p class="price-scope">{pkg.scope}</p>
+      <p class="price">
+        <span class="price-note">{pkg.priceNote}</span>
+        <span class="price-value">{pkg.price}</span>
+      </p>
+      <p class="price-summary">{pkg.summary}</p>
+      {!compact && (
+        <ul role="list" class="check-list price-features">
+          {pkg.features.map((feature) => <li>{feature}</li>)}
+        </ul>
+      )}
+      <a href={pkg.href} class:list={['btn', 'btn-block', pkg.featured ? '' : 'btn-secondary']}>
+        {pkg.cta} <Icon name="arrow-right" />
+      </a>
+    </article>
+  ))}
+</div>
+
+<style>
+  .pricing-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 720px) {
+    .pricing-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1180px) {
+    .pricing-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .price-card {
+    gap: 0.85rem;
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  .price-card.featured {
+    border: 2px solid var(--brand);
+    box-shadow: var(--shadow-md);
+  }
+
+  .price-badge-row {
+    display: flex;
+    min-height: 1.6rem;
+    margin-bottom: -0.25rem;
+  }
+
+  .price-card h3 {
+    font-size: 1.125rem;
+  }
+
+  .price-scope {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+
+  .price {
+    display: grid;
+    gap: 0.15rem;
+    padding-block: 0.5rem 0.25rem;
+  }
+
+  .price-note {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .price-value {
+    color: var(--ink);
+    font-size: clamp(1.9rem, 1.6rem + 1vw, 2.35rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .price-summary {
+    color: var(--text);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+  }
+
+  .price-features {
+    margin: 0.5rem 0 0.75rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-sm);
+  }
+
+  .price-card .btn {
+    margin-top: auto;
+  }
+
+  .compact .price-summary {
+    margin-bottom: 0.75rem;
+  }
+</style>

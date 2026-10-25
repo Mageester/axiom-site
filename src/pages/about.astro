@@ -1,284 +1,197 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
+import CtaBand from '../components/site/CtaBand.astro';
+import Film from '../components/site/Film.astro';
+import FounderCards from '../components/site/FounderCards.astro';
+import Icon from '../components/site/Icon.astro';
+import PageHero from '../components/site/PageHero.astro';
+import { founders } from '../content/company';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { SEO_ROUTES, ABOUT_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
-import { FadeIn } from '../components/ui/FadeIn';
-import { Card } from '../components/ui/card';
-import { Eyebrow } from '../components/ui/Eyebrow';
-import { MotionHeading } from '../components/motion/MotionHeading';
-import { SectionDivider } from '../components/motion/SectionDivider';
-import DrawIcon from '../components/ui/DrawIcon.astro';
+import {
+  FILM_JSON_LD,
+  SEO_ROUTES,
+  SITE_EMAIL,
+  SITE_PHONE_DISPLAY,
+  SITE_TELEPHONE,
+  personSchema,
+  type Crumb,
+} from '../lib/seo';
 
-const whyAxiom = [
-  {
-    number: '01',
-    title: 'The offer has to be obvious.',
-    description: 'A buyer should understand what you do, who you serve, and how to take the next step without decoding the site.',
-  },
-  {
-    number: '02',
-    title: 'Proof sits next to the decision.',
-    description: 'Reviews, credentials, work examples, and real photos belong near the price, service, form, and call button.',
-  },
-  {
-    number: '03',
-    title: 'Direct accountability matters.',
-    description: 'You talk to the people shaping the message and building the site, with one clear support path after launch.',
-  },
-] as const;
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'About', url: '/about/' },
+];
 
-const team = [
+const beliefs = [
   {
-    name: 'Aidan Magee',
-    monogram: 'aidan',
-    roles: ['STRATEGY', 'SCOPE', 'CLIENT SUPPORT'],
-    description:
-      'Your first point of contact. Keeps the project tied to what the business actually needs, from first call through launch.',
-  },
-  {
-    name: 'Riley Hinsperger',
-    monogram: 'riley',
-    roles: ['DESIGN', 'BUILD', 'QA'],
-    description:
-      'Builds the site. Handles design, development, and testing so the final product loads fast, works on every device, and holds up under real traffic.',
-  },
-] as const;
-
-const principles = [
-  {
-    number: '01',
-    title: 'Five-second offer.',
     icon: 'eye',
-    description:
-      'What you do, who you serve, and how to reach you should be readable before the first scroll. No hunting through menus.',
+    title: 'The offer has to be obvious',
+    text: 'A visitor should understand what you do, who you serve and how to take the next step without decoding the site.',
   },
   {
-    number: '02',
-    title: 'Proof beside the decision.',
-    icon: 'shield-check',
-    description:
-      'Reviews, credentials, and real photos should sit near the action, not buried where buyers may never see them.',
+    icon: 'shield',
+    title: 'Proof sits next to the decision',
+    text: 'Reviews, credentials, work examples and real photos belong near the price, the service and the contact button.',
   },
   {
-    number: '03',
-    title: 'Mobile is the site.',
-    icon: 'bolt',
-    description:
-      "A booking should be straightforward on a phone. Tap targets, load speed, and form quality are part of the launch review.",
+    icon: 'users',
+    title: 'Direct accountability matters',
+    text: 'You talk to the people shaping the message and building the site, with one clear support path after launch.',
   },
 ] as const;
 ---
 
-<SiteLayout
-  title={SEO_ROUTES.about.title}
-  description={SEO_ROUTES.about.description}
-  canonicalPath="/about"
-  schema={[ABOUT_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'About', url: `${SITE_URL}/about` }])]}
+<BaseLayout
+  {...SEO_ROUTES.about}
+  pageType="AboutPage"
+  crumbs={crumbs}
+  schema={[...founders.map((founder) => personSchema(founder)), FILM_JSON_LD]}
 >
-  <main id="main-content" tabindex="-1" class="pb-0">
-    <section class="axiom-container pt-20 md:pt-28">
-      <div class="max-w-3xl">
-        <FadeIn motion="eyebrow">
-          <Eyebrow>ABOUT</Eyebrow>
-          <SectionDivider className="mt-6" />
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={180}>
-          <MotionHeading as="h1" text="Two co-founders responsible for the strategy, build, and support." className="mt-4 max-w-4xl" />
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={500}>
-          <p class="section-copy mt-5 md:text-[17px]">
-            We are Aidan Magee and Riley Hinsperger, co-founders of Axiom International and Axiom Web, its web-focused subsidiary. Based in Kitchener-Waterloo and serving Canada, we lead every engagement directly—from strategy and design through development, launch, and support.
-          </p>
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={720} className="mt-7">
-          <a href="/approach/" class="btn-ghost-link">See how we work</a>
-        </FadeIn>
-      </div>
-    </section>
-
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section section-shell">
-      <div class="axiom-container grid gap-6 xl:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)] xl:items-start xl:gap-8">
-        <FadeIn as="div" motion="editorialMaskReveal" className="space-y-5">
-          <Eyebrow>WHY AXIOM</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Launch is not the finish line." className="section-heading mt-4" />
-          <p class="section-copy md:text-[17px]">
-            A polished launch matters, but the site also needs to stay clear, fast, and supported after it goes live. We focus on what helps buyers trust the business and take the next step.
-          </p>
-          <a href="/work/" class="btn-ghost-link">See concept builds</a>
-        </FadeIn>
-
-        <Card className="p-0">
-          <div class="p-6 sm:p-7">
-            {whyAxiom.map((item, index) => (
-              <FadeIn as="div" motion="timelineSequence" delay={Math.min(index * 160, 640)} className={`grid gap-4 py-5 first:pt-0 last:pb-0 sm:grid-cols-[4rem_minmax(0,1fr)] ${index > 0 ? 'border-t border-[color:var(--hairline)]' : ''}`}>
-                <div class="relative sm:pt-1">
-                  <span
-                    aria-hidden="true"
-                    class="about-principle-line absolute left-0 top-0 h-full w-px origin-top bg-[color:var(--accent-solid)]/40"
-                  ></span>
-                  <div class="axiom-metric text-[var(--accent-solid)]">{item.number}</div>
-                </div>
-                <div>
-                  <p class="text-[15px] font-semibold tracking-normal text-[var(--text-primary)]">{item.title}</p>
-                  <p class="section-copy mt-2">{item.description}</p>
-                </div>
-              </FadeIn>
-            ))}
+  <main id="main-content" tabindex="-1">
+    <PageHero eyebrow="About" title="A founder-led web design studio in Kitchener-Waterloo" crumbs={crumbs}>
+      <p class="lead">
+        We are Aidan Magee and Riley Hinsperger, co-founders of Axiom International and Axiom Web, its web-focused subsidiary. Based in Kitchener-Waterloo and serving Canada, we lead every engagement directly—from strategy and design through development, launch, and support.
+      </p>
+      <Fragment slot="actions">
+        <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+        <a href="/approach/" class="btn btn-secondary btn-lg">How we work</a>
+      </Fragment>
+      <aside slot="aside" class="card facts-card" aria-label="Axiom Web at a glance">
+        <dl>
+          <div>
+            <dt>Founded by</dt>
+            <dd>Aidan Magee &amp; Riley Hinsperger</dd>
           </div>
-        </Card>
+          <div>
+            <dt>Based in</dt>
+            <dd>Kitchener-Waterloo, Ontario</dd>
+          </div>
+          <div>
+            <dt>Serving</dt>
+            <dd>Waterloo Region, Guelph, Hamilton and clients across Canada</dd>
+          </div>
+          <div>
+            <dt>Parent company</dt>
+            <dd>Axiom International</dd>
+          </div>
+          <div>
+            <dt>Contact</dt>
+            <dd>
+              <a href={`tel:${SITE_TELEPHONE}`} class="text-link">{SITE_PHONE_DISPLAY}</a><br />
+              <a href={`mailto:${SITE_EMAIL}`} class="text-link">{SITE_EMAIL}</a>
+            </dd>
+          </div>
+        </dl>
+      </aside>
+    </PageHero>
+
+    <section class="section" aria-labelledby="founders-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">The founders</p>
+          <h2 id="founders-title">The two people behind every project</h2>
+          <p>There are no account managers or hand-offs. The people you speak to on the first call are the people who plan, design, build and support your website.</p>
+        </div>
+        <FounderCards withAnchors />
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <div class="max-w-3xl">
-          <FadeIn motion="editorialMaskReveal">
-            <Eyebrow>THE TEAM</Eyebrow>
-          </FadeIn>
-          <FadeIn motion="editorialMaskReveal" delay={120}>
-            <SectionDivider className="mt-6" />
-            <MotionHeading as="h2" text="Two people. Clear roles. You always know who to call." className="section-heading mt-4" />
-          </FadeIn>
-          <FadeIn motion="editorialMaskReveal" delay={260}>
-            <p class="section-copy mt-3 md:text-[17px]">
-              Based in Kitchener-Waterloo, serving local businesses and teams across Canada. Support and handoff
-              responsibilities are agreed before launch.
-            </p>
-          </FadeIn>
+    <section class="section section-soft" aria-labelledby="beliefs-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What we believe</p>
+          <h2 id="beliefs-title">Launch is not the finish line</h2>
+          <p>A polished launch matters, but a website also has to stay clear, fast and supported after it goes live. We focus on what helps customers trust a business and take the next step.</p>
         </div>
-
-        <div class="mt-10 grid gap-5 lg:grid-cols-2">
-          {team.map((member, index) => (
-            <FadeIn motion="depthCardReveal" delay={Math.min(index * 160, 640)}>
-              <Card className="group rounded-2xl border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-8 transition-all duration-300 hover:border-[color:var(--hairline-strong)] hover:bg-[color:var(--surface-overlay-press)]">
-                <div class="flex h-full flex-col">
-                  <div class="flex items-start gap-4">
-                    <div
-                      aria-hidden="true"
-                      class="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--surface-overlay)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(0,0,0,0.14)]"
-                    >
-                      <span aria-hidden="true" class="animate-ring-pulse absolute inset-0 rounded-full border border-[color:var(--accent-solid)]/40 opacity-0 transition-all duration-700 group-hover:scale-[1.2] group-hover:opacity-0 motion-safe:animate-none"></span>
-                      {member.monogram === 'aidan' ? (
-                        <svg
-                          viewBox="0 0 48 48"
-                          class="h-12 w-12 text-[var(--accent-solid)]"
-                          fill="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path d="M24 8L9 38h7l3.1-6h9.8l3.1 6h7L24 8zm-3 17 3-6 3 6h-6z" />
-                        </svg>
-                      ) : (
-                        <svg
-                          viewBox="0 0 48 48"
-                          class="h-12 w-12 text-[var(--accent-solid)]"
-                          fill="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path d="M13 38V10h14.2c6.8 0 10.8 3.3 10.8 8.6 0 4.2-2.4 7-6.3 8.1l7.1 11.3h-7.8l-6-10H20v10h-7zm7-15h6.7c3.1 0 4.7-1.2 4.7-3.8s-1.6-3.9-4.7-3.9H20V23z" />
-                        </svg>
-                      )}
-                    </div>
-
-                    <div class="min-w-0">
-                      <h3 id={member.monogram === 'aidan' ? 'aidan-magee' : 'riley-hinsperger'} class="text-xl font-semibold text-[var(--text-primary)]">{member.name}</h3>
-                      <div class="mt-3 flex flex-wrap gap-1">
-                        {member.roles.map((role) => (
-                          <span class="rounded-full bg-[color:var(--surface-overlay-press)] px-2 py-0.5 text-[12px] uppercase tracking-widest text-[var(--text-secondary)]">
-                            {role}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <p class="mt-6 text-[15px] leading-[1.7] text-[var(--text-secondary)]">
-                    {member.description}
-                  </p>
-                </div>
-              </Card>
-            </FadeIn>
+        <ul role="list" class="grid grid-3 beliefs">
+          {beliefs.map((belief) => (
+            <li class="card belief">
+              <span class="icon-tile"><Icon name={belief.icon} /></span>
+              <h3>{belief.title}</h3>
+              <p>{belief.text}</p>
+            </li>
           ))}
-        </div>
-
+        </ul>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <div class="max-w-3xl">
-          <FadeIn motion="editorialMaskReveal">
-            <Eyebrow>OUR APPROACH</Eyebrow>
-            <SectionDivider className="mt-6" />
-          </FadeIn>
-          <FadeIn motion="editorialMaskReveal" delay={120}>
-            <h2 class="section-heading mt-4">Three rules. Every build.</h2>
-          </FadeIn>
+    <section class="section" aria-labelledby="film-title">
+      <div class="container">
+        <div class="section-head center">
+          <p class="eyebrow">Studio film</p>
+          <h2 id="film-title">Built to the pixel</h2>
+          <p>A short look at the care that goes into every site we make.</p>
         </div>
-
-        <div class="mt-10 grid gap-5 md:grid-cols-3">
-          {principles.map((principle, index) => (
-            <FadeIn motion="depthCardReveal" delay={Math.min(index * 140, 560)}>
-              <Card className="h-full p-0">
-                <div class="flex h-full flex-col p-6 sm:p-7">
-                  <DrawIcon name={principle.icon} className="mb-4" />
-                  <Eyebrow>{principle.number}</Eyebrow>
-                  <h3 class="mt-4 text-[22px] font-semibold tracking-normal text-[var(--text-primary)]">
-                    {principle.title}
-                  </h3>
-                  <p class="section-copy mt-4">{principle.description}</p>
-                </div>
-              </Card>
-            </FadeIn>
-          ))}
+        <div class="film-wrap">
+          <Film />
         </div>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="finalFrameFooter">
-          <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
-            <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
-              <div class="max-w-3xl">
-                <SectionDivider className="mb-6" />
-                <MotionHeading as="h2" text="Let's build something your buyers trust." className="section-heading" />
-                <p class="section-copy mt-4 md:text-[17px]">
-                  Tell us what the business needs. We will recommend the right package within one business day: Local Launch Special, Local Business Website, Expanded Website, or Custom.
-                </p>
-              </div>
-
-              <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Start a project</a>
-            </div>
-          </Card>
-        </FadeIn>
-      </div>
-    </section>
+    <CtaBand title="Let’s build something clear together" />
   </main>
-</SiteLayout>
+</BaseLayout>
 
 <style>
-  .group:hover [aria-hidden='true'].animate-ring-pulse {
-    animation: ring-pulse 0.8s ease-out 1;
+  .facts-card {
+    box-shadow: var(--shadow-md);
   }
 
-  @keyframes ring-pulse {
-    0% {
-      transform: scale(1);
-      opacity: 0.45;
-    }
+  .facts-card dl {
+    display: grid;
+    margin: 0;
+  }
 
-    100% {
-      transform: scale(1.35);
-      opacity: 0;
-    }
+  .facts-card dl > div {
+    display: grid;
+    gap: 0.15rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .facts-card dl > div:first-child {
+    padding-top: 0;
+  }
+
+  .facts-card dl > div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .facts-card dt {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .facts-card dd {
+    margin: 0;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .beliefs {
+    margin: 0;
+  }
+
+  .belief {
+    gap: 0.65rem;
+  }
+
+  .belief .icon-tile {
+    margin-bottom: 0.4rem;
+  }
+
+  .belief p {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .film-wrap {
+    max-width: 68rem;
+    margin-inline: auto;
   }
 </style>

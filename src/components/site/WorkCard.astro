@@ -1,0 +1,135 @@
+---
+import type { Project } from '../../content/work';
+import Icon from './Icon.astro';
+import ResponsivePicture from './ResponsivePicture.astro';
+
+type Props = {
+  project: Project;
+  sizes?: string;
+  detailed?: boolean;
+};
+
+const { project, sizes = '(min-width: 1024px) 380px, (min-width: 720px) 45vw, 92vw', detailed = false } = Astro.props;
+const isClient = project.kind === 'client';
+---
+
+<article class="card card-link work-card">
+  <div class="work-media">
+    <ResponsivePicture source={project.image} alt={project.alt} sizes={sizes} position={project.position} />
+    <span class:list={['badge', 'work-badge', isClient ? 'badge-success badge-dot' : '']}>
+      {isClient ? 'Client site · Live' : 'Concept build'}
+    </span>
+  </div>
+  <div class="work-body">
+    <p class="work-meta">
+      {project.industryLabel}{project.location && <> · {project.location}</>}
+    </p>
+    <h3>
+      <a href={project.href} class="stretched" target="_blank" rel="noopener">
+        {project.title}
+        <span class="sr-only"> ({isClient ? 'live client website' : 'concept build'}, opens in a new tab)</span>
+      </a>
+    </h3>
+    <p class="work-summary">{project.summary}</p>
+    {detailed && (
+      <dl class="work-details">
+        <div>
+          <dt>The brief</dt>
+          <dd>{project.brief}</dd>
+        </div>
+        <div>
+          <dt>What we built</dt>
+          <dd>{project.built}</dd>
+        </div>
+      </dl>
+    )}
+    <span class="arrow-link work-link" aria-hidden="true">
+      {isClient ? 'Visit website' : 'View concept'} <Icon name="arrow-up-right" />
+    </span>
+  </div>
+</article>
+
+<style>
+  .work-card {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .work-media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--bg-tint);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .work-media :global(img) {
+    transition: transform 600ms var(--ease);
+  }
+
+  .work-card:hover .work-media :global(img) {
+    transform: scale(1.03);
+  }
+
+  .work-badge {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .work-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.4rem 1.5rem 1.25rem;
+  }
+
+  .work-meta {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .work-body h3 a {
+    color: var(--ink);
+  }
+
+  .work-summary {
+    color: var(--text);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+  }
+
+  .work-details {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0.4rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-sm);
+  }
+
+  .work-details dt {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .work-details dd {
+    margin: 0.15rem 0 0;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .work-link {
+    margin-top: auto;
+    padding-top: 0.35rem;
+  }
+
+  .work-card:hover .work-link :global(svg) {
+    transform: translate(2px, -2px);
+  }
+</style>

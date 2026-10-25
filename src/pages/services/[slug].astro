@@ -1,175 +1,327 @@
 ---
-import SiteLayout from '../../layouts/SiteLayout.astro';
-import { Card } from '../../components/ui/card';
-import { Eyebrow } from '../../components/ui/Eyebrow';
-import DrawIcon from '../../components/ui/DrawIcon.astro';
-import { FadeIn } from '../../components/ui/FadeIn';
-import { MotionHeading } from '../../components/motion/MotionHeading';
-import { SectionDivider } from '../../components/motion/SectionDivider';
-import { services } from '../../content/services';
+import CtaBand from '../../components/site/CtaBand.astro';
+import FaqList from '../../components/site/FaqList.astro';
+import Icon from '../../components/site/Icon.astro';
+import LinkCard from '../../components/site/LinkCard.astro';
+import PageHero from '../../components/site/PageHero.astro';
+import ProcessSteps from '../../components/site/ProcessSteps.astro';
+import WorkCard from '../../components/site/WorkCard.astro';
+import { processSteps } from '../../content/process';
+import { services, type Service, type ServiceSlug } from '../../content/services';
+import { getProject } from '../../content/work';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import { createStartProjectHref } from '../../lib/cta';
-import { SITE_NAME, SITE_URL, breadcrumbSchema, serviceJsonLd } from '../../lib/seo';
+import { faqJsonLd, serviceSchema, type Crumb } from '../../lib/seo';
 
 export function getStaticPaths() {
-  return services.map((service) => ({
-    params: { slug: service.slug },
-    props: { service },
-  }));
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
 }
 
-const { service } = Astro.props;
-const title = `${service.shortTitle} | ${SITE_NAME}`;
-const description = service.summary;
-const canonicalPath = `/services/${service.slug}`;
+const { service } = Astro.props as { service: Service };
+
+const relatedWork: Record<ServiceSlug, string[]> = {
+  'local-business-websites': ['reids-home-and-yard', 'landscaping', 'salon-nails'],
+  'conversion-sites': ['roofing', 'physio-clinic', 'restaurant-reservation'],
+  rebuilds: ['dental-aurelia', 'law-harrow', 'barber-blackline'],
+};
+const work = relatedWork[service.slug].map((id) => getProject(id)!);
+const others = services.filter((item) => item.slug !== service.slug);
+const path = `/services/${service.slug}/`;
+
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services/' },
+  { name: service.name, url: path },
+];
 ---
 
-<SiteLayout
-  title={title}
-  description={description}
-  canonicalPath={canonicalPath}
+<BaseLayout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  canonicalPath={path}
+  crumbs={crumbs}
   schema={[
-    serviceJsonLd(service),
-    breadcrumbSchema([
-      { name: 'Home', url: SITE_URL },
-      { name: 'Services', url: `${SITE_URL}/services` },
-      { name: service.shortTitle, url: `${SITE_URL}${canonicalPath}` },
-    ]),
+    serviceSchema({ name: service.name, description: service.metaDescription, path, audience: 'Local businesses' }),
+    faqJsonLd(service.faqs),
   ]}
 >
-  <main id="main-content" tabindex="-1" class="pb-0">
-    <section class="axiom-container pt-20 md:pt-28">
-      <div class="max-w-3xl">
-        <FadeIn motion="eyebrow">
-          <Eyebrow>{service.eyebrow}</Eyebrow>
-          <SectionDivider className="mt-6" />
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={180}>
-          <MotionHeading as="h1" text={service.title} className="mt-4" />
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={500}>
-          <p class="section-copy mt-5 md:text-[17px]">
-            {service.description}
-          </p>
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={620}>
-          <p class="section-copy mt-3 md:text-[17px]">
-            The goal is simple: make the business easier to understand, easier to trust, and easier to contact.
-          </p>
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={720}>
-          <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <a href={createStartProjectHref(service.pathIntent)} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Start this path</a>
-            <a href="/services/" class="btn-ghost-link">All services</a>
+  <main id="main-content" tabindex="-1">
+    <PageHero eyebrow="Services" title={service.title} lead={service.intro} crumbs={crumbs}>
+      <Fragment slot="actions">
+        <a href={createStartProjectHref(service.pathIntent)} class="btn btn-lg">Start this project <Icon name="arrow-right" /></a>
+        <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
+      </Fragment>
+      <aside slot="aside" class="card glance" aria-label="At a glance">
+        <p class="glance-title"><span class="icon-tile"><Icon name={service.icon} /></span> At a glance</p>
+        <dl>
+          <div>
+            <dt>Packages from</dt>
+            <dd>CAD $900</dd>
           </div>
-        </FadeIn>
+          <div>
+            <dt>Typical timeline</dt>
+            <dd>2–4 weeks</dd>
+          </div>
+          <div>
+            <dt>Hosting</dt>
+            <dd>First year included</dd>
+          </div>
+          <div>
+            <dt>Support</dt>
+            <dd>30 days after launch</dd>
+          </div>
+        </dl>
+        <p class="glance-note">{service.packageNote}</p>
+      </aside>
+    </PageHero>
+
+    <section class="section" aria-labelledby="fit-title">
+      <div class="container fit-grid">
+        <div>
+          <p class="eyebrow">Is this right for you?</p>
+          <h2 id="fit-title">Signs you need this</h2>
+          <ul role="list" class="check-list fit-list">
+            {service.signs.map((sign) => <li>{sign}</li>)}
+          </ul>
+        </div>
+        <div class="compare">
+          <div class="compare-col compare-before">
+            <p class="compare-label">Before</p>
+            <p>{service.before}</p>
+          </div>
+          <div class="compare-col compare-after">
+            <p class="compare-label">After</p>
+            <p>{service.after}</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="page-section section-shell">
-      <div class="axiom-container grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-        <FadeIn as="div" motion="depthCardReveal" direction="left">
-          <Card className="h-full p-0">
-            <div class="p-6 sm:p-7 md:p-8">
-              <Eyebrow>BEST FOR</Eyebrow>
-              <SectionDivider className="mt-6" />
-              <h2 class="mt-5 text-[clamp(1.6rem,2.2vw,2.4rem)] font-semibold leading-[1.15] tracking-normal text-[var(--text-primary)]">
-                {service.bestFor}
-              </h2>
-            </div>
-          </Card>
-        </FadeIn>
-
-        <FadeIn as="div" motion="depthCardReveal" direction="right">
-          <Card className="h-full p-0">
-            <div class="p-6 sm:p-7 md:p-8">
-              <Eyebrow>WHAT CHANGES</Eyebrow>
-              <div class="mt-6 space-y-5">
-                <div>
-                  <p class="text-[14px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">Before Axiom</p>
-                  <p class="section-copy mt-2 text-[15px]">{service.beforeAxiom}</p>
-                </div>
-                <div class="border-t border-[color:var(--hairline)] pt-5">
-                  <p class="text-[14px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">After Axiom</p>
-                  <p class="section-copy mt-2 text-[15px]">{service.afterAxiom}</p>
-                </div>
-                <div class="border-t border-[color:var(--hairline)] pt-5">
-                  <p class="text-[14px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">Typical path</p>
-                  <p class="section-copy mt-2 text-[15px]">{service.typicalPath}</p>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </FadeIn>
+    <section class="section section-soft" aria-labelledby="includes-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What’s included</p>
+          <h2 id="includes-title">What we deliver</h2>
+          <p>Every project also includes responsive design and development, first-year hosting, domain connection, launch testing, two revision rounds and thirty days of support.</p>
+        </div>
+        <ul role="list" class="grid grid-3 deliverables">
+          {service.includes.map((item) => (
+            <li class="card deliverable">
+              <span class="deliverable-check" aria-hidden="true"><Icon name="check" size={18} strokeWidth={2.4} /></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>OUTCOMES</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="What the buyer should notice." className="section-heading mt-4" />
-        </FadeIn>
+    <section class="section" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-head-row">
+          <div class="section-head">
+            <p class="eyebrow">How it works</p>
+            <h2 id="process-title">How the project runs</h2>
+          </div>
+          <a href="/approach/" class="arrow-link">See the full process <Icon name="arrow-right" /></a>
+        </div>
+        <ProcessSteps steps={processSteps} />
+      </div>
+    </section>
 
-        <div class="mt-10 grid gap-4 md:grid-cols-2">
-          {service.outcomes.map((item, index) => (
-            <FadeIn motion="timelineSequence" delay={Math.min(index * 120, 480)} as="div">
-              <div class="premium-card h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
-                <div class="flex gap-3 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
-                  <DrawIcon name="check" size={15} className="mt-1 shrink-0 text-[var(--accent-solid)]" />
-                  <span>{item}</span>
-                </div>
-              </div>
-            </FadeIn>
+    <section class="section section-soft" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head-row">
+          <div class="section-head">
+            <p class="eyebrow">Examples</p>
+            <h2 id="work-title">Related work</h2>
+          </div>
+          <a href="/work/" class="arrow-link">View all work <Icon name="arrow-right" /></a>
+        </div>
+        <div class="grid grid-3">
+          {work.map((project) => <WorkCard project={project} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Questions about {service.name.toLowerCase()}</h2>
+        </div>
+        <FaqList items={service.faqs} />
+      </div>
+    </section>
+
+    <section class="section-sm section-soft" aria-labelledby="other-title">
+      <div class="container">
+        <h2 id="other-title" class="other-title">Other services</h2>
+        <div class="grid grid-2">
+          {others.map((item) => (
+            <LinkCard href={`/services/${item.slug}/`} icon={item.icon} title={item.name} text={item.cardSummary} />
           ))}
         </div>
       </div>
     </section>
 
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>WHAT IS INCLUDED</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="A focused scope with launch discipline." className="section-heading mt-4" />
-        </FadeIn>
-
-        <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {service.includes.map((item, index) => (
-            <FadeIn motion="timelineSequence" delay={Math.min(index * 120, 480)} as="div">
-              <div class="premium-card h-full rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-5 sm:p-6">
-                <p class="font-semibold text-[var(--text-primary)]">{item}</p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn as="div" motion="finalFrameFooter">
-          <Card className="mx-auto max-w-5xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
-            <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
-              <div class="max-w-3xl">
-                <SectionDivider className="mb-6" />
-                <MotionHeading as="h2" text="This might be the right path." className="section-heading" />
-                <p class="section-copy mt-4 md:text-[17px]">
-                  Tell us what is unclear, what needs to convert, and which path feels closest. We will reply with the right next step within one business day.
-                </p>
-              </div>
-
-              <a href={createStartProjectHref(service.pathIntent)} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Start this path</a>
-            </div>
-          </Card>
-        </FadeIn>
-      </div>
-    </section>
-    <nav aria-label="Related services" class="axiom-container pb-12">
-      <p class="section-copy">Compare <a class="underline" href="/pricing/">pricing and project scope</a>, explore our <a class="underline" href="/web-design/">local service areas</a>, or read about <a class="underline" href="/approach/">the design and launch process</a>.</p>
-      <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-3">
-        {services.filter(item => item.slug !== service.slug).map(item => <li><a class="underline" href={`/services/${item.slug}/`}>{item.shortTitle}</a></li>)}
-      </ul>
-    </nav>
+    <CtaBand
+      title="Let’s talk about your website"
+      text={`Tell us about your business and current site. We reply within one business day with a recommendation, a clear price and the next step.`}
+      primaryHref={createStartProjectHref(service.pathIntent)}
+      primaryLabel="Start this project"
+    />
   </main>
-</SiteLayout>
+</BaseLayout>
+
+<style>
+  .glance {
+    gap: 1.25rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .glance-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--ink);
+    font-weight: 650;
+  }
+
+  .glance dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .glance dl > div {
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius);
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+  }
+
+  .glance dt {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+  }
+
+  .glance dd {
+    margin: 0.15rem 0 0;
+    color: var(--ink);
+    font-weight: 650;
+  }
+
+  .glance-note {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .fit-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .fit-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5rem;
+      align-items: center;
+    }
+  }
+
+  .fit-grid h2 {
+    margin-top: 0.75rem;
+  }
+
+  .fit-list {
+    margin-top: 1.75rem;
+    font-size: 1.0625rem;
+  }
+
+  .compare {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .compare-col {
+    padding: 1.5rem 1.75rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+  }
+
+  .compare-before {
+    background: var(--bg-soft);
+  }
+
+  .compare-after {
+    border-color: var(--brand-line);
+    background: var(--brand-soft);
+  }
+
+  .compare-label {
+    margin-bottom: 0.4rem;
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .compare-after .compare-label {
+    color: var(--brand);
+  }
+
+  .compare-col p:last-child {
+    color: var(--ink);
+    font-size: 1.0625rem;
+    font-weight: 500;
+  }
+
+  .deliverables {
+    margin: 0;
+  }
+
+  .deliverable {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.25rem 1.4rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .deliverable-check {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+    border-radius: 999px;
+    background: var(--brand-soft);
+    color: var(--brand);
+  }
+
+  .faq-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .faq-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  .faq-grid .section-head {
+    margin-bottom: 0;
+  }
+
+  .other-title {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.6rem);
+  }
+</style>

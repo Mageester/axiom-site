@@ -1,0 +1,328 @@
+---
+import { NAV_LINKS } from '../../content/company';
+import { CTA_PATHS } from '../../lib/cta';
+import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+
+type Props = { showCta?: boolean };
+const { showCta = true } = Astro.props;
+
+const current = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => {
+  const target = href.replace(/\/+$/, '') || '/';
+  return current === target || current.startsWith(`${target}/`);
+};
+---
+
+<header class="site-header" data-header>
+  <div class="container header-bar">
+    <a href="/" class="header-logo" aria-label="Axiom Web home">
+      <Logo />
+    </a>
+
+    <nav class="header-nav" aria-label="Primary">
+      <ul role="list">
+        {NAV_LINKS.map((link) => (
+          <li>
+            <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-phone" href={`tel:${SITE_TELEPHONE}`}>
+        <Icon name="phone" size={16} />
+        <span>{SITE_PHONE_DISPLAY}</span>
+      </a>
+      {showCta && (
+        <a href={CTA_PATHS.startProject} class="btn btn-sm header-cta">
+          Start a project
+        </a>
+      )}
+      <button
+        type="button"
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <span class="sr-only" data-menu-label>Open menu</span>
+        <Icon name="menu" size={22} class="icon-open" />
+        <Icon name="close" size={22} class="icon-close" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" data-menu hidden>
+    <nav class="container" aria-label="Mobile">
+      <ul role="list" class="mobile-links">
+        <li><a href="/" aria-current={current === '/' ? 'page' : undefined}>Home</a></li>
+        {NAV_LINKS.map((link) => (
+          <li>
+            <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
+              {link.label}
+              <Icon name="chevron-right" size={18} />
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="mobile-actions">
+        <a href={CTA_PATHS.startProject} class="btn btn-lg btn-block">
+          Start a project <Icon name="arrow-right" />
+        </a>
+        <a href={`tel:${SITE_TELEPHONE}`} class="btn btn-secondary btn-lg btn-block">
+          <Icon name="phone" /> Call {SITE_PHONE_DISPLAY}
+        </a>
+        <a href={`mailto:${SITE_EMAIL}`} class="mobile-email">{SITE_EMAIL}</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(255 255 255 / 0.9);
+    border-bottom: 1px solid transparent;
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+
+  .site-header[data-scrolled],
+  .site-header[data-open] {
+    border-bottom-color: var(--line);
+  }
+
+  .site-header[data-scrolled] {
+    box-shadow: 0 6px 24px -18px rgb(11 19 36 / 0.35);
+  }
+
+  .header-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: var(--header-h);
+  }
+
+  .header-logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-right: auto;
+    border-radius: 6px;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  .header-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin: 0;
+  }
+
+  .header-nav a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 0.8rem;
+    border-radius: 8px;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: color 160ms var(--ease), background-color 160ms var(--ease);
+  }
+
+  .header-nav a:hover {
+    background: var(--bg-soft);
+    color: var(--ink);
+  }
+
+  .header-nav a[aria-current='page'] {
+    color: var(--brand);
+  }
+
+  .header-nav a[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    right: 0.8rem;
+    bottom: 0.35rem;
+    left: 0.8rem;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .header-phone {
+    display: none;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.75rem;
+    padding-inline: 0.25rem;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .header-phone:hover {
+    color: var(--brand);
+  }
+
+  .header-phone :global(svg) {
+    color: var(--brand);
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .menu-toggle :global(svg) {
+    grid-area: 1 / 1;
+  }
+
+  .menu-toggle :global(.icon-close) {
+    display: none;
+  }
+
+  .menu-toggle[aria-expanded='true'] :global(.icon-open) {
+    display: none;
+  }
+
+  .menu-toggle[aria-expanded='true'] :global(.icon-close) {
+    display: block;
+  }
+
+  @media (min-width: 560px) {
+    .header-cta {
+      display: inline-flex;
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .header-nav {
+      display: block;
+    }
+    .menu-toggle,
+    .mobile-menu {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .header-phone {
+      display: inline-flex;
+    }
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: #fff;
+    border-top: 1px solid var(--line);
+    padding-block: 0.75rem 2rem;
+  }
+
+  .mobile-links {
+    margin: 0;
+  }
+
+  .mobile-links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3.5rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .mobile-links a[aria-current='page'] {
+    color: var(--brand);
+  }
+
+  .mobile-links :global(svg) {
+    color: var(--text-muted);
+  }
+
+  .mobile-actions {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .mobile-email {
+    justify-self: center;
+    padding: 0.75rem;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  const label = document.querySelector<HTMLElement>('[data-menu-label]');
+
+  if (header && toggle && menu) {
+    const setOpen = (open: boolean, restoreFocus = true) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      if (label) label.textContent = open ? 'Close menu' : 'Open menu';
+      menu.hidden = !open;
+      header.toggleAttribute('data-open', open);
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+      if (open) menu.querySelector<HTMLElement>('a')?.focus();
+      else if (restoreFocus) toggle.focus();
+    };
+
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !menu.hidden) setOpen(false);
+    });
+
+    window.matchMedia('(min-width: 1080px)').addEventListener('change', (event) => {
+      if (event.matches && !menu.hidden) setOpen(false, false);
+    });
+
+    const onScroll = () => header.toggleAttribute('data-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

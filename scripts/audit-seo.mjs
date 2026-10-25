@@ -133,9 +133,9 @@ for (const [route, { $ }] of documents) {
   for (const video of ofType('VideoObject')) {
     if (!$('video').length || !$('video source').toArray().some(e => origin + $(e).attr('src') === video.contentUrl)) fail(route, 'video schema does not match visible video');
     if (!existsSync(localFile(video.thumbnailUrl)) || !video.uploadDate || !/^PT\d+S$/.test(video.duration)) fail(route, 'incomplete video metadata');
-    if (!$('video[poster], .ax-film-poster img').toArray().some(e => origin + ($(e).attr('poster') || $(e).attr('src')) === video.thumbnailUrl)) fail(route, 'video thumbnail differs from visible poster');
+    if (!$('video[poster], [data-film-poster] img').toArray().some(e => origin + ($(e).attr('poster') || $(e).attr('src')) === video.thumbnailUrl)) fail(route, 'video thumbnail differs from visible poster');
   }
-  if (route === '/' && ($('video[preload="none"]').length !== 1 || !ofType('VideoObject').length)) fail(route, 'homepage film or video schema missing');
+  if (route === '/about/' && ($('video[preload="none"]').length !== 1 || !ofType('VideoObject').length)) fail(route, 'studio film or video schema missing');
 }
 
 const sitemapIndex = join(dist, 'sitemap-index.xml');

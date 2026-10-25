@@ -1,7 +1,6 @@
 ---
-import { FadeIn } from '../ui/FadeIn';
-import { Eyebrow } from '../ui/Eyebrow';
-import { SITE_EMAIL } from '../../lib/seo';
+import { SITE_EMAIL, type Crumb } from '../../lib/seo';
+import PageHero from './PageHero.astro';
 
 type LegalSection = {
   id: string;
@@ -15,197 +14,120 @@ type Props = {
   title: string;
   updated: string;
   sections: LegalSection[];
+  crumbs: Crumb[];
 };
 
-const { title, updated, sections } = Astro.props as Props;
+const { title, updated, sections, crumbs } = Astro.props as Props;
 ---
 
-<main id="main-content" tabindex="-1" class="pb-24 md:pb-32">
-  <section class="page-section pt-24 md:pt-32">
-    <div class="axiom-container max-w-[760px]">
-      <FadeIn motion="legal">
-        <Eyebrow>LEGAL</Eyebrow>
-      </FadeIn>
-      <FadeIn motion="legal" delay={120}>
-        <h1 class="mt-4 max-w-[760px]">{title}</h1>
-      </FadeIn>
-      <FadeIn motion="legal" delay={200}>
-        <p class="section-copy mt-4 max-w-[760px] text-[15px] leading-[1.78] md:text-[16px]">
-          Last updated: {updated}
-        </p>
-      </FadeIn>
-    </div>
-  </section>
+<main id="main-content" tabindex="-1">
+  <PageHero eyebrow="Legal" title={title} lead={`Last updated ${updated}.`} crumbs={crumbs} />
 
-  <section class="page-section-tight">
-    <div class="axiom-container xl:grid xl:grid-cols-[11rem_minmax(0,760px)] xl:justify-center xl:gap-8">
-      <FadeIn as="aside" motion="legal" className="hidden self-start xl:sticky xl:top-32 xl:block">
-        <div class="rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] p-4 shadow-[var(--shadow-card)]">
-          <p class="axiom-eyebrow">On this page</p>
-          <nav class="mt-4 space-y-1.5" aria-label="Table of contents">
-            {sections.map((section, index) => (
-              <a
-                href={`#${section.id}`}
-                data-legal-nav-link={section.id}
-                data-legal-nav-active={index === 0 ? 'true' : 'false'}
-                class="group flex items-start gap-3 rounded-[12px] border border-transparent px-3 py-2 transition-[background-color,border-color,color] duration-200 ease-out hover:border-[color:var(--hairline)] hover:bg-[color:var(--surface-overlay)]"
-              >
-                <span class="font-axiomMono text-[12px] font-medium leading-none tracking-[0.08em] text-[var(--text-secondary)] transition-colors duration-200 ease-out" data-legal-nav-number>
-                  {section.number}
-                </span>
-                <span class="text-[14px] leading-[1.6] text-[var(--text-secondary)] transition-colors duration-200 ease-out group-hover:text-[var(--text-primary)]" data-legal-nav-title>
-                  {section.title}
-                </span>
-              </a>
-            ))}
-          </nav>
-        </div>
-      </FadeIn>
+  <section class="section">
+    <div class="container legal-layout">
+      <nav class="legal-toc" aria-label="On this page">
+        <p class="legal-toc-title">On this page</p>
+        <ol role="list">
+          {sections.map((section) => (
+            <li>
+              <a href={`#${section.id}`}><span>{section.number}</span>{section.title}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
 
-      <div class="flex flex-col gap-6">
-        <article class="w-full max-w-[760px] overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[var(--shadow-card)]">
-          <div class="p-6 sm:p-8 lg:p-12">
-            <div class="space-y-8">
-              {sections.map((section, index) => (
-                <FadeIn
-                  as="section"
-                  id={section.id}
-                  data-legal-section
-                  class={`scroll-mt-28 ${index === 0 ? '' : 'border-t border-[color:var(--hairline)] pt-8'}`}
-                  motion="legal"
-                  delay={Math.min(index * 90, 360)}
-                >
-                  <div class="flex items-start gap-4">
-                    <span class="shrink-0 font-axiomMono text-[20px] font-medium leading-none tracking-normal text-[var(--accent-solid)]">
-                      {section.number}
-                    </span>
-                    <h2 class="section-heading font-body text-[20px] font-semibold text-[var(--text-primary)]">
-                      {section.title}
-                    </h2>
-                  </div>
-
-                  <div class="mt-4 space-y-4">
-                    {section.paragraphs.map((paragraph) => (
-                      <p class="section-copy">
-                        {paragraph}
-                      </p>
-                    ))}
-
-                    {section.bullets && section.bullets.length > 0 && (
-                      <ul class="space-y-3 pt-1">
-                        {section.bullets.map((bullet) => (
-                          <li class="flex gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)]">
-                            <span
-                              aria-hidden="true"
-                              class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-[2px] bg-[var(--accent-solid)]"
-                            ></span>
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </article>
-
-        <FadeIn as="article" motion="legal" className="w-full max-w-[760px] rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] px-5 py-4 shadow-[var(--shadow-card)] sm:px-6" delay={200}>
-          <p class="section-copy">
-            Questions? Email
-            <a
-              href={`mailto:${SITE_EMAIL}`}
-              class="text-[var(--text-primary)] underline decoration-[color:var(--border-strong)] underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]"
-            >
-              {SITE_EMAIL}
-            </a> - we reply with a clear next step.
+      <article class="prose legal-body">
+        {sections.map((section) => (
+          <section id={section.id} class="legal-section">
+            <h2><span class="legal-num">{section.number}.</span> {section.title}</h2>
+            {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            {section.bullets && (
+              <ul>
+                {section.bullets.map((bullet) => <li>{bullet}</li>)}
+              </ul>
+            )}
+          </section>
+        ))}
+        <section class="legal-section">
+          <h2>Questions</h2>
+          <p>
+            Contact us at <a href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a> with any questions about this page.
           </p>
-        </FadeIn>
-      </div>
+        </section>
+      </article>
     </div>
   </section>
 </main>
 
-<script>
-  (() => {
-    const sections = Array.from(document.querySelectorAll('[data-legal-section]'));
-    const links = Array.from(document.querySelectorAll('[data-legal-nav-link]'));
-
-    if (!sections.length || !links.length || !('IntersectionObserver' in window)) {
-      return;
-    }
-
-    const linkById = new Map(
-      links.map((link) => [link.getAttribute('data-legal-nav-link') || '', link])
-    );
-    const sectionIndexById = new Map(
-      sections.map((section, index) => [section.id, index])
-    );
-
-    let activeId = sections[0]?.id || '';
-
-    const setActive = (nextId) => {
-      if (!nextId || nextId === activeId) return;
-      activeId = nextId;
-
-      links.forEach((link) => {
-        const isActive = link.getAttribute('data-legal-nav-link') === nextId;
-        link.setAttribute('data-legal-nav-active', isActive ? 'true' : 'false');
-      });
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting);
-
-        if (!visible.length) return;
-
-        const activationLine = window.innerHeight * 0.3;
-        visible.sort((a, b) => {
-          const aDistance = Math.abs(a.boundingClientRect.top - activationLine);
-          const bDistance = Math.abs(b.boundingClientRect.top - activationLine);
-
-          if (aDistance !== bDistance) return aDistance - bDistance;
-
-          return (sectionIndexById.get(a.target.id) || 0) - (sectionIndexById.get(b.target.id) || 0);
-        });
-
-        setActive(visible[0].target.id);
-      },
-      {
-        rootMargin: '-30% 0px -60% 0px',
-        threshold: 0,
-      }
-    );
-
-    const syncInitialState = () => {
-      const hashTarget = window.location.hash.replace('#', '');
-      if (hashTarget && linkById.has(hashTarget)) {
-        activeId = hashTarget;
-      }
-
-      links.forEach((link) => {
-        const isActive = link.getAttribute('data-legal-nav-link') === activeId;
-        link.setAttribute('data-legal-nav-active', isActive ? 'true' : 'false');
-      });
-    };
-
-    syncInitialState();
-    sections.forEach((section) => observer.observe(section));
-
-    window.addEventListener('hashchange', syncInitialState);
-  })();
-</script>
-
 <style>
-  a[data-legal-nav-active='true'] {
-    border-color: var(--accent-border);
-    background: var(--surface-overlay);
+  .legal-layout {
+    display: grid;
+    gap: 2.5rem;
   }
 
-  a[data-legal-nav-active='true'] [data-legal-nav-number],
-  a[data-legal-nav-active='true'] [data-legal-nav-title] {
-    color: var(--accent-solid);
+  @media (min-width: 1024px) {
+    .legal-layout {
+      grid-template-columns: 15rem minmax(0, 46rem);
+      gap: 4rem;
+      justify-content: center;
+    }
+    .legal-toc {
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+      align-self: start;
+    }
+  }
+
+  .legal-toc {
+    padding: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg-soft);
+  }
+
+  .legal-toc-title {
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .legal-toc ol {
+    display: grid;
+    gap: 0.1rem;
+    margin: 0;
+  }
+
+  .legal-toc a {
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.4rem 0;
+    color: var(--text);
+    font-size: var(--fs-sm);
+    line-height: 1.45;
+  }
+
+  .legal-toc a:hover {
+    color: var(--brand);
+  }
+
+  .legal-toc a span {
+    min-width: 1.1rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .legal-body .legal-section {
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  .legal-body .legal-section:first-child h2 {
+    margin-top: 0;
+  }
+
+  .legal-num {
+    color: var(--brand);
   }
 </style>

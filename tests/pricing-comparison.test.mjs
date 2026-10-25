@@ -60,54 +60,42 @@ function stopProcess(child) {
   child.kill('SIGTERM');
 }
 
-test('desktop pricing keeps tier cards full-height with visible prices and the local launch offer', async () => {
+test('pricing shows every package with its price, a recommended tier and a full comparison table', async () => {
   const devServer = spawnCommand(['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port), '--strictPort']);
 
   try {
-    await waitForServer(`${baseUrl}/pricing`);
+    await waitForServer(`${baseUrl}/pricing/`);
 
     const browser = await chromium.launch({ headless: true });
     try {
       const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } });
-      await page.goto(`${baseUrl}/pricing`, { waitUntil: 'networkidle' });
+      await page.goto(`${baseUrl}/pricing/`, { waitUntil: 'networkidle' });
 
-      const localLaunchOffer = page.locator('[data-local-launch-offer]');
-      assert.equal(await localLaunchOffer.count(), 1, 'local launch offer should render once');
-      assert.match(await page.locator('.pricing-hero').innerText(), /Local Launch Special from CAD \$900/i, 'pricing hero should name the featured launch path');
-      const localLaunchOfferText = await localLaunchOffer.innerText();
-      assert.match(localLaunchOfferText, /INTRODUCTORY OFFER/i);
-      assert.match(localLaunchOfferText, /Local Launch Special from CAD \$900\./);
-      assert.match(localLaunchOfferText, /first-year basic hosting is included/i);
-      assert.match(localLaunchOfferText, /Introductory, restricted scope.*custom functionality/i);
+      const expected = {
+        'local-launch': 'CAD $900',
+        'local-business': 'CAD $1,200',
+        expanded: 'CAD $1,500',
+        custom: 'Quoted',
+      };
+      for (const [key, price] of Object.entries(expected)) {
+        const card = page.locator(`.pricing-cards #${key}`);
+        assert.equal(await card.count(), 1, `${key} card should render once`);
+        assert.match(await card.innerText(), new RegExp(price.replace(/[$]/g, '\\$')), `${key} should show ${price}`);
+        const box = await card.boundingBox();
+        assert.ok(box && box.height > 300, `${key} card should keep a usable height`);
+      }
 
-      const offerPosition = await page.evaluate(() => ({
-        offerTop: document.querySelector('[data-local-launch-offer]')?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY,
-        pricingTiersTop: document.querySelector('#local-business-tier')?.getBoundingClientRect().top ?? Number.NEGATIVE_INFINITY,
-      }));
-      assert.ok(offerPosition.offerTop < offerPosition.pricingTiersTop, 'local launch offer should appear before standard pricing tiers');
+      const featured = page.locator('.pricing-cards .price-card.featured');
+      assert.equal(await featured.count(), 1, 'exactly one package should be recommended');
+      assert.equal(await featured.getAttribute('id'), 'local-business');
+      assert.match(await featured.innerText(), /Recommended/);
 
-      await page.locator('text=COMPARE THE PATHS').scrollIntoViewIfNeeded();
-      await page.waitForTimeout(600);
+      const headers = await page.locator('.compare-table thead th').allInnerTexts();
+      assert.equal(headers.length, 5, 'comparison table should have a label column plus four packages');
+      assert.ok((await page.locator('.compare-table tbody tr').count()) >= 7, 'comparison table should list every row');
 
-      const diagnostics = await page.evaluate(() => {
-        const tiers = Array.from(document.querySelectorAll('#local-business-tier, #expanded-tier, #custom-tier'));
-        const price = document.querySelector('#local-business-tier')?.textContent ?? '';
-
-        return {
-          tierCount: tiers.length,
-          minTierHeight: tiers.length
-            ? Math.min(...tiers.map((tier) => tier.getBoundingClientRect().height))
-            : 0,
-          localBusinessPricePresent: price.includes('From CAD $1,200'),
-        };
-      });
-
-      assert.ok(diagnostics.tierCount === 3, 'all three standard pricing tiers should render on desktop');
-      assert.ok(
-        diagnostics.minTierHeight > 300,
-        `expected tier cards to keep usable height, got min height=${diagnostics.minTierHeight}px`
-      );
-      assert.ok(diagnostics.localBusinessPricePresent, 'Local Business tier should display its price');
+      const cta = page.locator('#expanded a.btn');
+      assert.equal(await cta.getAttribute('href'), '/start-a-project/?path=expanded', 'package CTA should carry the package intent');
     } finally {
       await browser.close();
     }

@@ -1,14 +1,60 @@
 ---
-type Item = { name: string; url: string };
-const { items } = Astro.props as { items: Item[] };
+import type { Crumb } from '../../lib/seo';
+import Icon from './Icon.astro';
+
+const { items } = Astro.props as { items: Crumb[] };
 ---
-<nav aria-label="Breadcrumb" class="axiom-container pt-6 text-[13px] text-[var(--text-secondary)]">
-  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
-    {items.map((item, index) => <li class="inline-flex items-center gap-2">
-      {index > 0 && <span aria-hidden="true">/</span>}
-      {index === items.length - 1
-        ? <span aria-current="page">{item.name}</span>
-        : <a class="inline-flex min-h-8 items-center hover:text-[var(--text-primary)]" href={item.url}>{item.name}</a>}
-    </li>)}
+
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+  <ol role="list">
+    {items.map((item, index) => (
+      <li>
+        {index > 0 && <Icon name="chevron-right" size={14} />}
+        {index === items.length - 1 ? (
+          <span aria-current="page">{item.name}</span>
+        ) : (
+          <a href={item.url}>{item.name}</a>
+        )}
+      </li>
+    ))}
   </ol>
 </nav>
+
+<style>
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.4rem;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+  }
+
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .breadcrumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    color: var(--text-muted);
+    transition: color 160ms var(--ease);
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--brand);
+  }
+
+  .breadcrumbs [aria-current='page'] {
+    color: var(--ink-2);
+  }
+
+  .breadcrumbs :global(svg) {
+    color: var(--line-strong);
+  }
+</style>

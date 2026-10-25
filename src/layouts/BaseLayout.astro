@@ -1,172 +1,144 @@
 ---
-import '../styles/globals.css';
-import Footer from '../components/layout/Footer.astro';
-import NavBar from '../components/layout/NavBar.astro';
+import '../styles/site.css';
+import interLatinWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import Footer from '../components/site/Footer.astro';
+import Header from '../components/site/Header.astro';
 import {
-  breadcrumbSchema,
   ORGANIZATION_SCHEMA,
-  WEBSITE_SCHEMA,
-  DEFAULT_OG_IMAGE,
-  DEFAULT_SEO_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
+  WEBSITE_SCHEMA,
+  breadcrumbSchema,
   formatSeoTitle,
   toCanonicalUrl,
+  webPageSchema,
+  type Crumb,
 } from '../lib/seo';
-import { ClientRouter } from 'astro:transitions';
 
-import interLatinWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
-import frauncesHeadingWoff2 from '@fontsource/fraunces/files/fraunces-latin-500-normal.woff2?url';
-import frauncesItalicWoff2 from '@fontsource/fraunces/files/fraunces-latin-300-italic.woff2?url';
-import frauncesHomeItalicWoff2 from '@fontsource/fraunces/files/fraunces-latin-400-italic.woff2?url';
+type Schema = Record<string, unknown>;
 
 type Props = {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   canonicalPath?: string;
-  image?: string;
-  ogImageAlt?: string;
   noIndex?: boolean;
-  schema?: Record<string, unknown> | Record<string, unknown>[];
-  hidePrimaryCta?: boolean;
-  showNav?: boolean;
-  showFooter?: boolean;
+  /** Schema.org WebPage subtype, e.g. AboutPage, ContactPage, CollectionPage. */
+  pageType?: string;
+  /** Breadcrumb trail ending at this page; drives BreadcrumbList JSON-LD. */
+  crumbs?: Crumb[];
+  schema?: Schema | Schema[];
+  ogImageAlt?: string;
+  /** Responsive LCP image to preload, e.g. the home hero screenshot. */
+  preload?: { type: string; srcset: string; sizes: string; href: string };
+  showCta?: boolean;
 };
 
 const {
   title,
   description,
   canonicalPath,
-  image,
-  ogImageAlt,
   noIndex = false,
+  pageType,
+  crumbs,
   schema,
-  hidePrimaryCta = false,
-  showNav = true,
-  showFooter = true,
+  ogImageAlt,
+  preload,
+  showCta = true,
 } = Astro.props as Props;
 
 const resolvedTitle = formatSeoTitle(title);
-const resolvedDescription = description?.trim() || DEFAULT_SEO_DESCRIPTION;
-const resolvedCanonical = toCanonicalUrl(canonicalPath || Astro.url.pathname);
-const socialSlug = Astro.url.pathname.replace(/^\/+|\/+$/g, '').replaceAll('/', '-') || 'home';
-const resolvedImage = image || (noIndex ? DEFAULT_OG_IMAGE : `/social/${socialSlug}.png`);
-const resolvedImageUrl = resolvedImage.startsWith('http') ? resolvedImage : `${SITE_URL}${resolvedImage}`;
-const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
-if (!noIndex && Astro.url.pathname !== '/' && !pageSchemas.some(s => s['@type'] === 'BreadcrumbList')) {
-  pageSchemas.push(breadcrumbSchema([{ name: 'Home', url: '/' }, { name: resolvedTitle.split(' | ')[0], url: resolvedCanonical }]));
-}
-const schemas = noIndex ? [] : [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, ...pageSchemas.filter(s =>
-  s['@id'] !== ORGANIZATION_SCHEMA['@id'] && s['@id'] !== WEBSITE_SCHEMA['@id']
-)];
+const canonical = toCanonicalUrl(canonicalPath || Astro.url.pathname);
+const socialSlug = new URL(canonical).pathname.replace(/^\/+|\/+$/g, '').replaceAll('/', '-') || 'home';
+const image = `${SITE_URL}/social/${noIndex ? 'home' : socialSlug}.png`;
+const imageAlt = ogImageAlt || `${resolvedTitle.split(' | ')[0]} — ${SITE_NAME}, web design in Kitchener-Waterloo`;
+
+const extraSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const schemas = noIndex
+  ? []
+  : [
+      ORGANIZATION_SCHEMA,
+      WEBSITE_SCHEMA,
+      webPageSchema({
+        type: pageType,
+        url: canonical,
+        name: resolvedTitle,
+        description,
+        image,
+        hasBreadcrumb: Boolean(crumbs?.length),
+      }),
+      ...(crumbs?.length ? [breadcrumbSchema(crumbs)] : []),
+      ...extraSchemas,
+    ];
 const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c');
-const shellPaddingClass = showNav ? 'pt-16 md:pt-20' : 'pt-0';
 ---
 
 <!doctype html>
-<html lang="en-CA" class="scroll-smooth text-[var(--text-primary)]">
+<html lang="en-CA">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050505" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="robots"
+      content={noIndex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'}
+    />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="preload" as="font" type="font/woff2" href={interLatinWoff2} crossorigin />
+    {preload && (
+      <link
+        rel="preload"
+        as="image"
+        type={preload.type}
+        href={preload.href}
+        imagesrcset={preload.srcset}
+        imagesizes={preload.sizes}
+        fetchpriority="high"
+      />
+    )}
+
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="author" content={SITE_NAME} />
     <meta name="application-name" content={SITE_NAME} />
+    <meta name="geo.region" content="CA-ON" />
+    <meta name="geo.placename" content="Kitchener-Waterloo" />
 
-    <link rel="preload" as="font" type="font/woff2" href={interLatinWoff2} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={frauncesHeadingWoff2} crossorigin />
-    {['/', '/web-design/'].some(path => Astro.url.pathname === path) || Astro.url.pathname.startsWith('/web-design/')
-      ? <link rel="preload" as="font" type="font/woff2" href={Astro.url.pathname === '/' ? frauncesHomeItalicWoff2 : frauncesItalicWoff2} crossorigin /> : null}
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-
-    <title>{resolvedTitle}</title>
-    <meta name="description" content={resolvedDescription} />
-    <meta name="robots" content={noIndex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'} />
-    <link rel="canonical" href={resolvedCanonical} />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_CA" />
-    <meta property="og:url" content={resolvedCanonical} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={resolvedTitle} />
-    <meta property="og:description" content={resolvedDescription} />
-    <meta property="og:image" content={resolvedImageUrl} />
-    <meta property="og:image:secure_url" content={resolvedImageUrl} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:secure_url" content={image} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content={resolvedImage.endsWith('.png') ? 'image/png' : resolvedImage.endsWith('.jpg') || resolvedImage.endsWith('.jpeg') ? 'image/jpeg' : 'image/webp'} />
-    <meta property="og:image:alt" content={ogImageAlt || `${SITE_NAME} - custom web design and development in Kitchener-Waterloo`} />
-    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:image:alt" content={imageAlt} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={resolvedTitle} />
-    <meta name="twitter:description" content={resolvedDescription} />
-    <meta name="twitter:image" content={resolvedImageUrl} />
-    <meta name="twitter:image:alt" content={ogImageAlt || `${SITE_NAME} - custom web design and development in Kitchener-Waterloo`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={imageAlt} />
 
-    <link rel="manifest" href="/site.webmanifest" />
-    {Astro.url.pathname === '/' && <link rel="preload" as="image" type="image/avif" href="/film/axiom-film-poster-1600.avif"
-      imagesrcset="/film/axiom-film-poster-800.avif 800w, /film/axiom-film-poster-1600.avif 1600w"
-      imagesizes="(min-width: 1280px) 1200px, 92vw" fetchpriority="high" />}
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <ClientRouter />
-
-    {schemas.map(s => <script type="application/ld+json" set:html={jsonLd(s)} />)}
-    <script is:inline>
-      (() => {
-        const html = document.documentElement;
-        // Confirm JS so the CSS reveal can hide-then-animate; without this class
-        // every [.reveal] stays visible (no-JS / failure safe).
-        html.classList.add('js');
-        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        html.dataset.motionReduced = reduced ? 'true' : 'false';
-        html.dataset.motionActive = reduced ? 'false' : 'true';
-
-        const reveal = () => {
-          const targets = Array.from(document.querySelectorAll('.reveal:not(.is-in)'));
-          if (!targets.length) return;
-          if (reduced || typeof IntersectionObserver === 'undefined') {
-            targets.forEach((el) => el.classList.add('is-in'));
-            return;
-          }
-          const io = new IntersectionObserver(
-            (entries, obs) => {
-              entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('is-in');
-                obs.unobserve(entry.target);
-              });
-            },
-            { threshold: 0.08, rootMargin: '0px 0px -10% 0px' }
-          );
-          targets.forEach((el) => io.observe(el));
-          // Failsafe: anything still hidden after 2.4s is forced visible.
-          window.setTimeout(() => {
-            document.querySelectorAll('.reveal:not(.is-in)').forEach((el) => {
-              const r = el.getBoundingClientRect();
-              if (r.top < (window.innerHeight || 0) * 1.1) el.classList.add('is-in');
-            });
-          }, 2400);
-        };
-
-        document.addEventListener('astro:page-load', reveal);
-      })();
-    </script>
+    {schemas.map((s) => <script type="application/ld+json" set:html={jsonLd(s)} />)}
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-
-    {showNav ? <NavBar hidePrimaryCta={hidePrimaryCta} /> : null}
-
-    <div class={`site-page-shell relative z-10 ${shellPaddingClass}`}>
-      <slot />
-    </div>
-
-    {showFooter ? <Footer /> : null}
+    <Header showCta={showCta} />
+    <slot />
+    <Footer />
   </body>
 </html>

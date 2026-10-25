@@ -1,0 +1,29 @@
+---
+// Local-dev fallback for retired URLs. Production redirects them with 301s in public/_redirects.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { SeoRouteMeta } from '../../lib/seo';
+
+type Props = { meta: SeoRouteMeta; target: string; label: string };
+const { meta, target, label } = Astro.props;
+---
+
+<BaseLayout {...meta} noIndex>
+  <meta slot="head" http-equiv="refresh" content={`0; url=${target}`} />
+  <main id="main-content" tabindex="-1" class="moved">
+    <div class="container-narrow">
+      <h1>This page has moved.</h1>
+      <p class="lead">Continue to <a class="text-link" href={target}>{label}</a>.</p>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .moved {
+    padding-block: clamp(4rem, 3rem + 6vw, 8rem);
+  }
+
+  .moved .container-narrow {
+    display: grid;
+    gap: 1rem;
+  }
+</style>

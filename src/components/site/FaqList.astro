@@ -1,0 +1,87 @@
+---
+import Icon from './Icon.astro';
+
+type Props = {
+  items: ReadonlyArray<{ question: string; answer: string }>;
+  /** Open the first answer so the pattern is obvious on arrival. */
+  openFirst?: boolean;
+};
+
+const { items, openFirst = false } = Astro.props;
+---
+
+<div class="faq">
+  {items.map((item, index) => (
+    <details class="faq-item" open={openFirst && index === 0}>
+      <summary>
+        <h3>{item.question}</h3>
+        <span class="faq-icon" aria-hidden="true"><Icon name="plus" size={18} strokeWidth={2} /></span>
+      </summary>
+      <p>{item.answer}</p>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq {
+    border-top: 1px solid var(--line);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.35rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary h3 {
+    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: color 160ms var(--ease);
+  }
+
+  summary:hover h3 {
+    color: var(--brand);
+  }
+
+  summary:focus-visible {
+    outline-offset: 4px;
+  }
+
+  .faq-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--brand);
+    transition: transform 200ms var(--ease), background-color 200ms var(--ease);
+  }
+
+  details[open] .faq-icon {
+    transform: rotate(45deg);
+    background: var(--brand-soft);
+    border-color: var(--brand-line);
+  }
+
+  .faq-item p {
+    max-width: 62ch;
+    padding-bottom: 1.5rem;
+    padding-right: 3rem;
+    color: var(--text);
+  }
+</style>

@@ -1,0 +1,69 @@
+---
+import { founders } from '../../content/company';
+
+type Props = { withAnchors?: boolean };
+const { withAnchors = false } = Astro.props;
+---
+
+<div class="founders">
+  {founders.map((founder) => (
+    <article class="card founder" id={withAnchors ? founder.id : undefined}>
+      <div class="founder-head">
+        <span class="avatar" aria-hidden="true">{founder.initials}</span>
+        <div>
+          <h3>{founder.name}</h3>
+          <p class="founder-role">{founder.role}</p>
+        </div>
+      </div>
+      <p class="founder-bio">{founder.bio}</p>
+    </article>
+  ))}
+</div>
+
+<style>
+  .founders {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 720px) {
+    .founders {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .founder {
+    gap: 1.1rem;
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  .founder-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .avatar {
+    display: inline-grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    flex: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--brand), #4d74e8);
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .founder-role {
+    margin-top: 0.15rem;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .founder-bio {
+    color: var(--text);
+  }
+</style>

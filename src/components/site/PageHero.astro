@@ -1,0 +1,93 @@
+---
+import type { Crumb } from '../../lib/seo';
+import Breadcrumbs from './Breadcrumbs.astro';
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  crumbs?: Crumb[];
+  center?: boolean;
+};
+
+const { eyebrow, title, lead, crumbs, center = false } = Astro.props;
+const hasAside = Astro.slots.has('aside');
+---
+
+<section class:list={['page-hero', { 'has-aside': hasAside, center }]}>
+  <div class="container">
+    {crumbs && crumbs.length > 1 && <Breadcrumbs items={crumbs} />}
+    <div class="page-hero-grid">
+      <div class="page-hero-copy">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        <h1>{title}</h1>
+        {lead && <p class="lead">{lead}</p>}
+        <slot />
+        {Astro.slots.has('actions') && (
+          <div class="btn-row page-hero-actions">
+            <slot name="actions" />
+          </div>
+        )}
+      </div>
+      {hasAside && (
+        <div class="page-hero-aside">
+          <slot name="aside" />
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding-block: clamp(1.5rem, 1rem + 1.5vw, 2.25rem) clamp(3.5rem, 2.5rem + 4vw, 5.5rem);
+    background:
+      radial-gradient(60rem 26rem at 85% -10%, rgb(36 83 214 / 0.07), transparent 70%),
+      linear-gradient(180deg, var(--bg-soft), var(--bg));
+    border-bottom: 1px solid var(--line);
+  }
+
+  .page-hero-grid {
+    display: grid;
+    gap: 2.5rem;
+    margin-top: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+  }
+
+  .page-hero:not(:has(.breadcrumbs)) .page-hero-grid {
+    margin-top: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  }
+
+  .page-hero-copy {
+    display: grid;
+    gap: 1.15rem;
+    align-content: start;
+    max-width: 46rem;
+  }
+
+  .page-hero-copy .lead {
+    max-width: 40rem;
+  }
+
+  .page-hero-actions {
+    margin-top: 0.75rem;
+  }
+
+  .center .page-hero-copy {
+    margin-inline: auto;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .center .page-hero-actions {
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .has-aside .page-hero-grid {
+      grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.85fr);
+      align-items: center;
+      gap: 4rem;
+    }
+  }
+</style>

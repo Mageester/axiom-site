@@ -11,8 +11,8 @@ const repoRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const port = 4326;
 const baseUrl = `http://127.0.0.1:${port}`;
 
-const routes = ['/', '/services', '/work', '/pricing', '/about', '/contact', '/start-a-project'];
-const expectedDesktopNav = ['Services', 'Work', 'Pricing', 'About'];
+const routes = ['/', '/services/', '/work/', '/pricing/', '/approach/', '/about/', '/industries/', '/contact/', '/start-a-project/'];
+const expectedDesktopNav = ['Services', 'Work', 'Pricing', 'Process', 'About', 'Contact'];
 
 function spawnCommand(args, options = {}) {
   if (process.platform === 'win32') {
@@ -63,7 +63,7 @@ function stopProcess(child) {
   child.kill('SIGTERM');
 }
 
-test('public pages keep site-wide consistency and reduced-motion boot state', async () => {
+test('public pages keep site-wide consistency, accessible navigation and form behaviour', async () => {
   const devServer = spawnCommand(['run', 'dev', '--', '--host', '127.0.0.1', '--port', String(port), '--strictPort']);
 
   try {
@@ -77,12 +77,11 @@ test('public pages keep site-wide consistency and reduced-motion boot state', as
         await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle' });
 
         assert.match(await page.title(), /Axiom Web/, `${route} title should contain Axiom Web`);
+        assert.equal(await page.evaluate(() => document.querySelectorAll('h1').length), 1, `${route} should have exactly one h1`);
         await assert.doesNotReject(
-          page.getByText('Websites built to convert. Not to decorate.').waitFor({ state: 'visible', timeout: 5000 }),
-          `${route} should render the standard footer tagline`
-        );
-        await assert.doesNotReject(
-          page.getByText('Co-founded by Aidan Magee and Riley Hinsperger. Axiom Web is the web-focused subsidiary of Axiom International.').waitFor({ state: 'visible', timeout: 5000 }),
+          page
+            .getByText('Co-founded by Aidan Magee and Riley Hinsperger. Axiom Web is the web-focused subsidiary of Axiom International.')
+            .waitFor({ state: 'visible', timeout: 5000 }),
           `${route} should identify the founders and parent company in the footer`
         );
 
@@ -92,36 +91,48 @@ test('public pages keep site-wide consistency and reduced-motion boot state', as
         assert.deepEqual(navLabels, expectedDesktopNav, `${route} desktop nav order should stay consistent`);
       }
 
-      await page.goto(`${baseUrl}/start-a-project`, { waitUntil: 'networkidle' });
+      await page.goto(`${baseUrl}/start-a-project/?path=expanded`, { waitUntil: 'networkidle' });
       assert.equal(await page.locator('[data-intake-alert]').getAttribute('hidden'), '', 'intake alert should start hidden');
-      assert.equal(await page.getByRole('link', { name: 'contact page' }).getAttribute('href'), '/contact', 'intake contact link should reach the contact page');
+      assert.equal(
+        await page.locator('input[name="pricing_path"]:checked').getAttribute('value'),
+        'expanded',
+        'pricing links should preselect the matching package'
+      );
+      await page.getByRole('button', { name: 'Send project details' }).click();
+      assert.equal(await page.locator('#project-name').getAttribute('aria-invalid'), 'true', 'empty required fields should be flagged');
+      assert.match(await page.locator('[data-intake-alert]').innerText(), /check the highlighted fields/i);
 
-      await page.goto(`${baseUrl}/about`, { waitUntil: 'networkidle' });
+      await page.goto(`${baseUrl}/about/`, { waitUntil: 'networkidle' });
       await assert.doesNotReject(
-        page.getByText('We are Aidan Magee and Riley Hinsperger, co-founders of Axiom International and Axiom Web, its web-focused subsidiary.').waitFor({ state: 'visible', timeout: 5000 }),
+        page
+          .getByText('We are Aidan Magee and Riley Hinsperger, co-founders of Axiom International and Axiom Web, its web-focused subsidiary.')
+          .waitFor({ state: 'visible', timeout: 5000 }),
         'About should identify the founders and parent-company relationship'
       );
 
       await page.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
       await assert.doesNotReject(
-        page.getByRole('heading', { name: 'Two co-founders. Direct accountability.' }).waitFor({ state: 'visible', timeout: 5000 }),
+        page.getByRole('heading', { name: 'Two founders. No account managers.' }).waitFor({ state: 'visible', timeout: 5000 }),
         'Homepage should identify the studio as founder-led'
       );
 
-      const context = await browser.newContext({
-        viewport: { width: 1440, height: 1000 },
-        reducedMotion: 'reduce',
-      });
+      const mobile = await browser.newPage({ viewport: { width: 390, height: 844 } });
+      await mobile.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
+      const toggle = mobile.locator('[data-menu-toggle]');
+      await toggle.click();
+      assert.equal(await toggle.getAttribute('aria-expanded'), 'true', 'menu button should report the open state');
+      await assert.doesNotReject(mobile.locator('#mobile-menu').waitFor({ state: 'visible', timeout: 2000 }));
+      await mobile.keyboard.press('Escape');
+      assert.equal(await toggle.getAttribute('aria-expanded'), 'false', 'Escape should close the menu');
+      assert.equal(await mobile.locator('#mobile-menu').isVisible(), false);
+
+      const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
       const reducedPage = await context.newPage();
       await reducedPage.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
-
-      const motionState = await reducedPage.evaluate(() => ({
-        reduced: document.documentElement.dataset.motionReduced,
-        active: document.documentElement.dataset.motionActive,
-      }));
-
-      assert.equal(motionState.reduced, 'true');
-      assert.notEqual(motionState.active, 'true');
+      const longestTransition = await reducedPage.evaluate(() =>
+        Math.max(...getComputedStyle(document.querySelector('.btn')).transitionDuration.split(',').map((value) => parseFloat(value)))
+      );
+      assert.ok(longestTransition < 0.001, `reduced motion should neutralise transitions, got ${longestTransition}s`);
       await context.close();
     } finally {
       await browser.close();

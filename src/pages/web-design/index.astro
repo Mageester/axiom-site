@@ -1,37 +1,75 @@
 ---
-import SiteLayout from '../../layouts/SiteLayout.astro';
+import CtaBand from '../../components/site/CtaBand.astro';
+import Icon from '../../components/site/Icon.astro';
+import LinkCard from '../../components/site/LinkCard.astro';
+import PageHero from '../../components/site/PageHero.astro';
 import { cities } from '../../content/cities';
-import { breadcrumbSchema } from '../../lib/seo';
-const title = 'Web Design Service Areas in Ontario | Axiom Web';
-const description = 'Axiom Web serves Kitchener, Waterloo, Cambridge, Guelph and Hamilton. Explore local website planning guidance from our Kitchener-Waterloo studio.';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_PATHS } from '../../lib/cta';
+import { SEO_ROUTES, type Crumb } from '../../lib/seo';
+
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Service areas', url: '/web-design/' },
+];
 ---
-<SiteLayout title={title} description={description} canonicalPath="/web-design/"
-  schema={breadcrumbSchema([{name:'Home',url:'/'},{name:'Web design service areas',url:'/web-design/'}])}>
+
+<BaseLayout {...SEO_ROUTES.webDesign} pageType="CollectionPage" crumbs={crumbs}>
   <main id="main-content" tabindex="-1">
-    <section class="axiom-container pt-20 md:pt-28">
-      <span class="eyebrow">SERVICE AREAS</span>
-      <h1 class="mt-4 max-w-4xl">Web design from Kitchener-Waterloo.</h1>
-      <p class="section-copy mt-5 max-w-3xl">Axiom Web is a two-founder studio serving businesses in Waterloo Region, Guelph and Hamilton. We work directly with owners to clarify the offer, organise the content and make the next inquiry easier.</p>
-      <p class="section-copy mt-4 max-w-3xl">The pages below cover practical decisions for each service area. They describe where we offer our services; our base is Kitchener-Waterloo.</p>
-    </section>
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <h2 class="section-heading">Plan for the customers you serve.</h2>
-        <div class="mt-10 divide-y divide-[color:var(--hairline)] border-y border-[color:var(--hairline)]">
-          {cities.map(city => <article class="py-8">
-            <h3 class="text-2xl"><a href={`/web-design/${city.slug}/`} class="hover:underline">Web design in {city.name}</a></h3>
-            <p class="section-copy mt-3 max-w-3xl">{city.focus} {city.intro}</p>
-          </article>)}
+    <PageHero
+      eyebrow="Service areas"
+      title="Web design from Kitchener-Waterloo"
+      lead="Axiom Web is a two-founder studio serving businesses in Waterloo Region, Guelph and Hamilton, and clients across Canada remotely. We work directly with owners to clarify the offer, organise the content and make the next inquiry easier."
+      crumbs={crumbs}
+    >
+      <Fragment slot="actions">
+        <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+      </Fragment>
+    </PageHero>
+
+    <section class="section" aria-labelledby="areas-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Where we work</p>
+          <h2 id="areas-title">Plan for the customers you serve</h2>
+          <p>Each page covers practical website decisions for that area. They describe where we offer our services; our base is Kitchener-Waterloo and we do not present other offices.</p>
+        </div>
+        <div class="grid grid-3">
+          {cities.map((city) => (
+            <LinkCard
+              href={`/web-design/${city.slug}/`}
+              icon="map-pin"
+              title={`Web design in ${city.name}`}
+              meta={city.region}
+              text={city.focus}
+              linkLabel={`Plan a ${city.name} website`}
+            />
+          ))}
         </div>
       </div>
     </section>
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container max-w-4xl">
-        <h2 class="section-heading">Define the scope before the design.</h2>
-        <p class="section-copy mt-4">A focused <a class="underline" href="/services/local-business-websites/">local business website</a> starts at CAD $1,200 for up to three pages. An <a class="underline" href="/pricing/">expanded five-page site</a> starts at CAD $1,500. A one-page Local Launch Special starts at CAD $900. Existing-site migrations and custom functionality are scoped separately.</p>
-        <p class="section-copy mt-4">Review the <a class="underline" href="/work/">concept builds</a> to assess our design approach, then read <a class="underline" href="/approach/">how a project moves from scope to launch</a>. These examples demonstrate design direction and are not client results.</p>
-        <a href="/start-a-project/" class="btn btn-primary mt-7">Discuss your project</a>
+
+    <section class="section section-soft" aria-labelledby="scope-title">
+      <div class="container-narrow prose scope">
+        <h2 id="scope-title">Define the scope before the design</h2>
+        <p>
+          A focused <a href="/services/local-business-websites/">local business website</a> starts at CAD $1,200 for up to three pages.
+          An <a href="/pricing/">expanded five-page site</a> starts at CAD $1,500, and a one-page Local Launch Special starts at CAD $900.
+          Existing-site migrations and custom functionality are scoped separately.
+        </p>
+        <p>
+          Review <a href="/work/">our work</a> to assess our design approach, then read
+          <a href="/approach/">how a project moves from scope to launch</a>. Concept builds demonstrate design direction and are not client results.
+        </p>
       </div>
     </section>
+
+    <CtaBand />
   </main>
-</SiteLayout>
+</BaseLayout>
+
+<style>
+  .scope h2 {
+    margin-top: 0;
+  }
+</style>

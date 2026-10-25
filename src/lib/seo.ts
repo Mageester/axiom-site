@@ -1,18 +1,24 @@
+import { packages } from '../content/pricing';
+
 export const SITE_NAME = 'Axiom Web';
-export const SITE_TAGLINE = 'High-trust websites for serious local businesses that need clearer offers, stronger proof, and easier inquiries.';
 export const SITE_URL = 'https://getaxiom.ca';
+export const SITE_TAGLINE =
+  'Kitchener-Waterloo web design studio building clear, fast websites for local businesses, with published pricing and launch in two to four weeks.';
 export const DEFAULT_OG_IMAGE = '/social/home.png';
 export const DEFAULT_SEO_DESCRIPTION = SITE_TAGLINE;
 export const SITE_EMAIL = 'aidanmageebusiness@gmail.com';
 export const SITE_TELEPHONE = '+12267531833';
+export const SITE_PHONE_DISPLAY = '(226) 753-1833';
+export const SITE_LOCATION = 'Kitchener-Waterloo, Ontario';
 
 export type SeoRouteMeta = {
   title: string;
   description: string;
   canonicalPath: string;
-  image?: string;
   noIndex?: boolean;
 };
+
+export type Crumb = { name: string; url: string };
 
 export const formatSeoTitle = (title?: string) => {
   const trimmed = title?.trim();
@@ -31,9 +37,13 @@ export const toCanonicalUrl = (canonicalPath?: string) => {
   return url.toString();
 };
 
-export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) => ({
+const ORG_ID = `${SITE_URL}/#organization`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
+
+export const breadcrumbSchema = (items: Crumb[]) => ({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
+  '@id': `${toCanonicalUrl(items[items.length - 1]?.url)}#breadcrumb`,
   itemListElement: items.map((item, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -42,364 +52,271 @@ export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) =>
   })),
 });
 
-// A single entity describes the studio; service areas are not branch offices.
-export const SERVICE_AREAS = ['Kitchener', 'Waterloo', 'Cambridge', 'Guelph', 'Hamilton'].map(name => ({
-  '@type': 'City', name, containedInPlace: { '@type': 'AdministrativeArea', name: 'Ontario, Canada' },
+// One entity describes the studio; service areas are not branch offices.
+export const SERVICE_AREAS = ['Kitchener', 'Waterloo', 'Cambridge', 'Guelph', 'Hamilton'].map((name) => ({
+  '@type': 'City',
+  name,
+  containedInPlace: { '@type': 'AdministrativeArea', name: 'Ontario, Canada' },
 }));
 
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'LocalBusiness'],
-  '@id': SITE_URL + '/#organization',
+  '@id': ORG_ID,
   name: SITE_NAME,
-  alternateName: ['Get Axiom', 'getaxiom.ca'],
+  alternateName: ['Axiom', 'Get Axiom', 'getaxiom.ca'],
   url: toCanonicalUrl('/'),
-  logo: SITE_URL + '/axiomtransparentlogo.webp',
-  image: SITE_URL + '/social/home.png',
+  logo: `${SITE_URL}/icon-512.png`,
+  image: `${SITE_URL}/social/home.png`,
   email: SITE_EMAIL,
   telephone: SITE_TELEPHONE,
   description: SITE_TAGLINE,
+  slogan: 'Clear, fast websites for local businesses.',
+  priceRange: 'CAD $900+',
+  currenciesAccepted: 'CAD',
+  knowsAbout: ['Web design', 'Website development', 'Website redesign', 'Local SEO', 'Mobile-first design'],
   founder: [
-    { '@type': 'Person', '@id': SITE_URL + '/about/#aidan-magee', name: 'Aidan Magee' },
-    { '@type': 'Person', '@id': SITE_URL + '/about/#riley-hinsperger', name: 'Riley Hinsperger' },
+    { '@type': 'Person', '@id': `${SITE_URL}/about/#aidan-magee`, name: 'Aidan Magee' },
+    { '@type': 'Person', '@id': `${SITE_URL}/about/#riley-hinsperger`, name: 'Riley Hinsperger' },
   ],
   parentOrganization: {
-    '@type': 'Organization', '@id': 'https://axiominternational.ca/#organization',
-    name: 'Axiom International', url: 'https://axiominternational.ca/',
+    '@type': 'Organization',
+    '@id': 'https://axiominternational.ca/#organization',
+    name: 'Axiom International',
+    url: 'https://axiominternational.ca/',
   },
   address: {
-    '@type': 'PostalAddress', addressLocality: 'Kitchener', addressRegion: 'ON', addressCountry: 'CA',
+    '@type': 'PostalAddress',
+    addressLocality: 'Kitchener',
+    addressRegion: 'ON',
+    addressCountry: 'CA',
   },
   areaServed: SERVICE_AREAS,
   contactPoint: {
-    '@type': 'ContactPoint', contactType: 'sales', telephone: SITE_TELEPHONE,
-    email: SITE_EMAIL, availableLanguage: ['en'],
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    telephone: SITE_TELEPHONE,
+    email: SITE_EMAIL,
+    areaServed: 'CA',
+    availableLanguage: ['en'],
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Website packages',
+    url: toCanonicalUrl('/pricing'),
+    itemListElement: packages.map((pkg) => ({
+      '@type': 'Offer',
+      name: pkg.name,
+      description: pkg.summary,
+      url: `${toCanonicalUrl('/pricing')}#${pkg.key}`,
+      ...(pkg.priceValue
+        ? { priceSpecification: { '@type': 'PriceSpecification', minPrice: pkg.priceValue, priceCurrency: 'CAD' } }
+        : {}),
+    })),
   },
 } as const;
-
-// ProfessionalService is deprecated by Schema.org; use one LocalBusiness identity.
-export const LOCAL_BUSINESS_SCHEMA = ORGANIZATION_SCHEMA;
 
 export const WEBSITE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': `${SITE_URL}/#website`,
+  '@id': WEBSITE_ID,
   name: SITE_NAME,
-  alternateName: ['Get Axiom', 'getaxiom.ca'],
+  alternateName: ['Axiom', 'Get Axiom', 'getaxiom.ca'],
   url: toCanonicalUrl('/'),
   description: SITE_TAGLINE,
-  publisher: {
-    '@id': `${SITE_URL}/#organization`,
-  },
-} as const;
-
-export const HOME_PAGE_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': `${SITE_URL}/#webpage`,
-  url: toCanonicalUrl('/'),
-  name: 'Axiom Web | Web Design in Kitchener-Waterloo',
-  description:
-    'Axiom Web is a Kitchener-Waterloo web design studio building fast, high-trust websites for local businesses across Waterloo Region and Canada.',
-  isPartOf: {
-    '@id': `${SITE_URL}/#website`,
-  },
-  about: {
-    '@id': `${SITE_URL}/#organization`,
-  },
-  publisher: {
-    '@id': `${SITE_URL}/#organization`,
-  },
-  primaryImageOfPage: {
-    '@type': 'ImageObject',
-    url: `${SITE_URL}/social/home.png`,
-    width: 1200,
-    height: 630,
-  },
   inLanguage: 'en-CA',
+  publisher: { '@id': ORG_ID },
 } as const;
 
-export const SERVICES_JSON_LD = {
+export const webPageSchema = (page: {
+  type?: string;
+  url: string;
+  name: string;
+  description: string;
+  image: string;
+  hasBreadcrumb: boolean;
+}) => ({
   '@context': 'https://schema.org',
-  '@type': 'OfferCatalog',
-  name: 'Axiom Web Services',
-  url: toCanonicalUrl('/services'),
-  itemListElement: [
-    {
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: 'Conversion Sites',
-        description: 'Focused sites structured around clearer offers, visible proof, and easier inquiry paths.',
-      },
-    },
-    {
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: 'Website Rebuilds',
-        description: 'Rebuilds for existing sites that need clearer structure, sharper messaging, and careful launch planning.',
-      },
-    },
-    {
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: 'Local Business Websites',
-        description: 'High-trust local business sites built for clarity, proof, speed, and fast contact.',
-      },
-    },
-  ],
-} as const;
-
-export const serviceJsonLd = (service: { shortTitle: string; summary: string; slug: string }) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': toCanonicalUrl('/services/' + service.slug) + '#service',
-  name: service.shortTitle,
-  serviceType: 'Web design and development',
-  description: service.summary,
-  provider: {
-    '@id': `${SITE_URL}/#organization`,
-  },
-  areaServed: SERVICE_AREAS,
-  url: toCanonicalUrl(`/services/${service.slug}`),
+  '@type': page.type || 'WebPage',
+  '@id': `${page.url}#webpage`,
+  url: page.url,
+  name: page.name,
+  description: page.description,
+  isPartOf: { '@id': WEBSITE_ID },
+  about: { '@id': ORG_ID },
+  publisher: { '@id': ORG_ID },
+  inLanguage: 'en-CA',
+  primaryImageOfPage: { '@type': 'ImageObject', url: page.image, width: 1200, height: 630 },
+  ...(page.hasBreadcrumb ? { breadcrumb: { '@id': `${page.url}#breadcrumb` } } : {}),
 });
 
-export const HOME_JSON_LD = ORGANIZATION_SCHEMA;
+export const serviceSchema = (service: {
+  name: string;
+  description: string;
+  path: string;
+  serviceType?: string;
+  audience?: string;
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${toCanonicalUrl(service.path)}#service`,
+  name: service.name,
+  serviceType: service.serviceType || 'Web design and development',
+  description: service.description,
+  url: toCanonicalUrl(service.path),
+  provider: { '@id': ORG_ID },
+  areaServed: SERVICE_AREAS,
+  ...(service.audience ? { audience: { '@type': 'BusinessAudience', name: service.audience } } : {}),
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'CAD',
+    lowPrice: Math.min(...packages.flatMap((pkg) => (pkg.priceValue ? [pkg.priceValue] : []))),
+    offerCount: packages.length,
+    url: toCanonicalUrl('/pricing'),
+  },
+});
 
-export const FILM_JSON_LD = {
-  '@context': 'https://schema.org', '@type': 'VideoObject',
-  '@id': SITE_URL + '/#film', name: 'Built to the pixel.',
-  description: 'A 32-second Axiom Web studio film introducing our approach to considered web design.',
-  thumbnailUrl: SITE_URL + '/film/axiom-film-poster.webp',
-  contentUrl: SITE_URL + '/film/axiom-built-to-the-pixel-1080.mp4',
-  uploadDate: '2026-09-27', duration: 'PT32S', inLanguage: 'en',
-  publisher: { '@id': SITE_URL + '/#organization' },
-};
-
-export const faqJsonLd = (items: Array<{ question: string; answer: string }>) => ({
-  '@context': 'https://schema.org', '@type': 'FAQPage',
-  mainEntity: items.map(item => ({
-    '@type': 'Question', name: item.question,
+export const faqJsonLd = (items: ReadonlyArray<{ question: string; answer: string }>) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
     acceptedAnswer: { '@type': 'Answer', text: item.answer },
   })),
 });
 
-export const PRICING_JSON_LD = {
+export const personSchema = (person: { id: string; name: string; role: string; bio: string }) => ({
   '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'Custom Web Design & Development',
-  provider: ORGANIZATION_SCHEMA,
-  url: toCanonicalUrl('/pricing'),
-  areaServed: 'Waterloo Region, Ontario',
-  offers: [
-    {
-      '@type': 'Offer',
-      name: 'Local Business Website',
-      description:
-        'Recommended local business website package with up to three pages. From CAD $1,200.',
-      priceCurrency: 'CAD',
-      price: '1200',
-    },
-    {
-      '@type': 'Offer',
-      name: 'Expanded Website',
-      description: 'Straightforward website package with up to five pages. From CAD $1,500.',
-      priceCurrency: 'CAD',
-      price: '1500',
-    },
-    {
-      '@type': 'Offer',
-      name: 'Local Launch Special',
-      description: 'Introductory one-page websites with up to six sections for very small local businesses. From CAD $900.',
-      priceCurrency: 'CAD',
-      price: '900',
-    },
-    {
-      '@type': 'Offer',
-      name: 'Custom',
-      description: 'Custom quoted work for e-commerce, databases, custom booking systems, customer accounts, migrations, and complex requirements.',
-      priceCurrency: 'CAD',
-    },
-  ],
-} as const;
+  '@type': 'Person',
+  '@id': `${SITE_URL}/about/#${person.id}`,
+  name: person.name,
+  jobTitle: person.role.replace(/^Co-founder · /, 'Co-founder, '),
+  description: person.bio,
+  worksFor: { '@id': ORG_ID },
+  url: `${toCanonicalUrl('/about')}#${person.id}`,
+});
 
-export const ABOUT_JSON_LD = {
+export const FILM_JSON_LD = {
   '@context': 'https://schema.org',
-  '@type': 'AboutPage',
-  url: toCanonicalUrl('/about'),
-  name: 'About Axiom Web',
-  description:
-    'Aidan Magee and Riley Hinsperger are the co-founders of Axiom International and Axiom Web, its web-focused subsidiary. Together, they build fast, conversion-focused websites for established businesses in Kitchener-Waterloo and across Canada.',
-  mainEntity: ORGANIZATION_SCHEMA,
-} as const;
+  '@type': 'VideoObject',
+  '@id': `${SITE_URL}/about/#film`,
+  name: 'Built to the pixel.',
+  description: 'A 32-second Axiom Web studio film introducing our approach to considered, carefully built websites.',
+  thumbnailUrl: `${SITE_URL}/film/axiom-film-poster.webp`,
+  contentUrl: `${SITE_URL}/film/axiom-built-to-the-pixel-1080.mp4`,
+  uploadDate: '2026-09-27',
+  duration: 'PT32S',
+  inLanguage: 'en',
+  publisher: { '@id': ORG_ID },
+};
 
-export const PROCESS_JSON_LD = {
+export const itemListSchema = (name: string, items: Array<{ name: string; url: string; description: string }>) => ({
   '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'How Axiom Builds a Website',
-  description: 'A clear website process from first review to launch: Review, Scope, Build, and Launch. Standard packages include launch testing and thirty days of post-launch defect support.',
-  step: [
-    {
-      '@type': 'HowToStep',
-      position: 1,
-      name: 'Week 1 - Review',
-      text: 'We review the current site, the offer, and the points where buyers may lose trust. Then we decide what needs to change first.',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 2,
-      name: 'Week 2 - Scope',
-      text: 'We confirm the pages, contact paths, and priorities before design starts. Decisions happen here, not mid-build.',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 3,
-      name: 'Weeks 2-3 - Build',
-      text: 'We design, write, and test the full site. Layout and flow stay simple enough to ship clean.',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 4,
-      name: 'Weeks 3-4 - Launch',
-      text: 'We run launch checks, connect the domain, and hand over a live site. Standard packages include thirty days of post-launch defect support.',
-    },
-  ],
-} as const;
-
-export const APPROACH_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'AboutPage',
-  name: 'Axiom Web Approach',
-  url: toCanonicalUrl('/approach'),
-  description:
-    'A plain-language website approach covering strategy, structure, design, development, launch checks, and ongoing support.',
-  mainEntity: ORGANIZATION_SCHEMA,
-} as const;
-
-export const CONTACT_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'ContactPage',
-  name: 'Contact Axiom Web',
-  url: toCanonicalUrl('/contact'),
-  description: 'Start a web design project, send project details, or reach Axiom Web by email or phone.',
-  mainEntity: ORGANIZATION_SCHEMA,
-} as const;
-
-export const START_PROJECT_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'ContactPage',
-  name: 'Start a Project with Axiom Web',
-  url: toCanonicalUrl('/start-a-project'),
-  description: 'Send project details for a Local Launch Special, Local Business Website, Expanded Website, or Custom project. Axiom replies within one business day.',
-  mainEntity: ORGANIZATION_SCHEMA,
-  potentialAction: {
-    '@type': 'CommunicateAction',
-    name: 'Send project details',
-    target: toCanonicalUrl('/start-a-project'),
-  },
-} as const;
-
-export const WORK_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: 'Axiom Web - Web Design Portfolio',
-  url: toCanonicalUrl('/work'),
-  description:
-      'Published websites and clearly labelled concept builds across home services, legal, medical, trades, and retail.',
-  provider: {
-    '@type': 'Organization',
-    name: SITE_NAME,
-    url: toCanonicalUrl('/'),
-  },
-} as const;
+  '@type': 'ItemList',
+  name,
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: { '@type': 'CreativeWork', name: item.name, url: item.url, description: item.description, creator: { '@id': ORG_ID } },
+  })),
+});
 
 export const SEO_ROUTES = {
   home: {
-    title: 'Axiom Web | Web Design in Kitchener-Waterloo',
+    title: 'Web Design in Kitchener-Waterloo | Axiom Web',
     description:
-      'Axiom Web is a Kitchener-Waterloo web design studio building fast, high-trust websites for local businesses across Waterloo Region and Canada.',
+      'Axiom Web designs clear, fast websites for local businesses in Kitchener, Waterloo and across Ontario. Published pricing from CAD $900 and launch in 2–4 weeks.',
     canonicalPath: '/',
   },
-  work: {
-      title: 'Web Design Portfolio | Published Sites & Concepts | Axiom Web',
+  services: {
+    title: 'Web Design Services for Local Businesses',
     description:
-        'Published websites and clearly labelled concept builds across home services, legal, medical, and retail. Explore Axiom Web’s selected work.',
-    canonicalPath: '/work',
+      'Local business websites, conversion-focused web design and website redesigns from a founder-led Kitchener-Waterloo studio. See what each service includes.',
+    canonicalPath: '/services',
   },
-  concepts: {
-    title: 'Concept Projects | Axiom Web',
-    description: 'Demonstration work exploring structure, hierarchy, proof placement, and conversion for future business websites.',
+  work: {
+    title: 'Web Design Portfolio | Client Sites & Concepts',
+    description:
+      'A live client website and clearly labelled concept builds for home services, clinics, salons, restaurants and law firms. See how we structure business sites.',
     canonicalPath: '/work',
   },
   pricing: {
-    title: 'Web Design Pricing | Local Packages | Axiom Web',
+    title: 'Website Pricing | Packages from CAD $900',
     description:
-      'Clear web design pricing for local businesses. Local Launch Special from CAD $900, Local Business Website from CAD $1,200, Expanded Website from CAD $1,500, or Custom.',
+      'Published website pricing: Local Launch Special from CAD $900, Local Business Website from CAD $1,200, Expanded Website from CAD $1,500, or a custom quote.',
     canonicalPath: '/pricing',
   },
-  services: {
-    title: 'Web Design Services | Conversion Sites & Rebuilds | Axiom Web',
-    description:
-      'Web design services for serious local businesses: conversion sites, local business websites, and rebuilds with clearer offers and stronger proof.',
-    canonicalPath: '/services',
-  },
-  about: {
-    title: 'About Axiom Web | Kitchener-Waterloo Web Design',
-    description:
-      'Meet Axiom Web, the Kitchener-Waterloo web design studio founded by Aidan Magee and Riley Hinsperger and operated as part of Axiom International.',
-    canonicalPath: '/about',
-  },
   approach: {
-    title: 'Our Web Design Process | Axiom Web',
-    description: 'A clear website approach for strategy, structure, design, development, launch checks, and ongoing support after the site goes live.',
+    title: 'Our Web Design Process | Launch in 2–4 Weeks',
+    description:
+      'How a website project runs with Axiom Web: review, written scope, design and build, then launch and support. Clear steps, fixed price and two revision rounds.',
     canonicalPath: '/approach',
   },
-  process: {
-    title: 'Our Web Design Process | 2-4 Weeks to Launch | Axiom Web',
+  about: {
+    title: 'About Axiom Web | Founder-Led Web Design Studio',
     description:
-      'A clear four-stage website process from first review to launch. Standard packages include launch testing and thirty days of post-launch defect support.',
-    canonicalPath: '/process',
+      'Meet Aidan Magee and Riley Hinsperger, co-founders of Axiom Web, a Kitchener-Waterloo web design studio and the web-focused subsidiary of Axiom International.',
+    canonicalPath: '/about',
   },
-  start: {
-    title: 'Start a Project | Axiom Web',
+  contact: {
+    title: 'Contact Axiom Web | Kitchener-Waterloo Web Design',
     description:
-      'Send project details for a Local Launch Special, Local Business Website, Expanded Website, or Custom project. We reply with a clear next step within one business day.',
-    canonicalPath: '/start-a-project',
-    noIndex: true,
+      'Call (226) 753-1833, email or message Axiom Web. Based in Kitchener-Waterloo and working with businesses across Ontario. We reply within one business day.',
+    canonicalPath: '/contact',
   },
   startProject: {
-    title: 'Start a Project | Axiom Web',
+    title: 'Start a Website Project | Get a Quote',
     description:
-      'Send project details for a Local Launch Special, Local Business Website, Expanded Website, or Custom project. We reply with a clear next step within one business day.',
+      'Tell us about your business and website. We reply within one business day with the right package, a clear price and the next step. No obligation.',
     canonicalPath: '/start-a-project',
   },
-  audit: {
-    title: 'Website Audit | Axiom Web',
-    description: 'A focused review of clarity, structure, and conversion opportunities.',
-    canonicalPath: '/admin/audit',
-    noIndex: true,
+  webDesign: {
+    title: 'Web Design Service Areas in Ontario',
+    description:
+      'Axiom Web serves Kitchener, Waterloo, Cambridge, Guelph and Hamilton from our Kitchener-Waterloo studio. Local website planning guidance for each area.',
+    canonicalPath: '/web-design',
+  },
+  industries: {
+    title: 'Website Design by Industry',
+    description:
+      'What a strong website needs for contractors, clinics, salons, restaurants and professional firms, with relevant examples and the package that usually fits.',
+    canonicalPath: '/industries',
   },
   privacy: {
-    title: 'Privacy Policy | Axiom Web',
-    description: 'Read how Axiom Web handles information submitted through getaxiom.ca, project intake forms, contact requests, analytics, and related website services.',
+    title: 'Privacy Policy',
+    description:
+      'Read how Axiom Web handles information submitted through getaxiom.ca, project intake forms, contact requests, analytics, and related website services.',
     canonicalPath: '/privacy',
   },
   terms: {
-    title: 'Terms of Service | Axiom Web',
-    description: 'Read the terms governing use of getaxiom.ca and Axiom Web services, including project timelines, payment terms, intellectual property, and Ontario law.',
+    title: 'Terms of Service',
+    description:
+      'Read the terms governing use of getaxiom.ca and Axiom Web services, including project timelines, payment terms, intellectual property, and Ontario law.',
     canonicalPath: '/terms',
   },
-  contact: {
-    title: 'Contact Axiom Web | Web Design Inquiry',
-    description: 'Start a web design project, send project details, or reach Axiom by email or phone. Based in Kitchener-Waterloo and serving Canada.',
-    canonicalPath: '/contact',
+  start: {
+    title: 'Start a Project',
+    description: 'This address has moved. Continue to the Axiom Web project form to send your project details.',
+    canonicalPath: '/start-a-project',
+    noIndex: true,
+  },
+  process: {
+    title: 'Our Process',
+    description: 'This address has moved. Continue to the Axiom Web process page to see how a website project runs.',
+    canonicalPath: '/approach',
+    noIndex: true,
   },
   notFound: {
-    title: 'Page Not Found | Axiom Web',
-    description: 'Use the main links to continue, or head back home.',
+    title: 'Page Not Found',
+    description: 'The page you were looking for could not be found. Use the links to continue.',
     canonicalPath: '/404',
+    noIndex: true,
+  },
+  audit: {
+    title: 'Website Audit',
+    description: 'A focused review of clarity, structure, and conversion opportunities.',
+    canonicalPath: '/admin/audit',
     noIndex: true,
   },
 } as const satisfies Record<string, SeoRouteMeta>;
