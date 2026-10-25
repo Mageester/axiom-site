@@ -1,666 +1,492 @@
 ---
-import { Button } from '../ui/button';
-import { Eyebrow } from '../ui/Eyebrow';
+import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
+import Icon from './Icon.astro';
 
 type Kind = 'contact' | 'project';
 
 type Props = {
   kind: Kind;
-  endpoint: '/api/contact' | '/api/intake';
   title: string;
-  eyebrow: string;
-  description: string;
-  helper: string;
-  submitLabel: string;
-  successTitle: string;
-  successText: string;
-  noteLinkHref: string;
-  noteLinkLabel: string;
-  noteText: string;
+  description?: string;
 };
 
-const {
-  kind,
-  endpoint,
-  title,
-  eyebrow,
-  description,
-  helper,
-  submitLabel,
-  successTitle,
-  successText,
-  noteLinkHref,
-  noteLinkLabel,
-  noteText,
-} = Astro.props as Props;
+const { kind, title, description } = Astro.props as Props;
+const endpoint = kind === 'project' ? '/api/intake' : '/api/contact';
+const submitLabel = kind === 'project' ? 'Send project details' : 'Send message';
+const id = (name: string) => `${kind}-${name}`;
 
-const fieldLabelClass = 'axiom-eyebrow text-[12px] font-medium uppercase tracking-[0.2em] text-[var(--text-muted)]';
-const fieldHelpClass = 'text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[13px]';
-const fieldErrorClass = 'min-h-[1.1em] text-[14px] leading-[1.65] text-[var(--text-error)] md:text-[13px]';
+// Values match the intake API's pricing_path vocabulary.
 const pricingPathOptions = [
-  { value: 'local_launch', label: 'Local Launch Special' },
-  { value: 'local_business', label: 'Local Business Website' },
-  { value: 'expanded', label: 'Expanded Website' },
-  { value: 'custom', label: 'Custom' },
-  { value: 'not_sure', label: 'Not sure yet' },
+  { value: 'local_launch', label: 'Local Launch Special', intent: 'local-launch' },
+  { value: 'local_business', label: 'Local Business Website', intent: 'local-business' },
+  { value: 'expanded', label: 'Expanded Website', intent: 'expanded' },
+  { value: 'custom', label: 'Custom', intent: 'custom' },
+  { value: 'not_sure', label: 'Not sure yet', intent: '' },
 ] as const;
 ---
 
-<article class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] shadow-[var(--shadow-card-elevated)]">
-  <div class="border-b border-[color:var(--hairline)] p-6 md:p-7 lg:p-8">
-    <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-      <div>
-        <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 class="section-heading mt-2 text-[28px] font-semibold text-[var(--text-primary)]">{title}</h2>
-      </div>
-      <p class="section-copy">{description}</p>
+<div class="card intake" data-intake-root>
+  <div class="intake-head">
+    <h2>{title}</h2>
+    {description && <p>{description}</p>}
+  </div>
+
+  <div class="intake-success" data-intake-success role="status" aria-live="polite" hidden tabindex="-1">
+    <span class="success-icon" aria-hidden="true"><Icon name="check" size={26} strokeWidth={2.4} /></span>
+    <h3>{kind === 'project' ? 'Project details received.' : 'Message received.'}</h3>
+    <p>
+      Thank you. We will review what you sent and reply within one business day
+      {kind === 'project' ? ' with the package we recommend, the price and the next step.' : '.'}
+    </p>
+    <div class="btn-row">
+      <a href="/work/" class="btn btn-secondary">See our work</a>
+      <button type="button" class="btn btn-secondary" data-intake-reset>
+        {kind === 'project' ? 'Send another project' : 'Send another message'}
+      </button>
     </div>
   </div>
 
-  <div class="p-6 md:p-7 lg:p-8">
-    <div data-intake-success class="hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-2)] p-6 shadow-[var(--shadow-card)] md:p-7" role="status" aria-live="polite">
-      <div class="flex items-start gap-4">
-        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent-border)] bg-[color:var(--accent-surface)] text-[var(--accent-solid)] shadow-[var(--shadow-brand-ring-soft)]" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </div>
-        <div class="min-w-0 text-left">
-          <Eyebrow className="text-[var(--accent-solid)]">{successTitle}</Eyebrow>
-          <h3 class="mt-2 text-[clamp(1.45rem,2.2vw,1.9rem)] font-semibold text-[var(--text-primary)]">What happens next</h3>
-          <p class="section-copy mt-2">{successText}</p>
-        </div>
+  <form
+    class="intake-form"
+    data-axiom-intake-form
+    data-intake-kind={kind}
+    data-intake-endpoint={endpoint}
+    data-submit-label={submitLabel}
+    aria-busy="false"
+    novalidate
+  >
+    <div class="intake-alert" data-intake-alert role="alert" hidden></div>
+
+    <div class="intake-grid">
+      <div class="field">
+        <label class="field-label" for={id('name')}>Name</label>
+        <input
+          class="input"
+          id={id('name')}
+          name="name"
+          type="text"
+          required
+          minlength="2"
+          autocomplete="name"
+          data-intake-field
+          data-error-required="Please enter your name."
+          data-error-short="Please use at least 2 characters."
+          aria-describedby={id('name-error')}
+        />
+        <p class="field-error" id={id('name-error')} data-intake-error hidden></p>
       </div>
 
-      <ol class="mt-6 space-y-3">
-        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay-strong)] text-[var(--accent-solid)]" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </div>
-          <div class="min-w-0">
-            <p class="font-medium text-[var(--text-primary)]">We review the business and site</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">We look at what you sent, the current site, and the clearest next move.</p>
-          </div>
-        </li>
-        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay-strong)] text-[var(--text-primary)]" aria-hidden="true">
-            <span class="font-display text-[1rem] leading-none">2</span>
-          </div>
-          <div class="min-w-0">
-            <p class="font-medium text-[var(--text-primary)]">You get a reply within one business day</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">The reply explains the recommended path, what it includes, and what happens next.</p>
-          </div>
-        </li>
-        <li class="flex gap-4 rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] p-4">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay-strong)] text-[var(--text-primary)]" aria-hidden="true">
-            <span class="font-display text-[1rem] leading-none">3</span>
-          </div>
-          <div class="min-w-0">
-            <p class="font-medium text-[var(--text-primary)]">If there is a fit, you get a clear scope</p>
-            <p class="mt-1 text-[16px] leading-[1.7] text-[var(--text-secondary)]">You will know the timeline, pricing path, and decision points before committing.</p>
-          </div>
-        </li>
-      </ol>
-
-      <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <a href="/work/" class="btn btn-secondary w-full sm:w-auto">While you wait, see demonstration builds &rarr;</a>
-        <Button
-          type="button"
-          variant="ghost"
-          className="px-0 sm:w-auto"
-          data-intake-reset
-        >
-          {kind === 'project' ? 'Send another project' : 'Send another note'}
-        </Button>
+      <div class="field">
+        <label class="field-label" for={id('email')}>Email</label>
+        <input
+          class="input"
+          id={id('email')}
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          inputmode="email"
+          spellcheck="false"
+          data-intake-field
+          data-error-required="Please enter your email address."
+          data-error-type="Please enter a valid email address."
+          aria-describedby={id('email-error')}
+        />
+        <p class="field-error" id={id('email-error')} data-intake-error hidden></p>
       </div>
-    </div>
 
-    <form
-      data-axiom-intake-form
-      data-intake-kind={kind}
-      data-intake-endpoint={endpoint}
-      class="flex flex-col gap-5 md:gap-6"
-      aria-busy="false"
-      noValidate
-    >
-      <div
-        data-intake-alert
-        class="hidden rounded-[var(--radius-card)] border border-[color:var(--error-border)] bg-[color:var(--error-surface)] px-4 py-3 text-[16px] text-[var(--error-text)] md:text-[15px]"
-        role="alert"
-        aria-live="assertive"
-        hidden
-      ></div>
-
-      <fieldset class="contents">
-        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6">
-          <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
-            <label for={`${kind}-name`} class={fieldLabelClass}>Name</label>
-            <p id={`${kind}-name-helper`} class={fieldHelpClass}>Who should we address?</p>
-            <input
-              id={`${kind}-name`}
-              name="name"
-              type="text"
-              required
-              minLength="2"
-              autoComplete="name"
-              enterkeyhint="next"
-              autocapitalize="words"
-              spellcheck="false"
-              class="data-intake-field"
-              data-intake-field
-              data-intake-field-key="name"
-              data-intake-helper-id={`${kind}-name-helper`}
-              data-intake-error-id={`${kind}-name-error`}
-              data-intake-required-message="Please enter your name."
-              data-intake-too-short-message="Please use at least 2 characters."
-              aria-describedby={`${kind}-name-helper`}
-            />
-            <p id={`${kind}-name-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
-          </div>
-
-          <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
-            <label for={`${kind}-email`} class={fieldLabelClass}>Email</label>
-            <p id={`${kind}-email-helper`} class={fieldHelpClass}>Where should we reply?</p>
-            <input
-              id={`${kind}-email`}
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              enterkeyhint="next"
-              autocapitalize="none"
-              autocorrect="off"
-              spellcheck="false"
-              class="data-intake-field"
-              data-intake-field
-              data-intake-field-key="email"
-              data-intake-helper-id={`${kind}-email-helper`}
-              data-intake-error-id={`${kind}-email-error`}
-              data-intake-required-message="Please enter an email address."
-              data-intake-type-message="Please enter a valid email address."
-              aria-describedby={`${kind}-email-helper`}
-            />
-            <p id={`${kind}-email-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
-          </div>
-
-          <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
-            <label for={`${kind}-business`} class={fieldLabelClass}>Business name</label>
-            <p id={`${kind}-business-helper`} class={fieldHelpClass}>Optional, if the reply should use a company name.</p>
-            <input
-              id={`${kind}-business`}
-              name="business_name"
-              type="text"
-              autoComplete="organization"
-              enterkeyhint="next"
-              autocapitalize="words"
-              spellcheck="false"
-              class="data-intake-field"
-              data-intake-field
-              data-intake-field-key="business_name"
-              data-intake-helper-id={`${kind}-business-helper`}
-              data-intake-error-id={`${kind}-business-error`}
-              aria-describedby={`${kind}-business-helper`}
-            />
-            <p id={`${kind}-business-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
-          </div>
-
-          {kind === 'project' ? (
-            <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
-              <label for={`${kind}-website`} class={fieldLabelClass}>Website URL</label>
-              <p id={`${kind}-website-helper`} class={fieldHelpClass}>Optional. Add it if there is already a site.</p>
-              <input
-                id={`${kind}-website`}
-                name="current_website"
-                type="url"
-                placeholder="https://example.com"
-                autoComplete="url"
-                enterkeyhint="next"
-                autocapitalize="none"
-                autocorrect="off"
-                spellcheck="false"
-                class="data-intake-field"
-                data-intake-field
-                data-intake-field-key="current_website"
-                data-intake-helper-id={`${kind}-website-helper`}
-                data-intake-error-id={`${kind}-website-error`}
-                data-intake-type-message="Please enter a valid website URL."
-                aria-describedby={`${kind}-website-helper`}
-              />
-              <p id={`${kind}-website-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
-            </div>
-          ) : null}
+      {kind === 'project' && (
+        <div class="field">
+          <label class="field-label" for={id('phone')}>Phone <span class="optional">(optional)</span></label>
+          <input class="input" id={id('phone')} name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" data-intake-field />
         </div>
+      )}
 
-        {kind === 'project' ? (
-          <div class="flex flex-col gap-2" data-intake-field-group>
-            <label class={fieldLabelClass}>Preferred pricing path</label>
-            <p class={fieldHelpClass}>Optional. Helps us answer with the right starting point.</p>
-            <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
-              {pricingPathOptions.map((option, index) => (
-                <label class="group relative cursor-pointer">
-                  <input
-                    type="radio"
-                    name="pricing_path"
-                    value={option.value}
-                    class="peer sr-only"
-                    data-intake-field
-                    data-intake-field-key="pricing_path"
-                    checked={index === pricingPathOptions.length - 1}
-                  />
-                  <span class="flex min-h-11 items-center justify-center rounded-[12px] border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-3 text-center text-[14px] font-medium leading-[1.45] text-[var(--text-secondary)] transition-[border-color,background-color,color,box-shadow] duration-200 ease-out peer-checked:border-[color:var(--accent-border)] peer-checked:bg-[color:var(--accent-surface)] peer-checked:text-[var(--text-primary)] peer-focus-visible:border-[color:var(--accent-border)] peer-focus-visible:ring-2 peer-focus-visible:ring-[color:var(--accent-ring)] peer-focus-visible:ring-offset-0">
-                    {option.label}
-                  </span>
-                </label>
-              ))}
-            </div>
-          </div>
-        ) : null}
+      <div class:list={['field', { 'span-2': kind === 'contact' }]}>
+        <label class="field-label" for={id('business')}>Business name <span class="optional">(optional)</span></label>
+        <input class="input" id={id('business')} name="business_name" type="text" autocomplete="organization" maxlength="120" data-intake-field />
+      </div>
 
-        <div class="flex flex-col gap-1.5 md:gap-2" data-intake-field-group>
-          <label for={`${kind}-details`} class={fieldLabelClass}>
-            {kind === 'project' ? 'Project details' : 'Message'}
-          </label>
-          <p id={`${kind}-details-helper`} class={fieldHelpClass}>{helper}</p>
-          <textarea
-            id={`${kind}-details`}
-            name={kind === 'project' ? 'details' : 'message'}
-            rows="5"
-            required
-            minLength="10"
-            placeholder={kind === 'project' ? "What does the business do, what's broken on the current site, and when do you want to move?" : 'Tell us what you need help with.'}
-            enterkeyhint="send"
-            class="data-intake-field data-intake-textarea"
-            data-intake-field
-            data-intake-field-key={kind === 'project' ? 'details' : 'message'}
-            data-intake-helper-id={`${kind}-details-helper`}
-            data-intake-error-id={`${kind}-details-error`}
-            data-intake-required-message={kind === 'project' ? 'Please share a little more detail.' : 'Please add a message.'}
-            data-intake-too-short-message="Please share a little more detail."
-            aria-describedby={`${kind}-details-helper`}
-          ></textarea>
-          <p id={`${kind}-details-error`} data-intake-field-error class={fieldErrorClass} hidden></p>
-        </div>
-
-        <div class="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
-          <label for={`${kind}-blank-field`}>Leave this field blank</label>
+      {kind === 'project' && (
+        <div class="field span-2">
+          <label class="field-label" for={id('website')}>Current website <span class="optional">(optional)</span></label>
           <input
-            id={`${kind}-blank-field`}
+            class="input"
+            id={id('website')}
+            name="current_website"
             type="text"
-            name="company_fax"
-            tabindex="-1"
-            autocomplete="off"
-            class="data-intake-field"
+            inputmode="url"
+            placeholder="yourbusiness.ca"
+            autocomplete="url"
+            autocapitalize="none"
+            spellcheck="false"
+            maxlength="500"
+            data-intake-field
           />
         </div>
+      )}
+    </div>
+
+    {kind === 'project' && (
+      <fieldset class="field package-field">
+        <legend class="field-label">Which package are you considering?</legend>
+        <div class="package-options">
+          {pricingPathOptions.map((option) => (
+            <label class="package-option">
+              <input
+                type="radio"
+                name="pricing_path"
+                value={option.value}
+                data-intent={option.intent}
+                checked={option.value === 'not_sure'}
+              />
+              <span>{option.label}</span>
+            </label>
+          ))}
+        </div>
+        <p class="field-help">Not sure is fine. We will recommend the right fit. <a class="text-link" href="/pricing/">Compare packages</a></p>
       </fieldset>
+    )}
 
-      <input type="hidden" name="source_path" value={Astro.url.pathname + Astro.url.search} />
+    <div class="field">
+      <label class="field-label" for={id('details')}>{kind === 'project' ? 'About the project' : 'Message'}</label>
+      <textarea
+        class="input"
+        id={id('details')}
+        name={kind === 'project' ? 'details' : 'message'}
+        rows="5"
+        required
+        minlength="10"
+        maxlength="4000"
+        placeholder={kind === 'project'
+          ? 'What does the business do, what should the website help with, and when would you like to launch?'
+          : 'How can we help?'}
+        data-intake-field
+        data-error-required={kind === 'project' ? 'Please tell us a little about the project.' : 'Please add a message.'}
+        data-error-short="Please add a little more detail (at least 10 characters)."
+        aria-describedby={id('details-error')}
+      ></textarea>
+      <p class="field-error" id={id('details-error')} data-intake-error hidden></p>
+    </div>
 
-      <div class="flex flex-col gap-4">
-        <Button type="submit" size="lg" className="w-full rounded-[1rem]">
-          {submitLabel}
-        </Button>
-        <p class="text-[14px] leading-[1.65] text-[var(--text-secondary)] md:text-[15px]">
-          {noteText}{' '}
-          <a href={noteLinkHref} class="underline decoration-[color:var(--border-strong)] underline-offset-2 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-            {noteLinkLabel}
-          </a>
-          .
-        </p>
-      </div>
-    </form>
-  </div>
-</article>
+    <div class="honeypot" aria-hidden="true">
+      <label for={id('company-fax')}>Leave this field blank</label>
+      <input id={id('company-fax')} type="text" name="company_fax" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name="source_path" value={Astro.url.pathname} data-source-path />
+
+    <div class="intake-submit">
+      <button type="submit" class="btn btn-lg btn-block" data-intake-submit>
+        <span data-submit-text>{submitLabel}</span>
+        <Icon name="arrow-right" />
+      </button>
+      <p class="intake-note">
+        Prefer to talk? Call <a class="text-link" href={`tel:${SITE_TELEPHONE}`}>{SITE_PHONE_DISPLAY}</a> or email
+        <a class="text-link" href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a>.
+      </p>
+    </div>
+  </form>
+</div>
 
 <style>
-  [data-axiom-intake-form] {
-    --intake-field-border: var(--hairline);
-    --intake-field-border-hover: var(--hairline-strong);
-    --intake-field-border-focus: var(--accent-border);
-    --intake-field-border-error: var(--text-error);
-    --intake-field-bg: var(--surface-input);
-    --intake-field-bg-hover: var(--surface-input-hover);
-    --intake-field-bg-focus: var(--surface-input-focus);
+  .intake {
+    gap: 1.75rem;
+    padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    box-shadow: var(--shadow-md);
   }
 
-  [data-axiom-intake-form] [data-intake-field] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 100%;
-    min-height: 3.5rem;
+  .intake-head {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .intake-head h2 {
+    font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.75rem);
+  }
+
+  .intake-head p {
+    color: var(--text);
+  }
+
+  .intake-form {
+    display: grid;
+    gap: 1.35rem;
+  }
+
+  .intake-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .intake-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .span-2 {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .package-field {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .package-field legend {
+    margin-bottom: 0.6rem;
+    padding: 0;
+  }
+
+  .package-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .package-option {
+    position: relative;
+  }
+
+  .package-option input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .package-option span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink-2);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    transition: border-color 160ms var(--ease), background-color 160ms var(--ease), color 160ms var(--ease);
+  }
+
+  .package-option:hover span {
+    border-color: var(--brand-line);
+  }
+
+  .package-option input:checked + span {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+    color: var(--brand-ink);
+    font-weight: 600;
+  }
+
+  .package-option input:focus-visible + span {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .package-field .field-help {
+    margin-top: 0.6rem;
+  }
+
+  .intake-alert {
+    padding: 0.85rem 1rem;
+    border: 1px solid #f5c2bd;
     border-radius: 10px;
-    border: 1px solid var(--intake-field-border);
-    background: var(--intake-field-bg);
-    padding: 0.875rem 1rem;
-    color: var(--text-primary);
-    font-size: 16px;
-    line-height: 1.5;
-    box-shadow: var(--shadow-field-base);
-    caret-color: var(--text-primary);
+    background: var(--danger-soft);
+    color: var(--danger);
+    font-size: var(--fs-sm);
+    font-weight: 500;
   }
 
-  [data-axiom-intake-form] [data-intake-field].data-intake-textarea {
-    min-height: 10.5rem;
-    resize: vertical;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+  .honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
-  [data-axiom-intake-form] [data-intake-field]::placeholder {
-    color: var(--text-placeholder);
-    opacity: 1;
+  .intake-submit {
+    display: grid;
+    gap: 0.9rem;
   }
 
-  [data-axiom-intake-form] [data-intake-field]:hover:not(:disabled) {
-    border-color: var(--intake-field-border-hover);
-    background: var(--intake-field-bg-hover);
+  .intake-note {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    text-align: center;
   }
 
-  [data-axiom-intake-form] [data-intake-field]:focus-visible {
-    border-color: var(--intake-field-border-focus);
-    background: var(--intake-field-bg-focus);
-    box-shadow: var(--shadow-field-focus), var(--shadow-field-base);
+  .intake-success {
+    display: grid;
+    gap: 0.9rem;
+    justify-items: start;
+    padding: 1.75rem;
+    border: 1px solid #bfe6d2;
+    border-radius: var(--radius-lg);
+    background: var(--success-soft);
+  }
+
+  .intake-success[hidden] {
+    display: none;
+  }
+
+  .intake-success:focus {
     outline: none;
   }
 
-  [data-axiom-intake-form] [data-intake-field][aria-invalid='true'] {
-    border-color: var(--intake-field-border-error);
+  .success-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: var(--success);
+    color: #fff;
   }
 
-  [data-axiom-intake-form] [data-intake-field][aria-invalid='true']:focus-visible {
-    border-color: var(--intake-field-border-focus);
-    box-shadow: var(--shadow-field-focus-error), var(--shadow-field-base);
+  .intake-success .btn-row {
+    margin-top: 0.5rem;
   }
 
-  [data-axiom-intake-form] [data-intake-field]:disabled {
-    cursor: not-allowed;
-    opacity: 0.72;
-  }
-
-  [data-axiom-intake-form] [data-intake-field-error]:not([hidden]) {
-    display: block;
-  }
-
-  [data-axiom-intake-form] [data-intake-alert]:not([hidden]) {
-    display: block;
-  }
-
-  [data-axiom-intake-form] [data-intake-success] {
-    scroll-margin-top: 6rem;
-  }
-
-  [data-axiom-intake-form] input:-webkit-autofill,
-  [data-axiom-intake-form] input:-webkit-autofill:hover,
-  [data-axiom-intake-form] input:-webkit-autofill:focus,
-  [data-axiom-intake-form] textarea:-webkit-autofill,
-  [data-axiom-intake-form] textarea:-webkit-autofill:hover,
-  [data-axiom-intake-form] textarea:-webkit-autofill:focus {
-    -webkit-text-fill-color: var(--text-primary);
-    caret-color: var(--text-primary);
-    box-shadow: var(--shadow-field-autofill);
-    transition: background-color 9999s ease-in-out 0s, color 9999s ease-in-out 0s;
-  }
-  
-  [data-axiom-intake-form] button[type='submit']:focus-visible {
-    box-shadow: var(--shadow-field-focus), var(--shadow-field-submit-focus);
+  [data-intake-root][data-sent] .intake-form {
+    display: none;
   }
 </style>
 
-<script is:inline>
-  const initIntakeForms = () => {
-    const forms = document.querySelectorAll('[data-axiom-intake-form]');
-    const FIELD_CONFIG = {
-      name: {
-        required: 'Please enter your name.',
-        tooShort: 'Please use at least 2 characters.'
-      },
-      email: {
-        required: 'Please enter an email address.',
-        typeMismatch: 'Please enter a valid email address.'
-      },
-      business_name: {},
-      current_website: {
-        typeMismatch: 'Please enter a valid website URL.'
-      },
-      details: {
-        required: 'Please share a little more detail.',
-        tooShort: 'Please share a little more detail.'
-      },
-      message: {
-        required: 'Please add a message.',
-        tooShort: 'Please share a little more detail.'
-      }
-    };
-
-    const updateFieldState = (form, field, force = false) => {
-      if (!(field instanceof HTMLElement)) return true;
-
-      const key = field.dataset.intakeFieldKey || '';
-      const helperId = field.dataset.intakeHelperId || '';
-      const errorId = field.dataset.intakeErrorId || '';
-      const errorEl = errorId ? form.querySelector(`#${errorId}`) : null;
-      const isTouched = force || field.dataset.touched === 'true' || form.dataset.validationAttempted === 'true';
-      let error = '';
-
-      if (isTouched && 'validity' in field) {
-        const config = FIELD_CONFIG[key] || {};
-        if (field.validity.valueMissing) {
-          error = config.required || 'Please complete this field.';
-        } else if (field.validity.typeMismatch) {
-          error = config.typeMismatch || 'Please enter a valid value.';
-        } else if (field.validity.tooShort) {
-          error = config.tooShort || 'Please use a longer value.';
-        }
-      }
-
-      if (errorEl instanceof HTMLElement) {
-        errorEl.textContent = error;
-        errorEl.hidden = !error;
-      }
-
-      if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
-        if (error) {
-          field.setAttribute('aria-invalid', 'true');
-          field.dataset.fieldState = 'invalid';
-        } else {
-          field.removeAttribute('aria-invalid');
-          delete field.dataset.fieldState;
-        }
-
-        if (helperId) {
-          field.setAttribute('aria-describedby', error ? `${helperId} ${errorId}` : helperId);
-        }
-      }
-
-      return error.length === 0;
-    };
-
-    forms.forEach((form) => {
-      if (!(form instanceof HTMLFormElement)) return;
-      if (form.dataset.intakeInitialized === 'true') return;
-      form.dataset.intakeInitialized = 'true';
-      form.dataset.validationAttempted = 'false';
-
-      const endpoint = form.dataset.intakeEndpoint || '/api/contact';
-      const alertBox = form.querySelector('[data-intake-alert]');
-      const successBox = form.closest('article')?.querySelector('[data-intake-success]');
-      const resetButton = form.closest('article')?.querySelector('[data-intake-reset]');
-      const submitButton = form.querySelector('button[type="submit"]');
-      const fields = Array.from(form.querySelectorAll('[data-intake-field]'));
-
-      const showAlert = (message) => {
-        if (!(alertBox instanceof HTMLElement)) return;
-        alertBox.textContent = message;
-        alertBox.hidden = false;
-        alertBox.classList.remove('hidden');
-      };
-
-      const clearAlert = () => {
-        if (!(alertBox instanceof HTMLElement)) return;
-        alertBox.textContent = '';
-        alertBox.hidden = true;
-        alertBox.classList.add('hidden');
-      };
-
-      const syncAllFieldStates = (force = false) => {
-        let firstInvalidField = null;
-        let hasErrors = false;
-
-        fields.forEach((field) => {
-          const isValid = updateFieldState(form, field, force);
-          if (!isValid && !firstInvalidField) {
-            firstInvalidField = field;
-          }
-          if (!isValid) {
-            hasErrors = true;
-          }
-        });
-
-        return { firstInvalidField, hasErrors };
-      };
-
-      const setBusy = (busy) => {
-        form.setAttribute('aria-busy', String(busy));
-        form.dataset.submitting = String(busy);
-        fields.forEach((field) => {
-          if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
-            field.disabled = busy;
-          }
-        });
-        if (submitButton instanceof HTMLButtonElement) {
-          submitButton.disabled = busy;
-          submitButton.textContent = busy ? 'Sending...' : form.dataset.intakeKind === 'project' ? 'Send project details \u2192' : 'Send note \u2192';
-        }
-      };
-
-      const resetToForm = () => {
-        form.reset();
-        clearAlert();
-        form.dataset.validationAttempted = 'false';
-        delete form.dataset.submitting;
-        fields.forEach((field) => {
-          if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
-            field.disabled = false;
-            field.dataset.touched = 'false';
-            field.removeAttribute('aria-invalid');
-            delete field.dataset.fieldState;
-            const errorId = field.dataset.intakeErrorId || '';
-            const errorEl = errorId ? form.querySelector(`#${errorId}`) : null;
-            if (errorEl instanceof HTMLElement) {
-              errorEl.textContent = '';
-              errorEl.hidden = true;
-            }
-          }
-        });
-        if (successBox instanceof HTMLElement) {
-          successBox.classList.add('hidden');
-        }
-        form.classList.remove('hidden');
-        if (submitButton instanceof HTMLButtonElement) {
-          submitButton.disabled = false;
-        }
-      };
-
-      if (resetButton instanceof HTMLButtonElement) {
-        resetButton.addEventListener('click', resetToForm);
-      }
-
-      fields.forEach((field) => {
-        if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement)) return;
-
-        field.addEventListener('blur', () => {
-          field.dataset.touched = 'true';
-          updateFieldState(form, field);
-        });
-
-        field.addEventListener('input', () => {
-          if (field.dataset.touched === 'true' || form.dataset.validationAttempted === 'true') {
-            updateFieldState(form, field);
-          }
-        });
-      });
-
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        form.dataset.validationAttempted = 'true';
-        clearAlert();
-        const { firstInvalidField, hasErrors } = syncAllFieldStates(true);
-
-        if (hasErrors) {
-          showAlert('Please review the highlighted fields.');
-          if (firstInvalidField instanceof HTMLElement) {
-            window.requestAnimationFrame(() => {
-              firstInvalidField.focus({ preventScroll: false });
-            });
-          }
-          return;
-        }
-
-        const formData = new FormData(form);
-        const payload = Object.fromEntries(formData.entries());
-
-        setBusy(true);
-
-        const body = form.dataset.intakeKind === 'project'
-          ? {
-              name: String(payload.name || '').trim(),
-              email: String(payload.email || '').trim(),
-              business_name: String(payload.business_name || '').trim(),
-              current_website: String(payload.current_website || '').trim(),
-              pricing_path: String(payload.pricing_path || '').trim(),
-              details: String(payload.details || '').trim(),
-              primary_goal: 'new_site',
-              source_path: String(payload.source_path || '').trim(),
-              company_fax: String(payload.company_fax || '').trim(),
-            }
-          : {
-              name: String(payload.name || '').trim(),
-              email: String(payload.email || '').trim(),
-              business_name: String(payload.business_name || '').trim(),
-              message: String(payload.message || '').trim(),
-              source_path: String(payload.source_path || '').trim(),
-              company_fax: String(payload.company_fax || '').trim(),
-            };
-
-        try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-          });
-
-          const result = await response.json().catch(() => null);
-          if (!response.ok || !result?.ok) {
-            const fallbackError = form.dataset.intakeKind === 'project'
-              ? 'The project details did not send. Please try again or email aidanmageebusiness@gmail.com.'
-              : 'The note did not send. Please try again or email aidanmageebusiness@gmail.com.';
-            throw new Error(result?.details || result?.error || fallbackError);
-          }
-
-          if (successBox instanceof HTMLElement) {
-            form.classList.add('hidden');
-            successBox.classList.remove('hidden');
-            successBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-
-          form.reset();
-        } catch (error) {
-          const message = error instanceof Error && error.message ? error.message : 'The form did not send. Please try again or email aidanmageebusiness@gmail.com.';
-          showAlert(message);
-        } finally {
-          setBusy(false);
-        }
-      });
-    });
+<script>
+  const MESSAGES = {
+    fallback: 'Something went wrong and your message was not sent. Please try again, or email aidanmageebusiness@gmail.com.',
+    review: 'Please check the highlighted fields.',
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initIntakeForms, { once: true });
-  } else {
-    initIntakeForms();
-  }
+  const fieldError = (field: HTMLInputElement | HTMLTextAreaElement) => {
+    const v = field.validity;
+    if (v.valueMissing) return field.dataset.errorRequired || 'Please complete this field.';
+    if (v.typeMismatch) return field.dataset.errorType || 'Please enter a valid value.';
+    if (v.tooShort) return field.dataset.errorShort || 'Please add a little more detail.';
+    return '';
+  };
+
+  const showFieldState = (field: HTMLInputElement | HTMLTextAreaElement) => {
+    const message = fieldError(field);
+    const errorId = field.getAttribute('aria-describedby');
+    const errorEl = errorId ? document.getElementById(errorId) : null;
+    if (message) field.setAttribute('aria-invalid', 'true');
+    else field.removeAttribute('aria-invalid');
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+    }
+    return !message;
+  };
+
+  // Preselect the package when a pricing link passed ?path=<intent>.
+  const intent = new URLSearchParams(window.location.search).get('path');
+
+  document.querySelectorAll<HTMLElement>('[data-intake-root]').forEach((root) => {
+    const form = root.querySelector<HTMLFormElement>('[data-axiom-intake-form]');
+    const alertBox = root.querySelector<HTMLElement>('[data-intake-alert]');
+    const success = root.querySelector<HTMLElement>('[data-intake-success]');
+    const submit = root.querySelector<HTMLButtonElement>('[data-intake-submit]');
+    const submitText = root.querySelector<HTMLElement>('[data-submit-text]');
+    if (!form || !alertBox || !success || !submit || !submitText) return;
+
+    const kind = form.dataset.intakeKind;
+    const endpoint = form.dataset.intakeEndpoint || '/api/contact';
+    const label = form.dataset.submitLabel || 'Send';
+    const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-intake-field]'));
+    let attempted = false;
+
+    if (intent) {
+      const match = form.querySelector<HTMLInputElement>(`input[name="pricing_path"][data-intent="${CSS.escape(intent)}"]`);
+      if (match) match.checked = true;
+      const source = form.querySelector<HTMLInputElement>('[data-source-path]');
+      if (source) source.value = `${window.location.pathname}?path=${intent}`.slice(0, 200);
+    }
+
+    const setAlert = (message: string) => {
+      alertBox.textContent = message;
+      alertBox.hidden = !message;
+    };
+
+    const setBusy = (busy: boolean) => {
+      form.setAttribute('aria-busy', String(busy));
+      submit.disabled = busy;
+      submitText.textContent = busy ? 'Sending…' : label;
+    };
+
+    fields.forEach((field) => {
+      field.addEventListener('blur', () => {
+        if (field.value || attempted) showFieldState(field);
+      });
+      field.addEventListener('input', () => {
+        if (field.getAttribute('aria-invalid') === 'true' || attempted) showFieldState(field);
+      });
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      attempted = true;
+      setAlert('');
+
+      const invalid = fields.filter((field) => !showFieldState(field));
+      if (invalid.length) {
+        setAlert(MESSAGES.review);
+        invalid[0].focus();
+        return;
+      }
+
+      const data = Object.fromEntries(
+        Array.from(new FormData(form).entries()).map(([key, value]) => [key, String(value).trim()])
+      );
+      const body =
+        kind === 'project'
+          ? { ...data, primary_goal: 'new_site' }
+          : {
+              name: data.name,
+              email: data.email,
+              business_name: data.business_name,
+              message: data.message,
+              source_path: data.source_path,
+              company_fax: data.company_fax,
+            };
+
+      setBusy(true);
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const result = await response.json().catch(() => null);
+        if (!response.ok || !result?.ok) throw new Error(result?.details || result?.error || MESSAGES.fallback);
+
+        form.reset();
+        attempted = false;
+        root.setAttribute('data-sent', '');
+        success.hidden = false;
+        success.focus();
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (error) {
+        setAlert(error instanceof Error && error.message ? error.message : MESSAGES.fallback);
+      } finally {
+        setBusy(false);
+      }
+    });
+
+    root.querySelector('[data-intake-reset]')?.addEventListener('click', () => {
+      root.removeAttribute('data-sent');
+      success.hidden = true;
+      fields.forEach((field) => {
+        field.removeAttribute('aria-invalid');
+        const errorId = field.getAttribute('aria-describedby');
+        const errorEl = errorId ? document.getElementById(errorId) : null;
+        if (errorEl) errorEl.hidden = true;
+      });
+      fields[0]?.focus();
+    });
+  });
 </script>

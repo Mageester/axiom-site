@@ -1,0 +1,68 @@
+---
+type Props = { url: string; class?: string };
+const { url, class: className } = Astro.props;
+---
+
+<figure class:list={['browser', className]}>
+  <div class="browser-bar" aria-hidden="true">
+    <span class="browser-dots"><i></i><i></i><i></i></span>
+    <span class="browser-url">{url}</span>
+  </div>
+  <div class="browser-view"><slot /></div>
+  {Astro.slots.has('caption') && <figcaption class="sr-only"><slot name="caption" /></figcaption>}
+</figure>
+
+<style>
+  .browser {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    height: 2.4rem;
+    padding-inline: 0.9rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-soft);
+  }
+
+  .browser-dots {
+    display: inline-flex;
+    gap: 0.35rem;
+  }
+
+  .browser-dots i {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 999px;
+    background: var(--line-strong);
+  }
+
+  .browser-url {
+    flex: 1;
+    max-width: 22rem;
+    margin-inline: auto;
+    overflow: hidden;
+    padding: 0.2rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .browser-view {
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: var(--bg-tint);
+  }
+</style>

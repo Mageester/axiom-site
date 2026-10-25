@@ -1,0 +1,293 @@
+---
+import CtaBand from '../../components/site/CtaBand.astro';
+import Icon from '../../components/site/Icon.astro';
+import IndustryGrid from '../../components/site/IndustryGrid.astro';
+import PageHero from '../../components/site/PageHero.astro';
+import { standardIncludes } from '../../content/pricing';
+import { services } from '../../content/services';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_PATHS, createStartProjectHref } from '../../lib/cta';
+import { SEO_ROUTES, SITE_URL, toCanonicalUrl, type Crumb } from '../../lib/seo';
+
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Services', url: '/services/' },
+];
+
+const chooser = [
+  {
+    situation: 'You don’t have a proper website yet, or it was a quick do-it-yourself build.',
+    slug: 'local-business-websites',
+  },
+  {
+    situation: 'People find your site, but too few of them call, book or ask for a quote.',
+    slug: 'conversion-sites',
+  },
+  {
+    situation: 'Your site is dated, slow or confusing, and no longer matches your business.',
+    slug: 'rebuilds',
+  },
+] as const;
+
+const servicesList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Axiom Web services',
+  itemListElement: services.map((service, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      '@id': `${toCanonicalUrl(`/services/${service.slug}`)}#service`,
+      name: service.name,
+      description: service.cardSummary,
+      url: toCanonicalUrl(`/services/${service.slug}`),
+      provider: { '@id': `${SITE_URL}/#organization` },
+    },
+  })),
+};
+---
+
+<BaseLayout {...SEO_ROUTES.services} pageType="CollectionPage" crumbs={crumbs} schema={servicesList}>
+  <main id="main-content" tabindex="-1">
+    <PageHero
+      eyebrow="Services"
+      title="Web design services for local businesses"
+      lead="We design and build websites that make your business easy to understand, easy to trust and easy to contact. Choose the service that matches where your website is today."
+      crumbs={crumbs}
+    >
+      <Fragment slot="actions">
+        <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+        <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
+      </Fragment>
+    </PageHero>
+
+    <section class="section" aria-labelledby="services-list-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What we do</p>
+          <h2 id="services-list-title">Three services, one standard</h2>
+          <p>Every service uses the same design, build and launch standard. The difference is your starting point and what the site needs to fix.</p>
+        </div>
+
+        <div class="service-rows">
+          {services.map((service) => (
+            <article class="card service-row">
+              <div class="service-main">
+                <span class="icon-tile"><Icon name={service.icon} /></span>
+                <h3><a href={`/services/${service.slug}/`}>{service.name}</a></h3>
+                <p>{service.cardSummary}</p>
+                <p class="service-package"><Icon name="tag" size={16} /> {service.packageNote}</p>
+                <div class="btn-row">
+                  <a href={`/services/${service.slug}/`} class="btn btn-secondary">
+                    Learn more <span class="sr-only">about {service.name}</span> <Icon name="arrow-right" />
+                  </a>
+                  <a href={createStartProjectHref(service.pathIntent)} class="arrow-link">Start this project <Icon name="arrow-right" /></a>
+                </div>
+              </div>
+              <div class="service-includes">
+                <h4>What’s included</h4>
+                <ul role="list" class="check-list">
+                  {service.includes.map((item) => <li>{item}</li>)}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="chooser-title">
+      <div class="container">
+        <div class="section-head center">
+          <p class="eyebrow">Not sure where to start?</p>
+          <h2 id="chooser-title">Find the right service in one step</h2>
+          <p>Pick the situation that sounds most like yours. If none quite fit, tell us about it and we will recommend the right path.</p>
+        </div>
+        <div class="grid grid-3">
+          {chooser.map((item) => {
+            const service = services.find((s) => s.slug === item.slug)!;
+            return (
+              <article class="card card-link chooser">
+                <p class="chooser-situation">“{item.situation}”</p>
+                <p class="chooser-answer">
+                  <span>We recommend</span>
+                  <a href={`/services/${service.slug}/`} class="stretched">{service.name}</a>
+                </p>
+                <Icon name="arrow-right" class="chooser-arrow" />
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="included-title">
+      <div class="container included-grid">
+        <div class="section-head">
+          <p class="eyebrow">Every website</p>
+          <h2 id="included-title">Included as standard</h2>
+          <p>Whichever service you choose, every standard package includes the essentials. No add-on surprises for the basics.</p>
+          <a href="/pricing/" class="arrow-link">See packages and prices <Icon name="arrow-right" /></a>
+        </div>
+        <ul role="list" class="check-list cols-2 included-list">
+          {standardIncludes.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="industries-title">
+      <div class="container">
+        <div class="section-head-row">
+          <div class="section-head">
+            <p class="eyebrow">Industries</p>
+            <h2 id="industries-title">Planned around your kind of business</h2>
+          </div>
+          <a href="/industries/" class="arrow-link">All industries <Icon name="arrow-right" /></a>
+        </div>
+        <IndustryGrid />
+      </div>
+    </section>
+
+    <CtaBand />
+  </main>
+</BaseLayout>
+
+<style>
+  .service-rows {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .service-row {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 900px) {
+    .service-row {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 3rem;
+      padding: 2.25rem 2.5rem;
+    }
+  }
+
+  .service-main {
+    display: grid;
+    gap: 0.85rem;
+    align-content: start;
+  }
+
+  .service-main .icon-tile {
+    margin-bottom: 0.25rem;
+  }
+
+  .service-main h3 {
+    font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.6rem);
+  }
+
+  .service-main h3 a:hover {
+    color: var(--brand);
+  }
+
+  .service-package {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .service-package :global(svg) {
+    flex: none;
+    margin-top: 0.2rem;
+    color: var(--brand);
+  }
+
+  .service-main .btn-row {
+    margin-top: 0.5rem;
+  }
+
+  .service-includes {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+  }
+
+  .service-includes h4 {
+    margin-bottom: 1rem;
+  }
+
+  .service-includes .check-list {
+    font-size: var(--fs-sm);
+  }
+
+  .chooser {
+    gap: 1.25rem;
+    padding-right: 3.5rem;
+  }
+
+  .chooser-situation {
+    color: var(--ink);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .chooser-answer {
+    display: grid;
+    gap: 0.15rem;
+    margin-top: auto;
+    font-size: var(--fs-sm);
+  }
+
+  .chooser-answer span {
+    color: var(--text-muted);
+  }
+
+  .chooser-answer a {
+    color: var(--brand);
+    font-weight: 650;
+  }
+
+  .chooser :global(.chooser-arrow) {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.6rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--brand);
+    transition: transform 160ms var(--ease);
+  }
+
+  .chooser:hover :global(.chooser-arrow) {
+    transform: translateX(3px);
+  }
+
+  .included-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .included-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr);
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  .included-grid .section-head {
+    margin-bottom: 0;
+    justify-items: start;
+  }
+
+  .included-list {
+    padding: 2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-xs);
+  }
+</style>

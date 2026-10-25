@@ -1,0 +1,39 @@
+---
+import CtaBand from '../../components/site/CtaBand.astro';
+import Icon from '../../components/site/Icon.astro';
+import IndustryGrid from '../../components/site/IndustryGrid.astro';
+import PageHero from '../../components/site/PageHero.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_PATHS } from '../../lib/cta';
+import { SEO_ROUTES, type Crumb } from '../../lib/seo';
+
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Industries', url: '/industries/' },
+];
+---
+
+<BaseLayout {...SEO_ROUTES.industries} pageType="CollectionPage" crumbs={crumbs}>
+  <main id="main-content" tabindex="-1">
+    <PageHero
+      eyebrow="Industries"
+      title="Websites planned around your kind of business"
+      lead="A contractor, a clinic and a restaurant win customers in very different ways. Each guide below covers what buyers in that sector look for, the pages that usually matter and the package that typically fits."
+      crumbs={crumbs}
+    >
+      <Fragment slot="actions">
+        <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+        <a href="/work/" class="btn btn-secondary btn-lg">See our work</a>
+      </Fragment>
+    </PageHero>
+
+    <section class="section" aria-labelledby="list-title">
+      <div class="container">
+        <h2 id="list-title" class="sr-only">Industries we work with</h2>
+        <IndustryGrid detailed />
+      </div>
+    </section>
+
+    <CtaBand />
+  </main>
+</BaseLayout>

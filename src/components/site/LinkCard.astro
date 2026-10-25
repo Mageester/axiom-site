@@ -1,0 +1,58 @@
+---
+import type { IconName } from '../../lib/icons';
+import Icon from './Icon.astro';
+
+type Props = {
+  href: string;
+  icon: IconName;
+  title: string;
+  text: string;
+  meta?: string;
+  linkLabel?: string;
+};
+
+const { href, icon, title, text, meta, linkLabel = 'Learn more' } = Astro.props;
+---
+
+<article class="card card-link link-card">
+  <span class="icon-tile"><Icon name={icon} /></span>
+  <h3><a href={href} class="stretched">{title}</a></h3>
+  {meta && <p class="link-card-meta">{meta}</p>}
+  <p class="link-card-text">{text}</p>
+  <span class="arrow-link" aria-hidden="true">{linkLabel} <Icon name="arrow-right" /></span>
+</article>
+
+<style>
+  .link-card {
+    gap: 0.75rem;
+  }
+
+  .link-card .icon-tile {
+    margin-bottom: 0.5rem;
+  }
+
+  .link-card h3 a {
+    color: var(--ink);
+  }
+
+  .link-card-meta {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+  }
+
+  .link-card-text {
+    color: var(--text);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+  }
+
+  .link-card .arrow-link {
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+
+  .link-card:hover .arrow-link :global(svg) {
+    transform: translateX(3px);
+  }
+</style>

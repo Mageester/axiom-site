@@ -1,247 +1,163 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
-import { Card } from '../components/ui/card';
-import { Eyebrow } from '../components/ui/Eyebrow';
-import DrawIcon from '../components/ui/DrawIcon.astro';
-import { FadeIn } from '../components/ui/FadeIn';
-import { MotionHeading } from '../components/motion/MotionHeading';
-import { SectionDivider } from '../components/motion/SectionDivider';
+import CtaBand from '../components/site/CtaBand.astro';
+import FaqList from '../components/site/FaqList.astro';
+import Icon from '../components/site/Icon.astro';
+import PageHero from '../components/site/PageHero.astro';
+import ProcessSteps from '../components/site/ProcessSteps.astro';
+import { approachFaq, processSteps, standards } from '../content/process';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { APPROACH_JSON_LD, SEO_ROUTES, SITE_URL, breadcrumbSchema } from '../lib/seo';
+import { SEO_ROUTES, faqJsonLd, type Crumb } from '../lib/seo';
 
-const timelineSteps = [
-  {
-    kicker: 'Review',
-    title: 'Understand the business before design starts.',
-    description:
-      'We look at the offer, audience, current site, proof, search surface, and contact paths before design starts.',
-  },
-  {
-    kicker: 'Structure',
-    title: 'Make the decision path obvious.',
-    description:
-      'We define the pages, message order, proof placement, and primary contact route so the site has a clear plan.',
-  },
-  {
-    kicker: 'Build',
-    title: 'Design and development move together.',
-    description:
-      'Copy, layout, mobile behavior, performance, accessibility, and motion are built as one system.',
-  },
-  {
-    kicker: 'Launch',
-    title: 'Ship only after the fundamentals hold.',
-    description:
-      'We check mobile quality, forms, metadata, redirects, analytics readiness, speed, and support expectations before release.',
-  },
-] as const;
-
-const standards = [
-  {
-    title: 'Buyer-language first',
-    detail: 'The site should sound like it understands the customer, not like it is explaining technical decisions.',
-    icon: 'eye',
-  },
-  {
-    title: 'Proof without invention',
-    detail: 'Concepts are labeled as concepts. Client outcomes are only used when they are real, approved, and supportable.',
-    icon: 'shield-check',
-  },
-  {
-    title: 'Motion with purpose',
-    detail: 'Transitions stay cinematic and restrained. Reduced-motion settings are respected without flattening the whole experience.',
-    icon: 'bolt',
-  },
-  {
-    title: 'One conversion path',
-    detail: 'The site should guide serious project interest into one simple path, with direct email and phone still available.',
-    icon: 'target',
-  },
-] as const;
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Process', url: '/approach/' },
+];
 ---
 
-<SiteLayout
-  title={SEO_ROUTES.approach.title}
-  description={SEO_ROUTES.approach.description}
-  canonicalPath="/approach"
-  schema={[APPROACH_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Approach', url: `${SITE_URL}/approach` }])]}
->
-  <main id="main-content" tabindex="-1" class="pb-0">
-    <section class="axiom-container pt-20 md:pt-28">
-      <div class="max-w-3xl">
-        <FadeIn motion="eyebrow">
-          <Eyebrow>APPROACH</Eyebrow>
-          <SectionDivider className="mt-6" />
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={180}>
-          <MotionHeading as="h1" text="A calmer way to get a sharper site." className="mt-4" />
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={500}>
-          <p class="section-copy mt-5 md:text-[17px]">
-            The work is strategy, structure, writing, design, development, launch checks, and support. The point is not more pages. The point is a site buyers can understand and trust faster.
-          </p>
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={720}>
-          <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Start a project</a>
-            <a href="/services/" class="btn-ghost-link">See services</a>
-          </div>
-        </FadeIn>
+<BaseLayout {...SEO_ROUTES.approach} crumbs={crumbs} schema={faqJsonLd(approachFaq)}>
+  <main id="main-content" tabindex="-1">
+    <PageHero
+      eyebrow="Process"
+      title="How a website project works"
+      lead="Four clear steps from first conversation to launch. Standard packages usually go live in two to four weeks, with the scope and price agreed in writing before design starts."
+      crumbs={crumbs}
+    >
+      <Fragment slot="actions">
+        <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+        <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
+      </Fragment>
+      <ol slot="aside" role="list" class="card overview" aria-label="Process overview">
+        {processSteps.map((step) => (
+          <li>
+            <span class="overview-num" aria-hidden="true">{step.number}</span>
+            <span class="overview-title">{step.title}</span>
+            <span class="overview-time">{step.timing}</span>
+          </li>
+        ))}
+      </ol>
+    </PageHero>
+
+    <section class="section" aria-labelledby="steps-title">
+      <div class="container-narrow">
+        <div class="section-head">
+          <p class="eyebrow">Step by step</p>
+          <h2 id="steps-title">What happens, and when</h2>
+          <p>Each step has a clear output and a clear decision, so you always know where the project stands and what comes next.</p>
+        </div>
+        <ProcessSteps steps={processSteps} detailed />
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <h2 class="sr-only">Approach timeline</h2>
-        <ol class="approach-timeline">
-          {timelineSteps.map((step, index) => (
-            <li class="approach-step reveal" style={`--reveal-delay: ${index * 90}ms`}>
-              <span class="approach-step-num">{`0${index + 1}`}</span>
-              <span class="approach-step-kicker">{step.kicker}</span>
-              <h3 class="approach-step-title">{step.title}</h3>
-              <p class="approach-step-desc">{step.description}</p>
+    <section class="section section-soft" aria-labelledby="standards-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Our standards</p>
+          <h2 id="standards-title">The rules every site follows</h2>
+          <p>Whatever the package, these principles shape every page we design and build.</p>
+        </div>
+        <ul role="list" class="grid grid-4 standards">
+          {standards.map((item) => (
+            <li class="card standard">
+              <span class="icon-tile"><Icon name={item.icon} /></span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>OPERATING STANDARD</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Premium is a set of decisions." className="section-heading mt-4" />
-        </FadeIn>
-
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
-          {standards.map((standard, index) => (
-            <FadeIn motion="timelineSequence" delay={Math.min(index * 140, 560)} as="div">
-              <Card className="h-full p-0">
-                <div class="flex h-full flex-col p-6 sm:p-7">
-                  <div class="mb-5 flex items-center justify-between gap-4">
-                    <DrawIcon name={standard.icon} className="text-[var(--accent-solid)]" />
-                    <p class="font-mono text-[0.75rem] font-medium uppercase tracking-[0.08em] text-[var(--accent-solid)]">
-                      0{index + 1}
-                    </p>
-                  </div>
-                  <h3 class="text-[clamp(1.25rem,1.5vw,1.5rem)] font-medium tracking-normal text-[var(--text-primary)]">
-                    {standard.title}
-                  </h3>
-                  <p class="section-copy mt-3">
-                    {standard.detail}
-                  </p>
-                </div>
-              </Card>
-            </FadeIn>
-          ))}
+    <section class="section" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Process questions</h2>
+          <p>More about pricing and payments is on the <a class="text-link" href="/pricing/">pricing page</a>.</p>
         </div>
+        <FaqList items={approachFaq} />
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn as="div" motion="finalFrameFooter">
-          <Card className="mx-auto max-w-5xl overflow-hidden p-0 text-center">
-            <div class="px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12">
-              <Eyebrow className="justify-center">BEFORE LAUNCH</Eyebrow>
-              <SectionDivider className="mx-auto mt-6" />
-              <MotionHeading as="h2" text="If it weakens trust, it does not ship." className="section-heading mx-auto mt-4" />
-              <p class="section-copy mx-auto mt-4 max-w-3xl">
-                We check clarity, mobile behavior, forms, metadata, redirects, accessibility, and performance before release. The transitions stay impressive, but the fundamentals carry the sale.
-              </p>
-              <div class="mt-7">
-                <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg">Start a project</a>
-              </div>
-            </div>
-          </Card>
-        </FadeIn>
-      </div>
-    </section>
+    <CtaBand />
   </main>
-</SiteLayout>
+</BaseLayout>
 
 <style>
-  .approach-timeline {
-    list-style: none;
+  .overview {
+    gap: 0;
+    padding: 0.5rem 1.5rem;
     margin: 0;
-    padding: 0;
+    box-shadow: var(--shadow-md);
+  }
+
+  .overview li {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
   }
 
-  @media (min-width: 860px) {
-    .approach-timeline {
-      grid-template-columns: repeat(4, 1fr);
-    }
+  .overview li:last-child {
+    border-bottom: 0;
   }
 
-  .approach-step {
-    position: relative;
-    padding-top: 2rem;
-    padding-right: clamp(1rem, 2vw, 2rem);
-    border-top: 1px solid var(--hairline-strong);
-  }
-
-  .approach-step::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: 0;
-    width: 7px;
-    height: 7px;
+  .overview-num {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
     border-radius: 999px;
-    background: var(--text-primary);
+    background: var(--brand-soft);
+    color: var(--brand);
+    font-size: var(--fs-sm);
+    font-weight: 700;
   }
 
-  @media (max-width: 859px) {
-    .approach-step {
-      padding-top: 1.6rem;
-      padding-bottom: 1.6rem;
-    }
-    .approach-step + .approach-step {
-      border-top: 1px solid var(--hairline);
-    }
+  .overview-title {
+    color: var(--ink);
+    font-weight: 650;
   }
 
-  .approach-step-num {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
+  .overview-time {
     color: var(--text-muted);
+    font-size: var(--fs-sm);
+    white-space: nowrap;
   }
 
-  .approach-step-kicker {
-    display: block;
-    margin-top: 0.85rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--text-secondary);
+  .standards {
+    margin: 0;
   }
 
-  .approach-step-title {
-    font-family: var(--font-display);
-    font-size: clamp(1.2rem, 1.9vw, 1.5rem);
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    color: var(--text-primary);
-    margin: 0.5rem 0 0;
+  .standard {
+    gap: 0.65rem;
   }
 
-  .approach-step-desc {
-    color: var(--text-secondary);
-    font-size: 0.92rem;
-    line-height: 1.65;
-    margin: 0.7rem 0 0;
-    max-width: 34ch;
+  .standard .icon-tile {
+    margin-bottom: 0.4rem;
+  }
+
+  .standard p {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .faq-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .faq-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  .faq-grid .section-head {
+    margin-bottom: 0;
   }
 </style>

@@ -1,13 +1,19 @@
 ---
 import LegalPage from '../components/site/LegalPage.astro';
-import SiteLayout from '../layouts/SiteLayout.astro';
-import { SEO_ROUTES } from '../lib/seo';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SEO_ROUTES, type Crumb } from '../lib/seo';
+
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Terms of Service', url: '/terms/' },
+];
 ---
 
-<SiteLayout title={SEO_ROUTES.terms.title} description={SEO_ROUTES.terms.description} canonicalPath="/terms">
+<BaseLayout {...SEO_ROUTES.terms} crumbs={crumbs}>
   <LegalPage
     title="Terms of Service"
     updated="April 17, 2026"
+    crumbs={crumbs}
     sections={[
       {
         id: 'terms-agreement',
@@ -59,4 +65,4 @@ import { SEO_ROUTES } from '../lib/seo';
       },
     ]}
   />
-</SiteLayout>
+</BaseLayout>

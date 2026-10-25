@@ -1,132 +1,189 @@
 ---
-import { FadeIn } from '../components/ui/FadeIn';
-import { Card } from '../components/ui/card';
-import { Eyebrow } from '../components/ui/Eyebrow';
-import DrawIcon from '../components/ui/DrawIcon.astro';
-import { MotionHeading } from '../components/motion/MotionHeading';
-import { SectionDivider } from '../components/motion/SectionDivider';
-import SiteLayout from '../layouts/SiteLayout.astro';
+import Icon from '../components/site/Icon.astro';
+import IntakeForm from '../components/site/IntakeForm.astro';
+import PageHero from '../components/site/PageHero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { SEO_ROUTES, SITE_EMAIL, SITE_TELEPHONE, CONTACT_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
+import { SEO_ROUTES, SITE_EMAIL, SITE_LOCATION, SITE_PHONE_DISPLAY, SITE_TELEPHONE, type Crumb } from '../lib/seo';
 
-const nextSteps = [
-  {
-    number: '01',
-    title: 'Tell us what needs to change',
-    detail: 'Share the business, the current site, and the outcome you want.',
-  },
-  {
-    number: '02',
-    title: 'We reply within one business day',
-    detail: 'You hear from the people who would scope and build the work.',
-  },
-  {
-    number: '03',
-    title: 'You get a clear recommendation',
-    detail: 'If there is a fit, we explain the right path, timeline, and price.',
-  },
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Contact', url: '/contact/' },
+];
+
+const steps = [
+  { title: 'You reach out', text: 'Call, email or send the form with a few details about your business.' },
+  { title: 'We reply within one business day', text: 'You hear from Aidan or Riley directly, not a sales team.' },
+  { title: 'You get a clear recommendation', text: 'If there is a fit, we explain the right package, the timeline and the price.' },
 ] as const;
 ---
 
-<SiteLayout
-  {...SEO_ROUTES.contact}
-  schema={[CONTACT_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Contact', url: `${SITE_URL}/contact` }])]}
->
-  <main id="main-content" tabindex="-1" class="pb-0">
-    <section class="axiom-container pt-20 md:pt-28">
-      <div class="mx-auto max-w-4xl text-center">
-        <FadeIn motion="eyebrow">
-          <Eyebrow>CONTACT</Eyebrow>
-          <SectionDivider className="mx-auto mt-6" />
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={180}>
-          <MotionHeading as="h1" align="center" text="Start with the site problem. We will point you to the right next step." className="mt-4" />
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={460}>
-          <p class="section-copy mx-auto mt-5 max-w-2xl md:text-[17px]">
-            Tell us what the business does, where the current site is falling short, and what needs to happen next. Email and phone stay open for direct notes.
-          </p>
-        </FadeIn>
+<BaseLayout {...SEO_ROUTES.contact} pageType="ContactPage" crumbs={crumbs}>
+  <main id="main-content" tabindex="-1">
+    <PageHero
+      eyebrow="Contact"
+      title="Contact Axiom Web"
+      lead="Questions about a website, pricing or timing? Call, email or send a message. We reply within one business day."
+      crumbs={crumbs}
+    />
 
-        <FadeIn motion="sceneOpen" delay={680}>
-          <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Start a project</a>
-            <a href="/services/" class="btn-ghost-link">See services</a>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>WHAT HAPPENS NEXT</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="What happens after you reach out." className="section-heading mt-4" />
-        </FadeIn>
-
-        <div class="mt-10 grid gap-5 md:grid-cols-3">
-          {nextSteps.map((step, index) => (
-            <FadeIn motion="timelineSequence" delay={Math.min(index * 140, 560)} as="div">
-              <Card className="h-full p-0">
-                <div class="flex h-full flex-col p-6 sm:p-7">
-                  <div class="mb-4 flex items-center justify-between gap-4">
-                    <DrawIcon name="check" size={14} className="text-[var(--accent-solid)]" />
-                    <p class="font-mono text-[0.75rem] font-medium uppercase tracking-[0.08em] text-[var(--accent-solid)]">{step.number}</p>
-                  </div>
-                  <h3 class="text-[18px] font-semibold tracking-[-0.01em] text-[var(--text-primary)]">
-                    {step.title}
-                  </h3>
-                  <p class="section-copy mt-3 text-[15px]">
-                    {step.detail}
-                  </p>
-                </div>
-              </Card>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn as="div" motion="formFocusMotion">
-          <Card className="mx-auto max-w-4xl p-0">
-            <div class="grid gap-6 p-6 text-left sm:p-7 md:grid-cols-2 md:p-8">
+    <section class="section" aria-labelledby="contact-options-title">
+      <div class="container contact-grid">
+        <div class="contact-side">
+          <h2 id="contact-options-title" class="side-title">Talk to us directly</h2>
+          <ul role="list" class="methods">
+            <li class="card method">
+              <span class="icon-tile"><Icon name="phone" /></span>
               <div>
-                <Eyebrow>DIRECT</Eyebrow>
-                <p class="section-copy mt-4">
-                  For a quick note, partnership question, or follow-up that does not need the project form.
-                </p>
-                <p class="mt-4 text-[14px] leading-[1.65] text-[var(--text-muted)]">
-                  Typical response time: same business day.
-                </p>
+                <h3>Phone</h3>
+                <a class="method-link" href={`tel:${SITE_TELEPHONE}`}>{SITE_PHONE_DISPLAY}</a>
               </div>
-              <div class="space-y-3 md:justify-self-end md:text-right">
-                <a
-                  href={`mailto:${SITE_EMAIL}`}
-                  class="block min-h-11 text-[18px] font-medium text-[var(--text-primary)] underline decoration-[color:var(--hairline-strong)] underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current"
-                >
-                  {SITE_EMAIL}
-                </a>
-                <a
-                  href={`tel:${SITE_TELEPHONE}`}
-                  class="block min-h-11 text-[18px] font-medium text-[var(--text-primary)] underline decoration-[color:var(--hairline-strong)] underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-[var(--accent-solid)] hover:decoration-current"
-                >
-                  (226) 753-1833
-                </a>
-                <p class="pt-2 text-[14px] leading-[1.65] text-[var(--text-muted)]">
-                  Based in Kitchener-Waterloo, Ontario.
-                </p>
+            </li>
+            <li class="card method">
+              <span class="icon-tile"><Icon name="mail" /></span>
+              <div>
+                <h3>Email</h3>
+                <a class="method-link" href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a>
               </div>
-            </div>
-          </Card>
-        </FadeIn>
+            </li>
+            <li class="card method">
+              <span class="icon-tile"><Icon name="map-pin" /></span>
+              <div>
+                <h3>Location</h3>
+                <p>{SITE_LOCATION}. Working with businesses across Waterloo Region, Guelph, Hamilton and Canada.</p>
+              </div>
+            </li>
+            <li class="card method">
+              <span class="icon-tile"><Icon name="clock" /></span>
+              <div>
+                <h3>Response time</h3>
+                <p>Within one business day.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="project-callout">
+            <h3>Ready to start a project?</h3>
+            <p>The project form asks a few more questions so we can recommend a package and price straight away.</p>
+            <a href={CTA_PATHS.startProject} class="arrow-link">Go to the project form <Icon name="arrow-right" /></a>
+          </div>
+        </div>
+
+        <IntakeForm kind="contact" title="Send a message" description="For quick questions, follow-ups or anything else." />
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="next-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What happens next</p>
+          <h2 id="next-title">After you get in touch</h2>
+        </div>
+        <ol role="list" class="grid grid-3 next-steps">
+          {steps.map((step, index) => (
+            <li class="card next-step">
+              <span class="next-num" aria-hidden="true">{index + 1}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   </main>
-</SiteLayout>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+
+  .side-title {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.75rem);
+  }
+
+  .methods {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+  }
+
+  .method {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.15rem 1.25rem;
+  }
+
+  .method h3 {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .method p {
+    color: var(--ink);
+    font-size: var(--fs-sm);
+  }
+
+  .method-link {
+    color: var(--ink);
+    font-size: 1.0625rem;
+    font-weight: 650;
+    word-break: break-word;
+  }
+
+  .method-link:hover {
+    color: var(--brand);
+  }
+
+  .project-callout {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--brand-line);
+    border-radius: var(--radius-lg);
+    background: var(--brand-soft);
+  }
+
+  .project-callout p {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .next-steps {
+    margin: 0;
+  }
+
+  .next-step {
+    gap: 0.6rem;
+  }
+
+  .next-num {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-bottom: 0.4rem;
+    border-radius: 999px;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .next-step p {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+</style>

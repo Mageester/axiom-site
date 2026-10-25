@@ -1,404 +1,154 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
+import BrowserFrame from '../components/site/BrowserFrame.astro';
+import CtaBand from '../components/site/CtaBand.astro';
+import Icon from '../components/site/Icon.astro';
+import PageHero from '../components/site/PageHero.astro';
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
+import WorkCard from '../components/site/WorkCard.astro';
+import { projects } from '../content/work';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { SEO_ROUTES, WORK_JSON_LD, breadcrumbSchema, SITE_URL } from '../lib/seo';
-import { getWorkProofImage } from '../lib/workProofImages';
-import { FadeIn } from '../components/ui/FadeIn';
-import { Eyebrow } from '../components/ui/Eyebrow';
-import { MotionHeading } from '../components/motion/MotionHeading';
-import { SectionDivider } from '../components/motion/SectionDivider';
+import { SEO_ROUTES, itemListSchema, type Crumb } from '../lib/seo';
 
-const projects = [
-  {
-    id: 'reids-home-and-yard',
-    title: 'Reid’s Home & Yard',
-    niche: 'Home Services',
-    kindLabel: 'Published website',
-    outcome: 'Ottawa walkway services, seasonal plans and direct contact in one calm, focused page.',
-    originalWeaknessLabel: 'The brief',
-    originalWeakness: 'Introduce walkway snow clearing, salting and de-icing, while keeping future lawn care clearly separate.',
-    axiomChangedLabel: 'What we built',
-    axiomChanged: 'An evergreen visual identity, winter imagery, cinematic transitions and direct phone and email links.',
-    whyItWorksLabel: 'Visitor experience',
-    whyItWorks: 'Homeowners can understand the current services and reach the business without a booking account or extra steps.',
-    meta: ['Published website', 'Ottawa', 'Home services'],
-    image: getWorkProofImage('reids-home-and-yard').source,
-    alt: getWorkProofImage('reids-home-and-yard').alt || 'Reid’s Home & Yard website',
-    position: 'center top',
-    href: 'https://reidshomeandyard.getaxiom.ca/',
-    ctaLabel: 'Visit website',
-  },
-  {
-    id: 'salon-nails',
-    title: 'Nails Studio',
-    niche: 'Salon & Beauty',
-    outcome: 'Booking pulled above the fold so clients tap once instead of hunting through a menu.',
-    originalWeakness: 'Services and booking were treated like secondary details instead of the main reason people visit.',
-    axiomChanged: 'We moved service comparison, trust cues, and booking into the first decision path.',
-    whyItWorks: 'Beauty clients can confirm fit, see the standard, and book without opening extra pages.',
-    meta: ['Website redesign', 'Local business', 'Conversion-focused'],
-    image: getWorkProofImage('concept-salon-demo').source,
-    alt: getWorkProofImage('concept-salon-demo').alt || 'Nails Studio concept site',
-    position: 'center 40%',
-    href: 'https://nails.getaxiom.ca',
-    ctaLabel: 'Open demo',
-  },
-  {
-    id: 'barber-blackline',
-    title: 'Blackline Barber Co.',
-    niche: 'Personal Services',
-    outcome: 'Sharp brand, big photography, booking link locked into every screen.',
-    originalWeakness: 'The brand needed to feel sharper and make the next appointment easy from a phone.',
-    axiomChanged: 'We made photography the first signal and kept booking visible across the experience.',
-    whyItWorks: 'A visitor gets the vibe quickly, then has a low-friction path to choose a time.',
-    meta: ['Website redesign', 'Local business'],
-    image: getWorkProofImage('concept-barber-demo').source,
-    alt: getWorkProofImage('concept-barber-demo').alt || 'Blackline Barber Co. concept site',
-    position: 'center 40%',
-    href: 'https://barber.getaxiom.ca',
-    ctaLabel: 'Open demo',
-  },
-  {
-    id: 'dental-aurelia',
-    title: 'Aurelia Dental Studio',
-    niche: 'Healthcare',
-    outcome: 'Warmer tone, fewer clicks to a booking — built for new patients who decide in seconds.',
-    originalWeakness: 'New patients needed reassurance before they were ready to request an appointment.',
-    axiomChanged: 'We placed care style, services, team cues, and booking closer together.',
-    whyItWorks: 'Healthcare buyers can understand the practice and feel safe taking the next step.',
-    meta: ['Website redesign', 'Local business', 'Conversion-focused'],
-    image: getWorkProofImage('concept-dental-demo').source,
-    alt: getWorkProofImage('concept-dental-demo').alt || 'Aurelia Dental Studio concept site',
-    position: 'center 40%',
-    href: 'https://dental.getaxiom.ca',
-    ctaLabel: 'Open demo',
-  },
-  {
-    id: 'restaurant-reservation',
-    title: 'Restaurant Reservation',
-    niche: 'Food & Hospitality',
-    outcome: 'Menu and reservation live above the fold. Mobile loads fast, decisions happen at the table.',
-    originalWeakness: 'Menu and reservation intent were split, forcing hungry visitors to search.',
-    axiomChanged: 'We brought menu preview and reservation action into the first mobile screen.',
-    whyItWorks: 'Guests can decide quickly and reserve before attention moves elsewhere.',
-    meta: ['Website redesign', 'Hospitality'],
-    image: getWorkProofImage('demonstration-restaurant-reservation-site').source,
-    alt: getWorkProofImage('demonstration-restaurant-reservation-site').alt || 'Restaurant reservation concept site',
-    position: 'center 24%',
-    href: 'https://restaurant.getaxiom.ca',
-    ctaLabel: 'Open demo',
-  },
-  {
-    id: 'physio-clinic',
-    title: 'Physio Clinic',
-    niche: 'Health & Wellness',
-    outcome: 'Treatment paths, practitioner trust and booking collapsed into one first-screen flow.',
-    originalWeakness: 'Treatment information, practitioner credibility, and booking were too separated.',
-    axiomChanged: 'We grouped symptoms, care paths, provider trust, and booking into one clear route.',
-    whyItWorks: 'Patients can recognize their problem and understand how to start care faster.',
-    meta: ['Website redesign', 'Local business'],
-    image: getWorkProofImage('concept-physio-demo').source,
-    alt: getWorkProofImage('concept-physio-demo').alt || 'Physiotherapy clinic concept site',
-    position: 'center top',
-    href: 'https://physio.getaxiom.ca',
-    ctaLabel: 'Open demo',
-  },
-  {
-    id: 'law-harrow',
-    title: 'Harrow & Calloway',
-    niche: 'Legal Services',
-    outcome: 'Cleaner hierarchy, shorter copy, one obvious path to a consultation.',
-    originalWeakness: 'Legal copy can feel dense, cautious, and hard to act on.',
-    axiomChanged: 'We clarified practice areas, reduced copy weight, and made consultation the obvious path.',
-    whyItWorks: 'Prospects can identify the right service and contact the firm without decoding the site.',
-    meta: ['Website redesign', 'Professional services'],
-    image: getWorkProofImage('concept-law-demo').source,
-    alt: getWorkProofImage('concept-law-demo').alt || 'Harrow & Calloway concept site',
-    position: 'center 40%',
-    href: 'https://law.getaxiom.ca',
-    ctaLabel: 'Open demo',
-  },
-  {
-    id: 'landscaping',
-    title: 'Landscaping Studio',
-    niche: 'Home Services',
-    outcome: 'Project photography forward, quote form down to two fields and a button.',
-    originalWeakness: 'Project quality was not visible soon enough and quote requests felt heavier than necessary.',
-    axiomChanged: 'We put finished work first and shortened the initial quote path.',
-    whyItWorks: 'Homeowners can judge taste and start a conversation before losing momentum.',
-    meta: ['Website redesign', 'Local business'],
-    image: getWorkProofImage('concept-landscaping-authority-site').source,
-    alt: getWorkProofImage('concept-landscaping-authority-site').alt || 'Landscaping concept site',
-    position: 'center 52%',
-    href: 'https://landscaping.getaxiom.ca',
-    ctaLabel: 'Open demo',
-  },
-  {
-    id: 'roofing',
-    title: 'Roofing Conversion',
-    niche: 'Home Services',
-    outcome: 'Urgent calls and planned estimates split into separate, unmissable paths.',
-    originalWeakness: 'Emergency repairs and planned estimates were competing for the same generic CTA.',
-    axiomChanged: 'We separated urgent calls from planned quote requests and made both easy to find.',
-    whyItWorks: 'Different buyers can take different actions without reading the whole page first.',
-    meta: ['Website redesign', 'Local business', 'Conversion-focused'],
-    image: getWorkProofImage('concept-roofing-conversion-site').source,
-    alt: getWorkProofImage('concept-roofing-conversion-site').alt || 'Roofing concept site',
-    position: 'center 36%',
-    href: 'https://roofing.getaxiom.ca',
-    ctaLabel: 'Open demo',
-  },
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Work', url: '/work/' },
 ];
+
+const client = projects.find((project) => project.kind === 'client')!;
+const concepts = projects.filter((project) => project.kind === 'concept');
 ---
 
-<SiteLayout
-  title={SEO_ROUTES.work.title}
-  description={SEO_ROUTES.work.description}
-  canonicalPath="/work"
-  schema={[WORK_JSON_LD, breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Work', url: `${SITE_URL}/work` }])]}
+<BaseLayout
+  {...SEO_ROUTES.work}
+  pageType="CollectionPage"
+  crumbs={crumbs}
+  schema={itemListSchema(
+    'Axiom Web portfolio',
+    projects.map((project) => ({
+      name: project.kind === 'client' ? project.title : `${project.title} (concept build)`,
+      url: project.href,
+      description: project.summary,
+    }))
+  )}
 >
-  <main id="main-content" tabindex="-1" class="pb-0">
-    <section class="axiom-container pt-20 md:pt-28">
-      <div class="max-w-3xl">
-        <FadeIn motion="eyebrow">
-          <Eyebrow>SELECTED WORK</Eyebrow>
-          <SectionDivider className="mt-6" />
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={180}>
-          <MotionHeading
-            as="h1"
-            text="Selected websites that show *how serious businesses present themselves.*"
-            className="mt-4"
-          />
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={500}>
-          <p class="section-copy mt-5 md:text-[17px]">
-            Published websites and clearly labelled concept builds. Each one shows how we structure a local business site around clarity and the next action.
-          </p>
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={720}>
-          <div class="mt-7">
-            <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg">Start a project <span aria-hidden="true">→</span></a>
+  <main id="main-content" tabindex="-1">
+    <PageHero
+      eyebrow="Work"
+      title="Websites we’ve designed and built"
+      lead="A live client website, plus concept builds that show how we structure sites for different kinds of local businesses. Every concept is clearly labelled."
+      crumbs={crumbs}
+    >
+      <Fragment slot="actions">
+        <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+        <a href="/services/" class="btn btn-secondary btn-lg">Our services</a>
+      </Fragment>
+    </PageHero>
+
+    <section class="section" aria-labelledby="client-title">
+      <div class="container">
+        <article class="featured">
+          <BrowserFrame url="reidshomeandyard.getaxiom.ca" class="featured-frame">
+            <ResponsivePicture
+              source={client.image}
+              alt={client.alt}
+              sizes="(min-width: 1024px) 640px, 92vw"
+              position="center top"
+            />
+          </BrowserFrame>
+          <div class="featured-copy">
+            <span class="badge badge-success badge-dot">Client site · Live</span>
+            <p class="featured-meta">{client.industryLabel} · {client.location}</p>
+            <h2 id="client-title">{client.title}</h2>
+            <p class="featured-summary">{client.summary}</p>
+            <dl class="featured-details">
+              <div>
+                <dt>The brief</dt>
+                <dd>{client.brief}</dd>
+              </div>
+              <div>
+                <dt>What we built</dt>
+                <dd>{client.built}</dd>
+              </div>
+            </dl>
+            <a href={client.href} class="btn" target="_blank" rel="noopener">
+              Visit the live site <span class="sr-only">(opens in a new tab)</span> <Icon name="arrow-up-right" />
+            </a>
           </div>
-        </FadeIn>
+        </article>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section-tight">
-      <div class="axiom-container">
-        <h2 class="sr-only">Selected projects</h2>
-        <div class="work-grid">
-          {projects.map((p, i) => (
-            <a
-              class="work-card reveal"
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={`--reveal-delay: ${(i % 2) * 80}ms`}
-            >
-              <div class="work-card-top">
-                <span class="work-card-num">{`0${i + 1}`}</span>
-                <span class="work-card-niche">{p.niche} · {p.kindLabel || 'Concept build'}</span>
-              </div>
-              <figure class="work-card-shot">
-                <ResponsivePicture
-                  source={p.image}
-                  alt={p.alt}
-                  sizes="(min-width: 760px) 44vw, 90vw"
-                  loading={i < 2 ? 'eager' : 'lazy'}
-                  objectPosition={p.position}
-                />
-              </figure>
-              <h3 class="work-card-title">{p.title}</h3>
-              <p class="work-card-outcome">{p.outcome}</p>
-              <div class="work-card-proof">
-                <p class="work-card-kicker">{p.originalWeaknessLabel || 'Original weakness'}</p>
-                <p class="work-card-detail">{p.originalWeakness}</p>
-                <p class="work-card-kicker">{p.axiomChangedLabel || 'Axiom changed'}</p>
-                <p class="work-card-detail">{p.axiomChanged}</p>
-                <p class="work-card-kicker">{p.whyItWorksLabel || 'Why it works'}</p>
-                <p class="work-card-detail">{p.whyItWorks}</p>
-              </div>
-              <span class="work-card-meta">
-                {p.meta.map((m) => <span>{m}</span>)}
-              </span>
-              <span class="work-card-cta">{p.ctaLabel} <span aria-hidden="true">↗</span></span>
-            </a>
-          ))}
+    <section class="section section-soft" aria-labelledby="concepts-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Concept builds</p>
+          <h2 id="concepts-title">How we approach different industries</h2>
+          <p>
+            Concept builds are working demonstration websites designed by Axiom Web. Each one starts from a common problem in its
+            industry and shows how we would structure the site to solve it. They are not client results.
+          </p>
+        </div>
+        <div class="grid grid-3">
+          {concepts.map((project) => <WorkCard project={project} detailed />)}
         </div>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn as="div" motion="finalFrameFooter">
-          <div class="mx-auto flex max-w-4xl flex-col items-start gap-8 border-t border-[color:var(--hairline)] py-14 md:flex-row md:items-center md:justify-between md:py-20">
-            <div class="max-w-xl">
-              <Eyebrow>BEFORE WE SHIP</Eyebrow>
-              <MotionHeading
-                as="h2"
-                text="Want your business to *look this sharp*?"
-                className="section-heading mt-4"
-              />
-              <p class="section-copy mt-4">
-                A stronger site should make the business easier to understand, easier to trust, and easier to contact. This selected work shows the structure we bring to that work.
-              </p>
-            </div>
-            <div class="flex flex-col items-start gap-3 md:items-end">
-              <a href={CTA_PATHS.startProject} class="btn btn-primary btn-lg">Start a project <span aria-hidden="true">→</span></a>
-              <p class="axiom-metric text-[var(--text-muted)]">Review &rarr; Scope &rarr; Build &rarr; Launch</p>
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
+    <CtaBand
+      title="Want a website like these for your business?"
+      text="Tell us what you do and what your current site is missing. We reply within one business day with a recommended package and a clear price."
+    />
   </main>
-</SiteLayout>
+</BaseLayout>
 
 <style>
-  .work-grid {
+  .featured {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
+    gap: 2.5rem;
+    align-items: center;
   }
 
-  @media (min-width: 760px) {
-    .work-grid {
-      grid-template-columns: repeat(2, 1fr);
+  @media (min-width: 1024px) {
+    .featured {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 4rem;
     }
   }
 
-  .work-card {
-    display: block;
-  }
-
-  .work-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid var(--hairline-strong);
-    padding-block: 0.85rem;
-    margin-bottom: 1rem;
-  }
-
-  .work-card-num,
-  .work-card-niche {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--text-muted);
-  }
-
-  .work-card-shot {
-    position: relative;
-    margin: 0;
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    border-radius: 8px;
-    background: var(--surface-1);
-  }
-
-  .work-card-shot :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(1) brightness(0.85);
-    transition: transform 0.7s var(--ease-premium), filter 0.5s ease;
-  }
-
-  .work-card:hover .work-card-shot :global(img) {
-    transform: scale(1.03);
-    filter: grayscale(0.35) brightness(1);
-  }
-
-  .work-card-title {
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    color: var(--text-primary);
-    margin: 1.1rem 0 0;
-  }
-
-  .work-card-outcome {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.65;
-    margin: 0.6rem 0 0;
-    max-width: 46ch;
-  }
-  /* Keep readable contrast while cards enter the viewport. */
-  .work-card.reveal { opacity: 1; transition-property: transform; }
-  :global(html.js) .work-card.reveal:not(.is-in) { opacity: 1; }
-
-  .work-card-proof {
+  .featured-copy {
     display: grid;
-    gap: 0.45rem;
-    margin-top: 1.15rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--hairline);
+    gap: 1rem;
+    justify-items: start;
   }
 
-  .work-card-kicker {
-    margin-top: 0.55rem;
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+  .featured-meta {
     color: var(--text-muted);
-  }
-
-  .work-card-kicker:first-child {
-    margin-top: 0;
-  }
-
-  .work-card-detail {
-    max-width: 48ch;
-    color: var(--text-secondary);
-    font-size: 0.88rem;
-    line-height: 1.62;
-    margin: 0;
-  }
-
-  .work-card-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .work-card-meta span {
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    border: 1px solid var(--hairline);
-    border-radius: 999px;
-    padding: 0.3rem 0.7rem;
   }
 
-  .work-card-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin-top: 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--text-secondary);
-    transition: color 0.2s ease, gap 0.2s ease;
+  .featured-summary {
+    font-size: var(--fs-lead);
   }
 
-  .work-card:hover .work-card-cta {
-    color: var(--text-primary);
-    gap: 0.65rem;
+  .featured-details {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    margin: 0.5rem 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .featured-details dt {
+    color: var(--ink);
+    font-weight: 650;
+  }
+
+  .featured-details dd {
+    margin: 0.2rem 0 0;
   }
 </style>

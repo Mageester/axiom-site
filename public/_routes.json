@@ -54,6 +54,11 @@
     "/site.webmanifest",
     "/speculation-rules.json",
     "/axiomtransparentlogo.webp",
-    "/social/*"
+    "/social/*",
+    "/industries",
+    "/industries/*",
+    "/icon-192.png",
+    "/icon-512.png",
+    "/llms.txt"
   ]
 }

@@ -1,13 +1,19 @@
 ---
 import LegalPage from '../components/site/LegalPage.astro';
-import SiteLayout from '../layouts/SiteLayout.astro';
-import { SEO_ROUTES } from '../lib/seo';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SEO_ROUTES, type Crumb } from '../lib/seo';
+
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Privacy Policy', url: '/privacy/' },
+];
 ---
 
-<SiteLayout title={SEO_ROUTES.privacy.title} description={SEO_ROUTES.privacy.description} canonicalPath="/privacy">
+<BaseLayout {...SEO_ROUTES.privacy} crumbs={crumbs}>
   <LegalPage
     title="Privacy Policy"
     updated="April 17, 2026"
+    crumbs={crumbs}
     sections={[
       {
         id: 'privacy-information-collection',
@@ -56,4 +62,4 @@ import { SEO_ROUTES } from '../lib/seo';
       },
     ]}
   />
-</SiteLayout>
+</BaseLayout>

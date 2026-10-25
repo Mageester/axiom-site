@@ -1,0 +1,67 @@
+---
+import { MARK_PATHS, MARK_VIEWBOX } from '../../lib/brand';
+
+type Props = {
+  tone?: 'dark' | 'light';
+  class?: string;
+};
+
+const { tone = 'dark', class: className } = Astro.props;
+---
+
+<span class:list={['logo', `logo-${tone}`, className]}>
+  <svg class="logo-mark" viewBox={MARK_VIEWBOX} width="22" height="29" aria-hidden="true" focusable="false">
+    {MARK_PATHS.map((d, i) => <path d={d} class={i === 1 ? 'logo-mark-accent' : undefined} />)}
+  </svg>
+  <span class="logo-word">Axiom<span class="logo-sub">Web</span></span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    line-height: 1;
+  }
+
+  .logo-mark {
+    width: 1.35rem;
+    height: auto;
+    fill: var(--ink);
+  }
+
+  .logo-mark .logo-mark-accent {
+    fill: var(--brand);
+  }
+
+  .logo-word {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    color: var(--ink);
+    font-size: 1.2rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .logo-sub {
+    color: var(--brand);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+  }
+
+  .logo-light .logo-mark,
+  .logo-light .logo-word {
+    fill: #fff;
+    color: #fff;
+  }
+
+  .logo-light .logo-mark .logo-mark-accent {
+    fill: var(--night-accent);
+  }
+
+  .logo-light .logo-sub {
+    color: var(--night-accent);
+  }
+</style>

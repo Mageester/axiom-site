@@ -36,3 +36,6 @@ dist-ssr
 /axiom-roofing-demo
 /axiom-landscaping-demo
 /__temp_*
+
+# Scratch copy created by tests/seo-audit.test.mjs
+output/seo-max-pass/

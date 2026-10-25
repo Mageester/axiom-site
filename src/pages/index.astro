@@ -1,1686 +1,519 @@
 ---
+import BrowserFrame from '../components/site/BrowserFrame.astro';
+import CtaBand from '../components/site/CtaBand.astro';
+import FactsBar from '../components/site/FactsBar.astro';
+import FaqList from '../components/site/FaqList.astro';
+import FounderCards from '../components/site/FounderCards.astro';
+import Icon from '../components/site/Icon.astro';
+import IndustryGrid from '../components/site/IndustryGrid.astro';
+import LinkCard from '../components/site/LinkCard.astro';
+import PricingCards from '../components/site/PricingCards.astro';
+import ProcessSteps from '../components/site/ProcessSteps.astro';
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
-import SiteLayout from '../layouts/SiteLayout.astro';
+import WorkCard from '../components/site/WorkCard.astro';
+import { homeFaq, valueProps } from '../content/company';
+import { packages } from '../content/pricing';
+import { processSteps } from '../content/process';
+import { services } from '../content/services';
+import { getProject } from '../content/work';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { FILM_JSON_LD, HOME_JSON_LD, HOME_PAGE_SCHEMA, WEBSITE_SCHEMA, SEO_ROUTES } from '../lib/seo';
-import { getWorkProofImage } from '../lib/workProofImages';
+import { SEO_ROUTES, SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE, faqJsonLd } from '../lib/seo';
 
-const work = [
-  {
-    id: 'reids-home-and-yard',
-    title: 'Reid’s Home & Yard',
-    niche: 'Home Services',
-    outcome: 'Published website. Walkway services and direct contact for Ottawa homeowners.',
-    href: 'https://reidshomeandyard.getaxiom.ca/',
-    ctaLabel: 'Visit website',
-    img: getWorkProofImage('reids-home-and-yard'),
-  },
-  {
-    id: 'dental-aurelia',
-    title: 'Aurelia Dental Studio',
-    niche: 'Healthcare',
-    outcome: 'New patients can understand the practice, trust the offer, and book without digging through the site.',
-    href: 'https://dental.getaxiom.ca',
-    img: getWorkProofImage('concept-dental-demo'),
-  },
-  {
-    id: 'salon-nails',
-    title: 'Nails Studio',
-    niche: 'Salon & Beauty',
-    outcome: 'Services are easier to compare, booking appears early, and the brand reads calm and premium.',
-    href: 'https://nails.getaxiom.ca',
-    img: getWorkProofImage('concept-salon-demo'),
-  },
-  {
-    id: 'barber-blackline',
-    title: 'Blackline Barber Co.',
-    niche: 'Personal Services',
-    outcome: 'A sharper first impression with the booking path visible before a visitor starts hunting.',
-    href: 'https://barber.getaxiom.ca',
-    img: getWorkProofImage('concept-barber-demo'),
-  },
-] as const;
-
-const services = [
-  {
-    label: 'Conversion Sites',
-    description: 'For businesses whose offer is good, but the current site makes visitors work too hard before they reach out.',
-    href: '/services/conversion-sites/',
-  },
-  {
-    label: 'Local Business Websites',
-    description: 'For established local companies that need reputation, services, service area, and contact path clear on every device.',
-    href: '/services/local-business-websites/',
-  },
-  {
-    label: 'Rebuilds',
-    description: 'For existing sites that no longer match the quality of the business, without losing useful content or search value.',
-    href: '/services/rebuilds/',
-  },
-] as const;
-
-const solution = [
-  { title: 'Clear offer, fast', description: 'Visitors should understand what you do, who you help, and how to take the next step before the page asks them to think.' },
-  { title: 'Proof beside action', description: 'Reviews, credentials, photos, and examples belong near the price, service, form, and call button - not buried later.' },
-  { title: 'Friction removed', description: 'Mobile layout, page speed, navigation, and forms are shaped around the way a real buyer decides to contact you.' },
-] as const;
-
-const principles = [
-  { title: 'No vague first impression', description: 'A serious business should not need paragraphs to explain itself. The offer, audience, and next action have to be obvious.' },
-  { title: 'Only supportable proof', description: 'We use real assets, clearly labeled concept work, visible standards, and proof that can be backed up.' },
-  { title: 'No mobile afterthought', description: 'Buyers should be able to decide from a phone. Buttons, forms, copy, speed, and image crops are judged there first.' },
-  { title: 'No account-manager fog', description: "You work directly with the people shaping the message and building the site, with a clear path after launch." },
-] as const;
-
-const figures = [
-  { value: 'Two', label: 'Partners, zero middlemen' },
-  { value: '14-30', label: 'Day delivery band' },
-  { value: 'CAD $900', label: 'Introductory local start' },
-] as const;
-
-const process = [
-  { title: 'Review', description: 'We look at the current site, offer, proof, and buyer path before deciding what needs to change.' },
-  { title: 'Scope', description: 'We define pages, calls to action, copy direction, pricing path, and launch requirements before build starts.' },
-  { title: 'Build', description: 'We design and develop the site around clarity, mobile quality, speed, and a cleaner inquiry path.' },
-  { title: 'Launch', description: 'We check performance, mobile flow, forms, SEO basics, and domain setup before the site goes live.' },
-] as const;
-
-const team = [
-  { name: 'Aidan Magee', role: 'Strategy & scope', description: 'Shapes the message, page structure, and buyer path so the site reflects how customers actually decide.' },
-  { name: 'Riley Hinsperger', role: 'Design & build', description: 'Builds the interface, performance foundation, and launch details so the site feels sharp on every screen.' },
-] as const;
+const featured = ['reids-home-and-yard', 'physio-clinic', 'dental-aurelia'].map((id) => getProject(id)!);
+const hero = featured[0];
+const heroSizes = '(min-width: 1180px) 600px, (min-width: 1024px) 48vw, 92vw';
 ---
 
-<SiteLayout
-  title={SEO_ROUTES.home.title}
-  description={SEO_ROUTES.home.description}
-  canonicalPath="/"
-  ogImageAlt="Axiom — web design studio in Kitchener-Waterloo."
-  schema={[HOME_JSON_LD, WEBSITE_SCHEMA, HOME_PAGE_SCHEMA, FILM_JSON_LD]}
+<BaseLayout
+  {...SEO_ROUTES.home}
+  schema={faqJsonLd(homeFaq)}
+  ogImageAlt="Axiom Web — clear, fast websites for local businesses in Kitchener-Waterloo"
+  preload={{ type: 'image/avif', href: '/images/work-reids-960.avif', srcset: hero.image.avifSrcSet, sizes: heroSizes }}
 >
-  <main id="main-content" tabindex="-1" class="ax-root" data-homepage>
-    <div class="ax-continuity-rail" aria-hidden="true">
-      <span class="ax-continuity-rail-track"><span class="ax-continuity-rail-progress"></span></span>
-    </div>
-
-    <!-- HERO -->
-    <section class="ax-hero ax-scene ax-scene--title-card" data-home-section="hero" data-cinematic-scene="hero" data-motion-role="title-card">
-      <div class="ax-container">
-        <h1 class="ax-mega ax-hero-title">
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 0">Web design</span></span>
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 1">for serious</span></span>
-          <span class="ax-line"><span class="ax-line-inner ax-mask" style="--i: 2"><em>local businesses.</em></span></span>
-        </h1>
-
-        <div class="ax-hero-foot">
-          <div class="ax-hero-actions ax-load" style="--i: 1">
-            <a href={CTA_PATHS.startProject} class="btn btn-primary">Start a project <span aria-hidden="true">→</span></a>
-            <a href="/work/" class="btn-ghost-link">See the work</a>
-          </div>
-          <p class="ax-lead ax-load" style="--i: 0">
-            Axiom Web is a Kitchener-Waterloo web design studio building fast, high-trust sites that make the offer clear, place proof where buyers decide, and turn attention into qualified inquiries.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FILM -->
-    <section class="ax-film ax-scene ax-scene--film" data-home-section="film" data-cinematic-scene="film" data-motion-role="feature" aria-labelledby="ax-film-title">
-      <div class="ax-container">
-        <div class="ax-film-head" style="--reveal-delay: 80ms">
-          <h2 id="ax-film-title" class="ax-film-title">Built to the pixel.</h2>
-          <span class="ax-film-meta">Film · 0:32 · Sound on</span>
-        </div>
-        <div class="ax-film-frame" data-film style="--reveal-delay: 220ms">
-          <picture class="ax-film-poster">
-            <source type="image/avif" srcset="/film/axiom-film-poster-800.avif 800w, /film/axiom-film-poster-1600.avif 1600w" sizes="(min-width: 1280px) 1200px, 92vw" />
-            <img src="/film/axiom-film-poster.webp"
-            srcset="/film/axiom-film-poster-800.webp 800w, /film/axiom-film-poster.webp 1600w"
-            sizes="(min-width: 1280px) 1200px, 92vw" width="1600" height="900"
-            alt="" loading="eager" fetchpriority="high" decoding="async" />
-          </picture>
-          <video
-            class="ax-film-video"
-            data-film-video
-            preload="none"
-            playsinline
-            width="1920"
-            height="1080"
-          >
-            <source src="/film/axiom-built-to-the-pixel-1080.mp4" type="video/mp4" />
-            <track kind="captions" src="/film/axiom-built-to-the-pixel.en.vtt" srclang="en" label="English" />
-          </video>
-          <button type="button" class="ax-film-play" data-film-play aria-label="Play film: Axiom Web, 32 seconds, with sound">
-            <span class="ax-film-play-icon" aria-hidden="true"></span>
-            <span class="ax-film-play-label">Play film</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROBLEM -->
-    <section class="ax-statement ax-scene ax-scene--statement" id="ax-statement" data-home-section="statement" data-cinematic-scene="statement" data-motion-role="statement">
-      <div class="ax-container">
-        <p class="ax-big reveal ax-reveal--statement" style="--reveal-delay: 80ms">
-          <span class="ax-statement-line ax-statement-line--quiet">Buyers judge the business before they ever call.</span>
-          <span class="ax-statement-line ax-statement-line--resolve"><em>Your site should make that judgment easy.</em></span>
-        </p>
-      </div>
-    </section>
-
-    <!-- SOLUTION -->
-    <section class="ax-section ax-scene ax-scene--cascade" data-home-section="solution" data-cinematic-scene="solution" data-motion-role="cascade">
-      <div class="ax-container">
-        <header class="ax-head">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 60ms">Make the right action <em>feel obvious</em></h2>
-          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 120ms">
-            A professional site should not only look better. It should make the offer easier to understand, the business easier to trust, and the next step easier to take.
-          </p>
-        </header>
-
-        <div class="ax-solution">
-          {solution.map((s, i) => (
-            <div class="ax-solution-item reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${180 + i * 260}ms`}>
-              <h3 class="ax-solution-title">{s.title}</h3>
-              <p class="ax-solution-desc">{s.description}</p>
+  <main id="main-content" tabindex="-1">
+    <!-- Hero -->
+    <section class="home-hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="hero-kicker"><span class="kicker-dot" aria-hidden="true"></span>Web design studio in Kitchener-Waterloo</p>
+            <h1 class="display">Websites that make your business the <span class="hl">obvious choice.</span></h1>
+            <p class="lead">
+              Axiom Web designs and builds clear, fast websites for local businesses across Kitchener-Waterloo and Ontario,
+              with published pricing from CAD $900 and launch in two to four weeks.
+            </p>
+            <div class="btn-row">
+              <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+              <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
             </div>
+            <ul role="list" class="hero-assurances">
+              <li><Icon name="check" size={18} strokeWidth={2.2} />Fixed price agreed before work starts</li>
+              <li><Icon name="check" size={18} strokeWidth={2.2} />Work directly with the two founders</li>
+              <li><Icon name="check" size={18} strokeWidth={2.2} />First year of hosting included</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-glow" aria-hidden="true"></div>
+            <BrowserFrame url="reidshomeandyard.getaxiom.ca" class="hero-browser">
+              <ResponsivePicture
+                source={hero.image}
+                alt={hero.alt}
+                sizes={heroSizes}
+                loading="eager"
+                fetchpriority="high"
+                position="center top"
+              />
+            </BrowserFrame>
+            <a class="hero-chip hero-chip-launch" href={hero.href} target="_blank" rel="noopener">
+              <span class="chip-icon chip-icon-live" aria-hidden="true"><Icon name="rocket" size={18} /></span>
+              <span>
+                <span class="chip-label">Live client site</span>
+                <span class="chip-title">Reid’s Home &amp; Yard <span class="sr-only">(opens in a new tab)</span></span>
+              </span>
+            </a>
+            <div class="hero-chip hero-chip-time" aria-hidden="true">
+              <span class="chip-icon"><Icon name="calendar" size={18} /></span>
+              <span>
+                <span class="chip-label">Typical launch</span>
+                <span class="chip-title">2–4 weeks</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-facts">
+          <FactsBar />
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head-row">
+          <div class="section-head">
+            <p class="eyebrow">Services</p>
+            <h2 id="services-title">A website built around how your customers decide</h2>
+            <p>Whether you need your first proper website or a rebuild of one that no longer fits, the goal is the same: make your business easy to understand, easy to trust and easy to contact.</p>
+          </div>
+          <a href="/services/" class="arrow-link">All services <Icon name="arrow-right" /></a>
+        </div>
+        <div class="grid grid-3">
+          {services.map((service) => (
+            <LinkCard href={`/services/${service.slug}/`} icon={service.icon} title={service.name} text={service.cardSummary} />
           ))}
         </div>
       </div>
     </section>
 
-    <!-- WORK -->
-    <section class="ax-section ax-scene ax-scene--feature" data-home-section="work" data-cinematic-scene="work" data-motion-role="feature">
-      <div class="ax-container">
-        <header class="ax-head">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Selected work that shows <em>the standard</em></h2>
-          <p class="ax-head-note reveal ax-reveal--copy" style="--reveal-delay: 420ms">Published websites and clearly labelled concept builds. They show how we structure local business sites for clarity, trust, and action.</p>
-        </header>
-
-        <div class="ax-work-explorer reveal ax-reveal--item" data-work-explorer style="--reveal-delay: 760ms">
-          <div class="ax-work-feature-frame" data-work-feature-frame>
-            {work.map((w, i) => (
-              <figure
-                class:list={['ax-work-feature', i === 0 && 'is-active']}
-                data-work-feature={w.id}
-                aria-hidden={i === 0 ? 'false' : 'true'}
-              >
-                <ResponsivePicture
-                  source={w.img.source}
-                  alt={w.img.alt || w.title}
-                  sizes="(min-width: 900px) 52vw, 100vw"
-                  class="ax-work-feature-img"
-                  loading="lazy"
-                  fetchpriority="low"
-                  objectPosition={w.img.position || 'center 40%'}
-                />
-                <figcaption class="ax-work-feature-caption" aria-hidden="true">
-                  <span>{`0${i + 1}`} / {String(work.length).padStart(2, '0')}</span>
-                  <span>{w.niche}</span>
-                </figcaption>
-              </figure>
-            ))}
+    <!-- Work -->
+    <section class="section section-soft" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head-row">
+          <div class="section-head">
+            <p class="eyebrow">Work</p>
+            <h2 id="work-title">Recent work</h2>
+            <p>A live client website and concept builds that show how we structure sites for different kinds of local businesses.</p>
           </div>
-
-          <div class="ax-work-index" data-work-index>
-            {work.map((w, i) => (
-              <article class:list={['ax-work-item', i === 0 && 'is-open']} data-work-item>
-                <button
-                  id={`homepage-work-trigger-${w.id}`}
-                  type="button"
-                  class="ax-work-trigger"
-                  aria-expanded={i === 0 ? 'true' : 'false'}
-                  aria-controls={`homepage-work-panel-${w.id}`}
-                  data-work-trigger={w.id}
-                >
-                  <span class="ax-work-num" aria-hidden="true">{`0${i + 1}`}</span>
-                  <span class="ax-work-name">{w.title}</span>
-                  <span class="ax-work-niche">{w.niche}</span>
-                  <span class="ax-work-indicator" aria-hidden="true">+</span>
-                </button>
-                <div
-                  id={`homepage-work-panel-${w.id}`}
-                  class:list={['ax-work-panel', i === 0 && 'is-open']}
-                  role="region"
-                  aria-labelledby={`homepage-work-trigger-${w.id}`}
-                  aria-hidden={i === 0 ? 'false' : 'true'}
-                  data-work-panel={w.id}
-                  hidden={i !== 0}
-                >
-                  <div class="ax-work-panel-inner">
-                    <p class="ax-work-outcome">{w.outcome}</p>
-                    <a
-                      href={w.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="ax-work-link"
-                      tabindex={i === 0 ? undefined : -1}
-                      aria-label={`Open ${w.title} ${w.id === 'reids-home-and-yard' ? 'website' : 'demo'} in a new tab`}
-                    >
-                      {w.id === 'reids-home-and-yard' ? 'Visit website' : 'Open demo'} <span aria-hidden="true">↗</span>
-                    </a>
-                  </div>
-                </div>
-              </article>
-            ))}
-
-            <a href="/work/" class="ax-more ax-work-all">All work <span aria-hidden="true">→</span></a>
-          </div>
+          <a href="/work/" class="arrow-link">View all work <Icon name="arrow-right" /></a>
         </div>
+        <div class="grid grid-3">
+          {featured.map((project) => <WorkCard project={project} />)}
+        </div>
+        <p class="work-note">Concept builds are demonstrations designed by Axiom Web and are labelled clearly. They are not client results.</p>
       </div>
     </section>
 
-    <!-- SERVICES -->
-    <section class="ax-section ax-scene ax-scene--index" data-home-section="services" data-cinematic-scene="services" data-motion-role="index">
-      <div class="ax-container">
-        <header class="ax-head">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Three focused paths, <em>one standard</em></h2>
-        </header>
-
-        <ol class="ax-list">
-          {services.map((s, i) => (
-            <li class="reveal ax-reveal--row" data-scene-index={i} style={`--reveal-delay: ${260 + i * 300}ms`}>
-              <a href={s.href} class="ax-row">
-                <span class="ax-row-title">{s.label}</span>
-                <span class="ax-row-desc">{s.description}</span>
-                <span class="ax-row-arrow" aria-hidden="true">→</span>
-              </a>
+    <!-- Why Axiom -->
+    <section class="section" aria-labelledby="why-title">
+      <div class="container why-grid">
+        <div class="section-head why-head">
+          <p class="eyebrow">Why Axiom Web</p>
+          <h2 id="why-title">Built properly. Priced plainly.</h2>
+          <p>Every website we build follows the same standard, whatever the package. You know the price before we start, and you know who is building your site.</p>
+          <a href="/about/" class="arrow-link">About the studio <Icon name="arrow-right" /></a>
+        </div>
+        <ul role="list" class="value-grid">
+          {valueProps.map((item) => (
+            <li class="value">
+              <span class="icon-tile"><Icon name={item.icon} /></span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
 
-    <!-- WHY -->
-    <section class="ax-section ax-scene ax-scene--proof" data-home-section="why" data-cinematic-scene="why" data-motion-role="proof">
-      <div class="ax-container ax-split">
-        <div class="ax-split-left">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Built for businesses that <em>cannot look unclear</em></h2>
-          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 440ms">
-            If a new customer decides whether to trust you before they speak to you, the site has to do more than look acceptable.
+    <!-- Process -->
+    <section class="section section-soft" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-head-row">
+          <div class="section-head">
+            <p class="eyebrow">How it works</p>
+            <h2 id="process-title">From first conversation to launch in four steps</h2>
+            <p>A simple, predictable process. Scope and price are agreed in writing before design starts, so there are no surprises later.</p>
+          </div>
+          <a href="/approach/" class="arrow-link">See the full process <Icon name="arrow-right" /></a>
+        </div>
+        <ProcessSteps steps={processSteps} />
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-head center">
+          <p class="eyebrow">Pricing</p>
+          <h2 id="pricing-title">Published packages. No guesswork.</h2>
+          <p>Choose the package that fits your business today. Every standard package includes first-year hosting, two revision rounds and thirty days of support after launch.</p>
+        </div>
+        <PricingCards packages={packages} compact />
+        <p class="center-link"><a href="/pricing/" class="arrow-link">Compare packages and what’s included <Icon name="arrow-right" /></a></p>
+      </div>
+    </section>
+
+    <!-- Industries -->
+    <section class="section section-soft" aria-labelledby="industries-title">
+      <div class="container">
+        <div class="section-head-row">
+          <div class="section-head">
+            <p class="eyebrow">Industries</p>
+            <h2 id="industries-title">Websites for local service businesses</h2>
+            <p>Different businesses win customers in different ways. We plan each site around what your buyers need to see before they get in touch.</p>
+          </div>
+          <a href="/industries/" class="arrow-link">All industries <Icon name="arrow-right" /></a>
+        </div>
+        <IndustryGrid />
+      </div>
+    </section>
+
+    <!-- Founders -->
+    <section class="section" aria-labelledby="team-title">
+      <div class="container team-grid">
+        <div class="section-head team-head">
+          <p class="eyebrow">Who you’ll work with</p>
+          <h2 id="team-title">Two founders. No account managers.</h2>
+          <p>
+            Aidan Magee and Riley Hinsperger are the co-founders of Axiom Web, the web-focused subsidiary of Axiom International.
+            You work directly with the people who plan, design and build your website.
           </p>
+          <a href="/about/" class="arrow-link">Meet the founders <Icon name="arrow-right" /></a>
         </div>
-        <div class="ax-split-right">
-          {principles.map((p, i) => (
-            <div class="ax-principle reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${260 + i * 240}ms`}>
-              <div>
-                <h3 class="ax-principle-title">{p.title}</h3>
-                <p class="ax-principle-desc">{p.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <FounderCards />
       </div>
     </section>
 
-    <!-- FIGURES -->
-    <section class="ax-section ax-section--tight ax-scene ax-scene--metrics" data-home-section="figures" data-cinematic-scene="figures" data-motion-role="metrics">
-      <div class="ax-container">
-        <div class="ax-figures">
-          {figures.map((f, i) => (
-            <div class="ax-figure reveal ax-reveal--metric" data-scene-index={i} style={`--reveal-delay: ${360 + i * 320}ms; --scene-index: ${i}`}>
-              <span class="ax-figure-num">{f.value}</span>
-              <span class="ax-figure-label">{f.label}</span>
-            </div>
-          ))}
+    <!-- FAQ -->
+    <section class="section section-soft" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="section-head faq-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Common questions</h2>
+          <p>Straight answers about cost, timing and what working with us looks like.</p>
+          <div class="faq-contact">
+            <p class="small muted">Still have a question?</p>
+            <a class="text-link" href={`tel:${SITE_TELEPHONE}`}>{SITE_PHONE_DISPLAY}</a>
+            <a class="text-link" href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a>
+          </div>
         </div>
+        <FaqList items={homeFaq} openFirst />
       </div>
     </section>
 
-    <!-- PROCESS -->
-    <section class="ax-section ax-scene ax-scene--process" data-home-section="process" data-cinematic-scene="process" data-motion-role="process">
-      <div class="ax-container">
-        <header class="ax-head">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Review, scope, <em>build, launch</em></h2>
-        </header>
-
-        <div class="ax-process-track" data-process-track>
-          <span class="ax-process-line" aria-hidden="true"><span class="ax-process-line-fill" data-process-line-fill></span></span>
-          <ol class="ax-process">
-            {process.map((p, i) => (
-              <li class="ax-step reveal ax-reveal--step" data-process-step data-scene-index={i} style={`--reveal-delay: ${300 + i * 220}ms`}>
-                <span class="ax-step-node" aria-hidden="true"></span>
-                <h3 class="ax-step-title">{p.title}</h3>
-                <p class="ax-step-desc">{p.description}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- STUDIO -->
-    <section class="ax-section ax-scene ax-scene--partners" data-home-section="studio" data-cinematic-scene="studio" data-motion-role="partners">
-      <div class="ax-container ax-split">
-        <div class="ax-split-left">
-          <h2 class="ax-h2 reveal ax-reveal--title" style="--reveal-delay: 180ms">Two co-founders. <em>Direct accountability.</em></h2>
-          <p class="ax-lead reveal ax-reveal--copy" style="--reveal-delay: 480ms">
-            Aidan Magee and Riley Hinsperger are co-founders of Axiom International and Axiom Web, its web-focused subsidiary. You work directly with the people shaping the strategy and building the site—no account layers, no handoff fog, no guessing who owns the outcome.
-          </p>
-        </div>
-        <div class="ax-split-right">
-          {team.map((m, i) => (
-            <div class="ax-person reveal ax-reveal--item" data-scene-index={i} style={`--reveal-delay: ${320 + i * 360}ms`}>
-              <span class="ax-person-name">{m.name}</span>
-              <span class="ax-person-role">{m.role}</span>
-              <p class="ax-person-desc">{m.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="ax-final ax-scene ax-scene--resolution" data-home-section="final" data-cinematic-scene="final" data-motion-role="resolution">
-      <div class="ax-container">
-        <div class="ax-final-rule reveal ax-reveal--rule" aria-hidden="true" style="--reveal-delay: 260ms"></div>
-        <h2 class="ax-mega ax-final-mega reveal ax-reveal--final" style="--reveal-delay: 620ms">
-          Start a serious<br /><em>project conversation.</em>
-        </h2>
-        <div class="ax-hero-actions reveal ax-reveal--final" style="--reveal-delay: 1080ms">
-          <a href={CTA_PATHS.startProject} class="btn btn-primary">Start a project <span aria-hidden="true">→</span></a>
-          <a href="/pricing/" class="btn-ghost-link">See pricing</a>
-        </div>
-        <p class="ax-fineprint reveal ax-reveal--final" style="--reveal-delay: 1400ms">
-          Four packages. Pricing is public, the launch path is defined, and every build is checked for speed, mobile quality, and clear inquiry flow before it ships.
-        </p>
-      </div>
-    </section>
+    <CtaBand />
   </main>
-</SiteLayout>
+</BaseLayout>
 
 <style>
-  .ax-root {
-    --ax-gutter: clamp(1.5rem, 5vw, 4rem);
-    color: var(--text-primary);
-  }
-
-  .ax-container {
-    width: 100%;
-    max-width: 75rem;
-    margin-inline: auto;
-    padding-inline: var(--ax-gutter);
-  }
-
-  /* ── Type ─────────────────────────────────────────── */
-  .ax-mega {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(2.6rem, 8vw, 7.5rem);
-    line-height: 0.98;
-    letter-spacing: -0.025em;
-    color: var(--text-primary);
-    margin: 0;
-  }
-  .ax-mega em {
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  .ax-h2 {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(1.9rem, 4vw, 3.25rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
-    margin: 0;
-    max-width: 18ch;
-  }
-  .ax-h2 em {
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  .ax-lead {
-    font-size: clamp(1rem, 1.2vw, 1.15rem);
-    line-height: 1.7;
-    color: var(--text-secondary);
-    max-width: 44ch;
-    margin: 0;
-  }
-
-  /* ── Hero ─────────────────────────────────────────── */
-  .ax-hero {
+  /* Hero */
+  .home-hero {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: clamp(560px, 84svh, 880px);
-    padding-block: clamp(2.5rem, 7vh, 5rem) clamp(3.5rem, 9vh, 6rem);
-  }
-
-  .ax-hero-title { margin: 0; }
-  .ax-line { display: block; overflow: hidden; padding-bottom: 0.04em; }
-  .ax-line-inner { display: block; }
-
-  .ax-hero-foot { margin-top: clamp(2.25rem, 5vw, 3.5rem); display: grid; gap: 2rem; }
-  .ax-hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-
-  @media (min-width: 900px) {
-    .ax-hero-foot { grid-template-columns: auto 1fr; align-items: end; gap: 3.5rem; }
-    .ax-hero-foot .ax-lead { justify-self: end; }
-  }
-
-  /* ── Mobile hero ──────────────────────────────────── */
-  @media (max-width: 767px) {
-    .ax-hero { min-height: auto; padding-top: 1.25rem; padding-bottom: 2.75rem; }
-    .ax-hero-foot { margin-top: 1.75rem; gap: 1.5rem; }
-    .ax-hero-actions { gap: 1rem; }
-    .ax-hero-actions .btn-primary { flex: 1 1 auto; justify-content: center; }
-  }
-
-  /* ── Film ─────────────────────────────────────────── */
-  .ax-film { padding-block: clamp(1rem, 4vh, 2.5rem) clamp(4.5rem, 11vh, 8rem); }
-  .ax-film-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin-bottom: clamp(1rem, 2vw, 1.4rem);
-  }
-  .ax-film-title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-style: italic;
-    font-size: clamp(1.15rem, 1.8vw, 1.45rem);
-    letter-spacing: -0.01em;
-    color: var(--text-primary);
-    margin: 0;
-  }
-  .ax-film-meta {
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .ax-film-frame {
-    position: relative;
-    aspect-ratio: 16 / 9;
     overflow: hidden;
-    border: 1px solid var(--hairline);
-    border-radius: 8px;
-    background: #000;
+    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    background:
+      radial-gradient(52rem 30rem at 92% 8%, rgb(36 83 214 / 0.1), transparent 70%),
+      linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--line);
   }
-  .ax-film-video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background: #000;
-  }
-  .ax-film-play {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-content: center;
-    justify-items: center;
-    gap: 1rem;
-    border: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.45));
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: opacity 420ms var(--ease-premium), visibility 0s linear 0s;
-  }
-  .ax-film-poster { position: absolute; inset: 0; }
-  .ax-film-poster img { width: 100%; height: 100%; object-fit: cover; }
-  .ax-film-frame[data-state='playing'] .ax-film-poster { visibility: hidden; }
-  .ax-film-play-icon {
-    position: relative;
-    width: clamp(3.75rem, 7vw, 5rem);
-    aspect-ratio: 1;
-    border: 1px solid rgba(242, 240, 234, 0.55);
-    border-radius: 999px;
-    background: rgba(10, 10, 10, 0.35);
-    backdrop-filter: blur(6px);
-    transition: transform 480ms var(--ease-cinematic), border-color 240ms var(--ease-premium), background-color 240ms var(--ease-premium);
-  }
-  .ax-film-play-icon::after {
+
+  .home-hero::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 53%;
-    border-style: solid;
-    border-width: 0.55rem 0 0.55rem 0.9rem;
-    border-color: transparent transparent transparent var(--text-primary);
-    transform: translate(-50%, -50%);
-  }
-  .ax-film-play-label {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(242, 240, 234, 0.82);
-  }
-  .ax-film-play:hover .ax-film-play-icon,
-  .ax-film-play:focus-visible .ax-film-play-icon {
-    transform: scale(1.06);
-    border-color: var(--text-primary);
-    background: rgba(242, 240, 234, 0.08);
-  }
-  .ax-film-play:focus-visible { outline: 1px solid var(--text-primary); outline-offset: -6px; }
-  .ax-film-frame[data-state='playing'] .ax-film-play {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 420ms var(--ease-premium), visibility 0s linear 420ms;
-  }
-
-  @media (max-width: 759px) {
-    .ax-film-head { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
-    .ax-film-frame { border-radius: 6px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ax-film-play, .ax-film-play-icon { transition: none !important; }
-  }
-
-  /* ── Section frame ────────────────────────────────── */
-  .ax-section { padding-block: clamp(4.5rem, 11vh, 8rem); border-top: 1px solid var(--hairline); }
-  .ax-section--tight { padding-block: clamp(3rem, 7vh, 5rem); }
-
-  .ax-head { display: grid; gap: 1.1rem; margin-bottom: clamp(2.5rem, 5vw, 3.75rem); max-width: 42rem; }
-  .ax-head-note { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; margin: 0; max-width: 48ch; }
-
-  /* ── Problem statement ────────────────────────────── */
-  .ax-statement { padding-block: clamp(4.5rem, 13vh, 9rem); border-top: 1px solid var(--hairline); }
-  .ax-big {
-    font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(1.7rem, 4.4vw, 3.4rem); line-height: 1.18; letter-spacing: -0.02em;
-    color: var(--text-muted); max-width: 22ch; margin: 0;
-  }
-  .ax-big em { font-style: normal; color: var(--text-primary); }
-
-  /* ── Solution ─────────────────────────────────────── */
-  .ax-solution { display: grid; grid-template-columns: 1fr; gap: clamp(1.5rem, 3vw, 2rem); border-top: 1px solid var(--hairline); padding-top: clamp(2rem, 4vw, 3rem); }
-  @media (min-width: 760px) { .ax-solution { grid-template-columns: repeat(3, 1fr); gap: clamp(2rem, 3vw, 3rem); } }
-  .ax-solution-item { display: grid; gap: 0.75rem; align-content: start; }
-  .ax-solution-title { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 500; letter-spacing: -0.015em; color: var(--text-primary); margin: 0; }
-  .ax-solution-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin: 0; max-width: 38ch; }
-
-  /* ── Persistent page motif ────────────────────────── */
-  .ax-continuity-rail {
-    position: fixed;
-    z-index: 4;
-    top: 22vh;
-    right: clamp(1rem, 2vw, 2rem);
-    width: 7px;
-    height: 56vh;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(70% 60% at 80% 20%, #000 0%, transparent 75%);
+    opacity: 0.55;
     pointer-events: none;
-    opacity: 0.72;
-  }
-  .ax-continuity-rail-track {
-    position: absolute;
-    inset: 0 auto 0 3px;
-    width: 1px;
-    background: var(--hairline);
-  }
-  .ax-continuity-rail-progress {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: var(--text-primary);
-    transform: scaleY(var(--page-progress, 0));
-    transform-origin: top center;
-    transition: transform 180ms linear;
   }
 
-  /* ── Work explorer ────────────────────────────────── */
-  .ax-work-explorer {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
-    gap: clamp(2rem, 6vw, 5.5rem);
-    align-items: start;
-  }
-
-  .ax-work-feature-frame {
+  .hero-grid {
     position: relative;
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    border: 1px solid var(--hairline);
-    border-radius: 8px;
-    background: var(--surface-1);
-  }
-
-  .ax-work-feature {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    margin: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.035);
-    transition:
-      opacity 600ms var(--ease-cinematic),
-      transform 900ms var(--ease-cinematic),
-      visibility 0s linear 600ms;
-  }
-
-  .ax-work-feature.is-active {
-    z-index: 1;
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-    transition-delay: 0s;
-  }
-
-  :global(.ax-work-feature-img) {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.04);
-    filter: grayscale(0.14) brightness(0.92);
-    transition: transform 1.3s var(--ease-cinematic), filter 700ms var(--ease-premium);
-  }
-
-  .ax-work-feature.is-active :global(.ax-work-feature-img) {
-    transform: scale(1);
-    filter: grayscale(0.04) brightness(1);
-  }
-
-  .ax-work-feature-caption {
-    position: absolute;
-    right: 1rem;
-    bottom: 0.9rem;
-    left: 1rem;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    color: rgba(242, 240, 234, 0.78);
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55);
-  }
-
-  .ax-work-index {
-    min-width: 0;
-    border-top: 1px solid var(--hairline-strong);
-  }
-
-  .ax-work-item {
-    min-width: 0;
-    border-bottom: 1px solid var(--hairline);
-  }
-
-  .ax-work-trigger {
     display: grid;
-    grid-template-columns: 2.1rem minmax(0, 1fr) auto 1.5rem;
-    gap: 0.75rem;
+    gap: clamp(2.75rem, 2rem + 3vw, 4rem);
     align-items: center;
-    width: 100%;
-    min-height: 4.3rem;
-    padding: 0.85rem 0;
-    border: 0;
-    background: transparent;
-    color: var(--text-primary);
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-    transition: background-color 240ms var(--ease-premium), color 240ms var(--ease-premium);
   }
 
-  .ax-work-trigger:hover,
-  .ax-work-trigger:focus-visible,
-  .ax-work-item.is-open .ax-work-trigger {
-    color: var(--text-primary);
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+      gap: clamp(3rem, 1rem + 4vw, 5rem);
+    }
   }
 
-  .ax-work-trigger:hover .ax-work-name,
-  .ax-work-trigger:focus-visible .ax-work-name,
-  .ax-work-item.is-open .ax-work-name {
-    transform: translateX(0.25rem);
+  .hero-copy {
+    display: grid;
+    gap: 1.4rem;
+    align-content: start;
   }
 
-  .ax-work-num,
-  .ax-work-niche {
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: 0.55rem;
+    padding: 0.4rem 0.85rem 0.4rem 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink-2);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    box-shadow: var(--shadow-xs);
   }
 
-  .ax-work-name {
-    min-width: 0;
-    color: inherit;
-    font-family: var(--font-display);
-    font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  .kicker-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--brand);
+    box-shadow: 0 0 0 4px var(--brand-soft);
+  }
+
+  .hero-copy h1 {
+    max-width: 15.5ch;
+  }
+
+  .hl {
+    color: var(--brand);
+  }
+
+  .hero-copy .lead {
+    max-width: 36rem;
+  }
+
+  .hero-copy .btn-row {
+    margin-top: 0.4rem;
+  }
+
+  .hero-assurances {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0.4rem 0 0;
+    color: var(--ink-2);
+    font-size: var(--fs-sm);
     font-weight: 500;
-    letter-spacing: -0.015em;
-    line-height: 1.1;
-    transition: transform 360ms var(--ease-cinematic);
   }
 
-  .ax-work-indicator {
-    display: inline-grid;
-    place-items: center;
-    width: 1.35rem;
-    height: 1.35rem;
-    color: var(--text-muted);
-    font-size: 1.3rem;
-    font-weight: 300;
-    line-height: 1;
-    transition: transform 360ms var(--ease-cinematic), color 240ms var(--ease-premium);
-  }
-
-  .ax-work-item.is-open .ax-work-indicator {
-    color: var(--text-primary);
-    transform: rotate(45deg);
-  }
-
-  .ax-work-panel {
-    display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-    transition: grid-template-rows 420ms var(--ease-cinematic), opacity 300ms var(--ease-premium);
-  }
-
-  .ax-work-panel-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1.25rem;
-    min-height: 0;
-    overflow: hidden;
-    padding: 0;
-  }
-
-  .ax-work-panel.is-open {
-    grid-template-rows: 1fr;
-    opacity: 1;
-  }
-
-  .ax-work-panel.is-open .ax-work-panel-inner {
-    padding-bottom: 1.35rem;
-  }
-
-  .ax-work-outcome {
-    max-width: 38ch;
-    color: var(--text-secondary);
-    font-size: 0.92rem;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .ax-work-link {
-    display: inline-flex;
-    align-items: center;
-    align-self: end;
-    gap: 0.45rem;
-    min-height: 2.75rem;
-    color: var(--text-primary);
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: underline;
-    text-decoration-color: var(--hairline-strong);
-    text-underline-offset: 0.4em;
-    transition: gap 240ms var(--ease-premium), text-decoration-color 240ms var(--ease-premium);
-  }
-
-  .ax-work-link:hover {
-    gap: 0.75rem;
-    text-decoration-color: var(--text-primary);
-  }
-
-  .ax-work-all {
-    margin-top: 1.75rem;
-  }
-
-  @media (max-width: 1100px) {
-    .ax-continuity-rail { display: none; }
-  }
-
-  @media (max-width: 759px) {
-    .ax-work-explorer {
-      grid-template-columns: 1fr;
-      gap: 2.25rem;
-    }
-
-    .ax-work-feature-frame { aspect-ratio: 4 / 3; }
-
-    .ax-work-trigger {
-      grid-template-columns: 2rem minmax(0, 1fr) auto 1.35rem;
-      gap: 0.55rem;
-      min-height: 4rem;
-    }
-
-    .ax-work-niche {
-      max-width: 6.5rem;
-      text-align: right;
-      line-height: 1.35;
-    }
-
-    .ax-work-panel-inner {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .ax-work-link { align-self: start; }
-  }
-
-  .ax-more {
-    display: inline-flex;
+  .hero-assurances li {
+    display: flex;
     align-items: center;
     gap: 0.55rem;
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--text-secondary);
-    transition: color 0.2s ease, gap 0.2s ease;
   }
 
-  .ax-more:hover { color: var(--text-primary); gap: 0.85rem; }
-
-  /* ── Index list (services) ────────────────────────── */
-  .ax-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hairline); }
-  .ax-row {
-    display: grid; grid-template-columns: 1fr; grid-template-areas: 'title' 'desc';
-    gap: 0.5rem; align-items: start;
-    padding-block: clamp(1.6rem, 3vw, 2.4rem); border-bottom: 1px solid var(--hairline);
-    transition: background-color 0.25s ease;
-  }
-  @media (min-width: 860px) {
-    .ax-row { grid-template-columns: minmax(12rem, 18rem) 1fr auto; grid-template-areas: 'title desc arrow'; align-items: center; gap: 2rem; }
-  }
-  .ax-row-title { grid-area: title; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.3rem); font-weight: 500; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.05; }
-  .ax-row-desc { grid-area: desc; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; max-width: 40ch; margin: 0; }
-  .ax-row-arrow { grid-area: arrow; color: var(--text-muted); font-size: 1.3rem; transition: transform 0.25s ease, color 0.25s ease; justify-self: end; }
-  a.ax-row:hover { background: var(--surface-1); }
-  a.ax-row:hover .ax-row-arrow { color: var(--text-primary); transform: translateX(6px); }
-
-  /* ── Split ────────────────────────────────────────── */
-  .ax-split { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 5vw, 4rem); }
-  @media (min-width: 980px) {
-    .ax-split { grid-template-columns: 0.82fr 1.18fr; gap: clamp(3rem, 6vw, 6rem); }
-    .ax-split-left { position: sticky; top: 7rem; align-self: start; }
-  }
-  .ax-split-left .ax-h2 { margin-block: 1rem 1.25rem; }
-
-  .ax-principle { display: grid; grid-template-columns: 1fr; gap: 1.25rem; padding-block: clamp(1.5rem, 3vw, 2.1rem); border-top: 1px solid var(--hairline); }
-  .ax-principle:first-child { border-top: 0; padding-top: 0; }
-  .ax-principle-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; color: var(--text-primary); margin: 0; letter-spacing: -0.01em; }
-  .ax-principle-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin: 0.6rem 0 0; }
-
-  /* ── Figures ──────────────────────────────────────── */
-  .ax-figures { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(2rem, 4vw, 3rem); }
-  @media (min-width: 760px) { .ax-figures { grid-template-columns: repeat(3, 1fr); } }
-  .ax-figure { position: relative; display: grid; gap: 0.65rem; border-top: 1px solid var(--hairline-strong); padding-top: 1.1rem; }
-  .ax-figure::before { content: ''; position: absolute; inset: -1px 0 auto; height: 1px; background: var(--text-primary); transform: scaleX(0); transform-origin: left center; transition: transform 700ms var(--ease-cinematic); }
-  .ax-figure.is-in::before { transform: scaleX(1); }
-  .ax-figure-num { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); }
-  .ax-figure-label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.5; }
-
-  /* ── Process ──────────────────────────────────────── */
-  .ax-process-track { position: relative; --process-progress: 0; }
-  .ax-process-line { position: absolute; z-index: 0; inset: 0 0 auto; display: block; height: 1px; background: var(--hairline-strong); pointer-events: none; }
-  .ax-process-line-fill { display: block; width: 100%; height: 100%; background: var(--text-primary); transform: scaleX(var(--process-progress)); transform-origin: left center; transition: transform 180ms linear; }
-  .ax-process { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 0; }
-  @media (min-width: 860px) { .ax-process { grid-template-columns: repeat(4, 1fr); } }
-  .ax-step { position: relative; padding-top: 2rem; padding-right: clamp(1rem, 2vw, 2rem); border-top: 1px solid transparent; }
-  @media (max-width: 859px) {
-    .ax-process-track { padding-left: 1.15rem; }
-    .ax-process-line { inset: 0 auto 0 0; width: 1px; height: auto; }
-    .ax-process-line-fill { width: 100%; height: 100%; transform: scaleY(var(--process-progress)); transform-origin: top center; }
-    .ax-step { padding-top: 1.6rem; padding-bottom: 1.6rem; }
-    .ax-step + .ax-step { border-top: 1px solid var(--hairline); }
-  }
-  .ax-step-node { position: absolute; top: -4px; left: 0; width: 7px; height: 7px; border-radius: 999px; background: var(--text-muted); transform: scale(0.82); transition: background-color 240ms var(--ease-premium), transform 360ms var(--ease-cinematic); }
-  .ax-step.is-current .ax-step-node { background: var(--text-primary); transform: scale(1.35); }
-  .ax-step-title { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 500; letter-spacing: -0.02em; color: var(--text-primary); margin: 0.5rem 0 0; }
-  .ax-step-desc { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin: 0.7rem 0 0; max-width: 34ch; }
-
-  /* ── Studio ───────────────────────────────────────── */
-  .ax-person { padding-block: clamp(1.75rem, 3vw, 2.25rem); border-top: 1px solid var(--hairline); }
-  .ax-person:first-child { border-top: 0; padding-top: 0; }
-  .ax-person-name { display: block; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; letter-spacing: -0.03em; color: var(--text-primary); }
-  .ax-person-role { display: block; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--text-muted); margin-top: 0.4rem; }
-  .ax-person-desc { color: var(--text-secondary); font-size: 1rem; line-height: 1.65; margin: 1rem 0 0; max-width: 46ch; }
-
-  /* ── Final CTA ────────────────────────────────────── */
-  .ax-final { position: relative; padding-block: clamp(5rem, 16vh, 10rem); border-top: 1px solid var(--hairline); overflow: hidden; }
-  .ax-final::after { content: ''; position: absolute; top: 0; right: 0; width: min(48vw, 42rem); height: 1px; background: linear-gradient(90deg, transparent, var(--hairline-strong)); pointer-events: none; }
-  .ax-final-rule { width: clamp(4rem, 10vw, 8rem); height: 1px; margin-bottom: clamp(2rem, 5vw, 3.5rem); background: var(--text-primary); transform-origin: left center; }
-  .ax-final-mega { margin-block: 0 2.5rem; }
-  .ax-fineprint { margin-top: 2.25rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; max-width: 48ch; }
-
-  /* ── Choreographed reveals ────────────────────────── */
-  .ax-root .ax-reveal--title { transition: opacity 800ms var(--ease-cinematic), transform 800ms var(--ease-cinematic), clip-path 800ms var(--ease-cinematic); }
-  .ax-root .ax-reveal--item,
-  .ax-root .ax-reveal--copy,
-  .ax-root .ax-reveal--row,
-  .ax-root .ax-reveal--metric,
-  .ax-root .ax-reveal--step,
-  .ax-root .ax-reveal--final { transition: opacity 640ms var(--ease-cinematic), transform 640ms var(--ease-cinematic); }
-  .ax-root .ax-reveal--rule { transition: opacity 720ms var(--ease-cinematic), transform 720ms var(--ease-cinematic); }
-
-  @media (prefers-reduced-motion: no-preference) {
-    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) { opacity: 0; transform: translateY(1.2rem); }
-    :global(html.js) .ax-root .ax-reveal--statement:not(.is-in) { opacity: 0; transform: translateY(1.4rem); }
-    :global(html.js) .ax-root .ax-reveal--copy:not(.is-in) { opacity: 0; transform: translateY(1rem); }
-    :global(html.js) .ax-root .ax-reveal--item:not(.is-in) { opacity: 0; transform: translateY(1rem) scale(0.985); }
-    :global(html.js) .ax-root .ax-reveal--row:not(.is-in) { opacity: 0; transform: translateX(-1.1rem); }
-    :global(html.js) .ax-root .ax-reveal--metric:not(.is-in) { opacity: 0; transform: translateY(1rem); }
-    :global(html.js) .ax-root .ax-reveal--step:not(.is-in) { opacity: 0; transform: translateY(1.25rem); }
-    :global(html.js) .ax-root .ax-reveal--final:not(.is-in) { opacity: 0; transform: translateY(1.25rem) scale(0.985); }
-    :global(html.js) .ax-root .ax-reveal--rule:not(.is-in) { opacity: 0; transform: scaleX(0); }
+  .hero-assurances :global(svg) {
+    flex: none;
+    color: var(--success);
   }
 
-  /* ── Hero title-card pacing ───────────────────────── */
-  .ax-hero::before { content: ''; position: absolute; top: clamp(1.5rem, 8vh, 4rem); bottom: clamp(2rem, 8vh, 5rem); left: var(--ax-gutter); width: 1px; background: linear-gradient(var(--hairline-strong), transparent); opacity: 0.7; transform: scaleY(0); transform-origin: top center; }
-  .ax-load { opacity: 1; }
-  .ax-mask { transform: none; }
-  :global(html.js) .ax-load { opacity: 0; animation: ax-rise 0.8s var(--ease-cinematic) forwards; animation-delay: calc(var(--i, 0) * 80ms); }
-  :global(html.js) .ax-mask { transform: translateY(110%); animation: ax-unmask 0.9s var(--ease-cinematic) forwards; animation-delay: calc(var(--i, 0) * 90ms); }
-  :global(html.js) .ax-hero::before { animation: ax-line-in 1.1s var(--ease-cinematic) 320ms forwards; }
-
-  @keyframes ax-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-  @keyframes ax-unmask { from { transform: translateY(110%); } to { transform: translateY(0); } }
-  @keyframes ax-line-in { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ax-load, .ax-mask, .ax-hero::before { animation: none !important; opacity: 1 !important; transform: none !important; }
-    .ax-continuity-rail { display: none; }
-    .ax-work-feature,
-    .ax-work-panel,
-    .ax-work-panel-inner,
-    .ax-work-name,
-    .ax-work-indicator,
-    .ax-work-feature-img,
-    .ax-process-line-fill,
-    .ax-step-node,
-    .ax-figure::before { transition: none !important; }
-    .ax-work-feature { transform: none; }
-    .ax-work-feature.is-active { opacity: 1; }
-    .ax-root .ax-reveal--rule { opacity: 1 !important; transform: none !important; }
-  }
-
-  /* ── Full-page cinematic scene system ───────────────── */
-  :global(html) { overflow-x: clip; }
-
-  .ax-scene {
-    --scene-progress: 1;
-    --scene-inverse: 0;
-    --scene-drift-left: 0px;
-    --scene-drift-right: 0px;
-    --scene-drift-up: 0px;
-    --scene-drift-down: 0px;
-    --scene-scale: 1;
+  .hero-visual {
     position: relative;
-    isolation: isolate;
+    padding: 1.5rem 0 2.5rem;
   }
 
-  .ax-scene::after {
-    content: '';
+  @media (min-width: 1024px) {
+    .hero-visual {
+      padding: 2rem 0 3rem 1.5rem;
+    }
+  }
+
+  .hero-glow {
     position: absolute;
-    z-index: 0;
-    right: var(--ax-gutter);
-    bottom: 0;
-    left: var(--ax-gutter);
-    height: 1px;
-    background: var(--hairline-strong);
-    opacity: 0.72;
-    pointer-events: none;
-    transform: scaleX(var(--scene-progress));
-    transform-origin: left center;
-    transition: transform 1.35s var(--ease-cinematic), opacity 900ms var(--ease-premium);
+    inset: 8% -6% 4% 8%;
+    border-radius: 40px;
+    background: linear-gradient(135deg, rgb(36 83 214 / 0.18), rgb(157 181 255 / 0.12));
+    filter: blur(40px);
   }
 
-  .ax-scene:not(.ax-scene--title-card)::before {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    right: var(--ax-gutter);
-    left: var(--ax-gutter);
-    height: 1px;
-    background: linear-gradient(90deg, var(--text-primary), transparent 38%, transparent);
-    opacity: 0.22;
-    pointer-events: none;
-    transform: scaleX(var(--scene-progress));
-    transform-origin: left center;
-    transition: transform 1.5s var(--ease-cinematic), opacity 1s var(--ease-premium);
-  }
-
-  .ax-scene--resolution::after {
-    top: 0;
-    right: 0;
-    bottom: auto;
-    left: auto;
-    width: min(48vw, 42rem);
-    background: linear-gradient(90deg, transparent, var(--hairline-strong));
-    transform-origin: right center;
-  }
-
-  .ax-scene > .ax-container,
-  .ax-scene > .ax-container > * {
+  .hero-visual :global(.hero-browser) {
     position: relative;
-    z-index: 1;
   }
 
-  /* The opening is a title card: held, masked, then released in three beats. */
-  .ax-scene--title-card .ax-hero-title {
-    transition: transform 1.45s var(--ease-cinematic);
+  .hero-chip {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem 0.75rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: var(--shadow-md);
+    font-size: var(--fs-xs);
+    line-height: 1.3;
   }
 
-  .ax-scene--title-card .ax-hero-foot {
-    transition: transform 1.25s var(--ease-cinematic);
+  .hero-chip-launch {
+    bottom: 0.5rem;
+    left: -0.5rem;
+    transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
   }
 
-  :global(html.js) .ax-scene--title-card .ax-hero-title {
-    transform: translate3d(0, var(--scene-drift-up), 0) scale(var(--scene-scale));
+  .hero-chip-launch:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
 
-  :global(html.js) .ax-scene--title-card .ax-hero-foot {
-    transform: translate3d(var(--scene-drift-right), 0, 0);
+  .hero-chip-time {
+    top: 0.25rem;
+    right: -0.25rem;
   }
 
-  :global(html.js) .ax-mask {
-    animation: ax-title-card-reveal 0.6s var(--ease-cinematic) both;
-    animation-delay: calc(var(--i, 0) * 80ms);
+  @media (min-width: 1024px) {
+    .hero-chip-launch {
+      left: -1rem;
+    }
+    .hero-chip-time {
+      right: -1.25rem;
+    }
   }
 
-  :global(html.js) .ax-load {
-    animation: ax-hero-support-reveal 0.5s var(--ease-cinematic) both;
-    animation-delay: calc(100ms + (var(--i, 0) * 80ms));
+  .chip-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex: none;
+    border-radius: 10px;
+    background: var(--brand-soft);
+    color: var(--brand);
   }
 
-  :global(html.js) .ax-hero::before {
-    animation: ax-line-in 1.8s var(--ease-cinematic) 180ms both;
+  .chip-icon-live {
+    background: var(--success-soft);
+    color: var(--success);
   }
 
-  @keyframes ax-title-card-reveal {
-    0% { opacity: 0; transform: translate3d(0, 120%, 0) scale(1.045); letter-spacing: 0.015em; }
-    58% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); letter-spacing: -0.025em; }
-    100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); letter-spacing: -0.025em; }
-  }
-
-  @keyframes ax-hero-support-reveal {
-    0% { opacity: 0; transform: translate3d(0, 1.25rem, 0); }
-    62% { opacity: 1; transform: translate3d(0, 0, 0); }
-    100% { opacity: 1; transform: translate3d(0, 0, 0); }
-  }
-
-  /* Editorial statement: two lines travel from opposite sides and settle. */
-  .ax-statement-line {
+  .chip-label {
     display: block;
-    transition: transform 1.45s var(--ease-cinematic), letter-spacing 1.45s var(--ease-cinematic);
+    color: var(--text-muted);
+    font-weight: 500;
   }
 
-  :global(html.js) .ax-scene--statement .ax-statement-line--quiet {
-    transform: translate3d(var(--scene-drift-left), 0, 0);
-    letter-spacing: 0.012em;
+  .chip-title {
+    display: block;
+    color: var(--ink);
+    font-size: var(--fs-sm);
+    font-weight: 650;
   }
 
-  :global(html.js) .ax-scene--statement .ax-statement-line--resolve {
-    transform: translate3d(var(--scene-drift-right), 0, 0);
-    letter-spacing: -0.02em;
-    transition-delay: 160ms;
+  .hero-facts {
+    position: relative;
+    margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    padding-top: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+    border-top: 1px solid var(--line);
   }
 
-  /* Solution cascade: each proof beat has a different vector. */
-  .ax-solution-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 1px;
-    background: var(--text-primary);
-    opacity: 0.45;
-    transform: scaleY(0);
-    transform-origin: top center;
-    transition: transform 1.2s var(--ease-cinematic);
+  @media (max-width: 519px) {
+    .hero-chip-time {
+      display: none;
+    }
   }
 
-  .ax-solution-item { position: relative; padding-left: clamp(0.85rem, 2vw, 1.4rem); }
-  .ax-solution-item.is-in::before { transform: scaleY(1); }
-  .ax-solution-title,
-  .ax-solution-desc { transition: transform 1.35s var(--ease-cinematic), opacity 1.1s var(--ease-premium); }
-
-  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(1) .ax-solution-title { transform: translate3d(var(--scene-drift-left), 0, 0); }
-  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(1) .ax-solution-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
-  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(2) .ax-solution-title { transform: translate3d(0, var(--scene-drift-up), 0); }
-  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(2) .ax-solution-desc { transform: translate3d(var(--scene-drift-right), 0, 0); }
-  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(3) .ax-solution-title { transform: translate3d(var(--scene-drift-right), 0, 0); }
-  :global(html.js) .ax-scene--cascade .ax-solution-item:nth-child(3) .ax-solution-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
-
-  /* Work: the frame and index arrive on separate tracks; the image breathes slowly. */
-  .ax-work-feature-frame,
-  .ax-work-index { transition: transform 1.5s var(--ease-cinematic); }
-  :global(html.js) .ax-scene--feature .ax-work-feature-frame { transform: translate3d(0, var(--scene-drift-down), 0); }
-  :global(html.js) .ax-scene--feature .ax-work-index { transform: translate3d(var(--scene-drift-right), 0, 0); }
-
-  .ax-work-feature {
-    clip-path: inset(0 16% 0 0);
-    transition:
-      opacity 1.2s var(--ease-cinematic),
-      transform 1.8s var(--ease-cinematic),
-      clip-path 1.25s var(--ease-cinematic),
-      visibility 0s linear 1.2s;
+  /* Work */
+  .work-note {
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
   }
 
-  .ax-work-feature.is-active {
-    clip-path: inset(0);
-    transition-delay: 0s;
+  /* Two-column sections */
+  .why-grid,
+  .team-grid,
+  .faq-grid {
+    display: grid;
+    gap: 2.5rem;
   }
 
-  :global(.ax-work-feature-img) {
-    transform: scale(1.1);
-    transition: transform 2.1s var(--ease-cinematic), filter 1.2s var(--ease-premium);
+  @media (min-width: 1024px) {
+    .why-grid,
+    .team-grid,
+    .faq-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+      gap: clamp(3rem, 2rem + 4vw, 6rem);
+      align-items: start;
+    }
+
+    .why-head,
+    .team-head,
+    .faq-head {
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
   }
 
-  .ax-work-feature.is-active :global(.ax-work-feature-img) {
-    transform: scale(1);
+  .why-head,
+  .team-head,
+  .faq-head {
+    margin-bottom: 0;
+    justify-items: start;
   }
 
-  .ax-work-feature-frame::after {
-    content: '';
-    position: absolute;
-    z-index: 3;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 1px;
-    background: rgba(242, 240, 234, 0.75);
-    pointer-events: none;
-    transform: translateX(calc(var(--scene-progress) * 100%));
-    opacity: 0.45;
-    transition: transform 1.65s var(--ease-cinematic), opacity 900ms var(--ease-premium);
+  .value-grid {
+    display: grid;
+    gap: 2rem 2.5rem;
+    margin: 0;
   }
 
-  /* Services: a line indicator draws before each row settles into the index. */
-  .ax-list > li { position: relative; overflow: hidden; }
-  .ax-list .ax-row { padding-left: clamp(1rem, 2vw, 1.5rem); padding-right: 0.5rem; }
-  .ax-list > li::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 2px;
-    background: var(--text-primary);
-    opacity: 0.7;
-    transform: scaleY(0);
-    transform-origin: top center;
-    transition: transform 1.25s var(--ease-cinematic);
-  }
-  .ax-list > li.is-in::before { transform: scaleY(1); }
-  .ax-row-title,
-  .ax-row-desc { transition: transform 1.35s var(--ease-cinematic), opacity 1.15s var(--ease-premium); }
-  :global(html.js) .ax-scene--index .ax-list > li:nth-child(1) .ax-row-title { transform: translate3d(var(--scene-drift-left), 0, 0); }
-  :global(html.js) .ax-scene--index .ax-list > li:nth-child(1) .ax-row-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
-  :global(html.js) .ax-scene--index .ax-list > li:nth-child(2) .ax-row-title { transform: translate3d(0, var(--scene-drift-up), 0); }
-  :global(html.js) .ax-scene--index .ax-list > li:nth-child(2) .ax-row-desc { transform: translate3d(var(--scene-drift-right), 0, 0); }
-  :global(html.js) .ax-scene--index .ax-list > li:nth-child(3) .ax-row-title { transform: translate3d(var(--scene-drift-left), 0, 0); }
-  :global(html.js) .ax-scene--index .ax-list > li:nth-child(3) .ax-row-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
-
-  /* Trust/proof: the left statement holds while proof lines disclose progressively. */
-  .ax-scene--proof .ax-split-left { transition: transform 1.45s var(--ease-cinematic); }
-  :global(html.js) .ax-scene--proof .ax-split-left { transform: translate3d(0, var(--scene-drift-up), 0); }
-  .ax-principle { position: relative; padding-left: clamp(0.85rem, 2vw, 1.4rem); }
-  .ax-principle::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 1px;
-    background: var(--text-primary);
-    opacity: 0.55;
-    transform: scaleY(0);
-    transform-origin: top center;
-    transition: transform 1.3s var(--ease-cinematic);
-  }
-  .ax-principle.is-in::after { transform: scaleY(1); }
-  .ax-principle-title,
-  .ax-principle-desc { transition: transform 1.35s var(--ease-cinematic), opacity 1.15s var(--ease-premium); }
-  :global(html.js) .ax-scene--proof .ax-principle-title { transform: translate3d(var(--scene-drift-right), 0, 0); }
-  :global(html.js) .ax-scene--proof .ax-principle-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
-
-  /* Metrics are a separate beat: line, number, then label. */
-  .ax-figure::before { transition: transform 1.25s var(--ease-cinematic); }
-  .ax-figure-num,
-  .ax-figure-label { display: block; }
-  :global(html.js) .ax-scene--metrics .ax-figure-num { animation: none; }
-  :global(html.js) .ax-scene--metrics .ax-figure.is-in .ax-figure-num {
-    animation: ax-metric-beat 1.55s var(--ease-cinematic) both;
-    animation-delay: calc(420ms + (var(--scene-index, 0) * 320ms));
-  }
-  :global(html.js) .ax-scene--metrics .ax-figure.is-in .ax-figure-label {
-    animation: ax-metric-label 1s var(--ease-premium) both;
-    animation-delay: calc(820ms + (var(--scene-index, 0) * 320ms));
-  }
-  @keyframes ax-metric-beat {
-    0% { opacity: 0; transform: translate3d(0, 1.4rem, 0) scale(0.92); }
-    58% { opacity: 1; transform: translate3d(0, 0, 0) scale(1.035); }
-    100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-  }
-  @keyframes ax-metric-label {
-    from { opacity: 0; transform: translate3d(0, 0.6rem, 0); letter-spacing: 0.22em; }
-    to { opacity: 1; transform: none; letter-spacing: 0.1em; }
+  @media (min-width: 640px) {
+    .value-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
-  /* Process: the drawn line leads; each step settles as its local progress arrives. */
-  .ax-process-line-fill { transition: transform 320ms linear; }
-  .ax-step { --step-progress: 1; --step-drift: 0px; }
-  .ax-step-node { transition: background-color 700ms var(--ease-premium), transform 800ms var(--ease-cinematic), box-shadow 800ms var(--ease-cinematic); }
-  .ax-step.is-current .ax-step-node { box-shadow: 0 0 0 5px rgba(242, 240, 234, 0.08); }
-  .ax-step-title,
-  .ax-step-desc { transition: transform 1s var(--ease-cinematic), opacity 900ms var(--ease-premium), color 700ms var(--ease-premium); }
-  :global(html.js) .ax-scene--process .ax-step-title { transform: translate3d(0, var(--step-drift), 0); }
-  :global(html.js) .ax-scene--process .ax-step-desc { opacity: calc(0.42 + (var(--step-progress) * 0.58)); transform: translate3d(0, var(--step-drift), 0); }
-  .ax-step.is-current .ax-step-title { color: var(--text-primary); }
-
-  /* Partners use a quiet lateral entrance rather than another stacked fade. */
-  .ax-scene--partners .ax-split-left { transition: transform 1.5s var(--ease-cinematic); }
-  :global(html.js) .ax-scene--partners .ax-split-left { transform: translate3d(var(--scene-drift-left), 0, 0); }
-  .ax-person { position: relative; overflow: hidden; }
-  .ax-person::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3rem;
-    height: 1px;
-    background: var(--text-primary);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 1.2s var(--ease-cinematic);
-  }
-  .ax-person.is-in::after { transform: scaleX(1); }
-  .ax-person-name { transition: transform 1.4s var(--ease-cinematic), opacity 1.1s var(--ease-premium); }
-  .ax-person-role,
-  .ax-person-desc { transition: transform 1.25s var(--ease-cinematic), opacity 1s var(--ease-premium); }
-  :global(html.js) .ax-scene--partners .ax-person-name { transform: translate3d(var(--scene-drift-right), 0, 0); }
-  :global(html.js) .ax-scene--partners .ax-person-role { transform: translate3d(var(--scene-drift-left), 0, 0); }
-  :global(html.js) .ax-scene--partners .ax-person-desc { transform: translate3d(0, var(--scene-drift-down), 0); }
-
-  /* Closing resolution: rule, message, action, then the quiet footnote. */
-  .ax-final-rule { transition: opacity 1.3s var(--ease-premium), transform 1.45s var(--ease-cinematic); }
-  .ax-final-mega { transition: transform 1.5s var(--ease-cinematic), opacity 1.25s var(--ease-premium); }
-  :global(html.js) .ax-scene--resolution .ax-final-mega { transform: translate3d(0, var(--scene-drift-up), 0) scale(var(--scene-scale)); }
-  :global(html.js) .ax-scene--resolution .ax-hero-actions { transform: translate3d(var(--scene-drift-right), 0, 0); transition: transform 1.2s var(--ease-cinematic); }
-  :global(html.js) .ax-scene--resolution .ax-fineprint { transform: translate3d(0, var(--scene-drift-down), 0); transition: transform 1.1s var(--ease-cinematic), opacity 1s var(--ease-premium); }
-
-  /* Homepage-only footer coda. The footer stays readable while its columns settle. */
-  :global(.site-footer[data-home-footer='true']) { position: relative; overflow: hidden; }
-  :global(.site-footer[data-home-footer='true']::before) {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: min(32vw, 22rem);
-    height: 1px;
-    background: var(--text-primary);
-    opacity: 0.6;
-    transform: scaleX(var(--footer-progress, 0));
-    transform-origin: left center;
-    transition: transform 1.4s var(--ease-cinematic);
-  }
-  :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div) {
-    transition: transform 1.25s var(--ease-cinematic), opacity 1s var(--ease-premium);
-  }
-  :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div:nth-child(odd)) {
-    transform: translate3d(0, var(--footer-drift, 0px), 0);
-  }
-  :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div:nth-child(even)) {
-    transform: translate3d(0, calc(var(--footer-drift, 0px) * -1), 0);
+  .value {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
   }
 
-  /* Long, deliberate scene holds. Every variant remains visible without JS. */
-  .ax-root .ax-reveal--title { transition: opacity 1.35s var(--ease-cinematic), transform 1.35s var(--ease-cinematic), clip-path 1.35s var(--ease-cinematic); }
-  .ax-root .ax-reveal--statement { transition: opacity 1.5s var(--ease-cinematic), transform 1.5s var(--ease-cinematic); }
-  .ax-root .ax-reveal--copy { transition: opacity 1.15s var(--ease-cinematic), transform 1.15s var(--ease-cinematic); }
-  .ax-root .ax-reveal--item { transition: opacity 1.25s var(--ease-cinematic), transform 1.25s var(--ease-cinematic); }
-  .ax-root .ax-reveal--row { transition: opacity 1.35s var(--ease-cinematic), transform 1.35s var(--ease-cinematic); }
-  .ax-root .ax-reveal--metric { transition: opacity 1.3s var(--ease-cinematic), transform 1.3s var(--ease-cinematic); }
-  .ax-root .ax-reveal--step { transition: opacity 1.2s var(--ease-cinematic), transform 1.2s var(--ease-cinematic); }
-  .ax-root .ax-reveal--final { transition: opacity 1.45s var(--ease-cinematic), transform 1.45s var(--ease-cinematic); }
-  .ax-root .ax-reveal--rule { transition: opacity 1.4s var(--ease-cinematic), transform 1.4s var(--ease-cinematic); }
-
-  @media (prefers-reduced-motion: no-preference) {
-    :global(html.js) .ax-root .ax-reveal--title:not(.is-in) { opacity: 0; transform: translate3d(0, 1.4rem, 0); }
-    :global(html.js) .ax-root .ax-reveal--statement:not(.is-in) { opacity: 0; transform: translate3d(0, 2.2rem, 0); }
-    :global(html.js) .ax-root .ax-reveal--copy:not(.is-in) { opacity: 0; transform: translate3d(var(--scene-drift-left), 1.4rem, 0); }
-    :global(html.js) .ax-root .ax-reveal--item:not(.is-in) { opacity: 0; transform: translate3d(0, 1.8rem, 0) scale(0.98); }
-    :global(html.js) .ax-root .ax-reveal--row:not(.is-in) { opacity: 0; transform: translate3d(-2.25rem, 0, 0); }
-    :global(html.js) .ax-root .ax-reveal--metric:not(.is-in) { opacity: 0; transform: translate3d(0, 2rem, 0) scale(0.96); }
-    :global(html.js) .ax-root .ax-reveal--step:not(.is-in) { opacity: 0; transform: translate3d(0, 1.8rem, 0); }
-    :global(html.js) .ax-root .ax-reveal--final:not(.is-in) { opacity: 0; transform: translate3d(0, 2rem, 0) scale(0.965); }
-    :global(html.js) .ax-root .ax-reveal--rule:not(.is-in) { opacity: 0; transform: scaleX(0); }
+  .value .icon-tile {
+    margin-bottom: 0.35rem;
   }
 
-  @media (max-width: 759px) {
-    .ax-scene::after,
-    .ax-scene:not(.ax-scene--title-card)::before { right: var(--ax-gutter); left: var(--ax-gutter); }
-    .ax-work-feature-frame::after { display: none; }
-    .ax-solution-item { padding-left: 0.9rem; }
-    :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div:nth-child(even)) { transform: translate3d(0, var(--footer-drift, 0px), 0); }
+  .value p {
+    color: var(--text);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .ax-scene::before,
-    .ax-scene::after,
-    .ax-scene--resolution::after,
-    .ax-work-feature-frame::after,
-    .ax-solution-item::before,
-    .ax-list > li::before,
-    .ax-principle::after,
-    .ax-person::after,
-    :global(.site-footer[data-home-footer='true']::before) { transition: none !important; transform: none !important; }
-    .ax-scene--title-card .ax-hero-title,
-    .ax-scene--title-card .ax-hero-foot,
-    .ax-scene--proof .ax-split-left,
-    .ax-scene--partners .ax-split-left,
-    .ax-work-feature-frame,
-    .ax-work-index,
-    .ax-solution-title,
-    .ax-solution-desc,
-    .ax-row-title,
-    .ax-row-desc,
-    .ax-principle-title,
-    .ax-principle-desc,
-    .ax-person-name,
-    .ax-person-role,
-    .ax-person-desc,
-    .ax-final-mega,
-    :global(html.js .site-footer[data-home-footer='true'] .axiom-container > div) { opacity: 1 !important; transform: none !important; transition: none !important; }
-    .ax-figure-num,
-    .ax-figure-label { animation: none !important; opacity: 1 !important; transform: none !important; }
-    .ax-step-desc { opacity: 1 !important; transform: none !important; }
+  /* Pricing */
+  .center-link {
+    margin-top: 1.75rem;
+    text-align: center;
+  }
+
+  /* FAQ */
+  .faq-contact {
+    display: grid;
+    gap: 0.35rem;
+    justify-items: start;
+    margin-top: 0.5rem;
+    font-size: var(--fs-sm);
   }
 </style>
-
-<script>
-  type HomeWindow = Window & { __axiomHomeCleanup?: () => void };
-
-  const initAxiomHomepage = () => {
-    const root = document.querySelector<HTMLElement>('[data-homepage]');
-    const homeWindow = window as HomeWindow;
-
-    if (!root) {
-      homeWindow.__axiomHomeCleanup?.();
-      homeWindow.__axiomHomeCleanup = undefined;
-      return;
-    }
-
-    if (root.dataset.homeMotionReady === 'true') return;
-
-    homeWindow.__axiomHomeCleanup?.();
-    root.dataset.homeMotionReady = 'true';
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const triggers = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-work-trigger]'));
-    const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-work-panel]'));
-    const features = Array.from(root.querySelectorAll<HTMLElement>('[data-work-feature]'));
-    const items = Array.from(root.querySelectorAll<HTMLElement>('[data-work-item]'));
-    const scenes = Array.from(root.querySelectorAll<HTMLElement>('[data-cinematic-scene]'));
-    const panelTimers = new WeakMap<HTMLElement, number>();
-    const processTrack = root.querySelector<HTMLElement>('[data-process-track]');
-    const processSteps = Array.from(root.querySelectorAll<HTMLElement>('[data-process-step]'));
-    const homeFooter = document.querySelector<HTMLElement>('.site-footer');
-    const footerColumns = homeFooter
-      ? Array.from(homeFooter.querySelectorAll<HTMLElement>('.axiom-container > div'))
-      : [];
-    let scrollFrame = 0;
-
-    homeFooter?.setAttribute('data-home-footer', 'true');
-    footerColumns.forEach((column, index) => {
-      column.style.setProperty('--footer-delay', `${index * 120}ms`);
-    });
-
-    const setPanelLinkState = (panel: HTMLElement, enabled: boolean) => {
-      panel.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
-        if (enabled) link.removeAttribute('tabindex');
-        else link.tabIndex = -1;
-      });
-    };
-
-    const cancelPanelTimer = (panel: HTMLElement) => {
-      const timer = panelTimers.get(panel);
-      if (timer !== undefined) {
-        window.clearTimeout(timer);
-        panelTimers.delete(panel);
-      }
-    };
-
-    const setPanelOpen = (panel: HTMLElement, open: boolean) => {
-      cancelPanelTimer(panel);
-
-      if (open) {
-        panel.hidden = false;
-        panel.setAttribute('aria-hidden', 'false');
-        setPanelLinkState(panel, true);
-        if (reducedMotion) {
-          panel.classList.add('is-open');
-        } else {
-          window.requestAnimationFrame(() => panel.classList.add('is-open'));
-        }
-        return;
-      }
-
-      panel.classList.remove('is-open');
-      panel.setAttribute('aria-hidden', 'true');
-      setPanelLinkState(panel, false);
-
-      if (reducedMotion) {
-        panel.hidden = true;
-        return;
-      }
-
-      const timer = window.setTimeout(() => {
-        if (!panel.classList.contains('is-open')) panel.hidden = true;
-        panelTimers.delete(panel);
-      }, 440);
-      panelTimers.set(panel, timer);
-    };
-
-    const setWorkActive = (activeId: string) => {
-      triggers.forEach((trigger) => {
-        const isActive = trigger.dataset.workTrigger === activeId;
-        trigger.setAttribute('aria-expanded', String(isActive));
-      });
-
-      items.forEach((item) => {
-        const trigger = item.querySelector<HTMLButtonElement>('[data-work-trigger]');
-        item.classList.toggle('is-open', trigger?.dataset.workTrigger === activeId);
-      });
-
-      panels.forEach((panel) => {
-        setPanelOpen(panel, panel.dataset.workPanel === activeId);
-      });
-
-      features.forEach((feature) => {
-        const isActive = feature.dataset.workFeature === activeId;
-        feature.classList.toggle('is-active', isActive);
-        feature.setAttribute('aria-hidden', String(!isActive));
-      });
-
-      root.dataset.activeWork = activeId;
-    };
-
-    triggers.forEach((trigger, index) => {
-      trigger.addEventListener('click', () => {
-        const activeId = trigger.dataset.workTrigger;
-        if (activeId && activeId !== root.dataset.activeWork) setWorkActive(activeId);
-      });
-
-      trigger.addEventListener('keydown', (event) => {
-        let nextIndex = index;
-        if (event.key === 'ArrowDown') nextIndex = (index + 1) % triggers.length;
-        if (event.key === 'ArrowUp') nextIndex = (index - 1 + triggers.length) % triggers.length;
-        if (event.key === 'Home') nextIndex = 0;
-        if (event.key === 'End') nextIndex = triggers.length - 1;
-        if (nextIndex === index) return;
-        event.preventDefault();
-        triggers[nextIndex]?.focus();
-      });
-    });
-
-    const clamp = (value: number) => Math.min(Math.max(value, 0), 1);
-
-    const updateScrollState = () => {
-      scrollFrame = 0;
-      const documentRange = document.documentElement.scrollHeight - window.innerHeight;
-      root.style.setProperty('--page-progress', String(documentRange > 0 ? clamp(window.scrollY / documentRange) : 0));
-
-      const viewportHeight = Math.max(window.innerHeight, 1);
-      const viewportStart = viewportHeight * 0.86;
-      const viewportEnd = viewportHeight * 0.22;
-      let activeScene = '';
-      let activeScore = Number.NEGATIVE_INFINITY;
-
-      scenes.forEach((scene) => {
-        const rect = scene.getBoundingClientRect();
-        const sceneRange = Math.max(rect.height + viewportStart - viewportEnd, 1);
-        const sceneProgress = clamp((viewportStart - rect.top) / sceneRange);
-        const sceneInverse = 1 - sceneProgress;
-        // Text stays on its grid while it is being read: no scroll-coupled drift.
-        // Sections still reveal, and their rule lines still draw with progress.
-        const horizontalDrift = 0;
-        const verticalDrift = 0;
-
-        scene.style.setProperty('--scene-progress', String(sceneProgress));
-        scene.style.setProperty('--scene-inverse', String(sceneInverse));
-        scene.style.setProperty('--scene-drift-left', `${-horizontalDrift}px`);
-        scene.style.setProperty('--scene-drift-right', `${horizontalDrift}px`);
-        scene.style.setProperty('--scene-drift-up', `${-verticalDrift}px`);
-        scene.style.setProperty('--scene-drift-down', `${verticalDrift}px`);
-        scene.style.setProperty('--scene-scale', '1');
-        scene.dataset.scenePhase = sceneProgress < 0.24 ? 'enter' : sceneProgress > 0.78 ? 'exit' : 'hold';
-
-        const visibleTop = Math.max(rect.top, 0);
-        const visibleBottom = Math.min(rect.bottom, viewportHeight);
-        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-        const isInScene = rect.top <= viewportHeight * 0.62 && rect.bottom >= viewportHeight * 0.28;
-        const centerDistance = Math.abs((rect.top + rect.bottom) / 2 - viewportHeight * 0.48);
-        const score = visibleHeight - centerDistance * 0.02;
-        if (isInScene && score > activeScore) {
-          activeScore = score;
-          activeScene = scene.dataset.cinematicScene || '';
-        }
-      });
-
-      scenes.forEach((scene) => {
-        scene.classList.toggle('is-scene-active', scene.dataset.cinematicScene === activeScene);
-      });
-      if (activeScene) root.dataset.activeScene = activeScene;
-
-      if (homeFooter) {
-        const footerRect = homeFooter.getBoundingClientRect();
-        const footerRange = Math.max(footerRect.height + viewportHeight * 0.9 - viewportHeight * 0.2, 1);
-        const footerProgress = clamp((viewportHeight * 0.9 - footerRect.top) / footerRange);
-        homeFooter.style.setProperty('--footer-progress', String(footerProgress));
-        homeFooter.style.setProperty('--footer-drift', `${Math.round((1 - footerProgress) * 18)}px`);
-        homeFooter.classList.toggle(
-          'is-footer-active',
-          footerRect.top <= viewportHeight * 0.78 && footerRect.bottom >= viewportHeight * 0.2
-        );
-      }
-
-      if (!processTrack) return;
-
-      const trackRect = processTrack.getBoundingClientRect();
-      const processViewportStart = viewportHeight * 0.8;
-      const processViewportEnd = viewportHeight * 0.22;
-      const trackRange = Math.max(trackRect.height + processViewportStart - processViewportEnd, 1);
-      const processProgress = clamp((processViewportStart - trackRect.top) / trackRange);
-      processTrack.style.setProperty('--process-progress', String(processProgress));
-
-      const activeStepIndex = Math.min(
-        processSteps.length - 1,
-        Math.floor(processProgress * processSteps.length)
-      );
-      processSteps.forEach((step, index) => {
-        step.classList.toggle('is-current', index <= activeStepIndex);
-        const stepProgress = clamp(
-          (processProgress - index / Math.max(processSteps.length, 1)) * Math.max(processSteps.length, 1)
-        );
-        step.style.setProperty('--step-progress', String(stepProgress));
-        step.style.setProperty('--step-drift', `${Math.round((1 - stepProgress) * 16)}px`);
-      });
-    };
-
-    const requestScrollState = () => {
-      if (scrollFrame) return;
-      scrollFrame = window.requestAnimationFrame(updateScrollState);
-    };
-
-    window.addEventListener('scroll', requestScrollState, { passive: true });
-    window.addEventListener('resize', requestScrollState, { passive: true });
-    updateScrollState();
-
-    homeWindow.__axiomHomeCleanup = () => {
-      window.removeEventListener('scroll', requestScrollState);
-      window.removeEventListener('resize', requestScrollState);
-      if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
-      scenes.forEach((scene) => {
-        scene.classList.remove('is-scene-active');
-        delete scene.dataset.scenePhase;
-        ['--scene-progress', '--scene-inverse', '--scene-drift-left', '--scene-drift-right', '--scene-drift-up', '--scene-drift-down', '--scene-scale'].forEach((property) => scene.style.removeProperty(property));
-      });
-      homeFooter?.removeAttribute('data-home-footer');
-      homeFooter?.classList.remove('is-footer-active');
-      homeFooter?.style.removeProperty('--footer-progress');
-      homeFooter?.style.removeProperty('--footer-drift');
-      footerColumns.forEach((column) => column.style.removeProperty('--footer-delay'));
-      root.dataset.homeMotionReady = 'false';
-    };
-  };
-
-  document.addEventListener('astro:page-load', initAxiomHomepage);
-  if (document.readyState !== 'loading') initAxiomHomepage();
-</script>
-
-<script>
-  // Homepage film: poster until the visitor chooses to play (sound on), then native controls.
-  // Pauses itself when scrolled out of view.
-  const initAxiomFilm = () => {
-    const frame = document.querySelector<HTMLElement>('[data-film]');
-    if (!frame || frame.dataset.filmReady === 'true') return;
-    const video = frame.querySelector<HTMLVideoElement>('[data-film-video]');
-    const play = frame.querySelector<HTMLButtonElement>('[data-film-play]');
-    if (!video || !play) return;
-    frame.dataset.filmReady = 'true';
-
-    const setPlaying = (playing: boolean) => {
-      frame.dataset.state = playing ? 'playing' : 'idle';
-      play.tabIndex = playing ? -1 : 0;
-    };
-
-    play.addEventListener('click', () => {
-      video.controls = true;
-      video.muted = false;
-      setPlaying(true);
-      video.play().catch(() => setPlaying(false));
-    });
-    video.addEventListener('play', () => setPlaying(true));
-    video.addEventListener('ended', () => {
-      video.controls = false;
-      video.currentTime = 0;
-      video.load();
-      setPlaying(false);
-    });
-
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry.isIntersecting && !video.paused) video.pause();
-        },
-        { threshold: 0.2 },
-      );
-      observer.observe(frame);
-    }
-  };
-
-  document.addEventListener('astro:page-load', initAxiomFilm);
-  if (document.readyState !== 'loading') initAxiomFilm();
-</script>

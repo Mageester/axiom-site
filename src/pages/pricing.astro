@@ -1,1045 +1,311 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
-import { createStartProjectHref } from '../lib/cta';
-import { SEO_ROUTES, PRICING_JSON_LD, faqJsonLd, breadcrumbSchema, SITE_URL } from '../lib/seo';
-import { FadeIn } from '../components/ui/FadeIn';
-import { Card } from '../components/ui/card';
-import { Eyebrow } from '../components/ui/Eyebrow';
-import DrawIcon from '../components/ui/DrawIcon.astro';
-import { MotionHeading } from '../components/motion/MotionHeading';
-import { SectionDivider } from '../components/motion/SectionDivider';
+import CtaBand from '../components/site/CtaBand.astro';
+import FaqList from '../components/site/FaqList.astro';
+import Icon from '../components/site/Icon.astro';
+import PageHero from '../components/site/PageHero.astro';
+import PricingCards from '../components/site/PricingCards.astro';
+import { comparisonRows, packages, paymentTerms, pricingFaq, standardIncludes } from '../content/pricing';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SEO_ROUTES, SITE_URL, faqJsonLd, toCanonicalUrl, type Crumb } from '../lib/seo';
 
-const isCheckmark = (val: string) => ['Included', String.fromCharCode(10003)].some((k) => val.toLowerCase() === k.toLowerCase());
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Pricing', url: '/pricing/' },
+];
 
-const pricingTiers = [
-  {
-    key: 'localBusiness',
-    name: 'Local Business Website',
-    costShape: 'Recommended',
-    price: 'From CAD $1,200',
-    subtext: 'Up to 3 pages for a normal independent local business.',
-    supportNote: 'The main package for a clear Home, Services, and Contact path.',
-    features: ['Home, Services, and Contact structure', 'Gallery where it strengthens the decision', 'Phone, directions, inquiry, and booking paths', 'Straightforward scope agreed before work starts'],
-    cta: 'Choose local business',
-    href: createStartProjectHref('local-business'),
-    variant: 'primary',
-    highlighted: true,
-    eyebrow: 'PREFERRED PATH',
-    bestFor: 'For independent local businesses that need a credible, focused site with the important buyer paths in view.',
-  },
-  {
-    key: 'expanded',
-    name: 'Expanded Website',
-    costShape: 'Upfront',
-    price: 'From CAD $1,500',
-    subtext: 'Up to 5 pages for businesses with more to explain and show.',
-    supportNote: 'For straightforward builds that need more content, not more complex systems.',
-    features: ['About, Gallery, Services, and Contact options', 'Room for a broader service story', 'Clear inquiry, phone, directions, and booking paths', 'Straightforward scope agreed before work starts'],
-    cta: 'Choose expanded website',
-    href: createStartProjectHref('expanded'),
-    variant: 'secondary',
-    bestFor: 'For businesses that need more content while keeping the structure, integrations, and launch path straightforward.',
-  },
-  {
-    key: 'custom',
-    name: 'Custom',
-    costShape: 'Quoted',
-    price: 'Custom quoted',
-    subtext: 'For requirements beyond the standard packages.',
-    supportNote: 'E-commerce, databases, custom booking systems, accounts, migrations, and unusual technical scope start here.',
-    features: ['Custom page counts and flows', 'E-commerce, database, or account functionality', 'Custom booking systems or software', 'Substantial migrations and redirect planning', 'Unusual or technically complex requirements'],
-    cta: 'Discuss custom scope',
-    href: createStartProjectHref('custom'),
-    variant: 'secondary',
-    bestFor: 'For projects that need systems, integrations, migrations, or other requirements beyond a straightforward website.',
-  },
-] as const;
-
-const standardIncludes = [
-  'Custom responsive design and development',
-  'Mobile optimization',
-  'First year of basic hosting included',
-  'Domain connection',
-  'SEO basics: page titles and metadata',
-  'Existing booking-platform integration when applicable',
-  'Light editing of client-supplied text',
-  'Client-supplied logo and images',
-  'Launch testing',
-  'Two consolidated revision rounds',
-  'Thirty days of post-launch defect support',
-] as const;
-
-const comparisonRows = [
-  {
-    key: 'starting-cost',
-    label: 'Starting Cost',
-    localBusiness: 'From CAD $1,200',
-    expanded: 'From CAD $1,500',
-    custom: 'Custom quoted',
-  },
-  {
-    key: 'best-fit',
-    label: 'Best Fit',
-    localBusiness: 'Normal independent local business',
-    expanded: 'More content, still straightforward',
-    custom: 'Complex or unusual requirements',
-  },
-  {
-    key: 'scope',
-    label: 'Scope',
-    localBusiness: 'Up to 3 pages',
-    expanded: 'Up to 5 pages',
-    custom: 'Defined in scope',
-  },
-  {
-    key: 'typical-structure',
-    label: 'Typical Structure',
-    localBusiness: 'Home, Services, Contact',
-    expanded: 'About, Gallery, Services, Contact, etc.',
-    custom: 'Custom pages and flows',
-  },
-  {
-    key: 'booking',
-    label: 'Booking Path',
-    localBusiness: 'Existing platform links where applicable',
-    expanded: 'Existing platform links where applicable',
-    custom: 'Custom systems quoted separately',
-  },
-  {
-    key: 'hosting',
-    label: 'Hosting After Year One',
-    localBusiness: 'From CAD $120/year',
-    expanded: 'From CAD $120/year',
-    custom: 'Defined in scope',
-  },
-  {
-    key: 'support',
-    label: 'Revisions & Support',
-    localBusiness: '2 rounds + 30 days defect support',
-    expanded: '2 rounds + 30 days defect support',
-    custom: 'Defined in scope',
-  },
-] as const;
-
-const comparisonTierOrder = ['localBusiness', 'expanded', 'custom'] as const;
-
-const mobileComparisonTiers = comparisonTierOrder
-  .map((key) => pricingTiers.find((tier) => tier.key === key))
-  .filter(Boolean)
-  .map((tier) => ({
-    ...tier,
-    rows: comparisonRows.map((row) => ({
-      label: row.label,
-      value: row[tier!.key as keyof typeof row],
-    })),
-  }));
-
-const faqItems = [
-  {
-    question: 'What is the Local Launch Special?',
-    answer:
-      'It is an introductory package from CAD $900 for very small local businesses that need a straightforward professional presence: one page with up to six sections. Existing third-party booking links can be connected.',
-  },
-  {
-    question: 'What is the Local Business Website?',
-    answer:
-      'It is the recommended package from CAD $1,200 for a normal independent local business. It includes up to three pages, typically Home, Services, and Contact, with a gallery and clear inquiry paths where appropriate.',
-  },
-  {
-    question: 'What is the Expanded Website?',
-    answer:
-      'It is from CAD $1,500 for businesses that need more content but still have a straightforward website requirement. The scope is up to five pages and can include About, Gallery, Services, and Contact.',
-  },
-  {
-    question: 'What does every standard package include?',
-    answer:
-      'Every standard package includes custom responsive design and development, mobile optimization, first-year basic hosting, domain connection, SEO basics, applicable existing booking-platform integration, light editing of client-supplied text, client-supplied logo and images, launch testing, two consolidated revision rounds, and thirty days of post-launch defect support.',
-  },
-  {
-    question: 'Does the price include booking software?',
-    answer:
-      'An existing booking platform can be connected when applicable. Booksy and other booking platforms remain the client account and expense. Custom booking systems or software are quoted as Custom.',
-  },
-  {
-    question: 'When is Custom needed?',
-    answer:
-      'Custom is required for e-commerce, databases, custom booking systems or software, customer accounts, substantial migrations, or unusual and technically complex requirements.',
-  },
-  {
-    question: 'How are payments handled?',
-    answer:
-      'Fifty percent is due after the scope is approved and the agreement is signed. The remaining fifty percent is due after approval of the finished staging site and before public launch.',
-  },
-  {
-    question: 'What happens after the first year?',
-    answer:
-      'Basic hosting starts at CAD $120 per year after year one, unless a documented handoff is provided where appropriate. Domain registration renewal is client-owned and billed by the registrar at its actual price.',
-  },
-] as const;
+const pricingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${toCanonicalUrl('/pricing')}#service`,
+  name: 'Website design and development packages',
+  serviceType: 'Web design and development',
+  provider: { '@id': `${SITE_URL}/#organization` },
+  url: toCanonicalUrl('/pricing'),
+  offers: packages.map((pkg) => ({
+    '@type': 'Offer',
+    name: pkg.name,
+    description: `${pkg.scope}. ${pkg.summary}`,
+    url: `${toCanonicalUrl('/pricing')}#${pkg.key}`,
+    ...(pkg.priceValue
+      ? { priceSpecification: { '@type': 'PriceSpecification', minPrice: pkg.priceValue, priceCurrency: 'CAD' } }
+      : {}),
+  })),
+};
 ---
 
-<SiteLayout
-  title={SEO_ROUTES.pricing.title}
-  description={SEO_ROUTES.pricing.description}
-  canonicalPath="/pricing"
-  schema={[PRICING_JSON_LD, faqJsonLd(faqItems), breadcrumbSchema([{ name: 'Home', url: SITE_URL }, { name: 'Pricing', url: `${SITE_URL}/pricing` }])]}
->
-  <main id="main-content" tabindex="-1" class="pricing-page pb-0">
-    <section class="pricing-hero axiom-container pt-[5.5rem] md:pt-[7.5rem]">
-      <div class="max-w-3xl">
-        <FadeIn motion="eyebrow">
-          <Eyebrow>PRICING</Eyebrow>
-          <SectionDivider className="mt-6" />
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={180}>
-          <MotionHeading as="h1" text="Clear pricing, before the call." className="mt-4" />
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={500}>
-          <p class="section-copy mt-5 md:text-[17px]">
-            Choose a Local Launch Special from CAD $900, a Local Business Website from CAD $1,200, an Expanded Website
-            from CAD $1,500, or Custom for quoted scope.
-          </p>
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={660}>
-          <p class="mt-3 text-[14px] leading-[1.65] text-[var(--text-muted)] md:text-[15px]">
-            Standard packages include the core design, launch, and support work. E-commerce, databases, custom booking
-            systems, customer accounts, substantial migrations, and unusual technical requirements are Custom.
-          </p>
-        </FadeIn>
+<BaseLayout {...SEO_ROUTES.pricing} crumbs={crumbs} schema={[pricingSchema, faqJsonLd(pricingFaq)]}>
+  <main id="main-content" tabindex="-1">
+    <PageHero
+      eyebrow="Pricing"
+      title="Simple, published website pricing"
+      lead="Four packages, with prices on the page. Your exact price is confirmed in a written scope before any work begins, and it doesn’t change unless the scope does."
+      crumbs={crumbs}
+    />
+
+    <section class="section pricing-cards" aria-labelledby="packages-title">
+      <div class="container">
+        <h2 id="packages-title" class="sr-only">Website packages</h2>
+        <PricingCards packages={packages} />
+        <p class="pricing-footnote">
+          All prices are in Canadian dollars. The Local Launch Special is an introductory package with a restricted scope; projects needing more pages or custom functionality use another package.
+        </p>
       </div>
     </section>
 
-    <section class="page-section-tight section-shell pt-0" aria-labelledby="local-launch-offer-title" data-local-launch-offer>
-      <div class="axiom-container">
-        <FadeIn motion="sceneOpen" delay={80} as="div">
-          <div class="local-launch-offer-frame">
-            <Card className="local-launch-offer-card">
-              <div class="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
-                <div class="max-w-3xl">
-                  <div class="flex flex-wrap items-center gap-3">
-                    <span class="local-launch-offer-badge">Introductory offer</span>
-                    <span class="local-launch-offer-price-badge">From CAD $900</span>
-                  </div>
-                  <h2 id="local-launch-offer-title" class="local-launch-offer-title mt-4 text-[28px] font-[600] leading-[1.15] tracking-[-0.02em] md:text-[34px]">
-                    Local Launch Special from CAD $900.
-                  </h2>
-                  <p class="local-launch-offer-copy section-copy mt-4 md:text-[17px]">
-                    For very small local businesses that need a straightforward professional presence: one page with up to six sections. Existing third-party booking links can be connected. First-year basic hosting is included, with the exact scope agreed before the project starts.
-                  </p>
-                  <p class="local-launch-offer-fineprint mt-3 text-[14px] leading-[1.65] md:text-[15px]">
-                    Introductory, restricted scope for straightforward local projects. Projects needing more pages or custom functionality use another package.
-                  </p>
-                </div>
-                <a href={createStartProjectHref('local-launch')} class="btn btn-primary local-launch-offer-cta w-full justify-center md:w-auto">
-                  Start with this special <span class="pricing-cta-arrow" aria-hidden="true">→</span>
-                </a>
-              </div>
-            </Card>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <div class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:pb-0">
-          {pricingTiers.map((tier, index) => (
-            <FadeIn
-              motion="depthCardReveal"
-              delay={Math.min(index * 150, 600)}
-              as="div"
-              id={tier.key === 'localBusiness' ? 'local-business-tier' : tier.key === 'expanded' ? 'expanded-tier' : tier.key === 'custom' ? 'custom-tier' : undefined}
-              className="flex h-full shrink-0 basis-[84%] snap-start flex-col sm:basis-[68%] md:basis-[56%] lg:basis-auto lg:shrink"
-            >
-              <Card
-                padding="none"
-                hoverLift
-                className={`pricing-tier-card pricing-tier-card-surface relative overflow-hidden ${tier.highlighted ? 'pricing-highlight-card border-[color:var(--hairline)] bg-[var(--surface-1)]' : 'bg-[var(--surface-1)]'}`}
-              >
-                <div class="relative flex h-full flex-col p-6 sm:p-7">
-                  <div class="flex flex-wrap items-center justify-between gap-3">
-                    <Eyebrow className={tier.highlighted ? 'text-[var(--accent-solid)]' : undefined}>{tier.eyebrow ?? tier.name}</Eyebrow>
-                    <span class={`rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] ${tier.highlighted ? 'border-white/20 bg-white/[0.04] text-white' : 'border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-secondary)]'}`}>
-                      {tier.costShape}
-                    </span>
-                  </div>
-
-                  <p class="mt-4 text-[15px] font-medium uppercase tracking-[0.1em] text-[var(--text-primary)]">
-                    {tier.name}
-                  </p>
-
-                  <p class="mt-2 text-[14px] leading-[1.65] text-[var(--text-secondary)]">
-                    {tier.bestFor}
-                  </p>
-
-                  <p class="mt-5 text-[42px] font-[600] leading-[1.05] tracking-[-0.04em] text-[var(--text-primary)] sm:text-[48px]">
-                    {tier.price}
-                  </p>
-
-                  {tier.subtext ? <p class="mt-3 text-[16px] leading-[1.7] text-[var(--text-secondary)]">{tier.subtext}</p> : null}
-
-                  <ul class="mt-6 space-y-3">
-                    {tier.features.map((feature) => (
-                      <li class="flex items-start gap-3 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
-                        <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-panel-strong)]">
-                          <DrawIcon name="check" size={12} className="text-[var(--accent-solid)]" />
-                        </span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div class="mt-auto pt-8">
-                    {tier.highlighted ? (
-                      <a href={tier.href} class="btn btn-primary w-full">{tier.cta} <span class="pricing-cta-arrow" aria-hidden="true">→</span></a>
-                    ) : (
-                      <a href={tier.href} class="btn btn-secondary w-full">{tier.cta} <span class="pricing-cta-arrow" aria-hidden="true">→</span></a>
-                    )}
-                  </div>
-                </div>
-              </Card>
-
-              {tier.supportNote ? (
-                <p class="mt-3 px-3 text-center text-[14px] font-normal leading-[1.65] text-[var(--text-muted)]">
-                  {tier.supportNote}
-                </p>
-              ) : null}
-            </FadeIn>
-          ))}
+    <section class="section section-soft" aria-labelledby="included-title">
+      <div class="container included-grid">
+        <div class="section-head">
+          <p class="eyebrow">Every standard package</p>
+          <h2 id="included-title">What’s included</h2>
+          <p>The package price covers the full delivery standard, from scope to launch. The Local Launch Special follows the same standard within its one-page scope.</p>
+        </div>
+        <div class="included-card">
+          <ul role="list" class="check-list cols-2">
+            {standardIncludes.map((item) => <li>{item}</li>)}
+          </ul>
+          <p class="included-note">
+            Booksy and other booking platforms remain your account and expense. Your domain, accounts and supplied assets stay yours.
+          </p>
         </div>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-          <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>COMPARE THE PATHS</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="What each option includes." className="section-heading mt-4" />
-          <p class="section-copy mt-4 md:text-[17px]">
-            The same delivery standard applies throughout. The differences are fit, page scope, and whether the project
-            needs custom systems or technical work.
-          </p>
-        </FadeIn>
-
-        <FadeIn as="div" motion="precisionPricingReveal" className="mt-8">
-          <Card className="pricing-inclusions-card border-[color:var(--hairline)] bg-[var(--surface-2)]">
-            <div class="grid gap-6 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-10">
-              <div>
-                <Eyebrow>EVERY STANDARD PACKAGE</Eyebrow>
-                <h3 class="mt-3 text-[25px] font-[600] leading-[1.18] tracking-[-0.02em] text-[var(--text-primary)]">Included from scope to launch.</h3>
-                <p class="section-copy mt-3 md:text-[16px]">The package price covers the following delivery standard. The Local Launch Special follows it within its one-page, six-section scope. Client-owned accounts and assets stay client-owned.</p>
-              </div>
-              <ul class="grid gap-x-8 gap-y-3 sm:grid-cols-2">
-                {standardIncludes.map((item) => (
-                  <li class="flex items-start gap-3 text-[15px] leading-[1.6] text-[var(--text-secondary)]">
-                    <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-panel-strong)]">
-                      <DrawIcon name="check" size={12} className="text-[var(--accent-solid)]" />
-                    </span>
-                    <span>{item}</span>
-                  </li>
+    <section class="section" aria-labelledby="compare-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Compare</p>
+          <h2 id="compare-title">Compare packages side by side</h2>
+          <p>The same quality standard applies throughout. The differences are page scope and whether the project needs custom systems.</p>
+        </div>
+        <div class="table-wrap" role="region" aria-label="Package comparison table, scrollable" tabindex="0">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th scope="col"><span class="sr-only">Feature</span></th>
+                {packages.map((pkg) => (
+                  <th scope="col" class:list={{ featured: pkg.featured }}>
+                    {pkg.featured && <span class="badge badge-brand">Recommended</span>}
+                    <span class="th-name">{pkg.name}</span>
+                  </th>
                 ))}
-              </ul>
-            </div>
-            <p class="mt-6 border-t border-[color:var(--hairline)] pt-5 text-[14px] leading-[1.65] text-[var(--text-muted)]">Booksy and other booking platforms remain the client’s account and expense.</p>
-          </Card>
-        </FadeIn>
-
-        <div class="mt-8 grid gap-4 md:hidden">
-          {mobileComparisonTiers.map((tier, index) => (
-            <FadeIn motion="precisionPricingReveal" delay={Math.min(index * 140, 560)} as="div">
-              <Card
-                padding="none"
-                className={`pricing-comparison-card overflow-hidden ${tier.highlighted ? 'pricing-highlight-card border-[color:var(--accent-border)] bg-[var(--surface-2)] shadow-[0_0_0_1px_var(--accent-shadow-medium)]' : 'bg-[var(--surface-1)]'}`}
-              >
-                <div class="p-6">
-                  {tier.highlighted ? <Eyebrow className="text-[var(--accent-solid)]">PREFERRED PATH</Eyebrow> : <Eyebrow>{tier.name}</Eyebrow>}
-                  <div class="mt-4">
-                    <div class="min-w-0">
-                      <p class="text-[2.35rem] font-[600] leading-none tracking-[-0.04em] text-[var(--text-primary)] sm:text-[2.75rem]">{tier.price}</p>
-                      <p class="mt-2 text-[14px] leading-[1.65] text-[var(--text-secondary)]">{tier.bestFor}</p>
-                    </div>
-                  </div>
-
-                  <div class="mt-6 space-y-3 border-t border-[color:var(--hairline)] pt-5">
-                    {tier.rows.map((row) => (
-                      <div class="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
-                        <p class="text-[14px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">{row.label}</p>
-                        <div class="text-[16px] leading-[1.7] text-[var(--text-secondary)]">
-                          {isCheckmark(row.value) ? (
-                            <span class="inline-flex items-center text-[var(--accent-solid)]">
-                              <DrawIcon name="check" size={16} className="is-active" />
-                              <span class="sr-only">{row.value}</span>
-                            </span>
-                          ) : (
-                            row.value
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            </FadeIn>
-          ))}
-        </div>
-
-        <FadeIn as="div" motion="precisionPricingReveal" className="pricing-table-shell mt-8 hidden overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)] md:block">
-          <table class="min-w-full border-collapse text-left">
-            <thead class="bg-[color:var(--nav-panel-bg)]">
-              <tr class="border-b border-[color:var(--hairline)]">
-                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                  Feature
-                </th>
-                <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
-                  <div class="flex flex-col gap-1">
-                    <span class="text-[12px] font-semibold uppercase tracking-[0.24em] text-[var(--accent-solid)]">Preferred</span>
-                  <span>Local Business</span>
-                </div>
-              </th>
-              <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                EXPANDED WEBSITE
-              </th>
-              <th scope="col" class="px-6 py-4 text-[12px] uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                CUSTOM
-              </th>
               </tr>
             </thead>
             <tbody>
               {comparisonRows.map((row) => (
-                <tr class="pricing-table-row border-b border-[color:var(--hairline)] odd:bg-[#0a0a0a] even:bg-[var(--surface-1)] last:border-b-0">
-                  <th scope="row" class="px-6 py-4 text-[16px] font-medium text-[var(--text-primary)]">
-                    {row.label}
-                  </th>
-                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)] bg-[linear-gradient(180deg,var(--accent-surface),transparent)]">
-                    {isCheckmark(row.localBusiness) ? (
-                      <span class="inline-flex items-center text-[var(--accent-solid)]">
-                        <DrawIcon name="check" size={18} className="is-active" />
-                        <span class="sr-only">{row.localBusiness}</span>
-                      </span>
-                    ) : row.localBusiness}
-                  </td>
-                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
-                    {isCheckmark(row.expanded) ? (
-                      <span class="inline-flex items-center text-[var(--accent-solid)]">
-                        <DrawIcon name="check" size={18} className="is-active" />
-                        <span class="sr-only">{row.expanded}</span>
-                      </span>
-                    ) : row.expanded}
-                  </td>
-                  <td class="px-6 py-4 text-[16px] leading-[1.7] text-[var(--text-secondary)]">
-                    {isCheckmark(row.custom) ? (
-                      <span class="inline-flex items-center text-[var(--accent-solid)]">
-                        <DrawIcon name="check" size={18} className="is-active" />
-                        <span class="sr-only">{row.custom}</span>
-                      </span>
-                    ) : row.custom}
-                  </td>
+                <tr>
+                  <th scope="row">{row.label}</th>
+                  {packages.map((pkg) => <td class:list={{ featured: pkg.featured }}>{row.values[pkg.key]}</td>)}
                 </tr>
               ))}
+              <tr class="table-actions">
+                <th scope="row"><span class="sr-only">Get started</span></th>
+                {packages.map((pkg) => (
+                  <td class:list={{ featured: pkg.featured }}>
+                    <a href={pkg.href} class:list={['btn', 'btn-sm', pkg.featured ? '' : 'btn-secondary']}>
+                      Choose <span class="sr-only">{pkg.name}</span>
+                    </a>
+                  </td>
+                ))}
+              </tr>
             </tbody>
           </table>
         </div>
-
-        <FadeIn as="div" motion="precisionPricingReveal" className="mt-6">
-          <Card className="border-[color:var(--hairline)] bg-[var(--surface-2)]">
-            <p class="section-copy mx-auto max-w-4xl text-center md:text-[16px]">
-              The first 50% is due after approved scope and a signed agreement. The final 50% is due after approval of the finished staging site and before public launch. Basic hosting starts at CAD $120/year after year one unless a documented handoff is provided where appropriate.
-            </p>
-          </Card>
-        </FadeIn>
+        <p class="table-hint" aria-hidden="true"><Icon name="arrow-right" size={14} /> Scroll sideways to compare all packages</p>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>FAQ</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text="Answers before the call." className="section-heading mt-4" />
-        </FadeIn>
-
-        <FadeIn motion="precisionPricingReveal" className="pricing-faq-reveal mt-8">
-          <div class="overflow-hidden rounded-[var(--radius-card)] border border-[color:var(--hairline)] bg-[var(--surface-1)]">
-            {faqItems.map((item, index) => (
-              <details class="group" data-faq>
-                <summary class={`pricing-faq-summary flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left transition-[background-color,color] duration-[var(--duration-fast)] hover:bg-[color:var(--surface-overlay)] ${index === 0 ? '' : 'border-t border-[color:var(--hairline)]'}`}>
-                  <span class="text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)] md:text-[18px]">
-                    {item.question}
-                  </span>
-                  <span
-                    class="faq-toggle relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] text-[var(--text-primary)] transition-transform duration-[200ms] ease-out"
-                    aria-hidden="true"
-                  >
-                    <svg class="faq-toggle-chevron h-4 w-4 transition-transform duration-[200ms] ease-out" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                      <path d="M5 8L10 13L15 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </span>
-                </summary>
-                <div class="faq-panel max-h-0 overflow-hidden opacity-0 translate-y-1 transition-[max-height,opacity,transform] duration-[var(--duration-medium)] ease-[var(--ease-premium)]">
-                  <div class="overflow-hidden">
-                    <div class="px-6 pb-5 pt-1 md:pb-6">
-                <p class="section-copy md:text-[16px]">
-                  {item.answer}
-                </p>
-                    </div>
-                  </div>
-                </div>
-              </details>
-            ))}
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>QUICK GUIDE</Eyebrow>
-        </FadeIn>
-
-        <div class="mt-8 grid gap-4 lg:grid-cols-3">
-          <FadeIn motion="timelineSequence" delay={80} as="div">
-            <Card className="pricing-guide-card h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
-              <div class="flex h-full flex-col">
-                <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
-                  You run a normal local business.
-                </h3>
-                <p class="section-copy mt-4 md:text-[16px]">
-                  The Local Business Website is the recommended path: up to three pages, a clear buyer path, and the standard delivery included from scope to launch.
-                </p>
-                <a href="#local-business-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-                  See local business details &uarr;</a>
-              </div>
-            </Card>
-          </FadeIn>
-
-          <FadeIn motion="timelineSequence" delay={220} as="div">
-            <Card className="pricing-guide-card h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
-              <div class="flex h-full flex-col">
-                <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
-                  You need more content, not more system.
-                </h3>
-                <p class="section-copy mt-4 md:text-[16px]">
-                  The Expanded Website supports up to five pages for a broader service story, About, Gallery, and other straightforward content.
-                </p>
-                <a href="#expanded-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-                  See expanded details &uarr;</a>
-              </div>
-            </Card>
-          </FadeIn>
-
-          <FadeIn motion="timelineSequence" delay={360} as="div">
-            <Card className="pricing-guide-card h-full border-[color:var(--hairline)] bg-[var(--surface-1)]">
-              <div class="flex h-full flex-col">
-                <h3 class="text-[24px] font-[600] leading-[1.15] tracking-[-0.02em] text-[var(--text-primary)]">
-                  You need a system or unusual scope.
-                </h3>
-                <p class="section-copy mt-4 md:text-[16px]">
-                  Custom is the right starting point for e-commerce, databases, custom booking software, accounts, migrations, or technically complex requirements.
-                </p>
-                <a href="#custom-tier" class="mt-6 inline-flex min-h-11 items-center text-[15px] font-medium leading-[1.6] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--accent-solid)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]">
-                  See Custom details &uarr;</a>
-              </div>
-            </Card>
-          </FadeIn>
+    <section class="section section-soft" aria-labelledby="payment-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Payments</p>
+          <h2 id="payment-title">How payment works</h2>
+          <p>Two payments tied to clear milestones, then simple annual hosting. No hourly billing.</p>
         </div>
+        <ol role="list" class="grid grid-3 terms">
+          {paymentTerms.map((term, index) => (
+            <li class="card term">
+              <span class="term-num" aria-hidden="true">{index + 1}</span>
+              <h3>{term.title}</h3>
+              <p>{term.text}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
 
-    <div aria-hidden="true" class="section-glow section-glow-offset-top" />
-
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn as="div" motion="finalFrameFooter">
-          <Card className="mx-auto max-w-6xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
-            <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
-              <div class="max-w-3xl">
-                <SectionDivider className="mb-6" />
-                <MotionHeading as="h2" text="Not sure which option is right?" className="section-heading" />
-                <p class="section-copy mt-4 md:text-[17px]">
-                  Tell us what the business needs. We’ll recommend the package that fits: Local Launch Special, Local Business Website, Expanded Website, or Custom.
-                  One business day. No pressure, no pitch deck.
-                </p>
-              </div>
-
-              <a href={createStartProjectHref('custom')} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Start a project <span class="pricing-cta-arrow" aria-hidden="true">→</span></a>
-            </div>
-          </Card>
-        </FadeIn>
+    <section class="section" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Pricing questions</h2>
+          <p>Can’t find your answer? Call or email us and we’ll explain how your project would be priced.</p>
+        </div>
+        <FaqList items={pricingFaq} />
       </div>
     </section>
+
+    <CtaBand
+      title="Not sure which package fits?"
+      text="Send a few details about your business. We’ll recommend the right package and confirm the price within one business day."
+    />
   </main>
+</BaseLayout>
 
-  <style>
-    .pricing-hero {
-      position: relative;
+<style>
+  .pricing-cards {
+    padding-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  }
+
+  .pricing-footnote {
+    max-width: 60rem;
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .included-grid,
+  .faq-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .included-grid,
+    .faq-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+      gap: 5rem;
+      align-items: start;
     }
+  }
 
-    .pricing-cta-arrow {
-      display: inline-block;
+  .included-grid .section-head,
+  .faq-grid .section-head {
+    margin-bottom: 0;
+  }
+
+  .included-card {
+    padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-xs);
+  }
+
+  .included-note {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .table-wrap {
+    position: relative;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-xs);
+  }
+
+  .table-wrap:focus-visible {
+    outline-offset: 2px;
+  }
+
+  .compare-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+  }
+
+  .compare-table th,
+  .compare-table td {
+    padding: 1rem 1.15rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .compare-table thead th {
+    vertical-align: bottom;
+    background: var(--bg-soft);
+    color: var(--ink);
+    font-weight: 650;
+  }
+
+  .compare-table thead .badge {
+    margin-bottom: 0.5rem;
+  }
+
+  .th-name {
+    display: block;
+  }
+
+  .compare-table tbody th {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 11rem;
+    background: #fff;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .compare-table td {
+    color: var(--text);
+  }
+
+  .compare-table .featured {
+    background: rgb(237 242 254 / 0.6);
+  }
+
+  .compare-table thead .featured {
+    background: var(--brand-soft);
+  }
+
+  .compare-table tbody tr:last-child th,
+  .compare-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .table-hint {
+    display: none;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  @media (max-width: 860px) {
+    .table-hint {
+      display: flex;
     }
+  }
 
-    @media (prefers-reduced-motion: no-preference) {
-      .pricing-page [data-motion='eyebrow'] {
-        animation: pricing-eyebrow-in 680ms var(--ease-cinematic) both;
-        animation-delay: var(--reveal-delay, 0ms);
-      }
+  .terms {
+    margin: 0;
+  }
 
-      .pricing-page [data-motion='sceneOpen'] {
-        animation: pricing-scene-in 920ms var(--ease-cinematic) both;
-        animation-delay: var(--reveal-delay, 0ms);
-      }
+  .term {
+    gap: 0.6rem;
+  }
 
-      .pricing-page [data-motion='editorialMaskReveal'] {
-        animation: pricing-editorial-in 760ms var(--ease-premium) both;
-        animation-delay: var(--reveal-delay, 0ms);
-      }
+  .term-num {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-bottom: 0.4rem;
+    border-radius: 999px;
+    background: var(--brand-soft);
+    color: var(--brand);
+    font-weight: 700;
+  }
 
-      .pricing-page [data-motion='depthCardReveal'] {
-        animation: pricing-card-in 840ms var(--ease-cinematic) both;
-        animation-delay: var(--reveal-delay, 0ms);
-      }
-
-      .pricing-page [data-motion='precisionPricingReveal'] {
-        animation: pricing-precision-in 820ms var(--ease-premium) both;
-        animation-delay: var(--reveal-delay, 0ms);
-      }
-
-      .pricing-page [data-motion='timelineSequence'] {
-        animation: pricing-timeline-in 760ms var(--ease-cinematic) both;
-        animation-delay: var(--reveal-delay, 0ms);
-      }
-
-      .pricing-page [data-motion='finalFrameFooter'] {
-        animation: pricing-footer-in 900ms var(--ease-cinematic) both;
-        animation-delay: var(--reveal-delay, 0ms);
-      }
-    }
-
-    .pricing-tier-card {
-      min-height: 100%;
-    }
-
-    .pricing-tier-card-surface,
-    .pricing-guide-card,
-    .pricing-inclusions-card,
-    .pricing-comparison-card,
-    .pricing-table-shell,
-    .local-launch-offer-card {
-      transition:
-        transform 420ms var(--ease-premium),
-        border-color var(--motion-duration-fast) ease,
-        box-shadow 520ms var(--ease-premium),
-        background-color var(--motion-duration-fast) ease;
-    }
-
-    @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-      .pricing-tier-card-surface:hover,
-      .pricing-tier-card-surface:focus-within,
-      .pricing-guide-card:hover,
-      .pricing-guide-card:focus-within,
-      .pricing-inclusions-card:hover,
-      .pricing-inclusions-card:focus-within,
-      .pricing-comparison-card:hover,
-      .pricing-comparison-card:focus-within,
-      .pricing-table-shell:hover,
-      .pricing-table-shell:focus-within,
-      .local-launch-offer-card:hover,
-      .local-launch-offer-card:focus-within {
-        transform: translateY(-4px);
-        border-color: var(--hairline-strong) !important;
-        box-shadow: 0 18px 52px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(255,255,255,0.07);
-      }
-
-      .pricing-highlight-card:hover,
-      .pricing-highlight-card:focus-within {
-        border-color: var(--accent-border) !important;
-        box-shadow: 0 20px 58px rgba(0, 0, 0, 0.38), 0 0 0 1px var(--accent-shadow-medium), 0 0 32px rgba(255,255,255,0.08);
-      }
-    }
-
-    .pricing-tier-card-surface .btn,
-    .local-launch-offer-cta,
-    .pricing-guide-card a,
-    .pricing-cta-arrow {
-      transition:
-        transform var(--motion-duration-fast) var(--ease-premium-soft),
-        color var(--motion-duration-fast) ease,
-        box-shadow var(--motion-duration-fast) var(--ease-premium-soft);
-    }
-
-    .pricing-tier-card-surface:hover .pricing-cta-arrow,
-    .pricing-tier-card-surface:focus-within .pricing-cta-arrow,
-    .local-launch-offer-cta:hover .pricing-cta-arrow,
-    .local-launch-offer-cta:focus-visible .pricing-cta-arrow,
-    .pricing-guide-card a:hover .pricing-cta-arrow,
-    .pricing-guide-card a:focus-visible .pricing-cta-arrow {
-      transform: translateX(3px);
-    }
-
-    .local-launch-offer-cta:hover,
-    .local-launch-offer-cta:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(255,255,255,0.16), 0 0 22px rgba(255,255,255,0.14);
-    }
-
-    .local-launch-offer-frame {
-      --launch-angle: 0deg;
-      position: relative;
-      isolation: isolate;
-      overflow: visible;
-      border-radius: calc(var(--radius-card) + 3px);
-      padding: 3px;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.12), 0 22px 70px rgba(0, 0, 0, 0.48);
-    }
-
-    .local-launch-offer-frame::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background: conic-gradient(
-        from var(--launch-angle),
-        rgba(255,255,255,0.14) 0deg,
-        rgba(255,255,255,0.14) 284deg,
-        rgba(255,255,255,0.5) 307deg,
-        var(--accent-solid) 324deg,
-        rgba(255,255,255,1) 334deg,
-        rgba(255,255,255,0.34) 348deg,
-        rgba(255,255,255,0.14) 360deg
-      );
-      animation: local-launch-border 5.5s linear infinite;
-    }
-
-    .local-launch-offer-frame::after {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      z-index: 0;
-      border-radius: calc(var(--radius-card) + 8px);
-      pointer-events: none;
-      background: conic-gradient(
-        from var(--launch-angle),
-        transparent 0deg,
-        transparent 286deg,
-        rgba(255,255,255,0.28) 314deg,
-        rgba(255,255,255,0.78) 330deg,
-        transparent 352deg,
-        transparent 360deg
-      );
-      filter: blur(10px);
-      opacity: 0.42;
-      animation: local-launch-border 5.5s linear infinite;
-    }
-
-    :global(.local-launch-offer-card) {
-      position: relative;
-      z-index: 2;
-      border: 0 !important;
-      background: linear-gradient(118deg, #191919, #101010 48%, #161616) !important;
-      box-shadow: 0 0 24px rgba(0,0,0,0.32);
-    }
-
-    .local-launch-offer-badge,
-    .local-launch-offer-price-badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      border-radius: 999px;
-      padding: 0.35rem 0.75rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-      line-height: 1;
-    }
-
-    .local-launch-offer-badge {
-      border: 1px solid rgba(255,255,255,0.28);
-      background: rgba(255,255,255,0.06);
-      color: var(--text-primary);
-      font-family: var(--font-display);
-      font-style: italic;
-      letter-spacing: -0.01em;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 0 18px rgba(255,255,255,0.14);
-      animation: limited-offer-pulse 4.8s var(--ease-premium) infinite;
-    }
-
-    .local-launch-offer-price-badge {
-      border: 1px solid rgba(255,255,255,0.16);
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
-      font-size: 0.66rem;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-    }
-
-    .local-launch-offer-cta {
-      box-shadow: 0 0 22px rgba(255,255,255,0.12);
-    }
-
-    .pricing-tier-card::after {
-      content: '';
-      position: absolute;
-      inset: 0 0 auto;
-      height: 1px;
-      pointer-events: none;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
-      opacity: 0.7;
-    }
-
-    .pricing-table-shell {
-      box-shadow: var(--shadow-card);
-    }
-
-    [data-motion='depthCardReveal'] .pricing-highlight-card,
-    [data-motion='precisionPricingReveal'] .pricing-highlight-card {
-      animation: pricing-recommendation-in 1.1s var(--ease-cinematic) both;
-    }
-
-    .pricing-table-row {
-      animation: pricing-row-in 0.78s var(--ease-cinematic) both;
-      transition: background-color var(--motion-micro-hover) var(--ease-premium-soft);
-    }
-
-    .pricing-table-row:hover {
-      background: rgba(255,255,255,0.035);
-    }
-
-    .pricing-faq-summary:focus-visible {
-      position: relative;
-      z-index: 1;
-      outline: 2px solid var(--accent-ring);
-      outline-offset: -2px;
-    }
-
-    .pricing-faq-summary:hover .faq-toggle,
-    .pricing-faq-summary:focus-visible .faq-toggle {
-      border-color: var(--hairline-strong);
-      transform: scale(1.04);
-    }
-
-    .pricing-faq-reveal .faq-panel {
-      will-change: max-height, opacity, transform;
-    }
-
-    details[data-faq][open] .faq-panel {
-      max-height: 24rem;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    details[data-faq][open] .faq-toggle {
-      background: var(--surface-overlay-press);
-      border-color: var(--accent-border);
-    }
-
-    details[data-faq][open] .faq-toggle-chevron {
-      transform: rotate(180deg);
-    }
-
-    details[data-faq] summary::-webkit-details-marker {
-      display: none;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      [data-motion='depthCardReveal'] .pricing-highlight-card,
-      [data-motion='precisionPricingReveal'] .pricing-highlight-card,
-      .pricing-table-row,
-      .local-launch-offer-frame::before,
-      .local-launch-offer-frame::after,
-      .local-launch-offer-badge,
-      .pricing-tier-card-surface,
-      .pricing-guide-card,
-      .pricing-inclusions-card,
-      .pricing-comparison-card,
-      .pricing-table-shell,
-      .local-launch-offer-card,
-      .pricing-tier-card-surface .btn,
-      .local-launch-offer-cta,
-      .pricing-guide-card a,
-      .pricing-cta-arrow,
-      .pricing-faq-summary,
-      .pricing-faq-reveal .faq-panel,
-      .pricing-faq-reveal .faq-toggle,
-      .pricing-faq-reveal .faq-toggle-chevron {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-        will-change: auto;
-      }
-    }
-
-    @property --launch-angle {
-      syntax: '<angle>';
-      inherits: false;
-      initial-value: 0deg;
-    }
-
-    @keyframes local-launch-border {
-      to {
-        --launch-angle: 360deg;
-      }
-    }
-
-    @keyframes limited-offer-pulse {
-      0%, 100% {
-        box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 0 14px rgba(255,255,255,0.1);
-      }
-
-      50% {
-        box-shadow: 0 0 0 1px rgba(255,255,255,0.16), 0 0 24px rgba(255,255,255,0.22);
-      }
-    }
-
-    @keyframes pricing-glow {
-      0% {
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0);
-      }
-
-      50% {
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16), 0 0 32px rgba(0, 0, 0, 0.45);
-      }
-
-      100% {
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0);
-      }
-    }
-
-    @keyframes pricing-eyebrow-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 8px, 0);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    @keyframes pricing-scene-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 18px, 0) scale(0.985);
-        clip-path: inset(0 0 10% 0 round 0.2rem);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1);
-        clip-path: inset(0 0 0 0 round 0.2rem);
-      }
-    }
-
-    @keyframes pricing-editorial-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 12px, 0);
-        clip-path: inset(0 0 100% 0);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-        clip-path: inset(0 0 0 0);
-      }
-    }
-
-    @keyframes pricing-card-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 22px, 0) scale(0.985);
-      }
-
-      70% {
-        opacity: 1;
-        transform: translate3d(0, -2px, 0) scale(1.002);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-    }
-
-    @keyframes pricing-precision-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 16px, 0);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    @keyframes pricing-timeline-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 20px, 0) rotateX(2deg);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) rotateX(0);
-      }
-    }
-
-    @keyframes pricing-footer-in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 26px, 0) scale(0.99);
-      }
-
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-    }
-
-    @keyframes pricing-recommendation-in {
-      0% {
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0);
-      }
-
-      58% {
-        box-shadow: 0 0 0 1px var(--accent-shadow-medium), 0 0 34px rgba(255,255,255,0.11);
-      }
-
-      100% {
-        box-shadow: 0 0 0 1px var(--accent-shadow-medium), 0 0 20px rgba(255,255,255,0.04);
-      }
-    }
-
-    @keyframes pricing-row-in {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .pricing-table-row:nth-child(1) { animation-delay: 0.08s; }
-    .pricing-table-row:nth-child(2) { animation-delay: 0.2s; }
-    .pricing-table-row:nth-child(3) { animation-delay: 0.32s; }
-    .pricing-table-row:nth-child(4) { animation-delay: 0.44s; }
-    .pricing-table-row:nth-child(5) { animation-delay: 0.56s; }
-    .pricing-table-row:nth-child(6) { animation-delay: 0.68s; }
-    .pricing-table-row:nth-child(7) { animation-delay: 0.8s; }
-    .pricing-table-row:nth-child(8) { animation-delay: 0.92s; }
-    .pricing-table-row:nth-child(9) { animation-delay: 1.04s; }
-  </style>
-</SiteLayout>
+  .term p {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+</style>

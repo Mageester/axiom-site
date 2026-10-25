@@ -1,0 +1,229 @@
+---
+import { cities } from '../../content/cities';
+import { industries } from '../../content/industries';
+import { services } from '../../content/services';
+import { CTA_PATHS } from '../../lib/cta';
+import { SITE_EMAIL, SITE_LOCATION, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    title: 'Services',
+    links: [
+      ...services.map((service) => ({ label: service.name, href: `/services/${service.slug}/` })),
+      { label: 'All services', href: '/services/' },
+      { label: 'Pricing', href: '/pricing/' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', href: '/about/' },
+      { label: 'Our process', href: '/approach/' },
+      { label: 'Work', href: '/work/' },
+      { label: 'Contact', href: '/contact/' },
+      { label: 'Start a project', href: CTA_PATHS.startProject },
+    ],
+  },
+  {
+    title: 'Industries',
+    links: [
+      ...industries.map((industry) => ({ label: industry.name, href: `/industries/${industry.slug}/` })),
+      { label: 'All industries', href: '/industries/' },
+    ],
+  },
+  {
+    title: 'Service areas',
+    links: [
+      ...cities.map((city) => ({ label: `Web design ${city.name}`, href: `/web-design/${city.slug}/` })),
+      { label: 'All service areas', href: '/web-design/' },
+    ],
+  },
+];
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="Axiom Web home"><Logo tone="light" /></a>
+        <p class="footer-about">
+          A founder-led web design studio in Kitchener-Waterloo, building clear, fast websites for local businesses across Ontario.
+        </p>
+        <ul role="list" class="footer-contact">
+          <li>
+            <a href={`tel:${SITE_TELEPHONE}`}><Icon name="phone" size={18} />{SITE_PHONE_DISPLAY}</a>
+          </li>
+          <li>
+            <a href={`mailto:${SITE_EMAIL}`}><Icon name="mail" size={18} />{SITE_EMAIL}</a>
+          </li>
+          <li><span><Icon name="map-pin" size={18} />{SITE_LOCATION}</span></li>
+        </ul>
+      </div>
+
+      <nav class="footer-columns" aria-label="Footer">
+        {columns.map((column) => (
+          <div>
+            <h2 class="footer-heading">{column.title}</h2>
+            <ul role="list">
+              {column.links.map((link) => (
+                <li><a href={link.href}>{link.label}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        © {year} Axiom Web. Co-founded by Aidan Magee and Riley Hinsperger. Axiom Web is the web-focused subsidiary of Axiom International.
+      </p>
+      <ul role="list" class="footer-legal">
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--night);
+    color: var(--night-text);
+    padding-block: clamp(3.5rem, 2.5rem + 4vw, 5.5rem) 2rem;
+    font-size: var(--fs-sm);
+  }
+
+  .footer-top {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1080px) {
+    .footer-top {
+      grid-template-columns: minmax(16rem, 0.85fr) 2.6fr;
+      gap: 4rem;
+    }
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+  }
+
+  .footer-about {
+    max-width: 22rem;
+    margin-top: 1rem;
+    color: var(--night-text);
+    line-height: 1.65;
+  }
+
+  .footer-contact {
+    display: grid;
+    gap: 0.35rem;
+    margin: 1.5rem 0 0;
+  }
+
+  .footer-contact a,
+  .footer-contact span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 2.25rem;
+    color: #fff;
+    font-weight: 500;
+    word-break: break-word;
+  }
+
+  .footer-contact a:hover {
+    color: var(--night-accent);
+  }
+
+  .footer-contact :global(svg) {
+    flex: none;
+    color: var(--night-accent);
+  }
+
+  .footer-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 1.5rem;
+  }
+
+  @media (min-width: 760px) {
+    .footer-columns {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .footer-heading {
+    margin-bottom: 0.9rem;
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .footer-columns ul {
+    display: grid;
+    gap: 0.15rem;
+    margin: 0;
+  }
+
+  .footer-columns a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    color: var(--night-text);
+    line-height: 1.35;
+    transition: color 160ms var(--ease);
+  }
+
+  .footer-columns a:hover {
+    color: #fff;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-top: clamp(3rem, 2rem + 3vw, 4.5rem);
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--night-line);
+    color: var(--night-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .footer-bottom p {
+    max-width: 52rem;
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 1.25rem;
+    margin: 0;
+  }
+
+  .footer-legal a {
+    display: inline-flex;
+    min-height: 2.25rem;
+    align-items: center;
+    color: var(--night-text);
+  }
+
+  .footer-legal a:hover {
+    color: #fff;
+  }
+
+  .site-footer :global(a:focus-visible) {
+    outline-color: var(--night-accent);
+  }
+</style>

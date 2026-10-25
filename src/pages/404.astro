@@ -1,36 +1,92 @@
 ---
-import { FadeIn } from '../components/ui/FadeIn';
-import { Card } from '../components/ui/card';
-import { Eyebrow } from '../components/ui/Eyebrow';
-import SiteLayout from '../layouts/SiteLayout.astro';
+import Icon from '../components/site/Icon.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES } from '../lib/seo';
+
+const links = [
+  { label: 'Services', href: '/services/', text: 'What we build and for whom' },
+  { label: 'Work', href: '/work/', text: 'Client sites and concept builds' },
+  { label: 'Pricing', href: '/pricing/', text: 'Packages from CAD $900' },
+  { label: 'Contact', href: '/contact/', text: 'Call, email or send a message' },
+] as const;
 ---
 
-<SiteLayout title={SEO_ROUTES.notFound.title} description={SEO_ROUTES.notFound.description} canonicalPath="/404" noIndex={true}>
-  <main id="main-content" tabindex="-1" class="axiom-container flex min-h-[calc(100svh-6rem)] items-center py-24 md:py-32">
-    <section class="w-full">
-      <FadeIn as="div" motion="sceneOpen">
-        <Card padding="none" className="mx-auto w-full max-w-[640px]">
-          <div class="p-8 sm:p-12">
-            <div class="max-w-xl">
-              <Eyebrow>404 &middot; NOT FOUND</Eyebrow>
-              <h1 class="mt-4">
-                Page not found.
-              </h1>
-              <p class="section-copy mt-4">
-                The address may have changed. Explore our work or contact the studio.
-              </p>
-
-              <div class="mt-10 grid grid-cols-2 gap-3">
-                <a href="/" class="btn btn-secondary w-full">Home</a>
-                <a href="/work/" class="btn btn-secondary w-full">See the work</a>
-                <a href={CTA_PATHS.startProject} class="btn btn-primary w-full col-span-2">Start a project</a>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </FadeIn>
-    </section>
+<BaseLayout {...SEO_ROUTES.notFound}>
+  <main id="main-content" tabindex="-1" class="not-found">
+    <div class="container-narrow">
+      <p class="eyebrow">Error 404</p>
+      <h1>We couldn’t find that page.</h1>
+      <p class="lead">The address may have changed or the page may no longer exist. These links will get you back on track.</p>
+      <div class="btn-row">
+        <a href="/" class="btn btn-lg">Back to home</a>
+        <a href={CTA_PATHS.startProject} class="btn btn-secondary btn-lg">Start a project</a>
+      </div>
+      <ul role="list" class="nf-links">
+        {links.map((link) => (
+          <li>
+            <a href={link.href}>
+              <span><strong>{link.label}</strong><span>{link.text}</span></span>
+              <Icon name="arrow-right" size={18} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </main>
-</SiteLayout>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: clamp(4rem, 3rem + 6vw, 8rem);
+    background: linear-gradient(180deg, var(--bg-soft), var(--bg));
+  }
+
+  .not-found .container-narrow {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .nf-links {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+  }
+
+  @media (min-width: 640px) {
+    .nf-links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .nf-links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
+  }
+
+  .nf-links a:hover {
+    border-color: var(--brand-line);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .nf-links strong {
+    display: block;
+  }
+
+  .nf-links span span {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .nf-links :global(svg) {
+    flex: none;
+    color: var(--brand);
+  }
+</style>

@@ -1,0 +1,258 @@
+---
+import CtaBand from '../../components/site/CtaBand.astro';
+import FaqList from '../../components/site/FaqList.astro';
+import Icon from '../../components/site/Icon.astro';
+import LinkCard from '../../components/site/LinkCard.astro';
+import PageHero from '../../components/site/PageHero.astro';
+import WorkCard from '../../components/site/WorkCard.astro';
+import { industries, type Industry } from '../../content/industries';
+import { getProject } from '../../content/work';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_PATHS } from '../../lib/cta';
+import { faqJsonLd, serviceSchema, type Crumb } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return industries.map((industry) => ({ params: { slug: industry.slug }, props: { industry } }));
+}
+
+const { industry } = Astro.props as { industry: Industry };
+const path = `/industries/${industry.slug}/`;
+const work = industry.workIds.map((id) => getProject(id)!);
+const others = industries.filter((item) => item.slug !== industry.slug);
+
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Industries', url: '/industries/' },
+  { name: industry.name, url: path },
+];
+---
+
+<BaseLayout
+  title={industry.metaTitle}
+  description={industry.metaDescription}
+  canonicalPath={path}
+  crumbs={crumbs}
+  schema={[
+    serviceSchema({
+      name: `Website design for ${industry.name.toLowerCase()}`,
+      description: industry.metaDescription,
+      path,
+      audience: industry.examples,
+    }),
+    faqJsonLd(industry.faqs),
+  ]}
+>
+  <main id="main-content" tabindex="-1">
+    <PageHero eyebrow="Industries" title={industry.title} lead={industry.intro} crumbs={crumbs}>
+      <Fragment slot="actions">
+        <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+        <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
+      </Fragment>
+      <aside slot="aside" class="card pages-card" aria-label="Recommended pages">
+        <p class="pages-title"><span class="icon-tile"><Icon name={industry.icon} /></span> A typical site structure</p>
+        <ol role="list" class="pages-list">
+          {industry.pages.map((page, index) => (
+            <li><span aria-hidden="true">{index + 1}</span>{page}</li>
+          ))}
+        </ol>
+        <p class="pages-note">{industry.examples}</p>
+      </aside>
+    </PageHero>
+
+    <section class="section" aria-labelledby="needs-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What customers look for</p>
+          <h2 id="needs-title">What your website needs to get right</h2>
+        </div>
+        <ul role="list" class="grid grid-2 needs">
+          {industry.needs.map((need) => (
+            <li class="card need">
+              <span class="need-check" aria-hidden="true"><Icon name="check" size={18} strokeWidth={2.4} /></span>
+              <div>
+                <h3>{need.title}</h3>
+                <p>{need.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head-row">
+          <div class="section-head">
+            <p class="eyebrow">Examples</p>
+            <h2 id="work-title">Relevant work</h2>
+            <p>Concept builds are demonstrations designed by Axiom Web and are labelled as such.</p>
+          </div>
+          <a href="/work/" class="arrow-link">View all work <Icon name="arrow-right" /></a>
+        </div>
+        <div class="grid grid-3">
+          {work.map((project) => <WorkCard project={project} />)}
+          {work.length < 3 && (
+            <article class="card more-work">
+              <h3>See more of our work</h3>
+              <p>Browse our client site and every concept build, from home services to law firms.</p>
+              <a href="/work/" class="btn btn-secondary">View all work <Icon name="arrow-right" /></a>
+            </article>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="package-title">
+      <div class="container package-grid">
+        <div class="section-head">
+          <p class="eyebrow">Pricing</p>
+          <h2 id="package-title">Which package fits</h2>
+          <p>{industry.packageNote}</p>
+          <a href="/pricing/" class="arrow-link">Compare all packages <Icon name="arrow-right" /></a>
+        </div>
+        <div class="card faq-card">
+          <h2 class="faq-card-title">Common questions</h2>
+          <FaqList items={industry.faqs} />
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm section-soft" aria-labelledby="other-title">
+      <div class="container">
+        <h2 id="other-title" class="other-title">Other industries</h2>
+        <div class="grid grid-4">
+          {others.map((item) => (
+            <LinkCard href={`/industries/${item.slug}/`} icon={item.icon} title={item.name} text={item.examples} linkLabel="Read the guide" />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CtaBand title="Ready to plan your website?" />
+  </main>
+</BaseLayout>
+
+<style>
+  .pages-card {
+    gap: 1.1rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .pages-title {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    color: var(--ink);
+    font-weight: 650;
+  }
+
+  .pages-list {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0;
+  }
+
+  .pages-list li {
+    display: flex;
+    gap: 0.75rem;
+    color: var(--ink-2);
+    font-size: var(--fs-sm);
+    line-height: 1.45;
+  }
+
+  .pages-list span {
+    display: inline-grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: none;
+    border-radius: 999px;
+    background: var(--brand-soft);
+    color: var(--brand);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .pages-note {
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .needs {
+    margin: 0;
+  }
+
+  .need {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .need-check {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+    border-radius: 999px;
+    background: var(--brand-soft);
+    color: var(--brand);
+  }
+
+  .need p {
+    margin-top: 0.4rem;
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .more-work {
+    gap: 0.75rem;
+    justify-content: center;
+    border-style: dashed;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .more-work p {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .more-work .btn {
+    align-self: start;
+    margin-top: 0.5rem;
+  }
+
+  .package-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .package-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr);
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+
+  .package-grid .section-head {
+    margin-bottom: 0;
+    justify-items: start;
+  }
+
+  .faq-card {
+    gap: 0.5rem;
+  }
+
+  .faq-card-title {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  .other-title {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.6rem);
+  }
+</style>

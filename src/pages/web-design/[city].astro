@@ -1,40 +1,54 @@
 ---
-import SiteLayout from '../../layouts/SiteLayout.astro';
-import { FadeIn } from '../../components/ui/FadeIn';
-import { Card } from '../../components/ui/card';
-import { Eyebrow } from '../../components/ui/Eyebrow';
-import DrawIcon from '../../components/ui/DrawIcon.astro';
-import { MotionHeading } from '../../components/motion/MotionHeading';
-import { SectionDivider } from '../../components/motion/SectionDivider';
-import { cities } from '../../content/cities';
-import { createStartProjectHref } from '../../lib/cta';
-import { ORGANIZATION_SCHEMA, SITE_NAME, SITE_URL, breadcrumbSchema, toCanonicalUrl } from '../../lib/seo';
+import CtaBand from '../../components/site/CtaBand.astro';
+import FaqList from '../../components/site/FaqList.astro';
+import Icon from '../../components/site/Icon.astro';
+import LinkCard from '../../components/site/LinkCard.astro';
+import PageHero from '../../components/site/PageHero.astro';
+import PricingCards from '../../components/site/PricingCards.astro';
+import { cities, type City } from '../../content/cities';
+import { packages } from '../../content/pricing';
+import { services } from '../../content/services';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_PATHS } from '../../lib/cta';
+import { SITE_URL, faqJsonLd, toCanonicalUrl, type Crumb } from '../../lib/seo';
 
 export function getStaticPaths() {
-  return cities.map((city) => ({
-    params: { city: city.slug },
-    props: { city },
-  }));
+  return cities.map((city) => ({ params: { city: city.slug }, props: { city } }));
 }
 
-const { city } = Astro.props;
+const { city } = Astro.props as { city: City };
+const path = `/web-design/${city.slug}/`;
+const canonical = toCanonicalUrl(path);
 
-const title = `Web Design ${city.name}, Ontario | ${SITE_NAME}`;
-const description = city.description;
-const canonicalPath = `/web-design/${city.slug}`;
-const canonicalUrl = toCanonicalUrl(canonicalPath);
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Service areas', url: '/web-design/' },
+  { name: `Web design in ${city.name}`, url: path },
+];
 
-const localServiceSchema = {
+const faqs = [
+  ...city.questions.map((item) => ({ question: item.q, answer: item.a })),
+  {
+    question: `How much does a website cost for a ${city.name} business?`,
+    answer:
+      'The Local Launch Special starts at CAD $900 for one page with up to six sections. The Local Business Website starts at CAD $1,200 for up to three pages, and the Expanded Website starts at CAD $1,500 for up to five. Custom functionality and substantial migrations are quoted separately.',
+  },
+  {
+    question: 'How are launch dates and ownership handled?',
+    answer:
+      'The project scope confirms timing, content responsibilities, hosting and any handoff before work begins. Your domain and client-supplied content remain yours. Standard packages include two consolidated revision rounds and thirty days of post-launch defect support.',
+  },
+];
+
+const localService = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': `${canonicalUrl}#service`,
-  name: `Web Design in ${city.name}`,
-  url: canonicalUrl,
-  description,
+  '@id': `${canonical}#service`,
+  name: `Web design in ${city.name}`,
   serviceType: 'Web design',
-  provider: {
-    '@id': `${SITE_URL}/#organization`,
-  },
+  url: canonical,
+  description: city.description,
+  provider: { '@id': `${SITE_URL}/#organization` },
   areaServed: {
     '@type': 'City',
     name: city.name,
@@ -42,242 +56,215 @@ const localServiceSchema = {
   },
 };
 
-const servicesTrio = [
-  {
-    label: 'High-Trust Conversion Sites',
-    description: `For ${city.name} service businesses where the site needs to turn interest into calls, bookings, or quote requests. Offer up top, proof near the action, simple mobile flow.`,
-    href: '/services/conversion-sites/',
-    icon: 'target',
-  },
-  {
-    label: 'Local Business Websites',
-    description: `For ${city.name} practices, studios, and shops whose reputation and service area need to be obvious in the first scroll.`,
-    href: '/services/local-business-websites/',
-    icon: 'crown',
-  },
-  {
-    label: 'Rebuilds',
-    description: `Review the existing site, retain useful content and plan redirects before replacing pages. Search positions cannot be guaranteed.`,
-    href: '/services/rebuilds/',
-    icon: 'refresh',
-  },
-] as const;
-
-const faqs = [
-  ...city.questions,
-  { q: 'What should we budget?', a: 'The Local Launch Special starts at CAD $900 for one page with up to six sections. The Local Business Website starts at CAD $1,200 for up to three pages; the Expanded Website starts at CAD $1,500 for up to five. Custom functionality and substantial migrations are quoted separately.' },
-  { q: 'How are launch dates and ownership handled?', a: 'The project scope confirms timing, content responsibilities, hosting and any handoff before work begins. Your domain and client-supplied content remain yours. Standard packages include two consolidated revision rounds and thirty days of post-launch defect support.' },
-] as const;
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((faq) => ({
-    '@type': 'Question',
-    name: faq.q,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.a,
-    },
-  })),
-};
+const otherCities = cities.filter((item) => item.slug !== city.slug);
+const metaTitle = `Web Design ${city.name}, Ontario`;
 ---
 
-<SiteLayout
-  title={title}
-  description={description}
-  canonicalPath={canonicalPath}
-  schema={[
-    ORGANIZATION_SCHEMA,
-    localServiceSchema,
-    faqSchema,
-    breadcrumbSchema([
-      { name: 'Home', url: SITE_URL },
-      { name: 'Web design service areas', url: `${SITE_URL}/web-design/` },
-      { name: city.name, url: canonicalUrl },
-    ]),
-  ]}
->
-  <main id="main-content" tabindex="-1" class="pb-0">
-    <section class="axiom-container pt-20 md:pt-28">
-      <div class="max-w-3xl">
-        <FadeIn motion="eyebrow">
-          <Eyebrow>WEB DESIGN {city.name.toUpperCase()}</Eyebrow>
-          <SectionDivider className="mt-6" />
-        </FadeIn>
-        <FadeIn motion="sceneOpen" delay={180}>
-          <MotionHeading
-            as="h1"
-            text={`Web design in *${city.name}*.`}
-            className="mt-4 max-w-4xl"
-          />
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={500}>
-          <p class="section-copy mt-5 md:text-[17px]">{city.intro}</p>
-        </FadeIn>
-        <FadeIn motion="editorialMaskReveal" delay={620}>
-          <p class="section-copy mt-3 md:text-[17px]">{city.localContext}</p>
-        </FadeIn>
-
-        <FadeIn delay={780} motion="sceneOpen">
-          <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <a href={createStartProjectHref('local-business')} class="btn btn-primary btn-lg w-full justify-center sm:w-auto">Discuss your project</a>
-            <a href="tel:+12267531833" class="btn-ghost-link">(226) 753-1833</a>
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={920} motion="editorialMaskReveal">
-          <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
-            <span>From CAD $1,200 for local business sites</span>
-            <span aria-hidden="true">&bull;</span>
-            <span>Reply within one business day</span>
-            <span aria-hidden="true">&bull;</span>
-            <span>{city.region}</span>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <h2 class="section-heading max-w-3xl">{city.focus}</h2>
-        <div class="mt-10 space-y-8 max-w-3xl">
-          {city.planning.map(item => <article>
-            <h3 class="text-xl font-medium text-[var(--text-primary)]">{item.title}</h3>
-            <p class="section-copy mt-3">{item.text}</p>
-          </article>)}
+<BaseLayout title={metaTitle} description={city.description} canonicalPath={path} crumbs={crumbs} schema={[localService, faqJsonLd(faqs)]}>
+  <main id="main-content" tabindex="-1">
+    <PageHero eyebrow={`Web design · ${city.region}`} title={`Web design in ${city.name}`} lead={city.intro} crumbs={crumbs}>
+      <Fragment slot="actions">
+        <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+        <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
+      </Fragment>
+      <aside slot="aside" class="card local-card" aria-label={`Working with ${city.name} businesses`}>
+        <p class="local-focus"><span class="icon-tile"><Icon name="map-pin" /></span>{city.focus}</p>
+        <p class="local-context">{city.localContext}</p>
+        <div>
+          <p class="local-label">Areas we serve in and around {city.name}</p>
+          <ul role="list" class="chips">
+            {city.neighborhoods.map((area) => <li>{area}</li>)}
+          </ul>
         </div>
-        <p class="section-copy mt-8 max-w-3xl">Compare <a href="/pricing/" class="underline">website packages and scope</a>, review our <a href="/work/" class="underline">concept builds</a>, or meet <a href="/about/" class="underline">the two founders</a> before deciding.</p>
+      </aside>
+    </PageHero>
+
+    <section class="section" aria-labelledby="planning-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Planning guidance</p>
+          <h2 id="planning-title">Planning a website for a {city.name} business</h2>
+          <p>Practical decisions to make before design starts, so the site answers the questions your customers actually ask.</p>
+        </div>
+        <ol role="list" class="grid grid-3 planning">
+          {city.planning.map((item, index) => (
+            <li class="card plan">
+              <span class="plan-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
 
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>SERVICES</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text={`What we build for ${city.name} businesses.`} className="section-heading mt-4" />
-        </FadeIn>
-
-        <div class="mt-10 flex flex-col border-t border-[color:var(--hairline)]">
-          {servicesTrio.map((service, index) => (
-            <FadeIn motion="timelineSequence" delay={Math.min(index * 120, 480)} as="div">
-              <div class="border-b border-[color:var(--hairline)]">
-                <a
-                  href={service.href}
-                  class="group flex flex-col md:flex-row md:items-center justify-between py-8 px-6 transition-all duration-300 hover:bg-white/[0.01]"
-                >
-                  <div class="flex items-start md:items-center gap-6">
-                    <span class="font-mono text-[14px] font-semibold text-[var(--accent-solid)] pt-1 md:pt-0">
-                      0{index + 1}
-                    </span>
-                    <div class="flex items-center gap-4">
-                      <DrawIcon name={service.icon} className="transition-transform duration-300 group-hover:rotate-90 group-hover:text-[var(--accent-solid)] text-[var(--text-muted)]" />
-                      <div class="flex flex-col gap-1">
-                        <h3 class="text-xl md:text-2xl font-medium tracking-tight text-[var(--text-primary)]">
-                          {service.label}
-                        </h3>
-                        <p class="section-copy max-w-2xl text-[14px] md:text-[15px] mt-0.5">
-                          {service.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mt-6 md:mt-0 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)] group-hover:text-[var(--accent-solid)] transition-colors duration-300">
-                    Explore Service
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                  </div>
-                </a>
-              </div>
-            </FadeIn>
+    <section class="section section-soft" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Services</p>
+          <h2 id="services-title">What we build for {city.name} businesses</h2>
+        </div>
+        <div class="grid grid-3">
+          {services.map((service) => (
+            <LinkCard href={`/services/${service.slug}/`} icon={service.icon} title={service.name} text={service.cardSummary} />
           ))}
         </div>
       </div>
     </section>
 
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>AREAS WE SERVE</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text={`Across ${city.name}.`} className="section-heading mt-4" />
-          <p class="section-copy mt-4 md:text-[17px]">
-            Tell us where your customers are in {city.name}, whether they visit you or you travel to them, and which areas you can reliably serve.
-          </p>
-        </FadeIn>
-
-        <div class="mt-8 flex flex-wrap gap-2">
-          {city.neighborhoods.map((n) => (
-            <span class="rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface-overlay)] px-4 py-2 font-mono text-[12px] uppercase tracking-[0.12em] text-[var(--text-secondary)]">
-              {n}
-            </span>
-          ))}
+    <section class="section" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Pricing</p>
+          <h2 id="pricing-title">Published prices for {city.name} projects</h2>
+          <p>The same packages apply wherever you are. The scope and price are confirmed in writing before work begins.</p>
         </div>
+        <PricingCards packages={packages} compact />
       </div>
     </section>
 
-    <section class="page-section section-shell">
-      <div class="axiom-container">
-        <FadeIn motion="editorialMaskReveal" className="max-w-3xl">
-          <Eyebrow>FAQ</Eyebrow>
-          <SectionDivider className="mt-6" />
-          <MotionHeading as="h2" text={`${city.name} questions, answered first.`} className="section-heading mt-4" />
-        </FadeIn>
-
-        <div class="mt-10 grid gap-px overflow-hidden rounded-[22px] border border-[color:var(--hairline)] bg-[color:var(--hairline)] md:grid-cols-2">
-          {faqs.map((faq, index) => (
-            <FadeIn motion="timelineSequence" delay={Math.min(index * 90, 540)} as="div">
-              <details class="group h-full bg-[var(--surface-1)] p-6 sm:p-7 transition-colors duration-200 hover:bg-[var(--surface-2)]">
-                <summary class="flex cursor-pointer items-start justify-between gap-4 text-left">
-                  <span class="text-[clamp(1.05rem,1.4vw,1.2rem)] font-medium tracking-tight text-[var(--text-primary)]">
-                    {faq.q}
-                  </span>
-                  <span class="mt-1 flex h-7 w-7 flex-none items-center justify-center rounded-full border border-[color:var(--hairline)] font-mono text-[14px] text-[var(--accent-solid)] transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
-                </summary>
-                <p class="section-copy mt-4 text-[14px] leading-relaxed">{faq.a}</p>
-              </details>
-            </FadeIn>
-          ))}
+    <section class="section section-soft" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Questions from {city.name} businesses</h2>
         </div>
+        <FaqList items={faqs} />
       </div>
     </section>
 
-    <section class="page-section-tight section-shell">
-      <div class="axiom-container">
-        <FadeIn as="div" motion="finalFrameFooter">
-          <Card className="mx-auto max-w-5xl border-[color:var(--hairline)] bg-[var(--surface-2)] p-0">
-            <div class="flex flex-col gap-6 px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:flex-row lg:items-end lg:justify-between">
-              <div class="max-w-3xl">
-                <SectionDivider className="mb-6" />
-                <MotionHeading as="h2" text={`Plan your ${city.name} website.`} className="section-heading" />
-                <p class="section-copy mt-4 md:text-[17px]">
-                  Share your services, current site and priorities. We will reply within one business day with a clear next step.
-                </p>
-              </div>
-
-              <a href={createStartProjectHref('local-business')} class="btn btn-primary btn-lg w-full justify-center lg:w-auto">Discuss your project</a>
-            </div>
-          </Card>
-        </FadeIn>
+    <section class="section-sm" aria-labelledby="areas-title">
+      <div class="container">
+        <h2 id="areas-title" class="areas-title">Other areas we serve</h2>
+        <ul role="list" class="area-links">
+          {otherCities.map((item) => (
+            <li><a href={`/web-design/${item.slug}/`}>Web design in {item.name} <Icon name="arrow-right" size={16} /></a></li>
+          ))}
+          <li><a href="/web-design/">All service areas <Icon name="arrow-right" size={16} /></a></li>
+        </ul>
       </div>
     </section>
-    <nav aria-label="Nearby service areas" class="axiom-container pb-12 text-[14px]">
-      <a href="/web-design/" class="underline">All web design service areas</a>
-      <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-3">
-        {cities.filter(area => area.slug !== city.slug).map(area => <li><a class="underline" href={`/web-design/${area.slug}/`}>Web design in {area.name}</a></li>)}
-      </ul>
-    </nav>
+
+    <CtaBand title={`Planning a website in ${city.name}?`} />
   </main>
+</BaseLayout>
 
-  <style>
-    details > summary {
-      list-style: none;
+<style>
+  .local-card {
+    gap: 1.1rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .local-focus {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    color: var(--ink);
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .local-context {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .local-label {
+    margin-bottom: 0.6rem;
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+  }
+
+  .chips li {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg-soft);
+    color: var(--ink-2);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+  }
+
+  .planning {
+    margin: 0;
+  }
+
+  .plan {
+    gap: 0.65rem;
+  }
+
+  .plan-num {
+    color: var(--brand);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .plan p {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .faq-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .faq-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+      gap: 5rem;
+      align-items: start;
     }
-    details > summary::-webkit-details-marker {
-      display: none;
-    }
-    details:not([open]) > *:not(summary) {
-      display: none;
-    }
-  </style>
-</SiteLayout>
+  }
+
+  .faq-grid .section-head {
+    margin-bottom: 0;
+  }
+
+  .areas-title {
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.6rem);
+  }
+
+  .area-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .area-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink-2);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    transition: border-color 160ms var(--ease), color 160ms var(--ease);
+  }
+
+  .area-links a:hover {
+    border-color: var(--brand-line);
+    color: var(--brand);
+  }
+
+  .area-links :global(svg) {
+    color: var(--brand);
+  }
+</style>

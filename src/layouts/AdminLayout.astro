@@ -1,23 +1,35 @@
 ---
-import BaseLayout from './BaseLayout.astro';
+// Private admin shell. Kept separate from the public BaseLayout so the
+// internal tools retain their own dark Tailwind theme (globals.css).
+import '../styles/globals.css';
+import { formatSeoTitle } from '../lib/seo';
 
 type Props = {
   title?: string;
   description?: string;
-  noIndex?: boolean;
 };
 
-const {
-  title = 'Axiom Admin',
-  description = 'Private admin area for Axiom Web.',
-  noIndex = true,
-} = Astro.props as Props;
+const { title = 'Axiom Admin', description = 'Private admin area for Axiom Web.' } = Astro.props as Props;
 ---
 
-<BaseLayout title={title} description={description} noIndex={noIndex} showNav={false} showFooter={false}>
-  <div class="relative flex min-h-screen items-center justify-center px-6 py-10">
-    <div class="w-full max-w-6xl">
-      <slot />
+<!doctype html>
+<html lang="en-CA" class="text-[var(--text-primary)]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>{formatSeoTitle(title)}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  </head>
+  <body>
+    <div class="relative flex min-h-screen items-center justify-center px-6 py-10">
+      <div class="w-full max-w-6xl">
+        <slot />
+      </div>
     </div>
-  </div>
-</BaseLayout>
+  </body>
+</html>

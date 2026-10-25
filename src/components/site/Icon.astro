@@ -1,0 +1,32 @@
+---
+import { ICONS, type IconName } from '../../lib/icons';
+
+type Props = {
+  name: IconName;
+  size?: number;
+  class?: string;
+  strokeWidth?: number;
+  label?: string;
+};
+
+const { name, size = 24, class: className, strokeWidth = 1.8, label } = Astro.props;
+const extraClass = name === 'arrow-right' || name === 'arrow-up-right' ? 'icon-arrow' : '';
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  width={size}
+  height={size}
+  fill="none"
+  stroke="currentColor"
+  stroke-width={strokeWidth}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class:list={[extraClass, className]}
+  aria-hidden={label ? undefined : 'true'}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  focusable="false"
+  set:html={ICONS[name]}
+/>
