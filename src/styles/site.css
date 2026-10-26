@@ -999,8 +999,8 @@ textarea.input {
 }
 
 /* ── Scroll-driven reveals ────────────────────────────────── */
-/* CSS-only: elements are visible unless the browser supports view timelines,
-   and even then they finish revealing well before reaching the reader. */
+/* CSS-only and motion-only: elements are always fully visible; where view
+   timelines are supported they settle into place as they scroll in. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .reveal,
@@ -1028,15 +1028,14 @@ textarea.input {
   }
 }
 
-/* Uses the individual translate property, not transform, so the filled end
-   state never overrides an element's own hover transform. */
+/* Motion only: content is never faded, so text keeps full contrast at every
+   scroll position. Uses the individual translate property, not transform, so
+   the filled end state never overrides an element's own hover transform. */
 @keyframes reveal-up {
   from {
-    opacity: 0;
-    translate: 0 28px;
+    translate: 0 32px;
   }
   to {
-    opacity: 1;
     translate: none;
   }
 }

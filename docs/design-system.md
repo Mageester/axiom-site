@@ -6,7 +6,7 @@ The public marketing site (everything except the private admin shell) uses one s
 
 - **Editorial, not template.** The polish comes from type, spacing, hairline rules and composition. Sections are numbered, labels sit in small wide capitals, and real work is shown large with a credits-style caption.
 - **One typeface, one accent.** Archivo (self-hosted, with width and weight axes) for everything. Its expanded cut (`font-stretch: 118%`) sets headlines and echoes the wide AXIOM wordmark; the normal width sets body text. Axiom blue appears only in section numbers, links on hover and focus rings.
-- **Content is visible by default.** Scroll-driven reveals use CSS `animation-timeline: view()` inside `@supports` and finish before an element reaches the middle of the screen. Browsers without support, and visitors with reduced motion, see everything at once.
+- **Content is visible by default.** Scroll-driven reveals use CSS `animation-timeline: view()` inside `@supports` and only move elements (a short rise); they never fade text, so contrast holds at every scroll position. The lit statement's dimmest state stays above the 3:1 large-text minimum. Visitors with reduced motion see everything static.
 - **Motion follows the reader.** Effects tied to scrolling (the work frame settling, the lit statement, the process rail) only move when the visitor scrolls. Nothing loops on its own.
 - **The real logo, untouched.** The header, footer and CTA use the original chrome artwork, never a redraw or recolour.
 - **Honest proof.** The live client site is labelled “Client site · Live”; every demonstration is labelled “Concept build”. The numerals band only shows published commitments. No invented testimonials, ratings or metrics (see `AGENTS.md`).
@@ -63,7 +63,7 @@ Type scale is fluid (`--fs-display`, `--fs-h1`, `--fs-h2`, `--fs-h3`, `--fs-lead
 | Film grain | Every page | Static SVG noise on `body::after` at 4.5% opacity |
 | Drafting grid | Home hero, `PageHero` | `.grid-lines`: faint vertical column lines that fade down |
 | Section numbers | Every `.section-head` | CSS counter on `main`: “(01) Services”, “(02) Work”… |
-| Reveals | `.reveal`, `.reveal-stagger > *` | Scroll-driven `reveal-up` (translate + fade), CSS only |
+| Reveals | `.reveal`, `.reveal-stagger > *` | Scroll-driven `reveal-up` (a short rise, never a fade), CSS only |
 | Page transitions | Same-site navigations | `@view-transition { navigation: auto; }` cross-fade |
 | Hero | Home | Headline lines rise from their own masks |
 | Work frame | Home | The live client site settles to full size as it scrolls in |

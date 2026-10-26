@@ -545,7 +545,8 @@ const serviceItems = services.map((service) => ({
     text-wrap: pretty;
   }
 
-  /* Words light up in reading order as the statement scrolls into view. */
+  /* Words brighten in reading order as the statement scrolls into view. The
+     resting state stays above 3:1, the large-text contrast minimum. */
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
       .statement {
@@ -561,7 +562,7 @@ const serviceItems = services.map((service) => ({
 
   @keyframes word-lit {
     from {
-      opacity: 0.18;
+      opacity: 0.45;
     }
     to {
       opacity: 1;
