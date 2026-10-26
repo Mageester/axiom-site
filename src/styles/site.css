@@ -1056,7 +1056,10 @@ textarea.input {
   .cta-band,
   .skip-link,
   .glow,
-  .grid-lines {
+  .grid-lines,
+  .page-hero-light,
+  .hero-atmosphere,
+  .film-light {
     display: none !important;
   }
 
