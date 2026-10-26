@@ -44,13 +44,8 @@ const serviceItems = services.map((service) => ({
     <section class="home-hero">
       <div class="grid-lines" aria-hidden="true"></div>
       <div class="container hero-inner">
-        <p class="hero-index label">
-          <span>Web design studio</span>
-          <span>Kitchener-Waterloo, Ontario</span>
-          <span class="hero-status"><span class="status-dot" aria-hidden="true"></span>Taking new projects</span>
-        </p>
-
         <h1 class="hero-title">
+          <span class="hero-kicker">Web design studio in Kitchener-Waterloo, Ontario<span class="sr-only">:</span></span>
           <span class="line"><span>Websites that make</span></span>
           <span class="line"><span>your business the</span></span>
           <span class="line"><span>obvious choice.</span></span>
@@ -71,6 +66,7 @@ const serviceItems = services.map((service) => ({
           <div><dt>Price</dt><dd>Fixed, and agreed before work starts</dd></div>
           <div><dt>Team</dt><dd>Work directly with the two founders</dd></div>
           <div><dt>Hosting</dt><dd>First year included</dd></div>
+          <div><dt>Availability</dt><dd class="hero-status"><span class="status-dot" aria-hidden="true"></span>Taking new projects</dd></div>
         </dl>
       </div>
 
@@ -95,7 +91,7 @@ const serviceItems = services.map((service) => ({
     <section class="section statement-section" aria-labelledby="statement-label">
       <div class="container statement-grid">
         <h2 id="statement-label" class="label statement-label">Our view</h2>
-        <p class="statement">
+        <p class="statement" data-reveal>
           {statement.split(' ').map((word, index) => (
             <>
               <span class="word" style={`--i:${index}`}>{word}</span>{' '}
@@ -200,9 +196,9 @@ const serviceItems = services.map((service) => ({
           <p>A simple, predictable process. Scope and price are agreed in writing before design starts, so there are no surprises later.</p>
           <a href="/approach/" class="arrow-link">See the full process <Icon name="arrow-right" /></a>
         </div>
-        <div class="rail">
+        <div class="rail" data-reveal>
           <span class="rail-line" aria-hidden="true"><span class="rail-fill"></span></span>
-          <ol role="list" class="rail-list">
+          <ol role="list" class="rail-list reveal-stagger">
             {processSteps.map((step) => (
               <li class="rail-step">
                 <span class="rail-dot" aria-hidden="true"></span>
@@ -305,19 +301,26 @@ const serviceItems = services.map((service) => ({
     gap: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
   }
 
-  .hero-index {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 2.5rem;
+  /* The primary search phrase, set as a small label line inside the h1. */
+  .hero-kicker {
+    display: block;
+    margin-bottom: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
     padding-bottom: 1.1rem;
     border-bottom: 1px solid var(--line);
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-label);
+    font-weight: 600;
+    font-stretch: var(--wdth-heading);
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
   }
 
   .hero-status {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    color: var(--ink-2);
   }
 
   .status-dot {
@@ -329,9 +332,12 @@ const serviceItems = services.map((service) => ({
 
   /* Each line rises from its own mask. */
   .hero-title {
-    font-size: var(--fs-display);
+    font-size: clamp(2.1rem, 0.75rem + 6.6vw, 6.75rem);
     line-height: 0.95;
     letter-spacing: -0.045em;
+  }
+
+  .hero-title .line {
     max-width: 17ch;
   }
 
@@ -344,6 +350,18 @@ const serviceItems = services.map((service) => ({
 
   .hero-title .line > span {
     display: inline-block;
+  }
+
+  /* On phones the fixed line breaks would strand single words, so the headline
+     wraps naturally (balanced) and fades in instead of rising line by line. */
+  @media (max-width: 639px) {
+    .hero-title .line,
+    .hero-title .line > span {
+      display: inline;
+      overflow: visible;
+      padding: 0;
+      margin: 0;
+    }
   }
 
   .hero-foot {
@@ -395,7 +413,7 @@ const serviceItems = services.map((service) => ({
 
   @media (min-width: 900px) {
     .hero-spec {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       border-bottom: 1px solid var(--line);
     }
     .hero-spec > div {
@@ -411,7 +429,7 @@ const serviceItems = services.map((service) => ({
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .hero-index,
+    .hero-kicker,
     .hero-foot,
     .hero-spec {
       animation: hero-fade 900ms var(--ease-out) both;
@@ -439,9 +457,21 @@ const serviceItems = services.map((service) => ({
     }
   }
 
+  @media (prefers-reduced-motion: no-preference) and (max-width: 639px) {
+    .hero-title .line > span {
+      animation-name: line-fade;
+    }
+  }
+
   @keyframes line-rise {
     from {
       transform: translateY(105%);
+    }
+  }
+
+  @keyframes line-fade {
+    from {
+      opacity: 0;
     }
   }
 
@@ -457,38 +487,12 @@ const serviceItems = services.map((service) => ({
     margin-top: clamp(3rem, 2rem + 4vw, 5.5rem);
   }
 
-  .reel-frame {
-    transform-origin: 50% 0%;
-  }
-
   .reel-frame :global(.browser) {
     border-radius: var(--radius-lg);
   }
 
   .reel-frame :global(.browser-view) {
     aspect-ratio: 16 / 9;
-  }
-
-  /* The frame settles to full size as it scrolls into view. */
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      .reel-frame {
-        animation: reel-settle linear both;
-        animation-timeline: view();
-        animation-range: entry 0% cover 45%;
-      }
-    }
-  }
-
-  @keyframes reel-settle {
-    from {
-      scale: 0.94;
-      opacity: 0.6;
-    }
-    to {
-      scale: none;
-      opacity: 1;
-    }
   }
 
   .reel-caption {
@@ -545,26 +549,14 @@ const serviceItems = services.map((service) => ({
     text-wrap: pretty;
   }
 
-  /* Words brighten in reading order as the statement scrolls into view. The
-     resting state stays above 3:1, the large-text contrast minimum. */
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      .statement {
-        view-timeline-name: --statement;
-      }
-      .statement .word {
-        animation: word-lit linear both;
-        animation-timeline: --statement;
-        animation-range: cover calc(15% + var(--i) * 0.6%) cover calc(21% + var(--i) * 0.6%);
-      }
-    }
-  }
-
-  @keyframes word-lit {
-    from {
+  /* Once the statement is well into view, its words brighten in reading order.
+     The resting state stays above 3:1, the large-text contrast minimum. */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.reveal-ready) .statement .word {
       opacity: 0.45;
+      transition: opacity 600ms var(--ease) calc(var(--i) * 28ms);
     }
-    to {
+    :global(.reveal-ready) .statement:global(.is-revealed) .word {
       opacity: 1;
     }
   }
@@ -692,7 +684,6 @@ const serviceItems = services.map((service) => ({
   /* ── Process rail ─────────────────────────────────────── */
   .rail {
     position: relative;
-    view-timeline-name: --rail;
   }
 
   .rail-list {
@@ -777,32 +768,15 @@ const serviceItems = services.map((service) => ({
     color: var(--text);
   }
 
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      /* The line fills to a point 60% down the screen; each step lights as that point reaches it. */
-      .rail-fill {
-        animation: rail-grow linear both;
-        animation-timeline: --rail;
-        animation-range: cover 40vh cover calc(100% - 60vh);
-      }
-      .rail-dot,
-      .rail-num {
-        animation: rail-lit linear both;
-        animation-timeline: view();
-        animation-range: cover 28vh cover 40vh;
-      }
-    }
-  }
-
-  @keyframes rail-grow {
-    from {
+  /* When the steps come into view the line draws down through them while each
+     step enters in turn. */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.reveal-ready) .rail-fill {
       transform: scaleY(0);
     }
-  }
-
-  @keyframes rail-lit {
-    from {
-      opacity: 0.4;
+    :global(.reveal-ready) .rail:global(.is-revealed) .rail-fill {
+      transform: none;
+      transition: transform 1600ms var(--ease-out) 150ms;
     }
   }
 

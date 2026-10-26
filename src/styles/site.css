@@ -998,44 +998,29 @@ textarea.input {
   mask-image: linear-gradient(180deg, #000, transparent 85%);
 }
 
-/* ── Scroll-driven reveals ────────────────────────────────── */
-/* CSS-only and motion-only: elements are always fully visible; where view
-   timelines are supported they settle into place as they scroll in. */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal,
-    .reveal-stagger > * {
-      animation: reveal-up linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 70%;
-    }
+/* ── Entrance reveals ─────────────────────────────────────── */
+/* Each element plays a short entrance once, on a timer, when it first comes
+   into view (see the inline script in BaseLayout). Rows stagger evenly. The
+   hiding class is only present when that script can run and motion is allowed,
+   so content is visible without JavaScript. The animation uses the individual
+   translate property, so it never overrides an element's own hover transform. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready :is(.reveal, .reveal-stagger > *):not(.is-revealed) {
+    opacity: 0;
+  }
 
-    .reveal-stagger > :nth-child(2) {
-      animation-range: entry 6% entry 76%;
-    }
-
-    .reveal-stagger > :nth-child(3) {
-      animation-range: entry 12% entry 82%;
-    }
-
-    .reveal-stagger > :nth-child(4) {
-      animation-range: entry 18% entry 88%;
-    }
-
-    .reveal-stagger > :nth-child(n + 5) {
-      animation-range: entry 22% entry 92%;
-    }
+  .reveal-ready :is(.reveal, .reveal-stagger > *).is-revealed {
+    animation: reveal-in 850ms var(--ease-out) var(--reveal-delay, 0ms) both;
   }
 }
 
-/* Motion only: content is never faded, so text keeps full contrast at every
-   scroll position. Uses the individual translate property, not transform, so
-   the filled end state never overrides an element's own hover transform. */
-@keyframes reveal-up {
+@keyframes reveal-in {
   from {
-    translate: 0 32px;
+    opacity: 0;
+    translate: 0 24px;
   }
   to {
+    opacity: 1;
     translate: none;
   }
 }
@@ -1108,6 +1093,11 @@ textarea.input {
   html,
   body {
     background: #fff !important;
+  }
+
+  .reveal-ready :is(.reveal, .reveal-stagger > *) {
+    opacity: 1 !important;
+    animation: none !important;
   }
 
   *,

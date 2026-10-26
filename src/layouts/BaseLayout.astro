@@ -95,6 +95,39 @@ const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c'
         }
       } catch (error) {}
     </script>
+    <script is:inline>
+      // Entrance reveals play once, on a timer, as each element first comes into view.
+      // The class that hides elements is only added when this can run, so content is
+      // always visible without JavaScript or with reduced motion.
+      (() => {
+        const root = document.documentElement;
+        if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        root.classList.add('reveal-ready');
+        const reveal = (observer, stagger) => (entries) => {
+          entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left)
+            .forEach((entry, index) => {
+              if (stagger) entry.target.style.setProperty('--reveal-delay', `${Math.min(index, 6) * 80}ms`);
+              entry.target.classList.add('is-revealed');
+              observer().unobserve(entry.target);
+            });
+        };
+        const start = () => {
+          try {
+            let items, moments;
+            items = new IntersectionObserver(reveal(() => items, true), { rootMargin: '0px 0px -6% 0px' });
+            moments = new IntersectionObserver(reveal(() => moments, false), { rootMargin: '0px 0px -25% 0px' });
+            document.querySelectorAll('.reveal, .reveal-stagger > *').forEach((el) => items.observe(el));
+            document.querySelectorAll('[data-reveal]').forEach((el) => moments.observe(el));
+          } catch (error) {
+            root.classList.remove('reveal-ready');
+          }
+        };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+        else start();
+      })();
+    </script>
     {preload && (
       <link
         rel="preload"
