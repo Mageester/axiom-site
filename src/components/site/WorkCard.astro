@@ -7,13 +7,20 @@ type Props = {
   project: Project;
   sizes?: string;
   detailed?: boolean;
+  /** Wide, side-by-side layout for the lead project in a showcase. */
+  featured?: boolean;
 };
 
-const { project, sizes = '(min-width: 1024px) 380px, (min-width: 720px) 45vw, 92vw', detailed = false } = Astro.props;
+const {
+  project,
+  sizes = '(min-width: 1024px) 380px, (min-width: 720px) 45vw, 92vw',
+  detailed = false,
+  featured = false,
+} = Astro.props;
 const isClient = project.kind === 'client';
 ---
 
-<article class="card card-link work-card">
+<article class:list={['card', 'card-link', 'work-card', { 'work-featured': featured }]}>
   <div class="work-media">
     <ResponsivePicture source={project.image} alt={project.alt} sizes={sizes} position={project.position} />
     <span class:list={['badge', 'work-badge', isClient ? 'badge-success badge-dot' : '']}>
@@ -63,15 +70,24 @@ const isClient = project.kind === 'client';
     border-bottom: 1px solid var(--line);
   }
 
+  .work-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgb(5 7 13 / 0.55));
+    pointer-events: none;
+  }
+
   .work-media :global(img) {
-    transition: transform 600ms var(--ease);
+    transition: transform 900ms var(--ease-out);
   }
 
   .work-card:hover .work-media :global(img) {
-    transform: scale(1.03);
+    transform: scale(1.045);
   }
 
   .work-badge {
+    z-index: 1;
     position: absolute;
     top: 0.85rem;
     left: 0.85rem;
@@ -131,5 +147,45 @@ const isClient = project.kind === 'client';
 
   .work-card:hover .work-link :global(svg) {
     transform: translate(2px, -2px);
+  }
+
+  @media (min-width: 900px) {
+    .work-featured {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    }
+
+    .work-featured .work-media {
+      aspect-ratio: auto;
+      min-height: 26rem;
+      border-right: 1px solid var(--line);
+      border-bottom: 0;
+    }
+
+    .work-featured .work-media :global(picture),
+    .work-featured .work-media :global(img) {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+    }
+
+    .work-featured .work-body {
+      justify-content: center;
+      gap: 0.85rem;
+      padding: clamp(2rem, 1rem + 2.5vw, 3rem);
+    }
+
+    .work-featured h3 {
+      font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.1rem);
+      letter-spacing: -0.025em;
+    }
+
+    .work-featured .work-summary {
+      font-size: var(--fs-body);
+    }
+
+    .work-featured .work-link {
+      margin-top: 0.75rem;
+    }
   }
 </style>

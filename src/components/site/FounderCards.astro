@@ -49,9 +49,13 @@ const { withAnchors = false } = Astro.props;
     width: 3.5rem;
     height: 3.5rem;
     flex: none;
+    border: 1px solid rgb(255 255 255 / 0.18);
     border-radius: 999px;
-    background: linear-gradient(135deg, var(--brand), #4d74e8);
+    background:
+      radial-gradient(circle at 30% 20%, rgb(255 255 255 / 0.35), transparent 60%),
+      linear-gradient(135deg, #3a6cf0, #1b2f74);
     color: #fff;
+    box-shadow: 0 10px 30px -10px var(--glow);
     font-size: 1.05rem;
     font-weight: 700;
     letter-spacing: 0.02em;

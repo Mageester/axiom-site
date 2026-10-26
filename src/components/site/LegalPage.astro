@@ -82,7 +82,7 @@ const { title, updated, sections, crumbs } = Astro.props as Props;
     padding: 1.25rem;
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    background: var(--bg-soft);
+    background: var(--surface);
   }
 
   .legal-toc-title {
@@ -110,7 +110,7 @@ const { title, updated, sections, crumbs } = Astro.props as Props;
   }
 
   .legal-toc a:hover {
-    color: var(--brand);
+    color: #fff;
   }
 
   .legal-toc a span {
@@ -128,6 +128,7 @@ const { title, updated, sections, crumbs } = Astro.props as Props;
   }
 
   .legal-num {
-    color: var(--brand);
+    color: var(--accent);
+    -webkit-text-fill-color: var(--accent);
   }
 </style>

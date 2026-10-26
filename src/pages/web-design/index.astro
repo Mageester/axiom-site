@@ -34,7 +34,7 @@ const crumbs: Crumb[] = [
           <h2 id="areas-title">Plan for the customers you serve</h2>
           <p>Each page covers practical website decisions for that area. They describe where we offer our services; our base is Kitchener-Waterloo and we do not present other offices.</p>
         </div>
-        <div class="grid grid-3">
+        <div class="grid grid-3 reveal-stagger">
           {cities.map((city) => (
             <LinkCard
               href={`/web-design/${city.slug}/`}

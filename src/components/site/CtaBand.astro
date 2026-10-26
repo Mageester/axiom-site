@@ -21,6 +21,7 @@ const {
 <section class="cta-band section-sm" aria-labelledby="cta-band-title">
   <div class="container">
     <div class="cta-panel">
+      <img class="cta-mark" src="/brand/axiom-mark.webp" width="278" height="347" alt="" loading="lazy" decoding="async" />
       <div class="cta-copy">
         <h2 id="cta-band-title">{title}</h2>
         <p>{text}</p>
@@ -40,13 +41,29 @@ const {
     gap: 2rem;
     overflow: hidden;
     padding: clamp(2rem, 1.25rem + 3.5vw, 4rem);
+    border: 1px solid transparent;
     border-radius: var(--radius-xl);
     background:
-      radial-gradient(40rem 20rem at 100% 0%, rgb(36 83 214 / 0.45), transparent 70%),
-      radial-gradient(30rem 18rem at 0% 120%, rgb(157 181 255 / 0.16), transparent 70%),
-      var(--night);
+      radial-gradient(44rem 24rem at 100% 0%, rgb(58 108 240 / 0.42), transparent 70%) padding-box,
+      radial-gradient(30rem 18rem at 0% 120%, rgb(157 181 255 / 0.14), transparent 70%) padding-box,
+      linear-gradient(180deg, #0c1222, #070a13) padding-box,
+      linear-gradient(180deg, rgb(160 185 255 / 0.45), rgb(255 255 255 / 0.05) 60%) border-box;
+    box-shadow: var(--shadow-lg), 0 0 120px -50px var(--glow);
     color: var(--night-text);
     isolation: isolate;
+  }
+
+  /* The chrome mark as a quiet watermark. */
+  .cta-mark {
+    position: absolute;
+    right: 2%;
+    bottom: -22%;
+    z-index: -1;
+    width: clamp(12rem, 8rem + 14vw, 20rem);
+    opacity: 0.12;
+    mask-image: linear-gradient(200deg, #000 30%, transparent 90%);
+    pointer-events: none;
+    user-select: none;
   }
 
   .cta-panel::before {
@@ -68,7 +85,7 @@ const {
   }
 
   .cta-copy h2 {
-    color: #fff;
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
   }
 
   .cta-copy p {

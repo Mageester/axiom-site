@@ -6,6 +6,7 @@
 //
 // Outputs:
 //   public/brand/axiom-logo.webp   Lockup used by the site header and footer.
+//   public/brand/axiom-mark.webp   Mark on its own, used as a watermark.
 //   src/lib/logo.json              Lockup size plus the seam lines between the three blades
 //                                  and the wordmark, used to animate each part separately.
 //   public/*.png                   Favicons and app icons.
@@ -89,6 +90,8 @@ await sharp(LOGO_SOURCE)
   .resize({ height: LOGO_HEIGHT, kernel: 'lanczos3' })
   .webp({ quality: 88, alphaQuality: 100, effort: 6 })
   .toFile('public/brand/axiom-logo.webp');
+
+await sharp(MARK_SOURCE).trim({ threshold: 1 }).webp({ quality: 90, alphaQuality: 100, effort: 6 }).toFile('public/brand/axiom-mark.webp');
 
 // ── Icons ──────────────────────────────────────────────────────────────
 // Chrome mark centred on a night tile, matching the original app icon.

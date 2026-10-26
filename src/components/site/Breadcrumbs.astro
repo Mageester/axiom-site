@@ -47,7 +47,7 @@ const { items } = Astro.props as { items: Crumb[] };
   }
 
   .breadcrumbs a:hover {
-    color: var(--brand);
+    color: #fff;
   }
 
   .breadcrumbs [aria-current='page'] {
@@ -55,6 +55,6 @@ const { items } = Astro.props as { items: Crumb[] };
   }
 
   .breadcrumbs :global(svg) {
-    color: var(--line-strong);
+    color: rgb(255 255 255 / 0.28);
   }
 </style>

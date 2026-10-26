@@ -187,8 +187,8 @@ const pricingSchema = {
     padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    background: #fff;
-    box-shadow: var(--shadow-xs);
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    box-shadow: var(--shadow-md);
   }
 
   .included-note {
@@ -204,7 +204,7 @@ const pricingSchema = {
     overflow-x: auto;
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    background: #fff;
+    background: var(--surface);
     box-shadow: var(--shadow-xs);
   }
 
@@ -247,7 +247,7 @@ const pricingSchema = {
     left: 0;
     z-index: 1;
     width: 11rem;
-    background: #fff;
+    background: var(--surface);
     color: var(--ink);
     font-weight: 600;
   }
@@ -257,11 +257,12 @@ const pricingSchema = {
   }
 
   .compare-table .featured {
-    background: rgb(237 242 254 / 0.6);
+    background: rgb(64 108 255 / 0.07);
+    box-shadow: inset 1px 0 0 var(--brand-line), inset -1px 0 0 var(--brand-line);
   }
 
   .compare-table thead .featured {
-    background: var(--brand-soft);
+    background: rgb(64 108 255 / 0.16);
   }
 
   .compare-table tbody tr:last-child th,
@@ -300,7 +301,7 @@ const pricingSchema = {
     margin-bottom: 0.4rem;
     border-radius: 999px;
     background: var(--brand-soft);
-    color: var(--brand);
+    color: var(--accent);
     font-weight: 700;
   }
 

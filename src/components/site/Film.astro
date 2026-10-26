@@ -44,9 +44,10 @@ import Icon from './Icon.astro';
     position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    border: 1px solid var(--line-strong);
     border-radius: var(--radius-xl);
     background: #05070d;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-lg), 0 0 120px -40px var(--glow);
   }
 
   .film-poster,
@@ -76,20 +77,26 @@ import Icon from './Icon.astro';
     justify-items: center;
     gap: 0.9rem;
     border: 0;
-    background: linear-gradient(180deg, rgb(10 17 34 / 0.05) 30%, rgb(10 17 34 / 0.55));
+    background:
+      radial-gradient(40% 50% at 50% 50%, rgb(5 7 13 / 0.25), transparent),
+      linear-gradient(180deg, rgb(5 7 13 / 0.05) 30%, rgb(5 7 13 / 0.6));
     color: #fff;
   }
 
   .film-play-icon {
+    position: relative;
     display: inline-grid;
     place-items: center;
     width: 4.5rem;
     height: 4.5rem;
+    border: 1px solid rgb(255 255 255 / 0.35);
     border-radius: 999px;
-    background: #fff;
-    color: var(--brand);
-    box-shadow: 0 10px 40px rgb(0 0 0 / 0.35);
-    transition: transform 200ms var(--ease);
+    background: rgb(255 255 255 / 0.12);
+    color: #fff;
+    box-shadow: 0 10px 40px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.3);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: transform 300ms var(--ease-out), background-color 300ms var(--ease);
   }
 
   .film-play-icon :global(svg) {
@@ -98,7 +105,30 @@ import Icon from './Icon.astro';
   }
 
   .film-play:hover .film-play-icon {
-    transform: scale(1.06);
+    transform: scale(1.08);
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .film-play-icon::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border: 1px solid rgb(255 255 255 / 0.4);
+      border-radius: 999px;
+      animation: film-pulse 2.6s var(--ease-out) infinite;
+    }
+  }
+
+  @keyframes film-pulse {
+    from {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.7);
+    }
   }
 
   .film-play:focus-visible {

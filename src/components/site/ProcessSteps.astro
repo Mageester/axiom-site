@@ -94,13 +94,16 @@ const { steps, detailed = false } = Astro.props;
     width: 2.75rem;
     height: 2.75rem;
     flex: none;
+    border: 1px solid var(--brand-line);
     border-radius: 999px;
-    background: var(--brand);
-    color: #fff;
+    background:
+      radial-gradient(circle at 35% 25%, rgb(150 180 255 / 0.35), transparent 70%),
+      #0d1427;
+    color: var(--ink);
     font-size: 0.9375rem;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
-    box-shadow: 0 0 0 6px var(--brand-soft);
+    box-shadow: 0 0 0 6px rgb(64 108 255 / 0.08), 0 0 28px -6px var(--glow);
   }
 
   .step-line {
@@ -121,7 +124,7 @@ const { steps, detailed = false } = Astro.props;
   }
 
   .step-timing {
-    color: var(--brand);
+    color: var(--accent);
     font-size: var(--fs-xs);
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -212,7 +215,7 @@ const { steps, detailed = false } = Astro.props;
   .from-you {
     padding: 1.1rem 1.2rem;
     border-radius: var(--radius);
-    background: var(--bg-soft);
+    background: rgb(255 255 255 / 0.025);
     border: 1px solid var(--line);
     font-size: var(--fs-sm);
   }

@@ -104,7 +104,7 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
           <p class="eyebrow">Services</p>
           <h2 id="services-title">What we build for {city.name} businesses</h2>
         </div>
-        <div class="grid grid-3">
+        <div class="grid grid-3 reveal-stagger">
           {services.map((service) => (
             <LinkCard href={`/services/${service.slug}/`} icon={service.icon} title={service.name} text={service.cardSummary} />
           ))}
@@ -204,7 +204,7 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
   }
 
   .plan-num {
-    color: var(--brand);
+    color: var(--accent);
     font-size: var(--fs-sm);
     font-weight: 700;
     font-variant-numeric: tabular-nums;
@@ -252,7 +252,7 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
     padding: 0.5rem 1rem;
     border: 1px solid var(--line);
     border-radius: 999px;
-    background: #fff;
+    background: var(--surface);
     color: var(--ink-2);
     font-size: var(--fs-sm);
     font-weight: 600;
@@ -261,10 +261,10 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
 
   .area-links a:hover {
     border-color: var(--brand-line);
-    color: var(--brand);
+    color: var(--accent);
   }
 
   .area-links :global(svg) {
-    color: var(--brand);
+    color: var(--accent);
   }
 </style>
