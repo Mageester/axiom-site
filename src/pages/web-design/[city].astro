@@ -68,7 +68,7 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
         <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
       </Fragment>
       <aside slot="aside" class="card local-card" aria-label={`Working with ${city.name} businesses`}>
-        <p class="local-focus"><span class="icon-tile"><Icon name="map-pin" /></span>{city.focus}</p>
+        <p class="local-focus">{city.focus}</p>
         <p class="local-context">{city.localContext}</p>
         <div>
           <p class="local-label">Areas we serve in and around {city.name}</p>
@@ -106,7 +106,7 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
         </div>
         <div class="grid grid-3 reveal-stagger">
           {services.map((service) => (
-            <LinkCard href={`/services/${service.slug}/`} icon={service.icon} title={service.name} text={service.cardSummary} />
+            <LinkCard href={`/services/${service.slug}/`} title={service.name} text={service.cardSummary} />
           ))}
         </div>
       </div>
@@ -188,7 +188,7 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
   .chips li {
     padding: 0.3rem 0.7rem;
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: var(--radius);
     background: var(--bg-soft);
     color: var(--ink-2);
     font-size: var(--fs-xs);
@@ -251,7 +251,7 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
     min-height: 2.75rem;
     padding: 0.5rem 1rem;
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: var(--radius);
     background: var(--surface);
     color: var(--ink-2);
     font-size: var(--fs-sm);

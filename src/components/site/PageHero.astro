@@ -15,7 +15,6 @@ const hasAside = Astro.slots.has('aside');
 ---
 
 <section class:list={['page-hero', { 'has-aside': hasAside, center }]}>
-  <div class="page-hero-light" aria-hidden="true"></div>
   <div class="grid-lines" aria-hidden="true"></div>
   <div class="container">
     {crumbs && crumbs.length > 1 && <Breadcrumbs items={crumbs} />}
@@ -54,32 +53,6 @@ const hasAside = Astro.slots.has('aside');
     z-index: 1;
   }
 
-  /* A cool light from above, like a single spotlight on a dark stage. */
-  .page-hero-light {
-    position: absolute;
-    inset: -30% -10% auto;
-    height: 46rem;
-    background:
-      radial-gradient(38rem 22rem at 70% 18%, rgb(64 108 255 / 0.28), transparent 70%),
-      radial-gradient(30rem 18rem at 20% 0%, rgb(150 180 255 / 0.12), transparent 70%);
-    filter: blur(10px);
-    pointer-events: none;
-  }
-
-  .center .page-hero-light {
-    background: radial-gradient(44rem 24rem at 50% 18%, rgb(64 108 255 / 0.3), transparent 70%);
-  }
-
-  .page-hero::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: -1px;
-    left: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgb(140 170 255 / 0.5), transparent);
-  }
-
   .page-hero h1 {
     font-size: var(--fs-h1);
   }
@@ -105,7 +78,7 @@ const hasAside = Astro.slots.has('aside');
   @keyframes hero-in {
     from {
       opacity: 0;
-      transform: translateY(18px);
+      transform: translateY(14px);
     }
   }
 
@@ -122,9 +95,9 @@ const hasAside = Astro.slots.has('aside');
 
   .page-hero-copy {
     display: grid;
-    gap: 1.15rem;
+    gap: 1.25rem;
     align-content: start;
-    max-width: 46rem;
+    max-width: 52rem;
   }
 
   .page-hero-copy .lead {
@@ -148,7 +121,7 @@ const hasAside = Astro.slots.has('aside');
   @media (min-width: 1024px) {
     .has-aside .page-hero-grid {
       grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.85fr);
-      align-items: center;
+      align-items: end;
       gap: 4rem;
     }
   }

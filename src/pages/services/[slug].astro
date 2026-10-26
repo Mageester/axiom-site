@@ -52,7 +52,7 @@ const crumbs: Crumb[] = [
         <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
       </Fragment>
       <aside slot="aside" class="card glance" aria-label="At a glance">
-        <p class="glance-title"><span class="icon-tile"><Icon name={service.icon} /></span> At a glance</p>
+        <p class="label glance-title">At a glance</p>
         <dl>
           <div>
             <dt>Packages from</dt>
@@ -158,7 +158,7 @@ const crumbs: Crumb[] = [
         <h2 id="other-title" class="other-title">Other services</h2>
         <div class="grid grid-2 reveal-stagger">
           {others.map((item) => (
-            <LinkCard href={`/services/${item.slug}/`} icon={item.icon} title={item.name} text={item.cardSummary} />
+            <LinkCard href={`/services/${item.slug}/`} title={item.name} text={item.cardSummary} />
           ))}
         </div>
       </div>
@@ -298,9 +298,9 @@ const crumbs: Crumb[] = [
     width: 2rem;
     height: 2rem;
     flex: none;
-    border-radius: 999px;
-    background: var(--brand-soft);
-    color: var(--accent);
+    border-radius: var(--radius);
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
   }
 
   .faq-grid {

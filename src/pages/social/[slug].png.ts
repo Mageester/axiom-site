@@ -65,18 +65,13 @@ export const GET: APIRoute = async ({ props }) => {
 
   const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <radialGradient id="glow" cx="1" cy="0" r="0.9">
-        <stop offset="0" stop-color="#3a6cf0" stop-opacity="0.5"/>
-        <stop offset="1" stop-color="#3a6cf0" stop-opacity="0"/>
-      </radialGradient>
-      <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-        <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
+      <pattern id="cols" width="173.33" height="630" patternUnits="userSpaceOnUse" x="80">
+        <path d="M0 0V630" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
       </pattern>
     </defs>
-    <rect width="1200" height="630" fill="#05070d"/>
-    <rect width="1200" height="630" fill="url(#grid)"/>
-    <rect width="1200" height="630" fill="url(#glow)"/>
-    <text x="80" y="${top - size - 6}" fill="#93b1ff" font-family="${FONT}" font-size="24" font-weight="600" letter-spacing="2.5">${escapeXml(label)}</text>
+    <rect width="1200" height="630" fill="#0b0b0c"/>
+    <rect width="1200" height="630" fill="url(#cols)"/>
+    <text x="80" y="${top - size - 6}" fill="#8ea8ff" font-family="${FONT}" font-size="24" font-weight="600" letter-spacing="2.5">${escapeXml(label)}</text>
     ${lines
       .map(
         (line, i) =>
@@ -84,7 +79,7 @@ export const GET: APIRoute = async ({ props }) => {
       )
       .join('')}
     <rect x="80" y="520" width="1040" height="1" fill="#ffffff" fill-opacity="0.14"/>
-    <text x="80" y="566" fill="#a9b3c6" font-family="${FONT}" font-size="24">Kitchener-Waterloo, Ontario · (226) 753-1833</text>
+    <text x="80" y="566" fill="#b6b5ae" font-family="${FONT}" font-size="24">Kitchener-Waterloo, Ontario · (226) 753-1833</text>
     <text x="1120" y="566" text-anchor="end" fill="#ffffff" font-family="${FONT}" font-size="24" font-weight="600">getaxiom.ca</text>
   </svg>`;
 

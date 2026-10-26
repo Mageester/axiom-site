@@ -18,18 +18,17 @@ const { url, class: className } = Astro.props;
     overflow: hidden;
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-lg);
-    background: #0c111d;
-    box-shadow: var(--shadow-lg), inset 0 1px 0 rgb(255 255 255 / 0.08);
+    background: var(--surface);
   }
 
   .browser-bar {
     display: flex;
     align-items: center;
     gap: 0.9rem;
-    height: 2.4rem;
+    height: 2.25rem;
     padding-inline: 0.9rem;
     border-bottom: 1px solid var(--line);
-    background: linear-gradient(180deg, #151b2b, #0f1422);
+    background: var(--surface);
   }
 
   .browser-dots {
@@ -38,10 +37,10 @@ const { url, class: className } = Astro.props;
   }
 
   .browser-dots i {
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.55rem;
+    height: 0.55rem;
     border-radius: 999px;
-    background: rgb(255 255 255 / 0.16);
+    background: rgb(255 255 255 / 0.14);
   }
 
   .browser-url {
@@ -49,12 +48,9 @@ const { url, class: className } = Astro.props;
     max-width: 22rem;
     margin-inline: auto;
     overflow: hidden;
-    padding: 0.2rem 0.75rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: rgb(0 0 0 / 0.3);
     color: var(--text-muted);
     font-size: 0.72rem;
+    letter-spacing: 0.02em;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -67,15 +67,21 @@ const { items, openFirst = false } = Astro.props;
     height: 2rem;
     flex: none;
     border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    color: var(--accent);
-    transition: transform 200ms var(--ease), background-color 200ms var(--ease);
+    border-radius: var(--radius);
+    color: var(--ink);
+    transition: border-color 200ms var(--ease);
+  }
+
+  .faq-icon :global(svg) {
+    transition: transform 240ms var(--ease-out);
   }
 
   details[open] .faq-icon {
+    border-color: var(--ink);
+  }
+
+  details[open] .faq-icon :global(svg) {
     transform: rotate(45deg);
-    background: var(--brand-soft);
-    border-color: var(--brand-line);
   }
 
   .faq-item p {

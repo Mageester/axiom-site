@@ -105,9 +105,9 @@ const beliefs = [
           <p>A polished launch matters, but a website also has to stay clear, fast and supported after it goes live. We focus on what helps customers trust a business and take the next step.</p>
         </div>
         <ul role="list" class="grid grid-3 beliefs">
-          {beliefs.map((belief) => (
+          {beliefs.map((belief, index) => (
             <li class="card belief">
-              <span class="icon-tile"><Icon name={belief.icon} /></span>
+              <span class="index-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               <h3>{belief.title}</h3>
               <p>{belief.text}</p>
             </li>
@@ -182,7 +182,7 @@ const beliefs = [
     gap: 0.65rem;
   }
 
-  .belief .icon-tile {
+  .belief .index-num {
     margin-bottom: 0.4rem;
   }
 

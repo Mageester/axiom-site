@@ -57,9 +57,9 @@ const crumbs: Crumb[] = [
           <p>Whatever the package, these principles shape every page we design and build.</p>
         </div>
         <ul role="list" class="grid grid-4 standards">
-          {standards.map((item) => (
+          {standards.map((item, index) => (
             <li class="card standard">
-              <span class="icon-tile"><Icon name={item.icon} /></span>
+              <span class="index-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </li>
@@ -109,9 +109,9 @@ const crumbs: Crumb[] = [
     place-items: center;
     width: 2.25rem;
     height: 2.25rem;
-    border-radius: 999px;
-    background: var(--brand-soft);
-    color: var(--accent);
+    border-radius: var(--radius);
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
     font-size: var(--fs-sm);
     font-weight: 700;
   }
@@ -135,7 +135,7 @@ const crumbs: Crumb[] = [
     gap: 0.65rem;
   }
 
-  .standard .icon-tile {
+  .standard .index-num {
     margin-bottom: 0.4rem;
   }
 

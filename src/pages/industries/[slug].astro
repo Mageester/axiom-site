@@ -49,7 +49,7 @@ const crumbs: Crumb[] = [
         <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
       </Fragment>
       <aside slot="aside" class="card pages-card" aria-label="Recommended pages">
-        <p class="pages-title"><span class="icon-tile"><Icon name={industry.icon} /></span> A typical site structure</p>
+        <p class="label pages-title">A typical site structure</p>
         <ol role="list" class="pages-list">
           {industry.pages.map((page, index) => (
             <li><span aria-hidden="true">{index + 1}</span>{page}</li>
@@ -122,7 +122,7 @@ const crumbs: Crumb[] = [
         <h2 id="other-title" class="other-title">Other industries</h2>
         <div class="grid grid-4 reveal-stagger">
           {others.map((item) => (
-            <LinkCard href={`/industries/${item.slug}/`} icon={item.icon} title={item.name} text={item.examples} linkLabel="Read the guide" />
+            <LinkCard href={`/industries/${item.slug}/`} title={item.name} text={item.examples} linkLabel="Read the guide" />
           ))}
         </div>
       </div>
@@ -166,9 +166,9 @@ const crumbs: Crumb[] = [
     width: 1.5rem;
     height: 1.5rem;
     flex: none;
-    border-radius: 999px;
-    background: var(--brand-soft);
-    color: var(--accent);
+    border-radius: var(--radius);
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
     font-size: 0.75rem;
     font-weight: 700;
   }
@@ -195,9 +195,9 @@ const crumbs: Crumb[] = [
     width: 2rem;
     height: 2rem;
     flex: none;
-    border-radius: 999px;
-    background: var(--brand-soft);
-    color: var(--accent);
+    border-radius: var(--radius);
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
   }
 
   .need p {

@@ -2,46 +2,40 @@
 import { industries } from '../../content/industries';
 import { CTA_PATHS } from '../../lib/cta';
 import Icon from './Icon.astro';
-import LinkCard from './LinkCard.astro';
+import IndexList from './IndexList.astro';
 
 type Props = { detailed?: boolean };
 const { detailed = false } = Astro.props;
+
+const items = industries.map((industry) => ({
+  href: `/industries/${industry.slug}/`,
+  title: industry.name,
+  text: detailed ? industry.intro : industry.examples,
+  meta: detailed ? industry.examples : undefined,
+}));
 ---
 
-<div class="grid grid-3">
-  {industries.map((industry) => (
-    <LinkCard
-      href={`/industries/${industry.slug}/`}
-      icon={industry.icon}
-      title={industry.name}
-      meta={detailed ? industry.examples : undefined}
-      text={detailed ? industry.intro : industry.examples}
-      linkLabel={detailed ? 'Read the guide' : 'See what matters'}
-    />
-  ))}
-  <article class="card industry-other">
-    <h3>Something else?</h3>
-    <p>The same principles apply to most local businesses: a clear offer, honest proof and an easy next step. Tell us what you do.</p>
-    <a href={CTA_PATHS.startProject} class="btn btn-secondary">Tell us about your business <Icon name="arrow-right" /></a>
-  </article>
+<div class="industries">
+  <IndexList items={items} />
+  <div class="industry-other">
+    <p><strong>Something else?</strong> The same principles apply to most local businesses: a clear offer, honest proof and an easy next step. Tell us what you do.</p>
+    <a href={CTA_PATHS.startProject} class="arrow-link">Tell us about your business <Icon name="arrow-right" /></a>
+  </div>
 </div>
 
 <style>
   .industry-other {
-    gap: 0.75rem;
-    justify-content: center;
-    border: 1px dashed var(--line-strong);
-    background: transparent;
-    box-shadow: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-top: 1.5rem;
   }
 
   .industry-other p {
+    max-width: 40rem;
     color: var(--text);
     font-size: var(--fs-sm);
-  }
-
-  .industry-other .btn {
-    align-self: start;
-    margin-top: 0.5rem;
   }
 </style>

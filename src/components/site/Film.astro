@@ -44,10 +44,9 @@ import Icon from './Icon.astro';
     position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-xl);
-    background: #05070d;
-    box-shadow: var(--shadow-lg), 0 0 120px -40px var(--glow);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #000;
   }
 
   .film-poster,
@@ -69,82 +68,58 @@ import Icon from './Icon.astro';
     visibility: visible;
   }
 
+  /* The whole frame is the button; the visible control sits in the corner. */
   .film-play {
     position: absolute;
     inset: 0;
     display: grid;
-    place-content: center;
-    justify-items: center;
-    gap: 0.9rem;
+    grid-auto-flow: column;
+    align-content: end;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    padding: clamp(1rem, 0.5rem + 2vw, 2rem);
     border: 0;
-    background:
-      radial-gradient(40% 50% at 50% 50%, rgb(5 7 13 / 0.25), transparent),
-      linear-gradient(180deg, rgb(5 7 13 / 0.05) 30%, rgb(5 7 13 / 0.6));
-    color: #fff;
+    background: linear-gradient(180deg, transparent 55%, rgb(0 0 0 / 0.55));
+    color: var(--ink);
   }
 
   .film-play-icon {
-    position: relative;
     display: inline-grid;
     place-items: center;
-    width: 4.5rem;
-    height: 4.5rem;
-    border: 1px solid rgb(255 255 255 / 0.35);
-    border-radius: 999px;
-    background: rgb(255 255 255 / 0.12);
-    color: #fff;
-    box-shadow: 0 10px 40px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.3);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    transition: transform 300ms var(--ease-out), background-color 300ms var(--ease);
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: var(--radius);
+    background: var(--ink);
+    color: var(--bg);
+    transition: background-color 200ms var(--ease);
   }
 
   .film-play-icon :global(svg) {
-    margin-left: 0.2rem;
+    margin-left: 0.15rem;
     fill: currentColor;
   }
 
   .film-play:hover .film-play-icon {
-    transform: scale(1.08);
-    background: rgb(255 255 255 / 0.2);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .film-play-icon::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border: 1px solid rgb(255 255 255 / 0.4);
-      border-radius: 999px;
-      animation: film-pulse 2.6s var(--ease-out) infinite;
-    }
-  }
-
-  @keyframes film-pulse {
-    from {
-      opacity: 0.8;
-      transform: scale(1);
-    }
-    to {
-      opacity: 0;
-      transform: scale(1.7);
-    }
+    background: #fff;
   }
 
   .film-play:focus-visible {
-    outline: 3px solid #fff;
-    outline-offset: -8px;
+    outline: 2px solid var(--accent);
+    outline-offset: -6px;
   }
 
   .film-play-label {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.75rem;
     font-size: var(--fs-sm);
     font-weight: 600;
-    text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
   }
 
   .film-duration {
-    margin-left: 0.35rem;
-    opacity: 0.8;
+    color: var(--ink-2);
+    font-weight: 500;
     font-variant-numeric: tabular-nums;
   }
 
@@ -157,7 +132,6 @@ import Icon from './Icon.astro';
     margin-top: 1rem;
     color: var(--text-muted);
     font-size: var(--fs-sm);
-    text-align: center;
   }
 </style>
 

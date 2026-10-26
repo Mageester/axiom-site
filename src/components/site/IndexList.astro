@@ -1,0 +1,21 @@
+---
+// Numbered rows on hairlines: the studio's alternative to a grid of icon cards.
+import Icon from './Icon.astro';
+
+type Item = { href: string; title: string; text: string; meta?: string };
+type Props = { items: Item[] };
+
+const { items } = Astro.props;
+---
+
+<ol role="list" class="index-list reveal-stagger">
+  {items.map((item, index) => (
+    <li class="index-row">
+      <span class="index-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+      <h3 class="index-title"><a href={item.href}>{item.title}</a></h3>
+      <p class="index-text">{item.text}</p>
+      {item.meta && <p class="index-meta">{item.meta}</p>}
+      <span class="index-arrow" aria-hidden="true"><Icon name="arrow-right" /></span>
+    </li>
+  ))}
+</ol>

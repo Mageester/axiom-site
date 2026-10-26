@@ -266,8 +266,8 @@ const pricingPathOptions = [
     min-height: 2.75rem;
     padding: 0.55rem 1rem;
     border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    background: rgb(255 255 255 / 0.03);
+    border-radius: var(--radius);
+    background: transparent;
     color: var(--ink-2);
     font-size: var(--fs-sm);
     font-weight: 500;
@@ -275,15 +275,14 @@ const pricingPathOptions = [
   }
 
   .package-option:hover span {
-    border-color: var(--brand-line);
+    border-color: rgb(255 255 255 / 0.32);
   }
 
   .package-option input:checked + span {
-    border-color: var(--accent);
-    background: rgb(64 108 255 / 0.18);
-    color: #fff;
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--bg);
     font-weight: 600;
-    box-shadow: 0 0 24px -8px var(--glow);
   }
 
   .package-option input:focus-visible + span {
@@ -298,7 +297,7 @@ const pricingPathOptions = [
   .intake-alert {
     padding: 0.85rem 1rem;
     border: 1px solid rgb(255 143 134 / 0.35);
-    border-radius: 10px;
+    border-radius: var(--radius);
     background: var(--danger-soft);
     color: var(--danger);
     font-size: var(--fs-sm);
@@ -347,9 +346,9 @@ const pricingPathOptions = [
     place-items: center;
     width: 3rem;
     height: 3rem;
-    border-radius: 999px;
+    border-radius: var(--radius);
     background: var(--success);
-    color: #05070d;
+    color: var(--bg);
   }
 
   .intake-success .btn-row {

@@ -23,7 +23,7 @@ const { withAnchors = false } = Astro.props;
 <style>
   .founders {
     display: grid;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   @media (min-width: 720px) {
@@ -33,7 +33,7 @@ const { withAnchors = false } = Astro.props;
   }
 
   .founder {
-    gap: 1.1rem;
+    gap: 1.25rem;
     scroll-margin-top: calc(var(--header-h) + 1.5rem);
   }
 
@@ -43,26 +43,33 @@ const { withAnchors = false } = Astro.props;
     gap: 1rem;
   }
 
+  .founder-head h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 540;
+    font-stretch: var(--wdth-heading);
+    letter-spacing: -0.02em;
+  }
+
+  /* A typographic monogram rather than a stock avatar. */
   .avatar {
     display: inline-grid;
     place-items: center;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3.25rem;
+    height: 3.25rem;
     flex: none;
-    border: 1px solid rgb(255 255 255 / 0.18);
-    border-radius: 999px;
-    background:
-      radial-gradient(circle at 30% 20%, rgb(255 255 255 / 0.35), transparent 60%),
-      linear-gradient(135deg, #3a6cf0, #1b2f74);
-    color: #fff;
-    box-shadow: 0 10px 30px -10px var(--glow);
-    font-size: 1.05rem;
-    font-weight: 700;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 560;
+    font-stretch: var(--wdth-display);
     letter-spacing: 0.02em;
   }
 
   .founder-role {
-    margin-top: 0.15rem;
+    margin-top: 0.2rem;
     color: var(--text-muted);
     font-size: var(--fs-sm);
   }

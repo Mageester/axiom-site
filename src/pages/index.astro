@@ -6,13 +6,12 @@ import FaqList from '../components/site/FaqList.astro';
 import Film from '../components/site/Film.astro';
 import FounderCards from '../components/site/FounderCards.astro';
 import Icon from '../components/site/Icon.astro';
+import IndexList from '../components/site/IndexList.astro';
 import IndustryGrid from '../components/site/IndustryGrid.astro';
-import LinkCard from '../components/site/LinkCard.astro';
 import PricingCards from '../components/site/PricingCards.astro';
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import WorkCard from '../components/site/WorkCard.astro';
 import { homeFaq, keyNumbers, valueProps } from '../content/company';
-import { industries } from '../content/industries';
 import { packages } from '../content/pricing';
 import { processSteps } from '../content/process';
 import { services } from '../content/services';
@@ -22,102 +21,80 @@ import { CTA_PATHS } from '../lib/cta';
 import { FILM_JSON_LD, SEO_ROUTES, SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE, faqJsonLd } from '../lib/seo';
 
 const [lead, ...concepts] = ['reids-home-and-yard', 'physio-clinic', 'dental-aurelia'].map((id) => getProject(id)!);
-const physio = concepts[0];
-const stageSizes = '(min-width: 1180px) 900px, 92vw';
+const reelSizes = '(min-width: 1320px) 1240px, 94vw';
 
 const statement =
   'Most local websites look fine and say very little. We build sites that explain what you do, show why you can be trusted and make the next step obvious, on the phone your customer is already holding.';
+
+const serviceItems = services.map((service) => ({
+  href: `/services/${service.slug}/`,
+  title: service.name,
+  text: service.cardSummary,
+}));
 ---
 
-<BaseLayout {...SEO_ROUTES.home} schema={[faqJsonLd(homeFaq), FILM_JSON_LD]} ogImageAlt="Axiom Web — clear, fast websites for local businesses in Kitchener-Waterloo">
+<BaseLayout
+  {...SEO_ROUTES.home}
+  schema={[faqJsonLd(homeFaq), FILM_JSON_LD]}
+  ogImageAlt="Axiom Web — clear, fast websites for local businesses in Kitchener-Waterloo"
+  preload={{ type: 'image/avif', href: '/images/work-reids-1200.avif', srcset: lead.image.avifSrcSet, sizes: reelSizes }}
+>
   <main id="main-content" tabindex="-1">
     <!-- Hero -->
     <section class="home-hero">
-      <div class="hero-atmosphere" aria-hidden="true">
-        <div class="hero-beam"></div>
-        <div class="hero-aurora"><span></span><span></span><span></span></div>
-        <div class="hero-floor"></div>
-      </div>
+      <div class="grid-lines" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="hero-index label">
+          <span>Web design studio</span>
+          <span>Kitchener-Waterloo, Ontario</span>
+          <span class="hero-status"><span class="status-dot" aria-hidden="true"></span>Taking new projects</span>
+        </p>
 
-      <div class="container hero-copy">
-        <p class="hero-kicker"><span class="kicker-dot" aria-hidden="true"></span>Web design studio in Kitchener-Waterloo</p>
-        <h1 class="display hero-title">
+        <h1 class="hero-title">
           <span class="line"><span>Websites that make</span></span>
           <span class="line"><span>your business the</span></span>
-          <span class="line"><span class="accent-text">obvious choice.</span></span>
+          <span class="line"><span>obvious choice.</span></span>
         </h1>
-        <p class="lead">
-          Axiom Web designs and builds clear, fast websites for local businesses across Kitchener-Waterloo and Ontario,
-          with published pricing from CAD $900 and launch in two to four weeks.
-        </p>
-        <div class="btn-row hero-actions">
-          <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
-          <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
-        </div>
-        <ul role="list" class="hero-assurances">
-          <li><Icon name="check" size={16} strokeWidth={2.4} />Fixed price agreed before work starts</li>
-          <li><Icon name="check" size={16} strokeWidth={2.4} />Work directly with the two founders</li>
-          <li><Icon name="check" size={16} strokeWidth={2.4} />First year of hosting included</li>
-        </ul>
-      </div>
 
-      <div class="container stage-wrap">
-        <div class="stage">
-          <div class="stage-tilt">
-            <div class="stage-side">
-              <BrowserFrame url="physio.getaxiom.ca">
-                <ResponsivePicture source={physio.image} alt={physio.alt} sizes="(min-width: 1180px) 560px, 60vw" position="left top" />
-              </BrowserFrame>
-              <span class="badge stage-side-badge">Concept build</span>
-            </div>
-            <div class="stage-main">
-              <BrowserFrame url="reidshomeandyard.getaxiom.ca">
-                <ResponsivePicture source={lead.image} alt={lead.alt} sizes={stageSizes} loading="eager" position="center top" />
-              </BrowserFrame>
-              <a class="stage-chip stage-chip-live" href={lead.href} target="_blank" rel="noopener">
-                <span class="chip-icon chip-icon-live" aria-hidden="true"><Icon name="rocket" size={18} /></span>
-                <span>
-                  <span class="chip-label">Client site · Live</span>
-                  <span class="chip-title">Reid’s Home &amp; Yard <span class="sr-only">(opens in a new tab)</span></span>
-                </span>
-              </a>
-              <div class="stage-chip stage-chip-time" aria-hidden="true">
-                <span class="chip-icon"><Icon name="calendar" size={18} /></span>
-                <span>
-                  <span class="chip-label">Typical launch</span>
-                  <span class="chip-title">2–4 weeks</span>
-                </span>
-              </div>
-            </div>
+        <div class="hero-foot">
+          <p class="lead">
+            Axiom Web designs and builds clear, fast websites for local businesses across Kitchener-Waterloo and Ontario,
+            with published pricing from CAD $900 and launch in two to four weeks.
+          </p>
+          <div class="btn-row">
+            <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
+            <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
           </div>
         </div>
+
+        <dl class="hero-spec">
+          <div><dt>Price</dt><dd>Fixed, and agreed before work starts</dd></div>
+          <div><dt>Team</dt><dd>Work directly with the two founders</dd></div>
+          <div><dt>Hosting</dt><dd>First year included</dd></div>
+        </dl>
       </div>
+
+      <figure class="container hero-reel">
+        <div class="reel-frame">
+          <BrowserFrame url="reidshomeandyard.getaxiom.ca">
+            <ResponsivePicture source={lead.image} alt={lead.alt} sizes={reelSizes} loading="eager" fetchpriority="high" position="center top" />
+          </BrowserFrame>
+        </div>
+        <figcaption class="reel-caption">
+          <span class="badge badge-success badge-dot">Client site · Live</span>
+          <span class="reel-title">{lead.title}</span>
+          <span class="reel-meta">{lead.industryLabel} · {lead.location}</span>
+          <a class="arrow-link reel-link" href={lead.href} target="_blank" rel="noopener">
+            Visit the site <span class="sr-only">(opens in a new tab)</span><Icon name="arrow-up-right" />
+          </a>
+        </figcaption>
+      </figure>
     </section>
 
-    <!-- Who it's for: moves with the page scroll, never on its own -->
-    <div class="ribbon">
-      <p class="ribbon-label" id="ribbon-label">Built for</p>
-      <div class="ribbon-window">
-        <div class="ribbon-track">
-          {[0, 1].map((copy) => (
-            <ul
-              role="list"
-              class="ribbon-list"
-              aria-labelledby={copy === 0 ? 'ribbon-label' : undefined}
-              aria-hidden={copy === 1 ? 'true' : undefined}
-            >
-              {industries.map((industry) => (
-                <li><Icon name={industry.icon} size={18} />{industry.name}</li>
-              ))}
-            </ul>
-          ))}
-        </div>
-      </div>
-    </div>
-
     <!-- Statement -->
-    <section class="section statement-section">
-      <div class="container">
+    <section class="section statement-section" aria-labelledby="statement-label">
+      <div class="container statement-grid">
+        <h2 id="statement-label" class="label statement-label">Our view</h2>
         <p class="statement">
           {statement.split(' ').map((word, index) => (
             <>
@@ -139,11 +116,7 @@ const statement =
           </div>
           <a href="/services/" class="arrow-link">All services <Icon name="arrow-right" /></a>
         </div>
-        <div class="grid grid-3 reveal-stagger">
-          {services.map((service) => (
-            <LinkCard href={`/services/${service.slug}/`} icon={service.icon} title={service.name} text={service.cardSummary} />
-          ))}
-        </div>
+        <IndexList items={serviceItems} />
       </div>
     </section>
 
@@ -169,22 +142,21 @@ const statement =
     </section>
 
     <!-- Film -->
-    <section class="section film-section" aria-labelledby="film-title">
-      <div class="film-light" aria-hidden="true"></div>
+    <section class="section section-soft" aria-labelledby="film-title">
       <div class="container">
-        <div class="section-head center reveal">
+        <div class="section-head reveal">
           <p class="eyebrow">Studio film</p>
           <h2 id="film-title">Built to the pixel.</h2>
           <p>Thirty-two seconds on how we approach every website: structure first, then the details most people never notice but every visitor feels.</p>
         </div>
-        <div class="film-stage reveal">
+        <div class="reveal">
           <Film />
         </div>
       </div>
     </section>
 
     <!-- Why Axiom -->
-    <section class="section section-soft" aria-labelledby="why-title">
+    <section class="section" aria-labelledby="why-title">
       <div class="container split">
         <div class="section-head split-head">
           <p class="eyebrow">Why Axiom Web</p>
@@ -192,15 +164,15 @@ const statement =
           <p>Every website we build follows the same standard, whatever the package. You know the price before we start, and you know who is building your site.</p>
           <a href="/about/" class="arrow-link">About the studio <Icon name="arrow-right" /></a>
         </div>
-        <ul role="list" class="value-grid reveal-stagger">
-          {valueProps.map((item) => (
-            <li class="card value">
-              <span class="icon-tile"><Icon name={item.icon} /></span>
+        <ol role="list" class="principles reveal-stagger">
+          {valueProps.map((item, index) => (
+            <li class="principle">
+              <span class="index-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
 
@@ -211,7 +183,7 @@ const statement =
         <ul role="list" class="numerals-grid reveal-stagger">
           {keyNumbers.map((item) => (
             <li>
-              <span class="numeral chrome-text">{item.value}</span>
+              <span class="numeral">{item.value}</span>
               <span class="numeral-label">{item.label}</span>
             </li>
           ))}
@@ -231,34 +203,36 @@ const statement =
         <div class="rail">
           <span class="rail-line" aria-hidden="true"><span class="rail-fill"></span></span>
           <ol role="list" class="rail-list">
-          {processSteps.map((step) => (
-            <li class="rail-step">
-              <span class="rail-dot" aria-hidden="true"></span>
-              <span class="rail-num chrome-text" aria-hidden="true">{step.number}</span>
-              <div class="rail-body">
-                <p class="rail-timing">Step {Number(step.number)} · {step.timing}</p>
-                <h3>{step.title}</h3>
-                <p>{step.summary}</p>
-              </div>
-            </li>
-          ))}
+            {processSteps.map((step) => (
+              <li class="rail-step">
+                <span class="rail-dot" aria-hidden="true"></span>
+                <span class="rail-num" aria-hidden="true">{step.number}</span>
+                <div class="rail-body">
+                  <p class="rail-timing">Step {Number(step.number)} · {step.timing}</p>
+                  <h3>{step.title}</h3>
+                  <p>{step.summary}</p>
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
       </div>
     </section>
 
     <!-- Pricing -->
-    <section class="section section-soft pricing-section" aria-labelledby="pricing-title">
+    <section class="section section-soft" aria-labelledby="pricing-title">
       <div class="container">
-        <div class="section-head center reveal">
-          <p class="eyebrow">Pricing</p>
-          <h2 id="pricing-title">Published packages. No guesswork.</h2>
-          <p>Choose the package that fits your business today. Every standard package includes first-year hosting, two revision rounds and thirty days of support after launch.</p>
+        <div class="section-head-row reveal">
+          <div class="section-head">
+            <p class="eyebrow">Pricing</p>
+            <h2 id="pricing-title">Published packages. No guesswork.</h2>
+            <p>Choose the package that fits your business today. Every standard package includes first-year hosting, two revision rounds and thirty days of support after launch.</p>
+          </div>
+          <a href="/pricing/" class="arrow-link">Compare packages <Icon name="arrow-right" /></a>
         </div>
         <div class="reveal">
           <PricingCards packages={packages} compact />
         </div>
-        <p class="center-link"><a href="/pricing/" class="arrow-link">Compare packages and what’s included <Icon name="arrow-right" /></a></p>
       </div>
     </section>
 
@@ -273,9 +247,7 @@ const statement =
           </div>
           <a href="/industries/" class="arrow-link">All industries <Icon name="arrow-right" /></a>
         </div>
-        <div class="reveal">
-          <IndustryGrid />
-        </div>
+        <IndustryGrid />
       </div>
     </section>
 
@@ -323,215 +295,126 @@ const statement =
   .home-hero {
     position: relative;
     overflow: hidden;
-    padding-top: clamp(3rem, 1rem + 6vh, 6rem);
+    padding-top: clamp(2.5rem, 1rem + 5vh, 5rem);
     isolation: isolate;
   }
 
-  .hero-atmosphere {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-  }
-
-  /* A single cone of light from above the headline. */
-  .hero-beam {
-    position: absolute;
-    top: -20%;
-    left: 50%;
-    width: min(140rem, 220vw);
-    height: 110%;
-    transform: translateX(-50%);
-    background: conic-gradient(
-      from 180deg at 50% 0%,
-      transparent 152deg,
-      rgb(130 160 255 / 0.1) 172deg,
-      rgb(170 195 255 / 0.16) 180deg,
-      rgb(130 160 255 / 0.1) 188deg,
-      transparent 208deg
-    );
-    mask-image: linear-gradient(180deg, #000 30%, transparent 85%);
-  }
-
-  .hero-aurora {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: min(100%, 100rem);
-    transform: translateX(-50%);
-  }
-
-  .hero-aurora span {
-    position: absolute;
-    border-radius: 50%;
-  }
-
-  .hero-aurora span:nth-child(1) {
-    top: 2%;
-    left: 50%;
-    width: 64rem;
-    height: 34rem;
-    margin-left: -32rem;
-    background: radial-gradient(closest-side, rgb(58 108 240 / 0.34), transparent);
-  }
-
-  .hero-aurora span:nth-child(2) {
-    top: 26%;
-    left: 8%;
-    width: 38rem;
-    height: 28rem;
-    background: radial-gradient(closest-side, rgb(110 90 255 / 0.16), transparent);
-  }
-
-  .hero-aurora span:nth-child(3) {
-    top: 18%;
-    right: 4%;
-    width: 40rem;
-    height: 30rem;
-    background: radial-gradient(closest-side, rgb(60 170 255 / 0.13), transparent);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-aurora span:nth-child(1) {
-      animation: aurora-a 18s ease-in-out infinite alternate;
-    }
-    .hero-aurora span:nth-child(2) {
-      animation: aurora-b 22s ease-in-out infinite alternate;
-    }
-    .hero-aurora span:nth-child(3) {
-      animation: aurora-b 26s ease-in-out -8s infinite alternate-reverse;
-    }
-  }
-
-  @keyframes aurora-a {
-    to {
-      transform: translate3d(4%, 6%, 0) scale(1.08);
-    }
-  }
-
-  @keyframes aurora-b {
-    to {
-      transform: translate3d(-10%, -8%, 0) scale(1.15);
-    }
-  }
-
-  /* A perspective grid floor the work stage stands on. */
-  .hero-floor {
-    position: absolute;
-    right: -50%;
-    bottom: 0;
-    left: -50%;
-    height: 62%;
-    background-image:
-      linear-gradient(rgb(140 170 255 / 0.16) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(140 170 255 / 0.16) 1px, transparent 1px);
-    background-size: 84px 84px;
-    background-position: center top;
-    transform: perspective(640px) rotateX(64deg);
-    transform-origin: 50% 100%;
-    mask-image: linear-gradient(0deg, #000 0%, rgb(0 0 0 / 0.5) 40%, transparent 80%);
-  }
-
-  .hero-copy {
+  .hero-inner {
     position: relative;
     display: grid;
-    justify-items: center;
-    gap: 1.5rem;
-    text-align: center;
+    gap: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
   }
 
-  .hero-kicker {
+  .hero-index {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 2.5rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-status {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.45rem 1rem 0.45rem 0.8rem;
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    background: rgb(255 255 255 / 0.04);
+    gap: 0.55rem;
     color: var(--ink-2);
-    font-size: var(--fs-xs);
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    backdrop-filter: blur(10px);
   }
 
-  .kicker-dot {
-    width: 0.5rem;
-    height: 0.5rem;
+  .status-dot {
+    width: 0.45rem;
+    height: 0.45rem;
     border-radius: 999px;
     background: var(--success);
-    box-shadow: 0 0 0 4px rgb(95 216 160 / 0.15), 0 0 12px var(--success);
   }
 
-  /* Each line has its own chrome finish so it can rise independently. */
+  /* Each line rises from its own mask. */
   .hero-title {
-    max-width: 14ch;
-    font-size: clamp(2.75rem, 1.2rem + 5.6vw, 5.75rem);
-    background: none;
-    color: var(--ink);
+    font-size: var(--fs-display);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    max-width: 17ch;
   }
 
   .hero-title .line {
     display: block;
-    padding-bottom: 0.06em;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
     overflow: hidden;
   }
 
   .hero-title .line > span {
     display: inline-block;
-    padding-inline: 0.04em;
-    background: var(--chrome);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
 
-  .hero-title .line > .accent-text {
-    background: var(--chrome-accent);
-    -webkit-background-clip: text;
-    background-clip: text;
+  .hero-foot {
+    display: grid;
+    gap: 1.75rem;
+    align-items: end;
   }
 
-  .hero-copy .lead {
-    max-width: 40rem;
+  .hero-foot .lead {
+    max-width: 36rem;
   }
 
-  .hero-actions {
-    justify-content: center;
-    margin-top: 0.25rem;
+  @media (min-width: 1024px) {
+    .hero-foot {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4rem;
+    }
   }
 
-  .hero-assurances {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem 1.5rem;
-    margin: 0.25rem 0 0;
-    color: var(--text);
+  .hero-spec {
+    display: grid;
+    margin: 0.5rem 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .hero-spec > div {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line);
     font-size: var(--fs-sm);
   }
 
-  .hero-assurances li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
+  .hero-spec dt {
+    color: var(--text-muted);
+    font-size: var(--fs-label);
+    font-weight: 600;
+    font-stretch: var(--wdth-heading);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.9;
   }
 
-  .hero-assurances :global(svg) {
-    flex: none;
-    color: var(--success);
+  .hero-spec dd {
+    margin: 0;
+    color: var(--ink-2);
+  }
+
+  @media (min-width: 900px) {
+    .hero-spec {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-spec > div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.25rem;
+      padding: 1rem 1.5rem 1rem 0;
+      border-bottom: 0;
+    }
+    .hero-spec > div + div {
+      padding-left: 1.5rem;
+      border-left: 1px solid var(--line);
+    }
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .hero-kicker,
-    .hero-copy .lead,
-    .hero-actions,
-    .hero-assurances {
-      animation: hero-fade 1000ms var(--ease-out) both;
-    }
-    .hero-kicker {
-      animation-delay: 50ms;
+    .hero-index,
+    .hero-foot,
+    .hero-spec {
+      animation: hero-fade 900ms var(--ease-out) both;
     }
     .hero-title .line > span {
       animation: line-rise 950ms var(--ease-out) both;
@@ -545,17 +428,14 @@ const statement =
     .hero-title .line:nth-child(3) > span {
       animation-delay: 220ms;
     }
-    .hero-copy .lead {
+    .hero-foot {
       animation-delay: 380ms;
     }
-    .hero-actions {
-      animation-delay: 460ms;
+    .hero-spec {
+      animation-delay: 480ms;
     }
-    .hero-assurances {
-      animation-delay: 540ms;
-    }
-    .stage {
-      animation: stage-in 1300ms var(--ease-out) 420ms both;
+    .hero-reel {
+      animation: hero-fade 1200ms var(--ease-out) 420ms both;
     }
   }
 
@@ -568,270 +448,101 @@ const statement =
   @keyframes hero-fade {
     from {
       opacity: 0;
-      transform: translateY(16px);
-      filter: blur(8px);
+      transform: translateY(14px);
     }
   }
 
-  @keyframes stage-in {
-    from {
-      opacity: 0;
-      transform: translateY(80px);
-    }
+  /* ── Hero reel: the real work, large ──────────────────── */
+  .hero-reel {
+    margin-top: clamp(3rem, 2rem + 4vw, 5.5rem);
   }
 
-  /* ── Work stage ───────────────────────────────────────── */
-  .stage-wrap {
-    position: relative;
-    margin-top: clamp(3rem, 2rem + 3vw, 4.5rem);
-  }
-
-  .stage {
-    position: relative;
-    max-width: 66rem;
-    margin-inline: auto;
-    perspective: 2200px;
-  }
-
-  .stage-tilt {
-    position: relative;
-    padding-top: 7%;
+  .reel-frame {
     transform-origin: 50% 0%;
-    transform-style: preserve-3d;
   }
 
-  /* The stage flattens toward the reader as the page scrolls. */
+  .reel-frame :global(.browser) {
+    border-radius: var(--radius-lg);
+  }
+
+  .reel-frame :global(.browser-view) {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* The frame settles to full size as it scrolls into view. */
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
-      .stage-tilt {
-        animation: stage-flatten linear both;
+      .reel-frame {
+        animation: reel-settle linear both;
         animation-timeline: view();
-        animation-range: entry 0% cover 50%;
+        animation-range: entry 0% cover 45%;
       }
     }
   }
 
-  @keyframes stage-flatten {
+  @keyframes reel-settle {
     from {
-      transform: rotateX(26deg) scale(0.9);
+      scale: 0.94;
+      opacity: 0.6;
     }
     to {
-      transform: none;
+      scale: none;
+      opacity: 1;
     }
   }
 
-  .stage-main {
-    position: relative;
-    width: 84%;
-    margin-left: auto;
-  }
-
-  .stage-main :global(.browser) {
-    box-shadow:
-      0 80px 160px -40px rgb(0 0 0 / 0.95),
-      0 0 0 1px rgb(255 255 255 / 0.06),
-      0 -20px 120px -30px rgb(80 120 255 / 0.45);
-  }
-
-  .stage-side {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 52%;
-    opacity: 0.75;
-    filter: brightness(0.7) saturate(0.9);
-    transform: translateZ(-60px);
-  }
-
-  .stage-side-badge {
-    position: absolute;
-    top: 3.1rem;
-    left: 0.85rem;
-  }
-
-  .stage-chip {
-    position: absolute;
+  .reel-caption {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.7rem 1rem 0.7rem 0.7rem;
-    border: 1px solid var(--line-strong);
-    border-radius: 16px;
-    background: rgb(12 17 30 / 0.78);
-    box-shadow: var(--shadow-lg), inset 0 1px 0 rgb(255 255 255 / 0.08);
-    font-size: var(--fs-xs);
-    line-height: 1.3;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-  }
-
-  .stage-chip-live {
-    bottom: 30%;
-    left: -1.5rem;
-    transition: transform 300ms var(--ease-out), border-color 300ms var(--ease);
-  }
-
-  .stage-chip-live:hover {
-    transform: translateY(-3px);
-    border-color: rgb(95 216 160 / 0.5);
-  }
-
-  .stage-chip-time {
-    top: 22%;
-    right: -1.5rem;
-  }
-
-  .chip-icon {
-    display: inline-grid;
-    place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    flex: none;
-    border: 1px solid var(--brand-line);
-    border-radius: 10px;
-    background: rgb(64 108 255 / 0.14);
-    color: var(--brand-ink);
-  }
-
-  .chip-icon-live {
-    border-color: rgb(95 216 160 / 0.35);
-    background: var(--success-soft);
-    color: var(--success);
-  }
-
-  .chip-label {
-    display: block;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .chip-title {
-    display: block;
-    color: var(--ink);
+    gap: 0.5rem 1.25rem;
+    padding-block: 1rem 0;
     font-size: var(--fs-sm);
-    font-weight: 650;
   }
 
-  /* The screenshot fades into the floor; the chips stay above the fade. */
-  .stage-main::before {
-    content: '';
-    position: absolute;
-    right: -2px;
-    bottom: -2px;
-    left: -2px;
-    height: 42%;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    background: linear-gradient(180deg, transparent, var(--bg-soft) 96%);
-    pointer-events: none;
-  }
-
-  @media (max-width: 1023px) {
-    .stage-side {
-      display: none;
-    }
-    .stage-tilt {
-      padding-top: 0;
-    }
-    .stage-main {
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 719px) {
-    .stage-chip-time {
-      display: none;
-    }
-    .stage-chip-live {
-      bottom: 22%;
-      left: 0.75rem;
-    }
-  }
-
-  /* ── Ribbon ───────────────────────────────────────────── */
-  .ribbon {
-    position: relative;
-    display: grid;
-    gap: 1rem;
-    padding-block: 1.75rem;
-    border-block: 1px solid var(--line);
-    background: var(--bg-soft);
-  }
-
-  .ribbon-label {
-    color: var(--text-muted);
-    font-size: var(--fs-xs);
+  .reel-title {
+    color: var(--ink);
     font-weight: 600;
-    letter-spacing: 0.16em;
-    text-align: center;
-    text-transform: uppercase;
   }
 
-  .ribbon-window {
-    overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  .reel-meta {
+    color: var(--text-muted);
   }
 
-  .ribbon-track {
-    display: flex;
-    width: max-content;
-  }
-
-  .ribbon-list {
-    display: flex;
-    gap: 3rem;
-    margin: 0;
-    padding-right: 3rem;
-  }
-
-  .ribbon-list li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    color: var(--ink-2);
-    font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem);
-    font-weight: 550;
-    letter-spacing: -0.015em;
-    white-space: nowrap;
-  }
-
-  .ribbon-list :global(svg) {
-    color: var(--accent);
-  }
-
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      .ribbon-track {
-        animation: ribbon-slide linear both;
-        animation-timeline: view();
-        animation-range: cover;
-      }
-    }
-  }
-
-  @keyframes ribbon-slide {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-36%);
-    }
+  .reel-link {
+    margin-left: auto;
+    min-height: 2.25rem;
   }
 
   /* ── Statement ────────────────────────────────────────── */
-  .statement-section {
-    background: radial-gradient(50rem 26rem at 50% 50%, rgb(64 108 255 / 0.08), transparent 70%);
+  .statement-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .statement-grid {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+      gap: 2rem;
+    }
+  }
+
+  .statement-label {
+    align-self: start;
+    padding-top: 0.6rem;
+    font-family: var(--font-sans);
   }
 
   .statement {
-    max-width: 30ch;
-    margin-inline: auto;
+    max-width: 24ch;
     color: var(--ink);
-    font-size: clamp(1.75rem, 1rem + 3vw, 3.5rem);
-    font-weight: 600;
-    line-height: 1.16;
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 0.9rem + 3.2vw, 3.6rem);
+    font-weight: 500;
+    font-stretch: var(--wdth-heading);
+    line-height: 1.12;
     letter-spacing: -0.035em;
-    text-align: center;
-    text-wrap: balance;
+    text-wrap: pretty;
   }
 
   /* Words light up in reading order as the statement scrolls into view. */
@@ -850,7 +561,7 @@ const statement =
 
   @keyframes word-lit {
     from {
-      opacity: 0.16;
+      opacity: 0.18;
     }
     to {
       opacity: 1;
@@ -867,28 +578,6 @@ const statement =
     margin-top: 1.5rem;
     color: var(--text-muted);
     font-size: var(--fs-xs);
-  }
-
-  /* ── Film ─────────────────────────────────────────────── */
-  .film-section {
-    overflow: hidden;
-  }
-
-  .film-light {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    width: 80rem;
-    height: 40rem;
-    transform: translateX(-50%);
-    background: radial-gradient(closest-side, rgb(64 108 255 / 0.18), transparent);
-    pointer-events: none;
-  }
-
-  .film-stage {
-    position: relative;
-    max-width: 68rem;
-    margin-inline: auto;
   }
 
   /* ── Split sections ───────────────────────────────────── */
@@ -915,27 +604,33 @@ const statement =
     justify-items: start;
   }
 
-  .value-grid {
+  /* ── Principles: numbered, no icons ───────────────────── */
+  .principles {
     display: grid;
-    gap: clamp(1rem, 0.6rem + 1.2vw, 1.5rem);
     margin: 0;
+    border-top: 1px solid var(--line-strong);
   }
 
   @media (min-width: 640px) {
-    .value-grid {
+    .principles {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2.5rem;
     }
   }
 
-  .value {
-    gap: 0.6rem;
+  .principle {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    padding-block: 1.5rem 1.75rem;
+    border-bottom: 1px solid var(--line);
   }
 
-  .value .icon-tile {
-    margin-bottom: 0.5rem;
+  .principle h3 {
+    font-size: 1.125rem;
   }
 
-  .value p {
+  .principle p {
     color: var(--text);
     font-size: var(--fs-sm);
     line-height: 1.6;
@@ -945,10 +640,7 @@ const statement =
   .numerals {
     position: relative;
     padding-block: clamp(4rem, 2.5rem + 5vw, 7rem);
-    border-bottom: 1px solid var(--line);
-    background:
-      radial-gradient(50rem 18rem at 50% 100%, rgb(64 108 255 / 0.14), transparent 70%),
-      var(--bg);
+    border-block: 1px solid var(--line);
   }
 
   .numerals-grid {
@@ -975,15 +667,18 @@ const statement =
 
   .numerals-grid li {
     display: grid;
-    gap: 0.6rem;
+    gap: 0.75rem;
     align-content: start;
   }
 
   .numeral {
+    color: var(--ink);
+    font-family: var(--font-display);
     font-size: clamp(3.25rem, 2.2rem + 4vw, 5.75rem);
-    font-weight: 650;
-    line-height: 1;
-    letter-spacing: -0.055em;
+    font-weight: 500;
+    font-stretch: var(--wdth-display);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
     font-variant-numeric: tabular-nums;
   }
 
@@ -1008,7 +703,7 @@ const statement =
     position: absolute;
     top: 0.75rem;
     bottom: 0.75rem;
-    left: 0.5rem;
+    left: 0.25rem;
     width: 1px;
     background: var(--line-strong);
   }
@@ -1016,8 +711,7 @@ const statement =
   .rail-fill {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, var(--accent), #fff);
-    box-shadow: 0 0 12px var(--accent);
+    background: var(--ink);
     transform-origin: 50% 0;
   }
 
@@ -1026,7 +720,7 @@ const statement =
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     gap: 0.25rem 1.5rem;
-    padding: 0 0 clamp(2.5rem, 2rem + 2vw, 3.5rem) 2.5rem;
+    padding: 0 0 clamp(2.5rem, 2rem + 2vw, 3.5rem) 2rem;
   }
 
   .rail-step:last-child {
@@ -1035,20 +729,21 @@ const statement =
 
   .rail-dot {
     position: absolute;
-    top: 0.45rem;
-    left: 0.5rem;
-    width: 0.75rem;
-    height: 0.75rem;
-    margin-left: -0.375rem;
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    background: var(--accent);
-    box-shadow: 0 0 0 5px var(--bg), 0 0 16px var(--accent);
+    top: 0.55rem;
+    left: 0.25rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: -0.25rem;
+    background: var(--ink);
+    box-shadow: 0 0 0 5px var(--bg);
   }
 
   .rail-num {
-    font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
-    font-weight: 650;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+    font-weight: 500;
+    font-stretch: var(--wdth-display);
     line-height: 0.9;
     letter-spacing: -0.05em;
     font-variant-numeric: tabular-nums;
@@ -1060,15 +755,19 @@ const statement =
   }
 
   .rail-timing {
-    color: var(--accent);
-    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    font-size: var(--fs-label);
     font-weight: 600;
-    letter-spacing: 0.1em;
+    font-stretch: var(--wdth-heading);
+    letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
   .rail-body h3 {
+    font-family: var(--font-display);
     font-size: clamp(1.3rem, 1.1rem + 0.6vw, 1.6rem);
+    font-weight: 540;
+    font-stretch: var(--wdth-heading);
     letter-spacing: -0.02em;
   }
 
@@ -1103,7 +802,6 @@ const statement =
   @keyframes rail-lit {
     from {
       opacity: 0.4;
-      box-shadow: none;
     }
   }
 
@@ -1113,12 +811,7 @@ const statement =
     }
   }
 
-  /* ── Pricing / misc ───────────────────────────────────── */
-  .center-link {
-    margin-top: 1.75rem;
-    text-align: center;
-  }
-
+  /* ── FAQ ──────────────────────────────────────────────── */
   .faq-contact {
     display: grid;
     gap: 0.35rem;

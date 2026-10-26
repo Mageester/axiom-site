@@ -71,10 +71,10 @@ const servicesList = {
         </div>
 
         <div class="service-rows">
-          {services.map((service) => (
+          {services.map((service, index) => (
             <article class="card service-row">
               <div class="service-main">
-                <span class="icon-tile"><Icon name={service.icon} /></span>
+                <span class="index-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                 <h3><a href={`/services/${service.slug}/`}>{service.name}</a></h3>
                 <p>{service.cardSummary}</p>
                 <p class="service-package"><Icon name="tag" size={16} /> {service.packageNote}</p>
@@ -178,7 +178,7 @@ const servicesList = {
     align-content: start;
   }
 
-  .service-main .icon-tile {
+  .service-main .index-num {
     margin-bottom: 0.25rem;
   }
 
