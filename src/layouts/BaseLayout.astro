@@ -1,6 +1,6 @@
 ---
 import '../styles/site.css';
-import interLatinWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import interLatinWoff2 from '@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url';
 import Footer from '../components/site/Footer.astro';
 import Header from '../components/site/Header.astro';
 import {
@@ -107,8 +107,8 @@ const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c'
       />
     )}
 
-    <meta name="theme-color" content="#0a1122" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#05070d" />
+    <meta name="color-scheme" content="dark" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="author" content={SITE_NAME} />
     <meta name="application-name" content={SITE_NAME} />
@@ -148,5 +148,21 @@ const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c'
     <Header showCta={showCta} />
     <slot />
     <Footer />
+    <script>
+      // Cards catch a soft light that follows the pointer.
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.addEventListener(
+          'pointermove',
+          (event) => {
+            const card = (event.target as Element | null)?.closest?.<HTMLElement>('.card');
+            if (!card) return;
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+            card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+          },
+          { passive: true }
+        );
+      }
+    </script>
   </body>
 </html>

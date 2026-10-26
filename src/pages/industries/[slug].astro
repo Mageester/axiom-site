@@ -89,7 +89,7 @@ const crumbs: Crumb[] = [
           </div>
           <a href="/work/" class="arrow-link">View all work <Icon name="arrow-right" /></a>
         </div>
-        <div class="grid grid-3">
+        <div class="grid grid-3 reveal-stagger">
           {work.map((project) => <WorkCard project={project} />)}
           {work.length < 3 && (
             <article class="card more-work">
@@ -120,7 +120,7 @@ const crumbs: Crumb[] = [
     <section class="section-sm section-soft" aria-labelledby="other-title">
       <div class="container">
         <h2 id="other-title" class="other-title">Other industries</h2>
-        <div class="grid grid-4">
+        <div class="grid grid-4 reveal-stagger">
           {others.map((item) => (
             <LinkCard href={`/industries/${item.slug}/`} icon={item.icon} title={item.name} text={item.examples} linkLabel="Read the guide" />
           ))}
@@ -168,7 +168,7 @@ const crumbs: Crumb[] = [
     flex: none;
     border-radius: 999px;
     background: var(--brand-soft);
-    color: var(--brand);
+    color: var(--accent);
     font-size: 0.75rem;
     font-weight: 700;
   }
@@ -197,7 +197,7 @@ const crumbs: Crumb[] = [
     flex: none;
     border-radius: 999px;
     background: var(--brand-soft);
-    color: var(--brand);
+    color: var(--accent);
   }
 
   .need p {

@@ -59,9 +59,30 @@ const { packages, compact = false } = Astro.props;
     scroll-margin-top: calc(var(--header-h) + 1.5rem);
   }
 
+  /* The recommended package carries a slow, lit gradient border. */
   .price-card.featured {
-    border: 2px solid var(--brand);
-    box-shadow: var(--shadow-md);
+    background:
+      linear-gradient(180deg, #111a33, #0a0f1d) padding-box,
+      conic-gradient(from var(--angle, 0deg), rgb(120 155 255 / 0.9), rgb(255 255 255 / 0.15) 25%, rgb(120 155 255 / 0.2) 50%, rgb(201 216 255 / 0.85) 75%, rgb(120 155 255 / 0.9)) border-box;
+    box-shadow: var(--shadow-lg), 0 0 60px -20px var(--glow);
+  }
+
+  @property --angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .price-card.featured {
+      animation: price-orbit 8s linear infinite;
+    }
+  }
+
+  @keyframes price-orbit {
+    to {
+      --angle: 360deg;
+    }
   }
 
   .price-badge-row {

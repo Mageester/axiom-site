@@ -104,7 +104,7 @@ const servicesList = {
           <h2 id="chooser-title">Find the right service in one step</h2>
           <p>Pick the situation that sounds most like yours. If none quite fit, tell us about it and we will recommend the right path.</p>
         </div>
-        <div class="grid grid-3">
+        <div class="grid grid-3 reveal-stagger">
           {chooser.map((item) => {
             const service = services.find((s) => s.slug === item.slug)!;
             return (
@@ -187,7 +187,7 @@ const servicesList = {
   }
 
   .service-main h3 a:hover {
-    color: var(--brand);
+    color: var(--accent);
   }
 
   .service-package {
@@ -201,7 +201,7 @@ const servicesList = {
   .service-package :global(svg) {
     flex: none;
     margin-top: 0.2rem;
-    color: var(--brand);
+    color: var(--accent);
   }
 
   .service-main .btn-row {
@@ -247,7 +247,7 @@ const servicesList = {
   }
 
   .chooser-answer a {
-    color: var(--brand);
+    color: var(--accent);
     font-weight: 650;
   }
 
@@ -257,7 +257,7 @@ const servicesList = {
     bottom: 1.6rem;
     width: 1.25rem;
     height: 1.25rem;
-    color: var(--brand);
+    color: var(--accent);
     transition: transform 160ms var(--ease);
   }
 
@@ -287,7 +287,7 @@ const servicesList = {
     padding: 2rem;
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    background: #fff;
+    background: var(--surface);
     box-shadow: var(--shadow-xs);
   }
 </style>

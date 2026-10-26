@@ -89,7 +89,7 @@ const concepts = projects.filter((project) => project.kind === 'concept');
             industry and shows how we would structure the site to solve it. They are not client results.
           </p>
         </div>
-        <div class="grid grid-3">
+        <div class="grid grid-3 reveal-stagger">
           {concepts.map((project) => <WorkCard project={project} detailed />)}
         </div>
       </div>

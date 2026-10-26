@@ -78,6 +78,8 @@ const columns = [
       </nav>
     </div>
 
+    <img class="footer-mark" src="/brand/axiom-logo.webp" width="493" height="132" alt="" loading="lazy" decoding="async" />
+
     <div class="footer-bottom">
       <p>
         © {year} Axiom Web. Co-founded by Aidan Magee and Riley Hinsperger. Axiom Web is the web-focused subsidiary of Axiom International.
@@ -92,10 +94,35 @@ const columns = [
 
 <style>
   .site-footer {
-    background: var(--night);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(60rem 22rem at 50% 0%, rgb(64 108 255 / 0.1), transparent 70%),
+      var(--night);
     color: var(--night-text);
-    padding-block: clamp(3.5rem, 2.5rem + 4vw, 5.5rem) 2rem;
+    padding-block: clamp(4rem, 2.5rem + 5vw, 6.5rem) 2rem;
     font-size: var(--fs-sm);
+  }
+
+  .site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(140 170 255 / 0.45), transparent);
+  }
+
+  /* The full lockup, oversized and fading into the floor. */
+  .footer-mark {
+    width: 100%;
+    max-width: 68rem;
+    margin: clamp(3.5rem, 2rem + 5vw, 6rem) auto 0;
+    opacity: 0.09;
+    mask-image: linear-gradient(180deg, #000 10%, transparent 95%);
+    pointer-events: none;
+    user-select: none;
   }
 
   .footer-top {
@@ -195,8 +222,9 @@ const columns = [
     align-items: center;
     justify-content: space-between;
     gap: 1rem 2rem;
-    margin-top: clamp(3rem, 2rem + 3vw, 4.5rem);
+    margin-top: clamp(-3rem, -1rem - 3vw, -1rem);
     padding-top: 1.75rem;
+    position: relative;
     border-top: 1px solid var(--night-line);
     color: var(--night-muted);
     font-size: var(--fs-xs);

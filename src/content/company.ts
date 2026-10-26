@@ -28,12 +28,13 @@ export const founders = [
 
 export type Fact = { icon: IconName; title: string; text: string };
 
-// Short, verifiable commitments used in trust bars across the site.
-export const keyFacts: Fact[] = [
-  { icon: 'tag', title: 'Published pricing', text: 'Packages from CAD $900' },
-  { icon: 'calendar', title: 'Launch in 2–4 weeks', text: 'For standard packages' },
-  { icon: 'users', title: 'Founder-led', text: 'No account managers' },
-  { icon: 'message', title: 'Fast replies', text: 'Within one business day' },
+// Published commitments shown as large numerals on the home page. Keep these to facts
+// stated elsewhere on the site (pricing, process and support terms).
+export const keyNumbers = [
+  { value: '$900', label: 'Published starting price, in CAD' },
+  { value: '2–4', label: 'Weeks from approved scope to launch' },
+  { value: '1', label: 'Business day to reply to every enquiry' },
+  { value: '30', label: 'Days of support after launch' },
 ];
 
 export const valueProps: Fact[] = [
