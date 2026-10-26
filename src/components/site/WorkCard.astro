@@ -82,8 +82,10 @@ const isClient = project.kind === 'client';
     transition: transform 900ms var(--ease-out);
   }
 
-  .work-card:hover .work-media :global(img) {
-    transform: scale(1.045);
+  @media (hover: hover) {
+    .work-card:hover .work-media :global(img) {
+      transform: scale(1.045);
+    }
   }
 
   .work-badge {

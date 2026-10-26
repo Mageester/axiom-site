@@ -74,7 +74,7 @@ Every effect has a static fallback and is off under `prefers-reduced-motion`.
 - **Buttons:** `.btn` (primary), `.btn-secondary` (glass), `.btn-light` (white, for the strongest action on a panel), `.btn-outline-light`, sizes `.btn-sm` / `.btn-lg`, `.btn-block`; `.arrow-link` for tertiary links.
 - **Cards:** `.card`, `.card-link` + `.stretched` for whole-card links without nested interactive elements.
 - **Lists:** `.check-list` (`.cols-2`), `.dash-list`.
-- **Components:** `PageHero` (breadcrumbs, title, lead, actions, optional aside), `CtaBand`, `FaqList` (native `<details>`), `PricingCards`, `ProcessSteps` (compact or detailed timeline), `WorkCard` (`featured` for the wide lead project), `LinkCard`, `IndustryGrid`, `FounderCards`, `BrowserFrame`, `Film`, `IntakeForm`, `LegalPage`.
+- **Components:** `PageHero` (breadcrumbs, title, lead, actions, optional aside), `CtaBand`, `FaqList` (native `<details>`), `PricingCards`, `ProcessSteps` (compact or detailed timeline), `WorkCard` (`featured` for the wide lead project), `LinkCard`, `IndustryGrid`, `FounderCards`, `BrowserFrame`, `Film`, `IntakeForm`, `LegalPage`, `EmailText` (the studio email with a line break allowed after “@”; use it wherever the address is shown).
 
 ## Logo
 
@@ -92,4 +92,5 @@ The chrome artwork is made for dark surfaces. The header and footer use the full
 1. Add copy to the relevant `src/content/*.ts` file (or a route entry in `SEO_ROUTES`).
 2. Render it inside `BaseLayout` with `title`, `description`, `crumbs` and any page-specific `schema`.
 3. Start with `PageHero`, alternate `.section` / `.section-soft`, add `.reveal-stagger` to card grids, and finish with `CtaBand`.
-4. Link it from the footer or a hub page, then run `npm run build` — the SEO audit fails on orphan pages, missing metadata, heading skips, broken links or schema that doesn't match visible content.
+4. If the page needs response headers, add them to `public/_headers` under a single matching rule. A path matched by two rules that set the same header gets it twice, and the build audit rejects that.
+5. Link it from the footer or a hub page, then run `npm run build` — the SEO audit fails on orphan pages, missing metadata, heading skips, broken links or schema that doesn't match visible content.

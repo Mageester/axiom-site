@@ -1,4 +1,5 @@
 ---
+import EmailText from '../components/site/EmailText.astro';
 import Icon from '../components/site/Icon.astro';
 import IntakeForm from '../components/site/IntakeForm.astro';
 import PageHero from '../components/site/PageHero.astro';
@@ -66,7 +67,7 @@ const steps = [
           <div class="card aside-card aside-direct">
             <h2 class="aside-title">Prefer to talk?</h2>
             <a href={`tel:${SITE_TELEPHONE}`} class="direct-link"><Icon name="phone" size={18} /> {SITE_PHONE_DISPLAY}</a>
-            <a href={`mailto:${SITE_EMAIL}`} class="direct-link"><Icon name="mail" size={18} /> {SITE_EMAIL}</a>
+            <a href={`mailto:${SITE_EMAIL}`} class="direct-link"><Icon name="mail" size={18} /> <EmailText /></a>
           </div>
         </aside>
       </div>

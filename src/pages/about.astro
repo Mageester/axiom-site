@@ -1,5 +1,6 @@
 ---
 import CtaBand from '../components/site/CtaBand.astro';
+import EmailText from '../components/site/EmailText.astro';
 import Film from '../components/site/Film.astro';
 import FounderCards from '../components/site/FounderCards.astro';
 import Icon from '../components/site/Icon.astro';
@@ -78,7 +79,7 @@ const beliefs = [
             <dt>Contact</dt>
             <dd>
               <a href={`tel:${SITE_TELEPHONE}`} class="text-link">{SITE_PHONE_DISPLAY}</a><br />
-              <a href={`mailto:${SITE_EMAIL}`} class="text-link">{SITE_EMAIL}</a>
+              <a href={`mailto:${SITE_EMAIL}`} class="text-link"><EmailText /></a>
             </dd>
           </div>
         </dl>

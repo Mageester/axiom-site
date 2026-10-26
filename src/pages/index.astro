@@ -1,6 +1,7 @@
 ---
 import BrowserFrame from '../components/site/BrowserFrame.astro';
 import CtaBand from '../components/site/CtaBand.astro';
+import EmailText from '../components/site/EmailText.astro';
 import FaqList from '../components/site/FaqList.astro';
 import Film from '../components/site/Film.astro';
 import FounderCards from '../components/site/FounderCards.astro';
@@ -94,12 +95,17 @@ const statement =
     </section>
 
     <!-- Who it's for: moves with the page scroll, never on its own -->
-    <div class="ribbon" aria-label="Industries we build for">
-      <p class="ribbon-label">Built for</p>
+    <div class="ribbon">
+      <p class="ribbon-label" id="ribbon-label">Built for</p>
       <div class="ribbon-window">
         <div class="ribbon-track">
           {[0, 1].map((copy) => (
-            <ul role="list" class="ribbon-list" aria-hidden={copy === 1 ? 'true' : undefined}>
+            <ul
+              role="list"
+              class="ribbon-list"
+              aria-labelledby={copy === 0 ? 'ribbon-label' : undefined}
+              aria-hidden={copy === 1 ? 'true' : undefined}
+            >
               {industries.map((industry) => (
                 <li><Icon name={industry.icon} size={18} />{industry.name}</li>
               ))}
@@ -301,7 +307,7 @@ const statement =
           <div class="faq-contact">
             <p class="small muted">Still have a question?</p>
             <a class="text-link" href={`tel:${SITE_TELEPHONE}`}>{SITE_PHONE_DISPLAY}</a>
-            <a class="text-link" href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a>
+            <a class="text-link" href={`mailto:${SITE_EMAIL}`}><EmailText /></a>
           </div>
         </div>
         <FaqList items={homeFaq} openFirst />
@@ -345,6 +351,15 @@ const statement =
       transparent 208deg
     );
     mask-image: linear-gradient(180deg, #000 30%, transparent 85%);
+  }
+
+  .hero-aurora {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: min(100%, 100rem);
+    transform: translateX(-50%);
   }
 
   .hero-aurora span {
@@ -710,7 +725,7 @@ const statement =
     pointer-events: none;
   }
 
-  @media (max-width: 719px) {
+  @media (max-width: 1023px) {
     .stage-side {
       display: none;
     }
@@ -720,6 +735,9 @@ const statement =
     .stage-main {
       width: 100%;
     }
+  }
+
+  @media (max-width: 719px) {
     .stage-chip-time {
       display: none;
     }
@@ -1061,16 +1079,17 @@ const statement =
 
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
+      /* The line fills to a point 60% down the screen; each step lights as that point reaches it. */
       .rail-fill {
         animation: rail-grow linear both;
         animation-timeline: --rail;
-        animation-range: cover 50vh cover calc(100% - 50vh);
+        animation-range: cover 40vh cover calc(100% - 60vh);
       }
       .rail-dot,
       .rail-num {
         animation: rail-lit linear both;
         animation-timeline: view();
-        animation-range: cover calc(50vh - 3rem) cover 50vh;
+        animation-range: cover 28vh cover 40vh;
       }
     }
   }
@@ -1083,7 +1102,7 @@ const statement =
 
   @keyframes rail-lit {
     from {
-      opacity: 0.25;
+      opacity: 0.4;
       box-shadow: none;
     }
   }

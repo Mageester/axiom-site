@@ -1,5 +1,6 @@
 ---
 import { SITE_EMAIL, type Crumb } from '../../lib/seo';
+import EmailText from './EmailText.astro';
 import PageHero from './PageHero.astro';
 
 type LegalSection = {
@@ -51,7 +52,7 @@ const { title, updated, sections, crumbs } = Astro.props as Props;
         <section class="legal-section">
           <h2>Questions</h2>
           <p>
-            Contact us at <a href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a> with any questions about this page.
+            Contact us at <a href={`mailto:${SITE_EMAIL}`}><EmailText /></a> with any questions about this page.
           </p>
         </section>
       </article>

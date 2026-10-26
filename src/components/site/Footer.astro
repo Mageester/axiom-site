@@ -4,6 +4,7 @@ import { industries } from '../../content/industries';
 import { services } from '../../content/services';
 import { CTA_PATHS } from '../../lib/cta';
 import { SITE_EMAIL, SITE_LOCATION, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
+import EmailText from './EmailText.astro';
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 
@@ -58,7 +59,7 @@ const columns = [
             <a href={`tel:${SITE_TELEPHONE}`}><Icon name="phone" size={18} />{SITE_PHONE_DISPLAY}</a>
           </li>
           <li>
-            <a href={`mailto:${SITE_EMAIL}`}><Icon name="mail" size={18} />{SITE_EMAIL}</a>
+            <a href={`mailto:${SITE_EMAIL}`}><Icon name="mail" size={18} /><EmailText /></a>
           </li>
           <li><span><Icon name="map-pin" size={18} />{SITE_LOCATION}</span></li>
         </ul>

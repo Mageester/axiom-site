@@ -1,5 +1,6 @@
 ---
 import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
+import EmailText from './EmailText.astro';
 import Icon from './Icon.astro';
 
 type Kind = 'contact' | 'project';
@@ -67,6 +68,7 @@ const pricingPathOptions = [
           type="text"
           required
           minlength="2"
+          maxlength="100"
           autocomplete="name"
           data-intake-field
           data-error-required="Please enter your name."
@@ -84,6 +86,8 @@ const pricingPathOptions = [
           name="email"
           type="email"
           required
+          maxlength="160"
+          pattern="[^@]+@[^@]+[.][A-Za-z]{2,}"
           autocomplete="email"
           inputmode="email"
           spellcheck="false"
@@ -182,7 +186,7 @@ const pricingPathOptions = [
       </button>
       <p class="intake-note">
         Prefer to talk? Call <a class="text-link" href={`tel:${SITE_TELEPHONE}`}>{SITE_PHONE_DISPLAY}</a> or email
-        <a class="text-link" href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a>.
+        <a class="text-link" href={`mailto:${SITE_EMAIL}`}><EmailText /></a>.
       </p>
     </div>
   </form>
@@ -363,13 +367,21 @@ const pricingPathOptions = [
     review: 'Please check the highlighted fields.',
   };
 
+  // The server trims values before validating, so check trimmed lengths here too.
   const fieldError = (field: HTMLInputElement | HTMLTextAreaElement) => {
     const v = field.validity;
-    if (v.valueMissing) return field.dataset.errorRequired || 'Please complete this field.';
-    if (v.typeMismatch) return field.dataset.errorType || 'Please enter a valid value.';
-    if (v.tooShort) return field.dataset.errorShort || 'Please add a little more detail.';
+    const trimmed = field.value.trim();
+    if (v.valueMissing || (field.required && !trimmed)) return field.dataset.errorRequired || 'Please complete this field.';
+    if (v.typeMismatch || v.patternMismatch) return field.dataset.errorType || 'Please enter a valid value.';
+    if (v.tooShort || (field.minLength > 0 && trimmed && trimmed.length < field.minLength)) {
+      return field.dataset.errorShort || 'Please add a little more detail.';
+    }
     return '';
   };
+
+  // Only messages written for visitors are shown; anything technical falls back to a plain one.
+  const visitorMessage = (status: number, result: { error?: unknown } | null) =>
+    [429, 502, 503].includes(status) && typeof result?.error === 'string' ? result.error : MESSAGES.fallback;
 
   const showFieldState = (field: HTMLInputElement | HTMLTextAreaElement) => {
     const message = fieldError(field);
@@ -463,7 +475,7 @@ const pricingPathOptions = [
           body: JSON.stringify(body),
         });
         const result = await response.json().catch(() => null);
-        if (!response.ok || !result?.ok) throw new Error(result?.details || result?.error || MESSAGES.fallback);
+        if (!response.ok || !result?.ok) throw new Error(visitorMessage(response.status, result));
 
         form.reset();
         attempted = false;

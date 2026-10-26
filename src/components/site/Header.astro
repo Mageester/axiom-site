@@ -2,6 +2,7 @@
 import { NAV_LINKS } from '../../content/company';
 import { CTA_PATHS } from '../../lib/cta';
 import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
+import EmailText from './EmailText.astro';
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 
@@ -77,7 +78,7 @@ const isActive = (href: string) => {
         <a href={`tel:${SITE_TELEPHONE}`} class="btn btn-outline-light btn-lg btn-block">
           <Icon name="phone" /> Call {SITE_PHONE_DISPLAY}
         </a>
-        <a href={`mailto:${SITE_EMAIL}`} class="mobile-email">{SITE_EMAIL}</a>
+        <a href={`mailto:${SITE_EMAIL}`} class="mobile-email"><EmailText /></a>
       </div>
     </nav>
   </div>
@@ -195,6 +196,7 @@ const isActive = (href: string) => {
 
   .header-cta {
     display: none;
+    white-space: nowrap;
   }
 
   .menu-toggle {

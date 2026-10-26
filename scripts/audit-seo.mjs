@@ -174,6 +174,20 @@ for (const route of ['/admin-shell', '/admin-shell/*', '/404.html', '/api/*']) i
 for (const host of ['axiom-site-f3f.pages.dev', ':version.axiom-site-f3f.pages.dev']) {
   if (!headers.includes(`https://${host}/*\n  X-Robots-Tag: noindex`)) fail('headers', `missing duplicate-host noindex for ${host}`);
 }
+// A path matched by two rules that set the same header gets it twice; a doubled
+// Content-Type stalls the response on Cloudflare's runtime (seen on /services/).
+const headerRules = [];
+for (const line of headers.split('\n')) {
+  if (/^\//.test(line)) headerRules.push({ path: line.trim(), names: new Set() });
+  else if (/^\s+[\w-]+:/.test(line) && headerRules.length) headerRules.at(-1).names.add(line.trim().split(':')[0].toLowerCase());
+}
+for (const rule of headerRules) {
+  for (const other of headerRules) {
+    if (other === rule || !other.path.endsWith('*') || other.path === '/*' || !rule.path.startsWith(other.path.slice(0, -1))) continue;
+    const shared = [...rule.names].filter((name) => other.names.has(name));
+    if (shared.length) fail('headers', `${rule.path} and ${other.path} both set ${shared.join(', ')}`);
+  }
+}
 const redirects = readFileSync(join(dist, '_redirects'), 'utf8');
 if (!redirects.includes('/sitemap.xml /sitemap-index.xml 301')) fail('redirects', 'legacy submitted sitemap must redirect to the current index');
 const functionRoutes = JSON.parse(readFileSync(join(dist, '_routes.json'), 'utf8'));
