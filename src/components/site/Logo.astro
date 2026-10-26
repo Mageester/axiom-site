@@ -1,67 +1,177 @@
 ---
-import { MARK_PATHS, MARK_VIEWBOX } from '../../lib/brand';
+// The original Axiom chrome lockup (see scripts/generate-brand-assets.mjs).
+// Four stacked copies of the same image are clipped along the artwork's own
+// seams so each blade and the wordmark can animate; at rest they read as one image.
+import logo from '../../lib/logo.json';
 
 type Props = {
-  tone?: 'dark' | 'light';
+  height?: number;
+  /** Play the brand intro (first page of a visit) or a glint (later pages). */
+  animate?: boolean;
   class?: string;
 };
 
-const { tone = 'dark', class: className } = Astro.props;
+const { height = 34, animate = false, class: className } = Astro.props;
+const width = Number(((logo.width / logo.height) * height).toFixed(2));
+const { blade1, blade2, wordmark } = logo.seams;
+const vars = [
+  `--logo-w:${width}px`,
+  `--logo-h:${height}px`,
+  `--logo-src:url(${logo.src})`,
+  `--s1t:${blade1[0]}%`,
+  `--s1b:${blade1[1]}%`,
+  `--s2t:${blade2[0]}%`,
+  `--s2b:${blade2[1]}%`,
+  `--ws:${wordmark}%`,
+].join(';');
+const parts = ['blade1', 'blade2', 'blade3', 'wordmark'] as const;
 ---
 
-<span class:list={['logo', `logo-${tone}`, className]}>
-  <svg class="logo-mark" viewBox={MARK_VIEWBOX} width="22" height="29" aria-hidden="true" focusable="false">
-    {MARK_PATHS.map((d, i) => <path d={d} class={i === 1 ? 'logo-mark-accent' : undefined} />)}
-  </svg>
-  <span class="logo-word">Axiom<span class="logo-sub">Web</span></span>
+<span class:list={['axiom-logo', className]} style={vars} data-logo-animate={animate ? '' : undefined}>
+  {parts.map((part) => (
+    <img
+      class={`logo-part logo-${part}`}
+      src={logo.src}
+      width={logo.width}
+      height={logo.height}
+      alt=""
+      decoding="async"
+      loading="eager"
+      draggable="false"
+    />
+  ))}
+  <span class="logo-sheen logo-glint" aria-hidden="true"></span>
+  <span class="logo-sheen logo-hover" aria-hidden="true"></span>
 </span>
 
 <style>
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    line-height: 1;
+  .axiom-logo {
+    position: relative;
+    display: inline-block;
+    flex: none;
+    width: var(--logo-w);
+    height: var(--logo-h);
+    vertical-align: middle;
   }
 
-  .logo-mark {
-    width: 1.35rem;
-    height: auto;
-    fill: var(--ink);
+  .logo-part,
+  .logo-sheen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  .logo-mark .logo-mark-accent {
-    fill: var(--brand);
+  .logo-part {
+    max-width: none;
+    user-select: none;
+    -webkit-user-drag: none;
   }
 
-  .logo-word {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.35rem;
-    color: var(--ink);
-    font-size: 1.2rem;
-    font-weight: 750;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .logo-blade1 {
+    clip-path: polygon(0 0, var(--s1t) 0, var(--s1b) 100%, 0 100%);
   }
 
-  .logo-sub {
-    color: var(--brand);
-    font-weight: 600;
-    letter-spacing: 0.12em;
+  .logo-blade2 {
+    clip-path: polygon(var(--s1t) 0, var(--s2t) 0, var(--s2b) 100%, var(--s1b) 100%);
   }
 
-  .logo-light .logo-mark,
-  .logo-light .logo-word {
-    fill: #fff;
-    color: #fff;
+  .logo-blade3 {
+    clip-path: polygon(var(--s2t) 0, var(--ws) 0, var(--ws) 100%, var(--s2b) 100%);
   }
 
-  .logo-light .logo-mark .logo-mark-accent {
-    fill: var(--night-accent);
+  .logo-wordmark {
+    clip-path: polygon(var(--ws) 0, 100% 0, 100% 100%, var(--ws) 100%);
   }
 
-  .logo-light .logo-sub {
-    color: var(--night-accent);
+  /* A soft highlight that travels across the chrome, masked to the logo's shape. */
+  .logo-sheen {
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(105deg, transparent 38%, rgb(255 255 255 / 0.95) 50%, transparent 62%) no-repeat;
+    background-size: 260% 100%;
+    background-position: 130% 0;
+    -webkit-mask: var(--logo-src) 0 0 / 100% 100% no-repeat;
+    mask: var(--logo-src) 0 0 / 100% 100% no-repeat;
+  }
+
+  .logo-hover {
+    opacity: 0.9;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* First page of a visit: blades rise in order, the wordmark wipes in, then a glint. */
+    :global(html.logo-intro) [data-logo-animate] .logo-blade1,
+    :global(html.logo-intro) [data-logo-animate] .logo-blade2,
+    :global(html.logo-intro) [data-logo-animate] .logo-blade3 {
+      animation: logo-rise 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    :global(html.logo-intro) [data-logo-animate] .logo-blade2 {
+      animation-delay: 110ms;
+    }
+
+    :global(html.logo-intro) [data-logo-animate] .logo-blade3 {
+      animation-delay: 220ms;
+    }
+
+    :global(html.logo-intro) [data-logo-animate] .logo-wordmark {
+      animation: logo-wipe 900ms cubic-bezier(0.65, 0, 0.35, 1) 380ms both;
+    }
+
+    :global(html.logo-intro) [data-logo-animate] .logo-glint {
+      animation: logo-sheen 1200ms cubic-bezier(0.4, 0, 0.2, 1) 1150ms both;
+    }
+
+    /* Later pages: a single quiet glint. */
+    :global(html:not(.logo-intro)) [data-logo-animate] .logo-glint {
+      animation: logo-sheen 1200ms cubic-bezier(0.4, 0, 0.2, 1) 350ms both;
+    }
+
+    /* Hovering the logo link sweeps a highlight across; it resets instantly on leave. */
+    :global(a:hover) > .axiom-logo .logo-hover,
+    :global(a:focus-visible) > .axiom-logo .logo-hover {
+      background-position: -30% 0;
+      transition: background-position 950ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+
+  @keyframes logo-rise {
+    from {
+      opacity: 0;
+      transform: translateY(32%);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes logo-wipe {
+    from {
+      opacity: 0.4;
+      clip-path: polygon(var(--ws) 0, var(--ws) 0, var(--ws) 100%, var(--ws) 100%);
+    }
+    to {
+      opacity: 1;
+      clip-path: polygon(var(--ws) 0, 100% 0, 100% 100%, var(--ws) 100%);
+    }
+  }
+
+  @keyframes logo-sheen {
+    0% {
+      opacity: 0;
+      background-position: 130% 0;
+    }
+    20% {
+      opacity: 0.9;
+    }
+    80% {
+      opacity: 0.9;
+    }
+    100% {
+      opacity: 0;
+      background-position: -30% 0;
+    }
   }
 </style>

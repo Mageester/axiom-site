@@ -6,6 +6,7 @@ The public marketing site (everything except the private admin shell) uses one s
 
 - **Clarity over effect.** Content is always visible on load. No scroll-reveal hiding, no parallax, no motion that delays reading.
 - **One typeface, one accent.** Inter (self-hosted variable font) for everything; Axiom blue for actions and emphasis.
+- **The real logo, untouched.** The header and footer use the original Axiom chrome lockup on dark navy, never a redraw or recolour.
 - **Honest proof.** The live client site is labelled “Client site · Live”; every demonstration is labelled “Concept build”. No invented testimonials, ratings or metrics (see `AGENTS.md`).
 - **Phone first.** Every layout is checked at 375–390px with no horizontal scroll.
 
@@ -17,7 +18,7 @@ The public marketing site (everything except the private admin shell) uses one s
 | Page shell (head, metadata, JSON-LD, header, footer) | `src/layouts/BaseLayout.astro` |
 | Shared components | `src/components/site/` |
 | Icons (inline SVG paths) | `src/lib/icons.ts` + `src/components/site/Icon.astro` |
-| Logo mark (vector) | `src/lib/brand.ts` + `src/components/site/Logo.astro` |
+| Logo (original chrome artwork) | `brand/source/` → `public/brand/axiom-logo.webp`, `src/lib/logo.json`, `src/components/site/Logo.astro` |
 | Content (single source of truth) | `src/content/*.ts` |
 | SEO metadata and structured data | `src/lib/seo.ts` |
 | Favicons and app icons | `node scripts/generate-brand-assets.mjs` |
@@ -48,6 +49,17 @@ Type scale is fluid (`--fs-display`, `--fs-h1`, `--fs-h2`, `--fs-h3`, `--fs-lead
 - **Cards:** `.card`, `.card-link` + `.stretched` for whole-card links without nested interactive elements.
 - **Lists:** `.check-list` (`.cols-2`), `.dash-list`.
 - **Components:** `PageHero` (breadcrumbs, title, lead, actions, optional aside), `CtaBand`, `FaqList` (native `<details>`), `PricingCards`, `ProcessSteps` (compact or detailed timeline), `WorkCard`, `LinkCard`, `IndustryGrid`, `FounderCards`, `FactsBar`, `BrowserFrame`, `Film`, `IntakeForm`, `LegalPage`.
+
+## Logo
+
+The logo is the original chrome lockup from `brand/source/axiom-logo-chrome.png`; app icons use `brand/source/axiom-mark-chrome.png`. Run `node scripts/generate-brand-assets.mjs` after changing either source. The script writes the web asset, the favicons and `src/lib/logo.json`.
+
+The chrome artwork is made for dark surfaces, so it sits on the navy header and footer. `Logo.astro` stacks four copies of the image, each clipped along the artwork's own dark seams (three blades and the wordmark), so the parts can animate yet read as one image at rest:
+
+- **First page of a visit:** the blades rise in sequence, the wordmark wipes in, then a chrome glint sweeps across (about 2.3s).
+- **Later pages:** a single glint.
+- **Hover or keyboard focus:** a highlight sweeps across.
+- **Reduced motion:** static.
 
 ## Adding a page
 
