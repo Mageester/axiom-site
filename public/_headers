@@ -129,6 +129,9 @@ https://:version.axiom-site-f3f.pages.dev/*
 /film/*
   Cache-Control: public, max-age=2592000
 
+/brand/*
+  Cache-Control: public, max-age=2592000
+
 /favicon.png
   Cache-Control: public, max-age=604800
 
@@ -139,9 +142,6 @@ https://:version.axiom-site-f3f.pages.dev/*
   Cache-Control: public, max-age=604800
 
 /apple-touch-icon.png
-  Cache-Control: public, max-age=604800
-
-/favicon.svg
   Cache-Control: public, max-age=604800
 
 /icon-192.png

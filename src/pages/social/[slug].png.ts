@@ -3,7 +3,6 @@ import sharp from 'sharp';
 import { cities } from '../../content/cities';
 import { industries } from '../../content/industries';
 import { services } from '../../content/services';
-import { MARK_PATHS } from '../../lib/brand';
 import { SEO_ROUTES } from '../../lib/seo';
 
 type Card = { path: string; title: string; label: string };
@@ -63,7 +62,6 @@ export const GET: APIRoute = async ({ props }) => {
   const size = lines.length > 2 ? 64 : 76;
   const lineHeight = size * 1.12;
   const top = 330 - ((lines.length - 1) * lineHeight) / 2;
-  const mark = MARK_PATHS.map((d, i) => `<path d="${d}" fill="${i === 1 ? '#9db5ff' : '#ffffff'}"/>`).join('');
 
   const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -78,8 +76,6 @@ export const GET: APIRoute = async ({ props }) => {
     <rect width="1200" height="630" fill="#0a1122"/>
     <rect width="1200" height="630" fill="url(#grid)"/>
     <rect width="1200" height="630" fill="url(#glow)"/>
-    <g transform="translate(80 70) scale(0.27)">${mark}</g>
-    <text x="134" y="111" fill="#ffffff" font-family="${FONT}" font-size="30" font-weight="700" letter-spacing="3">AXIOM <tspan fill="#9db5ff" font-weight="600">WEB</tspan></text>
     <text x="80" y="${top - size - 6}" fill="#9db5ff" font-family="${FONT}" font-size="24" font-weight="600" letter-spacing="2.5">${escapeXml(label)}</text>
     ${lines
       .map(
@@ -92,6 +88,11 @@ export const GET: APIRoute = async ({ props }) => {
     <text x="1120" y="566" text-anchor="end" fill="#ffffff" font-family="${FONT}" font-size="24" font-weight="600">getaxiom.ca</text>
   </svg>`;
 
-  const png = await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer();
+  // The original chrome lockup, not a redraw.
+  const logo = await sharp('brand/source/axiom-logo-chrome.png').resize({ height: 68, kernel: 'lanczos3' }).toBuffer();
+  const png = await sharp(Buffer.from(svg))
+    .composite([{ input: logo, left: 74, top: 62 }])
+    .png({ compressionLevel: 9 })
+    .toBuffer();
   return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
 };

@@ -59,6 +59,7 @@
     "/industries/*",
     "/icon-192.png",
     "/icon-512.png",
-    "/llms.txt"
+    "/llms.txt",
+    "/brand/*"
   ]
 }

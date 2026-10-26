@@ -18,7 +18,7 @@ const isActive = (href: string) => {
 <header class="site-header" data-header>
   <div class="container header-bar">
     <a href="/" class="header-logo" aria-label="Axiom Web home">
-      <Logo />
+      <Logo height={34} animate />
     </a>
 
     <nav class="header-nav" aria-label="Primary">
@@ -74,7 +74,7 @@ const isActive = (href: string) => {
         <a href={CTA_PATHS.startProject} class="btn btn-lg btn-block">
           Start a project <Icon name="arrow-right" />
         </a>
-        <a href={`tel:${SITE_TELEPHONE}`} class="btn btn-secondary btn-lg btn-block">
+        <a href={`tel:${SITE_TELEPHONE}`} class="btn btn-outline-light btn-lg btn-block">
           <Icon name="phone" /> Call {SITE_PHONE_DISPLAY}
         </a>
         <a href={`mailto:${SITE_EMAIL}`} class="mobile-email">{SITE_EMAIL}</a>
@@ -88,20 +88,24 @@ const isActive = (href: string) => {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgb(255 255 255 / 0.9);
-    border-bottom: 1px solid transparent;
+    background: rgb(10 17 34 / 0.94);
+    border-bottom: 1px solid var(--night-line);
+    color: #fff;
     backdrop-filter: saturate(180%) blur(14px);
     -webkit-backdrop-filter: saturate(180%) blur(14px);
     transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease);
   }
 
-  .site-header[data-scrolled],
-  .site-header[data-open] {
-    border-bottom-color: var(--line);
+  .site-header[data-scrolled] {
+    box-shadow: 0 10px 30px -18px rgb(5 8 18 / 0.7);
   }
 
-  .site-header[data-scrolled] {
-    box-shadow: 0 6px 24px -18px rgb(11 19 36 / 0.35);
+  .site-header :global(:focus-visible) {
+    outline-color: var(--night-accent);
+  }
+
+  .site-header :global(.btn:focus-visible) {
+    box-shadow: 0 0 0 3px var(--night), 0 0 0 5px var(--night-accent);
   }
 
   .header-bar {
@@ -137,19 +141,19 @@ const isActive = (href: string) => {
     min-height: 2.75rem;
     padding-inline: 0.8rem;
     border-radius: 8px;
-    color: var(--ink-2);
+    color: var(--night-text);
     font-size: 0.9375rem;
     font-weight: 500;
     transition: color 160ms var(--ease), background-color 160ms var(--ease);
   }
 
   .header-nav a:hover {
-    background: var(--bg-soft);
-    color: var(--ink);
+    background: rgb(255 255 255 / 0.06);
+    color: #fff;
   }
 
   .header-nav a[aria-current='page'] {
-    color: var(--brand);
+    color: #fff;
   }
 
   .header-nav a[aria-current='page']::after {
@@ -160,7 +164,7 @@ const isActive = (href: string) => {
     left: 0.8rem;
     height: 2px;
     border-radius: 2px;
-    background: currentColor;
+    background: var(--night-accent);
   }
 
   .header-actions {
@@ -175,7 +179,7 @@ const isActive = (href: string) => {
     gap: 0.45rem;
     min-height: 2.75rem;
     padding-inline: 0.25rem;
-    color: var(--ink-2);
+    color: #fff;
     font-size: 0.9375rem;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
@@ -183,11 +187,11 @@ const isActive = (href: string) => {
   }
 
   .header-phone:hover {
-    color: var(--brand);
+    color: var(--night-accent);
   }
 
   .header-phone :global(svg) {
-    color: var(--brand);
+    color: var(--night-accent);
   }
 
   .header-cta {
@@ -199,10 +203,10 @@ const isActive = (href: string) => {
     place-items: center;
     width: 2.75rem;
     height: 2.75rem;
-    border: 1px solid var(--line);
+    border: 1px solid rgb(255 255 255 / 0.18);
     border-radius: 10px;
-    background: #fff;
-    color: var(--ink);
+    background: transparent;
+    color: #fff;
   }
 
   .menu-toggle :global(svg) {
@@ -251,8 +255,8 @@ const isActive = (href: string) => {
     height: calc(100dvh - var(--header-h));
     overflow-y: auto;
     overscroll-behavior: contain;
-    background: #fff;
-    border-top: 1px solid var(--line);
+    background: var(--night);
+    border-top: 1px solid var(--night-line);
     padding-block: 0.75rem 2rem;
   }
 
@@ -265,19 +269,19 @@ const isActive = (href: string) => {
     align-items: center;
     justify-content: space-between;
     min-height: 3.5rem;
-    border-bottom: 1px solid var(--line);
-    color: var(--ink);
+    border-bottom: 1px solid var(--night-line);
+    color: #fff;
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: -0.015em;
   }
 
   .mobile-links a[aria-current='page'] {
-    color: var(--brand);
+    color: var(--night-accent);
   }
 
   .mobile-links :global(svg) {
-    color: var(--text-muted);
+    color: var(--night-muted);
   }
 
   .mobile-actions {
@@ -289,7 +293,7 @@ const isActive = (href: string) => {
   .mobile-email {
     justify-self: center;
     padding: 0.75rem;
-    color: var(--text-muted);
+    color: var(--night-muted);
     font-size: var(--fs-sm);
   }
 </style>
