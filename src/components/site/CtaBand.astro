@@ -23,6 +23,7 @@ const {
     <div class="cta-panel">
       <img class="cta-mark" src="/brand/axiom-mark.webp" width="278" height="347" alt="" loading="lazy" decoding="async" />
       <div class="cta-copy">
+        <p class="label">Next step</p>
         <h2 id="cta-band-title">{title}</h2>
         <p>{text}</p>
       </div>
@@ -35,62 +36,48 @@ const {
 </section>
 
 <style>
+  .cta-band {
+    border-top: 1px solid var(--line);
+  }
+
   .cta-panel {
     position: relative;
     display: grid;
-    gap: 2rem;
-    overflow: hidden;
-    padding: clamp(2rem, 1.25rem + 3.5vw, 4rem);
-    border: 1px solid transparent;
-    border-radius: var(--radius-xl);
-    background:
-      radial-gradient(44rem 24rem at 100% 0%, rgb(58 108 240 / 0.42), transparent 70%) padding-box,
-      radial-gradient(30rem 18rem at 0% 120%, rgb(157 181 255 / 0.14), transparent 70%) padding-box,
-      linear-gradient(180deg, #0c1222, #070a13) padding-box,
-      linear-gradient(180deg, rgb(160 185 255 / 0.45), rgb(255 255 255 / 0.05) 60%) border-box;
-    box-shadow: var(--shadow-lg), 0 0 120px -50px var(--glow);
-    color: var(--night-text);
+    gap: 2.5rem;
+    padding-block: clamp(1rem, 0.5rem + 2vw, 2.5rem);
     isolation: isolate;
   }
 
   /* The chrome mark as a quiet watermark. */
   .cta-mark {
     position: absolute;
-    right: 2%;
-    bottom: -22%;
+    top: 50%;
+    right: 0;
     z-index: -1;
-    width: clamp(12rem, 8rem + 14vw, 20rem);
-    opacity: 0.12;
-    mask-image: linear-gradient(200deg, #000 30%, transparent 90%);
+    width: clamp(9rem, 6rem + 10vw, 15rem);
+    opacity: 0.1;
+    transform: translateY(-50%);
     pointer-events: none;
     user-select: none;
   }
 
-  .cta-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: linear-gradient(90deg, transparent, #000 60%);
-  }
-
   .cta-copy {
     display: grid;
-    gap: 1rem;
-    max-width: 40rem;
+    gap: 1.25rem;
+    max-width: 56rem;
   }
 
   .cta-copy h2 {
-    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+    font-size: clamp(2.2rem, 1.2rem + 4vw, 4.75rem);
+    font-stretch: var(--wdth-display);
+    line-height: 1;
+    letter-spacing: -0.04em;
   }
 
-  .cta-copy p {
+  .cta-copy p:not(.label) {
+    max-width: 38rem;
     font-size: var(--fs-lead);
-    color: var(--night-text);
+    color: var(--text);
   }
 
   .cta-actions {
@@ -99,25 +86,15 @@ const {
     gap: 0.75rem;
   }
 
-  .cta-actions .btn:focus-visible {
-    box-shadow: 0 0 0 3px var(--night), 0 0 0 5px var(--night-accent);
+  @media (max-width: 719px) {
+    .cta-mark {
+      display: none;
+    }
   }
 
   @media (max-width: 479px) {
     .cta-actions .btn {
       flex: 1 1 100%;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .cta-panel {
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 3rem;
-    }
-    .cta-actions {
-      flex-direction: column;
-      align-items: stretch;
     }
   }
 </style>

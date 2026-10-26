@@ -2,6 +2,7 @@
 import { NAV_LINKS } from '../../content/company';
 import { CTA_PATHS } from '../../lib/cta';
 import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
+import EmailText from './EmailText.astro';
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 
@@ -77,7 +78,7 @@ const isActive = (href: string) => {
         <a href={`tel:${SITE_TELEPHONE}`} class="btn btn-outline-light btn-lg btn-block">
           <Icon name="phone" /> Call {SITE_PHONE_DISPLAY}
         </a>
-        <a href={`mailto:${SITE_EMAIL}`} class="mobile-email">{SITE_EMAIL}</a>
+        <a href={`mailto:${SITE_EMAIL}`} class="mobile-email"><EmailText /></a>
       </div>
     </nav>
   </div>
@@ -88,34 +89,16 @@ const isActive = (href: string) => {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgb(5 7 13 / 0.6);
-    border-bottom: 1px solid transparent;
-    color: #fff;
-    backdrop-filter: saturate(160%) blur(18px);
-    -webkit-backdrop-filter: saturate(160%) blur(18px);
-    transition: border-color 300ms var(--ease), background-color 300ms var(--ease), box-shadow 300ms var(--ease);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
     view-transition-name: site-header;
-  }
-
-  .site-header[data-scrolled],
-  .site-header[data-open] {
-    background: rgb(5 7 13 / 0.82);
-    border-bottom-color: var(--line);
-    box-shadow: 0 20px 40px -30px rgb(0 0 0 / 0.9);
-  }
-
-  .site-header :global(:focus-visible) {
-    outline-color: var(--night-accent);
-  }
-
-  .site-header :global(.btn:focus-visible) {
-    box-shadow: 0 0 0 3px var(--night), 0 0 0 5px var(--night-accent);
   }
 
   .header-bar {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
     height: var(--header-h);
   }
 
@@ -124,7 +107,7 @@ const isActive = (href: string) => {
     align-items: center;
     min-height: 2.75rem;
     margin-right: auto;
-    border-radius: 6px;
+    border-radius: 2px;
   }
 
   .header-nav {
@@ -134,67 +117,73 @@ const isActive = (href: string) => {
   .header-nav ul {
     display: flex;
     align-items: center;
-    gap: 0.125rem;
+    gap: 1.75rem;
     margin: 0;
-    padding: 0.25rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: rgb(255 255 255 / 0.025);
   }
 
   .header-nav a {
     position: relative;
     display: inline-flex;
     align-items: center;
-    min-height: 2.5rem;
-    padding-inline: 0.95rem;
-    border-radius: 999px;
-    color: var(--night-text);
+    min-height: 2.75rem;
+    color: var(--text);
     font-size: 0.9375rem;
     font-weight: 500;
-    transition: color 160ms var(--ease), background-color 160ms var(--ease);
+    transition: color 160ms var(--ease);
   }
 
-  .header-nav a:hover {
-    background: rgb(255 255 255 / 0.06);
-    color: #fff;
-  }
-
+  .header-nav a:hover,
   .header-nav a[aria-current='page'] {
-    background: rgb(255 255 255 / 0.08);
-    color: #fff;
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08);
+    color: var(--ink);
+  }
+
+  .header-nav a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0.55rem;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 260ms var(--ease-out);
+  }
+
+  .header-nav a:hover::after,
+  .header-nav a[aria-current='page']::after {
+    transform: scaleX(1);
   }
 
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1.25rem;
   }
 
   .header-phone {
     display: none;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.5rem;
     min-height: 2.75rem;
-    padding-inline: 0.25rem;
-    color: #fff;
+    color: var(--ink);
     font-size: 0.9375rem;
-    font-weight: 600;
+    font-weight: 500;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
 
   .header-phone:hover {
-    color: var(--night-accent);
+    color: var(--accent);
   }
 
   .header-phone :global(svg) {
-    color: var(--night-accent);
+    color: var(--text-muted);
   }
 
   .header-cta {
     display: none;
+    white-space: nowrap;
   }
 
   .menu-toggle {
@@ -202,10 +191,10 @@ const isActive = (href: string) => {
     place-items: center;
     width: 2.75rem;
     height: 2.75rem;
-    border: 1px solid rgb(255 255 255 / 0.16);
-    border-radius: 999px;
-    background: rgb(255 255 255 / 0.03);
-    color: #fff;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--ink);
   }
 
   .menu-toggle :global(svg) {
@@ -254,10 +243,8 @@ const isActive = (href: string) => {
     height: calc(100dvh - var(--header-h));
     overflow-y: auto;
     overscroll-behavior: contain;
-    background:
-      radial-gradient(40rem 24rem at 100% 0%, rgb(64 108 255 / 0.16), transparent 70%),
-      var(--night);
-    border-top: 1px solid var(--night-line);
+    background: var(--bg);
+    border-top: 1px solid var(--line);
     padding-block: 0.75rem 2rem;
   }
 
@@ -269,20 +256,22 @@ const isActive = (href: string) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 3.5rem;
-    border-bottom: 1px solid var(--night-line);
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 600;
+    min-height: 3.75rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 540;
+    font-stretch: var(--wdth-heading);
     letter-spacing: -0.025em;
   }
 
   .mobile-links a[aria-current='page'] {
-    color: var(--night-accent);
+    color: var(--accent);
   }
 
   .mobile-links :global(svg) {
-    color: var(--night-muted);
+    color: var(--text-muted);
   }
 
   .mobile-actions {
@@ -294,7 +283,7 @@ const isActive = (href: string) => {
   .mobile-email {
     justify-self: center;
     padding: 0.75rem;
-    color: var(--night-muted);
+    color: var(--text-muted);
     font-size: var(--fs-sm);
   }
 </style>

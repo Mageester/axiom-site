@@ -25,10 +25,8 @@ https://:version.axiom-site-f3f.pages.dev/*
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
 
-/services/
-  Speculation-Rules: "/speculation-rules.json"
-  Content-Type: text/html; charset=utf-8
-
+# One rule covers /services/ and every service page; a second exact /services/
+# rule makes both match and the duplicate headers stall the request.
 /services/*
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
@@ -50,9 +48,6 @@ https://:version.axiom-site-f3f.pages.dev/*
 /contact/
   Speculation-Rules: "/speculation-rules.json"
   Content-Type: text/html; charset=utf-8
-
-/admin/audit
-  X-Robots-Tag: noindex, nofollow
 
 /admin/*
   X-Robots-Tag: noindex, nofollow
@@ -161,12 +156,9 @@ https://:version.axiom-site-f3f.pages.dev/*
 /web-design/*
   Speculation-Rules: "/speculation-rules.json"
 
-/industries/
-  Speculation-Rules: "/speculation-rules.json"
-  Content-Type: text/html; charset=utf-8
-
 /industries/*
   Speculation-Rules: "/speculation-rules.json"
+  Content-Type: text/html; charset=utf-8
 
 /admin-shell
   X-Robots-Tag: noindex, nofollow

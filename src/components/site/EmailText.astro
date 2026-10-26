@@ -1,0 +1,9 @@
+---
+// The studio email with a line-break opportunity after "@", so narrow columns
+// wrap it as "name@ / domain" instead of splitting a word or overflowing.
+import { SITE_EMAIL } from '../../lib/seo';
+
+const [local, domain] = SITE_EMAIL.split('@');
+---
+
+{local}@<wbr />{domain}
