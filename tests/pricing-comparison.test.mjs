@@ -88,7 +88,8 @@ test('pricing shows every package with its price, a recommended tier and a full 
       const featured = page.locator('.pricing-cards .price-card.featured');
       assert.equal(await featured.count(), 1, 'exactly one package should be recommended');
       assert.equal(await featured.getAttribute('id'), 'local-business');
-      assert.match(await featured.innerText(), /Recommended/);
+      // textContent, not innerText: badges render in small capitals via CSS.
+      assert.match(await featured.textContent(), /Recommended/);
 
       const headers = await page.locator('.compare-table thead th').allInnerTexts();
       assert.equal(headers.length, 5, 'comparison table should have a label column plus four packages');
