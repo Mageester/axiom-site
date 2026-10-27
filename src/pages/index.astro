@@ -332,7 +332,12 @@ const serviceItems = services.map((service) => ({
       reduce.addEventListener?.('change', (event) => {
         if (event.matches) remove();
       });
-      video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
+      // Mark the first decoded frame. Cloudflare's Rocket Loader defers this script, so the 'playing' event may
+      // already have fired: check the current state too, and keep 'timeupdate' as a fallback.
+      const shown = () => video.classList.add('is-playing');
+      video.addEventListener('playing', shown, { once: true });
+      video.addEventListener('timeupdate', shown, { once: true });
+      if (!video.paused && video.readyState > 2) shown();
       const play = () => {
         const attempt = video.play();
         if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
