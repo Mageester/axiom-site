@@ -25,7 +25,7 @@ export const industries: Industry[] = [
     name: 'Contractors & home services',
     examples: 'Trades, roofing, landscaping, HVAC, cleaning, snow removal',
     title: 'Websites for contractors and home service businesses.',
-    metaTitle: 'Website Design for Contractors & Home Services | Axiom Web',
+    metaTitle: 'Contractor & Home Services Web Design | Axiom Web',
     metaDescription:
       'Websites for trades, roofers, landscapers and home service companies in Ontario. Clear service areas, quick quote requests and click-to-call on every screen.',
     intro:
@@ -77,7 +77,7 @@ export const industries: Industry[] = [
     name: 'Clinics & health practices',
     examples: 'Dental, physiotherapy, chiropractic, massage, wellness',
     title: 'Websites for clinics and health practices.',
-    metaTitle: 'Website Design for Clinics & Health Practices | Axiom Web',
+    metaTitle: 'Clinic & Health Practice Web Design | Axiom Web',
     metaDescription:
       'Websites for dental, physiotherapy, chiropractic and wellness clinics. Clear services, practitioner credentials and simple booking for new patients.',
     intro:
@@ -181,7 +181,7 @@ export const industries: Industry[] = [
     name: 'Restaurants & cafés',
     examples: 'Restaurants, cafés, bakeries, bars, catering',
     title: 'Websites for restaurants, cafés and hospitality.',
-    metaTitle: 'Restaurant Website Design | Menus & Reservations | Axiom Web',
+    metaTitle: 'Restaurant & Café Website Design | Axiom Web',
     metaDescription:
       'Restaurant and café websites with menus that load fast, clear hours and location, and reservations or ordering one tap away. Designed in Kitchener-Waterloo.',
     intro:

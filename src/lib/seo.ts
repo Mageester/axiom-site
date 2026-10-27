@@ -236,7 +236,7 @@ export const SEO_ROUTES = {
     canonicalPath: '/services',
   },
   work: {
-    title: 'Web Design Portfolio | Client Sites & Concepts',
+    title: 'Web Design Portfolio | Client Sites and Concepts',
     description:
       'A live client website and clearly labelled concept builds for home services, clinics, salons, restaurants and law firms. See how we structure business sites.',
     canonicalPath: '/work',

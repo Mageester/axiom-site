@@ -100,3 +100,19 @@ The chrome artwork is made for dark surfaces. The header and footer use the full
 3. Start with `PageHero`, alternate `.section` / `.section-soft`, prefer `IndexList` or numbered lists over icon cards, add `.reveal-stagger` to grids, and finish with `CtaBand`.
 4. If the page needs response headers, add them to `public/_headers` under a single matching rule. A path matched by two rules that set the same header gets it twice, and the build audit rejects that.
 5. Link it from the footer or a hub page, then run `npm run build` — the SEO audit fails on orphan pages, missing metadata, heading skips, broken links or schema that doesn't match visible content.
+
+## Hero film (home page)
+
+The home hero's first screen is a stage with a 20 s seamless film behind the copy: a phone standing on a dark
+polished floor whose layout (frosted-glass layers) lifts into an exploded view and snaps back into hairline seats.
+It is rendered in Blender from the scripts in the Axiom International repository (`axiom-int-site/video/`) and
+delivered as `public/film/axiom-web-hero-*`: `1080p.webm` and `1080p-web.mp4` for landscape viewports, a 9:16
+`mobile.mp4` for phones (chosen with `<source media>` by aspect ratio), and two posters. The poster `<img>` paints
+first (it is the LCP element and is preloaded); the video fades in on its first frame, plays only while on screen,
+and is removed entirely for `prefers-reduced-motion` or data saver, so those visitors keep the poster. The copy
+keeps the left two thirds (headline capped at 5.75rem, lead and spec row in a 40rem column); the phone lives in the
+right third of the film, so no scrim is needed. Landscape viewports squarer than 16:9 (16:10 and 3:2 laptops) crop
+the film's sides under `object-fit: cover`, so the film is anchored at `object-position: 76% 50%`: the crop falls on
+the empty left and the phone stays whole with air at the right edge. The headline's clamp (`0.5rem + 5.4vw`) only
+reaches the 5.75rem cap from about 1550px wide, so at 1440 and 1512px its longest line ends 75 to 95px before the
+phone. On phones the stage reserves the bottom 38vh for the phone, which rises into it from below the first screen.

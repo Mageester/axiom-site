@@ -37,12 +37,36 @@ const serviceItems = services.map((service) => ({
   {...SEO_ROUTES.home}
   schema={[faqJsonLd(homeFaq), FILM_JSON_LD]}
   ogImageAlt="Axiom Web — clear, fast websites for local businesses in Kitchener-Waterloo"
-  preload={{ type: 'image/avif', href: '/images/work-reids-1200.avif', srcset: lead.image.avifSrcSet, sizes: reelSizes }}
+  preload={{ type: 'image/jpeg', href: '/film/axiom-web-hero-poster.jpg', srcset: '/film/axiom-web-hero-poster.jpg 1920w', sizes: '100vw' }}
 >
   <main id="main-content" tabindex="-1">
     <!-- Hero -->
     <section class="home-hero">
-      <div class="grid-lines" aria-hidden="true"></div>
+      <div class="hero-stage">
+        <div class="hero-film" aria-hidden="true">
+          <picture class="hero-poster">
+            <source media="(max-aspect-ratio: 4/5)" srcset="/film/axiom-web-hero-poster-mobile.jpg" />
+            <img src="/film/axiom-web-hero-poster.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
+          </picture>
+          <video
+            class="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="/film/axiom-web-hero-poster.jpg"
+            disablepictureinpicture
+            disableremoteplayback
+            tabindex="-1"
+            data-hero-video
+          >
+            <source src="/film/axiom-web-hero-1080p.webm" type="video/webm" media="(min-aspect-ratio: 4/5)" />
+            <source src="/film/axiom-web-hero-1080p-web.mp4" type="video/mp4" media="(min-aspect-ratio: 4/5)" />
+            <source src="/film/axiom-web-hero-mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 4/5)" />
+            <source src="/film/axiom-web-hero-1080p-web.mp4" type="video/mp4" />
+          </video>
+        </div>
       <div class="container hero-inner">
         <h1 class="hero-title">
           <span class="hero-kicker">Web design studio in Kitchener-Waterloo, Ontario<span class="sr-only">:</span></span>
@@ -68,6 +92,7 @@ const serviceItems = services.map((service) => ({
           <div><dt>Hosting</dt><dd>First year included</dd></div>
           <div><dt>Availability</dt><dd class="hero-status"><span class="status-dot" aria-hidden="true"></span>Taking new projects</dd></div>
         </dl>
+      </div>
       </div>
 
       <figure class="container hero-reel">
@@ -286,19 +311,137 @@ const serviceItems = services.map((service) => ({
   </main>
 </BaseLayout>
 
+<script>
+  // Hero film: plays only while on screen, fades in on its first frame, and is removed entirely (the poster
+  // stays) for reduced motion or data saver.
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+  if (video) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const remove = () => {
+      try {
+        video.pause();
+      } catch {}
+      video.removeAttribute('autoplay');
+      video.preload = 'none';
+      video.remove();
+    };
+    if (reduce.matches || connection?.saveData === true) {
+      remove();
+    } else {
+      reduce.addEventListener?.('change', (event) => {
+        if (event.matches) remove();
+      });
+      video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
+      const play = () => {
+        const attempt = video.play();
+        if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
+      };
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) play();
+              else video.pause();
+            }
+          },
+          { threshold: 0.05 },
+        ).observe(video);
+      } else {
+        play();
+      }
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) video.pause();
+        else if (video.getBoundingClientRect().bottom > 0) play();
+      });
+    }
+  }
+</script>
+
 <style>
   /* ── Hero ─────────────────────────────────────────────── */
   .home-hero {
     position: relative;
     overflow: hidden;
-    padding-top: clamp(2.5rem, 1rem + 5vh, 5rem);
     isolation: isolate;
+  }
+
+  /* The first screen: the hero film (a 20 s seamless loop of a phone whose layout snaps into place) sits
+     behind the copy. The copy keeps the left two thirds; the phone lives in the right third of the film.
+     The poster paints first; the video fades in on its first frame; reduced motion keeps the poster. */
+  .hero-stage {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-content: center;
+    min-height: calc(100svh - var(--header-h));
+    padding-block: clamp(2.5rem, 1rem + 5vh, 5rem) clamp(2.5rem, 1rem + 6vh, 5.5rem);
+    background: var(--bg);
+  }
+
+  .hero-film {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .hero-film img,
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
+  /* Landscape viewports squarer than 16:9 (16:10 and 3:2 laptops) crop the film's sides; keep the crop on the
+     empty left so the phone in the right third stays whole, with air at the right edge. */
+  @media (min-aspect-ratio: 4/5) {
+    .hero-film img,
+    .hero-video {
+      object-position: 76% 50%;
+    }
+  }
+
+  .hero-video {
+    opacity: 0;
+    transition: opacity 1.4s var(--ease-out);
+  }
+
+  .hero-video.is-playing {
+    opacity: 1;
   }
 
   .hero-inner {
     position: relative;
+    z-index: 1;
     display: grid;
     gap: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+  }
+
+  /* Desktop: the headline is capped so its longest line ends before the phone in the film; the lead and
+     the spec row keep to a 40rem column. */
+  @media (min-width: 1024px) {
+    .hero-foot,
+    .hero-spec {
+      max-width: 40rem;
+    }
+  }
+
+  /* Phones: the copy covers the first screen, so the stage keeps a strip at the bottom for the phone. */
+  @media (max-width: 639px) {
+    .hero-stage {
+      padding-bottom: 38vh;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video {
+      display: none;
+    }
   }
 
   /* The primary search phrase, set as a small label line inside the h1. */
@@ -332,7 +475,7 @@ const serviceItems = services.map((service) => ({
 
   /* Each line rises from its own mask. */
   .hero-title {
-    font-size: clamp(2.1rem, 0.75rem + 6.6vw, 6.75rem);
+    font-size: clamp(2.1rem, 0.5rem + 5.4vw, 5.75rem);
     line-height: 0.95;
     letter-spacing: -0.045em;
   }
@@ -376,8 +519,7 @@ const serviceItems = services.map((service) => ({
 
   @media (min-width: 1024px) {
     .hero-foot {
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 4rem;
+      gap: 2.25rem;
     }
   }
 
@@ -413,7 +555,7 @@ const serviceItems = services.map((service) => ({
 
   @media (min-width: 900px) {
     .hero-spec {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       border-bottom: 1px solid var(--line);
     }
     .hero-spec > div {
@@ -485,6 +627,12 @@ const serviceItems = services.map((service) => ({
   /* ── Hero reel: the real work, large ──────────────────── */
   .hero-reel {
     margin-top: clamp(3rem, 2rem + 4vw, 5.5rem);
+  }
+
+  /* The first screen belongs to the film; the reel enters below it. */
+  .home-hero .hero-reel {
+    position: relative;
+    z-index: 1;
   }
 
   .reel-frame :global(.browser) {
