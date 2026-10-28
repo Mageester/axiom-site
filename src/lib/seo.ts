@@ -247,6 +247,12 @@ export const SEO_ROUTES = {
       'Published website pricing: Local Launch Special from CAD $900, Local Business Website from CAD $1,200, Expanded Website from CAD $1,500, or a custom quote.',
     canonicalPath: '/pricing',
   },
+  agencies: {
+    title: 'White-Label Web Development for Agencies | Axiom Web',
+    description:
+      'Extra hands for agencies: page builds, fixes and small sites delivered under your name. Fixed quote within 24 hours, CAD 50 an hour, NDA by default.',
+    canonicalPath: '/agencies',
+  },
   approach: {
     title: 'Our Web Design Process | Launch in 2–4 Weeks',
     description:

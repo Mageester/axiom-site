@@ -15,6 +15,7 @@ export function getStaticPaths() {
     work: 'Work',
     pricing: 'Pricing',
     approach: 'Process',
+    agencies: 'For agencies',
     about: 'About',
     contact: 'Contact',
     startProject: 'Start a project',
