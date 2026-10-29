@@ -1,5 +1,5 @@
 // Renders the home page's liquid lens in headless Chromium and saves it as the
-// static poster (public/images/lens-poster-{600,900}.{webp,avif}). The poster is
+// static poster (public/images/lens-poster-{450,600,900}.{webp,avif}). The poster is
 // the LCP image and the fallback for no-WebGL and reduced motion.
 // Usage: node scripts/render-lens-poster.mjs [devServerUrl]
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -36,7 +36,7 @@ await browser.close();
 
 const png = Buffer.from(dataUrl.split(',')[1], 'base64');
 mkdirSync('public/images', { recursive: true });
-for (const size of [600, 900]) {
+for (const size of [450, 600, 900]) {
   const image = sharp(png).extract(crop).resize(size, size);
   writeFileSync(`public/images/lens-poster-${size}.webp`, await image.clone().webp({ quality: 82, alphaQuality: 90 }).toBuffer());
   writeFileSync(`public/images/lens-poster-${size}.avif`, await image.clone().avif({ quality: 60 }).toBuffer());

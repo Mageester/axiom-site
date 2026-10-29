@@ -28,7 +28,7 @@ const rowSizes = '(min-width: 900px) 0px, 92vw';
 const poster = {
   type: 'image/webp',
   href: '/images/lens-poster-900.webp',
-  srcset: '/images/lens-poster-600.webp 600w, /images/lens-poster-900.webp 900w',
+  srcset: '/images/lens-poster-450.webp 450w, /images/lens-poster-600.webp 600w, /images/lens-poster-900.webp 900w',
   sizes: '(min-width: 861px) min(75vh, 50vw), 90vw',
 };
 ---
@@ -44,7 +44,7 @@ const poster = {
     <!-- Stage: the liquid lens hero -->
     <section class="stage hero-stage" id="hero-stage" data-stage>
       <picture class="lens-poster" id="lens-poster" aria-hidden="true">
-        <source type="image/avif" srcset="/images/lens-poster-600.avif 600w, /images/lens-poster-900.avif 900w" sizes={poster.sizes} />
+        <source type="image/avif" srcset="/images/lens-poster-450.avif 450w, /images/lens-poster-600.avif 600w, /images/lens-poster-900.avif 900w" sizes={poster.sizes} />
         <img
           src={poster.href}
           srcset={poster.srcset}
