@@ -16,7 +16,7 @@ const links = [
   <main id="main-content" tabindex="-1" class="not-found">
     <div class="container-narrow">
       <p class="eyebrow">Error 404</p>
-      <h1>We couldn’t find that page.</h1>
+      <h1>We couldn’t find that <em>page.</em></h1>
       <p class="lead">The address may have changed or the page may no longer exist. These links will get you back on track.</p>
       <div class="btn-row">
         <a href="/" class="btn btn-lg">Back to home</a>
@@ -38,8 +38,7 @@ const links = [
 
 <style>
   .not-found {
-    padding-block: clamp(4rem, 3rem + 6vw, 8rem);
-    background: linear-gradient(180deg, var(--bg-soft), var(--bg));
+    padding-block: calc(var(--header-h) + clamp(4rem, 3rem + 6vw, 8rem)) clamp(5rem, 3rem + 6vw, 9rem);
   }
 
   .not-found .container-narrow {
@@ -66,14 +65,13 @@ const links = [
     gap: 1rem;
     padding: 1rem 1.25rem;
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
     background: var(--surface);
-    transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
+    transition: border-color 300ms var(--ease);
   }
 
   .nf-links a:hover {
-    border-color: var(--brand-line);
-    box-shadow: var(--shadow-sm);
+    border-color: var(--ink);
   }
 
   .nf-links strong {
@@ -87,6 +85,6 @@ const links = [
 
   .nf-links :global(svg) {
     flex: none;
-    color: var(--accent);
+    color: var(--brand-ink);
   }
 </style>

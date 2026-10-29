@@ -3,10 +3,8 @@ import { cities } from '../../content/cities';
 import { industries } from '../../content/industries';
 import { services } from '../../content/services';
 import { CTA_PATHS } from '../../lib/cta';
-import { SITE_EMAIL, SITE_LOCATION, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
+import { SITE_ADDRESS, SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
 import EmailText from './EmailText.astro';
-import Icon from './Icon.astro';
-import Logo from './Logo.astro';
 
 const year = new Date().getFullYear();
 
@@ -20,7 +18,7 @@ const columns = [
     ],
   },
   {
-    title: 'Company',
+    title: 'Studio',
     links: [
       { label: 'About', href: '/about/' },
       { label: 'Our process', href: '/approach/' },
@@ -47,29 +45,25 @@ const columns = [
 ];
 ---
 
-<footer class="site-footer">
+<footer class="site-footer" data-stage>
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="/" class="footer-logo" aria-label="Axiom Web home"><Logo height={36} /></a>
+        <a href="/" class="footer-wordmark" aria-label="Axiom Web home">axiom<span>web</span></a>
         <p class="footer-about">
-          A founder-led web design studio in Kitchener-Waterloo, building clear, fast websites for local businesses across Ontario.
+          A two-person web studio in Kitchener-Waterloo. Websites for local businesses across Ontario, and quiet overflow work for agencies.
         </p>
-        <ul role="list" class="footer-contact">
-          <li>
-            <a href={`tel:${SITE_TELEPHONE}`}><Icon name="phone" size={18} />{SITE_PHONE_DISPLAY}</a>
-          </li>
-          <li>
-            <a href={`mailto:${SITE_EMAIL}`}><Icon name="mail" size={18} /><EmailText /></a>
-          </li>
-          <li><span><Icon name="map-pin" size={18} />{SITE_LOCATION}</span></li>
+        <ul role="list" class="footer-contact mono">
+          <li><a href={`mailto:${SITE_EMAIL}`}><EmailText /></a></li>
+          <li><a href={`tel:${SITE_TELEPHONE}`}>{SITE_PHONE_DISPLAY}</a></li>
+          <li><span>{SITE_ADDRESS}</span></li>
         </ul>
       </div>
 
       <nav class="footer-columns" aria-label="Footer">
         {columns.map((column) => (
           <div>
-            <h2 class="footer-heading">{column.title}</h2>
+            <h2 class="footer-heading mono">{column.title}</h2>
             <ul role="list">
               {column.links.map((link) => (
                 <li><a href={link.href}>{link.label}</a></li>
@@ -79,8 +73,6 @@ const columns = [
         ))}
       </nav>
     </div>
-
-    <img class="footer-mark" src="/brand/axiom-logo.webp" width="493" height="132" alt="" loading="lazy" decoding="async" />
 
     <div class="footer-bottom">
       <p>
@@ -97,11 +89,8 @@ const columns = [
 <style>
   .site-footer {
     position: relative;
-    overflow: hidden;
-    background: var(--night);
-    border-top: 1px solid var(--line);
-    color: var(--night-text);
-    padding-block: clamp(4rem, 2.5rem + 5vw, 6.5rem) 2rem;
+    padding-block: clamp(3.5rem, 2.5rem + 4vw, 6rem) 2rem;
+    border-top: 1px solid var(--line-night);
     font-size: var(--fs-sm);
   }
 
@@ -112,47 +101,57 @@ const columns = [
 
   @media (min-width: 1080px) {
     .footer-top {
-      grid-template-columns: minmax(16rem, 0.85fr) 2.6fr;
+      grid-template-columns: minmax(16rem, 0.9fr) 2.6fr;
       gap: 4rem;
     }
   }
 
-  .footer-logo {
+  .footer-wordmark {
     display: inline-flex;
+    gap: 0.3em;
     min-height: 2.75rem;
     align-items: center;
+    color: var(--snow);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+
+  .footer-wordmark span {
+    font-weight: 400;
+    color: var(--mute-night);
   }
 
   .footer-about {
     max-width: 22rem;
     margin-top: 1rem;
-    color: var(--night-text);
-    line-height: 1.65;
+    color: var(--mute-night);
+    line-height: 1.6;
   }
 
   .footer-contact {
     display: grid;
-    gap: 0.35rem;
-    margin: 1.5rem 0 0;
+    gap: 0.25rem;
+    margin: 1.75rem 0 0;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 0.8125rem;
   }
 
   .footer-contact a,
   .footer-contact span {
     display: inline-flex;
     align-items: center;
-    gap: 0.65rem;
-    min-height: 2.25rem;
-    color: var(--ink);
-    font-weight: 500;
+    min-height: 2rem;
+    color: var(--snow);
+  }
+
+  .footer-contact span {
+    color: var(--mute-night);
   }
 
   .footer-contact a:hover {
     color: var(--accent);
-  }
-
-  .footer-contact :global(svg) {
-    flex: none;
-    color: var(--text-muted);
   }
 
   .footer-columns {
@@ -170,15 +169,8 @@ const columns = [
   .footer-heading {
     margin-bottom: 0.9rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--line);
-    color: var(--text-muted);
-    font-family: var(--font-sans);
-    font-size: var(--fs-label);
-    font-weight: 600;
-    font-stretch: var(--wdth-heading);
-    letter-spacing: 0.14em;
-    line-height: 1.4;
-    text-transform: uppercase;
+    border-bottom: 1px solid var(--line-night);
+    color: var(--mute-night);
   }
 
   .footer-columns ul {
@@ -190,38 +182,26 @@ const columns = [
   .footer-columns a {
     display: inline-flex;
     align-items: center;
-    min-height: 2.25rem;
-    color: var(--night-text);
+    min-height: 2.1rem;
+    color: var(--mute-night);
     line-height: 1.35;
-    transition: color 160ms var(--ease);
+    transition: color 300ms var(--ease);
   }
 
   .footer-columns a:hover {
-    color: var(--ink);
-  }
-
-  /* The full lockup, oversized and fading into the floor. */
-  .footer-mark {
-    width: 100%;
-    max-width: 68rem;
-    margin: clamp(3.5rem, 2rem + 5vw, 6rem) auto 0;
-    opacity: 0.08;
-    mask-image: linear-gradient(180deg, #000 10%, transparent 95%);
-    pointer-events: none;
-    user-select: none;
+    color: var(--snow);
   }
 
   .footer-bottom {
-    position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 1rem 2rem;
-    margin-top: clamp(-3rem, -1rem - 3vw, -1rem);
+    margin-top: clamp(3rem, 2rem + 3vw, 5rem);
     padding-top: 1.75rem;
-    border-top: 1px solid var(--line);
-    color: var(--night-muted);
+    border-top: 1px solid var(--line-night);
+    color: var(--mute-night);
     font-size: var(--fs-xs);
   }
 
@@ -239,10 +219,10 @@ const columns = [
     display: inline-flex;
     min-height: 2.25rem;
     align-items: center;
-    color: var(--night-text);
+    color: var(--mute-night);
   }
 
   .footer-legal a:hover {
-    color: var(--ink);
+    color: var(--snow);
   }
 </style>

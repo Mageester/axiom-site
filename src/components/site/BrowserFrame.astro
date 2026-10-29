@@ -6,7 +6,7 @@ const { url, class: className } = Astro.props;
 <figure class:list={['browser', className]}>
   <div class="browser-bar" aria-hidden="true">
     <span class="browser-dots"><i></i><i></i><i></i></span>
-    <span class="browser-url">{url}</span>
+    <span class="browser-url mono">{url}</span>
   </div>
   <div class="browser-view"><slot /></div>
   {Astro.slots.has('caption') && <figcaption class="sr-only"><slot name="caption" /></figcaption>}
@@ -16,19 +16,19 @@ const { url, class: className } = Astro.props;
   .browser {
     margin: 0;
     overflow: hidden;
-    border: 1px solid var(--line-strong);
+    border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: var(--paper);
   }
 
   .browser-bar {
     display: flex;
     align-items: center;
     gap: 0.9rem;
-    height: 2.25rem;
-    padding-inline: 0.9rem;
+    height: 2.4rem;
+    padding-inline: 1rem;
     border-bottom: 1px solid var(--line);
-    background: var(--surface);
+    background: var(--snow);
   }
 
   .browser-dots {
@@ -37,10 +37,10 @@ const { url, class: className } = Astro.props;
   }
 
   .browser-dots i {
-    width: 0.55rem;
-    height: 0.55rem;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 999px;
-    background: rgb(255 255 255 / 0.14);
+    background: var(--line-strong);
   }
 
   .browser-url {
@@ -48,8 +48,9 @@ const { url, class: className } = Astro.props;
     max-width: 22rem;
     margin-inline: auto;
     overflow: hidden;
-    color: var(--text-muted);
-    font-size: 0.72rem;
+    color: var(--mute);
+    font-size: 0.7rem;
+    text-transform: none;
     letter-spacing: 0.02em;
     text-align: center;
     text-overflow: ellipsis;
@@ -59,6 +60,6 @@ const { url, class: className } = Astro.props;
   .browser-view {
     aspect-ratio: 3 / 2;
     overflow: hidden;
-    background: var(--bg-tint);
+    background: var(--snow);
   }
 </style>

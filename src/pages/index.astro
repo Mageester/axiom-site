@@ -1,274 +1,212 @@
 ---
-import BrowserFrame from '../components/site/BrowserFrame.astro';
+import LiquidLens from '../components/liquid/LiquidLens';
 import CtaBand from '../components/site/CtaBand.astro';
-import EmailText from '../components/site/EmailText.astro';
 import FaqList from '../components/site/FaqList.astro';
-import Film from '../components/site/Film.astro';
-import FounderCards from '../components/site/FounderCards.astro';
 import Icon from '../components/site/Icon.astro';
-import IndexList from '../components/site/IndexList.astro';
-import IndustryGrid from '../components/site/IndustryGrid.astro';
-import PricingCards from '../components/site/PricingCards.astro';
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
-import WorkCard from '../components/site/WorkCard.astro';
-import { homeFaq, keyNumbers, valueProps } from '../content/company';
-import { packages } from '../content/pricing';
+import { founders, homeFaq } from '../content/company';
 import { processSteps } from '../content/process';
 import { services } from '../content/services';
 import { getProject } from '../content/work';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { FILM_JSON_LD, SEO_ROUTES, SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE, faqJsonLd } from '../lib/seo';
+import { SEO_ROUTES, faqJsonLd } from '../lib/seo';
 
-const [lead, ...concepts] = ['reids-home-and-yard', 'physio-clinic', 'dental-aurelia'].map((id) => getProject(id)!);
-const reelSizes = '(min-width: 1320px) 1240px, 94vw';
-
-const statement =
-  'Most local websites look fine and say very little. We build sites that explain what you do, show why you can be trusted and make the next step obvious, on the phone your customer is already holding.';
-
-const serviceItems = services.map((service) => ({
-  href: `/services/${service.slug}/`,
-  title: service.name,
-  text: service.cardSummary,
+// The lens carries the live client site and three concepts, in this order.
+const reel = ['reids-home-and-yard', 'physio-clinic', 'dental-aurelia', 'landscaping'].map((id) => getProject(id)!);
+const lensProjects = reel.map((project) => ({
+  name: project.title,
+  kind: project.kind === 'client' ? 'Client, live' : 'Concept',
+  src: project.image.webpSrcSet.split(',').map((s) => s.trim().split(' ')[0]).find((src) => src.includes('960')) ?? project.image.fallbackSrc,
 }));
+const previewFor = (project: (typeof reel)[number]) =>
+  project.image.webpSrcSet.split(',').map((s) => s.trim().split(' ')[0]).find((src) => src.includes('960')) ?? project.image.fallbackSrc;
+const [lead, physio] = reel;
+const chipSizes = '(min-width: 900px) 120px, 60px';
+const rowSizes = '(min-width: 900px) 0px, 92vw';
+
+const poster = {
+  type: 'image/webp',
+  href: '/images/lens-poster-900.webp',
+  srcset: '/images/lens-poster-600.webp 600w, /images/lens-poster-900.webp 900w',
+  sizes: '(min-width: 861px) min(75vh, 50vw), 90vw',
+};
 ---
 
 <BaseLayout
   {...SEO_ROUTES.home}
-  schema={[faqJsonLd(homeFaq), FILM_JSON_LD]}
-  ogImageAlt="Axiom Web — clear, fast websites for local businesses in Kitchener-Waterloo"
-  preload={{ type: 'image/jpeg', href: '/film/axiom-web-hero-poster.jpg', srcset: '/film/axiom-web-hero-poster.jpg 1920w', sizes: '100vw' }}
+  schema={[faqJsonLd(homeFaq)]}
+  ogImageAlt="Axiom Web — a web design studio in Kitchener-Waterloo building websites for local businesses"
+  preload={poster}
+  heroTheme="dark"
 >
   <main id="main-content" tabindex="-1">
-    <!-- Hero -->
-    <section class="home-hero">
-      <div class="hero-stage">
-        <div class="hero-film" aria-hidden="true">
-          <picture class="hero-poster">
-            <source media="(max-aspect-ratio: 4/5)" srcset="/film/axiom-web-hero-poster-mobile.jpg" />
-            <img src="/film/axiom-web-hero-poster.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high" />
-          </picture>
-          <video
-            class="hero-video"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster="/film/axiom-web-hero-poster.jpg"
-            disablepictureinpicture
-            disableremoteplayback
-            tabindex="-1"
-            data-hero-video
-          >
-            <source src="/film/axiom-web-hero-1080p.webm" type="video/webm" media="(min-aspect-ratio: 4/5)" />
-            <source src="/film/axiom-web-hero-1080p-web.mp4" type="video/mp4" media="(min-aspect-ratio: 4/5)" />
-            <source src="/film/axiom-web-hero-mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 4/5)" />
-            <source src="/film/axiom-web-hero-1080p-web.mp4" type="video/mp4" />
-          </video>
-        </div>
+    <!-- Stage: the liquid lens hero -->
+    <section class="stage hero-stage" id="hero-stage" data-stage>
+      <picture class="lens-poster" id="lens-poster" aria-hidden="true">
+        <source type="image/avif" srcset="/images/lens-poster-600.avif 600w, /images/lens-poster-900.avif 900w" sizes={poster.sizes} />
+        <img
+          src={poster.href}
+          srcset={poster.srcset}
+          sizes={poster.sizes}
+          width="900"
+          height="900"
+          alt=""
+          decoding="async"
+          fetchpriority="high"
+        />
+      </picture>
+      <LiquidLens
+        client:idle
+        projects={lensProjects}
+        stageId="hero-stage"
+        reelId="hero-reel"
+        posterId="lens-poster"
+      />
+
       <div class="container hero-inner">
         <h1 class="hero-title">
-          <span class="hero-kicker">Web design studio in Kitchener-Waterloo, Ontario<span class="sr-only">:</span></span>
-          <span class="line"><span>Websites that make</span></span>
-          <span class="line"><span>your business the</span></span>
-          <span class="line"><span>obvious choice.</span></span>
+          <span class="hero-kicker mono">Web design studio · Kitchener-Waterloo, Ontario<span class="sr-only">:</span></span>
+          <span class="line"><span>Websites that</span></span>
+          <span class="line"><span>feel <em>alive.</em></span></span>
         </h1>
 
         <div class="hero-foot">
-          <p class="lead">
-            Axiom Web designs and builds clear, fast websites for local businesses across Kitchener-Waterloo and Ontario,
-            with published pricing from CAD $900 and launch in two to four weeks.
-          </p>
-          <div class="btn-row">
-            <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
-            <a href="/pricing/" class="btn btn-secondary btn-lg">See pricing</a>
+          <div class="hero-copy">
+            <p class="hero-sub">
+              A two-person studio building websites for local businesses across Ontario. Fixed prices from CAD $900, live in two to four weeks.
+            </p>
+            <div class="btn-row">
+              <a href={CTA_PATHS.startProject} class="btn btn-light" data-magnetic>Start a project <Icon name="arrow-right" /></a>
+              <a href="#work" class="arrow-link hero-link">Selected work <Icon name="arrow-right" /></a>
+            </div>
+          </div>
+
+          <div class="reel" id="hero-reel" aria-live="polite">
+            <span class="mono reel-hint">Now showing · move the cursor, click to splash</span>
+            <p class="reel-name">
+              <span data-reel-index>01</span> <span data-reel-name>{lead.title}</span>
+              <span class="reel-kind" data-reel-kind>· Client, live</span>
+            </p>
+            <div class="reel-bars" data-reel-bars aria-hidden="true">
+              {reel.map(() => <i><b></b></i>)}
+            </div>
           </div>
         </div>
-
-        <dl class="hero-spec">
-          <div><dt>Price</dt><dd>Fixed, and agreed before work starts</dd></div>
-          <div><dt>Team</dt><dd>Work directly with the two founders</dd></div>
-          <div><dt>Hosting</dt><dd>First year included</dd></div>
-          <div><dt>Availability</dt><dd class="hero-status"><span class="status-dot" aria-hidden="true"></span>Taking new projects</dd></div>
-        </dl>
       </div>
-      </div>
-
-      <figure class="container hero-reel">
-        <div class="reel-frame">
-          <BrowserFrame url="reidshomeandyard.getaxiom.ca">
-            <ResponsivePicture source={lead.image} alt={lead.alt} sizes={reelSizes} loading="eager" fetchpriority="high" position="center top" />
-          </BrowserFrame>
-        </div>
-        <figcaption class="reel-caption">
-          <span class="badge badge-success badge-dot">Client site · Live</span>
-          <span class="reel-title">{lead.title}</span>
-          <span class="reel-meta">{lead.industryLabel} · {lead.location}</span>
-          <a class="arrow-link reel-link" href={lead.href} target="_blank" rel="noopener">
-            Visit the site <span class="sr-only">(opens in a new tab)</span><Icon name="arrow-up-right" />
-          </a>
-        </figcaption>
-      </figure>
     </section>
 
     <!-- Statement -->
     <section class="section statement-section" aria-labelledby="statement-label">
-      <div class="container statement-grid">
-        <h2 id="statement-label" class="label statement-label">Our view</h2>
+      <div class="container">
+        <p id="statement-label" class="eyebrow">The studio</p>
         <p class="statement" data-reveal>
-          {statement.split(' ').map((word, index) => (
-            <>
-              <span class="word" style={`--i:${index}`}>{word}</span>{' '}
-            </>
-          ))}
+          We design
+          <span class="chip"><ResponsivePicture source={lead.image} alt="" sizes={chipSizes} position={lead.position} /></span>
+          websites for local businesses, and build
+          <span class="chip"><ResponsivePicture source={physio.image} alt="" sizes={chipSizes} position={physio.position} /></span>
+          quietly for agencies. Fast, clear, and <em>impossible to ignore.</em>
         </p>
       </div>
     </section>
 
-    <!-- Services -->
-    <section class="section section-soft" aria-labelledby="services-title">
+    <!-- Selected work -->
+    <section class="section work-section" id="work" aria-labelledby="work-title">
       <div class="container">
-        <div class="section-head-row reveal">
-          <div class="section-head">
-            <p class="eyebrow">Services</p>
-            <h2 id="services-title">A website built around how your customers decide</h2>
-            <p>Whether you need your first proper website or a rebuild of one that no longer fits, the goal is the same: make your business easy to understand, easy to trust and easy to contact.</p>
-          </div>
-          <a href="/services/" class="arrow-link">All services <Icon name="arrow-right" /></a>
+        <div class="work-head">
+          <h2 id="work-title">Selected <em>work</em></h2>
+          <p class="mono">1 client site · 3 concepts</p>
         </div>
-        <IndexList items={serviceItems} />
-      </div>
-    </section>
-
-    <!-- Work -->
-    <section class="section" aria-labelledby="work-title">
-      <div class="container">
-        <div class="section-head-row reveal">
-          <div class="section-head">
-            <p class="eyebrow">Work</p>
-            <h2 id="work-title">Recent work</h2>
-            <p>A live client website and concept builds that show how we structure sites for different kinds of local businesses.</p>
-          </div>
-          <a href="/work/" class="arrow-link">View all work <Icon name="arrow-right" /></a>
-        </div>
-        <div class="work-showcase reveal-stagger">
-          <WorkCard project={lead} featured sizes="(min-width: 900px) 60vw, 92vw" />
-          <div class="grid grid-2">
-            {concepts.map((project) => <WorkCard project={project} sizes="(min-width: 720px) 45vw, 92vw" />)}
-          </div>
-        </div>
-        <p class="work-note">Concept builds are demonstrations designed by Axiom Web and are labelled clearly. They are not client results.</p>
-      </div>
-    </section>
-
-    <!-- Film -->
-    <section class="section section-soft" aria-labelledby="film-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Studio film</p>
-          <h2 id="film-title">Built to the pixel.</h2>
-          <p>Thirty-two seconds on how we approach every website: structure first, then the details most people never notice but every visitor feels.</p>
-        </div>
-        <div class="reveal">
-          <Film />
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Axiom -->
-    <section class="section" aria-labelledby="why-title">
-      <div class="container split">
-        <div class="section-head split-head">
-          <p class="eyebrow">Why Axiom Web</p>
-          <h2 id="why-title">Built properly. Priced plainly.</h2>
-          <p>Every website we build follows the same standard, whatever the package. You know the price before we start, and you know who is building your site.</p>
-          <a href="/about/" class="arrow-link">About the studio <Icon name="arrow-right" /></a>
-        </div>
-        <ol role="list" class="principles reveal-stagger">
-          {valueProps.map((item, index) => (
-            <li class="principle">
-              <span class="index-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-
-    <!-- Numerals -->
-    <section class="numerals" aria-labelledby="numerals-title">
-      <div class="container">
-        <h2 id="numerals-title" class="sr-only">Axiom Web at a glance</h2>
-        <ul role="list" class="numerals-grid reveal-stagger">
-          {keyNumbers.map((item) => (
-            <li>
-              <span class="numeral">{item.value}</span>
-              <span class="numeral-label">{item.label}</span>
+        <ul role="list" class="rows">
+          {reel.map((project, index) => (
+            <li class="row" data-cursor="View" data-preview={previewFor(project)}>
+              <a class="row-in" href={project.href} target="_blank" rel="noopener">
+                <span class="row-main">
+                  <span class="row-name">{project.title}</span>
+                  <span class="row-thumb">
+                    <ResponsivePicture source={project.image} alt={project.alt} sizes={rowSizes} position={project.position} />
+                  </span>
+                </span>
+                <span class="row-meta mono">
+                  <span>{project.industryLabel}</span>
+                  <span class:list={['tag', { live: project.kind === 'client' }]}>
+                    {project.kind === 'client' ? 'Client · Live' : 'Concept'}
+                  </span>
+                  <span class="sr-only">({project.kind === 'client' ? 'live client website' : 'concept build'}, opens in a new tab)</span>
+                </span>
+                <span class="row-index mono" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              </a>
             </li>
           ))}
         </ul>
+        <div class="work-foot">
+          <p class="small muted">Concept builds are demonstrations designed by Axiom Web and labelled as such. They are not client results.</p>
+          <a href="/work/" class="arrow-link">All work <Icon name="arrow-right" /></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offers -->
+    <section class="section offers-section" id="offers" aria-label="What we offer">
+      <div class="container offers">
+        <div class="offer reveal">
+          <p class="eyebrow">For local businesses</p>
+          <h2 class="offer-title">A site that makes you the <em>obvious</em> choice.</h2>
+          <dl class="facts">
+            <div><dt>Fixed price</dt><dd>from CAD $900</dd></div>
+            <div><dt>Brief to live</dt><dd>2–4 weeks</dd></div>
+            <div><dt>Payments</dt><dd>two, tied to milestones</dd></div>
+            <div><dt>Hosting</dt><dd>simple, annual</dd></div>
+            <div><dt>Ownership</dt><dd>your domain, your accounts</dd></div>
+          </dl>
+          <div class="offer-actions">
+            <a class="btn" href={CTA_PATHS.startProject} data-magnetic>Start a project <Icon name="arrow-right" /></a>
+            <a class="arrow-link" href="/pricing/">See pricing</a>
+          </div>
+          <ul role="list" class="offer-links mono">
+            {services.map((service) => (
+              <li><a href={`/services/${service.slug}/`}>{service.name}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div class="offer reveal">
+          <p class="eyebrow">For agencies</p>
+          <h2 class="offer-title">Your name on it. <em>Our hands</em> on it.</h2>
+          <dl class="facts">
+            <div><dt>Rate</dt><dd>CAD 50/hour</dd></div>
+            <div><dt>Quote</dt><dd>fixed, within 24 hours</dd></div>
+            <div><dt>Confidentiality</dt><dd>NDA by default</dd></div>
+            <div><dt>After launch</dt><dd>30 days of free fixes</dd></div>
+            <div><dt>Platforms</dt><dd>custom, Shopify, WordPress</dd></div>
+          </dl>
+          <div class="offer-actions">
+            <a class="btn btn-secondary" href="/agencies/" data-magnetic>Send a first job <Icon name="arrow-right" /></a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Process -->
-    <section class="section" aria-labelledby="process-title">
+    <section class="section section-soft" aria-labelledby="process-title">
       <div class="container split">
         <div class="section-head split-head">
           <p class="eyebrow">How it works</p>
-          <h2 id="process-title">From first conversation to launch in four steps</h2>
-          <p>A simple, predictable process. Scope and price are agreed in writing before design starts, so there are no surprises later.</p>
+          <h2 id="process-title">First call to launch in <em>four</em> steps</h2>
+          <p>Scope and price are agreed in writing before design starts, so there are no surprises later.</p>
           <a href="/approach/" class="arrow-link">See the full process <Icon name="arrow-right" /></a>
         </div>
-        <div class="rail" data-reveal>
-          <span class="rail-line" aria-hidden="true"><span class="rail-fill"></span></span>
-          <ol role="list" class="rail-list reveal-stagger">
-            {processSteps.map((step) => (
-              <li class="rail-step">
-                <span class="rail-dot" aria-hidden="true"></span>
-                <span class="rail-num" aria-hidden="true">{step.number}</span>
-                <div class="rail-body">
-                  <p class="rail-timing">Step {Number(step.number)} · {step.timing}</p>
-                  <h3>{step.title}</h3>
-                  <p>{step.summary}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="section section-soft" aria-labelledby="pricing-title">
-      <div class="container">
-        <div class="section-head-row reveal">
-          <div class="section-head">
-            <p class="eyebrow">Pricing</p>
-            <h2 id="pricing-title">Published packages. No guesswork.</h2>
-            <p>Choose the package that fits your business today. Every standard package includes first-year hosting, two revision rounds and thirty days of support after launch.</p>
-          </div>
-          <a href="/pricing/" class="arrow-link">Compare packages <Icon name="arrow-right" /></a>
-        </div>
-        <div class="reveal">
-          <PricingCards packages={packages} compact />
-        </div>
-      </div>
-    </section>
-
-    <!-- Industries -->
-    <section class="section" aria-labelledby="industries-title">
-      <div class="container">
-        <div class="section-head-row reveal">
-          <div class="section-head">
-            <p class="eyebrow">Industries</p>
-            <h2 id="industries-title">Websites for local service businesses</h2>
-            <p>Different businesses win customers in different ways. We plan each site around what your buyers need to see before they get in touch.</p>
-          </div>
-          <a href="/industries/" class="arrow-link">All industries <Icon name="arrow-right" /></a>
-        </div>
-        <IndustryGrid />
+        <ol role="list" class="steps reveal-stagger">
+          {processSteps.map((step) => (
+            <li class="step">
+              <span class="step-num mono" aria-hidden="true">{step.number}</span>
+              <div class="step-body">
+                <p class="step-timing mono">{step.timing}</p>
+                <h3>{step.title}</h3>
+                <p>{step.summary}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
 
@@ -282,451 +220,458 @@ const serviceItems = services.map((service) => ({
             Aidan Magee and Riley Hinsperger are the co-founders of Axiom Web, the web-focused subsidiary of Axiom International.
             You work directly with the people who plan, design and build your website.
           </p>
-          <a href="/about/" class="arrow-link">Meet the founders <Icon name="arrow-right" /></a>
+          <a href="/about/" class="arrow-link">About the studio <Icon name="arrow-right" /></a>
         </div>
-        <div class="reveal">
-          <FounderCards />
-        </div>
+        <ul role="list" class="founders reveal-stagger">
+          {founders.map((founder) => (
+            <li class="founder">
+              <p class="founder-role mono">{founder.role}</p>
+              <h3>{founder.name}</h3>
+              <p>{founder.bio}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section" aria-labelledby="faq-title">
+    <section class="section section-soft" aria-labelledby="faq-title">
       <div class="container split">
         <div class="section-head split-head">
           <p class="eyebrow">FAQ</p>
-          <h2 id="faq-title">Common questions</h2>
-          <p>Straight answers about cost, timing and what working with us looks like.</p>
-          <div class="faq-contact">
-            <p class="small muted">Still have a question?</p>
-            <a class="text-link" href={`tel:${SITE_TELEPHONE}`}>{SITE_PHONE_DISPLAY}</a>
-            <a class="text-link" href={`mailto:${SITE_EMAIL}`}><EmailText /></a>
-          </div>
+          <h2 id="faq-title">Straight <em>answers</em></h2>
+          <p>About cost, timing and what working with us looks like.</p>
+          <a href="/contact/" class="arrow-link">Ask something else <Icon name="arrow-right" /></a>
         </div>
         <FaqList items={homeFaq} openFirst />
       </div>
     </section>
 
-    <CtaBand title="Let’s make your business the obvious choice." />
+    <CtaBand title="Let’s make yours." />
   </main>
 </BaseLayout>
 
-<script>
-  // Hero film: plays only while on screen, fades in on its first frame, and is removed entirely (the poster
-  // stays) for reduced motion or data saver.
-  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
-  if (video) {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    const remove = () => {
-      try {
-        video.pause();
-      } catch {}
-      video.removeAttribute('autoplay');
-      video.preload = 'none';
-      video.remove();
-    };
-    if (reduce.matches || connection?.saveData === true) {
-      remove();
-    } else {
-      reduce.addEventListener?.('change', (event) => {
-        if (event.matches) remove();
-      });
-      // Mark the first decoded frame. Cloudflare's Rocket Loader defers this script, so the 'playing' event may
-      // already have fired: check the current state too, and keep 'timeupdate' as a fallback.
-      const shown = () => video.classList.add('is-playing');
-      video.addEventListener('playing', shown, { once: true });
-      video.addEventListener('timeupdate', shown, { once: true });
-      if (!video.paused && video.readyState > 2) shown();
-      const play = () => {
-        const attempt = video.play();
-        if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
-      };
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (entry.isIntersecting) play();
-              else video.pause();
-            }
-          },
-          { threshold: 0.05 },
-        ).observe(video);
-      } else {
-        play();
-      }
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) video.pause();
-        else if (video.getBoundingClientRect().bottom > 0) play();
-      });
-    }
-  }
-</script>
-
 <style>
-  /* ── Hero ─────────────────────────────────────────────── */
-  .home-hero {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
-  /* The first screen: the hero film (a 20 s seamless loop of a phone whose layout snaps into place) sits
-     behind the copy. The copy keeps the left two thirds; the phone lives in the right third of the film.
-     The poster paints first; the video fades in on its first frame; reduced motion keeps the poster. */
+  /* ── Stage ─────────────────────────────────────────────── */
   .hero-stage {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: clamp(640px, 92svh, 920px);
+    padding-top: var(--header-h);
+    overflow: hidden;
     isolation: isolate;
-    display: grid;
-    align-content: center;
-    min-height: calc(100svh - var(--header-h));
-    padding-block: clamp(2.5rem, 1rem + 5vh, 5rem) clamp(2.5rem, 1rem + 6vh, 5.5rem);
-    background: var(--bg);
+    container-type: size;
   }
 
-  .hero-film {
+  .hero-stage::before {
+    content: '';
     position: absolute;
     inset: 0;
     z-index: 0;
-    overflow: hidden;
-    background: var(--bg);
+    background: radial-gradient(50% 60% at 70% 48%, var(--night-2) 0%, rgb(7 7 10 / 0) 70%);
   }
 
-  .hero-film img,
-  .hero-video {
+  .hero-stage :global(.lens-canvas) {
     position: absolute;
     inset: 0;
+    z-index: 1;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-  }
-
-  /* Landscape viewports squarer than 16:9 (16:10 and 3:2 laptops) crop the film's sides; keep the crop on the
-     empty left so the phone in the right third stays whole, with air at the right edge. */
-  @media (min-aspect-ratio: 4/5) {
-    .hero-film img,
-    .hero-video {
-      object-position: 76% 50%;
-    }
-  }
-
-  .hero-video {
     opacity: 0;
-    transition: opacity 1.4s var(--ease-out);
+    filter: blur(28px);
   }
 
-  .hero-video.is-playing {
+  .hero-stage :global(.lens-canvas.is-ready) {
     opacity: 1;
+    filter: blur(0);
+    transition: opacity 1600ms var(--ease), filter 2000ms var(--ease);
+  }
+
+  /* The poster paints first and is the LCP image; it sits exactly where the
+     lens renders (diameter × 1.3 for the displacement margin) and fades once
+     WebGL is ready. It stays for no-WebGL and reduced motion. */
+  .lens-poster {
+    position: absolute;
+    left: 74cqw;
+    top: 48cqh;
+    z-index: 1;
+    width: calc(min(58cqh, 38cqw) * 1.3);
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    transition: opacity 1200ms var(--ease);
+  }
+
+  .lens-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .lens-poster[data-hidden] {
+    opacity: 0;
+  }
+
+  @media (max-width: 860px) {
+    .lens-poster {
+      left: 50cqw;
+      top: 38cqh;
+      width: calc(min(68cqw, 44cqh) * 1.3);
+    }
   }
 
   .hero-inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-block: clamp(0.5rem, 2vw, 1.5rem) clamp(1.75rem, 1rem + 3vh, 3rem);
+    pointer-events: none;
+  }
+
+  .hero-inner a,
+  .hero-inner button {
+    pointer-events: auto;
+  }
+
+  .hero-title {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    color: var(--snow);
+    font-size: clamp(3.1rem, 1rem + 8.6vw, 8.75rem);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+  }
+
+  .hero-kicker {
+    display: block;
+    margin-bottom: auto;
+    color: var(--mute-night);
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    animation: fade-in 1200ms var(--ease) 200ms both;
+  }
+
+  .hero-title .line:nth-of-type(1) {
+    margin-top: auto;
+  }
+
+  .hero-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-top: clamp(1.25rem, 3vh, 2rem);
+  }
+
+  .hero-copy {
     display: grid;
-    gap: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+    gap: 1.25rem;
+    max-width: 34rem;
+    animation: fade-in 1400ms var(--ease) 700ms both;
   }
 
-  /* Desktop: the headline is capped so its longest line ends before the phone in the film; the lead and
-     the spec row keep to a 40rem column. */
-  @media (min-width: 1024px) {
-    .hero-foot,
-    .hero-spec {
-      max-width: 40rem;
-    }
+  .hero-sub {
+    max-width: 32ch;
+    color: var(--mute-night);
+    font-size: 15px;
+    line-height: 1.6;
   }
 
-  /* Phones: the copy covers the first screen, so the stage keeps a strip at the bottom for the phone. */
-  @media (max-width: 639px) {
+  .hero-link {
+    color: var(--snow);
+    text-decoration-color: var(--line-night);
+  }
+
+  .reel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 260px;
+    animation: fade-in 1400ms var(--ease) 900ms both;
+  }
+
+  .reel-hint {
+    color: var(--mute-night);
+  }
+
+  .reel-name {
+    min-height: 1.4em;
+    color: var(--snow);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+
+  .reel-kind {
+    color: var(--mute-night);
+  }
+
+  .reel-bars {
+    display: flex;
+    gap: 6px;
+  }
+
+  .reel-bars i {
+    position: relative;
+    flex: 1;
+    height: 2px;
+    background: var(--line-night);
+    overflow: hidden;
+  }
+
+  .reel-bars i b {
+    position: absolute;
+    inset: 0;
+    background: var(--snow);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .reel-bars i.is-done b {
+    transform: scaleX(1);
+  }
+
+  .reel-bars i.is-on b {
+    transform: scaleX(1);
+    transition: transform var(--dwell, 5.5s) linear;
+  }
+
+  @media (max-width: 860px) {
     .hero-stage {
-      padding-bottom: 38vh;
+      height: clamp(640px, 100svh, 860px);
+    }
+    .hero-title {
+      font-size: clamp(2.9rem, 1rem + 11.5vw, 5.5rem);
+    }
+    .hero-foot {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    .reel-hint {
+      display: none;
+    }
+    .reel {
+      width: 100%;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-video {
+    .hero-stage :global(.lens-canvas) {
       display: none;
     }
   }
 
-  /* The primary search phrase, set as a small label line inside the h1. */
-  .hero-kicker {
-    display: block;
-    margin-bottom: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
-    padding-bottom: 1.1rem;
-    border-bottom: 1px solid var(--line);
-    color: var(--text-muted);
-    font-family: var(--font-sans);
-    font-size: var(--fs-label);
-    font-weight: 600;
-    font-stretch: var(--wdth-heading);
-    letter-spacing: 0.14em;
-    line-height: 1.4;
-    text-transform: uppercase;
+  /* ── Statement ─────────────────────────────────────────── */
+  .statement-section .eyebrow {
+    margin-bottom: 1.75rem;
   }
 
-  .hero-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
+  /* ── Work rows ─────────────────────────────────────────── */
+  .work-section {
+    padding-top: 0;
   }
 
-  .status-dot {
-    width: 0.45rem;
-    height: 0.45rem;
-    border-radius: 999px;
-    background: var(--success);
+  .work-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
   }
 
-  /* Each line rises from its own mask. */
-  .hero-title {
-    font-size: clamp(2.1rem, 0.5rem + 5.4vw, 5.75rem);
+  .work-head h2 {
+    font-size: clamp(2.5rem, 1rem + 6vw, 6rem);
+    letter-spacing: -0.05em;
     line-height: 0.95;
-    letter-spacing: -0.045em;
   }
 
-  .hero-title .line {
-    max-width: 17ch;
+  .work-head p {
+    color: var(--mute);
   }
 
-  .hero-title .line {
-    display: block;
-    padding-bottom: 0.08em;
-    margin-bottom: -0.08em;
-    overflow: hidden;
-  }
-
-  .hero-title .line > span {
-    display: inline-block;
-  }
-
-  /* On phones the fixed line breaks would strand single words, so the headline
-     wraps naturally (balanced) and fades in instead of rising line by line. */
-  @media (max-width: 639px) {
-    .hero-title .line,
-    .hero-title .line > span {
-      display: inline;
-      overflow: visible;
-      padding: 0;
-      margin: 0;
-    }
-  }
-
-  .hero-foot {
-    display: grid;
-    gap: 1.75rem;
-    align-items: end;
-  }
-
-  .hero-foot .lead {
-    max-width: 36rem;
-  }
-
-  @media (min-width: 1024px) {
-    .hero-foot {
-      gap: 2.25rem;
-    }
-  }
-
-  .hero-spec {
-    display: grid;
-    margin: 0.5rem 0 0;
+  .rows {
+    margin: 0;
+    padding: 0;
     border-top: 1px solid var(--line);
   }
 
-  .hero-spec > div {
-    display: grid;
-    grid-template-columns: 6.5rem minmax(0, 1fr);
-    gap: 1rem;
-    padding-block: 0.85rem;
+  .row {
     border-bottom: 1px solid var(--line);
-    font-size: var(--fs-sm);
   }
 
-  .hero-spec dt {
-    color: var(--text-muted);
-    font-size: var(--fs-label);
-    font-weight: 600;
-    font-stretch: var(--wdth-heading);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    line-height: 1.9;
-  }
-
-  .hero-spec dd {
-    margin: 0;
-    color: var(--ink-2);
-  }
-
-  @media (min-width: 900px) {
-    .hero-spec {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      border-bottom: 1px solid var(--line);
-    }
-    .hero-spec > div {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.25rem;
-      padding: 1rem 1.5rem 1rem 0;
-      border-bottom: 0;
-    }
-    .hero-spec > div + div {
-      padding-left: 1.5rem;
-      border-left: 1px solid var(--line);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-kicker,
-    .hero-foot,
-    .hero-spec {
-      animation: hero-fade 900ms var(--ease-out) both;
-    }
-    .hero-title .line > span {
-      animation: line-rise 950ms var(--ease-out) both;
-    }
-    .hero-title .line:nth-child(1) > span {
-      animation-delay: 60ms;
-    }
-    .hero-title .line:nth-child(2) > span {
-      animation-delay: 140ms;
-    }
-    .hero-title .line:nth-child(3) > span {
-      animation-delay: 220ms;
-    }
-    .hero-foot {
-      animation-delay: 380ms;
-    }
-    .hero-spec {
-      animation-delay: 480ms;
-    }
-    .hero-reel {
-      animation: hero-fade 1200ms var(--ease-out) 420ms both;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) and (max-width: 639px) {
-    .hero-title .line > span {
-      animation-name: line-fade;
-    }
-  }
-
-  @keyframes line-rise {
-    from {
-      transform: translateY(105%);
-    }
-  }
-
-  @keyframes line-fade {
-    from {
-      opacity: 0;
-    }
-  }
-
-  @keyframes hero-fade {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-  }
-
-  /* ── Hero reel: the real work, large ──────────────────── */
-  .hero-reel {
-    margin-top: clamp(3rem, 2rem + 4vw, 5.5rem);
-  }
-
-  /* The first screen belongs to the film; the reel enters below it. */
-  .home-hero .hero-reel {
+  .row-in {
     position: relative;
-    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: clamp(1.4rem, 3vw, 2.5rem);
+    transition: transform 800ms var(--ease), opacity 600ms;
   }
 
-  .reel-frame :global(.browser) {
-    border-radius: var(--radius-lg);
+  .row-in:focus-visible {
+    outline-offset: -4px;
   }
 
-  .reel-frame :global(.browser-view) {
-    aspect-ratio: 16 / 9;
+  .row-name {
+    display: block;
+    color: var(--ink);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 1rem + 5vw, 4.75rem);
+    letter-spacing: -0.045em;
+    line-height: 1;
   }
 
-  .reel-caption {
+  .row-meta {
+    display: grid;
+    justify-items: end;
+    gap: 0.4rem;
+    color: var(--mute);
+    text-align: right;
+  }
+
+  .row-meta .tag {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+
+  .row-meta .tag.live {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .row-index {
+    display: none;
+  }
+
+  .row-thumb {
+    display: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .rows:hover .row-in {
+      opacity: 0.28;
+    }
+    .rows .row:hover .row-in {
+      opacity: 1;
+      transform: translateX(18px);
+    }
+  }
+
+  @media (hover: none) {
+    .row-thumb {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 1rem;
+      background: var(--snow);
+    }
+    .row-thumb :global(img) {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .row-in {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .row-meta {
+      justify-items: start;
+      text-align: left;
+    }
+  }
+
+  .work-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .work-foot p {
+    max-width: 40rem;
+  }
+
+  /* ── Offers ────────────────────────────────────────────── */
+  .offers-section {
+    padding-top: 0;
+  }
+
+  .offers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(3rem, 7vw, 7.5rem);
+  }
+
+  .offer {
+    display: grid;
+    gap: 1.75rem;
+    align-content: start;
+  }
+
+  .offer .eyebrow {
+    margin-bottom: -0.5rem;
+  }
+
+  .offer-title {
+    font-size: clamp(1.9rem, 1.2rem + 2.4vw, 3.1rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    max-width: 16ch;
+  }
+
+  .offer-actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem 1.25rem;
-    padding-block: 1rem 0;
-    font-size: var(--fs-sm);
+    gap: 0.75rem 1.5rem;
   }
 
-  .reel-title {
-    color: var(--ink);
-    font-weight: 600;
+  .offer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin: 0;
+    color: var(--mute);
   }
 
-  .reel-meta {
-    color: var(--text-muted);
-  }
-
-  .reel-link {
-    margin-left: auto;
+  .offer-links a {
+    display: inline-flex;
     min-height: 2.25rem;
+    align-items: center;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 0.35em;
+    transition: color 300ms var(--ease);
   }
 
-  /* ── Statement ────────────────────────────────────────── */
-  .statement-grid {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 1024px) {
-    .statement-grid {
-      grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
-      gap: 2rem;
-    }
-  }
-
-  .statement-label {
-    align-self: start;
-    padding-top: 0.6rem;
-    font-family: var(--font-sans);
-  }
-
-  .statement {
-    max-width: 24ch;
+  .offer-links a:hover {
     color: var(--ink);
-    font-family: var(--font-display);
-    font-size: clamp(1.75rem, 0.9rem + 3.2vw, 3.6rem);
-    font-weight: 500;
-    font-stretch: var(--wdth-heading);
-    line-height: 1.12;
-    letter-spacing: -0.035em;
-    text-wrap: pretty;
   }
 
-  /* Once the statement is well into view, its words brighten in reading order.
-     The resting state stays above 3:1, the large-text contrast minimum. */
-  @media (prefers-reduced-motion: no-preference) {
-    :global(.reveal-ready) .statement .word {
-      opacity: 0.45;
-      transition: opacity 600ms var(--ease) calc(var(--i) * 28ms);
-    }
-    :global(.reveal-ready) .statement:global(.is-revealed) .word {
-      opacity: 1;
+  @media (max-width: 860px) {
+    .offers {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
-  /* ── Work ─────────────────────────────────────────────── */
-  .work-showcase {
-    display: grid;
-    gap: clamp(1rem, 0.6rem + 1.2vw, 1.5rem);
-  }
-
-  .work-note {
-    margin-top: 1.5rem;
-    color: var(--text-muted);
-    font-size: var(--fs-xs);
-  }
-
-  /* ── Split sections ───────────────────────────────────── */
+  /* ── Split sections ────────────────────────────────────── */
   .split {
     display: grid;
     gap: 2.5rem;
@@ -738,10 +683,9 @@ const serviceItems = services.map((service) => ({
       gap: clamp(3rem, 2rem + 4vw, 6rem);
       align-items: start;
     }
-
     .split-head {
       position: sticky;
-      top: calc(var(--header-h) + 2.5rem);
+      top: calc(var(--header-h) + 2rem);
     }
   }
 
@@ -750,201 +694,66 @@ const serviceItems = services.map((service) => ({
     justify-items: start;
   }
 
-  /* ── Principles: numbered, no icons ───────────────────── */
-  .principles {
+  /* ── Process rows ──────────────────────────────────────── */
+  .steps {
     display: grid;
     margin: 0;
-    border-top: 1px solid var(--line-strong);
+    border-top: 1px solid var(--line);
   }
 
-  @media (min-width: 640px) {
-    .principles {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 2.5rem;
-    }
-  }
-
-  .principle {
+  .step {
     display: grid;
-    gap: 0.5rem;
-    align-content: start;
-    padding-block: 1.5rem 1.75rem;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
     border-bottom: 1px solid var(--line);
   }
 
-  .principle h3 {
-    font-size: 1.125rem;
+  .step-num {
+    color: var(--mute);
+    padding-top: 0.35rem;
   }
 
-  .principle p {
-    color: var(--text);
-    font-size: var(--fs-sm);
-    line-height: 1.6;
-  }
-
-  /* ── Numerals ─────────────────────────────────────────── */
-  .numerals {
-    position: relative;
-    padding-block: clamp(4rem, 2.5rem + 5vw, 7rem);
-    border-block: 1px solid var(--line);
-  }
-
-  .numerals-grid {
+  .step-body {
     display: grid;
-    gap: 2.5rem 1.5rem;
-    margin: 0;
+    gap: 0.5rem;
   }
 
-  @media (min-width: 640px) {
-    .numerals-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  .step-timing {
+    color: var(--mute);
   }
 
-  @media (min-width: 1024px) {
-    .numerals-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-    .numerals-grid li + li {
-      border-left: 1px solid var(--line);
-      padding-left: 2rem;
-    }
+  .step-body h3 {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem);
   }
 
-  .numerals-grid li {
-    display: grid;
-    gap: 0.75rem;
-    align-content: start;
-  }
-
-  .numeral {
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: clamp(3.25rem, 2.2rem + 4vw, 5.75rem);
-    font-weight: 500;
-    font-stretch: var(--wdth-display);
-    line-height: 0.95;
-    letter-spacing: -0.05em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .numeral-label {
-    max-width: 16rem;
-    color: var(--text);
-    font-size: var(--fs-sm);
-  }
-
-  /* ── Process rail ─────────────────────────────────────── */
-  .rail {
-    position: relative;
-  }
-
-  .rail-list {
-    display: grid;
-    margin: 0;
-  }
-
-  .rail-line {
-    position: absolute;
-    top: 0.75rem;
-    bottom: 0.75rem;
-    left: 0.25rem;
-    width: 1px;
-    background: var(--line-strong);
-  }
-
-  .rail-fill {
-    position: absolute;
-    inset: 0;
-    background: var(--ink);
-    transform-origin: 50% 0;
-  }
-
-  .rail-step {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 0.25rem 1.5rem;
-    padding: 0 0 clamp(2.5rem, 2rem + 2vw, 3.5rem) 2rem;
-  }
-
-  .rail-step:last-child {
-    padding-bottom: 0;
-  }
-
-  .rail-dot {
-    position: absolute;
-    top: 0.55rem;
-    left: 0.25rem;
-    width: 0.5rem;
-    height: 0.5rem;
-    margin-left: -0.25rem;
-    background: var(--ink);
-    box-shadow: 0 0 0 5px var(--bg);
-  }
-
-  .rail-num {
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
-    font-weight: 500;
-    font-stretch: var(--wdth-display);
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .rail-body {
-    display: grid;
-    gap: 0.45rem;
-  }
-
-  .rail-timing {
-    color: var(--text-muted);
-    font-size: var(--fs-label);
-    font-weight: 600;
-    font-stretch: var(--wdth-heading);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .rail-body h3 {
-    font-family: var(--font-display);
-    font-size: clamp(1.3rem, 1.1rem + 0.6vw, 1.6rem);
-    font-weight: 540;
-    font-stretch: var(--wdth-heading);
-    letter-spacing: -0.02em;
-  }
-
-  .rail-body p:last-child {
+  .step-body p:last-child {
     max-width: 36rem;
-    color: var(--text);
   }
 
-  /* When the steps come into view the line draws down through them while each
-     step enters in turn. */
-  @media (prefers-reduced-motion: no-preference) {
-    :global(.reveal-ready) .rail-fill {
-      transform: scaleY(0);
-    }
-    :global(.reveal-ready) .rail:global(.is-revealed) .rail-fill {
-      transform: none;
-      transition: transform 1600ms var(--ease-out) 150ms;
-    }
-  }
-
-  @media (max-width: 559px) {
-    .rail-step {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
-  /* ── FAQ ──────────────────────────────────────────────── */
-  .faq-contact {
+  /* ── Founders ──────────────────────────────────────────── */
+  .founders {
     display: grid;
-    gap: 0.35rem;
-    justify-items: start;
-    margin-top: 0.5rem;
-    font-size: var(--fs-sm);
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .founder {
+    display: grid;
+    gap: 0.6rem;
+    padding-block: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .founder-role {
+    color: var(--mute);
+  }
+
+  .founder h3 {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem);
+  }
+
+  .founder p:last-child {
+    max-width: 36rem;
   }
 </style>

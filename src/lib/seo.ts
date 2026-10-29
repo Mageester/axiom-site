@@ -10,6 +10,7 @@ export const SITE_EMAIL = 'aidanmageebusiness@gmail.com';
 export const SITE_TELEPHONE = '+12267531833';
 export const SITE_PHONE_DISPLAY = '(226) 753-1833';
 export const SITE_LOCATION = 'Kitchener-Waterloo, Ontario';
+export const SITE_ADDRESS = '257 Kipling Ave, Kitchener, ON';
 
 export type SeoRouteMeta = {
   title: string;
@@ -87,6 +88,7 @@ export const ORGANIZATION_SCHEMA = {
   },
   address: {
     '@type': 'PostalAddress',
+    streetAddress: '257 Kipling Ave',
     addressLocality: 'Kitchener',
     addressRegion: 'ON',
     addressCountry: 'CA',

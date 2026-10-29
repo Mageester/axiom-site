@@ -13,16 +13,16 @@ const { packages, compact = false } = Astro.props;
 
 <div class:list={['pricing-grid', { compact }]}>
   {packages.map((pkg) => (
-    <article id={pkg.key} class:list={['card', 'price-card', { featured: pkg.featured }]} data-package={pkg.key}>
-      <div class="price-badge-row">
-        {pkg.badge && <span class:list={['badge', pkg.featured ? 'badge-brand' : '']}>{pkg.badge}</span>}
+    <article id={pkg.key} class:list={['price-card', { featured: pkg.featured }]} data-package={pkg.key}>
+      <div class="price-head">
+        <p class="mono price-name">{pkg.name}</p>
+        {pkg.badge && <span class="badge">{pkg.badge}</span>}
       </div>
-      <h3>{pkg.name}</h3>
-      <p class="price-scope">{pkg.scope}</p>
       <p class="price">
-        <span class="price-note">{pkg.priceNote}</span>
         <span class="price-value">{pkg.price}</span>
+        <span class="price-note mono">{pkg.priceNote}</span>
       </p>
+      <h3 class="price-scope">{pkg.scope}</h3>
       <p class="price-summary">{pkg.summary}</p>
       {!compact && (
         <ul role="list" class="check-list price-features">
@@ -55,56 +55,80 @@ const { packages, compact = false } = Astro.props;
   }
 
   .price-card {
-    gap: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
     scroll-margin-top: calc(var(--header-h) + 1.5rem);
   }
 
-  /* The recommended package is marked by a solid rule, not a glow. */
+  /* The recommended package is the one filled card. */
   .price-card.featured {
-    border-color: var(--line-strong);
-    background: var(--surface-2);
-    box-shadow: inset 0 2px 0 var(--ink);
+    --line: var(--line-night);
+    --line-strong: rgb(244 243 248 / 0.28);
+    --ink: var(--snow);
+    --text: var(--mute-night);
+    --mute: var(--mute-night);
+    --paper: var(--night);
+    border-color: var(--night);
+    background: var(--night);
+    color: var(--mute-night);
+    color-scheme: dark;
   }
 
-  .price-badge-row {
+  .price-card.featured .check-list li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23F4F3F8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 10.5 4 4 8-9'/%3E%3C/svg%3E");
+  }
+
+  .price-card.featured .btn {
+    --btn-bg: var(--snow);
+    --btn-fg: var(--night);
+    --btn-border: var(--snow);
+  }
+
+  .price-card.featured .badge {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--night);
+  }
+
+  .price-head {
     display: flex;
-    min-height: 1.6rem;
-    margin-bottom: -0.25rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 1.8rem;
   }
 
-  .price-card h3 {
-    font-size: 1.125rem;
-  }
-
-  .price-scope {
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
+  .price-name {
+    color: var(--mute);
   }
 
   .price {
     display: grid;
-    gap: 0.25rem;
-    padding-block: 0.5rem 0.25rem;
-  }
-
-  .price-note {
-    color: var(--text-muted);
-    font-size: var(--fs-label);
-    font-weight: 600;
-    font-stretch: var(--wdth-heading);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    gap: 0.35rem;
+    padding-block: 0.75rem 0.25rem;
   }
 
   .price-value {
     color: var(--ink);
-    font-family: var(--font-display);
-    font-size: clamp(1.75rem, 1.45rem + 1vw, 2.25rem);
-    font-weight: 540;
-    font-stretch: var(--wdth-heading);
-    letter-spacing: -0.035em;
-    line-height: 1.1;
+    font-size: clamp(2.2rem, 1.8rem + 1.4vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 1;
     font-variant-numeric: tabular-nums;
+  }
+
+  .price-note {
+    color: var(--mute);
+  }
+
+  .price-scope {
+    font-size: 1.125rem;
+    letter-spacing: -0.02em;
   }
 
   .price-summary {
