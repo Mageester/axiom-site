@@ -6,7 +6,7 @@ export const SITE_TAGLINE =
   'Kitchener-Waterloo web design studio building clear, fast websites for local businesses, with published pricing and launch in two to four weeks.';
 export const DEFAULT_OG_IMAGE = '/social/home.png';
 export const DEFAULT_SEO_DESCRIPTION = SITE_TAGLINE;
-export const SITE_EMAIL = 'aidanmageebusiness@gmail.com';
+export const SITE_EMAIL = 'contact@axiominternational.ca';
 export const SITE_TELEPHONE = '+12267531833';
 export const SITE_PHONE_DISPLAY = '(226) 753-1833';
 export const SITE_LOCATION = 'Kitchener-Waterloo, Ontario';

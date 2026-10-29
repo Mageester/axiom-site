@@ -35,7 +35,7 @@ const orbBottom = orbLabel.slice(Math.ceil(orbLabel.length / 2)).join(' ');
         <h2 id="cta-band-title">{lead}{lead && ' '}<em>{last}</em></h2>
         {text && <p class="close-text">{text}</p>}
       </div>
-      <a class="orb" href={primaryHref} data-magnetic="0.22">
+      <a class="orb" href={primaryHref} data-magnetic="0.22" data-lens-anchor="close">
         <span class="btn-text">{orbTop}{orbBottom && <br />}{orbBottom}</span>
       </a>
     </div>
@@ -63,8 +63,14 @@ const orbBottom = orbLabel.slice(Math.ceil(orbLabel.length / 2)).join(' ');
     content: '';
     position: absolute;
     inset: 0;
+    z-index: 0;
     background: radial-gradient(50% 60% at 70% 55%, var(--night-2) 0%, rgb(7 7 10 / 0) 70%);
     pointer-events: none;
+  }
+
+  .close-stage .container {
+    position: relative;
+    z-index: 2;
   }
 
   .close-in {
@@ -135,6 +141,17 @@ const orbBottom = orbLabel.slice(Math.ceil(orbLabel.length / 2)).join(' ');
   .orb .btn-text {
     display: inline-block;
     transition: transform 600ms var(--ease);
+  }
+
+  /* Once the travelling lens docks here, the lens is the orb. */
+  .orb.is-lens {
+    background: transparent;
+    color: var(--snow);
+    transition: background-color 600ms var(--ease), color 600ms var(--ease);
+  }
+
+  .orb.is-lens::before {
+    display: none;
   }
 
   .close-contact {

@@ -6,8 +6,15 @@
  * of a blur, a static poster until WebGL is ready (and forever for no-WebGL or
  * reduced motion), and a reel caption synced to the shader timeline.
  *
- * The island renders only the canvas. The hero copy, poster and reel caption
- * are server-rendered HTML that this component drives by id.
+ * One persistent canvas travels with the scroll on wide screens: the lens
+ * starts large in the hero, glides between `[data-lens-anchor]` boxes placed
+ * in the page (beside the statement, in the work list, in the section heads)
+ * and ends docked on the closing orb. Hovering a `[data-lens-hover]` work row
+ * pulls it under the cursor showing that project. On narrow screens the lens
+ * stays in the hero and fades as it scrolls away.
+ *
+ * The island renders only the canvas. The hero copy, poster, anchors and reel
+ * caption are server-rendered HTML that this component drives by id.
  */
 import { useEffect, useRef } from 'react';
 import {
@@ -36,15 +43,15 @@ export type LensProject = { name: string; kind: string; src: string };
 
 type Props = {
   projects: LensProject[];
-  /** The hero section the lens lives in; pointer and size come from it. */
-  stageId: string;
   /** Element whose `data-reel-*` children show the current project. */
   reelId: string;
-  /** Poster image shown until the scene is ready. */
+  /** Poster image shown until the scene is ready; also the hero anchor. */
   posterId: string;
   /** Seconds each site is held before the dissolve. */
   dwell?: number;
 };
+
+type Target = { cx: number; cy: number; d: number };
 
 const NOISE = `
 vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
@@ -99,7 +106,7 @@ void main(){
 
 const FRAG = `
 uniform sampler2D uTexA; uniform sampler2D uTexB; uniform float uMix; uniform float uTime; uniform vec3 uTint;
-uniform vec2 uAspectA; uniform vec2 uAspectB;
+uniform vec2 uAspectA; uniform vec2 uAspectB; uniform float uHover;
 varying vec3 vNormal; varying vec3 vView;
 float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
 float vnoise(vec2 p){ vec2 i=floor(p); vec2 f=fract(p); vec2 u=f*f*(3.0-2.0*f);
@@ -130,6 +137,7 @@ void main(){
   col = pow(col, vec3(1.06));
   vec3 irid = mix(uTint, pal(fres*0.85 + N.y*0.18 + uTime*0.035), 0.3);
   col = mix(col, irid, fres*0.72);
+  col = mix(col, uTint * (0.85 + 0.3*fres), uHover * 0.8);
   float spec = pow(max(dot(R, L1), 0.0), 90.0) * 1.35 + pow(max(dot(R, L1), 0.0), 12.0) * 0.12;
   float spec2 = pow(max(dot(R, L2), 0.0), 34.0) * 0.4;
   col += spec + spec2 * irid;
@@ -147,15 +155,17 @@ function detectQuality() {
   return low ? { detail: 24, dpr: 1.5 } : { detail: 40, dpr: 2 };
 }
 
-export default function LiquidLens({ projects, stageId, reelId, posterId, dwell = 5.5 }: Props) {
+const smooth = (t: number) => (t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t));
+const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
+
+export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const stage = document.getElementById(stageId);
     const reel = document.getElementById(reelId);
     const poster = document.getElementById(posterId);
-    if (!canvas || !stage || projects.length === 0) return;
+    if (!canvas || !poster || projects.length === 0) return;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     // In development, `?lens-poster` keeps the drawing buffer so a script can
@@ -193,6 +203,7 @@ export default function LiquidLens({ projects, stageId, reelId, posterId, dwell 
       uMouse: { value: new Vector3() },
       uPulse: { value: 0 },
       uMix: { value: 0 },
+      uHover: { value: 0 },
       uTexA: { value: blank as Texture },
       uTexB: { value: blank as Texture },
       uAspectA: { value: new Vector2(1, 1) },
@@ -231,50 +242,120 @@ export default function LiquidLens({ projects, stageId, reelId, posterId, dwell 
       });
     });
 
-    let width = 1;
-    let height = 1;
-    const base = new Vector3();
+    // The canvas covers the viewport; the lens is placed in it in CSS pixels.
+    let W = 1;
+    let H = 1;
+    let visW = 1;
+    let visH = 1;
+    const travelQuery = matchMedia('(min-width: 861px)');
+    let travel = travelQuery.matches;
     const resize = () => {
-      width = stage.clientWidth || 1;
-      height = stage.clientHeight || 1;
-      renderer.setSize(width, height, false);
-      camera.aspect = width / height;
+      W = window.innerWidth || 1;
+      H = window.innerHeight || 1;
+      renderer.setSize(W, H, false);
+      canvas.style.width = `${W}px`;
+      canvas.style.height = `${H}px`;
+      camera.aspect = W / H;
       camera.updateProjectionMatrix();
-      const wide = width > 860;
-      const visH = 2 * Math.tan(MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
-      const visW = visH * camera.aspect;
-      // Keep in step with the poster's CSS: diameter = min(58cqh, 38cqw) at (76cqw, 44cqh) wide, min(56cqw, 30cqh) at (50cqw, 36cqh) narrow.
-      const s = wide ? Math.min(visH * 0.29, visW * 0.19) : Math.min(visW * 0.28, visH * 0.15);
-      mesh.scale.setScalar(s);
-      base.set(wide ? visW * 0.26 : 0, wide ? visH * 0.06 : visH * 0.14, 0);
-      mesh.position.copy(base);
+      visH = 2 * Math.tan(MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
+      visW = visH * camera.aspect;
+      travel = travelQuery.matches;
+      document.documentElement.classList.toggle('lens-travel', travel);
     };
     resize();
-    const observer = new ResizeObserver(resize);
-    observer.observe(stage);
+    window.addEventListener('resize', resize);
+
+    // Anchors in document order: the poster (hero) first, the orb last.
+    const anchors = Array.from(document.querySelectorAll<HTMLElement>('[data-lens-anchor]'));
+    const orb = anchors.find((el) => el.dataset.lensAnchor === 'close') ?? null;
+    const rectOf = (el: HTMLElement): Target | null => {
+      const r = el.getBoundingClientRect();
+      if (r.width < 8 || r.height < 8) return null;
+      const d = el === poster ? r.width / 1.3 : Math.min(r.width, r.height);
+      return { cx: r.left + r.width / 2, cy: r.top + r.height / 2, d };
+    };
+
+    // Work-row hover: the lens follows the cursor and shows that project.
+    let hovered: number | null = null;
+    const pointer = { x: W / 2, y: H / 2 };
+    const hoverRows = Array.from(document.querySelectorAll<HTMLElement>('[data-lens-hover]'));
+    const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (fine) {
+      hoverRows.forEach((row) => {
+        const index = Number(row.dataset.lensHover);
+        row.addEventListener('pointerenter', () => {
+          if (!travel || Number.isNaN(index)) return;
+          hovered = index;
+          canvas.classList.add('is-front');
+        });
+        row.addEventListener('pointerleave', () => {
+          hovered = null;
+          canvas.classList.remove('is-front');
+        });
+      });
+    }
+    let orbHover = false;
+    const orbOn = () => {
+      orbHover = true;
+    };
+    const orbOff = () => {
+      orbHover = false;
+    };
+    orb?.addEventListener('pointerenter', orbOn);
+    orb?.addEventListener('pointerleave', orbOff);
+    orb?.addEventListener('focus', orbOn);
+    orb?.addEventListener('blur', orbOff);
+
+    // Where the lens should be right now, in CSS pixels.
+    const lens = { cx: 0, cy: 0, d: 1, set: false };
+    const computeTarget = (): Target | null => {
+      if (hovered !== null && travel) {
+        return { cx: pointer.x, cy: pointer.y, d: Math.min(300, W * 0.22) };
+      }
+      const hero = rectOf(poster);
+      if (!travel) return hero;
+      const points: Array<Target & { doc: number }> = [];
+      for (const el of anchors) {
+        const r = rectOf(el);
+        if (r) points.push({ ...r, doc: r.cy + window.scrollY });
+      }
+      if (!points.length) return hero;
+      const ref = window.scrollY + H * 0.4;
+      if (ref <= points[0].doc) return points[0];
+      for (let i = 0; i < points.length - 1; i++) {
+        const a = points[i];
+        const b = points[i + 1];
+        if (ref >= a.doc && ref <= b.doc) {
+          const t = smooth((ref - a.doc) / Math.max(b.doc - a.doc, 1));
+          return { cx: lerp(a.cx, b.cx, t), cy: lerp(a.cy, b.cy, t), d: lerp(a.d, b.d, t) };
+        }
+      }
+      return points[points.length - 1];
+    };
 
     const mouse = { x: 0, y: 0, tx: 0, ty: 0, near: 0, tnear: 0 };
-    const projected = new Vector3();
     const onMove = (event: PointerEvent) => {
-      const r = stage.getBoundingClientRect();
-      mouse.tx = ((event.clientX - r.left) / r.width) * 2 - 1;
-      mouse.ty = -(((event.clientY - r.top) / r.height) * 2 - 1);
-      projected.set(mesh.position.x, mesh.position.y, 0).project(camera);
-      const dx = mouse.tx - projected.x;
-      const dy = mouse.ty - projected.y;
-      mouse.tnear = Math.max(0, 1 - Math.hypot(dx * camera.aspect, dy) / 1.1);
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      const r = Math.max(lens.d / 2, 1);
+      const nx = (event.clientX - lens.cx) / r;
+      const ny = -(event.clientY - lens.cy) / r;
+      mouse.tx = Math.max(-1, Math.min(1, nx * 0.5));
+      mouse.ty = Math.max(-1, Math.min(1, ny * 0.5));
+      mouse.tnear = Math.max(0, 1 - Math.hypot(nx, ny) / 2.2);
     };
     const onLeave = () => {
       mouse.tx = 0;
       mouse.ty = 0;
       mouse.tnear = 0;
     };
-    const onDown = () => {
-      uniforms.uPulse.value = 1;
+    const onDown = (event: PointerEvent) => {
+      const r = Math.max(lens.d / 2, 1);
+      if (Math.hypot(event.clientX - lens.cx, event.clientY - lens.cy) < r * 1.6) uniforms.uPulse.value = 1;
     };
-    stage.addEventListener('pointermove', onMove, { passive: true });
-    stage.addEventListener('pointerleave', onLeave);
-    stage.addEventListener('pointerdown', onDown, { passive: true });
+    window.addEventListener('pointermove', onMove, { passive: true });
+    document.addEventListener('pointerleave', onLeave);
+    window.addEventListener('pointerdown', onDown, { passive: true });
 
     // Reel caption and progress bars, driven from the shader timeline.
     const bars = reel ? Array.from(reel.querySelectorAll<HTMLElement>('[data-reel-bars] i')) : [];
@@ -303,13 +384,8 @@ export default function LiquidLens({ projects, stageId, reelId, posterId, dwell 
     let next = projects.length > 1 ? 1 : 0;
     let phase: 'hold' | 'blend' = 'hold';
     let phaseT = 0;
-    const TRANSITION = 1.8;
+    let transition = 1.8;
 
-    let visible = true;
-    const io = new IntersectionObserver((entries) => {
-      visible = entries[0]?.isIntersecting ?? true;
-    });
-    io.observe(stage);
     const onVisibility = () => {
       if (!document.hidden) clock.getDelta();
     };
@@ -323,12 +399,33 @@ export default function LiquidLens({ projects, stageId, reelId, posterId, dwell 
     const clock = new Clock();
     let t = 0;
     let raf = 0;
+    let shown = 1;
     const q = new Quaternion();
     const dir = new Vector3();
     const frame = () => {
       raf = requestAnimationFrame(frame);
       const dt = Math.min(clock.getDelta(), 0.05);
-      if (!visible || document.hidden) return;
+      if (document.hidden) return;
+
+      const target = computeTarget();
+      if (!target) return;
+      // Narrow screens keep the lens in the hero and fade it out as it scrolls away.
+      const wantShown = travel || target.cy + target.d / 2 > -40 ? 1 : 0;
+      shown += (wantShown - shown) * 0.1;
+      if (ready) canvas.style.opacity = String(Math.min(1, shown));
+      if (shown < 0.02) return;
+
+      if (!lens.set) {
+        Object.assign(lens, target, { set: true });
+      } else {
+        const k = hovered !== null ? 0.18 : 0.12;
+        lens.cx = lerp(lens.cx, target.cx, k);
+        lens.cy = lerp(lens.cy, target.cy, k);
+        lens.d = lerp(lens.d, target.d, k);
+      }
+      const radius = (lens.d / 2 / H) * visH;
+      mesh.scale.setScalar(radius);
+
       t += dt;
       mouse.x += (mouse.tx - mouse.x) * 0.06;
       mouse.y += (mouse.ty - mouse.y) * 0.06;
@@ -336,24 +433,38 @@ export default function LiquidLens({ projects, stageId, reelId, posterId, dwell 
       uniforms.uTime.value = t;
       uniforms.uAmp.value = 0.11 + mouse.near * 0.07 + uniforms.uPulse.value * 0.05;
       uniforms.uPulse.value *= 0.965;
+      uniforms.uHover.value += ((orbHover ? 1 : 0) - uniforms.uHover.value) * 0.08;
       mesh.rotation.y = t * 0.08 + mouse.x * 0.5;
       mesh.rotation.x = -mouse.y * 0.35 + Math.sin(t * 0.3) * 0.05;
-      const scrollK = Math.min(window.scrollY / Math.max(height, 1), 1);
-      mesh.position.set(base.x + mouse.x * 0.12, base.y + mouse.y * 0.08 + scrollK * 0.6, 0);
+      const wx = (lens.cx / W - 0.5) * visW + mouse.x * radius * 0.1;
+      const wy = (0.5 - lens.cy / H) * visH + mouse.y * radius * 0.08;
+      mesh.position.set(wx, wy, 0);
       dir.set(mouse.x, mouse.y, 0.9).normalize().multiplyScalar(mouse.near);
       q.copy(mesh.quaternion).invert();
       uniforms.uMouse.value.copy(dir.applyQuaternion(q));
 
+      // Timeline: hold, then dissolve to the next site. A hovered work row
+      // interrupts with a quick dissolve to that project and pauses the cycle.
       phaseT += dt;
-      if (phase === 'hold' && phaseT > dwell - TRANSITION && textures[next] && next !== current) {
+      const forced = hovered !== null && hovered !== current && Boolean(textures[hovered]);
+      if (phase === 'hold' && forced) {
         phase = 'blend';
         phaseT = 0;
+        transition = 0.7;
+        next = hovered as number;
+        uniforms.uTexB.value = textures[next];
+        uniforms.uAspectB.value = aspects[next];
+        setReel(next);
+      } else if (phase === 'hold' && hovered === null && phaseT > dwell - 1.8 && textures[next] && next !== current) {
+        phase = 'blend';
+        phaseT = 0;
+        transition = 1.8;
         uniforms.uTexB.value = textures[next];
         uniforms.uAspectB.value = aspects[next];
         setReel(next);
       }
       if (phase === 'blend') {
-        const k = Math.min(phaseT / TRANSITION, 1);
+        const k = Math.min(phaseT / transition, 1);
         uniforms.uMix.value = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
         if (k >= 1) {
           current = next;
@@ -370,8 +481,17 @@ export default function LiquidLens({ projects, stageId, reelId, posterId, dwell 
       if (!ready && textures[current]) {
         ready = true;
         canvas.classList.add('is-ready');
-        poster?.setAttribute('data-hidden', '');
+        poster.setAttribute('data-hidden', '');
         setReel(current);
+      }
+      // The closing orb hands over to the lens once it is docked there.
+      if (orb && travel && ready) {
+        const at = rectOf(orb);
+        const docked =
+          hovered === null && at !== null && Math.abs(lens.cx - at.cx) < 6 && Math.abs(lens.cy - at.cy) < 6 && Math.abs(lens.d - at.d) < 6;
+        orb.classList.toggle('is-lens', docked);
+      } else {
+        orb?.classList.remove('is-lens');
       }
 
       if (!sampled && ready) {
@@ -393,18 +513,19 @@ export default function LiquidLens({ projects, stageId, reelId, posterId, dwell 
 
     return () => {
       cancelAnimationFrame(raf);
-      observer.disconnect();
-      io.disconnect();
+      window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', onVisibility);
-      stage.removeEventListener('pointermove', onMove);
-      stage.removeEventListener('pointerleave', onLeave);
-      stage.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerleave', onLeave);
+      window.removeEventListener('pointerdown', onDown);
+      document.documentElement.classList.remove('lens-travel');
+      orb?.classList.remove('is-lens');
       textures.forEach((texture) => texture.dispose());
       geometry.dispose();
       material.dispose();
       renderer.dispose();
     };
-  }, [projects, stageId, reelId, posterId, dwell]);
+  }, [projects, reelId, posterId, dwell]);
 
   return <canvas ref={canvasRef} className="lens-canvas" aria-hidden="true" />;
 }

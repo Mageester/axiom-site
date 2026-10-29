@@ -42,7 +42,7 @@ Use this flow when verifying `/api/intake` on a fresh machine.
 2. Set values in `.dev.vars`:
    - always required for intake verification: `RESEND_API_KEY`
    - required for recipient routing:
-     - `INTAKE_EMAIL` (defaults already include `aidan@getaxiom.ca,riley@getaxiom.ca`)
+     - `INTAKE_EMAIL` (defaults already include `contact@axiominternational.ca`)
      - `INTAKE_FROM_EMAIL`
      - `INTAKE_CONFIRMATION_FROM_EMAIL`
    - optional:
@@ -86,8 +86,7 @@ Override expectation when secrets are configured:
 After `--expect success`:
 1. Submit via `/apply` in browser.
 2. Confirm internal notification delivered to:
-   - `aidan@getaxiom.ca`
-   - `riley@getaxiom.ca`
+   - `contact@axiominternational.ca`
 3. Confirm confirmation email delivered to submitter email.
 4. Confirm response body includes:
    - `{ "ok": true, "message": "Transmission received. Confirmation email sent." }`

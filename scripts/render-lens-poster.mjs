@@ -1,5 +1,5 @@
 // Renders the home page's liquid lens in headless Chromium and saves it as the
-// static poster (public/images/lens-poster-{450,600,900}.{webp,avif}). The poster is
+// static poster (public/images/lens-poster-{450,720,900}.{webp,avif}). The poster is
 // the LCP image and the fallback for no-WebGL and reduced motion.
 // Usage: node scripts/render-lens-poster.mjs [devServerUrl]
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -15,20 +15,16 @@ await page.waitForTimeout(1800);
 
 const { dataUrl, crop } = await page.evaluate(() => {
   const canvas = document.querySelector('.lens-canvas');
-  const stage = document.getElementById('hero-stage');
-  const w = stage.clientWidth;
-  const h = stage.clientHeight;
-  const scale = canvas.width / w;
-  const diameter = Math.min(h * 0.58, w * 0.38) * 1.3;
-  const cx = w * 0.76;
-  const cy = h * 0.44;
+  const scale = canvas.width / window.innerWidth;
+  // The poster box is the lens anchor in the hero: its rect is exactly the poster crop.
+  const r = document.getElementById('lens-poster').getBoundingClientRect();
   return {
     dataUrl: canvas.toDataURL('image/png'),
     crop: {
-      left: Math.round((cx - diameter / 2) * scale),
-      top: Math.round((cy - diameter / 2) * scale),
-      width: Math.round(diameter * scale),
-      height: Math.round(diameter * scale),
+      left: Math.round(r.left * scale),
+      top: Math.round(r.top * scale),
+      width: Math.round(r.width * scale),
+      height: Math.round(r.width * scale),
     },
   };
 });
@@ -36,9 +32,9 @@ await browser.close();
 
 const png = Buffer.from(dataUrl.split(',')[1], 'base64');
 mkdirSync('public/images', { recursive: true });
-for (const size of [450, 600, 900]) {
+for (const size of [450, 720, 900]) {
   const image = sharp(png).extract(crop).resize(size, size);
-  writeFileSync(`public/images/lens-poster-${size}.webp`, await image.clone().webp({ quality: 82, alphaQuality: 90 }).toBuffer());
-  writeFileSync(`public/images/lens-poster-${size}.avif`, await image.clone().avif({ quality: 60 }).toBuffer());
+  writeFileSync(`public/images/lens-poster-${size}.webp`, await image.clone().webp({ quality: 74, alphaQuality: 85 }).toBuffer());
+  writeFileSync(`public/images/lens-poster-${size}.avif`, await image.clone().avif({ quality: 52 }).toBuffer());
   console.log(`wrote lens-poster-${size}`);
 }

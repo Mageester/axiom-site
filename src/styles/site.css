@@ -179,6 +179,13 @@
   color-scheme: dark;
 }
 
+/* Page text sits above the travelling lens canvas (z-index 1). */
+main .container,
+main .container-narrow {
+  position: relative;
+  z-index: 2;
+}
+
 /* ── Reset & base ─────────────────────────────────────────── */
 *,
 *::before,
@@ -1249,6 +1256,11 @@ html.has-cursor :is(input, textarea, select) {
   }
 }
 
+/* When the lens itself follows the cursor through the work list, the image preview stands down. */
+html.lens-travel .preview {
+  display: none;
+}
+
 /* ── Entrance reveals ─────────────────────────────────────── */
 /* Each element plays a short entrance once, on a timer, when it first comes
    into view (see the inline script in BaseLayout). Rows stagger evenly. The
@@ -1326,25 +1338,29 @@ html.has-cursor :is(input, textarea, select) {
     navigation: auto;
   }
 
+  /* The new page rises as a liquid wipe from the bottom edge. */
   ::view-transition-old(root) {
-    animation: 260ms var(--ease) both vt-out;
+    animation: 500ms var(--ease) both vt-out;
   }
 
   ::view-transition-new(root) {
-    animation: 520ms var(--ease-out) both vt-in;
+    animation: 720ms cubic-bezier(0.7, 0, 0.2, 1) both vt-wipe;
   }
 }
 
 @keyframes vt-out {
   to {
-    opacity: 0;
+    opacity: 0.6;
+    transform: scale(0.985);
   }
 }
 
-@keyframes vt-in {
+@keyframes vt-wipe {
   from {
-    opacity: 0;
-    transform: translateY(12px);
+    clip-path: ellipse(70% 0% at 50% 102%);
+  }
+  to {
+    clip-path: ellipse(160% 130% at 50% 102%);
   }
 }
 

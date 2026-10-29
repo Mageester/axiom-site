@@ -102,7 +102,7 @@ for (const [route, { $ }] of documents) {
   if (ofType('ProfessionalService').length) fail(route, 'deprecated ProfessionalService type');
   for (const business of businesses) {
     if (business['@id'] !== origin + '/#organization' || business.url !== origin + '/' ||
-      business.name !== 'Axiom Web' || business.telephone !== '+12267531833' || business.email !== 'aidanmageebusiness@gmail.com' ||
+      business.name !== 'Axiom Web' || business.telephone !== '+12267531833' || business.email !== 'contact@axiominternational.ca' ||
       business.address?.addressLocality !== 'Kitchener' || business.address?.addressRegion !== 'ON' || business.address?.addressCountry !== 'CA' ||
       business.contactPoint?.telephone !== business.telephone || business.contactPoint?.email !== business.email) fail(route, 'inconsistent LocalBusiness NAP');
     if (business.founder?.map(f => f.name).sort().join('|') !== 'Aidan Magee|Riley Hinsperger' ||
@@ -110,11 +110,11 @@ for (const [route, { $ }] of documents) {
     for (const field of ['logo', 'image']) if (!business[field]?.startsWith(origin + '/') || !existsSync(localFile(business[field]))) fail(route, `missing business ${field}`);
   }
   $('a[href^="tel:"]').each((_, el) => { if ($(el).attr('href').replace(/[^\d+]/g, '') !== '+12267531833') fail(route, 'visible telephone differs from business identity'); });
-  $('a[href^="mailto:"]').each((_, el) => { if ($(el).attr('href').slice(7).split('?')[0] !== 'aidanmageebusiness@gmail.com') fail(route, 'visible email differs from business identity'); });
+  $('a[href^="mailto:"]').each((_, el) => { if ($(el).attr('href').slice(7).split('?')[0] !== 'contact@axiominternational.ca') fail(route, 'visible email differs from business identity'); });
   if (route !== '/' && !ofType('BreadcrumbList').length) fail(route, 'missing breadcrumb schema');
   for (const s of schemas) {
     if ([s['@type']].flat().some(type => ['AggregateRating','Review'].includes(type))) fail(route, 'unsupported review/rating schema');
-    if (s['@id'] === origin + '/#organization' && s.name && (s.name !== 'Axiom Web' || s.telephone !== '+12267531833' || s.email !== 'aidanmageebusiness@gmail.com')) fail(route, 'inconsistent business identity');
+    if (s['@id'] === origin + '/#organization' && s.name && (s.name !== 'Axiom Web' || s.telephone !== '+12267531833' || s.email !== 'contact@axiominternational.ca')) fail(route, 'inconsistent business identity');
   }
   const visible = normalize($('main').text());
   for (const faq of ofType('FAQPage')) for (const q of faq.mainEntity || []) {

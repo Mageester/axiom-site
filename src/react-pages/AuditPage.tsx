@@ -122,10 +122,10 @@ const AuditPage: React.FC = () => {
             }
 
             setStatus('error');
-            setMsg(result?.error || 'Submission failed. Please reach out to aidanmageebusiness@gmail.com directly.');
+            setMsg(result?.error || 'Submission failed. Please reach out to contact@axiominternational.ca directly.');
         } catch {
             setStatus('error');
-            setMsg('Submission failed. Please reach out to aidanmageebusiness@gmail.com directly.');
+            setMsg('Submission failed. Please reach out to contact@axiominternational.ca directly.');
         } finally {
             if (timeoutId !== null) window.clearTimeout(timeoutId);
         }

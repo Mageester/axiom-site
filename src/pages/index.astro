@@ -28,8 +28,8 @@ const rowSizes = '(min-width: 900px) 0px, 92vw';
 const poster = {
   type: 'image/webp',
   href: '/images/lens-poster-900.webp',
-  srcset: '/images/lens-poster-450.webp 450w, /images/lens-poster-600.webp 600w, /images/lens-poster-900.webp 900w',
-  sizes: '(min-width: 861px) min(75vh, 50vw), 90vw',
+  srcset: '/images/lens-poster-450.webp 450w, /images/lens-poster-720.webp 720w, /images/lens-poster-900.webp 900w',
+  sizes: '(min-width: 861px) min(75vh, 50vw), 73vw',
 };
 ---
 
@@ -41,10 +41,13 @@ const poster = {
   heroTheme="dark"
 >
   <main id="main-content" tabindex="-1">
+    <!-- One persistent lens canvas travels with the scroll (see LiquidLens.tsx). -->
+    <LiquidLens client:idle projects={lensProjects} reelId="hero-reel" posterId="lens-poster" />
+
     <!-- Stage: the liquid lens hero -->
     <section class="stage hero-stage" id="hero-stage" data-stage>
-      <picture class="lens-poster" id="lens-poster" aria-hidden="true">
-        <source type="image/avif" srcset="/images/lens-poster-450.avif 450w, /images/lens-poster-600.avif 600w, /images/lens-poster-900.avif 900w" sizes={poster.sizes} />
+      <picture class="lens-poster" id="lens-poster" aria-hidden="true" data-lens-anchor="hero">
+        <source type="image/avif" srcset="/images/lens-poster-450.avif 450w, /images/lens-poster-720.avif 720w, /images/lens-poster-900.avif 900w" sizes={poster.sizes} />
         <img
           src={poster.href}
           srcset={poster.srcset}
@@ -56,13 +59,6 @@ const poster = {
           fetchpriority="high"
         />
       </picture>
-      <LiquidLens
-        client:idle
-        projects={lensProjects}
-        stageId="hero-stage"
-        reelId="hero-reel"
-        posterId="lens-poster"
-      />
 
       <div class="container hero-inner">
         <h1 class="hero-title">
@@ -98,7 +94,8 @@ const poster = {
 
     <!-- Statement -->
     <section class="section statement-section" aria-labelledby="statement-label">
-      <div class="container">
+      <div class="container statement-wrap">
+        <div class="lens-anchor statement-anchor" data-lens-anchor="statement" aria-hidden="true"></div>
         <p id="statement-label" class="eyebrow">The studio</p>
         <p class="statement" data-reveal>
           We design
@@ -115,11 +112,14 @@ const poster = {
       <div class="container">
         <div class="work-head">
           <h2 id="work-title">Selected <em>work</em></h2>
-          <p class="mono">1 client site · 3 concepts</p>
+          <div class="work-head-side">
+            <div class="lens-anchor work-anchor" data-lens-anchor="work" aria-hidden="true"></div>
+            <p class="mono">1 client site · 3 concepts</p>
+          </div>
         </div>
         <ul role="list" class="rows">
           {reel.map((project, index) => (
-            <li class="row" data-cursor="View" data-preview={previewFor(project)}>
+            <li class="row" data-cursor="View" data-preview={previewFor(project)} data-lens-hover={index}>
               <a class="row-in" href={project.href} target="_blank" rel="noopener">
                 <span class="row-main">
                   <span class="row-name">{project.title}</span>
@@ -182,6 +182,7 @@ const poster = {
           <div class="offer-actions">
             <a class="btn btn-secondary" href="/agencies/" data-magnetic>Send a first job <Icon name="arrow-right" /></a>
           </div>
+          <div class="lens-anchor offers-anchor" data-lens-anchor="offers" aria-hidden="true"></div>
         </div>
       </div>
     </section>
@@ -194,6 +195,7 @@ const poster = {
           <h2 id="process-title">First call to launch in <em>four</em> steps</h2>
           <p>Scope and price are agreed in writing before design starts, so there are no surprises later.</p>
           <a href="/approach/" class="arrow-link">See the full process <Icon name="arrow-right" /></a>
+          <div class="lens-anchor head-anchor" data-lens-anchor="section" aria-hidden="true"></div>
         </div>
         <ol role="list" class="steps reveal-stagger">
           {processSteps.map((step) => (
@@ -221,6 +223,7 @@ const poster = {
             You work directly with the people who plan, design and build your website.
           </p>
           <a href="/about/" class="arrow-link">About the studio <Icon name="arrow-right" /></a>
+          <div class="lens-anchor head-anchor" data-lens-anchor="section" aria-hidden="true"></div>
         </div>
         <ul role="list" class="founders reveal-stagger">
           {founders.map((founder) => (
@@ -242,6 +245,7 @@ const poster = {
           <h2 id="faq-title">Straight <em>answers</em></h2>
           <p>About cost, timing and what working with us looks like.</p>
           <a href="/contact/" class="arrow-link">Ask something else <Icon name="arrow-right" /></a>
+          <div class="lens-anchor head-anchor" data-lens-anchor="section" aria-hidden="true"></div>
         </div>
         <FaqList items={homeFaq} openFirst />
       </div>
@@ -260,7 +264,6 @@ const poster = {
     height: clamp(640px, 92svh, 920px);
     padding-top: var(--header-h);
     overflow: hidden;
-    isolation: isolate;
     container-type: size;
   }
 
@@ -272,27 +275,79 @@ const poster = {
     background: radial-gradient(50% 60% at 70% 48%, var(--night-2) 0%, rgb(7 7 10 / 0) 70%);
   }
 
-  .hero-stage :global(.lens-canvas) {
-    position: absolute;
-    inset: 0;
+  /* The lens canvas is fixed over the whole page, above section backgrounds
+     and below the text (every .container sits at z-index 2). While a work
+     row is hovered it rises above the list like a floating preview. */
+  main :global(.lens-canvas) {
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 1;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
     opacity: 0;
     filter: blur(28px);
   }
 
-  .hero-stage :global(.lens-canvas.is-ready) {
-    opacity: 1;
+  main :global(.lens-canvas.is-ready) {
     filter: blur(0);
     transition: opacity 1600ms var(--ease), filter 2000ms var(--ease);
+  }
+
+  main :global(.lens-canvas.is-front) {
+    z-index: 3;
+  }
+
+  .hero-stage .container,
+  .lens-poster {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Invisible boxes the travelling lens docks to. */
+  .lens-anchor {
+    display: none;
+    pointer-events: none;
+  }
+
+  @media (min-width: 861px) {
+    .lens-anchor {
+      display: block;
+    }
+    .statement-wrap {
+      position: relative;
+    }
+    .statement-anchor {
+      position: absolute;
+      top: 50%;
+      right: var(--gutter);
+      width: clamp(150px, 15vw, 220px);
+      aspect-ratio: 1;
+      transform: translateY(-50%);
+    }
+    .work-anchor {
+      width: clamp(120px, 11vw, 170px);
+      aspect-ratio: 1;
+      margin-left: auto;
+    }
+    .offers-anchor {
+      width: clamp(130px, 12vw, 190px);
+      aspect-ratio: 1;
+      margin-top: 1rem;
+    }
+    .head-anchor {
+      width: clamp(120px, 11vw, 170px);
+      aspect-ratio: 1;
+      margin-top: 2rem;
+    }
   }
 
   /* The poster paints first and is the LCP image; it sits exactly where the
      lens renders (diameter × 1.3 for the displacement margin) and fades once
      WebGL is ready. It stays for no-WebGL and reduced motion. */
   .lens-poster {
-    position: absolute;
+    position: absolute !important;
     left: 76cqw;
     top: 44cqh;
     z-index: 1;
@@ -461,7 +516,7 @@ const poster = {
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-stage :global(.lens-canvas) {
+    main :global(.lens-canvas) {
       display: none;
     }
   }
@@ -483,6 +538,12 @@ const poster = {
     gap: 1rem;
     flex-wrap: wrap;
     margin-bottom: 1.75rem;
+  }
+
+  .work-head-side {
+    display: grid;
+    justify-items: end;
+    gap: 1.25rem;
   }
 
   .work-head h2 {

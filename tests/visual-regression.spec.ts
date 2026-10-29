@@ -15,6 +15,11 @@ const PUBLIC_PAGES = [
 
 for (const { name, path } of PUBLIC_PAGES) {
   test.describe(`${name} page`, () => {
+    // Snapshots capture the static design: with reduced motion the liquid lens
+    // stays on its rendered poster and the custom cursor is off, so the
+    // WebGL animation cannot make a pixel comparison flake.
+    test.use({ reducedMotion: 'reduce' });
+
     test(`renders above the fold`, async ({ page }) => {
       await page.goto(path, { waitUntil: 'networkidle' });
       await expect(page).toHaveScreenshot(`${name}-above-fold.png`, { fullPage: false });
