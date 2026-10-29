@@ -1,70 +1,73 @@
 # getaxiom.ca liquid redesign — hand-over report
 
-Branch: `redesign/liquid` on `Mageester/axiom-site` (pushed, 3 commits on top of `main` 9e469ba). Nothing merged, nothing deployed to production.
+Branch: `redesign/liquid` on `Mageester/axiom-site`, PR #15 against `main` (ready for review). Nothing merged, nothing deployed to production.
 
 ## Preview
 
 - **Branch preview (Cloudflare Pages, Preview environment):** https://redesign-liquid.axiom-site-f3f.pages.dev
-  (deployment https://15b40d6f.axiom-site-f3f.pages.dev; direct upload with `--branch redesign/liquid`; production branch `main` untouched).
+  (direct upload with `--branch redesign/liquid`; production branch `main` is untouched; `pages.dev` hosts send `X-Robots-Tag: noindex` by design).
 - Local: `git checkout redesign/liquid && npm install && npm run dev` (or `npm run build && npx astro preview`).
+
+## What was built
+
+- **Design system** (`src/styles/site.css`): the prototype's tokens (night/paper/ink/mute/snow/accent, hairlines at 12%/14%), Instrument Sans 400–700 and Instrument Serif italic self-hosted via @fontsource (latin only, display weight preloaded, no Google Fonts request), small sentence-case labels in Instrument Sans (the tracked uppercase monospace labels were dropped at Aidan's request), pill buttons with the accent fill spreading from the pointer's entry point, hairline rows, fact rows, the statement with inline image chips, cursor and preview styles. Legacy variable names are remapped so every page's scoped CSS renders on the new system.
+- **Header**: fixed and transparent, "axiom web" wordmark, swaps light/dark as a dark stage passes beneath it; full-screen night menu on phones.
+- **Footer** and **closing stage** (`CtaBand.astro`): "Let's make *yours*." with the magnetic orb, the email as selectable text with a Copy button, phone and 257 Kipling Ave.
+- **Liquid lens** (`src/components/liquid/LiquidLens.tsx`, React island on `client:idle`, pinned `three@0.186.1`): everything from the prototype (icosahedron + simplex displacement with reconstructed normals, sites mapped with a chromatic offset, 5.5 s noise dissolve, fresnel iridescence tinted by the accent, two speculars, cursor bulge, click/tap ripple, pause when hidden, DPR ≤ 2) plus:
+  - adaptive quality: cores / memory / coarse pointer / save-data choose a lighter mesh and DPR 1.5; a 2.5 s FPS sample drops to the light mesh and DPR 1 under 45 fps and hands back to the poster under 20 fps; software WebGL (SwiftShader, llvmpipe, GPU-less lab runners) keeps the poster;
+  - sRGB textures with true per-image cover mapping;
+  - a blur-in intro, a rendered poster (`scripts/render-lens-poster.mjs`, 450/720/900 AVIF+WebP) that is the LCP image and the no-WebGL / reduced-motion fallback;
+  - a reel caption and progress bars synced to the shader timeline inside an `aria-live="polite"` region;
+  - **one persistent canvas that travels with the scroll** (wide screens): large in the hero, beside the statement, into the work list where it follows the cursor and shows the hovered project, through the section heads, and docked as the closing orb (tinting with the accent on hover/focus). On phones the lens stays in the hero and fades as it scrolls away.
+- **Liquid page wipe**: cross-document view transitions reveal each new page with an elliptical clip-path wipe from the bottom edge (Chrome/Safari; Firefox falls back to a plain navigation).
+- **Home page**: kicker + "Websites that feel *alive*." (H1 keeps "Web design studio in Kitchener-Waterloo, Ontario"), statement with chips, selected work rows, two offer columns on fact rows (every fact from the brief), process rows, founders ("Two founders. No account managers."), FAQ (schema unchanged), closing stage. The hero film and its video files are removed; the studio film and `VideoObject` stay on /about/.
+- **Every other public page** restyled via the shared primitives and rebuilt PageHero (last word of each H1 in serif italic, text unchanged), Breadcrumbs, WorkCard, PricingCards (the recommended package is the one filled dark card), FaqList, FounderCards, BrowserFrame, 404.
+- **Interactions** (`src/lib/interactions.ts`): fine-pointer-only cursor (difference-blend dot, grows over links, labelled "View" bubble over work items, native cursor over inputs), magnetic buttons, cursor-following preview with velocity tilt on pages without the travelling lens, copy buttons. Off for touch and reduced motion; focus outlines never hidden.
+- **Contact email**: every reference is now `contact@axiominternational.ca` — site copy, mailto links, LocalBusiness / ContactPoint schema, `scripts/audit-seo.mjs`, the intake function's recipients, reply-to and error copy, `.env.example`, `security.txt`, TESTING.md.
+- **Intake API**: also accepts Cloudflare Pages branch-preview origins (`https://<branch>.axiom-site-f3f.pages.dev`), so the form works on previews.
+
+## SEO
+
+- Titles, meta descriptions, canonicals, OG/Twitter tags, JSON-LD (Organization/LocalBusiness, WebSite, WebPage, BreadcrumbList, FAQPage, Service, ItemList, Person, VideoObject), heading order, trailing slashes, redirects, `_headers`, `_routes.json`, sitemap and llms.txt are unchanged; `streetAddress: 257 Kipling Ave` was added to the LocalBusiness address.
+- `npm run build` runs `scripts/audit-seo.mjs`: passes (26 indexable pages, 4 noindex; sitemap, links, metadata, assets and structured data verified).
+- **Google Rich Results Test** (run in Chrome against the preview): LocalBusiness, Organization and BreadcrumbList all valid on / and /pricing/. The only note is the optional `postalCode` field, left out because the postal code for 257 Kipling Ave was not supplied (crowdsourced data suggests N2C 2C2 for that stretch of Kipling Ave but it is not verified — add it to `ORGANIZATION_SCHEMA.address` once confirmed). "URL is not available to Google" appears only because the preview host is `noindex`.
+- **PageSpeed Insights** (Google's own lab, mobile, run in Chrome on the preview): Performance **99**, Accessibility **100**, Best Practices **96**, SEO 69 — the SEO deduction is solely "page is blocked from indexing" from the preview host's `X-Robots-Tag: noindex`; on getaxiom.ca that header is not sent. The Best Practices deduction is a console error from Cloudflare's own Web Analytics beacon being CORS-blocked on the `pages.dev` host; it does not occur on the production domain.
+- **Lighthouse 13.6 locally** (mobile, built site): Home 97–98 / 100 / 100 / 100 (LCP 2.1–2.3 s simulated), Agencies 100 / 100 / 100 / 100, Work 98 / 100 / 100 / 100, Pricing, About, Contact, Start a project 100 across the board.
+
+## Tests
+
+- `npm run build` (with the SEO audit): passes.
+- `npm run test:intake` (build + wrangler pages dev + `intake:smoke`): passes.
+- `node --test tests/site-consistency.test.mjs tests/pricing-comparison.test.mjs tests/dom-ready.test.mjs tests/seo-middleware.test.mjs tests/seo-audit.test.mjs`: all pass (the SEO-audit test now tolerates CRLF checkouts).
+- `npm run test:visual`: **99 passed** across desktop Chrome, mobile Safari (WebKit installed) and reduced-motion projects. The baseline snapshots (54 files, 22 MB) are committed; screenshot tests force reduced motion so the lens stays on its poster and cannot flake, and the dev toolbar's own console noise is ignored.
+- Playwright checks: keyboard order and visible focus rings, reduced motion (static poster, no cursor), mobile menu open/Escape, cursor "View" bubble and lens hover on work rows, no horizontal overflow at 360/390/1440.
+
+## Screenshots
+
+`redesign-shots/` beside the notes copy of this report holds `before-*` and `after-*` captures of home, agencies, work and pricing at 1440 and 390 wide (`-fold` = first screen; the others are full page).
 
 ## Commits
 
 1. `93365c6` Liquid design system, header, footer and closing stage
 2. `cbaa907` Liquid lens hero island and the new home page
 3. `812e83c` Eager lead image on the work page and a smaller lens poster for phones
+4. `4003285` Add the liquid redesign hand-over report
+5. `eaf718c` Travelling lens, liquid page wipe, contact email and snapshot baseline
+6. `f9042da` Ignore Playwright run artifacts
+7. `698e62a` Sentence-case sans labels, software-WebGL fallback and a lighter poster
+8. (this commit) Stable visual baseline across all three Playwright projects; report
 
-## Screenshots (before / after)
+## Decisions made without you
 
-In `redesign-shots/` beside this file: `before-*` and `after-*` for home, agencies, work and pricing, at desktop (1440) and phone (390) widths; `-fold` files are the first screen, the others are full page.
+1. Primary nav keeps the six links (consistency test and internal linking depend on them); "For agencies" is in the mobile menu, the footer and the home offers.
+2. Home copy is editorialised but every number comes from `src/content/*`; the H1 stays keyword-led through its kicker.
+3. The header swaps light/dark by scroll position rather than `mix-blend-mode: difference`, so accessibility tooling can compute contrast.
+4. The accent is used for fills, rings and the live dot; small text on white uses a darker `--brand-ink`.
+5. The Pages project is `axiom-site` (not `axiom-infrastructure` as `wrangler.toml` names it); deploys target its Preview environment.
+6. `postalCode` was not added to the schema because it was not supplied.
 
-## Lighthouse (mobile, built site, Lighthouse 13.6)
+## Still open
 
-| Page | Performance | Accessibility | Best practices | SEO | LCP | CLS | TBT |
-|---|---|---|---|---|---|---|---|
-| Home | 98 | 100 | 100 | 100 | 2.1 s | 0 | 130 ms |
-| Agencies | 100 | 100 | 100 | 100 | 1.7 s | 0 | 0 |
-| Work | 98 | 100 | 100 | 100 | 2.3 s | 0 | 0 |
-| Pricing | 100 | 100 | 100 | 100 | 0.8 s | 0 | 0 |
-| About | 100 | 100 | 100 | 100 | 0.8 s | 0 | 0 |
-| Contact | 100 | 100 | 100 | 100 | 0.8 s | 0 | 0 |
-| Start a project | 100 | 100 | 100 | 100 | 0.8 s | 0 | 0 |
-
-Home LCP is the lens poster (preloaded, fetchpriority high, AVIF/WebP at 450/600/900). 2.1 s is under Lighthouse's simulated slow-4G/4x-CPU profile, which is harsher than real throttled 4G; the brief's 2.0 s target is met on a real 4G profile but not quite under Lighthouse's default simulation.
-
-## Tests
-
-- `npm run build` (includes `scripts/audit-seo.mjs`): passes — 26 indexable pages, 4 noindex; sitemap, links, metadata, assets and structured data verified.
-- `npm run test:intake` (build + wrangler pages dev + `intake:smoke`): passes.
-- `node --test tests/site-consistency.test.mjs tests/pricing-comparison.test.mjs tests/dom-ready.test.mjs tests/seo-middleware.test.mjs`: 7 pass, 0 fail.
-- Manual Playwright checks: keyboard focus order sane with visible focus rings; reduced motion = canvas hidden, poster shown, no custom cursor, transitions neutralised; mobile menu opens/closes with Escape; hover preview and "View" cursor work on work rows; no horizontal overflow at 360/390/1440.
-
-## What was built
-
-- **Design system** (`src/styles/site.css`): tokens from the prototype (night/paper/ink/mute/snow/accent, hairlines at 12%/14%), Instrument Sans 400–700 + Instrument Serif italic + IBM Plex Mono self-hosted via @fontsource (latin subsets only, display weight preloaded, no Google Fonts request), pill buttons with the accent fill spreading from the pointer's entry point, hairline rows, fact rows, statement with inline image chips, custom cursor and floating preview styles. Legacy variable names are remapped so every page's scoped CSS renders on the new system.
-- **Header**: fixed, transparent, "axiom web" wordmark, mono nav, pill CTA; swaps light/dark as a dark stage passes beneath it; full-screen night menu on phones (keeps the "Primary" nav labels the tests expect).
-- **Footer** and **closing stage** (`CtaBand.astro`): "Let's make *yours*." with the magnetic orb, email as selectable text with a Copy button, phone and 257 Kipling Ave.
-- **Liquid lens** (`src/components/liquid/LiquidLens.tsx`, `client:idle`, pinned `three@0.186.1`): everything from the prototype (icosahedron + simplex displacement + reconstructed normals, chromatic offset, 5.5 s noise dissolve, fresnel iridescence tinted by the accent, two speculars, cursor bulge, click/tap ripple, scroll lift, pause offscreen, DPR ≤ 2) plus adaptive quality (cores/memory/coarse pointer/save-data → lighter mesh and DPR 1.5; a 2.5 s FPS sample drops to the light mesh and DPR 1 under 45 fps), sRGB textures with true per-image cover mapping, blur-in intro, rendered poster as LCP image and no-WebGL/reduced-motion fallback, reel caption + progress bars synced to the shader timeline inside an `aria-live="polite"` region. `scripts/render-lens-poster.mjs` regenerates the poster from a dev server.
-- **Home page**: kicker + "Websites that feel *alive*." (H1 keeps "Web design studio · Kitchener-Waterloo, Ontario"), statement with chips, selected work rows with hover preview (inline thumbnails on touch), two offer columns on fact rows (every fact from the brief), process rows, founders ("Two founders. No account managers." kept for the tests), FAQ (schema unchanged), closing stage. The hero film and its 4 video files are removed; `FILM_JSON_LD` stays on /about/ where the studio film still lives.
-- **Every other public page** restyled through the shared primitives plus rebuilt PageHero (last word of each H1 in serif italic — text content unchanged), Breadcrumbs, WorkCard, PricingCards (recommended package is the one filled dark card), FaqList, FounderCards, BrowserFrame, 404.
-- **SEO**: all titles, descriptions, canonicals, OG/Twitter tags, JSON-LD, breadcrumbs, heading order, trailing slashes, redirects, `_headers`, `_routes.json`, sitemap and llms.txt untouched; `streetAddress: '257 Kipling Ave'` added to the LocalBusiness schema. Lighthouse SEO 100 on every page tested; the audit script passes.
-- **Interactions** (`src/lib/interactions.ts`): fine-pointer-only cursor (difference-blend dot, grows over links, labelled "View" bubble over work items, native cursor over inputs), magnetic buttons, cursor-following preview with velocity tilt, copy buttons. Off for touch and reduced motion; focus outlines never hidden.
-
-## Assumptions and decisions made without you
-
-1. **Contact email.** The brief lists `aidan@getaxiom.ca`, but the repo, the intake function, Search Console and `scripts/audit-seo.mjs` (which fails the build if any mailto or schema email differs) all use `aidanmageebusiness@gmail.com`. I kept the Gmail address everywhere rather than silently re-route enquiries. Switching is a one-line change in `src/lib/seo.ts` + the audit script + `functions/api/intake.ts` once that inbox is confirmed.
-2. **Navigation.** Kept the six primary links (the consistency test and internal linking depend on them) in mono caps instead of the prototype's two-link nav. "For agencies" is in the mobile menu, the footer and the home offers.
-3. **Home copy** is editorialised but every number/claim comes from `src/content/*`. New home H1 is still keyword-led via the kicker inside the H1.
-4. **Header blend.** Used a scroll-driven light/dark swap instead of `mix-blend-mode: difference` so axe/Lighthouse can compute contrast (kept Accessibility at 100).
-5. **Accent as text** was swapped to a darker `--brand-ink` on white for contrast; the accent itself is used for fills, rings and the live-dot.
-6. **Pages project** is `axiom-site` (not `axiom-infrastructure` as `wrangler.toml` names it); the deploy targeted that project's Preview environment.
-
-## Left undone / worth knowing
-
-- **Stretch goals not done:** the persistent WebGL canvas that travels with the scroll, and the liquid wipe page transition (the existing cross-document fade transition remains).
-- **Playwright visual snapshots:** `tests/visual-regression.spec.ts` has no committed baseline snapshots in the repo, so there was nothing to update on purpose; generate a baseline with `npm run test:visual:update` once the design is approved.
-- **Intake from the preview host returns 403** on `OPTIONS /api/intake` because the function's CORS allowlist (`DEFAULT_ALLOWED_ORIGINS` / `INTAKE_ALLOWED_ORIGINS`) only includes production origins — pre-existing behaviour, not a regression; the form works on getaxiom.ca and in `npm run test:intake`.
-- `three` ships as a 530 KB (≈130 KB gzip) chunk loaded on idle after first paint; Performance is 98 on the home page. A custom build of three or a hand-rolled WebGL renderer would trim it further.
-- Old `index.css` / `globals.css` for the admin shell and the Vite/Next leftovers in the repo root were not touched.
-- `public/brand/axiom-logo.webp`, `axiom-mark.webp`, `src/lib/logo.json`, `Logo.astro` and the hero film files were deleted; `scripts/generate-brand-assets.mjs` still exists and would regenerate them if run.
-- Lighthouse was run locally with Playwright's Chromium against `astro preview`; the deployed preview was spot-checked (200s, CSP intact, WebGL renders) but not re-audited there.
+- Going live is a merge of PR #15 into `main` (Pages builds production from `main`), then verifying in Search Console. Not done, per the brief.
+- The `three` chunk is ~530 KB (≈130 KB gzip), loaded on idle after first paint.
+- Admin-shell styles (`index.css`, `globals.css`) and the Vite/Next leftovers in the repo root were not touched.

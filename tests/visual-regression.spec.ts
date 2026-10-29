@@ -19,6 +19,9 @@ for (const { name, path } of PUBLIC_PAGES) {
     // stays on its rendered poster and the custom cursor is off, so the
     // WebGL animation cannot make a pixel comparison flake.
     test.use({ reducedMotion: 'reduce' });
+    test.beforeEach(async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+    });
 
     test(`renders above the fold`, async ({ page }) => {
       await page.goto(path, { waitUntil: 'networkidle' });
@@ -52,7 +55,8 @@ test.describe('SEO validation', () => {
         expect(await page.getAttribute(`meta[property="${property}"]`, 'content')).toBeTruthy();
       }
       expect(await page.getAttribute('meta[name="twitter:card"]', 'content')).toBe('summary_large_image');
-      await expect(page.locator('h1')).toHaveCount(1);
+      // Count the page's own headings: Playwright locators pierce the dev toolbar's shadow DOM.
+      expect(await page.evaluate(() => document.querySelectorAll('h1').length)).toBe(1);
     });
   }
 
@@ -100,7 +104,8 @@ test.describe('performance basics', () => {
   test('no console errors on public pages', async ({ page }) => {
     const errors: string[] = [];
     page.on('console', (msg) => {
-      if (msg.type() === 'error') errors.push(msg.text());
+      // The Astro dev toolbar logs its own audit failures with an "Astro" badge; only the site's errors count.
+      if (msg.type() === 'error' && !msg.text().startsWith('%cAstro')) errors.push(msg.text());
     });
     for (const { path } of PUBLIC_PAGES) {
       await page.goto(path, { waitUntil: 'networkidle' });
