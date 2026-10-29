@@ -50,22 +50,6 @@
   src: url('@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 500;
-  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 
 /* Metric-matched fallback keeps layout stable while Instrument Sans loads. */
 @font-face {
@@ -125,7 +109,7 @@
   --font-sans: 'Instrument Sans', 'Instrument Sans Fallback', 'Helvetica Neue', Arial, system-ui, sans-serif;
   --font-display: var(--font-sans);
   --font-serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
   --wdth-display: 100%;
   --wdth-heading: 100%;
   --fs-display: clamp(3rem, 1.2rem + 7.2vw, 8.75rem);
@@ -435,16 +419,15 @@ main:focus {
 }
 
 /* ── Type helpers ─────────────────────────────────────────── */
-/* Mono labels: 12px, uppercase, tracked. */
+/* Small labels: quiet, sentence-case, a touch heavier than body text. */
 .mono,
 .eyebrow,
 .label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   line-height: 1.5;
-  text-transform: uppercase;
 }
 
 .eyebrow,
@@ -785,12 +768,10 @@ main:focus {
   border-radius: var(--radius-pill);
   background: var(--surface);
   color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   line-height: 1.4;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -829,9 +810,8 @@ main:focus {
 
 .index-num {
   color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: var(--fs-label);
-  letter-spacing: 0.08em;
+  font-size: 0.8125rem;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
 
@@ -945,9 +925,7 @@ main:focus {
 .facts dd {
   margin: 0;
   color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  letter-spacing: 0.01em;
+  font-size: 0.9375rem;
   text-align: right;
 }
 
@@ -1162,10 +1140,9 @@ textarea.input {
 }
 
 .cursor .cursor-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   color: var(--paper);
   opacity: 0;
   transition: opacity 250ms;
@@ -1420,7 +1397,6 @@ html.lens-travel .preview {
 :is(.step-num, .next-num, .term-num, .aside-num, .timeline-num, .plan-num, .overview-num, .step-number) {
   border-radius: 50% !important;
   border-color: var(--line) !important;
-  font-family: var(--font-mono) !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   font-variant-numeric: tabular-nums;
 }

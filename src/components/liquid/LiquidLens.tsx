@@ -184,6 +184,20 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
       return;
     }
 
+    // Software WebGL (SwiftShader, llvmpipe, lab runners without a GPU) would
+    // burn the main thread on every frame: keep the poster instead.
+    try {
+      const gl = renderer.getContext();
+      const info = gl.getExtension('WEBGL_debug_renderer_info');
+      const name = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
+      if (/swiftshader|llvmpipe|software|mesa offscreen/i.test(name)) {
+        renderer.dispose();
+        return;
+      }
+    } catch {
+      /* renderer info unavailable: assume hardware */
+    }
+
     const quality = detectQuality();
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, quality.dpr));
     renderer.setClearColor(0x000000, 0);
@@ -500,6 +514,16 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
         if (sampleTime > 2.5) {
           sampled = true;
           const fps = frames / sampleTime;
+          if (fps < 20) {
+            // Too slow even for the light mesh: hand back to the static poster.
+            cancelAnimationFrame(raf);
+            canvas.classList.remove('is-ready', 'is-front');
+            canvas.style.opacity = '0';
+            poster.removeAttribute('data-hidden');
+            orb?.classList.remove('is-lens');
+            document.documentElement.classList.remove('lens-travel');
+            return;
+          }
           if (fps < 45 && quality.detail > 24) {
             geometry.dispose();
             geometry = new IcosahedronGeometry(1, 24);

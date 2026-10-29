@@ -29,7 +29,7 @@ const poster = {
   type: 'image/webp',
   href: '/images/lens-poster-900.webp',
   srcset: '/images/lens-poster-450.webp 450w, /images/lens-poster-720.webp 720w, /images/lens-poster-900.webp 900w',
-  sizes: '(min-width: 861px) min(75vh, 50vw), 73vw',
+  sizes: '(min-width: 861px) min(75vh, 50vw), 66vw',
 };
 ---
 
@@ -62,7 +62,7 @@ const poster = {
 
       <div class="container hero-inner">
         <h1 class="hero-title">
-          <span class="hero-kicker mono">Web design studio · Kitchener-Waterloo, Ontario<span class="sr-only">:</span></span>
+          <span class="hero-kicker mono">Web design studio in Kitchener-Waterloo, Ontario<span class="sr-only">:</span></span>
           <span class="line"><span>Websites that</span></span>
           <span class="line"><span>feel <em>alive.</em></span></span>
         </h1>
@@ -79,7 +79,7 @@ const poster = {
           </div>
 
           <div class="reel" id="hero-reel" aria-live="polite">
-            <span class="mono reel-hint">Now showing · move the cursor, click to splash</span>
+            <span class="mono reel-hint">Now showing — move the cursor, click to splash</span>
             <p class="reel-name">
               <span data-reel-index>01</span> <span data-reel-name>{lead.title}</span>
               <span class="reel-kind" data-reel-kind>· Client, live</span>
@@ -114,7 +114,7 @@ const poster = {
           <h2 id="work-title">Selected <em>work</em></h2>
           <div class="work-head-side">
             <div class="lens-anchor work-anchor" data-lens-anchor="work" aria-hidden="true"></div>
-            <p class="mono">1 client site · 3 concepts</p>
+            <p class="mono">One client site, three concepts</p>
           </div>
         </div>
         <ul role="list" class="rows">
@@ -405,7 +405,7 @@ const poster = {
     display: block;
     margin-bottom: auto;
     color: var(--mute-night);
-    letter-spacing: 0.08em;
+    font-size: 0.9375rem;
     line-height: 1.5;
     animation: fade-in 1200ms var(--ease) 200ms both;
   }
@@ -456,9 +456,8 @@ const poster = {
   .reel-name {
     min-height: 1.4em;
     color: var(--snow);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.04em;
+    font-size: 0.9375rem;
+    font-weight: 500;
   }
 
   .reel-kind {
