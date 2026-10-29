@@ -4,10 +4,9 @@ import { CTA_PATHS } from '../../lib/cta';
 import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
 import EmailText from './EmailText.astro';
 import Icon from './Icon.astro';
-import Logo from './Logo.astro';
 
-type Props = { showCta?: boolean };
-const { showCta = true } = Astro.props;
+type Props = { showCta?: boolean; theme?: 'dark' | 'light' };
+const { showCta = true, theme = 'light' } = Astro.props;
 
 const current = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (href: string) => {
@@ -16,11 +15,9 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="site-header" data-header>
+<header class="site-header" data-header data-theme={theme}>
   <div class="container header-bar">
-    <a href="/" class="header-logo" aria-label="Axiom Web home">
-      <Logo height={34} animate />
-    </a>
+    <a href="/" class="brand" aria-label="Axiom Web home">axiom<span>web</span></a>
 
     <nav class="header-nav" aria-label="Primary">
       <ul role="list">
@@ -35,12 +32,8 @@ const isActive = (href: string) => {
     </nav>
 
     <div class="header-actions">
-      <a class="header-phone" href={`tel:${SITE_TELEPHONE}`}>
-        <Icon name="phone" size={16} />
-        <span>{SITE_PHONE_DISPLAY}</span>
-      </a>
       {showCta && (
-        <a href={CTA_PATHS.startProject} class="btn btn-sm header-cta">
+        <a href={CTA_PATHS.startProject} class="pill header-cta" data-magnetic="0.2">
           Start a project
         </a>
       )}
@@ -57,42 +50,62 @@ const isActive = (href: string) => {
       </button>
     </div>
   </div>
-
-  <div id="mobile-menu" class="mobile-menu" data-menu hidden>
-    <nav class="container" aria-label="Mobile">
-      <ul role="list" class="mobile-links">
-        <li><a href="/" aria-current={current === '/' ? 'page' : undefined}>Home</a></li>
-        {NAV_LINKS.map((link) => (
-          <li>
-            <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
-              {link.label}
-              <Icon name="chevron-right" size={18} />
-            </a>
-          </li>
-        ))}
-      </ul>
-      <div class="mobile-actions">
-        <a href={CTA_PATHS.startProject} class="btn btn-lg btn-block">
-          Start a project <Icon name="arrow-right" />
-        </a>
-        <a href={`tel:${SITE_TELEPHONE}`} class="btn btn-outline-light btn-lg btn-block">
-          <Icon name="phone" /> Call {SITE_PHONE_DISPLAY}
-        </a>
-        <a href={`mailto:${SITE_EMAIL}`} class="mobile-email"><EmailText /></a>
-      </div>
-    </nav>
-  </div>
 </header>
 
+<div id="mobile-menu" class="mobile-menu" data-menu hidden>
+  <nav class="container" aria-label="Mobile">
+    <ul role="list" class="mobile-links">
+      <li><a href="/" aria-current={current === '/' ? 'page' : undefined}><span class="mono">01</span>Home</a></li>
+      {NAV_LINKS.map((link, index) => (
+        <li>
+          <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
+            <span class="mono">{String(index + 2).padStart(2, '0')}</span>{link.label}
+          </a>
+        </li>
+      ))}
+      <li><a href="/agencies/" aria-current={isActive('/agencies/') ? 'page' : undefined}><span class="mono">08</span>For agencies</a></li>
+    </ul>
+    <div class="mobile-actions">
+      <a href={CTA_PATHS.startProject} class="btn btn-light btn-lg btn-block">Start a project <Icon name="arrow-right" /></a>
+      <div class="mobile-contact">
+        <a href={`tel:${SITE_TELEPHONE}`}>{SITE_PHONE_DISPLAY}</a>
+        <a href={`mailto:${SITE_EMAIL}`}><EmailText /></a>
+      </div>
+    </div>
+  </nav>
+</div>
+
 <style>
+  /* Fixed and transparent: the header reads ink on paper and snow on the dark
+     stages, swapping as a stage passes beneath it. A faint blur backs it once
+     the page has scrolled. */
   .site-header {
-    position: sticky;
+    --hd-ink: var(--ink);
+    --hd-mute: var(--mute);
+    --hd-line: var(--line);
+    position: fixed;
     top: 0;
-    z-index: 50;
-    background: var(--bg);
-    border-bottom: 1px solid var(--line);
-    color: var(--ink);
-    view-transition-name: site-header;
+    right: 0;
+    left: 0;
+    z-index: 60;
+    color: var(--hd-ink);
+    transition: background-color 400ms var(--ease), color 400ms var(--ease);
+  }
+
+  .site-header[data-theme='dark'] {
+    --hd-ink: var(--snow);
+    --hd-mute: var(--mute-night);
+    --hd-line: var(--line-night);
+  }
+
+  .site-header[data-scrolled] {
+    background: rgb(255 255 255 / 0.72);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .site-header[data-scrolled][data-theme='dark'] {
+    background: rgb(7 7 10 / 0.6);
   }
 
   .header-bar {
@@ -102,12 +115,21 @@ const isActive = (href: string) => {
     height: var(--header-h);
   }
 
-  .header-logo {
+  .brand {
     display: inline-flex;
     align-items: center;
+    gap: 0.3em;
     min-height: 2.75rem;
     margin-right: auto;
-    border-radius: 2px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .brand span {
+    font-weight: 400;
+    color: var(--hd-mute);
   }
 
   .header-nav {
@@ -126,31 +148,31 @@ const isActive = (href: string) => {
     display: inline-flex;
     align-items: center;
     min-height: 2.75rem;
-    color: var(--text);
-    font-size: 0.9375rem;
+    color: var(--hd-mute);
+    font-size: 0.875rem;
     font-weight: 500;
-    transition: color 160ms var(--ease);
+    letter-spacing: 0.005em;
+    transition: color 400ms var(--ease);
   }
 
   .header-nav a:hover,
   .header-nav a[aria-current='page'] {
-    color: var(--ink);
+    color: var(--hd-ink);
   }
 
   .header-nav a::after {
     content: '';
     position: absolute;
     right: 0;
-    bottom: 0.55rem;
+    bottom: 0.5rem;
     left: 0;
     height: 1px;
     background: currentColor;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 260ms var(--ease-out);
+    transition: transform 400ms var(--ease-out);
   }
 
-  .header-nav a:hover::after,
   .header-nav a[aria-current='page']::after {
     transform: scaleX(1);
   }
@@ -158,32 +180,35 @@ const isActive = (href: string) => {
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
-  .header-phone {
+  .pill {
     display: none;
     align-items: center;
-    gap: 0.5rem;
-    min-height: 2.75rem;
-    color: var(--ink);
-    font-size: 0.9375rem;
+    gap: 10px;
+    padding: 0.7rem 1.1rem;
+    border: 1px solid var(--hd-line);
+    border-radius: var(--radius-pill);
+    color: var(--hd-ink);
+    font-size: 0.875rem;
     font-weight: 500;
-    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
     white-space: nowrap;
+    transition:
+      background-color 500ms var(--ease),
+      color 500ms var(--ease),
+      border-color 500ms var(--ease);
   }
 
-  .header-phone:hover {
-    color: var(--accent);
+  .pill:hover {
+    background: var(--hd-ink);
+    color: var(--paper);
+    border-color: var(--hd-ink);
   }
 
-  .header-phone :global(svg) {
-    color: var(--text-muted);
-  }
-
-  .header-cta {
-    display: none;
-    white-space: nowrap;
+  .site-header[data-theme='dark'] .pill:hover {
+    color: var(--night);
   }
 
   .menu-toggle {
@@ -191,10 +216,10 @@ const isActive = (href: string) => {
     place-items: center;
     width: 2.75rem;
     height: 2.75rem;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
+    border: 1px solid var(--hd-line);
+    border-radius: 50%;
     background: transparent;
-    color: var(--ink);
+    color: var(--hd-ink);
   }
 
   .menu-toggle :global(svg) {
@@ -213,8 +238,18 @@ const isActive = (href: string) => {
     display: block;
   }
 
+  /* While the menu is open the header sits on the night panel. */
+  .site-header[data-open] {
+    --hd-ink: var(--snow);
+    --hd-mute: var(--mute-night);
+    --hd-line: var(--line-night);
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
   @media (min-width: 560px) {
-    .header-cta {
+    .pill {
       display: inline-flex;
     }
   }
@@ -229,62 +264,60 @@ const isActive = (href: string) => {
     }
   }
 
-  @media (min-width: 1280px) {
-    .header-phone {
-      display: inline-flex;
-    }
-  }
-
   .mobile-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    height: calc(100dvh - var(--header-h));
+    position: fixed;
+    inset: 0;
+    z-index: 55;
     overflow-y: auto;
     overscroll-behavior: contain;
-    background: var(--bg);
-    border-top: 1px solid var(--line);
-    padding-block: 0.75rem 2rem;
+    background: var(--night);
+    color: var(--snow);
+    padding-block: calc(var(--header-h) + 1rem) 2.5rem;
   }
 
   .mobile-links {
     margin: 0;
+    border-top: 1px solid var(--line-night);
   }
 
   .mobile-links a {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 3.75rem;
-    border-bottom: 1px solid var(--line);
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    font-weight: 540;
-    font-stretch: var(--wdth-heading);
-    letter-spacing: -0.025em;
+    align-items: baseline;
+    gap: 1rem;
+    min-height: 4rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--line-night);
+    color: var(--snow);
+    font-size: clamp(1.9rem, 1.5rem + 2vw, 2.6rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .mobile-links .mono {
+    color: var(--mute-night);
   }
 
   .mobile-links a[aria-current='page'] {
     color: var(--accent);
   }
 
-  .mobile-links :global(svg) {
-    color: var(--text-muted);
-  }
-
   .mobile-actions {
     display: grid;
-    gap: 0.75rem;
-    margin-top: 1.75rem;
+    gap: 1.25rem;
+    margin-top: 2rem;
   }
 
-  .mobile-email {
-    justify-self: center;
-    padding: 0.75rem;
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
+  .mobile-contact {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: center;
+    color: var(--mute-night);
+    font-size: 0.9375rem;
+  }
+
+  .mobile-contact a {
+    padding: 0.5rem;
   }
 </style>
 
@@ -315,8 +348,19 @@ const isActive = (href: string) => {
       if (event.matches && !menu.hidden) setOpen(false, false);
     });
 
-    const onScroll = () => header.toggleAttribute('data-scrolled', window.scrollY > 8);
+    // The header turns light or dark to match whatever stage is under it.
+    const stages = Array.from(document.querySelectorAll<HTMLElement>('[data-stage]'));
+    const probe = header.offsetHeight / 2;
+    const onScroll = () => {
+      header.toggleAttribute('data-scrolled', window.scrollY > 8);
+      const dark = stages.some((stage) => {
+        const r = stage.getBoundingClientRect();
+        return r.top <= probe && r.bottom >= probe;
+      });
+      header.dataset.theme = dark ? 'dark' : 'light';
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
   }
 </script>

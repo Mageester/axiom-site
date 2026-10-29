@@ -7,14 +7,9 @@ const { withAnchors = false } = Astro.props;
 
 <div class="founders">
   {founders.map((founder) => (
-    <article class="card founder" id={withAnchors ? founder.id : undefined}>
-      <div class="founder-head">
-        <span class="avatar" aria-hidden="true">{founder.initials}</span>
-        <div>
-          <h3>{founder.name}</h3>
-          <p class="founder-role">{founder.role}</p>
-        </div>
-      </div>
+    <article class="founder" id={withAnchors ? founder.id : undefined}>
+      <p class="founder-role mono">{founder.role}</p>
+      <h3>{founder.name}</h3>
       <p class="founder-bio">{founder.bio}</p>
     </article>
   ))}
@@ -23,58 +18,37 @@ const { withAnchors = false } = Astro.props;
 <style>
   .founders {
     display: grid;
-    gap: 1rem;
+    gap: 0;
+    border-top: 1px solid var(--line);
   }
 
   @media (min-width: 720px) {
     .founders {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(2rem, 5vw, 5rem);
     }
   }
 
   .founder {
-    gap: 1.25rem;
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    padding-block: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+    border-bottom: 1px solid var(--line);
     scroll-margin-top: calc(var(--header-h) + 1.5rem);
   }
 
-  .founder-head {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .founder-head h3 {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    font-weight: 540;
-    font-stretch: var(--wdth-heading);
-    letter-spacing: -0.02em;
-  }
-
-  /* A typographic monogram rather than a stock avatar. */
-  .avatar {
-    display: inline-grid;
-    place-items: center;
-    width: 3.25rem;
-    height: 3.25rem;
-    flex: none;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 560;
-    font-stretch: var(--wdth-display);
-    letter-spacing: 0.02em;
+  .founder h3 {
+    font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.6rem);
+    letter-spacing: -0.04em;
   }
 
   .founder-role {
-    margin-top: 0.2rem;
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
+    color: var(--mute);
   }
 
   .founder-bio {
+    max-width: 34rem;
     color: var(--text);
   }
 </style>

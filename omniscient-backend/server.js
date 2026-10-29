@@ -31,7 +31,7 @@ const DEFAULT_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173'
 ];
 
-const DEFAULT_INTERNAL_RECIPIENTS = ['aidanmageebusiness@gmail.com'];
+const DEFAULT_INTERNAL_RECIPIENTS = ['contact@axiominternational.ca'];
 
 const allowedOrigins = new Set(
     (process.env.ALLOWED_ORIGINS || DEFAULT_ALLOWED_ORIGINS.join(','))

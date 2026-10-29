@@ -1,6 +1,6 @@
 ---
 import '../styles/site.css';
-import archivoWoff2 from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import displayWoff2 from '@fontsource/instrument-sans/files/instrument-sans-latin-500-normal.woff2?url';
 import Footer from '../components/site/Footer.astro';
 import Header from '../components/site/Header.astro';
 import {
@@ -28,9 +28,11 @@ type Props = {
   crumbs?: Crumb[];
   schema?: Schema | Schema[];
   ogImageAlt?: string;
-  /** Responsive LCP image to preload, e.g. the home hero screenshot. */
+  /** Responsive LCP image to preload, e.g. the home hero poster. */
   preload?: { type: string; srcset: string; sizes: string; href: string };
   showCta?: boolean;
+  /** The header starts on a dark stage (the home hero) or a white page. */
+  heroTheme?: 'dark' | 'light';
 };
 
 const {
@@ -44,6 +46,7 @@ const {
   ogImageAlt,
   preload,
   showCta = true,
+  heroTheme = 'light',
 } = Astro.props as Props;
 
 const resolvedTitle = formatSeoTitle(title);
@@ -76,7 +79,7 @@ const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c'
 <html lang="en-CA">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{resolvedTitle}</title>
     <meta name="description" content={description} />
     <meta
@@ -85,16 +88,7 @@ const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c'
     />
     <link rel="canonical" href={canonical} />
 
-    <link rel="preload" as="font" type="font/woff2" href={archivoWoff2} crossorigin />
-    <script is:inline>
-      // The full logo intro plays on the first page of a visit; later pages get a glint.
-      try {
-        if (!sessionStorage.getItem('axiom-logo-intro')) {
-          document.documentElement.classList.add('logo-intro');
-          sessionStorage.setItem('axiom-logo-intro', '1');
-        }
-      } catch (error) {}
-    </script>
+    <link rel="preload" as="font" type="font/woff2" href={displayWoff2} crossorigin />
     <script is:inline>
       // Entrance reveals play once, on a timer, as each element first comes into view.
       // The class that hides elements is only added when this can run, so content is
@@ -108,7 +102,7 @@ const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c'
             .filter((entry) => entry.isIntersecting)
             .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left)
             .forEach((entry, index) => {
-              if (stagger) entry.target.style.setProperty('--reveal-delay', `${Math.min(index, 6) * 80}ms`);
+              if (stagger) entry.target.style.setProperty('--reveal-delay', `${Math.min(index, 6) * 90}ms`);
               entry.target.classList.add('is-revealed');
               observer().unobserve(entry.target);
             });
@@ -140,8 +134,8 @@ const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c'
       />
     )}
 
-    <meta name="theme-color" content="#0b0b0c" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content={heroTheme === 'dark' ? '#07070a' : '#ffffff'} />
+    <meta name="color-scheme" content="light" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="author" content={SITE_NAME} />
     <meta name="application-name" content={SITE_NAME} />
@@ -178,8 +172,14 @@ const jsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c'
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <Header showCta={showCta} />
+    <Header showCta={showCta} theme={heroTheme} />
     <slot />
     <Footer />
+    <div class="cursor" data-cursor-dot aria-hidden="true"><span class="cursor-label"></span></div>
+    <div class="preview" data-preview-box aria-hidden="true"></div>
+    <script>
+      import { initInteractions } from '../lib/interactions';
+      initInteractions();
+    </script>
   </body>
 </html>

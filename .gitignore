@@ -39,3 +39,7 @@ dist-ssr
 
 # Scratch copy created by tests/seo-audit.test.mjs
 output/seo-max-pass/
+
+# Playwright run artifacts
+test-results/
+playwright-report/

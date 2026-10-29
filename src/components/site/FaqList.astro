@@ -15,7 +15,7 @@ const { items, openFirst = false } = Astro.props;
     <details class="faq-item" open={openFirst && index === 0}>
       <summary>
         <h3>{item.question}</h3>
-        <span class="faq-icon" aria-hidden="true"><Icon name="plus" size={18} strokeWidth={2} /></span>
+        <span class="faq-icon" aria-hidden="true"><Icon name="plus" size={18} strokeWidth={1.8} /></span>
       </summary>
       <p>{item.answer}</p>
     </details>
@@ -36,7 +36,7 @@ const { items, openFirst = false } = Astro.props;
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    padding-block: 1.35rem;
+    padding-block: 1.4rem;
     cursor: pointer;
     list-style: none;
   }
@@ -46,14 +46,9 @@ const { items, openFirst = false } = Astro.props;
   }
 
   summary h3 {
-    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    transition: color 160ms var(--ease);
-  }
-
-  summary:hover h3 {
-    color: #fff;
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.4rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
   }
 
   summary:focus-visible {
@@ -63,21 +58,23 @@ const { items, openFirst = false } = Astro.props;
   .faq-icon {
     display: inline-grid;
     place-items: center;
-    width: 2rem;
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
     flex: none;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    border-radius: 50%;
     color: var(--ink);
-    transition: border-color 200ms var(--ease);
+    transition: border-color 300ms var(--ease), background-color 300ms var(--ease), color 300ms var(--ease);
   }
 
   .faq-icon :global(svg) {
-    transition: transform 240ms var(--ease-out);
+    transition: transform 400ms var(--ease-out);
   }
 
   details[open] .faq-icon {
     border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
   }
 
   details[open] .faq-icon :global(svg) {
@@ -86,7 +83,7 @@ const { items, openFirst = false } = Astro.props;
 
   .faq-item p {
     max-width: 62ch;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.6rem;
     padding-right: 3rem;
     color: var(--text);
   }

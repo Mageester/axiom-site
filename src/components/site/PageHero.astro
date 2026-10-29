@@ -12,16 +12,20 @@ type Props = {
 
 const { eyebrow, title, lead, crumbs, center = false } = Astro.props;
 const hasAside = Astro.slots.has('aside');
+
+// The last word of every page headline is set in the serif italic.
+const words = title.trim().split(/\s+/);
+const last = words.pop() ?? '';
+const head = words.join(' ');
 ---
 
 <section class:list={['page-hero', { 'has-aside': hasAside, center }]}>
-  <div class="grid-lines" aria-hidden="true"></div>
   <div class="container">
     {crumbs && crumbs.length > 1 && <Breadcrumbs items={crumbs} />}
     <div class="page-hero-grid">
       <div class="page-hero-copy">
         {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-        <h1>{title}</h1>
+        <h1>{head}{head && ' '}<em>{last}</em></h1>
         {lead && <p class="lead">{lead}</p>}
         <slot />
         {Astro.slots.has('actions') && (
@@ -42,87 +46,82 @@ const hasAside = Astro.slots.has('aside');
 <style>
   .page-hero {
     position: relative;
-    overflow: hidden;
-    padding-block: clamp(1.5rem, 1rem + 1.5vw, 2.25rem) clamp(4rem, 2.5rem + 5vw, 7rem);
+    padding-block: calc(var(--header-h) + clamp(2.5rem, 1.5rem + 4vw, 5.5rem)) clamp(3.5rem, 2.5rem + 4vw, 6rem);
     border-bottom: 1px solid var(--line);
-    isolation: isolate;
-  }
-
-  .page-hero > .container {
-    position: relative;
-    z-index: 1;
   }
 
   .page-hero h1 {
-    font-size: var(--fs-h1);
+    font-size: clamp(2.75rem, 1.2rem + 6vw, 7rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    max-width: 14ch;
   }
 
   @media (prefers-reduced-motion: no-preference) {
     .page-hero-copy > * {
-      animation: hero-in 900ms var(--ease-out) both;
+      animation: hero-in 1100ms var(--ease-out) both;
     }
     .page-hero-copy > :nth-child(2) {
-      animation-delay: 70ms;
+      animation-delay: 80ms;
     }
     .page-hero-copy > :nth-child(3) {
-      animation-delay: 140ms;
+      animation-delay: 160ms;
     }
     .page-hero-copy > :nth-child(n + 4) {
-      animation-delay: 210ms;
+      animation-delay: 240ms;
     }
     .page-hero-aside {
-      animation: hero-in 1100ms var(--ease-out) 200ms both;
+      animation: hero-in 1300ms var(--ease-out) 240ms both;
     }
   }
 
   @keyframes hero-in {
     from {
       opacity: 0;
-      transform: translateY(14px);
+      translate: 0 22px;
+    }
+    to {
+      opacity: 1;
+      translate: none;
     }
   }
 
   .page-hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
-    margin-top: clamp(1.75rem, 1.25rem + 2vw, 3rem);
-  }
-
-  .page-hero:not(:has(.breadcrumbs)) .page-hero-grid {
-    margin-top: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  }
-
-  .page-hero-copy {
-    display: grid;
-    gap: 1.25rem;
-    align-content: start;
-    max-width: 52rem;
-  }
-
-  .page-hero-copy .lead {
-    max-width: 40rem;
-  }
-
-  .page-hero-actions {
-    margin-top: 0.75rem;
-  }
-
-  .center .page-hero-copy {
-    margin-inline: auto;
-    justify-items: center;
-    text-align: center;
-  }
-
-  .center .page-hero-actions {
-    justify-content: center;
+    margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem);
   }
 
   @media (min-width: 1024px) {
     .has-aside .page-hero-grid {
-      grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.85fr);
-      align-items: end;
+      grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.8fr);
       gap: 4rem;
+      align-items: end;
     }
+  }
+
+  .page-hero-copy {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+  }
+
+  .page-hero-copy .lead,
+  .page-hero-copy :global(.lead) {
+    max-width: 36rem;
+  }
+
+  .page-hero-actions {
+    margin-top: 0.5rem;
+  }
+
+  .center .page-hero-copy {
+    justify-items: center;
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .center h1 {
+    margin-inline: auto;
   }
 </style>

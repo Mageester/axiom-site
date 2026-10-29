@@ -1,7 +1,9 @@
 ---
+// The closing stage: the dark counterpart to the hero, ending every page with
+// one huge line, the round "Start a project" orb and the studio's contact
+// details as selectable text.
 import { CTA_PATHS } from '../../lib/cta';
-import { SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
-import Icon from './Icon.astro';
+import { SITE_ADDRESS, SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_TELEPHONE } from '../../lib/seo';
 
 type Props = {
   title?: string;
@@ -11,90 +13,204 @@ type Props = {
 };
 
 const {
-  title = 'Ready to talk about your website?',
-  text = 'Tell us about your business and what the site needs to do. We reply within one business day with a recommended package, a clear price and the next step.',
+  title = 'Let’s make yours.',
+  text,
   primaryLabel = 'Start a project',
   primaryHref = CTA_PATHS.startProject,
 } = Astro.props;
+
+// The last word of the headline is the one set in the serif italic.
+const words = title.trim().split(/\s+/);
+const last = words.pop() ?? '';
+const lead = words.join(' ');
+const orbLabel = primaryLabel.split(' ');
+const orbTop = orbLabel.slice(0, Math.ceil(orbLabel.length / 2)).join(' ');
+const orbBottom = orbLabel.slice(Math.ceil(orbLabel.length / 2)).join(' ');
 ---
 
-<section class="cta-band section-sm" aria-labelledby="cta-band-title">
+<section class="stage close-stage" data-stage aria-labelledby="cta-band-title">
   <div class="container">
-    <div class="cta-panel">
-      <img class="cta-mark" src="/brand/axiom-mark.webp" width="278" height="347" alt="" loading="lazy" decoding="async" />
-      <div class="cta-copy">
-        <p class="label">Next step</p>
-        <h2 id="cta-band-title">{title}</h2>
-        <p>{text}</p>
+    <div class="close-in">
+      <div class="close-copy">
+        <h2 id="cta-band-title">{lead}{lead && ' '}<em>{last}</em></h2>
+        {text && <p class="close-text">{text}</p>}
       </div>
-      <div class="cta-actions">
-        <a href={primaryHref} class="btn btn-light btn-lg">{primaryLabel} <Icon name="arrow-right" /></a>
-        <a href={`tel:${SITE_TELEPHONE}`} class="btn btn-outline-light btn-lg"><Icon name="phone" /> {SITE_PHONE_DISPLAY}</a>
+      <a class="orb" href={primaryHref} data-magnetic="0.22" data-lens-anchor="close">
+        <span class="btn-text">{orbTop}{orbBottom && <br />}{orbBottom}</span>
+      </a>
+    </div>
+    <div class="close-contact">
+      <div class="email">
+        <span id="close-email" class="mono email-text">{SITE_EMAIL}</span>
+        <button class="copy mono" type="button" data-copy="close-email">Copy</button>
+        <a class="sr-only" href={`mailto:${SITE_EMAIL}`}>Email {SITE_EMAIL}</a>
+      </div>
+      <div class="close-meta mono">
+        <a href={`tel:${SITE_TELEPHONE}`}>{SITE_PHONE_DISPLAY}</a>
+        <span>{SITE_ADDRESS}</span>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .cta-band {
-    border-top: 1px solid var(--line);
+  .close-stage {
+    position: relative;
+    overflow: hidden;
   }
 
-  .cta-panel {
+  .close-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(50% 60% at 70% 55%, var(--night-2) 0%, rgb(7 7 10 / 0) 70%);
+    pointer-events: none;
+  }
+
+  .close-stage .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .close-in {
     position: relative;
     display: grid;
-    gap: 2.5rem;
-    padding-block: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(2rem, 6vw, 6rem);
+    padding-block: clamp(6.5rem, 13vw, 12.5rem) clamp(4rem, 8vw, 7.5rem);
+  }
+
+  .close-copy {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .close-stage h2 {
+    font-size: clamp(3.25rem, 1.5rem + 8.6vw, 10.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+    color: var(--snow);
+    max-width: 10ch;
+  }
+
+  .close-text {
+    max-width: 34rem;
+    color: var(--mute-night);
+    font-size: var(--fs-lead);
+  }
+
+  .orb {
+    position: relative;
+    width: clamp(150px, 15vw, 210px);
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.3;
+    background: var(--snow);
+    color: var(--night);
+    overflow: hidden;
     isolation: isolate;
   }
 
-  /* The chrome mark as a quiet watermark. */
-  .cta-mark {
+  .orb::before {
+    content: '';
     position: absolute;
-    top: 50%;
-    right: 0;
+    left: var(--fx, 50%);
+    top: var(--fy, 50%);
+    width: 260%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 800ms var(--ease);
     z-index: -1;
-    width: clamp(9rem, 6rem + 10vw, 15rem);
-    opacity: 0.1;
-    transform: translateY(-50%);
-    pointer-events: none;
-    user-select: none;
   }
 
-  .cta-copy {
-    display: grid;
-    gap: 1.25rem;
-    max-width: 56rem;
+  .orb:hover::before,
+  .orb:focus-visible::before {
+    transform: translate(-50%, -50%) scale(1);
   }
 
-  .cta-copy h2 {
-    font-size: clamp(2.2rem, 1.2rem + 4vw, 4.75rem);
-    font-stretch: var(--wdth-display);
-    line-height: 1;
-    letter-spacing: -0.04em;
+  .orb .btn-text {
+    display: inline-block;
+    transition: transform 600ms var(--ease);
   }
 
-  .cta-copy p:not(.label) {
-    max-width: 38rem;
-    font-size: var(--fs-lead);
-    color: var(--text);
+  /* Once the travelling lens docks here, the lens is the orb. */
+  .orb.is-lens {
+    background: transparent;
+    color: var(--snow);
+    transition: background-color 600ms var(--ease), color 600ms var(--ease);
   }
 
-  .cta-actions {
+  .orb.is-lens::before {
+    display: none;
+  }
+
+  .close-contact {
+    position: relative;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem 2rem;
     flex-wrap: wrap;
+    padding-block: 1.5rem 2.25rem;
+    border-top: 1px solid var(--line-night);
+    color: var(--mute-night);
+  }
+
+  .email {
+    display: inline-flex;
+    align-items: center;
     gap: 0.75rem;
   }
 
-  @media (max-width: 719px) {
-    .cta-mark {
-      display: none;
-    }
+  .email-text {
+    color: var(--snow);
+    font-size: 0.9375rem;
+    user-select: all;
   }
 
-  @media (max-width: 479px) {
-    .cta-actions .btn {
-      flex: 1 1 100%;
+  .copy {
+    background: transparent;
+    color: var(--mute-night);
+    border: 1px solid var(--line-night);
+    border-radius: var(--radius-pill);
+    padding: 0.5rem 0.8rem;
+    transition: color 300ms, border-color 300ms;
+  }
+
+  .copy:hover {
+    color: var(--snow);
+    border-color: var(--snow);
+  }
+
+  .close-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+    font-size: 0.875rem;
+  }
+
+  .close-meta a {
+    color: var(--snow);
+  }
+
+  .close-meta a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 860px) {
+    .close-in {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: start;
     }
   }
 </style>

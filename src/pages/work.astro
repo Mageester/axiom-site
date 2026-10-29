@@ -54,6 +54,8 @@ const concepts = projects.filter((project) => project.kind === 'concept');
               alt={client.alt}
               sizes="(min-width: 1024px) 640px, 92vw"
               position="center top"
+              loading="eager"
+              fetchpriority="high"
             />
           </BrowserFrame>
           <div class="featured-copy">
@@ -126,8 +128,6 @@ const concepts = projects.filter((project) => project.kind === 'concept');
     color: var(--text-muted);
     font-size: var(--fs-xs);
     font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
 
   .featured-summary {
