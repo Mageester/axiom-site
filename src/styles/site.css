@@ -1222,6 +1222,7 @@ html.has-cursor :is(input, textarea, select) {
   transition: opacity 350ms;
 }
 
+.preview img.is-on,
 .preview picture.is-on,
 .preview picture.is-on img {
   opacity: 1;

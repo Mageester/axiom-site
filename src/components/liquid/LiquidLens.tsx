@@ -418,7 +418,9 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
     const dir = new Vector3();
     const frame = () => {
       raf = requestAnimationFrame(frame);
-      const dt = Math.min(clock.getDelta(), 0.05);
+      // The animation uses a capped delta; the FPS sample needs the real elapsed time.
+      const elapsed = clock.getDelta();
+      const dt = Math.min(elapsed, 0.05);
       if (document.hidden) return;
 
       const target = computeTarget();
@@ -510,7 +512,7 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
 
       if (!sampled && ready) {
         frames += 1;
-        sampleTime += dt;
+        sampleTime += elapsed;
         if (sampleTime > 2.5) {
           sampled = true;
           const fps = frames / sampleTime;
