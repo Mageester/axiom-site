@@ -243,10 +243,10 @@ export default function LiquidLens({ projects, stageId, reelId, posterId, dwell 
       const wide = width > 860;
       const visH = 2 * Math.tan(MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
       const visW = visH * camera.aspect;
-      // Keep in step with the poster's CSS: diameter = min(58cqh, 38cqw) wide, min(68cqw, 44cqh) narrow.
-      const s = wide ? Math.min(visH * 0.29, visW * 0.19) : Math.min(visW * 0.34, visH * 0.22);
+      // Keep in step with the poster's CSS: diameter = min(58cqh, 38cqw) at (76cqw, 44cqh) wide, min(56cqw, 30cqh) at (50cqw, 36cqh) narrow.
+      const s = wide ? Math.min(visH * 0.29, visW * 0.19) : Math.min(visW * 0.28, visH * 0.15);
       mesh.scale.setScalar(s);
-      base.set(wide ? visW * 0.24 : 0, wide ? visH * 0.015 : visH * 0.12, 0);
+      base.set(wide ? visW * 0.26 : 0, wide ? visH * 0.06 : visH * 0.14, 0);
       mesh.position.copy(base);
     };
     resize();

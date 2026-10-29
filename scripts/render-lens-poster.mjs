@@ -20,8 +20,8 @@ const { dataUrl, crop } = await page.evaluate(() => {
   const h = stage.clientHeight;
   const scale = canvas.width / w;
   const diameter = Math.min(h * 0.58, w * 0.38) * 1.3;
-  const cx = w * 0.74;
-  const cy = h * 0.48;
+  const cx = w * 0.76;
+  const cy = h * 0.44;
   return {
     dataUrl: canvas.toDataURL('image/png'),
     crop: {
