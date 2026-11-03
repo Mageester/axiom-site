@@ -515,6 +515,9 @@ ScrollTrigger.create({
     done.hidden = true;
     form.hidden = false;
     step = 0;
+    // The step transitions leave inline styles behind, which would keep the first question invisible.
+    gsap.killTweensOf(sets);
+    gsap.set(sets, { clearProps: 'opacity,transform' });
     sets.forEach((s, n) => (s.hidden = n !== 0));
     nEl.textContent = '1';
     bars.forEach((b, n) => b.classList.toggle('on', n === 0));

@@ -162,9 +162,26 @@ export function initBooking() {
     }
   });
 
+  // Going Back keeps the earlier choice, and picking it again fires no change event,
+  // so with no Continue button the visitor would be stuck. A new choice is not in state
+  // yet when its click fires, so this only catches the repeated one.
+  const advanceIfUnchanged = (input: HTMLInputElement) => {
+    if (input.name === 'area' && state.area === input.value) advance(1);
+    else if (input.name === 'day' && state.day?.toISOString() === input.value) advance(2);
+    else if (input.name === 'time' && state.time === Number(input.value)) advance(3);
+  };
+  dialog.addEventListener('keydown', (event) => {
+    const input = event.target as HTMLInputElement;
+    if (event.key === 'Enter' && input.type === 'radio') {
+      event.preventDefault();
+      advanceIfUnchanged(input);
+    }
+  });
+
   back.addEventListener('click', () => show(Math.max(0, index - 1)));
   dialog.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
+    if (target instanceof HTMLInputElement && target.type === 'radio') advanceIfUnchanged(target);
     if (target === dialog || target.closest('[data-close]')) dialog.close();
     if (target.closest('[data-restart]')) {
       reset();
