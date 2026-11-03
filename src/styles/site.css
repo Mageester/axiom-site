@@ -163,7 +163,7 @@
   color-scheme: dark;
 }
 
-/* Page text sits above the travelling lens canvas (z-index 1). */
+/* Page text sits above the lens canvas (z-index 1) except where the lens rises above the page. */
 main .container,
 main .container-narrow {
   position: relative;
@@ -1234,7 +1234,7 @@ html.has-cursor :is(input, textarea, select) {
   }
 }
 
-/* When the lens itself follows the cursor through the work list, the image preview stands down. */
+/* When the lens itself shows the hovered project in the work list, the image preview stands down. */
 html.lens-travel .preview {
   display: none;
 }

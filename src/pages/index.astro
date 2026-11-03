@@ -41,12 +41,12 @@ const poster = {
   heroTheme="dark"
 >
   <main id="main-content" tabindex="-1">
-    <!-- One persistent lens canvas travels with the scroll (see LiquidLens.tsx). -->
+    <!-- One persistent lens canvas: hero, corner dock, closing orb (see LiquidLens.tsx). -->
     <LiquidLens client:idle projects={lensProjects} reelId="hero-reel" posterId="lens-poster" />
 
     <!-- Stage: the liquid lens hero -->
     <section class="stage hero-stage" id="hero-stage" data-stage>
-      <picture class="lens-poster" id="lens-poster" aria-hidden="true" data-lens-anchor="hero">
+      <picture class="lens-poster" id="lens-poster" aria-hidden="true">
         <source type="image/avif" srcset="/images/lens-poster-450.avif 450w, /images/lens-poster-720.avif 720w, /images/lens-poster-900.avif 900w" sizes={poster.sizes} />
         <img
           src={poster.href}
@@ -94,8 +94,7 @@ const poster = {
 
     <!-- Statement -->
     <section class="section statement-section" aria-labelledby="statement-label">
-      <div class="container statement-wrap">
-        <div class="lens-anchor statement-anchor" data-lens-anchor="statement" aria-hidden="true"></div>
+      <div class="container">
         <p id="statement-label" class="eyebrow">The studio</p>
         <p class="statement" data-reveal>
           We design
@@ -112,10 +111,7 @@ const poster = {
       <div class="container">
         <div class="work-head">
           <h2 id="work-title">Selected <em>work</em></h2>
-          <div class="work-head-side">
-            <div class="lens-anchor work-anchor" data-lens-anchor="work" aria-hidden="true"></div>
-            <p class="mono">One client site, three concepts</p>
-          </div>
+          <p class="mono">One client site, three concepts</p>
         </div>
         <ul role="list" class="rows">
           {reel.map((project, index) => (
@@ -182,7 +178,6 @@ const poster = {
           <div class="offer-actions">
             <a class="btn btn-secondary" href="/agencies/" data-magnetic>Send a first job <Icon name="arrow-right" /></a>
           </div>
-          <div class="lens-anchor offers-anchor" data-lens-anchor="offers" aria-hidden="true"></div>
         </div>
       </div>
     </section>
@@ -195,7 +190,6 @@ const poster = {
           <h2 id="process-title">First call to launch in <em>four</em> steps</h2>
           <p>Scope and price are agreed in writing before design starts, so there are no surprises later.</p>
           <a href="/approach/" class="arrow-link">See the full process <Icon name="arrow-right" /></a>
-          <div class="lens-anchor head-anchor" data-lens-anchor="section" aria-hidden="true"></div>
         </div>
         <ol role="list" class="steps reveal-stagger">
           {processSteps.map((step) => (
@@ -223,7 +217,6 @@ const poster = {
             You work directly with the people who plan, design and build your website.
           </p>
           <a href="/about/" class="arrow-link">About the studio <Icon name="arrow-right" /></a>
-          <div class="lens-anchor head-anchor" data-lens-anchor="section" aria-hidden="true"></div>
         </div>
         <ul role="list" class="founders reveal-stagger">
           {founders.map((founder) => (
@@ -245,13 +238,17 @@ const poster = {
           <h2 id="faq-title">Straight <em>answers</em></h2>
           <p>About cost, timing and what working with us looks like.</p>
           <a href="/contact/" class="arrow-link">Ask something else <Icon name="arrow-right" /></a>
-          <div class="lens-anchor head-anchor" data-lens-anchor="section" aria-hidden="true"></div>
         </div>
         <FaqList items={homeFaq} openFirst />
       </div>
     </section>
 
     <CtaBand title="Let’s make yours." />
+
+    <!-- Where the lens rests while the page is read; only shown while it is there. -->
+    <a class="lens-dock" href={CTA_PATHS.startProject} data-lens-anchor="dock">
+      <span class="lens-dock-label">Start a project</span>
+    </a>
   </main>
 </BaseLayout>
 
@@ -276,8 +273,8 @@ const poster = {
   }
 
   /* The lens canvas is fixed over the whole page, above section backgrounds
-     and below the text (every .container sits at z-index 2). While a work
-     row is hovered it rises above the list like a floating preview. */
+     and below the text (every .container sits at z-index 2). In the corner
+     dock and while a work row is hovered it rises above the page. */
   main :global(.lens-canvas) {
     position: fixed;
     top: 0;
@@ -305,42 +302,79 @@ const poster = {
     z-index: 2;
   }
 
-  /* Invisible boxes the travelling lens docks to. */
-  .lens-anchor {
+  /* The corner dock: a transparent link over the resting lens. At rest the lens
+     only shows inside the page margin, so it can never cover the text: whole
+     where the margin is wide enough, peeking in from the edge where it is not.
+     Hover or focus pops it fully out. 1.06 and 1.12 allow for the displacement.
+     It needs a running lens, so without WebGL, with reduced motion and on
+     phones it never appears. */
+  .lens-dock {
     display: none;
-    pointer-events: none;
   }
 
-  @media (min-width: 861px) {
-    .lens-anchor {
-      display: block;
-    }
-    .statement-wrap {
-      position: relative;
-    }
-    .statement-anchor {
-      position: absolute;
-      top: 50%;
-      right: var(--gutter);
-      width: clamp(150px, 15vw, 220px);
-      aspect-ratio: 1;
-      transform: translateY(-50%);
-    }
-    .work-anchor {
-      width: clamp(120px, 11vw, 170px);
-      aspect-ratio: 1;
-      margin-left: auto;
-    }
-    .offers-anchor {
-      width: clamp(130px, 12vw, 190px);
-      aspect-ratio: 1;
-      margin-top: 1rem;
-    }
-    .head-anchor {
-      width: clamp(120px, 11vw, 170px);
-      aspect-ratio: 1;
-      margin-top: 2rem;
-    }
+  :global(html.lens-travel) .lens-dock {
+    --size: 120px;
+    --whole: calc(var(--size) * 1.12 + 1.5rem);
+    --show: min(max(var(--gutter), (100vw - var(--container)) / 2) - 10px, var(--whole));
+    position: fixed;
+    right: calc(var(--show) - var(--size) * 1.06);
+    bottom: clamp(1.25rem, 2.5vw, 2.25rem);
+    z-index: 4;
+    display: block;
+    width: var(--size);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    visibility: hidden;
+    transition:
+      right 500ms var(--ease),
+      width 500ms var(--ease),
+      visibility 0s linear 300ms;
+  }
+
+  :global(html.lens-travel) .lens-dock.is-on {
+    visibility: visible;
+    transition:
+      right 500ms var(--ease),
+      width 500ms var(--ease),
+      visibility 0s;
+  }
+
+  :global(html.lens-travel) .lens-dock:is(:hover, :focus-visible) {
+    --size: 132px;
+    --show: var(--whole);
+  }
+
+  /* Reaches past the screen edge so a pointer on the peeking lens keeps the hover
+     as the lens pops out from under it. */
+  .lens-dock::after {
+    content: '';
+    position: absolute;
+    inset: 0 -100px 0 50%;
+  }
+
+  .lens-dock-label {
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 1rem);
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-pill);
+    background: var(--night);
+    color: var(--snow);
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(10px, -50%);
+    transition:
+      opacity 300ms var(--ease),
+      transform 500ms var(--ease);
+  }
+
+  .lens-dock:is(:hover, :focus-visible) .lens-dock-label {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(0, -50%);
   }
 
   /* The poster paints first and is the LCP image; it sits exactly where the
@@ -449,6 +483,11 @@ const poster = {
     animation: fade-in 1400ms var(--ease) 900ms both;
   }
 
+  /* The caption goes with the lens as it leaves for the dock (set in LiquidLens). */
+  .reel > * {
+    opacity: calc(1 - var(--leaving, 0) * 4);
+  }
+
   .reel-hint {
     color: var(--mute-night);
   }
@@ -539,12 +578,6 @@ const poster = {
     margin-bottom: 1.75rem;
   }
 
-  .work-head-side {
-    display: grid;
-    justify-items: end;
-    gap: 1.25rem;
-  }
-
   .work-head h2 {
     font-size: clamp(2.5rem, 1rem + 6vw, 6rem);
     letter-spacing: -0.05em;
@@ -594,6 +627,7 @@ const poster = {
     gap: 0.4rem;
     color: var(--mute);
     text-align: right;
+    transition: transform 800ms var(--ease);
   }
 
   .row-meta .tag {
@@ -625,6 +659,10 @@ const poster = {
     .rows .row:hover .row-in {
       opacity: 1;
       transform: translateX(18px);
+    }
+    /* The name nudges; the tags hold the right edge. */
+    .rows .row:hover .row-meta {
+      transform: translateX(-18px);
     }
   }
 
