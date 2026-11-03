@@ -356,7 +356,10 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
       inDock = false;
       toOrb = 0;
       const hero = rectOf(poster);
-      if (!travel) return hero;
+      if (!travel) {
+        reel?.style.removeProperty('--leaving');
+        return hero;
+      }
       if (hoveredRow) {
         if (rail === undefined) rail = measureRail();
         if (rail) {
@@ -548,6 +551,7 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
             poster.removeAttribute('data-hidden');
             orb?.classList.remove('is-lens');
             dock?.classList.remove('is-on');
+            reel?.style.removeProperty('--leaving');
             document.documentElement.classList.remove('lens-travel');
             return;
           }
