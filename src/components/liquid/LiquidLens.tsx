@@ -6,12 +6,13 @@
  * of a blur, a static poster until WebGL is ready (and forever for no-WebGL or
  * reduced motion), and a reel caption synced to the shader timeline.
  *
- * One persistent canvas travels with the scroll on wide screens: the lens
- * starts large in the hero, glides between `[data-lens-anchor]` boxes placed
- * in the page (beside the statement, in the work list, in the section heads)
- * and ends docked on the closing orb. Hovering a `[data-lens-hover]` work row
- * pulls it under the cursor showing that project. On narrow screens the lens
- * stays in the hero and fades as it scrolls away.
+ * One persistent canvas with three places to be on wide screens: large in the
+ * hero, small in the corner dock (a real "Start a project" link) while the page
+ * is being read, and on the closing orb. It flies only as the hero leaves and as
+ * the closing stage arrives, so it never crosses the reading column. Hovering a
+ * `[data-lens-hover]` work row pops it out into the clear column beside the
+ * project names, showing that project. On narrow screens the lens stays in the
+ * hero and fades as it scrolls away.
  *
  * The island renders only the canvas. The hero copy, poster, anchors and reel
  * caption are server-rendered HTML that this component drives by id.
@@ -157,6 +158,7 @@ function detectQuality() {
 
 const smooth = (t: number) => (t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t));
 const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
+const mix = (a: Target, b: Target, k: number): Target => ({ cx: lerp(a.cx, b.cx, k), cy: lerp(a.cy, b.cy, k), d: lerp(a.d, b.d, k) });
 
 export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -263,7 +265,10 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
     let visH = 1;
     const travelQuery = matchMedia('(min-width: 861px)');
     let travel = travelQuery.matches;
+    // The clear column beside the work list's names; measured on first use.
+    let rail: { cx: number; d: number } | null | undefined;
     const resize = () => {
+      rail = undefined;
       W = window.innerWidth || 1;
       H = window.innerHeight || 1;
       renderer.setSize(W, H, false);
@@ -279,9 +284,9 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
     resize();
     window.addEventListener('resize', resize);
 
-    // Anchors in document order: the poster (hero) first, the orb last.
-    const anchors = Array.from(document.querySelectorAll<HTMLElement>('[data-lens-anchor]'));
-    const orb = anchors.find((el) => el.dataset.lensAnchor === 'close') ?? null;
+    // Where the lens rests after the hero: the corner dock, then the closing orb.
+    const dock = document.querySelector<HTMLElement>('[data-lens-anchor="dock"]');
+    const orb = document.querySelector<HTMLElement>('[data-lens-anchor="close"]');
     const rectOf = (el: HTMLElement): Target | null => {
       const r = el.getBoundingClientRect();
       if (r.width < 8 || r.height < 8) return null;
@@ -289,9 +294,9 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
       return { cx: r.left + r.width / 2, cy: r.top + r.height / 2, d };
     };
 
-    // Work-row hover: the lens follows the cursor and shows that project.
+    // Work-row hover: the lens pops out beside the names and shows that project.
     let hovered: number | null = null;
-    const pointer = { x: W / 2, y: H / 2 };
+    let hoveredRow: HTMLElement | null = null;
     const hoverRows = Array.from(document.querySelectorAll<HTMLElement>('[data-lens-hover]'));
     const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (fine) {
@@ -300,14 +305,33 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
         row.addEventListener('pointerenter', () => {
           if (!travel || Number.isNaN(index)) return;
           hovered = index;
-          canvas.classList.add('is-front');
+          hoveredRow = row;
         });
         row.addEventListener('pointerleave', () => {
           hovered = null;
-          canvas.classList.remove('is-front');
+          hoveredRow = null;
         });
       });
     }
+    // One column for every row, so the lens only slides up and down between them.
+    // When the names leave no room for it, it stays in the dock and shows the project there.
+    const measureRail = () => {
+      let nameEnd = 0;
+      let metaStart = W;
+      const range = document.createRange();
+      for (const row of hoverRows) {
+        const name = row.querySelector('.row-name');
+        const meta = row.querySelector('.row-meta');
+        if (!name || !meta) return null;
+        range.selectNodeContents(name);
+        nameEnd = Math.max(nameEnd, range.getBoundingClientRect().right);
+        metaStart = Math.min(metaStart, meta.getBoundingClientRect().left);
+      }
+      // 18px is the hovered row's nudge to the right, 1.3 the displacement margin.
+      const room = metaStart - nameEnd - 18;
+      const d = Math.min(room / 1.3, 300, W * 0.22);
+      return d < 110 ? null : { cx: nameEnd + 18 + room / 2, d };
+    };
     let orbHover = false;
     const orbOn = () => {
       orbHover = true;
@@ -315,42 +339,46 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
     const orbOff = () => {
       orbHover = false;
     };
-    orb?.addEventListener('pointerenter', orbOn);
-    orb?.addEventListener('pointerleave', orbOff);
-    orb?.addEventListener('focus', orbOn);
-    orb?.addEventListener('blur', orbOff);
+    [orb, dock].forEach((el) => {
+      el?.addEventListener('pointerenter', orbOn);
+      el?.addEventListener('pointerleave', orbOff);
+      el?.addEventListener('focus', orbOn);
+      el?.addEventListener('blur', orbOff);
+    });
 
-    // Where the lens should be right now, in CSS pixels.
+    // Where the lens should be right now, in CSS pixels. The flights are tied to
+    // the scroll: hero to dock over the first stretch of the hero leaving, dock
+    // to orb as the orb rises into view.
     const lens = { cx: 0, cy: 0, d: 1, set: false };
+    let inDock = false;
+    let toOrb = 0;
     const computeTarget = (): Target | null => {
-      if (hovered !== null && travel) {
-        return { cx: pointer.x, cy: pointer.y, d: Math.min(300, W * 0.22) };
-      }
+      inDock = false;
+      toOrb = 0;
       const hero = rectOf(poster);
       if (!travel) return hero;
-      const points: Array<Target & { doc: number }> = [];
-      for (const el of anchors) {
-        const r = rectOf(el);
-        if (r) points.push({ ...r, doc: r.cy + window.scrollY });
-      }
-      if (!points.length) return hero;
-      const ref = window.scrollY + H * 0.4;
-      if (ref <= points[0].doc) return points[0];
-      for (let i = 0; i < points.length - 1; i++) {
-        const a = points[i];
-        const b = points[i + 1];
-        if (ref >= a.doc && ref <= b.doc) {
-          const t = smooth((ref - a.doc) / Math.max(b.doc - a.doc, 1));
-          return { cx: lerp(a.cx, b.cx, t), cy: lerp(a.cy, b.cy, t), d: lerp(a.d, b.d, t) };
+      if (hoveredRow) {
+        if (rail === undefined) rail = measureRail();
+        if (rail) {
+          const r = hoveredRow.getBoundingClientRect();
+          return { cx: rail.cx, cy: r.top + r.height / 2, d: rail.d };
         }
       }
-      return points[points.length - 1];
+      const parked = dock && rectOf(dock);
+      if (!hero || !parked) return hero;
+      const closing = orb && rectOf(orb);
+      if (closing) {
+        toOrb = smooth((H - (closing.cy - closing.d / 2)) / (H * 0.6));
+        if (toOrb > 0) return mix(parked, closing, toOrb);
+      }
+      const k = smooth(window.scrollY / (poster.parentElement!.offsetHeight * 0.7));
+      inDock = k >= 1;
+      reel?.style.setProperty('--leaving', k.toFixed(3));
+      return mix(hero, parked, k);
     };
 
     const mouse = { x: 0, y: 0, tx: 0, ty: 0, near: 0, tnear: 0 };
     const onMove = (event: PointerEvent) => {
-      pointer.x = event.clientX;
-      pointer.y = event.clientY;
       const r = Math.max(lens.d / 2, 1);
       const nx = (event.clientX - lens.cx) / r;
       const ny = -(event.clientY - lens.cy) / r;
@@ -430,6 +458,11 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
       shown += (wantShown - shown) * 0.1;
       if (ready) canvas.style.opacity = String(Math.min(1, shown));
       if (shown < 0.02) return;
+      // Above the page in the dock and when popped out; behind the text elsewhere.
+      canvas.classList.toggle('is-front', inDock || hovered !== null);
+      dock?.classList.toggle('is-on', inDock && ready);
+      // The closing orb clears the way for the lens halfway through its flight.
+      orb?.classList.toggle('is-lens', travel && ready && toOrb > 0.5);
 
       if (!lens.set) {
         Object.assign(lens, target, { set: true });
@@ -461,6 +494,7 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
 
       // Timeline: hold, then dissolve to the next site. A hovered work row
       // interrupts with a quick dissolve to that project and pauses the cycle.
+      // The cycle also rests in the dock, so nothing changes beside the reading.
       phaseT += dt;
       const forced = hovered !== null && hovered !== current && Boolean(textures[hovered]);
       if (phase === 'hold' && forced) {
@@ -471,7 +505,7 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
         uniforms.uTexB.value = textures[next];
         uniforms.uAspectB.value = aspects[next];
         setReel(next);
-      } else if (phase === 'hold' && hovered === null && phaseT > dwell - 1.8 && textures[next] && next !== current) {
+      } else if (phase === 'hold' && hovered === null && !inDock && phaseT > dwell - 1.8 && textures[next] && next !== current) {
         phase = 'blend';
         phaseT = 0;
         transition = 1.8;
@@ -500,16 +534,6 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
         poster.setAttribute('data-hidden', '');
         setReel(current);
       }
-      // The closing orb hands over to the lens once it is docked there.
-      if (orb && travel && ready) {
-        const at = rectOf(orb);
-        const docked =
-          hovered === null && at !== null && Math.abs(lens.cx - at.cx) < 6 && Math.abs(lens.cy - at.cy) < 6 && Math.abs(lens.d - at.d) < 6;
-        orb.classList.toggle('is-lens', docked);
-      } else {
-        orb?.classList.remove('is-lens');
-      }
-
       if (!sampled && ready) {
         frames += 1;
         sampleTime += elapsed;
@@ -523,6 +547,7 @@ export default function LiquidLens({ projects, reelId, posterId, dwell = 5.5 }: 
             canvas.style.opacity = '0';
             poster.removeAttribute('data-hidden');
             orb?.classList.remove('is-lens');
+            dock?.classList.remove('is-on');
             document.documentElement.classList.remove('lens-travel');
             return;
           }
