@@ -1,0 +1,345 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/cinder-salt/styles.css';
+import { nameWide, nameTall } from '../../../demos/cinder-salt/name-paths';
+
+const letters = (layout: typeof nameWide) => layout.glyphs.map((g) => g.d).join('');
+const pad = 6;
+
+const menu = [
+  {
+    id: 'embers',
+    no: '01',
+    title: 'From the embers',
+    note: 'Cooked on the hearth, in the order the fire allows.',
+    dishes: [
+      { name: 'Dry-aged strip loin', desc: '10 oz over hot coals. Bone marrow butter, charred shallot, red wine jus.', fire: 'Hot bed', price: 54 },
+      { name: 'Lamb shoulder for two', desc: 'Six hours on the slow side of the hearth. Pickled rhubarb, yoghurt, flatbread.', fire: 'Slow bed', price: 82 },
+      { name: 'Whole rainbow trout', desc: 'Split and grilled skin down. Brown butter, capers, wild leeks, lemon.', fire: 'Hot bed', price: 38 },
+      { name: 'Waterloo Region pork chop', desc: 'Brined for two days. Apple mustard glaze, grilled cabbage, sage.', fire: 'Grill', price: 39 },
+      { name: 'Half chicken', desc: 'Brined overnight. Hot honey, lemon, garlic toast to catch the juices.', fire: 'Hot bed', price: 34 },
+      { name: 'Cauliflower steak', desc: 'Smoked almond romesco, parsley, preserved lemon. Vegan.', fire: 'Embers', price: 29 },
+    ],
+  },
+  {
+    id: 'small',
+    no: '02',
+    title: 'Small plates',
+    note: 'For the table, as they come off the fire.',
+    dishes: [
+      { name: 'Charred sourdough', desc: 'Whipped smoked butter, flaky salt.', fire: 'Grill', price: 9 },
+      { name: 'Coal-roasted oysters', desc: 'Three, with chili butter and lemon.', fire: 'Embers', price: 18 },
+      { name: 'Leeks in the embers', desc: 'Hazelnut romesco, shaved pecorino.', fire: 'Embers', price: 15 },
+      { name: 'Beef tartare', desc: 'Smoked egg yolk, pickled mustard seed, rye crisps.', fire: 'No fire', price: 19 },
+      { name: 'Sweet corn ribs', desc: 'Lime butter, cotija, chili. Vegetarian.', fire: 'Grill', price: 14 },
+      { name: 'Burnt carrots', desc: 'Whipped feta, dukkah, mint. Vegetarian.', fire: 'Embers', price: 15 },
+    ],
+  },
+  {
+    id: 'finish',
+    no: '03',
+    title: 'To finish',
+    note: 'Salt shows up here too.',
+    dishes: [
+      { name: 'Smoked maple custard', desc: 'Salted shortbread. Vegetarian.', fire: 'Embers', price: 12 },
+      { name: 'Grilled stone fruit', desc: 'Burnt honey cream, toasted oats. Vegetarian.', fire: 'Grill', price: 13 },
+      { name: 'Dark chocolate pot', desc: 'Olive oil, sea salt, grilled bread.', fire: 'Grill', price: 12 },
+      { name: 'Ontario cheeses', desc: 'Three, with grilled flatbread and preserves.', fire: 'Grill', price: 19 },
+    ],
+  },
+];
+
+const hours = [
+  { days: '1', label: 'Monday', time: 'Closed', kitchen: 'Back Tuesday' },
+  { days: '2,3,4', label: 'Tuesday to Thursday', time: '5 pm to 11 pm', kitchen: 'Kitchen until 10' },
+  { days: '5,6', label: 'Friday and Saturday', time: '5 pm to midnight', kitchen: 'Kitchen until 11' },
+  { days: '0', label: 'Sunday', time: '4:30 pm to 9:30 pm', kitchen: 'Kitchen until 8:30' },
+];
+---
+
+<DemoLayout
+  name="Cinder & Salt"
+  title="Cinder & Salt | Wood-fired restaurant in downtown Kitchener"
+  description="Cinder & Salt cooks everything over a live wood fire in downtown Kitchener, Ontario. See the menu, check tonight's hours and reserve a table."
+  themeColor="#0C0907"
+  pill="dark"
+>
+  <script is:inline slot="head">
+    (function () {
+      var r = document.documentElement;
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        r.classList.add('cs-js');
+        setTimeout(function () {
+          r.classList.remove('cs-js');
+        }, 5000);
+      }
+    })();
+  </script>
+
+  <div class="fire-stand" aria-hidden="true"></div>
+  <canvas class="fire" id="fire" aria-hidden="true"></canvas>
+
+  <header class="bar" data-theme="dark">
+    <a class="bar-mark" href="#top"><span class="visually-hidden">Cinder and Salt, </span>Cinder <i>&amp;</i> Salt</a>
+    <nav class="bar-nav" aria-label="Sections" data-check-skip>
+      <a href="#menu">Menu</a>
+      <a href="#fire-story">The fire</a>
+      <a href="#private">Private dining</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <p class="bar-status" data-status data-check-skip><span class="dot" aria-hidden="true"></span><span data-status-text>Tuesday to Sunday, from 5 pm</span></p>
+    <a class="bar-tel" data-check-skip href="tel:+15195550119">(519) 555-0119</a>
+    <a class="btn btn-reserve" href="#reserve" data-magnetic data-check-skip><span>Reserve</span></a>
+  </header>
+
+  <div class="veil" aria-hidden="true">
+    <div class="veil-frame">
+      <div class="hero-art" style={`--ar-wide:${nameWide.w / nameWide.h};--ar-tall:${nameTall.w / nameTall.h}`}>
+        <svg class="mask mask-wide" viewBox={`0 0 ${nameWide.w} ${nameWide.h}`} focusable="false">
+          <g class="mask-g">
+            <rect class="mask-bg" x="-1600" y="-1600" width="4400" height="5200"></rect>
+            <path class="mask-letters" d={letters(nameWide)}></path>
+            <g class="covers">
+              {nameWide.glyphs.map((g) => (
+                <rect class="cover" x={g.box[0] - pad} y={g.box[1] - pad} width={g.box[2] - g.box[0] + pad * 2} height={g.box[3] - g.box[1] + pad * 2}></rect>
+              ))}
+            </g>
+          </g>
+        </svg>
+        <svg class="mask mask-tall" viewBox={`0 0 ${nameTall.w} ${nameTall.h}`} focusable="false">
+          <g class="mask-g">
+            <rect class="mask-bg" x="-1600" y="-1600" width="4400" height="5200"></rect>
+            <path class="mask-letters" d={letters(nameTall)}></path>
+            <g class="covers">
+              {nameTall.glyphs.map((g) => (
+                <rect class="cover" x={g.box[0] - pad} y={g.box[1] - pad} width={g.box[2] - g.box[0] + pad * 2} height={g.box[3] - g.box[1] + pad * 2}></rect>
+              ))}
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-ui">
+    <div class="veil-frame">
+      <div class="hero-art" style={`--ar-wide:${nameWide.w / nameWide.h};--ar-tall:${nameTall.w / nameTall.h}`}>
+        <p class="hero-line" aria-hidden="true" data-reveal="lines" data-reveal-now data-reveal-delay="1.05">Wood-fired kitchen. Downtown Kitchener.</p>
+      </div>
+      <div class="hero-meta" data-check-skip>
+        <p class="hero-status" data-status><span class="dot" aria-hidden="true"></span><span data-status-text>Tuesday to Sunday, from 5 pm</span></p>
+        <p class="hero-scroll" aria-hidden="true"><span class="hero-scroll-bar"></span>Scroll to walk in</p>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero" id="top" data-theme="dark" aria-labelledby="hero-title">
+      <div class="hero-stage">
+        <h1 id="hero-title" class="visually-hidden">Cinder &amp; Salt. Wood-fired kitchen. Downtown Kitchener.</h1>
+      </div>
+
+      <div class="hero-statement" id="statement">
+        <p class="statement-big">
+          <span class="s-line"><span>Everything here is</span></span>
+          <span class="s-line"><span>cooked over <em>live fire.</em></span></span>
+        </p>
+        <p class="statement-small s-fade">Split oak, a bed of coals and one long grill. There is no gas line in the kitchen and no oven to hide behind. If it is on your plate, it has been close to the flame.</p>
+      </div>
+    </section>
+
+    <section class="story" id="fire-story" data-theme="dark" aria-labelledby="story-title">
+      <div class="story-stage">
+        <div class="story-head">
+          <p class="kicker">The fire</p>
+          <h2 id="story-title" class="h2">A night starts at three.</h2>
+        </div>
+        <ol class="steps" role="list">
+          <li class="step" data-beat="0">
+            <p class="step-time"><span class="num">3:00</span><span class="ampm">pm</span></p>
+            <h3 class="step-title">The oak goes on.</h3>
+            <p class="step-body">Split red oak stacked in the hearth, lit by hand. It takes about ninety minutes to burn down to coals worth cooking on, so nobody rushes it.</p>
+          </li>
+          <li class="step" data-beat="1">
+            <p class="step-time"><span class="num">4:30</span><span class="ampm">pm</span></p>
+            <h3 class="step-title">The coals get raked.</h3>
+            <p class="step-body">A hot bed for steak, trout and chops. A slow bed at the far end for lamb, onions and anything that wants time. The cooks know the map by heart.</p>
+          </li>
+          <li class="step" data-beat="2">
+            <p class="step-time"><span class="num">5:00</span><span class="ampm">pm</span></p>
+            <h3 class="step-title">The doors open.</h3>
+            <p class="step-body">Forty-two seats around a brick wall and a long oak counter that faces the hearth. The lights stay low, because the fire does most of the work.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="menu sheet" id="menu" data-theme="light" aria-labelledby="menu-title">
+      <div class="menu-inner">
+        <header class="menu-head">
+          <p class="kicker">Dinner, Tuesday to Sunday</p>
+          <h2 id="menu-title" class="menu-title" data-reveal="lines">The menu</h2>
+          <p class="menu-note" data-reveal="up">It changes with the market and with what the fire does well that week. Prices are in Canadian dollars, before tax. Tell us about allergies when you book or when you sit down.</p>
+        </header>
+
+        {menu.map((section) => (
+          <section class="course" aria-labelledby={`c-${section.id}`}>
+            <header class="course-head">
+              <p class="course-no" aria-hidden="true">{section.no}</p>
+              <h3 id={`c-${section.id}`} class="course-title">{section.title}</h3>
+              <p class="course-note">{section.note}</p>
+            </header>
+            <ul class="dishes" role="list" data-reveal="stagger">
+              {section.dishes.map((dish) => (
+                <li class="dish">
+                  <div class="dish-text">
+                    <h4 class="dish-name">{dish.name}</h4>
+                    <p class="dish-desc">{dish.desc}</p>
+                    <p class="dish-fire"><span class="visually-hidden">Cooked on: </span>{dish.fire}</p>
+                  </div>
+                  <p class="dish-price"><span class="visually-hidden">$</span><span aria-hidden="true" class="cur">$</span>{dish.price}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+
+        <p class="menu-foot">Cocktails, Ontario wine and local beer are on the bar list. Ask for it at the table.</p>
+      </div>
+    </section>
+
+    <section class="private" id="private" data-theme="dark" aria-labelledby="private-title">
+      <div class="private-inner">
+        <p class="kicker">Private dining</p>
+        <h2 id="private-title" class="private-title" data-reveal="lines">The back room, one long table.</h2>
+        <div class="private-grid">
+          <p class="private-lead" data-reveal="up">Twenty-two seats at a single oak table under the old chimney wall, close enough to the hearth to hear it. The whole menu is cooked for your group, on the same fire as everyone else.</p>
+          <dl class="facts" data-reveal="stagger">
+            <div><dt>Seats</dt><dd>Up to 22 at the table, 40 standing</dd></div>
+            <div><dt>Set menus</dt><dd>From $85 a person, before tax</dd></div>
+            <div><dt>Book</dt><dd><a class="link" href="mailto:events@cinderandsalt.example">events@cinderandsalt.example</a> or <a class="link" href="tel:+15195550119">(519) 555-0119</a></dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit" id="visit" data-theme="dark" aria-labelledby="visit-title">
+      <div class="visit-inner">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-title" class="visit-title" data-reveal="lines">Come hungry. Park easy.</h2>
+        <div class="visit-grid">
+          <div class="visit-block">
+            <h3 class="label">Hours</h3>
+            <p class="live-status" data-status aria-live="polite"><span class="dot" aria-hidden="true"></span><span data-status-text>Tuesday to Sunday, from 5 pm</span></p>
+            <table class="hours">
+              <caption class="visually-hidden">Opening hours</caption>
+              <tbody>
+                {hours.map((row) => (
+                  <tr data-days={row.days}>
+                    <th scope="row">{row.label}</th>
+                    <td>{row.time}</td>
+                    <td class="hours-k">{row.kitchen}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="visit-block">
+            <h3 class="label">Find us</h3>
+            <address class="address">
+              58 Water Street North<br />
+              Downtown Kitchener, Ontario
+            </address>
+            <p class="visit-copy"><strong>Parking.</strong> Street parking on Water Street is free after 6 pm. The Duke Street lot is a two-minute walk and runs about $6 for the evening.</p>
+            <p class="visit-copy"><strong>Access.</strong> Step-free entrance and washroom on the lane side. Ring the bell if the ramp door is shut.</p>
+          </div>
+          <div class="visit-block">
+            <h3 class="label">Talk to us</h3>
+            <a class="phone" href="tel:+15195550119">(519) 555-0119</a>
+            <p class="visit-copy">Call for parties over eight, for same-day tables, or to ask what is on the fire tonight.</p>
+            <p class="visit-copy"><a class="link" href="mailto:hello@cinderandsalt.example">hello@cinderandsalt.example</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reserve sheet" id="reserve" data-theme="ember" aria-labelledby="reserve-title">
+      <div class="reserve-inner">
+        <div class="reserve-intro">
+          <p class="kicker">Reserve</p>
+          <h2 id="reserve-title" class="reserve-title" data-reveal="lines">Book a seat at the fire.</h2>
+          <p class="reserve-copy">Pick the size of your party, the night and a time. We will hold the table and call to confirm.</p>
+          <p class="reserve-copy">Rather talk to a person? <a class="link" href="tel:+15195550119">(519) 555-0119</a></p>
+        </div>
+
+        <div class="rsv-wrap">
+          <noscript><p class="rsv-nojs">The booking tool needs JavaScript. To reserve, call <a class="link" href="tel:+15195550119">(519) 555-0119</a>.</p></noscript>
+          <form class="rsv" id="rsv" novalidate>
+            <div class="rsv-row rsv-party">
+              <fieldset>
+                <legend>Party size</legend>
+                <div class="stepper">
+                  <button type="button" class="step-btn" data-step="-1" aria-label="One fewer guest"><span aria-hidden="true">&minus;</span></button>
+                  <p class="step-n" aria-live="polite"><span data-party>2</span><span class="step-unit" data-party-unit>guests</span></p>
+                  <button type="button" class="step-btn" data-step="1" aria-label="One more guest"><span aria-hidden="true">+</span></button>
+                </div>
+              </fieldset>
+              <p class="rsv-hint" data-party-hint aria-live="polite"></p>
+            </div>
+
+            <fieldset class="rsv-row">
+              <legend>Night</legend>
+              <div class="days" data-days></div>
+            </fieldset>
+
+            <fieldset class="rsv-row">
+              <legend>Time</legend>
+              <div class="slots" data-slots aria-live="polite"></div>
+            </fieldset>
+
+            <div class="rsv-row rsv-contact">
+              <label class="field"><span>Name</span><input name="name" type="text" autocomplete="name" required /></label>
+              <label class="field"><span>Phone or email</span><input name="contact" type="text" autocomplete="tel" required /></label>
+              <label class="field field-wide"><span>Allergies, or an occasion</span><input name="note" type="text" /></label>
+            </div>
+
+            <div class="rsv-actions">
+              <button class="rsv-submit" type="submit"><span>Request this table</span></button>
+              <p class="rsv-error" role="alert" data-error></p>
+            </div>
+          </form>
+
+          <div class="rsv-done" data-done hidden>
+            <p class="kicker">Concept only</p>
+            <h3 class="done-title">Nothing was sent.</h3>
+            <p class="done-summary" data-summary></p>
+            <p class="done-copy">Cinder &amp; Salt is a fictional restaurant, so this request went nowhere. On a real site it would land with the host and the table would be held.</p>
+            <button class="rsv-again" type="button" data-again>Change the booking</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot" data-theme="dark">
+      <p class="foot-mark" aria-hidden="true">Cinder <i>&amp;</i> Salt</p>
+      <div class="foot-cols">
+        <p>58 Water Street North<br />Downtown Kitchener, Ontario</p>
+        <p><a class="link" href="tel:+15195550119">(519) 555-0119</a><br /><a class="link" href="mailto:hello@cinderandsalt.example">hello@cinderandsalt.example</a></p>
+        <p>Tuesday to Sunday, from 5 pm.<br />Closed Mondays.</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <ConceptFooter name="Cinder & Salt" />
+
+  <div class="dock" data-theme="dark" data-check-skip>
+    <a class="dock-reserve" href="#reserve"><span>Reserve</span></a>
+    <a class="dock-call" href="tel:+15195550119"><span class="visually-hidden">Call </span>(519) 555-0119</a>
+  </div>
+</DemoLayout>
+
+<script>
+  import '../../../demos/cinder-salt/main.ts';
+</script>

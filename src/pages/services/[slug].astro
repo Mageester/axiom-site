@@ -20,9 +20,9 @@ export function getStaticPaths() {
 const { service } = Astro.props as { service: Service };
 
 const relatedWork: Record<ServiceSlug, string[]> = {
-  'local-business-websites': ['reids-home-and-yard', 'landscaping', 'salon-nails'],
-  'conversion-sites': ['roofing', 'physio-clinic', 'restaurant-reservation'],
-  rebuilds: ['dental-aurelia', 'law-harrow', 'barber-blackline'],
+  'local-business-websites': ['reids-home-and-yard', 'vernis', 'cinder-salt'],
+  'conversion-sites': ['kelvin', 'atlas-axis', 'cinder-salt'],
+  rebuilds: ['aldous-wren', 'atlas-axis', 'vernis'],
 };
 const work = relatedWork[service.slug].map((id) => getProject(id)!);
 const others = services.filter((item) => item.slug !== service.slug);

@@ -1,0 +1,381 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/kelvin/styles.css';
+import posterWide from '../../../demos/kelvin/poster-wide.jpg';
+import posterTall from '../../../demos/kelvin/poster-tall.jpg';
+
+const phone = '(519) 555-0142';
+const tel = 'tel:+15195550142';
+
+const services = [
+  ['Furnace repair', 'No heat, strange noises, a burner that will not stay lit. We find the cause and fix it, on the first visit when we can.'],
+  ['Furnace replacement', 'A new furnace sized to your house, not copied from the old one. You get the price in writing before we start.'],
+  ['Heat pumps', 'One system for winter heat and summer cooling. A good fit if you want to move off oil, propane or electric baseboards.'],
+  ['Air conditioning', 'Installs, repairs and spring tune-ups. We check the coil, the refrigerant and the drain before the first hot week.'],
+  ['Ductwork', 'Leaky, undersized or badly routed ducts are why some rooms never get warm. We test, seal and rework them.'],
+  ['Heat-loss scan', 'A thermal camera walk-through, so we can show you where the house is losing heat instead of describing it.'],
+  ['Maintenance', 'A spring and fall visit that catches the small things before they turn into a cold night.'],
+];
+
+const checks = [
+  'Check the thermostat is set to Heat, and set a few degrees above the room.',
+  'Find the furnace switch. It looks like a light switch on or near the furnace. Make sure it is on.',
+  'Smell gas? Leave the house first, then call your gas utility from outside. Call us after.',
+  'Worried about frozen pipes? Open the cabinets under sinks on outside walls and let a tap drip.',
+];
+
+const towns = [
+  { id: 'kitchener', name: 'Kitchener', x: 47, y: 46, r: 17 },
+  { id: 'waterloo', name: 'Waterloo', x: 41, y: 25, r: 15 },
+  { id: 'cambridge', name: 'Cambridge', x: 60, y: 72, r: 15 },
+  { id: 'guelph', name: 'Guelph', x: 84, y: 40, r: 15 },
+];
+const nearby = [
+  { name: 'Elmira', x: 33, y: 8 },
+  { name: 'St. Jacobs', x: 44, y: 11 },
+  { name: 'Baden', x: 25, y: 38 },
+  { name: 'New Hamburg', x: 9, y: 46 },
+  { name: 'Breslau', x: 66, y: 41 },
+  { name: 'Ayr', x: 36, y: 84 },
+  { name: 'Elora', x: 76, y: 14 },
+];
+
+const jobs = [
+  ['Furnace replacement', 'Old, loud or failing'],
+  ['Heat pump', 'Heating and cooling in one'],
+  ['Air conditioner', 'New or replacing one'],
+  ['Not sure yet', 'Tell us what you are seeing'],
+];
+const townOptions = [
+  ['Kitchener', ''],
+  ['Waterloo', ''],
+  ['Cambridge', ''],
+  ['Guelph', ''],
+  ['Somewhere nearby', 'Elmira, Baden, New Hamburg and around'],
+];
+const timings = [
+  ['This week', 'Something is failing'],
+  ['Within a month', 'Planning ahead'],
+  ['Spring or summer', 'Before the next season'],
+  ['Just getting prices', 'No rush'],
+];
+const steps = [
+  { legend: 'What do you need done?', name: 'job', options: jobs },
+  { legend: 'Which town is the house in?', name: 'town', options: townOptions },
+  { legend: 'When would you like it done?', name: 'timing', options: timings },
+];
+
+const hours = [
+  ['Emergency heating and cooling', 'Open 24 hours, every day'],
+  ['Service visits and installs', 'Monday to Friday, 7:30 a.m. to 6 p.m.\nSaturday, 8 a.m. to 4 p.m.'],
+  ['Quotes and questions', 'Monday to Friday, 8 a.m. to 5 p.m.'],
+];
+---
+
+<DemoLayout
+  name="Kelvin Home Comfort"
+  title="Kelvin Home Comfort | Heating and cooling in Waterloo Region"
+  description="Furnace repair, replacement, heat pumps and air conditioning for homes in Kitchener, Waterloo, Cambridge and Guelph. A thermal-camera concept site."
+  themeColor="#07060c"
+  pill="dark"
+>
+  <Fragment slot="head">
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('k-live');
+    </script>
+  </Fragment>
+
+  <header class="top" id="top">
+    <a class="brand" href="#main-content" aria-label="Kelvin Home Comfort, top of page">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Kelvin</span>
+      <span class="brand-sub">Home Comfort</span>
+    </a>
+    <button class="menu-btn" data-check-skip type="button" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main" data-check-skip>
+      <a href="#services">Services</a>
+      <a href="#area">Service area</a>
+      <a href="#hours">Hours</a>
+      <a href="#quote">Get a quote</a>
+    </nav>
+  </header>
+
+  <a class="fab" href={tel} aria-label={`Call Kelvin Home Comfort, ${phone}`}>
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"></path></svg>
+    <span class="fab-text"><span class="fab-short">Call now</span><span class="fab-num">{phone}</span></span>
+  </a>
+
+  <main id="main-content" tabindex="-1">
+    <div class="story" id="story">
+      <div class="pin">
+        <div class="stage" aria-hidden="true">
+          <div class="stage-fallback" style={`--poster-wide:url(${posterWide.src});--poster-tall:url(${posterTall.src})`}></div>
+          <canvas id="thermal"></canvas>
+          <div class="stage-scan"></div>
+          <div class="stage-shade"></div>
+        </div>
+
+        <div class="hud" aria-hidden="true">
+          <i class="hud-corner tl"></i><i class="hud-corner tr"></i><i class="hud-corner bl"></i><i class="hud-corner br"></i>
+          <p class="hud-text hud-tl">KELVIN-IR / CAM 01<br />LWIR 8-14 &micro;m &middot; EMISSIVITY 0.95</p>
+          <p class="hud-text hud-tr"><span class="hud-rec">REC</span> <span id="hud-clock">00:00:00</span></p>
+          <div class="hud-inside">
+            <span class="hud-inside-label">INSIDE, AVERAGE</span>
+            <span class="hud-inside-value"><b id="hud-inside">-4.0</b><i>&deg;C</i></span>
+          </div>
+          <div class="scale">
+            <div class="scale-bar"></div>
+            <div class="scale-ticks" id="scale-ticks"></div>
+            <i class="scale-marker" id="scale-marker"></i>
+          </div>
+          <p class="hud-text hud-bl" id="hud-hint">MOVE TO READ A SURFACE</p>
+        </div>
+
+        <div class="reticle" id="reticle" aria-hidden="true">
+          <svg viewBox="0 0 56 56" width="56" height="56"><g fill="none" stroke="#fff" stroke-width="1.5"><circle cx="28" cy="28" r="14" stroke-dasharray="14 8"></circle><path d="M28 2v16M28 38v16M2 28h16M38 28h16"></path></g><circle cx="28" cy="28" r="1.6" fill="#fff"></circle></svg>
+          <div class="reticle-read"><b id="reticle-temp">--</b><span id="reticle-kind">--</span></div>
+        </div>
+
+        <p class="visually-hidden" id="heat-status" role="status" aria-live="polite"></p>
+
+        <section class="scene scene-hero" data-check-skip aria-labelledby="h1">
+          <div class="hero-copy">
+            <h1 class="h1" id="h1">
+              <span class="h1-eyebrow">Heating and cooling &middot; Waterloo Region, Ontario</span>
+              <span class="h1-line"><span>Your house</span></span>
+              <span class="h1-line"><span>is losing heat.</span></span>
+              <span class="h1-line h1-line--hot"><span>We can see where.</span></span>
+            </h1>
+            <p class="lede">
+              Furnaces, heat pumps and air conditioning for homes in Kitchener, Waterloo, Cambridge and Guelph. Repairs at any hour, replacements priced in writing.
+            </p>
+            <div class="controls">
+              <div class="toggle" id="toggle" role="radiogroup" aria-label="Show the house with the heat off or on">
+                <span class="toggle-thumb" aria-hidden="true"></span>
+                <button type="button" role="radio" aria-checked="true" data-state="off" tabindex="0">
+                  <span class="t-label">No heat</span>
+                  <span class="t-sub">House at -4 &deg;C</span>
+                </button>
+                <button type="button" role="radio" aria-checked="false" data-state="on" tabindex="-1">
+                  <span class="t-label">Heat on</span>
+                  <span class="t-sub">House at 21 &deg;C</span>
+                </button>
+              </div>
+              <a class="hero-call" href={tel}>
+                <span class="hero-call-q">No heat right now?</span>
+                <span class="hero-call-n">Call {phone}</span>
+              </a>
+            </div>
+            <a class="plan-link" href="#quote">Planning a replacement? Get a quote <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </section>
+
+        <section class="scene scene-furnace" data-scene="1" data-check-skip aria-labelledby="s1-title">
+          <p class="scene-kicker">01 / 04 &middot; The furnace</p>
+          <h2 class="scene-title" id="s1-title">It starts in the basement.</h2>
+          <p class="scene-body">
+            A furnace that is too big shuts on and off and wears out early. One that is too small never warms the back bedroom. We size it to your house, then check the gas, the flue and the blower before we leave.
+          </p>
+          <p class="scene-data">FLUE <b data-live="flue">-4</b>&deg;C &nbsp;&middot;&nbsp; SUPPLY AIR <b data-live="supply">-4</b>&deg;C</p>
+        </section>
+
+        <section class="scene scene-ducts" data-scene="2" data-check-skip aria-labelledby="s2-title">
+          <p class="scene-kicker">02 / 04 &middot; The ducts</p>
+          <h2 class="scene-title" id="s2-title">Then it has to reach the rooms.</h2>
+          <p class="scene-body">
+            A gap behind a wall or a blocked return is usually why one room stays cold. We trace the run, find the leak and seal it, so the heat you pay for arrives where you live.
+          </p>
+          <p class="scene-data">WARM AIR HAS TRAVELLED <b data-live="travel">0.0</b> m</p>
+        </section>
+
+        <section class="scene scene-summer" data-scene="3" data-check-skip aria-labelledby="s3-title">
+          <p class="scene-kicker">03 / 04 &middot; July</p>
+          <h2 class="scene-title" id="s3-title">Same house. The heat comes from outside.</h2>
+          <p class="scene-body">
+            In summer it presses in through the roof and walls. Air conditioning or a heat pump pulls it back out through the same ducts. If an upstairs room stays hot, the fix is often airflow, not a bigger unit.
+          </p>
+          <p class="scene-data">OUTSIDE <b>33</b>&deg;C &nbsp;&middot;&nbsp; ATTIC <b data-live="attic">47</b>&deg;C &nbsp;&middot;&nbsp; SUPPLY AIR <b>9</b>&deg;C</p>
+        </section>
+
+        <section class="scene scene-care" data-scene="4" data-check-skip aria-labelledby="s4-title">
+          <p class="scene-kicker">04 / 04 &middot; Maintenance</p>
+          <h2 class="scene-title" id="s4-title">Twice a year, we look again.</h2>
+          <p class="scene-body">
+            A spring and fall visit catches worn parts before the first cold snap or heat wave. You get a plain list of what we checked and what we would do next.
+          </p>
+          <ul class="tags" role="list">
+            <li class="tag" data-anchor="3.1,-2.3,-1.6" data-side="r"><span class="tag-line"></span><span class="tag-text"><b>Furnace</b><span class="tag-d">Burners, flue and filter checked and cleaned.</span></span></li>
+            <li class="tag" data-anchor="-2.5,-0.55,-2.7" data-side="l"><span class="tag-line"></span><span class="tag-text"><b>Ducts</b><span class="tag-d">Joints sealed where air escapes.</span></span></li>
+            <li class="tag" data-anchor="4.25,0.2,-2.5" data-side="r"><span class="tag-line"></span><span class="tag-text"><b>Registers</b><span class="tag-d">Airflow measured room by room.</span></span></li>
+            <li class="tag" data-anchor="-7.4,1.1,-1.0" data-side="l"><span class="tag-line"></span><span class="tag-text"><b>Outdoor unit</b><span class="tag-d">Coil rinsed, refrigerant pressures read.</span></span></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <div class="bridge">
+      <p class="bridge-line" data-reveal="lines">Seeing it is half the job. The other half is fixing it.</p>
+      <div class="bridge-ticks" aria-hidden="true" id="bridge-ticks"></div>
+    </div>
+
+    <div class="paper">
+      <section class="now" id="help" aria-labelledby="now-title">
+        <div class="now-head">
+          <p class="path-kicker">Path 01 &middot; Emergency</p>
+          <p class="path-open"><span class="dot" aria-hidden="true"></span>Open 24 hours, every day</p>
+        </div>
+        <h2 class="now-title" id="now-title" data-reveal="lines">No heat right now?</h2>
+        <a class="bignum" href={tel} aria-label={`Call Kelvin Home Comfort, ${phone}`}>
+          <span class="bignum-digits">{phone}</span>
+          <span class="bignum-cta">Tap to call. A person answers, any hour.</span>
+        </a>
+        <div class="while">
+          <h3 class="while-title">While you wait</h3>
+          <ol class="while-list" role="list">
+            {checks.map((c, i) => (
+              <li><span class="while-n">0{i + 1}</span><p>{c}</p></li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section class="plan" id="quote" aria-labelledby="plan-title">
+        <div class="plan-copy">
+          <p class="path-kicker path-kicker--ink">Path 02 &middot; Planning</p>
+          <h2 class="plan-title" id="plan-title" data-reveal="lines">Planning a replacement?</h2>
+          <p class="plan-body" data-reveal="up">
+            New furnace, heat pump or air conditioner. Three quick questions and we come back with a price in writing. No pressure, no rush.
+          </p>
+        </div>
+        <div class="quote-panel" id="quote-panel">
+          <noscript><p class="q-noscript">Quotes by phone: {phone}.</p></noscript>
+          <div class="q-intro" id="q-intro">
+            <p class="q-intro-kicker">Three questions &middot; about a minute</p>
+            <p class="q-intro-big" aria-hidden="true"><span>Job.</span><span>Town.</span><span>Timing.</span></p>
+            <button class="plan-start" type="button" id="quote-start" aria-expanded="false" aria-controls="quote-form">
+              <span>Start a quote</span><span class="plan-start-arrow" aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+          <form class="quote" id="quote-form" hidden novalidate>
+            <div class="q-top">
+              <p class="q-step" aria-live="polite">Step <span id="q-n">1</span> of 3</p>
+              <div class="q-progress" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+            </div>
+            {steps.map((s, i) => (
+              <fieldset class="q-fs" data-step={i + 1} hidden={i > 0}>
+                <legend>{s.legend}</legend>
+                <div class="q-opts">
+                  {s.options.map(([label, note]) => (
+                    <label class="q-opt">
+                      <input type="radio" name={s.name} value={label} />
+                      <span class="q-opt-text"><b>{label}</b>{note && <small>{note}</small>}</span>
+                      <span class="q-opt-mark" aria-hidden="true"></span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            ))}
+            <div class="q-actions">
+              <button type="button" class="q-back" id="q-back" hidden>Back</button>
+              <button type="submit" class="q-next" id="q-next" disabled>Continue</button>
+            </div>
+          </form>
+          <div class="q-done" id="q-done" hidden tabindex="-1" role="status">
+            <p class="q-done-kicker">Concept &middot; nothing was sent</p>
+            <h3>This is a concept. Nothing was sent.</h3>
+            <p>Kelvin Home Comfort is a fictional business, so nobody received this. You picked: <b id="q-summary"></b>.</p>
+            <p>If it were real, you would hear back with a written price. For an actual cold house, call {phone}.</p>
+            <button type="button" class="q-again" id="q-again">Start over</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="services" id="services" aria-labelledby="svc-title">
+        <div class="section-head">
+          <p class="path-kicker path-kicker--ink">What we do</p>
+          <h2 class="section-title" id="svc-title" data-reveal="lines">Heating, cooling and the air in between.</h2>
+        </div>
+        <ul class="svc-list" role="list">
+          {services.map(([t, d], i) => (
+            <li class="svc" data-reveal="up">
+              <span class="svc-n">0{i + 1}</span>
+              <h3 class="svc-t">{t}</h3>
+              <p class="svc-d">{d}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="area" id="area" aria-labelledby="area-title">
+        <div class="area-copy">
+          <p class="path-kicker">Service area</p>
+          <h2 class="area-title" id="area-title" data-reveal="lines">Kitchener, Waterloo, Cambridge, Guelph and nearby.</h2>
+          <ul class="area-list" role="list">
+            {towns.map((t) => (
+              <li><button type="button" class="area-town" data-town={t.id}>{t.name}</button></li>
+            ))}
+          </ul>
+          <p class="area-more">Also Elmira, St. Jacobs, Baden, New Hamburg, Breslau, Ayr and Elora. Not on the list? Call and ask. If we can get there safely, we will.</p>
+        </div>
+        <figure class="map" aria-label="Schematic map of the service area">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Kitchener, Waterloo, Cambridge and Guelph, shown as warm patches on a schematic map">
+            <defs>
+              <radialGradient id="heat-g">
+                <stop offset="0" stop-color="#fff1a2"></stop>
+                <stop offset=".18" stop-color="#ffc72b"></stop>
+                <stop offset=".38" stop-color="#fc8a1a"></stop>
+                <stop offset=".58" stop-color="#c6237a"></stop>
+                <stop offset=".8" stop-color="#3f1093" stop-opacity=".7"></stop>
+                <stop offset="1" stop-color="#1b0b55" stop-opacity="0"></stop>
+              </radialGradient>
+            </defs>
+            <g class="map-grid" stroke="#fff" stroke-opacity=".08" stroke-width=".18">
+              {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((n) => (<path d={`M${n} 0V100M0 ${n}H100`}></path>))}
+            </g>
+            <path class="map-road" d="M41 25 L47 46 L60 72 M47 46 L84 40" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width=".35" stroke-dasharray="1.2 1.2"></path>
+            {towns.map((t) => (
+              <g class="map-town" data-town={t.id}>
+                <circle class="map-blob" cx={t.x} cy={t.y} r={t.r} fill="url(#heat-g)"></circle>
+                <circle cx={t.x} cy={t.y} r=".9" fill="#fff"></circle>
+                <text x={t.x + 2} y={t.y - 2.2} class="map-label">{t.name}</text>
+              </g>
+            ))}
+            {nearby.map((t) => (
+              <g class="map-near">
+                <circle cx={t.x} cy={t.y} r=".55" fill="#fff" fill-opacity=".75"></circle>
+                <text x={t.x + 1.4} y={t.y + 1} class="map-label map-label--small">{t.name}</text>
+              </g>
+            ))}
+          </svg>
+          <figcaption>Schematic, not to scale.</figcaption>
+        </figure>
+      </section>
+
+      <section class="hours" id="hours" aria-labelledby="hours-title">
+        <h2 class="hours-title" id="hours-title" data-reveal="lines">Hours</h2>
+        <dl class="hours-list">
+          {hours.map(([k, v]) => (
+            <div class="hours-row" data-reveal="up">
+              <dt>{k}</dt>
+              <dd>{v.split('\n').map((line) => (<span>{line}</span>))}</dd>
+            </div>
+          ))}
+        </dl>
+        <address class="hours-where" data-reveal="up">
+          <span>Kelvin Home Comfort</span>
+          <span>Unit 4, 118 Ironworks Lane</span>
+          <span>Kitchener, Ontario</span>
+          <a href={tel}>{phone}</a>
+          <a href="mailto:hello@kelvinhomecomfort.example">hello@kelvinhomecomfort.example</a>
+        </address>
+      </section>
+    </div>
+  </main>
+
+  <ConceptFooter name="Kelvin Home Comfort" />
+</DemoLayout>
+
+<script>
+  import '../../../demos/kelvin/main.ts';
+</script>

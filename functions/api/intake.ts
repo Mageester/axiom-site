@@ -16,9 +16,6 @@ interface Env {
 const DEFAULT_ALLOWED_ORIGINS = [
     'https://getaxiom.ca',
     'https://www.getaxiom.ca',
-    'https://hvac.getaxiom.ca',
-    'https://roofing.getaxiom.ca',
-    'https://landscaping.getaxiom.ca',
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'http://localhost:10000',

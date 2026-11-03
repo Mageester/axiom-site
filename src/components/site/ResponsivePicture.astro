@@ -15,7 +15,7 @@ const { source, alt, sizes, class: className, loading = 'lazy', fetchpriority = 
 ---
 
 <picture class:list={['picture', className]}>
-  <source type="image/avif" srcset={source.avifSrcSet} sizes={sizes} />
+  {source.avifSrcSet && <source type="image/avif" srcset={source.avifSrcSet} sizes={sizes} />}
   <source type="image/webp" srcset={source.webpSrcSet} sizes={sizes} />
   <img
     src={source.fallbackSrc}

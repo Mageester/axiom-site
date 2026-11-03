@@ -30,9 +30,9 @@ const isClient = project.kind === 'client';
       <span class:list={['tag', { live: isClient }]}>{isClient ? 'Client · Live' : 'Concept'}</span>
     </p>
     <h3>
-      <a href={project.href} class="stretched" target="_blank" rel="noopener">
+      <a href={project.href} class="stretched" {...(isClient ? { target: '_blank', rel: 'noopener' } : {})}>
         {project.title}
-        <span class="sr-only"> ({isClient ? 'live client website' : 'concept build'}, opens in a new tab)</span>
+        <span class="sr-only"> ({isClient ? 'live client website, opens in a new tab' : 'concept build'})</span>
       </a>
     </h3>
     <p class="work-summary">{project.summary}</p>

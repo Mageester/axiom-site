@@ -1,0 +1,71 @@
+---
+// The honest ending every demo shares: says this is a concept and asks for the work.
+// Colour it from the demo's own stylesheet with --concept-bg, --concept-ink and --concept-mute.
+type Props = {
+  name: string;
+};
+
+const { name } = Astro.props;
+---
+
+<aside class="concept-footer" aria-label="About this concept">
+  <p class="concept-kicker">A concept by Axiom Web</p>
+  <p class="concept-line">
+    {name} is a fictional business. We built it to show what your site could feel like.
+  </p>
+  <div class="concept-actions">
+    <a class="concept-primary" href="/start-a-project/">Start a project</a>
+    <a class="concept-secondary" href="/work/">See all work</a>
+  </div>
+</aside>
+
+<style>
+  .concept-footer {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(3.5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem) clamp(5rem, 9vw, 8rem);
+    background: var(--concept-bg, #0b0b0f);
+    color: var(--concept-ink, #f4f3f8);
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  .concept-kicker {
+    color: var(--concept-mute, rgb(244 243 248 / 0.62));
+    font-size: 0.875rem;
+  }
+
+  .concept-line {
+    max-width: 24ch;
+    font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3.25rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .concept-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .concept-primary {
+    padding: 0.95rem 1.5rem;
+    border-radius: 999px;
+    background: var(--concept-ink, #f4f3f8);
+    color: var(--concept-bg, #0b0b0f);
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .concept-primary:hover {
+    transform: translateY(-2px);
+  }
+
+  .concept-secondary {
+    color: inherit;
+    text-underline-offset: 0.3em;
+  }
+</style>

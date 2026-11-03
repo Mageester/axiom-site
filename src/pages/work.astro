@@ -4,11 +4,10 @@ import CtaBand from '../components/site/CtaBand.astro';
 import Icon from '../components/site/Icon.astro';
 import PageHero from '../components/site/PageHero.astro';
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
-import WorkCard from '../components/site/WorkCard.astro';
 import { projects } from '../content/work';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
-import { SEO_ROUTES, itemListSchema, type Crumb } from '../lib/seo';
+import { SEO_ROUTES, SITE_URL, itemListSchema, type Crumb } from '../lib/seo';
 
 const crumbs: Crumb[] = [
   { name: 'Home', url: '/' },
@@ -27,7 +26,7 @@ const concepts = projects.filter((project) => project.kind === 'concept');
     'Axiom Web portfolio',
     projects.map((project) => ({
       name: project.kind === 'client' ? project.title : `${project.title} (concept build)`,
-      url: project.href,
+      url: new URL(project.href, SITE_URL).href,
       description: project.summary,
     }))
   )}
@@ -36,12 +35,12 @@ const concepts = projects.filter((project) => project.kind === 'concept');
     <PageHero
       eyebrow="Work"
       title="Websites we’ve designed and built"
-      lead="A live client website, plus concept builds that show how we structure sites for different kinds of local businesses. Every concept is clearly labelled."
+      lead="A live client website, plus five concepts we built from scratch to show what a local business website can feel like. Every concept is a fictional business and is labelled as one."
       crumbs={crumbs}
     >
       <Fragment slot="actions">
         <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
-        <a href="/services/" class="btn btn-secondary btn-lg">Our services</a>
+        <a href="#concepts-title" class="btn btn-secondary btn-lg">See the concepts</a>
       </Fragment>
     </PageHero>
 
@@ -81,20 +80,39 @@ const concepts = projects.filter((project) => project.kind === 'concept');
       </div>
     </section>
 
-    <section class="section section-soft" aria-labelledby="concepts-title">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Concept builds</p>
-          <h2 id="concepts-title">How we approach different industries</h2>
-          <p>
-            Concept builds are working demonstration websites designed by Axiom Web. Each one starts from a common problem in its
-            industry and shows how we would structure the site to solve it. They are not client results.
-          </p>
-        </div>
-        <div class="grid grid-3 reveal-stagger">
-          {concepts.map((project) => <WorkCard project={project} detailed />)}
-        </div>
+    <section class="concepts" aria-labelledby="concepts-title">
+      <div class="container concepts-head">
+        <p class="eyebrow">Concepts</p>
+        <h2 id="concepts-title">Five businesses that <em>don’t exist.</em></h2>
+        <p>
+          Each one is a working site for a fictional local business, built around a single idea from that trade. Open one and
+          play with it. They are not client results.
+        </p>
       </div>
+      <ol role="list" class="stack">
+        {concepts.map((project, index) => (
+          <li class="stack-item" style={`--i: ${index}`}>
+            <a class="stack-card" href={project.href} data-cursor="Open">
+              <div class="stack-media">
+                <ResponsivePicture source={project.image} alt={project.alt} sizes="(min-width: 1500px) 1360px, 94vw" position={project.position} loading="eager" />
+              </div>
+              <div class="stack-copy">
+                <div class="stack-title">
+                  <p class="mono stack-meta">
+                    <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                    <span>{project.industryLabel}</span>
+                  </p>
+                  <h3>{project.title}</h3>
+                </div>
+                <div class="stack-side">
+                  <p>{project.summary}</p>
+                  <span class="stack-open">Open the concept <Icon name="arrow-right" /></span>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ol>
     </section>
 
     <CtaBand
@@ -150,5 +168,139 @@ const concepts = projects.filter((project) => project.kind === 'concept');
 
   .featured-details dd {
     margin: 0.2rem 0 0;
+  }
+
+  /* ── Concepts: a deck of cards that stack as you scroll ───── */
+  .concepts {
+    padding-block: clamp(2rem, 1rem + 4vw, 5rem) clamp(4rem, 2rem + 6vw, 8rem);
+  }
+
+  .concepts-head {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  }
+
+  .concepts-head h2 {
+    max-width: 14ch;
+    font-size: clamp(2.75rem, 1rem + 7vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  .concepts-head p:last-child {
+    max-width: 44ch;
+    font-size: var(--fs-lead);
+  }
+
+  .stack {
+    display: grid;
+    gap: 1.25rem;
+    width: min(100%, calc(var(--container) + var(--gutter) * 2));
+    margin: 0 auto;
+    padding-inline: var(--gutter);
+  }
+
+  .stack-card {
+    display: grid;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--night);
+    color: var(--snow);
+    text-decoration: none;
+  }
+
+  .stack-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  .stack-media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .stack-media :global(img) {
+    transition: transform 1400ms var(--ease-out);
+  }
+
+  .stack-copy {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(1.25rem, 0.75rem + 2vw, 2.5rem);
+  }
+
+  .stack-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--mute-night);
+  }
+
+  .stack-copy h3 {
+    color: inherit;
+    font-size: clamp(2rem, 1rem + 4.5vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .stack-side {
+    display: grid;
+    gap: 1rem;
+    align-content: end;
+    justify-items: start;
+    color: var(--mute-night);
+  }
+
+  .stack-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--snow);
+    font-weight: 500;
+  }
+
+  .stack-open :global(svg) {
+    transition: transform 500ms var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .stack-card:hover .stack-media :global(img) {
+      transform: scale(1.03);
+    }
+    .stack-card:hover .stack-open :global(svg) {
+      transform: translateX(6px);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .stack {
+      gap: 0;
+    }
+
+    /* Each card pins just below the last one's edge, so they deal over each other.
+       A pinned card has to fit the screen, or its title would never come into view. */
+    .stack-item {
+      position: sticky;
+      top: calc(var(--header-h) + var(--i) * 12px);
+      padding-bottom: 2rem;
+    }
+
+    .stack-card {
+      grid-template-rows: minmax(0, 1fr) auto;
+      height: calc(100svh - var(--header-h) - 2.5rem - var(--i) * 12px);
+      min-height: 30rem;
+    }
+
+    .stack-media {
+      aspect-ratio: auto;
+      min-height: 0;
+    }
+
+    .stack-copy {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 3rem;
+      align-items: end;
+    }
   }
 </style>
