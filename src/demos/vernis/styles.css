@@ -528,6 +528,12 @@ html.gl .hero__css {
   gap: 0.6rem;
   margin-top: 1.4rem;
 }
+/* Short laptop windows: the giant name needs this space, and the header has both actions. */
+@media (max-height: 47rem) and (min-width: 48rem) {
+  .hero__cta {
+    display: none;
+  }
+}
 
 .hero__foot {
   flex: none;

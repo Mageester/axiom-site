@@ -2077,6 +2077,23 @@ html.motion .plan-link {
   }
 }
 
+/* Laptop-height windows: the hero copy fills the left side, so the readout takes the
+   camera label's place in one compact line instead of running into the headline. */
+@media (max-height: 56rem) and (min-width: 46.01rem) {
+  .hud-tl {
+    display: none;
+  }
+  .hud-inside:not(.at-right) {
+    top: 5.1rem;
+    grid-auto-flow: column;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .hud-inside:not(.at-right) .hud-inside-value {
+    font-size: 1.5rem;
+  }
+}
+
 /* ---------- not live: reduced motion, no WebGL, no script ---------- */
 
 html:not(.k-live) .scene:not(.scene-hero) {
