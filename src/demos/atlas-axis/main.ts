@@ -247,10 +247,13 @@ function select(region: Region, { focus = false, immediate = false } = {}) {
     labels.forEach((label) => label.classList.toggle('is-selected', label.dataset.region === region));
     selected = region;
     highlightSvg(region);
-    if (old !== next) {
+    // A newer choice replaces an exit still running, so only the latest panel ever shows.
+    if (old) gsap.killTweensOf(old);
+    if (old === next) {
+      gsap.set(next, { clearProps: 'all' });
+    } else {
       const swap = () => {
-        if (old) old.hidden = true;
-        next.hidden = false;
+        panels.forEach((panel) => (panel.hidden = panel !== next));
         if (!reducedMotion) {
           gsap.killTweensOf(next.children);
           gsap.fromTo(

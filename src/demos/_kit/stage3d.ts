@@ -1,8 +1,8 @@
 /**
  * A three.js stage for the demos that need real 3D, with the same manners as the
  * shaders: paused off screen, a capped pixel ratio that steps down on slow devices,
- * and a still frame with reduced motion or software WebGL. Import only what you use
- * from 'three' so the bundle stays small.
+ * and a still frame with reduced motion. Import only what you use from 'three' so the
+ * bundle stays small.
  */
 import { PerspectiveCamera, Scene, SRGBColorSpace, WebGLRenderer } from 'three';
 import { createLoop, isSoftwareGL, type Loop } from './gl';
@@ -15,8 +15,8 @@ export type Stage = {
 };
 
 /**
- * Returns null and sets `html.no-gl` when WebGL is unavailable, so give the canvas's
- * parent a CSS background that stands in for the scene.
+ * Returns null and sets `html.no-gl` when WebGL is unavailable or software-rendered, so
+ * give the canvas's parent a CSS background that stands in for the scene.
  */
 export function createStage(
   canvas: HTMLCanvasElement,
@@ -27,6 +27,11 @@ export function createStage(
   try {
     renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   } catch {
+    document.documentElement.classList.add('no-gl');
+    return null;
+  }
+  if (isSoftwareGL(renderer.getContext())) {
+    renderer.dispose();
     document.documentElement.classList.add('no-gl');
     return null;
   }
@@ -60,7 +65,6 @@ export function createStage(
       renderer.render(scene, camera);
     },
     {
-      still: isSoftwareGL(renderer.getContext()),
       onSlow: (level) => {
         renderer.setPixelRatio(level === 1 ? 1.25 : 1);
         resize();

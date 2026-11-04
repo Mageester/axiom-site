@@ -135,7 +135,7 @@ export function initBooking() {
         show('confirm');
       });
       timesEl.append(button);
-      count += 1;
+      if (!taken) count += 1;
     }
     if (!count) {
       const p = document.createElement('p');

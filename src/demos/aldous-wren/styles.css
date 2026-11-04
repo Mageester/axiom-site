@@ -96,6 +96,10 @@ html.no-gl .ink-wash,
 html.static-ink .ink-wash {
   display: block;
 }
+/* A context requested before software WebGL was rejected leaves the canvas opaque black. */
+html.no-gl .ink-stage canvas {
+  display: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .ink-wash {
     display: block;

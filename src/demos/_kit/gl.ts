@@ -1,9 +1,12 @@
 /**
  * Lightweight GPU helpers. `createLoop` is the frame loop every effect uses: it only
  * runs while its element is on screen and the tab is visible, steps quality down on
- * slow devices, and draws a single still frame with reduced motion or software WebGL.
- * `runShader` draws a fullscreen fragment shader with no 3D library at all, so a
- * shader demo costs about a kilobyte of code.
+ * slow devices, and draws a single still frame with reduced motion. `runShader` draws
+ * a fullscreen fragment shader with no 3D library at all, so a shader demo costs about
+ * a kilobyte of code.
+ *
+ * Software WebGL counts as no WebGL: it would burn the main thread on every frame, and a
+ * still frame cannot follow the scroll, so these effects hand over to the demo's CSS stand-in.
  */
 import { reducedMotion } from './motion';
 
@@ -21,15 +24,14 @@ export function isSoftwareGL(gl: WebGLRenderingContext | WebGL2RenderingContext)
 
 /**
  * @param onFrame called with seconds since start and the capped frame delta
- * @param options.still draw once and stop, for reduced motion or software rendering
  * @param options.onSlow called with 1, then 2, as sustained frame times get too long
  */
 export function createLoop(
   target: Element,
   onFrame: (time: number, dt: number) => void,
-  options: { still?: boolean; onSlow?: (level: number) => void } = {},
+  options: { onSlow?: (level: number) => void } = {},
 ): Loop {
-  const still = options.still || reducedMotion;
+  const still = reducedMotion;
   let raf = 0;
   let visible = true;
   let last = 0;
@@ -118,8 +120,8 @@ void main() {
  *   u_scroll   page scroll progress, 0 to 1
  *
  * Declare your own with `uniform` and set initial values in `uniforms`. Returns null and
- * sets `html.no-gl` when WebGL2 is unavailable, so give the canvas's parent a CSS
- * background that stands in for the effect.
+ * sets `html.no-gl` when WebGL2 is unavailable or software-rendered, so give the canvas's
+ * parent a CSS background that stands in for the effect.
  */
 export function runShader(
   canvas: HTMLCanvasElement,
@@ -135,7 +137,7 @@ export function runShader(
     return null;
   };
   const gl = canvas.getContext('webgl2', { antialias: false, alpha: true, powerPreference: 'high-performance' });
-  if (!gl) return fail();
+  if (!gl || isSoftwareGL(gl)) return fail();
 
   const compile = (type: number, source: string) => {
     const shader = gl.createShader(type)!;
@@ -192,7 +194,6 @@ export function runShader(
     { passive: true },
   );
 
-  const software = isSoftwareGL(gl);
   const loop = createLoop(
     canvas,
     (time, dt) => {
@@ -216,7 +217,6 @@ export function runShader(
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     },
     {
-      still: software,
       onSlow: (level) => {
         scale = level === 1 ? 0.75 : 0.5;
       },
