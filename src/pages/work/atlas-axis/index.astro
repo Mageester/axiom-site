@@ -1,0 +1,474 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/atlas-axis/styles.css';
+
+const PHONE = '(519) 555-0178';
+const TEL = 'tel:+15195550178';
+
+const regionOfIndex = (i: number) => (i <= 6 ? 'neck' : i <= 18 ? 'upper' : i <= 23 ? 'lower' : 'pelvis');
+
+// A drawn spine for when WebGL or motion is off: a side view in the same palette.
+function spineSvg(mode: 'crooked' | 'aligned', id: string) {
+  const N = 25;
+  const W = 420;
+  const H = 1000;
+  const dims = Array.from({ length: N }, (_, i) => {
+    const t = i / (N - 1);
+    return { w: 46 + 62 * Math.pow(t, 0.95), h: 22 + 20 * Math.pow(t, 1.1) };
+  });
+  const gap = 7;
+  const total = dims.reduce((sum, d) => sum + d.h + gap, 0);
+  const k = (H - 120) / total;
+  let y = 50;
+  const bones: string[] = [];
+  const discs: string[] = [];
+  const pts: { x: number; y: number }[] = [];
+  dims.forEach((d, i) => {
+    const t = i / (N - 1);
+    const cy = y + (d.h * k) / 2;
+    y += (d.h + gap) * k;
+    const x =
+      mode === 'crooked'
+        ? 205 + 100 * Math.sin(t * 5.2 + 0.4) + 18 * Math.sin(t * 13)
+        : 190 + 30 * Math.sin(t * Math.PI * 2.2 + 0.2) - 10 * t;
+    pts.push({ x, y: cy });
+  });
+  dims.forEach((d, i) => {
+    const prev = pts[Math.max(0, i - 1)];
+    const next = pts[Math.min(N - 1, i + 1)];
+    let angle = (Math.atan2(next.x - prev.x, next.y - prev.y) * 180) / Math.PI;
+    if (mode === 'crooked') angle += 9 * Math.sin(i * 1.7);
+    const { w, h } = d;
+    const hh = h * k;
+    const region = regionOfIndex(i);
+    const sp = w * (0.6 + (i % 7 === 0 ? 0 : 0.5));
+    bones.push(
+      `<g class="v" data-region="${region}" transform="translate(${pts[i].x.toFixed(1)} ${pts[i].y.toFixed(1)}) rotate(${(-angle).toFixed(1)})">` +
+        `<path class="sp" d="M ${(w * 0.28).toFixed(1)} ${(-hh * 0.28).toFixed(1)} L ${(w * 0.28 + sp).toFixed(1)} ${(hh * 0.3).toFixed(1)} Q ${(w * 0.28 + sp + 5).toFixed(1)} ${(hh * 0.5).toFixed(1)} ${(w * 0.28 + sp - 8).toFixed(1)} ${(hh * 0.5).toFixed(1)} L ${(w * 0.2).toFixed(1)} ${(hh * 0.34).toFixed(1)} Z"/>` +
+        `<rect class="ar" x="${(w * 0.04).toFixed(1)}" y="${(-hh * 0.4).toFixed(1)}" width="${(w * 0.34).toFixed(1)}" height="${(hh * 0.8).toFixed(1)}" rx="${(hh * 0.28).toFixed(1)}"/>` +
+        `<rect class="bd" x="${(-w * 0.62).toFixed(1)}" y="${(-hh / 2).toFixed(1)}" width="${(w * 0.74).toFixed(1)}" height="${hh.toFixed(1)}" rx="${(hh * 0.3).toFixed(1)}" fill="url(#${id})"/>` +
+        `</g>`,
+    );
+    if (i < N - 1) {
+      const mx = (pts[i].x + pts[i + 1].x) / 2;
+      const my = (pts[i].y + pts[i + 1].y) / 2;
+      discs.push(
+        `<rect class="dc" x="${(mx - w * 0.31).toFixed(1)}" y="${(my - 4.5).toFixed(1)}" width="${(w * 0.64).toFixed(1)}" height="9" rx="4.5" transform="rotate(${(-angle).toFixed(1)} ${mx.toFixed(1)} ${my.toFixed(1)})"/>`,
+      );
+    }
+  });
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" focusable="false"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#d6cdb9"/></linearGradient></defs>${discs.join('')}${bones.join('')}</svg>`;
+}
+const heroSvg = spineSvg('crooked', 'g-hero');
+const hurtSvg = spineSvg('aligned', 'g-hurt');
+
+const regionsData = [
+  {
+    key: 'neck',
+    name: 'Neck',
+    range: 'C1 to C7',
+    lede: 'Stiff, sore or catching when you turn your head.',
+    usually:
+      'Most often it is tight muscles and stiff joints from long hours looking down, a poor night’s sleep or an awkward turn. Sometimes it brings a headache from the base of the skull, or an ache that runs into the shoulder.',
+    first:
+      'We look at how far your neck turns and tilts each way, and at your shoulders and upper back, since they share the work. We check whether anything needs a doctor first. Then gentle hands-on work to ease the stiff spots, and one or two small movements to try at home.',
+    recovery:
+      'A flare-up often settles over some weeks with gentle, regular movement. If it has been there for months it can take longer. We tell you what we expect once we have examined you, not before.',
+  },
+  {
+    key: 'upper',
+    name: 'Upper back',
+    range: 'T1 to T12',
+    lede: 'An ache between the shoulder blades, or a catch when you breathe in.',
+    usually:
+      'Often a stiff stretch of spine and ribs from desk or driving posture, or from a rib that is not moving well. It can feel like a band across the back, and a deep breath can catch.',
+    first:
+      'We watch how your ribs, shoulders and spine move together, and find the stuck spots. Hands-on work to free them up, then a movement or two that keeps them moving between visits.',
+    recovery:
+      'Usually gradual. It tends to ease as the stiff areas loosen and the muscles around them stop overworking, but how long that takes is different for everyone, and we will talk you through it.',
+  },
+  {
+    key: 'lower',
+    name: 'Lower back',
+    range: 'L1 to L5',
+    lede: 'Sore after sitting, lifting or a long drive, or sore for no reason you can name.',
+    usually:
+      'Often the muscles and joints of the lower back have been overloaded rather than damaged. It can flare after a lift, a long drive or a long sit, and it sometimes feels worse before it settles. Pain that travels into the leg is worth a closer look.',
+    first:
+      'We find which movements ease it and which bring it on, check your hips and legs, and screen for anything that needs a doctor’s attention. Then we keep you moving, with hands-on work and a short routine you can manage.',
+    recovery:
+      'It varies a lot. Some flare-ups settle in a couple of weeks, others need a longer, steadier build, and some come and go. After the assessment we will give you a plain picture of what to expect.',
+  },
+  {
+    key: 'pelvis',
+    name: 'Pelvis',
+    range: 'Sacrum and hips',
+    lede: 'A deep ache low on one side, or stiffness that starts in the hip.',
+    usually:
+      'Often the joint where the spine meets the pelvis, or a hip that has stopped sharing the load. It can follow pregnancy, a fall, running, or sitting for long stretches, and it shows up as a low ache on one side.',
+    first:
+      'We assess the pelvis, hips and low back together, because they borrow from each other. Then hands-on work where it is stiff, and a few exercises to wake up the muscles that should be helping.',
+    recovery:
+      'Often a mix of mobility and strength work over several weeks. Some people feel a change early on and others need longer, so we will set expectations with you after we have examined you.',
+  },
+];
+
+const steps = [
+  {
+    from: 0,
+    to: 10,
+    title: 'We listen.',
+    text: 'What is going on, since when, what makes it better or worse, and what you want to get back to. No forms to rush through.',
+  },
+  {
+    from: 10,
+    to: 25,
+    title: 'We watch you move.',
+    text: 'Standing, bending, turning, a few simple tests. We look at the whole chain, not only the sore spot.',
+  },
+  {
+    from: 25,
+    to: 40,
+    title: 'We examine.',
+    text: 'Hands-on checks of the joints and muscles involved, and the nerves if that is warranted. We tell you what we find as we find it.',
+  },
+  {
+    from: 40,
+    to: 52,
+    title: 'We explain.',
+    text: 'A plain picture of what is likely going on, what we suggest, and how long things tend to take. Ask us anything.',
+  },
+  {
+    from: 52,
+    to: 60,
+    title: 'We get you started.',
+    text: 'First treatment if it suits, a few movements for home, and the next appointment if you need one.',
+  },
+];
+
+const hours = [
+  ['Monday', '8:00 am', '7:00 pm'],
+  ['Tuesday', '8:00 am', '7:00 pm'],
+  ['Wednesday', '8:00 am', '6:00 pm'],
+  ['Thursday', '8:00 am', '7:00 pm'],
+  ['Friday', '8:00 am', '4:00 pm'],
+  ['Saturday', '9:00 am', '1:00 pm'],
+  ['Sunday', '', ''],
+];
+
+const team = [
+  { name: 'Maya Okafor', days: 'Monday to Thursday' },
+  { name: 'Daniel Reimer', days: 'Tuesday to Saturday' },
+  { name: 'Priya Natarajan', days: 'Wednesday to Friday' },
+];
+---
+
+<DemoLayout
+  name="Atlas & Axis Physiotherapy"
+  title="Atlas & Axis Physiotherapy | Back, neck and joint pain in Kitchener"
+  description="A physiotherapy clinic in Kitchener, Ontario. Sixty-minute assessments, hands-on treatment and a plan you understand."
+  themeColor="#F4F2EC"
+  pill="light"
+>
+  <script is:inline slot="head">
+    (function () {
+      var r = document.documentElement;
+      r.classList.add('js');
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) r.classList.add('reduced');
+    })();
+  </script>
+
+  <canvas id="stage" class="stage" aria-hidden="true"></canvas>
+  <div class="spine-labels" aria-hidden="true">
+    {regionsData.map((r) => (
+      <button type="button" class="spine-label" data-region={r.key} tabindex="-1"><i></i><span>{r.name}</span></button>
+    ))}
+  </div>
+
+  <header class="bar" id="bar">
+    <a class="brand" href="#top" aria-label="Atlas &amp; Axis Physiotherapy, back to top">
+      <svg class="brand-mark" viewBox="0 0 28 34" aria-hidden="true">
+        <rect x="3" y="1" width="22" height="9" rx="4.5" fill="currentColor"></rect>
+        <rect x="6" y="12.5" width="16" height="5" rx="2.5" fill="#FF7A63"></rect>
+        <rect x="5" y="20" width="18" height="13" rx="5" fill="currentColor"></rect>
+      </svg>
+      <span class="brand-name">Atlas <i>&amp;</i> Axis</span>
+    </a>
+    <nav class="bar-nav" aria-label="Page sections" data-check-skip>
+      <a href="#hurt">Where it hurts</a>
+      <a href="#first-visit">First visit</a>
+      <a href="#visit">Visit us</a>
+    </nav>
+    <div class="bar-actions">
+      <a class="bar-phone" href={TEL} aria-label={`Call ${PHONE}`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h3l1.3 4-2 1.4a11 11 0 0 0 5.2 5.2l1.4-2 4 1.3v3a2.2 2.2 0 0 1-2.4 2.2A15.800 15.800 0 0 1 4.400 5.900 2.200 2.200 0 0 1 6.600 3.500Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path></svg>
+        <span class="bar-phone-num" data-check-skip>{PHONE}</span>
+      </a>
+      <a class="bar-book" href="#book" data-book><span>Book<span class="long" data-check-skip> an assessment</span></span></a>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <!-- Hero -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-pin">
+        <div class="hero-slot" data-slot="hero" data-fit="1.9" aria-hidden="true"></div>
+        <div class="svg-spine svg-hero" aria-hidden="true" set:html={heroSvg} />
+
+        <div class="hero-copy">
+          <h1 id="hero-title">
+            <span class="h1-kicker" data-reveal="up" data-reveal-now data-reveal-delay="0.15">Physiotherapy in Kitchener, Ontario</span>
+            <span class="h1-main"><span class="l1" data-reveal="lines" data-reveal-now data-reveal-delay="0.25">Move like it</span><em class="l2" data-reveal="lines" data-reveal-now data-reveal-delay="0.4">never happened.</em></span>
+          </h1>
+          <p class="hero-sub" data-reveal="up" data-reveal-now data-reveal-delay="0.85">
+            Hands-on treatment for back, neck and joint pain. One physiotherapist, sixty minutes, and a plan you understand.
+          </p>
+          <div class="hero-cta" data-reveal="up" data-reveal-now data-reveal-delay="1.0">
+            <a class="btn" href="#book" data-book><span>Book an assessment</span></a>
+            <a class="hero-tel" href={TEL}>or call <b>{PHONE}</b></a>
+          </div>
+        </div>
+
+        <div class="story">
+          <p class="story-kicker" aria-hidden="true">From pain to posture</p>
+          <div class="story-item" data-story="0">
+            <p class="story-no">01 <span>Pain</span></p>
+            <h2 class="story-title">It starts as a habit.</h2>
+            <p class="story-text">Hours at a desk, a mattress that has seen better days, a lift that went wrong. The body adapts, until it cannot.</p>
+          </div>
+          <div class="story-item" data-story="1">
+            <p class="story-no">02 <span>Pattern</span></p>
+            <h2 class="story-title">Then it spreads.</h2>
+            <p class="story-text">One stiff joint makes its neighbours work harder, and the ache turns up somewhere you did not expect.</p>
+          </div>
+          <div class="story-item" data-story="2">
+            <p class="story-no">03 <span>Posture</span></p>
+            <h2 class="story-title">Then it lines up.</h2>
+            <p class="story-text">We find the stuck part, free it, and show the rest of you how to move properly again, one vertebra at a time.</p>
+          </div>
+        </div>
+
+        <div class="ruler" aria-hidden="true">
+          <span class="ruler-cap">C1</span>
+          <div class="ruler-ticks">
+            {Array.from({ length: 25 }, () => <i></i>)}
+          </div>
+          <span class="ruler-cap">S1</span>
+        </div>
+        <p class="scroll-cue" aria-hidden="true"><span>Scroll</span><i></i></p>
+      </div>
+    </section>
+
+    <!-- Where does it hurt -->
+    <section class="hurt" id="hurt" aria-labelledby="hurt-title">
+      <div class="hurt-grid">
+        <div class="hurt-left">
+          <p class="eyebrow" data-reveal="up">Start here</p>
+          <h2 id="hurt-title" class="big" data-reveal="lines">Where does <em>it hurt?</em></h2>
+          <div class="regions" role="tablist" aria-label="Where does it hurt?" aria-orientation="vertical">
+            {regionsData.map((r, i) => (
+              <button
+                type="button"
+                role="tab"
+                id={`tab-${r.key}`}
+                class="region"
+                data-region={r.key}
+                aria-selected={r.key === 'lower' ? 'true' : 'false'}
+                aria-controls={`panel-${r.key}`}
+                tabindex={r.key === 'lower' ? '0' : '-1'}
+              >
+                <span class="region-no" data-check-skip>0{i + 1}</span>
+                <span class="region-name">{r.name}</span>
+                <span class="region-range" data-check-skip>{r.range}</span>
+              </button>
+            ))}
+          </div>
+          <p class="hint"><span class="hint-fine" data-check-skip>Choose a region, or point at the spine.</span><span class="hint-touch" data-check-skip>Choose a region, or tap the spine.</span></p>
+        </div>
+
+        <div class="hurt-slot" data-slot="hurt" data-fit="0.98" aria-hidden="true">
+          <div class="svg-spine svg-hurt" set:html={hurtSvg} />
+        </div>
+
+        <div class="hurt-panels" aria-live="polite">
+          {regionsData.map((r) => (
+            <div
+              role="tabpanel"
+              class="panel"
+              id={`panel-${r.key}`}
+              aria-labelledby={`tab-${r.key}`}
+              data-region={r.key}
+              hidden={r.key !== 'lower'}
+              tabindex="0"
+            >
+              <h3 class="panel-title">{r.name}</h3>
+              <p class="panel-lede">{r.lede}</p>
+              <dl class="panel-list">
+                <div><dt>What it usually is</dt><dd>{r.usually}</dd></div>
+                <div><dt>What we would do first</dt><dd>{r.first}</dd></div>
+                <div><dt>What recovery tends to involve</dt><dd>{r.recovery}</dd></div>
+              </dl>
+              <a class="panel-book" href="#book" data-book data-area={r.key}><span>Book for my {r.name.toLowerCase()}</span><i aria-hidden="true">&rarr;</i></a>
+            </div>
+          ))}
+          <p class="panel-note">Go to an emergency department or call 911 if you have new numbness around the groin, trouble controlling your bladder or bowel, or pain after a serious fall or accident.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- First visit -->
+    <section class="fv" id="first-visit" aria-labelledby="fv-title">
+      <div class="fv-pin">
+        <div class="fv-slot" data-slot="visit" data-fit="1.05" aria-hidden="true"></div>
+        <div class="fv-head">
+          <p class="eyebrow" data-reveal="up">Your first visit</p>
+          <h2 id="fv-title" class="big" data-reveal="lines">Sixty minutes. <em>Nothing rushed.</em></h2>
+        </div>
+        <p class="fv-clock" aria-hidden="true"><span class="fv-num">00</span><span class="fv-unit">minutes in</span></p>
+        <ol class="fv-steps" role="list">
+          {steps.map((s, i) => (
+            <li class="fv-step" data-from={s.from} data-to={s.to} data-step={i}>
+              <span class="fv-time">{s.from} to {s.to} min</span>
+              <h3 class="fv-title">{s.title}</h3>
+              <p class="fv-text">{s.text}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="fv-progress" aria-hidden="true">
+          {steps.map((st) => <i style={`--w:${st.to - st.from}`}></i>)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Practical details -->
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div class="visit-head">
+        <p class="eyebrow" data-reveal="up">Visit us</p>
+        <h2 id="visit-title" class="big" data-reveal="lines">Easy to get to. <em>Easy to get in.</em></h2>
+      </div>
+
+      <div class="visit-grid">
+        <div class="hours" data-reveal="up">
+          <p class="label">Hours</p>
+          <p class="open-now" id="open-now" aria-live="polite"></p>
+          <table class="hours-table">
+            <caption class="visually-hidden">Opening hours</caption>
+            <tbody>
+              {hours.map(([day, from, to]) => (
+                <tr data-day={day}>
+                  <th scope="row">{day}</th>
+                  <td>{from ? `${from} to ${to}` : 'Closed'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="facts">
+          <div class="fact" data-reveal="up">
+            <p class="label">Where</p>
+            <p class="fact-big">Suite 2, 61 Linden Lane<br />Kitchener, Ontario</p>
+            <p class="fact-text">Walk in off the parking lot at the back. We are the door with the green mat.</p>
+          </div>
+          <div class="fact" data-reveal="up">
+            <p class="label">Parking</p>
+            <p class="fact-text">Free parking behind the building, off Linden Lane. The two spaces by the back door are kept for people who find walking hard.</p>
+          </div>
+          <div class="fact" data-reveal="up">
+            <p class="label">Getting in</p>
+            <p class="fact-text">Step-free entrance beside the lot, an automatic door, wide hallways, an accessible washroom, and height-adjustable treatment tables.</p>
+          </div>
+          <div class="fact" data-reveal="up">
+            <p class="label">Direct billing</p>
+            <p class="fact-text">We bill most extended health plans straight from the clinic. Bring your card, and we will check what is covered with you before you pay anything.</p>
+          </div>
+          <div class="fact" data-reveal="up">
+            <p class="label">Bring</p>
+            <p class="fact-text">Clothes you can move in, your health card, any scans or reports, and a list of your medications. You do not need a doctor’s referral.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="team">
+        <p class="label" data-reveal="up">Who you will see</p>
+        <ul class="team-list" role="list">
+          {team.map((p) => (
+            <li class="person" data-reveal="up">
+              <span class="person-name">{p.name}</span>
+              <span class="person-role">Registered Physiotherapist</span>
+              <span class="person-days">{p.days}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Finale -->
+    <section class="finale" id="book" aria-labelledby="finale-title">
+      <div class="finale-sticky">
+        <div class="finale-flood" aria-hidden="true"></div>
+        <div class="finale-inner">
+          <p class="eyebrow">Ready when you are</p>
+          <h2 id="finale-title" class="finale-title">Book your <em>assessment.</em></h2>
+          <div class="finale-actions">
+            <button type="button" class="btn btn-light" data-book><span>Choose a time</span></button>
+            <a class="finale-tel" href={TEL}>{PHONE}</a>
+          </div>
+          <p class="finale-line">Monday to Saturday. Direct billing to most extended health plans. No referral needed.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="book" id="book-dialog" aria-labelledby="book-title" data-check-skip>
+    <div class="book-shell">
+      <div class="book-top">
+        <p class="book-step" id="book-step" aria-live="polite">Step 1 of 3</p>
+        <button type="button" class="book-close" data-close aria-label="Close booking"><span aria-hidden="true">Close</span></button>
+      </div>
+      <h2 class="book-title" id="book-title">Book an assessment</h2>
+      <form class="book-form" novalidate>
+        <fieldset class="book-pane" data-pane="area">
+          <legend>Where does it hurt?</legend>
+          <div class="choices">
+            {[...regionsData.map((r) => [r.key, r.name]), ['other', 'Somewhere else']].map(([key, name]) => (
+              <label class="choice">
+                <input type="radio" name="area" value={key} data-label={name} />
+                <span>{name}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+        <fieldset class="book-pane" data-pane="day" hidden>
+          <legend>Which day suits you?</legend>
+          <div class="choices choices-days" id="day-choices"></div>
+        </fieldset>
+        <fieldset class="book-pane" data-pane="time" hidden>
+          <legend>And what time?</legend>
+          <div class="choices choices-times" id="time-choices"></div>
+        </fieldset>
+        <div class="book-pane book-done" data-pane="done" hidden tabindex="-1">
+          <p class="done-kicker">That is the idea.</p>
+          <h3 class="done-title">This is a concept, so <em>nothing was sent.</em></h3>
+          <p class="done-summary" id="done-summary"></p>
+          <p class="done-text">Atlas &amp; Axis is a fictional clinic, and nobody will call or text you. A real clinic would confirm your time and tell you what to bring.</p>
+          <div class="done-actions">
+            <button type="button" class="btn" data-restart><span>Start again</span></button>
+            <button type="button" class="done-close" data-close>Close</button>
+          </div>
+        </div>
+        <div class="book-nav">
+          <button type="button" class="book-back" data-back hidden>Back</button>
+          <p class="book-phone">Prefer to talk? <a href={TEL}>{PHONE}</a></p>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <ConceptFooter name="Atlas & Axis Physiotherapy" />
+</DemoLayout>
+
+<script>
+  import '../../../demos/atlas-axis/main.ts';
+</script>

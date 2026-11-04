@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 // Snapshots are platform-specific: regenerate with `npm run test:visual:update` after design changes.
 const PUBLIC_PAGES = [
@@ -13,6 +13,16 @@ const PUBLIC_PAGES = [
   { name: 'start-a-project', path: '/start-a-project/' },
 ] as const;
 
+// Loaded images decode asynchronously, so wait until they can paint or a screenshot can catch them blank.
+const imagesDecoded = (page: Page) =>
+  page.evaluate(() =>
+    Promise.all(
+      Array.from(document.images)
+        .filter((image) => image.complete && image.naturalWidth > 0)
+        .map((image) => image.decode().catch(() => {}))
+    )
+  );
+
 for (const { name, path } of PUBLIC_PAGES) {
   test.describe(`${name} page`, () => {
     // Snapshots capture the static design: with reduced motion the liquid lens
@@ -25,11 +35,13 @@ for (const { name, path } of PUBLIC_PAGES) {
 
     test(`renders above the fold`, async ({ page }) => {
       await page.goto(path, { waitUntil: 'networkidle' });
+      await imagesDecoded(page);
       await expect(page).toHaveScreenshot(`${name}-above-fold.png`, { fullPage: false });
     });
 
     test(`renders full page`, async ({ page }) => {
       await page.goto(path, { waitUntil: 'networkidle' });
+      await imagesDecoded(page);
       await expect(page).toHaveScreenshot(`${name}-full-page.png`, { fullPage: true });
     });
   });

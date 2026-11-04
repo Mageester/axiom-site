@@ -31,10 +31,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Nested Demo Repositories
-/axiom-hvac-demo
-/axiom-roofing-demo
-/axiom-landscaping-demo
 /__temp_*
 
 # Scratch copy created by tests/seo-audit.test.mjs

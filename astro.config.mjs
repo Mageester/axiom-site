@@ -30,6 +30,8 @@ export default defineConfig({
         return (
           pathname !== '/404' &&
           pathname !== '/start' &&
+          // Concept demos are fictional businesses and stay out of search; /work/ itself is listed.
+          !pathname.startsWith('/work/') &&
           !sitemapExcludedPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))
         );
       },

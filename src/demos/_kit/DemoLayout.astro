@@ -1,0 +1,103 @@
+---
+// The document shell for a concept demo. It carries no marketing-site CSS or
+// scripts, keeps fictional businesses out of search, and always labels the page
+// as a concept with a way back to the real site.
+import './kit.css';
+
+type Props = {
+  /** The fictional business's name, used in the title and the label. */
+  name: string;
+  /** What the page would be titled for that business. */
+  title: string;
+  description: string;
+  themeColor?: string;
+  /** Pick the tone that stays readable over this demo's backgrounds. */
+  pill?: 'light' | 'dark';
+};
+
+const { name, title, description, themeColor = '#0b0b0f', pill = 'dark' } = Astro.props;
+const fullTitle = `${title} · Concept by Axiom Web`;
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content={themeColor} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var root = document.documentElement;
+        root.classList.add('motion');
+        setTimeout(function () {
+          root.classList.remove('motion');
+        }, 4000);
+      }
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="demo-skip" href="#main-content">Skip to content</a>
+    <slot />
+    <a class:list={['concept-pill', `concept-pill-${pill}`]} href="/work/">
+      <span class="concept-dot" aria-hidden="true"></span>
+      <span>Concept by <b>Axiom Web</b></span>
+      <span class="visually-hidden">. {name} is a fictional business. Back to all work.</span>
+    </a>
+  </body>
+</html>
+
+<style>
+  .concept-pill {
+    position: fixed;
+    left: clamp(0.75rem, 1.5vw, 1.25rem);
+    bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+    z-index: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 999px;
+    font: 450 0.75rem/1 ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    letter-spacing: 0.005em;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .concept-pill b {
+    font-weight: 600;
+  }
+
+  .concept-pill:hover {
+    transform: translateY(-2px);
+  }
+
+  .concept-pill-dark {
+    background: rgb(12 12 16 / 0.72);
+    color: #f4f3f8;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+  }
+
+  .concept-pill-light {
+    background: rgb(255 255 255 / 0.78);
+    color: #101014;
+    box-shadow: inset 0 0 0 1px rgb(16 16 20 / 0.1);
+  }
+
+  .concept-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.6;
+  }
+</style>

@@ -11,60 +11,6 @@ const fromRoot = (...segments) => path.join(rootDir, ...segments);
 
 const photoJobs = [
   {
-    input: fromRoot('public', 'images', 'work-aether.jpg'),
-    baseName: fromRoot('public', 'images', 'work-aether'),
-    widths: [640, 960, 1280],
-    fallback: { path: fromRoot('public', 'images', 'work-aether.jpg'), width: 1280, quality: 76 },
-  },
-  {
-    input: fromRoot('public', 'images', 'work-restaurant.jpg'),
-    baseName: fromRoot('public', 'images', 'work-restaurant'),
-    widths: [640, 960, 1280],
-    fallback: { path: fromRoot('public', 'images', 'work-restaurant.jpg'), width: 1280, quality: 76 },
-  },
-  {
-    input: fromRoot('public', 'landscaping-concept.webp'),
-    baseName: fromRoot('public', 'images', 'work-landscaping'),
-    widths: [640, 960, 1200],
-    fallback: { path: fromRoot('public', 'images', 'work-landscaping.jpg'), width: 1200, quality: 76 },
-  },
-  {
-    input: fromRoot('public', 'roofing-concept.webp'),
-    baseName: fromRoot('public', 'images', 'work-roofing'),
-    widths: [640, 960, 1200],
-    fallback: { path: fromRoot('public', 'images', 'work-roofing.jpg'), width: 1200, quality: 76 },
-  },
-  {
-    input: fromRoot('public', 'hvac-case-study.webp'),
-    baseName: fromRoot('public', 'images', 'work-hvac'),
-    widths: [640, 960, 1200],
-    fallback: { path: fromRoot('public', 'images', 'work-hvac.jpg'), width: 1200, quality: 76 },
-  },
-  {
-    input: fromRoot('public', 'images', 'case-study-1.jpg'),
-    baseName: fromRoot('public', 'images', 'case-study-1'),
-    widths: [640, 960, 1280],
-    fallback: { path: fromRoot('public', 'images', 'case-study-1.jpg'), width: 1280, quality: 76 },
-  },
-  {
-    input: fromRoot('public', 'images', 'case-study-2.jpg'),
-    baseName: fromRoot('public', 'images', 'case-study-2'),
-    widths: [640, 960, 1280],
-    fallback: { path: fromRoot('public', 'images', 'case-study-2.jpg'), width: 1280, quality: 76 },
-  },
-  {
-    input: fromRoot('public', 'images', 'case-study-3.jpg'),
-    baseName: fromRoot('public', 'images', 'case-study-3'),
-    widths: [480, 800, 1120],
-    fallback: { path: fromRoot('public', 'images', 'case-study-3.jpg'), width: 1120, quality: 74 },
-  },
-  {
-    input: fromRoot('public', 'images', 'case-study-4.jpg'),
-    baseName: fromRoot('public', 'images', 'case-study-4'),
-    widths: [480, 800, 1120],
-    fallback: { path: fromRoot('public', 'images', 'case-study-4.jpg'), width: 1120, quality: 74 },
-  },
-  {
     input: fromRoot('public', 'images', 'hero-chip.jpg'),
     baseName: fromRoot('public', 'images', 'hero-chip'),
     widths: [640, 960, 1280],

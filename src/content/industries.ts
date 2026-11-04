@@ -55,7 +55,7 @@ export const industries: Industry[] = [
       'About, with licences, insurance and experience',
       'Contact and quote request',
     ],
-    workIds: ['reids-home-and-yard', 'roofing', 'landscaping'],
+    workIds: ['reids-home-and-yard', 'kelvin'],
     packageNote:
       'Most trades fit the Local Business Website (from CAD $1,200). Companies with several distinct services or a large project gallery usually choose the Expanded Website (from CAD $1,500).',
     faqs: [
@@ -107,7 +107,7 @@ export const industries: Industry[] = [
       'New patients: what to expect, billing and forms',
       'Contact, hours and location',
     ],
-    workIds: ['physio-clinic', 'dental-aurelia'],
+    workIds: ['atlas-axis'],
     packageNote:
       'A single-practitioner clinic often fits the Local Business Website (from CAD $1,200). Multi-practitioner clinics with several services usually need the Expanded Website (from CAD $1,500).',
     faqs: [
@@ -159,7 +159,7 @@ export const industries: Industry[] = [
       'About the studio and team',
       'Contact, hours and directions',
     ],
-    workIds: ['salon-nails', 'barber-blackline'],
+    workIds: ['vernis'],
     packageNote:
       'A single-location salon or barbershop often fits the Local Launch Special (from CAD $900) or the Local Business Website (from CAD $1,200).',
     faqs: [
@@ -211,7 +211,7 @@ export const industries: Industry[] = [
       'Private events or catering, if offered',
       'Contact and directions',
     ],
-    workIds: ['restaurant-reservation'],
+    workIds: ['cinder-salt'],
     packageNote:
       'Most restaurants fit the Local Business Website (from CAD $1,200). Online ordering systems, gift cards or e-commerce are quoted as Custom.',
     faqs: [
@@ -263,7 +263,7 @@ export const industries: Industry[] = [
       'About the firm',
       'Contact and consultation request',
     ],
-    workIds: ['law-harrow'],
+    workIds: ['aldous-wren'],
     packageNote:
       'Small firms usually fit the Local Business Website or the Expanded Website. Firms with many practice areas or client portals are scoped as Custom.',
     faqs: [

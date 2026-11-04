@@ -1,0 +1,389 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/aldous-wren/styles.css';
+
+const situations = [
+  {
+    id: 'home',
+    title: "I'm buying my first home",
+    happens:
+      'You sign an offer, usually with a realtor, and then have a short window to line up your mortgage and any inspection. We read the agreement, search the title, explain the closing costs and meet you to sign. On closing day the money moves through our trust account and you get your keys.',
+    bring:
+      'The signed agreement of purchase and sale, your mortgage commitment, photo ID and the name of your insurance broker. Buying a condo? Bring the status certificate if you have it.',
+    fees: 'Usually a fixed fee, quoted before you commit. Costs that go to other people, such as land transfer tax, title insurance and registration, are listed separately so you can see where every dollar goes.',
+  },
+  {
+    id: 'let-go',
+    title: 'I was let go',
+    happens:
+      'You will likely have a termination letter and an offer of some pay. You do not have to sign on the spot. We read the letter and your contract, look at how long you worked there and what you did, and tell you plainly whether the offer looks fair. Sometimes that is one short call. Sometimes it is a longer conversation with your former employer.',
+    bring:
+      'The termination letter, your employment contract, recent pay stubs and any bonus or benefits documents. Write down your start date, your last day and what your role was.',
+    fees: 'The first conversation has no charge. A review of an offer is often a fixed fee. If it goes further we explain hourly rates, and how many hours we expect, before you decide.',
+  },
+  {
+    id: 'will',
+    title: 'A parent died and there’s a will',
+    happens:
+      'Usually the executor named in the will asks the court for authority to deal with the estate. After that, debts are settled, assets are gathered and everything is shared out as the will says. It is slow, and most of it is paperwork. We do the paperwork and explain each step before it happens.',
+    bring:
+      'The original will if you have it, a death certificate, and a list of bank accounts, property and debts as best you know them. Contact details for the people named in the will help too.',
+    fees: 'Often a mix: a fixed fee for the court application, then an hourly rate for the rest, with an estimate at the start. If the estimate changes, we tell you when it changes, not at the end.',
+  },
+  {
+    id: 'sued',
+    title: 'Someone is suing my business',
+    happens:
+      'A statement of claim arrives and the clock starts. It says how long you have to respond, often about twenty days, so please do not leave it in a drawer. We read the claim, check whether your insurance applies and set out your options. Often the first step is a calm letter, not a court date.',
+    bring:
+      'The claim exactly as you received it, with the envelope or email it came in. Add the contracts and messages involved and your business insurance policy.',
+    fees: 'Hourly, with a budget for each stage so there are no surprises. If the cost of defending is close to what is being claimed, we will say so early.',
+  },
+  {
+    id: 'separating',
+    title: 'We’re separating',
+    happens:
+      'Most couples settle things between themselves, with a lawyer to put it in writing. We explain what the law says about your home, support and the children, and help you reach an agreement you can live with. If you cannot agree we walk through the next steps. Court is the last option, not the first.',
+    bring:
+      'Three years of tax returns, recent pay stubs, bank, pension and mortgage statements, and any earlier agreement such as a marriage contract. If you have children, a rough picture of the current schedule.',
+    fees: 'Agreements are often a fixed fee to draft. Negotiating is hourly, with a monthly ceiling you set. Court costs more, and we will tell you that plainly.',
+  },
+  {
+    id: 'business',
+    title: 'I’m starting a business',
+    happens:
+      'We talk through how to set it up, on your own, as a corporation or with a partner, and what each choice means for tax and risk. Then we prepare the papers and, if there is a co-owner, a short agreement about who does what and what happens if someone leaves.',
+    bring:
+      'Ideas for the name, who owns what and who else is involved. If you have an accountant, bring their name. We are happy to work with them.',
+    fees: 'Set-ups are a fixed fee, listed in full before we start. An owners’ agreement is quoted separately.',
+  },
+  {
+    id: 'else',
+    title: 'It’s something else',
+    happens:
+      'A lot of what people ask us does not fit under a heading. Tell us in your own words, by phone or in the form below. If it is not something we do, we will say so on the first call and, where we can, point you to someone who does.',
+    bring: 'Anything in writing that relates to it: letters, emails, contracts, photos of documents. A short list of dates helps more than you would think.',
+    fees: 'The first conversation has no charge. After that we explain what we would do, and what it would cost, before anything starts.',
+  },
+];
+
+const steps = [
+  {
+    t: 'You tell us what happened.',
+    p: 'By phone, by video or in our office, whichever feels easier. Thirty minutes, and you do the talking. There is no charge for this and no pressure to hire us afterwards.',
+  },
+  {
+    t: 'We say what usually happens next.',
+    p: 'In ordinary words, with the deadlines that matter. If it is not something we can help with, we tell you that on the same call.',
+  },
+  {
+    t: 'We talk about fees before anything else.',
+    p: 'Fixed, hourly or a mix, and a rough total. It goes in writing, so you can read it at home without anyone waiting.',
+  },
+  {
+    t: 'You decide.',
+    p: 'Take a day, ask someone you trust, call us back with questions. If you say yes, we start. If you say no, you leave with a better idea of what you are facing.',
+  },
+];
+
+const people = [
+  { name: 'Eleanor Aldous', role: 'Partner', area: 'Homes, wills and estates', mail: 'eleanor' },
+  { name: 'Tomas Wren', role: 'Partner', area: 'Work disputes and small business', mail: 'tomas' },
+  { name: 'Priya Raman', role: 'Associate', area: 'Separation and family agreements', mail: 'priya' },
+];
+---
+
+<DemoLayout
+  name="Aldous Wren LLP"
+  title="Aldous Wren LLP | Law firm in Kitchener-Waterloo"
+  description="Aldous Wren LLP is a small law firm in Kitchener-Waterloo, Ontario, for homes, work, estates, disputes and separations, explained in plain words."
+  themeColor="#F3F0E8"
+  pill="light"
+>
+  <Fragment slot="head">
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <noscript><style>.sit__panel[hidden]{display:block!important}</style></noscript>
+  </Fragment>
+
+  <div class="ink-stage" aria-hidden="true">
+    <canvas id="ink"></canvas>
+  </div>
+
+  <header class="bar" id="top">
+    <a class="bar__mark" href="#top" aria-label="Aldous Wren LLP, back to top">Aldous Wren <i>LLP</i></a>
+    <nav class="bar__nav" aria-label="Main" data-check-skip>
+      <a href="#situations">Situations</a>
+      <a href="#first-conversation">First conversation</a>
+      <a href="#people">People</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="bar__act">
+      <a class="bar__call" href="tel:+15195550136" aria-label="Call (519) 555-0136">
+        <span class="bar__call-long" data-check-skip>(519) 555-0136</span>
+        <span class="bar__call-short" data-check-skip>Call</span>
+      </a>
+      <a class="bar__book" href="#consult">Book<span class="bar__book-long" data-check-skip> a conversation</span></a>
+    </div>
+  </header>
+
+  <a class="callfab" href="tel:+15195550136" aria-label="Call (519) 555-0136" data-check-skip>Call</a>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero" id="hero">
+      <div class="ink-wash" aria-hidden="true">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMaxYMin slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="wash" x="-30%" y="-30%" width="160%" height="160%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.011 0.018" numOctaves="2" seed="4" result="n" />
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="62" xChannelSelector="R" yChannelSelector="G" result="d" />
+              <feGaussianBlur in="d" stdDeviation="6" />
+            </filter>
+            <filter id="stain" x="-40%" y="-40%" width="180%" height="180%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.006 0.01" numOctaves="2" seed="11" result="n" />
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="140" xChannelSelector="G" yChannelSelector="R" result="d" />
+              <feGaussianBlur in="d" stdDeviation="34" />
+            </filter>
+            <linearGradient id="fade" gradientUnits="userSpaceOnUse" x1="0" y1="70" x2="0" y2="640">
+              <stop offset="0" stop-color="#0e0e10" stop-opacity="0" />
+              <stop offset="0.1" stop-color="#0e0e10" stop-opacity="0.92" />
+              <stop offset="0.7" stop-color="#0e0e10" stop-opacity="0.6" />
+              <stop offset="1" stop-color="#0e0e10" stop-opacity="0.1" />
+            </linearGradient>
+          </defs>
+          <g filter="url(#stain)" fill="#7a6650" opacity="0.3">
+            <ellipse cx="1130" cy="330" rx="260" ry="250" />
+            <ellipse cx="1330" cy="250" rx="110" ry="190" />
+          </g>
+          <g filter="url(#wash)" fill="none" stroke="url(#fade)" stroke-linecap="round">
+            <path d="M1060 70 C1110 160 1000 240 1090 330 S1135 470 1100 570" stroke-width="46" />
+            <path d="M1250 70 C1292 150 1228 222 1280 300 S1300 400 1286 470" stroke-width="28" />
+            <path d="M1372 70 C1384 120 1350 172 1372 232" stroke-width="18" />
+            <path d="M960 80 C985 120 950 160 972 205" stroke-width="12" />
+          </g>
+          <g filter="url(#wash)" fill="#0e0e10" opacity="0.28">
+            <ellipse cx="1100" cy="575" rx="78" ry="52" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="hero__top">
+      <h1 class="hero__h" id="hero-h">
+        <span class="hero__kicker" data-avoid="small" data-reveal="up" data-reveal-now data-reveal-delay="0.9">Aldous Wren LLP &middot; A law firm in Kitchener&#8209;Waterloo, Ontario</span>
+        <span class="hl hl--1"><span class="w" data-avoid="big" data-reveal="chars" data-reveal-now data-reveal-delay="0.15">Hard</span> <span class="w" data-avoid="big" data-reveal="chars" data-reveal-now data-reveal-delay="0.25">things,</span></span>
+        <span class="hl hl--2"><span class="w" data-avoid="big" data-reveal="chars" data-reveal-now data-reveal-delay="0.4">in</span> <span class="w it" data-avoid="big" data-reveal="chars" data-reveal-now data-reveal-delay="0.46">plain</span></span>
+        <span class="hl hl--3"><span class="w" data-avoid="big" data-reveal="chars" data-reveal-now data-reveal-delay="0.6">words<span class="dot">.</span></span></span>
+      </h1>
+      </div>
+
+      <div class="hero__foot">
+        <p class="hero__lede" data-avoid="small" data-reveal="up" data-reveal-now data-reveal-delay="1">
+          A small law firm for the things that happen once in a while: a house, a job, an estate, a dispute, a separation. We explain it in ordinary words and tell you what it costs before we start.
+        </p>
+        <div class="hero__cta" data-reveal="up" data-reveal-now data-reveal-delay="1.15">
+          <a class="btn" href="tel:+15195550136" data-avoid="small" data-magnetic>Call (519) 555-0136</a>
+          <a class="textlink" href="#situations" data-avoid="small">Find your situation</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement" aria-label="How we work">
+      <p class="statement__p" data-words>
+        Most people meet a lawyer once or twice in their life, and on a bad day. We keep the firm small, slow the conversation down and say what we mean.
+      </p>
+      <p class="statement__s" data-reveal="up">
+        Two partners and an associate, in one office in Kitchener. Every file is read by a person who will talk to you.
+      </p>
+    </section>
+
+    <section class="tide tide--rise" data-tide="rise" aria-labelledby="tide-1">
+      <div class="tide__stick">
+        <h2 class="tide__t" id="tide-1"><span class="tl">Start with</span><span class="tl">what <em>happened.</em></span></h2>
+        <p class="tide__s tl">The legal words can wait.</p>
+      </div>
+    </section>
+
+    <section class="dark" id="situations" aria-labelledby="sit-h">
+      <div class="dark__head">
+        <h2 class="kick" id="sit-h">Which of these is closest?</h2>
+        <p class="dark__lede" data-reveal="up">Choose one. We will tell you what usually happens, what to bring to a first conversation and how the fees tend to work.</p>
+      </div>
+
+      <ul class="sits" role="list" data-sits>
+        {
+          situations.map((s, i) => (
+            <li class="sit" data-sit={s.id}>
+              <h3 class="sit__h">
+                <button class="sit__btn" type="button" id={`sit-${s.id}-btn`} aria-expanded="false" aria-controls={`sit-${s.id}-panel`}>
+                  <span class="sit__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="sit__t">{s.title}</span>
+                  <span class="sit__i" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="sit__panel" id={`sit-${s.id}-panel`} role="region" aria-labelledby={`sit-${s.id}-btn`} hidden>
+                <div class="sit__grid">
+                  <div class="sit__blk sit__blk--lede">
+                    <h4>What usually happens</h4>
+                    <p>{s.happens}</p>
+                  </div>
+                  <div class="sit__blk">
+                    <h4>What to bring</h4>
+                    <p>{s.bring}</p>
+                  </div>
+                  <div class="sit__blk">
+                    <h4>How fees tend to work</h4>
+                    <p>{s.fees}</p>
+                  </div>
+                  <p class="sit__go">
+                    <a class="btn btn--paper" href="#consult" data-pick={s.id}>Talk to us about this</a>
+                  </p>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="dark__note">
+        These describe what usually happens, in general terms. Your situation will have its own details, and any quote from us is in writing before we begin.
+      </p>
+    </section>
+
+    <section class="dark dark--steps" id="first-conversation" aria-labelledby="steps-h">
+      <div class="steps__head">
+        <h2 class="display" id="steps-h" data-reveal="lines">How a first <em>conversation</em> works</h2>
+        <p class="steps__lede" data-reveal="up">Thirty minutes, with no charge and no obligation. It will not feel like an exam.</p>
+      </div>
+      <div class="steps-wrap">
+      <div class="steps__line" aria-hidden="true"><span></span></div>
+      <ol class="steps" role="list">
+        {
+          steps.map((s, i) => (
+            <li class="step">
+              <span class="step__dot" aria-hidden="true"></span>
+              <span class="step__n" aria-hidden="true">{['1', '2', '3', '4'][i]}</span>
+              <div class="step__b">
+                <h3 class="step__t">{s.t}</h3>
+                <p class="step__p">{s.p}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      </div>
+    </section>
+
+    <section class="tide tide--drain" data-tide="drain" aria-labelledby="tide-2">
+      <div class="tide__stick">
+        <h2 class="tide__t" id="tide-2"><span class="tl">Then the</span><span class="tl">water <em>settles.</em></span></h2>
+        <p class="tide__s tl">Here is who you would talk to.</p>
+      </div>
+    </section>
+
+    <section class="people" id="people" aria-labelledby="people-h">
+      <h2 class="kick kick--ink" id="people-h">The people</h2>
+      <ul class="people__list" role="list">
+        {
+          people.map((p, i) => (
+            <li class={`person person--${i + 1}`}>
+              <p class="person__name" data-reveal="lines">{p.name}</p>
+              <p class="person__meta" data-reveal="up"><span>{p.role}</span><span>{p.area}</span><a href={`mailto:${p.mail}@aldouswren.example`}>{p.mail}@aldouswren.example</a></p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="people__note" data-reveal="up">Titles only, because that is what you need to know. When you call, one of them will probably be the person who answers.</p>
+    </section>
+
+    <section class="consult" id="consult" aria-labelledby="consult-h">
+      <div class="consult__side">
+        <h2 class="display display--s" id="consult-h" data-reveal="lines">Tell us what&rsquo;s <em>happening.</em></h2>
+        <p class="consult__p" data-reveal="up">A few lines is plenty. We will call you back the same business day to arrange a first conversation. Prefer to talk now? <a href="tel:+15195550136">(519) 555-0136</a>.</p>
+      </div>
+
+      <div class="consult__main">
+        <form class="form" id="consult-form" novalidate>
+          <div class="field field--wide">
+            <label for="f-sit">What is going on?</label>
+            <div class="select">
+              <select id="f-sit" name="situation" required>
+                <option value="">Choose the closest</option>
+                {situations.map((s) => <option value={s.id}>{s.title}</option>)}
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="f-contact">Phone or email</label>
+            <input id="f-contact" name="contact" type="text" autocomplete="email" inputmode="email" required />
+          </div>
+          <div class="field field--wide">
+            <label for="f-time">Best time for a call</label>
+            <div class="select">
+              <select id="f-time" name="time">
+                <option>Any time in office hours</option>
+                <option>Mornings</option>
+                <option>Afternoons</option>
+                <option>After 5 pm, by appointment</option>
+              </select>
+            </div>
+          </div>
+          <div class="field field--wide">
+            <label for="f-more">Anything we should know <span>(optional)</span></label>
+            <textarea id="f-more" name="more" rows="3"></textarea>
+          </div>
+          <div class="form__act">
+            <button class="btn btn--blood" type="submit">Ask for a call</button>
+            <p class="form__fine" id="form-error" role="alert"></p>
+          </div>
+        </form>
+
+        <div class="done" id="consult-done" role="status" tabindex="-1" hidden>
+          <p class="done__k">This is a concept</p>
+          <h3 class="done__t">Nothing was sent.</h3>
+          <p class="done__p" id="done-line"></p>
+          <button class="textlink" type="button" id="done-reset">Start over</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit" id="visit" aria-labelledby="visit-h">
+      <h2 class="kick kick--ink" id="visit-h">Visit or call</h2>
+      <a class="visit__phone" href="tel:+15195550136" aria-label="Call (519) 555-0136">(519) 555-0136</a>
+      <dl class="visit__list">
+        <div>
+          <dt>Office</dt>
+          <dd>58 Queen Street North, Suite 204<br />Kitchener, Ontario</dd>
+        </div>
+        <div>
+          <dt>Hours</dt>
+          <dd>Monday to Friday, 9 am to 5 pm<br />Evenings and Saturdays by appointment</dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:hello@aldouswren.example">hello@aldouswren.example</a></dd>
+        </div>
+        <div>
+          <dt>Getting here</dt>
+          <dd>Step-free entrance and a lift. Free parking behind the building. If coming in is hard, we can talk by phone or video.</dd>
+        </div>
+      </dl>
+      <p class="visit__legal">
+        This website gives general information. It is not legal advice, and sending us a message does not make us your lawyers until we confirm it in writing.
+      </p>
+    </section>
+  </main>
+
+  <footer class="end">
+    <ConceptFooter name="Aldous Wren LLP" />
+  </footer>
+</DemoLayout>
+
+<script>
+  import '../../../demos/aldous-wren/main.ts';
+</script>

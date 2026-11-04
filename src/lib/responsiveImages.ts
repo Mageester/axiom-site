@@ -2,18 +2,8 @@ export type ResponsiveSource = {
   fallbackSrc: string;
   width: number;
   height: number;
-  avifSrcSet: string;
+  avifSrcSet?: string;
   webpSrcSet: string;
-};
-
-export const fallbackResponsiveImage: ResponsiveSource = {
-  fallbackSrc: '/images/work-aether.jpg',
-    width: 1280,
-    height: 1920,
-  avifSrcSet:
-    '/images/work-aether-640.avif 640w, /images/work-aether-960.avif 960w, /images/work-aether-1280.avif 1280w',
-  webpSrcSet:
-    '/images/work-aether-640.webp 640w, /images/work-aether-960.webp 960w, /images/work-aether-1280.webp 1280w',
 };
 
 export const responsiveImages = {
@@ -23,118 +13,6 @@ export const responsiveImages = {
     height: 800,
     avifSrcSet: '/images/work-reids-640.avif 640w, /images/work-reids-960.avif 960w, /images/work-reids-1200.avif 1200w',
     webpSrcSet: '/images/work-reids-640.webp 640w, /images/work-reids-960.webp 960w, /images/work-reids-1200.webp 1200w',
-  },
-  workAether: {
-    ...fallbackResponsiveImage,
-  },
-  workLaw: {
-    fallbackSrc: '/images/work-law-v2.png',
-    width: 1430,
-    height: 1073,
-    avifSrcSet: '/images/work-law-v2-640.avif 640w, /images/work-law-v2-960.avif 960w, /images/work-law-v2.avif 1200w',
-    webpSrcSet: '/images/work-law-v2-640.webp 640w, /images/work-law-v2-960.webp 960w, /images/work-law-v2.webp 1200w',
-  },
-  workDental: {
-    fallbackSrc: '/images/work-dental.png',
-    width: 1200,
-    height: 896,
-    avifSrcSet: '/images/work-dental-640.avif 640w, /images/work-dental-960.avif 960w, /images/work-dental.avif 1200w',
-    webpSrcSet: '/images/work-dental-640.webp 640w, /images/work-dental-960.webp 960w, /images/work-dental.webp 1200w',
-  },
-  workPhysio: {
-    fallbackSrc: '/images/work-physio.jpg',
-    width: 1200,
-    height: 800,
-    avifSrcSet:
-      '/images/work-physio-640.avif 640w, /images/work-physio-960.avif 960w, /images/work-physio-1200.avif 1200w',
-    webpSrcSet:
-      '/images/work-physio-640.webp 640w, /images/work-physio-960.webp 960w, /images/work-physio-1200.webp 1200w',
-  },
-  workBarber: {
-    fallbackSrc: '/images/work-barber.png',
-    width: 2400,
-    height: 1792,
-    avifSrcSet: '/images/work-barber-640.avif 640w, /images/work-barber-960.avif 960w, /images/work-barber.avif 1200w',
-    webpSrcSet: '/images/work-barber-640.webp 640w, /images/work-barber-960.webp 960w, /images/work-barber.webp 1200w',
-  },
-  workSalon: {
-    fallbackSrc: '/images/work-nails-v2.png',
-    width: 1200,
-    height: 896,
-    avifSrcSet: '/images/work-nails-v2-640.avif 640w, /images/work-nails-v2-960.avif 960w, /images/work-nails-v2.avif 1200w',
-    webpSrcSet: '/images/work-nails-v2-640.webp 640w, /images/work-nails-v2-960.webp 960w, /images/work-nails-v2.webp 1200w',
-  },
-  workRestaurant: {
-    fallbackSrc: '/images/work-restaurant.jpg',
-    width: 1280,
-    height: 853,
-    avifSrcSet:
-      '/images/work-restaurant-640.avif 640w, /images/work-restaurant-960.avif 960w, /images/work-restaurant-1280.avif 1280w',
-    webpSrcSet:
-      '/images/work-restaurant-640.webp 640w, /images/work-restaurant-960.webp 960w, /images/work-restaurant-1280.webp 1280w',
-  },
-  workLandscaping: {
-    fallbackSrc: '/images/work-landscaping.jpg',
-    width: 1200,
-    height: 796,
-    avifSrcSet:
-      '/images/work-landscaping-640.avif 640w, /images/work-landscaping-960.avif 960w, /images/work-landscaping-1200.avif 1200w',
-    webpSrcSet:
-      '/images/work-landscaping-640.webp 640w, /images/work-landscaping-960.webp 960w, /images/work-landscaping-1200.webp 1200w',
-  },
-  workRoofing: {
-    fallbackSrc: '/images/work-roofing.jpg',
-    width: 1200,
-    height: 800,
-    avifSrcSet:
-      '/images/work-roofing-640.avif 640w, /images/work-roofing-960.avif 960w, /images/work-roofing-1200.avif 1200w',
-    webpSrcSet:
-      '/images/work-roofing-640.webp 640w, /images/work-roofing-960.webp 960w, /images/work-roofing-1200.webp 1200w',
-  },
-  workHvac: {
-    fallbackSrc: '/images/work-hvac.jpg',
-    width: 1200,
-    height: 800,
-    avifSrcSet:
-      '/images/work-hvac-640.avif 640w, /images/work-hvac-960.avif 960w, /images/work-hvac-1200.avif 1200w',
-    webpSrcSet:
-      '/images/work-hvac-640.webp 640w, /images/work-hvac-960.webp 960w, /images/work-hvac-1200.webp 1200w',
-  },
-  caseStudy1: {
-    fallbackSrc: '/images/case-study-1.jpg',
-    width: 1280,
-    height: 1707,
-    avifSrcSet:
-      '/images/case-study-1-640.avif 640w, /images/case-study-1-960.avif 960w, /images/case-study-1-1280.avif 1280w',
-    webpSrcSet:
-      '/images/case-study-1-640.webp 640w, /images/case-study-1-960.webp 960w, /images/case-study-1-1280.webp 1280w',
-  },
-  caseStudy2: {
-    fallbackSrc: '/images/case-study-2.jpg',
-    width: 1280,
-    height: 1920,
-    avifSrcSet:
-      '/images/case-study-2-640.avif 640w, /images/case-study-2-960.avif 960w, /images/case-study-2-1280.avif 1280w',
-    webpSrcSet:
-      '/images/case-study-2-640.webp 640w, /images/case-study-2-960.webp 960w, /images/case-study-2-1280.webp 1280w',
-  },
-  caseStudy3: {
-    fallbackSrc: '/images/case-study-3.jpg',
-    width: 1120,
-    height: 1493,
-    avifSrcSet:
-      '/images/case-study-3-480.avif 480w, /images/case-study-3-800.avif 800w, /images/case-study-3-1120.avif 1120w',
-    webpSrcSet:
-      '/images/case-study-3-480.webp 480w, /images/case-study-3-800.webp 800w, /images/case-study-3-1120.webp 1120w',
-  },
-  caseStudy4: {
-    fallbackSrc: '/images/case-study-4.jpg',
-    width: 1120,
-    height: 742,
-    avifSrcSet:
-      '/images/case-study-4-480.avif 480w, /images/case-study-4-800.avif 800w, /images/case-study-4-1120.avif 1120w',
-    webpSrcSet:
-      '/images/case-study-4-480.webp 480w, /images/case-study-4-800.webp 800w, /images/case-study-4-1120.webp 1120w',
   },
   logoClear: {
     fallbackSrc: '/photos/logoclear.png',
@@ -158,5 +36,13 @@ export const responsiveImages = {
     webpSrcSet: '/images/team-mark.jpg',
   },
 } as const satisfies Record<string, ResponsiveSource>;
+
+/** The preview of a concept demo, captured from the running page by scripts/capture-work.mjs. */
+export const workPreview = (slug: string): ResponsiveSource => ({
+  fallbackSrc: `/images/work/${slug}-960.webp`,
+  width: 1600,
+  height: 1000,
+  webpSrcSet: `/images/work/${slug}-960.webp 960w, /images/work/${slug}-1600.webp 1600w`,
+});
 
 export type ResponsiveImageKey = keyof typeof responsiveImages;

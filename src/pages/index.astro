@@ -7,13 +7,13 @@ import ResponsivePicture from '../components/site/ResponsivePicture.astro';
 import { founders, homeFaq } from '../content/company';
 import { processSteps } from '../content/process';
 import { services } from '../content/services';
-import { getProject } from '../content/work';
+import { projects } from '../content/work';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, faqJsonLd } from '../lib/seo';
 
-// The lens carries the live client site and three concepts, in this order.
-const reel = ['reids-home-and-yard', 'physio-clinic', 'dental-aurelia', 'landscaping'].map((id) => getProject(id)!);
+// The lens carries the live client site and every concept, in this order.
+const reel = projects;
 const lensProjects = reel.map((project) => ({
   name: project.title,
   kind: project.kind === 'client' ? 'Client, live' : 'Concept',
@@ -21,7 +21,7 @@ const lensProjects = reel.map((project) => ({
 }));
 const previewFor = (project: (typeof reel)[number]) =>
   project.image.webpSrcSet.split(',').map((s) => s.trim().split(' ')[0]).find((src) => src.includes('960')) ?? project.image.fallbackSrc;
-const [lead, physio] = reel;
+const [lead, second] = reel;
 const chipSizes = '(min-width: 900px) 120px, 60px';
 const rowSizes = '(min-width: 900px) 0px, 92vw';
 
@@ -100,7 +100,7 @@ const poster = {
           We design
           <span class="chip"><ResponsivePicture source={lead.image} alt="" sizes={chipSizes} position={lead.position} /></span>
           websites for local businesses, and build
-          <span class="chip"><ResponsivePicture source={physio.image} alt="" sizes={chipSizes} position={physio.position} /></span>
+          <span class="chip"><ResponsivePicture source={second.image} alt="" sizes={chipSizes} position={second.position} /></span>
           quietly for agencies. Fast, clear, and <em>impossible to ignore.</em>
         </p>
       </div>
@@ -111,12 +111,12 @@ const poster = {
       <div class="container">
         <div class="work-head">
           <h2 id="work-title">Selected <em>work</em></h2>
-          <p class="mono">One client site, three concepts</p>
+          <p class="mono">One client site, five concepts</p>
         </div>
         <ul role="list" class="rows">
           {reel.map((project, index) => (
             <li class="row" data-cursor="View" data-preview={previewFor(project)} data-lens-hover={index}>
-              <a class="row-in" href={project.href} target="_blank" rel="noopener">
+              <a class="row-in" href={project.href} {...(project.kind === 'client' ? { target: '_blank', rel: 'noopener' } : {})}>
                 <span class="row-main">
                   <span class="row-name">{project.title}</span>
                   <span class="row-thumb">
@@ -128,7 +128,7 @@ const poster = {
                   <span class:list={['tag', { live: project.kind === 'client' }]}>
                     {project.kind === 'client' ? 'Client · Live' : 'Concept'}
                   </span>
-                  <span class="sr-only">({project.kind === 'client' ? 'live client website' : 'concept build'}, opens in a new tab)</span>
+                  <span class="sr-only">({project.kind === 'client' ? 'live client website, opens in a new tab' : 'concept build'})</span>
                 </span>
                 <span class="row-index mono" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               </a>

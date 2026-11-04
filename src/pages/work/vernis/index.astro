@@ -1,0 +1,443 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/vernis/styles.css';
+import { shades, services, hoursRows, PHONE_DISPLAY, PHONE_HREF, ADDRESS_LINES } from '../../../demos/vernis/data';
+
+const first = shades[0];
+const orbStyle = (s: (typeof shades)[number]) => `--d:${s.deep};--m:${s.mid};--g:${s.glow}`;
+const duration = (m: number) => {
+  if (m < 60) return `${m} min`;
+  const h = Math.floor(m / 60);
+  const r = m % 60;
+  return r ? `${h} h ${r}` : `${h} h`;
+};
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<DemoLayout
+  name="Vernis Nail Atelier"
+  title="Vernis Nail Atelier | Nail studio in Waterloo, Ontario"
+  description="Vernis is a nail studio in Waterloo, Ontario. Lacquer, gel, structured gel and sculpted extensions by appointment. Concept design by Axiom Web."
+  themeColor={first.bg}
+  pill="dark"
+>
+  <script slot="head" is:inline define:vars={{ shades }}>
+    // Put a remembered shade on the page before first paint, so a reload never flashes the wrong colour.
+    try {
+      var id = sessionStorage.getItem('vernis-shade');
+      var s = shades.filter(function (x) { return x.id === id; })[0];
+      if (s) {
+        var r = document.documentElement.style;
+        r.setProperty('--bg', s.bg);
+        r.setProperty('--ink', s.ink);
+        r.setProperty('--accent', s.accent);
+        r.setProperty('--deep', s.deep);
+        r.setProperty('--mid', s.mid);
+        r.setProperty('--glow', s.glow);
+      }
+    } catch (e) {}
+  </script>
+
+  <div class="stage" aria-hidden="true">
+    <canvas id="lacquer"></canvas>
+  </div>
+
+  <div class="actions">
+    <a class="actions__tel rv" href={PHONE_HREF} aria-label={`Call Vernis, ${PHONE_DISPLAY}`}>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.2 3.5h3.3l1.5 4.3-2 1.4a11 11 0 0 0 5.8 5.8l1.4-2 4.3 1.5v3.3a1.7 1.7 0 0 1-1.8 1.7A15.8 15.8 0 0 1 3.5 5.3 1.7 1.7 0 0 1 5.2 3.5Z"></path></svg>
+      <span class="actions__num" data-check-skip>{PHONE_DISPLAY}</span>
+    </a>
+    <a class="actions__book rv" href="#visit" data-book>Book</a>
+  </div>
+
+  <main id="main-content" tabindex="-1">
+    <!-- 01 HERO: the lacquer, the name of the shade, the picker -->
+    <section class="hero-wrap" id="top" data-tone="a" aria-label="Vernis Nail Atelier">
+      <div class="hero">
+        <div class="hero__css" aria-hidden="true"></div>
+
+        <header class="bar rv">
+          <a class="bar__mark" href="#top" aria-label="Vernis Nail Atelier, back to top">
+            <span class="bar__word">Vernis</span>
+            <span class="bar__sub">Nail Atelier</span>
+          </a>
+          <nav class="bar__nav" data-check-skip aria-label="Sections">
+            <a href="#shades">Shades</a>
+            <a href="#menu">Menu</a>
+            <a href="#how">How we work</a>
+            <a href="#visit">Visit</a>
+          </nav>
+        </header>
+
+        <div class="hero__body">
+          <h1 class="hero__title" aria-live="polite" aria-atomic="true">
+            <span class="hero__lead" data-reveal="chars" data-reveal-now>Nails, in</span>
+            <span class="hero__name">
+              <span class="vh" data-shade-text>{first.name}</span>
+              <span class="name-stack" aria-hidden="true">
+                <span class="name-layer" data-name-initial>{first.name}</span>
+              </span>
+            </span>
+          </h1>
+
+          <div class="hero__intro rv">
+            <p>Vernis is a nail studio in Waterloo, Ontario.<span class="hide-phone" data-check-skip> Lacquer, gel, structured gel and sculpted extensions, by appointment.</span></p>
+            <div class="hero__cta">
+              <a class="btn btn--solid" href="#visit" data-book>Book a time</a>
+              <a class="btn btn--line hide-phone" data-check-skip href={PHONE_HREF}>{PHONE_DISPLAY}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__foot rv">
+          <p class="hero__note hide-phone" data-check-skip aria-hidden="true">
+            <span class="hero__no" data-shade-no>No. 01 / {pad(shades.length)}</span>
+            <span class="hero__noteText" data-shade-note>{first.note}</span>
+          </p>
+          <fieldset class="picker" data-picker="hero">
+            <legend class="picker__label">Pick a shade. The whole page gets dipped.</legend>
+            <div class="picker__row">
+              {shades.map((s, i) => (
+                <label class="orb-label">
+                  <input class="vh" type="radio" name="shade-hero" value={s.id} checked={i === 0} />
+                  <span class="orb" style={orbStyle(s)}></span>
+                  <span class="vh">{s.name}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 THE STUDIO: wet look, dry wit -->
+    <section class="studio" id="studio" data-tone="b" aria-labelledby="studio-h">
+      <div class="studio__top">
+        <p class="kicker" data-reveal="up">The studio</p>
+        <h2 class="studio__h sheen" id="studio-h">
+          <span class="studio__l1">Wet look.</span>
+          <span class="studio__l2">Dry wit.</span>
+        </h2>
+      </div>
+      <div class="studio__grid">
+        <p class="studio__side" data-reveal="up">
+          Vernis Nail Atelier<br />
+          {ADDRESS_LINES[0]}<br />
+          Four chairs. By appointment.
+        </p>
+        <p class="studio__statement" data-statement>
+          A manicure here takes the time it takes. We shape by eye, build colour in thin layers, and finish with a top coat you could check your lipstick in.
+        </p>
+      </div>
+      <ol class="rules" role="list">
+        <li class="rule" data-reveal="up">
+          <span class="rule__no">i.</span>
+          <h3 class="rule__h">Four chairs.</h3>
+          <p class="rule__p">Never more than four people in the room. Nobody is rushed, and nobody sits waiting for a table.</p>
+        </li>
+        <li class="rule" data-reveal="up">
+          <span class="rule__no">ii.</span>
+          <h3 class="rule__h">Thin layers.</h3>
+          <p class="rule__p">Colour goes on in thin coats, each one dried or cured on its own. It is slower, and it is why it lasts.</p>
+        </li>
+        <li class="rule" data-reveal="up">
+          <span class="rule__no">iii.</span>
+          <h3 class="rule__h">Plain talk.</h3>
+          <p class="rule__p">Tell us the shape and the shade. If it will not work on your nails, we will say so and suggest what will.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 03 SHADE LIBRARY: scrubbed sideways on desktop, a swipe on phones -->
+    <section class="library" id="shades" data-tone="a" aria-labelledby="shades-h">
+      <div class="library__stick">
+        <div class="library__head">
+          <p class="kicker">The shade library</p>
+          <h2 class="library__h" id="shades-h">Seven shades, <br /><em>every one wet.</em></h2>
+          <p class="library__hint">Press a shade and the whole page is dipped in it.</p>
+        </div>
+        <div class="library__scroller">
+          <ul class="library__track" role="list">
+            {shades.map((s, i) => (
+              <li class="swatch" style={orbStyle(s)} data-shade-card={s.id}>
+                <button class="swatch__shape" type="button" data-shade={s.id} aria-label={`Dip the page in ${s.name}`}>
+                  <span class="swatch__gloss" aria-hidden="true"></span>
+                  <span class="swatch__no" aria-hidden="true">{pad(i + 1)}</span>
+                </button>
+                <span class="swatch__drip swatch__drip--a" aria-hidden="true"></span>
+                <span class="swatch__drip swatch__drip--b" aria-hidden="true"></span>
+                <span class="swatch__drip swatch__drip--c" aria-hidden="true"></span>
+                <h3 class="swatch__name">{s.name}</h3>
+                <p class="swatch__note">{s.note}</p>
+              </li>
+            ))}
+            <li class="swatch swatch--end">
+              <p class="swatch__endline">Have a picture?</p>
+              <p class="swatch__note">Bring it. If the shade is not on the shelf we will mix it, or tell you honestly how close we can get.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 THE MENU -->
+    <section class="menu" id="menu" data-tone="b" aria-labelledby="menu-h">
+      <div class="menu__head">
+        <p class="kicker" data-reveal="up">The menu</p>
+        <h2 class="menu__h" id="menu-h" data-reveal="lines">What it takes,<br /><em>and what it costs.</em></h2>
+        <div class="menu__sort" role="group" aria-label="Order the menu">
+          <span class="menu__sortLabel">Order by</span>
+          <button type="button" class="chip" data-sort="menu" aria-pressed="true">Menu</button>
+          <button type="button" class="chip" data-sort="time" aria-pressed="false">Shortest</button>
+          <button type="button" class="chip" data-sort="price" aria-pressed="false">Lowest price</button>
+        </div>
+      </div>
+
+      <ul class="menu__list" role="list" data-menu>
+        {services.map((s) => (
+          <li class="svc" data-svc={s.id} data-minutes={s.minutes} data-price={s.price}>
+            <button class="svc__head" type="button" aria-expanded="false" aria-controls={`svc-${s.id}`}>
+              <span class="svc__name">
+                <span class="svc__title">{s.name}</span>
+                <span class="svc__summary">{s.summary}</span>
+              </span>
+              <span class="svc__time">
+                <span class="svc__timeText">{duration(s.minutes)}</span>
+                <span class="svc__bar" aria-hidden="true"><i style={`--w:${Math.min(100, Math.round((s.minutes / 150) * 100))}%`}></i></span>
+              </span>
+              <span class="svc__price">{s.from ? 'from ' : ''}${s.price}</span>
+              <span class="svc__plus" aria-hidden="true"></span>
+            </button>
+            <div class="svc__body" id={`svc-${s.id}`} hidden>
+              <div class="svc__cols">
+                <div>
+                  <p class="svc__label">Included</p>
+                  <ul class="svc__list" role="list">
+                    {s.includes.map((line) => <li>{line}</li>)}
+                  </ul>
+                </div>
+                <div>
+                  <p class="svc__label">Good for</p>
+                  <p class="svc__good">{s.goodFor}</p>
+                  <button class="btn btn--solid btn--sm" type="button" data-book-service={s.id}>Book this</button>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="menu__foot">
+        Prices are in Canadian dollars, before tax. Not sure what you need? Call <a href={PHONE_HREF}>{PHONE_DISPLAY}</a> and we will work it out in two minutes.
+      </p>
+    </section>
+
+    <!-- 05 HOW WE WORK -->
+    <section class="how" id="how" data-tone="a" aria-labelledby="how-h">
+      <div class="how__side">
+        <div class="how__stick">
+          <p class="kicker">How we work</p>
+          <h2 class="how__h" id="how-h">Clean is not a <em>feature.</em></h2>
+          <p class="how__count" aria-hidden="true"><span data-how-no>01</span><span class="how__of"> / 04</span></p>
+        </div>
+      </div>
+      <ol class="how__list" role="list">
+        <li class="step" data-step>
+          <p class="step__tag">Tools</p>
+          <h3 class="step__h">Every tool, <em>every client.</em></h3>
+          <p class="step__p">Metal tools are scrubbed, cleaned in an ultrasonic bath, sealed in a pouch and sterilized in an autoclave. The pouch is opened in front of you. Files and buffers are used once, then they are yours or the bin's.</p>
+        </li>
+        <li class="step" data-step>
+          <p class="step__tag">Air</p>
+          <h3 class="step__h">Dust goes down, <em>not up.</em></h3>
+          <p class="step__p">Every table has a ventilation pad that pulls dust and fumes down and out before you breathe them. The room's air system runs all day, and we open the window on mild ones.</p>
+        </li>
+        <li class="step" data-step>
+          <p class="step__tag">Products</p>
+          <h3 class="step__h">Short labels. <em>Read them.</em></h3>
+          <p class="step__p">Our lacquers and gels leave out toluene, formaldehyde and DBP. Every bottle we use sits on the shelf by the door. If you have a sensitivity, tell us when you book and we will plan the visit around it.</p>
+        </li>
+        <li class="step" data-step>
+          <p class="step__tag">Pedicures</p>
+          <h3 class="step__h">Fresh basin, <em>fresh liner.</em></h3>
+          <p class="step__p">Pedicure basins are drained, scrubbed and disinfected between every client, and each one gets a single-use liner. You can watch us do it.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 06 VISIT -->
+    <section class="visit" id="visit" data-tone="b" aria-labelledby="visit-h">
+      <div class="visit__top">
+        <p class="kicker" data-reveal="up">Visit</p>
+        <h2 class="visit__h" id="visit-h" data-reveal="lines">Come in, <em>or call.</em></h2>
+      </div>
+      <div class="visit__grid">
+        <div class="visit__col visit__col--phone">
+          <a class="visit__phone" href={PHONE_HREF}>{PHONE_DISPLAY}</a>
+          <p class="visit__status" data-open-status aria-live="polite">Tuesday to Saturday</p>
+          <button class="btn btn--solid" type="button" data-book>Book a time</button>
+          <p class="visit__small">hello@vernis.example</p>
+        </div>
+        <div class="visit__col">
+          <p class="visit__label">Address</p>
+          <address class="visit__addr">
+            {ADDRESS_LINES[0]}<br />
+            {ADDRESS_LINES[1]}
+          </address>
+          <p class="visit__label">Hours</p>
+          <dl class="hours">
+            {hoursRows.map((r) => (
+              <div class="hours__row">
+                <dt>{r.days}</dt>
+                <dd>{r.open}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="visit__col visit__col--map">
+          <figure class="map">
+            <svg viewBox="0 0 640 460" role="img" aria-label="Sketch map: Vernis is on Erb Street West, one block west of King Street North, close to the ION station.">
+              <g class="map__grid" fill="none" stroke="currentColor" stroke-width="1" opacity="0.22">
+                <path d="M-20 90 L660 60"></path>
+                <path d="M-20 170 L660 150"></path>
+                <path d="M-20 390 L660 370"></path>
+                <path d="M120 -20 L150 480"></path>
+                <path d="M220 -20 L250 480"></path>
+                <path d="M470 -20 L505 480"></path>
+                <path d="M560 -20 L600 480"></path>
+              </g>
+              <g fill="none" stroke="currentColor" stroke-linecap="round">
+                <path d="M-20 290 L660 250" stroke-width="16" opacity="0.5"></path>
+                <path d="M350 -20 L395 480" stroke-width="12" opacity="0.5"></path>
+                <path d="M388 -20 L433 480" stroke-width="2" stroke-dasharray="3 7" opacity="0.8"></path>
+              </g>
+              <g class="map__label" fill="currentColor" font-size="15" font-family="'Instrument Sans', system-ui, sans-serif">
+                <text x="24" y="318" opacity="0.85">Erb Street West</text>
+                <text x="414" y="60" opacity="0.85">King Street North</text>
+                <text x="448" y="425" opacity="0.85">ION</text>
+              </g>
+              <circle cx="410" cy="272" r="5" fill="currentColor"></circle>
+              <text x="426" y="262" fill="currentColor" font-size="14" font-family="'Instrument Sans', system-ui, sans-serif" opacity="0.85">ION station</text>
+              <g class="map__pin" transform="translate(236 275)">
+                <circle class="map__ring" r="16" fill="none" stroke="var(--accent)" stroke-width="2"></circle>
+                <circle r="9" fill="var(--accent)"></circle>
+              </g>
+              <text x="200" y="228" fill="currentColor" font-size="17" font-weight="600" font-family="'Instrument Sans', system-ui, sans-serif">Vernis</text>
+            </svg>
+            <figcaption class="map__cap">
+              One block west of King Street North. The ION station is a short walk. Street parking on Erb, and a free lot behind the building with a step-free entrance off the lane.
+              <a class="map__link" href="https://www.openstreetmap.org/search?query=Erb%20Street%20West%20Waterloo%20Ontario" rel="noopener">Open a map</a>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 CLOSE -->
+    <section class="close" id="close" data-tone="a" aria-labelledby="close-h">
+      <h2 class="close__h" id="close-h">
+        <span class="close__l1" data-reveal="lines">Pick a shade.</span>
+        <em class="close__l2" data-reveal="lines">We will do the rest.</em>
+      </h2>
+      <div class="close__cta" data-reveal="up">
+        <button class="btn btn--solid btn--lg" type="button" data-book>Book a time</button>
+        <a class="btn btn--line btn--lg" href={PHONE_HREF}>{PHONE_DISPLAY}</a>
+      </div>
+    </section>
+  </main>
+
+  <ConceptFooter name="Vernis Nail Atelier" />
+
+  <!-- Shade dock: the picker follows you down the page -->
+  <div class="dock" data-dock>
+    <ul class="dock__list" id="dock-list" role="list" hidden>
+      {shades.map((s) => (
+        <li>
+          <button class="dock__item" type="button" data-shade={s.id} aria-pressed={s.id === first.id ? 'true' : 'false'}>
+            <span class="dock__label">{s.name}</span>
+            <span class="orb" style={orbStyle(s)}></span>
+          </button>
+        </li>
+      ))}
+    </ul>
+    <button class="dock__toggle" type="button" aria-expanded="false" aria-controls="dock-list" aria-label="Choose a shade">
+      <span class="orb orb--now" style={orbStyle(first)} data-dock-orb></span>
+    </button>
+  </div>
+
+  <!-- Booking: service, day, time. Nothing leaves the page. -->
+  <dialog class="book" id="book" aria-labelledby="book-title" data-check-skip data-lenis-prevent>
+    <div class="book__shell">
+      <div class="book__bar">
+        <p class="book__step" data-book-step aria-live="polite">Step 1 of 3</p>
+        <button class="book__close" type="button" data-book-close>Close</button>
+      </div>
+      <div class="book__progress" aria-hidden="true"><i data-book-progress></i></div>
+
+      <div class="book__panes">
+        <section class="pane" data-pane="service">
+          <h2 class="pane__h" id="book-title">What are we <em>doing?</em></h2>
+          <ul class="pick" role="list">
+            {services.map((s) => (
+              <li>
+                <button class="pick__item" type="button" data-pick-service={s.id}>
+                  <span class="pick__name">{s.name}</span>
+                  <span class="pick__meta">{duration(s.minutes)}</span>
+                  <span class="pick__meta">{s.from ? 'from ' : ''}${s.price}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="pane" data-pane="day" hidden>
+          <h2 class="pane__h">Which <em>day?</em></h2>
+          <p class="pane__sub" data-book-summary-service></p>
+          <div class="days" data-days></div>
+        </section>
+
+        <section class="pane" data-pane="time" hidden>
+          <h2 class="pane__h">What <em>time?</em></h2>
+          <p class="pane__sub" data-book-summary-day></p>
+          <div class="times" data-times></div>
+        </section>
+
+        <section class="pane" data-pane="confirm" hidden>
+          <h2 class="pane__h">Last <em>thing.</em></h2>
+          <p class="pane__sub" data-book-summary></p>
+          <form class="contact" novalidate data-book-form>
+            <label class="field">
+              <span>Name</span>
+              <input name="name" type="text" autocomplete="given-name" required />
+            </label>
+            <label class="field">
+              <span>Phone</span>
+              <input name="phone" type="tel" autocomplete="tel" inputmode="tel" required />
+            </label>
+            <p class="contact__err" data-book-error aria-live="polite"></p>
+            <button class="btn btn--inv btn--lg" type="submit">Request this time</button>
+          </form>
+        </section>
+
+        <section class="pane pane--done" data-pane="done" hidden>
+          <p class="done__tag">This is a concept</p>
+          <h2 class="pane__h">Nothing was <em>sent.</em></h2>
+          <p class="done__p" data-book-done></p>
+          <p class="done__p">Vernis is a fictional studio, so there is no one on the other end. On a real site, this is where a text message with these details would land in your phone.</p>
+          <div class="done__actions">
+            <button class="btn btn--inv" type="button" data-book-close>Back to the page</button>
+            <button class="btn btn--ghost" type="button" data-book-again>Try another time</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="book__nav">
+        <button class="book__back" type="button" data-book-back hidden>Back</button>
+      </div>
+    </div>
+  </dialog>
+</DemoLayout>
+
+<script>
+  import '../../../demos/vernis/main.ts';
+</script>
