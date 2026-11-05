@@ -22,7 +22,7 @@ export const founders = [
     name: 'Riley Hinsperger',
     initials: 'RH',
     role: 'Co-founder · Design & development',
-    bio: 'Riley designs and builds every site, handling development, performance and testing so it loads quickly and works properly on every device.',
+    bio: 'Riley leads design and development, and checks performance and testing on every site so it loads quickly and works properly on every device.',
   },
 ] as const;
 

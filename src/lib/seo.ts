@@ -252,7 +252,7 @@ export const SEO_ROUTES = {
   agencies: {
     title: 'White-Label Web Development for Agencies | Axiom Web',
     description:
-      'Extra hands for agencies: page builds, fixes and small sites delivered under your name. Fixed quote within 24 hours, CAD 50 an hour, NDA by default.',
+      'Extra hands for agencies: page builds, fixes and small sites delivered under your name. Fixed price in writing within 24 hours, NDA by default, 30 days of free fixes.',
     canonicalPath: '/agencies',
   },
   approach: {
