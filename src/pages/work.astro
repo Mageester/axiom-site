@@ -101,6 +101,7 @@ const concepts = projects.filter((project) => project.kind === 'concept');
                   <p class="mono stack-meta">
                     <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                     <span>{project.industryLabel}</span>
+                    <span class="stack-kind">Concept (fictional business)</span>
                   </p>
                   <h3>{project.title}</h3>
                 </div>
@@ -229,6 +230,11 @@ const concepts = projects.filter((project) => project.kind === 'concept');
     gap: 1.25rem;
     padding: clamp(1.25rem, 0.75rem + 2vw, 2.5rem);
   }
+
+  .stack-kind { opacity: 0.75; }
+
+  .stack-kind::before { content: "·"; margin: 0 0.5em; }
+
 
   .stack-meta {
     display: flex;

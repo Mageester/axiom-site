@@ -75,18 +75,6 @@ const steps = [
   </main>
 </BaseLayout>
 
-<script>
-  // Outreach links use ?path=teardown for a free site review; adjust the intro to match.
-  if (new URLSearchParams(window.location.search).get('path') === 'teardown') {
-    const lead = document.querySelector('[data-swap="lead"]');
-    const title = document.querySelector('.page-hero h1');
-    if (title) title.textContent = 'Request a free site teardown';
-    if (lead)
-      lead.textContent =
-        'Send your website and what you want more of. Within one business day we reply with a short teardown: what is working, what is creating friction and what we would change first. No sales call, no obligation.';
-    document.title = 'Free Site Teardown | Axiom Web';
-  }
-</script>
 
 <style>
   .start-section {
