@@ -4,7 +4,10 @@ import CtaBand from '../components/site/CtaBand.astro';
 import FaqList from '../components/site/FaqList.astro';
 import Icon from '../components/site/Icon.astro';
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
+import { cities } from '../content/cities';
 import { founders, homeFaq } from '../content/company';
+import { guides } from '../content/guides';
+import { industries } from '../content/industries';
 import { processSteps } from '../content/process';
 import { services } from '../content/services';
 import { projects } from '../content/work';
@@ -22,6 +25,10 @@ const lensProjects = reel.map((project) => ({
 const previewFor = (project: (typeof reel)[number]) =>
   project.image.webpSrcSet.split(',').map((s) => s.trim().split(' ')[0]).find((src) => src.includes('960')) ?? project.image.fallbackSrc;
 const [lead, second] = reel;
+const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+const clientCount = reel.filter((project) => project.kind === 'client').length;
+const conceptCount = reel.length - clientCount;
+const reelNote = `${numberWords[clientCount] ?? clientCount} client site${clientCount === 1 ? '' : 's'}, ${numberWords[conceptCount] ?? conceptCount} concepts`;
 const chipSizes = '(min-width: 900px) 120px, 60px';
 const rowSizes = '(min-width: 900px) 0px, 92vw';
 
@@ -111,7 +118,7 @@ const poster = {
       <div class="container">
         <div class="work-head">
           <h2 id="work-title">Selected <em>work</em></h2>
-          <p class="mono">One client site, five concepts</p>
+          <p class="mono">{reelNote.charAt(0).toUpperCase() + reelNote.slice(1)}</p>
         </div>
         <ul role="list" class="rows">
           {reel.map((project, index) => (
@@ -177,6 +184,58 @@ const poster = {
           </dl>
           <div class="offer-actions">
             <a class="btn btn-secondary" href="/agencies/" data-magnetic>Send a first job <Icon name="arrow-right" /></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where we work and who for: the main paths into the city, industry and guide pages -->
+    <section class="section reach-section" aria-labelledby="reach-title">
+      <div class="container split">
+        <div class="section-head split-head">
+          <p class="eyebrow">Where we work</p>
+          <h2 id="reach-title">Based in Kitchener. Building for businesses <em>across Ontario.</em></h2>
+          <p>We work with businesses across Waterloo Region, Guelph and Hamilton, and further afield. Calls, reviews and approvals happen by phone, email and a private preview link, so distance rarely matters.</p>
+        </div>
+        <div class="reach reveal">
+          <div class="reach-group">
+            <h3 class="reach-title">By city</h3>
+            <ul role="list" class="reach-list">
+              {cities.map((city) => (
+                <li>
+                  <a href={`/web-design/${city.slug}/`}>
+                    <span>Web design in {city.name}</span>
+                    <Icon name="arrow-right" size={16} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="reach-group">
+            <h3 class="reach-title">By industry</h3>
+            <ul role="list" class="reach-list">
+              {industries.map((industry) => (
+                <li>
+                  <a href={`/industries/${industry.slug}/`}>
+                    <span>Websites for {industry.name.charAt(0).toLowerCase() + industry.name.slice(1)}</span>
+                    <Icon name="arrow-right" size={16} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="reach-group reach-guides">
+            <h3 class="reach-title">Before you hire anyone</h3>
+            <ul role="list" class="reach-list">
+              {guides.map((guide) => (
+                <li>
+                  <a href={`/guides/${guide.slug}/`}>
+                    <span>{guide.title}</span>
+                    <Icon name="arrow-right" size={16} />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -790,6 +849,79 @@ const poster = {
   .split-head {
     margin-bottom: 0;
     justify-items: start;
+  }
+
+  /* ── Where we work ─────────────────────────────────────── */
+  .reach {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .reach {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2.5rem;
+    }
+
+    .reach-guides {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .reach-title {
+    margin-bottom: 0.75rem;
+    color: var(--mute);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .reach-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .reach-list li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .reach-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 48px;
+    padding: 0.7rem 0;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .reach-list a :global(svg) {
+    flex: none;
+    opacity: 0.45;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .reach-list a:hover span,
+  .reach-list a:focus-visible span {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .reach-list a:hover :global(svg),
+  .reach-list a:focus-visible :global(svg) {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reach-list a :global(svg) {
+      transition: none;
+    }
   }
 
   /* ── Process rows ──────────────────────────────────────── */

@@ -1,0 +1,430 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/fernhill/styles.css';
+import posterWide from '../../../demos/fernhill/poster-wide.jpg';
+import posterTall from '../../../demos/fernhill/poster-tall.jpg';
+import { chapters, months, services, timeline, faqs, steps } from '../../../demos/fernhill/content';
+
+const name = 'Fernhill Landscape Co.';
+const phone = '(519) 555-0118';
+const tel = 'tel:+15195550118';
+const email = 'hello@fernhill.example';
+
+const monthShort = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+
+const propertyTypes = [
+  ['Detached house', ''],
+  ['Semi or townhouse', ''],
+  ['Corner lot', ''],
+  ['Acreage or rural', 'Puslinch and around'],
+];
+const lotSizes = [
+  ['Small', 'A typical city lot'],
+  ['Medium', 'Room for a patio and a good lawn'],
+  ['Large', 'Half an acre or more'],
+  ['Not sure', 'We will measure it'],
+];
+const serviceChoices = [
+  ['lawn', 'Weekly lawn care'],
+  ['garden', 'Garden design and planting'],
+  ['stone', 'Interlock and stone'],
+  ['cleanup', 'Spring or fall cleanup'],
+  ['snow', 'Snow clearing'],
+];
+---
+
+<DemoLayout
+  name={name}
+  title="Fernhill Landscape Co. | Lawn, garden, stone and snow in Guelph"
+  description="Weekly lawn care, garden design and planting, interlock and stone, seasonal cleanups and snow clearing for homes in Guelph, Puslinch and east Kitchener. A concept site with a living lawn that turns with the seasons."
+  themeColor="#0c110b"
+  pill="light"
+>
+  <header class="top" id="top">
+    <a class="brand" href="#main-content" aria-label="Fernhill Landscape Co., top of page">
+      <svg class="brand-mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+        <path d="M2 25c6-5.5 11.5-8 16-8s8.6 2.2 12 5.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+        <path d="M11 21.5c-.4-4.6-2-8.4-4.6-11.6M14.6 19.4c.2-5.2-.8-10.4-3-15M18.4 18.2c1.4-4.4 1.6-9 .6-13.4M22 18.6c2-3.2 3.2-7 3.4-11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+      </svg>
+      <span class="brand-name">Fernhill</span>
+      <span class="brand-sub">Landscape Co.</span>
+    </a>
+    <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="nav" data-check-skip>Menu</button>
+    <nav class="nav" id="nav" aria-label="Main" data-check-skip>
+      <a href="#services">Services</a>
+      <a href="#year">The year</a>
+      <a href="#area">Service area</a>
+      <a href="#faq">Questions</a>
+      <a class="nav-phone" href={tel}>{phone}</a>
+      <a class="nav-cta" href="#quote">Get a quote</a>
+    </nav>
+  </header>
+
+  <a class="fab" href={tel} aria-label={`Call Fernhill, ${phone}`} data-check-skip>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"></path></svg>
+    <span>Call</span>
+  </a>
+
+  <main id="main-content" tabindex="-1">
+    <div class="story" id="story">
+      <div class="stage-wrap" aria-hidden="true">
+        <div class="stage">
+          <div class="stage-fallback" style={`--poster-wide:url(${posterWide.src});--poster-tall:url(${posterTall.src})`}></div>
+          <canvas id="lawn"></canvas>
+          <div class="stage-shade"></div>
+          <div class="stage-words">
+            {chapters.map((c, i) => <span class="stage-word" data-word={i}>{c.season}</span>)}
+          </div>
+        </div>
+      </div>
+
+      <section class="hero" aria-labelledby="h1">
+        <h1 class="h1" id="h1">
+          <span class="h1-eyebrow" data-reveal="fade" data-reveal-now data-reveal-delay="0.5">Fernhill Landscape Co. &middot; Guelph, Ontario</span>
+          <span class="h1-line" data-reveal="lines" data-reveal-now data-reveal-delay="0.35">Four seasons.</span>
+          <span class="h1-line h1-line--em" data-reveal="lines" data-reveal-now data-reveal-delay="0.5">One crew.</span>
+        </h1>
+        <div class="hero-foot">
+          <p class="lede" data-reveal="up" data-reveal-now data-reveal-delay="0.9">
+            Weekly lawn care, gardens, interlock and stone, spring and fall cleanups, and snow clearing for homes in Guelph, Puslinch and the east end of Kitchener. The same people on your property all year.
+          </p>
+          <div class="hero-actions" data-reveal="up" data-reveal-now data-reveal-delay="1.05">
+            <a class="btn btn-light" href="#quote">Get a quote</a>
+            <a class="btn btn-ghost" href={tel}>Call {phone}</a>
+          </div>
+        </div>
+        <p class="hint hint--fine" aria-hidden="true" data-check-skip><span class="hint-dot"></span>Walk across the lawn</p>
+        <p class="hint hint--touch" aria-hidden="true" data-check-skip><span class="hint-dot"></span>Touch the lawn</p>
+      </section>
+
+      {chapters.map((c, i) => (
+        <section class={`chapter chapter--${c.id}`} id={c.id} data-chapter={i} aria-labelledby={`${c.id}-title`}>
+          <div class="card" data-reveal="up">
+            <p class="kicker"><span>{c.season}</span> &middot; {c.when}</p>
+            <h2 class="card-title" id={`${c.id}-title`}>{c.title}</h2>
+            <p class="card-body">{c.body}</p>
+            <ul class="card-list" role="list">
+              {c.included.map((item) => <li>{item}</li>)}
+            </ul>
+            {c.try && <p class="card-try" aria-hidden="true" data-check-skip>{c.try}</p>}
+            <a class="card-link" href="#quote" data-service={c.service}>{c.cta} <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </section>
+      ))}
+
+      <nav class="seasons" aria-label="Seasons" data-check-skip>
+        {chapters.map((c, i) => (
+          <a href={`#${c.id}`} data-season-link={i}><i aria-hidden="true"></i>{c.season}</a>
+        ))}
+      </nav>
+    </div>
+
+    <div class="paper">
+      <svg class="hill" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 90V58C180 30 330 16 520 22c170 6 260 40 420 42 190 3 330-34 500-50v78z"></path>
+      </svg>
+
+      <section class="services" id="services" aria-labelledby="svc-title">
+        <div class="services-head">
+          <p class="eyebrow">What we do</p>
+          <h2 class="section-title" id="svc-title" data-reveal="lines">Lawn, garden, stone and snow.</h2>
+          <p class="section-lede" data-reveal="up">
+            Five services from one crew. Book one, or let us look after the whole yard through the year. Every quote is written, itemized and free.
+          </p>
+          <a class="btn btn-dark" href="#quote">Get a quote</a>
+        </div>
+        <ol class="svc-list" role="list">
+          {services.map((s, i) => (
+            <li class="svc" id={`svc-${s.id}`} data-reveal="up">
+              <div class="svc-top">
+                <span class="svc-n">0{i + 1}</span>
+                <span class="svc-when">{s.when}</span>
+              </div>
+              <h3 class="svc-title">{s.title}</h3>
+              <p class="svc-body">{s.body}</p>
+              <p class="svc-inc-label">Included</p>
+              <ul class="svc-inc" role="list">
+                {s.included.map((item) => <li>{item}</li>)}
+              </ul>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="year" id="year" aria-labelledby="year-title">
+        <div class="year-head split-head">
+          <p class="eyebrow eyebrow--light">The year at Fernhill</p>
+          <h2 class="section-title" id="year-title" data-reveal="lines">What we do each month.</h2>
+          <p class="section-lede" data-reveal="up">Pick a month to see what the crew is doing, and which services are running.</p>
+        </div>
+
+        <div class="months" id="months">
+          <div class="month-tabs" id="month-tabs" aria-label="Month" hidden>
+            {months.map((m, i) => (
+              <button type="button" class="month-tab" id={`mt-${i}`} data-month={i} aria-controls={`mp-${i}`}>
+                <span class="month-tab-abbr">{m.name.slice(0, 3)}</span>
+                <span class="month-now" hidden>Now</span>
+              </button>
+            ))}
+          </div>
+          <div class="month-panels">
+            {months.map((m, i) => (
+              <section class="month" id={`mp-${i}`} data-month={i} aria-labelledby={`mh-${i}`}>
+                <p class="month-season">{m.season}</p>
+                <h3 class="month-name" id={`mh-${i}`}>{m.name}</h3>
+                <ul class="month-work" role="list">
+                  {m.work.map((w) => <li>{w}</li>)}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </div>
+
+        <div class="gantt" id="gantt">
+          <p class="gantt-title">When each service runs</p>
+          <div class="gantt-grid">
+            <div class="gantt-months" aria-hidden="true">
+              {monthShort.map((m, i) => <span data-col={i}>{m}</span>)}
+            </div>
+            <i class="gantt-mark" aria-hidden="true" data-check-skip></i>
+            <ul class="gantt-rows" role="list">
+              {timeline.map((row) => (
+                <li class="gantt-row">
+                  <span class="gantt-name">{row.name} <span class="gantt-when">{row.when}</span></span>
+                  <span class="gantt-track" aria-hidden="true">
+                    {row.bars.map(([from, to, kind]) => (
+                      <i class:list={['gantt-bar', kind && `gantt-bar--${kind}`]} style={`grid-column:${from} / ${to}`}></i>
+                    ))}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p class="gantt-note"><i aria-hidden="true"></i>Design visits and planning, booked over the winter.</p>
+        </div>
+      </section>
+
+      <section class="visit" id="first-visit" aria-labelledby="visit-title">
+        <div class="visit-head split-head">
+          <p class="eyebrow">Getting started</p>
+          <h2 class="section-title" id="visit-title" data-reveal="lines">How a first visit works.</h2>
+          <p class="section-lede" data-reveal="up">One short walk around the yard, then a written price. Nothing to sign for lawn care.</p>
+        </div>
+        <ol class="steps" role="list">
+          {steps.map((s, i) => (
+            <li class="step" data-reveal="up">
+              <span class="step-n" aria-hidden="true">{i + 1}</span>
+              <h3 class="step-title">{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="area" id="area" aria-labelledby="area-title">
+        <div class="area-copy">
+          <p class="eyebrow">Service area</p>
+          <h2 class="section-title" id="area-title" data-reveal="lines">Guelph, Puslinch and the east end of Kitchener.</h2>
+          <p class="section-lede" data-reveal="up">
+            We keep the route tight, so the crew spends the day on lawns and not on the 401. Just outside the line? Ask anyway.
+          </p>
+          <dl class="area-list">
+            <div data-area="guelph">
+              <dt>Guelph</dt>
+              <dd>Every neighbourhood, from the Ward to Westminster Woods.</dd>
+            </div>
+            <div data-area="puslinch">
+              <dt>Puslinch</dt>
+              <dd>Aberfoyle, Morriston and the rural roads in between. Acreages welcome.</dd>
+            </div>
+            <div data-area="kitchener">
+              <dt>Kitchener, east end</dt>
+              <dd>Stanley Park, Chicopee, Grand River and Lackner Woods.</dd>
+            </div>
+          </dl>
+        </div>
+        <figure class="map">
+          <svg viewBox="0 0 420 320" role="img" aria-labelledby="map-title">
+            <title id="map-title">Schematic map: Guelph to the north-east, Puslinch to the south and the east end of Kitchener to the west, joined by Highways 7, 6 and 401.</title>
+            <defs>
+              <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+                <path d="M0 0V6" stroke="currentColor" stroke-width="1.2" stroke-opacity=".28"></path>
+              </pattern>
+            </defs>
+            <g class="map-contours" fill="none" stroke="currentColor" stroke-opacity=".13" stroke-width="1">
+              <path d="M-10 60c70-30 140-18 210 6s150 30 230-6"></path>
+              <path d="M-10 92c80-26 150-10 220 14s140 26 220-10"></path>
+              <path d="M-10 270c60-14 120-6 170 8s120 20 260-4"></path>
+              <path d="M-10 300c70-12 140-2 190 10s110 16 250-2"></path>
+              <path d="M60 140c20-40 70-52 104-30s30 66-6 80-118-8-98-50z"></path>
+              <path d="M300 230c30-22 74-14 84 12s-20 50-52 46-58-36-32-58z"></path>
+            </g>
+            <g class="map-zone" data-area="kitchener">
+              <path d="M40 176c14-34 64-50 102-34s44 62 12 84-90 22-108 0-18-32-6-50z" class="map-fill"></path>
+              <path d="M40 176c14-34 64-50 102-34s44 62 12 84-90 22-108 0-18-32-6-50z" fill="url(#hatch)"></path>
+            </g>
+            <g class="map-zone" data-area="guelph">
+              <path d="M228 58c30-30 92-30 124-4s30 82-6 104-104 18-126-14-22-60 8-86z" class="map-fill"></path>
+              <path d="M228 58c30-30 92-30 124-4s30 82-6 104-104 18-126-14-22-60 8-86z" fill="url(#hatch)"></path>
+            </g>
+            <g class="map-zone" data-area="puslinch">
+              <path d="M196 182c26-22 110-30 150-6s36 96-10 112-128 10-150-18-16-66 10-88z" class="map-fill"></path>
+              <path d="M196 182c26-22 110-30 150-6s36 96-10 112-128 10-150-18-16-66 10-88z" fill="url(#hatch)"></path>
+            </g>
+            <g class="map-roads" fill="none" stroke="currentColor" stroke-linecap="round">
+              <path d="M-6 262c80-12 160-16 236-24s140-14 196-22" stroke-width="2.4"></path>
+              <path d="M110 178c40-22 84-48 132-70s40-20 52-24" stroke-width="1.6"></path>
+              <path d="M262 22c-6 40-10 90-8 140s4 84 2 150" stroke-width="1.6"></path>
+            </g>
+            <path class="map-river" d="M250 30c18 20 4 36 22 52s40 6 46 30-14 34-4 56" fill="none" stroke-width="1.6" stroke-dasharray="1 4" stroke-linecap="round"></path>
+            <g class="map-labels">
+              <text x="282" y="72" class="ml-big">Guelph</text>
+              <text x="276" y="206" class="ml-big">Puslinch</text>
+              <text x="92" y="190" class="ml-big" text-anchor="middle">Kitchener</text>
+              <text x="92" y="207" class="ml-small" text-anchor="middle">east end</text>
+              <text x="248" y="222" class="ml-small" text-anchor="end">Aberfoyle</text>
+              <text x="248" y="284" class="ml-small" text-anchor="end">Morriston</text>
+              <text x="24" y="254" class="ml-road">401</text>
+              <text x="160" y="140" class="ml-road">7</text>
+              <text x="268" y="30" class="ml-road">6</text>
+            </g>
+            <g class="map-yard">
+              <circle cx="270" cy="256" r="5.5"></circle>
+              <text x="281" y="261" class="ml-small ml-yard">Our yard</text>
+            </g>
+          </svg>
+          <figcaption>Schematic, not to scale.</figcaption>
+        </figure>
+      </section>
+
+      <section class="quote" id="quote" aria-labelledby="quote-title">
+        <div class="quote-copy">
+          <p class="eyebrow eyebrow--light">Free, written quotes</p>
+          <h2 class="section-title" id="quote-title" data-reveal="lines">Ask for a quote.</h2>
+          <p class="section-lede" data-reveal="up">
+            A few quick questions. We come and look before we price anything, and you get the number in writing.
+          </p>
+          <p class="quote-or">Rather talk? <a href={tel}>{phone}</a></p>
+        </div>
+
+        <div class="quote-panel">
+          <form class="qf" id="quote-form" method="dialog" novalidate>
+            <noscript><p class="qf-noscript">This form needs JavaScript. Call {phone} or write to {email} instead.</p></noscript>
+            <fieldset class="qf-set">
+              <legend>What kind of property?</legend>
+              <div class="chips">
+                {propertyTypes.map(([label, note]) => (
+                  <label class="chip">
+                    <input type="radio" name="property" value={label} />
+                    <span>{label}{note && <small>{note}</small>}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <fieldset class="qf-set">
+              <legend>Roughly how big is the yard?</legend>
+              <div class="chips">
+                {lotSizes.map(([label, note]) => (
+                  <label class="chip">
+                    <input type="radio" name="size" value={label} />
+                    <span>{label}<small>{note}</small></span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <fieldset class="qf-set">
+              <legend>What would you like done? <span class="qf-opt">Pick any</span></legend>
+              <div class="chips">
+                {serviceChoices.map(([value, label]) => (
+                  <label class="chip chip--check">
+                    <input type="checkbox" name="services" value={value} data-label={label} />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <div class="qf-field">
+              <label for="qf-notes">Anything we should know? <span class="qf-opt">Optional</span></label>
+              <textarea id="qf-notes" name="notes" rows="3" placeholder="A gate code, a dog, a slope, a patio idea"></textarea>
+            </div>
+            <div class="qf-row">
+              <div class="qf-field">
+                <label for="qf-name">Your name</label>
+                <input id="qf-name" name="name" type="text" autocomplete="name" />
+              </div>
+              <fieldset class="qf-set qf-set--inline">
+                <legend>How should we reach you?</legend>
+                <div class="seg">
+                  <label><input type="radio" name="reach" value="call" checked /><span>Call</span></label>
+                  <label><input type="radio" name="reach" value="text" /><span>Text</span></label>
+                  <label><input type="radio" name="reach" value="email" /><span>Email</span></label>
+                </div>
+              </fieldset>
+            </div>
+            <div class="qf-field">
+              <label for="qf-contact" id="qf-contact-label">Phone number</label>
+              <input id="qf-contact" name="contact" type="tel" autocomplete="tel" />
+            </div>
+            <p class="qf-error" id="qf-error" role="alert"></p>
+            <button class="btn btn-sun qf-submit" type="submit">Request a quote</button>
+          </form>
+
+          <div class="qf-done" id="qf-done" hidden tabindex="-1">
+            <p class="qf-done-kicker">Your quote request</p>
+            <h3>This is a concept. Nothing was sent.</h3>
+            <p>Fernhill Landscape Co. is a fictional business, so nobody received this. You asked about <b id="qf-summary"></b>.</p>
+            <p>On a real Fernhill site, you would hear back within one business day to book a walk-through.</p>
+            <button type="button" class="btn btn-ghost" id="qf-again">Start over</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="faq-head">
+          <p class="eyebrow">Questions</p>
+          <h2 class="section-title" id="faq-title" data-reveal="lines">Before you book.</h2>
+        </div>
+        <div class="faq-list">
+          {faqs.map(([q, a]) => (
+            <details class="faq-item">
+              <summary><span>{q}</span><i aria-hidden="true"></i></summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    </div>
+
+    <section class="contact" aria-labelledby="contact-title">
+      <div class="contact-main">
+        <h2 class="contact-title" id="contact-title" data-reveal="lines">See you out there.</h2>
+        <div class="contact-actions">
+          <a class="btn btn-light" href="#quote">Get a quote</a>
+          <a class="btn btn-ghost" href={tel}>Call {phone}</a>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <address class="contact-block">
+          <p class="contact-label">Yard and office</p>
+          <span>Fernhill Landscape Co.</span>
+          <span>52 Wren Hollow Road</span>
+          <span>Puslinch, Ontario</span>
+          <a href={tel}>{phone}</a>
+          <a href={`mailto:${email}`}>{email}</a>
+        </address>
+        <dl class="contact-block contact-hours">
+          <div><dt class="contact-label">Office</dt><dd>Monday to Friday, 8 a.m. to 5 p.m.</dd></div>
+          <div><dt class="contact-label">Crews</dt><dd>Monday to Saturday, April to November</dd></div>
+          <div><dt class="contact-label">Snow</dt><dd>Whenever it snows, November 15 to April 15</dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <ConceptFooter name={name} />
+</DemoLayout>
+
+<script>
+  import '../../../demos/fernhill/main.ts';
+</script>

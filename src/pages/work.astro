@@ -16,6 +16,8 @@ const crumbs: Crumb[] = [
 
 const client = projects.find((project) => project.kind === 'client')!;
 const concepts = projects.filter((project) => project.kind === 'concept');
+const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+const conceptWord = numberWords[concepts.length] ?? String(concepts.length);
 ---
 
 <BaseLayout
@@ -35,7 +37,7 @@ const concepts = projects.filter((project) => project.kind === 'concept');
     <PageHero
       eyebrow="Work"
       title="Websites we’ve designed and built"
-      lead="A live client website, plus five concepts we built from scratch to show what a local business website can feel like. Every concept is a fictional business and is labelled as one."
+      lead={`A live client website, plus ${conceptWord} concepts we built from scratch to show what a local business website can feel like. Every concept is a fictional business and is labelled as one.`}
       crumbs={crumbs}
     >
       <Fragment slot="actions">
@@ -83,7 +85,7 @@ const concepts = projects.filter((project) => project.kind === 'concept');
     <section class="concepts" aria-labelledby="concepts-title">
       <div class="container concepts-head">
         <p class="eyebrow">Concepts</p>
-        <h2 id="concepts-title">Five businesses that <em>don’t exist.</em></h2>
+        <h2 id="concepts-title">{conceptWord.charAt(0).toUpperCase() + conceptWord.slice(1)} businesses that <em>don’t exist.</em></h2>
         <p>
           Each one is a working site for a fictional local business, built around a single idea from that trade. Open one and
           play with it. They are not client results.

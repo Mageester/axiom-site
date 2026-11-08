@@ -5,6 +5,7 @@ import Icon from '../../components/site/Icon.astro';
 import LinkCard from '../../components/site/LinkCard.astro';
 import PageHero from '../../components/site/PageHero.astro';
 import WorkCard from '../../components/site/WorkCard.astro';
+import { cities } from '../../content/cities';
 import { industries, type Industry } from '../../content/industries';
 import { getProject } from '../../content/work';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -15,7 +16,7 @@ export function getStaticPaths() {
   return industries.map((industry) => ({ params: { slug: industry.slug }, props: { industry } }));
 }
 
-const { industry } = Astro.props as { industry: Industry };
+const industry: Industry = industries.find((item) => item.slug === Astro.params.slug) ?? (Astro.props as { industry: Industry }).industry;
 const path = `/industries/${industry.slug}/`;
 const work = industry.workIds.map((id) => getProject(id)!);
 const others = industries.filter((item) => item.slug !== industry.slug);
@@ -117,6 +118,18 @@ const crumbs: Crumb[] = [
       </div>
     </section>
 
+    <section class="section-sm" aria-labelledby="areas-title">
+      <div class="container">
+        <h2 id="areas-title" class="areas-title">Websites for {industry.name.charAt(0).toLowerCase() + industry.name.slice(1)}, by city</h2>
+        <ul role="list" class="area-links">
+          {cities.map((city) => (
+            <li><a href={`/web-design/${city.slug}/`}>Web design in {city.name} <Icon name="arrow-right" size={16} /></a></li>
+          ))}
+          <li><a href="/web-design/">All service areas <Icon name="arrow-right" size={16} /></a></li>
+        </ul>
+      </div>
+    </section>
+
     <section class="section-sm section-soft" aria-labelledby="other-title">
       <div class="container">
         <h2 id="other-title" class="other-title">Other industries</h2>
@@ -133,6 +146,44 @@ const crumbs: Crumb[] = [
 </BaseLayout>
 
 <style>
+  .areas-title {
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.6rem);
+  }
+
+  .area-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .area-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink-2);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    transition: border-color 160ms var(--ease), color 160ms var(--ease);
+  }
+
+  .area-links a:hover {
+    border-color: var(--brand-line);
+    color: var(--brand-ink);
+  }
+
+  .area-links :global(svg) {
+    color: var(--brand-ink);
+  }
+
   .pages-card {
     gap: 1.1rem;
     box-shadow: var(--shadow-md);

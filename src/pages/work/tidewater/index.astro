@@ -1,0 +1,446 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/tidewater/styles.css';
+import silkStill from '../../../demos/tidewater/silk-still.webp';
+import {
+  NAME,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+  EMAIL,
+  ADDRESS_LINES,
+  classTypes,
+  classById,
+  days,
+  timetable,
+  timeLabel,
+  endLabel,
+  prices,
+  firstClass,
+  faqs,
+  contactTopics,
+} from '../../../demos/tidewater/data';
+
+const pad = (n: number) => String(n).padStart(2, '0');
+const slotsFor = (day: string) => timetable.filter((s) => s.day === day).sort((a, b) => a.start.localeCompare(b.start));
+const forNew = timetable.filter((s) => classById[s.cls].level !== 'some').length;
+---
+
+<DemoLayout
+  name={NAME}
+  title="Tidewater Yoga | Yoga studio in Uptown Waterloo, Ontario"
+  description="Tidewater is a small yoga studio in Uptown Waterloo, Ontario. Slow flow, yin, prenatal, a four-week beginners series and a Sunday restorative class, with mats provided. Concept design by Axiom Web."
+  themeColor="#0c1618"
+  pill="light"
+>
+  <div class="actions">
+    <a class="actions__tel" href={PHONE_HREF} aria-label={`Call Tidewater Yoga, ${PHONE_DISPLAY}`}>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.2 3.5h3.3l1.5 4.3-2 1.4a11 11 0 0 0 5.8 5.8l1.4-2 4.3 1.5v3.3a1.7 1.7 0 0 1-1.8 1.7A15.8 15.8 0 0 1 3.5 5.3 1.7 1.7 0 0 1 5.2 3.5Z"></path></svg>
+      <span class="actions__num" data-check-skip>{PHONE_DISPLAY}</span>
+    </a>
+    <a class="actions__book" href="#timetable">Book a class</a>
+  </div>
+
+  <main id="main-content" tabindex="-1" style={`--still:url(${silkStill.src})`}>
+    <!-- HERO: the silk, breathing -->
+    <section class="hero" id="top" aria-labelledby="hero-h">
+      <div class="hero__stage" aria-hidden="true">
+        <canvas class="hero__canvas" data-silk></canvas>
+      </div>
+
+      <header class="bar">
+        <a class="bar__mark" href="#top" aria-label="Tidewater Yoga, back to top">
+          <svg class="bar__glyph" viewBox="0 0 40 24" aria-hidden="true"><path d="M2 15c4.5 0 6-6 10.5-6S18 15 22.5 15 29 9 33.5 9 38 12 38 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path><path d="M2 20c4.5 0 6-4 10.5-4s5.5 4 10 4 6.5-4 11-4 4.5 2 4.5 2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.55"></path></svg>
+          <span class="bar__word">Tidewater</span>
+        </a>
+        <nav class="bar__nav" aria-label="Sections" data-check-skip>
+          <a href="#classes">Classes</a>
+          <a href="#timetable">Timetable</a>
+          <a href="#first">First class</a>
+          <a href="#prices">Prices</a>
+          <a href="#visit">Visit</a>
+        </nav>
+      </header>
+
+      <div class="hero__slot" aria-hidden="true" data-silk-slot></div>
+
+      <div class="hero__body">
+        <p class="hero__kicker">Yoga in Uptown Waterloo</p>
+        <h1 class="hero__h" id="hero-h">
+          <span class="hero__line" data-reveal="lines" data-reveal-now data-reveal-delay="0.5">Breathe in.</span>
+          <em class="hero__line hero__line--em" data-reveal="lines" data-reveal-now data-reveal-delay="0.75">Let the week go.</em>
+        </h1>
+        <p class="hero__intro">
+          A small studio on Regina Street. Slow flow, yin, prenatal and a Sunday restorative class, fourteen mats to a room<span class="hide-phone" data-check-skip>, and an easier version of every pose</span>.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--foam btn--lift" href="#timetable">See the timetable</a>
+          <a class="tlink" href="#first">Your first class</a>
+        </div>
+      </div>
+
+      <div class="hero__foot">
+        <div class="breathe" data-breathe hidden>
+          <button class="breathe__btn" type="button" aria-pressed="false" data-breathe-toggle aria-describedby="breathe-hint">
+            <svg class="breathe__ring" viewBox="0 0 48 48" aria-hidden="true">
+              <circle class="breathe__track" cx="24" cy="24" r="21"></circle>
+              <circle class="breathe__fill" cx="24" cy="24" r="21" pathLength="100" data-breathe-ring></circle>
+              <circle class="breathe__dot" cx="24" cy="24" r="4"></circle>
+            </svg>
+            <span class="breathe__label" data-breathe-label>Breathe with us</span>
+          </button>
+          <p class="breathe__hint" id="breathe-hint" data-breathe-hint>Six breaths, about a minute. Four counts in, six out.</p>
+          <p class="breathe__cue" data-breathe-cue aria-hidden="true" hidden>
+            <span class="breathe__word" data-cue-word>Breathe in</span>
+            <span class="breathe__count" data-cue-count>4</span>
+            <span class="breathe__step" data-cue-step>Breath 1 of 6</span>
+          </p>
+          <p class="visually-hidden" aria-live="polite" data-breathe-live></p>
+        </div>
+        <p class="hero__next" data-next data-check-skip>
+          <span class="hero__nextLabel">Seven days a week</span>
+          <a href="#timetable">Classes from 7 am</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- THE STUDIO -->
+    <section class="studio" aria-labelledby="studio-h">
+      <div class="studio__inner">
+        <p class="kicker" data-reveal="up">The studio</p>
+        <h2 class="studio__h display" id="studio-h" data-reveal="lines">One quiet room, <em>fourteen mats,</em> no mirrors.</h2>
+        <p class="studio__p" data-reveal="up">
+          Tidewater is a ground-floor studio on Regina Street North, a few minutes from Waterloo Public Square. Classes are small and unhurried, the room is warm rather than hot, and the teacher learns your name.
+        </p>
+      </div>
+      <ul class="facts" role="list" data-reveal="stagger">
+        <li class="fact">
+          <p class="fact__k">Small classes</p>
+          <p class="fact__v">Fourteen mats, then the class is full.</p>
+        </li>
+        <li class="fact">
+          <p class="fact__k">Nothing to bring</p>
+          <p class="fact__v">Mats, blocks, straps, bolsters and blankets are here.</p>
+        </li>
+        <li class="fact">
+          <p class="fact__k">Warm, not hot</p>
+          <p class="fact__v">Around 24 degrees. No hot yoga.</p>
+        </li>
+        <li class="fact">
+          <p class="fact__k">Easier versions</p>
+          <p class="fact__v">Every pose has one. Taking it is never failing.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- CLASSES -->
+    <section class="classes paper" id="classes" aria-labelledby="classes-h">
+      <header class="sec-head">
+        <p class="kicker" data-reveal="up">Classes</p>
+        <h2 class="display" id="classes-h" data-reveal="lines">Five classes, <em>in plain words.</em></h2>
+        <p class="sec-head__p" data-reveal="up">What happens in each one, who it suits, and how hard it is. If you are new, the beginners series, yin and Sunday restorative are all good places to start.</p>
+      </header>
+      <ol class="cls-list" role="list">
+        {classTypes.map((c, i) => (
+          <li class="cls" id={`class-${c.id}`} data-reveal="up">
+            <div class="cls__head">
+              <span class="cls__no" aria-hidden="true">{pad(i + 1)}</span>
+              <h3 class="cls__name">{c.name}</h3>
+              <p class="cls__meta">
+                <span>{c.note ? `${c.note}, ${c.minutes} min each` : `${c.minutes} min`}</span>
+                <span>{c.levelLabel}</span>
+              </p>
+            </div>
+            <p class="cls__what">{c.what}</p>
+            <div class="cls__side">
+              <p class="cls__label">Who it suits</p>
+              <p class="cls__suits">{c.suits}</p>
+              <p class="cls__label">Effort</p>
+              <p class="effort">
+                <span class="effort__marks" data-effort={c.effort} aria-hidden="true">
+                  {[1, 2, 3].map((n) => (
+                    <svg viewBox="0 0 28 10" class:list={['effort__mark', n <= c.effort && 'is-on']}><path d="M1 6.5c3 0 3.5-4 6.5-4s3.5 4 6.5 4 3.5-4 6.5-4 3.5 4 6.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+                  ))}
+                </span>
+                <span><span class="visually-hidden">{c.effort} of 3: </span>{c.effortLabel}</span>
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- TIMETABLE -->
+    <section class="tt paper" id="timetable" aria-labelledby="tt-h">
+      <header class="sec-head sec-head--row">
+        <div>
+          <p class="kicker" data-reveal="up">Timetable</p>
+          <h2 class="display" id="tt-h" data-reveal="lines">The week, <em>at a glance.</em></h2>
+        </div>
+        <p class="sec-head__p" data-reveal="up">
+          {timetable.length} classes a week, {forNew} of them good for someone new. Reserve a mat here, by phone or by email. Walk in if there is room.
+        </p>
+      </header>
+
+      <form class="filters" data-tt-filters hidden aria-label="Filter the timetable">
+        <fieldset class="seg seg--days">
+          <legend class="seg__legend">Day</legend>
+          <div class="seg__row">
+            <label class="chip chip--wide"><input type="radio" name="day" value="all" checked /><span>All week</span></label>
+            {days.map((d) => (
+              <label class="chip"><input type="radio" name="day" value={d.id} /><span aria-hidden="true">{d.short}</span><span class="visually-hidden">{d.name}</span></label>
+            ))}
+          </div>
+        </fieldset>
+        <fieldset class="seg seg--level">
+          <legend class="seg__legend">Level</legend>
+          <div class="seg__row">
+            <label class="chip"><input type="radio" name="level" value="any" checked /><span>Any</span></label>
+            <label class="chip"><input type="radio" name="level" value="new" /><span>New to yoga</span></label>
+            <label class="chip"><input type="radio" name="level" value="some" /><span>Some practice</span></label>
+          </div>
+        </fieldset>
+      </form>
+      <p class="tt__status" data-tt-status aria-live="polite"></p>
+
+      <div class="week" data-tt-grid>
+        {days.map((d) => (
+          <section class="day" data-day={d.id} aria-labelledby={`day-${d.id}`}>
+            <h3 class="day__h" id={`day-${d.id}`}>{d.name}</h3>
+            <ol class="day__list" role="list">
+              {slotsFor(d.id).map((s) => {
+                const c = classById[s.cls];
+                const minutes = s.minutes ?? c.minutes;
+                const label = `${c.name}, ${d.name} at ${timeLabel(s.start)}`;
+                return (
+                  <li class="slot" data-level={c.level} data-cls={c.id}>
+                    <p class="slot__time">
+                      <time>{timeLabel(s.start)}</time>
+                      <span class="slot__end">to {endLabel(s.start, minutes)}</span>
+                    </p>
+                    <p class="slot__name"><a href={`#class-${c.id}`}>{c.name}</a></p>
+                    <p class="slot__meta">{s.note ? `${s.note}, ` : ''}{c.levelLabel}</p>
+                    <a class="slot__book" href="#contact" data-reserve={label}>Reserve<span class="visually-hidden"> {label}</span></a>
+                  </li>
+                );
+              })}
+            </ol>
+            <p class="day__none" data-none hidden>Nothing at this level today.</p>
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <!-- YOUR FIRST CLASS -->
+    <section class="first" id="first" aria-labelledby="first-h">
+      <div class="first__side">
+        <div class="first__stick">
+          <p class="kicker" data-reveal="up">Your first class</p>
+          <h2 class="display" id="first-h" data-reveal="lines">Come ten minutes early. <em>We will take it from there.</em></h2>
+          <p class="first__p" data-reveal="up">Nothing to buy, nothing to know in advance. Here is how the first visit goes.</p>
+        </div>
+      </div>
+      <ol class="steps" role="list">
+        {firstClass.map((s, i) => (
+          <li class="step" data-reveal="up">
+            <p class="step__when"><span aria-hidden="true">{pad(i + 1)}</span> {s.when}</p>
+            <h3 class="step__h">{s.title}</h3>
+            <p class="step__p">{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- PRICES -->
+    <section class="prices paper" id="prices" aria-labelledby="prices-h">
+      <header class="sec-head">
+        <p class="kicker" data-reveal="up">Prices</p>
+        <h2 class="display" id="prices-h" data-reveal="lines">Simple prices. <em>No contracts.</em></h2>
+      </header>
+      <ul class="price-list" role="list" data-reveal="stagger">
+        {prices.map((p) => (
+          <li class:list={['price', p.featured && 'price--featured']}>
+            {p.featured && (
+              <svg class="price__mark" viewBox="0 0 40 24" aria-hidden="true"><path d="M2 15c4.5 0 6-6 10.5-6S18 15 22.5 15 29 9 33.5 9 38 12 38 12" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"></path><path d="M2 20c4.5 0 6-4 10.5-4s5.5 4 10 4 6.5-4 11-4 4.5 2 4.5 2" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.55"></path></svg>
+            )}
+            <h3 class="price__name">{p.name}</h3>
+            <p class="price__amt"><span class="price__num">{p.price}</span> <span class="price__per">{p.per}</span></p>
+            <p class="price__detail">{p.detail}</p>
+            {p.featured && <a class="btn btn--ink btn--lift price__cta" href="#timetable">Pick a first class</a>}
+          </li>
+        ))}
+      </ul>
+      <p class="prices__fine" data-reveal="up">
+        Canadian dollars, plus HST. Mats and props are included in every class. If cost is what stands between you and a class, email us; we keep a few community spots each week.
+      </p>
+    </section>
+
+    <!-- VISIT -->
+    <section class="visit paper paper--deep" id="visit" aria-labelledby="visit-h">
+      <header class="sec-head">
+        <p class="kicker" data-reveal="up">The space</p>
+        <h2 class="display" id="visit-h" data-reveal="lines">{ADDRESS_LINES[0]}. <em>The pale green door.</em></h2>
+      </header>
+      <div class="visit__grid">
+        <figure class="map" data-reveal="fade">
+          <svg viewBox="0 0 600 460" role="img" aria-label="Sketch map: Tidewater is on Regina Street North, between Erb Street and Willis Way, a block east of King Street and a short walk from Waterloo Public Square.">
+            <rect width="600" height="460" fill="none"></rect>
+            <g fill="none" stroke="currentColor" stroke-linecap="round">
+              <path d="M150 -10 L190 470" stroke-width="14" opacity="0.16"></path>
+              <path d="M350 -10 L390 470" stroke-width="10" opacity="0.16"></path>
+              <path d="M-10 360 L610 330" stroke-width="12" opacity="0.16"></path>
+              <path d="M-10 180 L610 160" stroke-width="7" opacity="0.12"></path>
+              <path d="M520 -10 L555 470" stroke-width="6" opacity="0.1"></path>
+            </g>
+            <rect x="40" y="200" width="104" height="90" rx="6" fill="currentColor" opacity="0.08"></rect>
+            <g class="map__labels" fill="currentColor" font-family="Inter, system-ui, sans-serif" font-size="17">
+              <text x="196" y="26" opacity="0.75" transform="rotate(84 196 26)">King St N</text>
+              <text x="396" y="26" opacity="0.75" transform="rotate(84 396 26)">Regina St N</text>
+              <text x="24" y="394" opacity="0.75">Erb Street</text>
+              <text x="24" y="164" opacity="0.75">Willis Way</text>
+              <text x="52" y="240" opacity="0.75">Public</text>
+              <text x="52" y="262" opacity="0.75">Square</text>
+            </g>
+            <g class="map__pin" transform="translate(372 262)">
+              <circle class="map__ring" r="18" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+              <circle r="8" fill="currentColor"></circle>
+            </g>
+            <text x="398" y="292" fill="currentColor" font-family="Fraunces, Georgia, serif" font-size="26">Tidewater</text>
+          </svg>
+          <figcaption class="map__cap">Sketch map, not to scale.</figcaption>
+        </figure>
+
+        <dl class="facts-list">
+          <div class="facts-list__row">
+            <dt>Address</dt>
+            <dd>
+              <address>{ADDRESS_LINES[0]}<br />{ADDRESS_LINES[1]}</address>
+              Look for the pale green door with a brass wave on it, between Erb Street and Willis Way.
+            </dd>
+          </div>
+          <div class="facts-list__row">
+            <dt>Getting in</dt>
+            <dd>Ground floor, step-free from the sidewalk, with an automatic door and wide doorways throughout. The studio floor is level, with no stairs anywhere.</dd>
+          </div>
+          <div class="facts-list__row">
+            <dt>Washroom</dt>
+            <dd>One accessible, all-gender washroom with grab bars. Two change rooms with benches and cubbies. No showers.</dd>
+          </div>
+          <div class="facts-list__row">
+            <dt>Parking</dt>
+            <dd>Paid street parking on Regina Street and a city lot a two-minute walk north. Bike racks at the door. Waterloo Public Square is about a five-minute walk.</dd>
+          </div>
+          <div class="facts-list__row">
+            <dt>Chairs and help</dt>
+            <dd>Chairs and extra props for any class. If you use a mobility aid or need a spot near the door, tell us when you reserve and it will be set up before you arrive.</dd>
+          </div>
+          <div class="facts-list__row">
+            <dt>Front desk</dt>
+            <dd>Opens twenty minutes before the first class of the day. Phones are answered 9 am to 5 pm on weekdays; leave a message any other time.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq paper" id="faq" aria-labelledby="faq-h">
+      <header class="sec-head">
+        <p class="kicker" data-reveal="up">Questions</p>
+        <h2 class="display" id="faq-h" data-reveal="lines">What people ask <em>before the first class.</em></h2>
+      </header>
+      <div class="faq__list">
+        {faqs.map((f) => (
+          <details class="qa">
+            <summary class="qa__q">
+              <span>{f.q}</span>
+              <span class="qa__icon" aria-hidden="true"></span>
+            </summary>
+            <p class="qa__a">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact" aria-labelledby="contact-h">
+      <div class="contact__side">
+        <p class="kicker" data-reveal="up">Write to us</p>
+        <h2 class="display" id="contact-h" data-reveal="lines">Ask anything. <em>Or save a mat.</em></h2>
+        <p class="contact__p" data-reveal="up">A few lines is plenty. We reply within a day, usually sooner.</p>
+        <div class="contact__direct" data-reveal="up">
+          <a class="contact__big" href={PHONE_HREF}>{PHONE_DISPLAY}</a>
+          <a class="contact__big contact__big--mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        </div>
+      </div>
+
+      <div class="contact__main">
+        <form class="form" method="dialog" novalidate data-contact aria-labelledby="contact-h">
+          <p class="chosen" data-chosen hidden>
+            <span class="chosen__k">Saving a mat for</span>
+            <span class="chosen__v" data-chosen-text></span>
+            <button class="chosen__x" type="button" data-chosen-clear>Remove<span class="visually-hidden"> this class</span></button>
+          </p>
+          <div class="field">
+            <label for="c-name">Your name</label>
+            <input id="c-name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="c-email">Email</label>
+            <input id="c-email" name="email" type="email" autocomplete="email" inputmode="email" required />
+          </div>
+          <div class="field field--wide">
+            <label for="c-topic">About</label>
+            <div class="select">
+              <select id="c-topic" name="topic">
+                <option value="">Choose one, if it helps</option>
+                <option>Reserving a mat</option>
+                {contactTopics.map((t) => <option>{t}</option>)}
+              </select>
+            </div>
+          </div>
+          <div class="field field--wide">
+            <label for="c-msg">Message <span class="field__opt">(optional)</span></label>
+            <textarea id="c-msg" name="message" rows="4"></textarea>
+          </div>
+          <div class="form__act">
+            <button class="btn btn--foam btn--lift" type="submit">Send</button>
+            <p class="form__err" data-contact-error role="alert"></p>
+          </div>
+          <noscript><p class="form__note">This is a concept site, so this form does not send anything.</p></noscript>
+        </form>
+
+        <div class="done" data-contact-done tabindex="-1" hidden>
+          <p class="done__k">This is a concept</p>
+          <p class="done__t">Nothing was sent.</p>
+          <p class="done__p" data-done-line></p>
+          <p class="done__p">Tidewater is a fictional studio, so there is no one on the other end. Your details stayed in this browser tab.</p>
+          <button class="tlink tlink--btn" type="button" data-done-reset>Start over</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-foot">
+      <div class="site-foot__brand">
+        <span class="site-foot__word">Tidewater</span>
+        <span>Yoga in Uptown Waterloo</span>
+      </div>
+      <address class="site-foot__addr">{ADDRESS_LINES[0]}<br />{ADDRESS_LINES[1]}</address>
+      <p class="site-foot__contact">
+        <a href={PHONE_HREF}>{PHONE_DISPLAY}</a><br />
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      </p>
+      <nav class="site-foot__nav" aria-label="Footer">
+        <a href="#classes">Classes</a>
+        <a href="#timetable">Timetable</a>
+        <a href="#prices">Prices</a>
+        <a href="#faq">Questions</a>
+      </nav>
+    </footer>
+  </main>
+
+  <ConceptFooter name={NAME} />
+</DemoLayout>
+
+<script>
+  import '../../../demos/tidewater/main.ts';
+</script>

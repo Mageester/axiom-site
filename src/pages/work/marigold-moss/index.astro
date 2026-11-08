@@ -1,0 +1,540 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/marigold-moss/styles.css';
+import posterWide from '../../../demos/marigold-moss/poster-wide.jpg';
+import posterTall from '../../../demos/marigold-moss/poster-tall.jpg';
+import posterBuild from '../../../demos/marigold-moss/poster-build.jpg';
+
+const phone = '(905) 555-0186';
+const tel = 'tel:+19055550186';
+const email = 'studio@marigoldmoss.example';
+const name = 'Marigold & Moss';
+
+const stems = [
+  { id: 'rose', label: 'Garden rose', add: 'Add a garden rose', swatch: '#eea06a' },
+  { id: 'ranunculus', label: 'Ranunculus', add: 'Add a ranunculus', swatch: '#ec7656' },
+  { id: 'marigold', label: 'Marigold', add: 'Add a marigold', swatch: '#ec7412' },
+  { id: 'cosmos', label: 'Cosmos', add: 'Add a cosmos', swatch: '#f5ede9' },
+  { id: 'anemone', label: 'Anemone', add: 'Add an anemone', swatch: '#f1efec', dot: '#141528' },
+  { id: 'eucalyptus', label: 'Eucalyptus', add: 'Add eucalyptus', swatch: '#8fa79c' },
+  { id: 'jasmine', label: 'Trailing jasmine', add: 'Add trailing jasmine', swatch: '#5d7a38' },
+];
+
+const sizes = [
+  { id: 'petite', name: 'Petite', price: 55, note: 'A small hand-tied posy. Bedside tables, desks, thank-yous.' },
+  { id: 'classic', name: 'Classic', price: 85, note: 'Our everyday bouquet. Fills a kitchen-table vase.' },
+  { id: 'generous', name: 'Generous', price: 125, note: 'Fuller, with more focal flowers and trailing greens.' },
+  { id: 'showpiece', name: 'Showpiece', price: 185, note: 'Big enough for an entry table or a milestone.' },
+];
+
+const zones = [
+  { name: 'Zone 1', fee: '$12', cutoff: 'Same day if ordered by 1 p.m.', areas: 'Downtown, Beasley, the North End, Strathcona, Durand, Kirkendall, Westdale, Crown Point' },
+  { name: 'Zone 2', fee: '$18', cutoff: 'Same day if ordered by 1 p.m.', areas: 'The Mountain, Dundas, Ancaster, Stoney Creek' },
+  { name: 'Zone 3', fee: '$25', cutoff: 'Same day if ordered by 11 a.m., otherwise next day', areas: 'Burlington, Waterdown, Binbrook, Grimsby' },
+];
+
+const consult = [
+  ['A short call', 'Twenty minutes, no charge. Your date, the venue, roughly how many guests and a rough budget. If we are already booked, you hear it now, not after a meeting.'],
+  ['A studio consultation', 'An hour at the studio on James Street North. Bring photos, a fabric swatch, anything. We put real stems on the table so you can see colour and scale together.'],
+  ['A written proposal', 'Within a week: every piece itemised, with the flowers we expect to use that season named. A 30% retainer holds your date.'],
+];
+
+const timeline = [
+  ['9 to 12 months before', 'Enquire and hold the date.'],
+  ['4 to 6 months', 'Studio consultation and written proposal.'],
+  ['6 weeks', 'Final guest and table numbers. Colours checked against what the season is giving.'],
+  ['1 week', 'Delivery, setup and teardown times confirmed with your venue.'],
+  ['The day', 'We deliver, set up and pin boutonnières. After the last dance, we come back and clear.'],
+];
+
+const included = [
+  'Bridal and wedding party bouquets',
+  'Boutonnières and corsages',
+  'Ceremony pieces: arch, aisle and urns',
+  'Centrepieces and table flowers',
+  'Delivery, setup and teardown',
+];
+
+const costs = [
+  ['The season', 'Peonies in June cost less than peonies in November, if they can be found at all. We will steer you to what is at its best.'],
+  ['Scale and labour', 'Arches, hanging pieces and installations take hours of hands-on work. Loose table flowers take fewer.'],
+  ['The venue', 'Stairs, tight setup windows and distance from Hamilton all add time.'],
+  ['Teardown', 'Clearing at midnight needs a crew on hand. Clearing the next morning costs less.'],
+];
+
+const plans = [
+  { name: 'Weekly', price: 65, note: 'A Classic bouquet every week, on the same day.' },
+  { name: 'Every two weeks', price: 72, note: 'Enough time to enjoy one before the next arrives.' },
+  { name: 'Monthly', price: 80, note: 'A Generous bouquet, once a month, for a little occasion.' },
+];
+
+const inSeason = [
+  { season: 'spring', months: 'March to May', stems: 'Ranunculus, tulips, anemones, hellebores and flowering branches.' },
+  { season: 'summer', months: 'June to August', stems: 'Garden roses, cosmos, sweet peas, snapdragons and trailing jasmine.' },
+  { season: 'autumn', months: 'September to November', stems: 'Dahlias, marigolds, rose hips, grasses and the last of the cosmos.' },
+  { season: 'winter', months: 'December to February', stems: 'Amaryllis, hellebores, eucalyptus, cedar and ilex berries.' },
+];
+
+const workshops = [
+  { season: 'winter', months: 'Mid-November to December', title: 'Evergreen wreaths', body: 'Cedar, pine, eucalyptus and dried citrus, wired onto a moss base you can reuse next year.' },
+  { season: 'spring', months: 'March to May', title: 'The hand-tied bouquet', body: 'Ranunculus, tulips and the spiral stem technique that holds a loose bouquet together.' },
+  { season: 'summer', months: 'June to August', title: 'Garden-cut centrepieces', body: 'A low, loose table arrangement in a footed bowl, built on chicken wire instead of foam.' },
+  { season: 'autumn', months: 'September to early November', title: 'Dried flowers', body: 'Grasses, strawflower and seed heads arranged to last through the winter.' },
+];
+
+const hours = [
+  ['Monday', 'Consultations by appointment'],
+  ['Tuesday to Friday', '10 a.m. to 6 p.m.'],
+  ['Saturday', '9 a.m. to 5 p.m.'],
+  ['Sunday', '11 a.m. to 3 p.m.'],
+];
+
+const faqs = [
+  ['What is the latest I can order for same-day delivery?', 'One o’clock in the afternoon, Monday to Saturday, for Zones 1 and 2. Eleven in the morning for Zone 3. After that, we deliver the next delivery day.'],
+  ['Can I choose the exact flowers?', 'Tell us favourite flowers and colours and we will build around them with what is best that week. If you need particular stems, give us three days’ notice so we can order them in.'],
+  ['What if nobody is home?', 'In mild weather we leave flowers somewhere shaded and sheltered and text you where. In winter we will not leave them outside. We try a neighbour, then try again the next delivery day.'],
+  ['Do you deliver to hospitals?', 'Yes, to the front desk or the unit’s station. Some units, like intensive care, do not allow flowers, so it is worth checking first.'],
+  ['Do you use floral foam?', 'No. We arrange in water with chicken wire and pin holders, which can be reused or recycled. Foam is a single-use plastic and we would rather not send it to landfill.'],
+  ['How long will they last?', 'Most of our flowers last five to eight days. Trim the stems, change the water every two days, and keep them away from heaters and fruit bowls.'],
+  ['Can I pause or change a subscription?', 'Yes. Email us by noon on the Monday of the delivery week to skip, pause, change the size or cancel. There is no charge to change.'],
+];
+---
+
+<DemoLayout
+  name={name}
+  title="Marigold & Moss | Florist and event flowers on James Street North, Hamilton"
+  description="Loose, seasonal flowers for weddings, events and same-day delivery across Hamilton, Ontario. Subscriptions, workshops and sympathy flowers. A concept site."
+  themeColor="#0d110b"
+  pill="light"
+>
+  <Fragment slot="head">
+    <script is:inline>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('mm-live');
+      document.documentElement.classList.add('mm-js');
+    </script>
+  </Fragment>
+
+  <header class="top" id="site-top">
+    <a class="brand" href="#main-content" aria-label={`${name}, top of page`}>
+      <span class="brand-name">Marigold <i>&amp;</i> Moss</span>
+      <span class="brand-sub">Flowers &middot; Hamilton</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main" data-check-skip>
+      <a href="#order">Delivery</a>
+      <a href="#weddings">Weddings</a>
+      <a href="#subscriptions">Subscriptions</a>
+      <a href="#workshops">Workshops</a>
+      <a href="#sympathy">Sympathy</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="top-actions">
+      <a class="top-phone" href={tel} data-check-skip>{phone}</a>
+      <a class="top-cta" href="#order" aria-label="Order flowers">Order<span class="cta-more" data-check-skip>&nbsp;flowers</span></a>
+      <button class="menu-btn" data-check-skip type="button" id="menu-btn" aria-expanded="false" aria-controls="nav" hidden>Menu</button>
+    </div>
+  </header>
+
+  <a class="call-fab" data-check-skip href={tel} aria-label={`Call ${name}, ${phone}`}>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"></path></svg>
+    <span>Call</span>
+  </a>
+
+  <main id="main-content" tabindex="-1">
+    <!-- The still life: a bunch that opens as the page scrolls. -->
+    <section class="bloom" id="bloom" aria-labelledby="h1">
+      <div class="bloom-stage" aria-hidden="true">
+        <div class="bloom-fallback" style={`--poster-wide:url(${posterWide.src});--poster-tall:url(${posterTall.src})`}></div>
+        <canvas id="bloom-canvas"></canvas>
+        <div class="bloom-shade"></div>
+        <div class="grain"></div>
+      </div>
+
+      <div class="bloom-copy">
+        <div class="hero">
+          <p class="eyebrow hero-eyebrow">Florist &amp; event studio<span class="eyebrow-more" data-check-skip> &middot; James Street North</span>, Hamilton</p>
+          <h1 class="h1" id="h1">
+            <span class="h1-line"><span>Arranged</span></span>
+            <span class="h1-line"><span>the way <em>they</em></span></span>
+            <span class="h1-line"><span><em>grow.</em></span></span>
+          </h1>
+          <p class="lede">
+            Loose, seasonal flowers for weddings, events and ordinary Tuesdays. Same-day delivery across Hamilton when you order by 1 p.m.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#order">Send flowers today</a>
+            <a class="btn btn-ghost" href="#weddings">Plan a wedding</a>
+          </div>
+          <p class="cutoff-line">
+            <span class="pulse" aria-hidden="true"></span>
+            <span data-cutoff="short">Order by 1 p.m., Monday to Saturday, for delivery the same day.</span>
+          </p>
+        </div>
+
+        <div class="panel panel-one">
+          <div class="panel-card">
+            <p class="eyebrow">Made the day it leaves</p>
+            <h2 class="panel-title">No cooler full of ready-made bouquets.</h2>
+            <p>
+              Stems come in through the week from growers we know. Every order is cut, arranged and wrapped by hand in the studio, then sent out the same day with fresh water and a care card.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel panel-two">
+          <div class="panel-card">
+            <p class="eyebrow">The look</p>
+            <h2 class="panel-title">Loose, seasonal, a little wild.</h2>
+            <p>
+              Stems at different heights, something trailing over the edge, nothing packed into foam. We build around what is best that week, so no two arrangements are quite the same.
+            </p>
+            <a class="text-link" href="#build">Build one, stem by stem <span aria-hidden="true">&darr;</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bouquet builder -->
+    <section class="build" id="build" aria-labelledby="build-title">
+      <div class="build-copy">
+        <p class="eyebrow">Build a bouquet</p>
+        <h2 class="section-title" id="build-title" data-reveal="lines">Choose the stems. Watch it come together.</h2>
+        <p class="build-intro">
+          Add stems and see roughly what you would get, set on a bed of seasonal greens. When it looks right, send it to the order form and a florist will make one like it from this week’s flowers.
+        </p>
+        <p class="build-nojs" id="build-nojs">Tell us favourite stems and colours in the order notes, and we will build around them.</p>
+
+        <div class="stems" id="stems" role="group" aria-label="Add stems to your bouquet" hidden>
+          {stems.map((s) => (
+            <button type="button" class="stem-btn" data-stem={s.id} aria-label={s.add}>
+              <span class="stem-swatch" style={`--sw:${s.swatch};--dot:${s.dot ?? 'transparent'}`} aria-hidden="true"></span>
+              <span class="stem-label">{s.label}</span>
+              <span class="stem-plus" aria-hidden="true">+</span>
+            </button>
+          ))}
+        </div>
+
+        <div class="tally" id="tally" hidden>
+          <p class="tally-text" id="tally-text" aria-live="polite">Nothing yet. A garden rose is a good place to start.</p>
+          <p class="tally-size" id="tally-size"></p>
+          <div class="tally-actions">
+            <a class="btn btn-gold" href="#order" id="build-order" aria-disabled="true">Order one like this</a>
+            <button type="button" class="btn-plain" id="build-undo" disabled>Undo</button>
+            <button type="button" class="btn-plain" id="build-clear" disabled>Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="build-stage" aria-hidden="true">
+        <div class="build-fallback" style={`--poster:url(${posterBuild.src})`}></div>
+        <canvas id="build-canvas"></canvas>
+        <p class="build-count" id="build-count"></p>
+      </div>
+    </section>
+
+    <div class="paper">
+      <!-- Delivery -->
+      <section class="order" id="order" aria-labelledby="order-title">
+        <div class="order-head">
+          <p class="eyebrow">Order for delivery</p>
+          <h2 class="section-title" id="order-title" data-reveal="lines">Same-day delivery across Hamilton.</h2>
+          <div class="cutoff-card">
+            <p class="cutoff-big" data-cutoff="long">Order by 1 p.m., Monday to Saturday, for delivery the same day.</p>
+            <p class="cutoff-small">Monday to Saturday, 1 p.m. cut-off. Every bouquet arrives in water, with a handwritten card.</p>
+          </div>
+        </div>
+
+        <form class="order-form" id="order-form" method="dialog" novalidate>
+          <fieldset class="sizes">
+            <legend class="form-legend">Choose a size</legend>
+            <div class="size-grid">
+              {sizes.map((s, i) => (
+                <label class="size">
+                  <input type="radio" name="size" value={s.id} checked={i === 1} />
+                  <span class="size-body">
+                    <span class="size-top"><b>{s.name}</b><span class="size-price">${s.price}</span></span>
+                    <span class="size-note">{s.note}</span>
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="o-date">Delivery date</label>
+              <input id="o-date" name="date" type="date" required />
+            </div>
+            <div class="field">
+              <label for="o-zone">Delivery area</label>
+              <select id="o-zone" name="zone">
+                {zones.map((z) => (<option value={z.name}>{z.name}: {z.areas.split(',').slice(0, 2).join(',')} and nearby ({z.fee})</option>))}
+                <option value="Pickup">Pick up at the studio (free)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="o-card">Card message <span class="field-hint" id="o-card-count">200 characters left</span></label>
+            <textarea id="o-card" name="card" rows="3" maxlength="200" aria-describedby="o-card-count" placeholder="Happy birthday, from all of us."></textarea>
+          </div>
+
+          <div class="field">
+            <label for="o-notes">Notes for the florist <span class="field-hint">Optional</span></label>
+            <textarea id="o-notes" name="notes" rows="2" placeholder="Favourite colours, flowers to avoid, a building buzzer code."></textarea>
+          </div>
+
+          <div class="form-foot">
+            <button class="btn btn-ink" type="submit">Review order</button>
+            <p class="form-small">This is a concept site. Nothing you enter here is sent anywhere.</p>
+          </div>
+        </form>
+        <div class="done" id="order-done" role="status" tabindex="-1" hidden>
+          <p class="eyebrow">Concept &middot; nothing was sent</p>
+          <h3>This is a concept. Nothing was sent.</h3>
+          <p>{name} is a fictional studio, so no one received this order. You chose: <b id="order-summary"></b>.</p>
+          <p>If it were real, you would pay on the next step and get an email confirmation with a delivery window.</p>
+          <button class="btn-plain" type="button" id="order-again">Start again</button>
+        </div>
+
+        <div class="zones">
+          <h3 class="zones-title">Where we deliver</h3>
+          <ul class="zone-list" role="list">
+            {zones.map((z, i) => (
+              <li class="zone">
+                <span class="zone-ring" aria-hidden="true" style={`--i:${i}`}></span>
+                <div>
+                  <p class="zone-top"><b>{z.name}</b> <span>{z.fee}</span></p>
+                  <p class="zone-areas">{z.areas}</p>
+                  <p class="zone-cut">{z.cutoff}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Weddings -->
+      <section class="weddings" id="weddings" aria-labelledby="wed-title">
+        <div class="wed-head">
+          <p class="eyebrow">Weddings &amp; events</p>
+          <h2 class="section-title" id="wed-title" data-reveal="lines">Flowers for the whole day, from the first meeting to the last stem cleared.</h2>
+        </div>
+        <div class="wed-minimum">
+          <p class="min-kicker">Full-service weddings from</p>
+          <p class="min-figure">$3,500</p>
+          <p class="min-note">Events and smaller celebrations from $1,200. Bouquets and boutonnières only, picked up from the studio, from $650.</p>
+          <a class="btn btn-ink" href="#enquire" data-topic="Wedding">Start a wedding enquiry</a>
+        </div>
+
+        <div class="wed-block">
+          <h3 class="block-title">How a consultation works</h3>
+          <ol class="steps" role="list">
+            {consult.map(([t, d], i) => (
+              <li class="step" data-reveal="up">
+                <span class="step-n">0{i + 1}</span>
+                <h4>{t}</h4>
+                <p>{d}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="wed-split">
+          <div class="wed-block">
+            <h3 class="block-title">The timeline before your date</h3>
+            <ol class="timeline" role="list">
+              {timeline.map(([when, what]) => (
+                <li><span class="tl-when">{when}</span><span class="tl-what">{what}</span></li>
+              ))}
+            </ol>
+          </div>
+          <div class="wed-block">
+            <h3 class="block-title">What full service includes</h3>
+            <ul class="ticks" role="list">
+              {included.map((x) => (<li>{x}</li>))}
+            </ul>
+            <h3 class="block-title block-title--gap">What affects the cost</h3>
+            <dl class="costs">
+              {costs.map(([t, d]) => (
+                <div><dt>{t}</dt><dd>{d}</dd></div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Subscriptions -->
+    <section class="subs" id="subscriptions" aria-labelledby="subs-title">
+      <div class="subs-head">
+        <p class="eyebrow">Flower subscriptions</p>
+        <h2 class="section-title" id="subs-title" data-reveal="lines">Fresh flowers on the table, without having to remember.</h2>
+        <p class="subs-intro">The florist’s choice from that week, delivered on the same day each time. Delivery is included in Zones 1 and 2. Collect from the studio and take $10 off.</p>
+      </div>
+      <div class="season-card">
+        <h3>What a delivery might hold</h3>
+        <dl class="season-list">
+          {inSeason.map((s) => (
+            <div class="season-row" data-stem-season={s.season}>
+              <dt>{s.months} <span class="season-now" hidden>Now</span></dt>
+              <dd>{s.stems}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <ul class="plans" role="list">
+        {plans.map((p) => (
+          <li class="plan" data-reveal="up">
+            <h3>{p.name}</h3>
+            <p class="plan-price"><b>${p.price}</b> <span>per delivery</span></p>
+            <p class="plan-note">{p.note}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="subs-foot">
+        <p>Skip, pause, change size or cancel by email, any week, at no charge.</p>
+        <a class="btn btn-gold" href="#enquire" data-topic="Subscription">Start a subscription</a>
+      </div>
+    </section>
+
+    <div class="paper">
+      <!-- Workshops -->
+      <section class="workshops" id="workshops" aria-labelledby="ws-title">
+        <div class="ws-head">
+          <p class="eyebrow">Workshops</p>
+          <h2 class="section-title" id="ws-title" data-reveal="lines">Learn to arrange the way we do.</h2>
+          <p class="ws-intro">
+            Two hours at the studio table on a Thursday evening, 6:30 to 8:30 p.m. Flowers, tools and a cup of something warm are included, and you take home what you make. Ten seats, $95 each.
+          </p>
+        </div>
+        <ul class="ws-list" role="list">
+          {workshops.map((w) => (
+            <li class="ws" data-season={w.season}>
+              <p class="ws-months">{w.months} <span class="ws-now" hidden>Booking now</span></p>
+              <h3>{w.title}</h3>
+              <p>{w.body}</p>
+            </li>
+          ))}
+        </ul>
+        <div class="ws-foot">
+          <p>Private workshops for 6 to 12 people from $85 each: birthdays, showers, team evenings.</p>
+          <a class="btn btn-ink" href="#enquire" data-topic="Workshop">Ask about a workshop</a>
+        </div>
+      </section>
+
+      <!-- Sympathy -->
+      <section class="sympathy" id="sympathy" aria-labelledby="sym-title">
+        <div class="sym-inner">
+          <p class="eyebrow">Sympathy flowers</p>
+          <h2 class="sym-title" id="sym-title">When someone has died.</h2>
+          <p class="sym-body">
+            Tell us the funeral home and the time of the service, and we will take it from there. We deliver directly and on time, and we keep it simple. If you are not sure what to send, call. We will suggest something fitting.
+          </p>
+          <dl class="sym-list">
+            <div><dt>For the service</dt><dd>Standing sprays from $225. Casket sprays from $350.</dd></div>
+            <div><dt>For the family’s home</dt><dd>A vase arrangement or a plant, from $75.</dd></div>
+            <div><dt>Sundays and holidays</dt><dd>Call us. We arrange delivery for services outside our usual days.</dd></div>
+          </dl>
+          <a class="sym-call" href={tel}>Call {phone}</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Visit and enquire -->
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div class="visit-info">
+        <p class="eyebrow">The studio</p>
+        <h2 class="section-title" id="visit-title" data-reveal="lines">Come in and choose your own.</h2>
+        <p class="open-now" id="open-now" aria-live="polite" hidden></p>
+        <address class="address">
+          <span>{name}</span>
+          <span>189 James Street North</span>
+          <span>Hamilton, Ontario</span>
+        </address>
+        <dl class="hours">
+          {hours.map(([d, h]) => (
+            <div><dt>{d}</dt><dd>{h}</dd></div>
+          ))}
+        </dl>
+        <p class="contact-lines">
+          <a href={tel}>{phone}</a>
+          <a href={`mailto:${email}`}>{email}</a>
+        </p>
+      </div>
+
+      <div class="enquire" id="enquire">
+        <h3 class="enquire-title">Send us a note</h3>
+        <p class="enquire-sub">For weddings, events, subscriptions and workshops. We reply within one working day.</p>
+        <form class="enquire-form" id="enquire-form" method="dialog" novalidate>
+          <div class="field">
+            <label for="e-name">Your name</label>
+            <input id="e-name" name="name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="e-email">Email</label>
+            <input id="e-email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="e-topic">What is it for?</label>
+              <select id="e-topic" name="topic">
+                <option>Wedding</option>
+                <option>Event</option>
+                <option>Subscription</option>
+                <option>Workshop</option>
+                <option>Sympathy</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="e-date">Date, if there is one</label>
+              <input id="e-date" name="date" type="date" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="e-msg">Tell us a little</label>
+            <textarea id="e-msg" name="message" rows="4"></textarea>
+          </div>
+          <p class="form-error" id="e-error" role="alert" hidden></p>
+          <div class="form-foot">
+            <button class="btn btn-gold" type="submit">Send note</button>
+            <p class="form-small">This is a concept site. Nothing you enter here is sent anywhere.</p>
+          </div>
+        </form>
+        <div class="done done-dark" id="enquire-done" role="status" tabindex="-1" hidden>
+          <p class="eyebrow">Concept &middot; nothing was sent</p>
+          <h3>This is a concept. Nothing was sent.</h3>
+          <p>{name} is a fictional studio, so this note did not go anywhere. If it were real, you would hear back within a working day.</p>
+          <button class="btn-plain" type="button" id="enquire-again">Write another</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="paper">
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <h2 class="section-title" id="faq-title" data-reveal="lines">Questions people ask</h2>
+        <div class="faq-list">
+          {faqs.map(([q, a]) => (
+            <details class="qa">
+              <summary><span>{q}</span><span class="qa-mark" aria-hidden="true"></span></summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-brand">Marigold <i>&amp;</i> Moss</p>
+    <p class="foot-line">Florist and event studio, 189 James Street North, Hamilton, Ontario</p>
+    <p class="foot-line"><a href={tel}>{phone}</a> &middot; <a href={`mailto:${email}`}>{email}</a></p>
+  </footer>
+
+  <ConceptFooter name={name} />
+</DemoLayout>
+
+<script>
+  import '../../../demos/marigold-moss/main.ts';
+</script>

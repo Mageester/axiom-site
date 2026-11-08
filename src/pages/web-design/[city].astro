@@ -4,19 +4,23 @@ import FaqList from '../../components/site/FaqList.astro';
 import Icon from '../../components/site/Icon.astro';
 import LinkCard from '../../components/site/LinkCard.astro';
 import PageHero from '../../components/site/PageHero.astro';
-import PricingCards from '../../components/site/PricingCards.astro';
+import WorkCard from '../../components/site/WorkCard.astro';
 import { cities, type City } from '../../content/cities';
+import { guides } from '../../content/guides';
+import { industries } from '../../content/industries';
 import { packages } from '../../content/pricing';
 import { services } from '../../content/services';
+import { projects } from '../../content/work';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../../lib/cta';
-import { SITE_URL, faqJsonLd, toCanonicalUrl, type Crumb } from '../../lib/seo';
+import { CITY_WIKIPEDIA, SITE_URL, faqJsonLd, toCanonicalUrl, type Crumb } from '../../lib/seo';
 
 export function getStaticPaths() {
   return cities.map((city) => ({ params: { city: city.slug }, props: { city } }));
 }
 
-const { city } = Astro.props as { city: City };
+// Read the city from the module rather than cached props, so edits to cities.ts show up in dev.
+const city: City = cities.find((item) => item.slug === Astro.params.city) ?? (Astro.props as { city: City }).city;
 const path = `/web-design/${city.slug}/`;
 const canonical = toCanonicalUrl(path);
 
@@ -52,11 +56,23 @@ const localService = {
   areaServed: {
     '@type': 'City',
     name: city.name,
+    sameAs: CITY_WIKIPEDIA[city.name],
     containedInPlace: { '@type': 'AdministrativeArea', name: 'Ontario, Canada' },
   },
 };
 
 const otherCities = cities.filter((item) => item.slug !== city.slug);
+
+// Proof on every city page: the live client site, then two concepts that rotate by city so
+// each page shows different work.
+const cityIndex = cities.findIndex((item) => item.slug === city.slug);
+const client = projects.find((project) => project.kind === 'client');
+const concepts = projects.filter((project) => project.kind === 'concept');
+const cityWork = [
+  ...(client ? [client] : []),
+  concepts[(cityIndex * 2) % concepts.length],
+  concepts[(cityIndex * 2 + 1) % concepts.length],
+];
 const metaTitle = `Web Design ${city.name}, Ontario`;
 ---
 
@@ -79,7 +95,19 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
       </aside>
     </PageHero>
 
-    <section class="section" aria-labelledby="planning-title">
+    <section class="section" aria-labelledby="local-title">
+      <div class="container local-grid">
+        <div class="section-head">
+          <p class="eyebrow">{city.name}</p>
+          <h2 id="local-title">{city.local.title}</h2>
+        </div>
+        <div class="prose local-copy">
+          {city.local.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="planning-title">
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Planning guidance</p>
@@ -112,6 +140,42 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
       </div>
     </section>
 
+    <section class="section" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head-row">
+          <div class="section-head">
+            <p class="eyebrow">Work</p>
+            <h2 id="work-title">Work you can open</h2>
+            <p>A live client site and two concept builds. Concepts are fictional businesses we designed to show what a site can do, and they are labelled as such.</p>
+          </div>
+          <a href="/work/" class="arrow-link">View all work <Icon name="arrow-right" /></a>
+        </div>
+        <div class="grid grid-3 reveal-stagger">
+          {cityWork.map((project) => <WorkCard project={project} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="industries-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">By industry</p>
+          <h2 id="industries-title">Websites for {city.name} businesses, by industry</h2>
+          <p>What customers in your sector look for, the pages that usually matter and the package that tends to fit.</p>
+        </div>
+        <ul role="list" class="industry-links">
+          {industries.map((industry) => (
+            <li>
+              <a href={`/industries/${industry.slug}/`}>
+                <span class="industry-link-name">{industry.name}</span>
+                <span class="industry-link-examples">{industry.examples}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="pricing-title">
       <div class="container">
         <div class="section-head">
@@ -119,7 +183,16 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
           <h2 id="pricing-title">Published prices for {city.name} projects</h2>
           <p>The same packages apply wherever you are. The scope and price are confirmed in writing before work begins.</p>
         </div>
-        <PricingCards packages={packages} compact />
+        <ul role="list" class="price-lines">
+          {packages.map((pkg) => (
+            <li>
+              <span class="price-name">{pkg.name}</span>
+              <span class="price-scope">{pkg.scope}</span>
+              <span class="price-value">{pkg.priceValue ? `From ${pkg.price}` : pkg.price}</span>
+            </li>
+          ))}
+        </ul>
+        <a href="/pricing/" class="arrow-link price-more">Compare packages and what is included <Icon name="arrow-right" /></a>
       </div>
     </section>
 
@@ -130,6 +203,17 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
           <h2 id="faq-title">Questions from {city.name} businesses</h2>
         </div>
         <FaqList items={faqs} />
+      </div>
+    </section>
+
+    <section class="section-sm" aria-labelledby="guides-title">
+      <div class="container">
+        <h2 id="guides-title" class="areas-title">Guides for {city.name} business owners</h2>
+        <ul role="list" class="area-links">
+          {guides.map((guide) => (
+            <li><a href={`/guides/${guide.slug}/`}>{guide.title} <Icon name="arrow-right" size={16} /></a></li>
+          ))}
+        </ul>
       </div>
     </section>
 
@@ -150,6 +234,127 @@ const metaTitle = `Web Design ${city.name}, Ontario`;
 </BaseLayout>
 
 <style>
+  .local-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .local-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+
+  .local-copy p {
+    color: var(--text);
+  }
+
+  .price-lines {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .price-lines li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  @media (min-width: 768px) {
+    .price-lines li {
+      grid-template-columns: minmax(0, 14rem) minmax(0, 1fr) auto;
+      align-items: baseline;
+    }
+  }
+
+  .price-name {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .price-scope {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    grid-column: 1;
+  }
+
+  @media (min-width: 768px) {
+    .price-scope {
+      grid-column: auto;
+    }
+  }
+
+  .price-value {
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    grid-row: 1;
+    grid-column: 2;
+    text-align: right;
+  }
+
+  @media (min-width: 768px) {
+    .price-value {
+      grid-row: auto;
+      grid-column: auto;
+    }
+  }
+
+  .price-more {
+    margin-top: 1.25rem;
+  }
+
+  .industry-links {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 768px) {
+    .industry-links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2.5rem;
+    }
+  }
+
+  .industry-links li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .industry-links a {
+    display: grid;
+    gap: 0.2rem;
+    min-height: 44px;
+    padding: 1rem 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .industry-link-name {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .industry-links a:hover .industry-link-name,
+  .industry-links a:focus-visible .industry-link-name {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .industry-link-examples {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
   .local-card {
     gap: 1.1rem;
     box-shadow: var(--shadow-md);

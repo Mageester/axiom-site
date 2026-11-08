@@ -25,7 +25,7 @@ export const industries: Industry[] = [
     name: 'Contractors & home services',
     examples: 'Trades, roofing, landscaping, HVAC, cleaning, snow removal',
     title: 'Websites for contractors and home service businesses.',
-    metaTitle: 'Contractor & Home Services Web Design | Axiom Web',
+    metaTitle: 'Contractor, Roofing & Landscaping Website Design | Axiom Web',
     metaDescription:
       'Websites for trades, roofers, landscapers and home service companies in Ontario. Clear service areas, quick quote requests and click-to-call on every screen.',
     intro:
@@ -55,7 +55,7 @@ export const industries: Industry[] = [
       'About, with licences, insurance and experience',
       'Contact and quote request',
     ],
-    workIds: ['reids-home-and-yard', 'kelvin'],
+    workIds: ['reids-home-and-yard', 'kelvin', 'fernhill'],
     packageNote:
       'Most trades fit the Local Business Website (from CAD $1,200). Companies with several distinct services or a large project gallery usually choose the Expanded Website (from CAD $1,500).',
     faqs: [
@@ -75,11 +75,11 @@ export const industries: Industry[] = [
     slug: 'health-clinics',
     icon: 'heart',
     name: 'Clinics & health practices',
-    examples: 'Dental, physiotherapy, chiropractic, massage, wellness',
-    title: 'Websites for clinics and health practices.',
-    metaTitle: 'Clinic & Health Practice Web Design | Axiom Web',
+    examples: 'Dental, chiropractic, physiotherapy, osteopathy, massage, wellness',
+    title: 'Websites for dental, chiropractic and physiotherapy clinics.',
+    metaTitle: 'Dental, Chiropractic & Physio Website Design | Axiom Web',
     metaDescription:
-      'Websites for dental, physiotherapy, chiropractic and wellness clinics. Clear services, practitioner credentials and simple booking for new patients.',
+      'Websites for dental offices, chiropractors, physiotherapists, osteopaths and massage therapists in Ontario. Plain-language services, credentials and easy booking.',
     intro:
       'New patients want to know they have found the right practice before they book. Your site should explain your services in plain language, introduce the practitioners and make booking or contacting the clinic simple.',
     needs: [
@@ -120,6 +120,11 @@ export const industries: Industry[] = [
         question: 'Can you connect our existing booking system?',
         answer:
           'Yes. We link to your existing online booking platform, ideally straight to the right service where the platform allows it. The booking account and its fees remain yours. Custom scheduling software is quoted separately.',
+      },
+      {
+        question: 'Do you build websites for solo practitioners like osteopaths and massage therapists?',
+        answer:
+          'Yes. A solo practice often fits the Local Launch Special or the Local Business Website. We write within the advertising standards that apply to your profession, and you approve every claim before launch.',
       },
     ],
   },
@@ -233,7 +238,7 @@ export const industries: Industry[] = [
     name: 'Law & professional services',
     examples: 'Law firms, accountants, consultants, advisers',
     title: 'Websites for law firms and professional service firms.',
-    metaTitle: 'Law Firm & Professional Services Websites | Axiom Web',
+    metaTitle: 'Law Firm & Accountant Website Design | Axiom Web',
     metaDescription:
       'Websites for law firms, accountants and consultants. Clear practice areas, credible profiles and a simple path to a consultation, without the dense copy.',
     intro:
@@ -276,6 +281,214 @@ export const industries: Industry[] = [
         question: 'Should each practice area have its own page?',
         answer:
           'When practice areas serve different clients with different questions, separate pages help visitors and search engines. Closely related areas can share one page with clear sections.',
+      },
+    ],
+  },
+  {
+    slug: 'fitness-wellness',
+    icon: 'zap',
+    name: 'Fitness studios & wellness',
+    examples: 'Yoga and pilates studios, gyms, personal trainers, martial arts, holistic practitioners',
+    title: 'Websites for yoga studios, gyms and wellness practitioners.',
+    metaTitle: 'Yoga Studio, Gym & Fitness Website Design | Axiom Web',
+    metaDescription:
+      'Websites for yoga and pilates studios, gyms and personal trainers in Ontario. A timetable that works on a phone, clear pricing and an easy first class.',
+    intro:
+      'Someone new is nervous about their first class. Your site has to show what the space feels like, which class suits a beginner, what it costs and exactly what happens when they walk in.',
+    needs: [
+      {
+        title: 'A timetable people can read on a phone',
+        text: 'Filter by day and level, with the teacher, length and intensity on every class, and a link straight to your booking platform.',
+      },
+      {
+        title: 'A first visit with no surprises',
+        text: 'What to wear, what to bring, when to arrive and what to tell the instructor. This is the page that turns a curious visitor into a booking.',
+      },
+      {
+        title: 'Pricing in plain sight',
+        text: 'Drop-ins, class passes, memberships and any intro offer, laid out so nobody has to email to ask.',
+      },
+      {
+        title: 'The feeling of the room',
+        text: 'Light, pace and atmosphere matter in this business. The design should carry the mood of your space before anyone has visited.',
+      },
+    ],
+    pages: [
+      'Home with upcoming classes, the intro offer and booking',
+      'Class types, with who each one suits',
+      'Timetable',
+      'Pricing and memberships',
+      'Your first visit, the space and contact',
+    ],
+    workIds: ['tidewater'],
+    packageNote:
+      'A solo instructor or personal trainer often fits the Local Launch Special (from CAD $900). Studios with a timetable, several class types and memberships usually choose the Local Business Website (from CAD $1,200) or the Expanded Website (from CAD $1,500).',
+    faqs: [
+      {
+        question: 'Can you connect Mindbody, Momence or the booking app we already use?',
+        answer:
+          'Yes. We link your existing booking platform, ideally straight to the right class or pass where the platform allows it. Your booking account and its fees remain yours. Custom scheduling software is quoted separately.',
+      },
+      {
+        question: 'Can the timetable stay up to date without a developer?',
+        answer:
+          'If your booking platform offers an embeddable schedule, we can place it on the site so it updates itself. Otherwise we build a simple timetable section that is quick to change.',
+      },
+    ],
+  },
+  {
+    slug: 'automotive',
+    icon: 'gauge',
+    name: 'Auto detailing & repair',
+    examples: 'Detailers, mechanics, tire shops, body shops, window tinting',
+    title: 'Websites for auto detailers, mechanics and repair shops.',
+    metaTitle: 'Auto Detailing & Repair Shop Website Design | Axiom Web',
+    metaDescription:
+      'Websites for auto detailers, mechanics, tire and body shops in Ontario. Packages and prices by vehicle, clear hours and booking requests that suit a busy bay.',
+    intro:
+      'Drivers want three answers fast: what you do for their kind of vehicle, roughly what it costs and when they can get in. Your site should give all three on a phone, in under a minute.',
+    needs: [
+      {
+        title: 'Packages by vehicle type',
+        text: 'A coupe and a pickup are different jobs. Show what each package includes and how pricing changes with size, so every quote starts from the right place.',
+      },
+      {
+        title: 'Booking that suits the bay',
+        text: 'Ask for the vehicle, the service and preferred days. Keep it short, and keep the phone number one tap away for anyone who would rather call.',
+      },
+      {
+        title: 'Your work, up close',
+        text: 'Before-and-after photos of real vehicles you worked on do more than any slogan. Paint, interiors and wheels deserve to be shown big and sharp.',
+      },
+      {
+        title: 'Drop-off and pickup, explained',
+        text: 'Where to park, when to leave the keys and how pickup works answer the questions that otherwise fill your voicemail.',
+      },
+    ],
+    pages: [
+      'Home with services, starting prices and booking',
+      'Packages and prices by vehicle',
+      'Gallery of real work',
+      'How drop-off and pickup work',
+      'Contact, hours and directions',
+    ],
+    workIds: ['mirrorline'],
+    packageNote:
+      'A single-bay detailer often fits the Local Launch Special (from CAD $900). Shops with several services and a pricing table usually choose the Local Business Website (from CAD $1,200).',
+    faqs: [
+      {
+        question: 'Can customers book a specific time online?',
+        answer:
+          'We can connect a booking platform you already use, or build a short booking request that you confirm by phone or email. Online scheduling with deposits is reviewed as an additional requirement and may be quoted as Custom.',
+      },
+      {
+        question: 'Should our prices be on the website?',
+        answer:
+          'For detailing and routine service, starting prices by vehicle size save you calls from people who were never going to book. For repairs that depend on a diagnosis, a clear explanation of how you quote works better than a number.',
+      },
+    ],
+  },
+  {
+    slug: 'shops-makers',
+    icon: 'store',
+    name: 'Shops, jewellers & makers',
+    examples: 'Jewellers, boutiques, galleries, custom studios and makers',
+    title: 'Websites for independent shops, jewellers and makers.',
+    metaTitle: 'Website Design for Jewellers, Boutiques & Makers | Axiom Web',
+    metaDescription:
+      'Websites for jewellers, boutiques, galleries and makers in Ontario. Show the craft, explain custom work step by step and make visits and appointments easy.',
+    intro:
+      'People buy from an independent shop because of the craft and the person behind it. Your site should show the work beautifully, explain how custom orders happen and make a visit or an appointment feel easy.',
+    needs: [
+      {
+        title: 'The work, presented like it matters',
+        text: 'Large, carefully lit images with room to breathe. Craft deserves better than a cramped product grid.',
+      },
+      {
+        title: 'Custom work, step by step',
+        text: 'Consultation, design, making and pickup, with honest timelines. Clear steps make a large purchase feel safe to start.',
+      },
+      {
+        title: 'Appointments and visits made simple',
+        text: 'Hours, parking and an appointment request that asks only for what you need to prepare.',
+      },
+      {
+        title: 'Repairs and services listed plainly',
+        text: 'Resizing, repairs, cleaning and alterations bring people through the door. Say what you do and roughly how long it takes.',
+      },
+    ],
+    pages: [
+      'Home with the work, the story and how to visit',
+      'Custom work and how it happens',
+      'Collections or gallery',
+      'Repairs and services',
+      'Visit, hours and appointments',
+    ],
+    workIds: ['orrin-vale'],
+    packageNote:
+      'A single shop or studio often fits the Local Business Website (from CAD $1,200). Selling online with a full catalogue, cart and checkout is scoped as Custom.',
+    faqs: [
+      {
+        question: 'Can I sell online from the site?',
+        answer:
+          'A few featured pieces can link to a checkout you already use. A full online store with inventory, shipping and taxes is scoped and quoted as Custom.',
+      },
+      {
+        question: 'Do I need professional product photos?',
+        answer:
+          'Good images matter more for shops than for almost any other business. If you do not have them yet, we can launch with your best images and show you where better photography would have the most impact.',
+      },
+    ],
+  },
+  {
+    slug: 'events-weddings',
+    icon: 'calendar',
+    name: 'Event & wedding vendors',
+    examples: 'Florists, photographers, DJs, planners, event entertainers',
+    title: 'Websites for florists, photographers and event vendors.',
+    metaTitle: 'Florist, Photographer & Event Vendor Website Design | Axiom Web',
+    metaDescription:
+      'Websites for florists, photographers, DJs, planners and event entertainers in Ontario. A portfolio that sells the feeling and an enquiry form planners can use.',
+    intro:
+      'Most of your work comes from referrals and from the guests at your last event. When a planner or a guest looks you up the next morning, your site has to show your style in seconds and make an enquiry easy, even from a business card.',
+    needs: [
+      {
+        title: 'Your style in the first screen',
+        text: 'Couples and planners shortlist vendors on feel. The first screen should show your work and say what you do and where.',
+      },
+      {
+        title: 'An enquiry form that fits how events are booked',
+        text: 'Date, venue or city, guest count and budget range: the details you need to say yes or no quickly, without a long form.',
+      },
+      {
+        title: 'A page for planners',
+        text: 'Planners book vendors again and again. Give them what you offer, your setup needs, the insurance you can document and the fastest way to reach you, in one place.',
+      },
+      {
+        title: 'Somewhere for guests to land',
+        text: 'Guests take your card or see your work at an event. A short web address and a QR code on your card should open a page that makes them want to book you.',
+      },
+    ],
+    pages: [
+      'Home with your work and an enquiry button',
+      'Services or packages, with starting prices if you share them',
+      'Portfolio or gallery',
+      'For planners',
+      'Enquiry form and contact',
+    ],
+    workIds: ['marigold-moss'],
+    packageNote:
+      'Many solo vendors and entertainers fit the Local Launch Special (from CAD $900), a single page with up to six sections. Studios with several services, a large portfolio or separate wedding and corporate offers usually choose the Local Business Website (from CAD $1,200).',
+    faqs: [
+      {
+        question: 'Do I need a booking calendar on my site?',
+        answer:
+          'Usually not. Most event work starts with an enquiry about a date. We design the form around the details you need to reply, and connect a booking or deposit tool you already use where applicable.',
+      },
+      {
+        question: 'Can you make a QR code for my business card?',
+        answer:
+          'Yes. We can provide a QR code that opens your site, so the card a guest takes home leads straight back to you.',
       },
     ],
   },

@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import sharp from 'sharp';
 import { cities } from '../../content/cities';
+import { guides } from '../../content/guides';
 import { industries } from '../../content/industries';
 import { services } from '../../content/services';
 import { SEO_ROUTES } from '../../lib/seo';
@@ -21,6 +22,7 @@ export function getStaticPaths() {
     startProject: 'Start a project',
     webDesign: 'Service areas',
     industries: 'Industries',
+    guides: 'Guides',
     privacy: 'Legal',
     terms: 'Legal',
   };
@@ -30,6 +32,7 @@ export function getStaticPaths() {
 
   for (const service of services) cards.push({ path: `/services/${service.slug}`, title: service.name, label: 'Services' });
   for (const industry of industries) cards.push({ path: `/industries/${industry.slug}`, title: `Websites for ${industry.name.toLowerCase()}`, label: 'Industries' });
+  for (const guide of guides) cards.push({ path: `/guides/${guide.slug}`, title: guide.title, label: 'Guide' });
   for (const city of cities) cards.push({ path: `/web-design/${city.slug}`, title: `Web design in ${city.name}, Ontario`, label: 'Service areas' });
 
   return cards.map((card) => ({

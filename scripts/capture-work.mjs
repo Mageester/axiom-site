@@ -14,6 +14,11 @@ const demos = {
   vernis: { scroll: 0, wait: 5000 },
   'cinder-salt': { scroll: 0, wait: 6000 },
   'aldous-wren': { scroll: 0, wait: 9000 },
+  'orrin-vale': { scroll: 0, wait: 4500 },
+  tidewater: { scroll: 0, wait: 5000 },
+  fernhill: { scroll: 0, wait: 3800 },
+  mirrorline: { scroll: 0, wait: 7000 },
+  'marigold-moss': { scroll: 0, wait: 6000 },
 };
 
 const option = (name, fallback) => process.argv.find((arg) => arg.startsWith(`--${name}=`))?.split('=')[1] ?? fallback;

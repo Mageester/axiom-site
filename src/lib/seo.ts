@@ -53,10 +53,20 @@ export const breadcrumbSchema = (items: Crumb[]) => ({
   })),
 });
 
+// Wikipedia pages pin each service area to the right place (Hamilton is not only in Ontario).
+export const CITY_WIKIPEDIA: Record<string, string> = {
+  Kitchener: 'https://en.wikipedia.org/wiki/Kitchener,_Ontario',
+  Waterloo: 'https://en.wikipedia.org/wiki/Waterloo,_Ontario',
+  Cambridge: 'https://en.wikipedia.org/wiki/Cambridge,_Ontario',
+  Guelph: 'https://en.wikipedia.org/wiki/Guelph',
+  Hamilton: 'https://en.wikipedia.org/wiki/Hamilton,_Ontario',
+};
+
 // One entity describes the studio; service areas are not branch offices.
 export const SERVICE_AREAS = ['Kitchener', 'Waterloo', 'Cambridge', 'Guelph', 'Hamilton'].map((name) => ({
   '@type': 'City',
   name,
+  sameAs: CITY_WIKIPEDIA[name],
   containedInPlace: { '@type': 'AdministrativeArea', name: 'Ontario, Canada' },
 }));
 
@@ -285,10 +295,16 @@ export const SEO_ROUTES = {
       'Axiom Web serves Kitchener, Waterloo, Cambridge, Guelph and Hamilton from our Kitchener-Waterloo studio. Local website planning guidance for each area.',
     canonicalPath: '/web-design',
   },
+  guides: {
+    title: 'Website Guides for Small Business Owners',
+    description:
+      'Plain answers for Ontario small business owners: what a website costs, what a one-page site should include and what to prepare before hiring a web designer.',
+    canonicalPath: '/guides',
+  },
   industries: {
     title: 'Website Design by Industry',
     description:
-      'What a strong website needs for contractors, clinics, salons, restaurants and professional firms, with relevant examples and the package that usually fits.',
+      'Website design for contractors, clinics, salons, restaurants, law firms, studios, auto shops, jewellers and event vendors, with examples and the package that fits.',
     canonicalPath: '/industries',
   },
   privacy: {

@@ -1,0 +1,510 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/orrin-vale/styles.css';
+import { METALS, STONES } from '../../../demos/orrin-vale/looks';
+import { standinSvg } from '../../../demos/orrin-vale/standin';
+import { FRAMING, FRAMING_NARROW } from '../../../demos/orrin-vale/scene';
+import { plotSvg } from '../../../demos/orrin-vale/plot';
+
+const PHONE = '(416) 555-0151';
+const TEL = 'tel:+14165550151';
+const EMAIL = 'studio@orrinvale.example';
+
+const svgWide = standinSvg(FRAMING, 'w');
+const svgNarrow = standinSvg(FRAMING_NARROW, 'n');
+const plot = plotSvg();
+
+const services = [
+  {
+    title: 'Engagement and wedding rings',
+    text: 'Designed with you and made at our bench. Bring a sketch, a screenshot or only a feeling, and we will draw it out together.',
+    time: 'Usually 6 to 10 weeks',
+  },
+  {
+    title: 'Heirloom remakes',
+    text: 'A grandmother’s diamond, a band nobody wears. We turn pieces that sit in a drawer into one you will put on every day.',
+    time: 'Usually 6 to 10 weeks',
+  },
+  {
+    title: 'Repairs',
+    text: 'Broken chains, bent claws, loose stones, worn-thin shanks. Quoted in writing before we touch anything.',
+    time: 'Most in 1 to 2 weeks',
+  },
+  {
+    title: 'Resizing and re-tipping',
+    text: 'Up or down a few sizes, and fresh metal on worn claws before a stone goes missing.',
+    time: 'About a week',
+  },
+  {
+    title: 'Cleaning and inspection',
+    text: 'A proper clean, and every claw checked under magnification while you wait. Any ring, from any jeweller.',
+    time: 'About 15 minutes',
+  },
+];
+
+// Weeks from the first visit. Estimates, shown as estimates.
+const steps = [
+  { title: 'Consultation', text: 'An hour at the studio. We look at your hands, talk through stones, metals and budget, and try shapes on from our sample tray.', from: 0, to: 0.4, when: 'Week 1' },
+  { title: 'Sketch and quote', text: 'Hand sketches and a written quote for the design, the metal and the stone. Change anything you like before we start.', from: 0.4, to: 1.5, when: 'Within about a week' },
+  { title: 'Wax or CAD model', text: 'We carve a wax or print a model from CAD, so you can try the ring on before any metal is poured.', from: 1.5, to: 3.5, when: 'Weeks 2 to 4' },
+  { title: 'Casting', text: 'Your design is cast in the metal you chose, then filed, shaped and polished by hand.', from: 3.5, to: 5, when: 'Weeks 4 to 5' },
+  { title: 'Setting', text: 'The stone goes in last, claw by claw, under the microscope.', from: 5, to: 6.5, when: 'Weeks 5 to 7' },
+  { title: 'Final fitting', text: 'You try it on at the studio. We check the size, the comfort and the light, and adjust anything that is off.', from: 6.5, to: 8, extra: 10, when: 'Weeks 7 to 10' },
+];
+const WEEKS = 10;
+
+const repairs = [
+  ['Ring resizing', 'About a week'],
+  ['Re-tipping or rebuilding claws', '1 to 2 weeks'],
+  ['Tightening a loose stone', 'Often the same day'],
+  ['Chain and clasp repair', '3 to 5 days'],
+  ['Replacing a lost stone', '2 to 3 weeks, depending on finding a match'],
+  ['Refinishing a worn band', 'About a week'],
+  ['Cleaning and claw check', 'About 15 minutes, while you wait'],
+];
+
+const sizes = Array.from({ length: 13 }, (_, i) => {
+  const s = 4 + i * 0.5;
+  const d = 11.63 + 0.8128 * s;
+  return { label: s % 1 ? `${Math.floor(s)}½` : String(s), d: d.toFixed(1), c: (d * Math.PI).toFixed(1) };
+});
+
+const faqs = [
+  {
+    q: 'Do you work with lab-grown diamonds?',
+    a: 'Yes. Lab-grown and natural diamonds are both real diamonds; they are priced differently and hold their value differently. We show you both side by side, with the grading report for whichever you choose, and let you decide.',
+  },
+  {
+    q: 'Can I bring my own stone?',
+    a: 'Yes. We look at it under magnification before we design around it, and tell you plainly if a chip or crack makes setting it risky.',
+  },
+  {
+    q: 'Is there a charge for the first consultation?',
+    a: 'No. The first hour is free and there is nothing to sign. If you go ahead, you approve a written quote before any work starts.',
+  },
+  {
+    q: 'How is the price of a custom ring worked out?',
+    a: 'Mostly by the stone, then the metal and the hours at the bench. Your quote lists all three, so you can see where a change would make a difference.',
+  },
+  {
+    q: 'Can you make a wedding band to sit flush with my engagement ring?',
+    a: 'Yes, either a shaped band or a straight one with a notch. Bring the engagement ring so we can fit the two together exactly.',
+  },
+  {
+    q: 'What if the ring does not fit later?',
+    a: 'Fingers change with seasons and years. Every ring we make includes one free resize in its first year.',
+  },
+  {
+    q: 'Do you repair watches or costume jewellery?',
+    a: 'No. We work in gold, platinum and silver with real stones. For watches we are happy to suggest someone good nearby.',
+  },
+];
+
+const hours = [
+  ['Tuesday to Friday', '11 am to 7 pm'],
+  ['Saturday', '10 am to 4 pm'],
+  ['Sunday and Monday', 'At the bench, closed to visits'],
+];
+---
+
+<DemoLayout
+  name="Orrin & Vale"
+  title="Orrin & Vale | Goldsmiths in Leslieville, Toronto"
+  description="A two-goldsmith studio in Leslieville, Toronto: custom engagement and wedding rings, heirloom remakes, repairs and resizing, by appointment."
+  themeColor="#0d0b0a"
+  pill="dark"
+>
+  <script is:inline slot="head">
+    (function () {
+      var r = document.documentElement;
+      r.classList.add('js');
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) r.classList.add('reduced');
+    })();
+  </script>
+
+  <header class="bar">
+    <a class="brand" href="#main-content" aria-label="Orrin &amp; Vale, back to top">
+      <span class="brand-name">Orrin <i>&amp;</i> Vale</span>
+      <span class="brand-sub">Goldsmiths</span>
+    </a>
+    <nav class="nav" aria-label="Sections" data-check-skip>
+      <a href="#make">What we make</a>
+      <a href="#process">How it’s made</a>
+      <a href="#repairs">Repairs</a>
+      <a href="#sizing">Sizing</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="bar-actions">
+      <a class="bar-call" href={TEL} aria-label={`Call ${PHONE}`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h3l1.3 4-2 1.4a11 11 0 0 0 5.2 5.2l1.4-2 4 1.3v3a2.2 2.2 0 0 1-2.4 2.2A15.8 15.8 0 0 1 4.4 5.9a2.2 2.2 0 0 1 2.2-2.4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+        <span class="bar-call-short" data-check-skip>Call</span>
+        <span class="bar-call-num" data-check-skip>{PHONE}</span>
+      </a>
+      <a class="bar-book" href="#appointment">Book<span class="long" data-check-skip>&nbsp;a consultation</span></a>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <!-- The stone -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-head">
+        <p class="kicker" data-reveal="up" data-reveal-now data-reveal-delay="0.2">Goldsmiths in Leslieville, Toronto</p>
+        <h1 class="hero-title" id="hero-title">
+          <span class="l1" data-reveal="lines" data-reveal-now data-reveal-delay="0.3">Made for</span>
+          <span class="l2" data-reveal="lines" data-reveal-now data-reveal-delay="0.42"><em>one</em> hand.</span>
+        </h1>
+      </div>
+      <div class="hero-body">
+        <p class="hero-sub" data-reveal="up" data-reveal-now data-reveal-delay="0.7">
+          Engagement and wedding rings designed with you and made at our bench, heirlooms remade into something you will wear, and careful repairs. Two goldsmiths, by appointment.
+        </p>
+        <div class="hero-cta" data-reveal="up" data-reveal-now data-reveal-delay="0.85">
+          <a class="btn btn-gold" href="#appointment"><span>Book a consultation</span></a>
+          <a class="link-call" href={TEL}>or call <b>{PHONE}</b></a>
+        </div>
+      </div>
+
+      <figure class="viewer" aria-labelledby="viewer-caption">
+        <div class="stage" data-stage>
+          <div class="standin standin-wide" aria-hidden="true" set:html={svgWide} />
+          <div class="standin standin-narrow" aria-hidden="true" set:html={svgNarrow} />
+          <canvas id="ring" class="ring-canvas" aria-hidden="true"></canvas>
+          <div class="glints" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="turn" role="slider" tabindex="0" aria-label="Turn the ring" aria-valuemin="0" aria-valuemax="359" aria-valuenow="0" aria-valuetext="Facing you" aria-describedby="turn-help" data-turn hidden></div>
+
+        </div>
+
+        <p class="turn-hint" id="turn-help" hidden data-check-skip>
+            <svg viewBox="0 0 40 16" aria-hidden="true"><path d="M8 3 3 8l5 5M32 3l5 5-5 5M4 8h32" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span class="hint-fine">Drag to turn it</span><span class="hint-touch">Swipe to turn it</span><span class="visually-hidden">, or use the arrow keys.</span>
+          </p>
+
+        <div class="configure">
+          <fieldset class="pick" data-pick="metal">
+            <legend><span class="pick-label">Metal</span></legend>
+            <div class="pick-now" aria-hidden="true" data-check-skip>
+              {METALS.map((m) => <span data-now={m.key}>{m.name}</span>)}
+            </div>
+            <div class="swatches">
+              {METALS.map((m, i) => (
+                <label class={`swatch metal-${m.key}`}>
+                  <input type="radio" name="metal" value={m.key} checked={i === 0} />
+                  <span class="chip" aria-hidden="true"></span>
+                  <span class="visually-hidden">{m.name}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset class="pick" data-pick="stone">
+            <legend><span class="pick-label">Stone</span></legend>
+            <div class="pick-now" aria-hidden="true" data-check-skip>
+              {STONES.map((s) => <span data-now={s.key}>{s.name}</span>)}
+            </div>
+            <div class="swatches">
+              {STONES.map((s, i) => (
+                <label class={`swatch stone-${s.key}`}>
+                  <input type="radio" name="stone" value={s.key} checked={i === 0} />
+                  <span class="chip" aria-hidden="true"></span>
+                  <span class="visually-hidden">{s.name}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <figcaption class="spec" id="viewer-caption">
+            <span class="spec-title">The Vale solitaire</span>
+            <span class="spec-detail">Six claws, round brilliant cut, made to order in any of these.</span>
+          </figcaption>
+          <div class="notes" data-check-skip>
+            {STONES.map((s) => (
+              <p class="note" data-note={s.key}><b>{s.name}.</b> {s.note} <span class="note-hard">Hardness {s.hardness}.</span></p>
+            ))}
+          </div>
+          <p class="visually-hidden" aria-live="polite" data-announce></p>
+        </div>
+      </figure>
+    </section>
+
+    <!-- What we make -->
+    <section class="make" id="make" aria-labelledby="make-title">
+      <div class="make-head">
+        <p class="eyebrow" data-reveal="up">What we make</p>
+        <h2 class="big" id="make-title" data-reveal="lines">One bench, <em>five things</em> done properly.</h2>
+      </div>
+      <ol class="make-list" role="list">
+        {services.map((s, i) => (
+          <li class="make-item" data-reveal="up">
+            <span class="make-no" aria-hidden="true">0{i + 1}</span>
+            <h3 class="make-title">{s.title}</h3>
+            <p class="make-text">{s.text}</p>
+            <p class="make-time">{s.time}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- Process -->
+    <section class="process" id="process" aria-labelledby="process-title">
+      <div class="process-head">
+        <p class="eyebrow" data-reveal="up">How a ring gets made</p>
+        <h2 class="big" id="process-title" data-reveal="lines">From a sketch to <em>your hand.</em></h2>
+        <p class="lede" data-reveal="up">
+          You meet both of us. Mara Orrin sets stones and does the fine finishing; Theo Vale carves the models and does the casting. Here is what happens, and roughly when.
+        </p>
+      </div>
+
+      <div class="gantt" style={`--weeks:${WEEKS}`}>
+        <div class="gantt-scale" aria-hidden="true">
+          <span class="gantt-unit">Weeks from your first visit</span>
+          <div class="gantt-ticks">
+            {Array.from({ length: WEEKS + 1 }, (_, w) => <span style={`--w:${w}`}>{w}</span>)}
+          </div>
+        </div>
+        <ol class="gantt-rows" role="list">
+          {steps.map((s, i) => (
+            <li class="gantt-row" data-reveal="up">
+              <div class="gantt-label">
+                <span class="gantt-no" aria-hidden="true">{i + 1}</span>
+                <h3 class="gantt-title">{s.title}</h3>
+                <p class="gantt-when">{s.when}</p>
+                <p class="gantt-text">{s.text}</p>
+              </div>
+              <div class="gantt-track" aria-hidden="true">
+                <i class="gantt-bar" style={`--a:${s.from};--b:${s.to}`}></i>
+                {s.extra && <i class="gantt-extra" style={`--a:${s.to};--b:${s.extra}`}></i>}
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p class="gantt-note" data-reveal="up">
+          These are typical times, not promises. Finding a particular stone can add a few weeks. If there is a date you are working toward, tell us at the first visit and we will say honestly whether it is realistic.
+        </p>
+      </div>
+    </section>
+
+    <!-- Heirlooms -->
+    <section class="heirloom" id="heirlooms" aria-labelledby="heirloom-title">
+      <div class="heirloom-copy">
+        <p class="eyebrow" data-reveal="up">Heirloom remakes</p>
+        <h2 class="big" id="heirloom-title" data-reveal="lines">Keep what matters. <em>Wear it again.</em></h2>
+        <p class="lede" data-reveal="up">Bring the pieces in however they live now, even in a sandwich bag. We look at every stone and the metal, tell you what can be reused, and sketch a few ways to bring them together.</p>
+      </div>
+      <dl class="facts">
+        <div data-reveal="up">
+          <dt>The stones</dt>
+          <dd>Most diamonds and sapphires can be lifted and reset. Softer stones like opal and pearl need more care, and we will tell you if one is too chipped or worn to use.</dd>
+        </div>
+        <div data-reveal="up">
+          <dt>The gold</dt>
+          <dd>Old gold can often be refined and used again. Sometimes it is better to trade it toward new metal, and we will tell you which, and why.</dd>
+        </div>
+        <div data-reveal="up">
+          <dt>The story</dt>
+          <dd>If there is an engraving or a mark you want to keep exactly as it is, we design around it.</dd>
+        </div>
+      </dl>
+      <figure class="plot">
+        <div class="plot-art" aria-hidden="true" set:html={plot} />
+        <figcaption>Every stone is looked at under magnification and drawn before we reset it: face up, in profile and face down. This one is a round brilliant with a 55% table, a 34.5° crown and a 40.75° pavilion.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Repairs -->
+    <section class="repairs" id="repairs" aria-labelledby="repairs-title">
+      <div class="repairs-head">
+        <p class="eyebrow" data-reveal="up">Repairs and resizing</p>
+        <h2 class="big" id="repairs-title" data-reveal="lines">Plain answers on <em>how long.</em></h2>
+        <p class="lede" data-reveal="up">Every repair is quoted in writing before we start. Drop-offs are welcome during studio hours: we photograph the piece with you and give you a receipt.</p>
+      </div>
+      <table class="turnaround" data-reveal="up">
+        <caption class="visually-hidden">Typical turnaround for repairs</caption>
+        <thead>
+          <tr><th scope="col">Job</th><th scope="col">Typical turnaround</th></tr>
+        </thead>
+        <tbody>
+          {repairs.map(([job, time]) => (
+            <tr><th scope="row">{job}</th><td>{time}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Sizing -->
+    <section class="sizing" id="sizing" aria-labelledby="sizing-title">
+      <div class="sizing-head">
+        <p class="eyebrow" data-reveal="up">Ring sizing</p>
+        <h2 class="big" id="sizing-title" data-reveal="lines">Find your size <em>at home.</em></h2>
+        <p class="lede" data-reveal="up">A good estimate is enough to start. We confirm it with proper sizers at your appointment.</p>
+      </div>
+
+      <div class="sizer" data-sizer>
+        <form class="sizer-form" data-sizer-form>
+          <fieldset class="seg">
+            <legend>What are you measuring?</legend>
+            <label><input type="radio" name="measure" value="ring" checked /><span>A ring that fits</span></label>
+            <label><input type="radio" name="measure" value="finger" /><span>Around my finger</span></label>
+          </fieldset>
+          <label class="field" for="sizer-mm">
+            <span class="field-label" data-measure-label>Inside diameter, in millimetres</span>
+            <span class="mm-wrap">
+              <button type="button" class="mm-step" data-step="-1" aria-label="Smaller" hidden>&minus;</button>
+              <input id="sizer-mm" name="mm" type="number" inputmode="decimal" min="10" max="80" step="0.1" value="17.3" aria-describedby="sizer-hint" />
+              <span class="mm-unit" aria-hidden="true">mm</span>
+              <button type="button" class="mm-step" data-step="1" aria-label="Larger" hidden>+</button>
+            </span>
+          </label>
+          <p class="sizer-hint" id="sizer-hint" data-measure-hint>Lay a ruler across the inside of the ring, edge to edge, at its widest.</p>
+        </form>
+        <div class="sizer-result">
+          <svg class="sizer-ring" viewBox="0 0 200 200" aria-hidden="true">
+            <circle class="sizer-ring-guide" cx="100" cy="100" r="92"></circle>
+            <circle class="sizer-ring-band" cx="100" cy="100" r="74" data-sizer-ring></circle>
+          </svg>
+          <output class="sizer-out" for="sizer-mm" aria-live="polite" data-sizer-out>
+            <span class="size-label">About a size</span>
+            <span class="size-big" data-size>7</span>
+            <span class="size-sub" data-size-sub>Canadian and US sizing</span>
+          </output>
+        </div>
+      </div>
+
+      <div class="sizing-more">
+        <ul class="tips" role="list">
+          <li data-reveal="up"><b>Measure late in the day.</b> Fingers are largest in the evening and smallest when you are cold.</li>
+          <li data-reveal="up"><b>Wide bands fit tighter.</b> For a band wider than 6 mm, go up a quarter to a half size.</li>
+          <li data-reveal="up"><b>Mind the knuckle.</b> If yours is bigger than the base of your finger, measure both and choose in between.</li>
+          <li data-reveal="up"><b>Planning a surprise?</b> Borrow a ring they wear on that finger, trace the inside onto paper, and bring us the tracing.</li>
+        </ul>
+        <table class="size-table">
+          <caption>Size chart</caption>
+          <thead><tr><th scope="col">Size</th><th scope="col">Inside diameter</th><th scope="col">Around the finger</th></tr></thead>
+          <tbody>
+            {sizes.map((s) => (
+              <tr><th scope="row">{s.label}</th><td>{s.d} mm</td><td>{s.c} mm</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Appointment -->
+    <section class="appointment" id="appointment" aria-labelledby="appointment-title">
+      <div class="appt-copy">
+        <p class="eyebrow" data-reveal="up">Your first visit</p>
+        <h2 class="big" id="appointment-title" data-reveal="lines">An hour, <em>no charge,</em> nothing to sign.</h2>
+        <p class="lede" data-reveal="up">Sit at the bench with us, hold stones in different lights, and leave with a clear idea of what your ring could be and what it would cost.</p>
+        <h3 class="bring-title" data-reveal="up">Worth bringing</h3>
+        <ul class="bring" role="list">
+          <li data-reveal="up">Pictures of rings you like, and ones you do not.</li>
+          <li data-reveal="up">Any stones or jewellery you want to reuse.</li>
+          <li data-reveal="up">A ring that fits, if the new one is a surprise.</li>
+          <li data-reveal="up">A budget range you are comfortable with. We will show you where it goes furthest.</li>
+          <li data-reveal="up">Your date, if there is one.</li>
+        </ul>
+      </div>
+
+      <div class="appt-form">
+        <form class="request" id="request" novalidate data-request>
+          <h3 class="form-title">Request an appointment</h3>
+          <fieldset class="opts">
+            <legend>What is it for?</legend>
+            <label class="opt"><input type="radio" name="for" value="New ring" checked /><span>A new ring</span></label>
+            <label class="opt"><input type="radio" name="for" value="Heirloom remake" /><span>Remaking an heirloom</span></label>
+            <label class="opt"><input type="radio" name="for" value="Repair or resize" /><span>Repair or resize</span></label>
+            <label class="opt"><input type="radio" name="for" value="Cleaning and check" /><span>Cleaning and check</span></label>
+          </fieldset>
+          <label class="field" data-budget>
+            <span class="field-label">Budget, roughly</span>
+            <select name="budget">
+              <option>Not sure yet</option>
+              <option>Under $2,000</option>
+              <option>$2,000 to $4,000</option>
+              <option>$4,000 to $8,000</option>
+              <option>Over $8,000</option>
+            </select>
+          </label>
+          <fieldset class="opts">
+            <legend>When suits you?</legend>
+            <label class="opt"><input type="checkbox" name="when" value="weekday daytimes" /><span>Weekday daytime</span></label>
+            <label class="opt"><input type="checkbox" name="when" value="weekday evenings" /><span>Weekday evening</span></label>
+            <label class="opt"><input type="checkbox" name="when" value="Saturdays" /><span>Saturday</span></label>
+          </fieldset>
+          <div class="field-row">
+            <label class="field">
+              <span class="field-label">Your name</span>
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label class="field">
+              <span class="field-label">Phone or email</span>
+              <input type="text" name="contact" autocomplete="email" required />
+            </label>
+          </div>
+          <p class="form-error" data-form-error role="alert" hidden>Add your name and a phone number or email, so we know who to reply to.</p>
+          <button type="submit" class="btn btn-gold form-submit"><span>Request an appointment</span></button>
+          <noscript><p class="form-nojs">The request form needs JavaScript. To book, call <a href={TEL}>{PHONE}</a> or email <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p></noscript>
+          <p class="form-alt">Rather talk? Call <a href={TEL}>{PHONE}</a>.</p>
+        </form>
+
+        <div class="sent" data-sent hidden tabindex="-1">
+          <p class="eyebrow">Thank you</p>
+          <h3 class="sent-title">This is a concept, so <em>nothing was sent.</em></h3>
+          <p class="sent-summary" data-sent-summary></p>
+          <p class="sent-text">Orrin &amp; Vale is a fictional studio, and nobody will call or email you. A real studio would reply to confirm a time and remind you what to bring.</p>
+          <button type="button" class="btn-line" data-sent-reset>Start again</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="faq-head">
+        <p class="eyebrow" data-reveal="up">Questions</p>
+        <h2 class="big" id="faq-title" data-reveal="lines">Asked at <em>the bench.</em></h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="qa">
+            <summary><span>{f.q}</span><i aria-hidden="true"></i></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Visit -->
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div class="visit-head">
+        <p class="eyebrow" data-reveal="up">Visit</p>
+        <h2 class="big" id="visit-title" data-reveal="lines">Up the stairs, <em>past the frame shop.</em></h2>
+      </div>
+      <div class="visit-grid">
+        <div class="visit-block" data-reveal="up">
+          <h3 class="label">The studio</h3>
+          <p class="visit-big">7 Tallow Lane, upstairs<br />Leslieville, Toronto</p>
+          <p class="visit-text">Ring buzzer 2, beside the frame shop door. It is a short walk from the streetcar, with metered parking on the side streets.</p>
+        </div>
+        <div class="visit-block" data-reveal="up">
+          <h3 class="label">By appointment</h3>
+          <table class="hours">
+            <caption class="visually-hidden">Studio hours</caption>
+            <tbody>
+              {hours.map(([d, h]) => <tr><th scope="row">{d}</th><td>{h}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <div class="visit-block" data-reveal="up">
+          <h3 class="label">Get in touch</h3>
+          <p class="visit-big"><a href={TEL}>{PHONE}</a></p>
+          <p class="visit-text"><a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+          <a class="btn btn-gold visit-btn" href="#appointment"><span>Book a consultation</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <ConceptFooter name="Orrin & Vale" />
+</DemoLayout>
+
+<script>
+  import '../../../demos/orrin-vale/main.ts';
+</script>

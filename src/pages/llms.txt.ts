@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { founders } from '../content/company';
 import { cities } from '../content/cities';
+import { guides } from '../content/guides';
 import { industries } from '../content/industries';
 import { packages } from '../content/pricing';
 import { services } from '../content/services';
@@ -24,6 +25,9 @@ export const GET: APIRoute = () => {
     '',
     '## Industries',
     ...industries.map((i) => link(i.name, `/industries/${i.slug}/`, i.examples)),
+    '',
+    '## Guides',
+    ...guides.map((g) => link(g.title, `/guides/${g.slug}/`, g.metaDescription)),
     '',
     '## Service areas',
     ...cities.map((c) => link(`Web design in ${c.name}`, `/web-design/${c.slug}/`, c.focus)),

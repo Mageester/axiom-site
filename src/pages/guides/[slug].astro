@@ -1,0 +1,239 @@
+---
+import CtaBand from '../../components/site/CtaBand.astro';
+import FaqList from '../../components/site/FaqList.astro';
+import Icon from '../../components/site/Icon.astro';
+import PageHero from '../../components/site/PageHero.astro';
+import { guides, type Guide } from '../../content/guides';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE_URL, faqJsonLd, toCanonicalUrl, type Crumb } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
+}
+
+const guide: Guide = guides.find((item) => item.slug === Astro.params.slug) ?? (Astro.props as { guide: Guide }).guide;
+const path = `/guides/${guide.slug}/`;
+const canonical = toCanonicalUrl(path);
+const updatedLabel = new Date(`${guide.updated}T12:00:00`).toLocaleDateString('en-CA', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Guides', url: '/guides/' },
+  { name: guide.title, url: path },
+];
+
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${canonical}#article`,
+  headline: guide.title,
+  description: guide.metaDescription,
+  url: canonical,
+  mainEntityOfPage: { '@id': `${canonical}#webpage` },
+  datePublished: guide.updated,
+  dateModified: guide.updated,
+  inLanguage: 'en-CA',
+  author: { '@id': `${SITE_URL}/#organization` },
+  publisher: { '@id': `${SITE_URL}/#organization` },
+  image: `${SITE_URL}/social/guides-${guide.slug}.png`,
+};
+
+const others = guides.filter((item) => item.slug !== guide.slug);
+---
+
+<BaseLayout
+  title={guide.metaTitle}
+  description={guide.metaDescription}
+  canonicalPath={path}
+  crumbs={crumbs}
+  schema={[article, faqJsonLd(guide.faqs)]}
+>
+  <main id="main-content" tabindex="-1">
+    <PageHero eyebrow="Guide" title={guide.title} lead={guide.lead} crumbs={crumbs}>
+      <p slot="actions" class="guide-meta mono">
+        Updated <time datetime={guide.updated}>{updatedLabel}</time> · {guide.readMinutes} minute read
+      </p>
+    </PageHero>
+
+    <section class="section">
+      <div class="container guide-layout">
+        <nav class="guide-toc" aria-label="In this guide">
+          <p class="guide-toc-title">In this guide</p>
+          <ol role="list">
+            {guide.sections.map((section) => (
+              <li><a href={`#${section.id}`}>{section.title}</a></li>
+            ))}
+            <li><a href="#questions">Common questions</a></li>
+          </ol>
+        </nav>
+
+        <article class="prose guide-body">
+          {guide.sections.map((section) => (
+            <section id={section.id} class="guide-section" aria-labelledby={`${section.id}-title`}>
+              <h2 id={`${section.id}-title`}>{section.title}</h2>
+              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              {section.bullets && (
+                <ul>
+                  {section.bullets.map((bullet) => <li>{bullet}</li>)}
+                </ul>
+              )}
+            </section>
+          ))}
+
+          <section id="questions" class="guide-section" aria-labelledby="questions-title">
+            <h2 id="questions-title">Common questions</h2>
+            <FaqList items={guide.faqs} />
+          </section>
+
+          <aside class="guide-next" aria-label="Keep reading">
+            <p class="guide-next-title">Keep reading</p>
+            <ul role="list">
+              {guide.related.map((link) => (
+                <li><a href={link.href} class="arrow-link">{link.label} <Icon name="arrow-right" /></a></li>
+              ))}
+            </ul>
+          </aside>
+        </article>
+      </div>
+    </section>
+
+    {others.length > 0 && (
+      <section class="section-sm section-soft" aria-labelledby="more-guides-title">
+        <div class="container">
+          <h2 id="more-guides-title" class="more-title">More guides</h2>
+          <ul role="list" class="more-guides">
+            {others.map((item) => (
+              <li>
+                <a href={`/guides/${item.slug}/`} class="card more-guide">
+                  <span class="more-guide-title">{item.title}</span>
+                  <span class="more-guide-lead">{item.metaDescription}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    <CtaBand
+      title="Rather talk it through?"
+      text="Tell us about your business and we will reply within one business day with a straight answer on scope and price."
+    />
+  </main>
+</BaseLayout>
+
+<style>
+  .guide-meta {
+    color: var(--text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .guide-layout {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .guide-layout {
+      grid-template-columns: 15rem minmax(0, 44rem);
+      gap: 4rem;
+      justify-content: center;
+    }
+
+    .guide-toc {
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+      align-self: start;
+    }
+  }
+
+  .guide-toc {
+    padding: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .guide-toc-title,
+  .guide-next-title {
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+  }
+
+  .guide-toc ol {
+    display: grid;
+    gap: 0.1rem;
+    margin: 0;
+  }
+
+  .guide-toc a {
+    display: block;
+    padding: 0.45rem 0;
+    color: var(--text);
+    font-size: var(--fs-sm);
+    line-height: 1.45;
+  }
+
+  .guide-section {
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  .guide-section:first-child h2 {
+    margin-top: 0;
+  }
+
+  .guide-next {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .guide-next ul {
+    display: grid;
+    gap: 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .more-title {
+    margin-bottom: 1.5rem;
+    font-size: var(--fs-xl);
+  }
+
+  .more-guides {
+    display: grid;
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 768px) {
+    .more-guides {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .more-guide {
+    display: grid;
+    gap: 0.5rem;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .more-guide-title {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .more-guide-lead {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+</style>

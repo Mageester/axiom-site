@@ -1,0 +1,433 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import '../../../demos/mirrorline/styles.css';
+import { groups, sizes, allPackages, money } from '../../../demos/mirrorline/data';
+import posterWide from '../../../demos/mirrorline/poster-wide.jpg';
+import posterTall from '../../../demos/mirrorline/poster-tall.jpg';
+import panelBefore from '../../../demos/mirrorline/panel-before.jpg';
+import panelAfter from '../../../demos/mirrorline/panel-after.jpg';
+
+const phone = '(519) 555-0127';
+const tel = 'tel:+15195550127';
+const email = 'book@mirrorline.example';
+
+const day = [
+  {
+    time: '8:00 a.m.',
+    title: 'Drop-off',
+    body: 'Bring the car in between 8 and 9. Tell us what bothers you about it, and we write it down. Keys stay with us, the car stays inside.',
+  },
+  {
+    time: '8:30 a.m.',
+    title: 'Inspection under lights',
+    body: 'Before any machine touches the paint, we go over every panel under bright inspection lights and measure paint depth. If a mark will not come out safely, you hear it now, not at pickup.',
+  },
+  {
+    time: 'All day',
+    title: 'The work',
+    body: 'One car in the studio at a time, doors closed, heated in winter. If we find something that changes the plan or the price, we call before going further.',
+  },
+  {
+    time: 'By 6:00 p.m.',
+    title: 'Walkaround at pickup',
+    body: 'We walk around the car with you under the same lights, show you what changed, and hand you a care card for the weeks ahead.',
+  },
+];
+
+const aftercare = [
+  ['Give it a week.', 'The coating keeps hardening for about seven days. Rain is fine. Soap and brushes wait.'],
+  ['Wash by hand, every two weeks or so.', 'Two buckets, a pH-neutral soap and a clean mitt. Work from the roof down.'],
+  ['Skip the brush car wash.', 'Spinning brushes put swirls right back in. A touchless wash is fine in winter, when hand washing is not practical.'],
+  ['Dry it, do not let it air-dry.', 'A clean microfibre towel or a blower, so minerals in the water do not leave spots.'],
+  ['Take droppings and sap off the same day.', 'They are acidic and etch even a coated finish if they sit in the sun.'],
+  ['Come back at one year.', 'We check the coating under the lights and top it up where it needs it. The check is part of the package.'],
+];
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const saltMonths = new Set([0, 1, 2, 3, 10, 11]);
+// How heavy the salt usually is, for the shading only.
+const saltLevel: Record<number, number> = { 10: 0.5, 11: 0.85, 0: 1, 1: 1, 2: 0.75, 3: 0.4 };
+
+const winterTips = [
+  ['Protect before the first big snowfall.', 'Sealants and coatings need a clean, dry panel above freezing to bond. Late October and early November fill up fast.'],
+  ['Rinse the underside when it is above freezing.', 'Every couple of weeks is plenty. Brine sits in seams, wheel wells and around brake lines, where you cannot see it.'],
+  ['Never wipe salt crust off dry paint.', 'Rinse first. Dry salt is grit, and wiping it is like sanding the clear coat.'],
+  ['Put the rubber liners in.', 'Salty slush soaks into carpet, stains it white and keeps the floor damp until spring.'],
+  ['Book a spring decontamination for April.', 'Once the roads are swept, we strip what winter left behind and seal the paint again.'],
+];
+
+const faq = [
+  ['How long will you have my car?', 'A maintenance wash is done the same morning. An interior reset or a one-step correction takes the day. A two-step correction or a ceramic coating takes two days, and coated cars stay indoors overnight to cure.'],
+  ['Will paint correction remove every scratch?', 'No, and we will not pretend otherwise. Correction removes marks that sit in the clear coat: swirls, haze, light scratches and water spots. A scratch you can catch with a fingernail usually goes deeper, and polishing it out would thin the paint too much. We show you which marks will come out at inspection, before any work starts.'],
+  ['How long does a ceramic coating last?', 'With the washing routine on this page, years rather than months. How many depends on how the car is stored, driven and washed. We check it at one year and tell you plainly how it is holding up.'],
+  ['Can I take a coated car through a car wash?', 'Touchless, yes. A wash with spinning brushes or cloth strips, no: it will put fine scratches back in, coating or not.'],
+  ['Do you work through the winter?', 'Yes. The studio is heated and dry, so correction and coatings carry on all year. Winter is also when undercarriage rinses matter most.'],
+  ['Do you come to me?', 'No. Correction and coating need controlled light, heat and clean air, so all of the work happens in the studio.'],
+  ['What if it rains on the drive home?', 'That is fine, even the day you pick up a coated car. Rain will not hurt it. Just hold off on soap for the first week.'],
+  ['How do I pay?', 'Debit, credit or e-transfer at pickup. Two-day bookings hold their dates with a deposit; washes and interiors do not need one.'],
+];
+---
+
+<DemoLayout
+  name="Mirrorline Detailing"
+  title="Mirrorline Detailing | Paint correction and ceramic coating in Cambridge, Ontario"
+  description="Paint correction, ceramic coating, interior detailing and winter salt protection, by appointment in a lit studio in Cambridge, Ontario. A concept site."
+  themeColor="#04060b"
+  pill="dark"
+>
+  <Fragment slot="head">
+    <script is:inline>
+      document.documentElement.classList.add('ml-js');
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('ml-live');
+    </script>
+  </Fragment>
+
+  <header class="top" id="top">
+    <a class="brand" href="#main-content" aria-label="Mirrorline Detailing, top of page">
+      <span class="brand-mark" aria-hidden="true"><i></i></span>
+      <span class="brand-name">Mirrorline</span>
+      <span class="brand-sub" aria-hidden="true">Detailing</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main" data-check-skip>
+      <a href="#correction">Correction</a>
+      <a href="#packages">Packages</a>
+      <a href="#day">Your day</a>
+      <a href="#winter">Winter</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <div class="top-actions">
+      <a class="top-call" href={tel} data-check-skip>{phone}</a>
+      <a class="btn btn-light btn-sm" href="#book">Book</a>
+      <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="nav" data-check-skip>Menu</button>
+    </div>
+  </header>
+
+  <a class="fab" href={tel} data-check-skip aria-label={`Call Mirrorline Detailing, ${phone}`}>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"></path></svg>
+    <span>Call</span>
+  </a>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero" aria-labelledby="h1">
+      <div class="stage" aria-hidden="true">
+        <div class="stage-fallback has-poster" style={`--poster-wide:url(${posterWide.src});--poster-tall:url(${posterTall.src})`}></div>
+        <canvas id="paint"></canvas>
+        <div class="stage-shade"></div>
+      </div>
+
+      <div class="hero-copy">
+        <h1 class="h1" id="h1">
+          <span class="eyebrow">Detailing studio &middot; Cambridge, Ontario</span>
+          <span class="h1-line"><span>Back to</span></span>
+          <span class="h1-line"><span>a mirror.</span></span>
+        </h1>
+        <p class="lede">
+          Paint correction, ceramic coating and careful hand washing. One car at a time, by appointment, in a heated studio built around good light.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-light" href="#book">Request a booking</a>
+          <a class="btn btn-ghost" href="#packages">See packages and prices</a>
+        </div>
+      </div>
+
+      <div class="hero-spec" aria-hidden="true">
+        <p><span>Midnight blue metallic</span><span>Ceramic coated</span></p>
+        <p class="hero-hint"><span class="hint-fine">Move to light the panel. Click to mist it.</span><span class="hint-touch">Tap the panel to mist it.</span></p>
+      </div>
+    </section>
+
+    <section class="correct" id="correction" aria-labelledby="correct-title">
+      <div class="correct-head">
+        <p class="kicker" data-reveal="fade">Paint correction</p>
+        <h2 class="h2" id="correct-title" data-reveal="lines">Swirls are scratches. We take them out.</h2>
+        <p class="correct-body" data-reveal="up">
+          Most dull paint is not faded. It is covered in fine scratches from washing and drying, and under a light they show up as rings. Machine polishing levels the clear coat until they are gone, then refines it back to gloss.
+        </p>
+      </div>
+
+      <div class="workbench">
+        <div class="panel" id="panel">
+          <div class="panel-fallback has-poster" aria-hidden="true" style={`--poster-panel:url(${panelBefore.src});--poster-panel-after:url(${panelAfter.src})`}></div>
+          <canvas id="correction-canvas" aria-hidden="true"></canvas>
+          <div class="pad" id="pad" aria-hidden="true"><i></i></div>
+          <p class="panel-hint" id="panel-hint" aria-hidden="true">
+            <span class="hint-fine">Hold and drag across the paint to polish it.</span><span class="hint-touch">Rub the paint with your finger to polish it.</span>
+          </p>
+          <p class="panel-tag" aria-hidden="true">Bonnet &middot; under an inspection light</p>
+        </div>
+
+        <div class="readout" id="readout">
+          <p class="readout-kicker">Your correction</p>
+          <p class="readout-big"><b id="corr-n">0</b><span>% corrected</span></p>
+          <div class="readout-bar" aria-hidden="true"><i id="corr-bar"></i></div>
+          <dl class="readout-rows">
+            <div>
+              <dt>Swirl marks</dt>
+              <dd><span class="was">Heavy</span><span class="arrow" aria-hidden="true">&rarr;</span><b id="corr-swirl">Heavy</b></dd>
+            </div>
+            <div>
+              <dt>Finish</dt>
+              <dd><span class="was">Hazy</span><span class="arrow" aria-hidden="true">&rarr;</span><b id="corr-finish">Hazy</b></dd>
+            </div>
+          </dl>
+          <p class="readout-note" id="corr-note">The first pass cuts the scratches out. The second brings the clarity back.</p>
+          <p class="deep-note" id="deep-note" hidden>
+            Two long marks stayed. They go through the clear coat, so polishing deeper would thin the paint. We point out marks like these at inspection, before any work starts.
+          </p>
+          <div class="readout-actions">
+            <button type="button" class="btn btn-light btn-sm" id="corr-auto">Polish it for me</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="corr-reset">Start over</button>
+          </div>
+          <p class="visually-hidden" id="corr-live" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="paper">
+      <section class="packages" id="packages" aria-labelledby="pk-title">
+        <div class="pk-head">
+          <div>
+            <p class="kicker" data-reveal="fade">Packages</p>
+            <h2 class="h2" id="pk-title" data-reveal="lines">Priced by the size of the car.</h2>
+          </div>
+          <div class="size-wrap">
+            <fieldset class="size" id="size">
+              <legend>Vehicle size</legend>
+              <div class="size-track">
+                {sizes.map((s, i) => (
+                  <label class="size-opt">
+                    <input type="radio" name="size" value={s.id} id={`size-${s.id}`} checked={i === 0} />
+                    <span>{s.label}</span>
+                  </label>
+                ))}
+                <span class="size-thumb" aria-hidden="true"></span>
+              </div>
+            </fieldset>
+            <p class="size-note" id="size-note" aria-live="polite">Prices for coupes and sedans, before HST.</p>
+          </div>
+        </div>
+
+        {groups.map((g) => (
+          <div class="pk-group">
+            <div class="pk-group-head">
+              <h3 class="pk-group-title">{g.title}</h3>
+              <p class="pk-group-note">{g.note}</p>
+            </div>
+            <ul class="pk-list" role="list">
+              {g.packages.map((p) => (
+                <li class="pk" data-reveal="up">
+                  <div class="pk-top">
+                    <h4 class="pk-name">{p.name}</h4>
+                    <p class="pk-price">
+                      <span class="pk-from">from</span>
+                      {sizes.map((s) => (
+                        <span class="pk-amt" data-size={s.id}>{money(p.price[s.id])}</span>
+                      ))}
+                    </p>
+                  </div>
+                  <p class="pk-line">{p.line}</p>
+                  <p class="pk-time"><span class="pk-clock" aria-hidden="true"></span>{p.time}</p>
+                  <ul class="pk-inc" role="list" aria-label={`${p.name} includes`}>
+                    {p.includes.map((item) => (<li>{item}</li>))}
+                  </ul>
+                  <a class="pk-book" href="#book" data-pkg={p.id}>Book this <span class="visually-hidden">{p.name}</span><span aria-hidden="true">&rarr;</span></a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <p class="pk-foot">
+          Prices are before HST. A very heavily soiled interior, pet hair or paint that needs more than the package allows can add time. If it does, we tell you at inspection, before any work starts.
+        </p>
+      </section>
+
+      <section class="day" id="day" aria-labelledby="day-title">
+        <div class="day-head">
+          <p class="kicker" data-reveal="fade">Your day</p>
+          <h2 class="h2" id="day-title" data-reveal="lines">How your day goes.</h2>
+        </div>
+        <ol class="day-list" role="list">
+          {day.map((d, i) => (
+            <li class="day-step" data-reveal="up">
+              <p class="day-time"><span class="day-n">0{i + 1}</span>{d.time}</p>
+              <h3 class="day-title">{d.title}</h3>
+              <p class="day-body">{d.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </div>
+
+    <section class="book" id="book" aria-labelledby="book-title">
+      <div class="book-copy">
+        <p class="kicker" data-reveal="fade">Booking request</p>
+        <h2 class="h2" id="book-title" data-reveal="lines">Pick a package and two dates.</h2>
+        <p class="book-body" data-reveal="up">We confirm by phone or email within one business day. Nothing is booked until we do.</p>
+        <p class="book-alt" data-reveal="up">Rather talk it through? <a href={tel}>{phone}</a></p>
+      </div>
+
+      <div class="book-panel">
+        <noscript><p class="book-noscript">Booking requests need JavaScript in this concept. Call {phone} or write to {email}.</p></noscript>
+        <form class="book-form" id="book-form" method="dialog" aria-describedby="book-hint">
+          <p class="book-hint" id="book-hint">Everything except notes and a second date is needed.</p>
+          <div class="f-two">
+            <div class="f">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="f">
+              <label for="f-contact">Phone or email</label>
+              <input id="f-contact" name="contact" type="text" autocomplete="tel" required />
+            </div>
+          </div>
+          <div class="f">
+            <label for="f-vehicle">Vehicle</label>
+            <input id="f-vehicle" name="vehicle" type="text" placeholder="Year, make and model" required />
+          </div>
+          <fieldset class="f f-size">
+            <legend>Size</legend>
+            <div class="f-chips">
+              {sizes.map((s, i) => (
+                <label class="chip">
+                  <input type="radio" name="vsize" value={s.id} checked={i === 0} />
+                  <span>{s.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <div class="f">
+            <label for="f-package">Package</label>
+            <select id="f-package" name="package" required>
+              {allPackages.map((p) => (<option value={p.id}>{p.name}</option>))}
+              <option value="unsure">Not sure yet, advise me</option>
+            </select>
+          </div>
+          <div class="f-two">
+            <div class="f">
+              <label for="f-date1">First choice of date</label>
+              <input id="f-date1" name="date1" type="date" required />
+            </div>
+            <div class="f">
+              <label for="f-date2">Second choice <span class="opt">(optional)</span></label>
+              <input id="f-date2" name="date2" type="date" />
+            </div>
+          </div>
+          <div class="f">
+            <label for="f-notes">Notes <span class="opt">(optional)</span></label>
+            <textarea id="f-notes" name="notes" rows="3" placeholder="Pet hair, a scratch you are worried about, a lease return date"></textarea>
+          </div>
+          <div class="f-submit">
+            <button class="btn btn-light" type="submit">Request this booking</button>
+            <p class="f-price" id="f-price" aria-live="polite"></p>
+          </div>
+        </form>
+        <div class="book-done" id="book-done" hidden tabindex="-1">
+          <p class="kicker">Concept &middot; nothing was sent</p>
+          <h3 class="book-done-title">This is a concept. Nothing was sent.</h3>
+          <p>Mirrorline Detailing is a fictional business, so nobody received this request. You asked for: <b id="book-summary"></b>.</p>
+          <p>If the studio were real, you would hear back within a business day to confirm a date.</p>
+          <button type="button" class="btn btn-ghost btn-sm" id="book-again">Start over</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="paper">
+      <section class="care" id="aftercare" aria-labelledby="care-title">
+        <div class="care-head">
+          <p class="kicker" data-reveal="fade">Aftercare</p>
+          <h2 class="h2" id="care-title" data-reveal="lines">Looking after a coated car.</h2>
+          <p class="care-body" data-reveal="up">A coating makes washing easier. It does not make washing optional. This is the routine on the card you take home.</p>
+        </div>
+        <ol class="care-list" role="list">
+          {aftercare.map(([t, d], i) => (
+            <li class="care-item" data-reveal="up">
+              <span class="care-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="care-t">{t}</h3>
+              <p class="care-d">{d}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="winter" id="winter" aria-labelledby="winter-title">
+        <div class="winter-head">
+          <p class="kicker" data-reveal="fade">Winter in Ontario</p>
+          <h2 class="h2" id="winter-title" data-reveal="lines">Salt season runs November to April.</h2>
+          <p class="winter-body" data-reveal="up">
+            Road brine sticks to everything below the door handles. Most of the damage starts where you cannot see it: seams, wheel wells, brake lines and the underside.
+          </p>
+        </div>
+        <figure class="salt-year" data-reveal="up">
+          <ol class="months" role="list" aria-label="Salt season by month">
+            {months.map((m, i) => (
+              <li class:list={['month', saltMonths.has(i) && 'is-salt', i === 9 && 'is-book', i === 3 && 'is-spring']} style={saltMonths.has(i) ? `--k: ${saltLevel[i]}` : undefined}>
+                <span class="month-name">{m}</span>
+                <span class="month-mark" aria-hidden="true"></span>
+                {saltMonths.has(i) && <span class="visually-hidden">, salt on the roads</span>}
+                {i === 9 && <span class="month-flag">Book protection</span>}
+                {i === 3 && <span class="month-flag">Spring decon</span>}
+              </li>
+            ))}
+          </ol>
+          <figcaption>Roads are salted from the first freeze to the spring thaw, roughly November to April.</figcaption>
+        </figure>
+        <ol class="winter-list" role="list">
+          {winterTips.map(([t, d]) => (
+            <li class="winter-item" data-reveal="up">
+              <h3 class="winter-t">{t}</h3>
+              <p class="winter-d">{d}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="winter-pk" data-reveal="up">
+          <p><b>Winter salt protection</b> covers the rinse, the sealant and the wheels in one visit, about three hours.</p>
+          <a class="pk-book" href="#book" data-pkg="winter">Book it before the snow <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </section>
+
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="faq-head">
+          <p class="kicker" data-reveal="fade">Questions</p>
+          <h2 class="h2" id="faq-title" data-reveal="lines">Asked at almost every drop-off.</h2>
+        </div>
+        <div class="faq-list">
+          {faq.map(([q, a]) => (
+            <details class="qa">
+              <summary><span>{q}</span><i aria-hidden="true"></i></summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    </div>
+
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div class="visit-grid">
+        <div>
+          <p class="kicker">Visit</p>
+          <h2 class="h2" id="visit-title">By appointment, in Cambridge.</h2>
+          <p class="visit-body">Unit 7 is at the back of the building. Look for the door with the light over it.</p>
+        </div>
+        <address class="visit-card">
+          <span class="visit-name">Mirrorline Detailing</span>
+          <span>Unit 7, 140 Millrace Court</span>
+          <span>Cambridge, Ontario</span>
+          <a href={tel}>{phone}</a>
+          <a href={`mailto:${email}`}>{email}</a>
+        </address>
+        <dl class="visit-hours">
+          <div><dt>Drop-off</dt><dd>Monday to Saturday, 8 to 9 a.m.</dd></div>
+          <div><dt>Pickup</dt><dd>By 6 p.m., or the next morning for two-day work</dd></div>
+          <div><dt>Phone</dt><dd>Monday to Saturday, 8 a.m. to 6 p.m.</dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <ConceptFooter name="Mirrorline Detailing" />
+</DemoLayout>
+
+<script>
+  import '../../../demos/mirrorline/main.ts';
+</script>

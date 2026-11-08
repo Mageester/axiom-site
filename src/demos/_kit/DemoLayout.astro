@@ -17,6 +17,11 @@ type Props = {
 
 const { name, title, description, themeColor = '#0b0b0f', pill = 'dark' } = Astro.props;
 const fullTitle = `${title} · Concept by Axiom Web`;
+// Shared links show the concept's own screenshot (made by scripts/capture-work.mjs).
+const slug = Astro.url.pathname.split('/').filter(Boolean)[1];
+const site = Astro.site ?? new URL('https://getaxiom.ca');
+const pageUrl = new URL(Astro.url.pathname, site).href;
+const shareImage = slug ? new URL(`/images/work/${slug}-1600.webp`, site).href : undefined;
 ---
 
 <!doctype html>
@@ -31,6 +36,12 @@ const fullTitle = `${title} · Concept by Axiom Web`;
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:site_name" content="Axiom Web" />
+    {shareImage && <meta property="og:image" content={shareImage} />}
+    {shareImage && <meta property="og:image:type" content="image/webp" />}
+    {shareImage && <meta property="og:image:alt" content={`${name}, a concept website by Axiom Web`} />}
+    <meta name="twitter:card" content={shareImage ? 'summary_large_image' : 'summary'} />
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
     <script is:inline>
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
