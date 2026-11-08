@@ -102,6 +102,11 @@ https://:version.axiom-site-f3f.pages.dev/*
   # Allow the site's own inline scripts while keeping external scripts restricted to self.
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; script-src-attr 'none'; upgrade-insecure-requests
 
+# Private client previews (PIN pages built by scripts/build-private-preview.mjs).
+/preview/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
 /api/*
   X-Robots-Tag: noindex, nofollow
   X-Content-Type-Options: nosniff
