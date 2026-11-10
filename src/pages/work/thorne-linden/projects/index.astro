@@ -16,7 +16,8 @@ import { BASE, projects } from '../../../../demos/thorne-linden/data';
         <h1>Rooms we have designed</h1>
         <p>Kitchens, bathrooms, bedrooms and built-ins, from Guelph to Waterloo Region.</p>
       </div>
-      <ul class="tiles" role="list">
+      <h2 class="sr" id="all-projects">All projects</h2>
+      <ul class="tiles" role="list" aria-labelledby="all-projects">
         {projects.map((project, index) => <Tile project={project} eager={index < 2} />)}
       </ul>
       <p class="note">

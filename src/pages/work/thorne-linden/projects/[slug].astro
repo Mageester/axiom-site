@@ -13,14 +13,12 @@ const index = projects.findIndex((item) => item.slug === slug);
 const next = projects[(index + 1) % projects.length];
 const first = project.shots[0].wide ? project.shots[0] : undefined;
 const rest = first ? project.shots.slice(1) : project.shots;
-const lead = photos[project.cover];
 ---
 
 <Layout
   title={`${project.title} | Thorne & Linden Interiors`}
   description={`${project.line} A ${project.type.toLowerCase()} project in ${project.place}, by Thorne & Linden Interiors. Part of a concept website by Axiom Web.`}
   section="work"
-  preload={first ? `${lead.dir}/${lead.name}-1024.webp` : undefined}
 >
   <main id="main-content" tabindex="-1">
     <div class="wrap">

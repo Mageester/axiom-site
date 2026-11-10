@@ -106,7 +106,7 @@ const nav = [
       if (label) label.textContent = open ? 'Close' : 'Menu';
     };
     button.addEventListener('click', () => set(button.getAttribute('aria-expanded') !== 'true'));
-    nav.addEventListener('keydown', (event) => {
+    document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
         set(false);
         button.focus();

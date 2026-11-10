@@ -100,3 +100,22 @@ Passing it is the minimum. Open the screenshots and judge them.
 
 Closed panels should use the `hidden` attribute, which the check skips. If something is
 deliberately invisible until an interaction and cannot use `hidden`, mark it `data-check-skip`.
+
+## Everyday builds
+
+`fennmoor`, `thorne-linden` and `millrace` are the exception to the effects rules above: they are
+ordinary, fast sites for the kinds of business we are asked to build most (an online store, a
+creative portfolio, a local trade). They use no canvas and no WebGL, and they are listed in
+`everydayBuilds` in `src/content/work.ts`, apart from `projects`, so the home page and city pages
+keep showing the design experiments only.
+
+- **Photos** are free-licence Pexels stock, never AI-generated. They live as WebP in
+  `public/images/everyday/<slug>/` in several widths (each file under about 150 KB), with a
+  `CREDITS.md` beside them and a `photos.json` next to the site's code that records size, alt text
+  and the photographer. Render them with `_kit/Photo.astro`, and list the credits in the footer.
+- **Sample reviews** (Millrace only) are allowed because they are labelled as samples on the page,
+  next to the reviews. Never use Review or AggregateRating schema for them.
+- **Shared helpers**: `_kit/ui.ts` has the dropdown, the storage wrapper and `conceptForms()`, which
+  makes any `form[data-concept-form]` validate and then show its own `[data-concept-msg]` panel.
+- **Preview images** for `/work/` are made with `node scripts/capture-work.mjs --only=<slug>` like
+  the others (a screenshot of the real page).

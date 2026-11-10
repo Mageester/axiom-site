@@ -191,5 +191,62 @@ export const projects: Project[] = [
   },
 ];
 
-export const getProject = (id: string) => projects.find((project) => project.id === id);
-export const projectsForIndustry = (industry: IndustrySlug) => projects.filter((project) => project.industry === industry);
+// Everyday builds are complete, conventional sites for the kinds of business we are asked to build for
+// most often. They are fictional and labelled as concepts, like the design experiments above, but they
+// use no heavy effects and are meant to be read as ordinary working sites. They are kept apart from
+// `projects` so the home page and the city pages keep showing the design experiments only.
+export const everydayBuilds: Project[] = [
+  {
+    id: 'fennmoor',
+    title: 'Fennmoor Home',
+    kind: 'concept',
+    industry: 'shops-makers',
+    industryLabel: 'Online store',
+    summary:
+      'An online store laid out the way a Shopify shop works: twenty products, filters and sorting, size and colour options and a slide-out cart. Checkout is not connected.',
+    brief: 'A small home-goods shop needs shoppers to find a product, choose a size or colour and check out without friction.',
+    built:
+      'A Products menu with categories, collection pages with working filters and sorting, product pages with options and quantity, a slide-out cart that updates its totals and a checkout that says plainly it is a concept.',
+    href: '/work/fennmoor/',
+    image: workPreview('fennmoor'),
+    alt: 'Fennmoor Home concept online store: the headline “Plain things, made well.” beside a shelf of white and brown ceramic cups and bowls',
+    screenshot: true,
+  },
+  {
+    id: 'thorne-linden',
+    title: 'Thorne & Linden Interiors',
+    kind: 'concept',
+    industry: 'professional-services',
+    industryLabel: 'Interior design studio',
+    summary:
+      'A Squarespace-style portfolio site for a fictional design studio: a project grid, project pages, services with starting prices and an enquiry form that sends nothing.',
+    brief: 'A design studio sells taste, so its site has to show the work first and make the next step easy.',
+    built:
+      'A portfolio grid with a page for each project, plain services and starting prices, an about page and a contact form that checks its fields and then says it is a concept.',
+    href: '/work/thorne-linden/',
+    image: workPreview('thorne-linden'),
+    alt: 'Thorne & Linden Interiors concept website: the headline “Interiors for rooms that are lived in.” above a bedroom with a walnut headboard',
+    position: 'left top',
+    screenshot: true,
+  },
+  {
+    id: 'millrace',
+    title: 'Millrace Plumbing',
+    kind: 'concept',
+    industry: 'home-services',
+    industryLabel: 'Plumbing',
+    summary:
+      'A local plumber’s site built for a phone first: starting prices, a booking form, reviews labelled as samples, a service area and an FAQ.',
+    brief: 'Someone with a leak wants a phone number and a price. Someone planning a renovation wants proof of care.',
+    built:
+      'A call button that stays in reach, services with starting prices, a three-step explanation of a visit, sample reviews that say they are samples, a service-area list, an FAQ and a booking form.',
+    href: '/work/millrace/',
+    image: workPreview('millrace'),
+    alt: 'Millrace Plumbing concept website: the headline “Plumbing that gets fixed the first time.” beside water running into a basin',
+    screenshot: true,
+  },
+];
+
+export const getProject = (id: string) => [...projects, ...everydayBuilds].find((project) => project.id === id);
+export const projectsForIndustry = (industry: IndustrySlug) =>
+  [...projects, ...everydayBuilds].filter((project) => project.industry === industry);

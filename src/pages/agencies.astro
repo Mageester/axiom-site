@@ -5,6 +5,8 @@ import Icon from '../components/site/Icon.astro';
 import PageHero from '../components/site/PageHero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EmailText from '../components/site/EmailText.astro';
+import WorkCard from '../components/site/WorkCard.astro';
+import { everydayBuilds, getProject } from '../content/work';
 import { SEO_ROUTES, SITE_EMAIL, faqJsonLd, type Crumb } from '../lib/seo';
 
 const crumbs: Crumb[] = [
@@ -34,9 +36,18 @@ const work = [
   },
   {
     title: 'Accessibility passes',
-    text: 'Contrast, labels, headings and keyboard checks against WCAG 2.0 AA, with a written list of what changed.',
+    text: 'Contrast, labels, headings and keyboard checks against WCAG 2.1 AA, with a written list of what changed.',
+  },
+  {
+    title: 'Shopify stores and product migrations',
+    text: 'Store builds from your designs, product imports from spreadsheets or an old site using CSV files and Matrixify-style tools, and redirects so existing traffic carries over.',
   },
 ];
+
+// A client site and three concept builds you can open and test. The concepts are fictional, so each
+// card carries its own “Concept” or “Client” label.
+// Reid's screenshot is wider than these cards, so keep its left edge (the logo) in frame.
+const handover = [{ ...getProject('reids-home-and-yard')!, position: 'left top' }, ...everydayBuilds];
 
 const steps = [
   { title: 'Send the brief', text: 'A link, a design file or a few lines on what the client needs.' },
@@ -59,7 +70,7 @@ const faq = [
   {
     question: 'What platforms do you work on?',
     answer:
-      'Custom-coded sites and the common builders and content systems agencies hand over. Tell us the platform in the brief and we will say plainly if it is not a fit.',
+      'We work on Squarespace, Shopify and WordPress, and we write custom code when a platform is the wrong tool for the job. Tell us the platform in the brief and we will say plainly if it is not a fit.',
   },
   {
     question: 'How do we start?',
@@ -98,9 +109,12 @@ const mailto = `mailto:${SITE_EMAIL}?subject=Agency%20overflow%20work`;
         <div class="section-head">
           <p class="eyebrow">What we take on</p>
           <h2 id="work-title">The work that stalls a busy studio</h2>
-          <p>Well-defined jobs your team would rather not context-switch into, finished to your standard.</p>
+          <p>
+            Well-defined jobs your team would rather not context-switch into, finished to your standard, on Squarespace,
+            Shopify, WordPress or custom code.
+          </p>
         </div>
-        <ul role="list" class="grid grid-4 offers">
+        <ul role="list" class="grid offers">
           {work.map((item, index) => (
             <li class="card offer">
               <span class="index-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
@@ -133,7 +147,27 @@ const mailto = `mailto:${SITE_EMAIL}?subject=Agency%20overflow%20work`;
       </div>
     </section>
 
-    <section class="section" aria-labelledby="faq-title">
+    <section class="section" aria-labelledby="handover-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What we hand over</p>
+          <h2 id="handover-title">What a finished job looks like</h2>
+          <p>
+            One live client site and three concept builds you can open and test yourself. The concepts are fictional
+            businesses. They show the standard of build you would receive, and none of them is a client result.
+          </p>
+        </div>
+        <ul role="list" class="grid grid-4 handover">
+          {handover.map((project) => (
+            <li>
+              <WorkCard project={project} sizes="(min-width: 1024px) 270px, (min-width: 720px) 45vw, 92vw" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="faq-title">
       <div class="container faq-grid">
         <div class="section-head">
           <p class="eyebrow">FAQ</p>
@@ -170,7 +204,7 @@ const mailto = `mailto:${SITE_EMAIL}?subject=Agency%20overflow%20work`;
   }
 
   .terms dt {
-    color: var(--text-muted);
+    color: var(--text);
     font-size: var(--fs-sm);
   }
 
@@ -181,8 +215,35 @@ const mailto = `mailto:${SITE_EMAIL}?subject=Agency%20overflow%20work`;
     text-align: right;
   }
 
-  .offers {
+  .offers,
+  .handover {
     margin: 0;
+    padding: 0;
+  }
+
+  /* Five cards: two across on tablets with the last one full width, then a row of three and a row of two. */
+  @media (min-width: 720px) and (max-width: 1023.98px) {
+    .offers {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .offers > :last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .offers {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .offers > * {
+      grid-column: span 2;
+    }
+
+    .offers > :nth-child(n + 4) {
+      grid-column: span 3;
+    }
   }
 
   .offer {

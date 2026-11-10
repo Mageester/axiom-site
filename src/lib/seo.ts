@@ -250,7 +250,7 @@ export const SEO_ROUTES = {
   work: {
     title: 'Web Design Portfolio | Client Sites and Concepts',
     description:
-      'A live client website and clearly labelled concept builds for home services, clinics, salons, restaurants and law firms. See how we structure business sites.',
+      'A live client website, three everyday concept builds (a store, a design studio and a plumber) and ten design experiments, all clearly labelled as concepts.',
     canonicalPath: '/work',
   },
   pricing: {
