@@ -1,0 +1,144 @@
+---
+import Layout from '../../../demos/fennmoor/Layout.astro';
+import ProductCard from '../../../demos/fennmoor/ProductCard.astro';
+import Photo from '../../../demos/_kit/Photo.astro';
+import { BASE, categories, featured, photos, productByHandle, products } from '../../../demos/fennmoor/data';
+
+const picks = featured.map((handle) => productByHandle(handle));
+const order = (handle: string) => products.findIndex((product) => product.handle === handle);
+const countIn = (handle: string) => products.filter((product) => product.category === handle).length;
+const hero = photos.hero;
+---
+
+<Layout
+  title="Fennmoor Home | Stoneware, linen and everyday things for the home"
+  description="Fennmoor Home is a small online shop for stoneware, linen, bedding and everyday things for the home. A concept online store designed and built by Axiom Web."
+  section="home"
+  preload={`${hero.dir}/${hero.name}-1280.webp`}
+>
+  <main id="main-content" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-h">
+      <div class="hero-copy">
+        <p class="eyebrow">The autumn range</p>
+        <h1 id="hero-h">Plain things, <em>made well.</em></h1>
+        <p class="lead">
+          Stoneware, linen and wood for the table, the bed and the shelf. A small range, honest materials and
+          nothing packed in plastic.
+        </p>
+        <div class="actions">
+          <a class="btn btn-solid" href={`${BASE}/collections/all/`}>Shop all products</a>
+          <a class="btn btn-ghost" href={`${BASE}/#story`}>Our story</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <Photo
+          photo={hero}
+          sizes="(min-width: 900px) 55vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="cats-h">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Shop by room</p>
+            <h2 id="cats-h">Three places to start</h2>
+          </div>
+          <a class="text-link" href={`${BASE}/collections/all/`}>View all {products.length} products</a>
+        </div>
+        <ul class="cats" role="list">
+          {categories.map((category) => (
+            <li>
+              <a class="cat" href={`${BASE}/collections/${category.handle}/`}>
+                <div class="cat-media">
+                  <Photo photo={photos[category.photo]} alt="" sizes="(min-width: 760px) 32vw, 100vw" maxWidth={800} />
+                </div>
+                <div class="cat-body">
+                  <h3>{category.name}</h3>
+                  <p>{category.blurb}</p>
+                  <p class="price">{countIn(category.handle)} products</p>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0" aria-labelledby="picks-h">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Favourites</p>
+            <h2 id="picks-h">Good things to put in the cart first</h2>
+          </div>
+          <a class="text-link" href={`${BASE}/collections/all/`}>Shop everything</a>
+        </div>
+        <ul class="grid" role="list">
+          {picks.map((product) => <ProductCard product={product} order={order(product.handle)} />)}
+        </ul>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <ul class="promises" role="list">
+        <li>
+          <h3>Free shipping over $100</h3>
+          <p>Orders over $100 ship free anywhere in Canada. Smaller orders ship for a flat rate at checkout.</p>
+        </li>
+        <li>
+          <h3>Thirty days to change your mind</h3>
+          <p>If something is not right, send it back within thirty days in its original packaging.</p>
+        </li>
+        <li>
+          <h3>Packed without plastic</h3>
+          <p>Paper, card and recycled fibre only, so what arrives at the door is easy to recycle.</p>
+        </li>
+      </ul>
+    </div>
+
+    <section class="section" id="story" aria-labelledby="story-h">
+      <div class="wrap story">
+        <div class="story-media">
+          <Photo photo={photos.story} sizes="(min-width: 900px) 48vw, 100vw" />
+        </div>
+        <div class="story-copy">
+          <p class="eyebrow">Our story</p>
+          <h2 id="story-h">Made slowly, <em>sent plainly.</em></h2>
+          <p>
+            Fennmoor Home is a small shop for things you use every day. We keep the range short, favour plain
+            materials such as stoneware, linen, beech and oak, and would rather you bought one good thing than
+            five forgettable ones.
+          </p>
+          <p>
+            Everything is described honestly, with its size, its material and how to look after it, so you know
+            what you are getting before it arrives.
+          </p>
+          <a class="btn btn-ghost" href={`${BASE}/help/`}>Shipping, returns and care</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="news" aria-labelledby="news-h">
+      <div class="wrap news-inner">
+        <div>
+          <h2 id="news-h">A short note, now and then</h2>
+          <p>New arrivals and the odd care tip. No more than twice a month.</p>
+        </div>
+        <form data-concept-form>
+          <div class="field-row">
+            <label class="sr" for="news-email">Email address</label>
+            <input class="input" id="news-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            <button class="btn btn-solid" type="submit">Subscribe</button>
+          </div>
+          <p class="concept-msg" role="status" tabindex="-1" data-concept-msg hidden>
+            This is a concept store, so nothing was saved or sent. On a live site this would add you to the list.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+</Layout>

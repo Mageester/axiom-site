@@ -1,0 +1,43 @@
+---
+// One product in a grid. The data attributes let the collection page filter and sort the cards
+// in the browser without another request.
+import Photo from '../_kit/Photo.astro';
+import { BASE, categories, fromPrice, hasRange, money, photos, type Product } from './data';
+
+type Props = {
+  product: Product;
+  /** Position in the shop's default order, used by the "Featured" sort. */
+  order?: number;
+  heading?: 'h2' | 'h3';
+  eager?: boolean;
+};
+
+const { product, order = 0, heading = 'h3', eager = false } = Astro.props;
+const Heading = heading;
+const category = categories.find((item) => item.handle === product.category)!;
+const price = fromPrice(product);
+---
+
+<li
+  class="card"
+  data-handle={product.handle}
+  data-category={product.category}
+  data-price={price}
+  data-name={product.name}
+  data-order={order}
+>
+  <div class="card-media">
+    <Photo
+      photo={photos[product.photo]}
+      alt=""
+      sizes="(min-width: 1100px) 24vw, (min-width: 760px) 32vw, 48vw"
+      maxWidth={800}
+      loading={eager ? 'eager' : 'lazy'}
+    />
+  </div>
+  <div class="card-body">
+    <Heading class="card-title"><a href={`${BASE}/products/${product.handle}/`}>{product.name}</a></Heading>
+    <p class="card-cat">{category.name}</p>
+    <p class="price">{hasRange(product) ? 'From ' : ''}{money(price)}</p>
+  </div>
+</li>

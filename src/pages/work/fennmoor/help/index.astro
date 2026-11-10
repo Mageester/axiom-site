@@ -1,0 +1,85 @@
+---
+import Layout from '../../../../demos/fennmoor/Layout.astro';
+import { BASE, EMAIL, FREE_SHIPPING_FROM, PHONE_DISPLAY, PHONE_HREF, money } from '../../../../demos/fennmoor/data';
+---
+
+<Layout
+  title="Shipping, returns and care | Fennmoor Home"
+  description="How shipping, returns and care work at Fennmoor Home, and how to get in touch. Part of a concept online store designed and built by Axiom Web."
+  section="help"
+>
+  <main id="main-content" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href={`${BASE}/`}>Home</a></li>
+            <li aria-current="page">Help</li>
+          </ol>
+        </nav>
+        <h1>Shipping, returns and care</h1>
+        <p>The practical things, in plain words.</p>
+      </div>
+
+      <div class="help">
+        <section id="shipping" aria-labelledby="shipping-h">
+          <h2 id="shipping-h">Shipping</h2>
+          <p>
+            Orders ship within two business days. Delivery usually takes three to six business days across Ontario and
+            Quebec, and five to nine elsewhere in Canada.
+          </p>
+          <ul>
+            <li>Free shipping on orders over {money(FREE_SHIPPING_FROM)}.</li>
+            <li>A flat rate applies to smaller orders, shown at checkout.</li>
+            <li>Everything is packed in paper, card and recycled fibre.</li>
+          </ul>
+        </section>
+
+        <section id="returns" aria-labelledby="returns-h">
+          <h2 id="returns-h">Returns</h2>
+          <p>
+            If something is not right, send it back within thirty days in its original packaging and we will refund
+            the price of the item. Candles and soap can only be returned unopened.
+          </p>
+          <p>If something arrives damaged, tell us with a photo and we will send a replacement.</p>
+        </section>
+
+        <section id="care" aria-labelledby="care-h">
+          <h2 id="care-h">Care guides</h2>
+          <ul>
+            <li><strong>Stoneware.</strong> Dishwasher safe, though a hand wash keeps the glaze looking new for longer.</li>
+            <li><strong>Linen.</strong> Wash warm, tumble dry low and take it out while it is still a little damp. It gets softer with every wash.</li>
+            <li><strong>Wood.</strong> Wash by hand, dry upright and oil lightly every few months.</li>
+            <li><strong>Candles.</strong> Trim the wick to 5 mm before each burn and never leave one unattended.</li>
+          </ul>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-h">
+          <h2 id="contact-h">Contact</h2>
+          <p>
+            Email <a href={`mailto:${EMAIL}`}>{EMAIL}</a> or call <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>, or leave a
+            message here.
+          </p>
+          <form class="contact-form" data-concept-form>
+            <label class="field">
+              Your name
+              <input class="input" name="name" type="text" autocomplete="name" required />
+            </label>
+            <label class="field">
+              Email address
+              <input class="input" name="email" type="email" autocomplete="email" required />
+            </label>
+            <label class="field">
+              Message
+              <textarea class="input" name="message" rows="5" required></textarea>
+            </label>
+            <button class="btn btn-solid" type="submit">Send message</button>
+            <p class="concept-msg" role="status" tabindex="-1" data-concept-msg hidden>
+              This is a concept store, so nothing was sent. On a live site this would reach the shop.
+            </p>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+</Layout>
