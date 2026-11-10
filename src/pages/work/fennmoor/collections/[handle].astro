@@ -1,0 +1,97 @@
+---
+import Layout from '../../../../demos/fennmoor/Layout.astro';
+import ProductCard from '../../../../demos/fennmoor/ProductCard.astro';
+import { BASE, categories, collectionByHandle, products, productsIn } from '../../../../demos/fennmoor/data';
+
+export function getStaticPaths() {
+  return [{ params: { handle: 'all' } }, ...categories.map((category) => ({ params: { handle: category.handle } }))];
+}
+
+const { handle } = Astro.params;
+const collection = collectionByHandle(handle!)!;
+const items = productsIn(handle!);
+const isAll = handle === 'all';
+const order = (productHandle: string) => products.findIndex((product) => product.handle === productHandle);
+const prices = [
+  ['any', 'Any price'],
+  ['0-3000', 'Under $30'],
+  ['3000-6000', '$30 to $60'],
+  ['6000-12000', '$60 to $120'],
+  ['12000-', 'Over $120'],
+];
+const sorts = [
+  ['featured', 'Featured'],
+  ['price-asc', 'Price, low to high'],
+  ['price-desc', 'Price, high to low'],
+  ['name', 'Name, A to Z'],
+];
+---
+
+<Layout
+  title={`${collection.name} | Fennmoor Home`}
+  description={`${collection.blurb} Browse, filter and sort ${items.length} products at Fennmoor Home, a concept online store by Axiom Web.`}
+  section="products"
+>
+  <main id="main-content" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href={`${BASE}/`}>Home</a></li>
+            {!isAll && <li><a href={`${BASE}/collections/all/`}>Shop</a></li>}
+            <li aria-current="page">{collection.name}</li>
+          </ol>
+        </nav>
+        <h1>{collection.name}</h1>
+        <p>{collection.blurb}</p>
+      </div>
+
+      <form class="filters" data-filters aria-label="Filter and sort products">
+        {isAll && (
+          <fieldset class="chips">
+            <legend>Category</legend>
+            {categories.map((category) => (
+              <label class="chip">
+                <input type="checkbox" name="category" value={category.handle} />
+                <span>{category.name}</span>
+              </label>
+            ))}
+          </fieldset>
+        )}
+        <div class="selects">
+          <label>
+            Price
+            <select class="select" name="price">
+              {prices.map(([value, label]) => <option value={value}>{label}</option>)}
+            </select>
+          </label>
+          <label>
+            Sort by
+            <select class="select" name="sort">
+              {sorts.map(([value, label]) => <option value={value}>{label}</option>)}
+            </select>
+          </label>
+        </div>
+        <div class="filter-foot">
+          <p class="count" role="status" aria-live="polite" data-count>{items.length} products</p>
+          <button class="link-btn" type="button" data-clear hidden>Clear filters</button>
+        </div>
+      </form>
+
+      <h2 class="sr">Products</h2>
+      <ul class="grid" role="list" data-grid>
+        {items.map((product) => <ProductCard product={product} order={order(product.handle)} />)}
+      </ul>
+
+      <div class="empty" data-empty hidden>
+        <p>No products match those filters.</p>
+        <button class="btn btn-ghost" type="button" data-clear>Clear filters</button>
+      </div>
+    </div>
+    <div class="collection-end"></div>
+  </main>
+</Layout>
+
+<script>
+  import '../../../../demos/fennmoor/collection';
+</script>

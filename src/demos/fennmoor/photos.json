@@ -1,0 +1,392 @@
+{
+ "hero": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "hero",
+  "widths": [
+   800,
+   1280,
+   1920
+  ],
+  "w": 1920,
+  "h": 1280,
+  "alt": "Ceramic cups, bowls and a teapot on warm wooden shelves beside a pale wall",
+  "credit": {
+   "name": "Cup of Couple",
+   "profile": "https://www.pexels.com/@cup-of-couple/",
+   "page": "https://www.pexels.com/photo/6963800/",
+   "id": 6963800
+  }
+ },
+ "story": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "story",
+  "widths": [
+   640,
+   1024,
+   1600
+  ],
+  "w": 1600,
+  "h": 1067,
+  "alt": "Hands shaping a rough clay pot",
+  "credit": {
+   "name": "cottonbro studio",
+   "profile": "https://www.pexels.com/@cottonbro/",
+   "page": "https://www.pexels.com/photo/6692610/",
+   "id": 6692610
+  }
+ },
+ "mug": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "mug",
+  "widths": [
+   480,
+   800
+  ],
+  "w": 800,
+  "h": 1000,
+  "alt": "Cream-coloured mugs lined up on a wooden shelf",
+  "credit": {
+   "name": "Roman Odintsov",
+   "profile": "https://www.pexels.com/@roman-odintsov/",
+   "page": "https://www.pexels.com/photo/8063803/",
+   "id": 8063803
+  }
+ },
+ "bowls": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "bowls",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "White hand-pinched ceramic bowls on a wooden table",
+  "credit": {
+   "name": "Cem Nisan",
+   "profile": "https://www.pexels.com/@cemnisan/",
+   "page": "https://www.pexels.com/photo/29312155/",
+   "id": 29312155
+  }
+ },
+ "plates": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "plates",
+  "widths": [
+   480,
+   800
+  ],
+  "w": 800,
+  "h": 1000,
+  "alt": "A stack of speckled stoneware plates with a rust-brown rim",
+  "credit": {
+   "name": "Magda Ehlers",
+   "profile": "https://www.pexels.com/@magda-ehlers-pexels/",
+   "page": "https://www.pexels.com/photo/10900768/",
+   "id": 10900768
+  }
+ },
+ "board": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "board",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "Halved figs on a light wooden serving board",
+  "credit": {
+   "name": "Александр Трубицын",
+   "profile": "https://www.pexels.com/@75310099/",
+   "page": "https://www.pexels.com/photo/9725823/",
+   "id": 9725823
+  }
+ },
+ "napkins": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "napkins",
+  "widths": [
+   480,
+   800
+  ],
+  "w": 800,
+  "h": 1000,
+  "alt": "A folded cream linen napkin on a white plate beside gold cutlery",
+  "credit": {
+   "name": "Mikhail Nilov",
+   "profile": "https://www.pexels.com/@mikhail-nilov/",
+   "page": "https://www.pexels.com/photo/6957847/",
+   "id": 6957847
+  }
+ },
+ "carafe": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "carafe",
+  "widths": [
+   480,
+   800
+  ],
+  "w": 800,
+  "h": 1000,
+  "alt": "A glass carafe of water on a wooden board in window light",
+  "credit": {
+   "name": "ly",
+   "profile": "https://www.pexels.com/@ly-45419102/",
+   "page": "https://www.pexels.com/photo/8183769/",
+   "id": 8183769
+  }
+ },
+ "spoons": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "spoons",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "Wooden spoons standing in a holder against a cream wall",
+  "credit": {
+   "name": "Cup of Couple",
+   "profile": "https://www.pexels.com/@cup-of-couple/",
+   "page": "https://www.pexels.com/photo/7303783/",
+   "id": 7303783
+  }
+ },
+ "pourover": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "pourover",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "A matte white ceramic pour-over dripper on a wooden board",
+  "credit": {
+   "name": "ly",
+   "profile": "https://www.pexels.com/@ly-45419102/",
+   "page": "https://www.pexels.com/photo/8214439/",
+   "id": 8214439
+  }
+ },
+ "teatowel": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "teatowel",
+  "widths": [
+   480,
+   800
+  ],
+  "w": 800,
+  "h": 1000,
+  "alt": "Striped and natural linen tea towels hanging from a rail",
+  "credit": {
+   "name": "Tima Miroshnichenko",
+   "profile": "https://www.pexels.com/@tima-miroshnichenko/",
+   "page": "https://www.pexels.com/photo/4794878/",
+   "id": 4794878
+  }
+ },
+ "duvet": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "duvet",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "A bed made up with tan linen bedding against a white wall",
+  "credit": {
+   "name": "Aljona Ovtšinnikova",
+   "profile": "https://www.pexels.com/@aljona-ovtsinnikova-121486965/",
+   "page": "https://www.pexels.com/photo/27439405/",
+   "id": 27439405
+  }
+ },
+ "pillowcase": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "pillowcase",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "Hands smoothing a cream pillowcase on a bed in morning light",
+  "credit": {
+   "name": "cottonbro studio",
+   "profile": "https://www.pexels.com/@cottonbro/",
+   "page": "https://www.pexels.com/photo/4108797/",
+   "id": 4108797
+  }
+ },
+ "towels": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "towels",
+  "widths": [
+   480,
+   800
+  ],
+  "w": 800,
+  "h": 1000,
+  "alt": "A stack of folded beige cotton towels on a small white stool",
+  "credit": {
+   "name": "Karola G (kaboompics.com)",
+   "profile": "https://www.pexels.com/@karola-g/",
+   "page": "https://www.pexels.com/photo/4210372/",
+   "id": 4210372
+  }
+ },
+ "throw": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "throw",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "A chunky sage-green knitted throw draped over the arm of a sofa",
+  "credit": {
+   "name": "Rachel Claire",
+   "profile": "https://www.pexels.com/@rachel-claire/",
+   "page": "https://www.pexels.com/photo/4846429/",
+   "id": 4846429
+  }
+ },
+ "candle": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "candle",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "Three candles in dark amber glass jars on kraft paper",
+  "credit": {
+   "name": "Vie Studio",
+   "profile": "https://www.pexels.com/@vie-studio/",
+   "page": "https://www.pexels.com/photo/7004676/",
+   "id": 7004676
+  }
+ },
+ "vase": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "vase",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "Dried grasses in a white fluted ceramic vase",
+  "credit": {
+   "name": "Karola G (kaboompics.com)",
+   "profile": "https://www.pexels.com/@karola-g/",
+   "page": "https://www.pexels.com/photo/6958742/",
+   "id": 6958742
+  }
+ },
+ "basket": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "basket",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "A woven seagrass basket with a lid on a cream rug",
+  "credit": {
+   "name": "Kader D. Kahraman",
+   "profile": "https://www.pexels.com/@kaderdygnn/",
+   "page": "https://www.pexels.com/photo/31390663/",
+   "id": 31390663
+  }
+ },
+ "planter": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "planter",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "A glazed clay pot with a silvery succulent on a sunny windowsill",
+  "credit": {
+   "name": "juliane Monari",
+   "profile": "https://www.pexels.com/@julianemonarifotografia/",
+   "page": "https://www.pexels.com/photo/30163109/",
+   "id": 30163109
+  }
+ },
+ "soap": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "soap",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "Five bars of handmade soap standing in a row on white marble",
+  "credit": {
+   "name": "Monstera Production",
+   "profile": "https://www.pexels.com/@gabby-k/",
+   "page": "https://www.pexels.com/photo/6621470/",
+   "id": 6621470
+  }
+ },
+ "tray": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "tray",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "A wooden tray with a glass bottle of eucalyptus and a blank card",
+  "credit": {
+   "name": "Cup of Couple",
+   "profile": "https://www.pexels.com/@cup-of-couple/",
+   "page": "https://www.pexels.com/photo/8015525/",
+   "id": 8015525
+  }
+ },
+ "cushion": {
+  "dir": "/images/everyday/fennmoor",
+  "name": "cushion",
+  "widths": [
+   480,
+   800,
+   1200
+  ],
+  "w": 1200,
+  "h": 1500,
+  "alt": "A round cream bouclé cushion on a bouclé sofa",
+  "credit": {
+   "name": "Alina Skazka",
+   "profile": "https://www.pexels.com/@alinaskazka/",
+   "page": "https://www.pexels.com/photo/30650074/",
+   "id": 30650074
+  }
+ }
+}

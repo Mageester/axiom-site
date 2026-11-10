@@ -4,7 +4,8 @@ import CtaBand from '../components/site/CtaBand.astro';
 import Icon from '../components/site/Icon.astro';
 import PageHero from '../components/site/PageHero.astro';
 import ResponsivePicture from '../components/site/ResponsivePicture.astro';
-import { projects } from '../content/work';
+import WorkCard from '../components/site/WorkCard.astro';
+import { everydayBuilds, projects } from '../content/work';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CTA_PATHS } from '../lib/cta';
 import { SEO_ROUTES, SITE_URL, itemListSchema, type Crumb } from '../lib/seo';
@@ -18,6 +19,8 @@ const client = projects.find((project) => project.kind === 'client')!;
 const concepts = projects.filter((project) => project.kind === 'concept');
 const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 const conceptWord = numberWords[concepts.length] ?? String(concepts.length);
+const everydayWord = numberWords[everydayBuilds.length] ?? String(everydayBuilds.length);
+const allWork = [...projects, ...everydayBuilds];
 ---
 
 <BaseLayout
@@ -26,7 +29,7 @@ const conceptWord = numberWords[concepts.length] ?? String(concepts.length);
   crumbs={crumbs}
   schema={itemListSchema(
     'Axiom Web portfolio',
-    projects.map((project) => ({
+    allWork.map((project) => ({
       name: project.kind === 'client' ? project.title : `${project.title} (concept build)`,
       url: new URL(project.href, SITE_URL).href,
       description: project.summary,
@@ -37,18 +40,22 @@ const conceptWord = numberWords[concepts.length] ?? String(concepts.length);
     <PageHero
       eyebrow="Work"
       title="Websites we’ve designed and built"
-      lead={`A live client website, plus ${conceptWord} concepts we built from scratch to show what a local business website can feel like. Every concept is a fictional business and is labelled as one.`}
+      lead={`One live client website, ${everydayWord} everyday builds that show the sites most small businesses actually need, and ${conceptWord} design experiments that show our range. Everything except the client site is a fictional business, and every one is labelled as such.`}
       crumbs={crumbs}
     >
       <Fragment slot="actions">
         <a href={CTA_PATHS.startProject} class="btn btn-lg">Start a project <Icon name="arrow-right" /></a>
-        <a href="#concepts-title" class="btn btn-secondary btn-lg">See the concepts</a>
+        <a href="#everyday-title" class="btn btn-secondary btn-lg">See the everyday builds</a>
       </Fragment>
     </PageHero>
 
-    <section class="section" aria-labelledby="client-title">
+    <section class="section" aria-labelledby="client-heading">
       <div class="container">
-        <article class="featured">
+        <div class="section-head">
+          <p class="eyebrow">Live</p>
+          <h2 id="client-heading">Client work</h2>
+        </div>
+        <article class="featured" aria-labelledby="client-title">
           <BrowserFrame url="reidshomeandyard.getaxiom.ca" class="featured-frame">
             <ResponsivePicture
               source={client.image}
@@ -62,7 +69,7 @@ const conceptWord = numberWords[concepts.length] ?? String(concepts.length);
           <div class="featured-copy">
             <span class="badge badge-success badge-dot">Client site · Live</span>
             <p class="featured-meta">{client.industryLabel} · {client.location}</p>
-            <h2 id="client-title">{client.title}</h2>
+            <h3 id="client-title" class="featured-title">{client.title}</h3>
             <p class="featured-summary">{client.summary}</p>
             <dl class="featured-details">
               <div>
@@ -82,13 +89,39 @@ const conceptWord = numberWords[concepts.length] ?? String(concepts.length);
       </div>
     </section>
 
+    <section class="section" id="everyday" aria-labelledby="everyday-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Concept builds</p>
+          <h2 id="everyday-title">Everyday builds</h2>
+          <p>
+            The sites most local businesses actually need: an online store, a portfolio for a creative studio and a
+            service business that gets booked by phone. They use no heavy effects, just fast pages that work on a phone and
+            with a keyboard.
+          </p>
+        </div>
+        <ul role="list" class="grid grid-3 builds">
+          {everydayBuilds.map((project) => (
+            <li>
+              <WorkCard project={project} />
+            </li>
+          ))}
+        </ul>
+        <p class="builds-note">
+          All {everydayWord} are fictional businesses. Their checkout, forms and reviews are examples: nothing is sold, sent or
+          stored, and none of them is a client result.
+        </p>
+      </div>
+    </section>
+
     <section class="concepts" aria-labelledby="concepts-title">
       <div class="container concepts-head">
-        <p class="eyebrow">Concepts</p>
-        <h2 id="concepts-title">{conceptWord.charAt(0).toUpperCase() + conceptWord.slice(1)} businesses that <em>don’t exist.</em></h2>
+        <p class="eyebrow">Concept experiments</p>
+        <h2 id="concepts-title">{conceptWord.charAt(0).toUpperCase() + conceptWord.slice(1)} design <em>experiments.</em></h2>
         <p>
-          Each one is a working site for a fictional local business, built around a single idea from that trade. Open one and
-          play with it. They are not client results.
+          Each one is a working site for a fictional local business, built around a single idea from that trade, to show our
+          range with real-time 3D, simulation and heavy interaction. They are experiments rather than the everyday sites above,
+          and they are not client results. Open one and play with it.
         </p>
       </div>
       <ol role="list" class="stack">
@@ -145,6 +178,12 @@ const conceptWord = numberWords[concepts.length] ?? String(concepts.length);
     justify-items: start;
   }
 
+  .featured-title {
+    font-size: var(--fs-h2);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
   .featured-meta {
     color: var(--text-muted);
     font-size: var(--fs-xs);
@@ -171,6 +210,18 @@ const conceptWord = numberWords[concepts.length] ?? String(concepts.length);
 
   .featured-details dd {
     margin: 0.2rem 0 0;
+  }
+
+  .builds {
+    margin: 0;
+    padding: 0;
+  }
+
+  .builds-note {
+    max-width: 44rem;
+    margin-top: 2rem;
+    color: var(--text);
+    font-size: var(--fs-sm);
   }
 
   /* ── Concepts: a deck of cards that stack as you scroll ───── */

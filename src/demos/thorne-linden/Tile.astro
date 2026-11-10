@@ -1,0 +1,24 @@
+---
+// One project in a grid: a photograph, the type and place, the name and one line.
+import Photo from '../_kit/Photo.astro';
+import { BASE, photos, type Project } from './data';
+
+type Props = { project: Project; eager?: boolean };
+const { project, eager = false } = Astro.props;
+---
+
+<li class="tile">
+  <div class="tile-media">
+    <Photo
+      photo={photos[project.cover]}
+      alt=""
+      sizes="(min-width: 700px) 48vw, 100vw"
+      maxWidth={1024}
+      loading={eager ? 'eager' : 'lazy'}
+      style="object-position: 50% 40%"
+    />
+  </div>
+  <p class="tile-meta"><span>{project.type}</span><span>{project.place}</span></p>
+  <h3><a href={`${BASE}/projects/${project.slug}/`}>{project.title}</a></h3>
+  <p class="tile-line">{project.line}</p>
+</li>

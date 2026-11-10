@@ -1,0 +1,175 @@
+---
+// The shared frame for every Fennmoor Home page: header with a Products menu, the slide-out
+// cart, the footer and the honest concept ending.
+import DemoLayout from '../_kit/DemoLayout.astro';
+import ConceptFooter from '../_kit/ConceptFooter.astro';
+import Photo from '../_kit/Photo.astro';
+import '../_kit/everyday.css';
+import './styles.css';
+import { BASE, EMAIL, FREE_SHIPPING_FROM, NAME, PHONE_DISPLAY, PHONE_HREF, categories, money, photos } from './data';
+
+type Props = {
+  title: string;
+  description: string;
+  /** Marks the current section in the header. */
+  section?: 'home' | 'products' | 'help';
+  /** Preload the first screen's large image. */
+  preload?: string;
+};
+
+const { title, description, section, preload } = Astro.props;
+const credit = photos;
+const creditList = Object.values(credit);
+---
+
+<DemoLayout name={NAME} title={title} description={description} themeColor="#f7f3ec" pill="light">
+  {preload && <link slot="head" rel="preload" as="image" href={preload} />}
+
+  <header class="site-header" data-header>
+    <p class="announce">Free shipping across Canada on orders over {money(FREE_SHIPPING_FROM)}</p>
+    <div class="bar">
+      <button
+        class="menu-btn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        data-menu-toggle
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        <span class="sr">Menu</span>
+      </button>
+
+      <a class="logo" href={`${BASE}/`}>
+        <span class="logo-mark" aria-hidden="true">F</span>
+        <span class="logo-word">Fennmoor <em>Home</em></span>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Main" data-nav>
+        <ul class="nav-list">
+          <li class="has-drop" data-drop-wrap>
+            <button
+              class="nav-link drop-btn"
+              type="button"
+              aria-expanded="false"
+              aria-controls="drop-products"
+              data-drop-toggle
+              aria-current={section === 'products' ? 'true' : undefined}
+            >
+              Products
+              <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"></path></svg>
+            </button>
+            <div class="drop" id="drop-products" data-drop hidden>
+              <ul class="drop-grid" role="list">
+                {categories.map((category) => (
+                  <li>
+                    <a class="drop-card" href={`${BASE}/collections/${category.handle}/`}>
+                      <span class="drop-thumb">
+                        <Photo photo={photos[category.photo]} alt="" sizes="96px" maxWidth={480} />
+                      </span>
+                      <span class="drop-text">
+                        <span class="drop-title">{category.name}</span>
+                        <span class="drop-sub">{category.blurb}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a class="drop-all" href={`${BASE}/collections/all/`}>Shop all products <span aria-hidden="true">→</span></a>
+            </div>
+          </li>
+          <li><a class="nav-link" href={`${BASE}/#story`}>Our story</a></li>
+          <li><a class="nav-link" href={`${BASE}/help/`} aria-current={section === 'help' ? 'page' : undefined}>Help</a></li>
+        </ul>
+      </nav>
+
+      <button class="cart-btn" type="button" data-cart-open aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 8Z"></path><path d="M9 8V6.5a3 3 0 0 1 6 0V8"></path></svg>
+        <span class="cart-label" data-cart-label>Cart</span>
+        <span class="cart-count" data-cart-count aria-hidden="true">0</span>
+      </button>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href={`${BASE}/`}>
+          <span class="logo-mark" aria-hidden="true">F</span>
+          <span class="logo-word">Fennmoor <em>Home</em></span>
+        </a>
+        <p>Plain, well-made things for the table, the bed and the shelf. Packed without plastic.</p>
+      </div>
+      <nav aria-label="Shop">
+        <h2 class="footer-h">Shop</h2>
+        <ul role="list">
+          {categories.map((category) => (
+            <li><a href={`${BASE}/collections/${category.handle}/`}>{category.name}</a></li>
+          ))}
+          <li><a href={`${BASE}/collections/all/`}>All products</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Help">
+        <h2 class="footer-h">Help</h2>
+        <ul role="list">
+          <li><a href={`${BASE}/help/#shipping`}>Shipping</a></li>
+          <li><a href={`${BASE}/help/#returns`}>Returns</a></li>
+          <li><a href={`${BASE}/help/#care`}>Care guides</a></li>
+          <li><a href={`${BASE}/help/#contact`}>Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="footer-h">Say hello</h2>
+        <p class="footer-contact">
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a><br />
+          <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
+        </p>
+      </div>
+    </div>
+    <details class="photo-credits">
+      <summary>Photography credits</summary>
+      <p>
+        Product and lifestyle photographs are free-licence images from Pexels, used as stock for this concept:
+        {creditList.map((photo, index) => (
+          <>
+            <a href={photo.credit.page} rel="noopener">{photo.credit.name}</a>{index < creditList.length - 1 ? ', ' : '.'}
+          </>
+        ))}
+      </p>
+    </details>
+  </footer>
+
+  <ConceptFooter name={NAME} />
+
+  <dialog class="cart" id="cart" aria-labelledby="cart-title" data-cart>
+    <div class="cart-head">
+      <h2 id="cart-title">Your cart</h2>
+      <button class="cart-close" type="button" data-cart-close>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        <span class="sr">Close cart</span>
+      </button>
+    </div>
+    <p class="cart-ship" data-cart-ship></p>
+    <div class="cart-body">
+      <ul class="cart-lines" role="list" data-cart-lines></ul>
+      <div class="cart-empty" data-cart-empty hidden>
+        <p>Your cart is empty.</p>
+        <a class="btn btn-ghost" href={`${BASE}/collections/all/`}>Browse the shop</a>
+      </div>
+    </div>
+    <div class="cart-foot" data-cart-foot>
+      <p class="cart-subtotal"><span>Subtotal</span> <strong data-cart-subtotal>$0</strong></p>
+      <p class="cart-note">Taxes and shipping are calculated at checkout.</p>
+      <button class="btn btn-solid btn-block" type="button" data-cart-checkout>Checkout</button>
+      <p class="cart-concept" role="status" data-cart-concept hidden>
+        This is a concept store, so checkout is not connected. No payment is taken and nothing is sent.
+      </p>
+    </div>
+    <p class="sr" role="status" aria-live="polite" data-cart-live></p>
+  </dialog>
+</DemoLayout>
+
+<script>
+  import './store';
+</script>

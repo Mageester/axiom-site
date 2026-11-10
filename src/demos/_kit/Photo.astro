@@ -1,0 +1,51 @@
+---
+// A licensed photograph with a ready-made srcset. The three everyday builds keep
+// their photos as WebP in public/images/everyday/<site>/, in several widths, with
+// a photos.json beside the site's code describing each one (size, alt text, credit).
+type Entry = {
+  /** Folder URL, for example /images/everyday/fennmoor */
+  dir: string;
+  /** File stem: the files are <name>-<width>.webp */
+  name: string;
+  /** Widths that exist on disk, smallest first. */
+  widths: number[];
+  /** Pixel size of the largest file. */
+  w: number;
+  h: number;
+  alt: string;
+};
+
+type Props = {
+  photo: Entry;
+  sizes: string;
+  /** Overrides the stored description. Pass an empty string for a decorative image. */
+  alt?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  class?: string;
+  style?: string;
+  /** Skip widths wider than this. */
+  maxWidth?: number;
+};
+
+const { photo, sizes, alt, loading = 'lazy', fetchpriority, class: className, style, maxWidth } = Astro.props;
+const widths = photo.widths.filter((width) => !maxWidth || width <= maxWidth);
+const largest = widths[widths.length - 1] ?? photo.w;
+const ratio = photo.h / photo.w;
+const src = (width: number) => `${photo.dir}/${photo.name}-${width}.webp`;
+const fallback = widths.includes(800) ? 800 : largest;
+---
+
+<img
+  src={src(fallback)}
+  srcset={widths.map((width) => `${src(width)} ${width}w`).join(', ')}
+  sizes={sizes}
+  width={largest}
+  height={Math.round(largest * ratio)}
+  alt={alt ?? photo.alt}
+  loading={loading}
+  decoding="async"
+  fetchpriority={fetchpriority}
+  class={className}
+  style={style}
+/>

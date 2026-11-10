@@ -19,6 +19,10 @@ const demos = {
   fernhill: { scroll: 0, wait: 3800 },
   mirrorline: { scroll: 0, wait: 7000 },
   'marigold-moss': { scroll: 0, wait: 6000 },
+  // The everyday builds are ordinary pages, so there is nothing to wait for but fonts and images.
+  fennmoor: { scroll: 0, wait: 2500 },
+  'thorne-linden': { scroll: 0, wait: 2500 },
+  millrace: { scroll: 0, wait: 2500 },
 };
 
 const option = (name, fallback) => process.argv.find((arg) => arg.startsWith(`--${name}=`))?.split('=')[1] ?? fallback;

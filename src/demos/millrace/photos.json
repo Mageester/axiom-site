@@ -1,0 +1,110 @@
+{
+ "tap": {
+  "dir": "/images/everyday/millrace",
+  "name": "tap",
+  "widths": [
+   800,
+   1280,
+   1920
+  ],
+  "w": 1920,
+  "h": 1280,
+  "alt": "Water running from a tap into a pale teal basin",
+  "credit": {
+   "name": "actually_jet",
+   "profile": "https://www.pexels.com/@actually_jet-2150578553/",
+   "page": "https://www.pexels.com/photo/31213992/",
+   "id": 31213992
+  }
+ },
+ "tools": {
+  "dir": "/images/everyday/millrace",
+  "name": "tools",
+  "widths": [
+   640,
+   1024,
+   1600
+  ],
+  "w": 1600,
+  "h": 1067,
+  "alt": "A new faucet, braided hoses and a pipe wrench laid on a floor plan",
+  "credit": {
+   "name": "AS Photography",
+   "profile": "https://www.pexels.com/@asphotography/",
+   "page": "https://www.pexels.com/photo/14953886/",
+   "id": 14953886
+  }
+ },
+ "leak": {
+  "dir": "/images/everyday/millrace",
+  "name": "leak",
+  "widths": [
+   640,
+   1024,
+   1600
+  ],
+  "w": 1600,
+  "h": 1067,
+  "alt": "Gloved hands tightening a steel pipe fitting with blue pliers",
+  "credit": {
+   "name": "Sergei Starostin",
+   "profile": "https://www.pexels.com/@sejio402/",
+   "page": "https://www.pexels.com/photo/29226620/",
+   "id": 29226620
+  }
+ },
+ "basement": {
+  "dir": "/images/everyday/millrace",
+  "name": "basement",
+  "widths": [
+   640,
+   1024,
+   1600
+  ],
+  "w": 1600,
+  "h": 1067,
+  "alt": "An unfinished basement with exposed joists, copper pipes and a water heater",
+  "credit": {
+   "name": "Curtis Adams",
+   "profile": "https://www.pexels.com/@curtis-adams-1694007/",
+   "page": "https://www.pexels.com/photo/4092030/",
+   "id": 4092030
+  }
+ },
+ "crew": {
+  "dir": "/images/everyday/millrace",
+  "name": "crew",
+  "widths": [
+   640,
+   1024,
+   1600
+  ],
+  "w": 1600,
+  "h": 2080,
+  "alt": "A man holding a black and yellow toolbox in a room under renovation",
+  "credit": {
+   "name": "Tima Miroshnichenko",
+   "profile": "https://www.pexels.com/@tima-miroshnichenko/",
+   "page": "https://www.pexels.com/photo/6474460/",
+   "id": 6474460
+  }
+ },
+ "check": {
+  "dir": "/images/everyday/millrace",
+  "name": "check",
+  "widths": [
+   640,
+   1024,
+   1600
+  ],
+  "w": 1600,
+  "h": 1067,
+  "alt": "A man kneeling beside a toilet, checking the bathroom floor with a handheld moisture meter",
+  "credit": {
+   "name": "Kathleen Austin Kuhn",
+   "profile": "https://www.pexels.com/@kathleen-austin-kuhn-2152973960/",
+   "page": "https://www.pexels.com/photo/32497162/",
+   "id": 32497162
+  }
+ }
+}

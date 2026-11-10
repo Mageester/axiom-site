@@ -1,0 +1,118 @@
+---
+// The frame for every Thorne & Linden page: header and menu, footer, and the honest concept ending.
+import DemoLayout from '../_kit/DemoLayout.astro';
+import ConceptFooter from '../_kit/ConceptFooter.astro';
+import '../_kit/everyday.css';
+import './styles.css';
+import { ADDRESS, BASE, EMAIL, NAME, PHONE_DISPLAY, PHONE_HREF, SHORT, photos } from './data';
+
+type Props = {
+  title: string;
+  description: string;
+  section?: 'home' | 'work' | 'services' | 'about' | 'contact';
+  preload?: string;
+};
+
+const { title, description, section, preload } = Astro.props;
+const credits = Object.values(photos);
+const nav = [
+  { id: 'work', label: 'Work', href: `${BASE}/projects/` },
+  { id: 'services', label: 'Services', href: `${BASE}/services/` },
+  { id: 'about', label: 'About', href: `${BASE}/about/` },
+  { id: 'contact', label: 'Contact', href: `${BASE}/contact/` },
+];
+---
+
+<DemoLayout name={NAME} title={title} description={description} themeColor="#f5f2ec" pill="light">
+  {preload && <link slot="head" rel="preload" as="image" href={preload} />}
+
+  <header class="site-header">
+    <div class="bar">
+      <a class="mark" href={`${BASE}/`} aria-label={`${NAME}, home`}>
+        <span class="mark-name">{SHORT}</span>
+        <span class="mark-sub">Interiors</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+        <span class="menu-label" data-menu-label>Menu</span>
+        <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Main" data-nav>
+        <ul role="list">
+          {nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={section === item.id ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-mark">{SHORT}</p>
+        <p class="footer-line">Interior design for kitchens, bathrooms, bedrooms and whole homes.</p>
+      </div>
+      <nav aria-label="Footer">
+        <h2 class="footer-h">Studio</h2>
+        <ul role="list">
+          {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </nav>
+      <div>
+        <h2 class="footer-h">Visit or write</h2>
+        <p>
+          {ADDRESS.map((line) => (<>{line}<br /></>))}
+        </p>
+        <p class="footer-contact">
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a><br />
+          <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
+        </p>
+      </div>
+      <div>
+        <h2 class="footer-h">Hours</h2>
+        <p>Tuesday to Friday, 9 am to 5 pm<br />By appointment on weekends</p>
+      </div>
+    </div>
+    <details class="photo-credits">
+      <summary>Photography credits</summary>
+      <p>
+        The projects on this site are fictional, shown with free-licence stock photographs from Pexels:
+        {credits.map((photo, index) => (
+          <>
+            <a href={photo.credit.page} rel="noopener">{photo.credit.name}</a>{index < credits.length - 1 ? ', ' : '.'}
+          </>
+        ))}
+      </p>
+    </details>
+  </footer>
+
+  <ConceptFooter name={NAME} />
+</DemoLayout>
+
+<script>
+  import { conceptForms } from '../_kit/ui';
+
+  const button = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  const label = document.querySelector<HTMLElement>('[data-menu-label]');
+  if (button && nav) {
+    const set = (open: boolean) => {
+      button.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('is-open', open);
+      if (label) label.textContent = open ? 'Close' : 'Menu';
+    };
+    button.addEventListener('click', () => set(button.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        button.focus();
+      }
+    });
+    matchMedia('(min-width: 800px)').addEventListener('change', (event) => event.matches && set(false));
+  }
+  conceptForms();
+</script>

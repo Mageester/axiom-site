@@ -1,0 +1,181 @@
+---
+import Layout from '../../../../demos/fennmoor/Layout.astro';
+import ProductCard from '../../../../demos/fennmoor/ProductCard.astro';
+import Photo from '../../../../demos/_kit/Photo.astro';
+import {
+  BASE,
+  FREE_SHIPPING_FROM,
+  categories,
+  fromPrice,
+  hasRange,
+  money,
+  photos,
+  productByHandle,
+  products,
+} from '../../../../demos/fennmoor/data';
+
+export function getStaticPaths() {
+  return products.map((product) => ({ params: { handle: product.handle } }));
+}
+
+const { handle } = Astro.params;
+const product = productByHandle(handle!);
+const photo = photos[product.photo];
+const category = categories.find((item) => item.handle === product.category)!;
+const order = (productHandle: string) => products.findIndex((item) => item.handle === productHandle);
+const related = [
+  ...products.filter((item) => item.category === product.category && item.handle !== product.handle),
+  ...products.filter((item) => item.category !== product.category),
+].slice(0, 4);
+const url = `${BASE}/products/${product.handle}/`;
+const image = `${photo.dir}/${photo.name}-${photo.widths[0]}.webp`;
+const lead = hasRange(product) ? `From ${money(fromPrice(product))}.` : `${money(fromPrice(product))}.`;
+---
+
+<Layout
+  title={`${product.name} | ${category.name} | Fennmoor Home`}
+  description={`${product.blurb} ${lead} Choose your options and add it to the cart at Fennmoor Home, a concept store by Axiom Web.`}
+  section="products"
+  preload={`${photo.dir}/${photo.name}-800.webp`}
+>
+  <main id="main-content" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head" style="padding-bottom:1rem">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href={`${BASE}/`}>Home</a></li>
+            <li><a href={`${BASE}/collections/${category.handle}/`}>{category.name}</a></li>
+            <li aria-current="page">{product.name}</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="pdp">
+        <div class="pdp-gallery">
+          <div class="pdp-main" data-stage>
+            <Photo
+              photo={photo}
+              sizes="(min-width: 900px) 48vw, 100vw"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+          <div class="pdp-thumbs" role="group" aria-label="Photo views">
+            <button class="thumb" type="button" data-view="full" aria-pressed="true">
+              <Photo photo={photo} alt="" sizes="72px" maxWidth={480} />
+              <span class="sr">Show the whole photograph</span>
+            </button>
+            <button class="thumb zoom" type="button" data-view="detail" aria-pressed="false">
+              <Photo photo={photo} alt="" sizes="72px" maxWidth={480} />
+              <span class="sr">Show a close-up</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pdp-info">
+          <div>
+            <p class="eyebrow">{category.name}</p>
+            <h1>{product.name}</h1>
+          </div>
+
+          <form
+            class="options"
+            data-product-form
+            data-handle={product.handle}
+            data-name={product.name}
+            data-base={product.base}
+            data-image={image}
+            data-url={url}
+            aria-label={`Options for ${product.name}`}
+          >
+            <p class="pdp-price" data-price aria-live="polite">{money(product.base)}</p>
+            <p class="pdp-lead">{product.blurb}</p>
+
+            {product.options.map((option, index) => (
+              <fieldset class="option" data-option={option.name}>
+                <legend>
+                  {option.name}<span data-selected>: {option.values[0].label}</span>
+                </legend>
+                <div class="choices">
+                  {option.values.map((value, position) => (
+                    <label class="choice">
+                      <input
+                        type="radio"
+                        name={`option-${index}`}
+                        value={value.label}
+                        data-delta={value.delta ?? 0}
+                        checked={position === 0}
+                      />
+                      <span>
+                        {value.swatch && <span class="swatch" style={`--sw:${value.swatch}`} aria-hidden="true" />}
+                        {value.label}
+                        {(value.delta ?? 0) > 0 && <span class="shown">+{money(value.delta ?? 0)}</span>}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            ))}
+            {product.shown && (
+              <p class="shown">The photograph shows the {product.shown} colour.</p>
+            )}
+
+            <div class="buy">
+              <div class="qty" role="group" aria-label="Quantity">
+                <button type="button" data-qty-minus aria-label="Decrease quantity" disabled>
+                  <span aria-hidden="true">−</span>
+                </button>
+                <input type="number" inputmode="numeric" min="1" max="20" value="1" data-qty aria-label="Quantity" />
+                <button type="button" data-qty-plus aria-label="Increase quantity">
+                  <span aria-hidden="true">+</span>
+                </button>
+              </div>
+              <button class="btn btn-solid" type="submit">Add to cart</button>
+            </div>
+            <p class="buy-note">Free shipping on orders over {money(FREE_SHIPPING_FROM)}. Returns within thirty days.</p>
+          </form>
+
+          <div class="accordion">
+            <details open>
+              <summary>Details</summary>
+              <div class="panel">
+                {product.description.map((paragraph) => <p>{paragraph}</p>)}
+                <ul>
+                  {product.details.map((detail) => <li>{detail}</li>)}
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Care</summary>
+              <div class="panel"><p>{product.care}</p></div>
+            </details>
+            <details>
+              <summary>Shipping and returns</summary>
+              <div class="panel">
+                <p>
+                  Orders ship within two business days. Shipping is free over {money(FREE_SHIPPING_FROM)} and a flat rate below that.
+                  You have thirty days to return anything in its original packaging.
+                </p>
+                <p><a href={`${BASE}/help/#shipping`}>Read the full shipping and returns policy</a></p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <section class="section" style="padding-top:1rem" aria-labelledby="related-h">
+        <div class="section-head">
+          <h2 id="related-h">You may also like</h2>
+          <a class="text-link" href={`${BASE}/collections/all/`}>Shop everything</a>
+        </div>
+        <ul class="grid" role="list">
+          {related.map((item) => <ProductCard product={item} order={order(item.handle)} />)}
+        </ul>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import '../../../../demos/fennmoor/product';
+</script>

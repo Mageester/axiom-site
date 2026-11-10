@@ -1,0 +1,88 @@
+---
+import Layout from '../../../../demos/thorne-linden/Layout.astro';
+import Photo from '../../../../demos/_kit/Photo.astro';
+import { BASE, photos, projectBySlug, projects } from '../../../../demos/thorne-linden/data';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug } }));
+}
+
+const { slug } = Astro.params;
+const project = projectBySlug(slug!);
+const index = projects.findIndex((item) => item.slug === slug);
+const next = projects[(index + 1) % projects.length];
+const first = project.shots[0].wide ? project.shots[0] : undefined;
+const rest = first ? project.shots.slice(1) : project.shots;
+---
+
+<Layout
+  title={`${project.title} | Thorne & Linden Interiors`}
+  description={`${project.line} A ${project.type.toLowerCase()} project in ${project.place}, by Thorne & Linden Interiors. Part of a concept website by Axiom Web.`}
+  section="work"
+>
+  <main id="main-content" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head" style="padding-bottom:2rem">
+        <p class="eyebrow"><a href={`${BASE}/projects/`} style="text-decoration:none">Work</a> / {project.type}</p>
+        <h1>{project.title}</h1>
+        <p>{project.line}</p>
+      </div>
+
+      <dl class="meta">
+        <div><dt>Place</dt><dd>{project.place}</dd></div>
+        <div><dt>Year</dt><dd>{project.year}</dd></div>
+        <div><dt>Type</dt><dd>{project.type}</dd></div>
+        <div>
+          <dt>Scope</dt>
+          <dd>
+            <ul role="list">
+              {project.scope.map((item) => <li>{item}</li>)}
+            </ul>
+          </dd>
+        </div>
+      </dl>
+
+      {first && (
+        <figure class="shot-wide">
+          <Photo
+            photo={photos[first.photo]}
+            sizes="(min-width: 1400px) 1300px, 92vw"
+            loading="eager"
+            fetchpriority="high"
+          />
+          {first.caption && <figcaption>{first.caption}</figcaption>}
+        </figure>
+      )}
+
+      <div class="story">
+        <div>
+          <h2>The brief</h2>
+          {project.brief.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <div>
+          <h2>What we did</h2>
+          {project.outcome.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+
+      <div class="shots" data-count={rest.length}>
+        {rest.map((shot, position) => (
+          <figure>
+            <Photo
+              photo={photos[shot.photo]}
+              sizes="(min-width: 700px) 46vw, 92vw"
+              maxWidth={1024}
+              loading={position < 2 && !first ? 'eager' : 'lazy'}
+            />
+            {shot.caption && <figcaption>{shot.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+
+      <div class="next">
+        <p class="eyebrow">Next project</p>
+        <a href={`${BASE}/projects/${next.slug}/`}>{next.title}</a>
+      </div>
+    </div>
+  </main>
+</Layout>
