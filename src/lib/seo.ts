@@ -265,6 +265,12 @@ export const SEO_ROUTES = {
       'Extra hands for agencies: page builds, fixes and small sites delivered under your name. Fixed price in writing within 24 hours, NDA by default, 30 days of free fixes.',
     canonicalPath: '/agencies',
   },
+  government: {
+    title: 'Title II Accessibility for Cities and Counties | Axiom Web',
+    description:
+      'City and county websites and PDFs fixed to WCAG 2.1 AA, new agendas made accessible within 24 hours, and a monthly proof report. Free first report.',
+    canonicalPath: '/government',
+  },
   approach: {
     title: 'Our Web Design Process | Launch in 2–4 Weeks',
     description:

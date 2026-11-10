@@ -1,0 +1,276 @@
+---
+import CtaBand from '../components/site/CtaBand.astro';
+import FaqList from '../components/site/FaqList.astro';
+import Icon from '../components/site/Icon.astro';
+import PageHero from '../components/site/PageHero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EmailText from '../components/site/EmailText.astro';
+import { SEO_ROUTES, SITE_EMAIL, faqJsonLd, type Crumb } from '../lib/seo';
+
+const crumbs: Crumb[] = [
+  { name: 'Home', url: '/' },
+  { name: 'For cities and counties', url: '/government/' },
+];
+
+const terms = [
+  { label: 'Standard', value: 'WCAG 2.1 AA' },
+  { label: 'Deadline', value: 'April 26, 2027' },
+  { label: 'First report', value: 'Free' },
+  { label: 'New documents', value: 'Fixed within 24 hours' },
+  { label: 'Proof', value: 'Monthly report' },
+];
+
+const work = [
+  {
+    title: 'Free report',
+    text: 'Your own site checked page by page against WCAG 2.1 AA, plus your latest agenda PDF, in plain English. No cost and no commitment.',
+  },
+  {
+    title: 'Website fixes',
+    text: 'Contrast, missing image descriptions, form labels, headings and keyboard access fixed in the page itself. Most fixes go in shared templates, so one change repairs every page built on it.',
+  },
+  {
+    title: 'Document backlog',
+    text: 'Agendas, packets, minutes, forms and notices already on your site, made readable by screen readers: tagged headings, reading order, table structure and alt text.',
+  },
+  {
+    title: 'Keep it fixed',
+    text: 'We watch your agenda and documents pages. Every new PDF comes back fixed within 24 hours, so your clerk and staff change nothing about how they post.',
+  },
+];
+
+const steps = [
+  { title: 'Ask for your report', text: 'Reply to our email or write to us. The report is free and yours to keep.' },
+  { title: 'Free page count and a fixed quote', text: 'We count the pages, layouts and documents, then quote a fixed price in writing. No hourly billing.' },
+  { title: 'We fix, you review', text: 'Website fixes are made on your platform or handed to your vendor as exact changes. Documents come back fixed and checked.' },
+  { title: 'Monthly upkeep and proof', text: 'New documents fixed within 24 hours, and a monthly report listing every page and file checked, what was found and what was fixed.' },
+];
+
+const faq = [
+  {
+    question: 'What does the Title II rule require, and by when?',
+    answer:
+      "The Justice Department's ADA Title II rule requires state and local government websites and the documents posted on them to meet WCAG 2.1 AA. For governments serving 50,000 people or more, the compliance date is April 26, 2027.",
+  },
+  {
+    question: 'Do you guarantee compliance?',
+    answer:
+      'No honest provider can. What we do is fix the WCAG 2.1 AA problems in the page or file itself, check our work, and give you a monthly report of every page and document checked, found and fixed. That record is your evidence of effort.',
+  },
+  {
+    question: 'Is this an overlay or a plugin?',
+    answer:
+      'No. Overlays add a toolbar on top of a page and leave the page and its PDFs unchanged. We fix the page, the template and the file.',
+  },
+  {
+    question: 'Does our staff need to send you files?',
+    answer:
+      'No. We watch the pages where you post agendas and documents and pick up new files ourselves. Your clerk posts exactly as they do today.',
+  },
+  {
+    question: 'Our website is run by a vendor. Can you still help?',
+    answer:
+      'Yes. Tell us the platform. Where we can make the fix directly we will. Where only your vendor can change a template, we hand them the exact change, and we fix the documents either way.',
+  },
+  {
+    question: 'How do we buy?',
+    answer:
+      'A fixed-price written quote after a free page count, with one line for the one-time fix and one for monthly upkeep. A first job is often small enough for a direct purchase, and we are glad to answer a quote request or RFP if your rules require one.',
+  },
+  {
+    question: 'Who are you?',
+    answer:
+      'Axiom is a two-person web studio in Kitchener-Waterloo, Ontario. You deal with the same two people from the first report to every monthly update.',
+  },
+];
+
+const mailto = `mailto:${SITE_EMAIL}?subject=Free%20accessibility%20report`;
+---
+
+<BaseLayout {...SEO_ROUTES.government} crumbs={crumbs} schema={faqJsonLd(faq)}>
+  <main id="main-content" tabindex="-1">
+    <PageHero
+      eyebrow="For cities and counties"
+      title="Accessible websites and documents, ahead of April 2027"
+      lead="Axiom fixes city and county websites and documents to WCAG 2.1 AA, then keeps every new agenda and PDF accessible within 24 hours of posting. Your staff change nothing, and a monthly report shows exactly what was checked and fixed."
+      crumbs={crumbs}
+    >
+      <Fragment slot="actions">
+        <a href={mailto} class="btn btn-lg">Get your free report <Icon name="arrow-right" /></a>
+        <a href="#how-title" class="btn btn-secondary btn-lg">How it works</a>
+      </Fragment>
+      <dl slot="aside" class="card terms">
+        {terms.map((item) => (
+          <div>
+            <dt>{item.label}</dt>
+            <dd>{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </PageHero>
+
+    <section class="section" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What we do</p>
+          <h2 id="work-title">Fix it once, then keep it fixed</h2>
+          <p>Most city sites fail on the same few things, and the documents are where the volume is. We handle both.</p>
+        </div>
+        <ul role="list" class="grid grid-4 offers">
+          {work.map((item, index) => (
+            <li class="card offer">
+              <span class="index-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-soft" aria-labelledby="how-title">
+      <div class="container-narrow">
+        <div class="section-head">
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">From free report to monthly proof</h2>
+          <p>Four steps, a fixed price in writing, and nothing extra for your staff to do.</p>
+        </div>
+        <ol role="list" class="steps">
+          {steps.map((step, index) => (
+            <li>
+              <span class="step-num" aria-hidden="true">{index + 1}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Questions from clerks and IT</h2>
+          <p>Prefer to ask directly? Email <a class="text-link" href={mailto}><EmailText /></a>.</p>
+        </div>
+        <FaqList items={faq} />
+      </div>
+    </section>
+
+    <CtaBand />
+  </main>
+</BaseLayout>
+
+<style>
+  .terms {
+    display: grid;
+    gap: 0;
+    padding: 0.5rem 1.5rem;
+    margin: 0;
+    box-shadow: var(--shadow-md);
+  }
+
+  .terms div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .terms div:last-child {
+    border-bottom: 0;
+  }
+
+  .terms dt {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .terms dd {
+    margin: 0;
+    color: var(--ink);
+    font-weight: 650;
+    text-align: right;
+  }
+
+  .offers {
+    margin: 0;
+  }
+
+  .offer {
+    gap: 0.65rem;
+  }
+
+  .offer .index-num {
+    margin-bottom: 0.4rem;
+  }
+
+  .offer p {
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .steps {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .steps li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .steps li:last-child {
+    border-bottom: 0;
+  }
+
+  .step-num {
+    display: inline-grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .steps h3 {
+    margin: 0 0 0.35rem;
+  }
+
+  .steps p {
+    margin: 0;
+    color: var(--text);
+  }
+
+  #how-title {
+    scroll-margin-top: 6rem;
+  }
+
+  .faq-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .faq-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  .faq-grid .section-head {
+    margin-bottom: 0;
+  }
+</style>

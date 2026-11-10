@@ -17,6 +17,7 @@ export function getStaticPaths() {
     pricing: 'Pricing',
     approach: 'Process',
     agencies: 'For agencies',
+    government: 'Cities and counties',
     about: 'About',
     contact: 'Contact',
     startProject: 'Start a project',
