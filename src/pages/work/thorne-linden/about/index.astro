@@ -1,0 +1,83 @@
+---
+import Layout from '../../../../demos/thorne-linden/Layout.astro';
+import Photo from '../../../../demos/_kit/Photo.astro';
+import { BASE, photos } from '../../../../demos/thorne-linden/data';
+
+const values = [
+  {
+    title: 'Fewer, better things',
+    text: 'We would rather specify one oak console than three occasional tables. Rooms feel calmer when everything in them has a job.',
+  },
+  {
+    title: 'Made to be looked after',
+    text: 'We choose materials that age well, such as stone, timber, linen and brass, and tell you how to care for each one.',
+  },
+  {
+    title: 'Honest about cost',
+    text: 'You get real products and real prices in the plan, so there is no gap between the design and the budget.',
+  },
+];
+---
+
+<Layout
+  title="About | Thorne & Linden Interiors"
+  description="Thorne & Linden is a small Guelph interior design studio that favours fewer, better things, materials that age well and honest costs. A concept site by Axiom Web."
+  section="about"
+>
+  <main id="main-content" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">About the studio</p>
+        <h1>A small studio, <em>on purpose.</em></h1>
+        <p>
+          Thorne &amp; Linden is two designers working from a shared studio in Guelph. We take on a handful of
+          projects at a time, so the people you meet are the people who design your room.
+        </p>
+      </div>
+    </div>
+
+    <section class="section" style="padding-top:2rem" aria-labelledby="how-h">
+      <div class="wrap split">
+        <div class="split-media">
+          <Photo photo={photos.st2} sizes="(min-width: 900px) 46vw, 100vw" />
+        </div>
+        <div class="split-copy">
+          <p class="eyebrow">How we think</p>
+          <h2 id="how-h">Plan the room around <em>the people in it.</em></h2>
+          <p>
+            We start with how you live: where you sit, where the light falls, what ends up on the kitchen
+            counter. Then we choose the materials, then the furniture, and last of all the things you will
+            notice first.
+          </p>
+          <p>
+            It is a slower way to begin, and it is why the rooms we design tend to look as if they were always
+            like that.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0" aria-labelledby="values-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="values-h">What we care about</h2>
+        </div>
+        <ul class="values" role="list">
+          {values.map((value) => (
+            <li>
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-h">
+      <div class="wrap">
+        <h2 id="cta-h">Let us look at <em>your room.</em></h2>
+        <a class="btn" href={`${BASE}/contact/`}>Get in touch</a>
+      </div>
+    </section>
+  </main>
+</Layout>

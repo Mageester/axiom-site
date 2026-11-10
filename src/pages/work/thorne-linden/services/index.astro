@@ -1,0 +1,77 @@
+---
+import Layout from '../../../../demos/thorne-linden/Layout.astro';
+import { BASE, faqs, process, services } from '../../../../demos/thorne-linden/data';
+---
+
+<Layout
+  title="Services and fees | Thorne & Linden Interiors"
+  description="Room design, whole-home design, custom joinery drawings and styling days from Thorne & Linden Interiors, with starting prices. A concept website by Axiom Web."
+  section="services"
+>
+  <main id="main-content" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">Services</p>
+        <h1>Four ways to work with us</h1>
+        <p>Every project starts with a free call. Prices below are starting points; we give a fixed fee once we have seen the room.</p>
+      </div>
+
+      <div>
+        {services.map((service) => (
+          <section class="service" id={service.id} aria-labelledby={`${service.id}-h`}>
+            <div class="service-head">
+              <h2 id={`${service.id}-h`}>{service.name}</h2>
+              <p class="from">{service.from}</p>
+            </div>
+            <div>
+              <p>{service.blurb}</p>
+              <ul role="list">
+                {service.includes.map((item) => <li>{item}</li>)}
+              </ul>
+              <p class="fit">{service.fit}</p>
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="process-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="process-h">How a project runs</h2>
+        </div>
+        <ol class="steps" role="list">
+          {process.map((step) => (
+            <li>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0" aria-labelledby="faq-h">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="faq-h">Questions we are asked</h2>
+        </div>
+        <div class="faq">
+          {faqs.map((item) => (
+            <details>
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-h">
+      <div class="wrap">
+        <h2 id="cta-h">Not sure which one <em>fits?</em></h2>
+        <a class="btn" href={`${BASE}/contact/`}>Book a free call</a>
+      </div>
+    </section>
+  </main>
+</Layout>

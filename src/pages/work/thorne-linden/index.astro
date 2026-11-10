@@ -1,0 +1,112 @@
+---
+import Layout from '../../../demos/thorne-linden/Layout.astro';
+import Tile from '../../../demos/thorne-linden/Tile.astro';
+import Photo from '../../../demos/_kit/Photo.astro';
+import { BASE, photos, process, projects, services } from '../../../demos/thorne-linden/data';
+
+const selected = projects.slice(0, 4);
+const hero = photos.br1;
+---
+
+<Layout
+  title="Thorne & Linden Interiors | Interior design in Guelph, Ontario"
+  description="Thorne & Linden is a small interior design studio in Guelph, Ontario, designing kitchens, bathrooms, bedrooms and whole homes. A concept website by Axiom Web."
+  section="home"
+  preload={`${hero.dir}/${hero.name}-1280.webp`}
+>
+  <main id="main-content" tabindex="-1">
+    <div class="wrap intro">
+      <h1>Interiors for rooms that are <em>lived in.</em></h1>
+      <div class="intro-side">
+        <p>
+          Thorne &amp; Linden is a small interior design studio in Guelph. We design kitchens, bathrooms, bedrooms
+          and whole homes that feel calm, are easy to look after and get better with use.
+        </p>
+        <a class="btn" href={`${BASE}/contact/`}>Start a conversation</a>
+      </div>
+    </div>
+
+    <div class="hero-img">
+      <Photo photo={hero} sizes="100vw" loading="eager" fetchpriority="high" />
+    </div>
+
+    <section class="section" aria-labelledby="work-h">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Selected work</p>
+            <h2 id="work-h">Rooms we have designed</h2>
+          </div>
+          <a class="text-link" href={`${BASE}/projects/`}>All {projects.length} projects</a>
+        </div>
+        <ul class="tiles" role="list">
+          {selected.map((project) => <Tile project={project} />)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0" aria-labelledby="services-h">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">What we do</p>
+            <h2 id="services-h">Four ways to work with us</h2>
+          </div>
+          <a class="text-link" href={`${BASE}/services/`}>See what is included</a>
+        </div>
+        <ul class="list" role="list">
+          {services.map((service) => (
+            <li>
+              <h3>{service.name}</h3>
+              <p>{service.blurb}</p>
+              <p class="price">{service.from}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0" aria-labelledby="process-h">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">How we work</p>
+            <h2 id="process-h">Four steps, no surprises</h2>
+          </div>
+        </div>
+        <ol class="steps" role="list">
+          {process.map((step) => (
+            <li>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0" aria-labelledby="materials-h">
+      <div class="wrap split">
+        <div class="split-media">
+          <Photo photo={photos.st1} sizes="(min-width: 900px) 46vw, 100vw" />
+        </div>
+        <div class="split-copy">
+          <p class="eyebrow">Materials first</p>
+          <h2 id="materials-h">We start with <em>what you touch.</em></h2>
+          <p>
+            Every project begins with a table of samples: stone, tile, timber, linen and paint. We would rather
+            you hold the material before you decide on the room around it.
+          </p>
+          <a class="btn btn-line" href={`${BASE}/about/`}>About the studio</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-h">
+      <div class="wrap">
+        <h2 id="cta-h">Tell us about <em>your room.</em></h2>
+        <a class="btn" href={`${BASE}/contact/`}>Get in touch</a>
+      </div>
+    </section>
+  </main>
+</Layout>

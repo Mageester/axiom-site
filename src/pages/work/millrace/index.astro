@@ -1,0 +1,386 @@
+---
+import DemoLayout from '../../../demos/_kit/DemoLayout.astro';
+import ConceptFooter from '../../../demos/_kit/ConceptFooter.astro';
+import Photo from '../../../demos/_kit/Photo.astro';
+import '../../../demos/_kit/everyday.css';
+import '../../../demos/millrace/styles.css';
+import {
+  BASE,
+  EMAIL,
+  NAME,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+  faqs,
+  jobs,
+  photos,
+  reasons,
+  reviews,
+  services,
+  steps,
+  towns,
+} from '../../../demos/millrace/data';
+
+const hero = photos.tap;
+const credits = Object.values(photos);
+const nav = [
+  { href: '#services', label: 'Services' },
+  { href: '#visit', label: 'How it works' },
+  { href: '#reviews', label: 'Reviews' },
+  { href: '#area', label: 'Service area' },
+  { href: '#faq', label: 'FAQ' },
+];
+const phoneIcon =
+  'M5.2 3.5h3.3l1.5 4.3-2 1.4a11 11 0 0 0 5.8 5.8l1.4-2 4.3 1.5v3.3a1.7 1.7 0 0 1-1.8 1.7A15.8 15.8 0 0 1 3.5 5.3 1.7 1.7 0 0 1 5.2 3.5Z';
+---
+
+<DemoLayout
+  name={NAME}
+  title="Millrace Plumbing | Licensed plumbers in Cambridge, Kitchener, Waterloo and Guelph"
+  description="Millrace Plumbing is a local plumber for leaks, drains, water heaters and renovations across Cambridge, Kitchener, Waterloo and Guelph. A concept website by Axiom Web."
+  themeColor="#08383f"
+  pill="light"
+>
+  <link slot="head" rel="preload" as="image" href={`${hero.dir}/${hero.name}-1280.webp`} imagesrcset={hero.widths.map((w) => `${hero.dir}/${hero.name}-${w}.webp ${w}w`).join(', ')} imagesizes="(min-width: 900px) 48vw, 100vw" />
+
+  <header class="site-header">
+    <div class="bar">
+      <a class="logo" href={`${BASE}/`} aria-label={`${NAME}, home`}>
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c3 3.8 5.5 6.6 5.5 10a5.5 5.5 0 0 1-11 0c0-3.4 2.5-6.2 5.5-10Z"></path></svg>
+        </span>
+        Millrace
+      </a>
+      <nav class="nav" id="site-nav" aria-label="Main" data-nav>
+        <ul role="list">
+          {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </nav>
+      <div class="bar-actions">
+        <a class="btn btn-amber call-btn" href={PHONE_HREF}>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={phoneIcon}></path></svg>
+          <span>Call<span class="call-num">&nbsp;{PHONE_DISPLAY}</span></span>
+        </a>
+        <a class="btn btn-teal book-btn" href="#book">Book a visit</a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+          <span class="sr">Menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-h">
+      <div class="hero-copy">
+        <p class="eyebrow">Plumbers in Cambridge, Kitchener, Waterloo and Guelph</p>
+        <h1 id="hero-h">Plumbing that gets fixed the first time.</h1>
+        <p class="lead">
+          Licensed plumbers for leaks, drains, water heaters and renovations. You get the price in writing before we start.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-amber" href="#book">Book a visit</a>
+          <a class="btn btn-line" href={PHONE_HREF}>Call {PHONE_DISPLAY}</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <Photo photo={hero} sizes="(min-width: 900px) 48vw, 100vw" loading="eager" fetchpriority="high" />
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="wrap">
+        <ul role="list">
+          {['Licensed Ontario plumbers', 'Prices before we start', 'Same-day callouts', 'A year on every repair'].map((item) => (
+            <li>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <p class="fine">
+          In this concept, the licence line is a placeholder. On a live site this is where your real licence number and insurer would go.
+        </p>
+      </div>
+    </div>
+
+    <section class="section" id="services" aria-labelledby="services-h">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Services and prices</p>
+          <h2 id="services-h">What we fix, and what it costs</h2>
+          <p>
+            Starting prices are before HST. A callout and diagnosis starts at $95 and is credited toward the repair
+            if you go ahead with us.
+          </p>
+        </div>
+        <ul class="cards" role="list">
+          {services.map((service) => (
+            <li class="card">
+              <h3>{service.name}</h3>
+              <p>{service.text}</p>
+              <ul role="list">
+                {service.examples.map((item) => <li>{item}</li>)}
+              </ul>
+              <div class="card-foot">
+                <p class="from">
+                  <small>{service.from === 'Free quote' ? 'Priced as' : 'From'}</small>
+                  <strong>{service.from === 'Free quote' ? 'Free quote' : service.from}</strong>
+                  {service.from !== 'Free quote' && <small>{service.unit}</small>}
+                </p>
+                <a href="#book">Get a time<span class="sr"> for {service.name.toLowerCase()}</span></a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-white" id="visit" aria-labelledby="visit-h">
+      <div class="wrap split">
+        <div class="split-media">
+          <Photo photo={photos.check} sizes="(min-width: 900px) 46vw, 100vw" />
+        </div>
+        <div>
+          <div class="section-head" style="margin-bottom:1.75rem">
+            <p class="eyebrow">How a visit works</p>
+            <h2 id="visit-h">Three steps, and no surprises on the bill</h2>
+          </div>
+          <ol class="steps" role="list">
+            {steps.map((step) => (
+              <li>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="why-h">
+      <div class="wrap split">
+        <div>
+          <div class="section-head" style="margin-bottom:1.75rem">
+            <p class="eyebrow">Why Millrace</p>
+            <h2 id="why-h">A plumber you only have to call once</h2>
+          </div>
+          <ul class="reasons stack" role="list" style="grid-template-columns:1fr">
+            {reasons.map((reason) => (
+              <li>
+                <h3>{reason.title}</h3>
+                <p>{reason.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="split-media portrait">
+          <Photo photo={photos.crew} sizes="(min-width: 900px) 46vw, 100vw" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white" style="padding-block:clamp(2.5rem,5vw,4rem)" aria-labelledby="site-h">
+      <div class="wrap">
+        <h2 id="site-h" class="sr">On the job</h2>
+        <ul class="trio" role="list">
+          <li>
+            <figure>
+              <div class="pic"><Photo photo={photos.leak} sizes="(min-width: 760px) 30vw, 100vw" maxWidth={1024} /></div>
+              <figcaption>Tightening a leaking fitting.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <div class="pic"><Photo photo={photos.basement} sizes="(min-width: 760px) 30vw, 100vw" maxWidth={1024} /></div>
+              <figcaption>Basements, water heaters and the pipes in between.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <div class="pic"><Photo photo={photos.tools} sizes="(min-width: 760px) 30vw, 100vw" maxWidth={1024} /></div>
+              <figcaption>New fixtures, supplied and fitted.</figcaption>
+            </figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="reviews" aria-labelledby="reviews-h">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="tag"><span aria-hidden="true">●</span> Sample reviews written for this concept</p>
+          <h2 id="reviews-h">What customers might say</h2>
+          <p>
+            Millrace is fictional, so these reviews are examples of the kind of feedback a plumbing site would show.
+            On a live site, this section would use real reviews from real customers.
+          </p>
+        </div>
+        <ul class="quotes" role="list">
+          {reviews.map((review) => (
+            <li>
+              <figure class="quote">
+                <p class="stars" role="img" aria-label="Five stars">
+                  {[0, 1, 2, 3, 4].map(() => (
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8L12 2.8Z"></path></svg>
+                  ))}
+                </p>
+                <blockquote>{review.quote}</blockquote>
+                <figcaption><strong>{review.who}</strong><span>{review.job}</span></figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-white" id="area" aria-labelledby="area-h">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Service area</p>
+          <h2 id="area-h">We work across Waterloo Region and Wellington County</h2>
+          <p>Our crews are based in Cambridge and drive to these towns every day.</p>
+        </div>
+        <ul class="towns" role="list">
+          {towns.map((town) => <li>{town}</li>)}
+        </ul>
+        <p class="area-note">Not on the list? Call us on <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>. We often go a little further for a good reason.</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-h">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Questions</p>
+          <h2 id="faq-h">Before you call</h2>
+        </div>
+        <div class="faq">
+          {faqs.map((item) => (
+            <details>
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section book" id="book" aria-labelledby="book-h">
+      <div class="wrap book-grid">
+        <div class="book-copy">
+          <p class="eyebrow">Book a visit</p>
+          <h2 id="book-h">Tell us what is happening</h2>
+          <p>We will confirm a two-hour window by text or email within one business hour. For a flood, call us now.</p>
+          <ul class="contact-list" role="list">
+            <li><a href={PHONE_HREF}>{PHONE_DISPLAY}</a></li>
+            <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+          </ul>
+          <p>Office hours: Monday to Friday, 7 am to 6 pm. Emergency line open 24 hours.</p>
+        </div>
+
+        <form class="form" data-concept-form aria-label="Book a visit">
+          <div class="form-row">
+            <label class="field">
+              Your name
+              <input class="input" name="name" type="text" autocomplete="name" required />
+            </label>
+            <label class="field">
+              Phone number
+              <input class="input" name="phone" type="tel" autocomplete="tel" required />
+            </label>
+          </div>
+          <div class="form-row">
+            <label class="field">
+              Email address
+              <input class="input" name="email" type="email" autocomplete="email" />
+            </label>
+            <label class="field">
+              Town
+              <select class="input" name="town" autocomplete="address-level2">
+                {towns.map((town) => <option>{town}</option>)}
+                <option>Somewhere else</option>
+              </select>
+            </label>
+          </div>
+          <label class="field">
+            What is the job?
+            <select class="input" name="job">
+              {jobs.map((job) => <option>{job}</option>)}
+            </select>
+          </label>
+          <fieldset class="urgency">
+            <legend>How urgent is it?</legend>
+            <label class="choice">
+              <input type="radio" name="urgency" value="now" />
+              <span>Right now, water is getting out</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="urgency" value="soon" checked />
+              <span>Today or tomorrow</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="urgency" value="later" />
+              <span>This week or later</span>
+            </label>
+          </fieldset>
+          <label class="field">
+            Anything we should know?
+            <textarea class="input" name="message" rows="4"></textarea>
+          </label>
+          <button class="btn btn-amber btn-block" type="submit">Request a visit</button>
+          <p class="concept-msg" role="status" tabindex="-1" data-concept-msg hidden>
+            This is a concept, so nothing was sent. On a live site this would reach the dispatcher, and you would get a text with your arrival window.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-row">
+      <p><strong>{NAME}</strong>. Plumbing for homes in Cambridge, Kitchener, Waterloo and Guelph.</p>
+      <p>
+        <a href={PHONE_HREF}>{PHONE_DISPLAY}</a> &middot; <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      </p>
+    </div>
+    <details class="photo-credits">
+      <summary>Photography credits</summary>
+      <p>
+        Photographs are free-licence stock images from Pexels, used for this concept:
+        {credits.map((photo, index) => (
+          <>
+            <a href={photo.credit.page} rel="noopener">{photo.credit.name}</a>{index < credits.length - 1 ? ', ' : '.'}
+          </>
+        ))}
+      </p>
+    </details>
+  </footer>
+
+  <ConceptFooter name={NAME} />
+</DemoLayout>
+
+<script>
+  import { conceptForms } from '../../../demos/_kit/ui';
+
+  const button = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  if (button && nav) {
+    const set = (open: boolean) => {
+      button.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('is-open', open);
+    };
+    button.addEventListener('click', () => set(button.getAttribute('aria-expanded') !== 'true'));
+    nav.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) set(false);
+    });
+    nav.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        button.focus();
+      }
+    });
+    matchMedia('(min-width: 1000px)').addEventListener('change', (event) => event.matches && set(false));
+  }
+  conceptForms();
+</script>

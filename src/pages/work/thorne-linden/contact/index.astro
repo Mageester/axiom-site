@@ -1,0 +1,87 @@
+---
+import Layout from '../../../../demos/thorne-linden/Layout.astro';
+import { ADDRESS, EMAIL, PHONE_DISPLAY, PHONE_HREF, budgets, projectTypes } from '../../../../demos/thorne-linden/data';
+---
+
+<Layout
+  title="Contact | Thorne & Linden Interiors"
+  description="Tell Thorne & Linden Interiors about your room, your timing and your budget and we will reply within two business days. A concept website by Axiom Web."
+  section="contact"
+>
+  <main id="main-content" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">Contact</p>
+        <h1>Tell us about <em>your room.</em></h1>
+        <p>We read every enquiry and reply within two business days. The first call is free.</p>
+      </div>
+
+      <div class="contact">
+        <form class="form" data-concept-form aria-label="Project enquiry">
+          <div class="form-row">
+            <label class="field">
+              Your name
+              <input class="input" name="name" type="text" autocomplete="name" required />
+            </label>
+            <label class="field">
+              Email address
+              <input class="input" name="email" type="email" autocomplete="email" required />
+            </label>
+          </div>
+          <div class="form-row">
+            <label class="field">
+              <span>Phone <span class="opt">(optional)</span></span>
+              <input class="input" name="phone" type="tel" autocomplete="tel" />
+            </label>
+            <label class="field">
+              Where is the project?
+              <input class="input" name="place" type="text" autocomplete="address-level2" placeholder="Town or city" />
+            </label>
+          </div>
+          <div class="form-row">
+            <label class="field">
+              What are we designing?
+              <select class="input" name="type">
+                {projectTypes.map((type) => <option>{type}</option>)}
+              </select>
+            </label>
+            <label class="field">
+              Rough budget
+              <select class="input" name="budget">
+                {budgets.map((budget) => <option>{budget}</option>)}
+              </select>
+            </label>
+          </div>
+          <label class="field">
+            Tell us a little about it
+            <textarea class="input" name="message" rows="6" required></textarea>
+          </label>
+          <button class="btn" type="submit">Send enquiry</button>
+          <p class="concept-msg" role="status" tabindex="-1" data-concept-msg hidden>
+            This is a concept, so nothing was sent. On a live site this would reach the studio and you would get a
+            reply within two business days.
+          </p>
+        </form>
+
+        <div class="contact-details">
+          <div>
+            <h2>Email</h2>
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          </div>
+          <div>
+            <h2>Phone</h2>
+            <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
+          </div>
+          <div>
+            <h2>Studio</h2>
+            <p>{ADDRESS[0]}<br />{ADDRESS[1]}</p>
+          </div>
+          <div>
+            <h2>Hours</h2>
+            <p>Tuesday to Friday, 9 am to 5 pm<br />By appointment on weekends</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

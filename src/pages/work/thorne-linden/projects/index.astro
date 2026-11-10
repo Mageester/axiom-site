@@ -1,0 +1,31 @@
+---
+import Layout from '../../../../demos/thorne-linden/Layout.astro';
+import Tile from '../../../../demos/thorne-linden/Tile.astro';
+import { BASE, projects } from '../../../../demos/thorne-linden/data';
+---
+
+<Layout
+  title="Work | Thorne & Linden Interiors"
+  description="Kitchens, bathrooms, bedrooms, living rooms and built-ins designed by Thorne & Linden Interiors in Ontario. Part of a concept website by Axiom Web."
+  section="work"
+>
+  <main id="main-content" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">Work</p>
+        <h1>Rooms we have designed</h1>
+        <p>Kitchens, bathrooms, bedrooms and built-ins, from Guelph to Waterloo Region.</p>
+      </div>
+      <ul class="tiles" role="list">
+        {projects.map((project, index) => <Tile project={project} eager={index < 2} />)}
+      </ul>
+      <p class="note">
+        These projects are part of the concept: the studio is fictional and the photographs are licensed stock,
+        credited at the foot of the page. On a real site each one would be a project you could point to.
+      </p>
+      <div class="next" style="border-top:0;margin-top:2rem">
+        <a href={`${BASE}/contact/`}>Have a room in mind?</a>
+      </div>
+    </div>
+  </main>
+</Layout>
